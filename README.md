@@ -1,13 +1,13 @@
 KNAB Style Library
 --
 
-# Packages
+## Packages
 
 Since we're going to use the cx-shared-library we will need to include
 the packages from that project so we need to follow the instructions 
 to include the packages from them.
 
-# Accessing
+## Accessing
 
 To access any private npm registry you need to define it.
 It can be done by changing your global npm settings with:

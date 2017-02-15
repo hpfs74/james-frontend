@@ -10,7 +10,19 @@
     "type": "git",
     "url": "ssh://git@swfactory.aegon.com:7999/knab/knab-style-library.git"
   },
-  "keywords": ['knab', 'sass'],
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@cx/base": "^1.15.0",
+    "@cx/checkbox": "^1.2.1",
+    "@cx/form": "^1.7.0",
+    "@cx/form-group": "^1.0.0",
+    "@cx/forms": "^1.0.0",
+    "@cx/input": "^1.8.0",
+    "@cx/radio": "^1.1.1",
+    "@cx/select": "^1.1.1",
+    "@cx/slider": "^0.4.0",
+    "@cx/utils": "^1.3.1"
+  }
 }
