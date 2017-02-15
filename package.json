@@ -1,0 +1,16 @@
+{
+  "name": "knab-style-library",
+  "version": "1.0.0",
+  "description": "Knab project style library it contains style for html components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@swfactory.aegon.com:7999/knab/knab-style-library.git"
+  },
+  "keywords": ['knab', 'sass'],
+  "author": "",
+  "license": "ISC"
+}
