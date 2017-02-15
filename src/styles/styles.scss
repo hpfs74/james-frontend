@@ -6,3 +6,10 @@
 /* import shared library styles */
 @import '../../node_modules/@cx/grid/index';
 @import '../../node_modules/@cx/base/index';
+
+body {
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}

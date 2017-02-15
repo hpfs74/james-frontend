@@ -466,3 +466,13 @@
     padding: 10px 15px;
     display: inline-block
 }
+
+.navbar-breadcrumb {
+    color: $knab-white;
+    background: $knab-primary-blue;
+    padding: 25px 0;
+}
+
+.navbar-breadcrumb .cx-container-fluid {
+  padding: 0;
+}
