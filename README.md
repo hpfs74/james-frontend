@@ -3,6 +3,7 @@
 ## Getting Started
 
 ### Dependencies
+
 What you need to run this app:
 * `node` and `npm`
 * Ensure you're running the latest versions Node `v4.x.x`+ (or `v5.x.x`) and NPM `3.x.x`+
@@ -13,6 +14,7 @@ Once you have those, you should install these globals with `npm install -g`:
 * `npm install -g webpack webpack-dev-server karma protractor typescript`
 
 ### Using CX-Shared-Library
+
 Since we're going to use the cx-shared-library we will need to include
 the packages from that project so we need to follow the instructions 
 to include the packages from them.
@@ -41,6 +43,7 @@ After adding the private repository you can install all dependencies from the ro
 
 
 ## AoT Don'ts
+
 The following are some things that will make AoT compile fail.
 
 - Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
@@ -51,6 +54,7 @@ The following are some things that will make AoT compile fail.
 - @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
 
 ## File structure
+
 ```
 /
  ├──config/                        * our configuration
@@ -91,17 +95,17 @@ The following are some things that will make AoT compile fail.
 
 ## Support for debugging in VSCode
 
-1. Install the `Debugger for Chrome` extension
-2. `npm install write-file-webpack-plugin --save-dev`
-3. In tsconfig.webpack.json:
+1. Install the Debugger for Chrome extension from the Extension menu (CTRL+Shift+X in VSCode)
+2. Install webpack plugin: `npm install write-file-webpack-plugin --save-dev`
+3. Add to tsconfig.webpack.json:
     ```
     "outDir": "dist",
-    "sourceRoot": "../src",
+    "sourceRoot": "src",
     ```
 4. In tsconfig.json:
 	```
     "outDir": "dist",
-    "sourceRoot": "../src",
+    "sourceRoot": "src",
     ```
 5. In webpack.dev.js
 	```
