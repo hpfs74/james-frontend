@@ -1,0 +1,468 @@
+.navbar {
+    border: 0;
+    min-height: 0
+}
+
+.navbar .icon-search {
+    cursor: pointer;
+    margin-top: -47px;
+    margin-right: 10px
+}
+
+@media (min-width: 768px) {
+    .navbar .icon-search {
+        margin-right: 0;
+        height: auto;
+        margin-top: -50px
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .navbar .icon-search {
+        margin-top: -42px;
+        margin-right: 10px
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar.navbar-default {
+        font-size: 12px
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+    .navbar.navbar-default {
+        font-size: 12px
+    }
+}
+
+.navbar.navbar-default .logo {
+    float: left;
+    margin-right: 10px;
+    overflow: hidden;
+    height: 50px;
+    line-height: 45px
+}
+
+@media (min-width: 768px) {
+    .navbar.navbar-default .logo {
+        max-width: 70px
+    }
+}
+
+@media (max-width: 320px) {
+    .navbar.navbar-default .logo {
+        max-width: 50px
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar.navbar-default .logo {
+        max-width: 50px
+    }
+}
+
+.navbar.navbar-default .logo a img {
+    width: 70px
+}
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+    .navbar.navbar-default .logo a img {
+        width: 50px
+    }
+}
+
+.navbar.navbar-default .nav>li {
+    display: inline-block
+}
+
+.navbar.navbar-default .nav>li a {
+    padding-right: 10px;
+    padding-left: 10px
+}
+
+.navbar.navbar-default .navbar-nav>.active>a,
+.navbar.navbar-default .navbar-nav>.active>a:hover,
+.navbar.navbar-default .navbar-nav>.active>a:focus {
+    background: none;
+    color: #e86068
+}
+
+.navbar.navbar-default .navbar-toggle {
+    float: none;
+    border: 0;
+    margin: 3px 40px 0 10px;
+    padding: 0;
+    background: none
+}
+
+.navbar.navbar-default .navbar-toggle:focus {
+    background: none
+}
+
+.navbar.navbar-default .navbar-toggle:focus .icon-hamburger {
+    color: #e86068
+}
+
+@media (min-width: 768px) {
+    .navbar.navbar-default .navbar-toggle {
+        margin-right: 0;
+        margin-left: 0;
+        margin-top: 0
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar.navbar-inverse {
+        display: block
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar.navbar-inverse .container.collapse {
+        display: block !important
+    }
+}
+
+.navbar.navbar-inverse li>a {
+    font-weight: bold;
+    font-size: 16px
+}
+
+.navbar.navbar-inverse .active>a:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #efe9e4;
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    margin-left: -12px;
+    z-index: 990;
+    display: none
+}
+
+@media (min-width: 768px) {
+    .navbar.navbar-inverse .active>a:after {
+        top: 46px;
+        display: block
+    }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+    .navbar.navbar-inverse li:first-child>a {
+        padding-left: 0
+    }
+    .navbar.navbar-inverse li:first-child>a:after {
+        margin-left: -22px
+    }
+}
+
+.navbar .container {
+    padding: 0
+}
+
+.navbar .container .navbar-nav {
+    margin: 0
+}
+
+.navbar .container .navbar-nav.list-inline {
+    margin-left: -15px;
+    margin-right: -15px
+}
+
+@media (min-width: 768px) {
+    .navbar .container .navbar-nav.list-inline {
+        margin: 0
+    }
+}
+
+.navbar .container .navbar-nav.list-inline li.active>a:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #fff;
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    margin-left: -12px;
+    z-index: 999
+}
+
+.navbar .container .navbar-nav.navbar-secondary {
+    margin-right: 30px
+}
+
+@media (max-width: 768px) {
+    .navbar .container .navbar-nav.hidden-lg {
+        border-top: 2px solid #fff
+    }
+}
+
+.navbar .container .navbar-nav.hidden-lg li a {
+    font-weight: normal;
+    padding: 10px 20px
+}
+
+.navbar .container li>a {
+    padding: 15px 20px
+}
+
+@media (min-width: 768px) {
+    .navbar .container li>a {
+        padding: 15px 20px;
+        outline: 0
+    }
+}
+
+.navbar .container .navbar-header {
+    float: right;
+    width: 100%
+}
+
+.navbar .container .navbar-header a:link {
+    display: inline-block
+}
+
+@media (min-width: 768px) {
+    .navbar .container .btn-nav,
+    .navbar .container .btn-nav:hover,
+    .navbar .container .btn-nav:active,
+    .navbar .container .btn-nav:visited {
+        color: #fff !important;
+        background-color: #e86068;
+        border-color: #fff
+    }
+    .navbar .container .btn-nav:hover,
+    .navbar .container .btn-nav:focus,
+    .navbar .container .btn-nav:active,
+    .navbar .container .btn-nav.active,
+    .open>.navbar .container .btn-nav.dropdown-toggle,
+    .navbar .container .btn-nav:hover:hover,
+    .navbar .container .btn-nav:hover:focus,
+    .navbar .container .btn-nav:hover:active,
+    .navbar .container .btn-nav:hover.active,
+    .open>.navbar .container .btn-nav:hover.dropdown-toggle,
+    .navbar .container .btn-nav:active:hover,
+    .navbar .container .btn-nav:active:focus,
+    .navbar .container .btn-nav:active:active,
+    .navbar .container .btn-nav:active.active,
+    .open>.navbar .container .btn-nav:active.dropdown-toggle,
+    .navbar .container .btn-nav:visited:hover,
+    .navbar .container .btn-nav:visited:focus,
+    .navbar .container .btn-nav:visited:active,
+    .navbar .container .btn-nav:visited.active,
+    .open>.navbar .container .btn-nav:visited.dropdown-toggle {
+        color: #fff !important;
+        background-color: #e2333e;
+        border-color: #e0e0e0
+    }
+    .navbar .container .btn-nav:active,
+    .navbar .container .btn-nav.active,
+    .open>.navbar .container .btn-nav.dropdown-toggle,
+    .navbar .container .btn-nav:hover:active,
+    .navbar .container .btn-nav:hover.active,
+    .open>.navbar .container .btn-nav:hover.dropdown-toggle,
+    .navbar .container .btn-nav:active:active,
+    .navbar .container .btn-nav:active.active,
+    .open>.navbar .container .btn-nav:active.dropdown-toggle,
+    .navbar .container .btn-nav:visited:active,
+    .navbar .container .btn-nav:visited.active,
+    .open>.navbar .container .btn-nav:visited.dropdown-toggle {
+        background-image: none
+    }
+    .navbar .container .btn-nav.disabled,
+    .navbar .container .btn-nav.disabled:hover,
+    .navbar .container .btn-nav.disabled:focus,
+    .navbar .container .btn-nav.disabled:active,
+    .navbar .container .btn-nav.disabled.active,
+    .navbar .container .btn-nav[disabled],
+    .navbar .container .btn-nav[disabled]:hover,
+    .navbar .container .btn-nav[disabled]:focus,
+    .navbar .container .btn-nav[disabled]:active,
+    .navbar .container .btn-nav[disabled].active,
+    fieldset[disabled] .navbar .container .btn-nav,
+    fieldset[disabled] .navbar .container .btn-nav:hover,
+    fieldset[disabled] .navbar .container .btn-nav:focus,
+    fieldset[disabled] .navbar .container .btn-nav:active,
+    fieldset[disabled] .navbar .container .btn-nav.active,
+    .navbar .container .btn-nav:hover.disabled,
+    .navbar .container .btn-nav:hover.disabled:hover,
+    .navbar .container .btn-nav:hover.disabled:focus,
+    .navbar .container .btn-nav:hover.disabled:active,
+    .navbar .container .btn-nav:hover.disabled.active,
+    .navbar .container .btn-nav:hover[disabled],
+    .navbar .container .btn-nav:hover[disabled]:hover,
+    .navbar .container .btn-nav:hover[disabled]:focus,
+    .navbar .container .btn-nav:hover[disabled]:active,
+    .navbar .container .btn-nav:hover[disabled].active,
+    fieldset[disabled] .navbar .container .btn-nav:hover,
+    fieldset[disabled] .navbar .container .btn-nav:hover:hover,
+    fieldset[disabled] .navbar .container .btn-nav:hover:focus,
+    fieldset[disabled] .navbar .container .btn-nav:hover:active,
+    fieldset[disabled] .navbar .container .btn-nav:hover.active,
+    .navbar .container .btn-nav:active.disabled,
+    .navbar .container .btn-nav:active.disabled:hover,
+    .navbar .container .btn-nav:active.disabled:focus,
+    .navbar .container .btn-nav:active.disabled:active,
+    .navbar .container .btn-nav:active.disabled.active,
+    .navbar .container .btn-nav:active[disabled],
+    .navbar .container .btn-nav:active[disabled]:hover,
+    .navbar .container .btn-nav:active[disabled]:focus,
+    .navbar .container .btn-nav:active[disabled]:active,
+    .navbar .container .btn-nav:active[disabled].active,
+    fieldset[disabled] .navbar .container .btn-nav:active,
+    fieldset[disabled] .navbar .container .btn-nav:active:hover,
+    fieldset[disabled] .navbar .container .btn-nav:active:focus,
+    fieldset[disabled] .navbar .container .btn-nav:active:active,
+    fieldset[disabled] .navbar .container .btn-nav:active.active,
+    .navbar .container .btn-nav:visited.disabled,
+    .navbar .container .btn-nav:visited.disabled:hover,
+    .navbar .container .btn-nav:visited.disabled:focus,
+    .navbar .container .btn-nav:visited.disabled:active,
+    .navbar .container .btn-nav:visited.disabled.active,
+    .navbar .container .btn-nav:visited[disabled],
+    .navbar .container .btn-nav:visited[disabled]:hover,
+    .navbar .container .btn-nav:visited[disabled]:focus,
+    .navbar .container .btn-nav:visited[disabled]:active,
+    .navbar .container .btn-nav:visited[disabled].active,
+    fieldset[disabled] .navbar .container .btn-nav:visited,
+    fieldset[disabled] .navbar .container .btn-nav:visited:hover,
+    fieldset[disabled] .navbar .container .btn-nav:visited:focus,
+    fieldset[disabled] .navbar .container .btn-nav:visited:active,
+    fieldset[disabled] .navbar .container .btn-nav:visited.active {
+        background-color: #e86068;
+        border-color: #fff
+    }
+    .navbar .container .btn-nav .badge,
+    .navbar .container .btn-nav:hover .badge,
+    .navbar .container .btn-nav:active .badge,
+    .navbar .container .btn-nav:visited .badge {
+        color: #e86068;
+        background-color: #fff !important
+    }
+}
+
+.navbar.navbar-search .navbar-collapse {
+    padding: 0;
+    margin: 0;
+    border: 0
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form {
+    border: 0;
+    padding: 0;
+    margin: 0
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .col-md-12 {
+    padding: 0 5px
+}
+
+@media (min-width: 768px) {
+    .navbar.navbar-search .navbar-collapse .navbar-form .col-md-12 {
+        padding: 0
+    }
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group {
+    z-index: 999
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .dropdown-menu {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    padding: 0
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .dropdown-menu>li>a {
+    color: inherit
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .dropdown-menu>.active>a,
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .dropdown-menu>.active>a:hover,
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .dropdown-menu>.active>a:focus {
+    color: #fff;
+    background: #e86068
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #efe9e4;
+    position: absolute;
+    top: -7px;
+    right: 0
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group input[type="text"] {
+    background: #fff;
+    height: 48px;
+    border: 2px solid #efe9e4;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+    -webkit-appearance: none
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group #searchclear {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ccc
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .btn-default,
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .btn-secondary,
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .btn-menu {
+    border: 2px solid #efe9e4;
+    border-left: 0;
+    border-right: 0;
+    margin-left: 0;
+    margin-top: 0;
+    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    min-height: 48px
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .btn-default:focus,
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .btn-secondary:focus,
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .btn-menu:focus {
+    outline: 0
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .input-group .glyphicon-remove {
+    z-index: 9999;
+    margin-top: -38px;
+    margin-right: 15px;
+    background: #efe9e4;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .alert-danger {
+    color: #fff;
+    border: 0;
+    background: #a94442;
+    margin: 0;
+    padding: 0
+}
+
+.navbar.navbar-search .navbar-collapse .navbar-form .alert-danger .field-validation-error {
+    padding: 10px 15px;
+    display: inline-block
+}

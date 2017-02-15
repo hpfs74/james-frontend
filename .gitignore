@@ -37,6 +37,8 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+typings
+ts-node
 
 # Optional npm cache directory
 .npm
@@ -55,6 +57,46 @@ jspm_packages
 
 # dotenv environment variables file
 .env
+
+# Users Environment Variables
+.lock-wscript
+.tsdrc
+.typingsrc
+
+#IDE configuration files
+.idea
+*.iml
+.vscode/angulardoc.json
+
+dist
+dev
+docs
+lib
+test
+tmp
+
+src/**/*.js
+src/**/*.js.map
+!src/client/app/shared/test
+nativescript/app
+nativescript/src/app
+nativescript/hooks
+nativescript/node_modules
+nativescript/platforms
+nativescript/**/*.js
+nativescript/**/*.js.map
+nativescript/*.d.ts
+!nativescript/references.d.ts
+!nativescript/app/App_Resources
+desktop
+gulpfile.js
+gulpfile.js.map
+
+#VSCode Chrome Debugger Extension (launch.json configuration)
+ChromeDebugger-UserData
+
+# OS X trash files
+.DS_Store
 
 
 # End of https://www.gitignore.io/api/node
