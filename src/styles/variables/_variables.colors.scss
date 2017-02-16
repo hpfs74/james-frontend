@@ -13,3 +13,28 @@ $knab-secondary-green: rgb(59, 201, 127);
 $knab-secondary-blue: rgb(106, 140, 188);
 
 $knab-white: #fff;
+
+
+// cx-base overrides
+//@TODO currently doesn't do anything because cx-base vars don't have !default flag
+$aegonBlue: $knab-primary-blue;
+$linkBlue: $knab-primary-blue;
+$regalBlue: #003c64;
+$curiousBlue: $knab-secondary-blue;
+$linkWater: #e5f1f9;
+$textBlack: #000000;
+$mojo: #CA4642;
+$aegonError: #CA4642;
+$seaBuckthorn: #F59733;
+$aegonWarning: #F59733;
+$lightningYellow: #FDC828;
+$apple: #49AF57;
+$loginColor: #49AF57;
+$coldGray: #1D1D1D;
+$codGray: #1D1D1D;
+$silverChalice: #5a5a5a;
+$mercury: #E8E8E8;
+$fogGray: #f2f2f2;
+$inputGray: #f2f2f2;
+$aegonWhite: #ffffff;
+$disabledGrey: #eee;
