@@ -29,7 +29,13 @@ import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
+<<<<<<< HEAD
 if ('production' === process.env.ENV) {
+=======
+const ENV = process.env.ENV || 'development';
+
+if ('production' === ENV) {
+>>>>>>> 9dceae065d1ef9daca6113cf2622f60f9d841354
   // Production
 
 } else {
