@@ -4,6 +4,5 @@ import { Component } from '@angular/core';
   selector: 'knab-footer',
   templateUrl: 'knab-footer.component.html',
 })
-export class KnabFooterComponent  { 
-  
+export class KnabFooterComponent {
 }
