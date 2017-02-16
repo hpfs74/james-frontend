@@ -45,21 +45,21 @@ const COMMIT_VERSIONS = {
 
 if (commit) {
   commit.type = commit[1].trim();
-  commit.package = commit[2].trim();
+  commit.scope = commit[2].trim();
   commit.messageText = commit[3].trim();
 
   console.log(chalk.cyan('Commit message:'));
   console.log(commitMsg);
   console.log(chalk.cyan('Commit type: '), commit.type);
-  console.log(chalk.cyan('Commit package: '), commit.package);
+  console.log(chalk.cyan('Commit scope: '), commit.scope);
 }
 
-if (commit && commit.type && commit.package) {
+if (commit && commit.type && commit.scope) {
 
   if (isCI) {
     fs.writeFileSync('COMMIT_TYPE', commit.type);
     fs.writeFileSync('COMMIT_VERSION', COMMIT_VERSIONS[commit.type]);
-    fs.writeFileSync('COMMIT_PACKAGE', commit.package);
+    fs.writeFileSync('COMMIT_PACKAGE', commit.scope);
   }
 
   if (!isValidType(commit.type)) {
