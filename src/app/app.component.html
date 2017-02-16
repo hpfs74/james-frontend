@@ -1,38 +1,15 @@
- <h1>Hello {{ 1 + 2 }}</h1>
-
- <button class="cx-button cx-button--arrow">I'm a CX button</button>
-
+<h1>Hello {{ 1 + 2 }}</h1>
+<button class="cx-button cx-button--arrow">I'm a CX button</button>
 <header class="header">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="cx-container">
-            <div class="row">
-                <div class="cx-col-md-4 cx-col-sm-4 cx-col-xs-9">
-                    <div class="logo">
-                        <a href="/"><img src="/assets/knab-logo.svg?la=nl" alt="Logo Knab"></a>
-                    </div>
-                </div>
-                <ul class="nav navbar-nav list-inline">
-                    <li class="active"><a href="">Overzicht</a></li>
-                    <li class=""><a href="">Mijn account</a></li>
-                    <li class=""><a href="">FAQ</a></li>
-                    <li class=""><a href="">Over ons</a></li>
-                </ul>
-                <ul class="nav nav-pills pull-right">
-                    <li><a href="https://www.knab.nl"><i class="fa fa-chevron-left" aria-hidden="true"></i>Uitloggen</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <knab-navbar></knab-navbar>
 </header>
-
 <div class="navbar-breadcrumb">
-    <div class="cx-container-fluid">
-        <ul id="nav-particulier-menu" class="nav navbar-nav">
-            <li class="">
-                <span>Overzicht</span>
-            </li>
-        </ul>
-    </div>
+  <div class="cx-container-fluid">
+    <ul id="nav-particulier-menu" class="nav navbar-nav">
+      <li class="">
+        <span>Overzicht</span>
+      </li>
+    </ul>
+  </div>
 </div>
-
 <!--<router-outlet></router-outlet>-->

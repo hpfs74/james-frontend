@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }  from './app.component';
+import { KnabNavbarComponent } from './navbar.component';
 
 import '../styles/styles.scss';
 
@@ -8,7 +9,7 @@ import '../styles/styles.scss';
   imports:      [
     BrowserModule
  ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, KnabNavbarComponent ],
 
   bootstrap:    [ AppComponent ]
 })
