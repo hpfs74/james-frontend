@@ -2,6 +2,8 @@
 /* This file is for setting global styles  */
 @import 'variables';
 @import 'navbar';
+@import 'footer';
+@import 'knab-screen.css';
 @import 'pricing-table';
 
 /* import shared library styles */
@@ -13,4 +15,29 @@ body {
     font-size: 14px;
     padding: 0;
     margin: 0;
+}
+
+.navbar-breadcrumb {
+    background: rgb(0, 59, 90);
+    padding: 25px 0;
+}
+
+.header .navbar .container li>span {
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Intro Medium';
+    letter-spacing: 1px;
+}
+
+.features-row {
+    padding-top: 15px;
+}
+
+.sidebar-chat {
+    background: #eeebe5;
+    min-height: 300px;
+}
+
+.no-gutter {
+    padding: 0;
 }

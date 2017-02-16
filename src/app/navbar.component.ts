@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class KnabNavbarComponent  { 
     project: string = "KNAB";
-
-    b 
+    
+    
 }
