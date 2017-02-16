@@ -908,7 +908,7 @@ pre code {
     overflow-y: scroll
 }
 
-.container {
+/*.container {
     margin-right: auto;
     margin-left: auto;
     padding-left: 15px;
@@ -1756,7 +1756,7 @@ pre code {
     .col-lg-offset-12 {
         margin-left: 100%
     }
-}
+}*/
 
 table {
     background-color: transparent
@@ -18617,11 +18617,11 @@ p.intro {
 
 .header .logo img {
     width: 70px;
-    height: 23px
+    height: 23px;
 }
 
 .header .icon {
-    height: auto
+    height: auto;
 }
 
 .header .navbar .container li>span {

@@ -1,23 +1,25 @@
 <header class="header">
   <knab-navbar></knab-navbar>
 </header>
-<div class="navbar-breadcrumb">
-  <div class="cx-container-fluid">
-    <ul id="nav-particulier-menu" class="nav navbar-nav">
-      <li class="">
-        <span>Overzicht</span>
-      </li>
-    </ul>
+
+<div class="cx-container-fluid nav-breadcrumb">
+  <div class="nav-breadcrumb__content cx-container">
+        <a class="nav-breadcrumb-item" href="">Overzicht</a>
   </div>
 </div>
 
-
 <div class="cx-base">
-
-<h1>Hello {{ 1 + 2 }}</h1>
-<button class="cx-button cx-button--arrow">I'm a CX button</button>
-
   <div class="cx-container">
+    <div class="cx-row">
+      <div class="cx-col-md-12">
+        <ol class="cx-step-navigation cx-font cx-font--light cx-font--medium">
+            <li class="cx-step-navigation__step cx-step-navigation__step--current">Je gegevens {{ 1 + 2 }}</li>
+            <li class="cx-step-navigation__step">Resultaten</li>
+            <li class="cx-step-navigation__step">Afsluiten</li>
+        </ol>
+      </div>
+    </div>
+
     <div class="cx-row">
       <div class="cx-col-sm-4">
         <div class="knab-pricing-table">
