@@ -81,6 +81,8 @@ if (commit && commit.type && commit.package) {
   throwError(`
     Incorrect commit message.
     Commit message must match pattern: "type(<scope>): commit message"
+
+    <scope> could be anything specifying place of the commit change. For example $location, $browser, $compile, $rootScope, ngHref, ngClick, ngView, etc...
     got: ${commitMsg}`);
 }
 
