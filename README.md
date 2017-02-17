@@ -19,6 +19,8 @@ Since we're going to use the cx-shared-library we will need to include
 the packages from that project so we need to follow the instructions 
 to include the packages from them.
 
+> You can use the .npmrc provided in this repo and skip this step
+
 To access any private npm registry you need to define it.
 It can be done by changing your global npm settings with:
 npm config set @cx:registry https://swfactory.aegon.com/artifactory/api/npm/npm
@@ -27,7 +29,7 @@ or by having .npmrc file in your project defining that registry with the followi
 Now you should be able to run successfully npm install @cx/[package] or npm show @cx/[package]/ Packages names are defined for every packages in their own package.json files.
 
 ```
-@cx/base  //TODO: reconfigure variables to use Knab styles
+@cx/base
 @cx/checkbox
 @cx/form
 @cx/form-group
@@ -35,12 +37,11 @@ Now you should be able to run successfully npm install @cx/[package] or npm show
 @cx/input
 @cx/radio
 @cx/select
-@cx/slider   //TODO:  is this needed and usable?
+@cx/slider
 @cx/utils
 ```
 After adding the private repository you can install all dependencies from the root directory:
 * `npm install`
-
 
 ## AoT Don'ts
 
@@ -93,6 +94,15 @@ The following are some things that will make AoT compile fail.
  └──webpack.config.js              * webpack main configuration file
 ```
 
+## Code formatting
+
+Check the linting config files for our formatting conventions:
+
+* Editorconfig: `.editorconfig`
+* TypeScript: `tslint.json`
+* Sass: `config/stylelint.conf.js`
+
+
 ## Support for debugging in VSCode
 
 1. Install the Debugger for Chrome extension from the Extension menu (CTRL+Shift+X in VSCode)
@@ -120,6 +130,3 @@ The following are some things that will make AoT compile fail.
     // After DefinePlugin
     new WriteFilePlugin(),
     ```
-
-
-something
