@@ -1,11 +1,10 @@
-<!--<div class="cx-row">
-  <div *ngFor="let item in Items" 
-       [ngClass]="{ getItemClass(): true }"
-
-  <div class="cx-col-sm-4">
-  </div>
-  <div class="cx-col-sm-4">
-  </div>
-  <div class="cx-col-sm-4">
-  </div>
-</div>-->
+<div class="cx-row">
+  <div *ngFor="let item of Items" [ngClass]="getItemClass()">
+    
+    <knab-price-table-item  
+      Header="{{item.Header}}"
+      Price="{{item.Price}}"
+      Highlight="{{item.Highlight}}"
+      [Features]="item.Features"></knab-price-table-item>
+  </div>    
+</div>

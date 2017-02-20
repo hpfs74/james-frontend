@@ -37,7 +37,9 @@
         </ol>
       </div>
     </div>
-    <div class="cx-row">
+
+
+    <!--<div class="cx-row">
       <div class="cx-col-sm-4">
         <knab-price-table-item Header="WA" Price="18,50" [Features]="['Schade door vandalisme','Schade door eigen schuld']">
         </knab-price-table-item>
@@ -50,7 +52,13 @@
         <knab-price-table-item Header="WA limited" Price="30,19" [Features]="['Schade aan anderen', 'Diefstal', 'Inbraak', 'Brand en storm', 'Ruitschade', 'Schade door vandalisme', 'Schade door eigen schuld']">
         </knab-price-table-item>
       </div>
+    </div>-->
+
+    <div class="cx-row">
+      <knab-price-table [Items]="prices"></knab-price-table>
     </div>
+
+
   </div>
 </div>
 <knab-footer></knab-footer>

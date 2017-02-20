@@ -1,14 +1,16 @@
 import { Component, Input } from '@angular/core';
+import { Price } from '../../models/price.d';
 
 @Component({
-    selector: module.id,
+    selector: 'knab-price-table',
     template: require('./knab-price-table.component.html'),
 })
 export class KnabPriceTableComponent {
 
-    @Input() Items: Array<any>;
+    @Input() Items: Array<Price>;
 
     getItemClass(): string {
-        return 'cx-col-sm-4';
+        let ret ='cx-col-sm-' + 12 / this.Items.length;
+        return ret;
     }
 }
