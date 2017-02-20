@@ -9,6 +9,6 @@ export class KnabPriceTableItemComponent  {
 
     @Input() Header: string;
     @Input() Price: number;
-    @Input() Items: Array<string>;
+    @Input() Features: Array<string>;
     @Input() Highlight: boolean = false;
 }
