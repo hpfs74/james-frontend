@@ -9,6 +9,6 @@ export class KnabPriceTableComponent {
     @Input() Items: Array<any>;
 
     getItemClass(): string {
-        return "cx-col-sm-4";
+        return 'cx-col-sm-4';
     }
 }
