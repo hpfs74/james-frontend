@@ -1,0 +1,11 @@
+<div class="knab-pricing-table">
+  <div class="knab-pricing-table__header" [ngClass]="{'knab-pricing-table--highlight': Highlight===true}">
+    {{Header}}
+  </div>
+  <ul class="knab-pricing-table__features">
+    <li *ngFor="let item of Items">{{item}}</li>
+  </ul>
+  <div class="knab-pricing-table__price">
+    vanaf <span class="knab-pricing-table__price-amount">&euro; {{Price}}</span>
+  </div>
+</div>
