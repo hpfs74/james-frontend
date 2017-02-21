@@ -6,7 +6,6 @@
 @import 'icons-fa';
 @import 'utils';
 @import 'navbar';
-@import 'footer';
 @import 'pricing-table';
 
 //@TODO cleanup and replace styles in this file in favor of cx-base:
@@ -21,4 +20,10 @@ body {
   font-size: 14px;
   padding: 0;
   margin: 0;
+}
+
+.footer.footer--mod {
+  background: $knab-primary-grey;
+  color: $knab-primary-blue;
+  overflow: hidden;
 }
