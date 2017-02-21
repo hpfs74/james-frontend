@@ -1,7 +1,3 @@
-/**
- * @author: @AngularClass
- */
-
 module.exports = function (config) {
   var testWebpackConfig = require('./webpack.test.js')({ env: 'test' });
 
@@ -50,21 +46,6 @@ module.exports = function (config) {
     // Webpack Config at ./webpack.test.js
     webpack: testWebpackConfig,
 
-    coverageReporter: {
-      type: 'in-memory'
-    },
-
-    remapCoverageReporter: {
-      'text-summary': null,
-      json: './coverage/coverage.json',
-      html: './coverage/html'
-    },
-
-    htmlReporter: {
-      outputDir: 'coverage',
-      reportName: 'karma-unit'
-    },
-
     // Webpack please don't spam the console when running in karma!
     webpackMiddleware: {
       // webpack-dev-middleware configuration
@@ -85,6 +66,21 @@ module.exports = function (config) {
      */
     reporters: ['mocha', 'coverage', 'remap-coverage', 'html'],
 
+    coverageReporter: {
+      type: 'in-memory'
+    },
+
+    remapCoverageReporter: {
+      'text-summary': null,
+      json: './coverage/coverage.json',
+      html: './coverage/html'
+    },
+
+    htmlReporter: {
+      outputDir: 'coverage',
+      reportName: 'karma-unit'
+    },
+
     // web server port
     port: 9876,
 
@@ -98,37 +94,20 @@ module.exports = function (config) {
     logLevel: config.LOG_WARN,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
-
+    autoWatch: process.env.KARMA_WATCH ? true : false,
     /*
-     * start these browsers
-     * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-     */
-    browsers: [
-     // 'PhantomJS'
-     'Chrome'
-     
-    ],
-
-    // customLaunchers: {
-    //   ChromeTravisCi: {
-    //     base: 'Chrome',
-    //     flags: ['--no-sandbox']
-    //   }
-    // },
-
-    /*
-     * Continuous Integration mode
-     * if true, Karma captures browsers, runs the tests and exits
-     */
-    singleRun: true
+      * start these browsers
+      * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+      */
+    browsers: ['PhantomJS'],
+    singleRun: process.env.KARMA_WATCH ? false : true
   };
 
-  // if (process.env.TRAVIS) {
-  //   configuration.browsers = [
-  //     'ChromeTravisCi'
-  //   ];
-  // }
+  // CI
+  if (!process.env.KARMA_WATCH) {
+    _config.coverageReporter.reporters.push({type: 'text'});
+    _config.coverageReporter.reporters.push({type: 'text-summary'});
+  }
 
   config.set(configuration);
 };
