@@ -71,7 +71,7 @@
     "@angularclass/conventions-loader": "^1.0.2",
     "@angularclass/hmr": "~1.2.2",
     "@angularclass/hmr-loader": "~3.0.2",
-    "@cx/base": "^1.15.0",
+    "@cx/base": "^1.17.0",
     "@cx/checkbox": "^1.2.1",
     "@cx/form": "^1.7.0",
     "@cx/form-group": "^1.0.0",

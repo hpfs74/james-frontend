@@ -12,14 +12,13 @@ $knab-secondary-red: rgb(200, 65, 72);
 $knab-secondary-green: rgb(59, 201, 127);
 $knab-secondary-blue: rgb(106, 140, 188);
 
+// Additional colors
 $knab-white: #fff;
 
-
 // cx-base overrides
-//@TODO currently doesn't do anything because cx-base vars don't have !default flag
 $aegonBlue: $knab-primary-blue;
 $linkBlue: $knab-primary-blue;
-$regalBlue: #003c64;
+$regalBlue: $knab-primary-blue;
 $curiousBlue: $knab-secondary-blue;
 $linkWater: #e5f1f9;
 $textBlack: #000;
