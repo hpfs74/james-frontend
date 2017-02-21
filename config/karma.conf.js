@@ -64,7 +64,7 @@ module.exports = function (config) {
      * possible values: 'dots', 'progress'
      * available reporters: https://npmjs.org/browse/keyword/karma-reporter
      */
-    reporters: ['mocha', 'coverage', 'remap-coverage', 'html'],
+    reporters: ['mocha', 'coverage', 'remap-coverage', 'html', 'junit'],
 
     coverageReporter: {
       type: 'in-memory'
@@ -79,6 +79,16 @@ module.exports = function (config) {
     htmlReporter: {
       outputDir: 'coverage',
       reportName: 'karma-unit'
+    },
+
+    junitReporter: {
+      outputDir: './coverage', // results will be saved as $outputDir/$browserName.xml
+      outputFile: 'jasmine.xml', // if included, results will be saved as $outputDir/$browserName/$outputFile
+      suite: '', // suite will become the package name attribute in xml testsuite element
+      useBrowserName: false, // add browser name to report and classes names
+      nameFormatter: undefined, // function (browser, result) to customize the name attribute in xml testcase element
+      classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
+      properties: {} // key value pair of properties to add to the <properties> section of the report
     },
 
     // web server port
@@ -105,8 +115,8 @@ module.exports = function (config) {
 
   // CI
   if (!process.env.KARMA_WATCH) {
-    _config.coverageReporter.reporters.push({type: 'text'});
-    _config.coverageReporter.reporters.push({type: 'text-summary'});
+    _config.coverageReporter.reporters.push({ type: 'text' });
+    _config.coverageReporter.reporters.push({ type: 'text-summary' });
   }
 
   config.set(configuration);
