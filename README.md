@@ -80,10 +80,14 @@ The following are some things that will make AoT compile fail.
  │   │   └──app.component.ts       * a simple version of our App component components
  │   │
  │   └──assets/                    * static assets are served here
- │       ├──icon/                  * our list of icons from www.favicon-generator.org
+ │       ├──icons/                  * our list of icons from www.favicon-generator.org
  │       ├──service-worker.js      * ignore this. Web App service worker that's not complete yet
  │       ├──robots.txt             * for search engines to crawl your website
  │       └──humans.txt             * for humans to know who the developers are
+ │   │
+ │   └──e2e/                    * Cucumber .feature files
+ │   │
+ │   └──styles/                    * General Sass and CSS files that are bundled automatically
  │
  │
  ├──tslint.json                    * typescript lint config
