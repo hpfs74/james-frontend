@@ -8,8 +8,8 @@ import { Section, Nav } from '../../models/nav.d';
 @Component({
   selector: 'ki-footer',
   template: `
-    <footer class="footer footer--mod">
-      <div class="cx-container-fluid">
+    <footer class="cx-base footer">
+      <div class="cx-container">
         <div class="cx-row">
           <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
             <ul class="nav nav-pills nav-stacked">
@@ -25,7 +25,7 @@ import { Section, Nav } from '../../models/nav.d';
               <li></li>
             </ul>
           </div>
-          <div class="cx-col-md3 cx-col-sm-6 cx-col-xs-6">
+          <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
             <ul class="nav nav-pills nav-stacked">
               <li>
                 <h2>Pakketten</h2>
@@ -39,7 +39,7 @@ import { Section, Nav } from '../../models/nav.d';
             </ul>
           </div>
           <div class="cx-clearfix cx-visible-xs-block cx-visible-sm-block"></div>
-          <div class="cx-col-md3 cx-col-sm-6 cx-col-xs-6">
+          <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
             <ul class="nav nav-pills nav-stacked">
               <li>
                 <h2>Over Knab</h2>
@@ -51,7 +51,7 @@ import { Section, Nav } from '../../models/nav.d';
               <li></li>
             </ul>
           </div>
-          <div class="cx-col-md3 cx-col-sm-6 cx-col-xs-6">
+          <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
             <ul class="nav nav-pills nav-stacked bg-knab">
               <li>
                 <h2>Service &amp; contact</h2>
@@ -65,8 +65,8 @@ import { Section, Nav } from '../../models/nav.d';
             </ul>
           </div>
         </div>
-        <div class="cx-row colophon">
-          <div class="cx-col-md12 cx-col-sm-12 cx-col-xs-12">
+        <div class="cx-row footer__colophon">
+          <div class="cx-col-md-12 cx-col-sm-12 cx-col-xs-12">
             <div class="social pull-left">
               <a href="https://www.facebook.com/knab.nl" target="_blank" alt=""><i class="fa fa-facebook-square fa-lg"></i></a>
               <a href="https://twitter.com/@knab_nl" target="_blank" alt=""><i class="fa fa-twitter-square fa-lg"></i></a>
