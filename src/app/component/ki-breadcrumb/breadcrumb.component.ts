@@ -7,7 +7,7 @@ import { Nav } from '../../models/nav';
     <div class="breadcrumb">
       <div class="cx-container container--flat">
         <ul>
-          <li *ngFor="let item of Items; let i = index" class="{{ item.Class }}">
+          <li *ngFor="let item of Items; let i = index" class="{{ item.cssClass }}">
             <a href="{{ item.Url }}"><span class="fa fa-home"></span> {{ item.Title }}</a>
           </li>
           <li class="breadcrumb__item"><a href="">Overzicht</a></li>
