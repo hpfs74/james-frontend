@@ -3,14 +3,14 @@ import { Price } from '../../models/price.d';
 
 @Component({
     selector: 'knab-price-table',
-    template: require('./knab-price-table.component.html'),
+    template: require('./price-table.component.html'),
 })
-export class KnabPriceTableComponent {
+export class PriceTableComponent {
 
     @Input() Items: Array<Price>;
 
     getItemClass(): string {
-        let ret ='cx-col-sm-' + 12 / this.Items.length;
+        let ret = 'cx-col-sm-' + 12 / this.Items.length;
         return ret;
     }
 }

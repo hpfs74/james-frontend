@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knab-price-table-item',
-  template: require('./knab-price-table-item.component.html'),
+  template: require('./price-table-item.component.html'),
 })
-export class KnabPriceTableItemComponent  {
+export class PriceTableItemComponent  {
     project: string = 'KNAB';
 
     @Input() Header: string;

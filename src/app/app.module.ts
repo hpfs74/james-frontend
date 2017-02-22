@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { KnabNavbarComponent, KnabFooterComponent } from './component/navigation';
-import { KnabPriceTableComponent, KnabPriceTableItemComponent } from './component/knab-price-table';
+import { PriceTableComponent, PriceTableItemComponent } from './component/price-table';
 
 import '../styles/styles.scss';
 
@@ -14,8 +14,8 @@ import '../styles/styles.scss';
     AppComponent,
     KnabNavbarComponent,
     KnabFooterComponent,
-    KnabPriceTableComponent,
-    KnabPriceTableItemComponent
+    PriceTableComponent,
+    PriceTableItemComponent
   ],
   bootstrap: [AppComponent]
 })
