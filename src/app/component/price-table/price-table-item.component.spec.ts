@@ -23,7 +23,8 @@ describe('Component: PriceTableItem', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(PriceTableItemComponent);
         comp = fixture.componentInstance;
-        comp.Header = 'Ciao';
+        comp.Header = 'WA + Casco';
+        comp.Price = 13.90;
 
         fixture.detectChanges();
         de = fixture.debugElement.query(By.css('div.knab-pricing-table__header'));
@@ -35,6 +36,14 @@ describe('Component: PriceTableItem', () => {
         let el = inputDe.nativeElement;
 
         expect(el).not.toBeNull();
-        console.log(el);
+        expect(el.innerText).toBe('WA + Casco');
+    });
+
+    it ('should display the price', () => {
+         let inputDe = fixture.debugElement.query(By.css('span.knab-pricing-table__price-amount'));
+        let el = inputDe.nativeElement;
+
+        expect(el).not.toBeNull();
+        expect(el.innerText).toBe('€ 13.9');
     });
 });
