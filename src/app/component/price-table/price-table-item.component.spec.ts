@@ -48,10 +48,38 @@ describe('Component: PriceTableItem', () => {
         expect(el.innerText).toBe('€ 13.9');
     });
 
-    it ('shoud display list of features', () => {
+    it ('should display list of features', () => {
         let inputDe = fixture.debugElement.query(By.css('ul.knab-pricing-table__features'));
         let el = inputDe.nativeElement;
         expect(el).not.toBeNull();
         expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knab-pricing-table__features > li').length).toBe(4);
+    });
+
+    it ('should display list of features change adding one more', () => {
+        let inputDe = fixture.debugElement.query(By.css('ul.knab-pricing-table__features'));
+        let el = inputDe.nativeElement;
+
+        comp.Features.push('Feat5');
+        fixture.detectChanges();
+
+        expect(el).not.toBeNull();
+        expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knab-pricing-table__features > li').length).toBe(5);
+    });
+
+    it ('should display a not highlighted header by default', () => {
+        let inputDe = fixture.debugElement.query(By.css('div.knab-pricing-table--highlight'));
+
+        expect(comp.Highlight).not.toBeTruthy();
+        expect(inputDe).toBeNull();
+    });
+
+    it ('should display highlighted header when Highlight flag is true', () => {
+        comp.Highlight = true;
+        fixture.detectChanges();
+
+        let inputDe = fixture.debugElement.query(By.css('div.knab-pricing-table--highlight'));
+        let el = inputDe.nativeElement;
+
+        expect(el).not.toBeNull();
     });
 });
