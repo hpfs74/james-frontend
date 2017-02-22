@@ -15,31 +15,28 @@ describe('Component: KnabPriceTable', () => {
     let prices: Array<Price>;
 
     beforeEach(async(() => {
-        // console.log('Creating testbed component');
-
-        // TestBed.configureTestingModule({
-        //     declarations: [KnabPriceTableComponent, KnabPriceTableItemComponent],
-        //     imports: []
-        // }).compileComponents();
+        TestBed.configureTestingModule({
+            declarations: [PriceTableComponent, PriceTableItemComponent],
+            imports: []
+        }).compileComponents();
     }));
 
     beforeEach(() => {
-        // fixture = TestBed.createComponent(KnabPriceTableComponent);
-        // comp = fixture.componentInstance;
-        // prices = new Array<Price>();
-        // prices.push({ Header: 'Title1', Highlight: false, Price: 10.00, Features: [] });
-        // prices.push({ Header: 'Title2', Highlight: true, Price: 20.00, Features: [] });
-        // prices.push({ Header: 'Title3', Highlight: false, Price: 30.00, Features: [] });
+        fixture = TestBed.createComponent(PriceTableComponent);
+        comp = fixture.componentInstance;
+        prices = new Array<Price>();
+        prices.push({ Header: 'Title1', Highlight: false, Price: 10.00, Features: [] });
+        prices.push({ Header: 'Title2', Highlight: true, Price: 20.00, Features: [] });
+        prices.push({ Header: 'Title3', Highlight: false, Price: 30.00, Features: [] });
 
-        // comp.Items = prices;
+        comp.Items = prices;
 
-        // fixture.detectChanges();
+        fixture.detectChanges();
         // de = fixture.debugElement.query(By.css('input'));
         // el = de.nativeElement;
     });
 
     it('should render with cx-col-sm-4 with 3 elemts', () => {
-        // let inputDe = fixture.debugElement.query(By.css('.cx-row'));
-        // expect(inputDe).toBeNull();
+        expect(fixture.debugElement.nativeElement.querySelectorAll('div.cx-col-sm-4').length).toBe(3);
     });
 });
