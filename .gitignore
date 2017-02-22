@@ -74,6 +74,7 @@ docs
 lib
 test
 tmp
+dll
 
 src/**/*.js
 src/**/*.js.map

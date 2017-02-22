@@ -7,15 +7,12 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "outDir": "dist",
-    "sourceRoot": "./src",
     "noEmit": true,
     "noEmitHelpers": true,
     "importHelpers": true,
     "strictNullChecks": false,
     "lib": [
       "dom",
-      "es6.promise",
       "es6"
     ],
     "typeRoots": [
