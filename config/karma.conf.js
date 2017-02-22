@@ -60,14 +60,14 @@ module.exports = function (config) {
 
     /*
      * test results reporter to use
-     *
-     * possible values: 'dots', 'progress'
      * available reporters: https://npmjs.org/browse/keyword/karma-reporter
      */
     reporters: ['mocha', 'coverage', 'remap-coverage', 'html', 'junit'],
 
     coverageReporter: {
-      type: 'in-memory'
+      reporters: [
+        { type: 'json', subdir: '.', file: 'coverage-final.json' }
+      ]
     },
 
     remapCoverageReporter: {
@@ -94,29 +94,17 @@ module.exports = function (config) {
     // web server port
     port: 9876,
 
-    // enable / disable colors in the output (reporters and logs)
     colors: true,
-
-    /*
-     * level of logging
-     * possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-     */
     logLevel: config.LOG_WARN,
-
-    // enable / disable watching file and executing tests whenever any file changes
     autoWatch: process.env.KARMA_WATCH ? true : false,
-    /*
-      * start these browsers
-      * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-      */
     browsers: ['PhantomJS'],
     singleRun: process.env.KARMA_WATCH ? false : true
   };
 
   // CI
   if (!process.env.KARMA_WATCH) {
-    _config.coverageReporter.reporters.push({ type: 'text' });
-    _config.coverageReporter.reporters.push({ type: 'text-summary' });
+    configuration.coverageReporter.reporters.push({ type: 'text' });
+    configuration.coverageReporter.reporters.push({ type: 'text-summary' });
   }
 
   config.set(configuration);
