@@ -8,8 +8,20 @@ import { Price } from '../../models/price.d';
 export class PriceTableComponent {
 
     @Input() Items: Array<Price>;
+    @Input() Select: boolean;
 
-    getItemClass(): string {
+
+    /**
+     * set the current Highlighted element
+     */
+    setHightlight(index) {
+        this.Items.map((item, i) => {
+            item.Highlight = index === i ? true : false;
+        });
+    }
+
+
+    private getItemClass(): string {
         let ret = 'cx-col-sm-' + 12 / this.Items.length;
         return ret;
     }
