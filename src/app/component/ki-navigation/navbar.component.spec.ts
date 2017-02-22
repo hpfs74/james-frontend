@@ -6,32 +6,31 @@ import { NavbarComponent } from './navbar.component';
 import { Nav } from '../../models/nav';
 
 describe('Component: Navbar', () => {
-    let comp: NavbarComponent;
-    let fixture: ComponentFixture<NavbarComponent>;
-    let de: DebugElement;
-    let el: HTMLElement;
+  let comp: NavbarComponent;
+  let fixture: ComponentFixture<NavbarComponent>;
+  let de: DebugElement;
+  let el: HTMLElement;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [NavbarComponent],
-            imports: []
-        }).compileComponents();
-    }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [NavbarComponent],
+      imports: []
+    }).compileComponents();
+  }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(NavbarComponent);
-        comp = fixture.componentInstance;
-        comp.menuItems = [
-            { id: 'about', title: 'About' }
-        ];
+  beforeEach(() => {
+    fixture = TestBed.createComponent(NavbarComponent);
+    comp = fixture.componentInstance;
+    comp.menuItems = [
+      { id: 'about', title: 'About' }
+    ];
+    fixture.detectChanges();
+  });
 
-        fixture.detectChanges();
-    });
+  it('should display the title', () => {
+    let inputDe = fixture.debugElement.query(By.css('ul.navbar-nav'));
+    let el = inputDe.nativeElement;
 
-    it('should display the title', () => {
-        let inputDe = fixture.debugElement.query(By.css('ul.navbar-nav'));
-        let el = inputDe.nativeElement;
-
-        expect(el).not.toBeNull();
-    });
+    expect(el).not.toBeNull();
+  });
 });

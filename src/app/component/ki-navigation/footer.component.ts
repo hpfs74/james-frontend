@@ -8,7 +8,7 @@ import { Section, Nav } from '../../models/nav.d';
 @Component({
   selector: 'ki-footer',
   template: `
-    <div class="footer footer--mod">
+    <footer class="footer footer--mod">
       <div class="cx-container-fluid">
         <div class="cx-row">
           <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
@@ -93,7 +93,7 @@ import { Section, Nav } from '../../models/nav.d';
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   `
 })
 export class FooterComponent {
