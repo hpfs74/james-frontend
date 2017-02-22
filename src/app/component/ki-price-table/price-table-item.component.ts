@@ -2,24 +2,24 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ki-price-table-item',
-  template: `<div class="knab-pricing-table" [ngClass]="{'knab-pricing-table--highlight': Highlight  }">
+  template: `<div class="knab-pricing-table" [ngClass]="{'knab-pricing-table--highlight': highlight }">
   <div class="knab-pricing-table__header" >
-    {{Header}}
+    {{ header }}
   </div>
   <ul class="knab-pricing-table__features">
-    <li *ngFor="let item of Features">{{item}}</li>
+    <li *ngFor="let item of features">{{ item }}</li>
   </ul>  
   <div class="knab-pricing-table__price">
-    vanaf <span class="knab-pricing-table__price-amount">&euro; {{Price}}</span>
+    vanaf <span class="knab-pricing-table__price-amount">&euro; {{ price }}</span>
   </div>
 </div>`,
 })
 export class PriceTableItemComponent {
   project: string = 'KNAB';
 
-  @Input() Header: string;
-  @Input() Price: number;
-  @Input() Features: Array<string>;
-  @Input() Highlight: boolean = false;
-  @Input() Selectable: boolean = false;
+  @Input() header: string;
+  @Input() price: number;
+  @Input() features: Array<string>;
+  @Input() highlight: boolean = false;
+  @Input() selectable: boolean = false;
 }

@@ -4,12 +4,12 @@
  * knab-price-table o knab-price-table-item
  */
 export class Price {
-    Header: string;
-    Price: number;
+    header: string;
+    price: number;
     /**
      * @description
      * List of features
      */
-    Features: Array<string>;
-    Highlight: boolean;
+    features: Array<string>;
+    highlight: boolean;
 }

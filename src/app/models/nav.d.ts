@@ -4,9 +4,9 @@
  * Describe a section for navigation purpose
  */
 export class Section {
-    Icon: string;
-    Name: string;
-    Links: Array<Nav>;
+    icon: string;
+    name: string;
+    links: Array<Nav>;
 }
 
 /**
@@ -16,12 +16,12 @@ export class Section {
    require('./footer.component.html')
  */
 export class Nav {
-    Id: string;
-    Title: string;
-    Url?: string;
-    Target?: string;
-    Alternate?: string;
-    Icon?: string;
-    Image?: string;
-    Class?: string;
+    id: string;
+    title: string;
+    url?: string;
+    target?: string;
+    alternate?: string;
+    icon?: string;
+    image?: string;
+    cssClass?: string;
 }

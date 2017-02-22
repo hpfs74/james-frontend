@@ -4,12 +4,12 @@
  * through the knab-vehicle.
  */
 export class Vehicle {
-    Name: string;
-    Manufacturer: string;
-    Model: string;
-    Engine: string;
-    Transmission: string;
-    Year: Number;
-    AcquisitionValue: Number;
-    EstimatedValue: Number;
+    name: string;
+    manufacturer: string;
+    model: string;
+    engine: string;
+    transmission: string;
+    year: Number;
+    acquisitionValue: Number;
+    estimatedValue: Number;
 }

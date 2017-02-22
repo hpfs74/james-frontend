@@ -6,25 +6,25 @@ import { Price } from '../../models/price.d';
   template: `<div class="cx-row">
   <div *ngFor="let item of Items" [ngClass]="getItemClass()">
     <ki-price-table-item 
-        Header="{{item.Header}}" 
-        Price="{{item.Price}}" 
-        Highlight="{{item.Highlight}}" 
-        [Features]="item.Features">
+        Header="{{item.header}}" 
+        Price="{{item.price}}" 
+        Highlight="{{item.highlight}}" 
+        [Features]="item.features">
     </ki-price-table-item>
   </div>
 </div>`,
 })
 export class PriceTableComponent {
 
-  @Input() Items: Array<Price>;
-  @Input() Selectable: boolean;
+  @Input() items: Array<Price>;
+  @Input() selectable: boolean;
 
   /**
    * set the current Highlighted element
    */
-  setHightlight(index) {
-    this.Items.map((item, i) => {
-      item.Highlight = index === i ? true : false;
+  setHightlight(index: number) {
+    this.items.map((item, i) => {
+      item.highlight = index === i ? true : false;
     });
   }
 
@@ -32,7 +32,7 @@ export class PriceTableComponent {
    * get the right class for columns
    */
   getItemClass(): string {
-    let ret = 'cx-col-sm-' + 12 / this.Items.length;
+    let ret = 'cx-col-sm-' + 12 / this.items.length;
     return ret;
   }
 }
