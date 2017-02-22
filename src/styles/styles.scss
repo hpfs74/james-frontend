@@ -15,6 +15,9 @@
 @import '../../node_modules/@cx/grid/index';
 @import '../../node_modules/@cx/base/index';
 
+/* component styles */
+@import '../app/component/ki-breadcrumb/breadcrumb.component';
+
 body {
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
   font-size: 14px;

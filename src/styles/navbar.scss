@@ -519,44 +519,6 @@
   }
 }
 
-.nav-breadcrumb {
-  background: $knab-primary-blue;
-  padding: 0;
-  margin-bottom: 25px;
-}
-
-.nav-breadcrumb__content {
-  padding: 30px 15px;
-  color: $knab-white;
-  font-size: 20px;
-  font-family: $knab-font-family-primary;
-
-  &:before {
-    content: "\f015";
-    font-family: 'FontAwesome';
-    color: $knab-white;
-    margin-right: 15px;
-  }
-}
-
-.nav-breadcrumb-item {
-color: $knab-white;
-text-decoration: none;
-
-&:before {
-  content: "\f054";
-  font-family: 'FontAwesome';
-  font-size: 16px;
-  color: $knab-white;
-  margin-right: 15px;
-}
-
-&:hover {
-  color: $knab-white;
-  text-decoration: none;
-}
-}
-
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
   border-top-right-radius: 0;
