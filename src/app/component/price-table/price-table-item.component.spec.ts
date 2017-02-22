@@ -25,6 +25,7 @@ describe('Component: PriceTableItem', () => {
         comp = fixture.componentInstance;
         comp.Header = 'WA + Casco';
         comp.Price = 13.90;
+        comp.Features = ['Feat1', 'Feat2', 'Feat3', 'Feat4'];
 
         fixture.detectChanges();
         de = fixture.debugElement.query(By.css('div.knab-pricing-table__header'));
@@ -45,5 +46,12 @@ describe('Component: PriceTableItem', () => {
 
         expect(el).not.toBeNull();
         expect(el.innerText).toBe('€ 13.9');
+    });
+
+    it ('shoud display list of features', () => {
+        let inputDe = fixture.debugElement.query(By.css('ul.knab-pricing-table__features'));
+        let el = inputDe.nativeElement;
+        expect(el).not.toBeNull();
+        expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knab-pricing-table__features > li').length).toBe(4);
     });
 });
