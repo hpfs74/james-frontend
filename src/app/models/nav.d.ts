@@ -4,10 +4,10 @@
  * Describe a section for navigation purpose
  */
 export class Section {
+    Icon: string;
     Name: string;
     Links: Array<Nav>;
 }
-
 
 /**
  * @description
@@ -20,4 +20,7 @@ export class Nav {
     Title: string;
     Url: string;
     Target: string;
+    Alternate: string;
+    Icon: string;
+    Image: string;
 }
