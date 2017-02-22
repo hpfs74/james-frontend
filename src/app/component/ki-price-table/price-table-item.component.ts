@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'knab-price-table-item',
+  selector: 'ki-price-table-item',
   template: `<div class="knab-pricing-table" [ngClass]="{'knab-pricing-table--highlight': Highlight  }">
   <div class="knab-pricing-table__header" >
     {{Header}}
@@ -15,11 +15,11 @@ import { Component, Input } from '@angular/core';
 </div>
 `,
 })
-export class PriceTableItemComponent  {
-    project: string = 'KNAB';
+export class PriceTableItemComponent {
+  project: string = 'KNAB';
 
-    @Input() Header: string;
-    @Input() Price: number;
-    @Input() Features: Array<string>;
-    @Input() Highlight: boolean = false;
+  @Input() Header: string;
+  @Input() Price: number;
+  @Input() Features: Array<string>;
+  @Input() Highlight: boolean = false;
 }
