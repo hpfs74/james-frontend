@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Price } from './models/price.d';
 
 @Component({
-  selector: 'knab-app',
+  selector: 'ki-app',
   templateUrl: 'app.component.html',
 })
 export class AppComponent {

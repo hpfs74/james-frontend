@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
  * KnabFooterComponent handle to footer of the page
  */
 @Component({
-  selector: 'knab-footer',
+  selector: 'ki-footer',
   template: require('./footer.component.html'),
 })
 export class FooterComponent {
