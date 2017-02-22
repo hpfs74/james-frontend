@@ -28,16 +28,16 @@ module.exports = function (config) {
      * we are building the test environment in ./spec-bundle.js
      */
     files: [{
-        pattern: './config/spec-bundle.js',
-        watched: false
-      },
-      {
-        pattern: './src/assets/**/*',
-        watched: false,
-        included: false,
-        served: true,
-        nocache: false
-      }
+      pattern: './config/spec-bundle.js',
+      watched: false
+    },
+    {
+      pattern: './src/assets/**/*',
+      watched: false,
+      included: false,
+      served: true,
+      nocache: false
+    }
     ],
 
     /*
@@ -110,26 +110,14 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_WARN,
     autoWatch: process.env.KARMA_WATCH ? true : false,
-<<<<<<< HEAD
-    /*
-     * start these browsers
-     * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-     */
-=======
->>>>>>> bfd2fbdac7a4ac98e82152a4df91b903e4b39167
     browsers: ['PhantomJS'],
     singleRun: process.env.KARMA_WATCH ? false : true
   };
 
   // CI
   if (!process.env.KARMA_WATCH) {
-<<<<<<< HEAD
-    // _config.coverageReporter.reporters.push({ type: 'text' });
-    // _config.coverageReporter.reporters.push({ type: 'text-summary' });
-=======
     configuration.coverageReporter.reporters.push({ type: 'text' });
     configuration.coverageReporter.reporters.push({ type: 'text-summary' });
->>>>>>> bfd2fbdac7a4ac98e82152a4df91b903e4b39167
   }
 
   config.set(configuration);

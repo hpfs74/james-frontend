@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "outDir": "dist",
-    "sourceRoot": "../src",
+    "sourceRoot": "./src",
     "noEmit": true,
     "noEmitHelpers": true,
     "importHelpers": true,
