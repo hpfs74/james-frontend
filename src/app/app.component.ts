@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Price } from './models/price.d';
 
-
 @Component({
   selector: 'knab-app',
   templateUrl: 'app.component.html',
