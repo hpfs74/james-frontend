@@ -19,10 +19,10 @@ export class AppComponent {
     ];
 
     this.topMenu = [
-      { Id: 'menu-overview', Title: 'Overzicht', Url: '/', Target: '' },
-      { Id: 'menu-account', Title: 'Mijn account', Target: '', Url: '/' },
-      { Id: 'menu-faq', Title: 'FAQ', Url: '/', Target: '' },
-      { Id: 'menu-about', Title: 'Over ons', Url: '/', Target: '' },
+      { Id: 'menu-overview', Title: 'Overzicht' },
+      { Id: 'menu-account', Title: 'Mijn account' },
+      { Id: 'menu-faq', Title: 'FAQ' },
+      { Id: 'menu-about', Title: 'Over ons' },
     ];
   }
 }

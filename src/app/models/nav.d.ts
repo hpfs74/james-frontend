@@ -18,9 +18,10 @@ export class Section {
 export class Nav {
     Id: string;
     Title: string;
-    Url: string;
-    Target: string;
-    Alternate: string;
-    Icon: string;
-    Image: string;
+    Url?: string;
+    Target?: string;
+    Alternate?: string;
+    Icon?: string;
+    Image?: string;
+    Class?: string;
 }

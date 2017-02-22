@@ -22,7 +22,7 @@ import { Section, Nav } from '../../models/nav.d';
       </div>
       <ul class="nav navbar-nav list-inline">
         <li class="" *ngFor="let item of MenuItems; let i = index">
-          <a id="{{item.Id}}" href="item.Url" target="{{ item.Target }}">{{ item.Title }}</a>
+          <a id="{{ item.Id }}" href="{{ item.Url }}" target="{{ item.Target }}">{{ item.Title }}</a>
         </li>
       </ul>
       <ul class="nav nav-pills pull-right" *ngIf="LoginAccess">

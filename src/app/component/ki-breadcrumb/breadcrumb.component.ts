@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Nav } from '../../models/nav';
 
 @Component({
   selector: 'ki-breadcrumb',
@@ -6,7 +7,9 @@ import { Component } from '@angular/core';
     <div class="breadcrumb">
       <div class="cx-container container--flat">
         <ul>
-          <li class="breadcrumb__home"><a href="/"><span class="fa fa-home"></span></a></li>
+          <li *ngFor="let item of Items; let i = index" class="{{ item.Class }}">
+            <a href="{{ item.Url }}"><span class="fa fa-home"></span> {{ item.Title }}</a>
+          </li>
           <li class="breadcrumb__item"><a href="">Overzicht</a></li>
           <li class="breadcrumb__item"><a href="">Overzicht</a></li>
           <li class="breadcrumb__item"><a href="">Overzicht</a></li>
@@ -16,5 +19,5 @@ import { Component } from '@angular/core';
   `
 })
 export class BreadCrumbComponent {
-
+  @Input() Items: Array<Nav>;
 }
