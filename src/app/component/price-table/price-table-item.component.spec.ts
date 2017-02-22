@@ -6,7 +6,7 @@ import { PriceTableItemComponent } from './price-table-item.component';
 import { Price } from '../../models/price';
 
 
-describe('Component: KnabPriceTableItem', () => {
+describe('Component: PriceTableItem', () => {
     let comp: PriceTableItemComponent;
     let fixture: ComponentFixture<PriceTableItemComponent>;
     let de: DebugElement;

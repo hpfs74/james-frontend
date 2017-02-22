@@ -1,2 +1,2 @@
-export * from './knab-footer.component';
-export * from './knab-navbar.component';
+export * from './footer.component';
+export * from './navbar.component';

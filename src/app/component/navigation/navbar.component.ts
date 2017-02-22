@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'knab-navbar',
-  templateUrl: 'knab-navbar.component.html',
+  templateUrl: require('./navbar.component.html'),
 })
-export class KnabNavbarComponent {
+export class NavbarComponent {
   project: string = 'KNAB';
 }

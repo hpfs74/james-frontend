@@ -6,9 +6,9 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
   selector: 'knab-footer',
-  templateUrl: 'knab-footer.component.html',
+  template: require('./footer.component.html'),
 })
-export class KnabFooterComponent {
+export class FooterComponent {
   @Input() SocialIcons: boolean = false;
 
 }
