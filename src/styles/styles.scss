@@ -5,11 +5,7 @@
 //@TODO replace icon font with svg icons
 @import 'icons-fa';
 @import 'utils';
-@import 'navbar';
 @import 'pricing-table';
-
-//@TODO cleanup and replace styles in this file in favor of cx-base:
-@import 'knab-screen.css';
 
 /* import shared library styles */
 @import '../../node_modules/@cx/grid/index';
@@ -17,6 +13,7 @@
 
 /* component styles */
 @import '../app/component/ki-breadcrumb/breadcrumb.component';
+@import '../app/component/ki-navigation/navbar.component';
 
 body {
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
@@ -25,8 +22,19 @@ body {
   margin: 0;
 }
 
-.footer.footer--mod {
-  background: $knab-primary-grey;
-  color: $knab-primary-blue;
-  overflow: hidden;
+a {
+  color: $knab-primary-red;
+  text-decoration: none
+}
+
+a:hover,
+a:focus {
+  color: $knab-secondary-red;
+  text-decoration: underline
+}
+
+a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px
 }
