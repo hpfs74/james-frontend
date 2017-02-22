@@ -8,12 +8,11 @@ import { Component, Input } from '@angular/core';
   </div>
   <ul class="knab-pricing-table__features">
     <li *ngFor="let item of Features">{{item}}</li>
-  </ul>
+  </ul>  
   <div class="knab-pricing-table__price">
     vanaf <span class="knab-pricing-table__price-amount">&euro; {{Price}}</span>
   </div>
-</div>
-`,
+</div>`,
 })
 export class PriceTableItemComponent {
   project: string = 'KNAB';

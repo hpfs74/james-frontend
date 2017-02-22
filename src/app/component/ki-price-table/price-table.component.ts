@@ -29,7 +29,9 @@ export class PriceTableComponent {
     });
   }
 
-
+  /**
+   * get the right class for columns
+   */
   getItemClass(): string {
     let ret = 'cx-col-sm-' + 12 / this.Items.length;
     return ret;
