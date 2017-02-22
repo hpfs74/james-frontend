@@ -21,7 +21,7 @@ import { Section, Nav } from '../../models/nav.d';
         </div>
       </div>
       <ul class="nav navbar-nav list-inline">
-        <li class="" *ngFor="let item of MenuItems; let i = index">
+        <li class="navbar-nav__menu-item" *ngFor="let item of MenuItems; let i = index">
           <a id="{{ item.Id }}" href="{{ item.Url }}" target="{{ item.Target }}">{{ item.Title }}</a>
         </li>
       </ul>

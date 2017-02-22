@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar.component';
 import { Nav } from '../../models/nav';
 
-
 describe('Component: Navbar', () => {
     let comp: NavbarComponent;
     let fixture: ComponentFixture<NavbarComponent>;
@@ -29,7 +28,7 @@ describe('Component: Navbar', () => {
         fixture.detectChanges();
     });
 
-    it('should display the header', () => {
+    it('should display the title', () => {
         let inputDe = fixture.debugElement.query(By.css('ul.navbar-nav'));
         let el = inputDe.nativeElement;
 
