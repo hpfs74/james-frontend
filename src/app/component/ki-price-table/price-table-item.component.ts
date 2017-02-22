@@ -21,4 +21,5 @@ export class PriceTableItemComponent {
   @Input() Price: number;
   @Input() Features: Array<string>;
   @Input() Highlight: boolean = false;
+  @Input() Selectable: boolean = false;
 }

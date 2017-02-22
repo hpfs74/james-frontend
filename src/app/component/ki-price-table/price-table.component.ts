@@ -17,8 +17,7 @@ import { Price } from '../../models/price.d';
 export class PriceTableComponent {
 
   @Input() Items: Array<Price>;
-  @Input() Select: boolean;
-
+  @Input() Selectable: boolean;
 
   /**
    * set the current Highlighted element
