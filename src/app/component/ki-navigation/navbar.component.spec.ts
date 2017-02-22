@@ -21,8 +21,8 @@ describe('Component: Navbar', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(NavbarComponent);
         comp = fixture.componentInstance;
-        comp.MenuItems = [
-            { Id: 'about', Title: 'About' }
+        comp.menuItems = [
+            { id: 'about', title: 'About' }
         ];
 
         fixture.detectChanges();

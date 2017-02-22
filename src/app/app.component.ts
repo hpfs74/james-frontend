@@ -13,16 +13,16 @@ export class AppComponent {
 
   constructor() {
     this.prices = [
-      { Header: 'WA', Price: 18.90, Features: ['Feat1', 'Feat2'], Highlight: false },
-      { Header: 'WA + Casco', Price: 22.90, Features: ['Feat1', 'Feat2', 'Feat3'], Highlight: true },
-      { Header: 'WA limited', Price: 30.19, Features: ['Feat1', 'Feat2', 'Feat3', 'Feat4', 'Feat5'], Highlight: false },
+      { header: 'WA', price: 18.90, features: ['Feat1', 'Feat2'], highlight: false },
+      { header: 'WA + Casco', price: 22.90, features: ['Feat1', 'Feat2', 'Feat3'], highlight: true },
+      { header: 'WA limited', price: 30.19, features: ['Feat1', 'Feat2', 'Feat3', 'Feat4', 'Feat5'], highlight: false },
     ];
 
     this.topMenu = [
-      { Id: 'menu-overview', Title: 'Overzicht' },
-      { Id: 'menu-account', Title: 'Mijn account' },
-      { Id: 'menu-faq', Title: 'FAQ' },
-      { Id: 'menu-about', Title: 'Over ons' },
+      { id: 'menu-overview', title: 'Overzicht' },
+      { id: 'menu-account', title: 'Mijn account' },
+      { id: 'menu-faq', title: 'FAQ' },
+      { id: 'menu-about', title: 'Over ons' },
     ];
   }
 }

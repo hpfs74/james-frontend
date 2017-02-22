@@ -23,9 +23,9 @@ describe('Component: PriceTableItem', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(PriceTableItemComponent);
         comp = fixture.componentInstance;
-        comp.Header = 'WA + Casco';
-        comp.Price = 13.90;
-        comp.Features = ['Feat1', 'Feat2', 'Feat3', 'Feat4'];
+        comp.header = 'WA + Casco';
+        comp.price = 13.90;
+        comp.features = ['Feat1', 'Feat2', 'Feat3', 'Feat4'];
 
         fixture.detectChanges();
         de = fixture.debugElement.query(By.css('div.knab-pricing-table__header'));
@@ -59,7 +59,7 @@ describe('Component: PriceTableItem', () => {
         let inputDe = fixture.debugElement.query(By.css('ul.knab-pricing-table__features'));
         let el = inputDe.nativeElement;
 
-        comp.Features.push('Feat5');
+        comp.features.push('Feat5');
         fixture.detectChanges();
 
         expect(el).not.toBeNull();
@@ -69,12 +69,12 @@ describe('Component: PriceTableItem', () => {
     it ('should display a not highlighted header by default', () => {
         let inputDe = fixture.debugElement.query(By.css('div.knab-pricing-table--highlight'));
 
-        expect(comp.Highlight).not.toBeTruthy();
+        expect(comp.highlight).not.toBeTruthy();
         expect(inputDe).toBeNull();
     });
 
     it ('should display highlighted header when Highlight flag is true', () => {
-        comp.Highlight = true;
+        comp.highlight = true;
         fixture.detectChanges();
 
         let inputDe = fixture.debugElement.query(By.css('div.knab-pricing-table--highlight'));

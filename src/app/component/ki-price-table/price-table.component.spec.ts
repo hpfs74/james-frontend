@@ -12,7 +12,7 @@ describe('Component: PriceTable', () => {
     let fixture: ComponentFixture<PriceTableComponent>;
     let de: DebugElement;
     let el: HTMLElement;
-    let prices: Array<Price>;
+
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -24,12 +24,12 @@ describe('Component: PriceTable', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(PriceTableComponent);
         comp = fixture.componentInstance;
-        prices = new Array<Price>();
-        prices.push({ Header: 'Title1', Highlight: false, Price: 10.00, Features: [] });
-        prices.push({ Header: 'Title2', Highlight: false, Price: 20.00, Features: [] });
-        prices.push({ Header: 'Title3', Highlight: false, Price: 30.00, Features: [] });
 
-        comp.Items = prices;
+        comp.items = [
+          { header: 'Title1', highlight: false, price: 10.00, features: [] },
+          { header: 'Title2', highlight: false, price: 20.00, features: [] },
+          { header: 'Title3', highlight: false, price: 30.00, features: [] }
+        ] ;
 
         fixture.detectChanges();
         // de = fixture.debugElement.query(By.css('input'));
@@ -42,8 +42,8 @@ describe('Component: PriceTable', () => {
 
     it('should render with cx-col-sm-3 with 4 elements', () => {
 
-        comp.Items.push({
-            Header: 'Title4', Highlight: false, Price: 30.00, Features: []
+        comp.items.push({
+            header: 'Title4', highlight: false, price: 30.00, features: []
         });
         fixture.detectChanges();
 
