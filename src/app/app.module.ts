@@ -9,9 +9,10 @@ import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 
 // Shared components
-import { NavbarComponent, FooterComponent } from './component/ki-navigation';
-import { BreadCrumbComponent } from './component/ki-breadcrumb/breadcrumb.component';
-import { PriceTableComponent, PriceTableItemComponent } from './component/ki-price-table';
+import { NavbarComponent, FooterComponent } from './components/ki-navigation';
+import { BreadCrumbComponent } from './components/ki-breadcrumb/breadcrumb.component';
+import { PriceTableComponent, PriceTableItemComponent } from './components/ki-price-table';
+import { FeaturesComponent } from './components/ki-features/features.component';
 
 // Pages
 import { OverviewComponent } from './pages/overview/overview.component';
@@ -33,6 +34,7 @@ import '../styles/styles.scss';
     BreadCrumbComponent,
     PriceTableComponent,
     PriceTableItemComponent,
+    FeaturesComponent,
     OverviewComponent
   ],
   bootstrap: [AppComponent]

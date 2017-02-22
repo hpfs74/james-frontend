@@ -1,4 +1,5 @@
 import { DebugElement } from '@angular/core';
+import { AppRoutingModule } from '../../app.routes';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +15,7 @@ describe('Component: Navbar', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NavbarComponent],
-      imports: []
+      imports: [AppRoutingModule]
     }).compileComponents();
   }));
 
@@ -28,8 +29,8 @@ describe('Component: Navbar', () => {
   });
 
   it('should display the title', () => {
-    let inputDe = fixture.debugElement.query(By.css('ul.navbar-nav'));
-    let el = inputDe.nativeElement;
+    let navElement = fixture.debugElement.query(By.css('ul.navbar-nav'));
+    let el = navElement.nativeElement;
 
     expect(el).not.toBeNull();
   });
