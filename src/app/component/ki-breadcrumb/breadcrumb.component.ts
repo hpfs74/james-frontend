@@ -19,5 +19,5 @@ import { Nav } from '../../models/nav';
   `
 })
 export class BreadCrumbComponent {
-  @Input() Items: Array<Nav>;
+  @Input() items: Array<Nav>;
 }

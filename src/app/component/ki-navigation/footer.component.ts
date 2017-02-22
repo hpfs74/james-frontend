@@ -97,6 +97,6 @@ import { Section, Nav } from '../../models/nav.d';
   `
 })
 export class FooterComponent {
-  @Input() SocialIcons: boolean = false;
-  @Input() Sections: Array<Section>;
+  @Input() socialIcons: boolean = false;
+  @Input() sections: Array<Section>;
 }
