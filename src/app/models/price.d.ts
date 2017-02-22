@@ -11,5 +11,5 @@ export class Price {
      * List of features
      */
     features: Array<string>;
-    highlight: boolean;
+  highlight?: boolean;
 }
