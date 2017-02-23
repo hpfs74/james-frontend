@@ -7,9 +7,9 @@ export class Vehicle {
     name: string;
     manufacturer: string;
     model: string;
-    engine: string;
-    transmission: string;
-    year: Number;
-    acquisitionValue: Number;
-    estimatedValue: Number;
+    engine?: string;
+    transmission?: string;
+    year?: Number;
+    acquisitionValue?: Number;
+    estimatedValue?: Number;
 }

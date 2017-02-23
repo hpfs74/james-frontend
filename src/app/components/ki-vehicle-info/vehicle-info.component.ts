@@ -6,6 +6,11 @@ import { Vehicle } from '../../models/vehicle';
   template: `
     <div class="ki-block-round">
       <div class="cx-row">
+        <div class="cx-sm-col-12">
+          <img src="" alt="vehicle image" border="0"/>
+        </div>
+      </div>    
+      <div class="cx-row">
         <div class="cx-sm-col-6">Merk</div>
         <div class="cx-sm-col-6">{{ vehicle.manufacturer }}</div>
       </div>  
@@ -35,7 +40,6 @@ import { Vehicle } from '../../models/vehicle';
       </div>
   </div>`
 })
-
 export class VehicleInfoComponent {
 
   @Input() vehicle: Vehicle;
