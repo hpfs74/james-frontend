@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Section, Nav } from '../../models/nav.d';
+import { RouterLink } from '@angular/router';
+
+import { Nav } from '../../models';
 
 @Component({
   selector: 'ki-navbar',
