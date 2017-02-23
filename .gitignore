@@ -1,6 +1,10 @@
 
 # Created by https://www.gitignore.io/api/node
 
+
+### Typedoc ###
+docs
+
 ### Node ###
 # Logs
 logs
