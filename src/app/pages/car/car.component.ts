@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../models/vehicle';
 
 @Component({
-  selector: 'ki-overview',
+  selector: 'ki-car',
   template: require('./car.component.html')
 })
 export class CarComponent implements OnInit {

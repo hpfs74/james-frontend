@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Price } from './models/price.d';
-import { Nav } from './models/nav.d';
-import { Feature } from './models/feature.d';
+
+import { FeatureService } from './shared';
+import { Price, Nav, Feature } from './models';
 
 @Component({
   selector: 'ki-app',
