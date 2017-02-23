@@ -33,5 +33,9 @@ import { Section, Nav } from '../../models/nav.d';
 </nav>`,
 })
 export class NavbarComponent {
+  /**
+   * contains the elments of the menu
+   * @see module:models/Nav
+   */
   @Input() menuItems: Array<Nav>;
 }

@@ -1,7 +1,15 @@
+/**
+ * models for navigations
+ * @module models/Nav
+ */
+
 
 /**
+ * @name
+ * Section
  * @description
  * Describe a section for navigation purpose
+ *
  */
 export class Section {
     icon: string;
@@ -10,6 +18,8 @@ export class Section {
 }
 
 /**
+ * @name
+ * Nav
  * @description
  * Describe a navigation link /// <reference path="ki-footer" />
  * and also /// <reference path="ki-navbar" />
