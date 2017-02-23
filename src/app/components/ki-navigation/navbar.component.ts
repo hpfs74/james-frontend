@@ -22,7 +22,7 @@ import { Section, Nav } from '../../models/nav.d';
       </div>
       <ul class="nav navbar-nav list-inline">
         <li class="navbar-nav__menu-item" *ngFor="let item of menuItems; let i = index">
-          <a id="{{ item.Id }}" href="{{ item.Url }}" target="{{ item.Target }}">{{ item.Title }}</a>
+          <a id="{{ item.id }}" routerLink="{{ item.url }}">{{ item.title }}</a>
         </li>
       </ul>
       <ul class="nav nav-pills pull-right" *ngIf="LoginAccess">
@@ -33,5 +33,5 @@ import { Section, Nav } from '../../models/nav.d';
 </nav>`,
 })
 export class NavbarComponent {
-  @Input() menuItems : Array<Nav>;
+  @Input() menuItems: Array<Nav>;
 }

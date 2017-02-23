@@ -1,54 +1,55 @@
 @import "variables";
 
-.knab-pricing-table {
-border-radius: 0;
-border: 1px solid $knab-primary-grey;
-color: $knab-primary-blue;
-font-size: 16px;
+.ki-pricing-table {
+  border-radius: 0;
+  border: 1px solid $knab-primary-grey;
+  color: $knab-primary-blue;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.knab-pricing-table--highlight {
-border: 2px solid $knab-primary-green;
+.ki-pricing-table--highlight {
+  border: 2px solid $knab-primary-green;
 }
 
-.knab-pricing-table__header {
-font-size: 20px;
-font-weight: 500;
-text-align: center;
-margin: 0;
-padding: 20px;
+.ki-pricing-table__header {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
 }
 
-.knab-pricing-table--highlight .knab-pricing-table__header {
+.ki-pricing-table--highlight .ki-pricing-table__header {
   color: $knab-white;
   background: $knab-primary-green;
 }
 
-.knab-pricing-table__features {
-padding: 0 45px;
-list-style-type: none;
+.ki-pricing-table__features {
+  padding: 0 45px;
+  list-style-type: none;
 
-& > * {
-  margin-bottom: 20px;
+  & > * {
+    margin-bottom: 20px;
 
-  &:before {
-    margin-top: 0;
-    margin-left: -35px;
-    content: "\f00c";
-    font-size: 1.5em;
-    color: $knab-primary-green;
+    &:before {
+      margin-top: 0;
+      margin-left: -35px;
+      content: "\f00c";
+      font-size: 1.5em;
+      color: $knab-primary-green;
+    }
   }
 }
+
+.ki-pricing-table__price {
+  padding: 0 30px;
+  text-align: right;
 }
 
-.knab-pricing-table__price {
-padding: 0 30px;
-text-align: right;
-}
-
-.knab-pricing-table__price-amount {
-font-size: 20px;
-font-weight: 700;
+.ki-pricing-table__price-amount {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 

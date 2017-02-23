@@ -1,0 +1,30 @@
+.container-features {
+  background: $knab-primary-blue;
+}
+
+.container-features-inner {
+  display: flex;
+  align-items: flex-center;
+  align-content: flex-center;
+  background: inherit;
+  padding: 50px 0;
+}
+
+.feature {
+  margin-right: 30px;
+  flex: 1 1 0;
+}
+
+.feature__title {
+  color: $knab-white;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
+  margin-bottom: 10px;
+}
+
+.feature__description {
+  color: $knab-secondary-blue;
+  font-size: 14px;
+  font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
+}

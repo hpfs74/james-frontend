@@ -5,15 +5,17 @@
 //@TODO replace icon font with svg icons
 @import 'icons-fa';
 @import 'utils';
-@import 'pricing-table';
 
 /* import shared library styles */
 @import '../../node_modules/@cx/grid/index';
 @import '../../node_modules/@cx/base/index';
 
 /* component styles */
-@import '../app/component/ki-breadcrumb/breadcrumb.component';
-@import '../app/component/ki-navigation/navbar.component';
+@import '../app/components/ki-breadcrumb/breadcrumb.component';
+@import '../app/components/ki-features/features.component';
+@import '../app/components/ki-navigation/navbar.component';
+@import '../app/components/ki-navigation/footer.component';
+@import '../app/components/ki-price-table/price-table.component';
 
 body {
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
