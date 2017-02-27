@@ -28,6 +28,7 @@ export class Section {
 export class Nav {
     id: string;
     title: string;
+    routePath: string;
     url?: string;
     target?: string;
     alternate?: string;

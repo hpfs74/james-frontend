@@ -24,7 +24,7 @@ import { Nav } from '../../models';
       </div>
       <ul class="nav navbar-nav list-inline">
         <li class="navbar-nav__menu-item" *ngFor="let item of menuItems; let i = index">
-          <a id="{{ item.id }}" routerLink="{{ item.url }}">{{ item.title }}</a>
+          <a id="{{ item.id }}" routerLink="{{ item.routePath }}" routerLinkActive="active">{{ item.title }}</a>
         </li>
       </ul>
       <ul class="nav nav-pills pull-right" *ngIf="LoginAccess">

@@ -8,6 +8,18 @@ export const routes: Routes = [
   {
     path: 'overview',
     component: OverviewComponent
+  },
+  {
+    path: 'profile',
+    component: OverviewComponent //UserProfileComponent
+  },
+  {
+    path: 'faq',
+    component: OverviewComponent //FaqComponent
+  },
+  {
+    path: 'about',
+    component: OverviewComponent //AboutComponent
   }
 ];
 

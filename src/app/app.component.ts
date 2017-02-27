@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.prices = this.insuranceService.getPrices();
-    this.topMenu = this.navigationService.getFooter();
+    this.topMenu = this.navigationService.getMenu();
     this.features = this.featureService.getFeatures();
   }
 }
