@@ -1,10 +1,10 @@
 /* this file will be extracted to main dist folder and is imported in index.html */
 /* This file is for setting global styles  */
 @import 'variables';
-@import 'typography';
-//@TODO replace icon font with svg icons
-@import 'icons-fa';
+@import 'fonts';
+@import 'icons';   //@TODO replace icon font with svg icons
 @import 'utils';
+@import 'base';
 
 /* import shared library styles */
 @import '../../node_modules/@cx/grid/index';
@@ -16,109 +16,3 @@
 @import '../app/components/ki-navigation/navbar.component';
 @import '../app/components/ki-navigation/footer.component';
 @import '../app/components/ki-price-table/price-table.component';
-
-body {
-  font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: $knab-primary-red;
-  text-decoration: none
-}
-
-a:hover,
-a:focus {
-  color: $knab-secondary-red;
-  text-decoration: underline
-}
-
-a:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px
-}
-
-.container--fullwidth {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.container--flat {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-ul,
-ol {
-  margin-top: 0;
-  margin-bottom: 10px
-}
-
-ul ul,
-ul ol,
-ol ul,
-ol ol {
-  margin-bottom: 0
-}
-
-.list-unstyled,
-.list-inline {
-  padding-left: 0;
-  list-style: none
-}
-
-.list-inline {
-  margin-left: -5px
-}
-
-.list-inline>li {
-  display: inline-block;
-  padding-left: 5px;
-  padding-right: 5px
-}
-
-dl {
-  margin-top: 0;
-  margin-bottom: 20px
-}
-
-dt,
-dd {
-  line-height: 1.428571429
-}
-
-dt {
-  font-weight: bold
-}
-
-dd {
-  margin-left: 0
-}
-
-.dl-horizontal dd:before,
-.dl-horizontal dd:after {
-  content: " ";
-  display: table
-}
-
-.dl-horizontal dd:after {
-  clear: both
-}
-
-@media (min-width: 768px) {
-  .dl-horizontal dt {
-      float: left;
-      width: 160px;
-      clear: left;
-      text-align: right;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap
-  }
-  .dl-horizontal dd {
-      margin-left: 180px
-  }
-}
