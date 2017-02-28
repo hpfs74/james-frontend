@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Section, Nav } from '../../models/nav.d';
+import { Section, Nav } from '../../models/nav';
 
 /**
  * @description
