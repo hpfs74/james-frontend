@@ -6,6 +6,8 @@ import { CookiewallComponent } from './cookiewall.component';
 import { CookieService } from '../../shared/cookie.service';
 
 describe('Test the Cookiewall Component', () => {
+  let component;
+  let cookieService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,21 +20,26 @@ describe('Test the Cookiewall Component', () => {
     });
   });
 
-  it('should have a visible property', inject([CookiewallComponent, CookieService], (cmp) => {
-    cmp.ngOnInit();
-    expect(cmp.visible).toBeDefined();
+  beforeEach(inject([CookiewallComponent, CookieService], (cmp, s) => {
+    component = cmp;
+    cookieService = s;
   }));
+
+
+  it('should have a visible property', () => {
+    component.ngOnInit();
+    expect(component.visible).toBeDefined();
+  });
 
   // TODO: Figure out why below test is not working
-  it('should set a cookie with the name `knabprivacy`', inject([CookiewallComponent, CookieService], (cmp, s) => {
-      spyOn(s, 'set');
+  it('should set a cookie with the name `knabprivacy`', () => {
+      spyOn(cookieService, 'set')
+          .and.callThrough();
 
-      cmp.name = 'knabprivacy';
-      cmp.setCookie();
+      component.name = 'knabprivacy';
+      component.setCookie();
 
-
-      expect(document.cookie).toBe('ciao');
-      expect(s.set).toHaveBeenCalled();
-      expect(s.check('knabprivacy')).toBeTruthy();
-  }));
+      expect(cookieService.set).toHaveBeenCalled();
+      expect(cookieService.check('knabprivacy')).toBeTruthy();
+  });
 });
