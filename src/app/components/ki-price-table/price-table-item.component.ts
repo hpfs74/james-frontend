@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
     <li *ngFor="let item of features">{{ item }}</li>
   </ul>
   <div class="ki-pricing-table__price">
-    vanaf <span class="ki-pricing-table__price-amount">&euro; {{ price }}</span>
+    <span i18n>price</span> <span class="ki-pricing-table__price-amount">{{ price | currency:'EUR':true:'1.2-2' }}</span>
   </div>
 </div>`,
 })

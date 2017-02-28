@@ -2,6 +2,8 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CurrencyPipe } from '@angular/common';
+
 import { PriceTableItemComponent } from './price-table-item.component';
 import { Price } from '../../models/price';
 
@@ -16,7 +18,7 @@ describe('Component: PriceTableItem', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PriceTableItemComponent],
-      imports: []
+      imports: [ ]
     }).compileComponents();
   }));
 
@@ -45,7 +47,7 @@ describe('Component: PriceTableItem', () => {
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();
-    expect(el.innerText).toBe('€ 13.9');
+    expect(el.innerText).toBe('€13.90');
   });
 
   it('should display list of features', () => {
