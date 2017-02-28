@@ -10,31 +10,19 @@
 
 <div class="cx-base">
   <div class="cx-container">
-
-    <!--<div class="cx-row">
-      <div class="cx-col-sm-4">
-        <knab-price-table-item Header="WA" Price="18,50" [Features]="['Schade door vandalisme','Schade door eigen schuld']">
-        </knab-price-table-item>
-      </div>
-      <div class="cx-col-sm-4">
-        <knab-price-table-item Header="WA + Casco" Price="21,59" [Features]="['Brand en storm', 'Ruitschade', 'Schade door vandalisme', 'Schade door eigen schuld']"
-          Highlight="true"></knab-price-table-item>
-      </div>
-      <div class="cx-col-sm-4">
-        <knab-price-table-item Header="WA limited" Price="30,19" [Features]="['Schade aan anderen', 'Diefstal', 'Inbraak', 'Brand en storm', 'Ruitschade', 'Schade door vandalisme', 'Schade door eigen schuld']">
-        </knab-price-table-item>
-      </div>
-    </div>-->
-
     <div class="cx-row">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<div class="cx-base">
+  <div class="cx-container">
+    <div class="cx-row">
+      <h3>Angular playground</h3>
       <ki-price-table [items]="prices"></ki-price-table>
     </div>
-
-    <router-outlet></router-outlet>
-
   </div>
 </div>
 
 <ki-features [items]="features"></ki-features>
-
-<ki-footer></ki-footer>

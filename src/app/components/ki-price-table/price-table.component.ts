@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { Price } from '../../models/price.d';
+import { Price } from '../../models/price';
 
 @Component({
   selector: 'ki-price-table',
   template: `<div class="cx-row">
   <div *ngFor="let item of items" [ngClass]="getItemClass()">
-    <ki-price-table-item 
-        header="{{item.header}}" 
-        price="{{item.price}}" 
-        highlight="{{item.highlight}}" 
+    <ki-price-table-item
+        header="{{item.header}}"
+        price="{{item.price}}"
+        highlight="{{item.highlight}}"
         [features]="item.features">
     </ki-price-table-item>
   </div>
