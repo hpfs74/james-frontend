@@ -13,9 +13,12 @@ import { NavbarComponent, FooterComponent } from './components/ki-navigation';
 import { BreadCrumbComponent } from './components/ki-breadcrumb/breadcrumb.component';
 import { PriceTableComponent, PriceTableItemComponent } from './components/ki-price-table';
 import { FeaturesComponent } from './components/ki-features/features.component';
+import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.component';
 
 // Pages
+import { CarComponent } from './pages/car/car.component';
 import { OverviewComponent } from './pages/overview/overview.component';
+
 
 // Styles 'barrel'
 import '../styles/styles.scss';
@@ -34,7 +37,9 @@ import '../styles/styles.scss';
     BreadCrumbComponent,
     PriceTableComponent,
     PriceTableItemComponent,
+    VehicleInfoComponent,
     FeaturesComponent,
+    CarComponent,
     OverviewComponent
   ],
   bootstrap: [AppComponent]

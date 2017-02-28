@@ -3,7 +3,7 @@ import { Vehicle } from '../../models/vehicle';
 
 @Component({
   selector: 'ki-car',
-  template: require('./car.component.html')
+  templateUrl: 'car.component.html'
 })
 export class CarComponent implements OnInit {
 
