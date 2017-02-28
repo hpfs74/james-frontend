@@ -90,7 +90,10 @@ module.exports = function (options) {
     module: {
 
       rules: [
-
+        {
+          test: /\.xlf$/,
+          loader: 'ignore-loader'
+        },
         /*
          * css loader support for *.css files (styles directory only)
          * Loads external css styles into the DOM, supports HMR

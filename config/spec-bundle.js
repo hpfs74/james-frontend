@@ -27,6 +27,11 @@ require('zone.js/dist/fake-async-test');
 // RxJS
 require('rxjs/Rx');
 
+require('intl');
+require('intl/locale-data/jsonp/en.js');
+
+
+
 var testing = require('@angular/core/testing');
 var browser = require('@angular/platform-browser-dynamic/testing');
 

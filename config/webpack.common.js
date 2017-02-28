@@ -91,7 +91,10 @@ module.exports = function (options) {
     module: {
 
       rules: [
-
+        {
+          test: /\.xlf$/,
+          loader: 'ignore-loader'
+        },
         /*
          * Typescript loader support for .ts
          *

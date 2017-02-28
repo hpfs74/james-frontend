@@ -11,6 +11,7 @@
     "noEmitHelpers": true,
     "importHelpers": true,
     "strictNullChecks": false,
+    "outDir": "dist2",
     "lib": [
       "dom",
       "es6"
