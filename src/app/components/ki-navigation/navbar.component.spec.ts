@@ -24,7 +24,7 @@ describe('Component: Navbar', () => {
     fixture = TestBed.createComponent(NavbarComponent);
     comp = fixture.componentInstance;
     comp.menuItems = [
-      {id: 'about', title: 'About'}
+      {id: 'about', title: 'About', routePath: '/about'}
     ];
     fixture.detectChanges();
   });
