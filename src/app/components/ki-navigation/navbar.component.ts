@@ -16,7 +16,7 @@ import { Nav } from '../../models';
         <span class="icon-bar"></span>
         </button>
     </div>
-    <div class="row">
+    <div class="cx-row">
       <div class="cx-col-md-4 cx-col-sm-4 cx-col-xs-9">
         <div class="logo">
           <a href="/"><img src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab"></a>

@@ -1,0 +1,37 @@
+.button-wrapper {
+  width: 120px;
+  display: inline-block;
+  margin-right: 30px;
+  margin-bottom: 50px;
+}
+
+.button--icon {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  background: $knab-primary-grey;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 3pt 2pt $knab-secondary-blue;
+  }
+}
+
+.button__icon {
+  font-size: 50px;
+  color: $knab-primary-blue;
+}
+
+.button__label {
+  color: $knab-primary-blue;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+}

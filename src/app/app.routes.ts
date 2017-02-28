@@ -7,6 +7,11 @@ import { CarComponent } from './pages/car/car.component';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/overview',
+    pathMatch: 'full'
+  },
+  {
     path: 'overview',
     component: OverviewComponent
   },
@@ -22,7 +27,11 @@ export const routes: Routes = [
   {
     path: 'about',
     component: OverviewComponent //AboutComponent
-  }
+  },
+  // {
+  //   path: '**',
+  //   component: PageNotFoundComponent
+  // }
 ];
 
 @NgModule({

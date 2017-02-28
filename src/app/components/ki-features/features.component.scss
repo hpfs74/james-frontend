@@ -13,6 +13,15 @@
 .feature {
   margin-right: 30px;
   flex: 1 1 0;
+
+  &:before {
+    font-family: 'FontAwesome';
+    font-size: 18px;
+    content: "\f00c";
+    color: $knab-primary-yellow;
+    float: left;
+    margin-right: 15px;
+  }
 }
 
 .feature__title {
@@ -27,4 +36,5 @@
   color: $knab-secondary-blue;
   font-size: 14px;
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
+  margin-left: 35px;
 }
