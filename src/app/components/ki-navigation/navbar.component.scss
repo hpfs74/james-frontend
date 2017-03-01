@@ -208,6 +208,10 @@
   clear: both
 }
 
+.navbar .logo {
+  min-width: 60px;
+}
+
 @media (min-width: 768px) {
   .navbar {
       border-radius: 0
@@ -249,6 +253,7 @@
 
 .navbar.navbar-default .logo {
   float: left;
+  margin-left: 15px;
   margin-right: 10px;
   overflow: hidden;
   height: 50px;

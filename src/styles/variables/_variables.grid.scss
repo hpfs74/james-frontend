@@ -1,0 +1,19 @@
+//== Container sizes overrides for @cx/grid
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+$cx-grid-gutter-width: 30px;
+
+$cx-container-tablet: (720px + $cx-grid-gutter-width);
+//** For `$cx-screen-sm-min` and up.
+$cx-container-sm: $cx-container-tablet;
+
+// Medium screen / desktop
+$cx-container-desktop:  (940px + $cx-grid-gutter-width);
+//** For `$cx-screen-md-min` and up.
+$cx-container-md:  $cx-container-desktop;
+
+// Large screen / wide desktop
+$cx-container-large-desktop:  (1040px + $cx-grid-gutter-width);
+//** For `$cx-screen-lg-min` and up.
+$cx-container-lg:  $cx-container-large-desktop ;
