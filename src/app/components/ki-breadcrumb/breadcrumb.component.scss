@@ -19,16 +19,15 @@
   color: $knab-white;
   font-size: 18px;
   font-family: $knab-font-family-primary;
-}
 
-.breadcrumb__home {
-  display: inline-block;
+  & > li {
+      display: inline;
+  }
 }
 
 .breadcrumb__item {
   color: $knab-white;
   text-decoration: none;
-  display: inline-block;
 
   &:before {
     content: "\f054";
@@ -42,4 +41,12 @@
     color: $knab-white;
     text-decoration: none;
   }
+}
+
+.breadcrumb__home {
+  color: $knab-white;
+  text-decoration: none;
+  content: "\f015";
+  font-family: 'FontAwesome';
+  margin: 0 5px;
 }

@@ -13,9 +13,11 @@ export const routes: Routes = [
   },
   {
     path: 'overview',
-    component: OverviewComponent
+    component: OverviewComponent,
+    data: {
+      breadcrumb: 'Overview'
+    }
   },
-  { path: 'car', component: CarComponent },
   {
     path: 'profile',
     component: OverviewComponent //UserProfileComponent

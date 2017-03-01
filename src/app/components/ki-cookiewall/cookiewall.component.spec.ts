@@ -5,13 +5,13 @@ import { RouterModule } from '@angular/router';
 import { CookiewallComponent } from './cookiewall.component';
 import { CookieService } from '../../shared/cookie.service';
 
-describe('Test the Cookiewall Component', () => {
+describe('Component: Cookiewall', () => {
   let component;
   let cookieService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[BrowserModule, FormsModule, RouterModule],
+      imports: [BrowserModule, FormsModule, RouterModule],
       declarations: [CookiewallComponent],
       providers: [
         CookieService,
@@ -33,13 +33,13 @@ describe('Test the Cookiewall Component', () => {
 
   // TODO: Figure out why below test is not working
   it('should set a cookie with the name `knabprivacy`', () => {
-      spyOn(cookieService, 'set')
-          .and.callThrough();
+    spyOn(cookieService, 'set')
+      .and.callThrough();
 
-      component.name = 'knabprivacy';
-      component.setCookie();
+    component.name = 'knabprivacy';
+    component.setCookie();
 
-      expect(cookieService.set).toHaveBeenCalled();
-      expect(cookieService.check('knabprivacy')).toBeTruthy();
+    expect(cookieService.set).toHaveBeenCalled();
+    expect(cookieService.check('knabprivacy')).toBeTruthy();
   });
 });

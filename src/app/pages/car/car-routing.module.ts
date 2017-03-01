@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CarComponent } from './car.component';
+
+import { CarComponent } from '../car/car.component';
 
 const carRoutes: Routes = [
-  { path: 'car', component: CarComponent }
+  {
+    path: 'car',
+    component: CarComponent,
+    data: {
+      breadcrumb: 'Je autoverzekering vergelijken'
+    }
+  }
 ];
 @NgModule({
   imports: [

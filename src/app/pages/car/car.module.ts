@@ -1,20 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 import { CarRoutingModule } from './car-routing.module';
-import { CarComponent } from './car.component';
-import { VehicleInfoComponent } from '../../components/ki-vehicle-info/vehicle-info.component';
+import { CarComponent } from '../car/car.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
+    SharedModule,
     CarRoutingModule
   ],
   declarations: [
-    CarComponent,
-    VehicleInfoComponent
+    CarComponent
   ]
 })
 export class CarModule { }
