@@ -3,23 +3,24 @@ import { CookieService } from '../../shared/cookie.service';
 
 @Component({
   selector: 'ki-cookiewall',
+  styleUrls: ['cookiewall.component.scss'],
   template: `
-        <div *ngIf="!visible" id="cookie-wall" class="cookie-wall blocking-popup">
-            <div class="popup-container">
-                <div class="popup-content cookiewall-basic popup-show"> 
-                    <h1>COOKIE TITLE</h1>
-                    <h4>COOKIE SUBTITLE</h4>
-                    <p class="popup-action">
-                      <button class="button orange icon-right arrow" id="accept-cookie" (click)="setCookie()">
-                        Akkoord en doorgaan
-                      </button>
-                    </p>
-                    <p>Lorem ipsum .... <a href="https://www.knab.nl/privacy" target="_blank">privacybeleid</a> en 
-                    <a href="https://www.knab.nl/cookiebeleid" target="_blank">cookiebeleid</a>.
-                    </p> 
-                </div>
-            </div>  
-        </div>
+    <div *ngIf="!visible" id="cookie-wall" class="cookie-wall blocking-popup">
+        <div class="popup-container">
+            <div class="popup-content cookiewall-basic popup-show"> 
+                <h1>COOKIE TITLE</h1>
+                <h4>COOKIE SUBTITLE</h4>
+                <p class="popup-action">
+                  <button class="button orange icon-right arrow" id="accept-cookie" (click)="setCookie()">
+                    Akkoord en doorgaan
+                  </button>
+                </p>
+                <p>Lorem ipsum .... <a href="https://www.knab.nl/privacy" target="_blank">privacybeleid</a> en 
+                <a href="https://www.knab.nl/cookiebeleid" target="_blank">cookiebeleid</a>.
+                </p> 
+            </div>
+        </div>  
+    </div>
 `
 })
 export class CookiewallComponent implements OnInit {
@@ -32,6 +33,7 @@ export class CookiewallComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('Cookiewall: ' + this.visible);
     this.visible = this.cookieService.check(this.name);
     if(!this.visible) {
       document.body.classList.add('no-scroll');
