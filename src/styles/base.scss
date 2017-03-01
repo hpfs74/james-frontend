@@ -6,56 +6,59 @@ body {
   margin: 0;
 }
 
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
 a {
   color: $knab-primary-red;
-  text-decoration: none
+  text-decoration: none;
 }
 
 a:hover,
 a:focus {
   color: $knab-secondary-red;
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px
-}
-
-.container--fullwidth,
-.cx-container.container--fullwidth,
-.cx-container-fluid.container--fullwidth {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.container--flat {
-  padding-top: 0;
-  padding-bottom: 0;
+  outline-offset: -2px;
 }
 
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 
 ul ul,
 ul ol,
 ol ul,
 ol ol {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .list-unstyled,
 .list-inline {
   padding-left: 0;
-  list-style: none
+  list-style: none;
 }
 
 .list-inline {
-  margin-left: -5px
+  margin-left: -5px;
 }
 
 .list-inline>li {
@@ -66,7 +69,7 @@ ol ol {
 
 dl {
   margin-top: 0;
-  margin-bottom: 20px
+  margin-bottom: 20px;
 }
 
 dt,
@@ -75,21 +78,21 @@ dd {
 }
 
 dt {
-  font-weight: bold
+  font-weight: bold;
 }
 
 dd {
-  margin-left: 0
+  margin-left: 0;
 }
 
 .dl-horizontal dd:before,
 .dl-horizontal dd:after {
   content: " ";
-  display: table
+  display: table;
 }
 
 .dl-horizontal dd:after {
-  clear: both
+  clear: both;
 }
 
 @media (min-width: 768px) {
@@ -100,9 +103,9 @@ dd {
       text-align: right;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap
+      white-space: nowrap;
   }
   .dl-horizontal dd {
-      margin-left: 180px
+      margin-left: 180px;
   }
 }
