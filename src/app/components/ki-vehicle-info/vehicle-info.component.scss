@@ -5,7 +5,7 @@
   color: $knab-primary-blue;
   font-size: 14px;
   font-family: $baseFontFamily;
-  border: 2px solid;
+  border: 1px solid;
   border-radius: 25px;
   padding: 5px;
   max-width: 400px;
@@ -15,6 +15,7 @@
   width: 100%;
 }
 
-.ki-block-round  .cx-col-md-6:{
+.ki-block-round .cx-row div:last-of-type {
   text-align: right;
+  font-weight: bold;
 }
