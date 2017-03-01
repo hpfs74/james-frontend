@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../models/vehicle';
 
 @Component({
-  selector: 'ki-car',
-  styleUrls: ['car.component.scss'],
-  templateUrl: 'car.component.html'
+  selector: 'ki-car-page',
+  styleUrls: ['car-page.component.scss'],
+  templateUrl: 'car-page.component.html'
 })
-export class CarComponent implements OnInit {
+export class CarPageComponent implements OnInit {
 
   myCar: Vehicle;
 

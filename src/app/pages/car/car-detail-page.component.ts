@@ -4,10 +4,10 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { CarDetailForm } from './car-detail.form';
 
 @Component({
-  selector: 'ki-car-detail',
-  templateUrl: 'car-detail.component.html'
+  selector: 'ki-car-detail-page',
+  templateUrl: 'car-detail-page.component.html'
 })
-export class CarDetailComponent implements OnInit {
+export class CarDetailPageComponent implements OnInit {
   carDetailForm: CarDetailForm;
 
   constructor(private fb: FormBuilder, elementRef: ElementRef) {
