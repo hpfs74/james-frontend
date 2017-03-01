@@ -1,9 +1,21 @@
-.ki-vehicle-info {
+@import "../../../styles/variables";
+
+.ki-block-round {
   background: $knab-white;
   color: $knab-primary-blue;
   font-size: 14px;
-  font-family: $knab-font-family-primary;
-  border: 2px solid;
+  font-family: $baseFontFamily;
+  border: 1px solid;
   border-radius: 25px;
+  padding: 5px;
+  max-width: 250px;
 }
 
+.ki-block-round  img {
+  width: 100%;
+}
+
+.ki-block-round__cartext {
+  text-align: right;
+  font-weight: bold;
+}
