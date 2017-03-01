@@ -1,0 +1,19 @@
+<!-- TO BE IMPLEMENTED -->
+<div class="cx-row">
+  <div class="cx-col-md-6">
+    <form [formGroup]="carDetailForm.basicForm" (submit)="save($event)">
+
+      <cx-form-group formControlName="license" [options]="{
+        label: 'Wat is je kenteken?',
+        formControl: carDetailForm.basicForm.controls.license,
+        inputOptions: {
+            placeholder: 'AA-BB-22'
+        }
+    }"></cx-form-group>
+
+    </form>
+  </div>
+  <div class="cx-col-md-6">
+    <!-- sidebar -->
+  </div>
+</div>

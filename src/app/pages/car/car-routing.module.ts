@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CarComponent } from '../car/car.component';
+import { CarDetailComponent } from '../car/car-detail.component';
 
 const carRoutes: Routes = [
   {
     path: 'car',
-    component: CarComponent,
+    component: CarDetailComponent,
     data: {
       breadcrumb: 'Je autoverzekering vergelijken'
     }

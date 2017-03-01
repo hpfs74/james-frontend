@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Shared components
 import { BreadCrumbComponent } from '../components/ki-breadcrumb/breadcrumb.component';
@@ -24,6 +24,7 @@ import { VehicleInfoComponent } from '../components/ki-vehicle-info/vehicle-info
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ButtonIconComponent,
     FeaturesComponent,
     PriceTableComponent,

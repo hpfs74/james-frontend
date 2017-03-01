@@ -15,20 +15,29 @@ export const routes: Routes = [
     path: 'overview',
     component: OverviewComponent,
     data: {
-      breadcrumb: 'Overview'
+      breadcrumb: 'Overzicht'
     }
   },
   {
     path: 'profile',
-    component: OverviewComponent //UserProfileComponent
+    component: OverviewComponent, //UserProfileComponent
+    data: {
+      breadcrumb: 'Mijn account'
+    }
   },
   {
     path: 'faq',
-    component: OverviewComponent //FaqComponent
+    component: OverviewComponent, //FaqComponent
+    data: {
+      breadcrumb: 'FAQ'
+    }
   },
   {
     path: 'about',
-    component: OverviewComponent //AboutComponent
+    component: OverviewComponent, //AboutComponent
+    data: {
+      breadcrumb: 'Over ons'
+    }
   },
   // {
   //   path: '**',
