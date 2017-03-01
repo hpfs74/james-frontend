@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 import { OverviewComponent } from './pages/overview/overview.component';
+import { SpinnerComponent } from './components/ki-spinner/spinner.component';
 
 // Layout components
 import { NavbarComponent, FooterComponent } from './components/ki-navigation';
@@ -31,10 +32,11 @@ import '../styles/styles.scss';
   ],
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
     BreadCrumbComponent,
-    OverviewComponent
+    FooterComponent,
+    NavbarComponent,
+    OverviewComponent,
+    SpinnerComponent
   ],
   bootstrap: [AppComponent]
 })

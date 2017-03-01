@@ -6,7 +6,7 @@ import { FeaturesComponent } from './features.component';
 import { Feature } from '../../models/feature';
 
 
-describe('Component: FeaturesComponent', () => {
+describe('Component: Features', () => {
   let comp: FeaturesComponent;
   let fixture: ComponentFixture<FeaturesComponent>;
   let de: DebugElement;
