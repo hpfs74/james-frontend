@@ -8,14 +8,14 @@
   border: 1px solid;
   border-radius: 25px;
   padding: 5px;
-  max-width: 400px;
+  max-width: 250px;
 }
 
 .ki-block-round  img {
   width: 100%;
 }
 
-.ki-block-round .cx-row div:last-of-type {
+.ki-block-round__cartext {
   text-align: right;
   font-weight: bold;
 }
