@@ -11,7 +11,8 @@ const carRoutes: Routes = [
     data: {
       breadcrumb: 'Je autoverzekering vergelijken'
     }
-  }
+  },
+  { path: 'car2', component: CarComponent }
 ];
 @NgModule({
   imports: [
