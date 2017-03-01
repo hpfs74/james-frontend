@@ -1,0 +1,13 @@
+@import "../../../styles/variables";
+
+
+.ki-block-round {
+  background: $knab-white;
+  color: $knab-primary-blue;
+  font-size: 14px;
+  font-family: $baseFontFamily;
+  border: 1px solid;
+  border-radius: 25px;
+  padding: 5px;
+  max-width: 250px;
+}

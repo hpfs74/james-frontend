@@ -3,6 +3,7 @@ import { Vehicle } from '../../models/vehicle';
 
 @Component({
   selector: 'ki-car',
+  styleUrls: ['car.component.scss'],
   templateUrl: 'car.component.html'
 })
 export class CarComponent implements OnInit {
@@ -14,7 +15,8 @@ export class CarComponent implements OnInit {
     this.myCar = {
       name: 'PANDA',
       manufacturer: 'FIAT',
-      model: 'TURBO'
+      model: 'TURBO',
+      year: 2006
     };
 
     return;

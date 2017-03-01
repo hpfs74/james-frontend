@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, trigger, state, style, transition, animate } from '@angular/core';
 import { Vehicle } from '../../models/vehicle';
 
 @Component({
+
   selector: 'ki-vehicle-info',
   styleUrls: ['vehicle-info.component.scss'],
   template: `
-  <div class="ki-block-round">      
+  <div class="ki-block-round" [@flyInOut]="'in'">      
     <div class="cx-container-fluid">
     
       <div class="cx-row">
@@ -47,11 +48,29 @@ import { Vehicle } from '../../models/vehicle';
         <div class="cx-col-sm-6 ki-block-round__cartext">{{ vehicle.estimatedValue | currency }}</div>
       </div>
       </div>
-  </div>`
+  </div>`,
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }),
+        animate('0.4s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.4s 10 ease-out', style({
+          opacity: 0,
+          transform: 'translateX(100%)'
+        }))
+      ])
+    ])
+  ]
 })
 export class VehicleInfoComponent {
 
   @Input() vehicle: Vehicle;
   @Input() comment: string;
-
+  @Input() state: string ;
 }
