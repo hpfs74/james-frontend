@@ -1,5 +1,5 @@
 
-import { Component, Input, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, Input, trigger, state, style, transition, animate, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ki-message',
@@ -8,8 +8,9 @@ import { Component, Input, trigger, state, style, transition, animate } from '@a
   <div class='ki-block-round'>
     <div class='cx-container-fluid'>
       <div class='cx-row'>
-        <div class='cx-col-sm-12'>
+        <div class='cx-col-sm-12'>/
           {{ message }}
+          <small>{{ getMessageDate() }}</small>
         </div>          
       </div>
     </div>
@@ -34,6 +35,15 @@ import { Component, Input, trigger, state, style, transition, animate } from '@a
     ])
   ]
 })
-export class MessageComponent {
+export class MessageComponent implements OnInit {
   @Input() message: string;
+  date: Date;
+
+  getMessageDate() {
+    return this.date;
+  }
+
+  ngOnInit() {
+    this.date = new Date();
+  }
 }
