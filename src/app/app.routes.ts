@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 // import routes here
 import { OverviewComponent } from './pages/overview/overview.component';
 import { CarComponent } from './pages/car/car.component';
+import { CookiesPageComponent } from './pages/cookies/cookies.component';
 
 export const routes: Routes = [
+  { path: 'cookies', component: CookiesPageComponent },
   {
     path: '',
     redirectTo: '/overview',
