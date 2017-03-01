@@ -20,6 +20,7 @@
     content: "\f00c";
     color: $knab-primary-yellow;
     float: left;
+    margin-top: 2px;
     margin-right: 15px;
   }
 }
@@ -27,8 +28,8 @@
 .feature__title {
   color: $knab-white;
   font-size: 16px;
-  font-weight: 500;
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
+  font-weight: normal;
   margin-bottom: 10px;
 }
 
@@ -36,5 +37,6 @@
   color: $knab-secondary-blue;
   font-size: 14px;
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
+  font-weight: normal;
   margin-left: 35px;
 }
