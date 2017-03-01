@@ -3,22 +3,21 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
 
 @Component({
   selector: 'ki-message',
-  styleUrls: ['./message.component.scss'],
   template: `
-  <div class='ki-block-round'>
+  <div class='ki-chat-message'>
     <div class='cx-container-fluid'>
       <div class='cx-row'>
         <div class='cx-col-sm-12'>/
           {{ message }}
           <small>{{ getMessageDate() }}</small>
-        </div>          
+        </div>
       </div>
     </div>
   </div>
   `,
   animations: [
     trigger('flyInOut', [
-      state('in', style({opacity: 1, transform: 'translateX(0)'})),
+      state('in', style({ opacity: 1, transform: 'translateX(0)' })),
       transition('void => *', [
         style({
           opacity: 0,

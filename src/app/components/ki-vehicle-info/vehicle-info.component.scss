@@ -1,21 +1,10 @@
-@import "../../../styles/variables";
-
-.ki-block-round {
-  background: $knab-white;
-  color: $knab-primary-blue;
-  font-size: 14px;
-  font-family: $baseFontFamily;
-  border: 1px solid;
-  border-radius: 25px;
-  padding: 5px;
-  max-width: 250px;
-}
-
-.ki-block-round  img {
+.ki-vehicle-info-car-preview  {
+  display: block;
   width: 100%;
+  margin: 20px 0;
 }
 
-.ki-block-round__cartext {
+.ki-chat-message-content {
   text-align: right;
-  font-weight: bold;
+  font-weight: 600;
 }
