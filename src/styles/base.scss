@@ -7,6 +7,12 @@ body {
   margin: 0;
 }
 
+h1, .h1, h2, .h2, h4, .h4, h5, .h5 {
+    font-family: "Intro Bold Caps",Helvetica,Arial,sans-serif;
+    margin-top: 0;
+    color: #003b5a;
+}
+
 h1 {
   font-size: 2em;
 }

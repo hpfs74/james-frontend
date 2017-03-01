@@ -1,6 +1,12 @@
 <!-- TO BE IMPLEMENTED -->
 <div class="cx-row">
   <div class="cx-col-md-6">
+    <ol class="cx-step-navigation">
+      <li class="cx-step-navigation__step cx-step-navigation__step--current">Je gegevens</li>
+      <li class="cx-step-navigation__step">Resultaten</li>
+      <li class="cx-step-navigation__step">Afsluiten</li>
+    </ol>
+
     <form [formGroup]="carDetailForm.basicForm" (submit)="save($event)">
 
       <cx-form-group formControlName="license" [options]="{
