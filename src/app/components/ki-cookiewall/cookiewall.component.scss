@@ -1,1 +1,26 @@
 // TODO: @thomas-g add stylesheet
+@import "../../../styles/variables";
+
+.cookie-wall {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 2000;
+  background: $knab-black;
+  color: $knab-white;
+  padding: 20px 55px;
+  width:92%;
+  text-align:center;
+}
+
+.cookie-wall-close {
+  background: url(/assets/images/close.png) no-repeat 0 0;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  margin-top: -12px;
+  text-decoration: underline;
+  text-indent: -5555px;
+}

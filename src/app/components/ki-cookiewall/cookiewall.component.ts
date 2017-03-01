@@ -5,21 +5,14 @@ import { CookieService } from '../../shared/cookie.service';
   selector: 'ki-cookiewall',
   styleUrls: ['cookiewall.component.scss'],
   template: `
-    <div *ngIf="!visible" id="cookie-wall" class="cookie-wall blocking-popup">
-        <div class="popup-container">
-            <div class="popup-content cookiewall-basic popup-show"> 
-                <h1>COOKIE TITLE</h1>
-                <h4>COOKIE SUBTITLE</h4>
-                <p class="popup-action">
-                  <button class="button orange icon-right arrow" id="accept-cookie" (click)="setCookie()">
-                    Akkoord en doorgaan
-                  </button>
-                </p>
-                <p>Lorem ipsum .... <a href="https://www.knab.nl/privacy" target="_blank">privacybeleid</a> en 
-                <a href="https://www.knab.nl/cookiebeleid" target="_blank">cookiebeleid</a>.
-                </p> 
-            </div>
-        </div>  
+    <div *ngIf="!visible" id="cookie-wall" class="cookie-wall blocking-popup">      
+      <div>
+        Knab gebruikt cookies voor een goede werking van de site en het bieden van gepersonaliseerde 
+        informatie en aanbiedingen. Daarvoor analyseren we je online gedrag en de gegevens die bij ons 
+        van je bekend zijn. <p>Ga je verder op de site? Dan stem je erin toe dat wij cookies plaatsen. 
+        Lees meer: <a target="_blank" href="/cookies">cookiebeleid &amp; instellingen wijzigen</a></p>
+      </div>
+      <a href="#" class="cookie-wall-close" (click)="setCookie()">Close</a>
     </div>
 `
 })
