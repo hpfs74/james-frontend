@@ -4,14 +4,17 @@
 @import 'fonts';
 @import 'icons';   //@TODO replace icon font with svg icons
 @import 'utils';
+//@import 'reboot';
 @import 'base';
 @import 'layout';
 
 /* import shared library styles */
-@import '../../node_modules/@cx/grid/index';
 @import '../../node_modules/@cx/base/index';
+@import '../../node_modules/@cx/grid/index';
+
 
 /* component styles */
+@import '../app/components/ki-avatar/avatar.component';
 @import '../app/components/ki-breadcrumb/breadcrumb.component';
 @import '../app/components/ki-features/features.component';
 @import '../app/components/ki-navigation/navbar.component';

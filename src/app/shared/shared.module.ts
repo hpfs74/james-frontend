@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Shared components
+import { AvatarComponent } from '../components/ki-avatar/avatar.component';
 import { BreadCrumbComponent } from '../components/ki-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from '../components/ki-button-icon/button-icon.component';
 import { FeaturesComponent } from '../components/ki-features/features.component';
 import { NavbarComponent, FooterComponent } from '../components/ki-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from '../components/ki-price-table';
 import { VehicleInfoComponent } from '../components/ki-vehicle-info/vehicle-info.component';
-import { AttendantMessageComponent, MessageComponent } from '../components/ki-chat-stream';
+import { MessageComponent } from '../components/ki-chat-stream';
 import { CookiewallComponent } from '../components/ki-cookiewall/cookiewall.component';
 
 
@@ -18,7 +19,7 @@ import { CookiewallComponent } from '../components/ki-cookiewall/cookiewall.comp
     CommonModule
   ],
   declarations: [
-    AttendantMessageComponent,
+    AvatarComponent,
     MessageComponent,
     ButtonIconComponent,
     CookiewallComponent,
@@ -28,7 +29,7 @@ import { CookiewallComponent } from '../components/ki-cookiewall/cookiewall.comp
     VehicleInfoComponent
   ],
   exports: [
-    AttendantMessageComponent,
+    AvatarComponent,
     ButtonIconComponent,
     CookiewallComponent,
     CommonModule,

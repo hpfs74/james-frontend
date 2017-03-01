@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
@@ -115,4 +118,8 @@ dd {
   .dl-horizontal dd {
       margin-left: 180px;
   }
+}
+
+img.circle {
+  border-radius: 50%;
 }
