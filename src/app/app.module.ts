@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 import { OverviewComponent } from './pages/overview/overview.component';
-import { CookiesPageComponent } from './pages/cookies/cookies.component';
+import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 import { SpinnerComponent } from './components/ki-spinner/spinner.component';
 
 // Layout components
