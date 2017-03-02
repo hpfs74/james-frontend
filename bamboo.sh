@@ -16,8 +16,9 @@ npm --version
 # required for linking dependencies
 mkdir -p "$(pwd)/vendor/node_modules"
 export NPM_CONFIG_PREFIX="$(pwd)/vendor/node_modules/.npm-global"
+export NPM_CONFIG_REGISTRY=https://swfactory.aegon.com/artifactory/api/npm/npm
 
-npm config set prefix "$(pwd)/vendor/node_modules"
-npm config set @cx:registry https://swfactory.aegon.com/artifactory/api/npm/npm
 
+#npm config set prefix "$(pwd)/vendor/node_modules"
+#npm config set @cx:registry 
 
