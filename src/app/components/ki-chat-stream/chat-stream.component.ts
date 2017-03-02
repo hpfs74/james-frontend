@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
-  template:`
-  
+  template: `
+
 `
 })
 export class ChatStreamComponent {

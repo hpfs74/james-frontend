@@ -3,13 +3,12 @@ import { CookieService } from '../../shared/cookie.service';
 
 @Component({
   selector: 'ki-cookiewall',
-  styleUrls: ['cookiewall.component.scss'],
   template: `
-    <div *ngIf="!visible" id="cookie-wall" class="cookie-wall blocking-popup">      
+    <div *ngIf="!visible" id="cookie-wall" class="cookie-wall blocking-popup">
       <div>
-        Knab gebruikt cookies voor een goede werking van de site en het bieden van gepersonaliseerde 
-        informatie en aanbiedingen. Daarvoor analyseren we je online gedrag en de gegevens die bij ons 
-        van je bekend zijn. <p>Ga je verder op de site? Dan stem je erin toe dat wij cookies plaatsen. 
+        Knab gebruikt cookies voor een goede werking van de site en het bieden van gepersonaliseerde
+        informatie en aanbiedingen. Daarvoor analyseren we je online gedrag en de gegevens die bij ons
+        van je bekend zijn. <p>Ga je verder op de site? Dan stem je erin toe dat wij cookies plaatsen.
         Lees meer: <a target="_blank" href="/cookies">cookiebeleid &amp; instellingen wijzigen</a></p>
       </div>
       <a href="#" class="cookie-wall-close" (click)="setCookie()">Close</a>
@@ -28,7 +27,7 @@ export class CookiewallComponent implements OnInit {
   ngOnInit() {
     console.log('Cookiewall: ' + this.visible);
     this.visible = this.cookieService.check(this.name);
-    if(!this.visible) {
+    if (!this.visible) {
       document.body.classList.add('no-scroll');
     }
   }
