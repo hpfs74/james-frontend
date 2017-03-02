@@ -8,9 +8,9 @@ import { Nav } from '../../models/nav';
     <div class="breadcrumb">
       <div class="cx-container container--flat">
         <ul>
-          <li><a class="breadcrumb__home" routerLink="/"><span class="fa fa-home"></span></a></li>
+          <li><a class="breadcrumb-home" routerLink="/"><span class="fa fa-home"></span></a></li>
           <li *ngFor="let breadcrumb of breadcrumbs; let i = index;">
-            <a class="breadcrumb__item" [routerLink]="[breadcrumb.url]">{{  breadcrumb.name }}</a>
+            <a class="breadcrumb-item" [routerLink]="[breadcrumb.url]">{{  breadcrumb.name }}</a>
           </li>
         </ul>
       </div>

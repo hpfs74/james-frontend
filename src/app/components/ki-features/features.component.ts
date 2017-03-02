@@ -7,8 +7,8 @@ import { Feature } from '../../models/feature';
   <div class="cx-container-fluid container--fullwidth container-features">
     <div class="cx-container container-features-inner">
       <div class="feature" *ngFor="let item of items">
-        <div class="feature__title">{{ item.title }}</div>
-        <div class="feature__description">{{ item.description }}</div>
+        <div class="feature-title">{{ item.title }}</div>
+        <div class="feature-description">{{ item.description }}</div>
     </div>
     </div>
     </div>

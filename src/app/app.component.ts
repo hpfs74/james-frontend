@@ -6,7 +6,7 @@ import { Price, Nav, Feature } from './models';
 @Component({
   selector: 'ki-app',
   templateUrl: 'app.component.html',
-  providers: [ FeatureService, NavigationService, InsuranceService, CookieService ]
+  providers: [FeatureService, NavigationService, InsuranceService, CookieService]
 })
 export class AppComponent implements OnInit {
   name = 'Angular';
@@ -14,9 +14,9 @@ export class AppComponent implements OnInit {
   topMenu: Array<Nav>;
   features: Array<Feature>;
 
-  constructor(private featureService:FeatureService,
-              private navigationService:NavigationService,
-              private insuranceService:InsuranceService ) {
+  constructor(private featureService: FeatureService,
+    private navigationService: NavigationService,
+    private insuranceService: InsuranceService) {
 
   }
 

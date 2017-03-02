@@ -5,7 +5,7 @@
   margin-bottom: 50px;
 }
 
-.button--icon {
+button {
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -23,12 +23,12 @@
   }
 }
 
-.button__icon {
+.button-icon {
   font-size: 50px;
   color: $knab-primary-blue;
 }
 
-.button__label {
+.button-label {
   color: $knab-primary-blue;
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
   font-size: 15px;

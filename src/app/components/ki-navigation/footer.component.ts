@@ -65,7 +65,7 @@ import { Section, Nav } from '../../models/nav';
             </ul>
           </div>
         </div>
-        <div class="cx-row footer__colophon">
+        <div class="cx-row footer-colophon">
           <div class="cx-col-md-12 cx-col-sm-12 cx-col-xs-12">
             <div class="social pull-left">
               <a href="https://www.facebook.com/knab.nl" target="_blank" alt=""><i class="fa fa-facebook-square fa-lg"></i></a>
