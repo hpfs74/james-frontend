@@ -22,3 +22,4 @@ export NPM_CONFIG_REGISTRY=https://swfactory.aegon.com/artifactory/api/npm/npm
 #npm config set prefix "$(pwd)/vendor/node_modules"
 #npm config set @cx:registry 
 
+npm install
