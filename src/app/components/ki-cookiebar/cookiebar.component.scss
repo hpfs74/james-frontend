@@ -1,4 +1,4 @@
-.cookie-wall {
+.cookie-bar {
   position: fixed;
   bottom: 0px;
   left: 0px;
@@ -6,11 +6,12 @@
   background: $knab-black;
   color: $knab-white;
   padding: 20px 55px;
-  width:92%;
-  text-align:center;
+  width: 100%;
+  text-align: center;
+  opacity: 0.75;
 }
 
-.cookie-wall-close {
+.cookie-bar-close {
   background: url(/assets/images/close.png) no-repeat 0 0;
   position: absolute;
   right: 20px;
