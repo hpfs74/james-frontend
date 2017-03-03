@@ -24,3 +24,11 @@ export NPM_CONFIG_REGISTRY=https://swfactory.aegon.com/artifactory/api/npm/npm
 
 npm install
 npm run build
+
+
+# Deployment
+export AWS_ACCESS_KEY_ID=${bamboo.awsAccessKeyId}
+export AWS_SECRET_ACCESS_KEY=${bamboo.awsSecretAccessKeyPassword}
+export AWS_DEFAULT_REGION=us-west-1
+ 
+aws s3 cp dist/ s3://aws-website-knab-dev-0b8y4/${bamboo.buildResultKey}/ --recursive --include "*"
