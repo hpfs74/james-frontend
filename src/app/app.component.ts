@@ -9,12 +9,12 @@ import { Price, Nav, Feature } from './models';
   providers: [FeatureService, NavigationService, InsuranceService, CookieService]
 })
 export class AppComponent implements OnInit {
-  name = 'Angular';
   prices: Array<Price>;
   topMenu: Array<Nav>;
   features: Array<Feature>;
 
-  constructor(private featureService: FeatureService,
+  constructor(
+    private featureService: FeatureService,
     private navigationService: NavigationService,
     private insuranceService: InsuranceService) {
 

@@ -2,25 +2,25 @@ import { TestBed, inject } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { CookiewallComponent } from './cookiewall.component';
+import { CookiebarComponent } from './cookiebar.component';
 import { CookieService } from '../../shared/cookie.service';
 
-describe('Component: Cookiewall', () => {
+describe('Component: Cookiebarl', () => {
   let component;
   let cookieService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, FormsModule, RouterModule],
-      declarations: [CookiewallComponent],
+      declarations: [CookiebarComponent],
       providers: [
         CookieService,
-        CookiewallComponent
+        CookiebarComponent
       ]
     });
   });
 
-  beforeEach(inject([CookiewallComponent, CookieService], (cmp, s) => {
+  beforeEach(inject([CookiebarComponent, CookieService], (cmp, s) => {
     component = cmp;
     cookieService = s;
   }));
