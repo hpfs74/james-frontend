@@ -23,5 +23,4 @@ export NPM_CONFIG_REGISTRY=https://swfactory.aegon.com/artifactory/api/npm/npm
 #npm config set @cx:registry 
 
 npm install
-npm run test
 npm run build
