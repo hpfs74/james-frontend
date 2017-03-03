@@ -3,16 +3,12 @@
   <ki-navbar [menuItems]="topMenu"></ki-navbar>
 </header>
 
-<div class="cx-base">
-  <div class="cx-container-fluid container--fullwidth">
-    <ki-breadcrumb></ki-breadcrumb>
-  </div>
+<div class="container-fluid container--fullwidth">
+  <ki-breadcrumb></ki-breadcrumb>
 </div>
 
-<div class="cx-base">
-  <div class="cx-container">
-    <router-outlet></router-outlet>
-  </div>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
 
 <ki-features [items]="features"></ki-features>

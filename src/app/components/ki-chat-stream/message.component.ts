@@ -5,9 +5,9 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
   selector: 'ki-message',
   template: `
   <div class='ki-chat-message'>
-    <div class='cx-container-fluid'>
-      <div class='cx-row'>
-        <div class='cx-col-sm-12'>/
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-sm-12'>/
           {{ message }}
           <small>{{ getMessageDate() }}</small>
         </div>

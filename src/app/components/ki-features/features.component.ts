@@ -4,8 +4,8 @@ import { Feature } from '../../models/feature';
 @Component({
   selector: 'ki-features',
   template: `
-  <div class="cx-container-fluid container--fullwidth container-features">
-    <div class="cx-container container-features-inner">
+  <div class="container-fluid container--fullwidth container-features">
+    <div class="container container-features-inner">
       <div class="feature" *ngFor="let item of items">
         <div class="feature-title">{{ item.title }}</div>
         <div class="feature-description">{{ item.description }}</div>

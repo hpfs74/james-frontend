@@ -3,7 +3,7 @@ import { Price } from '../../models/price';
 
 @Component({
   selector: 'ki-price-table',
-  template: `<div class="cx-row">
+  template: `<div class="row">
   <div *ngFor="let item of items" [ngClass]="getItemClass()">
     <ki-price-table-item
         header="{{item.header}}"

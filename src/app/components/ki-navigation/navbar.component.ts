@@ -6,7 +6,7 @@ import { Nav } from '../../models';
 @Component({
   selector: 'ki-navbar',
   template: `<nav class="navbar navbar-default" role="navigation">
-  <div class="cx-container">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
         aria-controls="navbar">
@@ -16,8 +16,8 @@ import { Nav } from '../../models';
         <span class="icon-bar"></span>
         </button>
     </div>
-    <div class="cx-row">
-      <div class="cx-col-md-4 cx-col-sm-4 cx-col-xs-9">
+    <div class="row">
+      <div class="col-md-4 col-sm-4 col-xs-9">
         <div class="logo">
           <a href="/"><img src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab"></a>
         </div>

@@ -6,7 +6,7 @@ import { Nav } from '../../models/nav';
   selector: 'ki-breadcrumb',
   template: `
     <div class="breadcrumb">
-      <div class="cx-container container--flat">
+      <div class="container container--flat">
         <ul>
           <li><a class="breadcrumb-home" routerLink="/"><span class="fa fa-home"></span></a></li>
           <li *ngFor="let breadcrumb of breadcrumbs; let i = index;">

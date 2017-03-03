@@ -7,10 +7,11 @@
 //@import 'reboot';
 @import 'base';
 @import 'layout';
+@import 'grid';
 
 /* import shared library styles */
 @import '../../node_modules/@cx/base/index';
-@import '../../node_modules/@cx/grid/index';
+//@import '../../node_modules/@cx/grid/index';
 
 
 /* component styles */

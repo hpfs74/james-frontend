@@ -8,10 +8,10 @@ import { Section, Nav } from '../../models/nav';
 @Component({
   selector: 'ki-footer',
   template: `
-    <footer class="cx-base footer">
-      <div class="cx-container">
-        <div class="cx-row">
-          <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-6">
             <ul class="nav nav-pills nav-stacked">
               <li>
                 <h2>Oplossingen</h2>
@@ -25,7 +25,7 @@ import { Section, Nav } from '../../models/nav';
               <li></li>
             </ul>
           </div>
-          <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
+          <div class="col-md-3 col-sm-6 col-xs-6">
             <ul class="nav nav-pills nav-stacked">
               <li>
                 <h2>Pakketten</h2>
@@ -38,8 +38,8 @@ import { Section, Nav } from '../../models/nav';
               <li></li>
             </ul>
           </div>
-          <div class="cx-clearfix cx-visible-xs-block cx-visible-sm-block"></div>
-          <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
+          <div class="clearfix visible-xs-block visible-sm-block"></div>
+          <div class="col-md-3 col-sm-6 col-xs-6">
             <ul class="nav nav-pills nav-stacked">
               <li>
                 <h2>Over Knab</h2>
@@ -51,7 +51,7 @@ import { Section, Nav } from '../../models/nav';
               <li></li>
             </ul>
           </div>
-          <div class="cx-col-md-3 cx-col-sm-6 cx-col-xs-6">
+          <div class="col-md-3 col-sm-6 col-xs-6">
             <ul class="nav nav-pills nav-stacked bg-knab">
               <li>
                 <h2>Service &amp; contact</h2>
@@ -65,8 +65,8 @@ import { Section, Nav } from '../../models/nav';
             </ul>
           </div>
         </div>
-        <div class="cx-row footer-colophon">
-          <div class="cx-col-md-12 cx-col-sm-12 cx-col-xs-12">
+        <div class="row footer-colophon">
+          <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="social pull-left">
               <a href="https://www.facebook.com/knab.nl" target="_blank" alt=""><i class="fa fa-facebook-square fa-lg"></i></a>
               <a href="https://twitter.com/@knab_nl" target="_blank" alt=""><i class="fa fa-twitter-square fa-lg"></i></a>
@@ -78,7 +78,7 @@ import { Section, Nav } from '../../models/nav';
                 <i class="fa fa-youtube-square fa-lg"></i>
               </a>
             </div>
-            <div class="cx-clearfix cx-visible-xs-block cx-visible-sm-block"></div>
+            <div class="clearfix visible-xs-block visible-sm-block"></div>
             <ul class="nav nav-pills">
               <li>© Knab</li>
               <li>| </li>
