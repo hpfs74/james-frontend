@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FeatureService, NavigationService, InsuranceService, CookieService } from './shared';
+import { FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './shared';
 import { Price, Nav, Feature } from './models';
 
 @Component({
   selector: 'ki-app',
   templateUrl: 'app.component.html',
-  providers: [FeatureService, NavigationService, InsuranceService, CookieService]
+  providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService]
 })
 export class AppComponent implements OnInit {
   prices: Array<Price>;

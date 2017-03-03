@@ -1,25 +1,24 @@
-<!-- TO BE IMPLEMENTED -->
-<div class="cx-row">
-  <div class="cx-col-md-6">
+<div class="row">
+  <div class="cx-base col-md-6">
     <ol class="cx-step-navigation">
-      <li class="cx-step-navigation__step cx-step-navigation__step--current">Je gegevens</li>
-      <li class="cx-step-navigation__step">Resultaten</li>
-      <li class="cx-step-navigation__step">Afsluiten</li>
+      <li *ngFor="let step of formConfig.steps; let i = index;" class="cx-step-navigation__step" [ngClass]="{ 'cx-step-navigation__step--current': i === 0 }">{{ step.title }}</li>
     </ol>
 
-    <form [formGroup]="carDetailForm.basicForm" (submit)="save($event)">
+    <ng-container *ngIf="formConfig.steps">
+      <form [formGroup]="carDetailForm.detailForm" (submit)="save($event)">
+        <cx-form-group formControlName="license" [options]="{
+          label: formConfig.steps[0].licensePlate.label,
+          formControl: carDetailForm.detailForm.controls.license,
+          inputOptions: {
+              placeholder: formConfig.steps[0].licensePlate.placeholder
+          }
+      }">
+        </cx-form-group>
+      </form>
+    </ng-container>
 
-      <cx-form-group formControlName="license" [options]="{
-        label: 'Wat is je kenteken?',
-        formControl: carDetailForm.basicForm.controls.license,
-        inputOptions: {
-            placeholder: 'AA-BB-22'
-        }
-    }"></cx-form-group>
-
-    </form>
   </div>
-  <div class="cx-col-md-6">
+  <div class="col-md-6">
     <!-- sidebar -->
   </div>
 </div>

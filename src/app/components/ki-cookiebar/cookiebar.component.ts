@@ -25,7 +25,6 @@ export class CookiebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Cookiebar: ' + this.visible);
     this.visible = this.cookieService.check(this.name);
     if (!this.visible) {
       document.body.classList.add('no-scroll');
