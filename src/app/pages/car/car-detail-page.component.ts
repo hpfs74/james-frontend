@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
-import { ContentService } from '../../shared/content.service';
+import { ContentService } from '../../services/content.service';
 import { CarDetailForm } from './car-detail.form';
 
 @Component({

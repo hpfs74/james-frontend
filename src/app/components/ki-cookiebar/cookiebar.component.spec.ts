@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { CookiebarComponent } from './cookiebar.component';
-import { CookieService } from '../../shared/cookie.service';
+import { CookieService } from '../../services/cookie.service';
 
 describe('Component: Cookiebarl', () => {
   let component;

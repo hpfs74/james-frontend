@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './shared';
+import { FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './services';
 import { Price, Nav, Feature } from './models';
 
 @Component({
   selector: 'ki-app',
   templateUrl: 'app.component.html',
   providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService]
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
+  isLoading: boolean = true;
   prices: Array<Price>;
   topMenu: Array<Nav>;
   features: Array<Feature>;
@@ -17,12 +19,13 @@ export class AppComponent implements OnInit {
     private featureService: FeatureService,
     private navigationService: NavigationService,
     private insuranceService: InsuranceService) {
-
   }
 
   ngOnInit() {
     this.prices = this.insuranceService.getPrices();
     this.topMenu = this.navigationService.getMenu();
     this.features = this.featureService.getFeatures();
+
+    this.isLoading = false;
   }
 }

@@ -5,7 +5,7 @@ import { Vehicle } from '../models/vehicle';
 @Injectable()
 export class VehicleService {
 
-  getVehicleByPlate(plate:string): Vehicle {
+  getVehicleByPlate(plate: string): Vehicle {
 
     return {
       name: 'PANDA',

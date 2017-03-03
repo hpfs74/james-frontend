@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CookieService } from '../../shared/cookie.service';
+import { CookieService } from '../../services/cookie.service';
 
 @Component({
   selector: 'ki-cookiebar',

@@ -50,8 +50,9 @@ a:focus {
 
 ul,
 ol {
+  padding-left: 0;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 ul ul,
@@ -122,4 +123,9 @@ dd {
 
 img.circle {
   border-radius: 50%;
+}
+
+.ki-btn-primary,
+button.ki-btn-primary {
+  background: $knab-primary-green;
 }

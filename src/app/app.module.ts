@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 import { OverviewComponent } from './pages/overview/overview.component';
+import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 import { SpinnerComponent } from './components/ki-spinner/spinner.component';
 
@@ -16,7 +17,7 @@ import { NavbarComponent, FooterComponent } from './components/ki-navigation';
 import { BreadCrumbComponent } from './components/ki-breadcrumb/breadcrumb.component';
 
 // Feature modules
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared.module';
 import { CarModule } from './pages/car/car.module';
 
 // Styles 'barrel'
@@ -39,6 +40,7 @@ import '../styles/styles.scss';
     // Pages
     CookiesPageComponent,
     OverviewComponent,
+    PageNotFoundComponent,
     SpinnerComponent
   ],
   bootstrap: [AppComponent]
