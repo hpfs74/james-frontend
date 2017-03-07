@@ -17,9 +17,10 @@ export class AppComponent implements OnInit {
   features: Array<Feature>;
 
   constructor(
-    private featureService: FeatureService,
+    private contentService: ContentService,
     private navigationService: NavigationService,
-    private insuranceService: InsuranceService) {
+    private insuranceService: InsuranceService,
+    private featureService: FeatureService) {
   }
 
   ngOnInit() {

@@ -15,7 +15,7 @@ export class CarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contentService.getFormConfig('car-advice')
+    this.contentService.getTranslationJSON('car-advice')
       .subscribe(data => {
         this.formControlOptions = data;
       });

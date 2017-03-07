@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /**
  * Shared module for all generic components
@@ -36,7 +36,6 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
     CookiebarComponent,
     CommonModule,
     FeaturesComponent,
-    FormsModule,
     MessageComponent,
     PriceTableComponent,
     PriceTableItemComponent,

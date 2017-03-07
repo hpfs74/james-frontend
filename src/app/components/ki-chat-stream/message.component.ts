@@ -9,7 +9,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
       <div class='row'>
         <div class='col-sm-12'>/
           {{ message }}
-          <small>{{ getMessageDate() }}</small>
+          <div class="ki-chat-message-datetime">{{ getMessageDate() | date:'shortTime' }}</div>
         </div>
       </div>
     </div>
@@ -17,18 +17,20 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
   `,
   animations: [
     trigger('flyInOut', [
-      state('in', style({ opacity: 1, transform: 'translateX(0)' })),
+      state('in', style({ opacity: 1, scale: 0 })),
       transition('void => *', [
         style({
           opacity: 0,
-          transform: 'translateX(-100%)'
+          scale: 1,
+          //transform: 'translateX(-100%)',
         }),
         animate('0.4s ease-in')
       ]),
       transition('* => void', [
         animate('0.4s 10 ease-out', style({
           opacity: 0,
-          transform: 'translateX(100%)'
+          scale: 0,
+          //transform: 'translateX(100%)'
         }))
       ])
     ])

@@ -8,3 +8,20 @@
   margin: 20px 0;
   max-width: 250px;
 }
+.ki-chat-message:first-child:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid #fff;
+  position: absolute;
+  margin-top: -25px;
+  margin-left: 25px;
+}
+.ki-chat-message-datetime {
+  font-size: 11px;
+  color: $silverChalice;
+  margin-top: 0.2em;
+  float: right;
+}

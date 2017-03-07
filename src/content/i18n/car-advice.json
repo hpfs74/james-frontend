@@ -7,30 +7,36 @@
       "formControls": {
         "licensePlate": {
           "label": "Wat is je kenteken?",
+          "required": "Kenteken is een verplicht veld",
           "inputOptions": {
             "placeholder": "NL-16K-NAB"
           }
         },
         "birthDate": {
-          "label": "Geboortedatum"
+          "label": "Geboortedatum",
+          "required": "Geboortedatum is een verplicht veld"
         },
         "postalCode": {
           "label": "Postcode",
+          "required": "Postcode is een verplicht veld",
           "inputOptions": {
             "placeholder": "1234 AB"
           }
         },
         "houseNumber": {
-          "label": "Huisnummer"
+          "label": "Huisnummer",
+          "required": "Huisnummer is een verplicht veld"
         },
         "houseNumberExtension": {
-          "label": ""
+          "label": "Toevoeging"
         },
         "damageFreeYears": {
-          "label": "Aantal schadevrije jaren"
+          "label": "Aantal schadevrije jaren",
+          "description": "Lorem ipsum description ..."
         },
         "kilometerPerYear": {
-          "label": "Aantal KM per jaar"
+          "label": "Aantal KM per jaar",
+          "description": "Lorem ipsum description ..."
         }
       }
     },

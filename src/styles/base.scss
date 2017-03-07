@@ -4,28 +4,28 @@
 
 body {
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 16px;
   padding: 0;
   margin: 0;
 }
 
-h1, .h1, h2, .h2, h4, .h4, h5, .h5 {
+h1, .h1, h2, .h2, , h3, .h3, h4, .h4, h5, .h5 {
     font-family: "Intro Bold Caps",Helvetica,Arial,sans-serif;
-    margin-top: 0;
+    margin-bottom: 30px;
     color: #003b5a;
 }
 
 h1 {
-  font-size: 2em;
-}
-
-h2 {
   font-size: 1.8em;
 }
 
+h2 {
+  font-size: 1.5em;
+}
+
 h3 {
-  font-size: 1.4em;
+  font-size: 1.3em;
 }
 
 h4 {
@@ -128,4 +128,8 @@ img.circle {
 .ki-btn-primary,
 button.ki-btn-primary {
   background: $knab-primary-green;
+}
+
+button.cx-button {
+  min-width: 200px;
 }
