@@ -4,11 +4,14 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
 @Component({
   selector: 'ki-message',
   template: `
-  <div class='ki-chat-message'>
+  <div class='ki-chat-message' [@flyInOut]="'in'">
     <div class='container-fluid'>
       <div class='row'>
-        <div class='col-sm-12'>/
-          {{ message }}
+        <div class='col-md-12 col-sm-12'>
+          <div #ref><ng-content></ng-content></div>
+          <ng-container *ngIf="ref.childNodes.length == 0">
+            {{ message }}
+          </ng-container>
           <div class="ki-chat-message-datetime">{{ getMessageDate() | date:'shortTime' }}</div>
         </div>
       </div>
@@ -22,7 +25,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
         style({
           opacity: 0,
           scale: 1,
-          //transform: 'translateX(-100%)',
+          transform: 'translateX(-100%)',
         }),
         animate('0.4s ease-in')
       ]),
@@ -30,7 +33,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
         animate('0.4s 10 ease-out', style({
           opacity: 0,
           scale: 0,
-          //transform: 'translateX(100%)'
+          transform: 'translateX(100%)'
         }))
       ])
     ])

@@ -4,17 +4,11 @@ import { Vehicle } from '../../models/vehicle';
 @Component({
   selector: 'ki-vehicle-info',
   template: `
-  <div class="ki-chat-message ki-vehicle-info" [@flyInOut]="'in'">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12">Molto bello! Mooie auto die <b>{{ vehicle.manufacturer }} {{ vehicle.name }} {{ vehicle.model }}</b></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <img class="ki-vehicle-info-car-preview" alt="vehicle image"
-               src="/assets/images/cars/{{ vehicle.manufacturer | lowercase }}/{{ vehicle.name | lowercase }}.jpg" />
-        </div>
-      </div>
+  <div class="container-fluid container--fullwidth">
+      Molto bello! Mooie auto die <strong>{{ vehicle.manufacturer }} {{ vehicle.name }} {{ vehicle.model }}</strong>
+      <img class="ki-vehicle-info-car-preview" alt="vehicle image"
+                src="/assets/images/cars/{{ vehicle.manufacturer | lowercase }}/{{ vehicle.name | lowercase }}.jpg">
+
       <div class="row">
         <div class="col-sm-6">Merk</div>
         <div class="col-sm-6 ki-chat-message-content">{{ vehicle.manufacturer }} {{ vehicle.name }}</div>
@@ -43,29 +37,10 @@ import { Vehicle } from '../../models/vehicle';
         <div class="col-sm-6">Geschatte waarde</div>
         <div class="col-sm-6 ki-chat-message-content">{{ vehicle.estimatedValue | currency }}</div>
       </div>
-      </div>
-  </div>`,
-  animations: [
-    trigger('flyInOut', [
-      state('in', style({ opacity: 1, transform: 'translateX(0)' })),
-      transition('void => *', [
-        style({
-          opacity: 0,
-          transform: 'translateX(-100%)'
-        }),
-        animate('0.4s ease-in')
-      ]),
-      transition('* => void', [
-        animate('0.4s 10 ease-out', style({
-          opacity: 0,
-          transform: 'translateX(100%)'
-        }))
-      ])
-    ])
-  ]
+    </div>
+  `
 })
 export class VehicleInfoComponent {
-
   @Input() vehicle: Vehicle;
   @Input() comment: string;
   @Input() state: string;

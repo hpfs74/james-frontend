@@ -7,6 +7,7 @@
   padding: 15px 0;
   margin: 20px 0;
   max-width: 250px;
+  z-index: -999;
 }
 .ki-chat-message:first-child:before {
   content: '';
@@ -20,8 +21,10 @@
   margin-left: 25px;
 }
 .ki-chat-message-datetime {
+  display: block;
   font-size: 11px;
   color: $silverChalice;
   margin-top: 0.2em;
   float: right;
+  opacity: 0.7;
 }
