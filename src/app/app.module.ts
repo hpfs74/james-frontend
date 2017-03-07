@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-// Root component
+// Container and subroot-level components
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/login/login.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
@@ -34,6 +35,7 @@ import '../styles/styles.scss';
   ],
   declarations: [
     AppComponent,
+    LoginComponent,
     BreadCrumbComponent,
     FooterComponent,
     NavbarComponent,
@@ -46,5 +48,4 @@ import '../styles/styles.scss';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
 }

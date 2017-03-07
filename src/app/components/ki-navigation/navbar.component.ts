@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Nav } from '../../models';
+import { UserDetailComponent } from './../ki-user-detail/user-detail.component';
 
 @Component({
   selector: 'ki-navbar',
@@ -27,8 +28,8 @@ import { Nav } from '../../models';
           <a id="{{ item.id }}" routerLink="{{ item.routePath }}" routerLinkActive="active">{{ item.title }}</a>
         </li>
       </ul>
-      <ul class="nav nav-pills pull-right" *ngIf="LoginAccess">
-        <li><a href="https://www.knab.nl"><i class="fa fa-chevron-left" aria-hidden="true"></i>Uitloggen</a></li>
+      <ul class="nav nav-pills pull-right">
+        <li><ki-user-detail [isLoggedIn]="isLoggedIn"></ki-user-detail></li>
       </ul>
     </div>
   </div>

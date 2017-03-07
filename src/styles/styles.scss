@@ -15,6 +15,8 @@
 
 
 /* component styles */
+@import '../app/pages/overview/overview.component';
+
 @import '../app/components/ki-avatar/avatar.component';
 @import '../app/components/ki-breadcrumb/breadcrumb.component';
 @import '../app/components/ki-chat-stream/message.component';
@@ -25,4 +27,5 @@
 @import '../app/components/ki-price-table/price-table.component';
 @import '../app/components/ki-button-icon/button-icon.component';
 @import '../app/components/ki-spinner/spinner.component';
+@import '../app/components/ki-user-detail/user-detail.component';
 @import '../app/components/ki-vehicle-info/vehicle-info.component';

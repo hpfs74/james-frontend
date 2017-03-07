@@ -1,17 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// import routes here
+import { AuthGuard } from './services/auth.guard.service';
+import { LoginComponent } from './pages/login/login.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
+//TODO: add canActivate: [AuthGuard] to pages
+
 export const routes: Routes = [
-  { path: 'cookies', component: CookiesPageComponent },
   {
     path: '',
     redirectTo: '/overview',
     pathMatch: 'full'
+  },
+  {
+    path: 'cookies',
+    component: CookiesPageComponent,
+    data: {
+      breadcrumb: 'Cookie-beleid'
+    }
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'overview',

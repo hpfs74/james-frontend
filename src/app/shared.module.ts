@@ -14,6 +14,7 @@ import { FeaturesComponent } from './components/ki-features/features.component';
 import { MessageComponent } from './components/ki-chat-stream';
 import { NavbarComponent, FooterComponent } from './components/ki-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/ki-price-table';
+import { UserDetailComponent } from './components/ki-user-detail/user-detail.component';
 import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.component';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
     FeaturesComponent,
     PriceTableComponent,
     PriceTableItemComponent,
+    UserDetailComponent,
     VehicleInfoComponent
   ],
   exports: [
@@ -40,6 +42,7 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
     PriceTableComponent,
     PriceTableItemComponent,
     ReactiveFormsModule,
+    UserDetailComponent,
     VehicleInfoComponent
   ]
 })

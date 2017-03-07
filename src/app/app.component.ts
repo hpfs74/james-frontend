@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
-import { FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './services';
+import { AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './services';
 import { Price, Nav, Feature } from './models';
 
 @Component({
   selector: 'ki-app',
   templateUrl: 'app.component.html',
-  providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService],
+  providers: [AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService],
   //changeDetection: ChangeDetectionStrategy.OnPush
   encapsulation: ViewEncapsulation.None
 })
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private contentService: ContentService,
+    private authService: AuthService,
     private navigationService: NavigationService,
     private insuranceService: InsuranceService,
     private featureService: FeatureService) {
