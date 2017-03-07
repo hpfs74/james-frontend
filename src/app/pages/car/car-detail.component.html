@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-8">
+    <ol *ngIf="steps" class="cx-step-navigation">
+      <li *ngFor="let step of steps; let i = index;" class="cx-step-navigation__step" [ngClass]="{ 'cx-step-navigation__step--current': i === 0 }">{{ step.title }}</li>
+    </ol>
+
+    <ng-container *ngIf="config">
+      <form [formGroup]="form.formGroup" (submit)="save($event)">
+
+        <cx-form-group formControlName="licensePlate" [options]="form.formOptions.licensePlate"></cx-form-group>
+        <cx-form-group formControlName="birthDate" [options]="form.formOptions.birthDate"></cx-form-group>
+        <cx-form-group formControlName="postalCode" [options]="form.formOptions.postalCode"></cx-form-group>
+
+        <div class="row">
+          <div class="col-md-8">
+            <cx-form-group formControlName="houseNumber" [options]="form.formOptions.houseNumber"></cx-form-group>
+          </div>
+          <div class="col-md-4">
+            <cx-form-group formControlName="houseNumberExtension" [options]="form.formOptions.houseNumberExtension"></cx-form-group>
+          </div>
+        </div>
+
+        <cx-form-group formControlName="damageFreeYears" [options]="form.formOptions.damageFreeYears"></cx-form-group>
+        <cx-form-group formControlName="kilometerPerYear" [options]="form.formOptions.kilometerPerYear"></cx-form-group>
+
+        <button class=" cx-button cx-button--arrow ki-btn-primary ">Default</button>
+
+      </form>
+    </ng-container>
+
+  </div>
+  <div class="col-md-4">
+    <!-- sidebar -->
+  </div>
+</div>

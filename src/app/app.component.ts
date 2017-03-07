@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
 import { FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './services';
 import { Price, Nav, Feature } from './models';
@@ -6,8 +6,9 @@ import { Price, Nav, Feature } from './models';
 @Component({
   selector: 'ki-app',
   templateUrl: 'app.component.html',
-  providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService]
+  providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService],
   //changeDetection: ChangeDetectionStrategy.OnPush
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
   isLoading: boolean = true;

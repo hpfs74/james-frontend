@@ -1,14 +1,15 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { CXFormGroupComponent } from '../../../../node_modules/@cx/form-group';
 
 export class CarDetailForm {
-  /* form for the first step in the flow */
-  detailForm: FormGroup;
+  formGroup: FormGroup;
+  formOptions: any = {};
 
   // @TODO: create validators
 
   constructor(private fb: FormBuilder, public config: any) {
-    this.detailForm = this.fb.group({
-      license: ['', Validators.required],
+    this.formGroup = this.fb.group({
+      licensePlate: ['', Validators.required],
       birthDate: ['', Validators.required],
       postalCode: ['', Validators.required],
       houseNumber: ['', Validators.required],
@@ -16,5 +17,19 @@ export class CarDetailForm {
       damageFreeYears: ['', Validators.required],
       kilometerPerYear: ['', Validators.required]
     });
+
+    this.initFormOptions(config);
+  }
+
+  private initFormOptions(config: any): void {
+    if (config && config.formControls) {
+      for (let key in config.formControls) {
+        let controlConfig = config.formControls[key];
+        // find the accompanying FormControl ...
+        controlConfig.formControl = this.formGroup.get(key);
+        // .. and add it to the config options
+        this.formOptions[key] = controlConfig;
+      }
+    }
   }
 }

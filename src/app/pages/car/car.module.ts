@@ -5,8 +5,8 @@ import { SharedModule } from '../../shared.module';
 import { CXFormsModule } from '../../../../node_modules/@cx/forms';
 
 import { CarRoutingModule } from './car-routing.module';
-import { CarPageComponent } from '../car/car-page.component';
-import { CarDetailPageComponent } from '../car/car-detail-page.component';
+import { CarComponent } from '../car/car.component';
+import { CarDetailComponent } from '../car/car-detail.component';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { CarDetailPageComponent } from '../car/car-detail-page.component';
     CXFormsModule
   ],
   declarations: [
-    CarPageComponent,
-    CarDetailPageComponent
+    CarComponent,
+    CarDetailComponent
   ]
 })
 export class CarModule { }

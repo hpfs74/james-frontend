@@ -1,0 +1,44 @@
+{
+  "title": "Je autoverzekering vergelijken",
+  "steps": [
+    {
+      "title": "Je gegevens",
+      "formgroupLabel": "Gegevens auto",
+      "formControls": {
+        "licensePlate": {
+          "label": "Wat is je kenteken?",
+          "inputOptions": {
+            "placeholder": "NL-16K-NAB"
+          }
+        },
+        "birthDate": {
+          "label": "Geboortedatum"
+        },
+        "postalCode": {
+          "label": "Postcode",
+          "inputOptions": {
+            "placeholder": "1234 AB"
+          }
+        },
+        "houseNumber": {
+          "label": "Huisnummer"
+        },
+        "houseNumberExtension": {
+          "label": ""
+        },
+        "damageFreeYears": {
+          "label": "Aantal schadevrije jaren"
+        },
+        "kilometerPerYear": {
+          "label": "Aantal KM per jaar"
+        }
+      }
+    },
+    {
+      "title": "Resultaten"
+    },
+    {
+      "title": "Afsluiten"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<!-- template to show how to display car information: TO BE DESIGNED -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <ki-car-detail-form [config]="formControlOptions?.steps[0]" [steps]="formControlOptions?.steps"></ki-car-detail-form>
+    </div>
+    <div class="col-md-4 chat">
+      <ki-avatar name="Marjolein" title="Expert verzekeringen"></ki-avatar>
+
+      <ki-vehicle-info [vehicle]="myCar"></ki-vehicle-info>
+
+      <ki-message message="Ciao Mondo!"></ki-message>
+    </div>
+  </div>
+</div>
