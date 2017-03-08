@@ -41,4 +41,6 @@ export class NavbarComponent {
    * @see module:models/Nav
    */
   @Input() menuItems: Array<Nav>;
+
+  isLoggedIn: boolean = false;
 }

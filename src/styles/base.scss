@@ -9,7 +9,7 @@ html {
 body {
   font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: $baseFontSize;
   padding: 0;
   margin: 0;
 }
@@ -34,6 +34,10 @@ h3 {
 
 h4 {
   font-size: 1.2em;
+}
+
+p {
+  font-size: $baseFontSize;
 }
 
 a {
@@ -132,6 +136,15 @@ img.circle {
 .ki-btn-primary,
 button.ki-btn-primary {
   background: $knab-primary-green;
+}
+
+button.btn-sm {
+  font-size: 16px;
+  padding: 5px 2px;
+}
+
+button.cx-button {
+  margin-bottom: 10px;
 }
 
 .cx-form-group button.cx-button {

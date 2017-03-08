@@ -11,7 +11,7 @@ import { BreadCrumbComponent } from './components/ki-breadcrumb/breadcrumb.compo
 import { ButtonIconComponent } from './components/ki-button-icon/button-icon.component';
 import { CookiebarComponent } from './components/ki-cookiebar/cookiebar.component';
 import { FeaturesComponent } from './components/ki-features/features.component';
-import { MessageComponent } from './components/ki-chat-stream';
+import { ChatStreamComponent, ChatMessageComponent } from './components/ki-chat-stream';
 import { NavbarComponent, FooterComponent } from './components/ki-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/ki-price-table';
 import { UserDetailComponent } from './components/ki-user-detail/user-detail.component';
@@ -23,7 +23,8 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
   ],
   declarations: [
     AvatarComponent,
-    MessageComponent,
+    ChatStreamComponent,
+    ChatMessageComponent,
     ButtonIconComponent,
     CookiebarComponent,
     FeaturesComponent,
@@ -38,7 +39,8 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
     CookiebarComponent,
     CommonModule,
     FeaturesComponent,
-    MessageComponent,
+    ChatStreamComponent,
+    ChatMessageComponent,
     PriceTableComponent,
     PriceTableItemComponent,
     ReactiveFormsModule,

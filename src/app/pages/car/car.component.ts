@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Vehicle } from '../../models/vehicle';
+import { ChatStreamComponent, ChatMessage } from '../../components/ki-chat-stream/';
 import { ContentService } from '../../services/content.service';
 
 @Component({
@@ -10,6 +12,7 @@ import { ContentService } from '../../services/content.service';
 export class CarComponent implements OnInit {
   formControlOptions: any;
   myCar: Vehicle;
+  chatMessages: ChatMessage[] = [];
 
   constructor(private contentService: ContentService) {
   }
@@ -26,6 +29,18 @@ export class CarComponent implements OnInit {
       model: 'TURBO',
       year: 2006
     };
+  }
+
+  addCarMessage() {
+    this.chatMessages.push({ type: 'vehicle', content: this.myCar });
+  }
+
+  addMessage() {
+    this.chatMessages.push({ type: 'text', content: 'Hello this is me!' });
+  }
+
+  clearMessages() {
+    this.chatMessages = [];
   }
 
 }

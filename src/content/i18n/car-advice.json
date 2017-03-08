@@ -36,7 +36,16 @@
         },
         "kilometerPerYear": {
           "label": "Aantal KM per jaar",
-          "description": "Lorem ipsum description ..."
+          "description": "Lorem ipsum description ...",
+          "type": "select",
+          "inputOptions": {
+            "items": [
+              {
+                "label": "30.000 of meer",
+                "value": "> 30.000"
+              }
+            ]
+          }
         }
       }
     },

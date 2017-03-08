@@ -1,4 +1,4 @@
-import { DebugElement } from '@angular/core';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { NavbarComponent } from './navbar.component';
 // import { Nav } from '../../models/nav';
+import { UserDetailComponent } from './../ki-user-detail/user-detail.component';
 
 describe('Component: Navbar', () => {
   let comp: NavbarComponent;
@@ -16,7 +17,8 @@ describe('Component: Navbar', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [NavbarComponent]
+      declarations: [NavbarComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -24,7 +26,7 @@ describe('Component: Navbar', () => {
     fixture = TestBed.createComponent(NavbarComponent);
     comp = fixture.componentInstance;
     comp.menuItems = [
-      {id: 'about', title: 'About', routePath: '/about'}
+      { id: 'about', title: 'About', routePath: '/about' }
     ];
     fixture.detectChanges();
   });

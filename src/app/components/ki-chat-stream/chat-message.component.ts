@@ -1,8 +1,7 @@
-
 import { Component, Input, trigger, state, style, transition, animate, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ki-message',
+  selector: 'ki-chat-message',
   template: `
   <div class='ki-chat-message' [@flyInOut]="'in'">
     <div class='container-fluid'>
@@ -27,10 +26,10 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
           scale: 1,
           transform: 'translateX(-100%)',
         }),
-        animate('0.4s ease-in')
+        animate('0.2s ease-in')
       ]),
       transition('* => void', [
-        animate('0.4s 10 ease-out', style({
+        animate('0.2s 10 ease-out', style({
           opacity: 0,
           scale: 0,
           transform: 'translateX(100%)'
@@ -39,7 +38,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
     ])
   ]
 })
-export class MessageComponent implements OnInit {
+export class ChatMessageComponent implements OnInit {
   @Input() message: string;
   date: Date;
 
