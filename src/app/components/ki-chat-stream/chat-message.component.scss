@@ -7,7 +7,7 @@
   padding: 15px 0;
   margin: 20px 0;
   max-width: 250px;
-  z-index: -999;
+  box-shadow: 0px 5px 10px 1px #ccc;
 }
 .ki-chat-message:first-child:before {
   content: '';

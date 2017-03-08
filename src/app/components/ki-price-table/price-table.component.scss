@@ -1,10 +1,20 @@
 @import "variables";
 
+.ki-price-table-wrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.ki-price-table-wrapper > *:not(:last-child) {
+    margin-right: 10px;
+}
+
 .ki-pricing-table {
   border-radius: 0;
   border: 1px solid $knab-primary-grey;
   color: $knab-primary-blue;
-  font-size: 16px;
+  font-size: $baseFontSize - 2;
   margin-bottom: 10px;
 }
 
@@ -12,43 +22,46 @@
   border: 2px solid $knab-primary-green;
 }
 
-.ki-pricing-table__header {
-  font-size: 20px;
+.ki-pricing-table-header {
+  font-size: $baseFontSize + 2;
+  font-weight: bold;
   text-align: center;
   margin: 0;
   padding: 20px;
+  margin-bottom: 15px;
 }
 
-.ki-pricing-table--highlight .ki-pricing-table__header {
+.ki-pricing-table--highlight .ki-pricing-table-header {
   color: $knab-white;
   background: $knab-primary-green;
 }
 
-.ki-pricing-table__features {
-  padding: 0 45px;
+.ki-pricing-table-features {
+  padding: 0 20px;
   list-style-type: none;
 
   & > * {
     margin-bottom: 20px;
 
-    &:before {
+    .icon {
       margin-top: 0;
-      margin-left: -35px;
-      content: "\f00c";
-      font-size: 1.5em;
+      margin-right: 6px;
+      font-size: $baseFontSize;
       color: $knab-primary-green;
     }
   }
 }
 
-.ki-pricing-table__price {
+.ki-pricing-table-price {
   padding: 0 30px;
   text-align: right;
+  margin-bottom: 15px;
 }
 
-.ki-pricing-table__price-amount {
-  font-size: 20px;
-  font-weight: 700;
+.ki-pricing-table-amount {
+  font-size: $baseFontSize + 2;
+  font-weight: 400;
+  margin-left: 10px;
 }
 
 

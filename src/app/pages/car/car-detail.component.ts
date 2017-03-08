@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, ElementRef, Input, Output,
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { CarDetailForm } from './car-detail.form';
+import { Price } from '../../models/price';
 
 @Component({
   selector: 'ki-car-detail-form',
@@ -13,6 +14,7 @@ export class CarDetailComponent implements OnInit, OnChanges {
   @Input() userProfile: any;
   @Input() steps: any[];
   @Input() config: any;
+  @Input() coverages: Price[];
 
   @Output() carDetails: EventEmitter<any> = new EventEmitter();
 

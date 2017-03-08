@@ -6,9 +6,38 @@ export class InsuranceService {
 
   getPrices(): Array<Price> {
     return [
-      { header: 'WA', price: 18.90, features: ['Feat1', 'Feat2'] },
-      { header: 'WA + Casco', price: 22.90, features: ['Feat1', 'Feat2', 'Feat3'], highlight: true },
-      { header: 'WA limited', price: 30.19, features: ['Feat1', 'Feat2', 'Feat3', 'Feat4', 'Feat5'] },
+      {
+        header: 'WA',
+        features: [
+          'Schade door vandalisme',
+          'Schade door eigen schuld'
+        ],
+        price: 18.50
+      },
+      {
+        header: 'WA + Casco',
+        features: [
+          'Brand en storm',
+          'Ruitschade',
+          'Schade door vandalisme',
+          'Schade door eigen schuld'
+        ],
+        price: 21.59,
+        highlight: true
+      },
+      {
+        header: 'WA limited',
+        features: [
+          'Schade door anderen',
+          'Diefstal',
+          'Inbraak',
+          'Brand en storm',
+          'Ruitschade',
+          'Schade door vandalisme',
+          'Schade door eigen schuld'
+        ],
+        price: 30.19
+      }
     ];
   }
 }

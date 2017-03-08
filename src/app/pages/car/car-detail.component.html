@@ -24,21 +24,16 @@
 
         <cx-form-group formControlName="damageFreeYears" [options]="form.formOptions.damageFreeYears"></cx-form-group>
         <cx-form-group formControlName="kilometerPerYear" [options]="form.formOptions.kilometerPerYear"></cx-form-group>
-
-        <div class="cx-form-group cx-form-group--space-between">
-          <button class="cx-button cx-button--back cx-button--link" routerLink="/overview">terug naar overzicht</button>
-          <button class="cx-button cx-button--arrow ki-btn-primary" routerLink="/car-advice">Bekijk resultaten</button>
-        </div>
-
       </form>
     </ng-container>
 
-    <!--
     <h2>Kies een dekking</h2>
+    <ki-price-table [items]="coverages"></ki-price-table>
 
-    <ki-price-table></ki-price-table>
-
-    -->
+    <div class="cx-form-group cx-form-group--space-between">
+      <button class="cx-button cx-button--back cx-button--link" routerLink="/overview">terug naar overzicht</button>
+      <button class="cx-button cx-button--arrow ki-btn-primary" routerLink="/car-advice">Bekijk resultaten</button>
+    </div>
 
   </div>
   <div class="col-md-2">

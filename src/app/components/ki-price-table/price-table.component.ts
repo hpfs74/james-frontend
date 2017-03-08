@@ -3,15 +3,14 @@ import { Price } from '../../models/price';
 
 @Component({
   selector: 'ki-price-table',
-  template: `<div class="row">
-  <div *ngFor="let item of items" [ngClass]="getItemClass()">
+  template: `<div class="ki-price-table-wrapper">
     <ki-price-table-item
-        header="{{item.header}}"
-        price="{{item.price}}"
-        highlight="{{item.highlight}}"
+        *ngFor="let item of items"
+        [header]="item.header"
+        [price]="item.price"
+        [highlight]="item.highlight"
         [features]="item.features">
     </ki-price-table-item>
-  </div>
 </div>`,
 })
 export class PriceTableComponent {
@@ -31,8 +30,8 @@ export class PriceTableComponent {
   /**
    * get the right class for columns
    */
-  getItemClass(): string {
-    let ret = 'cx-col-sm-' + 12 / this.items.length;
-    return ret;
-  }
+  // getItemClass(): string {
+  //   let ret = 'cx-col-sm-' + 12 / this.items.length;
+  //   return ret;
+  // }
 }
