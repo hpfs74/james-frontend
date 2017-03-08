@@ -54,7 +54,17 @@ The following are some things that will make AoT compile fail.
 - Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
 - @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
 
+## App architecture
+
+Use a smart-container component that has dumb child, or sub-, components. For example, for the Car insurances there is a `CarModule` that groups
+all related car Components, Directives, Services, etc. into one piece of functionality. In the `CarModule`, the `CarComponent` is the smart root container
+that passes data into it's child components and receives events back, using `Input()` and `Output()` decorators.
+
+See: http://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/
+
 ## File structure
+
+> Needs an update
 
 ```
 /
@@ -103,7 +113,7 @@ The following are some things that will make AoT compile fail.
 Check the linting config files for our formatting conventions:
 
 * Editorconfig: `.editorconfig`
-* TypeScript: `tslint.json`
+* TypeScript (and Codelyzer): `tslint.json`
 * Sass: `config/stylelint.conf.js`
 
 
