@@ -13,7 +13,6 @@ describe('Component: PriceTable', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PriceTableComponent, PriceTableItemComponent],
@@ -36,18 +35,17 @@ describe('Component: PriceTable', () => {
     // el = de.nativeElement;
   });
 
-  it('should render with cx-col-sm-4 with 3 elements', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('div.cx-col-sm-4').length).toBe(3);
+  it('should render with with 3 elements', () => {
+    expect(fixture.debugElement.nativeElement.querySelectorAll('div.ki-pricing-table').length).toBe(3);
   });
 
-  it('should render with cx-col-sm-3 with 4 elements', () => {
-
+  it('should render with 4 elements', () => {
     comp.items.push({
       header: 'Title4', highlight: false, price: 30.00, features: []
     });
     fixture.detectChanges();
 
-    expect(fixture.debugElement.nativeElement.querySelectorAll('div.cx-col-sm-3').length).toBe(4);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('div.ki-pricing-table').length).toBe(4);
   });
 
   it('should show highlight on an element', () => {

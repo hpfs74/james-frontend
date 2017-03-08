@@ -18,7 +18,7 @@ describe('Component: PriceTableItem', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PriceTableItemComponent],
-      imports: [ ]
+      imports: []
     }).compileComponents();
   }));
 
@@ -30,12 +30,12 @@ describe('Component: PriceTableItem', () => {
     comp.features = ['Feat1', 'Feat2', 'Feat3', 'Feat4'];
 
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('div.ki-pricing-table__header'));
+    de = fixture.debugElement.query(By.css('div.ki-pricing-table-header'));
     el = de.nativeElement;
   });
 
   it('should display the header', () => {
-    let inputDe = fixture.debugElement.query(By.css('div.ki-pricing-table__header'));
+    let inputDe = fixture.debugElement.query(By.css('div.ki-pricing-table-header'));
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();
@@ -43,7 +43,7 @@ describe('Component: PriceTableItem', () => {
   });
 
   it('should display the price', () => {
-    let inputDe = fixture.debugElement.query(By.css('span.ki-pricing-table__price-amount'));
+    let inputDe = fixture.debugElement.query(By.css('span.ki-pricing-table-amount'));
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();
@@ -51,21 +51,21 @@ describe('Component: PriceTableItem', () => {
   });
 
   it('should display list of features', () => {
-    let inputDe = fixture.debugElement.query(By.css('ul.ki-pricing-table__features'));
+    let inputDe = fixture.debugElement.query(By.css('ul.ki-pricing-table-features'));
     let el = inputDe.nativeElement;
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.ki-pricing-table__features > li').length).toBe(4);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.ki-pricing-table-features > li').length).toBe(4);
   });
 
   it('should display list of features change adding one more', () => {
-    let inputDe = fixture.debugElement.query(By.css('ul.ki-pricing-table__features'));
+    let inputDe = fixture.debugElement.query(By.css('ul.ki-pricing-table-features'));
     let el = inputDe.nativeElement;
 
     comp.features.push('Feat5');
     fixture.detectChanges();
 
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.ki-pricing-table__features > li').length).toBe(5);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.ki-pricing-table-features > li').length).toBe(5);
   });
 
   it('should display a not highlighted header by default', () => {

@@ -11,15 +11,15 @@ import { Vehicle } from '../../models/vehicle';
 
       <div class="row">
         <div class="col-sm-6">Merk</div>
-        <div class="col-sm-6 ki-chat-message-content">{{ vehicle.manufacturer }} {{ vehicle.name }}</div>
+        <div class="col-sm-6 ki-chat-message-content ">{{ vehicle.manufacturer | uppercase  }} {{ vehicle.name | uppercase }}</div>
       </div>
       <div class="row">
         <div class="col-sm-6">Model</div>
-        <div class="col-sm-6 ki-chat-message-content">{{ vehicle.model }}</div>
+        <div class="col-sm-6 ki-chat-message-content">{{ vehicle.model | uppercase }}</div>
       </div>
       <div class="row" *ngIf="vehicle.engine">
         <div class="col-sm-6">Brandstof</div>
-        <div class="col-sm-6 ki-chat-message-content">{{ vehicle.engine }}</div>
+        <div class="col-sm-6 ki-chat-message-content">{{ vehicle.engine | uppercase }}</div>
       </div>
       <div class="row" *ngIf="vehicle.transmission">
         <div class="col-sm-6">Transmissie</div>
