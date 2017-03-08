@@ -9,11 +9,19 @@ export class CarDetailForm {
 
   constructor(private fb: FormBuilder, public config: any) {
     this.formGroup = this.fb.group({
-      licensePlate: ['', Validators.required],
+      licensePlate: ['', Validators.compose(
+        [Validators.required, Validators.maxLength(10)]
+      )],
       birthDate: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      houseNumber: ['', Validators.required],
-      houseNumberExtension: ['', Validators.required],
+      postalCode: ['', Validators.compose(
+        [Validators.required, Validators.maxLength(4)]
+      )],
+      houseNumber: ['', Validators.compose(
+        [Validators.required, Validators.maxLength(15)]
+      )],
+      houseNumberExtension: ['', Validators.compose(
+        [Validators.required, Validators.maxLength(15)]
+      )],
       damageFreeYears: ['', Validators.required],
       kilometerPerYear: ['', Validators.required]
     });

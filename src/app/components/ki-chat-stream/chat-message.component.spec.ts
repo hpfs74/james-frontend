@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatStreamComponent } from './chat-stream.component';
-import { ChatMessage } from './chat-message';
+import { ChatMessage } from '../../models/chat-message';
 
 describe('Component: ChatMessageComponent', () => {
   let comp: ChatStreamComponent;

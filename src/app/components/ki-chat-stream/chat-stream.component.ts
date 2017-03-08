@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ChatStreamOptions } from './chat-stream.options';
 import { ChatMessageComponent } from './chat-message.component';
-import { ChatMessage } from './chat-message';
+import { ChatMessage } from '../../models/chat-message';
 
 //@TODO: REFACTOR: message type based on a string to determine if it's a regular textual message or a vehicle info object
 @Component({

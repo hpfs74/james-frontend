@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { NavbarComponent } from './navbar.component';
-// import { Nav } from '../../models/nav';
 import { UserDetailComponent } from './../ki-user-detail/user-detail.component';
 
 describe('Component: Navbar', () => {

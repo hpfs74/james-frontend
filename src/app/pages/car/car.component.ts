@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Vehicle } from '../../models/vehicle';
-import { ChatStreamComponent, ChatMessage } from '../../components/ki-chat-stream/';
+import { ChatMessage } from '../../models/chat-message';
+import { ChatStreamComponent } from '../../components/ki-chat-stream/';
 import { ContentService } from '../../services/content.service';
 
 @Component({
