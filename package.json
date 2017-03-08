@@ -1,10 +1,10 @@
 {
-  "name": "knab-web",
+  "name": "knab-james-web",
   "version": "0.0.1",
-  "description": "Knab Verzekeren Web app",
+  "description": "Knab Verzekeren Web app (Codename James)",
   "keywords": [],
   "homepage": "",
-  "author": "",
+  "author": "cXstudio",
   "scripts": {
     "commitmsg": "node config/hooks/commit.js && npm run lint",
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && webpack --config config/webpack.prod.js  --progress --profile --bail",

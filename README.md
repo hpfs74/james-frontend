@@ -1,6 +1,17 @@
 # Knab Verzekeren Web
 
-## Getting Started
+This is the repository for the Knab Verzekeren Angular app (a.k.a. James Web). Before getting started, please work with a (lead) developer to help you get up and running
+and familiar with the code and best practices. This document describes how to set up your development environment to build and test the app.
+
+* [Getting Started](#getting-started)
+* [AoT Don'ts](#aot)
+* [App architecture](#architecture)
+* [File structure](#file-structure)
+* [Code formatting](#code-guidelines)
+* [Definition of done](#scrum-done)
+* [Support for debugging in VSCode](#vscode)
+
+## <a name="getting-started"></a> Getting Started
 
 ### Dependencies
 
@@ -14,6 +25,8 @@ Once you have those, you should install these globals with `npm install -g`:
 * `npm install -g webpack webpack-dev-server karma protractor typescript`
 
 ### Using CX-Shared-Library
+
+> NOTE: March 2017 TG: replaced cx-grid with bootstrap 4 grid, recommended not to use it until fully stable
 
 Since we're going to use the cx-shared-library we will need to include
 the packages from that project so we need to follow the instructions 
@@ -43,7 +56,7 @@ Now you should be able to run successfully npm install @cx/[package] or npm show
 After adding the private repository you can install all dependencies from the root directory:
 * `npm install`
 
-## AoT Don'ts
+## <a name="aot"></a> AoT Don'ts
 
 The following are some things that will make AoT compile fail.
 
@@ -54,7 +67,7 @@ The following are some things that will make AoT compile fail.
 - Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
 - @Inputs, @Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
 
-## App architecture
+## <a name="architecture"></a> App architecture
 
 Use a smart-container component that has dumb child, or sub-, components. For example, for the Car insurances there is a `CarModule` that groups
 all related car Components, Directives, Services, etc. into one piece of functionality. In the `CarModule`, the `CarComponent` is the smart root container
@@ -62,7 +75,7 @@ that passes data into it's child components and receives events back, using `Inp
 
 See: http://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/
 
-## File structure
+## <a name="file-structure"></a> File structure
 
 > Needs an update
 
@@ -108,7 +121,7 @@ See: http://blog.angular-university.io/angular-2-smart-components-vs-presentatio
  └──webpack.config.js              * webpack main configuration file
 ```
 
-## Code formatting
+## <a name="code-guidelines"></a> Code formatting
 
 Check the linting config files for our formatting conventions:
 
@@ -117,7 +130,13 @@ Check the linting config files for our formatting conventions:
 * Sass: `config/stylelint.conf.js`
 
 
-## Support for debugging in VSCode
+## <a name="scrum-done"></a> Definition of Done
+
+At the end of each development interval, we must have integrated, tested, working, and potentially shippable code, demonstrated
+in a production-like environment, created from the master branch, using an automated process, validated with automated  tests.
+
+
+## <a name="vscode"></a> Support for debugging in VSCode
 
 1. Install the Debugger for Chrome extension from the Extension menu (CTRL+Shift+X in VSCode)
 2. Install webpack plugin: `npm install write-file-webpack-plugin --save-dev`
