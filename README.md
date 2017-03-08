@@ -56,9 +56,17 @@ Now you should be able to run successfully npm install @cx/[package] or npm show
 After adding the private repository you can install all dependencies from the root directory:
 * `npm install`
 
-## <a name="aot"></a> AoT Don'ts
+## <a name="aot"></a> (Ahead of Time compilation) AoT Don'ts
 
-The following are some things that will make AoT compile fail.
+You can compile the app in the browser, at runtime, as the application loads, using the Just-in-Time (JIT) compiler. This is the standard development approach shown throughout the documentation. It's great .. but it has shortcomings.
+
+JIT compilation incurs a runtime performance penalty. Views take longer to render because of the in-browser compilation step. The application is bigger because it includes the Angular compiler and a lot of library code that the application won't actually need. Bigger apps take longer to transmit and are slower to load.
+
+Compilation can uncover many component-template binding errors. JIT compilation discovers them at runtime which is later than we'd like.
+
+The Ahead-of-Time (AOT) compiler can catch template errors early and improve performance by compiling at build time as you'll learn in this chapter.
+
+The following are some things you should follow because not doing so will make AoT compile fail.
 
 - Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
 - Don’t use default exports.
