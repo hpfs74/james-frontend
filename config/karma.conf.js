@@ -74,12 +74,13 @@ module.exports = function (config) {
      * test results reporter to use
      * available reporters: https://npmjs.org/browse/keyword/karma-reporter
      */
-    reporters: ['mocha', 'coverage', 'remap-coverage', 'html', 'junit'],
+    reporters: ['mocha', 'dots', 'coverage', 'remap-coverage', 'html', 'junit'],
 
     coverageReporter: {
       type: 'in-memory',
       reporters: [
-        { type: 'json', subdir: '.', file: 'coverage-final.json' }
+        { type: 'json', subdir: '.', file: 'coverage-final.json' },
+        {type: 'clover', dir: 'test-reports', subdir: '.', file: 'clover.xml'}
       ]
     },
 
