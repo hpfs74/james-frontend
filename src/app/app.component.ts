@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
+import { LoginComponent } from './pages/login/login.component';
 import { AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './services';
 import { Price, Nav, Feature } from './models';
 
@@ -11,10 +12,11 @@ import { Price, Nav, Feature } from './models';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  isLoading: boolean = true;
   prices: Array<Price>;
   topMenu: Array<Nav>;
   features: Array<Feature>;
+
+  private isLoading: boolean = true;
 
   constructor(
     private contentService: ContentService,
@@ -30,5 +32,11 @@ export class AppComponent implements OnInit {
     this.features = this.featureService.getFeatures();
 
     this.isLoading = false;
+  }
+
+  isLoggedIn() {
+    // for developing:
+    return true;
+    //return this.authService.isLoggedIn();
   }
 }

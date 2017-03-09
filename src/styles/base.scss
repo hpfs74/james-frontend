@@ -15,7 +15,7 @@ body {
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
-    font-family: "Intro Bold Caps",Helvetica,Arial,sans-serif;
+    font-family: $headFontFamily;
     margin-bottom: 30px;
     color: #003b5a;
 }
@@ -135,7 +135,19 @@ img.circle {
 
 .ki-btn-primary,
 button.ki-btn-primary {
+  font-size: $baseFontSize + 1;
   background: $knab-primary-green;
+  font-family: $headFontFamily;
+
+  &:hover {
+    background: $knab-primary-dark-green;
+  }
+  &:active,
+  &:focus {
+    color: #fff;
+    background-color: $knab-primary-dark-green;
+    border-color: $knab-primary-grey;
+  }
 }
 
 button.btn-sm {
@@ -144,7 +156,13 @@ button.btn-sm {
 }
 
 button.cx-button {
+  padding-top: 12px;
   margin-bottom: 10px;
+}
+
+button.cx-button--link {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .cx-form-group button.cx-button {
