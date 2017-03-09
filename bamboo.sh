@@ -25,8 +25,8 @@ npm run lint
 echo "#### Npm Build"
 npm run build
 
-#echo "#### Npm Test"
-#npm test
+echo "#### Npm Test"
+npm test
 
 echo "Build done"
 

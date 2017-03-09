@@ -32,7 +32,7 @@
     "compodoc": "node_modules/.bin/compodoc -p tsconfig.json -d doc",
     "postinstall": "npm run webdriver:update",
     "postversion": "git push && git push --tags",
-    "posttest": "remap-istanbul -i coverage/coverage-final.json -o coverage -t html",
+    "posttest-norun": "remap-istanbul -i coverage/coverage-final.json -o coverage -t html",
     "preclean:install": "npm run clean",
     "preversion": "npm test",
     "protractor": "protractor",
