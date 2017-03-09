@@ -80,7 +80,7 @@ module.exports = function (config) {
       type: 'in-memory',
       reporters: [
         { type: 'json', subdir: '.', file: 'coverage-final.json' },
-        {type: 'clover', dir: 'test-reports', subdir: '.', file: 'clover.xml'}
+        { type: 'clover', dir: 'coverage', subdir: '.', file: 'clover.xml' }
       ]
     },
 
