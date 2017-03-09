@@ -12,11 +12,10 @@ import { Price, Nav, Feature } from './models';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
+  isLoading: boolean = true;
   prices: Array<Price>;
   topMenu: Array<Nav>;
   features: Array<Feature>;
-
-  private isLoading: boolean = true;
 
   constructor(
     private contentService: ContentService,
