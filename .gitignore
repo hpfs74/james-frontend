@@ -104,4 +104,7 @@ ChromeDebugger-UserData
 .DS_Store
 
 
+# Test reports
+test-reports
+
 # End of https://www.gitignore.io/api/node
