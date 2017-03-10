@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CarComponent } from '../car/car.component';
 import { CarDetailComponent } from '../car/car-detail.component';
 
-const carRoutes: Routes = [
+export const carRoutes: Routes = [
   {
-    path: 'car',
+    path: '',
     component: CarComponent,
     data: {
       breadcrumb: 'Je autoverzekering vergelijken'

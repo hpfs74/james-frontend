@@ -3,17 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './services/auth.guard.service';
 import { LoginComponent } from './pages/login/login.component';
-import { OverviewComponent } from './pages/overview/overview.component';
-import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
+import { HomeComponent } from './pages/home/home.component';
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
-//TODO: add canActivate: [AuthGuard] to pages
+import { HomeModule } from './pages/home/home.module';
+
+//TODO: add canActivate: [AuthGuard] to all page components except login
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/overview',
-    pathMatch: 'full'
+    loadChildren: () => HomeModule,
+    canLoad: [AuthGuard]
   },
   {
     path: 'cookies',
@@ -27,36 +28,9 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'overview',
-    component: OverviewComponent,
-    data: {
-      breadcrumb: 'Overzicht'
-    }
-  },
-  {
-    path: 'profile',
-    component: OverviewComponent, //UserProfileComponent
-    data: {
-      breadcrumb: 'Mijn account'
-    }
-  },
-  {
-    path: 'faq',
-    component: OverviewComponent, //FaqComponent
-    data: {
-      breadcrumb: 'FAQ'
-    }
-  },
-  {
-    path: 'about',
-    component: OverviewComponent, //AboutComponent
-    data: {
-      breadcrumb: 'Over ons'
-    }
-  },
-  {
+    // 404: redirect unkown paths to home
     path: '**',
-    component: PageNotFoundComponent
+    redirectTo: ''
   }
 ];
 

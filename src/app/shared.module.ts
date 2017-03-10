@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // @cx
-import { CXFormsModule } from '../../node_modules/@cx/forms';
+//Don't import CXFormsModule: breaks lazy loading due to it using BrowserModule instead of CommonModule
+// import { CXFormsModule } from '../../node_modules/@cx/forms';
+import { CXInputComponent, TextMaskModule } from '../../node_modules/@cx/input';
+import { CXSelectComponent } from '../../node_modules/@cx/select';
+import { CXCheckboxComponent } from '../../node_modules/@cx/checkbox';
+import { CXRadioComponent } from '../../node_modules/@cx/radio';
 import { CXFormGroupComponent } from '../../node_modules/@cx/form-group';
+import { CXSliderComponent } from '../../node_modules/@cx/slider';
 
 /**
  * Shared module for all generic components
@@ -19,15 +25,26 @@ import { FeaturesComponent } from './components/ki-features/features.component';
 import { NavbarComponent, FooterComponent } from './components/ki-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/ki-price-table';
 import { StickerComponent } from './components/ki-sticker/sticker.component';
+import { SpinnerComponent } from './components/ki-spinner/spinner.component';
 import { UserDetailComponent } from './components/ki-user-detail/user-detail.component';
 import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    CXFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    TextMaskModule
+    //CXFormsModule
   ],
   declarations: [
+    CXInputComponent,
+    CXSelectComponent,
+    CXCheckboxComponent,
+    CXRadioComponent,
+    CXSliderComponent,
+    CXFormGroupComponent,
+
     AvatarComponent,
     ChatStreamComponent,
     ChatMessageComponent,
@@ -37,22 +54,31 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
     PriceTableComponent,
     PriceTableItemComponent,
     StickerComponent,
+    SpinnerComponent,
     UserDetailComponent,
-    VehicleInfoComponent
+    VehicleInfoComponent,
   ],
   exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CXInputComponent,
+    CXSelectComponent,
+    CXCheckboxComponent,
+    CXRadioComponent,
+    CXSliderComponent,
     CXFormGroupComponent,
+
     AvatarComponent,
     ButtonIconComponent,
     CookiebarComponent,
-    CommonModule,
     FeaturesComponent,
     ChatStreamComponent,
     ChatMessageComponent,
     PriceTableComponent,
     PriceTableItemComponent,
-    ReactiveFormsModule,
     StickerComponent,
+    SpinnerComponent,
     UserDetailComponent,
     VehicleInfoComponent
   ]

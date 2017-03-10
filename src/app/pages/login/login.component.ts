@@ -1,5 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+
+import { CXEmailValidator } from '../../../../node_modules/@cx/form';
+import { AuthService } from './../../services/auth.service';
 
 /**
  * Login page that gets rendered in AppComponent if not logged in
@@ -31,7 +34,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
         </div>
           <div class="row">
           <div class="col-md-6 offset-md-3">
-
+            <p class="login-info text-center"><a href="">Wachtwoord vergeten?</a></p>
           </div>
         </div>
         </form>
@@ -43,16 +46,16 @@ export class LoginComponent {
   loginForm: FormGroup;
   formGroupConfig = [];
 
-  //@Output()
+  //@Output()login$: EventEmitter = new EventEmitter();
 
   constructor() {
     this.formBuilder = new FormBuilder();
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose(
-        [Validators.required]
+        [Validators.required, CXEmailValidator]
       )],
       password: ['', Validators.compose(
-        [Validators.required]
+        [Validators.required, Validators.minLength(8)]
       )],
     });
 
@@ -76,7 +79,10 @@ export class LoginComponent {
     ];
   }
 
-  login() {
+  login(event) {
+    if (this.loginForm.valid) {
+      console.log('login!');
+    }
     return;
   }
 }
