@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
-// Container and subroot-level components
-import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 import { LoginComponent } from './pages/login/login.component';
-//import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
+import { LoginRoutingModule } from './pages/login/login-routing.module';
+
+//TODO: needed on login?
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
 // Feature modules
@@ -26,15 +28,19 @@ import '../styles/styles.scss';
     HttpModule,
     SharedModule,
     HomeModule,
+    LoginRoutingModule,
     AppRoutingModule,
   ],
   declarations: [
     AppComponent,
     LoginComponent,
     CookiesPageComponent,
-
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
 }
