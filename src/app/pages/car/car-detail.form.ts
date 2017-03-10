@@ -1,5 +1,4 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { CXFormGroupComponent } from '../../../../node_modules/@cx/form-group';
 
 export class CarDetailForm {
   formGroup: FormGroup;
