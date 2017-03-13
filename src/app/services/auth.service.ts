@@ -36,6 +36,7 @@ export class AuthService {
    * Remove authentication token
    */
   logout() {
+    console.log('logout!');
     localStorage.removeItem('auth_token');
     this.loggedIn = false;
   }

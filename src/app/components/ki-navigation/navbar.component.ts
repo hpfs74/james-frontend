@@ -29,7 +29,7 @@ import { UserDetailComponent } from './../ki-user-detail/user-detail.component';
         </li>
       </ul>
       <ul class="nav nav-pills pull-right">
-        <li><ki-user-detail [isLoggedIn]="isLoggedIn"></ki-user-detail></li>
+          <li><ng-content select="ki-user-detail"></ng-content></li>
       </ul>
     </div>
   </div>
@@ -37,5 +37,4 @@ import { UserDetailComponent } from './../ki-user-detail/user-detail.component';
 })
 export class NavbarComponent {
   @Input() menuItems: Array<Nav>;
-  @Input() isLoggedIn: boolean;
 }

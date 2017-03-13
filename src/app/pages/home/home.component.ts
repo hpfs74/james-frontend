@@ -8,7 +8,9 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
   template: `
   <ki-cookiebar></ki-cookiebar>
   <header class="header">
-    <ki-navbar [menuItems]="topMenu" [isLoggedIn]="isLoggedIn"></ki-navbar>
+    <ki-navbar [menuItems]="topMenu">
+        <ki-user-detail [isLoggedIn]="isLoggedIn" (logOut)="logOut()"></ki-user-detail>
+    </ki-navbar>
   </header>
 
   <div class="container-fluid container--fullwidth">
@@ -47,5 +49,10 @@ export class HomeComponent implements OnInit {
     this.footerItems = this.featureService.getFeatures();
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();
+  }
+
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 }

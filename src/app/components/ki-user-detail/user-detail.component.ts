@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'ki-user-detail',
@@ -16,11 +15,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserDetailComponent {
   @Input() isLoggedIn: boolean = false;
-
-  constructor(private authService: AuthService) {
-  }
+  @Output() logOut = new EventEmitter();
 
   logout() {
-    this.authService.logout();
+    this.logOut.emit();
   }
 }
