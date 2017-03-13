@@ -48,7 +48,9 @@ a {
 a:hover,
 a:focus {
   color: $knab-secondary-red;
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 a:focus {

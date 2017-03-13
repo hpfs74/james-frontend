@@ -29,6 +29,30 @@ import { SpinnerComponent } from './components/ki-spinner/spinner.component';
 import { UserDetailComponent } from './components/ki-user-detail/user-detail.component';
 import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.component';
 
+export const sharedComponents = [
+  AvatarComponent,
+  ButtonIconComponent,
+  CookiebarComponent,
+  FeaturesComponent,
+  ChatStreamComponent,
+  ChatMessageComponent,
+  PriceTableComponent,
+  PriceTableItemComponent,
+  StickerComponent,
+  SpinnerComponent,
+  UserDetailComponent,
+  VehicleInfoComponent
+];
+
+export const cxComponents = [
+  CXInputComponent,
+  CXSelectComponent,
+  CXCheckboxComponent,
+  CXRadioComponent,
+  CXSliderComponent,
+  CXFormGroupComponent
+];
+
 @NgModule({
   imports: [
     CommonModule,
@@ -38,49 +62,15 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
     //CXFormsModule
   ],
   declarations: [
-    CXInputComponent,
-    CXSelectComponent,
-    CXCheckboxComponent,
-    CXRadioComponent,
-    CXSliderComponent,
-    CXFormGroupComponent,
-
-    AvatarComponent,
-    ChatStreamComponent,
-    ChatMessageComponent,
-    ButtonIconComponent,
-    CookiebarComponent,
-    FeaturesComponent,
-    PriceTableComponent,
-    PriceTableItemComponent,
-    StickerComponent,
-    SpinnerComponent,
-    UserDetailComponent,
-    VehicleInfoComponent,
+    ...cxComponents,
+    ...sharedComponents
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CXInputComponent,
-    CXSelectComponent,
-    CXCheckboxComponent,
-    CXRadioComponent,
-    CXSliderComponent,
-    CXFormGroupComponent,
-
-    AvatarComponent,
-    ButtonIconComponent,
-    CookiebarComponent,
-    FeaturesComponent,
-    ChatStreamComponent,
-    ChatMessageComponent,
-    PriceTableComponent,
-    PriceTableItemComponent,
-    StickerComponent,
-    SpinnerComponent,
-    UserDetailComponent,
-    VehicleInfoComponent
+    ...cxComponents,
+    ...sharedComponents
   ]
 })
 export class SharedModule { }

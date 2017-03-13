@@ -3,7 +3,7 @@ import { Http, Headers } from '@angular/http';
 
 @Injectable()
 export class AuthService {
-    // store the URL so we can redirect after logging in
+  // store the URL so we can redirect after logging in
   redirectUrl: string;
   private loggedIn = false;
 
@@ -45,6 +45,7 @@ export class AuthService {
    * @returns {Boolean}
    */
   isLoggedIn() {
-    return this.loggedIn;
+    return true;
+    //return this.loggedIn;
   }
 }

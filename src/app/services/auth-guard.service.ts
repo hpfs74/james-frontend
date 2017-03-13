@@ -23,15 +23,18 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    if (localStorage.getItem('auth_token') && this.authService.isLoggedIn()) {
-      // logged in so return true
-      return true;
-    }
-    // store the attempted url for redirecting
-    this.authService.redirectUrl = url;
+    //DEVELOP; always login
+    return true;
 
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: url } });
-    return false;
+    // if (localStorage.getItem('auth_token') && this.authService.isLoggedIn()) {
+    //   // logged in so return true
+    //   return true;
+    // }
+    // // store the attempted url for redirecting
+    // this.authService.redirectUrl = url;
+
+    // // not logged in so redirect to login page with the return url
+    // this.router.navigate(['/login'], { queryParams: { returnUrl: url } });
+    // return false;
   }
 }

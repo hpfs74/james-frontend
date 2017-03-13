@@ -14,9 +14,11 @@
 //@import '../../node_modules/@cx/grid/index';
 
 
-/* component styles */
+/* page component styles */
 @import '../app/pages/overview/overview.component';
+@import '../app/pages/login/login.component';
 
+/* component styles */
 @import '../app/components/ki-avatar/avatar.component';
 @import '../app/components/ki-breadcrumb/breadcrumb.component';
 @import '../app/components/ki-chat-stream/chat-stream.component';

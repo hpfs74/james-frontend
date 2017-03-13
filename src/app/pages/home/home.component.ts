@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Price, Nav, Feature } from '../../models';
-import { FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from '../../services';
+import { AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from '../../services';
 
 @Component({
   template: `
   <ki-cookiebar></ki-cookiebar>
   <header class="header">
-    <ki-navbar [menuItems]="topMenu"></ki-navbar>
+    <ki-navbar [menuItems]="topMenu" [isLoggedIn]="isLoggedIn"></ki-navbar>
   </header>
 
   <div class="container-fluid container--fullwidth">
@@ -26,12 +26,14 @@ import { FeatureService, NavigationService, InsuranceService, CookieService, Con
 })
 export class HomeComponent implements OnInit {
   isLoading: boolean = true;
+  isLoggedIn: boolean = false;
   prices: Array<Price>;
   topMenu: Array<Nav>;
   footerItems: Array<Feature>;
 
   constructor(
     private router: Router,
+    private authService: AuthService,
     private contentService: ContentService,
     private navigationService: NavigationService,
     private insuranceService: InsuranceService,
@@ -44,5 +46,6 @@ export class HomeComponent implements OnInit {
     this.topMenu = this.navigationService.getMenu();
     this.footerItems = this.featureService.getFeatures();
     this.isLoading = false;
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 }

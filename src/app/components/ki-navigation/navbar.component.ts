@@ -36,11 +36,6 @@ import { UserDetailComponent } from './../ki-user-detail/user-detail.component';
 </nav>`,
 })
 export class NavbarComponent {
-  /**
-   * contains the elments of the menu
-   * @see module:models/Nav
-   */
   @Input() menuItems: Array<Nav>;
-
-  isLoggedIn: boolean = false;
+  @Input() isLoggedIn: boolean;
 }
