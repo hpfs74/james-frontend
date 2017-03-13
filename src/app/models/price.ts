@@ -17,4 +17,5 @@ export class Price {
    */
   features: Array<string>;
   highlight?: boolean;
+  selected?: boolean;
 }

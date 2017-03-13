@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
     private navigationService: NavigationService,
     private insuranceService: InsuranceService,
     private featureService: FeatureService) {
-    console.log(this.router.url);
   }
 
   ngOnInit() {

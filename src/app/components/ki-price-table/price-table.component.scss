@@ -12,14 +12,21 @@
 
 .ki-pricing-table {
   border-radius: 0;
-  border: 1px solid $knab-primary-grey;
+  outline: 1px solid $knab-primary-grey;
   color: $knab-primary-blue;
   font-size: $baseFontSize - 2;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+
+  &:hover {
+    outline: 4px solid  $knab-primary-grey;
+    cursor: pointer;
+  }
 }
 
-.ki-pricing-table--highlight {
-  border: 2px solid $knab-primary-green;
+.ki-pricing-table--selected {
+  outline: 2px solid $knab-primary-green;
+  background: $knab-primary-green;
+  color: #fff;
 }
 
 .ki-pricing-table-header {
@@ -34,6 +41,16 @@
 .ki-pricing-table--highlight .ki-pricing-table-header {
   color: $knab-white;
   background: $knab-primary-green;
+}
+
+/* selected state */
+.ki-pricing-table--selected.ki-pricing-table-header {
+  background: #fff;
+  color: $knab-primary-green;
+}
+.ki-pricing-table--selected .ki-pricing-table-features,
+.ki-pricing-table--selected .ki-pricing-table-features .icon {
+  color: #fff;
 }
 
 .ki-pricing-table-features {
