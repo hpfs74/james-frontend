@@ -1,7 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
 import { LoginComponent } from './pages/login/login.component';
-import { AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from './services';
+import {
+  AuthService,
+  FeatureService,
+  NavigationService,
+  InsuranceService,
+  CookieService,
+  ContentService,
+} from './services';
 
 @Component({
   selector: 'ki-app',

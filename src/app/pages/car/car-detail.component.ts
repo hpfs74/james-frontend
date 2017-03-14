@@ -6,10 +6,11 @@ import { Price } from '../../models/price';
 
 @Component({
   selector: 'ki-car-detail-form',
-  templateUrl: 'car-detail.component.html'
+  templateUrl: 'car-detail.component.html',
 })
 export class CarDetailComponent implements OnInit, OnChanges {
-  form: CarDetailForm;
+  public form: CarDetailForm;
+  public validationErrors: any;
 
   @Input() userProfile: any;
   @Input() steps: any[];
@@ -31,7 +32,7 @@ export class CarDetailComponent implements OnInit, OnChanges {
     }
     if (changes['config']) {
       this.config = changes['config'].currentValue;
-      this.form = new CarDetailForm(this.fb, this.config);
+      this.form = new CarDetailForm(this.fb);
     }
   }
 

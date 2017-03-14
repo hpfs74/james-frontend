@@ -1,67 +1,76 @@
-{
-  "title": "Je autoverzekering vergelijken",
-  "steps": [
-    {
-      "title": "Je gegevens",
-      "formgroupLabel": "Gegevens auto",
-      "formControls": {
-        "licensePlate": {
-          "label": "Wat is je kenteken?",
-          "inputOptions": {
-            "placeholder": "NL-16K-NAB"
-          },
-          "validationErrors": {
-            "required": "Kenteken is een verplicht veld"
-          }
-        },
-        "birthDate": {
-          "label": "Geboortedatum",
-          "validationErrors": {
-            "required": "Geboortedatum is een verplicht veld"
-          }
-        },
-        "postalCode": {
-          "label": "Postcode",
-          "inputOptions": {
-            "placeholder": "1234 AB"
-          },
-          "validationErrors": {
-            "required": "Postcode is een verplicht veld"
-          }
-        },
-        "houseNumber": {
-          "label": "Huisnummer",
-          "validationErrors": {
-            "required": "Huisnummer is een verplicht veld"
-          }
-        },
-        "houseNumberExtension": {
-          "label": "Toevoeging"
-        },
-        "damageFreeYears": {
-          "label": "Aantal schadevrije jaren",
-          "description": "Lorem ipsum description ..."
-        },
-        "kilometerPerYear": {
-          "label": "Aantal KM per jaar",
-          "description": "Lorem ipsum description ...",
-          "type": "select",
-          "inputOptions": {
-            "items": [
-              {
-                "label": "30.000 of meer",
-                "value": "> 30.000"
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "title": "Resultaten"
-    },
-    {
-      "title": "Afsluiten"
-    }
-  ]
-}
+// {
+//   "title": "Je autoverzekering vergelijken",
+//   "steps": [
+//     {
+//       "title": "Je gegevens",
+//       "formgroupLabel": "Gegevens auto",
+//       "formControls": {
+//         "licensePlate": {
+//           "label": "Wat is je kenteken?",
+//           "inputOptions": {
+//             "placeholder": "NL-16K-NAB"
+//           },
+//           "validationErrors": {
+//             "required": "Kenteken is een verplicht veld"
+//           }
+//         },
+//         "birthDate": {
+//           "label": "Geboortedatum",
+//           "validationErrors": {
+//             "required": "Geboortedatum is een verplicht veld"
+//           }
+//         },
+//         "postalCode": {
+//           "label": "Postcode",
+//           "inputOptions": {
+//             "placeholder": "1234 AB"
+//           },
+//           "validationErrors": {
+//             "required": "Postcode is een verplicht veld"
+//           }
+//         },
+//         "addressNumber": {
+//           "label": "Huisnummer",
+//           "validationErrors": {
+//             "required": "Huisnummer is een verplicht veld"
+//           }
+//         },
+//         "addressNumberExtension": {
+//           "label": "Toevoeging",
+//           "inputOptions": {
+//             "placeholder": "Optioneel"
+//           }
+//         },
+//         "street": {
+//           "label": "Adres"
+//         },
+//         "city": {
+//           "label": "Plaats"
+//         },
+//         "damageFreeYears": {
+//           "label": "Aantal schadevrije jaren",
+//           "description": "Lorem ipsum description ..."
+//         },
+//         "kilometerPerYear": {
+//           "label": "Aantal KM per jaar",
+//           "description": "Lorem ipsum description ...",
+//           "type": "select",
+//           "inputOptions": {
+//             "items": [
+//               {
+//                 "label": "30.000 of meer",
+//                 "value": "> 30.000"
+//               }
+//             ]
+//           }
+//         }
+//       }
+//     },
+//     {
+//       "title": "Resultaten"
+//     },
+//     {
+//       "title": "Afsluiten"
+//     }
+//   ]
+// }

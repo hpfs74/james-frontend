@@ -1,0 +1,44 @@
+<div class="formgroup-address-lookup" [formGroup]="addressFormGroup">
+  <cx-form-group formControlName="postalCode" [options]="{
+              formControl: addressFormGroup.get('postalCode'),
+              label: 'Postcode',
+              type: 'text',
+              textMask: inputMasks.postalCodeMask,
+              transform: inputMasks.postalCodeMask.decode,
+              validationErrors: validationErrors
+            }"></cx-form-group>
+
+  <div class="row">
+    <div class="col-md-8">
+      <cx-form-group formControlName="addressNumber" [options]="{
+        formControl: addressFormGroup.get('addressNumber'),
+        label: 'Huisnummer',
+        validationErrors: validationErrors
+      }"></cx-form-group>
+    </div>
+    <div class="col-md-4">
+      <cx-form-group formControlName="addressNumberExtension" [options]="{
+        formControl: addressFormGroup.get('addressNumberExtension'),
+        label: 'Toevoeging',
+        validationErrors: validationErrors,
+        inputOptions: {
+          placeholder: 'Optioneel'
+        }
+      }"></cx-form-group>
+    </div>
+  </div>
+
+  <!-- prefilled -->
+  <cx-form-group *ngIf="showAddress" formControlName="addressStreet" [options]="{
+        formControl: addressFormGroup.get('addressStreet'),
+        validationErrors: validationErrors,
+        label: 'Straatnaam'
+      }"></cx-form-group>
+
+  <!-- pre-filled -->
+  <cx-form-group *ngIf="showAddress" formControlName="addressCity" [options]=" {
+        formControl: addressFormGroup.get('addressCity'),
+        validationErrors: validationErrors,
+        label: 'Plaats'
+      }"></cx-form-group>
+</div>

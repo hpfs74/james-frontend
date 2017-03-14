@@ -17,6 +17,7 @@ import { CXSliderComponent } from '../../node_modules/@cx/slider';
  * import components in alphabetic order: easier to find something!
  */
 import { AvatarComponent } from './components/ki-avatar/avatar.component';
+import { AddressLookupComponent } from './components/ki-address-lookup/address-lookup.component';
 import { BreadCrumbComponent } from './components/ki-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from './components/ki-button-icon/button-icon.component';
 import { CookiebarComponent } from './components/ki-cookiebar/cookiebar.component';
@@ -31,6 +32,7 @@ import { VehicleInfoComponent } from './components/ki-vehicle-info/vehicle-info.
 
 export const sharedComponents = [
   AvatarComponent,
+  AddressLookupComponent,
   ButtonIconComponent,
   CookiebarComponent,
   FeaturesComponent,

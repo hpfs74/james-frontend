@@ -1,42 +1,21 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
+import { createAddress, dateValidator } from '../../utils/base-form';
+
 export class CarDetailForm {
   formGroup: FormGroup;
-  formOptions: any = {};
+  addressForm: any;
 
-  // @TODO: create validators
-
-  constructor(private fb: FormBuilder, public config: any) {
+  constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
-      licensePlate: ['', Validators.compose(
+      licensePlate: [null, Validators.compose(
         [Validators.required, Validators.maxLength(10)]
       )],
-      birthDate: ['', Validators.required],
-      postalCode: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(4)]
-      )],
-      houseNumber: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(15)]
-      )],
-      houseNumberExtension: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(15)]
-      )],
-      damageFreeYears: ['', Validators.required],
-      kilometerPerYear: ['', Validators.required]
+      birthDate: [null, Validators.required, dateValidator('date')],
+      damageFreeYears: [null, Validators.required],
+      kilometersPerYear: ['', Validators.required]
     });
 
-    this.initFormOptions(config);
-  }
-
-  private initFormOptions(config: any): void {
-    if (config && config.formControls) {
-      for (let key in config.formControls) {
-        let controlConfig = config.formControls[key];
-        // find the accompanying FormControl ...
-        controlConfig.formControl = this.formGroup.get(key);
-        // .. and add it to the config options
-        this.formOptions[key] = controlConfig;
-      }
-    }
+    this.addressForm = createAddress(this.fb);
   }
 }

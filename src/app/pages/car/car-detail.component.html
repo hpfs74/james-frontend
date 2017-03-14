@@ -6,24 +6,44 @@
 
     <h2>Gegevens auto</h2>
 
-    <ng-container *ngIf="config">
+    <ng-container>
       <form [formGroup]="form.formGroup" (submit)="save($event)">
 
-        <cx-form-group formControlName="licensePlate" [options]="form.formOptions.licensePlate"></cx-form-group>
-        <cx-form-group formControlName="birthDate" [options]="form.formOptions.birthDate"></cx-form-group>
-        <cx-form-group formControlName="postalCode" [options]="form.formOptions.postalCode"></cx-form-group>
+        <cx-form-group formControlName="licensePlate" [options]="{
+            label: 'Wat is je kenteken?',
+            formControl: form.formGroup.get('licensePlate'),
+            validationErrors: validationErrors,
+            inputOptions: {
+              placeholder: 'NL-16K-NAB'
+            }
+          }"></cx-form-group>
 
-        <div class="row">
-          <div class="col-md-8">
-            <cx-form-group formControlName="houseNumber" [options]="form.formOptions.houseNumber"></cx-form-group>
-          </div>
-          <div class="col-md-4">
-            <cx-form-group formControlName="houseNumberExtension" [options]="form.formOptions.houseNumberExtension"></cx-form-group>
-          </div>
-        </div>
+        <cx-form-group formControlName="birthDate" [options]="{
+            label: 'Geboortedatum',
+            formControl: form.formGroup.get('birthDate'),
+            validationErrors: validationErrors
+          }"></cx-form-group>
 
-        <cx-form-group formControlName="damageFreeYears" [options]="form.formOptions.damageFreeYears"></cx-form-group>
-        <cx-form-group formControlName="kilometerPerYear" [options]="form.formOptions.kilometerPerYear"></cx-form-group>
+        <ki-address-lookup [addressFormGroup]="form.addressForm"></ki-address-lookup>
+
+        <cx-form-group formControlName="damageFreeYears" [options]="{
+            label: 'Aantal schadevrije jaren',
+            formControl: form.formGroup.get('damageFreeYears')
+          }"></cx-form-group>
+
+        <cx-form-group formControlName="kilometersPerYear" [options]="{
+            label: 'Aantal KM per jaar',
+            type: 'select',
+            formControl: form.formGroup.get('kilometersPerYear'),
+            inputOptions: {
+              items: [
+                {
+                  label: '30.000 of meer',
+                  value: '> 30.000'
+                }
+              ]
+            }
+          }"></cx-form-group>
       </form>
     </ng-container>
 

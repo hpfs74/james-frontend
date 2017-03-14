@@ -18,15 +18,10 @@ export class CarComponent implements OnInit {
   chatMessages: ChatMessage[] = [];
   coverages: Price[];
 
-  constructor(private contentService: ContentService, private insuranceService: InsuranceService) {
+  constructor(private insuranceService: InsuranceService) {
   }
 
   ngOnInit() {
-    this.contentService.getTranslationJSON('car-advice')
-      .subscribe(data => {
-        this.formControlOptions = data;
-      });
-
     this.myCar = {
       name: 'PANDA',
       manufacturer: 'FIAT',
