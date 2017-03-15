@@ -14,30 +14,33 @@ import { AuthService } from './../../services/auth.service';
 @Component({
   selector: 'ki-login',
   template: `
-    <div class="container">
-      <div class="row">
-        <div class="ki-login-welcome">
-
+    <div class='container'>
+      <div class='row'>
+        <div class='ki-login-welcome'>
         </div>
       </div>
 
-      <form [formGroup]="loginForm" (submit)="login($event)">
-        <div class="row">
-          <div class="col-md-6 offset-md-3">
-              <cx-form-group [formControlName]="formGroupConfig[0].formControlName"
-                [options]="formGroupConfig[0]"></cx-form-group>
+      <form [formGroup]='loginForm' (submit)='login($event)'>
+        <div class='row'>
+          <div class='col-md-6 offset-md-3'>
 
-              <cx-form-group [formControlName]="formGroupConfig[1].formControlName"
-                [options]="formGroupConfig[1]"></cx-form-group>
+              <div class='fullwidth' ng-class='messageClass'>{{ message }}</div>
+          
+              <cx-form-group [formControlName]='formGroupConfig[0].formControlName'
+                [options]='formGroupConfig[0]'></cx-form-group>
 
-                <button class="cx-button ki-btn-primary fullwidth"
-                  [class.cx-button--pending]="isPending" [disabled]="isPending"
-                  (click)="login()">Inloggen</button>
+              <cx-form-group [formControlName]='formGroupConfig[1].formControlName'
+                [options]='formGroupConfig[1]'></cx-form-group>
+              <button (click)='showPassword()'>Show Password</button>
+
+                <button class='cx-button ki-btn-primary fullwidth'
+                  [class.cx-button--pending]='isPending' [disabled]='isPending'>
+                  Inloggen</button>
           </div>
         </div>
-          <div class="row">
-          <div class="col-md-6 offset-md-3">
-            <p class="login-info text-center"><a href="">Wachtwoord vergeten?</a></p>
+          <div class='row'>
+          <div class='col-md-6 offset-md-3'>
+            <p class='login-info text-center'><a href=''>Wachtwoord vergeten?</a></p>
           </div>
         </div>
         </form>
@@ -45,6 +48,8 @@ import { AuthService } from './../../services/auth.service';
   `
 })
 export class LoginComponent {
+  message: string = '';
+  messageClass: string = 'hidden';
   isPending: boolean = false;
   formBuilder: FormBuilder;
   loginForm: FormGroup;
@@ -71,7 +76,8 @@ export class LoginComponent {
         label: 'E-mailadres',
         formControl: this.loginForm.get('email'),
         inputOptions: {
-          placeholder: 'voorbeeld@mail.com'
+          placeholder: 'voorbeeld@mail.com',
+
         }
       },
       {
@@ -79,14 +85,22 @@ export class LoginComponent {
         label: 'Wachtwoord',
         formControl: this.loginForm.get('password'),
         inputOptions: {
-          placeholder: ''
+          placeholder: '',
+          type: 'password'
         }
       }
     ];
   }
 
+  showPassword() {
+    let passwordControl = this.formGroupConfig[1];
+
+    passwordControl.inputOptions.type =
+      (passwordControl.inputOptions.type === 'password')
+        ? 'text' : 'password';
+  }
+
   login(event) {
-    console.log('Login()');
 
     if (this.loginForm.valid) {
       console.log('Trying to log in ...');
@@ -96,27 +110,33 @@ export class LoginComponent {
       let password = this.loginForm.get('password');
 
       //DISABLE LoginComponent
-      this.router.navigate(['/overview']);
+      // this.router.navigate(['/overview']);
+      console.log('email is ',  email.value);
+      this.authService.login(email.value, password.value).subscribe(() => {
+        this.isPending = false;
 
-      // this.authService.login(email, password).subscribe(() => {
-      //   this.isPending = false;
+        if (this.authService.isLoggedIn()) {
+          this.messageClass = 'text-success';
+          this.message = 'Ok your loggend in';
+          // Get the redirect URL from our auth service
+          // If no redirect has been set, use the default
+          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
 
-      //   if (this.authService.isLoggedIn) {
-      //     // Get the redirect URL from our auth service
-      //     // If no redirect has been set, use the default
-      //     let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
+          // Set our navigation extras object
+          // that passes on our global query params and fragment
+          let navigationExtras: NavigationExtras = {
+            preserveQueryParams: true,
+            preserveFragment: true
+          };
 
-      //     // Set our navigation extras object
-      //     // that passes on our global query params and fragment
-      //     let navigationExtras: NavigationExtras = {
-      //       preserveQueryParams: true,
-      //       preserveFragment: true
-      //     };
+          // Redirect the user
+          // this.router.navigate([redirect], navigationExtras);
+        } else {
+          this.messageClass = 'text-danger';
+          this.message = 'Sorry no login yet';
+        }
 
-      //     // Redirect the user
-      //     this.router.navigate([redirect], navigationExtras);
-      //   }
-      // });
+      });
     }
     return;
   }
