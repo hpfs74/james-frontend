@@ -1,5 +1,7 @@
 <div class="formgroup-address-lookup" [formGroup]="addressFormGroup">
-  <cx-form-group formControlName="postalCode" [options]="{
+  <div class="row">
+    <div class="col-md-6">
+      <cx-form-group formControlName="postalCode" [options]="{
               formControl: addressFormGroup.get('postalCode'),
               label: 'Postcode',
               type: 'text',
@@ -7,24 +9,17 @@
               transform: inputMasks.postalCodeMask.decode,
               validationErrors: validationErrors
             }"></cx-form-group>
-
-  <div class="row">
-    <div class="col-md-8">
-      <cx-form-group formControlName="addressNumber" [options]="{
+    </div>
+    <div class="col-md-4">
+      <cx-form-group formControlName="addressNumber" (blur)="addressBlur(postalCode, addressNumber)" [options]="{
         formControl: addressFormGroup.get('addressNumber'),
         label: 'Huisnummer',
         validationErrors: validationErrors
       }"></cx-form-group>
     </div>
-    <div class="col-md-4">
-      <cx-form-group formControlName="addressNumberExtension" [options]="{
-        formControl: addressFormGroup.get('addressNumberExtension'),
-        label: 'Toevoeging',
-        validationErrors: validationErrors,
-        inputOptions: {
-          placeholder: 'Optioneel'
-        }
-      }"></cx-form-group>
+
+    <div class="col-md-2">
+      <button class="cx-button ki-btn-primary btn-form-group" (click)="getLocationAddress()"><span class="icon fa fa-map-marker"></span></button>
     </div>
   </div>
 

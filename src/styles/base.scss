@@ -140,6 +140,7 @@ button.ki-btn-primary {
   font-size: $baseFontSize + 1;
   background: $knab-primary-green;
   font-family: $headFontFamily;
+  border-radius: $button-border-radius;
 
   &:hover {
     background: $knab-primary-dark-green;
@@ -150,6 +151,10 @@ button.ki-btn-primary {
     background-color: $knab-primary-dark-green;
     border-color: $knab-primary-grey;
   }
+  &.disabled {
+    color: #fff;
+    background: $knab-disabled-grey;
+  }
 }
 
 button.btn-sm {
@@ -158,8 +163,9 @@ button.btn-sm {
 }
 
 button.cx-button {
-  padding-top: 12px;
+  padding-top: 8px;
   margin-bottom: 10px;
+  border-radius: $button-border-radius;
 }
 
 button.cx-button--link {
@@ -170,3 +176,11 @@ button.cx-button--link {
 .cx-form-group button.cx-button {
   min-width: 200px;
 }
+
+button.btn-form-group {
+  margin-top: 23px;
+  width: 100%;
+  height: 44px;
+  border-radius: $input-border-radius;
+}
+

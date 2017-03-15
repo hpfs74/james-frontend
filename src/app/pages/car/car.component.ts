@@ -17,6 +17,7 @@ export class CarComponent implements OnInit {
   myCar: Vehicle;
   chatMessages: ChatMessage[] = [];
   coverages: Price[];
+  formSteps: Array<any>;
 
   constructor(private insuranceService: InsuranceService) {
   }
@@ -28,6 +29,12 @@ export class CarComponent implements OnInit {
       model: 'TURBO',
       year: 2006
     };
+
+    this.formSteps = [
+      { title: 'Je gegevens ' },
+      { title: 'Resultaten ' },
+      { title: 'Afsluiten' }
+    ];
 
     this.coverages = this.insuranceService.getPrices();
   }

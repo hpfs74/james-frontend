@@ -6,10 +6,9 @@
 
     <h2>Gegevens auto</h2>
 
-    <ng-container>
-      <form [formGroup]="form.formGroup" (submit)="save($event)">
+    <form [formGroup]="form.formGroup" (submit)="save($event)">
 
-        <cx-form-group formControlName="licensePlate" [options]="{
+      <cx-form-group formControlName="licensePlate" [options]="{
             label: 'Wat is je kenteken?',
             formControl: form.formGroup.get('licensePlate'),
             validationErrors: validationErrors,
@@ -18,34 +17,40 @@
             }
           }"></cx-form-group>
 
-        <cx-form-group formControlName="birthDate" [options]="{
+      <cx-form-group formControlName="birthDate" [options]="{
             label: 'Geboortedatum',
             formControl: form.formGroup.get('birthDate'),
             validationErrors: validationErrors
           }"></cx-form-group>
 
-        <ki-address-lookup [addressFormGroup]="form.addressForm"></ki-address-lookup>
+      <ki-address-lookup [addressFormGroup]="form.addressForm"></ki-address-lookup>
 
-        <cx-form-group formControlName="damageFreeYears" [options]="{
-            label: 'Aantal schadevrije jaren',
-            formControl: form.formGroup.get('damageFreeYears')
-          }"></cx-form-group>
-
-        <cx-form-group formControlName="kilometersPerYear" [options]="{
-            label: 'Aantal KM per jaar',
-            type: 'select',
-            formControl: form.formGroup.get('kilometersPerYear'),
-            inputOptions: {
-              items: [
-                {
-                  label: '30.000 of meer',
-                  value: '> 30.000'
+      <div class="row">
+        <div class="col-md-6">
+          <cx-form-group formControlName="damageFreeYears" [options]="{
+                label: 'Aantal schadevrije jaren',
+                formControl: form.formGroup.get('damageFreeYears'),
+                validationErrors: validationErrors
+              }"></cx-form-group>
+        </div>
+        <div class="col-md-6">
+          <cx-form-group formControlName="kilometersPerYear" [options]="{
+                label: 'Aantal KM per jaar',
+                type: 'select',
+                formControl: form.formGroup.get('kilometersPerYear'),
+                validationErrors: validationErrors,
+                inputOptions: {
+                  items: [
+                    {
+                      label: '30.000 of meer',
+                      value: '> 30.000'
+                    }
+                  ]
                 }
-              ]
-            }
-          }"></cx-form-group>
-      </form>
-    </ng-container>
+              }"></cx-form-group>
+        </div>
+      </div>
+    </form>
 
     <h2>Kies een dekking</h2>
     <ki-price-table [items]="coverages"></ki-price-table>
