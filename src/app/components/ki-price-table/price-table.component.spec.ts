@@ -49,9 +49,9 @@ describe('Component: PriceTable', () => {
   });
 
   it('should show highlight on an element', () => {
-    comp.setHightlight(0);
+    comp.selectItem(0);
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('div.ki-pricing-table--highlight'))).not.toBeNull();
+    expect(fixture.debugElement.query(By.css('div.ki-pricing-table--selected'))).not.toBeNull();
   });
 });

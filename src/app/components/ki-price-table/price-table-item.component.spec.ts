@@ -84,4 +84,14 @@ describe('Component: PriceTableItem', () => {
 
     expect(el).not.toBeNull();
   });
+
+  it('should display selected item when selected flag is true', () => {
+    comp.selected = true;
+    fixture.detectChanges();
+
+    let inputDe = fixture.debugElement.query(By.css('div.ki-pricing-table--selected'));
+    let el = inputDe.nativeElement;
+
+    expect(el).not.toBeNull();
+  });
 });
