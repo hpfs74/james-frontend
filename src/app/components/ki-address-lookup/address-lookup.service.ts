@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AddressLookupService {
 
-  constructor() { }
+  constructor() {
+    // here goes the construct
+  }
 
   public lookUp(postalCode: string, addressNumber: string): Observable<any> {
     return null;
