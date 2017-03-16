@@ -151,9 +151,10 @@ button.ki-btn-primary {
     background-color: $knab-primary-dark-green;
     border-color: $knab-primary-grey;
   }
-  &.disabled {
+  &:disabled {
     color: #fff;
     background: $knab-disabled-grey;
+    cursor: not-allowed;
   }
 }
 
