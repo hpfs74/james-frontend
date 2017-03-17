@@ -1,0 +1,12 @@
+{
+  "app": {
+    "enableProdMode": false,
+    "name": "config.json"
+  },
+  "api": {
+    "nicciProxy": {
+      "auth": "https://arb0oitf38.execute-api.eu-west-1.amazonaws.com/test/auth"
+    },
+    "external": {}
+  }
+}

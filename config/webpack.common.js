@@ -262,6 +262,7 @@ module.exports = function (options) {
       new CopyWebpackPlugin([
         { from: 'src/assets', to: 'assets' },
         { from: 'src/content', to: 'content' },
+        { from: 'config/api', to: 'config/api' }
       ]),
 
 

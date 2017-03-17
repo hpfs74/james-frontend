@@ -3,11 +3,17 @@
  */
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { bootloader } from '@angularclass/hmr';
+import { enableProdMode } from '@angular/core';
+
 /*
  * App Module
  * our top level module that holds all of our components
  */
 import { AppModule } from './app/app.module';
+
+if (process.env.ENV === 'production') {
+  enableProdMode();
+}
 
 /*
  * Bootstrap our Angular app with a top level NgModule
