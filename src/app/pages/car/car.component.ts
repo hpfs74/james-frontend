@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Vehicle } from '../../models/vehicle';
+import { ConfigService } from '../../config.service';
+import { InsuranceService } from '../../services/insurance.service';
+
+import { Car } from '../../models/car';
 import { ChatMessage } from '../../models/chat-message';
 import { Price } from '../../models/price';
 import { ChatStreamComponent } from '../../components/ki-chat-stream/';
-import { ContentService } from '../../services/content.service';
-import { InsuranceService } from '../../services/insurance.service';
 
 @Component({
   selector: 'ki-car-page',
@@ -14,12 +15,12 @@ import { InsuranceService } from '../../services/insurance.service';
 })
 export class CarComponent implements OnInit {
   formControlOptions: any;
-  myCar: Vehicle;
+  myCar: Car;
   chatMessages: ChatMessage[] = [];
   coverages: Price[];
   formSteps: Array<any>;
 
-  constructor(private insuranceService: InsuranceService) {
+  constructor(private configService: ConfigService, private insuranceService: InsuranceService) {
   }
 
   ngOnInit() {

@@ -1,10 +1,11 @@
-import { Address } from './../../models/address';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { HomeComponent } from './home.component';
 import { OverviewComponent } from '../overview/overview.component';
+import { Address } from './../../models/address';
 
 const homeRoutes: Routes = [
   {
@@ -60,4 +61,11 @@ const homeRoutes: Routes = [
     RouterModule
   ]
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: HomeRoutingModule,
+      providers: [AuthService, AuthGuard]
+    };
+  }
+}

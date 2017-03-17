@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+
 import { LoginComponent } from './pages/login/login.component';
 import { LoginRoutingModule } from './pages/login/login-routing.module';
 
@@ -28,14 +31,14 @@ export function ConfigLoader(configService: ConfigService) {
   return () => configService.load('./config/api/config.json');
 }
 
-// NOTE: Ensure AppRoutingModule is always imported last!
+// !! Ensure AppRoutingModule is always imported last
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     SharedModule,
-    HomeModule,
+    HomeModule.forRoot(),
     LoginRoutingModule,
     AppRoutingModule,
   ],

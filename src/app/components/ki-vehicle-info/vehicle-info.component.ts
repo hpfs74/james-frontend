@@ -1,5 +1,5 @@
 import { Component, Input, trigger, state, style, transition, animate } from '@angular/core';
-import { Vehicle } from '../../models/vehicle';
+import { Car } from '../../models/car';
 
 @Component({
   selector: 'ki-vehicle-info',
@@ -41,7 +41,7 @@ import { Vehicle } from '../../models/vehicle';
   `
 })
 export class VehicleInfoComponent {
-  @Input() vehicle: Vehicle;
+  @Input() vehicle: Car;
   @Input() comment: string;
   @Input() state: string;
 }

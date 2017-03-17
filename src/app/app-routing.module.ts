@@ -39,8 +39,8 @@ export const routes: Routes = [
     RouterModule
   ],
   providers: [
-    AuthGuard,
-    AuthService
+    AuthService,
+    AuthGuard
   ]
 })
 export class AppRoutingModule { }

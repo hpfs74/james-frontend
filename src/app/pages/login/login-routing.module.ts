@@ -14,10 +14,6 @@ const loginRoutes: Routes = [
   ],
   exports: [
     RouterModule
-  ],
-  providers: [
-    AuthGuard,
-    AuthService
   ]
 })
 export class LoginRoutingModule { }

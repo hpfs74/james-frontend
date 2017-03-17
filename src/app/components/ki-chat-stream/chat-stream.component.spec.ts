@@ -7,7 +7,7 @@ import { AvatarComponent } from './../ki-avatar/avatar.component';
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
 import { ChatMessage } from '../../models/chat-message';
-import { Vehicle } from '../../models/vehicle';
+import { Car } from '../../models/car';
 
 describe('Component: ChatStreamComponent', () => {
   let comp: ChatStreamComponent;

@@ -23,16 +23,13 @@ import { AuthService } from './../../services/auth.service';
       <form [formGroup]="loginForm" (submit)="login($event)">
         <div class="row">
           <div class="col-md-6 offset-md-3">
-
-              <div class="fullwidth" ng-class="messageClass">{{ message }}</div>
-
               <cx-form-group [formControlName]='formGroupConfig[0].formControlName'
                 [options]="formGroupConfig[0]"></cx-form-group>
 
               <div class="login-password-wrapper">
                 <cx-form-group [formControlName]="formGroupConfig[1].formControlName"
                   [options]="formGroupConfig[1]"></cx-form-group>
-                <button *ngIf="loginForm.get('password').value" class="btn-show-password fa fa-eye" (click)="showPassword()"></button>
+                <button *ngIf="loginForm.get('password').value" class="btn-show-password fa fa-eye" (click)="showPassword($event)"></button>
               </div>
 
                 <button class="cx-button ki-btn-primary fullwidth"
@@ -42,7 +39,7 @@ import { AuthService } from './../../services/auth.service';
         </div>
           <div class="row">
           <div class="col-md-6 offset-md-3">
-            <div class="cx-message cx-message--error" *ngIf="submitted && !loginForm.valid && message">
+            <div class="cx-message cx-message--error" *ngIf="submitted && loginForm.valid && message">
                 <div class="cx-message__header">{{ messageTitle }}</div>
                 <div class="cx-message__content">{{ message }}
                 </div>
@@ -65,6 +62,9 @@ export class LoginComponent {
   formGroupConfig = [];
 
   constructor(private router: Router, private authService: AuthService) {
+    console.log('In login.component');
+    console.log(authService);
+
     this.initForm();
   }
 
@@ -101,7 +101,8 @@ export class LoginComponent {
     ];
   }
 
-  showPassword() {
+  showPassword(event) {
+    event.preventDefault();
     let passwordControl = this.formGroupConfig[1];
 
     passwordControl.inputOptions.type =
@@ -125,6 +126,8 @@ export class LoginComponent {
 
       this.authService.login(email.value, password.value).subscribe(() => {
         this.isPending = false;
+
+        console.log(this.authService);
 
         if (this.authService.isLoggedIn()) {
           this.messageTitle = 'Succes!';

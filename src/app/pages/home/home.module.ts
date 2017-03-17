@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 
 import { HomeRoutingModule } from './home.routing.module';
 import { HomeComponent } from './home.component';
+import { AuthService } from '../../services/auth.service';
+import { AuthGuard } from '../../services/auth-guard.service';
 
 // Layout components
 import { OverviewComponent } from '../overview/overview.component';
@@ -18,7 +20,7 @@ import { BreadCrumbComponent } from '../../components/ki-breadcrumb/breadcrumb.c
 @NgModule({
   imports: [
     SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule.forRoot()
   ],
   declarations: [
     HomeComponent,
@@ -28,4 +30,11 @@ import { BreadCrumbComponent } from '../../components/ki-breadcrumb/breadcrumb.c
     OverviewComponent,
   ]
 })
-export class HomeModule { }
+export class HomeModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: HomeModule,
+      providers: [AuthService, AuthGuard]
+    };
+  }
+}

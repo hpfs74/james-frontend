@@ -17,12 +17,11 @@ import { LoginComponent } from './pages/login/login.component';
 @Component({
   selector: 'ki-app',
   template: `<router-outlet></router-outlet>`,
-  providers: [AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService],
+  providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService],
   //changeDetection: ChangeDetectionStrategy.OnPush
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  config: ConfigInterface;
   isLoading: boolean = true;
 
   constructor(private configService: ConfigService, private authService: AuthService) {
@@ -30,9 +29,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = false;
-    this.config = this.configService.config;
-
-    console.log('Configurations: ' + JSON.stringify(this.config));
+    console.log('Configurations: ' + JSON.stringify(this.configService.config));
   }
-
 }
