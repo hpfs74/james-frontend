@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { ConfigService } from './../config.service';
 
 @Injectable()
 export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
   private loggedIn = false;
-  private baseUrl : string = 'https://arb0oitf38.execute-api.eu-west-1.amazonaws.com/test';
+  private baseUrl: string;
 
-  constructor(private http: Http) {
-
+  constructor(private http: Http, private configService: ConfigService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
+    this.baseUrl = configService.config.api.nicciProxy.auth;
   }
 
   /**
@@ -22,10 +23,8 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-
-
     return this.http
-      .post(this.baseUrl + '/auth/login', JSON.stringify({ username: email, password: password }), { headers })
+      .post(this.baseUrl + '/login', JSON.stringify({ username: email, password: password }), { headers })
       .map(res => res.json())
       .map((res) => {
         console.log('REQ HERE', res);

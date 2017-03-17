@@ -20,7 +20,7 @@ import { UserDetailComponent } from './../ki-user-detail/user-detail.component';
     <div class="row">
       <div class="col-md-4 col-sm-4 col-xs-9">
         <div class="logo">
-          <a href="/"><img src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab"></a>
+          <a routerLink=""><img src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab"></a>
         </div>
       </div>
       <ul class="nav navbar-nav list-inline">

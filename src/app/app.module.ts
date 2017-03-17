@@ -1,4 +1,7 @@
-import { NgModule } from '@angular/core';
+import { ConfigInterface } from './config.interface';
+import { ConfigService } from './config.service';
+
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -20,6 +23,11 @@ import { HomeModule } from './pages/home/home.module';
 // Styles 'barrel'
 import '../styles/styles.scss';
 
+// Needed because app initializer doesn't work with anonymous function
+export function ConfigLoader(configService: ConfigService) {
+  return () => configService.load('./config/api/config.json');
+}
+
 // NOTE: Ensure AppRoutingModule is always imported last!
 @NgModule({
   imports: [
@@ -36,8 +44,18 @@ import '../styles/styles.scss';
     LoginComponent,
     CookiesPageComponent,
   ],
-  bootstrap: [AppComponent]
+  providers: [
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ConfigLoader,
+      deps: [ConfigService],
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
 })
+
 export class AppModule {
   // Diagnostic only: inspect router configuration
   constructor(router: Router) {
