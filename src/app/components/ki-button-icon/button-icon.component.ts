@@ -5,7 +5,8 @@ import { Component, Input } from '@angular/core';
   template: `
   <div class="ki-button-icon">
     <button class="button-circle">
-        <span class="button-icon fa fa-lg {{ icon }}"></span>
+        <img class="button-icon" src="/assets/images/icon-car.svg">
+        <!-- <ng-content></ng-content> -->
     </button>
     <span *ngIf="label" class="button-label">{{ label }}</span>
   </div>
