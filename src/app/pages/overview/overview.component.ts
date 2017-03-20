@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
       <div class="row">
         <div class="col-md-12 col-sm-12">
           <ki-button-icon label="Opstal" icon="fa-home"></ki-button-icon>
-          <ki-button-icon label="Aansprakelijkheid" icon="fa-legal"></ki-button-icon>
+          <ki-button-icon label="Aansprakelijkheid" icon="fa-legal" isPlaceholder="true"></ki-button-icon>
         </div>
       </div>
     </div>

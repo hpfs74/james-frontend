@@ -23,6 +23,16 @@
   }
 }
 
+.ki-button-icon--placeholder .button-circle {
+  background: #fff;
+  border: 4px dashed $knab-primary-grey;
+
+  &:hover {
+    border: 4px dashed $knab-primary-blue;
+  }
+}
+
+
 .button-icon {
   width: 80px;
   color: $knab-primary-blue;
