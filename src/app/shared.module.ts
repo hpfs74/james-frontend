@@ -8,9 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CXInputComponent, TextMaskModule } from '../../node_modules/@cx/input';
 import { CXSelectComponent } from '../../node_modules/@cx/select';
 import { CXCheckboxComponent } from '../../node_modules/@cx/checkbox';
+import { CXFileUploadComponent } from '../../node_modules/@cx/file-upload';
 import { CXRadioComponent } from '../../node_modules/@cx/radio';
 import { CXFormGroupComponent } from '../../node_modules/@cx/form-group';
 import { CXSliderComponent } from '../../node_modules/@cx/slider';
+import { CXTextareaComponent } from '../../node_modules/@cx/textarea';
 
 /**
  * Shared module for all generic components
@@ -50,9 +52,11 @@ export const cxComponents = [
   CXInputComponent,
   CXSelectComponent,
   CXCheckboxComponent,
+  CXFileUploadComponent,
   CXRadioComponent,
   CXSliderComponent,
-  CXFormGroupComponent
+  CXFormGroupComponent,
+  CXTextareaComponent
 ];
 
 @NgModule({
