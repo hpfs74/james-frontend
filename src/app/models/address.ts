@@ -3,15 +3,15 @@
  * Class definition for address type used by user profile
  */
 export class Address {
-  postalCode: string;
-  addressNumber: string;
-  addressNumberExtension: string;
+  postcode: string;
   street: string;
+  //addressNumberExtension: string;
   city: string;
-  country: string;
+  county: string;
   province: string;
-  geolocation: {
+  fullname: string;
+  location: {
     lat: number,
-    long: number
+    lng: number
   };
 }

@@ -29,6 +29,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = false;
-    console.log('Configurations: ' + JSON.stringify(this.configService.config));
+    console.log('Configuration loaded: ' + JSON.stringify(this.configService.config));
   }
 }

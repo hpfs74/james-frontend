@@ -17,23 +17,11 @@ export interface ConfigAPIInterface {
 
 export interface NicciEndpoint {
   auth?: string;
+  address?: string;
+  profile?: string;
+  car?: string;
+  travel?: string;
+  liability?: string;
+  content?: string;
+  home?: string;
 }
-
-// @Injectable()
-// export class AppConfig {
-//   ready: boolean = false;
-//   config: ConfigInterface;
-
-//   getInstance(cfg: ConfigInterface) {
-//     this.config = cfg;
-//     this.ready = true;
-//     return this;
-//   }
-//   getConfig(): ConfigInterface {
-//     if (this.ready) {
-//       return this.config;
-//     } else {
-//       throw Error('Config not set');
-//     }
-//   }
-// }

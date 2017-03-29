@@ -5,7 +5,8 @@
   },
   "api": {
     "nicciProxy": {
-      "auth": "https://arb0oitf38.execute-api.eu-west-1.amazonaws.com/test/auth"
+      "auth": "https://arb0oitf38.execute-api.eu-west-1.amazonaws.com/test/auth",
+      "address": "http://localhost:10010/v1/address/"
     },
     "external": {}
   }

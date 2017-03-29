@@ -10,12 +10,10 @@ export class AuthService implements OnInit {
   private baseUrl: string;
 
   constructor(private http: Http, private configService: ConfigService) {
-    console.log('AuthService created');
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
   }
 
   ngOnInit() {
-    console.log('Oninit Auth');
     this.baseUrl = this.configService.config.api.nicciProxy.auth;
     console.log(this.baseUrl);
   }
@@ -30,7 +28,6 @@ export class AuthService implements OnInit {
     headers.append('Content-Type', 'application/json');
 
     //TODO: handle success based on status codes
-
     return this.http
       .post(this.baseUrl + '/login', JSON.stringify({ username: email, password: password }), { headers })
       .map((res: Response) => {

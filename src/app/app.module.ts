@@ -40,7 +40,7 @@ export function ConfigLoader(configService: ConfigService) {
     SharedModule,
     HomeModule.forRoot(),
     LoginRoutingModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,

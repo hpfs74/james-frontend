@@ -16,8 +16,8 @@ import { GeolocationService } from '../../services/geolocation.service';
 })
 export class AddressLookupComponent implements OnInit {
   @Input() address: Address;
-  @Input() showAddress: boolean = false;
-  @Input() addressFormGroup: any;
+  @Input() showAddress: boolean = true;
+  @Input() addressFormGroup: FormGroup;
 
   public inputMasks = InputMasks;
   public validationErrors;
@@ -29,17 +29,24 @@ export class AddressLookupComponent implements OnInit {
   }
 
   ngOnInit() {
-    return;
+    this.addressFormGroup.get('postalCode').disable();
+    console.log(this.addressFormGroup.get('postalCode').disabled);
   }
 
-  addressBlur(postalCode: string, addressNumber: string) {
-    let formData = this.addressFormGroup.data.value;
+  addressBlur(event) {
+    let postalCode = this.addressFormGroup.get('postalCode').value;
+    let number = this.addressFormGroup.get('addressNumber').value;
 
-    // Fields valid?
+    console.log(postalCode);
+
+    if (!postalCode && !number) {
+      return;
+    }
+
     if (this.addressFormGroup.get('postalCode').valid && this.addressFormGroup.get('addressNumber').valid) {
-      this.addressService.lookupAddress(formData.postalCode, formData.addressNumber)
+      this.addressService.lookupAddress(postalCode, number)
         .subscribe(res => {
-          console.log('postal code lookup', res);
+          console.log('postal code lookup response', res);
           // Lookup OK
           this.addressFormGroup.get('addressStreet').disable();
           this.addressFormGroup.get('addressCity').disable();

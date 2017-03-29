@@ -11,10 +11,11 @@
             }"></cx-form-group>
     </div>
     <div class="col-md-4">
-      <cx-form-group formControlName="addressNumber" (blur)="addressBlur(postalCode, addressNumber)" [options]="{
+      <cx-form-group formControlName="addressNumber" (focusout)="addressBlur($event)" [options]="{
         formControl: addressFormGroup.get('addressNumber'),
         label: 'Huisnummer',
-        validationErrors: validationErrors
+        validationErrors: validationErrors,
+        events: ['blur']
       }"></cx-form-group>
     </div>
 
@@ -27,13 +28,19 @@
   <cx-form-group *ngIf="showAddress" formControlName="addressStreet" [options]="{
         formControl: addressFormGroup.get('addressStreet'),
         validationErrors: validationErrors,
-        label: 'Straatnaam'
+        label: 'Straatnaam',
+        inputOptions: {
+          disabled: true
+        }
       }"></cx-form-group>
 
   <!-- pre-filled -->
   <cx-form-group *ngIf="showAddress" formControlName="addressCity" [options]=" {
         formControl: addressFormGroup.get('addressCity'),
         validationErrors: validationErrors,
-        label: 'Plaats'
+        label: 'Plaats',
+        inputOptions: {
+          disabled: true
+        }
       }"></cx-form-group>
 </div>

@@ -22,6 +22,9 @@ npm install --scripts-prepend-node-path=false
 echo "#### Npm Lint"
 npm run lint
 
+echo "#### Vuln check on node modules (nsp)"
+npm run security
+
 echo "#### Npm Build"
 npm run build
 
