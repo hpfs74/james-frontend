@@ -164,6 +164,11 @@
       "from": "@cx/utils@1.4.0",
       "resolved": "https://swfactory.aegon.com/artifactory/api/npm/npm/@cx/utils/-/@cx/utils-1.4.0.tgz"
     },
+    "@knx/base": {
+      "version": "0.0.1",
+      "from": "@knx/base@latest",
+      "resolved": "https://knab-npm.ddns.net/@knx%2fbase/-/base-0.0.1.tgz"
+    },
     "@ngrx/core": {
       "version": "1.2.0",
       "from": "@ngrx/core@>=1.2.0 <2.0.0",

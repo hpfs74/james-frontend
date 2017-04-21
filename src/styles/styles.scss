@@ -4,14 +4,12 @@
 @import 'fonts';
 @import 'icons';   //@TODO replace icon font with svg icons
 @import 'utils';
-//@import 'reboot';
-@import 'base';
 @import 'layout';
 @import 'grid';
 
 /* import shared library styles */
+@import '../../node_modules/@knx/base/index';
 @import '../../node_modules/@cx/base/index';
-//@import '../../node_modules/@cx/grid/index';
 
 
 /* page component styles */
@@ -28,7 +26,6 @@
 @import '../app/components/ki-navigation/navbar.component';
 @import '../app/components/ki-navigation/footer.component';
 @import '../app/components/ki-price-table/price-table.component';
-@import '../app/components/ki-button-icon/button-icon.component';
 @import '../app/components/ki-spinner/spinner.component';
 @import '../app/components/ki-user-detail/user-detail.component';
 @import '../app/components/ki-vehicle-info/vehicle-info.component';

@@ -89,6 +89,7 @@
     "@cx/slider": "0.4.2",
     "@cx/textarea": "0.2.0",
     "@cx/utils": "1.4.0",
+    "@knx/base": "0.0.1",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "@types/es6-shim": "^0.31.32",

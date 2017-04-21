@@ -3,12 +3,12 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'ki-button-icon',
   template: `
-  <div class="ki-button-icon" [class.ki-button-icon--placeholder]="isPlaceholder">
-    <button class="button-circle">
-        <img class="button-icon" src="/assets/images/icon-car.svg">
-        <!-- <ng-content></ng-content> -->
+   <div class="knx-button-icon" [class.ki-button-icon--placeholder]="isPlaceholder">
+    <button class="knx-button-icon__circle">
+        <img class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
+        <!-- <ng-content><knx-icon></knx-icon></ng-content> -->
     </button>
-    <span *ngIf="label" class="button-label">{{ label }}</span>
+    <span *ngIf="label" class="knx-button-icon__label">{{ label }}</span>
   </div>
   `
 })
