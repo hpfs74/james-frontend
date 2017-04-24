@@ -8,6 +8,7 @@ import { Price } from '../../models/price';
     <knx-price-table-item
         *ngFor="let item of items; let i = index"
         [header]="item.header"
+        [badge]="item.badge"
         [price]="item.price"
         [highlight]="item.highlight"
         [selected]="item.selected"

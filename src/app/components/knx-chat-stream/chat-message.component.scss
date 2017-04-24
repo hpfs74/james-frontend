@@ -1,30 +1,31 @@
 .knx-chat-message {
-  background: $knab-white;
-  color: $knab-primary-blue;
+  position: relative;
+  border-radius: 5px;
+  margin: 20px 0 5px;
+  padding: 15px 0;
+  color: $knab-white;
   font-size: 16px;
   font-family: $baseFontFamily;
-  border-radius: 10px;
-  padding: 15px 0;
-  margin: 20px 0;
-  max-width: 250px;
-  box-shadow: 0px 5px 10px 1px #ccc;
+  background: $knab-primary-green;
 }
+
 .knx-chat-message:first-child:before {
+  position: absolute;
   content: '';
   width: 0;
   height: 0;
+  top: -10px;
+  right: 32px;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-bottom: 10px solid #fff;
-  position: absolute;
-  margin-top: -25px;
-  margin-left: 25px;
+  border-bottom: 10px solid $knab-primary-green;
 }
+
 .knx-chat-message-datetime {
   display: block;
-  font-size: 11px;
-  color: $knab-dark-grey;
-  margin-top: 0.2em;
   float: right;
+  font-size: 11px;
+  margin-top: 0.2em;
+  color: $knab-dark-grey;
   opacity: 0.7;
 }

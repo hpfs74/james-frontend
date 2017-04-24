@@ -11,6 +11,7 @@
 export class Price {
   header: string;
   price: number;
+  badge: string;
   /**
    * @description
    * List of features

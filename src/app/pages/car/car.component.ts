@@ -45,7 +45,11 @@ export class CarComponent implements OnInit {
   }
 
   addMessage() {
-    this.chatMessages.push({ type: 'text', content: 'Hello this is me!' });
+    this.chatMessages.push({
+      type: 'text',
+      content: 'Hoi! Ik ben Anupama. ' +
+      'Ik ga je vandaag helpen <b>besparen</b> op je auto-verzekering. ' +
+      'Ben je er klaar voor? Let\'s do this!'});
   }
 
   clearMessages() {

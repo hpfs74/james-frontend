@@ -8,6 +8,7 @@ export class InsuranceService {
     return [
       {
         header: 'WA',
+        badge: 'ons advies',
         features: [
           'Schade door vandalisme',
           'Schade door eigen schuld'
@@ -16,6 +17,7 @@ export class InsuranceService {
       },
       {
         header: 'WA + Casco',
+        badge: 'ons advies',
         features: [
           'Brand en storm',
           'Ruitschade',
@@ -27,6 +29,7 @@ export class InsuranceService {
       },
       {
         header: 'WA limited',
+        badge: 'ons advies',
         features: [
           'Schade door anderen',
           'Diefstal',

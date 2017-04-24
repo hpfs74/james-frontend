@@ -18,7 +18,7 @@
   padding-bottom: 10px;
 
   &:hover {
-    outline: 4px solid  $knab-primary-grey;
+    outline-width: 4px;
     cursor: pointer;
   }
 }
@@ -30,17 +30,38 @@
 }
 
 .knx-pricing-table-header {
+  margin: 0 0 15px 0;
+  padding: 10px;
   font-size: $baseFontSize + 2;
   font-weight: bold;
   text-align: center;
-  margin: 0;
-  padding: 20px;
-  margin-bottom: 15px;
 }
 
-.knx-pricing-table--highlight .knx-pricing-table-header {
-  color: $knab-white;
-  background: $knab-primary-green;
+.knx-pricing-table--highlight{
+  position: relative;
+  outline-color: $knab-primary-green;
+  outline-width: 2px;
+
+  .knx-pricing-table-header {
+    color: $knab-white;
+    background: $knab-primary-green;
+  }
+
+  .knx-pricing-table-badge{
+    position: absolute;
+    top: -27px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 10px 5px;
+    color: $knab-dark-green;
+    font-size: 10px;
+    font-weight: normal;
+    text-align: center;
+    line-height: 9px;
+    background: $knab-primary-yellow;
+    border-radius: 50%;
+  }
 }
 
 /* selected state */
@@ -54,15 +75,21 @@
 }
 
 .knx-pricing-table-features {
-  padding: 0 20px;
+  padding: 0 16px;
   list-style-type: none;
 
   & > * {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+
+    .knx-pricing-table-text{
+      padding-left: 22px;
+    }
 
     .icon {
+      float: left;
       margin-top: 0;
       margin-right: 6px;
+      line-height: 1.3;
       font-size: $baseFontSize;
       color: $knab-primary-green;
     }
@@ -76,8 +103,8 @@
 }
 
 .knx-pricing-table-amount {
-  font-size: $baseFontSize + 2;
-  font-weight: 400;
+  font-size: $baseFontSize + 5;
+  font-weight: bold;
   margin-left: 10px;
 }
 

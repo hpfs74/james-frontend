@@ -9,9 +9,9 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
         <div class='col-md-12 col-sm-12'>
           <div #ref><ng-content></ng-content></div>
           <ng-container *ngIf="ref.childNodes.length == 0">
-            {{ message }}
+            <div [innerHtml]="message"></div>
           </ng-container>
-          <div class="knx-chat-message-datetime">{{ getMessageDate() | date:'shortTime' }}</div>
+          <!--<div class="knx-chat-message-datetime">{{ getMessageDate() | date:'shortTime' }}</div>-->
         </div>
       </div>
     </div>

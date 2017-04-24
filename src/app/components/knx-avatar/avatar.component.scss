@@ -2,17 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 15px;
 }
 
 .knx-avatar-image {
-  max-width: 90px;
-  margin-right: auto;
+  max-width: 80px;
 }
 
 .knx-avatar-image img {
   width: 100%;
   border: 3px solid #fff;
+  border-radius: 50%;
 }
 
 .knx-avatar-detail {

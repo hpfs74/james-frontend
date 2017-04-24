@@ -13,10 +13,10 @@
 
 .breadcrumb ul {
   list-style-type: none;
-  padding: 15px 15px 15px 0;
+  padding: 12px 15px 14px 0;
   margin-bottom: 0;
   color: $knab-white;
-  font-size: 22px;
+  font-size: $baseFontSize;
   font-family: $knab-font-family-headings;
   font-weight: 700;
   text-transform: uppercase;
