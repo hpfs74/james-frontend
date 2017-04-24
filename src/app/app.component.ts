@@ -15,7 +15,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 
 @Component({
-  selector: 'ki-app',
+  selector: 'knx-app',
   template: `<router-outlet></router-outlet>`,
   providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService],
   //changeDetection: ChangeDetectionStrategy.OnPush

@@ -21,8 +21,8 @@ export class Section {
  * @name
  * Nav
  * @description
- * Describe a navigation link /// <reference path="ki-footer" />
- * and also /// <reference path="ki-navbar" />
+ * Describe a navigation link /// <reference path="knx-footer" />
+ * and also /// <reference path="knx-navbar" />
    require('./footer.component.html')
  */
 export class Nav {

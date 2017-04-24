@@ -1,0 +1,34 @@
+.knx-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.knx-avatar-image {
+  max-width: 90px;
+  margin-right: auto;
+}
+
+.knx-avatar-image img {
+  width: 100%;
+  border: 3px solid #fff;
+}
+
+.knx-avatar-detail {
+  font-family: $knab-font-family-secondary;
+  margin-right: auto;
+  width: 50%;
+
+  .knx-avatar-name {
+    color: $knab-primary-blue;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 3px;
+  }
+  .knx-avatar-title {
+    color: $knab-primary-blue;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

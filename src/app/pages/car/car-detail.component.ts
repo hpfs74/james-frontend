@@ -7,7 +7,7 @@ import { CarDetailForm } from './car-detail.form';
 import { Price } from '../../models/price';
 
 @Component({
-  selector: 'ki-car-detail-form',
+  selector: 'knx-car-detail-form',
   templateUrl: 'car-detail.component.html',
 })
 export class CarDetailComponent implements OnInit {

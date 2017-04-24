@@ -6,24 +6,24 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
 
 @Component({
   template: `
-  <ki-cookiebar></ki-cookiebar>
+  <knx-cookiebar></knx-cookiebar>
   <header class="header">
-    <ki-navbar [menuItems]="topMenu">
-        <ki-user-detail [isLoggedIn]="isLoggedIn" (logOut)="logOut()"></ki-user-detail>
-    </ki-navbar>
+    <knx-navbar [menuItems]="topMenu">
+        <knx-user-detail [isLoggedIn]="isLoggedIn" (logOut)="logOut()"></knx-user-detail>
+    </knx-navbar>
   </header>
 
   <div class="container-fluid container--fullwidth">
-    <ki-breadcrumb></ki-breadcrumb>
+    <knx-breadcrumb></knx-breadcrumb>
   </div>
 
   <div class="container main-container">
-    <ki-spinner [visible]="isLoading"></ki-spinner>
+    <knx-spinner [visible]="isLoading"></knx-spinner>
     <router-outlet></router-outlet>
   </div>
 
   <!-- footer is a features block -->
-  <ki-features [items]="footerItems"></ki-features>
+  <knx-features [items]="footerItems"></knx-features>
   `
 })
 export class HomeComponent implements OnInit {

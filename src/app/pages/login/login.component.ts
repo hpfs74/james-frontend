@@ -12,11 +12,11 @@ import { AuthService } from './../../services/auth.service';
  * @class LoginComponent
  */
 @Component({
-  selector: 'ki-login',
+  selector: 'knx-login',
   template: `
     <div class="container">
       <div class="row">
-        <div class="ki-login-welcome">
+        <div class="knx-login-welcome">
         </div>
       </div>
 
@@ -32,7 +32,7 @@ import { AuthService } from './../../services/auth.service';
                 <button *ngIf="loginForm.get('password').value" class="btn-show-password fa fa-eye" (click)="showPassword($event)"></button>
               </div>
 
-                <button class="cx-button ki-btn-primary fullwidth"
+                <button class="cx-button knx-btn-primary fullwidth"
                   [class.cx-button--pending]="isPending" [disabled]="!loginForm.valid || isPending">
                   Inloggen</button>
           </div>

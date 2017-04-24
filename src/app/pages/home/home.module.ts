@@ -8,8 +8,8 @@ import { AuthGuard } from '../../services/auth-guard.service';
 
 // Layout components
 import { OverviewComponent } from '../overview/overview.component';
-import { NavbarComponent, FooterComponent } from '../../components/ki-navigation';
-import { BreadCrumbComponent } from '../../components/ki-breadcrumb/breadcrumb.component';
+import { NavbarComponent, FooterComponent } from '../../components/knx-navigation';
+import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.component';
 
 /**
  * Home is the container module for all feature modules that are available after logging in

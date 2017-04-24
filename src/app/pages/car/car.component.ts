@@ -6,10 +6,10 @@ import { InsuranceService } from '../../services/insurance.service';
 import { Car } from '../../models/car';
 import { ChatMessage } from '../../models/chat-message';
 import { Price } from '../../models/price';
-import { ChatStreamComponent } from '../../components/ki-chat-stream/';
+import { ChatStreamComponent } from '../../components/knx-chat-stream/';
 
 @Component({
-  selector: 'ki-car-page',
+  selector: 'knx-car-page',
   styleUrls: ['car.component.scss'],
   templateUrl: 'car.component.html'
 })
