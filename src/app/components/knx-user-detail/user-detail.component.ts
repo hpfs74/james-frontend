@@ -4,12 +4,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   selector: 'knx-user-detail',
   template: `
     <div class="knx-user-detail">
-      <button *ngIf="!isLoggedIn" class="cx-button cx-button--link">
+      <a href="#" *ngIf="!isLoggedIn">
         <span class="icon fa fa-user"></span> Inloggen
-      </button>
-      <button *ngIf="isLoggedIn" class="cx-button cx-button--link" (click)="logout()">
+      </a>
+      <a href="#" *ngIf="isLoggedIn" (click)="logout()">
         <span class="icon fa fa-user"></span> Uitloggen
-      </button>
+      </a>
     </div>
   `
 })

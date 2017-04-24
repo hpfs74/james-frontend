@@ -25,7 +25,18 @@ import { UserDetailComponent } from './../knx-user-detail/user-detail.component'
       </div>
       <ul class="nav navbar-nav list-inline">
         <li class="navbar-nav__menu-item" *ngFor="let item of menuItems; let i = index">
-          <a id="{{ item.id }}" routerLink="{{ item.routePath }}" routerLinkActive="active">{{ item.title }}</a>
+          <a id="{{ item.id }}"
+             routerLink="{{ item.routePath }}"
+             routerLinkActive="active">
+            {{ item.title }}
+          </a>
+        </li>
+        
+        <li>
+          <a id="{{ phone.id }}"
+             href="{{ phone.link }}">
+            {{ phone.title }}
+          </a>
         </li>
       </ul>
       <ul class="nav nav-pills pull-right">
@@ -35,6 +46,8 @@ import { UserDetailComponent } from './../knx-user-detail/user-detail.component'
   </div>
 </nav>`,
 })
+
 export class NavbarComponent {
   @Input() menuItems: Array<Nav>;
+  @Input() phone: Object;
 }

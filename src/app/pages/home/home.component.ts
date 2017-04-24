@@ -8,7 +8,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
   template: `
   <knx-cookiebar></knx-cookiebar>
   <header class="header">
-    <knx-navbar [menuItems]="topMenu">
+    <knx-navbar [menuItems]="topMenu" [phone]="phone">
         <knx-user-detail [isLoggedIn]="isLoggedIn" (logOut)="logOut()"></knx-user-detail>
     </knx-navbar>
   </header>
@@ -17,7 +17,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
     <knx-breadcrumb></knx-breadcrumb>
   </div>
 
-  <div class="container main-container">
+  <div class="main-container">
     <knx-spinner [visible]="isLoading"></knx-spinner>
     <router-outlet></router-outlet>
   </div>
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
   prices: Array<Price>;
   topMenu: Array<Nav>;
+  phone: Object;
   footerItems: Array<Feature>;
 
   constructor(
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.prices = this.insuranceService.getPrices();
     this.topMenu = this.navigationService.getMenu();
+    this.phone = this.navigationService.getPhone();
     this.footerItems = this.featureService.getFeatures();
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();

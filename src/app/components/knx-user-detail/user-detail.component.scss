@@ -1,12 +1,9 @@
-.knx-user-detail button.cx-button {
-  font-size: 16px;
-  color: $knab-dark-grey;
-  padding-bottom: 0px;
-  line-height: 1.7em;
+.knx-user-detail a {
+  line-height: 3;
+  text-decoration: none;
+  font-weight: normal;
 }
 
 .knx-user-detail .icon {
-  float: left;
-  color: $knab-dark-grey;
   margin-top: 5px;
 }

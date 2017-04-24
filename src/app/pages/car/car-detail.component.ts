@@ -21,7 +21,6 @@ export class CarDetailComponent implements OnInit {
   };
 
   @Input() userProfile: any;
-  @Input() steps: any[];
   @Input() config: any;
   @Input() coverages: Price[];
 

@@ -1,3 +1,4 @@
+@import "variables";
 /**
  * Layout related styles for containers and spacings etc.
  */
@@ -11,8 +12,42 @@
   padding-right: 0;
 }
 
-.cx-step-navigation {
-  margin: 40px 0 30px 0;
+.panel-grey{
+  background: $knab-primary-grey;
+}
+
+//TODO: overrides to be merged in KNX Pattern library
+.container--fullwidth .cx-step-navigation {
+  padding: 18px 0;
+
+  .cx-step-navigation__step{
+    font-size: $baseFontSize - 2;
+    font-weight: bold;
+    margin-right: 40px;
+
+    &:before{
+      margin-right: 6px;
+      color: $knab-medium-grey;
+      font-family: 'FontAwesome';
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.6;
+      background: $knab-white;
+      box-shadow: 0 0 0 3px $knab-medium-grey inset;
+      content: "\f023";
+    }
+
+    &.cx-step-navigation__step--current{
+      color: $knab-primary-green;
+
+      &:before{
+        color: $knab-primary-green;
+        background: $knab-white;
+        box-shadow: 0 0 0 3px $knab-primary-green inset;
+        content: "\f040";
+      }
+    }
+  }
 }
 
 .container--flat {

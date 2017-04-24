@@ -4,7 +4,7 @@ import { Feature } from '../../models/feature';
 @Component({
   selector: 'knx-features',
   template: `
-  <div class="container-fluid container--fullwidth container-features">
+  <div class="container-fluid container--fullwidth panel-grey">
     <div class="container container-features-inner">
       <div class="feature" *ngFor="let item of items">
         <div class="feature-title">{{ item.title }}</div>
