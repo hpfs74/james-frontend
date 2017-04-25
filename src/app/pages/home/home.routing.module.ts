@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { HomeComponent } from './home.component';
-import { OverviewComponent } from '../overview/overview.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 import { Address } from './../../models/address';
 
 const homeRoutes: Routes = [
@@ -16,7 +16,7 @@ const homeRoutes: Routes = [
       {
         path: '',
         canActivateChild: [AuthGuard],
-        component: OverviewComponent,
+        component: DashboardComponent,
         data: {
           breadcrumb: 'Overzicht'
         }
@@ -29,7 +29,7 @@ const homeRoutes: Routes = [
       {
         path: 'profile',
         canActivateChild: [AuthGuard],
-        component: OverviewComponent, //UserProfileComponent
+        component: DashboardComponent, //UserProfileComponent
         data: {
           breadcrumb: 'Mijn account'
         }
@@ -37,7 +37,7 @@ const homeRoutes: Routes = [
       {
         path: 'faq',
         canActivateChild: [AuthGuard],
-        component: OverviewComponent, //FaqComponent
+        component: DashboardComponent, //FaqComponent
         data: {
           breadcrumb: 'FAQ'
         }
@@ -45,7 +45,7 @@ const homeRoutes: Routes = [
       {
         path: 'about',
         canActivateChild: [AuthGuard],
-        component: OverviewComponent, //AboutComponent
+        component: DashboardComponent, //AboutComponent
         data: {
           breadcrumb: 'Over ons'
         }

@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   template: `
    <div class="knx-button-icon" [class.knx-button-icon--placeholder]="isPlaceholder">
     <button class="knx-button-icon__circle">
-        <img class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
+        <ng-content></ng-content>
         <!-- <ng-content><knx-icon></knx-icon></ng-content> -->
     </button>
     <span *ngIf="label" class="knx-button-icon__label">{{ label }}</span>

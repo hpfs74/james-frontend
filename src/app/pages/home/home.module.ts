@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 
 // Layout components
-import { OverviewComponent } from '../overview/overview.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 import { NavbarComponent } from '../../components/knx-navigation';
 import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.component';
 
@@ -26,7 +26,7 @@ import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.
     HomeComponent,
     BreadCrumbComponent,
     NavbarComponent,
-    OverviewComponent,
+    DashboardComponent,
   ]
 })
 export class HomeModule {
