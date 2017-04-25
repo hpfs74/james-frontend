@@ -1,0 +1,26 @@
+<div class="formgroup-address-lookup" [formGroup]="addressFormGroup">
+  <div class="row">
+    <div class="col-md-6">
+      <cx-form-group formControlName="userName" [options]="{
+              formControl: addressFormGroup.get('postalCode'),
+              label: 'Postcode',
+              type: 'text',
+              textMask: inputMasks.postalCodeMask,
+              transform: inputMasks.postalCodeMask.decode,
+              validationErrors: validationErrors
+            }"></cx-form-group>
+    </div>
+    <div class="col-md-4">
+      <cx-form-group formControlName="password" (focusout)="addressBlur($event)" [options]="{
+        formControl: addressFormGroup.get('addressNumber'),
+        label: 'Huisnummer',
+        validationErrors: validationErrors,
+        events: ['blur']
+      }"></cx-form-group>
+    </div>
+
+    <div class="col-md-2">
+      <button class="cx-button knx-btn-primary btn-form-group" (click)="getLocationAddress()"><span class="icon fa fa-map-marker"></span></button>
+    </div>
+  </div>
+</div>
