@@ -13,7 +13,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
     </knx-navbar>
   </header>
 
-  <div class="container-fluid container--fullwidth">
+  <div class="container-fluid knx-container--fullwidth">
     <knx-breadcrumb></knx-breadcrumb>
   </div>
 

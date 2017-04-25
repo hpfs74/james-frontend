@@ -25,7 +25,7 @@ import { ButtonIconComponent } from './components/knx-button-icon/button-icon.co
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { ChatStreamComponent, ChatMessageComponent } from './components/knx-chat-stream';
 import { FeaturesComponent } from './components/knx-features/features.component';
-import { NavbarComponent, FooterComponent } from './components/knx-navigation';
+import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
 import { SpinnerComponent } from './components/knx-spinner/spinner.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';

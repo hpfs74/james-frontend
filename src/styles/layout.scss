@@ -3,25 +3,12 @@
  * Layout related styles for containers and spacings etc.
  */
 
-.container--fullwidth,
-.container.container--fullwidth,
-.container-fluid.container--fullwidth,
-.cx-container.container--fullwidth,
-.cx-container-fluid.container--fullwidth {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.panel-gray{
-  background: $knab-primary-gray;
-}
-
 //TODO: overrides to be merged in KNX Pattern library
 .container--fullwidth .cx-step-navigation {
   padding: 18px 0;
 
   .cx-step-navigation__step{
-    font-size: $baseFontSize - 2;
+    font-size: $font-size-base - 2;
     font-weight: bold;
     margin-right: 40px;
 
@@ -48,50 +35,4 @@
       }
     }
   }
-}
-
-.container--flat {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.main-container {
-}
-
-.mt0 {
-  margin-top: 0;
-}
-.mt10 {
-  margin-top: 10px;
-}
-.mb0 {
-  margin-bottom: 0;
-}
-.ml0 {
-  margin-left: 0;
-}
-.mr0 {
-  margin-right: 0;
-}
-.pt0 {
-  padding-top: 0;
-}
-.pb0 {
-  padding-bottom: 0;
-}
-.pl0 {
-  padding-left: 0;
-}
-.pr0 {
-  padding-right: 0;
-}
-.text-center {
-  text-align: center;
-}
-.fit {
-  max-width: 100%;
-}
-.fullwidth {
-  display: block;
-  width: 100%;
 }

@@ -90,7 +90,7 @@
     "@cx/slider": "0.4.2",
     "@cx/textarea": "0.2.0",
     "@cx/utils": "1.4.0",
-    "@knx/base": "2.1.1",
+    "@knx/base": "2.1.5",
     "@knx/grid": "0.0.3",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",

@@ -8,7 +8,7 @@ import { AuthGuard } from '../../services/auth-guard.service';
 
 // Layout components
 import { OverviewComponent } from '../overview/overview.component';
-import { NavbarComponent, FooterComponent } from '../../components/knx-navigation';
+import { NavbarComponent } from '../../components/knx-navigation';
 import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.component';
 
 /**
@@ -25,7 +25,6 @@ import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.
   declarations: [
     HomeComponent,
     BreadCrumbComponent,
-    FooterComponent,
     NavbarComponent,
     OverviewComponent,
   ]

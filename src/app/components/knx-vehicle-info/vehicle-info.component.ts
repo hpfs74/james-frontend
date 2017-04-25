@@ -4,7 +4,7 @@ import { Car } from '../../models/car';
 @Component({
   selector: 'knx-vehicle-info',
   template: `
-  <div class="container-fluid container--fullwidth">
+  <div class="container-fluid knx-container--fullwidth">
       Molto bello! Mooie auto die <strong>{{ vehicle.manufacturer }} {{ vehicle.name }} {{ vehicle.model }}</strong>
       <img class="knx-vehicle-info-car-preview" alt="vehicle image"
                 src="/assets/images/cars/{{ vehicle.manufacturer | lowercase }}/{{ vehicle.name | lowercase }}.jpg">

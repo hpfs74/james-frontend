@@ -16,8 +16,8 @@
   padding: 12px 15px 14px 0;
   margin-bottom: 0;
   color: $knab-white;
-  font-size: $baseFontSize;
-  font-family: $headFontFamily;
+  font-size: $font-size-base;
+  font-family: $font-family-head;
   font-weight: 700;
   text-transform: uppercase;
 
@@ -31,8 +31,8 @@
   text-decoration: none;
 
   &:before {
-    content: "\f054";
-    font-family: 'FontAwesome';
+    content: map-get($icons, chevron-right);
+    font-family: $font-family-icon;
     font-size: 16px;
     color: $knab-white;
     margin: 0 15px;
@@ -47,7 +47,7 @@
 .breadcrumb-home {
   color: $knab-white;
   text-decoration: none;
-  content: "\f015";
-  font-family: 'FontAwesome';
+  content: map-get($icons, home);
+  font-family: $font-family-icon;
   margin: 0 5px;
 }
