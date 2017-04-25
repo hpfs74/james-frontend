@@ -11,7 +11,7 @@
   position: absolute;
   top: 34px;
   right: 10px;
-  color: $knab-dark-grey;
+  color: $knab-dark-gray;
   font-size: 20px;
   border: 0;
   background: none;
@@ -27,6 +27,6 @@
   }
 
   &:active {
-    color: $knab-primary-grey;
+    color: $knab-primary-gray;
   }
 }

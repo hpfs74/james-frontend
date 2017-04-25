@@ -12,8 +12,8 @@
   padding-right: 0;
 }
 
-.panel-grey{
-  background: $knab-primary-grey;
+.panel-gray{
+  background: $knab-primary-gray;
 }
 
 //TODO: overrides to be merged in KNX Pattern library
@@ -27,13 +27,13 @@
 
     &:before{
       margin-right: 6px;
-      color: $knab-medium-grey;
+      color: $knab-medium-gray;
       font-family: 'FontAwesome';
       font-size: 14px;
       text-align: center;
       line-height: 1.6;
       background: $knab-white;
-      box-shadow: 0 0 0 3px $knab-medium-grey inset;
+      box-shadow: 0 0 0 3px $knab-medium-gray inset;
       content: "\f023";
     }
 
