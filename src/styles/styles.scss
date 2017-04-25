@@ -3,12 +3,11 @@
 @import 'variables';
 @import 'fonts';
 @import 'icons';   //@TODO replace icon font with svg icons
-@import 'utils';
 @import 'layout';
-@import 'grid';
 
 /* import shared library styles */
 @import '../../node_modules/@knx/base/index';
+@import '../../node_modules/@knx/grid/index';
 @import '../../node_modules/@cx/base/index';
 
 
@@ -17,7 +16,6 @@
 @import '../app/pages/login/login.component';
 
 /* component styles */
-@import '../app/components/knx-avatar/avatar.component';
 @import '../app/components/knx-breadcrumb/breadcrumb.component';
 @import '../app/components/knx-chat-stream/chat-stream.component';
 @import '../app/components/knx-chat-stream/chat-message.component';
@@ -26,6 +24,5 @@
 @import '../app/components/knx-navigation/navbar.component';
 @import '../app/components/knx-navigation/footer.component';
 @import '../app/components/knx-price-table/price-table.component';
-@import '../app/components/knx-spinner/spinner.component';
 @import '../app/components/knx-user-detail/user-detail.component';
 @import '../app/components/knx-vehicle-info/vehicle-info.component';

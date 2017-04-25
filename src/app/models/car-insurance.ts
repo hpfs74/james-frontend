@@ -1,6 +1,4 @@
 export class CarInsurance {
-  dateOfBirth: string;
-  postalCode: string;
   license: string;
   coverage: string;
   claimFreeYears: number;

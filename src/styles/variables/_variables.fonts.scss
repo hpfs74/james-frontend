@@ -1,9 +1,12 @@
 // overrides for @cx/base
 $fonts_path: '/assets/fonts/';
 
-$baseFontFamily: 'PT Sans';
+$baseFontFamily: 'PT Sans, Helvetica, Arial, sans-serif';
 $headFontFamily: "Intro Bold Caps",Helvetica,Arial,sans-serif;
-//$iconsFontFamily: 'aegon_icons' !default;
+
+//todo: refactor
+$knab-font-family-secondary: $baseFontFamily;
+
 $baseFontSize: 16px;
 $baseFontWeight: 400;
 

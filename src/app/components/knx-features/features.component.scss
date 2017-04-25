@@ -30,14 +30,14 @@
 .feature-title {
   color: $knab-primary-blue;
   font-size: 16px;
-  font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
+  font-family: $baseFontFamily;
   font-weight: bold;
 }
 
 .feature-description {
   color: $knab-primary-blue;
   font-size: 14px;
-  font-family: $knab-font-family-secondary, Helvetica, Arial, sans-serif;
+  font-family: $baseFontFamily;
   font-weight: normal;
   padding-left: 60px;
 }

@@ -27,7 +27,6 @@ import { ChatStreamComponent, ChatMessageComponent } from './components/knx-chat
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { NavbarComponent, FooterComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
-import { StickerComponent } from './components/knx-sticker/sticker.component';
 import { SpinnerComponent } from './components/knx-spinner/spinner.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
 import { VehicleInfoComponent } from './components/knx-vehicle-info/vehicle-info.component';
@@ -42,7 +41,6 @@ export const sharedComponents = [
   ChatMessageComponent,
   PriceTableComponent,
   PriceTableItemComponent,
-  StickerComponent,
   SpinnerComponent,
   UserDetailComponent,
   VehicleInfoComponent
