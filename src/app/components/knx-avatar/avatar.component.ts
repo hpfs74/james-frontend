@@ -4,14 +4,12 @@ import { Component, Input } from '@angular/core';
   selector: 'knx-avatar',
   template: `
   <div class="knx-avatar">
-      <div class="knx-avatar-detail">
-        <div class="knx-avatar-name">{{ name }}</div>
-        <div class="knx-avatar-title">{{ title }}</div>
+      <div class="knx-avatar__detail">
+        <div class="knx-avatar__name">{{ name }}</div>
+        <div class="knx-avatar__title">{{ title }}</div>
       </div>
-  
-      <div class="knx-avatar-image">
-        <img src="/assets/images/avatars/{{ name | lowercase }}.jpg" class="circle"/>
-      </div>
+
+      <img  class="knx-avatar__image" src="/assets/images/avatars/{{ name | lowercase }}.jpg">
   </div>
   `
 })
