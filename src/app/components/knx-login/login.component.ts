@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {
   }
 
-  // ngOnInit() {
-  //
-  // }
+  ngOnInit() {
+    return ;
+  }
 
   // loginBlur(event){
   //   // here we can check if username exists
