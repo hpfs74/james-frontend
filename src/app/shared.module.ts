@@ -4,15 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // @cx
 //Don't import CXFormsModule: breaks lazy loading due to it using BrowserModule instead of CommonModule
-// import { CXFormsModule } from '../../node_modules/@cx/forms';
-import { CXInputComponent, TextMaskModule } from '../../node_modules/@cx/input';
-import { CXSelectComponent } from '../../node_modules/@cx/select';
-import { CXCheckboxComponent } from '../../node_modules/@cx/checkbox';
-import { CXFileUploadComponent } from '../../node_modules/@cx/file-upload';
-import { CXRadioComponent } from '../../node_modules/@cx/radio';
-import { CXFormGroupComponent } from '../../node_modules/@cx/form-group';
-import { CXSliderComponent } from '../../node_modules/@cx/slider';
-import { CXTextareaComponent } from '../../node_modules/@cx/textarea';
+import { CXFormsModule } from '../../node_modules/@cx/forms';
+// import { CXInputComponent, TextMaskModule } from '../../node_modules/@cx/input';
 
 /**
  * Shared module for all generic components
@@ -46,34 +39,21 @@ export const sharedComponents = [
   VehicleInfoComponent
 ];
 
-export const cxComponents = [
-  CXInputComponent,
-  CXSelectComponent,
-  CXCheckboxComponent,
-  CXFileUploadComponent,
-  CXRadioComponent,
-  CXSliderComponent,
-  CXFormGroupComponent,
-  CXTextareaComponent
-];
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TextMaskModule
-    //CXFormsModule
+    CXFormsModule
   ],
   declarations: [
-    ...cxComponents,
     ...sharedComponents
   ],
   exports: [
     CommonModule,
     FormsModule,
+    CXFormsModule,
     ReactiveFormsModule,
-    ...cxComponents,
     ...sharedComponents
   ]
 })

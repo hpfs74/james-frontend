@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
         <div class="knx-avatar__title">{{ title }}</div>
       </div>
 
-      <img  class="knx-avatar__image" src="/assets/images/avatars/{{ name | lowercase }}.jpg">
+      <img  class="knx-avatar__image" src="/assets/images/avatars/assistant.png">
   </div>
   `
 })

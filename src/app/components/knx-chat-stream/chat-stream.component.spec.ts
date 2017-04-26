@@ -32,7 +32,7 @@ describe('Component: ChatStreamComponent', () => {
   let options: ChatStreamOptions = {
     showAvatar: true,
     avatarName: 'Marjolein',
-    avatarTitle: 'Expert verzekeringen'
+    avatarTitle: 'Expert autoverzekeringen'
   };
 
   beforeEach(async(() => {
