@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from './../config.service';
+import { NicciService } from './nicci.service';
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -9,7 +10,7 @@ export class AuthService implements OnInit {
   private loggedIn = false;
   private baseUrl: string;
 
-  constructor(private http: Http, private configService: ConfigService) {
+  constructor(private http: Http, private configService: ConfigService, private nicciService : NicciService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
   }
 
@@ -24,22 +25,25 @@ export class AuthService implements OnInit {
    * @param password
    */
   login(email, password) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    return this.nicciService.signIn(email, password);
 
-    //TODO: handle success based on status codes
-    return this.http
-      .post(this.baseUrl + '/login', JSON.stringify({ username: email, password: password }), { headers })
-      .map((res: Response) => {
-        console.log('/login response', res);
 
-        if (res.status === 200) {
-          let data = res.json();
-          console.log('login succes!');
-          localStorage.setItem('auth_token', data.auth_token);
-          this.loggedIn = true;
-        }
-      });
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    //
+    // //TODO: handle success based on status codes
+    // return this.http
+    //   .post(this.baseUrl + '/login', JSON.stringify({username: email, password: password}), {headers})
+    //   .map((res: Response) => {
+    //     console.log('/login response', res);
+    //
+    //     if (res.status === 200) {
+    //       let data = res.json();
+    //       console.log('login succes!e');
+    //       localStorage.setItem('auth_token', data.auth_token);
+    //       this.loggedIn = true;
+    //     }
+    //   });
   }
 
   /**
