@@ -1,4 +1,4 @@
-.container-features-inner {
+.knx-features {
   display: flex;
   align-items: flex-center;
   align-content: flex-center;
@@ -6,7 +6,7 @@
   padding: 50px 0;
 }
 
-.feature {
+.knx-features__item {
   margin-right: 30px;
   flex: 1 1 0;
 
@@ -16,7 +16,7 @@
     float: left;
     margin-top: 2px;
     margin-right: 15px;
-    content: map-get($icons, check);
+    content: map-get($knx-icons, check);
     font-family: $font-family-icon;
     line-height: 1.4;
     font-size: 33px;
@@ -27,14 +27,14 @@
   }
 }
 
-.feature-title {
+.knx-features__title {
   color: $knab-primary-blue;
   font-size: 16px;
   font-family: $font-family-base;
   font-weight: bold;
 }
 
-.feature-description {
+.knx-features__description {
   color: $knab-primary-blue;
   font-size: 14px;
   font-family: $font-family-base;

@@ -7,10 +7,8 @@
 /* import shared library styles */
 @import '../../node_modules/@knx/base/index';
 @import '../../node_modules/@knx/grid/index';
-@import '../../node_modules/@cx/base/index';
 
 @import 'fonts';
-@import 'layout'; //TODO: remove
 
 /* page component styles */
 @import '../app/pages/dashboard/dashboard.component';

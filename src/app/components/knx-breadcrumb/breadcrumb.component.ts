@@ -8,7 +8,7 @@ import { Nav } from '../../models/nav';
     <div class="breadcrumb">
       <div class="container knx-container--flat">
         <ul>
-          <li><a class="breadcrumb-home" routerLink="/"><span class="knx-icon-home"></span></a></li>
+          <li><a class="breadcrumb-home" routerLink="/"><span class="knx-icon-arrow-left"></span></a></li>
           <li *ngFor="let breadcrumb of breadcrumbs; let i = index;">
             <a class="breadcrumb-item" [routerLink]="[breadcrumb.url]">{{  breadcrumb.name }}</a>
           </li>

@@ -17,7 +17,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
     <knx-breadcrumb></knx-breadcrumb>
   </div>
 
-  <div class="container main-container">
+  <div class="main-container">
     <knx-spinner [visible]="isLoading"></knx-spinner>
     <router-outlet></router-outlet>
   </div>

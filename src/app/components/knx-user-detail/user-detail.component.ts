@@ -5,10 +5,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   template: `
     <div class="knx-user-detail">
       <a href="#" *ngIf="!isLoggedIn">
-        <span class="icon fa fa-user"></span> Inloggen
+        <span class="knx-icon-user"></span> Inloggen
       </a>
       <a href="#" *ngIf="isLoggedIn" (click)="logout()">
-        <span class="icon fa fa-user"></span> Uitloggen
+        <span class="knx-icon-user"></span> Uitloggen
       </a>
     </div>
   `

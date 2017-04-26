@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   template: `
-    <div class="knx-container-dashboard">
+    <div class="container knx-container-dashboard">
       <div class="row">
         <div class="col-md-12 col-sm-12">
           <knx-button-icon label="Auto" routerLink="/car">

@@ -18,7 +18,7 @@ import { UserDetailComponent } from './../knx-user-detail/user-detail.component'
         </button>
     </div>
     <div class="row">
-      <div class="col-md-4 col-sm-4 col-xs-9">
+      <div class="col-md-3 col-sm-3 col-xs-9">
         <div class="logo">
           <a routerLink=""><img src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab"></a>
         </div>
@@ -31,11 +31,11 @@ import { UserDetailComponent } from './../knx-user-detail/user-detail.component'
             {{ item.title }}
           </a>
         </li>
-        
+
         <li>
           <a id="{{ phone.id }}"
              href="{{ phone.link }}">
-            {{ phone.title }}
+            <span class="knx-icon-phone"></span> {{ phone.title }}
           </a>
         </li>
       </ul>
