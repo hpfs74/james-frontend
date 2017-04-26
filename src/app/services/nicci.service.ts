@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { ConfigService } from './../config.service';
+import { ConfigService } from '../config.service';
 import { crypto } from 'crypto-js';
 import { Observable } from 'rxjs/Observable';
 

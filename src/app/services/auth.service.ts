@@ -25,6 +25,7 @@ export class AuthService implements OnInit {
    * @param password
    */
   login(email, password) {
+
     return this.nicciService.signIn(email, password);
 
 
