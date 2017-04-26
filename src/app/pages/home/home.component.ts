@@ -9,7 +9,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
   <knx-cookiebar></knx-cookiebar>
   <header class="header">
     <knx-navbar [menuItems]="topMenu" [phone]="phone">
-        <knx-user-detail [isLoggedIn]="isLoggedIn" (logOut)="logOut()"></knx-user-detail>
+        <knx-user-detail [isLoggedIn]="isLoggedIn" (signOut)="signOut()"></knx-user-detail>
     </knx-navbar>
   </header>
 
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-  logOut() {
+  signOut() {
     this.authService.logout();
     this.router.navigate(['']);
   }

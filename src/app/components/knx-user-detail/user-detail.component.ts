@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       <a href="#" *ngIf="!isLoggedIn">
         <span class="knx-icon-user"></span> Inloggen
       </a>
-      <a href="#" *ngIf="isLoggedIn" (click)="logout()">
+      <a href="#" *ngIf="isLoggedIn" (click)="signOutAction()">
         <span class="knx-icon-user"></span> Uitloggen
       </a>
     </div>
@@ -15,9 +15,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UserDetailComponent {
   @Input() isLoggedIn: boolean = false;
-  @Output() logOut = new EventEmitter();
+  @Output() signOut = new EventEmitter();
 
-  logout() {
-    this.logOut.emit();
+  signOutAction() {
+    this.signOut.emit();
   }
 }
