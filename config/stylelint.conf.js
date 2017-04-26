@@ -1,5 +1,5 @@
 {
-  "defaultSeverity": "warning",
+  "defaultSeverity": "error",
   "rules": {
     "at-rule-empty-line-before": [ "always", {
       except: [
