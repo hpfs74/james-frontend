@@ -6,6 +6,7 @@
     color: $knab-white;
     text-decoration: none;
   }
+
   & a:hover {
     text-decoration: none;
   }
@@ -22,7 +23,7 @@
   text-transform: uppercase;
 
   & > li {
-      display: inline;
+    display: inline;
   }
 }
 
