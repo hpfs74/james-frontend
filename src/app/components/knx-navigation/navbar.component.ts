@@ -33,15 +33,9 @@ import { UserDetailComponent } from './../knx-user-detail/user-detail.component'
         </li>
 
         <li>
-<<<<<<< Updated upstream
           <a id="{{ phone.id }}"
-             href="{{ phone.link }}">
-            <span class="knx-icon-phone"></span> {{ phone.title }}
-=======
-          <a id="{{ phone.id }}" class="phone"
              href="{{ phone.link }}" rel="nofollow">
-            <i class="icon fa fa-phone"></i> {{ phone.title }}
->>>>>>> Stashed changes
+            <span class="knx-icon-phone"></span> {{ phone.title }}
           </a>
         </li>
       </ul>
