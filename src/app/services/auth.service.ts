@@ -51,6 +51,10 @@ export class AuthService implements OnInit {
     this.loggedIn = false;
   }
 
+  forgotPassword(email) {
+    return null;
+  }
+
   /**
    * Return whether the current user is logged in
    * @returns {Boolean}
