@@ -6,7 +6,7 @@
   "homepage": "",
   "author": "cXstudio",
   "scripts": {
-    "commitmsg": "node config/hooks/commit.js && npm run lint",
+    "commitmsg": "node config/hooks/commit.js && npm run lint:styles && npm run lint",
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && webpack --config config/webpack.prod.js  --progress --profile --bail",
     "build:aot": "npm run build:aot:prod",
     "build:dev": "npm run clean:dist && webpack --config config/webpack.dev.js --progress --profile",
@@ -169,7 +169,7 @@
     "to-string-loader": "^1.1.4",
     "ts-node": "^2.0.0",
     "tslib": "^1.5.0",
-    "tslint": "~4.4.0",
+    "tslint": "^4.4.2",
     "typedoc": "^0.5.3",
     "typescript": "~2.1.5",
     "url-loader": "^0.5.7",
