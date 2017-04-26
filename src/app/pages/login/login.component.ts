@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, RouterLink, NavigationExtras } from '@angular/router';
 
 import { CXEmailValidator } from '../../../../node_modules/@cx/form';
 import { AuthService } from './../../services/auth.service';
@@ -44,7 +44,7 @@ import { AuthService } from './../../services/auth.service';
                 <div class="cx-message__content">{{ message }}
                 </div>
             </div>
-            <p class="login-info knx-text-center"><a href="">Wachtwoord vergeten?</a></p>
+            <p class="login-info knx-text-center"><a rel="nofollow" href="/forgot-password">Wachtwoord vergeten?</a></p>
           </div>
         </div>
         </form>

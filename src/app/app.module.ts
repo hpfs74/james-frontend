@@ -16,6 +16,10 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginRoutingModule } from './pages/login/login-routing.module';
 
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ForgotPasswordRoutingModule } from './pages/forgot-password/forgot-password-routing.module';
+
+
 //TODO: needed on login?
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
@@ -40,11 +44,13 @@ export function ConfigLoader(configService: ConfigService) {
     SharedModule,
     HomeModule.forRoot(),
     LoginRoutingModule,
+    ForgotPasswordRoutingModule,
     AppRoutingModule
   ],
   declarations: [
     AppComponent,
     LoginComponent,
+    ForgotPasswordComponent,
     CookiesPageComponent,
   ],
   providers: [

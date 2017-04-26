@@ -27,7 +27,6 @@ import { AuthService } from './../../services/auth.service';
               <cx-form-group [formControlName]='formGroupConfig[0].formControlName'
                 [options]="formGroupConfig[0]"></cx-form-group>
             
-
                 <button class="cx-button knx-btn-primary fullwidth"
                   [class.cx-button--pending]="isPending" [disabled]="!forgotPasswordForm.valid || isPending">
                   Reset password</button>
