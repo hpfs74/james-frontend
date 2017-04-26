@@ -1,5 +1,5 @@
 {
-  "defaultSeverity": "warning",
+  "defaultSeverity": "error",
   "rules": {
     "at-rule-empty-line-before": [ "always", {
       except: [
@@ -114,7 +114,7 @@
     "selector-pseudo-class-no-unknown": true,
     "selector-pseudo-class-parentheses-space-inside": "never",
     "selector-pseudo-element-case": "lower",
-    "selector-pseudo-element-colon-notation": "double",
+    "selector-pseudo-element-colon-notation": "single",
     "selector-pseudo-element-no-unknown": true,
     "selector-type-case": "lower",
     "selector-type-no-unknown": true,

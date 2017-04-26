@@ -7,7 +7,7 @@
 }
 
 .knx-price-table-wrapper > *:not(:last-child) {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
 .knx-pricing-table {
@@ -30,14 +30,14 @@
 }
 
 .knx-pricing-table-header {
-  margin: 0 0 15px 0;
+  margin: 0 0 15px;
   padding: 10px;
   font-size: $font-size-base + 2;
   font-weight: bold;
   text-align: center;
 }
 
-.knx-pricing-table--highlight{
+.knx-pricing-table--highlight {
   position: relative;
   outline-color: $knab-primary-green;
   outline-width: 2px;
@@ -47,7 +47,7 @@
     background: $knab-primary-green;
   }
 
-  .knx-pricing-table-badge{
+  .knx-pricing-table-badge {
     position: absolute;
     top: -27px;
     left: 5px;
@@ -69,6 +69,7 @@
   background: #fff;
   color: $knab-primary-green;
 }
+
 .knx-pricing-table--selected .knx-pricing-table-features,
 .knx-pricing-table--selected .knx-pricing-table-features .icon {
   color: #fff;
@@ -81,7 +82,7 @@
   & > * {
     margin-bottom: 15px;
 
-    .knx-pricing-table-text{
+    .knx-pricing-table-text {
       padding-left: 22px;
     }
 
