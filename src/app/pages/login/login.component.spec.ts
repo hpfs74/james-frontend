@@ -30,4 +30,5 @@ describe('Component: Navbar', () => {
   it('should disable submit button until form is valid');
   it('should notify success on correct login data');
   it('should display error on invalid login data');
+  it('should display error on not yet validate account that try to login');
 });
