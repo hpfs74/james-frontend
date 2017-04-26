@@ -8,11 +8,11 @@ import { FormValidationErrors } from '../../../../node_modules/@cx/form';
 import { LoginService } from './login.service';
 
 @Component({
-  selector: 'knx-login',
-  templateUrl: './login.component.html',
+  selector: 'knx-forgot-password',
+  templateUrl: './forgot-password.component.html',
   providers: [LoginService]
 })
-export class LoginComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
 
   public inputMasks = InputMasks;
   public validationErrors;
@@ -24,19 +24,8 @@ export class LoginComponent implements OnInit {
     return ;
   }
 
-  loginBlur(event) {
-     // TODO: here we can check if username exists
-    return;
-  }
 
-  signIn(event) {
-    // TODO: here we will handle the button click after use click it
+  resetPasswordRequest() {
     return ;
   }
-
-  forgotPassword(event) {
-    // TODO: user will be redirect to forgot password component
-    return ;
-  }
-
 }
