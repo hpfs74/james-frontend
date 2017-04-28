@@ -7,18 +7,16 @@ import { Observable } from 'rxjs/Observable';
 import { NicciKey } from '../models/nicci-key';
 import { NicciProfile } from '../models/nicci-profile';
 
+const config = require('../../../config/api/config.json');
+
 @Injectable()
-export class NicciService implements OnInit {
+export class NicciService {
   // store the URL so we can redirect after logging in
   private baseUrl: string;
 
   constructor(private http: Http, private configService: ConfigService) {
     console.log('NICCI Constructor');
-    this.baseUrl = 'https://profile-james-t.nicci.io';
-  }
-
-  ngOnInit() {
-    this.baseUrl = this.configService.config.api.nicciProxy.auth;
+    this.baseUrl = config.api.nicciProxy.auth;
   }
 
   /**
@@ -27,7 +25,6 @@ export class NicciService implements OnInit {
    * @param password
    */
   public signIn(email, password) :Observable<NicciKey> {
-    console.log(' SIGN IN ');
     return this.getNicciKey();
   }
 
@@ -105,7 +102,7 @@ export class NicciService implements OnInit {
       .map((res: Response) => {
         console.log('/key response', res);
 
-        if (res.status === 200) {
+        if (res.status === 201) {
           let data = res.json();
           console.log('key success!');
           localStorage.setItem('nicci_id', data._id);
