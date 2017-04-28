@@ -30,4 +30,11 @@ describe('Component: Navbar', () => {
     let el = navElement.nativeElement;
     expect(navElement).not.toBeNull();
   });
+
+  it('should disable submit button until user provide a correct email');
+  it('should display success message if user provide existing email');
+  it('should display error message if user provide not existing email');
+  it('should display a captcha when is needed');
+  it('should display error message on network error');
+
 });

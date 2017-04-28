@@ -124,10 +124,15 @@ export class LoginComponent {
       // this.router.navigate(['/overview']);
       console.log('email is ', email.value);
 
-      this.authService.login(email.value, password.value).subscribe(() => {
-        this.isPending = false;
+      this.authService
+        .login(email.value, password.value)
+        .subscribe( (data) => {
+          console.log( 'AUTH', data);
+        });
 
-        console.log(this.authService);
+
+      ; /*.subscribe(() => {
+        this.isPending = false;
 
         if (this.authService.isLoggedIn()) {
           this.messageTitle = 'Succes!';
@@ -150,7 +155,7 @@ export class LoginComponent {
           this.message = 'Invalid email or password';
         }
 
-      });
+      });*/
     }
     return;
   }

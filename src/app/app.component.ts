@@ -9,6 +9,7 @@ import {
   InsuranceService,
   CookieService,
   ContentService,
+  NicciService
 } from './services';
 
 import { LoginComponent } from './pages/login/login.component';
@@ -24,7 +25,7 @@ import { LoginComponent } from './pages/login/login.component';
 export class AppComponent implements OnInit {
   isLoading: boolean = true;
 
-  constructor(private configService: ConfigService, private authService: AuthService) {
+  constructor(private configService: ConfigService, private authService: AuthService, private nicciService: NicciService) {
   }
 
   ngOnInit() {

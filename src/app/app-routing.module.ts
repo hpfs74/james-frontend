@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
+import { NicciService } from './services/nicci.service';
 import { LoginComponent } from './pages/login/login.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -21,10 +22,7 @@ export const routes: Routes = [
       breadcrumb: 'Cookie-beleid'
     }
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   {
     // 404: redirect unkown paths to home
@@ -42,7 +40,8 @@ export const routes: Routes = [
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    NicciService
   ]
 })
 export class AppRoutingModule { }

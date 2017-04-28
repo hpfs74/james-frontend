@@ -1,6 +1,6 @@
 {
   "name": "knab-james-frontend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Knab Verzekeren Web app (Codename James)",
   "keywords": [],
   "homepage": "",
@@ -97,6 +97,7 @@
     "@types/es6-shim": "^0.31.32",
     "angular-swagger-form-field": "^1.2.2",
     "core-js": "^2.4.1",
+    "crypto-js": "^3.1.9-1",
     "http-server": "^0.9.0",
     "ie-shim": "^0.1.0",
     "intl": "^1.2.5",
