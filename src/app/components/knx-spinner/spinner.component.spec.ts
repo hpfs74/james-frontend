@@ -23,14 +23,14 @@ describe('Component: Spinner', () => {
   });
 
   it('should hide the spinner by default', () => {
-    de = fixture.debugElement.query(By.css('.spinner-icon'));
+    de = fixture.debugElement.query(By.css('.knx-loader-icon'));
     expect(de).toBeNull();
   });
 
   it('should show the spinner', () => {
     comp.visible = true;
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('.spinner-icon'));
+    de = fixture.debugElement.query(By.css('.knx-loader-icon'));
     expect(de).not.toBeNull();
     el = de.nativeElement;
     expect(el).not.toBeNull();

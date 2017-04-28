@@ -1,18 +1,17 @@
 <div class="row">
   <div class="col-md-10">
 
-    <h2>Gegevens auto</h2>
+    <h2>Je gegevens</h2>
 
     <form [formGroup]="form.formGroup" (submit)="save($event)">
-
-      <cx-form-group formControlName="licensePlate" class="knx-icon-check" [options]="{
-            label: 'Wat is je kenteken?',
-            formControl: form.formGroup.get('licensePlate'),
-            validationErrors: validationErrors,
-            inputOptions: {
-              placeholder: 'NL-16K-NAB'
-            }
-          }"></cx-form-group>
+      <cx-form-group [options]="{
+          type: 'custom',
+          label: 'Wat is je kenteken?',
+          formControl: form.formGroup.get('licensePlate'),
+          validationErrors: validationErrors
+      }">
+        <knx-input-licenseplate formControlName="licensePlate" [options]="{ placeholder: '16K-NAB-9' }"></knx-input-licenseplate>
+      </cx-form-group>
 
       <cx-form-group formControlName="birthDate" [options]="{
             label: 'Geboortedatum',
@@ -49,7 +48,7 @@
       </div>
     </form>
 
-    <h2>Kies een dekking</h2>
+    <h2>Je dekkingswensen</h2>
     <knx-price-table [items]="coverages"></knx-price-table>
 
     <div class="cx-form-group cx-form-group--space-between">

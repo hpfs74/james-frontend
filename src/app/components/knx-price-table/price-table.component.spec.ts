@@ -24,10 +24,21 @@ describe('Component: PriceTable', () => {
     fixture = TestBed.createComponent(PriceTableComponent);
     comp = fixture.componentInstance;
 
+  // header: string;
+  // price: number;
+  // badge: string;
+  // /**
+  //  * @description
+  //  * List of features
+  //  */
+  // features: Array<string>;
+  // highlight?: boolean;
+  // selected?: boolean;
+
     comp.items = [
-      { header: 'Title1', highlight: false, price: 10.00, features: [] },
-      { header: 'Title2', highlight: false, price: 20.00, features: [] },
-      { header: 'Title3', highlight: false, price: 30.00, features: [] }
+      { header: 'Title1', badge: 'Test1', highlight: false, price: 10.00, features: [] },
+      { header: 'Title2', badge: 'Test2', highlight: false, price: 20.00, features: [] },
+      { header: 'Title3', badge: 'Test3', highlight: false, price: 30.00, features: [] }
     ];
 
     fixture.detectChanges();
@@ -40,9 +51,14 @@ describe('Component: PriceTable', () => {
   });
 
   it('should render with 4 elements', () => {
-    comp.items.push({
-      header: 'Title4', highlight: false, price: 30.00, features: []
-    });
+    let newItem: Price = {
+      header: 'Title4',
+      badge: 'Test4',
+      highlight: false,
+      price: 30.00,
+      features: []
+    };
+    comp.items.push(newItem);
     fixture.detectChanges();
 
     expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-pricing-table').length).toBe(4);

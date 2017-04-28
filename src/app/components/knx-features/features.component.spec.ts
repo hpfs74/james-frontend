@@ -31,25 +31,25 @@ describe('Component: Features', () => {
     ];
 
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('div.container-features'));
+    de = fixture.debugElement.query(By.css('div.knx-features '));
     el = de.nativeElement;
   });
 
   it('should display list of features', () => {
-    let containerEl = fixture.debugElement.query(By.css('div.container-features-inner'));
+    let containerEl = fixture.debugElement.query(By.css('div.knx-features'));
     let el = containerEl.nativeElement;
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('.feature').length).toBe(4);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-features__item').length).toBe(4);
   });
 
   it('should display list of features change adding one more', () => {
-    let inputDe = fixture.debugElement.query(By.css('div.container-features-inner'));
+    let inputDe = fixture.debugElement.query(By.css('div.knx-features'));
     let el = inputDe.nativeElement;
 
     comp.items.push({ title: 'Feat 5', description: 'This is feature 5' });
     fixture.detectChanges();
 
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('.feature').length).toBe(5);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-features__item').length).toBe(5);
   });
 });

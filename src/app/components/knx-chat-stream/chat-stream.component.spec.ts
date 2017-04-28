@@ -61,7 +61,7 @@ describe('Component: ChatStreamComponent', () => {
 
     expect(comp.options.showAvatar).toBe(true);
     expect(comp.options.avatarName).toEqual('Marjolein');
-    expect(comp.options.avatarTitle).toEqual('Expert verzekeringen');
+    expect(comp.options.avatarTitle).toEqual('Expert autoverzekeringen');
 
     let avatarEl = el.getElementsByTagName('knx-avatar');
     expect(avatarEl).not.toBeNull();

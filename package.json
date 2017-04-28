@@ -7,6 +7,7 @@
   "author": "cXstudio",
   "scripts": {
     "commitmsg": "node config/hooks/commit.js && npm run lint:styles && npm run lint",
+    "prepush": "npm run test",
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && webpack --config config/webpack.prod.js  --progress --profile --bail",
     "build:aot": "npm run build:aot:prod",
     "build:dev": "npm run clean:dist && webpack --config config/webpack.dev.js --progress --profile",
@@ -90,7 +91,7 @@
     "@cx/slider": "0.4.2",
     "@cx/textarea": "0.2.0",
     "@cx/utils": "1.4.0",
-    "@knx/base": "2.5.0",
+    "@knx/base": "2.5.1",
     "@knx/grid": "0.0.3",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",

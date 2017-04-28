@@ -17,7 +17,8 @@ export class CarDetailComponent implements OnInit {
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
     postalCode: () => `Provided postal code is invalid`,
     policyNumber: () => `Provided policy number is invalid`,
-    email: () => `Provided e-mail is invalid`
+    email: () => `Provided e-mail is invalid`,
+    licensePlate: () => `Vul een geldig kenteken in`
   };
 
   @Input() userProfile: any;
