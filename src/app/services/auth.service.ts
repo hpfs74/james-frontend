@@ -2,6 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
+import { Observable } from 'rxjs/Observable';
+import { NicciKey } from '../models/nicci-key';
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -12,9 +14,13 @@ export class AuthService implements OnInit {
 
   constructor(private http: Http, private configService: ConfigService, private nicciService : NicciService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
+    this.baseUrl = '';
   }
 
+
   ngOnInit() {
+    console.log('AUTH SERVICE INIT');
+
     this.baseUrl = this.configService.config.api.nicciProxy.auth;
     console.log(this.baseUrl);
   }
@@ -24,7 +30,8 @@ export class AuthService implements OnInit {
    * @param email
    * @param password
    */
-  login(email, password) {
+  login(email, password) : Observable<NicciKey> {
+    console.log('AUTH SERVICE: login');
 
     return this.nicciService.signIn(email, password);
 

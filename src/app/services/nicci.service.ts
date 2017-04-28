@@ -13,7 +13,8 @@ export class NicciService implements OnInit {
   private baseUrl: string;
 
   constructor(private http: Http, private configService: ConfigService) {
-
+    console.log('NICCI Constructor');
+    this.baseUrl = 'https://profile-james-t.nicci.io';
   }
 
   ngOnInit() {
@@ -25,24 +26,26 @@ export class NicciService implements OnInit {
    * @param email
    * @param password
    */
-  public signIn(email, password) {
-
-
-   this.getNicciKey().map(() => {
-    return null;
-   });
-
+  public signIn(email, password) :Observable<NicciKey> {
+    console.log(' SIGN IN ');
+    return this.getNicciKey();
   }
 
+  /**
+   *
+   * @param profile
+   */
   public isActivated(profile) {
     throw new Error('Not implemented yet');
   }
 
+  /**
+   *
+   * @param email
+   */
   public resendActivation(email) {
     throw new Error('Not implemented yet');
   }
-
-
 
   /**
    *
@@ -90,6 +93,8 @@ export class NicciService implements OnInit {
    * @return {Observable<R>}
    */
   getNicciKey() : Observable<NicciKey> {
+
+    console.log(' NICCI KEY ');
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

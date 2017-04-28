@@ -5,8 +5,8 @@
   },
   "api": {
     "nicciProxy": {
-      "auth": "https://arb0oitf38.execute-api.eu-west-1.amazonaws.com/test/auth",
-      "address": "http://localhost:10010/v1/address/"
+      "auth": "https://profile-james-t.nicci.io",
+      "address": "https://profile-james-t.nicci.io"
     },
     "external": {}
   }
