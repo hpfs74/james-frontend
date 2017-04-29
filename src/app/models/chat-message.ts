@@ -1,6 +1,6 @@
 import { Car } from './car';
 
 export class ChatMessage {
-  type: 'text' | 'vehicle';
+  type: 'text' | 'car';
   content: string | Car;
 }

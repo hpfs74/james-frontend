@@ -8,7 +8,7 @@ import { Nav } from '../../models/nav';
     <div class="breadcrumb">
       <div class="container knx-container--flat">
         <ul>
-          <li><a class="breadcrumb-home" routerLink="/"><span class="knx-icon-arrow-left"></span></a></li>
+          <li *ngIf="!isRoot"><a class="breadcrumb-home" routerLink="/"><span class="knx-icon-arrow-left"></span></a></li>
           <li *ngFor="let breadcrumb of breadcrumbs; let i = index;">
             <a class="breadcrumb-item" [routerLink]="[breadcrumb.url]">{{  breadcrumb.name }}</a>
           </li>
@@ -18,6 +18,7 @@ import { Nav } from '../../models/nav';
   `
 })
 export class BreadCrumbComponent implements OnInit {
+  isRoot: boolean = true;
   breadcrumbs: {
     name: string;
     url: string
@@ -42,6 +43,9 @@ export class BreadCrumbComponent implements OnInit {
       let url = urlSegments.map(urlSegment => {
         return urlSegment.path;
       }).join('/');
+
+      this.isRoot = url === '';
+
       this.breadcrumbs.push({
         name: node.data['breadcrumb'],
         url: '/' + url

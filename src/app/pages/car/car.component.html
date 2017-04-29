@@ -11,17 +11,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <knx-car-detail-form [coverages]="coverages"></knx-car-detail-form>
+      <knx-car-detail-form
+        (licensePlateChange)="getCarInfo($event)"
+        (coverageDetailsChange)="getCoverages($event)">
+      </knx-car-detail-form>
     </div>
     <div class="col-md-4">
-      <knx-chat-stream [options]="{showAvatar: true, avatarName: 'Marjolein', avatarTitle: 'Expert autoverzekeringen'}" [messages]="chatMessages"></knx-chat-stream>
-
-      <!-- test -->
-      <br><br>
-      <div><small>Test stuff below</small></div>
-      <button class="cx-button btn-sm" (click)="addCarMessage()">Add car</button>
-      <button class="cx-button btn-sm" (click)="addMessage()">Say something</button>
-      <button class="cx-button btn-sm" (click)="clearMessages()">Clear</button>
+      <knx-chat-stream
+        [options]="chatConfig"
+        [messages]="chatMessages">
+      </knx-chat-stream>
     </div>
   </div>
 </div>

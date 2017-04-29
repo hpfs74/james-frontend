@@ -1,46 +1,43 @@
 <div class="formgroup-address-lookup" [formGroup]="addressFormGroup">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <cx-form-group formControlName="postalCode" [options]="{
-              formControl: addressFormGroup.get('postalCode'),
-              label: 'Postcode',
-              type: 'text',
-              textMask: inputMasks.postalCodeMask,
-              transform: inputMasks.postalCodeMask.decode,
-              validationErrors: validationErrors
-            }"></cx-form-group>
+        formControl: addressFormGroup.get('postalCode'),
+        label: 'Postcode',
+        validationErrors: validationErrors,
+        inputOptions: {
+          placeholder: '1234 AB',
+          textMask: postalCodeMask,
+          transform: postalCodeMask.decode,
+          disabled: true
+        }
+      }"></cx-form-group>
     </div>
-    <div class="col-md-4">
-      <cx-form-group formControlName="addressNumber" (focusout)="addressBlur($event)" [options]="{
-        formControl: addressFormGroup.get('addressNumber'),
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <cx-form-group formControlName="houseNumber" (focusout)="addressBlur($event)" [options]="{
+        formControl: addressFormGroup.get('houseNumber'),
         label: 'Huisnummer',
         validationErrors: validationErrors,
         events: ['blur']
       }"></cx-form-group>
     </div>
 
+    <div class="col-md-3">
+      <cx-form-group formControlName="houseNumberExtension" (focusout)="addressBlur($event)" [options]="{
+        formControl: addressFormGroup.get('houseNumberExtension'),
+        label: 'Toevoeging',
+        validationErrors: validationErrors,
+        events: ['blur']
+      }"></cx-form-group>
+    </div>
+
     <div class="col-md-2">
-      <button class="knx-button knx-button--secondary" (click)="getLocationAddress()"><span class="knx-icon-map-marker"></span></button>
+      <div class="cx-form-group">
+        <button class="knx-button knx-button--inline-form knx-button--secondary knx-icon-map-marker" (click)="getLocationAddress()"></button>
+      </div>
     </div>
   </div>
 
-  <!-- prefilled -->
-  <cx-form-group *ngIf="showAddress" formControlName="addressStreet" [options]="{
-        formControl: addressFormGroup.get('addressStreet'),
-        validationErrors: validationErrors,
-        label: 'Straatnaam',
-        inputOptions: {
-          disabled: true
-        }
-      }"></cx-form-group>
-
-  <!-- pre-filled -->
-  <cx-form-group *ngIf="showAddress" formControlName="addressCity" [options]=" {
-        formControl: addressFormGroup.get('addressCity'),
-        validationErrors: validationErrors,
-        label: 'Plaats',
-        inputOptions: {
-          disabled: true
-        }
-      }"></cx-form-group>
 </div>

@@ -8,6 +8,11 @@ import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
 
 /**
+ * Pipes
+ */
+import { TitleCasePipe } from './pipes/titlecase.pipe';
+
+/**
  * Shared module for all generic components
  * import components in alphabetic order: easier to find something!
  */
@@ -21,9 +26,9 @@ import { FeaturesComponent } from './components/knx-features/features.component'
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
-import { SpinnerComponent } from './components/knx-spinner/spinner.component';
+import { LoaderComponent } from './components/knx-loader/loader.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
-import { VehicleInfoComponent } from './components/knx-vehicle-info/vehicle-info.component';
+import { CarInfoComponent } from './components/knx-car-info/car-info.component';
 
 export const sharedComponents = [
   AvatarComponent,
@@ -36,9 +41,9 @@ export const sharedComponents = [
   ChatMessageComponent,
   PriceTableComponent,
   PriceTableItemComponent,
-  SpinnerComponent,
+  LoaderComponent,
   UserDetailComponent,
-  VehicleInfoComponent
+  CarInfoComponent
 ];
 
 @NgModule({
@@ -50,6 +55,7 @@ export const sharedComponents = [
     CXFormsModule
   ],
   declarations: [
+    TitleCasePipe,
     ...sharedComponents
   ],
   exports: [

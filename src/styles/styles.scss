@@ -20,4 +20,29 @@
 @import '../app/components/knx-navigation/navbar.component';
 @import '../app/components/knx-price-table/price-table.component';
 @import '../app/components/knx-user-detail/user-detail.component';
-@import '../app/components/knx-vehicle-info/vehicle-info.component';
+@import '../app/components/knx-car-info/car-info.component';
+
+
+.main-container {
+  margin-bottom: 60px;
+
+  h2 {
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+}
+
+.noborder {
+  border: 0;
+}
+
+.inline-formelement {
+  margin-top: 1.5em;
+  height: 44px;
+  border-radius: 3px;
+  line-height: 1em;
+
+  &:before {
+    padding-left: 5px;
+  }
+}

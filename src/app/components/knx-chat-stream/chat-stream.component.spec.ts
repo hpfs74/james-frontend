@@ -16,15 +16,35 @@ describe('Component: ChatStreamComponent', () => {
   let el: HTMLElement;
 
   let myCar = {
-    name: 'Carrera',
-    manufacturer: 'Porsche',
-    model: 'Turbo',
-    year: 2006
+    'license': 'KX-900-Z',
+    'vin': 'VF1BA0F0G17869206',
+    'reporting_code': '9206',
+    'year': '1998',
+    'fuel': 'Gasoline',
+    'secondary_fuel': null,
+    'color': 'Blauw',
+    'color_code': '04',
+    'secondary_color': 'Onbekend',
+    'secondary_color_code': '99',
+    'weight_empty_vehicle': 1030,
+    'price_consumer_excl_vat': 14841,
+    'price_consumer_incl_vat': 16976,
+    'make': 'RENAULT',
+    'model': 'MEGANE',
+    'technical_type': '1.6 E HB RT',
+    'wheels': 4,
+    'top_speed': 184,
+    'engine_capacity': 1598,
+    'power_kw': 66,
+    'transmission': 'Manual',
+    'transmission_nl': 'Handgeschakeld',
+    'edition': null,
+    'doors': 5,
   };
 
   let messages: Array<ChatMessage> = [
     { type: 'text', content: 'Hello World' },
-    { type: 'vehicle', content: myCar },
+    { type: 'car', content: myCar },
     { type: 'text', content: 'This is a second message' },
     { type: 'text', content: 'This is a second message' }
   ];
@@ -74,6 +94,6 @@ describe('Component: ChatStreamComponent', () => {
 
   it('should render a vehicle type message', () => {
     expect(el).not.toBeNull();
-    expect(el.querySelectorAll('knx-vehicle-info').length).toBe(1);
+    expect(el.querySelectorAll('knx-car-info').length).toBe(1);
   });
 });

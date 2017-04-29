@@ -24,7 +24,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
         style({
           opacity: 0,
           scale: 1,
-          transform: 'translateX(-100%)',
+          transform: 'translateY(100%)',
         }),
         animate('0.2s ease-in')
       ]),
@@ -32,7 +32,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
         animate('0.2s 10 ease-out', style({
           opacity: 0,
           scale: 0,
-          transform: 'translateX(100%)'
+          transform: 'translateY(-100%)'
         }))
       ])
     ])

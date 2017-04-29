@@ -11,10 +11,9 @@ import { ChatMessage } from '../../models/chat-message';
     <div class="knx-chat-stream">
       <knx-avatar *ngIf="options.showAvatar" [name]="options.avatarName" [title]="options.avatarTitle"></knx-avatar>
       <ng-container *ngFor="let msg of messages">
-        <knx-chat-message *ngIf="msg.type === 'vehicle'">
-          <knx-vehicle-info [vehicle]="msg.content"></knx-vehicle-info>
+        <knx-chat-message *ngIf="msg.type === 'car'">
+          <knx-car-info [car]="msg.content"></knx-car-info>
         </knx-chat-message>
-
         <knx-chat-message *ngIf="msg.type === 'text'" [message]="msg.content"></knx-chat-message>
       </ng-container>
     </div>
