@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-10">
+    <knx-loader [visible]="isCoverageLoading">
+      Bezig met ophalen van dekkingsopties...
+    </knx-loader>
+
+    <form *ngIf="!isCoverageLoading && coverages">
+      <h2>Je dekkingswensen</h2>
+      <knx-price-table [items]="coverages"></knx-price-table>
+
+      <div class="cx-form-group cx-form-group--space-between">
+        <button class="knx-button knx-button--link knx-button--back" routerLink="/">Terug</button>
+
+        <!-- submit -->
+        <button class="knx-button knx-button--arrow">Naar resultaten</button>
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -14,7 +14,7 @@ import { GeolocationService } from '../../services/geolocation.service';
   templateUrl: './address-lookup.component.html',
   providers: [AddressLookupService, GeolocationService]
 })
-export class AddressLookupComponent implements OnInit {
+export class AddressLookupComponent {
   @Input() address: Address;
   @Input() showAddress: boolean = true;
   @Input() addressFormGroup: FormGroup;
@@ -26,14 +26,6 @@ export class AddressLookupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private addressService: AddressLookupService,
     private geolocationService: GeolocationService) {
-  }
-
-  ngOnInit() {
-    let ctrl = this.addressFormGroup.get('postalCode');
-
-    ctrl.disable();
-
-    console.log(this.addressFormGroup.get('postalCode').disabled);
   }
 
   addressBlur(event) {
