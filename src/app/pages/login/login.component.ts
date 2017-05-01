@@ -32,7 +32,7 @@ import { AuthService } from './../../services/auth.service';
                 <button *ngIf="loginForm.get('password').value" class="btn-show-password fa fa-eye" (click)="showPassword($event)"></button>
               </div>
 
-                <button class="cx-button knx-btn-primary fullwidth"
+                <button class="knx-button knx-btn-primary knx-button--fullwidth"
                   [class.cx-button--pending]="isPending" [disabled]="!loginForm.valid || isPending">
                   Inloggen</button>
           </div>
@@ -126,36 +126,30 @@ export class LoginComponent {
 
       this.authService
         .login(email.value, password.value)
-        .subscribe( (data) => {
-          console.log( 'AUTH', data);
+        .subscribe( (loggedIn: boolean) => {
+          this.isPending = false;
+
+          if (loggedIn && this.authService.isLoggedIn()) {
+            this.messageTitle = 'Succes!';
+            this.message = 'Login succesfull';
+            // Get the redirect URL from our auth service
+            // If no redirect has been set, use the default
+            let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
+
+            // Set our navigation extras object
+            // that passes on our global query params and fragment
+            let navigationExtras: NavigationExtras = {
+              preserveQueryParams: true,
+              preserveFragment: true
+            };
+
+            // Redirect the user
+            // this.router.navigate([redirect], navigationExtras);
+          } else {
+            this.messageTitle = 'Login failed';
+            this.message = 'Invalid email or password';
+          }
         });
-
-
-      ; /*.subscribe(() => {
-        this.isPending = false;
-
-        if (this.authService.isLoggedIn()) {
-          this.messageTitle = 'Succes!';
-          this.message = 'Login succesfull';
-          // Get the redirect URL from our auth service
-          // If no redirect has been set, use the default
-          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
-
-          // Set our navigation extras object
-          // that passes on our global query params and fragment
-          let navigationExtras: NavigationExtras = {
-            preserveQueryParams: true,
-            preserveFragment: true
-          };
-
-          // Redirect the user
-          // this.router.navigate([redirect], navigationExtras);
-        } else {
-          this.messageTitle = 'Login failed';
-          this.message = 'Invalid email or password';
-        }
-
-      });*/
     }
     return;
   }

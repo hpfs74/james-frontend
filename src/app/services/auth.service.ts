@@ -1,59 +1,42 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { tokenNotExpired } from 'angular2-jwt';
+
 import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
-import { Observable } from 'rxjs/Observable';
-import { NicciKey } from '../models/nicci-key';
+import { AuthKey, AuthToken } from '../models/auth';
 
 @Injectable()
 export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
-  private loggedIn = false;
+
   private baseUrl: string;
 
-  constructor(private http: Http,
-              @Inject(ConfigService) private configService: ConfigService, private nicciService : NicciService) {
-    this.loggedIn = false; // !!localStorage.getItem('auth_token');
-    this.baseUrl = configService.config.api.nicciProxy.auth;
+  constructor(private http: Http, private configService: ConfigService, private nicciService : NicciService) {
+    this.baseUrl = configService.config.api.james.auth;
   }
-
-
-
 
   /**
    * Request an auth token with email and password
    * @param email
    * @param password
    */
-  login(email, password) : Observable<NicciKey> {
-
-    let ret =  this.nicciService.signIn(email, password)
-      .map((data) => {
-        // with data keys try to perform login
-
-
-
+  login(email, password): Observable<boolean> {
+    return this.nicciService.login(email, password)
+      .map((res: Response) => {
+        if (res.status === 200) {
+          // success login
+          let token = <AuthToken>res.json();
+          if (token) {
+            localStorage.setItem('auth_token', token.access_token);
+            return true;
+          }
+          return false;
+        }
+        throw new Error(res.statusText);
       });
-
-
-    return null;
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    //
-    // //TODO: handle success based on status codes
-    // return this.http
-    //   .post(this.baseUrl + '/login', JSON.stringify({username: email, password: password}), {headers})
-    //   .map((res: Response) => {
-    //     console.log('/login response', res);
-    //
-    //     if (res.status === 200) {
-    //       let data = res.json();
-    //       console.log('login succes!e');
-    //       localStorage.setItem('auth_token', data.auth_token);
-    //       this.loggedIn = true;
-    //     }
-    //   });
   }
 
   /**
@@ -62,7 +45,6 @@ export class AuthService {
   logout() {
     console.log('logout!');
     localStorage.removeItem('auth_token');
-    this.loggedIn = false;
   }
 
   forgotPassword(email) {
@@ -74,6 +56,6 @@ export class AuthService {
    * @returns {Boolean}
    */
   isLoggedIn() {
-    return this.loggedIn;
+    return tokenNotExpired('auth_token');
   }
 }

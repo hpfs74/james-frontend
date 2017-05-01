@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
+import { AuthHttp } from 'angular2-jwt';
 
 import { ConfigService } from '../../config.service';
 import { Car } from '../../models/car';
@@ -9,13 +10,13 @@ import { Car } from '../../models/car';
 export class CarService {
   private baseUrl: string;
 
-  constructor(private configService: ConfigService, private http: Http) {
-    this.baseUrl = configService.config.api.nicciProxy.address;
+  constructor(private configService: ConfigService, private authHttp: AuthHttp) {
+    //this.baseUrl = configService.config.api.james.car;
   }
 
   getByLicense(licensePlate: string): Observable<Car> {
     let url = this.baseUrl + `/cars/${licensePlate}`;
-    return this.http.get(url)
+    return this.authHttp.get(url)
       .map(res => {
         console.log(res);
         if (res.json) {

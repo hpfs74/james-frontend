@@ -13,7 +13,7 @@ export class LoginService {
   private serviceError: boolean = false;
 
   constructor(private configService: ConfigService, private http: Http) {
-    this.baseUrl = configService.config.api.nicciProxy.address;
+    this.baseUrl = configService.config.api.james.address;
   }
 
   /**

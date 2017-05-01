@@ -1,6 +1,6 @@
   import { crypto } from 'crypto-js';
 
-  /**
+   /**
    *
    * @param source
    * @return {any}
@@ -19,7 +19,7 @@
     return encodedSource;
   }
 
-    /**
+  /**
    *
    * @param password
    * @param secret

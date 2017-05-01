@@ -9,7 +9,7 @@ export interface ConfigInterface {
 }
 
 export interface ConfigAPIInterface {
-  nicciProxy: NicciEndpoint,
+  james: NicciEndpoint,
   external?: {
     //TODO: for config endpoints like Blueconic, Google Analytics
   }

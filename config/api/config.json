@@ -4,7 +4,7 @@
     "name": "config.json"
   },
   "api": {
-    "nicciProxy": {
+    "james": {
       "auth": "https://profile-james-t.nicci.io",
       "address": "https://profile-james-t.nicci.io",
       "baseUrl": "https://profile-james-t.nicci.io/v1"

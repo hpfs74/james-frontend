@@ -1,24 +1,20 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from '../config.service';
-import { crypto } from 'crypto-js';
+import * as AuthUtils from '../utils/auth.utils';
 import { Observable } from 'rxjs/Observable';
 
-import { NicciKey } from '../models/nicci-key';
-import { NicciProfile } from '../models/nicci-profile';
-
-const config = require('../../../config/api/config.json');
+import { User } from '../models/user';
+import { AuthKey, AuthToken } from '../models/auth';
 
 @Injectable()
 export class NicciService {
   // store the URL so we can redirect after logging in
   private baseUrl: string;
 
-  constructor(private http: Http, @Inject(ConfigService) private configService: ConfigService) {
-    console.log('NICCI Constructor');
-    console.log(configService);
-
-    this.baseUrl = config.api.nicciProxy.auth;
+  constructor(private http: Http, private configService: ConfigService) {
+    this.baseUrl = configService.config.api.james.auth;
+    console.log(this.baseUrl);
   }
 
   /**
@@ -26,12 +22,11 @@ export class NicciService {
    * @param email
    * @param password
    */
-  public signIn(email, password): Observable<NicciProfile> {
-
+  public login(email, password): Observable<Response> {
     this
       .getNicciKey()
-      .map( (data: NicciKey) => {
-        let encPass = this.encryptPassword(password, data.key);
+      .map( (data: AuthKey) => {
+        let encPass = AuthUtils.encryptPassword(password, data.key);
         let headers = this.getBasicHeader(data);
 
         let tokenRequest = {
@@ -40,17 +35,7 @@ export class NicciService {
           password: encPass,
           scope: 'profile/basic'
         };
-
-        this.http.post(this.configService.config.api.nicciProxy.auth, tokenRequest, {headers})
-          .map((res: Response) => {
-
-            if (res.status === 200) {
-              // success login
-
-              return res.json();
-            }
-            throw new Error(res.statusText);
-          });
+        return this.http.post(this.baseUrl, tokenRequest, { headers });
       });
 
     return null;
@@ -62,10 +47,10 @@ export class NicciService {
    */
   public isActivated(email : string) {
 
-    this.getNicciKey().map( (data: NicciKey) =>  {
+    this.getNicciKey().map( (data: AuthKey) =>  {
       let headers = this.getBasicHeader(data);
 
-      this.http.post(this.configService.config.api.nicciProxy.auth, { email }, { headers })
+      this.http.post(this.baseUrl, { email }, { headers })
         .map((res: Response) => {
 
           if (res.status === 200) {
@@ -108,52 +93,13 @@ export class NicciService {
                     + `&scope=${scope}`;
   }
 
-  /**
-   *
-   * @param source
-   * @return {any}
-   */
-  private base64url(source) {
-    // Encode in classical base64
-    let encodedSource = crypto.enc.Base64.stringify(source);
 
-    // Remove padding equal characters
-    encodedSource = encodedSource.replace(/=+$/, '');
-
-    // Replace characters according to base64url specifications
-    encodedSource = encodedSource.replace(/\+/g, '-');
-    encodedSource = encodedSource.replace(/\//g, '_');
-
-    return encodedSource;
-  }
-
-  /**
-   *
-   * @param password
-   * @param secret
-   * @return {string}
-   */
-  private encryptPassword(password, secret) {
-
-    let header = {'alg': 'HS256', 'typ': 'JWT'};
-    let data = password;
-    let stringifiedHeader = crypto.enc.Utf8.parse(JSON.stringify(header));
-    let encodedHeader = this.base64url(stringifiedHeader);
-    let stringifiedData = crypto.enc.Utf8.parse(JSON.stringify(data));
-    let encodedData = this.base64url(stringifiedData);
-    let signature = encodedHeader + '.' + encodedData;
-
-    signature = crypto.HmacSHA256(signature, secret);
-    signature = this.base64url(signature);
-
-    return encodedHeader + '.' + encodedData + '.' + signature;
-  }
 
   /**
    *
    * @return {Observable<R>}
    */
-  private getNicciKey(): Observable<NicciKey> {
+  private getNicciKey(): Observable<AuthKey> {
 
     console.log(' NICCI KEY ');
 
@@ -170,7 +116,7 @@ export class NicciService {
           let data = res.json();
           console.log('key success! ', data._id, data.key);
 
-          let ret = new NicciKey();
+          let ret = new AuthKey();
           ret.id = data._id;
           ret.key = data.key;
 
@@ -181,7 +127,7 @@ export class NicciService {
       });
   }
 
-  private getBasicHeader(data : NicciKey) {
+  private getBasicHeader(data : AuthKey) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
