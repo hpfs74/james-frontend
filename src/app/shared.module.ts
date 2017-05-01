@@ -5,7 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // @cx
 //Don't import CXFormsModule: breaks lazy loading due to it using BrowserModule instead of CommonModule
 import { CXFormsModule } from '../../node_modules/@cx/forms';
-// import { CXInputComponent, TextMaskModule } from '../../node_modules/@cx/input';
+import { TextMaskModule } from '../../node_modules/@cx/input';
+
+/**
+ * Pipes
+ */
+import { TitleCasePipe } from './pipes/titlecase.pipe';
 
 /**
  * Shared module for all generic components
@@ -18,11 +23,12 @@ import { ButtonIconComponent } from './components/knx-button-icon/button-icon.co
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { ChatStreamComponent, ChatMessageComponent } from './components/knx-chat-stream';
 import { FeaturesComponent } from './components/knx-features/features.component';
+import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
-import { SpinnerComponent } from './components/knx-spinner/spinner.component';
+import { LoaderComponent } from './components/knx-loader/loader.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
-import { VehicleInfoComponent } from './components/knx-vehicle-info/vehicle-info.component';
+import { CarInfoComponent } from './components/knx-car-info/car-info.component';
 
 export const sharedComponents = [
   AvatarComponent,
@@ -30,13 +36,14 @@ export const sharedComponents = [
   ButtonIconComponent,
   CookiebarComponent,
   FeaturesComponent,
+  LicensePlateComponent,
   ChatStreamComponent,
   ChatMessageComponent,
   PriceTableComponent,
   PriceTableItemComponent,
-  SpinnerComponent,
+  LoaderComponent,
   UserDetailComponent,
-  VehicleInfoComponent
+  CarInfoComponent
 ];
 
 @NgModule({
@@ -44,9 +51,11 @@ export const sharedComponents = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TextMaskModule,
     CXFormsModule
   ],
   declarations: [
+    TitleCasePipe,
     ...sharedComponents
   ],
   exports: [

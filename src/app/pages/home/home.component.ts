@@ -18,7 +18,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
   </div>
 
   <div class="main-container">
-    <knx-spinner [visible]="isLoading"></knx-spinner>
+    <knx-loader [visible]="isLoading"></knx-loader>
     <router-outlet></router-outlet>
   </div>
 
@@ -29,7 +29,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
 export class HomeComponent implements OnInit {
   isLoading: boolean = true;
   isLoggedIn: boolean = false;
-  prices: Array<Price>;
+  coverages: Array<Price>;
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.prices = this.insuranceService.getPrices();
+    this.coverages = this.insuranceService.getCoverages();
     this.topMenu = this.navigationService.getMenu();
     this.phone = this.navigationService.getPhone();
     this.footerItems = this.featureService.getFeatures();

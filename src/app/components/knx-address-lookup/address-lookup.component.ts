@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 
 import { Options as InputOptions } from '../../../../node_modules/@cx/input/src/cx-input.options';
-import * as InputMasks from '../../../../node_modules/@cx/input/src/cx-input.masks';
+import { postalCodeMask } from '../../../../node_modules/@cx/input/src/cx-input.masks';
 import { FormValidationErrors } from '../../../../node_modules/@cx/form';
 
 import { Address } from '../../models/address';
@@ -14,13 +14,13 @@ import { GeolocationService } from '../../services/geolocation.service';
   templateUrl: './address-lookup.component.html',
   providers: [AddressLookupService, GeolocationService]
 })
-export class AddressLookupComponent implements OnInit {
+export class AddressLookupComponent {
   @Input() address: Address;
   @Input() showAddress: boolean = true;
   @Input() addressFormGroup: FormGroup;
+  @Input() validationErrors: any;
 
-  public inputMasks = InputMasks;
-  public validationErrors;
+  public postalCodeMask = postalCodeMask;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,14 +28,9 @@ export class AddressLookupComponent implements OnInit {
     private geolocationService: GeolocationService) {
   }
 
-  ngOnInit() {
-    this.addressFormGroup.get('postalCode').disable();
-    console.log(this.addressFormGroup.get('postalCode').disabled);
-  }
-
   addressBlur(event) {
     let postalCode = this.addressFormGroup.get('postalCode').value;
-    let number = this.addressFormGroup.get('addressNumber').value;
+    let number = this.addressFormGroup.get('houseNumber').value;
 
     console.log(postalCode);
 
@@ -43,23 +38,23 @@ export class AddressLookupComponent implements OnInit {
       return;
     }
 
-    if (this.addressFormGroup.get('postalCode').valid && this.addressFormGroup.get('addressNumber').valid) {
+    if (this.addressFormGroup.get('postalCode').valid && this.addressFormGroup.get('houseNumber').valid) {
       this.addressService.lookupAddress(postalCode, number)
         .subscribe(res => {
           console.log('postal code lookup response', res);
           // Lookup OK
-          this.addressFormGroup.get('addressStreet').disable();
-          this.addressFormGroup.get('addressCity').disable();
-          this.addressFormGroup.get('addressStreet').setValue(res.street);
-          this.addressFormGroup.get('addressCity').setValue(res.city);
+          this.addressFormGroup.get('street').disable();
+          this.addressFormGroup.get('city').disable();
+          this.addressFormGroup.get('street').setValue(res.street);
+          this.addressFormGroup.get('city').setValue(res.city);
 
           this.showAddress = true;
         }, err => {
           console.log('postal code ERROR', err);
-          this.addressFormGroup.get('addressStreet').enable();
-          this.addressFormGroup.get('addressCity').enable();
-          this.addressFormGroup.get('addressStreet').setValue('');
-          this.addressFormGroup.get('addressCity').setValue('');
+          this.addressFormGroup.get('street').enable();
+          this.addressFormGroup.get('city').enable();
+          this.addressFormGroup.get('street').setValue('');
+          this.addressFormGroup.get('city').setValue('');
           this.showAddress = true;
         });
     } else {

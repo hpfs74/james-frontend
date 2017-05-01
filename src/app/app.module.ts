@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { requestOptionsProvider } from './services/default-request-opts.service';
 
+import { AuthModule } from './auth.module';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { NicciService } from './services/nicci.service';
@@ -47,6 +49,7 @@ export function ConfigLoader(configService: ConfigService) {
     HomeModule.forRoot(),
     LoginRoutingModule,
     ForgotPasswordRoutingModule,
+    AuthModule,
     AppRoutingModule
   ],
   declarations: [
@@ -62,7 +65,8 @@ export function ConfigLoader(configService: ConfigService) {
       useFactory: ConfigLoader,
       deps: [ConfigService],
       multi: true
-    }
+    },
+    requestOptionsProvider
   ],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Price } from '../../models/price';
 
 @Component({
@@ -21,9 +21,12 @@ export class PriceTableComponent {
   @Input() items: Array<Price>;
   @Input() selectable: boolean;
 
+  @Output() onSelected: EventEmitter<number> = new EventEmitter();
+
   selectItem(index: number) {
     this.items.map((item, i) => {
       item.selected = index === i ? true : false;
     });
+    this.onSelected.emit(index);
   }
 }

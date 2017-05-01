@@ -4,7 +4,7 @@ import { Price } from '../models';
 @Injectable()
 export class InsuranceService {
 
-  getPrices(): Array<Price> {
+  getCoverages(): Array<Price> {
     return [
       {
         header: 'WA',

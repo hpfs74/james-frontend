@@ -1,41 +1,64 @@
 <div class="row">
   <div class="col-md-10">
 
-    <h2>Gegevens auto</h2>
+    <h2>Je gegevens</h2>
 
-    <form [formGroup]="form.formGroup" (submit)="save($event)">
+    <form [formGroup]="form.formGroup" (submit)="submitForm($event)">
 
-      <cx-form-group formControlName="licensePlate" class="knx-icon-check" [options]="{
-            label: 'Wat is je kenteken?',
-            formControl: form.formGroup.get('licensePlate'),
-            validationErrors: validationErrors,
-            inputOptions: {
-              placeholder: 'NL-16K-NAB'
-            }
-          }"></cx-form-group>
+      <cx-form-group [options]="{
+          type: 'custom',
+          label: 'Wat is je kenteken?',
+          formControl: form.formGroup.get('licensePlate'),
+          validationErrors: form.validationErrors
+      }">
+        <knx-input-licenseplate
+          formControlName="licensePlate"
+          (ngModelChange)="onLicensePlateChange($event)"
+          [options]="{ placeholder: '16K-NAB-9' }">
+        </knx-input-licenseplate>
+      </cx-form-group>
 
       <cx-form-group formControlName="birthDate" [options]="{
             label: 'Geboortedatum',
             formControl: form.formGroup.get('birthDate'),
-            validationErrors: validationErrors
+            validationErrors: form.validationErrors,
+            inputOptions: {
+              placeholder: 'DD / MM / JJJJ',
+              transform: CXInputMasks.dateMask.decode,
+              textMask: CXInputMasks.dateMask
+            }
           }"></cx-form-group>
 
-      <knx-address-lookup [addressFormGroup]="form.addressForm"></knx-address-lookup>
+      <knx-address-lookup
+        [addressFormGroup]="form.addressForm"
+        [validationErrors]="form.validationErrors">
+      </knx-address-lookup>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
           <cx-form-group formControlName="damageFreeYears" [options]="{
                 label: 'Aantal schadevrije jaren',
                 formControl: form.formGroup.get('damageFreeYears'),
-                validationErrors: validationErrors
-              }"></cx-form-group>
+                validationErrors: form.validationErrors,
+                inputOptions: {
+                  type: 'number'
+                }
+              }">
+          </cx-form-group>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
+          <div class="cx-form-group">
+            <button class="knx-button knx-button--util inline-formelement" href="">Weet ik niet</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
           <cx-form-group formControlName="kilometersPerYear" [options]="{
                 label: 'Aantal KM per jaar',
                 type: 'select',
                 formControl: form.formGroup.get('kilometersPerYear'),
-                validationErrors: validationErrors,
+                validationErrors: form.validationErrors,
                 inputOptions: {
                   items: [
                     {
@@ -44,20 +67,106 @@
                     }
                   ]
                 }
-              }"></cx-form-group>
+              }">
+          </cx-form-group>
+        </div>
+        <div class="col-md-4">
+          <div class="cx-form-group">
+            <button class="knx-button knx-button--util inline-formelement" href="">Weet ik niet</button>
+          </div>
         </div>
       </div>
+
+      <cx-form-group formControlName="loan" [options]="{
+            label: 'Heb je een lening?',
+            type: 'radio',
+            formControl: form.formGroup.get('loan'),
+            validationErrors: form.validationErrors,
+            inputOptions: {
+                formGroupModifiers: ['cx-form-group__wrap--horizontal'],
+                placeholder: '',
+                items: [
+                  {
+                      label: 'Ja',
+                      value: 'true'
+                  },
+                  {
+                      label: 'Nee',
+                      value: 'false'
+                  }
+              ]
+            }
+          }">
+      </cx-form-group>
+
+      <cx-form-group formControlName="familyType" [options]="{
+            label: 'Wat is je gezinssituatie?',
+            type: 'select',
+            formControl: form.formGroup.get('familyType'),
+            validationErrors: form.validationErrors,
+            inputOptions: {
+                placeholder: '',
+                items: [
+                  {
+                      label: 'Alleen ikzelf',
+                      value: ''
+                  },
+                  {
+                      label: 'Ik en mijn partner',
+                      value: ''
+                  },
+                  {
+                      label: 'Ik, mijn partner en de kind(eren)',
+                      value: ''
+                  },
+                  {
+                      label: 'Ik en mijn kind(eren)',
+                      value: ''
+                  }
+              ]
+            }
+          }">
+      </cx-form-group>
+
+      <cx-form-group formControlName="gender" [options]="{
+            label: 'Geslacht',
+            type: 'radio',
+            formControl: form.formGroup.get('gender'),
+            validationErrors: form.validationErrors,
+            inputOptions: {
+                formGroupModifiers: ['cx-form-group__wrap--horizontal'],
+                placeholder: 'Selecteer je geslacht',
+                items: [
+                  {
+                      label: 'Man',
+                      value: 'm'
+                  },
+                  {
+                      label: 'Vrouw',
+                      value: 'f'
+                  }
+              ]
+            }
+          }">
+      </cx-form-group>
+
     </form>
 
-    <h2>Kies een dekking</h2>
-    <knx-price-table [items]="coverages"></knx-price-table>
+    <knx-loader [visible]="isCoverageLoading">
+      Bezig met ophalen van dekkingsopties...
+    </knx-loader>
 
-    <div class="cx-form-group cx-form-group--space-between">
-      <button class="knx-button knx-button--link knx-button--back" routerLink="/">terug naar overzicht</button>
+    <form *ngIf="!isCoverageLoading && coverages">
+      <h2>Je dekkingswensen</h2>
+      <knx-price-table [items]="coverages"></knx-price-table>
 
-      <!-- submit -->
-      <button class="knx-button knx-button--arrow">Doorgaan</button>
-    </div>
+      <div class="cx-form-group cx-form-group--space-between">
+        <button class="knx-button knx-button--link knx-button--back" routerLink="/">Terug</button>
+
+        <!-- submit -->
+        <button class="knx-button knx-button--arrow">Naar resultaten</button>
+      </div>
+    </form>
 
   </div>
   <div class="col-md-2">

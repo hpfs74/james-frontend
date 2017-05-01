@@ -27,6 +27,10 @@ describe('Component: Navbar', () => {
     comp.menuItems = [
       { id: 'about', title: 'About', routePath: '/about' }
     ];
+    comp.phone = {
+      id: 'tel:test',
+      link: 'tel:0203031680'
+    };
     fixture.detectChanges();
   });
 

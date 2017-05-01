@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, ElementRef, Input, Output,
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
+import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.masks';
 
 import { CarDetailForm } from './car-detail.form';
 import { Price } from '../../models/price';
@@ -12,19 +13,21 @@ import { Price } from '../../models/price';
 })
 export class CarDetailComponent implements OnInit {
   public form: CarDetailForm;
-  public validationErrors = {
-    required: () => 'Dit veld is verplicht',
-    maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    postalCode: () => `Provided postal code is invalid`,
-    policyNumber: () => `Provided policy number is invalid`,
-    email: () => `Provided e-mail is invalid`
-  };
+  public CXInputMasks = CXInputMasks;
+  public isCoverageLoading: boolean = true;
 
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];
 
-  @Output() carDetails: EventEmitter<any> = new EventEmitter();
+  // notify licenseplate entered
+  @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
+
+  // notify details change to get new coverages
+  @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
+
+  // form submit
+  @Output() nextStep: EventEmitter<any> = new EventEmitter();
 
   constructor(private fb: FormBuilder, elementRef: ElementRef) {
   }
@@ -33,7 +36,19 @@ export class CarDetailComponent implements OnInit {
     this.form = new CarDetailForm(this.fb);
   }
 
-  save(event) {
-    console.log(event);
+  //TODO: implement
+  onDetailsChange() {
+    this.coverageDetailsChange.emit({});
+  }
+
+  onLicensePlateChange(licensePlate: string) {
+    const validLength = 6;
+    if (licensePlate && licensePlate.length === validLength) {
+      this.licensePlateChange.emit(licensePlate);
+    }
+  }
+
+  submitForm(event) {
+    //this.nextStep.emit(carDetails);
   }
 }
