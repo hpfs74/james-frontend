@@ -7,12 +7,8 @@ import { Price } from '../../models/price';
   templateUrl: './car-coverage.component.html'
 })
 
-export class CarCoverageComponent implements OnInit {
+export class CarCoverageComponent {
   public isCoverageLoading: boolean = true;
 
   @Input() coverages: Price[];
-
-  constructor() { }
-
-  ngOnInit() { }
 }
