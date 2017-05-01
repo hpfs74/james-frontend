@@ -1,6 +1,11 @@
 import { Address } from './address';
 
-export class User {
+/**
+ * NICCI User Profile
+ * @export
+ * @interface IUser
+ */
+export interface IUser {
   id: number;
   email: string;
   password: string;
@@ -9,5 +14,15 @@ export class User {
   gender: string;
   dateOfBirth: string;
 
-  address: Address;
+  address?: Address;
+}
+
+export class User implements IUser {
+  id: number;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  dateOfBirth: string;
 }
