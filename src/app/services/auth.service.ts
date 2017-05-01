@@ -4,6 +4,7 @@ import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
 import { Observable } from 'rxjs/Observable';
 import { NicciKey } from '../models/nicci-key';
+import { NicciProfile } from '../models/nicci-profile';
 
 @Injectable()
 export class AuthService {
@@ -13,12 +14,11 @@ export class AuthService {
   private baseUrl: string;
 
   constructor(private http: Http,
-              @Inject(ConfigService) private configService: ConfigService, private nicciService : NicciService) {
+              @Inject(ConfigService) private configService: ConfigService,
+              @Inject(NicciService) private nicciService : NicciService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
     this.baseUrl = configService.config.api.nicciProxy.auth;
   }
-
-
 
 
   /**
@@ -29,12 +29,10 @@ export class AuthService {
   login(email, password) : Observable<NicciKey> {
 
     let ret =  this.nicciService.signIn(email, password)
-      .map((data) => {
+      .subscribe( (nicci: NicciProfile) => {
         // with data keys try to perform login
 
-
-
-      });
+      }, console.log);
 
 
     return null;
