@@ -10,8 +10,6 @@ describe('Service: NicciService', function () {
 
   it('all method should be defined', function() {
     expect(service).toBeDefined();
-    expect(service.getNicciKey).toBeDefined();
-    expect(service.isNicciProfileActive).toBeDefined();
     expect(service.signIn).toBeDefined();
   });
 
