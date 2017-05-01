@@ -12,7 +12,11 @@ export class CarCoverageComponent implements OnInit {
 
   @Input() coverages: Price[];
 
-  constructor() { }
+  constructor() {
+    // constructor
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // init of the module
+  }
 }

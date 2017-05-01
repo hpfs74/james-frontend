@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
@@ -6,24 +6,20 @@ import { Observable } from 'rxjs/Observable';
 import { NicciKey } from '../models/nicci-key';
 
 @Injectable()
-export class AuthService implements OnInit {
+export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
   private loggedIn = false;
   private baseUrl: string;
 
-  constructor(private http: Http, private configService: ConfigService, private nicciService : NicciService) {
+  constructor(private http: Http,
+              @Inject(ConfigService) private configService: ConfigService, private nicciService : NicciService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
-    this.baseUrl = '';
+    this.baseUrl = configService.config.api.nicciProxy.auth;
   }
 
 
-  ngOnInit() {
-    console.log('AUTH SERVICE INIT');
 
-    this.baseUrl = this.configService.config.api.nicciProxy.auth;
-    console.log(this.baseUrl);
-  }
 
   /**
    * Request an auth token with email and password
@@ -31,11 +27,17 @@ export class AuthService implements OnInit {
    * @param password
    */
   login(email, password) : Observable<NicciKey> {
-    console.log('AUTH SERVICE: login');
 
-    return this.nicciService.signIn(email, password);
+    let ret =  this.nicciService.signIn(email, password)
+      .map((data) => {
+        // with data keys try to perform login
 
 
+
+      });
+
+
+    return null;
     // let headers = new Headers();
     // headers.append('Content-Type', 'application/json');
     //
