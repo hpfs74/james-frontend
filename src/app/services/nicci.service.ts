@@ -14,7 +14,6 @@ export class NicciService {
 
   constructor(private http: Http, private configService: ConfigService) {
     this.baseUrl = configService.config.api.james.auth;
-    console.log(this.baseUrl);
   }
 
   /**
@@ -100,9 +99,6 @@ export class NicciService {
    * @return {Observable<R>}
    */
   private getNicciKey(): Observable<AuthKey> {
-
-    console.log(' NICCI KEY ');
-
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
@@ -110,12 +106,10 @@ export class NicciService {
     return this.http
       .post(this.baseUrl + '/key', '', {headers})
       .map((res: Response) => {
-        console.log('/key response', res);
+        //console.log('/key response', res);
 
         if (res.status === 201) {
           let data = res.json();
-          console.log('key success! ', data._id, data.key);
-
           let ret = new AuthKey();
           ret.id = data._id;
           ret.key = data.key;

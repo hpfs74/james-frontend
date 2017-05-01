@@ -5,6 +5,7 @@ import { AuthHttp } from 'angular2-jwt';
 
 import { ConfigService } from '../../config.service';
 import { Car } from '../../models/car';
+import { Price } from '../../models/price';
 
 @Injectable()
 export class CarService {
@@ -18,7 +19,6 @@ export class CarService {
     let url = this.baseUrl + `/cars/${licensePlate}`;
     return this.authHttp.get(url)
       .map(res => {
-        console.log(res);
         if (res.json) {
           return res.json().data as Car;
         } else {
@@ -28,5 +28,45 @@ export class CarService {
       //"error": "license_not_found"
       //201, 400, 501
       //.catch(this.handleError);
+  }
+
+  getCoverages(): Array<Price> {
+    return [
+      {
+        header: 'WA',
+        badge: 'ons advies',
+        features: [
+          'Schade door vandalisme',
+          'Schade door eigen schuld'
+        ],
+        price: 18.50
+      },
+      {
+        header: 'WA + Casco',
+        badge: 'ons advies',
+        features: [
+          'Brand en storm',
+          'Ruitschade',
+          'Schade door vandalisme',
+          'Schade door eigen schuld'
+        ],
+        price: 21.59,
+        highlight: true
+      },
+      {
+        header: 'WA limited',
+        badge: 'ons advies',
+        features: [
+          'Schade door anderen',
+          'Diefstal',
+          'Inbraak',
+          'Brand en storm',
+          'Ruitschade',
+          'Schade door vandalisme',
+          'Schade door eigen schuld'
+        ],
+        price: 30.19
+      }
+    ];
   }
 }

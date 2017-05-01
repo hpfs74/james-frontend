@@ -26,7 +26,7 @@ import { AuthService } from './../../services/auth.service';
             <p> Please provide the username/email address to get the reset link. </p>
               <cx-form-group [formControlName]='formGroupConfig[0].formControlName'
                 [options]="formGroupConfig[0]"></cx-form-group>
-            
+
                 <button class="cx-button knx-btn-primary fullwidth"
                   [class.cx-button--pending]="isPending" [disabled]="!forgotPasswordForm.valid || isPending">
                   Reset password</button>
@@ -90,19 +90,15 @@ export class ForgotPasswordComponent {
     this.submitted = true;
 
     if (this.forgotPasswordForm.valid) {
-      console.log('Trying to log in ...');
       this.isPending = true;
 
       let email = this.forgotPasswordForm.get('email');
 
       //DISABLE LoginComponent
       // this.router.navigate(['/overview']);
-      console.log('email is ', email.value);
 
       this.authService.forgotPassword(email.value).subscribe(() => {
         this.isPending = false;
-
-        console.log(this.authService);
 
         // TODO: check if return value is correct so at this point we can have net fail, wrong email or success.
         this.message = 'Reset complted, check your email. If you don\'t see any email please check in spam folder';

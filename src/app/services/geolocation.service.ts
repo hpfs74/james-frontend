@@ -39,7 +39,6 @@ import { Observable } from 'rxjs/Observable';
 
         // Error callback.
         (error: PositionError) => {
-          console.log('Geolocation service: ' + error.message);
           observer.error(error);
         }
       );

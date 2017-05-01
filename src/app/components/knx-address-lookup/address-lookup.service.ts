@@ -26,7 +26,6 @@ export class AddressLookupService {
     let url = this.baseUrl + postalCode.trim() + '/' + addressNumber;
     return this.http.get(url)
       .map(res => {
-        console.log(res);
         if (res.json) {
           return res.json().data as Address;
         } else {
@@ -45,7 +44,6 @@ export class AddressLookupService {
     // in a real world app, we may send the error to some remote logging infrastructure
     // instead of just logging it to the console
     this.serviceError = true;
-    console.error(error);
     return Observable.throw((error && error.json && error.json().error) || 'AIP:AddressLookupService:Server error');
   }
 }
