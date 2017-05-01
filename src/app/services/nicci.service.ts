@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from '../config.service';
 import { crypto } from 'crypto-js';
@@ -7,18 +7,18 @@ import { Observable } from 'rxjs/Observable';
 import { NicciKey } from '../models/nicci-key';
 import { NicciProfile } from '../models/nicci-profile';
 
+const config = require('../../../config/api/config.json');
+
 @Injectable()
-export class NicciService implements OnInit {
+export class NicciService {
   // store the URL so we can redirect after logging in
   private baseUrl: string;
 
-  constructor(private http: Http, private configService: ConfigService) {
+  constructor(private http: Http, @Inject(ConfigService) private configService: ConfigService) {
     console.log('NICCI Constructor');
-    this.baseUrl = 'https://profile-james-t.nicci.io';
-  }
+    console.log(configService);
 
-  ngOnInit() {
-    this.baseUrl = this.configService.config.api.nicciProxy.auth;
+    this.baseUrl = config.api.nicciProxy.auth;
   }
 
   /**
@@ -26,18 +26,64 @@ export class NicciService implements OnInit {
    * @param email
    * @param password
    */
-  public signIn(email, password) :Observable<NicciKey> {
-    console.log(' SIGN IN ');
-    return this.getNicciKey();
+  public signIn(email, password): Observable<NicciProfile> {
+
+    this
+      .getNicciKey()
+      .map( (data: NicciKey) => {
+        let encPass = this.encryptPassword(password, data.key);
+        let headers = this.getBasicHeader(data);
+
+        let tokenRequest = {
+          grant_type: 'password',
+          username: email,
+          password: encPass,
+          scope: 'profile/basic'
+        };
+
+        this.http.post(this.configService.config.api.nicciProxy.auth, tokenRequest, {headers})
+          .map((res: Response) => {
+
+            if (res.status === 200) {
+              // success login
+
+              return res.json();
+            }
+            throw new Error(res.statusText);
+          });
+      });
+
+    return null;
   }
 
   /**
    *
    * @param profile
    */
-  public isActivated(profile) {
+  public isActivated(email : string) {
+
+    this.getNicciKey().map( (data: NicciKey) =>  {
+      let headers = this.getBasicHeader(data);
+
+      this.http.post(this.configService.config.api.nicciProxy.auth, { email }, { headers })
+        .map((res: Response) => {
+
+          if (res.status === 200) {
+            // success login
+
+            let check = res.json();
+
+            if (check.status === true) {
+              // it is activated
+            }
+          }
+          throw new Error(res.statusText);
+        });
+    });
+
     throw new Error('Not implemented yet');
   }
+
 
   /**
    *
@@ -47,12 +93,27 @@ export class NicciService implements OnInit {
     throw new Error('Not implemented yet');
   }
 
+  public forgotPassword() : string {
+    let baseUrl = '';
+    let clientId = '';
+    let currentLocale = 'nl';
+    let redirectUrl = 'http';
+    let responseType = 'code';
+    let scope = 'basic+emailaddress+social';
+
+    return `${baseUrl}/password?client_id=${clientId}`
+                    + `&locale=${currentLocale}`
+                    + `&redirect_uri=${redirectUrl}`
+                    + `&response_type=${responseType}`
+                    + `&scope=${scope}`;
+  }
+
   /**
    *
    * @param source
    * @return {any}
    */
-  base64url(source) {
+  private base64url(source) {
     // Encode in classical base64
     let encodedSource = crypto.enc.Base64.stringify(source);
 
@@ -72,7 +133,7 @@ export class NicciService implements OnInit {
    * @param secret
    * @return {string}
    */
-  encryptPassword(password, secret) {
+  private encryptPassword(password, secret) {
 
     let header = {'alg': 'HS256', 'typ': 'JWT'};
     let data = password;
@@ -92,7 +153,7 @@ export class NicciService implements OnInit {
    *
    * @return {Observable<R>}
    */
-  getNicciKey() : Observable<NicciKey> {
+  private getNicciKey(): Observable<NicciKey> {
 
     console.log(' NICCI KEY ');
 
@@ -105,15 +166,14 @@ export class NicciService implements OnInit {
       .map((res: Response) => {
         console.log('/key response', res);
 
-        if (res.status === 200) {
+        if (res.status === 201) {
           let data = res.json();
-          console.log('key success!');
-          localStorage.setItem('nicci_id', data._id);
-          localStorage.setItem('nicci_key', data.key);
+          console.log('key success! ', data._id, data.key);
 
-          let ret;
+          let ret = new NicciKey();
           ret.id = data._id;
           ret.key = data.key;
+
           return ret;
         }
 
@@ -121,9 +181,12 @@ export class NicciService implements OnInit {
       });
   }
 
-  isNicciProfileActive(profile) {
+  private getBasicHeader(data : NicciKey) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+    headers.append('NICCI-Key', data.key);
+
+    return headers;
   }
 }

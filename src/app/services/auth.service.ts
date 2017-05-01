@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
@@ -12,10 +12,14 @@ export class AuthService {
   private loggedIn = false;
   private baseUrl: string;
 
-  constructor(private http: Http, private configService: ConfigService, private nicciService : NicciService) {
+  constructor(private http: Http,
+              @Inject(ConfigService) private configService: ConfigService, private nicciService : NicciService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
     this.baseUrl = configService.config.api.nicciProxy.auth;
   }
+
+
+
 
   /**
    * Request an auth token with email and password
@@ -23,11 +27,17 @@ export class AuthService {
    * @param password
    */
   login(email, password) : Observable<NicciKey> {
-    console.log('AUTH SERVICE: login');
 
-    return this.nicciService.signIn(email, password);
+    let ret =  this.nicciService.signIn(email, password)
+      .map((data) => {
+        // with data keys try to perform login
 
 
+
+      });
+
+
+    return null;
     // let headers = new Headers();
     // headers.append('Content-Type', 'application/json');
     //

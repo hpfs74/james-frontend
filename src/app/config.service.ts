@@ -1,4 +1,4 @@
-import { ConfigInterface } from './config.interface';
+import   { ConfigInterface } from './config.interface';
 
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -10,6 +10,17 @@ export class ConfigService {
   config: ConfigInterface;
 
   constructor(private http: Http) {
+  }
+
+  public getApiEndpoint() {
+    // if the configuration is not loaded
+    if (!(this.config && this.config.api)) {
+      // retrieve configuration object
+
+
+    }
+
+    return this.config.api;
   }
 
   load(url: string) {
