@@ -20,7 +20,7 @@ import { AuthService } from './../../services/auth.service';
         </div>
       </div>
 
-      <form [formGroup]="loginForm" (submit)="login($event)">
+      <form [formGroup]="loginForm" (ngSubmit)="login($event)">
         <div class="row">
           <div class="col-md-6 offset-md-3">
               <cx-form-group [formControlName]='formGroupConfig[0].formControlName'
@@ -32,7 +32,7 @@ import { AuthService } from './../../services/auth.service';
                 <button *ngIf="loginForm.get('password').value" class="btn-show-password fa fa-eye" (click)="showPassword($event)"></button>
               </div>
 
-                <button type="button" class="knx-button knx-btn-primary knx-button--fullwidth"
+                <button type="submit" class="knx-button knx-btn-primary knx-button--fullwidth"
                   [class.cx-button--pending]="isPending" [disabled]="!loginForm.valid || isPending">
                   Inloggen</button>
           </div>
@@ -108,6 +108,7 @@ export class LoginComponent {
   }
 
   login(event) {
+    event.preventDefault();
     this.submitted = true;
 
     if (this.loginForm.valid) {
@@ -121,7 +122,7 @@ export class LoginComponent {
 
       this.authService
         .login(email.value, password.value)
-        .subscribe( (loggedIn: boolean) => {
+        .subscribe( (loggedIn) => {
           this.isPending = false;
 
           if (loggedIn && this.authService.isLoggedIn()) {

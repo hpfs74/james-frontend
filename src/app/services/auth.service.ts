@@ -3,8 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
 import { Observable } from 'rxjs/Observable';
-import { NicciKey } from '../models/nicci-key';
-import { NicciProfile } from '../models/nicci-profile';
+import { User } from '../models/user';
 
 @Injectable()
 export class AuthService {
@@ -14,11 +13,12 @@ export class AuthService {
   private baseUrl: string;
 
   constructor(private http: Http,
-              @Inject(ConfigService) private configService: ConfigService,
-              @Inject(NicciService) private nicciService : NicciService) {
+              @Inject(ConfigService) private configService: ConfigService, private nicciService : NicciService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
-    this.baseUrl = configService.config.api.nicciProxy.auth;
+    this.baseUrl = configService.config.api.james.auth;
   }
+
+
 
 
   /**
@@ -26,16 +26,16 @@ export class AuthService {
    * @param email
    * @param password
    */
-  login(email, password) : Observable<NicciKey> {
+  login(email, password)  {
 
-    let ret =  this.nicciService.signIn(email, password)
-      .subscribe( (nicci: NicciProfile) => {
-        // with data keys try to perform login
+    return this.nicciService.signIn(email, password)
+      .map( (data) => {
 
-      }, console.log);
+          return data !== null;
+      });
 
 
-    return null;
+
     // let headers = new Headers();
     // headers.append('Content-Type', 'application/json');
     //
@@ -58,13 +58,16 @@ export class AuthService {
    * Remove authentication token
    */
   logout() {
-    console.log('logout!');
     localStorage.removeItem('auth_token');
     this.loggedIn = false;
   }
 
   forgotPassword(email) {
-    return null;
+    return 'https://profile-james-a.nicci.io/password?' +
+              'client_id=56a6ab20bb00893f071faddc' +
+              '&locale=nl_NL&redirect_uri=com.mobgen.knab://' +
+              '&response_type=code' +
+              '&scope=basic+emailaddress+social';
   }
 
   /**

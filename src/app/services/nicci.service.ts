@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from '../config.service';
-import { crypto } from 'crypto-js';
 import { Observable } from 'rxjs/Observable';
 
-import { NicciKey } from '../models/nicci-key';
-import { NicciProfile } from '../models/nicci-profile';
+const crypto = require('crypto-js');
+
+import { AuthKey, AuthToken } from '../models/auth';
+import { User } from '../models/user';
 
 const config = require('../../../config/api/config.json');
 
@@ -15,10 +16,7 @@ export class NicciService {
   private baseUrl: string;
 
   constructor(private http: Http, @Inject(ConfigService) private configService: ConfigService) {
-    console.log('NICCI Constructor');
-    console.log(configService);
-
-    this.baseUrl = config.api.nicciProxy.auth;
+    this.baseUrl = config.api.james.auth;
   }
 
   /**
@@ -26,11 +24,11 @@ export class NicciService {
    * @param email
    * @param password
    */
-  public signIn(email, password): Observable<NicciProfile> {
+  public signIn(email, password) {
 
-    this
+    return this
       .getNicciKey()
-      .map( (data: NicciKey) => {
+      .map( (data: AuthKey) => {
         let encPass = this.encryptPassword(password, data.key);
         let headers = this.getBasicHeader(data);
 
@@ -41,7 +39,7 @@ export class NicciService {
           scope: 'profile/basic'
         };
 
-        this.http.post(this.configService.config.api.nicciProxy.auth, tokenRequest, {headers})
+         this.http.post(this.configService.config.api.james.auth, tokenRequest, {headers})
           .map((res: Response) => {
 
             if (res.status === 200) {
@@ -52,8 +50,6 @@ export class NicciService {
             throw new Error(res.statusText);
           });
       });
-
-    return null;
   }
 
   /**
@@ -62,10 +58,10 @@ export class NicciService {
    */
   public isActivated(email : string) {
 
-    this.getNicciKey().map( (data: NicciKey) =>  {
+    this.getNicciKey().map( (data: AuthKey) =>  {
       let headers = this.getBasicHeader(data);
 
-      this.http.post(this.configService.config.api.nicciProxy.auth, { email }, { headers })
+      this.http.post(this.configService.config.api.james.auth, { email }, { headers })
         .map((res: Response) => {
 
           if (res.status === 200) {
@@ -80,8 +76,6 @@ export class NicciService {
           throw new Error(res.statusText);
         });
     });
-
-    throw new Error('Not implemented yet');
   }
 
 
@@ -153,9 +147,7 @@ export class NicciService {
    *
    * @return {Observable<R>}
    */
-  private getNicciKey(): Observable<NicciKey> {
-
-    console.log(' NICCI KEY ');
+  private getNicciKey(): Observable<AuthKey> {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -164,24 +156,21 @@ export class NicciService {
     return this.http
       .post(this.baseUrl + '/key', '', {headers})
       .map((res: Response) => {
-        console.log('/key response', res);
 
         if (res.status === 201) {
           let data = res.json();
-          console.log('key success! ', data._id, data.key);
 
-          let ret = new NicciKey();
-          ret.id = data._id;
-          ret.key = data.key;
-
-          return ret;
+          return <AuthKey> {
+            id: data._id,
+            key: data.key
+          };
         }
 
         throw new Error(res.statusText);
       });
   }
 
-  private getBasicHeader(data : NicciKey) {
+  private getBasicHeader(data : AuthKey) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');

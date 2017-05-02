@@ -1,4 +1,4 @@
-  import { crypto } from 'crypto-js';
+  const crypto = require('crypto-js');
 
    /**
    *
@@ -30,13 +30,13 @@
     let header = {'alg': 'HS256', 'typ': 'JWT'};
     let data = password;
     let stringifiedHeader = crypto.enc.Utf8.parse(JSON.stringify(header));
-    let encodedHeader = this.base64url(stringifiedHeader);
+    let encodedHeader = base64url(stringifiedHeader);
     let stringifiedData = crypto.enc.Utf8.parse(JSON.stringify(data));
-    let encodedData = this.base64url(stringifiedData);
+    let encodedData = base64url(stringifiedData);
     let signature = encodedHeader + '.' + encodedData;
 
     signature = crypto.HmacSHA256(signature, secret);
-    signature = this.base64url(signature);
+    signature = base64url(signature);
 
     return encodedHeader + '.' + encodedData + '.' + signature;
   }
