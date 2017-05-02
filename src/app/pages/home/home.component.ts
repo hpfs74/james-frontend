@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.coverages = this.insuranceService.getCoverages();
     this.topMenu = this.navigationService.getMenu();
     this.phone = this.navigationService.getPhone();
     this.footerItems = this.featureService.getFeatures();

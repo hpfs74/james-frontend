@@ -20,6 +20,7 @@
       "static-before-instance",
       "variables-before-functions"
     ],
+    "no-console": [true, "log"],
     "no-arg": true,
     "no-construct": true,
     "no-duplicate-variable": true,

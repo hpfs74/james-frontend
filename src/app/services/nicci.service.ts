@@ -6,8 +6,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { NicciKey } from '../models/nicci-key';
 import { NicciProfile } from '../models/nicci-profile';
-import { Restangular } from 'ngx-restangular';
-
 
 const config = require('../../../config/api/config.json');
 
@@ -32,11 +30,9 @@ export class NicciService {
 
     this
       .getNicciKey()
-      .subscribe( (data: NicciKey) => {
-        console.log(' BEFORE START');
-
+      .map( (data: NicciKey) => {
         let encPass = this.encryptPassword(password, data.key);
-        let headers = this.getBasicHeaderWithKey(data);
+        let headers = this.getBasicHeader(data);
 
         let tokenRequest = {
           grant_type: 'password',
@@ -45,9 +41,7 @@ export class NicciService {
           scope: 'profile/basic'
         };
 
-        console.log('READY: ', tokenRequest);
-
-        this.http.post(this.configService.config.api.nicciProxy.auth, tokenRequest, { headers })
+        this.http.post(this.configService.config.api.nicciProxy.auth, tokenRequest, {headers})
           .map((res: Response) => {
 
             if (res.status === 200) {
@@ -161,12 +155,11 @@ export class NicciService {
    */
   private getNicciKey(): Observable<NicciKey> {
 
+    console.log(' NICCI KEY ');
 
-    let headers = this.getBasicHeader();
+    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
-
-    console.log(' NICCI KEY HEADS: ', headers);
 
     return this.http
       .post(this.baseUrl + '/key', '', {headers})
@@ -188,17 +181,12 @@ export class NicciService {
       });
   }
 
-  private getBasicHeader() : Headers {
+  private getBasicHeader(data : NicciKey) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+    headers.append('NICCI-Key', data.key);
 
     return headers;
-  }
-
-  private getBasicHeaderWithKey(data : NicciKey) : Headers {
-    return this
-            .getBasicHeader()
-            .append('NICCI-Key', data.key);
   }
 }

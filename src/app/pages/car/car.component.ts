@@ -55,7 +55,6 @@ export class CarComponent implements OnInit {
       coverageAdvice: `Op basis van je situatie adviseer ik een ...`
     };
 
-    this.coverages = this.insuranceService.getCoverages();
     this.addTextMessage(this.assistantMessages.welcome);
   }
 
@@ -70,8 +69,6 @@ export class CarComponent implements OnInit {
   }
 
   getCarInfo(licensePlate: string) {
-    console.log('fetch car' + licensePlate);
-
     //TEST
     this.myCar = {
       'license': licensePlate,
@@ -115,7 +112,7 @@ export class CarComponent implements OnInit {
   }
 
   getCoverages(carDetails) {
-    this.coverages = this.insuranceService.getCoverages();
+    this.coverages = this.carService.getCoverages();
   }
 
 }

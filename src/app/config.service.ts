@@ -16,19 +16,15 @@ export class ConfigService {
     // if the configuration is not loaded
     if (!(this.config && this.config.api)) {
       // retrieve configuration object
-
-
     }
 
     return this.config.api;
   }
 
   load(url: string) {
-    console.log('Inside Load');
     return new Promise((resolve) => {
       this.http.get(url).map(res => res.json())
         .subscribe(config => {
-          console.log('Configuration loaded...........');
           this.config = config;
           resolve();
         });

@@ -32,8 +32,6 @@ export class AddressLookupComponent {
     let postalCode = this.addressFormGroup.get('postalCode').value;
     let number = this.addressFormGroup.get('houseNumber').value;
 
-    console.log(postalCode);
-
     if (!postalCode && !number) {
       return;
     }
@@ -41,7 +39,6 @@ export class AddressLookupComponent {
     if (this.addressFormGroup.get('postalCode').valid && this.addressFormGroup.get('houseNumber').valid) {
       this.addressService.lookupAddress(postalCode, number)
         .subscribe(res => {
-          console.log('postal code lookup response', res);
           // Lookup OK
           this.addressFormGroup.get('street').disable();
           this.addressFormGroup.get('city').disable();
@@ -50,15 +47,12 @@ export class AddressLookupComponent {
 
           this.showAddress = true;
         }, err => {
-          console.log('postal code ERROR', err);
           this.addressFormGroup.get('street').enable();
           this.addressFormGroup.get('city').enable();
           this.addressFormGroup.get('street').setValue('');
           this.addressFormGroup.get('city').setValue('');
           this.showAddress = true;
         });
-    } else {
-      console.log('Invalid data for lookup');
     }
   }
 
@@ -67,7 +61,7 @@ export class AddressLookupComponent {
   // 2: get address from lookupService
   getLocationAddress() {
     this.geolocationService.getCurrentPosition().subscribe(position => {
-      console.log(position);
+        //
     });
   }
 }
