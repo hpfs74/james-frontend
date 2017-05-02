@@ -19,9 +19,14 @@ export class CarComponent implements OnInit {
   chatConfig: any;
   chatMessages: Array<ChatMessage> = [];
   coverages: Array<Price>;
+
   formSteps: Array<any>;
+  currentFormStep: string;
+  isPendingNext: boolean;
+
   assistantMessages: any;
   myCar: Car;
+  isCoverageLoading: boolean = false;
 
   constructor(
     private configService: ConfigService,
@@ -30,11 +35,22 @@ export class CarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentFormStep = 'carDetails';
     this.formSteps = [
-      { title: 'Je gegevens ' },
-      { title: 'Resultaten ' },
-      { title: 'Premies vergelijken' }
+      {
+        id: 'carDetails',
+        title: 'Je gegevens'
+      },
+      {
+        id: 'carResults',
+        title: 'Resultaten'
+      },
+      {
+        id: 'carComparison',
+        title: 'Premies vergelijken'
+      }
     ];
+    this.isPendingNext = true;
 
     this.chatConfig = {
       showAvatar: true,
@@ -68,13 +84,21 @@ export class CarComponent implements OnInit {
     this.chatMessages.push({ type: 'text', content: message });
   }
 
+  goToPreviousStep(event) {
+    ;
+  }
+
+  goToNextStep(event) {
+    this.currentFormStep = 'carCoverages';
+  }
+
   getCarInfo(licensePlate: string) {
     //TEST
     this.myCar = {
       'license': licensePlate,
       'vin': 'VF1BA0F0G17869206',
       'reporting_code': '9206',
-      'year': '1998',
+      'year': 2016,
       'fuel': 'Gasoline',
       'secondary_fuel': null,
       'color': 'Blauw',
@@ -99,6 +123,7 @@ export class CarComponent implements OnInit {
 
     this.addCarMessage(this.myCar);
 
+    //TODO: test with backend
     // this.carService.getByLicense(licensePlate)
     //   .subscribe(res => {
     //     this.myCar = res;
@@ -111,8 +136,12 @@ export class CarComponent implements OnInit {
     //   });
   }
 
-  getCoverages(carDetails) {
-    this.coverages = this.carService.getCoverages();
+  getCoverages(formData) {
+    if (this.myCar && formData.loan) {
+      this.isCoverageLoading = true;
+      this.coverages = this.carService.getCoverages(this.myCar, formData);
+      this.isCoverageLoading = false;
+    }
   }
 
 }

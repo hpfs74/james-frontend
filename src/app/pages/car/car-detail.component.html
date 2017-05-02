@@ -3,7 +3,7 @@
 
     <h2>Je gegevens</h2>
 
-    <form [formGroup]="form.formGroup" (submit)="submitForm($event)">
+    <form [formGroup]="form.formGroup">
 
       <cx-form-group [options]="{
           type: 'custom',
@@ -150,26 +150,21 @@
           }">
       </cx-form-group>
 
-    </form>
+      <div class="car-form__coverages">
+        <knx-loader [visible]="isCoverageLoading">
+          Bezig met ophalen van dekkingsopties...
+        </knx-loader>
 
-    <knx-loader [visible]="isCoverageLoading">
-      Bezig met ophalen van dekkingsopties...
-    </knx-loader>
-
-    <form *ngIf="!isCoverageLoading && coverages">
-      <h2>Je dekkingswensen</h2>
-      <knx-price-table [items]="coverages"></knx-price-table>
-
-      <div class="cx-form-group cx-form-group--space-between">
-        <button class="knx-button knx-button--link knx-button--back" routerLink="/">Terug</button>
-
-        <!-- submit -->
-        <button class="knx-button knx-button--arrow">Naar resultaten</button>
+        <ng-container *ngIf="!isCoverageLoading && coverages">
+          <h2>Je dekkingswensen</h2>
+          <knx-price-table [items]="coverages"></knx-price-table>
+        </ng-container>
       </div>
+
     </form>
 
   </div>
   <div class="col-md-2">
-    <!-- sidebar -->
+    <!-- some breathing space between this and assistant -->
   </div>
 </div>

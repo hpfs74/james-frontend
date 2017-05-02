@@ -6,8 +6,9 @@
   "api": {
     "james": {
       "auth": "https://profile-james-t.nicci.io",
-      "address": "https://profile-james-t.nicci.io",
-      "baseUrl": "https://profile-james-t.nicci.io/v1"
+      "baseUrl": "https://profile-james-t.nicci.io/v1",
+      "address": "https://profile-james-t.nicci.io/v1/address",
+      "car": "https://profile-james-t.nicci.io/v1/cars"
     },
     "external": {}
   }

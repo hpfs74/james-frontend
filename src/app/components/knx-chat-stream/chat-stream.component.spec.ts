@@ -19,7 +19,7 @@ describe('Component: ChatStreamComponent', () => {
     'license': 'KX-900-Z',
     'vin': 'VF1BA0F0G17869206',
     'reporting_code': '9206',
-    'year': '1998',
+    'year': 1998,
     'fuel': 'Gasoline',
     'secondary_fuel': null,
     'color': 'Blauw',

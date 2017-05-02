@@ -14,11 +14,11 @@ import { Price } from '../../models/price';
 export class CarDetailComponent implements OnInit {
   public form: CarDetailForm;
   public CXInputMasks = CXInputMasks;
-  public isCoverageLoading: boolean = true;
 
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];
+  @Input() isCoverageLoading: boolean;
 
   // notify licenseplate entered
   @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
@@ -34,11 +34,9 @@ export class CarDetailComponent implements OnInit {
 
   ngOnInit() {
     this.form = new CarDetailForm(this.fb);
-  }
-
-  //TODO: implement
-  onDetailsChange() {
-    this.coverageDetailsChange.emit({});
+    this.form.formGroup.valueChanges.subscribe(data => {
+      this.coverageDetailsChange.emit(data);
+    });
   }
 
   onLicensePlateChange(licensePlate: string) {
@@ -49,6 +47,6 @@ export class CarDetailComponent implements OnInit {
   }
 
   submitForm(event) {
-    //this.nextStep.emit(carDetails);
+    this.nextStep.emit();
   }
 }

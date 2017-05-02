@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Don't import CXFormsModule: breaks lazy loading due to it using BrowserModule instead of CommonModule
 import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
+import { CXWizardModule } from '../../node_modules/@cx/wizard';
 
 /**
  * Pipes
@@ -52,7 +53,8 @@ export const sharedComponents = [
     FormsModule,
     ReactiveFormsModule,
     TextMaskModule,
-    CXFormsModule
+    CXFormsModule,
+    CXWizardModule
   ],
   declarations: [
     TitleCasePipe,
@@ -62,6 +64,7 @@ export const sharedComponents = [
     CommonModule,
     FormsModule,
     CXFormsModule,
+    CXWizardModule,
     ReactiveFormsModule,
     ...sharedComponents
   ]

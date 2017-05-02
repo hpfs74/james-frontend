@@ -5,7 +5,6 @@ import { CarRoutingModule } from './car-routing.module';
 import { CarService } from './car.service';
 import { CarComponent } from './car.component';
 import { CarDetailComponent } from './car-detail.component';
-import { CarCoverageComponent } from './car-coverage.component';
 
 @NgModule({
   imports: [
@@ -14,8 +13,7 @@ import { CarCoverageComponent } from './car-coverage.component';
   ],
   declarations: [
     CarComponent,
-    CarDetailComponent,
-    CarCoverageComponent
+    CarDetailComponent
   ],
   providers: [
     CarService

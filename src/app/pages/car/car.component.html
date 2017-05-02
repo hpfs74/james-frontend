@@ -9,12 +9,28 @@
 </div>
 
 <div class="container">
+
   <div class="row">
     <div class="col-md-8">
-      <knx-car-detail-form
-        (licensePlateChange)="getCarInfo($event)"
-        (coverageDetailsChange)="getCoverages($event)">
-      </knx-car-detail-form>
+      <div class="car-forms__container">
+
+        <div class="car-form" [ngSwitch]="currentFormStep">
+          <knx-car-detail-form
+            *ngSwitchCase="'carDetails'"
+            (licensePlateChange)="getCarInfo($event)"
+            (coverageDetailsChange)="getCoverages($event)"
+            (nextStep)="goToNextStep($event)"
+            [coverages]="coverages"
+            [isCoverageLoading]="isCoverageLoading">
+          </knx-car-detail-form>
+        </div>
+
+        <div class="cx-form-group cx-form-group--space-between">
+          <button class="knx-button knx-button--link knx-button--back" (click)="goToPreviousStep()">Terug</button>
+          <button class="knx-button knx-button--primary knx-button--arrow" (click)="goToNextStep()" [disabled]="isPendingNext">Volgende</button>
+        </div>
+
+      </div>
     </div>
     <div class="col-md-4">
       <knx-chat-stream

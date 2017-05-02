@@ -17,18 +17,19 @@ export class AddressLookupService {
   /**
    * Get street, city and geolocation from postalcode
    * @param {string} postalCode
-   * @param {string} addressNumber
+   * @param {string} houseNumber
    * @returns {Observable<Address>}
    *
    * @memberOf AddressLookupService
    */
-  public lookupAddress(postalCode: string, addressNumber: string): Observable<Address> {
-    let url = this.baseUrl + postalCode.trim() + '/' + addressNumber;
+  public lookupAddress(postalCode: string, houseNumber: string): Observable<Address> {
+    let url = this.baseUrl + '/' + postalCode.trim() + houseNumber.trim(); // POSTCODENUMBER
     return this.http.get(url)
-      .map(res => {
-        if (res.json) {
+      .map((res: Response) => {
+        if (res.status === 200) {
           return res.json().data as Address;
         } else {
+          //  "errors": [    "address_not_found"  ]
           return [];
         }
       })
