@@ -20,6 +20,7 @@ export interface NicciEndpoint {
   address?: string;
   profile?: string;
   car?: string;
+  helper?: string;
   travel?: string;
   liability?: string;
   content?: string;

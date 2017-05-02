@@ -7,6 +7,7 @@ import { CarService } from './car.service';
 import { Car } from '../../models/car';
 import { ChatMessage } from '../../models/chat-message';
 import { Price } from '../../models/price';
+import { CarCoverageRecommendation } from './../../models/coverage';
 import { ChatStreamComponent } from '../../components/knx-chat-stream/';
 
 @Component({
@@ -139,8 +140,24 @@ export class CarComponent implements OnInit {
   getCoverages(formData) {
     if (this.myCar && formData.loan) {
       this.isCoverageLoading = true;
-      this.coverages = this.carService.getCoverages(this.myCar, formData);
-      this.isCoverageLoading = false;
+
+      // get default coverage types
+      this.coverages = this.carService.getCoverages();
+
+      // fetch recommendation
+      this.carService.getCoverageRecommendation(this.myCar.license, formData.loan)
+        .subscribe(res => {
+          this.isCoverageLoading = false;
+
+          //TODO: determine what return values are possible from NICCI
+          let coverage = this.coverages.find(price => price.id === res.recommended_value);
+          if (coverage) {
+            coverage.highlight = true;
+          }
+
+        }, error => {
+          this.isCoverageLoading = true;
+        });
     }
   }
 
