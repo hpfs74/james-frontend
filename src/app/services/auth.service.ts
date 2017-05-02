@@ -4,6 +4,9 @@ import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user';
+import { tokenNotExpired } from 'angular2-jwt';
+;
+
 
 @Injectable()
 export class AuthService {
@@ -13,7 +16,8 @@ export class AuthService {
   private baseUrl: string;
 
   constructor(private http: Http,
-              @Inject(ConfigService) private configService: ConfigService, private nicciService : NicciService) {
+              private configService: ConfigService,
+              private nicciService : NicciService) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
     this.baseUrl = configService.config.api.james.auth;
   }
@@ -29,6 +33,7 @@ export class AuthService {
         return cb(err, token);
       }
 
+      localStorage.setItem('access_token', token.access_token);
       localStorage.setItem('token', JSON.stringify(token));
 
       cb(null, token);
@@ -58,6 +63,7 @@ export class AuthService {
    * Remove authentication token
    */
   logout() {
+    localStorage.removeItem('access_token');
     localStorage.removeItem('token');
     this.loggedIn = false;
   }
@@ -71,7 +77,7 @@ export class AuthService {
    * @returns {Boolean}
    */
   isLoggedIn() : boolean {
-    return localStorage.getItem('token') !== null;
-
+    return tokenNotExpired();
+    // return localStorage.getItem('token') !== null;
   }
 }
