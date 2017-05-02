@@ -18,21 +18,21 @@ export class AuthService {
     this.baseUrl = configService.config.api.james.auth;
   }
 
-
-
-
   /**
    * Request an auth token with email and password
    * @param email
    * @param password
    */
-  login(email, password)  {
+  login(email, password, cb)  {
+    return this.nicciService.signIn(email, password, (err, token) => {
+      if (err) {
+        return cb(err, token);
+      }
 
-    return this.nicciService.signIn(email, password)
-      .map( (data) => {
+      localStorage.setItem('token', JSON.stringify(token));
 
-          return data !== null;
-      });
+      cb(null, token);
+    });
 
 
 
@@ -58,23 +58,20 @@ export class AuthService {
    * Remove authentication token
    */
   logout() {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('token');
     this.loggedIn = false;
   }
 
   forgotPassword(email) {
-    return 'https://profile-james-a.nicci.io/password?' +
-              'client_id=56a6ab20bb00893f071faddc' +
-              '&locale=nl_NL&redirect_uri=com.mobgen.knab://' +
-              '&response_type=code' +
-              '&scope=basic+emailaddress+social';
+    return this.nicciService.forgotPassword();
   }
 
   /**
    * Return whether the current user is logged in
    * @returns {Boolean}
    */
-  isLoggedIn() {
-    return this.loggedIn;
+  isLoggedIn() : boolean {
+    return localStorage.getItem('token') !== null;
+
   }
 }

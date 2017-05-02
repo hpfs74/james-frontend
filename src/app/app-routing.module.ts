@@ -22,8 +22,14 @@ export const routes: Routes = [
       breadcrumb: 'Cookie-beleid'
     }
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     // 404: redirect unkown paths to home
     path: '**',

@@ -121,11 +121,35 @@ export class LoginComponent {
       // this.router.navigate(['/overview']);
 
       this.authService
-        .login(email.value, password.value)
-        .subscribe( (loggedIn) => {
+        .login(email.value, password.value, (err, data) => {
           this.isPending = false;
 
-          if (loggedIn && this.authService.isLoggedIn()) {
+          if (err) {
+
+            if(data.error === 'inactive_profile') {
+              this.messageTitle = 'Login failed';
+              this.message = 'Sorry your profile is inactive';
+              return;
+            }
+
+            if (data.error === 'invalid_password') {
+              this.messageTitle = 'Login failed';
+              this.message = 'Invalid email or password';
+              return ;
+            }
+
+            if (data.error === 'too_many_login_attempts') {
+              this.messageTitle = 'Login failed';
+              this.message = data.error_description;
+              return;
+            }
+
+            this.messageTitle = 'Login failed';
+            this.message = 'Unexpected error while calling remote ('+err+')';
+            return ;
+          }
+
+
             this.messageTitle = 'Succes!';
             this.message = 'Login succesfull';
             // Get the redirect URL from our auth service
@@ -140,11 +164,7 @@ export class LoginComponent {
             };
 
             // Redirect the user
-            // this.router.navigate([redirect], navigationExtras);
-          } else {
-            this.messageTitle = 'Login failed';
-            this.message = 'Invalid email or password';
-          }
+             this.router.navigate([redirect], navigationExtras);
         });
     }
     return;

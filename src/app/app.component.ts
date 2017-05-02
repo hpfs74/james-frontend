@@ -12,7 +12,6 @@ import {
   NicciService
 } from './services';
 
-import { LoginComponent } from './pages/login/login.component';
 
 
 @Component({

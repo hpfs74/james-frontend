@@ -24,11 +24,12 @@ export class NicciService {
    * @param email
    * @param password
    */
-  public signIn(email, password) {
+  public signIn(email, password, cb) {
 
     return this
       .getNicciKey()
-      .map( (data: AuthKey) => {
+      .subscribe( (data: AuthKey) => {
+
         let encPass = this.encryptPassword(password, data.key);
         let headers = this.getBasicHeader(data);
 
@@ -39,16 +40,20 @@ export class NicciService {
           scope: 'profile/basic'
         };
 
-         this.http.post(this.configService.config.api.james.auth, tokenRequest, {headers})
-          .map((res: Response) => {
+          this.http.post(this.configService.config.api.james.auth + '/token', tokenRequest, {headers})
+            .subscribe( (res: Response) => {
+              let ret = res.json();
 
-            if (res.status === 200) {
-              // success login
+              let token  : AuthToken = {
+                access_token: ret.access_token,
+                token_type: ret.token_type,
+                expires_in: ret.expires_in,
+                refresh_token: ret.refresh_token
+              };
 
-              return res.json();
-            }
-            throw new Error(res.statusText);
-          });
+              cb(null, token);
+
+            }, (res) => cb(res.statusText, res.json()));
       });
   }
 
@@ -88,18 +93,25 @@ export class NicciService {
   }
 
   public forgotPassword() : string {
-    let baseUrl = '';
-    let clientId = '';
-    let currentLocale = 'nl';
-    let redirectUrl = 'http';
-    let responseType = 'code';
-    let scope = 'basic+emailaddress+social';
 
-    return `${baseUrl}/password?client_id=${clientId}`
-                    + `&locale=${currentLocale}`
-                    + `&redirect_uri=${redirectUrl}`
-                    + `&response_type=${responseType}`
-                    + `&scope=${scope}`;
+    return 'https://profile-james-a.nicci.io/password?' +
+      'client_id=56a6ab20bb00893f071faddc' +
+      '&locale=nl_NL&redirect_uri=com.mobgen.knab://' +
+      '&response_type=code' +
+      '&scope=basic+emailaddress+social';
+
+    // let baseUrl = '';
+    // let clientId = '';
+    // let currentLocale = 'nl';
+    // let redirectUrl = 'http';
+    // let responseType = 'code';
+    // let scope = 'basic+emailaddress+social';
+    //
+    // return `${baseUrl}/password?client_id=${clientId}`
+    //                 + `&locale=${currentLocale}`
+    //                 + `&redirect_uri=${redirectUrl}`
+    //                 + `&response_type=${responseType}`
+    //                 + `&scope=${scope}`;
   }
 
   /**
@@ -174,7 +186,7 @@ export class NicciService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
-    headers.append('NICCI-Key', data.key);
+    headers.append('NICCI-Key', data.id);
 
     return headers;
   }

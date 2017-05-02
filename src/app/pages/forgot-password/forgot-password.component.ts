@@ -6,10 +6,10 @@ import { CXEmailValidator } from '../../../../node_modules/@cx/form';
 import { AuthService } from './../../services/auth.service';
 
 /**
- * Login page that's rendered in router-outlet of 'AppComponent if not logged in
+ * Forgot password component
  *
  * @export
- * @class LoginComponent
+ * @class ForgotPasswordComponent
  */
 @Component({
   selector: 'knx-forgot-password',
@@ -59,52 +59,59 @@ export class ForgotPasswordComponent {
 
     // TODO: check that you cannot get here if you're logged in
     this.initForm();
+
+
   }
 
   initForm() {
-    this.formBuilder = new FormBuilder();
-    this.forgotPasswordForm = this.formBuilder.group({
-      email: [null, Validators.compose(
-        [Validators.required, CXEmailValidator]
-      )],
-      password: [null, Validators.compose(
-        [Validators.required]
-      )],
-    });
 
-    this.formGroupConfig = [
-      {
-        formControlName: 'email',
-        label: 'E-mailadres',
-        formControl: this.forgotPasswordForm.get('email'),
-        inputOptions: {
-          placeholder: 'voorbeeld@mail.com',
-        }
-      }
-    ];
+    let url =this.authService.forgotPassword('');
+    this.router.navigateByUrl(url);
+
+    // window.location.href = url;
+    // this.formBuilder = new FormBuilder();
+    // this.forgotPasswordForm = this.formBuilder.group({
+    //   email: [null, Validators.compose(
+    //     [Validators.required, CXEmailValidator]
+    //   )],
+    //   password: [null, Validators.compose(
+    //     [Validators.required]
+    //   )],
+    // });
+    //
+    // this.formGroupConfig = [
+    //   {
+    //     formControlName: 'email',
+    //     label: 'E-mailadres',
+    //     formControl: this.forgotPasswordForm.get('email'),
+    //     inputOptions: {
+    //       placeholder: 'voorbeeld@mail.com',
+    //     }
+    //   }
+    // ];
   }
 
 
 
   resetPasswordRequest(event) {
-    this.submitted = true;
-
-    if (this.forgotPasswordForm.valid) {
-      this.isPending = true;
-
-      let email = this.forgotPasswordForm.get('email');
-
-      //DISABLE LoginComponent
-      // this.router.navigate(['/overview']);
-
-      this.authService.forgotPassword(email.value).subscribe(() => {
-        this.isPending = false;
-
-        // TODO: check if return value is correct so at this point we can have net fail, wrong email or success.
-        this.message = 'Reset complted, check your email. If you don\'t see any email please check in spam folder';
-        this.messageTitle = 'Password reset request';
-      });
-    }
-    return;
+    // this.submitted = true;
+    //
+    // if (this.forgotPasswordForm.valid) {
+    //   this.isPending = true;
+    //
+    //   let email = this.forgotPasswordForm.get('email');
+    //
+    //   //DISABLE LoginComponent
+    //   // this.router.navigate(['/overview']);
+    //
+    //   this.authService.forgotPassword(email.value).subscribe(() => {
+    //     this.isPending = false;
+    //
+    //     // TODO: check if return value is correct so at this point we can have net fail, wrong email or success.
+    //     this.message = 'Reset complted, check your email. If you don\'t see any email please check in spam folder';
+    //     this.messageTitle = 'Password reset request';
+    //   });
+    // }
+    // return;
   }
 }
