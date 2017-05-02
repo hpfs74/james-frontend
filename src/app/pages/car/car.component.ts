@@ -69,6 +69,9 @@ export class CarComponent implements OnInit {
         korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
         dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`
       },
+      error: {
+        carInfo: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
+      },
       coverageAdvice: `Op basis van je situatie adviseer ik een ...`
     };
 
@@ -125,16 +128,15 @@ export class CarComponent implements OnInit {
     this.addCarMessage(this.myCar);
 
     //TODO: test with backend
-    // this.carService.getByLicense(licensePlate)
-    //   .subscribe(res => {
-    //     this.myCar = res;
+    this.carService.getByLicense(licensePlate)
+      .subscribe(res => {
+        this.myCar = res;
 
-    //     // show assistant message
-    //     this.addCarMessage(this.myCar);
+        this.addCarMessage(this.myCar);
 
-    //   }, err => {
-    //     //console.log();
-    //   });
+      }, err => {
+        this.addTextMessage(this.assistantMessages.error.carInfo);
+      });
   }
 
   getCoverages(formData) {

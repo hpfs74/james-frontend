@@ -11,7 +11,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
           <ng-container *ngIf="ref.childNodes.length == 0">
             <div [innerHtml]="message"></div>
           </ng-container>
-          <!--<div class="knx-chat-message-datetime">{{ getMessageDate() | date:'shortTime' }}</div>-->
+          <div *ngIf="showDate" class="knx-chat-message-datetime">{{ getMessageDate() | date:'shortTime' }}</div>
         </div>
       </div>
     </div>
@@ -40,6 +40,8 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
 })
 export class ChatMessageComponent implements OnInit {
   @Input() message: string;
+  @Input() showDate: boolean = false;
+
   date: Date;
 
   getMessageDate() {
