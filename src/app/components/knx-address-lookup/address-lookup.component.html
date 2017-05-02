@@ -1,4 +1,7 @@
 <div class="formgroup-address-lookup" [formGroup]="addressFormGroup">
+
+  <div *ngIf="addressFormGroup.errors">Fout</div>
+
   <div class="row">
     <div class="col-md-12">
       <cx-form-group formControlName="postalCode" [options]="{
@@ -15,20 +18,18 @@
   </div>
   <div class="row">
     <div class="col-md-7">
-      <cx-form-group formControlName="houseNumber" (focusout)="addressBlur($event)" [options]="{
+      <cx-form-group formControlName="houseNumber" [options]="{
         formControl: addressFormGroup.get('houseNumber'),
         label: 'Huisnummer',
-        validationErrors: validationErrors,
-        events: ['blur']
+        validationErrors: validationErrors
       }"></cx-form-group>
     </div>
 
     <div class="col-md-3">
-      <cx-form-group formControlName="houseNumberExtension" (focusout)="addressBlur($event)" [options]="{
+      <cx-form-group formControlName="houseNumberExtension" [options]="{
         formControl: addressFormGroup.get('houseNumberExtension'),
         label: 'Toevoeging',
-        validationErrors: validationErrors,
-        events: ['blur']
+        validationErrors: validationErrors
       }"></cx-form-group>
     </div>
 

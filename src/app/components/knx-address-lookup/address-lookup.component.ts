@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { Component, AfterViewChecked, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormControl, AbstractControl, FormArray } from '@angular/forms';
 
 import { Options as InputOptions } from '../../../../node_modules/@cx/input/src/cx-input.options';
 import { postalCodeMask } from '../../../../node_modules/@cx/input/src/cx-input.masks';
@@ -14,7 +14,7 @@ import { GeolocationService } from '../../services/geolocation.service';
   templateUrl: './address-lookup.component.html',
   providers: [AddressLookupService, GeolocationService]
 })
-export class AddressLookupComponent {
+export class AddressLookupComponent implements AfterViewChecked {
   @Input() address: Address;
   @Input() showAddress: boolean = true;
   @Input() addressFormGroup: FormGroup;
@@ -23,36 +23,39 @@ export class AddressLookupComponent {
   public postalCodeMask = postalCodeMask;
 
   constructor(
-    private formBuilder: FormBuilder,
     private addressService: AddressLookupService,
     private geolocationService: GeolocationService) {
   }
 
-  addressBlur(event) {
-    let postalCode = this.addressFormGroup.get('postalCode').value;
-    let number = this.addressFormGroup.get('houseNumber').value;
+  ngAfterViewChecked(): void {
+    this.addressFormGroup.setValidators(this.validateAddress);
+  }
 
-    if (!postalCode && !number) {
-      return;
+  validateAddress(formGroup: AbstractControl): { [key: string]: boolean } {
+    let postalCode = formGroup.get('postalCode').value;
+    let houseNumber = formGroup.get('houseNumber').value;
+
+    if (!postalCode && !houseNumber) {
+      return null;
     }
 
-    if (this.addressFormGroup.get('postalCode').valid && this.addressFormGroup.get('houseNumber').valid) {
-      this.addressService.lookupAddress(postalCode, number)
-        .subscribe(res => {
-          // Lookup OK
-          this.addressFormGroup.get('street').disable();
-          this.addressFormGroup.get('city').disable();
-          this.addressFormGroup.get('street').setValue(res.street);
-          this.addressFormGroup.get('city').setValue(res.city);
+    if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
+      // let isValid: boolean = false;
+      // this.addressService.lookupAddress(postalCode, houseNumber)
+      //   .subscribe(res => {
+      //     isValid = !!(res.street && res.city);
+      //   }, err => {
+      //     isValid = false; // cannot validate: server error?
+      //   });
 
-          this.showAddress = true;
-        }, err => {
-          this.addressFormGroup.get('street').enable();
-          this.addressFormGroup.get('city').enable();
-          this.addressFormGroup.get('street').setValue('');
-          this.addressFormGroup.get('city').setValue('');
-          this.showAddress = true;
-        });
+      // test
+      let isValid = false;
+      console.log(isValid);
+
+
+      console.log(formGroup);
+
+      return isValid ? null : { address: true };
     }
   }
 
@@ -61,7 +64,7 @@ export class AddressLookupComponent {
   // 2: get address from lookupService
   getLocationAddress() {
     this.geolocationService.getCurrentPosition().subscribe(position => {
-        //
+      //console.log('Geolocation lookup not implemented');
     });
   }
 }

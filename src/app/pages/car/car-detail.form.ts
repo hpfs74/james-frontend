@@ -13,6 +13,7 @@ export class CarDetailForm {
     licensePlate: () => `Vul een geldig kenteken in`,
     birthDate: () => 'Vul een geldige geboortedatum in',
     postalCode: () => `Vul een geldige postcode in`,
+    address: () => `Vul een geldige postcode en huisnummer combinatie in`,
     houseNumber: () => `Vul een huisnummer in`,
     damageFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
   };

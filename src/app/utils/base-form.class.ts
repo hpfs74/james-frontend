@@ -13,9 +13,7 @@ export function createAddress(fb: FormBuilder): FormGroup {
       ]
     )],
     houseNumber: [null, Validators.required],
-    houseNumberExtension: [null],
-    street: [null],
-    city: [null]
+    houseNumberExtension: [null]
   });
 }
 
