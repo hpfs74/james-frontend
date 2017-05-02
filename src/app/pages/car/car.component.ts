@@ -7,6 +7,7 @@ import { CarService } from './car.service';
 import { Car } from '../../models/car';
 import { ChatMessage } from '../../models/chat-message';
 import { Price } from '../../models/price';
+import { CarCoverageRecommendation } from './../../models/coverage';
 import { ChatStreamComponent } from '../../components/knx-chat-stream/';
 
 @Component({
@@ -19,9 +20,14 @@ export class CarComponent implements OnInit {
   chatConfig: any;
   chatMessages: Array<ChatMessage> = [];
   coverages: Array<Price>;
+
   formSteps: Array<any>;
+  currentFormStep: string;
+  isPendingNext: boolean;
+
   assistantMessages: any;
   myCar: Car;
+  isCoverageLoading: boolean = false;
 
   constructor(
     private configService: ConfigService,
@@ -30,11 +36,22 @@ export class CarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentFormStep = 'carDetails';
     this.formSteps = [
-      { title: 'Je gegevens ' },
-      { title: 'Resultaten ' },
-      { title: 'Premies vergelijken' }
+      {
+        id: 'carDetails',
+        title: 'Je gegevens'
+      },
+      {
+        id: 'carResults',
+        title: 'Resultaten'
+      },
+      {
+        id: 'carComparison',
+        title: 'Premies vergelijken'
+      }
     ];
+    this.isPendingNext = true;
 
     this.chatConfig = {
       showAvatar: true,
@@ -52,6 +69,9 @@ export class CarComponent implements OnInit {
         korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
         dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`
       },
+      error: {
+        carInfo: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
+      },
       coverageAdvice: `Op basis van je situatie adviseer ik een ...`
     };
 
@@ -68,13 +88,21 @@ export class CarComponent implements OnInit {
     this.chatMessages.push({ type: 'text', content: message });
   }
 
+  goToPreviousStep(event) {
+    ;
+  }
+
+  goToNextStep(event) {
+    this.currentFormStep = 'carCoverages';
+  }
+
   getCarInfo(licensePlate: string) {
     //TEST
     this.myCar = {
       'license': licensePlate,
       'vin': 'VF1BA0F0G17869206',
       'reporting_code': '9206',
-      'year': '1998',
+      'year': 2016,
       'fuel': 'Gasoline',
       'secondary_fuel': null,
       'color': 'Blauw',
@@ -99,20 +127,40 @@ export class CarComponent implements OnInit {
 
     this.addCarMessage(this.myCar);
 
-    // this.carService.getByLicense(licensePlate)
-    //   .subscribe(res => {
-    //     this.myCar = res;
+    //TODO: test with backend
+    this.carService.getByLicense(licensePlate)
+      .subscribe(res => {
+        this.myCar = res;
 
-    //     // show assistant message
-    //     this.addCarMessage(this.myCar);
+        this.addCarMessage(this.myCar);
 
-    //   }, err => {
-    //     //console.log();
-    //   });
+      }, err => {
+        this.addTextMessage(this.assistantMessages.error.carInfo);
+      });
   }
 
-  getCoverages(carDetails) {
-    this.coverages = this.carService.getCoverages();
+  getCoverages(formData) {
+    if (this.myCar && formData.loan) {
+      this.isCoverageLoading = true;
+
+      // get default coverage types
+      this.coverages = this.carService.getCoverages();
+
+      // fetch recommendation
+      this.carService.getCoverageRecommendation(this.myCar.license, formData.loan)
+        .subscribe(res => {
+          this.isCoverageLoading = false;
+
+          //TODO: determine what return values are possible from NICCI
+          let coverage = this.coverages.find(price => price.id === res.recommended_value);
+          if (coverage) {
+            coverage.highlight = true;
+          }
+
+        }, error => {
+          this.isCoverageLoading = true;
+        });
+    }
   }
 
 }

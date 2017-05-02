@@ -2,7 +2,7 @@ export interface ICar {
   license: string;
   vin: string;
   reporting_code: string;
-  year: string;
+  year: number;
   fuel: string;
   secondary_fuel?: string;
   color: string;
@@ -34,7 +34,7 @@ export class Car implements ICar {
   license: string;
   vin: string;
   reporting_code: string;
-  year: string;
+  year: number;
   fuel: string;
   secondary_fuel: string;
   color: string;
