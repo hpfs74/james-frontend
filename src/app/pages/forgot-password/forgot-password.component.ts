@@ -97,13 +97,13 @@ export class ForgotPasswordComponent {
       //DISABLE LoginComponent
       // this.router.navigate(['/overview']);
 
-      this.authService.forgotPassword(email.value).subscribe(() => {
-        this.isPending = false;
+      // this.authService.forgotPassword(email.value).subscribe(() => {
+      //   this.isPending = false;
 
-        // TODO: check if return value is correct so at this point we can have net fail, wrong email or success.
-        this.message = 'Reset complted, check your email. If you don\'t see any email please check in spam folder';
-        this.messageTitle = 'Password reset request';
-      });
+      //   // TODO: check if return value is correct so at this point we can have net fail, wrong email or success.
+      //   this.message = 'Reset complted, check your email. If you don\'t see any email please check in spam folder';
+      //   this.messageTitle = 'Password reset request';
+      // });
     }
     return;
   }
