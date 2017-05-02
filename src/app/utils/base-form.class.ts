@@ -50,3 +50,21 @@ export function dateValidator(key: string) {
     return !value ? obj : null;
   };
 }
+
+export function birthDateValidator(key: string) {
+  return (c: FormControl): {[key: string]: any} => {
+    let value = c.value;
+
+    if (value && !(value instanceof Date)) {
+      value = dateMask.decode(value);
+    }
+
+    if (value && (value.getFullYear() < 1897 || value.getFullYear() > 1999)) {
+      value = false;
+    }
+
+    let obj = {};
+    obj[key] = true;
+    return !value ? obj : null;
+  };
+}

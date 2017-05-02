@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { createAddress, dateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.class';
+import { createAddress, dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.class';
 import { LicensePlateValidator } from '../../components/knx-input-licenseplate/licenseplate.validator';
 
 export class CarDetailForm {
@@ -11,7 +11,7 @@ export class CarDetailForm {
     required: () => 'Dit veld is verplicht',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
     licensePlate: () => `Vul een geldig kenteken in`,
-    birthDate: () => 'Vul een geboortedatum in',
+    birthDate: () => 'Vul een geldige geboortedatum in',
     postalCode: () => `Vul een geldige postcode in`,
     houseNumber: () => `Vul een huisnummer in`,
     damageFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
@@ -29,7 +29,7 @@ export class CarDetailForm {
       birthDate: [null,
         [
           Validators.required,
-          dateValidator('birthDate')
+          birthDateValidator('birthDate')
         ]
       ],
       damageFreeYears: [null, Validators.compose(
