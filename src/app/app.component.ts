@@ -8,8 +8,7 @@ import {
   NavigationService,
   InsuranceService,
   CookieService,
-  ContentService,
-  NicciService
+  ContentService
 } from './services';
 
 @Component({
@@ -22,7 +21,7 @@ import {
 export class AppComponent implements OnInit {
   isLoading: boolean = true;
 
-  constructor(private configService: ConfigService, private authService: AuthService, private nicciService: NicciService) {
+  constructor(private configService: ConfigService, private authService: AuthService) {
   }
 
   ngOnInit() {

@@ -46,8 +46,7 @@ export const routes: Routes = [
   ],
   providers: [
     AuthService,
-    AuthGuard,
-    NicciService
+    AuthGuard
   ]
 })
 export class AppRoutingModule { }

@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();
 
-    this.authService.getCurrentProfile()
+    this.authService.getUserProfile()
       .subscribe( (user) => {
         this.profile = user;
       }, (res) => {
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   signOut() {
-    this.authService.logout();
+    this.authService.signOff();
     this.router.navigate(['']);
   }
 }

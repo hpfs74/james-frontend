@@ -14,7 +14,6 @@ import { requestOptionsProvider } from './services/default-request-opts.service'
 import { AuthModule } from './auth.module';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
-import { NicciService } from './services/nicci.service';
 
 
 import { LoginComponent } from './pages/login/login.component';
