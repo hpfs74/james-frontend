@@ -3,24 +3,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ForgotPasswordComponent } from './forgot-password.component';
+import { PasswordResetComponent } from './password-reset.component';
 
 describe('Component: Navbar', () => {
-  let comp: ForgotPasswordComponent;
-  let fixture: ComponentFixture<ForgotPasswordComponent>;
+  let comp: PasswordResetComponent;
+  let fixture: ComponentFixture<PasswordResetComponent>;
   let de: DebugElement;
   let el: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [ForgotPasswordComponent],
+      declarations: [PasswordResetComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForgotPasswordComponent);
+    fixture = TestBed.createComponent(PasswordResetComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   });

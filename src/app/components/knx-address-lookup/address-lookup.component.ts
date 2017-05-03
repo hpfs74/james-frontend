@@ -50,7 +50,6 @@ export class AddressLookupComponent implements AfterViewChecked {
 
       // test
       let isValid = false;
-      //console.log(isValid);
 
       //console.log(formGroup);
 
