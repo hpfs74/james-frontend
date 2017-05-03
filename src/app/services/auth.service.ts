@@ -22,6 +22,18 @@ export class AuthService {
     this.baseUrl = configService.config.api.james.auth;
   }
 
+  login2(email, password) {
+    return this.nicciService.signIn2(email, password)
+      .map(
+        (token) => {
+          localStorage.setItem('access_token', token.access_token);
+          localStorage.setItem('token', JSON.stringify(token));
+        },
+        () => {
+          // handle error
+        });
+  }
+
   /**
    * Request an auth token with email and password
    * @param email
@@ -78,6 +90,5 @@ export class AuthService {
    */
   isLoggedIn() : boolean {
     return tokenNotExpired();
-    // return localStorage.getItem('token') !== null;
   }
 }

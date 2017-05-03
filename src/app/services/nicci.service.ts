@@ -19,6 +19,38 @@ export class NicciService {
     this.baseUrl = config.api.james.auth;
   }
 
+
+  public signIn2(email, password) {
+    return this.getNicciKey()
+      .map( (nicci) => nicci)
+      .flatMap( (nicci) => {
+        let encPass = this.encryptPassword(password, nicci.key);
+        let headers = this.getBasicHeader(nicci);
+
+        let tokenRequest = {
+          grant_type: 'password',
+          username: email,
+          password: encPass,
+          scope: 'profile/basic'
+        };
+
+        return this.http.post(this.configService.config.api.james.auth + '/token', tokenRequest, {headers})
+          .map( (res: Response) => {
+            let ret = res.json();
+
+            let token  : AuthToken = {
+              access_token: ret.access_token,
+              token_type: ret.token_type,
+              expires_in: ret.expires_in,
+              refresh_token: ret.refresh_token
+            };
+
+            return token;
+
+          });
+      });
+  }
+
   /**
    *
    * @param email
