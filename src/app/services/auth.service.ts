@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { ConfigService } from './../config.service';
+import { ConfigService } from '../config.service';
 import { AuthKey, AuthToken } from '../models/auth';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user';
-import * as crypto from 'crypto-js';
+
+const crypto = require('crypto-js');
 
 
 @Injectable()
