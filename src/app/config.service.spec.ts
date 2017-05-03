@@ -7,11 +7,9 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from './config.service';
+import { ConfigInterface } from './config.interface';
 
 describe('Service: ConfigService', () => {
-  let backend: MockBackend;
-  let service: ConfigService;
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -31,19 +29,19 @@ describe('Service: ConfigService', () => {
       ]
     });
 
-    let backend = TestBed.get(MockBackend);
-    let service = TestBed.get(ConfigService);
+    this.backend = TestBed.get(MockBackend);
+    this.service = TestBed.get(ConfigService);
   }));
 
   it('should intialize the service', () => {
-    expect(backend).not.toBeNull;
-    expect(service).not.toBeNull;
+    expect(this.backend).not.toBeNull;
+    expect(this.service).not.toBeNull;
   });
 
-  xit('should load a config from disk', () => {
-    expect(service.config).toBeNull;
-    service.load('../../config/api/config.json').then((result) => {
-      expect(service.config).not.toBeNull;
+  it('should load a config from disk', () => {
+    expect(this.service.config).toBeNull;
+    this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+      expect(result.api).not.toBeNull;
     });
   });
 });
