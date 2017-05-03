@@ -19,7 +19,8 @@ export class NicciService {
 
   public getUserProfile() {
 
-    return this.http.get(this.baseUrl+'/v1/me', this.getHeaderWithBearer())
+
+    return this.http.get(this.baseUrl+'/profile', { headers: this.getHeaderWithBearer() })
       .map( (x) => x.json())
       .map( (x) => <User>x);
   }

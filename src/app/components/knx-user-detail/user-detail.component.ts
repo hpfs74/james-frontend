@@ -27,6 +27,8 @@ export class UserDetailComponent implements OnInit {
     this._auth.getCurrentProfile()
       .subscribe( (user) => {
         this.profile = user;
+      }, (res) => {
+        throw new Error(res);
       });
   }
 

@@ -1,11 +1,7 @@
-import { Inject, Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import { ConfigService } from './../config.service';
 import { NicciService } from './nicci.service';
-import { Observable } from 'rxjs/Observable';
-import { User } from '../models/user';
-import { tokenNotExpired } from 'angular2-jwt';
-;
 
 
 @Injectable()
@@ -23,8 +19,7 @@ export class AuthService {
   }
 
 
-
-  login2(email, password) {
+  login(email, password) {
     return this.nicciService.signIn2(email, password)
       .map( (token) => {
           localStorage.setItem('access_token', token.access_token);
@@ -34,46 +29,8 @@ export class AuthService {
         });
   }
 
-
   getCurrentProfile() {
       return this.nicciService.getUserProfile();
-  }
-
-  /**
-   * Request an auth token with email and password
-   * @param email
-   * @param password
-   */
-  login(email, password, cb)  {
-    return this.nicciService.signIn(email, password, (err, token) => {
-      if (err) {
-        return cb(err, token);
-      }
-
-      localStorage.setItem('access_token', token.access_token);
-      localStorage.setItem('token', JSON.stringify(token));
-
-      cb(null, token);
-    });
-
-
-
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    //
-    // //TODO: handle success based on status codes
-    // return this.http
-    //   .post(this.baseUrl + '/login', JSON.stringify({username: email, password: password}), {headers})
-    //   .map((res: Response) => {
-    //     console.log('/login response', res);
-    //
-    //     if (res.status === 200) {
-    //       let data = res.json();
-    //       console.log('login succes!e');
-    //       localStorage.setItem('auth_token', data.auth_token);
-    //       this.loggedIn = true;
-    //     }
-    //   });
   }
 
   /**
