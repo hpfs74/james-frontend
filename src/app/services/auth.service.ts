@@ -20,7 +20,7 @@ export class AuthService {
 
 
   login(email, password) {
-    return this.nicciService.signIn2(email, password)
+    return this.nicciService.signIn(email, password)
       .map( (token) => {
           localStorage.setItem('access_token', token.access_token);
           localStorage.setItem('token', JSON.stringify(token));
