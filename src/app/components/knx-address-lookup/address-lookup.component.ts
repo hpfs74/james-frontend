@@ -15,10 +15,10 @@ import { GeolocationService } from '../../services/geolocation.service';
   providers: [AddressLookupService, GeolocationService]
 })
 export class AddressLookupComponent implements AfterViewChecked {
-  @Input() address: Address;
-  @Input() showAddress: boolean = true;
   @Input() addressFormGroup: FormGroup;
   @Input() validationErrors: any;
+
+  @Output() addressFound: EventEmitter<Address> = new EventEmitter();
 
   public postalCodeMask = postalCodeMask;
 
@@ -31,6 +31,27 @@ export class AddressLookupComponent implements AfterViewChecked {
     this.addressFormGroup.setValidators(this.validateAddress);
   }
 
+  public getErrors(): Array<string> {
+    if (this.addressFormGroup.errors) {
+      return Object
+        .keys(this.addressFormGroup.errors)
+        .map(error => this.getErrorMessage(error));
+    }
+    return null;
+  }
+
+  public getErrorMessage(errorCode: string): string {
+    if (this.validationErrors && this.validationErrors[errorCode]) {
+      const errorMessage = this.validationErrors[errorCode];
+
+      if (typeof errorMessage === 'string') {
+        return errorMessage;
+      } else {
+        return errorMessage(this.validationErrors[errorCode]);
+      }
+    }
+  }
+
   validateAddress(formGroup: AbstractControl): { [key: string]: boolean } {
     let postalCode = formGroup.get('postalCode').value;
     let houseNumber = formGroup.get('houseNumber').value;
@@ -40,19 +61,14 @@ export class AddressLookupComponent implements AfterViewChecked {
     }
 
     if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
-      // let isValid: boolean = false;
-      // this.addressService.lookupAddress(postalCode, houseNumber)
-      //   .subscribe(res => {
-      //     isValid = !!(res.street && res.city);
-      //   }, err => {
-      //     isValid = false; // cannot validate: server error?
-      //   });
-
-      // test
-      let isValid = false;
-
-      //console.log(formGroup);
-
+      let isValid: boolean = false;
+      this.addressService.lookupAddress(postalCode, houseNumber)
+        .subscribe(res => {
+          isValid = !!(res.street && res.city);
+          this.addressFound.emit(res);
+        }, err => {
+          isValid = false; // cannot validate: server error?
+        });
       return isValid ? null : { address: true };
     }
   }

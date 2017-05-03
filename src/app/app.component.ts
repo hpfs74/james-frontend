@@ -12,8 +12,6 @@ import {
   NicciService
 } from './services';
 
-
-
 @Component({
   selector: 'knx-app',
   template: `<router-outlet></router-outlet>`,

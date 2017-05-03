@@ -14,7 +14,6 @@ export class CarService {
   private baseUrl: string;
   private helperUrl: string;
 
-
   constructor(private configService: ConfigService, private authHttp: AuthHttp) {
     this.baseUrl = configService.config.api.james.car;
     this.helperUrl = configService.config.api.james.helper;
