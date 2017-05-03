@@ -122,7 +122,7 @@ export class LoginComponent {
 
       this.authService
         .login2(email.value, password.value)
-        .subscribe( (data) => {
+        .subscribe( () => {
           this.messageTitle = 'Succes!';
           this.message = 'Login succesfull';
           // Get the redirect URL from our auth service
@@ -138,30 +138,31 @@ export class LoginComponent {
 
           // Redirect the user
           this.router.navigate([redirect], navigationExtras);
-        }, (err) => {
+        }, (res) => {
+          let data = res.json();
+
           this.isPending = false;
 
-
-          if(err.error === 'inactive_profile') {
+          if(data.error === 'inactive_profile') {
             this.messageTitle = 'Login failed';
             this.message = 'Sorry your profile is inactive';
             return;
           }
 
-          if (err.error === 'invalid_password') {
+          if (data.error === 'invalid_password') {
             this.messageTitle = 'Login failed';
             this.message = 'Invalid email or password';
             return ;
           }
 
-          if (err.error === 'too_many_login_attempts') {
+          if (data.error === 'too_many_login_attempts') {
             this.messageTitle = 'Login failed';
-            this.message = err.error_description;
+            this.message = data.error_description;
             return;
           }
 
           this.messageTitle = 'Login failed';
-          this.message = 'Unexpected error while calling remote ('+err+')';
+          this.message = 'Unexpected error while calling remote ('+data+')';
         });
     }
     return;
