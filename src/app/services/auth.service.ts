@@ -14,15 +14,20 @@ export class AuthService {
   redirectUrl: string;
   private loggedIn = false;
   private baseUrl: string;
+  private authUrl: string;
+  private keyUrl: string;
+
 
   constructor(private http: Http,
-              private configService: ConfigService,) {
+              private configService: ConfigService) {
+
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
-    this.baseUrl = configService.config.api.james.auth;
+    this.baseUrl = configService.config.api.james.base;
+    this.keyUrl = configService.config.api.james.key;
   }
 
   public getUserProfile(): Observable<User> {
-    return this.http.get(this.baseUrl + '/v1/profile', {headers: this.getHeaderWithBearer()})
+    return this.http.get(this.baseUrl + '/profile', {headers: this.getHeaderWithBearer()})
       .map((x) => x.json())
       .map((x) => <User>x);
   }
@@ -63,7 +68,7 @@ export class AuthService {
       .flatMap((nicci: AuthKey) => {
         let headers = this.getBasicHeaderWithKey(nicci);
 
-        return this.http.post(this.configService.config.api.james.auth, {email}, {headers})
+        return this.http.post(this.keyUrl, {email}, {headers})
           .map((res: Response) => res.json());
       });
   }
@@ -141,7 +146,7 @@ export class AuthService {
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
 
     return this.http
-      .post(this.baseUrl + '/key', '', {headers})
+      .post(this.keyUrl, '', {headers})
       .map((res: Response) => {
 
         if (res.status === 201) {

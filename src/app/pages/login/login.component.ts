@@ -122,8 +122,10 @@ export class LoginComponent {
 
       this.authService
         .signIn(email.value, password.value)
-        .subscribe( () => {
+        .subscribe( (token) => {
 
+          localStorage.setItem('access_token', token.access_token);
+          localStorage.setItem('token', JSON.stringify(token));
 
           this.messageTitle = 'Success!';
           this.message = 'Login succesfull';
