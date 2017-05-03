@@ -22,19 +22,11 @@ export const routes: Routes = [
       breadcrumb: 'Cookie-beleid'
     }
   },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    // 404: redirect unkown paths to home
-    path: '**',
-    redirectTo: ''
-  }
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'login', component: LoginComponent },
+
+  // 404: redirect unkown paths to home
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

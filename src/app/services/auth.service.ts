@@ -22,16 +22,21 @@ export class AuthService {
     this.baseUrl = configService.config.api.james.auth;
   }
 
+
+
   login2(email, password) {
     return this.nicciService.signIn2(email, password)
-      .map(
-        (token) => {
+      .map( (token) => {
           localStorage.setItem('access_token', token.access_token);
           localStorage.setItem('token', JSON.stringify(token));
-        },
-        () => {
-          // handle error
+
+          return token;
         });
+  }
+
+
+  getCurrentProfile() {
+      return this.nicciService.getUserProfile();
   }
 
   /**
@@ -89,6 +94,7 @@ export class AuthService {
    * @returns {Boolean}
    */
   isLoggedIn() : boolean {
-    return tokenNotExpired();
+    // return tokenNotExpired();
+    return localStorage.getItem('access_token') !== null;
   }
 }

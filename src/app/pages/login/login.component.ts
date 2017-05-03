@@ -123,7 +123,9 @@ export class LoginComponent {
       this.authService
         .login2(email.value, password.value)
         .subscribe( () => {
-          this.messageTitle = 'Succes!';
+
+
+          this.messageTitle = 'Success!';
           this.message = 'Login succesfull';
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
@@ -162,7 +164,7 @@ export class LoginComponent {
           }
 
           this.messageTitle = 'Login failed';
-          this.message = 'Unexpected error while calling remote ('+data+')';
+          this.message = `Unexpected error while calling remote (${data})`;
         });
     }
     return;

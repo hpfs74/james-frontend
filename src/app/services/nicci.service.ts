@@ -1,14 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { ConfigService } from '../config.service';
 import { Observable } from 'rxjs/Observable';
 
 const crypto = require('crypto-js');
 
-import { AuthKey, AuthToken } from '../models/auth';
 import { User } from '../models/user';
-
-const config = require('../../../config/api/config.json');
+import { AuthKey, AuthToken } from '../models/auth';
+import { ConfigService } from '../config.service';
 
 @Injectable()
 export class NicciService {
@@ -16,15 +14,23 @@ export class NicciService {
   private baseUrl: string;
 
   constructor(private http: Http, @Inject(ConfigService) private configService: ConfigService) {
-    this.baseUrl = config.api.james.auth;
+    this.baseUrl = configService.config.api.james.auth;
   }
+
+  public getUserProfile() {
+
+    return this.http.get(this.baseUrl+'/v1/me', this.getHeaderWithBearer())
+      .map( (x) => x.json())
+      .map( (x) => <User>x);
+  }
+
 
 
   public signIn2(email, password) {
     return this.getNicciKey()
       .flatMap( (nicci) => {
         let encPass = this.encryptPassword(password, nicci.key);
-        let headers = this.getBasicHeader(nicci);
+        let headers = this.getBasicHeaderWithKey(nicci);
 
         let tokenRequest = {
           grant_type: 'password',
@@ -51,7 +57,7 @@ export class NicciService {
       .subscribe( (data: AuthKey) => {
 
         let encPass = this.encryptPassword(password, data.key);
-        let headers = this.getBasicHeader(data);
+        let headers = this.getBasicHeaderWithKey(data);
 
         let tokenRequest = {
           grant_type: 'password',
@@ -83,23 +89,12 @@ export class NicciService {
    */
   public isActivated(email : string) {
 
-    this.getNicciKey().map( (data: AuthKey) =>  {
-      let headers = this.getBasicHeader(data);
+    this.getNicciKey()
+      .flatMap( (nicci: AuthKey) => {
+      let headers = this.getBasicHeaderWithKey(nicci);
 
-      this.http.post(this.configService.config.api.james.auth, { email }, { headers })
-        .map((res: Response) => {
-
-          if (res.status === 200) {
-            // success login
-
-            let check = res.json();
-
-            if (check.status === true) {
-              // it is activated
-            }
-          }
-          throw new Error(res.statusText);
-        });
+      return this.http.post(this.configService.config.api.james.auth, { email }, { headers })
+        .map((res: Response) => res.json());
     });
   }
 
@@ -202,11 +197,29 @@ export class NicciService {
       });
   }
 
-  private getBasicHeader(data : AuthKey) {
+  private getBasicHeader() : Headers {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+
+    return headers;
+  }
+
+  private getBasicHeaderWithKey(data : AuthKey) : Headers {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
     headers.append('NICCI-Key', data.id);
+
+    return headers;
+  }
+
+  private getHeaderWithBearer() : Headers {
+    let headers = new Headers();
+
+    headers.set('Postman-Token', localStorage.getItem('nicci_key'));
+    headers.set('Authorization', 'Bearer '+ localStorage.getItem('access_token'));
+    headers.set('Cache-Control', 'no-cache');
 
     return headers;
   }

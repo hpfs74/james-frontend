@@ -3,6 +3,9 @@ import { RouterLink } from '@angular/router';
 
 import { Nav } from '../../models';
 import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
+import { AuthService } from '../../services/auth.service';
+import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
+
 
 @Component({
   selector: 'knx-navbar',
@@ -46,7 +49,6 @@ import { UserDetailComponent } from './../knx-user-detail/user-detail.component'
   </div>
 </nav>`,
 })
-
 export class NavbarComponent {
   @Input() menuItems: Array<Nav>;
   @Input() phone: Object;
