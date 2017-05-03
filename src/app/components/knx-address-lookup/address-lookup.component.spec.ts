@@ -1,11 +1,13 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { Address } from '../../models/address';
 import { AddressLookupService } from './address-lookup.service';
+import { ConfigService } from '../../config.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { AddressLookupComponent } from './address-lookup.component';
 import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
@@ -29,11 +31,23 @@ describe('Component: AddressLookup', () => {
   let geoLocationServiceStub = {
   };
 
+  let configServiceStub = {
+    config: {
+      api: {
+        james: {
+          address: ''
+        }
+      }
+    }
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ HttpModule ],
       providers: [
         { provide: AddressLookupService, useValue: addressServiceStub },
-        { provide: GeolocationService, geoLocationServiceStub }
+        { provide: GeolocationService, useValue: geoLocationServiceStub },
+        { provide: ConfigService, useValue: configServiceStub }
       ],
       declarations: [AddressLookupComponent],
       schemas: [NO_ERRORS_SCHEMA]
@@ -54,13 +68,9 @@ describe('Component: AddressLookup', () => {
     fixture.detectChanges();
   });
 
-  // it('should initialize validationErrors', () => {
-  //   expect(comp.addressFormGroup).not.toBeNull();
-  // });
-
-  // xit('should initialize with a formGroup', () => {
-
-  // });
+  it('should initialize with a formGroup', () => {
+    expect(comp.addressFormGroup).not.toBeNull;
+  });
 
   // xit('should get formGroup errors', () => {
 
