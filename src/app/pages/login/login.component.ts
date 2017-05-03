@@ -121,50 +121,47 @@ export class LoginComponent {
       // this.router.navigate(['/overview']);
 
       this.authService
-        .login(email.value, password.value, (err, data) => {
+        .login2(email.value, password.value)
+        .subscribe( (data) => {
+          this.messageTitle = 'Succes!';
+          this.message = 'Login succesfull';
+          // Get the redirect URL from our auth service
+          // If no redirect has been set, use the default
+          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
+
+          // Set our navigation extras object
+          // that passes on our global query params and fragment
+          let navigationExtras: NavigationExtras = {
+            preserveQueryParams: true,
+            preserveFragment: true
+          };
+
+          // Redirect the user
+          this.router.navigate([redirect], navigationExtras);
+        }, (err) => {
           this.isPending = false;
 
-          if (err) {
 
-            if(data.error === 'inactive_profile') {
-              this.messageTitle = 'Login failed';
-              this.message = 'Sorry your profile is inactive';
-              return;
-            }
-
-            if (data.error === 'invalid_password') {
-              this.messageTitle = 'Login failed';
-              this.message = 'Invalid email or password';
-              return ;
-            }
-
-            if (data.error === 'too_many_login_attempts') {
-              this.messageTitle = 'Login failed';
-              this.message = data.error_description;
-              return;
-            }
-
+          if(err.error === 'inactive_profile') {
             this.messageTitle = 'Login failed';
-            this.message = 'Unexpected error while calling remote ('+err+')';
+            this.message = 'Sorry your profile is inactive';
+            return;
+          }
+
+          if (err.error === 'invalid_password') {
+            this.messageTitle = 'Login failed';
+            this.message = 'Invalid email or password';
             return ;
           }
 
+          if (err.error === 'too_many_login_attempts') {
+            this.messageTitle = 'Login failed';
+            this.message = err.error_description;
+            return;
+          }
 
-            this.messageTitle = 'Succes!';
-            this.message = 'Login succesfull';
-            // Get the redirect URL from our auth service
-            // If no redirect has been set, use the default
-            let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
-
-            // Set our navigation extras object
-            // that passes on our global query params and fragment
-            let navigationExtras: NavigationExtras = {
-              preserveQueryParams: true,
-              preserveFragment: true
-            };
-
-            // Redirect the user
-             this.router.navigate([redirect], navigationExtras);
+          this.messageTitle = 'Login failed';
+          this.message = 'Unexpected error while calling remote ('+err+')';
         });
     }
     return;
