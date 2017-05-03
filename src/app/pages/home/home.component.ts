@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Price, Nav, Feature } from '../../models';
+import { Price, Nav, Feature, User } from '../../models';
 import { AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from '../../services';
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
   <knx-cookiebar></knx-cookiebar>
   <header class="header">
     <knx-navbar [menuItems]="topMenu" [phone]="phone">
-        <knx-user-detail [isLoggedIn]="isLoggedIn" (signOut)="signOut()"></knx-user-detail>
+        <knx-user-detail [isLoggedIn]="isLoggedIn" (signOut)="signOut()" [profile]="profile"></knx-user-detail>
     </knx-navbar>
   </header>
 
@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
+  profile: User;
 
   constructor(
     private router: Router,
@@ -49,6 +50,13 @@ export class HomeComponent implements OnInit {
     this.footerItems = this.featureService.getFeatures();
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();
+
+    this.authService.getCurrentProfile()
+      .subscribe( (user) => {
+        this.profile = user;
+      }, (res) => {
+        throw new Error(res);
+      });
   }
 
   signOut() {

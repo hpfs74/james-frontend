@@ -17,7 +17,6 @@ export class ConfigService {
     if (!(this.config && this.config.api)) {
       // retrieve configuration object
     }
-
     return this.config.api;
   }
 
