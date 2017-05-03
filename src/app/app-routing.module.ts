@@ -5,7 +5,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { NicciService } from './services/nicci.service';
 import { LoginComponent } from './pages/login/login.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
@@ -24,7 +24,7 @@ export const routes: Routes = [
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent,
+    component: PasswordResetComponent,
   },
   {
     path: 'login',

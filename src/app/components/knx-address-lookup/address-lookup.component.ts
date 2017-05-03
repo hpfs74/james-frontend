@@ -50,9 +50,8 @@ export class AddressLookupComponent implements AfterViewChecked {
 
       // test
       let isValid = false;
-      //console.log(isValid);
 
-      //console.log(formGroup);
+      console.log(formGroup);
 
       return isValid ? null : { address: true };
     }
