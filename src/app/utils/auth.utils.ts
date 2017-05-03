@@ -1,4 +1,4 @@
-  const crypto = require('crypto-js');
+import * as crypto from 'crypto-js';
 
    /**
    *
