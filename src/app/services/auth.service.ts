@@ -4,7 +4,7 @@ import { ConfigService } from '../config.service';
 import { AuthKey, AuthToken } from '../models/auth';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user';
-import * as  CryptoJS from 'crypto-js';
+const CryptoJS = require('crypto-js');
 
 
 
