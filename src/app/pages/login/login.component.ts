@@ -32,9 +32,9 @@ import { AuthService } from './../../services/auth.service';
                 <button *ngIf="loginForm.get('password').value" class="btn-show-password fa fa-eye" (click)="showPassword($event)"></button>
               </div>
 
-                <button type="submit" class="knx-button knx-btn-primary knx-button--fullwidth"
-                  [class.cx-button--pending]="isPending" [disabled]="!loginForm.valid || isPending">
-                  Inloggen</button>
+              <button type="submit" class="knx-button knx-btn-primary knx-button--fullwidth"
+                [class.cx-button--pending]="isPending" [disabled]="!loginForm.valid || isPending">
+                Inloggen</button>
           </div>
         </div>
           <div class="row">

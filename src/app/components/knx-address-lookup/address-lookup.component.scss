@@ -1,0 +1,11 @@
+.knx-address-lookup {
+  // error message
+  &:after {
+    margin-top: -12px;
+    margin-bottom: 20px;
+  }
+
+  .knx-address-lookup__button {
+    margin-bottom: 0;
+  }
+}
