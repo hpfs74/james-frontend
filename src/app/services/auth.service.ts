@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { ConfigService } from './../config.service';
-import { NicciService } from './nicci.service';
+import { AuthKey, AuthToken } from '../models/auth';
+import { Observable } from 'rxjs/Observable';
+import { User } from '../models/user';
+import * as crypto from 'crypto-js';
 
 
 @Injectable()
@@ -12,46 +15,171 @@ export class AuthService {
   private baseUrl: string;
 
   constructor(private http: Http,
-              private configService: ConfigService,
-              private nicciService : NicciService) {
+              private configService: ConfigService,) {
     this.loggedIn = false; // !!localStorage.getItem('auth_token');
     this.baseUrl = configService.config.api.james.auth;
   }
 
-
-  login(email, password) {
-    return this.nicciService.signIn(email, password)
-      .map( (token) => {
-          localStorage.setItem('access_token', token.access_token);
-          localStorage.setItem('token', JSON.stringify(token));
-
-          return token;
-        });
+  public getUserProfile(): Observable<User> {
+    return this.http.get(this.baseUrl + '/v1/profile', {headers: this.getHeaderWithBearer()})
+      .map((x) => x.json())
+      .map((x) => <User>x);
   }
 
-  getCurrentProfile() {
-      return this.nicciService.getUserProfile();
-  }
-
-  /**
-   * Remove authentication token
-   */
-  logout() {
+  public signOff() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('token');
-    this.loggedIn = false;
+    localStorage.removeItem('nicci_key');
+    localStorage.removeItem('nicci_id');
   }
 
-  forgotPassword(email) {
-    return this.nicciService.forgotPassword();
+  public signIn(email, password): Observable<AuthToken> {
+    return this.getNicciKey()
+      .flatMap((nicci) => {
+        let encPass = this.encryptPassword(password, nicci.key);
+        let headers = this.getBasicHeaderWithKey(nicci);
+
+        let tokenRequest = {
+          grant_type: 'password',
+          username: email,
+          password: encPass,
+          scope: 'profile/basic'
+        };
+
+        return this.http.post(this.configService.config.api.james.auth + '/token', tokenRequest, {headers})
+          .map((res) => res.json())
+          .map((token) => <AuthToken>token);
+      });
   }
 
   /**
-   * Return whether the current user is logged in
-   * @returns {Boolean}
+   *
+   * @param profile
    */
-  isLoggedIn() : boolean {
-    // return tokenNotExpired();
+  public isActive(email: string) {
+
+    this.getNicciKey()
+      .flatMap((nicci: AuthKey) => {
+        let headers = this.getBasicHeaderWithKey(nicci);
+
+        return this.http.post(this.configService.config.api.james.auth, {email}, {headers})
+          .map((res: Response) => res.json());
+      });
+  }
+
+  public isLoggedIn() {
     return localStorage.getItem('access_token') !== null;
+  }
+
+  /**
+   *
+   * @param email
+   */
+  public resendActivation(email) {
+    throw new Error('Not implemented yet');
+  }
+
+  public forgotPassword(): string {
+
+    return 'https://profile-james-a.nicci.io/password?' +
+      'client_id=56a6ab20bb00893f071faddc' +
+      '&locale=nl_NL&redirect_uri=com.mobgen.knab://' +
+      '&response_type=code' +
+      '&scope=basic+emailaddress+social';
+  }
+
+  /**
+   *
+   * @param source
+   * @return {any}
+   */
+  private base64url(source) {
+    // Encode in classical base64
+    let encodedSource = crypto.enc.Base64.stringify(source);
+
+    // Remove padding equal characters
+    encodedSource = encodedSource.replace(/=+$/, '');
+
+    // Replace characters according to base64url specifications
+    encodedSource = encodedSource.replace(/\+/g, '-');
+    encodedSource = encodedSource.replace(/\//g, '_');
+
+    return encodedSource;
+  }
+
+  /**
+   *
+   * @param password
+   * @param secret
+   * @return {string}
+   */
+  private encryptPassword(password, secret) {
+
+    let header = {'alg': 'HS256', 'typ': 'JWT'};
+    let data = password;
+    let stringifiedHeader = crypto.enc.Utf8.parse(JSON.stringify(header));
+    let encodedHeader = this.base64url(stringifiedHeader);
+    let stringifiedData = crypto.enc.Utf8.parse(JSON.stringify(data));
+    let encodedData = this.base64url(stringifiedData);
+    let signature = encodedHeader + '.' + encodedData;
+
+    signature = crypto.HmacSHA256(signature, secret);
+    signature = this.base64url(signature);
+
+    return encodedHeader + '.' + encodedData + '.' + signature;
+  }
+
+  /**
+   *
+   * @return {Observable<R>}
+   */
+  private getNicciKey(): Observable<AuthKey> {
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+
+    return this.http
+      .post(this.baseUrl + '/key', '', {headers})
+      .map((res: Response) => {
+
+        if (res.status === 201) {
+          let data = res.json();
+
+          return <AuthKey> {
+            id: data._id,
+            key: data.key
+          };
+        }
+
+        throw new Error(res.statusText);
+      });
+  }
+
+  private getBasicHeader(): Headers {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+
+    return headers;
+  }
+
+  private getBasicHeaderWithKey(data: AuthKey): Headers {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+    headers.append('NICCI-Key', data.id);
+
+    return headers;
+  }
+
+  private getHeaderWithBearer(): Headers {
+    let headers = new Headers();
+
+    headers.set('Postman-Token', localStorage.getItem('nicci_key'));
+    headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+    headers.set('Cache-Control', 'no-cache');
+
+    return headers;
   }
 }

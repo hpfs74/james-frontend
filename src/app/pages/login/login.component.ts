@@ -121,7 +121,7 @@ export class LoginComponent {
       // this.router.navigate(['/overview']);
 
       this.authService
-        .login(email.value, password.value)
+        .signIn(email.value, password.value)
         .subscribe( () => {
 
 

@@ -58,7 +58,7 @@ export class PasswordResetComponent {
   }
 
   initForm() {
-    this.redirectUrl = this.authService.forgotPassword('');
+    this.redirectUrl = this.authService.forgotPassword();
 
     this.formBuilder = new FormBuilder();
     this.forgotPasswordForm = this.formBuilder.group({
