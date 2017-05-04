@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 
+import { KnabBaseService } from '../../services/base.service';
 import { ConfigService } from '../../config.service';
 import { Address } from '../../models/address';
 
 @Injectable()
-export class AddressLookupService {
+export class AddressLookupService extends KnabBaseService {
   private baseUrl: string;
-  private serviceError: boolean = false;
+
 
   constructor(private configService: ConfigService, private http: Http) {
+    super();
+    this.serviceName = 'AddressLookupService';
     this.baseUrl = configService.config.api.james.address;
   }
 
@@ -34,17 +37,5 @@ export class AddressLookupService {
         }
       })
       .catch(this.handleError);
-  }
-
-  /**
-   * Error handler
-   * @param error
-   * @returns {ErrorObservable}
-   */
-  private handleError(error: Response) {
-    // in a real world app, we may send the error to some remote logging infrastructure
-    // instead of just logging it to the console
-    this.serviceError = true;
-    return Observable.throw((error && error.json && error.json().error) || 'AIP:AddressLookupService:Server error');
   }
 }
