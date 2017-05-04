@@ -64,30 +64,6 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-7">
-          <cx-form-group formControlName="kilometersPerYear" [options]="{
-                label: 'Aantal KM per jaar',
-                type: 'select',
-                formControl: form.formGroup.get('kilometersPerYear'),
-                validationErrors: form.validationErrors,
-                inputOptions: {
-                  items: [
-                    {
-                      label: '30.000 of meer',
-                      value: '> 30.000'
-                    }
-                  ]
-                }
-              }">
-          </cx-form-group>
-        </div>
-        <div class="col-md-4">
-          <div class="cx-form-group">
-            <button class="knx-button knx-button--util inline-formelement" href="">Weet ik niet</button>
-          </div>
-        </div>
-      </div>
 
       <cx-form-group formControlName="loan" [options]="{
             label: 'Heb je een lening?',
@@ -134,28 +110,6 @@
                   {
                       label: 'Ik en mijn kind(eren)',
                       value: ''
-                  }
-              ]
-            }
-          }">
-      </cx-form-group>
-
-      <cx-form-group formControlName="gender" [options]="{
-            label: 'Geslacht',
-            type: 'radio',
-            formControl: form.formGroup.get('gender'),
-            validationErrors: form.validationErrors,
-            inputOptions: {
-                formGroupModifiers: ['cx-form-group__wrap--horizontal'],
-                placeholder: 'Selecteer je geslacht',
-                items: [
-                  {
-                      label: 'Man',
-                      value: 'm'
-                  },
-                  {
-                      label: 'Vrouw',
-                      value: 'f'
                   }
               ]
             }

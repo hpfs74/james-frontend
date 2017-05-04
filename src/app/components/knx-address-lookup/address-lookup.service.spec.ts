@@ -13,7 +13,7 @@ import { AuthHttp } from '../../services';
 import { Address } from '../../models/address';
 
 
-describe('Service: AddressLookupService', () => {
+describe('Service: AddressLookup', () => {
 
   let configServiceStub = {
     config: {
@@ -36,11 +36,10 @@ describe('Service: AddressLookupService', () => {
         AddressLookupService,
         {
           deps: [
-            AuthHttp,
             MockBackend,
             BaseRequestOptions
           ],
-          provide: Http,
+          provide: AuthHttp,
           useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
             return new Http(backend, defaultOptions);
           }
@@ -63,7 +62,7 @@ describe('Service: AddressLookupService', () => {
     });
   };
 
-  xit('should lookup an address', () => {
+  it('should lookup an address', () => {
     setupConnections(this.backend, {
       body:
       {

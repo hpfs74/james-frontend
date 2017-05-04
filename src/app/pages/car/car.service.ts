@@ -20,13 +20,13 @@ export class CarService {
 
   public getByLicense(licensePlate: string): Observable<Car> {
     return this.authHttp.get(this.baseUrl + `/${licensePlate}`)
-      .map(res=><Car>res.json());
+      .map(res => <Car>res.json());
   }
 
   public getCoverageRecommendation(licensePlate: string, loan: boolean): Observable<CarCoverageRecommendation> {
     let url = this.helperUrl + 'car/coverage';
     return this.authHttp.post(url, { license: licensePlate })
-      .map(res=><CarCoverageRecommendation>res.json());
+      .map(res => <CarCoverageRecommendation>res.json());
   }
 
   public getCoverages(): Array<Price> {

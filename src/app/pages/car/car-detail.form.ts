@@ -40,9 +40,7 @@ export class CarDetailForm {
           maxNumberValidator('damageFreeYears', 50)
         ]
       )],
-      kilometersPerYear: ['', Validators.required],
       familyType: [null, Validators.required],
-      gender: [null, Validators.required],
       loan: [null, Validators.required]
     });
 
