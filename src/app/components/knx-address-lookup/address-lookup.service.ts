@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { AuthHttp , KnabBaseService } from '../../services';
+import { AuthHttp, KnabBaseService } from '../../services';
 import { ConfigService } from '../../config.service';
 import { Address } from '../../models/address';
 
@@ -46,10 +46,9 @@ export class AddressLookupService extends KnabBaseService {
    *
    * @memberOf AddressLookupService
    */
-  public lookupAddress(postalCode: string , houseNumber: string) : Observable<Address> {
-    let body = { address: postalCode + houseNumber };
+  public lookupAddress(postalCode: string, houseNumber: string) {
+    let body = {address: postalCode + houseNumber};
 
-    return this.http.post(this.baseUrl, body)
-      .map(res=><Address>res.json());
+    return this.http.post(this.baseUrl, body);
   }
 }

@@ -21,6 +21,7 @@ export class AddressLookupComponent implements AfterViewChecked {
 
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
 
+  public address : string = null;
   public postalCodeMask = postalCodeMask;
 
   constructor(
@@ -32,7 +33,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   ngAfterViewChecked(): void {
 
     // TODO: add
-    this.addressFormGroup.setValidators( (formControl) => this.validateAddress(formControl, this.addressService));
+    this.addressFormGroup.setAsyncValidators( (formControl) => this.validateAddress(formControl, this.addressService));
   }
 
   public getErrors(): Array<string> {
@@ -56,27 +57,37 @@ export class AddressLookupComponent implements AfterViewChecked {
     }
   }
 
-  validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): { [key: string]: boolean } {
+  validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): { [key: string]: any } {
+    return new Promise ( (resolve,reject) => {
 
-    let postalCode = formGroup.get('postalCode').value;
-    let houseNumber = formGroup.get('houseNumber').value;
+      let postalCode = formGroup.get('postalCode').value;
+      let houseNumber = formGroup.get('houseNumber').value;
 
-    if (!postalCode && !houseNumber) {
-      return null;
-    }
+      if (!postalCode && !houseNumber) {
+        return null;
+      }
 
-    if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
-      let isValid: boolean = false;
+      if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
+        let isValid: boolean = false;
 
-      addressService.lookupAddress(postalCode, houseNumber)
-        .subscribe(res => {
-          isValid = !!(res.street && res.city);
-          this.addressFound.emit(res);
-        }, err => {
-          isValid = false; // cannot validate: server error?
-        });
-      return isValid ? null : { address: true };
-    }
+        addressService.lookupAddress(postalCode, houseNumber)
+          .subscribe( (data) => {
+            let res = <Address>data.json();
+
+
+            isValid = !!(res.street && res.city);
+            this.addressFound.emit(res);
+
+            this.address = `${res.fullname}`;
+
+            resolve(isValid ? null : {address: true});
+
+          }, err => {
+            isValid = false; // cannot validate: server error?
+            resolve({address: true});
+          });
+      }
+    });
   }
 
   //TODO:
