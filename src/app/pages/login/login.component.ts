@@ -48,7 +48,9 @@ import { AuthService } from './../../services/auth.service';
                 <div class="cx-message__content">{{ message }}
                 </div>
             </div>
-            <p class="knx-login__reset knx-text-center"><small><a rel="nofollow" href="/forgot-password">Wachtwoord vergeten?</a></small></p>
+            <p class="knx-login__reset knx-text-center">
+              <small><a rel="nofollow" href="/forgot-password">Wachtwoord vergeten?</a></small>
+            </p>
           </div>
         </div>
         </form>
