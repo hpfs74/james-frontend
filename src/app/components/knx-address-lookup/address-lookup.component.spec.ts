@@ -6,9 +6,8 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { Address } from '../../models/address';
-import { AddressLookupService } from './address-lookup.service';
 import { ConfigService } from '../../config.service';
-import { GeolocationService } from '../../services/geolocation.service';
+import { AddressLookupService, GeolocationService } from '../../services';
 import { AddressLookupComponent } from './address-lookup.component';
 import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
 
