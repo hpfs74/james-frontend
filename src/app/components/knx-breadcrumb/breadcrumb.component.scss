@@ -41,4 +41,8 @@
   color: $knab-white;
   text-decoration: none;
   margin-right: 15px;
+
+  span:before {
+    line-height: 1em; //fix jumpy breadcrumb container
+  }
 }
