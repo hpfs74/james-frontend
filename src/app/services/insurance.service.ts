@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
+
+import { AuthHttp } from './auth-http.service';
 
 import { Price } from '../models';
 

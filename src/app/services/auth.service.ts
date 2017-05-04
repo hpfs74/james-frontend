@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
 import { ConfigService } from '../config.service';
 import { AuthKey, AuthToken } from '../models/auth';
-import { Observable } from 'rxjs/Observable';
+import * as AuthUtils from '../utils/auth.utils';
 import { User } from '../models/user';
 const CryptoJS = require('crypto-js');
-
-
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,6 @@ export class AuthService {
   private authUrl: string;
   private keyUrl: string;
 
-
   constructor(private http: Http,
               private configService: ConfigService) {
 
@@ -27,7 +26,7 @@ export class AuthService {
   }
 
   public getUserProfile(): Observable<User> {
-    return this.http.get(this.baseUrl + '/profile', {headers: this.getHeaderWithBearer()})
+    return this.http.get(this.baseUrl + '/profile', { headers: this.getHeaderWithBearer() })
       .map((x) => x.json())
       .map((x) => <User>x);
   }
@@ -63,7 +62,6 @@ export class AuthService {
    * @param profile
    */
   public isActive(email: string) {
-
     this.getNicciKey()
       .flatMap((nicci: AuthKey) => {
         let headers = this.getBasicHeaderWithKey(nicci);
@@ -74,6 +72,7 @@ export class AuthService {
   }
 
   public isLoggedIn() {
+    //return AuthUtils.tokenNotExpired('token');
     return localStorage.getItem('access_token') !== null;
   }
 
@@ -86,7 +85,6 @@ export class AuthService {
   }
 
   public forgotPassword(): string {
-
     return 'https://profile-james-a.nicci.io/password?' +
       'client_id=56a6ab20bb00893f071faddc' +
       '&locale=nl_NL&redirect_uri=com.mobgen.knab://' +

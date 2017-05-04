@@ -151,7 +151,6 @@ export class CarComponent implements OnInit {
         .subscribe(res => {
           this.isCoverageLoading = false;
 
-          //TODO: determine what return values are possible from NICCI
           let coverage = this.coverages.find(price => price.id === res.recommended_value);
           if (coverage) {
             coverage.highlight = true;

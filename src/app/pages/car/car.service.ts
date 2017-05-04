@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
-import { AuthHttp } from 'angular2-jwt';
 
+import { AuthHttp } from '../../services/auth-http.service';
 import { ConfigService } from '../../config.service';
 import { Car } from '../../models/car';
 import { Price } from '../../models/price';
@@ -48,9 +48,13 @@ export class CarService {
   }
 
   public getCoverages(): Array<Price> {
+    // CL (coverage_recommandation_liability_text),
+    // CLC(coverage_recommandation_limited_casco_text)
+    // CAR(coverage_recommandation_all_risk_text)
+
     return [
       {
-        id: 'WA',
+        id: 'CL',
         header: 'WA',
         badge: 'ons advies',
         features: [
@@ -74,7 +78,7 @@ export class CarService {
         highlight: false
       },
       {
-        id: 'AR',
+        id: 'CAR',
         header: 'All risk',
         badge: 'ons advies',
         features: [

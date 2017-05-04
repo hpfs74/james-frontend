@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { LoginComponent } from './login.component';
 
-describe('Component: Navbar', () => {
+describe('Component: Login', () => {
   let comp: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let de: DebugElement;
