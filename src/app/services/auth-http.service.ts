@@ -54,9 +54,8 @@ export class AuthHttp {
     //     return new Observable<Response>((obs: any) => {
     //       obs.error(new AuthHttpError('No JWT present or has expired'));
     //     });
-
     req.headers.set('Content-Type', 'application/json');
-    req.headers.set('Authorization', 'Bearer ' + localStorage.getItem(TOKEN_NAME));
+    req.headers.set('Authorization', 'Bearer ' + token);
     req.headers.set('Cache-Control', 'no-cache');
 
     return this.http.request(req);
@@ -74,10 +73,6 @@ export class AuthHttp {
   }
 
   public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-    if (!options.headers) {
-      options.headers = new Headers();
-    }
-
     // DONT USE: BROKEN
     // return Observable.create((observer) => {
     //   this.process.next(Action.QueryStart);
@@ -104,11 +99,18 @@ export class AuthHttp {
     //       }
     //     });
     // });
-
     // from this point url is always an instance of Request;
     let req: Request = url as Request;
     let token: string = localStorage.getItem(TOKEN_NAME);
-    return this.requestWithToken(req, token);
+
+    return this.requestWithToken(req, token)
+      .catch((error: Response) => {
+        if (error.status === 401 || error.status === 403) {
+          //console.log('The authentication session expires or the user is not authorised. Force refresh of the current page.');
+          //window.location.href = window.location.href + '?' + new Date().getMilliseconds();
+        }
+        return Observable.throw(error);
+      });
   }
 
   private mergeOptions(providedOpts: RequestOptionsArgs, defaultOpts?: RequestOptions) {

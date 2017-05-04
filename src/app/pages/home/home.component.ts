@@ -55,6 +55,9 @@ export class HomeComponent implements OnInit {
       .subscribe( (user) => {
         this.profile = user;
       }, (res) => {
+        if (res.status === 403) {
+          this.router.navigate(['/login']);
+        }
         throw new Error(res);
       });
   }

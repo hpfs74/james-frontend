@@ -24,7 +24,6 @@ export class AddressLookupService {
    */
   public lookupAddress(postalCode: string, houseNumber: string, houseNumberExtension?: string) {
     let body = { address: postalCode + houseNumber + (houseNumberExtension || '') };
-    console.log(body);
     return this.authHttp.post(this.baseUrl, body);
   }
 }

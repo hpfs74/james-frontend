@@ -7,6 +7,7 @@ import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.m
 import { CarDetailForm } from './car-detail.form';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
+import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 
 @Component({
   selector: 'knx-car-detail-form',
@@ -30,7 +31,7 @@ export class CarDetailComponent implements OnInit {
   // form submit
   @Output() nextStep: EventEmitter<any> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, elementRef: ElementRef) {
+  constructor(private fb: FormBuilder, elementRef: ElementRef, private chatNotifierService: ChatStreamService ) {
   }
 
   ngOnInit() {
@@ -48,9 +49,10 @@ export class CarDetailComponent implements OnInit {
   }
 
   onAddressFound(event: Address) {
-    // handling the address view
-
-
+    this.chatNotifierService.addMessage({
+      type: 'text',
+      content: `Ik heb je adres gevonden. Woon je op ${event.fullname}?`
+    });
   }
 
   submitForm(event) {

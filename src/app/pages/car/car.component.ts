@@ -3,12 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../config.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { CarService } from './car.service';
-
 import { Car } from '../../models/car';
-import { ChatMessage } from '../../models/chat-message';
 import { Price } from '../../models/price';
 import { CarCoverageRecommendation } from './../../models/coverage';
+
+import { ChatMessage } from '../../models/chat-message';
 import { ChatStreamComponent } from '../../components/knx-chat-stream/';
+import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 
 @Component({
   selector: 'knx-car-page',
@@ -32,10 +33,18 @@ export class CarComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private carService: CarService,
-    private insuranceService: InsuranceService) {
+    private insuranceService: InsuranceService,
+    private chatNotifierService: ChatStreamService) {
   }
 
   ngOnInit() {
+    this.chatNotifierService.addMessage$.subscribe(
+      message => {
+        // replace messages instead of pushing
+        this.chatMessages = [];
+        this.chatMessages.push(message);
+    });
+
     this.currentFormStep = 'carDetails';
     this.formSteps = [
       {
@@ -80,12 +89,12 @@ export class CarComponent implements OnInit {
 
   addCarMessage(car: Car) {
     this.chatMessages = [];
-    this.chatMessages.push({ type: 'car', content: car});
+    this.chatNotifierService.addMessage({ type: 'car', content: car });
   }
 
   addTextMessage(message) {
     this.chatMessages = [];
-    this.chatMessages.push({ type: 'text', content: message });
+    this.chatNotifierService.addMessage({ type: 'text', content: message });
   }
 
   goToPreviousStep(event) {
