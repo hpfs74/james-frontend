@@ -49,6 +49,8 @@ export class CarDetailComponent implements OnInit {
 
   onAddressFound(event: Address) {
     // handling the address view
+
+
   }
 
   submitForm(event) {
