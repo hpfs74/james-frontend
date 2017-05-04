@@ -42,7 +42,8 @@
 
       <knx-address-lookup
         [addressFormGroup]="form.addressForm"
-        [validationErrors]="form.validationErrors">
+        [validationErrors]="form.validationErrors"
+        (addressFound)="onAddressFound($event)">
       </knx-address-lookup>
 
       <div class="row">

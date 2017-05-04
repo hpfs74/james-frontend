@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { KnabBaseService } from './base.service';
-import { ConfigService } from '../config.service';
-import { Address } from '../models/address';
-import { AuthHttp } from './auth-http.service';
+import { AuthHttp , KnabBaseService } from '../../services';
+import { ConfigService } from '../../config.service';
+import { Address } from '../../models/address';
 
 @Injectable()
 export class AddressLookupService extends KnabBaseService {

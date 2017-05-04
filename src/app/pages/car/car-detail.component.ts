@@ -6,6 +6,7 @@ import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.m
 
 import { CarDetailForm } from './car-detail.form';
 import { Price } from '../../models/price';
+import { Address } from '../../models/address';
 
 @Component({
   selector: 'knx-car-detail-form',
@@ -44,6 +45,10 @@ export class CarDetailComponent implements OnInit {
     if (licensePlate && licensePlate.length === validLength) {
       this.licensePlateChange.emit(licensePlate);
     }
+  }
+
+  onAddressFound(event: Address) {
+    // handling the address view
   }
 
   submitForm(event) {

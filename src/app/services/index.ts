@@ -1,5 +1,5 @@
-export * from './address-lookup.service';
 export * from './auth.service';
+export * from './auth-http.service';
 export * from './base.service';
 export * from './feature.service';
 export * from './geolocation.service';

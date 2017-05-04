@@ -6,7 +6,9 @@ import { postalCodeMask } from '../../../../node_modules/@cx/input/src/cx-input.
 import { FormValidationErrors } from '../../../../node_modules/@cx/form';
 
 import { Address } from '../../models/address';
-import { AddressLookupService, GeolocationService } from '../../services';
+import { AddressLookupService } from './address-lookup.service';
+import { GeolocationService } from '../../services';
+
 
 @Component({
   selector: 'knx-address-lookup',
