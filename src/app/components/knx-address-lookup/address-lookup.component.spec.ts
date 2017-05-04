@@ -19,8 +19,11 @@ describe('Component: AddressLookup', () => {
   let el: HTMLElement;
   let formGroup: FormGroup;
 
+  const validationErrors = {
+    address: () => 'Error'
+  };
 
-  let addressServiceStub = {
+  const addressServiceStub = {
     lookupAddress: (postalCode: string, houseNumber: string) => {
       return {
         street: 'Teststraat',
@@ -29,10 +32,10 @@ describe('Component: AddressLookup', () => {
     }
   };
 
-  let geoLocationServiceStub = {
+  const geoLocationServiceStub = {
   };
 
-  let configServiceStub = {
+  const configServiceStub = {
     config: {
       api: {
         james: {
@@ -61,31 +64,42 @@ describe('Component: AddressLookup', () => {
 
     let fb = new FormBuilder();
     comp.addressFormGroup = fb.group({
-        postalCode: [null, Validators.required ],
-        houseNumber: [null, Validators.required],
-        houseNumberExtension: [null]
-      });
+      postalCode: [null, Validators.required ],
+      houseNumber: [null, Validators.required],
+      houseNumberExtension: [null]
+    });
 
     fixture.detectChanges();
   });
 
-  xit('should initialize with a formGroup', () => {
+  it('should initialize with a formGroup', () => {
     expect(comp.addressFormGroup).not.toBeNull;
   });
 
-  // xit('should get formGroup errors', () => {
+  it('should get formGroup errors', () => {
+    Object.keys(comp.addressFormGroup.controls).forEach(key => {
+      comp.addressFormGroup.get(key).markAsTouched();
+    });
+    comp.addressFormGroup.markAsTouched();
 
-  // });
+    fixture.detectChanges();
 
-  // xit('should get error messages', () => {
+    expect(comp.addressFormGroup.errors).not.toBeNull;
 
-  // });
+    let errors = comp.getErrors();
+    expect(errors).toBeDefined;
+  });
 
-  // xit('should emit an address', () => {
+  it('should get error messages', () => {
+    comp.validationErrors = validationErrors;
+    expect(comp.getErrorMessage('address')).toEqual('Error');
+  });
 
-  // });
+  xit('should emit an address', () => {
+    //TO BE IMPLEMENTED
+  });
 
-  // xit('should get your current geolocation', () => {
-
-  // });
+  xit('should get your current geolocation', () => {
+    //TO BE IMPLEMENTED
+  });
 });

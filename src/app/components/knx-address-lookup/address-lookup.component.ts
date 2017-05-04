@@ -9,7 +9,6 @@ import { Address } from '../../models/address';
 import { AddressLookupService } from './address-lookup.service';
 import { GeolocationService } from '../../services';
 
-
 @Component({
   selector: 'knx-address-lookup',
   templateUrl: './address-lookup.component.html',
@@ -26,12 +25,9 @@ export class AddressLookupComponent implements AfterViewChecked {
   constructor(
     private addressService: AddressLookupService,
     private geolocationService: GeolocationService) {
-
   }
 
   ngAfterViewChecked(): void {
-
-    // TODO: add
     this.addressFormGroup.setValidators( (formControl) => this.validateAddress(formControl, this.addressService));
   }
 
