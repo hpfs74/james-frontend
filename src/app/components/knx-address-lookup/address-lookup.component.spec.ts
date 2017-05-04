@@ -69,7 +69,7 @@ describe('Component: AddressLookup', () => {
     fixture.detectChanges();
   });
 
-  xit('should initialize with a formGroup', () => {
+  it('should initialize with a formGroup', () => {
     expect(comp.addressFormGroup).not.toBeNull;
   });
 

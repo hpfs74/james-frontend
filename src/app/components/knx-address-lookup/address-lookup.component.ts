@@ -33,7 +33,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   ngAfterViewChecked(): void {
 
     // TODO: add
-    this.addressFormGroup.setAsyncValidators( (formControl) => this.validateAddress(formControl, this.addressService));
+    this.addressFormGroup.setValidators( (formControl) => this.validateAddress(formControl, this.addressService));
   }
 
   public getErrors(): Array<string> {
@@ -58,34 +58,33 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): { [key: string]: any } {
-    return new Promise ( (resolve,reject) => {
-
+    return new Promise( (resolve, reject) => {
       let postalCode = formGroup.get('postalCode').value;
       let houseNumber = formGroup.get('houseNumber').value;
 
       if (!postalCode && !houseNumber) {
-        return null;
+        return resolve(null);
       }
 
       if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
         let isValid: boolean = false;
 
         addressService.lookupAddress(postalCode, houseNumber)
-          .subscribe( (data) => {
-            let res = <Address>data.json();
-
-
+          .map(data => data.json())
+          .map(data => <Address>data)
+          .subscribe( (res) => {
             isValid = !!(res.street && res.city);
-            this.addressFound.emit(res);
-
-            this.address = `${res.fullname}`;
+            // this.addressFound.emit(res);
+            // this.address = `${res.fullname}`;
 
             resolve(isValid ? null : {address: true});
 
           }, err => {
             isValid = false; // cannot validate: server error?
-            resolve({address: true});
+            reject({address: true});
           });
+      } else {
+        resolve({ address: true});
       }
     });
   }
