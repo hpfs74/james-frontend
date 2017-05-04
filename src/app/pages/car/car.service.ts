@@ -8,7 +8,6 @@ import { Car } from '../../models/car';
 import { Price } from '../../models/price';
 import { CarCoverageRecommendation } from './../../models/coverage';
 
-
 @Injectable()
 export class CarService {
   private baseUrl: string;
@@ -20,31 +19,14 @@ export class CarService {
   }
 
   public getByLicense(licensePlate: string): Observable<Car> {
-    let url = this.baseUrl + `/${licensePlate}`;
-    return this.authHttp.get(url)
-      .map(res => {
-        if (res.status === 200) {
-          return res.json().data as Car;
-        } else {
-          //"error": "license_not_found"
-          return [];
-        }
-      })
-      .catch(this.handleError);
+    return this.authHttp.get(this.baseUrl + `/${licensePlate}`)
+      .map(res=><Car>res.json());
   }
 
   public getCoverageRecommendation(licensePlate: string, loan: boolean): Observable<CarCoverageRecommendation> {
     let url = this.helperUrl + 'car/coverage';
-
     return this.authHttp.post(url, { license: licensePlate })
-      .map(res => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          return [];
-        }
-      })
-      .catch(this.handleError);
+      .map(res=><CarCoverageRecommendation>res.json());
   }
 
   public getCoverages(): Array<Price> {
@@ -94,14 +76,5 @@ export class CarService {
         highlight: false
       }
     ];
-  }
-
-  /**
-   * Error handler
-   * @param error
-   * @returns {ErrorObservable}
-   */
-  private handleError(error: Response) {
-    return Observable.throw((error && error.json && error.json().error) || 'AIP:CarService:Server error');
   }
 }
