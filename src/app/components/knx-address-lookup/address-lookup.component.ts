@@ -6,8 +6,7 @@ import { postalCodeMask } from '../../../../node_modules/@cx/input/src/cx-input.
 import { FormValidationErrors } from '../../../../node_modules/@cx/form';
 
 import { Address } from '../../models/address';
-import { AddressLookupService } from './address-lookup.service';
-import { GeolocationService } from '../../services/geolocation.service';
+import { AddressLookupService, GeolocationService } from '../../services';
 
 @Component({
   selector: 'knx-address-lookup',
@@ -25,6 +24,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   constructor(
     private addressService: AddressLookupService,
     private geolocationService: GeolocationService) {
+
   }
 
   ngAfterViewChecked(): void {
@@ -53,6 +53,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   validateAddress(formGroup: AbstractControl): { [key: string]: boolean } {
+
     let postalCode = formGroup.get('postalCode').value;
     let houseNumber = formGroup.get('houseNumber').value;
 
@@ -62,6 +63,7 @@ export class AddressLookupComponent implements AfterViewChecked {
 
     if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
       let isValid: boolean = false;
+
       this.addressService.lookupAddress(postalCode, houseNumber)
         .subscribe(res => {
           isValid = !!(res.street && res.city);

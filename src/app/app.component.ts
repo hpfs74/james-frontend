@@ -3,13 +3,16 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@
 import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
 import {
+  AddressLookupService,
   AuthService,
   FeatureService,
+  GeolocationService,
   NavigationService,
   InsuranceService,
   CookieService,
   ContentService
 } from './services';
+
 
 @Component({
   selector: 'knx-app',

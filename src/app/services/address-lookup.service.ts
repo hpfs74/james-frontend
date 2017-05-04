@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, URLSearchParams } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { KnabBaseService } from '../../services/base.service';
-import { ConfigService } from '../../config.service';
-import { Address } from '../../models/address';
-import { post } from 'selenium-webdriver/http';
+import { KnabBaseService } from './base.service';
+import { ConfigService } from '../config.service';
+import { Address } from '../models/address';
 
 @Injectable()
 export class AddressLookupService extends KnabBaseService {
@@ -25,19 +24,19 @@ export class AddressLookupService extends KnabBaseService {
    *
    * @memberOf AddressLookupService
    */
-  public lookupAddress(postalCode: string, houseNumber: string): Observable<Address> {
-    let url = this.baseUrl + '/' + postalCode.trim() + houseNumber.trim(); // POSTCODENUMBER
-    return this.http.get(url)
-      .map((res: Response) => {
-        if (res.status === 200) {
-          return res.json().data as Address;
-        } else {
-          //  "errors": [    "address_not_found"  ]
-          return [];
-        }
-      })
-      .catch(this.handleError);
-  }
+  // public lookupAddress(postalCode: string, houseNumber: string): Observable<Address> {
+  //   let url = this.baseUrl + '/' + postalCode.trim() + houseNumber.trim(); // POSTCODENUMBER
+  //   return this.http.get(url)
+  //     .map((res: Response) => {
+  //       if (res.status === 200) {
+  //         return res.json().data as Address;
+  //       } else {
+  //         //  "errors": [    "address_not_found"  ]
+  //         return [];
+  //       }
+  //     })
+  //     .catch(this.handleError);
+  // }
 
   /**
    * Get street, city and geolocation from postalcode
@@ -47,7 +46,7 @@ export class AddressLookupService extends KnabBaseService {
    *
    * @memberOf AddressLookupService
    */
-  public lookup(postalCode: string , houseNumber: string) : Observable<Address> {
+  public lookupAddress(postalCode: string , houseNumber: string) : Observable<Address> {
     let body = { address: postalCode + houseNumber };
 
     return this.post(this.baseUrl, body)

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from '../../config.service';
+import { ConfigService } from '../config.service';
 import { AddressLookupService } from './address-lookup.service';
 
 describe('Service: AddressLookupService', () => {
