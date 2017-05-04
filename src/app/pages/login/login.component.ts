@@ -20,7 +20,7 @@ import { AuthService } from './../../services/auth.service';
         </div>
       </div>
 
-      <form [formGroup]="loginForm" (ngSubmit)="login($event)">
+      <form [formGroup]="loginForm" (ngSubmit)="login($event)" (keyup.enter)="login($event)">
         <div class="row">
           <div class="col-md-6 offset-md-3">
               <cx-form-group [formControlName]='formGroupConfig[0].formControlName'

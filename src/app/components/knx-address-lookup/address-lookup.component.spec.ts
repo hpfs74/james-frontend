@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
@@ -93,6 +93,13 @@ describe('Component: AddressLookup', () => {
   it('should get error messages', () => {
     comp.validationErrors = validationErrors;
     expect(comp.getErrorMessage('address')).toEqual('Error');
+  });
+
+  it('should validate an address', () => {
+      inject([AddressLookupService], (addressServiceStub) => {
+        let isValid = addressServiceStub.validateAddress(comp.addressFormGroup, addressServiceStub);
+        expect(isValid).toBeUndefined;
+      });
   });
 
   xit('should emit an address', () => {

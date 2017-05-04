@@ -23,6 +23,8 @@ export class AddressLookupComponent implements AfterViewChecked {
   public address : string = null;
   public postalCodeMask = postalCodeMask;
 
+  private lookupTimeout;
+
   constructor(
     private addressService: AddressLookupService,
     private geolocationService: GeolocationService) {
@@ -55,34 +57,35 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): { [key: string]: any } {
-    return new Promise ( (resolve,reject) => {
+    clearTimeout(this.lookupTimeout);
+    return new Promise((resolve, reject) => {
+      this.lookupTimeout = setTimeout(() => {
+        let postalCode = formGroup.get('postalCode').value;
+        let houseNumber = formGroup.get('houseNumber').value;
+        let houseNumberExtension = formGroup.get('houseNumberExtension').value;
 
-      let postalCode = formGroup.get('postalCode').value;
-      let houseNumber = formGroup.get('houseNumber').value;
+        if (!postalCode && !houseNumber) {
+          resolve(null);
+        }
 
-      if (!postalCode && !houseNumber) {
-        return null;
-      }
+        if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
+          let isValid: boolean = false;
 
-      if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
-        let isValid: boolean = false;
+          addressService.lookupAddress(postalCode, houseNumber, houseNumberExtension)
+            .subscribe((data) => {
+              let res = <Address>data.json();
 
-        addressService.lookupAddress(postalCode, houseNumber)
-          .subscribe( (data) => {
-            let res = <Address>data.json();
+              isValid = !!(res.street && res.city);
+              this.addressFound.emit(res);
 
-            isValid = !!(res.street && res.city);
-            this.addressFound.emit(res);
+              resolve(isValid ? null : { address: true });
 
-            this.address = `${res.fullname}`;
-
-            resolve(isValid ? null : {address: true});
-
-          }, err => {
-            isValid = false; // cannot validate: server error?
-            resolve({address: true});
-          });
-      }
+            }, err => {
+              isValid = false; // cannot validate: server error?
+              resolve({ address: true });
+            });
+        }
+      }, 600);
     });
   }
 
