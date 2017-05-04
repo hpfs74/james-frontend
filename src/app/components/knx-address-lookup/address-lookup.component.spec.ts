@@ -9,7 +9,7 @@ import { Address } from '../../models/address';
 import { ConfigService } from '../../config.service';
 import { AddressLookupService, GeolocationService } from '../../services';
 import { AddressLookupComponent } from './address-lookup.component';
-import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
+import { AuthHttp } from '../../services/auth-http.service';
 
 describe('Component: AddressLookup', () => {
   let comp: AddressLookupComponent;
@@ -17,6 +17,8 @@ describe('Component: AddressLookup', () => {
   let de: DebugElement;
   let el: HTMLElement;
   let formGroup: FormGroup;
+
+  let authHttpStub = {};
 
   let addressServiceStub = {
     lookupAddress: (postalCode: string, houseNumber: string) => {
@@ -42,8 +44,9 @@ describe('Component: AddressLookup', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
+      imports: [  HttpModule ],
       providers: [
+        { provide: AuthHttp, useValue: authHttpStub },
         { provide: AddressLookupService, useValue: addressServiceStub },
         { provide: GeolocationService, useValue: geoLocationServiceStub },
         { provide: ConfigService, useValue: configServiceStub }

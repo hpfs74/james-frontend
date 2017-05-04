@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { KnabBaseService } from './base.service';
 import { ConfigService } from '../config.service';
 import { Address } from '../models/address';
+import { AuthHttp } from './auth-http.service';
 
 @Injectable()
 export class AddressLookupService extends KnabBaseService {
   private baseUrl: string;
 
-  constructor(private configService: ConfigService, private http: Http) {
-    super(http);
+  constructor(private configService: ConfigService, private http: AuthHttp) {
+    super();
     this.serviceName = 'AddressLookupService';
     this.baseUrl = configService.config.api.james.address;
   }
@@ -49,7 +50,7 @@ export class AddressLookupService extends KnabBaseService {
   public lookupAddress(postalCode: string , houseNumber: string) : Observable<Address> {
     let body = { address: postalCode + houseNumber };
 
-    return this.post(this.baseUrl, body)
-      .map(res=><Address>res);
+    return this.http.post(this.baseUrl, body)
+      .map(res=><Address>res.json());
   }
 }

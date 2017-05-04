@@ -1,23 +1,10 @@
 
-import { Response, Http, Headers } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 export class KnabBaseService {
   protected serviceError: boolean;
   protected serviceName : string;
-
-  constructor(private _http : Http) {
-
-  }
-
-  protected post(url, data) : Observable<any> {
-    let headers = new Headers();
-    headers.set('Content-type', 'application/json');
-    headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
-
-    return this._http.post(url, data, { headers })
-      .map(res=>res.json());
-  }
 
   /**
    * Generic Error handler

@@ -8,8 +8,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from '../config.service';
 import { AddressLookupService } from './address-lookup.service';
+import { AuthHttp } from './auth-http.service';
+import { Address } from '../models/address';
+
 
 describe('Service: AddressLookupService', () => {
+
   let configServiceStub = {
     config: {
       api: {
@@ -20,9 +24,17 @@ describe('Service: AddressLookupService', () => {
     }
   };
 
+  let authHttpStub =  {
+    post: (url, body) => {
+      return new Observable<Address>();
+    }
+  };
+
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
+        { provide: AuthHttp, useValue: authHttpStub },
         { provide: ConfigService, useValue: configServiceStub },
         BaseRequestOptions,
         MockBackend,

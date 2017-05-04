@@ -28,7 +28,9 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    this.addressFormGroup.setValidators(this.validateAddress);
+
+    // TODO: add
+    this.addressFormGroup.setValidators( (formControl) => this.validateAddress(formControl, this.addressService));
   }
 
   public getErrors(): Array<string> {
@@ -52,7 +54,7 @@ export class AddressLookupComponent implements AfterViewChecked {
     }
   }
 
-  validateAddress(formGroup: AbstractControl): { [key: string]: boolean } {
+  validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): { [key: string]: boolean } {
 
     let postalCode = formGroup.get('postalCode').value;
     let houseNumber = formGroup.get('houseNumber').value;
@@ -64,7 +66,7 @@ export class AddressLookupComponent implements AfterViewChecked {
     if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
       let isValid: boolean = false;
 
-      this.addressService.lookupAddress(postalCode, houseNumber)
+      addressService.lookupAddress(postalCode, houseNumber)
         .subscribe(res => {
           isValid = !!(res.street && res.city);
           this.addressFound.emit(res);

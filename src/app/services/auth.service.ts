@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ConfigService } from '../config.service';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
+import 'rxjs/add/operator/mergeMap';
 import { User } from '../models/user';
 const CryptoJS = require('crypto-js');
 
@@ -26,7 +27,7 @@ export class AuthService {
   }
 
   public getUserProfile(): Observable<User> {
-    return this.http.get(this.baseUrl + '/profile', { headers: this.getHeaderWithBearer() })
+    return this.http.get(this.baseUrl + '/profile', {headers: this.getHeaderWithBearer()})
       .map((x) => x.json())
       .map((x) => <User>x);
   }
@@ -145,18 +146,12 @@ export class AuthService {
 
     return this.http
       .post(this.keyUrl, '', {headers})
-      .map((res: Response) => {
-
-        if (res.status === 201) {
-          let data = res.json();
-
-          return <AuthKey> {
-            id: data._id,
-            key: data.key
-          };
-        }
-
-        throw new Error(res.statusText);
+      .map(data => data.json())
+      .map(data => {
+        return <AuthKey> {
+          id: data._id,
+          key: data.key
+        };
       });
   }
 
