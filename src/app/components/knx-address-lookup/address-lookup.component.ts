@@ -76,11 +76,10 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   //TODO:
-  // 1: get postalcode from GeolocationService
-  // 2: get address from lookupService
+  // Implement Google Maps API/preview
   getLocationAddress() {
     this.geolocationService.getCurrentPosition().subscribe(position => {
-      //console.log('Geolocation lookup not implemented');
+      throw Error('Not implemented');
     });
   }
 }

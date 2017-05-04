@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { AuthHttp } from './services/auth-http.service';
 
 
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
-      noJwtError: true,
-      noTokenScheme: true,
-      tokenName: 'auth_token',
-      tokenGetter: (() => localStorage.getItem('auth_token')),
-      globalHeaders: [{'Content-Type':'application/json'}],
-  }), http, options);
+export function authHttpServiceFactory(http: Http) {
+  return new AuthHttp(http);
 }
 
 @NgModule({
