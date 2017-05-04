@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 
+import { KnabBaseService } from '../../services/base.service';
 import { ConfigService } from '../../config.service';
 import { Address } from '../../models/address';
+import { post } from 'selenium-webdriver/http';
 
 @Injectable()
-export class AddressLookupService {
+export class AddressLookupService extends KnabBaseService {
   private baseUrl: string;
-  private serviceError: boolean = false;
 
   constructor(private configService: ConfigService, private http: Http) {
+    super(http);
+    this.serviceName = 'AddressLookupService';
     this.baseUrl = configService.config.api.james.address;
   }
 
@@ -37,14 +40,17 @@ export class AddressLookupService {
   }
 
   /**
-   * Error handler
-   * @param error
-   * @returns {ErrorObservable}
+   * Get street, city and geolocation from postalcode
+   * @param {string} postalCode
+   * @param {string} houseNumber
+   * @returns {Observable<Address>}
+   *
+   * @memberOf AddressLookupService
    */
-  private handleError(error: Response) {
-    // in a real world app, we may send the error to some remote logging infrastructure
-    // instead of just logging it to the console
-    this.serviceError = true;
-    return Observable.throw((error && error.json && error.json().error) || 'AIP:AddressLookupService:Server error');
+  public lookup(postalCode: string , houseNumber: string) : Observable<Address> {
+    let body = { address: postalCode + houseNumber };
+
+    return this.post(this.baseUrl, body)
+      .map(res=><Address>res);
   }
 }
