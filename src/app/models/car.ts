@@ -59,7 +59,7 @@ export class Car implements ICar {
   doors: number;
 }
 
-export const MockCar: ICar = {
+export const MockCar: Car = {
   'license': '71ZXK6',
   'vin': 'VF1BA0F0G17869206',
   'reporting_code': '9206',

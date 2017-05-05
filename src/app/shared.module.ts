@@ -29,7 +29,7 @@ import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
-import { CarInfoComponent } from './components/knx-car-info/car-info.component';
+import { CarInfoComponent, CarPreviewComponent } from './components/knx-car-info';
 
 export const sharedComponents = [
   AvatarComponent,
@@ -44,7 +44,8 @@ export const sharedComponents = [
   PriceTableItemComponent,
   LoaderComponent,
   UserDetailComponent,
-  CarInfoComponent
+  CarInfoComponent,
+  CarPreviewComponent
 ];
 
 @NgModule({

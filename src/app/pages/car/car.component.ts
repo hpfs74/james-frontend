@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../config.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { CarService } from './car.service';
-import { Car } from '../../models/car';
+import { Car, MockCar } from '../../models/car';
 import { Price } from '../../models/price';
 import { CarCoverageRecommendation } from './../../models/coverage';
 
