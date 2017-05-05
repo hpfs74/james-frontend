@@ -52,7 +52,7 @@ export class AuthService {
           scope: 'profile/basic'
         };
 
-        return this.http.post(this.configService.config.api.james.auth + '/token', tokenRequest, {headers})
+        return this.http.post(this.configService.config.api.james.token , tokenRequest, {headers})
           .map((res) => res.json())
           .map((token) => <AuthToken>token);
       });

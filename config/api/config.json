@@ -7,6 +7,7 @@
     "james": {
       "base": "https://james-t.nicci.io/v1",
       "key": "https://profile-james-t.nicci.io/key",
+      "token": "https://profile-james-t.nicci.io/token",
       "profile": "https://profile-james-t.nicci.io/client/profile",
       "auth": "https://profile-james-t.nicci.io",
       "baseUrl": "https://james-t.nicci.io/v1",

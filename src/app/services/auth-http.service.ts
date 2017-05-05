@@ -122,13 +122,11 @@ export class AuthHttp {
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
 
-      return this.http.post(this.configService.config.api.james.auth+'/profile', refreshTokenBody, { headers })
+      return this.http.post(this.configService.config.api.james.token, refreshTokenBody, { headers })
         .map(data => data.json())
         .flatMap( (data) => {
 
           // Update local storage
-          // localStorage.removeItem(TOKEN_NAME);
-          // localStorage.removeItem(TOKEN_OBJECT_NAME);
           token = data.access_token;
           localStorage.setItem(TOKEN_NAME, token);
           localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(data));
