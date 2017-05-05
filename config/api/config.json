@@ -11,7 +11,7 @@
       "profile": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci/profile",
       "auth": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci",
       "baseUrl": "https://james-t.nicci.io/v1",
-      "address": "https://james-t.nicci.io/v1/address",
+      "address": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/james/address",
       "car": "https://james-t.nicci.io/v1/cars",
       "helper": "https://james-t.nicci.io/v1/helper"
     },
