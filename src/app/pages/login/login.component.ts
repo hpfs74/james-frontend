@@ -20,7 +20,7 @@ import { AuthService } from './../../services/auth.service';
         </div>
       </div>
 
-      <form [formGroup]="loginForm" (ngSubmit)="login($event)">
+      <form [formGroup]="loginForm" (ngSubmit)="login($event)" (keyup.enter)="login($event)">
         <div class="row">
           <div class="col-md-6 offset-md-3">
               <cx-form-group [formControlName]='formGroupConfig[0].formControlName'
@@ -29,7 +29,8 @@ import { AuthService } from './../../services/auth.service';
               <div class="login-password-wrapper">
                 <cx-form-group [formControlName]="formGroupConfig[1].formControlName"
                   [options]="formGroupConfig[1]"></cx-form-group>
-                <button *ngIf="loginForm.get('password').value"
+                <button type="button"
+                  *ngIf="loginForm.get('password').value"
                   class="btn-show-password knx-icon-eye"
                   [class.knx-icon-eye-slash]="showPassword"
                   [class.knx-icon-eye]="!showPassword"

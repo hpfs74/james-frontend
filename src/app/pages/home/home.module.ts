@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home.routing.module';
 import { HomeComponent } from './home.component';
 import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
+import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 
 // Layout components
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -33,7 +34,11 @@ export class HomeModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: HomeModule,
-      providers: [AuthService, AuthGuard]
+      providers: [
+        AuthService,
+        AuthGuard,
+        ChatStreamService
+      ]
     };
   }
 }

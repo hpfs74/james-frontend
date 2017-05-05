@@ -9,7 +9,6 @@ import { Address } from '../../models/address';
 import { AddressLookupService } from './address-lookup.service';
 import { GeolocationService } from '../../services';
 
-
 @Component({
   selector: 'knx-address-lookup',
   templateUrl: './address-lookup.component.html',
@@ -24,16 +23,16 @@ export class AddressLookupComponent implements AfterViewChecked {
   public address : string = null;
   public postalCodeMask = postalCodeMask;
 
+  private lookupTimeout;
+
   constructor(
     private addressService: AddressLookupService,
     private geolocationService: GeolocationService) {
-
   }
 
   ngAfterViewChecked(): void {
-
     // TODO: add
-    this.addressFormGroup.setValidators( (formControl) => this.validateAddress(formControl, this.addressService));
+    this.addressFormGroup.setAsyncValidators( (formControl) => this.validateAddress(formControl, this.addressService));
   }
 
   public getErrors(): Array<string> {
@@ -58,34 +57,35 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): { [key: string]: any } {
-    return new Promise( (resolve, reject) => {
-      let postalCode = formGroup.get('postalCode').value;
-      let houseNumber = formGroup.get('houseNumber').value;
+    clearTimeout(this.lookupTimeout);
+    return new Promise((resolve, reject) => {
+      this.lookupTimeout = setTimeout(() => {
+        let postalCode = formGroup.get('postalCode').value;
+        let houseNumber = formGroup.get('houseNumber').value;
+        let houseNumberExtension = formGroup.get('houseNumberExtension').value;
 
-      if (!postalCode && !houseNumber) {
-        return resolve(null);
-      }
+        if (!postalCode && !houseNumber) {
+          resolve(null);
+        }
 
-      if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
-        let isValid: boolean = false;
+        if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
+          let isValid: boolean = false;
 
-        addressService.lookupAddress(postalCode, houseNumber)
-          .map(data => data.json())
-          .map(data => <Address>data)
-          .subscribe( (res) => {
-            isValid = !!(res.street && res.city);
-            // this.addressFound.emit(res);
-            // this.address = `${res.fullname}`;
+          addressService.lookupAddress(postalCode, houseNumber, houseNumberExtension)
+            .subscribe((data) => {
+              let res = <Address>data.json();
 
-            resolve(isValid ? null : {address: true});
+              isValid = !!(res.street && res.city);
+              this.addressFound.emit(res);
 
-          }, err => {
-            isValid = false; // cannot validate: server error?
-            reject({address: true});
-          });
-      } else {
-        resolve({ address: true});
-      }
+              resolve(isValid ? null : { address: true });
+
+            }, err => {
+              isValid = false; // cannot validate: server error?
+              resolve({ address: true });
+            });
+        }
+      }, 600);
     });
   }
 
