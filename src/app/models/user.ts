@@ -7,10 +7,11 @@ import { Address } from './address';
  */
 export interface IUser {
   id: number;
-  email: string;
+  emailaddress: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  infix: string;
+  lastname: string;
   gender: string;
   dateOfBirth: string;
 
@@ -19,10 +20,11 @@ export interface IUser {
 
 export class User implements IUser {
   id: number;
-  email: string;
+  emailaddress: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  infix: string;
+  lastname: string;
   gender: string;
   dateOfBirth: string;
 }

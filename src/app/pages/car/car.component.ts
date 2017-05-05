@@ -72,6 +72,9 @@ export class CarComponent implements OnInit {
     this.auth.getUserProfile()
       .subscribe(res => {
 
+        let user : string = (res.firstname || res.lastname) ?
+          res.emailaddress : `${res.firstname} ${res.infix} ${res.lastname}`;
+
         this.assistantMessages = {
           welcome: `Hoi! Ik ben <i>${res.emailaddress}</i>.
         Ik ga je vandaag helpen <strong>besparen</strong> op je auto-verzekering.
