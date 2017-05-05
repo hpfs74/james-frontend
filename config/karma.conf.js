@@ -22,12 +22,6 @@ module.exports = function (config) {
       captureConsole: false
     },
 
-    browserConsoleLogOptions: {
-      level: 'log',
-      format: '%b %T: %m',
-      terminal: true
-    },
-
     /*
      * list of files / patterns to load in the browser
      *
