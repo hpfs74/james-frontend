@@ -145,30 +145,30 @@ export class CarComponent implements OnInit {
   }
 
   getCoverages(formData) {
-    //TMP
+    // TODO: just for testing
     this.coverages = this.carService.getCoverages();
     return;
 
-    if (this.myCar && formData.loan) {
-      this.isCoverageLoading = true;
-
-      // get default coverage types
-      this.coverages = this.carService.getCoverages();
-
-      // fetch recommendation
-      this.carService.getCoverageRecommendation(this.myCar.license, formData.loan)
-        .subscribe(res => {
-          this.isCoverageLoading = false;
-
-          let coverage = this.coverages.find(price => price.id === res.recommended_value);
-          if (coverage) {
-            coverage.highlight = true;
-          }
-
-        }, error => {
-          this.isCoverageLoading = true;
-        });
-    }
+    // if (this.myCar && formData.loan) {
+    //   this.isCoverageLoading = true;
+    //
+    //   // get default coverage types
+    //   this.coverages = this.carService.getCoverages();
+    //
+    //   // fetch recommendation
+    //   this.carService.getCoverageRecommendation(this.myCar.license, formData.loan)
+    //     .subscribe(res => {
+    //       this.isCoverageLoading = false;
+    //
+    //       let coverage = this.coverages.find(price => price.id === res.recommended_value);
+    //       if (coverage) {
+    //         coverage.highlight = true;
+    //       }
+    //
+    //     }, error => {
+    //       this.isCoverageLoading = true;
+    //     });
+    // }
   }
 
 }
