@@ -6,10 +6,10 @@
   "api": {
     "james": {
       "base": "https://james-t.nicci.io/v1",
-      "key": "https://profile-james-t.nicci.io/key",
-      "token": "https://profile-james-t.nicci.io/token",
-      "profile": "https://profile-james-t.nicci.io/client/profile",
-      "auth": "https://profile-james-t.nicci.io",
+      "key": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci/key",
+      "token": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci/token",
+      "profile": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci/profile",
+      "auth": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci",
       "baseUrl": "https://james-t.nicci.io/v1",
       "address": "https://james-t.nicci.io/v1/address",
       "car": "https://james-t.nicci.io/v1/cars",

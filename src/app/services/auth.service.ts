@@ -14,20 +14,19 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
   private loggedIn = false;
-  private baseUrl: string;
-  private authUrl: string;
   private keyUrl: string;
+  private profileUrl: string;
 
   constructor(private http: Http,
               private configService: ConfigService) {
 
-    this.loggedIn = false; // !!localStorage.getItem('auth_token');
-    this.baseUrl = configService.config.api.james.base;
+    this.loggedIn = false; // !!localStorage.getItem('a uth_token');
     this.keyUrl = configService.config.api.james.key;
+    this.profileUrl = configService.config.api.james.profile;
   }
 
   public getUserProfile(): Observable<User> {
-    return this.http.get(this.baseUrl + '/profile', {headers: this.getHeaderWithBearer()})
+    return this.http.get(this.profileUrl, {headers: this.getHeaderWithBearer()})
       .map((x) => x.json())
       .map((x) => <User>x);
   }
