@@ -12,7 +12,7 @@
       "baseUrl": "https://james-t.nicci.io/v1",
       "address": "https://james-t.nicci.io/v1/address",
       "car": "https://james-t.nicci.io/v1/cars",
-      "helper": "https://profile-james-t.nicci.io/v1/helper"
+      "helper": "https://james-t.nicci.io/v1/helper"
     },
     "external": {}
   }

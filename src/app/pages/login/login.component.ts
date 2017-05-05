@@ -16,7 +16,12 @@ import { AuthService } from './../../services/auth.service';
   template: `
     <div class="container">
       <div class="row">
-        <div class="knx-login__welcome">
+        <div class="col-md-6 offset-md-3">
+          <div class="knx-login__welcome">
+            <img class="knx-login__logo" src="../../../assets/images/knab-logo.svg">
+            <h2 class="knx-login__subline">Verzekeren</h2>
+            <p>Meld je aan met je e-mailadres en wachtwoord en ontdek hoeveel jij kunt besparen op je verzekeringen.</p>
+          </div>
         </div>
       </div>
 

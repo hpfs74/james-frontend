@@ -10,11 +10,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     </div>
     <ul class="knx-pricing-table-features">
       <li *ngFor="let item of features">
-        <div class="icon fa fa-check"></div> 
+        <div class="knx-icon-check"></div>
         <div class="knx-pricing-table-text">{{ item }}</div>
       </li>
     </ul>
-    <div class="knx-pricing-table-price">
+    <div *ngIf="price" class="knx-pricing-table-price">
       vanaf <span class="knx-pricing-table-amount">{{ price | currency:'EUR':true:'1.2-2' }}</span>
     </div>
     <div class="knx-pricing-table-input">
