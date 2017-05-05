@@ -4,10 +4,9 @@ import { Component, Input } from '@angular/core';
   selector: 'knx-car-preview',
   template: `
     <div class="knx-car-preview__car knx-car--{{colorCode}}">
-      <!-- // TODO: -->
+      <!-- // TODO: implement -->
     </div>`
 })
-
 export class CarPreviewComponent {
   @Input() colorCode: string;
 }
