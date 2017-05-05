@@ -4,10 +4,14 @@ import {
   Response, RequestMethod, Request, Connection, ConnectionBackend
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { tokenNotExpired } from '../utils/auth.utils';
+import { ConfigService } from '../config.service';
 
-export enum Action { QueryStart, QueryStop };
+export enum Action { QueryStart, QueryStop }
+;
 
-const TOKEN_NAME: string = 'access_token';
+export const TOKEN_NAME: string = 'access_token';
+export const TOKEN_OBJECT_NAME: string = 'token';
 
 @Injectable()
 export class AuthHttp {
@@ -15,38 +19,41 @@ export class AuthHttp {
   authFailed: EventEmitter<any> = new EventEmitter<any>();
   config: any;
 
-  constructor(private http: Http, private defOpts?: RequestOptions) {
+  constructor(private http: Http,
+              private configService: ConfigService,
+              private defOpts?: RequestOptions, ) {
+
     this.config = {
-      globalHeaders: [{ 'Content-Type': 'application/json' }]
+      globalHeaders: [{'Content-Type': 'application/json'}]
     };
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: '', method: RequestMethod.Get, url: url }, options);
+    return this.requestHelper({body: '', method: RequestMethod.Get, url: url}, options);
   }
 
   public post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: body, method: RequestMethod.Post, url: url }, options);
+    return this.requestHelper({body: body, method: RequestMethod.Post, url: url}, options);
   }
 
   public put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: body, method: RequestMethod.Put, url: url }, options);
+    return this.requestHelper({body: body, method: RequestMethod.Put, url: url}, options);
   }
 
   public delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: '', method: RequestMethod.Delete, url: url }, options);
+    return this.requestHelper({body: '', method: RequestMethod.Delete, url: url}, options);
   }
 
   public patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: body, method: RequestMethod.Patch, url: url }, options);
+    return this.requestHelper({body: body, method: RequestMethod.Patch, url: url}, options);
   }
 
   public head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: '', method: RequestMethod.Head, url: url }, options);
+    return this.requestHelper({body: '', method: RequestMethod.Head, url: url}, options);
   }
 
   public options(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({ body: '', method: RequestMethod.Options, url: url }, options);
+    return this.requestHelper({body: '', method: RequestMethod.Options, url: url}, options);
   }
 
   public requestWithToken(req: Request, token: string): Observable<Response> {
@@ -100,17 +107,47 @@ export class AuthHttp {
     //     });
     // });
     // from this point url is always an instance of Request;
+
     let req: Request = url as Request;
     let token: string = localStorage.getItem(TOKEN_NAME);
 
-    return this.requestWithToken(req, token)
-      .catch((error: Response) => {
-        if (error.status === 401 || error.status === 403) {
-          //console.log('The authentication session expires or the user is not authorised. Force refresh of the current page.');
-          //window.location.href = window.location.href + '?' + new Date().getMilliseconds();
-        }
-        return Observable.throw(error);
-      });
+    if (!tokenNotExpired) {
+      let tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
+      let refreshTokenBody = {
+        grant_type: 'refresh_token',
+        refresh_token: tokenObject.refresh_token
+      };
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+
+      return this.http.post(this.configService.config.api.james.auth+'/profile', refreshTokenBody, { headers })
+        .map(data => data.json())
+        .flatMap( (data) => {
+
+          // Update local storage
+          // localStorage.removeItem(TOKEN_NAME);
+          // localStorage.removeItem(TOKEN_OBJECT_NAME);
+          token = data.access_token;
+          localStorage.setItem(TOKEN_NAME, token);
+          localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(data));
+
+          return this.requestWithToken(req, token);
+        });
+    } else {
+
+      return this.requestWithToken(req, token);
+        // .catch((error: Response) => {
+        //
+        //
+        //   if (error.status === 401 || (error.status === 403 && error.json().error === 'invalid_access_token')) {
+        //     //console.log('The authentication session expires or the user is not authorised. Force refresh of the current page.');
+        //     //window.location.href = window.location.href + '?' + new Date().getMilliseconds();
+        //   }
+        //   return Observable.throw(error);
+        // });
+    }
   }
 
   private mergeOptions(providedOpts: RequestOptionsArgs, defaultOpts?: RequestOptions) {
