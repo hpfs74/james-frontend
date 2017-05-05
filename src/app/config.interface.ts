@@ -18,6 +18,7 @@ export interface ConfigAPIInterface {
 export interface NicciEndpoint {
   base?: string;
   key?: string;
+  token?: string;
   auth?: string;
   address?: string;
   profile?: string;

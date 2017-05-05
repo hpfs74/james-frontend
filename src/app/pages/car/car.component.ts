@@ -76,7 +76,7 @@ export class CarComponent implements OnInit {
           res.emailaddress : `${res.firstname} ${res.infix} ${res.lastname}`;
 
         this.assistantMessages = {
-          welcome: `Hoi! Ik ben <i>${res.emailaddress}</i>.
+          welcome: `Hoi <i>${res.emailaddress}</i>! Ik ben Anupama.
         Ik ga je vandaag helpen <strong>besparen</strong> op je auto-verzekering.
         Ben je er klaar voor? Let\'s do this!`,
           info: {

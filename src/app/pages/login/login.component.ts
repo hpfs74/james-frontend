@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router, RouterLink, NavigationExtras } from '@angular/router';
 
 import { CXEmailValidator } from '../../../../node_modules/@cx/form';
-import { AuthService } from './../../services/auth.service';
+import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -145,8 +145,8 @@ export class LoginComponent {
         .signIn(email.value, password.value)
         .subscribe((token) => {
 
-          localStorage.setItem('access_token', token.access_token);
-          localStorage.setItem('token', JSON.stringify(token));
+          localStorage.setItem(TOKEN_NAME, token.access_token);
+          localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(token));
 
           this.messageTitle = 'Success!';
           this.message = 'Login succesfull';
