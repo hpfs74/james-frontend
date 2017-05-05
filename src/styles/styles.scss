@@ -47,3 +47,11 @@
     padding-left: 5px;
   }
 }
+
+[class*='knx-icon-'] {
+  line-height: 1em;
+
+  &:before {
+    line-height: 1em;
+  }
+}

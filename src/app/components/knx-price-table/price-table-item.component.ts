@@ -18,6 +18,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       vanaf <span class="knx-pricing-table-amount">{{ price | currency:'EUR':true:'1.2-2' }}</span>
     </div>
     <div class="knx-pricing-table-input">
+      <button class="knx-button knx-button--ghost">
+        <span *ngIf="selected" class="knx-icon-check"></span>{{ selected ? ' Gekozen' : 'Kies deze' }}
+      </button>
     </div>
 </div>`,
 })

@@ -1,9 +1,9 @@
-<div class="row">
-  <div class="col-md-10">
+<form [formGroup]="form.formGroup">
 
-    <h2>Je gegevens</h2>
+  <div class="row">
+    <div class="col-md-10">
 
-    <form [formGroup]="form.formGroup">
+      <h2>Je gegevens</h2>
 
       <div class="row">
         <div class="col-md-5">
@@ -116,7 +116,14 @@
             }
           }">
       </cx-form-group>
+    </div>
+    <div class="col-md-2">
+      <!-- some breathing space between this and assistant -->
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-12">
       <div class="car-form__coverages">
         <knx-loader [visible]="isCoverageLoading">
           Bezig met ophalen van dekkingsopties...
@@ -127,11 +134,7 @@
           <knx-price-table [items]="coverages"></knx-price-table>
         </ng-container>
       </div>
-
-    </form>
-
+    </div>
   </div>
-  <div class="col-md-2">
-    <!-- some breathing space between this and assistant -->
-  </div>
-</div>
+
+</form>

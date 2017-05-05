@@ -11,6 +11,7 @@ import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.
 
 @Component({
   selector: 'knx-car-detail-form',
+  styleUrls: ['car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
 })
 export class CarDetailComponent implements OnInit {
@@ -51,7 +52,7 @@ export class CarDetailComponent implements OnInit {
   onAddressFound(event: Address) {
     this.chatNotifierService.addMessage({
       type: 'text',
-      content: `Ik heb je adres gevonden. Woon je op ${event.fullname}?`
+      content: `Ik heb je adres gevonden. Woon je op <strong>${event.street} in ${event.city}</strong>?`
     });
   }
 

@@ -131,6 +131,10 @@ export class CarComponent implements OnInit {
   }
 
   getCoverages(formData) {
+    //TMP
+    this.coverages = this.carService.getCoverages();
+    return;
+
     if (this.myCar && formData.loan) {
       this.isCoverageLoading = true;
 
