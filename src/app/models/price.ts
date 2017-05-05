@@ -11,7 +11,7 @@
 export class Price {
   id?: string;
   header: string;
-  price: number;
+  price?: number;
   badge: string;
   /**
    * @description

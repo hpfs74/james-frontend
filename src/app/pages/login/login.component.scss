@@ -1,6 +1,19 @@
 .knx-login__welcome {
-  padding: 40px 0;
-  margin-bottom: 30px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+h1.knx-login__subline,
+h2.knx-login__subline,
+.knx-login__subline {
+  color: $knab-secondary-blue;
+  margin-top: 5px;
+  margin-bottom: 40px;
+}
+
+.knx-login__logo {
+  max-width: 140px;
+  display: block;
 }
 
 .knx-login__reset {

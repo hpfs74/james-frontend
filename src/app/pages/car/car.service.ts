@@ -24,7 +24,7 @@ export class CarService {
   }
 
   public getCoverageRecommendation(licensePlate: string, loan: boolean): Observable<CarCoverageRecommendation> {
-    let url = this.helperUrl + 'car/coverage';
+    let url = this.helperUrl + '/car/coverage';
     return this.authHttp.post(url, { license: licensePlate })
       .map(res => <CarCoverageRecommendation>res.json());
   }
@@ -43,7 +43,6 @@ export class CarService {
           'Schade door vandalisme',
           'Schade door eigen schuld'
         ],
-        price: 18.50,
         highlight: false
       },
       {
@@ -56,7 +55,6 @@ export class CarService {
           'Schade door vandalisme',
           'Schade door eigen schuld'
         ],
-        price: 21.59,
         highlight: false
       },
       {
@@ -72,7 +70,6 @@ export class CarService {
           'Schade door vandalisme',
           'Schade door eigen schuld'
         ],
-        price: 30.19,
         highlight: false
       }
     ];
