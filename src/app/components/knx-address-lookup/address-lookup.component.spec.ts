@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -47,8 +48,10 @@ describe('Component: AddressLookup', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [  AuthModule, HttpModule ],
+      imports: [  HttpModule ],
       providers: [
+        AuthHttp,
+        AuthService,
         { provide: AddressLookupService, useValue: addressServiceStub },
         { provide: GeolocationService, useValue: geoLocationServiceStub },
         { provide: ConfigService, useValue: configServiceStub }
