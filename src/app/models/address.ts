@@ -21,6 +21,7 @@ export interface IAddress {
  * Class definition for address type used by user profile
  */
 export class Address implements IAddress {
+  postcode?: string;
   number: string;
   street: string;
   city: string;

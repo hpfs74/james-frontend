@@ -30,7 +30,7 @@ export class CarDetailComponent implements OnInit {
   @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
 
   // form submit
-  @Output() nextStep: EventEmitter<any> = new EventEmitter();
+  @Output() nextStep: EventEmitter<CarDetailForm> = new EventEmitter();
 
   constructor(private fb: FormBuilder, elementRef: ElementRef, private chatNotifierService: ChatStreamService ) {
   }
@@ -57,6 +57,8 @@ export class CarDetailComponent implements OnInit {
   }
 
   submitForm(event) {
-    this.nextStep.emit();
+    if (this.form.formGroup.valid && !this.form.formGroup.errors) {
+      this.nextStep.emit();
+    }
   }
 }

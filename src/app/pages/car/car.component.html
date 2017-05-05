@@ -35,6 +35,11 @@
             [coverages]="coverages"
             [isCoverageLoading]="isCoverageLoading">
           </knx-car-detail-form>
+
+          <knx-car-result-form>
+            *ngSwitchCase="'carResults'"
+          </knx-car-result-form>
+
         </div>
 
         <div class="cx-form-group cx-form-group--space-between">

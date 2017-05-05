@@ -27,4 +27,6 @@ export class User implements IUser {
   lastname: string;
   gender: string;
   dateOfBirth: string;
+
+  address?: Address;
 }
