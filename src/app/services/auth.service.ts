@@ -60,6 +60,27 @@ export class AuthService {
 
   /**
    *
+   * @param refreshToken
+   * @return {Observable<R>}
+   */
+  public refreshToken(refreshToken: string) : Observable<AuthToken> {
+
+    return this.getNicciKey()
+      .flatMap((nicci) => {
+        let headers = this.getBasicHeaderWithKey(nicci);
+        let refreshTokenBody = {
+          grant_type: 'refresh_token',
+          refresh_token: refreshToken
+        };
+
+        return this.http.post(this.configService.config.api.james.token, refreshTokenBody, { headers })
+          .map(data => data.json());
+      });
+  }
+
+
+  /**
+   *
    * @param profile
    */
   public isActive(email: string) {

@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { AuthHttp } from './services/auth-http.service';
-import { ConfigService } from './config.service';
+import { AuthService, AuthHttp } from './services';
 
-export function authHttpServiceFactory(http: Http, configService: ConfigService, options: RequestOptions) {
-  return new AuthHttp(http, configService, options);
+export function authHttpServiceFactory(http: Http, authService: AuthService, options: RequestOptions) {
+  return new AuthHttp(http, authService, options);
 }
 
 @NgModule({
@@ -12,7 +11,7 @@ export function authHttpServiceFactory(http: Http, configService: ConfigService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
-      deps: [Http, ConfigService, RequestOptions]
+      deps: [Http, AuthService, RequestOptions]
     }
   ]
 })

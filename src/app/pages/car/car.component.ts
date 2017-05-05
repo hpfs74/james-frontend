@@ -30,12 +30,26 @@ export class CarComponent implements OnInit {
   assistantMessages: any;
   myCar: Car;
   isCoverageLoading: boolean = false;
+  token: string = '';
 
   constructor(private configService: ConfigService,
               private carService: CarService,
               private insuranceService: InsuranceService,
               private chatNotifierService: ChatStreamService,
               private auth: AuthService) {
+    this.token = localStorage.getItem('access_token');
+  }
+
+
+  refreshToken() {
+    let token = JSON.parse(localStorage.getItem('token'));
+      this.auth.refreshToken(token.refresh_token)
+        .subscribe(newToken => {
+            localStorage.setItem('access_token', newToken.access_token);
+            localStorage.setItem('token', JSON.stringify(newToken));
+
+            this.token = newToken.access_token;
+        });
   }
 
   ngOnInit() {

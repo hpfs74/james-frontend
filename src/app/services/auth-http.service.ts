@@ -5,7 +5,7 @@ import {
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { tokenNotExpired } from '../utils/auth.utils';
-import { ConfigService } from '../config.service';
+import { AuthService } from './auth.service';
 
 export enum Action { QueryStart, QueryStop }
 ;
@@ -20,7 +20,7 @@ export class AuthHttp {
   config: any;
 
   constructor(private http: Http,
-              private configService: ConfigService,
+              private authService: AuthService,
               private defOpts?: RequestOptions, ) {
 
     this.config = {
@@ -113,17 +113,7 @@ export class AuthHttp {
 
     if (!tokenNotExpired) {
       let tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
-      let refreshTokenBody = {
-        grant_type: 'refresh_token',
-        refresh_token: tokenObject.refresh_token
-      };
-
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
-
-      return this.http.post(this.configService.config.api.james.token, refreshTokenBody, { headers })
-        .map(data => data.json())
+      this.authService.refreshToken(tokenObject.refresh_token)
         .flatMap( (data) => {
 
           // Update local storage
