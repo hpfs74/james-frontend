@@ -6,6 +6,7 @@ import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.
 import { CarService } from './car.service';
 import { CarComponent } from './car.component';
 import { CarDetailComponent } from './car-detail.component';
+import { CarResultComponent } from './car-results.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { CarDetailComponent } from './car-detail.component';
   ],
   declarations: [
     CarComponent,
-    CarDetailComponent
+    CarDetailComponent,
+    CarResultComponent
   ],
   providers: [
     CarService,

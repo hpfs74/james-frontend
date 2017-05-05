@@ -1,0 +1,23 @@
+$knx-car-colors: (
+  00: $knab-secondary-orange,
+  01: $knab-primary-red,
+  02: $knab-secondary-red,
+  03: #fff,
+  04: $knab-primary-blue,
+  05: $knab-primary-green,
+  06: $knab-primary-yellow,
+  07: $knab-dark-gray,
+  08: #564634,
+  09: #f5f5dc,
+  10: #fcfbe3,
+  11: #800080,
+  12: #000,
+  13: $knab-light-gray,
+  99: $knab-light-gray
+) !default;
+
+@each $color_code, $color in $knx-car-colors {
+  .knx-icon-#{$color_code} {
+    background: $color !important;
+  }
+}

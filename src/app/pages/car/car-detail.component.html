@@ -66,27 +66,31 @@
         </div>
       </div>
 
-      <cx-form-group formControlName="loan" [options]="{
-            label: 'Heb je een lening?',
-            type: 'radio',
-            formControl: form.formGroup.get('loan'),
-            validationErrors: form.validationErrors,
-            inputOptions: {
-                formGroupModifiers: ['cx-form-group__wrap--horizontal'],
-                placeholder: '',
-                items: [
-                  {
-                      label: 'Ja',
-                      value: 'true'
-                  },
-                  {
-                      label: 'Nee',
-                      value: 'false'
-                  }
-              ]
-            }
-          }">
-      </cx-form-group>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <cx-form-group formControlName="loan" [options]="{
+                label: 'Heb je een lening?',
+                type: 'radio',
+                formControl: form.formGroup.get('loan'),
+                validationErrors: form.validationErrors,
+                inputOptions: {
+                    formGroupModifiers: ['cx-form-group__wrap--spread'],
+                    placeholder: '',
+                    items: [
+                      {
+                          label: 'Ja',
+                          value: 'true'
+                      },
+                      {
+                          label: 'Nee',
+                          value: 'false'
+                      }
+                  ]
+                }
+              }">
+          </cx-form-group>
+        </div>
+      </div>
 
       <cx-form-group formControlName="familyType" [options]="{
             label: 'Wat is je gezinssituatie?',

@@ -23,6 +23,8 @@ export interface ICar {
   transmission_nl?: string;
   edition?: string;
   doors: number;
+  slug?: Array<string>;
+  current_value?: number;
 };
 
 /**

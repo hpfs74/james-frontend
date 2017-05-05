@@ -29,8 +29,8 @@ export class CarDetailComponent implements OnInit {
   // notify details change to get new coverages
   @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
 
-  // form submit
-  @Output() nextStep: EventEmitter<any> = new EventEmitter();
+  // form ready to be submitted
+  @Output() formValid: EventEmitter<any> = new EventEmitter();
 
   constructor(private fb: FormBuilder, elementRef: ElementRef, private chatNotifierService: ChatStreamService ) {
   }
@@ -39,6 +39,10 @@ export class CarDetailComponent implements OnInit {
     this.form = new CarDetailForm(this.fb);
     this.form.formGroup.valueChanges.subscribe(data => {
       this.coverageDetailsChange.emit(data);
+
+      if (this.form.formGroup.valid) {
+        this.formValid.emit(this.form.formGroup.value);
+      }
     });
   }
 
@@ -56,7 +60,4 @@ export class CarDetailComponent implements OnInit {
     });
   }
 
-  submitForm(event) {
-    this.nextStep.emit();
-  }
 }
