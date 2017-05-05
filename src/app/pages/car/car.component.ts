@@ -91,20 +91,19 @@ export class CarComponent implements OnInit {
 
         this.assistantMessages = {
           welcome: `Hoi <i>${res.emailaddress}</i>! Ik ben Anupama.
-        Ik ga je vandaag helpen <strong>besparen</strong> op je auto-verzekering.
-        Ben je er klaar voor? Let\'s do this!`,
+            Ik ga je vandaag helpen <strong>besparen</strong> op je auto-verzekering.
+            Ben je er klaar voor? Let\'s do this!`,
           info: {
             damageFreeYears: `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
-        Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
-        korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
-        dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`
+              Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
+              korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
+              dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`
           },
           error: {
             carInfo: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
           },
           coverageAdvice: `Op basis van je situatie adviseer ik een ...`
         };
-
 
         this.addTextMessage(this.assistantMessages.welcome);
       });
@@ -125,7 +124,14 @@ export class CarComponent implements OnInit {
   }
 
   goToNextStep(event) {
-    this.currentFormStep = 'carCoverages';
+    switch (this.currentFormStep) {
+      case 'carDetails':
+        this.getInsurances(event);
+        this.currentFormStep = 'carCoverages';
+        break;
+      default:
+        break;
+    }
   }
 
   getCarInfo(licensePlate: string) {
@@ -145,30 +151,32 @@ export class CarComponent implements OnInit {
   }
 
   getCoverages(formData) {
-    // TODO: just for testing
-    this.coverages = this.carService.getCoverages();
-    return;
+    if (this.myCar && formData.loan) {
+      this.isCoverageLoading = true;
 
-    // if (this.myCar && formData.loan) {
-    //   this.isCoverageLoading = true;
-    //
-    //   // get default coverage types
-    //   this.coverages = this.carService.getCoverages();
-    //
-    //   // fetch recommendation
-    //   this.carService.getCoverageRecommendation(this.myCar.license, formData.loan)
-    //     .subscribe(res => {
-    //       this.isCoverageLoading = false;
-    //
-    //       let coverage = this.coverages.find(price => price.id === res.recommended_value);
-    //       if (coverage) {
-    //         coverage.highlight = true;
-    //       }
-    //
-    //     }, error => {
-    //       this.isCoverageLoading = true;
-    //     });
-    // }
+      // get default coverage types
+      this.coverages = this.carService.getCoverages();
+
+      // fetch recommendation
+      this.carService.getCoverageRecommendation(this.myCar.license, formData.loan)
+        .subscribe(res => {
+          this.isCoverageLoading = false;
+
+          let coverage = this.coverages.find(price => price.id === res.recommended_value);
+          if (coverage) {
+            coverage.highlight = true;
+          }
+
+        }, error => {
+          this.isCoverageLoading = true;
+        });
+    }
+  }
+
+  getInsurances(formData) {
+    // TODO: implement
+
+    //console.log(formData);
   }
 
 }

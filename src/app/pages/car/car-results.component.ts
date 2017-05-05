@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Insurance } from '../../models/insurance';
 
 @Component({
   selector: 'knx-car-result-form',
@@ -6,5 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class CarResultComponent {
-
+  @Input() insurancesLoading: boolean;
+  @Input() insurances: Array<Insurance>;
 }

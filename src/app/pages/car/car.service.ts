@@ -40,11 +40,11 @@ export class CarService {
       return;
     }
 
-    // let url = this.profileUrl + '/insurances/compare/car/';
-    // let carUser = new CarUser(profile, car, address, options);
+    let url = this.profileUrl + '/insurances/compare/car/';
+    let carUser = new CarUser(profile, car, address, options);
 
-    // return this.authHttp.post(url, JSON.stringify(carUser))
-    //   .map(res => <CarInsurance>res.json());
+    return this.authHttp.post(url, JSON.stringify(carUser))
+      .map(res => <CarInsurance>res.json());
   }
 
   public getCoverages(): Array<Price> {

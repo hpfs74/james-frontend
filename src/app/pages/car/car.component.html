@@ -31,13 +31,13 @@
             *ngSwitchCase="'carDetails'"
             (licensePlateChange)="getCarInfo($event)"
             (coverageDetailsChange)="getCoverages($event)"
-            (nextStep)="goToNextStep($event)"
+            (formValid)="goToNextStep($event)"
             [coverages]="coverages"
             [isCoverageLoading]="isCoverageLoading">
           </knx-car-detail-form>
 
-          <knx-car-result-form>
-            *ngSwitchCase="'carResults'"
+          <knx-car-result-form
+            *ngSwitchCase="'carResults'">
           </knx-car-result-form>
 
         </div>
