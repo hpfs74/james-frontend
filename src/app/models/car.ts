@@ -2,8 +2,9 @@ export interface ICar {
   license: string;
   vin: string;
   reporting_code: string;
-  year: number;
+  year: string | number;
   fuel: string;
+  fuel_code?: string;
   secondary_fuel?: string;
   color: string;
   color_code: string;
@@ -19,12 +20,12 @@ export interface ICar {
   top_speed: number;
   engine_capacity: number;
   power_kw: number;
-  transmission: string;
+  transmission?: string;
   transmission_nl?: string;
   edition?: string;
   doors: number;
   slug?: Array<string>;
-  current_value?: number;
+  current_value?: string | number;
 };
 
 /**
@@ -36,8 +37,9 @@ export class Car implements ICar {
   license: string;
   vin: string;
   reporting_code: string;
-  year: number;
+  year: string | number;
   fuel: string;
+  fuel_code?: string;
   secondary_fuel: string;
   color: string;
   color_code: string;
@@ -53,13 +55,15 @@ export class Car implements ICar {
   top_speed: number;
   engine_capacity: number;
   power_kw: number;
-  transmission: string;
-  transmission_nl: string;
+  transmission?: string;
+  transmission_nl?: string;
   edition?: string;
   doors: number;
+  slug?: Array<string>;
+  current_value?: string | number;
 }
 
-export const MockCar: ICar = {
+export const MockCar: Car = {
   'license': '71ZXK6',
   'vin': 'VF1BA0F0G17869206',
   'reporting_code': '9206',

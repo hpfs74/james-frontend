@@ -37,14 +37,15 @@
           </knx-car-detail-form>
 
           <knx-car-result-form
-            *ngSwitchCase="'carResults'">
+            *ngSwitchCase="'carResults'"
+            [insurances]="insurances">
           </knx-car-result-form>
 
         </div>
 
         <div class="cx-form-group cx-form-group--space-between">
           <button class="knx-button knx-button--link knx-button--back" (click)="goToPreviousStep()">Terug</button>
-          <button class="knx-button knx-button--primary knx-button--arrow" (click)="goToNextStep()" [disabled]="isPendingNext">Volgende</button>
+          <button class="knx-button knx-button--primary knx-button--arrow" (click)="goToNextStep()">Volgende</button>
         </div>
 
       </div>

@@ -1,11 +1,13 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { ConfigService } from '../../config.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { CarService } from './car.service';
-import { Car } from '../../models/car';
+import { Car, MockCar } from '../../models/car';
 import { Price } from '../../models/price';
 import { CarCoverageRecommendation } from './../../models/coverage';
+import { CarInsurance, MockInsurances } from '../../models/car-insurance';
 
 import { ChatMessage } from '../../models/chat-message';
 import { ChatStreamComponent } from '../../components/knx-chat-stream/';
@@ -27,12 +29,15 @@ export class CarComponent implements OnInit {
   currentFormStep: string;
   isPendingNext: boolean;
 
+  insurances: Array<CarInsurance>;
+
   assistantMessages: any;
   myCar: Car;
   isCoverageLoading: boolean = false;
   token: string = '';
 
-  constructor(private configService: ConfigService,
+  constructor(private router: Router,
+              private configService: ConfigService,
               private carService: CarService,
               private insuranceService: InsuranceService,
               private chatNotifierService: ChatStreamService,
@@ -90,7 +95,7 @@ export class CarComponent implements OnInit {
           res.emailaddress : `${res.firstname} ${res.infix} ${res.lastname}`;
 
         this.assistantMessages = {
-          welcome: `Hoi <i>${res.emailaddress}</i>! Ik ben Anupama.
+          welcome: `Hoi <i>${res.emailaddress}</i>! Ik ben ${this.chatConfig.avatarName}.
             Ik ga je vandaag helpen <strong>besparen</strong> op je auto-verzekering.
             Ben je er klaar voor? Let\'s do this!`,
           info: {
@@ -119,15 +124,23 @@ export class CarComponent implements OnInit {
     this.chatNotifierService.addMessage({type: 'text', content: message});
   }
 
-  goToPreviousStep(event) {
-    ;
+  goToPreviousStep() {
+    // TODO: refactor step navigation in generic/reusable way
+    let index = this.formSteps.findIndex(step => step.id === this.currentFormStep);
+    if (index === 0) {
+      // to home
+      this.router.navigate(['/overview']);
+    }
+    if (index > 0 && index <= this.formSteps.length) {
+      this.currentFormStep = this.formSteps[index - 1].id;
+    }
   }
 
   goToNextStep(event) {
     switch (this.currentFormStep) {
       case 'carDetails':
         this.getInsurances(event);
-        this.currentFormStep = 'carCoverages';
+        this.currentFormStep = 'carResults';
         break;
       default:
         break;
@@ -175,6 +188,9 @@ export class CarComponent implements OnInit {
 
   getInsurances(formData) {
     // TODO: implement
+    this.insurances = MockInsurances;
+
+    //this.carService.getInsurances()
 
     //console.log(formData);
   }

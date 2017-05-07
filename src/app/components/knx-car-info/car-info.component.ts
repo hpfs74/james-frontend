@@ -1,5 +1,6 @@
 import { Component, Input, trigger, state, style, transition, animate } from '@angular/core';
 import { Car } from '../../models/car';
+import { CarPreviewComponent } from './car-preview.component';
 
 @Component({
   selector: 'knx-car-info',
@@ -7,9 +8,7 @@ import { Car } from '../../models/car';
   <div class="container-fluid knx-container--fullwidth">
       <div class="knx-car-info__message">
         Molto bello! Mooie auto die <strong>{{ car.make | titleCase }} {{ car.model | titleCase }}</strong>
-        <!-- TODO: implement visual preview -->
-        <img *ngIf="false" class="knx-car-info__visual" alt="car image"
-                  src="/assets/images/cars/{{ car.make | lowercase }}.jpg">
+        <knx-car-preview [colorCode]="car.color_code"></knx-car-preview>
       </div>
       <div class="row">
         <div class="col-sm-6">Merk</div>
