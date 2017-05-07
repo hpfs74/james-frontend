@@ -9,8 +9,7 @@ import { Price } from '../../models/price';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance, MockInsurances } from '../../models/car-insurance';
 
-import { ChatMessage } from '../../models/chat-message';
-import { ChatStreamComponent } from '../../components/knx-chat-stream/';
+import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -61,8 +60,7 @@ export class CarComponent implements OnInit {
     this.chatNotifierService.addMessage$.subscribe(
       message => {
         // replace messages instead of pushing
-        this.chatMessages = [];
-        this.chatMessages.push(message);
+        this.chatMessages = [ message ];
       });
 
     this.currentFormStep = 'carDetails';
@@ -110,18 +108,9 @@ export class CarComponent implements OnInit {
           coverageAdvice: `Op basis van je situatie adviseer ik een ...`
         };
 
-        this.addTextMessage(this.assistantMessages.welcome);
+        //this.addTextMessage(this.assistantMessages.welcome);
+        this.chatNotifierService.addTextMessage(this.assistantMessages.welcome);
       });
-  }
-
-  addCarMessage(car: Car) {
-    this.chatMessages = [];
-    this.chatNotifierService.addMessage({type: 'car', content: car});
-  }
-
-  addTextMessage(message) {
-    this.chatMessages = [];
-    this.chatNotifierService.addMessage({type: 'text', content: message});
   }
 
   goToPreviousStep() {
@@ -154,12 +143,13 @@ export class CarComponent implements OnInit {
 
     this.carService.getByLicense(licensePlate)
       .subscribe(res => {
-        this.myCar = res;
+        if (res.license) {
+          this.myCar = res;
 
-        this.addCarMessage(this.myCar);
-
-      }, err => {
-        this.addTextMessage(this.assistantMessages.error.carInfo);
+          this.chatNotifierService.addCarMessage(this.myCar);
+        }
+      }, err => {;
+        this.chatNotifierService.addTextMessage(this.assistantMessages.error.carInfo);
       });
   }
 

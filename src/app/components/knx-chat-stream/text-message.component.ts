@@ -1,4 +1,5 @@
 import { Component, Input, trigger, state, style, transition, animate, OnInit } from '@angular/core';
+import { IChatMessage } from './chat-message.interface';
 
 @Component({
   selector: 'knx-chat-message',
@@ -6,13 +7,7 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
   <div class='knx-chat-message' [@flyInOut]="'in'">
     <div class='container-fluid'>
       <div class='row'>
-        <div class='col-md-12 col-sm-12'>
-          <div #ref><ng-content></ng-content></div>
-          <ng-container *ngIf="ref.childNodes.length == 0">
-            <div [innerHtml]="message"></div>
-          </ng-container>
-          <div *ngIf="showDate" class="knx-chat-message-datetime">{{ getMessageDate() | date:'shortTime' }}</div>
-        </div>
+        <div class='col-md-12 col-sm-12' [innerHTML]="data"></div>
       </div>
     </div>
   </div>
@@ -38,8 +33,8 @@ import { Component, Input, trigger, state, style, transition, animate, OnInit } 
     ])
   ]
 })
-export class ChatMessageComponent implements OnInit {
-  @Input() message: string;
+export class TextMessageComponent implements OnInit, IChatMessage {
+  @Input() data: any;
   @Input() showDate: boolean = false;
 
   date: Date;
