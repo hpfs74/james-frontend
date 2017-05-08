@@ -8,11 +8,12 @@ import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
 import { CXWizardModule } from '../../node_modules/@cx/wizard';
 
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 /**
  * Pipes
  */
 import { TitleCasePipe } from './pipes/titlecase.pipe';
-
 
 /**
  * Shared module for all generic components
@@ -51,7 +52,8 @@ export const sharedComponents = [
     ReactiveFormsModule,
     TextMaskModule,
     CXFormsModule,
-    CXWizardModule
+    CXWizardModule,
+    AngularSvgIconModule
   ],
   declarations: [
     ...sharedComponents
@@ -62,6 +64,7 @@ export const sharedComponents = [
     CXFormsModule,
     CXWizardModule,
     ReactiveFormsModule,
+    AngularSvgIconModule,
     ...sharedComponents
   ]
 })
