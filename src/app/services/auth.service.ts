@@ -7,7 +7,6 @@ import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
 import 'rxjs/add/operator/mergeMap';
 import { User } from '../models/user';
-const CryptoJS = require('crypto-js');
 
 @Injectable()
 export class AuthService {
@@ -27,23 +26,47 @@ export class AuthService {
     this.tokenUrl = configService.config.api.james.token;
   }
 
+  /**
+   * get the current user profile based on the current token
+   *
+   * @return {Observable<R>}
+   */
   public getUserProfile(): Observable<User> {
     return this.http.get(this.profileUrl, {headers: this.getHeaderWithBearer()})
       .map((x) => x.json())
       .map((x) => <User>x);
   }
 
+  /**
+   * do a hard token reset on the backend, and removes all the local storage vars
+   *
+   * @return {Observable<R>}
+   */
   public signOff() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('token');
-    localStorage.removeItem('nicci_key');
-    localStorage.removeItem('nicci_id');
+    return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
+      .map(x => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('token');
+        localStorage.removeItem('nicci_key');
+        localStorage.removeItem('nicci_id');
+
+        return x.json();
+      });
   }
 
+  /**
+   * do a sing in
+   *
+   * @param email
+   * @param password
+   * @return {Observable<R>}
+   */
   public signIn(email, password): Observable<AuthToken> {
     return this.getNicciKey()
       .flatMap((nicci) => {
-        let encPass = this.encryptPassword(password, nicci.key);
+        let encPass = AuthUtils.encryptPassword(password, nicci.key);
+
+        // let encPass = this.encryptPassword(password, nicci.key);
         let headers = this.getBasicHeaderWithKey(nicci);
 
         let tokenRequest = {
@@ -115,46 +138,6 @@ export class AuthService {
       '&scope=basic+emailaddress+social';
   }
 
-  /**
-   *
-   * @param source
-   * @return {any}
-   */
-  private base64url(source) {
-    // Encode in classical base64
-    let encodedSource = CryptoJS.enc.Base64.stringify(source);
-
-    // Remove padding equal characters
-    encodedSource = encodedSource.replace(/=+$/, '');
-
-    // Replace characters according to base64url specifications
-    encodedSource = encodedSource.replace(/\+/g, '-');
-    encodedSource = encodedSource.replace(/\//g, '_');
-
-    return encodedSource;
-  }
-
-  /**
-   *
-   * @param password
-   * @param secret
-   * @return {string}
-   */
-  private encryptPassword(password, secret) {
-
-    let header = {'alg': 'HS256', 'typ': 'JWT'};
-    let data = password;
-    let stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
-    let encodedHeader = this.base64url(stringifiedHeader);
-    let stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
-    let encodedData = this.base64url(stringifiedData);
-    let signature = encodedHeader + '.' + encodedData;
-
-    signature = CryptoJS.HmacSHA256(signature, secret);
-    signature = this.base64url(signature);
-
-    return encodedHeader + '.' + encodedData + '.' + signature;
-  }
 
   /**
    *
@@ -162,9 +145,7 @@ export class AuthService {
    */
   private getNicciKey(): Observable<AuthKey> {
 
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+    let headers = this.getBasicHeader();
 
     return this.http
       .post(this.keyUrl, '', {headers})
@@ -186,9 +167,7 @@ export class AuthService {
   }
 
   private getBasicHeaderWithKey(data: AuthKey): Headers {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+    let headers = this.getBasicHeader();
     headers.append('NICCI-Key', data.id);
 
     return headers;
@@ -196,8 +175,7 @@ export class AuthService {
 
   private getHeaderWithBearer(): Headers {
     let headers = new Headers();
-
-    headers.set('Postman-Token', localStorage.getItem('nicci_key'));
+    headers.append('Content-Type', 'application/json');
     headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
     headers.set('Cache-Control', 'no-cache');
 
