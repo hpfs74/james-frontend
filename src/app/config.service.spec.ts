@@ -38,10 +38,41 @@ describe('Service: ConfigService', () => {
     expect(this.service).not.toBeNull;
   });
 
-  it('should load a config from disk', () => {
-    expect(this.service.config).toBeNull;
-    this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
-      expect(result.api).not.toBeNull;
+  describe('james api', () => {
+    it('should load a config from disk', () => {
+      expect(this.service.config).toBeNull;
+      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api).not.toBeNull;
+      });
     });
+
+    it('should contain token url', () => {
+      expect(this.service.config).toBeNull;
+      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api.james).not.toBeNull;
+        expect(result.api.james.token).not.toBeNull;
+      });
+    });
+
+    it('should contain key url', () => {
+      expect(this.service.config).toBeNull;
+      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api.james).not.toBeNull;
+        expect(result.api.james.key).not.toBeNull;
+      });
+    });
+
+    it('should contain profile url', () => {
+      expect(this.service.config).toBeNull;
+      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api.james).not.toBeNull;
+        expect(result.api.james.profile).not.toBeNull;
+      });
+    });
+
+
+
+
   });
+
 });
