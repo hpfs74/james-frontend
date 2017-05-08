@@ -62,7 +62,7 @@ describe('Service: AddressLookup', () => {
     });
   };
 
-  xit('should lookup an address', () => {
+  it('should lookup an address', () => {
     setupConnections(this.backend, {
       body:
       {
@@ -98,8 +98,12 @@ describe('Service: AddressLookup', () => {
     });
 
     this.service.lookupAddress('4641BB', '71').subscribe((res) => {
-      expect(res.street).toBe('Molenstraat');
-      expect(res.city).toBe('Ossendrecht');
+
+      let data = res.json();
+
+      expect(data).not.toBeNull;
+      expect(data.street).toBe('Molenstraat');
+      expect(data.city).toBe('Ossendrecht');
     });
   });
 
