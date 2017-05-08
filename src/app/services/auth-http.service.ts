@@ -7,8 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { tokenNotExpired } from '../utils/auth.utils';
 import { AuthService } from './auth.service';
 
-export enum Action { QueryStart, QueryStop }
-;
+export enum Action { QueryStart, QueryStop };
 
 export const TOKEN_NAME: string = 'access_token';
 export const TOKEN_OBJECT_NAME: string = 'token';
@@ -80,34 +79,6 @@ export class AuthHttp {
   }
 
   public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-    // DONT USE: BROKEN
-    // return Observable.create((observer) => {
-    //   this.process.next(Action.QueryStart);
-    //   this.http.request(new Request(requestOptions))
-    //     .map(res => res.json())
-    //     .finally(() => {
-    //       this.process.next(Action.QueryStop);
-    //     })
-    //     .subscribe(
-    //     (res) => {
-    //       observer.next(res);
-    //       observer.complete();
-    //     },
-    //     (err) => {
-    //       switch (err.status) {
-    //         case 401:
-    //           //intercept 401
-    //           this.authFailed.next(err);
-    //           observer.error(err);
-    //           break;
-    //         default:
-    //           observer.error(err);
-    //           break;
-    //       }
-    //     });
-    // });
-    // from this point url is always an instance of Request;
-
     let req: Request = url as Request;
     let token: string = localStorage.getItem(TOKEN_NAME);
 
@@ -125,13 +96,6 @@ export class AuthHttp {
         });
     } else {
       return this.requestWithToken(req, token);
-        // .catch((error: Response) => {
-        //   // if (error.status === 401 || (error.status === 403 && error.json().error === 'invalid_access_token')) {
-        //   //   //console.log('The authentication session expires or the user is not authorised. Force refresh of the current page.');
-        //   //   //window.location.href = window.location.href + '?' + new Date().getMilliseconds();
-        //   // }
-        //   return Observable.throw(error);
-        // });
     }
   }
 
