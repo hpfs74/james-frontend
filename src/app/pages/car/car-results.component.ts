@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Insurance } from '../../models/insurance';
 
+import { Car } from '../../models/car';
+
 @Component({
   selector: 'knx-car-result-form',
   templateUrl: 'car-result.component.html'
@@ -9,4 +11,5 @@ import { Insurance } from '../../models/insurance';
 export class CarResultComponent {
   @Input() insurancesLoading: boolean;
   @Input() insurances: Array<Insurance>;
+  @Input() car: Car;
 }

@@ -59,7 +59,6 @@ export function base64url(source) {
  * @return {string}
  */
 export function encryptPassword(password, secret) {
-
   let header = {'alg': 'HS256', 'typ': 'JWT'};
   let data = password;
   let stringifiedHeader = crypto.enc.Utf8.parse(JSON.stringify(header));
@@ -70,6 +69,6 @@ export function encryptPassword(password, secret) {
 
   signature = crypto.HmacSHA256(signature, secret);
   signature = base64url(signature);
-
+  //TODO: what's the use here of hashing when we return encodedData?
   return encodedHeader + '.' + encodedData + '.' + signature;
 }

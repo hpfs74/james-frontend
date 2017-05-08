@@ -1,8 +1,12 @@
 <div class="row">
-  <knx-loader [visible]="insurancesLoading"></knx-loader>
+  <div class="col-sm-12">
+    <h2 *ngIf="car">Beste verzekeringen voor je {{ car.make }} van alle 41!</h2>
+    <h2 *ngIf="!car">Beste verzekeringen van alle 41!</h2>
 
-  <ng-container *ngIf="insurances">
+    <knx-loader [visible]="insurancesLoading"></knx-loader>
+
+    <knx-insurance-result *ngFor="let item of insurances; let i = index;" [insurance]="item" [index]="i"></knx-insurance-result>
+
     <pre>{{ insurances | json }}</pre>
-  </ng-container>
-
+  </div>
 </div>

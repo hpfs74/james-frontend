@@ -8,11 +8,12 @@ import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
 import { CXWizardModule } from '../../node_modules/@cx/wizard';
 
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 /**
  * Pipes
  */
 import { TitleCasePipe } from './pipes/titlecase.pipe';
-
 
 /**
  * Shared module for all generic components
@@ -24,6 +25,7 @@ import { ButtonIconComponent } from './components/knx-button-icon/button-icon.co
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
+import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
 import { LoaderComponent } from './components/knx-loader/loader.component';
@@ -36,6 +38,7 @@ export const sharedComponents = [
   CookiebarComponent,
   FeaturesComponent,
   LicensePlateComponent,
+  InsuranceResultComponent,
   PriceTableComponent,
   PriceTableItemComponent,
   LoaderComponent,
@@ -49,7 +52,8 @@ export const sharedComponents = [
     ReactiveFormsModule,
     TextMaskModule,
     CXFormsModule,
-    CXWizardModule
+    CXWizardModule,
+    AngularSvgIconModule
   ],
   declarations: [
     ...sharedComponents
@@ -60,6 +64,7 @@ export const sharedComponents = [
     CXFormsModule,
     CXWizardModule,
     ReactiveFormsModule,
+    AngularSvgIconModule,
     ...sharedComponents
   ]
 })

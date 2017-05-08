@@ -2,7 +2,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.module';
 
-
 import { HomeRoutingModule } from './home.routing.module';
 import { HomeComponent } from './home.component';
 import { AuthService } from '../../services/auth.service';
@@ -38,7 +37,7 @@ export class HomeModule {
       ngModule: HomeModule,
       providers: [
         AuthService,
-        AuthGuard
+        AuthGuard,
       ]
     };
   }
