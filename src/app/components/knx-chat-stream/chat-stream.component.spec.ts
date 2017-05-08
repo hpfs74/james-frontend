@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AvatarComponent } from './../knx-avatar/avatar.component';
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
-import { ChatMessage } from '../../models/chat-message';
 import { Car } from '../../models/car';
 
 describe('Component: ChatStreamComponent', () => {
@@ -42,13 +41,6 @@ describe('Component: ChatStreamComponent', () => {
     'doors': 5,
   };
 
-  let messages: Array<ChatMessage> = [
-    { type: 'text', content: 'Hello World' },
-    { type: 'car', content: myCar },
-    { type: 'text', content: 'This is a second message' },
-    { type: 'text', content: 'This is a second message' }
-  ];
-
   let options: ChatStreamOptions = {
     showAvatar: true,
     avatarName: 'Marjolein',
@@ -69,14 +61,13 @@ describe('Component: ChatStreamComponent', () => {
 
     // Provide Input() data
     comp.options = options;
-    comp.messages = messages;
 
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('div.knx-chat-stream'));
     el = de.nativeElement;
   });
 
-  xit('should show an avatar', () => {
+  it('should show an avatar', () => {
     expect(el).not.toBeNull();
 
     expect(comp.options.showAvatar).toBe(true);
@@ -87,13 +78,4 @@ describe('Component: ChatStreamComponent', () => {
     expect(avatarEl).not.toBeNull();
   });
 
-  xit('should render the specified number of messages', () => {
-    expect(el).not.toBeNull();
-    expect(el.querySelectorAll('knx-chat-message').length).toBe(messages.length);
-  });
-
-  xit('should render a vehicle type message', () => {
-    expect(el).not.toBeNull();
-    expect(el.querySelectorAll('knx-car-info').length).toBe(1);
-  });
 });

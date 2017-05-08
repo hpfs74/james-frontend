@@ -82,6 +82,7 @@ export class CarUser implements ICarUser {
 
   insurance?: string;
 
+  /* istanbul ignore next: object initializer */
   constructor(profile: User, car: Car,  address: Address, options: ICarInsuranceOptions) {
 
     this.license = car.license;
