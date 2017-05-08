@@ -13,39 +13,33 @@ import { CXWizardModule } from '../../node_modules/@cx/wizard';
  */
 import { TitleCasePipe } from './pipes/titlecase.pipe';
 
+
 /**
  * Shared module for all generic components
  * import components in alphabetic order: easier to find something!
  */
-import { AvatarComponent } from './components/knx-avatar/avatar.component';
 import { AddressLookupComponent } from './components/knx-address-lookup/address-lookup.component';
 import { BreadCrumbComponent } from './components/knx-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
-import { ChatStreamComponent, ChatMessageComponent } from './components/knx-chat-stream';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
-import { CarInfoComponent, CarPreviewComponent } from './components/knx-car-info';
 
 export const sharedComponents = [
-  AvatarComponent,
+  TitleCasePipe,
   AddressLookupComponent,
   ButtonIconComponent,
   CookiebarComponent,
   FeaturesComponent,
   LicensePlateComponent,
-  ChatStreamComponent,
-  ChatMessageComponent,
   PriceTableComponent,
   PriceTableItemComponent,
   LoaderComponent,
-  UserDetailComponent,
-  CarInfoComponent,
-  CarPreviewComponent
+  UserDetailComponent
 ];
 
 @NgModule({
@@ -58,7 +52,6 @@ export const sharedComponents = [
     CXWizardModule
   ],
   declarations: [
-    TitleCasePipe,
     ...sharedComponents
   ],
   exports: [

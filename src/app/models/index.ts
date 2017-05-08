@@ -2,7 +2,6 @@ export * from './address';
 export * from './car-insurance';
 export * from './car-prefs';
 export * from './car';
-export * from './chat-message';
 export * from './coverage';
 export * from './feature';
 export * from './insurance';

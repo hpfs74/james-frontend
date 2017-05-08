@@ -1,11 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SharedModule } from '../../shared.module';
+import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.module';
+
 
 import { HomeRoutingModule } from './home.routing.module';
 import { HomeComponent } from './home.component';
 import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
-import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 
 // Layout components
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -21,6 +22,7 @@ import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.
 @NgModule({
   imports: [
     SharedModule,
+    ChatStreamModule,
     HomeRoutingModule.forRoot()
   ],
   declarations: [
@@ -36,8 +38,7 @@ export class HomeModule {
       ngModule: HomeModule,
       providers: [
         AuthService,
-        AuthGuard,
-        ChatStreamService
+        AuthGuard
       ]
     };
   }

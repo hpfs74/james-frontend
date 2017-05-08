@@ -124,15 +124,12 @@ export class AuthHttp {
           return this.requestWithToken(req, token);
         });
     } else {
-
       return this.requestWithToken(req, token);
         // .catch((error: Response) => {
-        //
-        //
-        //   if (error.status === 401 || (error.status === 403 && error.json().error === 'invalid_access_token')) {
-        //     //console.log('The authentication session expires or the user is not authorised. Force refresh of the current page.');
-        //     //window.location.href = window.location.href + '?' + new Date().getMilliseconds();
-        //   }
+        //   // if (error.status === 401 || (error.status === 403 && error.json().error === 'invalid_access_token')) {
+        //   //   //console.log('The authentication session expires or the user is not authorised. Force refresh of the current page.');
+        //   //   //window.location.href = window.location.href + '?' + new Date().getMilliseconds();
+        //   // }
         //   return Observable.throw(error);
         // });
     }
