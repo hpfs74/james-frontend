@@ -14,7 +14,7 @@ import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
         </div>
         <div class="row">
           <div class="col-sm-6">Merk</div>
-          <div class="col-sm-6 knx-car-info__item ">{{ data.make | uppercase  }}</div>
+          <div class="col-sm-6 knx-car-info__item">{{ data.make | uppercase  }}</div>
         </div>
         <div class="row">
           <div class="col-sm-6">Model</div>
