@@ -6,8 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AvatarComponent } from './../knx-avatar/avatar.component';
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
-import { ChatMessage } from '../../models/chat-message';
 import { Car } from '../../models/car';
+import { ChatMessage } from './chat-message';
 
 describe('Component: ChatStreamComponent', () => {
   let comp: ChatStreamComponent;
@@ -43,10 +43,10 @@ describe('Component: ChatStreamComponent', () => {
   };
 
   let messages: Array<ChatMessage> = [
-    { type: 'text', content: 'Hello World' },
-    { type: 'car', content: myCar },
-    { type: 'text', content: 'This is a second message' },
-    { type: 'text', content: 'This is a second message' }
+    new ChatMessage('text', 'Hello World'),
+    new ChatMessage('car', myCar ),
+    new ChatMessage('text',  'This is a second message' ),
+    new ChatMessage('text',  'This is a second message' )
   ];
 
   let options: ChatStreamOptions = {
