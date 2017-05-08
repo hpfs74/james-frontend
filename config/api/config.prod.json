@@ -1,0 +1,17 @@
+{
+  "app": {
+    "enableProdMode": false,
+    "name": "config.json"
+  },
+  "api": {
+    "james": {
+      "key": "https://profile-james-t.nicci.io/key",
+      "token": "https://profile-james-t.nicci.io/token",
+      "profile": "https://james-t.nicci.io/v1/profile",
+      "address": "https://james-t.nicci.io/v1/address",
+      "car": "https://james-t.nicci.io/v1/cars",
+      "helper": "https://james-t.nicci.io/v1/helper"
+    },
+    "external": {}
+  }
+}
