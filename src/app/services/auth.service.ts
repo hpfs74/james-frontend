@@ -16,6 +16,7 @@ export class AuthService {
   private loggedIn = false;
   private keyUrl: string;
   private profileUrl: string;
+  private tokenUrl : string;
 
   constructor(private http: Http,
               private configService: ConfigService) {
@@ -23,6 +24,7 @@ export class AuthService {
     this.loggedIn = false; // !!localStorage.getItem('a uth_token');
     this.keyUrl = configService.config.api.james.key;
     this.profileUrl = configService.config.api.james.profile;
+    this.tokenUrl = configService.config.api.james.token;
   }
 
   public getUserProfile(): Observable<User> {
@@ -51,7 +53,7 @@ export class AuthService {
           scope: 'profile/basic'
         };
 
-        return this.http.post(this.configService.config.api.james.token , tokenRequest, {headers})
+        return this.http.post(this.tokenUrl, tokenRequest, {headers})
           .map((res) => res.json())
           .map((token) => <AuthToken>token);
       });
@@ -72,7 +74,7 @@ export class AuthService {
           refresh_token: refreshToken
         };
 
-        return this.http.post(this.configService.config.api.james.token, refreshTokenBody, { headers })
+        return this.http.post(this.tokenUrl, refreshTokenBody, { headers })
           .map(data => data.json());
       });
   }
