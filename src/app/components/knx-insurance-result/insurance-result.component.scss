@@ -1,15 +1,36 @@
 .knx-insurance-result {
   border: 2px solid $knab-primary-gray;
-  margin-bottom: 40px;
+  margin: 40px 0;
 
   [class*="col-"] {
     border-right: 2px solid $knab-primary-gray;
-    padding: 30px 40px;
+    padding: 50px 40px 40px;
 
     &:last-child {
       border-right: 0;
     }
   }
+
+  & > .row {
+    // counter height
+    margin-top: -40px;
+  }
+}
+
+.knx-insurance-result__counter {
+  background: $knab-primary-blue;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  top: -20px;
+  width: 40px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
 }
 
 .knx-insurance-result__price {

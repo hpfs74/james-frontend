@@ -6,6 +6,8 @@ import { InsuranceBase, Insurance } from '../../models/insurance';
   selector: 'knx-insurance-result',
   template: `
     <div class="knx-insurance-result">
+      <div class="knx-insurance-result__counter">{{ index + 1 }}</div>
+
       <div class="row">
         <div class="col-sm-4">
           <img class="knx-insurance-result__logo" src="{{ insurance._embedded.insurance_logo}}">
@@ -34,5 +36,6 @@ import { InsuranceBase, Insurance } from '../../models/insurance';
 })
 
 export class InsuranceResultComponent {
+  @Input() index: number;
   @Input() insurance: InsuranceBase;
 }
