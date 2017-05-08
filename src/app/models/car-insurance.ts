@@ -1,7 +1,7 @@
-import { Insurance } from './insurance';
+import { InsuranceBase, Insurance } from './insurance';
 import { Car } from './car';
 
-export class CarInsurance {
+export class CarInsurance extends InsuranceBase {
   id: string;
   insurance_id: string;
   moneyview_id: string;
