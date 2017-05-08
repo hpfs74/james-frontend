@@ -163,33 +163,34 @@ export class LoginComponent {
 
           // Redirect the user
           this.router.navigate([redirect], navigationExtras);
-        }, (res) => {
-          let data = res.json();
-
-          this.isPending = false;
-
-          if (data.error === 'inactive_profile') {
-            this.messageTitle = 'Login failed';
-            this.message = 'Sorry your profile is inactive';
-            return;
-          }
-
-          if (data.error === 'invalid_password') {
-            this.messageTitle = 'Login failed';
-            this.message = 'Invalid email or password';
-            return ;
-          }
-
-          if (data.error === 'too_many_login_attempts') {
-            this.messageTitle = 'Login failed';
-            this.message = data.error_description;
-            return;
-          }
-
-          this.messageTitle = 'Login failed';
-          this.message = `Unexpected error while calling remote (${data})`;
-        });
+        }, (res) => this.handleError(res.json()));
     }
     return;
+  }
+
+  handleError(data) {
+
+    this.isPending = false;
+
+    if (data.error === 'inactive_profile') {
+      this.messageTitle = 'Login failed';
+      this.message = 'Sorry your profile is inactive';
+      return;
+    }
+
+    if (data.error === 'invalid_password') {
+      this.messageTitle = 'Login failed';
+      this.message = 'Invalid email or password';
+      return ;
+    }
+
+    if (data.error === 'too_many_login_attempts') {
+      this.messageTitle = 'Login failed';
+      this.message = data.error_description;
+      return;
+    }
+
+    this.messageTitle = 'Login failed';
+    this.message = `Unexpected error while calling remote (${data})`;
   }
 }
