@@ -105,9 +105,23 @@ describe('Component: AddressLookup', () => {
       });
   });
 
-  xit('should emit an address', () => {
-    //TO BE IMPLEMENTED
-  });
+  xit('should emit an addressFound', (done) => {
+
+    inject([AddressLookupService], (addressServiceStub) => {
+      comp.addressFound.subscribe((data) => {
+        expect(data.street).not.toBeNull;
+        done();
+      });
+
+      comp.addressFormGroup.controls['postalCode']
+        .setValue('2273DE');
+      comp.addressFormGroup.controls['houseNumber']
+        .setValue('220');
+      fixture.detectChanges();
+
+      addressServiceStub.validateAddress(comp.addressFormGroup, addressServiceStub);
+    });
+  }, 5000);
 
   xit('should get your current geolocation', () => {
     //TO BE IMPLEMENTED

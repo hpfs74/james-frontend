@@ -25,8 +25,6 @@ describe('Service: AddressLookup', () => {
     }
   };
 
-
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
