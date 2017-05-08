@@ -1,11 +1,14 @@
 <div class="row">
-  <h2 *ngIf="car">Beste verzekeringen voor je {{ car.make }} van alle 41!</h2>
-  <h2 *ngIf="!car">Beste verzekeringen van alle 41!</h2>
+  <div class="col-sm-12">
+    <h2 *ngIf="car">Beste verzekeringen voor je {{ car.make }} van alle 41!</h2>
+    <h2 *ngIf="!car">Beste verzekeringen van alle 41!</h2>
 
-  <knx-loader [visible]="insurancesLoading"></knx-loader>
+    <knx-loader [visible]="insurancesLoading"></knx-loader>
 
-  <ng-container *ngIf="insurances">
-    <pre>{{ insurances | json }}</pre>
-  </ng-container>
+    <ng-container *ngIf="insurances">
+      <knx-insurance-result *ngFor="let i of insurances" [insurance]="i"></knx-insurance-result>
 
+      <pre>{{ insurances | json }}</pre>
+    </ng-container>
+  </div>
 </div>
