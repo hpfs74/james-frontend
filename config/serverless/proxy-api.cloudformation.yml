@@ -1,0 +1,15 @@
+AWSTemplateVersion: 2010-09-09
+Description: Proxy API for NICCI comunication workaround for missing CORS enabled response
+Resources:
+  Authentication:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId:
+        Ref: RestApi
+      ParentId:
+        "Fn::GetAtt": ["RestApi", "RootResourceId"]
+      PathPart: authentication
+  James:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+
