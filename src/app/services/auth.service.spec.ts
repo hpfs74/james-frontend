@@ -1,10 +1,8 @@
 import { TestBed, async, inject } from '@angular/core/testing';
-import { HttpModule, Http, Response, ResponseOptions, XHRBackend, BaseRequestOptions } from '@angular/http';
+import { Http, Response, ResponseOptions, XHRBackend, BaseRequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { AuthService } from './auth.service';
 import { ConfigService } from '../config.service';
-import { User } from '../models';
-
 
 describe('Service: AuthService', () => {
   let configServiceStub = {
@@ -27,7 +25,6 @@ describe('Service: AuthService', () => {
         MockBackend,
         AuthService,
         { provide: XHRBackend, useClass: MockBackend },
-
         {
           deps: [
             MockBackend,
@@ -52,22 +49,13 @@ describe('Service: AuthService', () => {
       const response = new Response(responseOptions);
 
       connection.mockRespond(response);
-
-      // if (connection.request.url === 'api/profile') {
-      //   const responseOptions = new ResponseOptions(options);
-      //   const response = new Response(responseOptions);
-      //
-      //   connection.mockRespond(response);
-      // }
-      //
-      // throw new Error('Ya shall not pass!')
     });
   };
+
   describe('getUserProfile()', () => {
 
     it('should return an Observable<User>', (done) => {
       inject([AuthService, XHRBackend], (authService, mockBackend) => {
-
         const mockResponse = {
           data: {
             emailaddress: 'matteo.s@hcl.com'
@@ -79,7 +67,7 @@ describe('Service: AuthService', () => {
           expect(user).not.toBeNull;
           done();
         });
-      });
-    },9000);
+      })();
+    });
   });
 });

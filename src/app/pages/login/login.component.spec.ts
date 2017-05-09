@@ -38,7 +38,6 @@ describe('Component: Login', () => {
             MockBackend,
             BaseRequestOptions
           ],
-
           provide: Http,
           useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
             return new Http(backend, defaultOptions);
