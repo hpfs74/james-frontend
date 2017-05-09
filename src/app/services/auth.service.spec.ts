@@ -1,6 +1,6 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { HttpModule, Http, Response, ResponseOptions, XHRBackend, BaseRequestOptions } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 import { AuthService } from './auth.service';
 import { ConfigService } from '../config.service';
 import { User } from '../models';
@@ -18,16 +18,16 @@ describe('Service: AuthService', () => {
       }
     }
   };
-  beforeEach(() => {
 
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule],
       providers: [
-        {provide: ConfigService, useValue: configServiceStub},
-
+        { provide: ConfigService, useValue: configServiceStub },
         BaseRequestOptions,
         MockBackend,
         AuthService,
+        { provide: XHRBackend, useClass: MockBackend },
+
         {
           deps: [
             MockBackend,
@@ -40,11 +40,32 @@ describe('Service: AuthService', () => {
         }
       ]
     });
-  });
 
+    this.backend = TestBed.get(MockBackend);
+    this.service = TestBed.get(AuthService);
+  }));
+
+  function setupConnections(backend: MockBackend, options: any) {
+    backend.connections.subscribe((connection: MockConnection) => {
+
+      const responseOptions = new ResponseOptions(options);
+      const response = new Response(responseOptions);
+
+      connection.mockRespond(response);
+
+      // if (connection.request.url === 'api/profile') {
+      //   const responseOptions = new ResponseOptions(options);
+      //   const response = new Response(responseOptions);
+      //
+      //   connection.mockRespond(response);
+      // }
+      //
+      // throw new Error('Ya shall not pass!')
+    });
+  };
   describe('getUserProfile()', () => {
 
-    xit('should return an Observable<User>',
+    it('should return an Observable<User>', (done) => {
       inject([AuthService, XHRBackend], (authService, mockBackend) => {
 
         const mockResponse = {
@@ -52,16 +73,13 @@ describe('Service: AuthService', () => {
             emailaddress: 'matteo.s@hcl.com'
           }
         };
-
-        mockBackend.connections.subscribe((connection) => {
-          connection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(mockResponse)
-          })));
-        });
+        setupConnections(this.backend, mockResponse);
 
         authService.getUserProfile().subscribe((user) => {
           expect(user).not.toBeNull;
+          done();
         });
-      }));
+      });
+    },9000);
   });
 });
