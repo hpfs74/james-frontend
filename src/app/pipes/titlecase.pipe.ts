@@ -1,7 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-/*
- * Changes the case of the first letter of a given number of words in a string.
+/**
+ * @description
+ * Change the case of the first letter of a given number of words in a string
+ *
+ * @export
+ * @class TitleCasePipe
+ * @implements {PipeTransform}
  */
 @Pipe({name: 'titleCase', pure: false})
 export class TitleCasePipe implements PipeTransform {

@@ -42,9 +42,8 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
                   (click)="togglePassword($event)"></button>
               </div>
 
-              <button type="submit" class="knx-button knx-button--primary knx-button--fullwidth"
-                [class.knx-button--pending]="isPending">
-                Inloggen</button>
+              <button type="submit" class="knx-button knx-button--secondary knx-button--fullwidth"
+                [class.knx-button--pending]="isPending">Inloggen</button>
           </div>
         </div>
           <div class="row">
@@ -55,7 +54,7 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
                 </div>
             </div>
             <p class="knx-login__reset knx-text-center">
-              <small><a rel="nofollow" href="/forgot-password">Wachtwoord vergeten?</a></small>
+              <small><a rel="nofollow" href="/forgot-password">Ik ben mijn wachtwoord vergeten</a></small>
             </p>
           </div>
         </div>

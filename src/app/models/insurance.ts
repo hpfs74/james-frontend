@@ -1,3 +1,5 @@
+import { Car } from './car';
+
 export class Insurance {
   id: number;
   insurance_brand: string;
@@ -5,7 +7,7 @@ export class Insurance {
   url: string;
 }
 
-export class InsuranceBase {
+export class InsuranceAdvice {
   fit: number;
   own_risk: number;
   price_quality: number;
@@ -13,6 +15,7 @@ export class InsuranceBase {
   reviews: number;
   reviews_amount: number;
   _embedded: {
+    car: Car;
     insurance: Insurance;
   };
 }

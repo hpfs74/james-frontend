@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Insurance } from '../../models/insurance';
+import { InsuranceAdvice } from '../../models/insurance';
 
 import { Car } from '../../models/car';
 
@@ -10,6 +10,6 @@ import { Car } from '../../models/car';
 
 export class CarResultComponent {
   @Input() insurancesLoading: boolean;
-  @Input() insurances: Array<Insurance>;
+  @Input() insurances: Array<InsuranceAdvice>;
   @Input() car: Car;
 }

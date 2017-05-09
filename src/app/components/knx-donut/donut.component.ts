@@ -19,7 +19,7 @@ import {
         </g>
         <g *ngIf="percentage">
           <text class="knx-donut__text" text-anchor="middle" [attr.x]="this.radius + this.width" [attr.y]="-20" stroke-width="0">
-            {{ percentage }}%
+            {{ percentage | round }}%
           </text>
         </g>
       </svg>

@@ -1,7 +1,7 @@
-import { InsuranceBase, Insurance } from './insurance';
+import { InsuranceAdvice, Insurance } from './insurance';
 import { Car } from './car';
 
-export class CarInsurance extends InsuranceBase {
+export class CarInsurance extends InsuranceAdvice {
   id: string;
   insurance_id: string;
   moneyview_id: string;
@@ -50,7 +50,7 @@ export const MockInsurances: Array<CarInsurance> =
       'insurance_name': 'Auto',
       'fit': 75.66,
       'price_quality': 10,
-      'own_risk': 0,
+      'own_risk': 20.5,
       'monthly_premium': 36.08,
       'wa_nett': 155.96,
       'bonus_malus_step_wa': '16',

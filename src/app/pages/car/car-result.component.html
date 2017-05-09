@@ -5,7 +5,8 @@
 
     <knx-loader [visible]="insurancesLoading"></knx-loader>
 
-    <knx-insurance-result *ngFor="let item of insurances; let i = index;" [insurance]="item" [index]="i"></knx-insurance-result>
+    <knx-insurance-result *ngFor="let item of insurances; let i = index;"
+      [insurance]="item" [index]="i"></knx-insurance-result>
 
     <pre>{{ insurances | json }}</pre>
   </div>

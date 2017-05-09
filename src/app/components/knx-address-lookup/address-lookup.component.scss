@@ -7,5 +7,9 @@
 
   .knx-address-lookup__button {
     margin-bottom: 0;
+
+    button {
+      width: 100%;
+    }
   }
 }

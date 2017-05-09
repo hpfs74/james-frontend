@@ -13,7 +13,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 /**
  * Pipes
  */
-import { TitleCasePipe } from './pipes/titlecase.pipe';
+import { TitleCasePipe, RoundPipe } from './pipes/index';
+
 
 /**
  * Shared module for all generic components
@@ -34,6 +35,7 @@ import { UserDetailComponent } from './components/knx-user-detail/user-detail.co
 
 export const sharedComponents = [
   TitleCasePipe,
+  RoundPipe,
   AddressLookupComponent,
   ButtonIconComponent,
   CookiebarComponent,

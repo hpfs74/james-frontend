@@ -41,8 +41,10 @@
   }
 }
 
-// .knx-insurance-result__logo {
-// }
+.knx-insurance-result__logo {
+  width: 100%;
+  margin-top: 20px;
+}
 
 .knx-sticker {
   width: 70px;
@@ -82,9 +84,12 @@
   margin-top: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 
-  & ~ * {
-    flex-grow: 1 1;
+  & > * {
+    flex-grow: 1;
   }
 }
 
