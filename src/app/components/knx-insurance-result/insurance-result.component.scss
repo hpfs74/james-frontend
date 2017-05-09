@@ -1,9 +1,12 @@
+
+$knx-insurace-result-border: 1px;
+
 .knx-insurance-result {
-  border: 2px solid $knab-primary-gray;
+  border: $knx-insurace-result-border solid $knab-primary-gray;
   margin: 60px 0 80px;
 
   [class*="col-"] {
-    border-right: 2px solid $knab-primary-gray;
+    border-right: $knx-insurace-result-border solid $knab-primary-gray;
     padding: 50px 40px 15px;
 
     &:last-child {
@@ -33,26 +36,33 @@
   line-height: 40px;
 }
 
+.knx-insurance-result__logo {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.knx-sticker {
+  width: 60px;
+  height: 60px;
+  color: $knab-primary-blue;
+  font-weight: normal;
+  font-size: 13px;
+  text-transform: lowercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .knx-insurance-result__price {
   display: inline-block;
 
   &:first-letter {
     padding-right: 0.3em;
   }
-}
-
-.knx-insurance-result__logo {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.knx-sticker {
-  width: 70px;
-  height: 70px;
-  color: $knab-primary-blue;
-  font-weight: normal;
-  font-size: 13px;
-  text-transform: lowercase;
 }
 
 [class*="col-"].knx-insurance-result__own-risk,
