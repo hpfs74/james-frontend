@@ -18,7 +18,7 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
               {{ insurance.own_risk | currency:'EUR':true }}<br><span>Eigen risico</span>
             </div>
             <div class="col-sm-6 knx-insurance-result__reviews">
-              9.3<br><span>120 Reviews</span>
+              9.3<br><span>{{ insurance.reviews_amount }} reviews</span>
             </div>
           </div>
           <div class="row">

@@ -13,7 +13,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 /**
  * Pipes
  */
-import { TitleCasePipe, RoundPipe } from './pipes/index';
+import { TitleCasePipe, RoundPipe } from './pipes/';
 
 
 /**
