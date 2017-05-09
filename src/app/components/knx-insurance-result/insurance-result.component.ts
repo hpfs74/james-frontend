@@ -22,7 +22,10 @@ import { InsuranceBase, Insurance } from '../../models/insurance';
               9.3<br><span>120 Reviews</span>
             </div>
           </div>
-          <div class="knx-insurance-result__profilescore">Profielscore</div>
+          <div class="knx-insurance-result__profilescore">
+            Profielscore
+            <knx-donut [percentage]="35"></knx-donut>
+          </div>
         </div>
         <div class="col-sm-4">
           <div class="knx-insurance-result__premium knx-insurance-result__price">

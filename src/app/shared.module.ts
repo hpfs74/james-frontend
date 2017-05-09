@@ -23,6 +23,7 @@ import { AddressLookupComponent } from './components/knx-address-lookup/address-
 import { BreadCrumbComponent } from './components/knx-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
+import { DonutComponent } from './components/knx-donut/donut.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
@@ -36,6 +37,7 @@ export const sharedComponents = [
   AddressLookupComponent,
   ButtonIconComponent,
   CookiebarComponent,
+  DonutComponent,
   FeaturesComponent,
   LicensePlateComponent,
   InsuranceResultComponent,

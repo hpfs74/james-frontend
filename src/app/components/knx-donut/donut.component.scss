@@ -1,0 +1,38 @@
+.knx-donut {
+  display: inline-block;
+}
+
+.knx-donut__text {
+  stroke: 0;
+  fill: $knab-primary-blue;
+  font-family: $font-family-base;
+  font-weight: bold;
+  transform: rotate(90deg);
+  font-size: 14px;
+  position: relative;
+}
+
+.knx-donut__circle {
+  width: 60px;
+  height: 60px;
+  transform: rotate(-90deg);
+  display: block;
+  fill: none;
+  stroke: $knab-primary-green;
+}
+
+// .circle_animation {
+//   stroke-dasharray: 240;
+//   stroke-dashoffset: 240;
+// }
+
+// .knx-donut--animate .circle_animation {
+//   -webkit-animation: anim-donut 2s ease-out forwards;
+//   animation: anim-donut 2s ease-out forwards;
+// }
+
+// @keyframes anim-donut {
+//   to {
+//     stroke-dashoffset: 157;
+//   }
+// }
