@@ -1,7 +1,7 @@
 import * as AuthUtils from './auth.utils';
 import { TokenHelper, tokenNotExpired } from './auth.utils';
 
-describe('AuthUtils', () => {
+describe('Utils: AuthUtils', () => {
 
   describe('encryptPassword', () => {
     it('should provide an encrypted password', () => {

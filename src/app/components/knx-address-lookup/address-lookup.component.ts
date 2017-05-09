@@ -56,8 +56,10 @@ export class AddressLookupComponent implements AfterViewChecked {
     }
   }
 
-  validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): { [key: string]: any } {
+  validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): Promise<any> {
+
     clearTimeout(this.lookupTimeout);
+
     return new Promise((resolve, reject) => {
       this.lookupTimeout = setTimeout(() => {
         let postalCode = formGroup.get('postalCode').value;
@@ -65,7 +67,7 @@ export class AddressLookupComponent implements AfterViewChecked {
         let houseNumberExtension = formGroup.get('houseNumberExtension').value;
 
         if (!postalCode && !houseNumber) {
-          resolve(null);
+          return resolve(null);
         }
 
         if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
@@ -76,13 +78,13 @@ export class AddressLookupComponent implements AfterViewChecked {
               let res = <Address>data.json();
 
               isValid = !!(res.street && res.city);
+
               this.addressFound.emit(res);
 
-              resolve(isValid ? null : { address: true });
-
+              return resolve(isValid ? null : { address: true });
             }, err => {
               isValid = false; // cannot validate: server error?
-              resolve({ address: true });
+              return resolve({ address: true });
             });
         }
       }, 600);

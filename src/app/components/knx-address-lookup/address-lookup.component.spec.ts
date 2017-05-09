@@ -2,7 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Response, ResponseOptions } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
@@ -25,11 +25,15 @@ describe('Component: AddressLookup', () => {
   };
 
   const addressServiceStub = {
-    lookupAddress: (postalCode: string, houseNumber: string) => {
-      return {
-        street: 'Teststraat',
-        number: '200'
-      };
+    lookupAddress: (postalCode: string, houseNumber: string, houseNumberExtension: string) => {
+      let ret = new Response(
+        new ResponseOptions({
+          body: [
+            { street: 'streetname', city: 'cityname' }
+          ]
+        }));
+
+      return Observable.of(ret);
     }
   };
 
@@ -100,16 +104,19 @@ describe('Component: AddressLookup', () => {
 
   it('should validate an address', () => {
       inject([AddressLookupService], (addressServiceStub) => {
-        let isValid = addressServiceStub.validateAddress(comp.addressFormGroup, addressServiceStub);
+        let isValid = comp.validateAddress(comp.addressFormGroup, addressServiceStub);
         expect(isValid).toBeUndefined;
       });
   });
 
-  xit('should emit an addressFound', (done) => {
+  it('should emit an addressFound', (done) => {
 
     inject([AddressLookupService], (addressServiceStub) => {
       comp.addressFound.subscribe((data) => {
-        expect(data.street).not.toBeNull;
+        expect(data).not.toBeNull;
+        expect(data.street).not.toBe('streetname');
+        expect(data.city).not.toBe('cityname');
+
         done();
       });
 
@@ -117,11 +124,12 @@ describe('Component: AddressLookup', () => {
         .setValue('2273DE');
       comp.addressFormGroup.controls['houseNumber']
         .setValue('220');
+
       fixture.detectChanges();
 
-      addressServiceStub.validateAddress(comp.addressFormGroup, addressServiceStub);
-    });
-  }, 5000);
+      comp.validateAddress(comp.addressFormGroup, addressServiceStub);
+    })();
+  });
 
   xit('should get your current geolocation', () => {
     //TO BE IMPLEMENTED
