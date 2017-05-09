@@ -3,11 +3,39 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
 import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.masks';
+import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 
 import { CarDetailForm } from './car-detail.form';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
+
+
+export const carDateMask = {
+  mask: [/[0-9]/, /[0-9]/, ' ', '/', ' ', /[0-9]/, /[0-9]/, ' ', '/', ' ', /[1-2]/, /[0-9]/, /[0-9]/, /[0-9]/],
+  guide: true,
+  keepCharPositions: false,
+  decode: value => {
+    const parts = value.replace(/[ _]/gim, '').split('/');
+
+    const day = +parts[0];
+    const month = +parts[1] - 1;
+    const year = +parts[2];
+
+    if (day > 0 && month >= 0 && year > 999) {
+      const date = new Date(year, month, day);
+
+      //check if day or month are not bigger then valid
+      //note: in JS new Date(50, 60, 2016) is completely valid
+      if (date.getDate() === day && date.getMonth() === month) {
+        return date;
+      }
+    }
+
+    return null;
+  },
+  pipe: createAutoCorrectedDatePipe('dd / mm / yyyy')
+};
 
 @Component({
   selector: 'knx-car-detail-form',
@@ -17,6 +45,7 @@ import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.
 export class CarDetailComponent implements OnInit {
   public form: CarDetailForm;
   public CXInputMasks = CXInputMasks;
+  public KNXDateMasks = carDateMask;
 
   @Input() userProfile: any;
   @Input() config: any;
