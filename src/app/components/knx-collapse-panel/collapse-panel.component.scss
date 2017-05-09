@@ -1,0 +1,23 @@
+.knx-collapse-panel {
+  padding-top: 5px;
+  text-align: center;
+  color: $knab-primary-green;
+
+  .knx-button:after {
+    font-family: $font-family-icon;
+    content: map-get($knx-icons, chevron-down);
+    margin-left: 10px;
+    font-size: $base-font-size;
+  }
+
+  .knx-button--panel-open:after {
+    font-family: $font-family-icon;
+    content: map-get($knx-icons, chevron-up);
+    margin-left: 10px;
+    font-size: $base-font-size;
+  }
+}
+
+.knx-collapse-panel__content {
+  display: none;
+}

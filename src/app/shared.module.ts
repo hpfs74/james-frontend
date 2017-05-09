@@ -24,13 +24,16 @@ import { AddressLookupComponent } from './components/knx-address-lookup/address-
 import { BreadCrumbComponent } from './components/knx-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
+import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { DonutComponent } from './components/knx-donut/donut.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
+import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
 import { LoaderComponent } from './components/knx-loader/loader.component';
+import { TabComponent } from './components/knx-tab/tab.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
 
 export const sharedComponents = [
@@ -39,14 +42,17 @@ export const sharedComponents = [
   AddressLookupComponent,
   ButtonIconComponent,
   CookiebarComponent,
+  CollapsePanelComponent,
   DonutComponent,
   FeaturesComponent,
   LicensePlateComponent,
   InsuranceResultComponent,
+  InsuranceResultDetailComponent,
   PriceTableComponent,
   PriceTableItemComponent,
   LoaderComponent,
-  UserDetailComponent
+  TabComponent,
+  UserDetailComponent,
 ];
 
 @NgModule({

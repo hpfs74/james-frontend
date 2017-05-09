@@ -35,6 +35,8 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
           <button role="button" class="knx-button knx-button--primary knx-button--fullwidth">Dit wil ik</button>
         </div>
       </div>
+
+      <knx-insurance-result-detail *ngIf="showDetailPanel" [insurance]="insurance"></knx-insurance-result-detail>
     </div>
   `
 })
@@ -42,4 +44,5 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
 export class InsuranceResultComponent {
   @Input() index: number;
   @Input() insurance: InsuranceAdvice;
+  @Input() showDetailPanel: boolean = true;
 }

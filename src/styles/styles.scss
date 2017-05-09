@@ -17,16 +17,19 @@
 @import '../app/components/knx-address-lookup/address-lookup.component';
 @import '../app/components/knx-chat-stream/chat-stream.component';
 @import '../app/components/knx-chat-stream/chat-message.component';
+@import '../app/components/knx-collapse-panel/collapse-panel.component';
 @import '../app/components/knx-cookiebar/cookiebar.component';
 @import '../app/components/knx-donut/donut.component';
 @import '../app/components/knx-features/features.component';
 @import '../app/components/knx-insurance-result/insurance-result.component';
+@import '../app/components/knx-insurance-result-detail/insurance-result-detail.component';
 @import '../app/components/knx-navigation/navbar.component';
 @import '../app/components/knx-price-table/price-table.component';
 @import '../app/components/knx-user-detail/user-detail.component';
 @import '../app/components/knx-car-info/car-info.component';
 @import '../app/components/knx-car-info/car-info.colors';
 @import '../app/components/knx-car-info/car-preview.component';
+@import '../app/components/knx-tab/tab.component';
 
 .main-container {
   margin-bottom: 60px;
