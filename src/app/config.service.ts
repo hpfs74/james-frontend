@@ -12,14 +12,6 @@ export class ConfigService {
   constructor(private http: Http) {
   }
 
-  public getApiEndpoint() {
-    // if the configuration is not loaded
-    if (!(this.config && this.config.api)) {
-      // retrieve configuration object
-    }
-    return this.config.api;
-  }
-
   load(url: string) {
     return new Promise((resolve) => {
       this.http.get(url).map(res => res.json())
