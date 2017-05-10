@@ -15,6 +15,13 @@ export interface ConfigAPIInterface {
   }
 }
 
+export interface AssistantConfig {
+  showAvatar: boolean;
+  avatarName: string;
+  avatarTitle: string;
+  messages: Array<any>;
+}
+
 export interface NicciEndpoint {
   base?: string;
   key?: string;

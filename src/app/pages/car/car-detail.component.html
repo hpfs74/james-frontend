@@ -120,6 +120,33 @@
             }
           }">
       </cx-form-group>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <cx-form-group formControlName="gender" [options]="{
+                label: 'Geslacht',
+                type: 'radio',
+                formControl: form.formGroup.get('gender'),
+                validationErrors: form.validationErrors,
+                inputOptions: {
+                    formGroupModifiers: ['cx-form-group__wrap--spread'],
+                    placeholder: 'Selecteer je geslacht',
+                    items: [
+                      {
+                          label: 'Man',
+                          value: 'm'
+                      },
+                      {
+                          label: 'Vrouw',
+                          value: 'f'
+                      }
+                  ]
+                }
+              }">
+          </cx-form-group>
+        </div>
+      </div>
+
     </div>
     <div class="col-md-2">
       <!-- some breathing space between this and assistant -->

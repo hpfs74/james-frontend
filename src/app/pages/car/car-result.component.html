@@ -1,14 +1,19 @@
 <div class="row">
   <div class="col-sm-12">
-    <h2 *ngIf="car">Beste verzekeringen voor je {{ car.make }} van alle 41!</h2>
+    <h2 *ngIf="car">Beste verzekeringen voor je {{ car.make }} van alle 41</h2>
+    <h2 *ngIf="!car">Beste autoverzekeringen van alle 41</h2>
 
-    <knx-loader [visible]="isInsuranceLoading">
+    <knx-loader [visible]="!insurances">
       Bezig met ophalen van verzekeringen...
     </knx-loader>
 
-    <knx-insurance-result *ngFor="let item of insurances; let i = index;"
-      [insurance]="item" [index]="i"></knx-insurance-result>
+    <knx-insurance-result
+      *ngFor="let item of insurances | slice:0:total; let i = index;"
+      [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)">
+    </knx-insurance-result>
 
-    <button class="knx-button knx-button--primary">Toon meer</button>
+    <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showMore()">
+      Toon {{ insurances.length - total }} meer
+    </button>
   </div>
 </div>

@@ -33,8 +33,8 @@
 
           <knx-car-result-form
             *ngSwitchCase="'carResults'"
-            [insurances]="insurances"
-            [isInsuranceLoading]="isInsuranceLoading"
+            (insuranceSelected$)="goToNextStep($event)"
+            [insurances]="insurances | async"
             [car]="myCar">
           </knx-car-result-form>
 

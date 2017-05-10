@@ -8,3 +8,7 @@ $knx-insurace-result-border: 1px solid $knab-primary-gray;
   text-align: center;
   color: $knab-primary-green;
 }
+
+.knx-insurance-result__details .knx-collapse-panel a.knx-button {
+  font-size: $font-size-base;
+}

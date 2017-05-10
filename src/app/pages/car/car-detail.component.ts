@@ -85,5 +85,4 @@ export class CarDetailComponent implements OnInit {
   onAddressFound(event: Address) {
     this.chatNotifierService.addTextMessage(`Ik heb je adres gevonden. Woon je op <strong>${event.street} in ${event.city}</strong>?`);
   }
-
 }
