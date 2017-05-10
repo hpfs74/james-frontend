@@ -54,7 +54,8 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
                 </div>
             </div>
             <p class="knx-login__reset knx-text-center">
-              <small><a rel="nofollow" href="/forgot-password">Ik ben mijn wachtwoord vergeten</a></small>
+              <!--<a rel="nofollow" href="/forgot-password">Ik ben mijn wachtwoord vergeten</a>-->
+              <a tabindex="0" rel="nofollow" (click)="goToPasswordRest()">Ik ben mijn wachtwoord vergeten</a>
             </p>
           </div>
         </div>
@@ -114,6 +115,10 @@ export class LoginComponent {
         }
       }
     ];
+  }
+
+  goToPasswordRest() {
+    window.location.href  = this.authService.forgotPassword();
   }
 
   togglePassword(event) {

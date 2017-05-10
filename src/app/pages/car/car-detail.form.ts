@@ -13,6 +13,7 @@ export class CarDetailForm {
     licensePlate: () => `Vul een geldig kenteken in`,
     birthDate: () => 'Vul een geldige geboortedatum in',
     postalCode: () => `Vul een geldige postcode in`,
+    gender: () => `Selecteer je geslacht`,
     address: () => `Vul een geldige postcode en huisnummer combinatie in`,
     houseNumber: () => `Vul een huisnummer in`,
     damageFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
@@ -41,7 +42,8 @@ export class CarDetailForm {
         ]
       )],
       familyType: [null, Validators.required],
-      loan: [null, Validators.required]
+      loan: [null, Validators.required],
+      gender: [null, Validators.required]
     });
 
     this.addressForm = createAddress(this.fb);

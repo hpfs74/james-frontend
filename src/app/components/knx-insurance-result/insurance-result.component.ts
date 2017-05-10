@@ -11,7 +11,9 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
         <div class="row">
           <div class="col-sm-4">
             <img class="knx-insurance-result__logo" src="{{ insurance._embedded.insurance.insurance_logo}}">
-            <div class="knx-sticker knx-sticker--yellow">meest<br>gekozen</div>
+            <div class="knx-sticker knx-sticker--yellow" title="Op basis van jouw wensen raden we deze premie aan">
+              <span class="knx-icon-thumbs-o-up"></span>
+            </div>
           </div>
           <div class="col-sm-4">
             <div class="row">
@@ -23,9 +25,13 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
               </div>
             </div>
             <div class="row">
-              <div class="knx-insurance-result__profilescore">
-                <div class="knx-insurance-result__label">Profielscore</div>
+              <div class="col-sm-6 knx-insurance-result__profilescore">
                 <knx-donut *ngIf="insurance.fit" [percentage]="insurance.fit"></knx-donut>
+                <div class="knx-insurance-result__label">Profielscore</div>
+              </div>
+              <div class="col-sm-6 knx-insurance-result__price-quality">
+                <div class="knx-insurance-result__amount">{{ insurance.price_quality }}<span>/10</span></div>
+                <div class="knx-insurance-result__label">Prijs kwaliteit</div>
               </div>
             </div>
           </div>
@@ -33,7 +39,7 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
             <div class="knx-insurance-result__premium knx-insurance-result__price">
               {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
             </div>
-            <button role="button" class="knx-button knx-button--secondary knx-button--fullwidth">Dit wil ik</button>
+            <button role="button" class="knx-button knx-button--secondary knx-button--fullwidth">Kies deze</button>
           </div>
         </div>
       </div>

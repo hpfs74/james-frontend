@@ -131,13 +131,11 @@ export class AuthService {
   }
 
   public forgotPassword(): string {
-    return 'https://profile-james-a.nicci.io/password?' +
+    const redirectUrl = '';
+    return `https://profile-james-a.nicci.io/password?' +
       'client_id=56a6ab20bb00893f071faddc' +
-      '&locale=nl_NL&redirect_uri=com.mobgen.knab://' +
-      '&response_type=code' +
-      '&scope=basic+emailaddress+social';
+      '&locale=nl_NL&redirect_uri=${redirectUrl}`;
   }
-
 
   /**
    *
