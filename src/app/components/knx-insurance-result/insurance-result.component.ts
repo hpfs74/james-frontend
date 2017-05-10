@@ -33,7 +33,7 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
             <div class="knx-insurance-result__premium knx-insurance-result__price">
               {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
             </div>
-            <button role="button" class="knx-button knx-button--primary knx-button--fullwidth">Dit wil ik</button>
+            <button role="button" class="knx-button knx-button--secondary knx-button--fullwidth">Dit wil ik</button>
           </div>
         </div>
       </div>

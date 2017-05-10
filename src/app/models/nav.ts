@@ -12,9 +12,9 @@
  *
  */
 export class Section {
-    icon: string;
-    name: string;
-    links: Array<Nav>;
+  icon: string;
+  name: string;
+  links: Array<Nav>;
 }
 
 /**
@@ -26,13 +26,19 @@ export class Section {
    require('./footer.component.html')
  */
 export class Nav {
-    id: string;
-    title: string;
-    routePath: string;
-    url?: string;
-    target?: string;
-    alternate?: string;
-    icon?: string;
-    image?: string;
-    cssClass?: string;
+  id: string;
+  title: string;
+  routePath: string;
+  url?: string;
+  target?: string;
+  alternate?: string;
+  icon?: string;
+  image?: string;
+  cssClass?: string;
+  menuType: NavItemType;
+}
+
+export enum NavItemType {
+  LEFT,
+  RIGHT
 }

@@ -42,7 +42,7 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
                   (click)="togglePassword($event)"></button>
               </div>
 
-              <button type="submit" class="knx-button knx-button--secondary knx-button--fullwidth"
+              <button type="submit" class="knx-button knx-button--primary knx-button--fullwidth"
                 [class.knx-button--pending]="isPending">Inloggen</button>
           </div>
         </div>

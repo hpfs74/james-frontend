@@ -24,10 +24,6 @@ export class ChatStreamComponent implements OnChanges {
 
   constructor(private componentFactoryResolve: ComponentFactoryResolver) { }
 
-  // ngAfterViewInit() {
-  //   this.loadComponent();
-  // }
-
   ngOnChanges(changes: SimpleChanges) {
     for (let message of this.messages) {
       let componentFactory = this.componentFactoryResolve.resolveComponentFactory(message.component);

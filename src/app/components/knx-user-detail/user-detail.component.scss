@@ -1,7 +1,14 @@
 .knx-user-detail a {
+  display: block;
   line-height: 3;
   text-decoration: none;
   font-weight: normal;
+  font-size: $font-size-base;
+
+  &:hover {
+    font-weight: normal;
+    color: $knab-primary-red;
+  }
 }
 
 .knx-user-detail .icon {

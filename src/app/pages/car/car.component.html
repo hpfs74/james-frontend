@@ -3,7 +3,7 @@
     <ol *ngIf="formSteps" class="knx-step-navigation">
       <li *ngFor="let step of formSteps; let i = index;"
         class="knx-step-navigation__step"
-        [ngClass]="{ 'knx-step-navigation__step--current': i === 0 }">{{ step.title }}</li>
+        [ngClass]="{ 'knx-step-navigation__step--current': getCurrentStepIndex(i) }">{{ step.title }}</li>
     </ol>
   </div>
 </div>
@@ -34,6 +34,7 @@
           <knx-car-result-form
             *ngSwitchCase="'carResults'"
             [insurances]="insurances"
+            [isInsuranceLoading]="isInsuranceLoading"
             [car]="myCar">
           </knx-car-result-form>
 
@@ -41,7 +42,7 @@
 
         <div class="cx-form-group cx-form-group--space-between">
           <button class="knx-button knx-button--link knx-button--back" (click)="goToPreviousStep()">Terug</button>
-          <button class="knx-button knx-button--primary knx-button--arrow" (click)="goToNextStep()">Volgende</button>
+          <button class="knx-button knx-button--secondary knx-button--arrow" (click)="goToNextStep()">Volgende</button>
         </div>
 
       </div>

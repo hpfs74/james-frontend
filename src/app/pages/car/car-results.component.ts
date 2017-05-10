@@ -9,7 +9,7 @@ import { Car } from '../../models/car';
 })
 
 export class CarResultComponent {
-  @Input() insurancesLoading: boolean;
+  @Input() isInsuranceLoading: boolean;
   @Input() insurances: Array<InsuranceAdvice>;
   @Input() car: Car;
 }

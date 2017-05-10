@@ -5,10 +5,9 @@ import { User } from '../../models/user';
 @Component({
   selector: 'knx-user-detail',
   template: `
-    <div class="knx-user-detail">
-      <small *ngIf="profile">Hi {{ profile.firstName }}</small>
-      <a href="#" *ngIf="isLoggedIn" (click)="logOut()">
-        <span class="knx-icon-logout"></span> Uitloggen
+    <div class="knx-user-detail" *ngIf="profile" >
+      <a *ngIf="isLoggedIn" (click)="logOut()">
+        <span class="knx-icon-user"></span> {{ profile.firstname || 'Uitloggen' }}
       </a>
     </div>
   `

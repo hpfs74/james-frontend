@@ -40,6 +40,11 @@
   }
 }
 
+.knx-logo {
+  width: 80px;
+  margin-left: -15px;
+}
+
 .noborder {
   border: 0;
 }
@@ -66,3 +71,12 @@
     line-height: 1.4em;
   }
 }
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+

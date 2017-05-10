@@ -33,6 +33,7 @@ export class CarComponent implements OnInit {
   assistantMessages: any;
   myCar: Car;
   isCoverageLoading: boolean = false;
+  isInsuranceLoading: boolean = false;
   token: string = '';
 
   constructor(private router: Router,
@@ -113,6 +114,10 @@ export class CarComponent implements OnInit {
       });
   }
 
+  getCurrentStepIndex(index: number) {
+    return this.formSteps[index].id === this.currentFormStep;
+  }
+
   goToPreviousStep() {
     // TODO: refactor step navigation in generic/reusable way
     let index = this.formSteps.findIndex(step => step.id === this.currentFormStep);
@@ -177,12 +182,11 @@ export class CarComponent implements OnInit {
   }
 
   getInsurances(formData) {
+    this.isInsuranceLoading = true;
     // TODO: implement
     this.insurances = MockInsurances;
 
     //this.carService.getInsurances()
-
-    //console.log(formData);
   }
 
 }
