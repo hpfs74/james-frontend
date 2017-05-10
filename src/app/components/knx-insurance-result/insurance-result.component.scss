@@ -2,8 +2,12 @@
 $knx-insurace-result-border: 1px solid $knab-primary-gray;
 
 .knx-insurance-result {
+  margin-bottom: 80px;
+}
+
+.knx-insurance_advice {
   border: $knx-insurace-result-border;
-  margin: 60px 0 80px;
+  margin: 60px 0 0;
 
   [class*="col-"] {
     border-right: $knx-insurace-result-border;
@@ -117,4 +121,18 @@ $knx-insurace-result-border: 1px solid $knab-primary-gray;
     font-size: 16px;
     display: block;
   }
+}
+
+// Tab component customizations
+.knx-insurance-result__details .knx-tabs {
+  display: flex;
+}
+
+.knx-insurance-result__details .knx-tabs__tab {
+  flex-grow: 1;
+}
+
+.knx-insurance-result__details .knx-tabs,
+.knx-insurance-result__details .knx-tab__content {
+  padding: 0 20px;
 }

@@ -29,7 +29,7 @@
 @import '../app/components/knx-car-info/car-info.component';
 @import '../app/components/knx-car-info/car-info.colors';
 @import '../app/components/knx-car-info/car-preview.component';
-@import '../app/components/knx-tab/tab.component';
+@import '../app/components/knx-tabs/tabs.component';
 
 .main-container {
   margin-bottom: 60px;
@@ -42,6 +42,10 @@
 
 .noborder {
   border: 0;
+}
+
+.pt-0 {
+  padding-top: 0;
 }
 
 .inline-formelement {

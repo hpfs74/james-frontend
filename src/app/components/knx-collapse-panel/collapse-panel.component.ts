@@ -8,18 +8,16 @@ import { Component, Input, trigger, state, style, animate, transition } from '@a
         (click)="toggle()" [class.knx-button--panel-open]="showPanel">{{ showPanel ? closeLabel : openLabel }}</a>
 
       <div class="row knx-collapse-panel__content" [@togglePanel]="showPanel" [attr.height]="contentHeight">
-        <div class="col-sm-12">
-          <ng-content></ng-content>
-        </div>
+        <ng-content></ng-content>
       </div>
     </div>
   `,
   animations: [
     trigger('togglePanel', [
-      state('true', style({ height: '*', display: 'block' })),
-      state('false', style({ height: '0px', display: 'none' })),
-      transition('1 => 0', animate('100ms ease-out')),
-      transition('0 => 1', animate('100ms ease-in'))
+      state('true', style({ display: 'block', opacity: 1, height: '*' })),
+      state('false', style({ display: 'none', opactiy: 0, height: '0px' })),
+      transition('1 => 0', animate('200ms ease-out')),
+      transition('0 => 1', animate('200ms ease-in'))
     ])
   ]
 })

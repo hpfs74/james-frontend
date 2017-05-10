@@ -8,17 +8,11 @@
   </div>
 </div>
 
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-
-      Current Token: <pre>{{token}}</pre>.
-
-      <button type="button" (click)="refreshToken()" class="knx-button"><i class="knx-icon-check"></i> REFRESH TOKEN</button>
-
-    </div>
-  </div>
+<!-- TODO: remove me when refresh implemented -->
+<div #el style="position:absolute;top:50px;right:20px;width:300px;background: yellow;border:1px solid red;padding:10px">
+  <small>Current Token: <br><textarea style="width:100%">{{token}}</textarea></small><br>
+  <a style="margin-right:10px" (click)="refreshToken()">refresh</a>
+  <a (click)="el.style.display = 'none'">hide</a>
 </div>
 
 <div class="container">

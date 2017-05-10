@@ -33,7 +33,8 @@ import { InsuranceResultDetailComponent } from './components/knx-insurance-resul
 import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
 import { LoaderComponent } from './components/knx-loader/loader.component';
-import { TabComponent } from './components/knx-tab/tab.component';
+import { TabsComponent } from './components/knx-tabs/tabs.component';
+import { TabComponent } from './components/knx-tabs/tab.component';
 import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
 
 export const sharedComponents = [
@@ -51,6 +52,7 @@ export const sharedComponents = [
   PriceTableComponent,
   PriceTableItemComponent,
   LoaderComponent,
+  TabsComponent,
   TabComponent,
   UserDetailComponent,
 ];

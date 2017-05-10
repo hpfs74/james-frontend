@@ -44,7 +44,7 @@ export class CarComponent implements OnInit {
     this.token = localStorage.getItem('access_token');
   }
 
-
+  //TODO: for testing
   refreshToken() {
     let token = JSON.parse(localStorage.getItem('token'));
       this.auth.refreshToken(token.refresh_token)

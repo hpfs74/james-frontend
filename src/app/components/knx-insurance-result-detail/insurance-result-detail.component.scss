@@ -1,7 +1,9 @@
 $knx-insurace-result-border: 1px solid $knab-primary-gray;
 
 .knx-insurance-result__details .knx-collapse-panel {
-  border-top: $knx-insurace-result-border;
+  border-left: $knx-insurace-result-border;
+  border-right: $knx-insurace-result-border;
+  border-bottom: $knx-insurace-result-border;
   padding-top: 5px;
   text-align: center;
   color: $knab-primary-green;

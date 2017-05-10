@@ -1,0 +1,48 @@
+.knx-tabs {
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 10px;
+  list-style: none;
+  border-bottom: 1px solid $knab-primary-gray;
+  width: 100%;
+  height: 3.4em;
+}
+
+.knx-tabs__tab {
+  float: left;
+  color: $knab-primary-green;
+  margin-bottom: -1px;
+  position: relative;
+  display: block;
+}
+
+.knx-tabs__tab > span {
+  color: $knab-medium-gray;
+  position: relative;
+  display: block;
+  padding: 15px 30px;
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.knx-tabs__tab.active > span,
+.knx-tabs__tab.active > span:hover,
+.knx-tabs__tabi.active > span:focus {
+  cursor: default;
+  border: 1px solid $knab-primary-green;
+  border-bottom-color: transparent;
+  background: $knab-primary-green;
+  color: #fff;
+}
+
+.knx-tab__content {
+  text-align: left;
+  margin: 25px 0;
+  color: $knab-primary-blue;
+}
