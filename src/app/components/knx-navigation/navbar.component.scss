@@ -1,9 +1,13 @@
 @import './bs4/bs4'; // Use some Bootstrap 4 utils
 
-$knx-navbar-font: $font-size-base + 1;
+$knx-navbar-font: $font-size-base;
 
 .knx-navbar {
   display: flex;
+}
+
+.knx-navbar.navbar {
+  padding: 0;
 }
 
 .knx-navbar .mr-auto {
