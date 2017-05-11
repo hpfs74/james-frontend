@@ -54,7 +54,6 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
                 </div>
             </div>
             <p class="knx-login__reset knx-text-center">
-              <!--<a rel="nofollow" href="/forgot-password">Ik ben mijn wachtwoord vergeten</a>-->
               <a tabindex="0" rel="nofollow" (click)="goToPasswordRest()">Ik ben mijn wachtwoord vergeten</a>
             </p>
           </div>
@@ -73,9 +72,17 @@ export class LoginComponent {
   messageTitle: string;
   message: string;
   formGroupConfig = [];
+  forgotPasswordLink: string;
 
   constructor(private router: Router, private authService: AuthService) {
     this.initForm();
+
+    this.forgotPasswordLink = 'https://profile-james-a.nicci.io/password?client_id=56a6ab20bb00893f071faddc' +
+                                '&locale=nl_NL' +
+                                '&redirect_uri=com.mobgen.knab://' +
+                                '&response_type=code' +
+                                '&scope=basic+emailaddress+social';
+
   }
 
   initForm() {
