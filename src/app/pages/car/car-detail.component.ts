@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ElementRef, Input, Output, EventEmitter, AfterViewChecked } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
@@ -9,7 +9,7 @@ import { CarDetailForm } from './car-detail.form';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
-
+import { CarService } from './car.service';
 
 export const carDateMask = {
   mask: [/[0-9]/, /[0-9]/, ' ', '/', ' ', /[0-9]/, /[0-9]/, ' ', '/', ' ', /[1-2]/, /[0-9]/, /[0-9]/, /[0-9]/],
@@ -42,7 +42,7 @@ export const carDateMask = {
   styleUrls: ['car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
 })
-export class CarDetailComponent implements OnInit {
+export class CarDetailComponent implements OnInit, AfterViewChecked {
   public form: CarDetailForm;
   public CXInputMasks = CXInputMasks;
   public KNXDateMasks = carDateMask;
@@ -61,7 +61,20 @@ export class CarDetailComponent implements OnInit {
   // form ready to be submitted
   @Output() formValid: EventEmitter<any> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, elementRef: ElementRef, private chatNotifierService: ChatStreamService ) {
+  constructor(
+    private fb: FormBuilder, elementRef: ElementRef,
+    private chatNotifierService: ChatStreamService,
+    private carService: CarService) {
+  }
+
+  ngAfterViewChecked(): void {
+    // we've already attached LicensePlateValidator on the form which get's triggered first
+    // and checks the format of the licenseplate. When it's valid we do a Http request to
+    // RDC(Dutch Car database) to check if the provided license plate is known/registered
+    // let licenseControl = this.form.formGroup.get('licensePlate');
+    // const validateErrorKey = 'licensePlateRDC';
+    // licenseControl.setAsyncValidators(
+    //   (formControl) => this.carValidatorService.validateLicensePlateRDC(licenseControl, validateErrorKey, this.carService));
   }
 
   ngOnInit() {

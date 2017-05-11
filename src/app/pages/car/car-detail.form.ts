@@ -11,6 +11,7 @@ export class CarDetailForm {
     required: () => 'Dit veld is verplicht',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
     licensePlate: () => `Vul een geldig kenteken in`,
+    licensePlateRDC: () => `Vul een geldig (geregistreerd) kenteken in`,
     birthDate: () => 'Vul een geldige geboortedatum in',
     postalCode: () => `Vul een geldige postcode in`,
     gender: () => `Selecteer je geslacht`,

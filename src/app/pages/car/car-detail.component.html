@@ -11,8 +11,8 @@
         <cx-form-group [options]="{
             type: 'custom',
             label: 'Wat is je kenteken?',
-            formControl: form.formGroup.get('licensePlate'),
-            validationErrors: form.validationErrors
+            validationErrors: form.validationErrors,
+            formControl: form.formGroup.get('licensePlate')
         }">
           <knx-input-licenseplate
             formControlName="licensePlate"

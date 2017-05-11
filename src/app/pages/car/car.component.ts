@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { ConfigService } from '../../config.service';
@@ -8,6 +8,7 @@ import { CarService } from './car.service';
 import { CarUser } from './../../models/car-prefs';
 import { Car, MockCar } from '../../models/car';
 import { Price } from '../../models/price';
+import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance, MockInsurances } from '../../models/car-insurance';
 
@@ -21,6 +22,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'car.component.html'
 })
 export class CarComponent implements OnInit {
+  @ViewChild(CarDetailComponent) detailComponent: CarDetailComponent;
+
   formControlOptions: any;
   chatConfig: any;
   chatMessages: Array<ChatMessage> = [];
@@ -158,8 +161,14 @@ export class CarComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.myCar = res;
-
           this.chatNotifierService.addCarMessage(this.myCar);
+        } else {
+          // Car not found in RDC
+          let c = this.detailComponent.form.formGroup.get('licensePlate');
+          this.chatNotifierService.addTextMessage(this.assistantMessages.error.carInfo);
+
+          c.setErrors({ 'licensePlateRDC': true });
+          c.markAsTouched();
         }
       }, err => {;
         this.chatNotifierService.addTextMessage(this.assistantMessages.error.carInfo);

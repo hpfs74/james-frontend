@@ -29,10 +29,7 @@ const homeRoutes: Routes = [
       {
         path: 'profile',
         canActivateChild: [AuthGuard],
-        component: DashboardComponent, //UserProfileComponent
-        data: {
-          breadcrumb: 'Mijn account'
-        }
+        loadChildren: '../profile/profile.module#ProfileModule'
       },
       {
         path: 'faq',
