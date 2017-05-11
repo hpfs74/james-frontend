@@ -6,10 +6,16 @@ import { Insurance } from './../../models/insurance';
   template: `
     <knx-collapse-panel
       class="knx-insurance-result__details"
-      [contentHeight]="'200px'"
-      [openLabel]="'bekijk details'"
-      [closeLabel]="'sluit details'">
-        <h3>Hello</h3>
+      contentHeight="200px"
+      openLabel="bekijk details"
+      closeLabel="sluit details">
+      <div class="col-md-12 pt-0">
+        <knx-tabs>
+          <knx-tab tabTitle="Kenmerken">Tab 1 Content</knx-tab>
+          <knx-tab tabTitle="Details">Tab 2 Content</knx-tab>
+          <knx-tab tabTitle="Reviews">Tab 2 Content</knx-tab>
+        </knx-tabs>
+      </div>
     </knx-collapse-panel>
   `
 })

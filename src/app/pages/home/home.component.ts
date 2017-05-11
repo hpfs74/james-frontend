@@ -8,7 +8,7 @@ import { AuthService, FeatureService, NavigationService, InsuranceService, Cooki
   template: `
   <knx-cookiebar></knx-cookiebar>
   <header class="header">
-    <knx-navbar [menuItems]="topMenu" [phone]="phone">
+    <knx-navbar [menuItems]="topMenu">
         <knx-user-detail [isLoggedIn]="isLoggedIn" (signOut)="signOut()" [profile]="profile"></knx-user-detail>
     </knx-navbar>
   </header>
@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
-    this.phone = this.navigationService.getPhone();
     this.footerItems = this.featureService.getFeatures();
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();

@@ -19,6 +19,11 @@ h2.knx-login__subline,
 
 .knx-login__reset {
   margin-top: 20px;
+
+  a {
+    color: $knab-primary-red;
+    font-size: $font-size-base - 2;
+  }
 }
 
 .login-password-wrapper {

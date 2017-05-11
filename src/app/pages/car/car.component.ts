@@ -1,9 +1,11 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 import { ConfigService } from '../../config.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { CarService } from './car.service';
+import { CarUser } from './../../models/car-prefs';
 import { Car, MockCar } from '../../models/car';
 import { Price } from '../../models/price';
 import { CarCoverageRecommendation } from './../../models/coverage';
@@ -28,11 +30,12 @@ export class CarComponent implements OnInit {
   currentFormStep: string;
   isPendingNext: boolean;
 
-  insurances: Array<CarInsurance>;
+  insurances: Observable<Array<CarInsurance>>;
 
   assistantMessages: any;
   myCar: Car;
   isCoverageLoading: boolean = false;
+  isInsuranceLoading: boolean = false;
   token: string = '';
 
   constructor(private router: Router,
@@ -44,7 +47,7 @@ export class CarComponent implements OnInit {
     this.token = localStorage.getItem('access_token');
   }
 
-
+  //TODO: for testing
   refreshToken() {
     let token = JSON.parse(localStorage.getItem('token'));
       this.auth.refreshToken(token.refresh_token)
@@ -105,12 +108,14 @@ export class CarComponent implements OnInit {
           error: {
             carInfo: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
           },
-          coverageAdvice: `Op basis van je situatie adviseer ik een ...`
+          coverageAdvice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
         };
-
-        //this.addTextMessage(this.assistantMessages.welcome);
         this.chatNotifierService.addTextMessage(this.assistantMessages.welcome);
       });
+  }
+
+  getCurrentStepIndex(index: number) {
+    return this.formSteps[index].id === this.currentFormStep;
   }
 
   goToPreviousStep() {
@@ -128,8 +133,16 @@ export class CarComponent implements OnInit {
   goToNextStep(event) {
     switch (this.currentFormStep) {
       case 'carDetails':
-        this.getInsurances(event);
+        //TODO: implement form data
+        //this.getInsurances(event);
+        //profile: User, car: Car, address: Address, options: ICarInsuranceOptions
+        //let carRequestObj = new CarUser(this.)
+
+        this.insurances = this.carService.getInsurances(null);
         this.currentFormStep = 'carResults';
+        break;
+      case 'carResults':
+        //console.log('Premie gekozen: ' + event);
         break;
       default:
         break;
@@ -168,6 +181,7 @@ export class CarComponent implements OnInit {
           let coverage = this.coverages.find(price => price.id === res.recommended_value);
           if (coverage) {
             coverage.highlight = true;
+            this.chatNotifierService.addTextMessage(this.assistantMessages.coverageAdvice(coverage));
           }
 
         }, error => {
@@ -175,14 +189,4 @@ export class CarComponent implements OnInit {
         });
     }
   }
-
-  getInsurances(formData) {
-    // TODO: implement
-    this.insurances = MockInsurances;
-
-    //this.carService.getInsurances()
-
-    //console.log(formData);
-  }
-
 }

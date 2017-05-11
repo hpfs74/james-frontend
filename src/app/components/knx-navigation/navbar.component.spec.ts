@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { Nav, NavItemType } from '../../models';
 import { NavbarComponent } from './navbar.component';
 import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
 
@@ -25,12 +26,12 @@ describe('Component: Navbar', () => {
     fixture = TestBed.createComponent(NavbarComponent);
     comp = fixture.componentInstance;
     comp.menuItems = [
-      { id: 'about', title: 'About', routePath: '/about' }
-    ];
-    comp.phone = {
-      id: 'tel:test',
-      link: 'tel:0203031680'
-    };
+      { id: 'menu-overview', title: 'Overzicht', routePath: 'overview', menuType: NavItemType.RIGHT },
+      { id: 'menu-account', title: 'Mijn account', routePath: 'profile', menuType: NavItemType.RIGHT },
+      { id: 'menu-faq', title: 'FAQ', routePath: 'faq', menuType: NavItemType.RIGHT },
+      { id: 'menu-about', title: 'Over ons', routePath: 'about', menuType: NavItemType.RIGHT },
+      { id: 'menu-phone', icon: 'knx-icon-phone', title: '020-303 1680', routePath: '', menuType: NavItemType.RIGHT, url: 'tel:0203031680'}
+    ];;
     fixture.detectChanges();
   });
 

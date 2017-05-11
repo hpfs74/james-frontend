@@ -29,7 +29,7 @@
 @import '../app/components/knx-car-info/car-info.component';
 @import '../app/components/knx-car-info/car-info.colors';
 @import '../app/components/knx-car-info/car-preview.component';
-@import '../app/components/knx-tab/tab.component';
+@import '../app/components/knx-tabs/tabs.component';
 
 .main-container {
   margin-bottom: 60px;
@@ -40,8 +40,27 @@
   }
 }
 
+.knx-logo {
+  width: 80px;
+  margin-left: -15px;
+}
+
 .noborder {
   border: 0;
+}
+
+.block-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.pt-0 {
+  padding-top: 0;
 }
 
 .inline-formelement {
@@ -62,3 +81,12 @@
     line-height: 1.4em;
   }
 }
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+

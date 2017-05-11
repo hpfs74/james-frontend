@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InsuranceAdvice } from '../../models/insurance';
 
 import { Car } from '../../models/car';
@@ -8,8 +8,24 @@ import { Car } from '../../models/car';
   templateUrl: 'car-result.component.html'
 })
 
-export class CarResultComponent {
-  @Input() insurancesLoading: boolean;
+export class CarResultComponent implements OnInit {
   @Input() insurances: Array<InsuranceAdvice>;
   @Input() car: Car;
+
+  @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
+
+  stepAmount: number;
+  total: number;
+
+  ngOnInit() {
+    this.total = this.stepAmount = 4;
+  }
+
+  showMore(): void {
+    this.total += this.stepAmount;
+  }
+
+  selectInsurance(event) {
+    this.insuranceSelected$.emit(event);
+  }
 }

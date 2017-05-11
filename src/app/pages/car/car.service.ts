@@ -6,7 +6,7 @@ import { AuthHttp } from '../../services/auth-http.service';
 import { User } from '../../models/user';
 import { ConfigService } from '../../config.service';
 import { Car } from '../../models/car';
-import { CarInsurance } from '../../models/car-insurance';
+import { CarInsurance, MockInsurances } from '../../models/car-insurance';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
 import { CarCoverageRecommendation } from './../../models/coverage';
@@ -35,16 +35,14 @@ export class CarService {
       .map(res => <CarCoverageRecommendation>res.json());
   }
 
-  public getInsurances(profile: User, car: Car, address: Address, options: ICarInsuranceOptions): Observable<CarInsurance> {
-    if (!profile || !car || !options) {
-      return;
-    }
-
+  public getInsurances(carRequest: CarUser): Observable<Array<CarInsurance>> {
     let url = this.profileUrl + '/insurances/compare/car/';
-    let carUser = new CarUser(profile, car, address, options);
 
-    return this.authHttp.post(url, JSON.stringify(carUser))
-      .map(res => <CarInsurance>res.json());
+    // TODO: replace mock with actual
+    return Observable.of(MockInsurances).delay(2000);
+
+    // return this.authHttp.post(url, JSON.stringify(carRequest))
+    //   .map((res:Response) => res.json());
   }
 
   public getCoverages(): Array<Price> {

@@ -1,55 +1,83 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { Nav } from '../../models';
+import { Nav, NavItemType } from '../../models';
 import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
 import { AuthService } from '../../services/auth.service';
 import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
 
-
 @Component({
   selector: 'knx-navbar',
-  template: `<nav class="navbar navbar-default" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-        aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+  template: `
+  <nav class="knx-navbar navbar navbar-toggleable-md bg-faded">
+    <div class="container">
+      <div class="clearfix">
+        <button (click)="isCollapsed = !isCollapsed"
+          class="navbar-toggler navbar-toggler-right" type="button"
+          aria-controls="bd-main-nav"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" [class.knx-icon-bars]="isCollapsed" [class.knx-icon-times]="!isCollapsed"></span>
         </button>
-    </div>
-    <div class="row">
-      <div class="col-md-3 col-sm-3 col-xs-9">
-        <div class="logo">
-          <a routerLink=""><img src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab"></a>
-        </div>
-      </div>
-      <ul class="nav navbar-nav list-inline">
-        <li class="navbar-nav__menu-item" *ngFor="let item of menuItems; let i = index">
-          <a id="{{ item.id }}"
-             routerLink="{{ item.routePath }}"
-             routerLinkActive="active">
-            {{ item.title }}
-          </a>
-        </li>
 
-        <li>
-          <a id="{{ phone.id }}"
-             href="{{ phone.link }}" rel="nofollow">
-            <span class="knx-icon-phone"></span> {{ phone.title }}
-          </a>
-        </li>
-      </ul>
-      <ul class="nav nav-pills pull-right">
-          <li><ng-content select="knx-user-detail"></ng-content></li>
-      </ul>
+        <a (click)="isCollapsed = true"
+          class="navbar-brand hidden-sm-up"
+          routerLink="">
+          <img class="knx-logo" src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab">
+        </a>
+      </div>
+
+      <div class="navbar-collapse navbar-toggleable-xs" id="navbarNavDropdown"
+        [attr.aria-expanded]="!isCollapsed" [ngClass]="{collapse: isCollapsed}">
+        <ul class="navbar-nav mr-auto">
+          <li (click)="isCollapsed = true" class="nav-item" routerLinkActive="active">
+            <a class="navbar-brand hidden-xs-down" routerLink="">
+              <img class="knx-logo" src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab">
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li (click)="isCollapsed = true"
+            class="nav-item active"
+            *ngFor="let item of menuItems; let i = index"
+            routerLinkActive="active"
+            [ngClass]="getMenuItemClasses(item)">
+            <a *ngIf="item.routePath" id="{{ item.id }}"
+              routerLink="{{ item.routePath }}"
+              class="nav-link" href="#">{{ item.title }}</a>
+
+              <a *ngIf="!item.routePath" id="{{ item.id }}"
+                href="{{ item.url }}" target="_blank"
+                class="nav-link"><span *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
+          </li>
+          <!-- TODO: implemement dropdown component
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com"
+            id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown link
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          -->
+          <li class="nav-item hidden-xs"><ng-content select="knx-user-detail"></ng-content></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>`,
+  </nav>
+  `,
 })
 export class NavbarComponent {
   @Input() menuItems: Array<Nav>;
-  @Input() phone: Object;
+
+  isCollapsed: boolean = false;
+
+  public getMenuItemClasses(menuItem: any) {
+    return {
+      'float-right': this.isCollapsed && menuItem.menuType === NavItemType.RIGHT
+    };
+  }
 }
