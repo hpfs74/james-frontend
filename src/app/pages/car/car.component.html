@@ -25,8 +25,9 @@
           <knx-car-detail-form
             *ngSwitchCase="'carDetails'"
             (licensePlateChange)="getCarInfo($event)"
+            (addressChange)="updateAddress($event)"
             (coverageDetailsChange)="getCoverages($event)"
-            (formValid)="goToNextStep($event)"
+            (coverageSelected)="updateSelectedCoverage($event)"
             [coverages]="coverages"
             [isCoverageLoading]="isCoverageLoading">
           </knx-car-detail-form>

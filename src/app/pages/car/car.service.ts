@@ -46,10 +46,6 @@ export class CarService {
   }
 
   public getCoverages(): Array<Price> {
-    // CL (coverage_recommandation_liability_text),
-    // CLC(coverage_recommandation_limited_casco_text)
-    // CAR(coverage_recommandation_all_risk_text)
-
     return [
       {
         id: 'CL',

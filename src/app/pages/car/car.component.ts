@@ -1,13 +1,13 @@
+import { ICarInsuranceOptions } from './../../models/car-prefs';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 
 import { ConfigService } from '../../config.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { CarService } from './car.service';
-import { CarUser } from './../../models/car-prefs';
-import { Car, MockCar } from '../../models/car';
-import { Price } from '../../models/price';
+import { Car, MockCar, Price, CarUser, User, Address } from '../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance, MockInsurances } from '../../models/car-insurance';
@@ -36,7 +36,8 @@ export class CarComponent implements OnInit {
   insurances: Observable<Array<CarInsurance>>;
 
   assistantMessages: any;
-  myCar: Car;
+  car: Car;
+  profile: User;
   isCoverageLoading: boolean = false;
   isInsuranceLoading: boolean = false;
   token: string = '';
@@ -46,14 +47,14 @@ export class CarComponent implements OnInit {
               private carService: CarService,
               private insuranceService: InsuranceService,
               private chatNotifierService: ChatStreamService,
-              private auth: AuthService) {
+              private authService: AuthService) {
     this.token = localStorage.getItem('access_token');
   }
 
   //TODO: for testing
   refreshToken() {
     let token = JSON.parse(localStorage.getItem('token'));
-      this.auth.refreshToken(token.refresh_token)
+      this.authService.refreshToken(token.refresh_token)
         .subscribe(newToken => {
             localStorage.setItem('access_token', newToken.access_token);
             localStorage.setItem('token', JSON.stringify(newToken));
@@ -68,6 +69,9 @@ export class CarComponent implements OnInit {
         // replace messages instead of pushing
         this.chatMessages = [ message ];
       });
+
+    this.authService.getUserProfile()
+      .subscribe(p => this.profile = p);
 
     this.currentFormStep = 'carDetails';
     this.formSteps = [
@@ -92,7 +96,7 @@ export class CarComponent implements OnInit {
       avatarTitle: 'Expert autoverzekeringen'
     };
 
-    this.auth.getUserProfile()
+    this.authService.getUserProfile()
       .subscribe(res => {
 
         let user : string = (res.firstname || res.lastname) ?
@@ -133,15 +137,32 @@ export class CarComponent implements OnInit {
     }
   }
 
-  goToNextStep(event) {
+  goToNextStep() {
+    // TODO: only supports one step currently, migrate to knx-wizard
+
     switch (this.currentFormStep) {
       case 'carDetails':
-        //TODO: implement form data
-        //this.getInsurances(event);
-        //profile: User, car: Car, address: Address, options: ICarInsuranceOptions
-        //let carRequestObj = new CarUser(this.)
+        let detailForm = this.detailComponent.form.formGroup;
+        let address = this.detailComponent.form.addressForm;
 
-        this.insurances = this.carService.getInsurances(null);
+        this.validateForm(detailForm);
+        this.validateForm(address);
+
+        if (!detailForm.valid && !address.valid) {
+          return;
+        }
+
+        // build the payload in Nicci format
+        let options: ICarInsuranceOptions = {
+          active_loan:detailForm.value.active_loan,
+          coverage: detailForm.value.coverage,
+          claim_free_years: detailForm.value.damageFreeYears,
+          household_status: detailForm.value.houseHold
+        };
+        let requestObj = new CarUser(this.profile, this.car, this.profile.address, options);
+
+        //console.log(requestObj);
+        this.insurances = this.carService.getInsurances(requestObj);
         this.currentFormStep = 'carResults';
         break;
       case 'carResults':
@@ -152,6 +173,16 @@ export class CarComponent implements OnInit {
     }
   }
 
+  validateForm(form: FormGroup) {
+    Object.keys(form.controls).forEach(key => {
+      form.get(key).markAsTouched();
+    });
+  }
+
+  updateSelectedCoverage(coverage: Price) {
+    this.detailComponent.form.formGroup.get('coverage').value = coverage.id;
+  }
+
   getCarInfo(licensePlate: string) {
     if (!licensePlate) {
       return;
@@ -160,8 +191,8 @@ export class CarComponent implements OnInit {
     this.carService.getByLicense(licensePlate)
       .subscribe(res => {
         if (res.license) {
-          this.myCar = res;
-          this.chatNotifierService.addCarMessage(this.myCar);
+          this.car = res;
+          this.chatNotifierService.addCarMessage(this.car);
         } else {
           // Car not found in RDC
           let c = this.detailComponent.form.formGroup.get('licensePlate');
@@ -175,15 +206,20 @@ export class CarComponent implements OnInit {
       });
   }
 
+  updateAddress(address: Address) {
+    this.profile.address = address;
+    this.chatNotifierService.addTextMessage(`Ik heb je adres gevonden. Woon je op <strong>${address.street} in ${address.city}</strong>?`);
+  }
+
   getCoverages(formData) {
-    if (this.myCar && formData.loan) {
+    if (this.car && formData.loan) {
       this.isCoverageLoading = true;
 
       // get default coverage types
       this.coverages = this.carService.getCoverages();
 
       // fetch recommendation
-      this.carService.getCoverageRecommendation(this.myCar.license, formData.loan)
+      this.carService.getCoverageRecommendation(this.car.license, formData.loan)
         .subscribe(res => {
           this.isCoverageLoading = false;
 

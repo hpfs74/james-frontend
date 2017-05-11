@@ -42,9 +42,10 @@ export class CarDetailForm {
           maxNumberValidator('damageFreeYears', 50)
         ]
       )],
-      familyType: [null, Validators.required],
+      houseHold: [null, Validators.required],
       loan: [null, Validators.required],
-      gender: [null, Validators.required]
+      gender: [null, Validators.required],
+      coverage: [null, Validators.required]
     });
 
     this.addressForm = createAddress(this.fb);
