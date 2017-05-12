@@ -25,7 +25,7 @@ const ngcWebpack = require('ngc-webpack');
  * Webpack Constants
  */
 const HMR = helpers.hasProcessFlag('hot');
-const AOT = helpers.hasNpmFlag('aot');
+const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
   title: 'Knab Verzekeren Web',
   baseUrl: '/',

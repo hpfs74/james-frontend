@@ -36,9 +36,9 @@ describe('Component: PriceTable', () => {
   // selected?: boolean;
 
     comp.items = [
-      { header: 'Title1', badge: 'Test1', highlight: false, price: 10.00, features: [] },
-      { header: 'Title2', badge: 'Test2', highlight: false, price: 20.00, features: [] },
-      { header: 'Title3', badge: 'Test3', highlight: false, price: 30.00, features: [] }
+      { id: 'a', header: 'Title1', badge: 'Test1', highlight: false, price: 10.00, features: [] },
+      { id: 'b', header: 'Title2', badge: 'Test2', highlight: false, price: 20.00, features: [] },
+      { id: 'c', header: 'Title3', badge: 'Test3', highlight: false, price: 30.00, features: [] }
     ];
 
     fixture.detectChanges();
@@ -52,6 +52,7 @@ describe('Component: PriceTable', () => {
 
   it('should render with 4 elements', () => {
     let newItem: Price = {
+      id: 'd',
       header: 'Title4',
       badge: 'Test4',
       highlight: false,

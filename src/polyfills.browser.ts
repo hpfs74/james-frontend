@@ -1,11 +1,16 @@
 // TODO(gdi2290): switch to DLLs
 
-// Polyfills
+/**
+ * Polyfills
+ */
 
-// import 'ie-shim'; // Internet Explorer 9 support
+/* import 'ie-shim'; *//* Internet Explorer 9 support */
 
-// import 'core-js/es6';
-// Added parts of es6 which are necessary for your project or your browser support requirements.
+/* import 'core-js/es6'; */
+
+/**
+ * Added parts of es6 which are necessary for your project or your browser support requirements.
+ */
 import 'core-js/es6/symbol';
 import 'core-js/es6/object';
 import 'core-js/es6/function';

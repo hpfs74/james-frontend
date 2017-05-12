@@ -180,7 +180,7 @@ export class CarComponent implements OnInit {
   }
 
   updateSelectedCoverage(coverage: Price) {
-    this.detailComponent.form.formGroup.get('coverage').value = coverage.id;
+    this.detailComponent.form.formGroup.get('coverage').patchValue(coverage.id);
   }
 
   getCarInfo(licensePlate: string) {

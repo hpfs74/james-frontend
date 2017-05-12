@@ -10,7 +10,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+//const WriteFilePlugin = require('write-file-webpack-plugin');
 
 /**
  * Webpack Constants
@@ -74,7 +74,7 @@ module.exports = function (options) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
        */
-      // sourceMapFilename: '[file].map',
+      sourceMapFilename: '[file].map',
 
       /** The filename of non-entry chunks as relative path
        * inside the output.path directory.
@@ -140,7 +140,6 @@ module.exports = function (options) {
           'HMR': METADATA.HMR,
         }
       }),
-      new WriteFilePlugin(),
 
       new DllBundlesPlugin({
         bundles: {
@@ -168,7 +167,7 @@ module.exports = function (options) {
           ]
         },
         dllDir: helpers.root('dll'),
-        webpackConfig: webpackMergeDll(commonConfig({ env: ENV }), {
+        webpackConfig: webpackMergeDll(commonConfig({env: ENV}), {
           devtool: 'cheap-module-source-map',
           plugins: []
         })
@@ -228,7 +227,7 @@ module.exports = function (options) {
       contentBase: "dist/"
     },
 
-    /*
+    /**
      * Include polyfills or mocks for various node stuff
      * Description: Node configuration
      *
@@ -240,7 +239,7 @@ module.exports = function (options) {
       process: true,
       module: false,
       clearImmediate: false,
-      setImmediate: false,
+      setImmediate: false
     }
 
   });

@@ -1,4 +1,5 @@
-import { Component, Input, trigger, state, style, transition, animate, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IChatMessage } from './chat-message.interface';
 
 @Component({
