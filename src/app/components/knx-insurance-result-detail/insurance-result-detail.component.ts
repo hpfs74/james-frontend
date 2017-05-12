@@ -21,4 +21,5 @@ import { Insurance } from './../../models/insurance';
 })
 export class InsuranceResultDetailComponent {
   @Input() insurance: Insurance;
+  @Input() showDetails: boolean;
 }

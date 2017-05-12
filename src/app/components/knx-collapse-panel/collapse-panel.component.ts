@@ -8,17 +8,21 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       <a role="button" class="knx-button knx-button--link"
         (click)="toggle()" [class.knx-button--panel-open]="showPanel">{{ showPanel ? closeLabel : openLabel }}</a>
 
-      <div class="row knx-collapse-panel__content" [@togglePanel]="showPanel" [attr.height]="contentHeight">
+      <div class="row knx-collapse-panel__content" *ngIf="showPanel" [@togglePanel]="showPanel" [attr.height]="contentHeight">
         <ng-content></ng-content>
       </div>
     </div>
   `,
   animations: [
     trigger('togglePanel', [
-      state('true', style({ display: 'block', opacity: 1, height: '*' })),
-      state('false', style({ display: 'none', opactiy: 0, height: '0px' })),
-      transition('1 => 0', animate('200ms ease-out')),
-      transition('0 => 1', animate('200ms ease-in'))
+      state('in', style({ display: 'block', opacity: 1, height: '*' })),
+      transition('void => *', [
+        style({ display: 'block', opacity: 1, height: '*' }),
+        animate('200ms ease-in')
+      ]),
+      transition('* => void', [
+        animate('200ms ease-out', style({ display: 'none', opactiy: 0, height: '0px' }))
+      ])
     ])
   ]
 })

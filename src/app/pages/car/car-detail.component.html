@@ -154,7 +154,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <div class="car-form__coverages">
         <knx-loader [visible]="isCoverageLoading">
           Bezig met ophalen van dekkingsopties...
@@ -162,8 +162,17 @@
 
         <ng-container *ngIf="!isCoverageLoading && coverages">
           <h2>Je dekkingswensen</h2>
-          <knx-price-table [items]="coverages" (onSelected)="selectCoverage($event)"></knx-price-table>
+          <knx-price-table [items]="coverages" (onSelected)="onSelectCoverage($event)"></knx-price-table>
         </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Summary error message -->
+      <div class="cx-form-group" [hidden]="!form.formGroup.touched || (form.formGroup.valid && form.addressForm.valid)">
+        <div class="cx-form__error">Heb je alle velden (correct) ingevuld?</div>
       </div>
     </div>
   </div>

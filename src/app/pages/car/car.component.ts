@@ -177,6 +177,7 @@ export class CarComponent implements OnInit {
     Object.keys(form.controls).forEach(key => {
       form.get(key).markAsTouched();
     });
+    form.updateValueAndValidity();
   }
 
   updateSelectedCoverage(coverage: Price) {

@@ -36,7 +36,9 @@ export class CarService {
   }
 
   public getInsurances(carRequest: CarUser): Observable<Array<CarInsurance>> {
-    let url = this.profileUrl + '/insurances/compare/car/';
+    //let url = this.profileUrl + '/insurances/compare/car/';
+
+    let url = 'https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile/insurance/compare/car';
 
     // TODO: replace mock with actual
     return Observable.of(MockInsurances).delay(2000);
