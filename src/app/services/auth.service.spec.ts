@@ -50,24 +50,24 @@ describe('Service: AuthService', () => {
 
       connection.mockRespond(response);
     });
-  };
+  }
 
-  describe('getUserProfile()', () => {
+  // describe('getUserProfile()', () => {
 
-    it('should return an Observable<User>', (done) => {
-      inject([AuthService, XHRBackend], (authService, mockBackend) => {
-        const mockResponse = {
-          data: {
-            emailaddress: 'matteo.s@hcl.com'
-          }
-        };
-        setupConnections(this.backend, mockResponse);
+  //   it('should return an Observable<User>', (done) => {
+  //     inject([AuthService, XHRBackend], (authService, mockBackend) => {
+  //       const mockResponse = {
+  //         data: {
+  //           emailaddress: 'matteo.s@hcl.com'
+  //         }
+  //       };
+  //       setupConnections(this.backend, mockResponse);
 
-        authService.getUserProfile().subscribe((user) => {
-          expect(user).not.toBeNull;
-          done();
-        });
-      })();
-    });
-  });
+  //       authService.getUserProfile().subscribe((user) => {
+  //         expect(user).not.toBeNull;
+  //         done();
+  //       });
+  //     })();
+  //   });
+  // });
 });

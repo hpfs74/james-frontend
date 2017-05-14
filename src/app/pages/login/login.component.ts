@@ -36,7 +36,7 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
                   [options]="formGroupConfig[1]"></cx-form-group>
                 <button type="button"
                   *ngIf="loginForm.get('password').value"
-                  class="btn-show-password knx-icon-eye"
+                  class="knx-login__showpassword knx-icon-eye"
                   [class.knx-icon-eye-slash]="showPassword"
                   [class.knx-icon-eye]="!showPassword"
                   (click)="togglePassword($event)"></button>
@@ -87,7 +87,9 @@ export class LoginComponent {
 
   initForm() {
     this.validationErrors = {
-      required: () => 'Dit veld is verplicht'
+      required: () => 'Dit veld is verplicht',
+      email: () => 'Dit veld is verplicht',
+      password: () => 'Dit veld is verplicht'
     };
 
     this.formBuilder = new FormBuilder();
@@ -103,21 +105,18 @@ export class LoginComponent {
     this.formGroupConfig = [
       {
         formControlName: 'email',
-        label: 'E-mailadres',
         formControl: this.loginForm.get('email'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: 'Bv. naam@knab.nl',
-
+          placeholder: 'E-mailadres'
         }
       },
       {
         formControlName: 'password',
-        label: 'Wachtwoord',
         formControl: this.loginForm.get('password'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: '',
+          placeholder: 'Wachtwoord',
           type: 'password'
         }
       }

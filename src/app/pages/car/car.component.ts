@@ -1,4 +1,4 @@
-import { ICarInsuranceOptions } from './../../models/car-prefs';
+import { CarInsuranceOptions } from './../../models/car-prefs';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
@@ -7,14 +7,16 @@ import { Observable } from 'rxjs/Rx';
 import { ConfigService } from '../../config.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { CarService } from './car.service';
-import { Car, MockCar, Price, CarUser, User, Address } from '../../models';
+import { Car, Price, CarUser, User, Address } from '../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
-import { CarInsurance, MockInsurances } from '../../models/car-insurance';
+import { CarInsurance } from '../../models/car-insurance';
+import { MockInsurances } from '../../models/car-insurance.mock';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'knx-car-page',
@@ -47,7 +49,8 @@ export class CarComponent implements OnInit {
               private carService: CarService,
               private insuranceService: InsuranceService,
               private chatNotifierService: ChatStreamService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private profileService: ProfileService) {
     this.token = localStorage.getItem('access_token');
   }
 
@@ -70,7 +73,7 @@ export class CarComponent implements OnInit {
         this.chatMessages = [ message ];
       });
 
-    this.authService.getUserProfile()
+    this.profileService.getUserProfile()
       .subscribe(p => this.profile = p);
 
     this.currentFormStep = 'carDetails';
@@ -96,7 +99,7 @@ export class CarComponent implements OnInit {
       avatarTitle: 'Expert autoverzekeringen'
     };
 
-    this.authService.getUserProfile()
+    this.profileService.getUserProfile()
       .subscribe(res => {
 
         let user : string = (res.firstname || res.lastname) ?
@@ -153,7 +156,7 @@ export class CarComponent implements OnInit {
         }
 
         // build the payload in Nicci format
-        let options: ICarInsuranceOptions = {
+        let options: CarInsuranceOptions = {
           active_loan:detailForm.value.active_loan,
           coverage: detailForm.value.coverage,
           claim_free_years: detailForm.value.damageFreeYears,
@@ -202,7 +205,7 @@ export class CarComponent implements OnInit {
           c.setErrors({ 'licensePlateRDC': true });
           c.markAsTouched();
         }
-      }, err => {;
+      }, err => {
         this.chatNotifierService.addTextMessage(this.assistantMessages.error.carInfo);
       });
   }

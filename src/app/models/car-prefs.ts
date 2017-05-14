@@ -7,9 +7,9 @@ import { Car } from './car';
  * Additional settings required for making an insurance advice request
  *
  * @export
- * @interface ICarInsuranceOptions
+ * @class CarInsuranceOptions
  */
-export interface ICarInsuranceOptions {
+export class CarInsuranceOptions {
   active_loan: boolean;
   cover_occupants?: boolean;
   coverage: string;
@@ -23,38 +23,7 @@ export interface ICarInsuranceOptions {
   road_assistance?: string;
 }
 
-/**
- * @description
- * Interface for request payload for car insurance advice request
- *
- * @export
- * @interface ICarUser
- */
-export interface ICarUser {
-  active_loan: boolean;
-  license: string;
-  country: string;
-  cover_occupants?: boolean;
-  coverage: string;
-  claim_free_years: number;
-  household_status: string;
-  kilometers_per_year?: string;
-  legal_aid?: string;
-  no_claim_protection?: boolean;
-  own_risk?: number;
-  risk?: string;
-  road_assistance?: string;
-  date_of_birth: string;
-  first_name: string;
-  gender: string;
-  house_number: string;
-  last_name: string;
-  title: string;
-  zipcode: string;
-  insurance?: string;
-}
-
-export class CarUser implements ICarUser {
+export class CarUser {
   // minimal required options
   active_loan: boolean;
   coverage: string;
@@ -86,7 +55,7 @@ export class CarUser implements ICarUser {
   insurance?: string;
 
   /* istanbul ignore next: object initializer */
-  constructor(profile: User, car: Car, address: Address, options: ICarInsuranceOptions) {
+  constructor(profile: User, car: Car, address: Address, options: CarInsuranceOptions) {
 
     this.license = car.license;
     this.date_of_birth = profile.dateOfBirth;
@@ -100,4 +69,4 @@ export class CarUser implements ICarUser {
 
     Object.assign(this, options);
   }
-};
+}

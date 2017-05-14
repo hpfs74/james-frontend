@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { collapseAnimation } from '../../animations/collapse.animation';
 
 @Component({
   selector: 'knx-collapse-panel',
@@ -8,23 +8,12 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       <a role="button" class="knx-button knx-button--link"
         (click)="toggle()" [class.knx-button--panel-open]="showPanel">{{ showPanel ? closeLabel : openLabel }}</a>
 
-      <div class="row knx-collapse-panel__content" *ngIf="showPanel" [@togglePanel]="showPanel" [attr.height]="contentHeight">
+      <div class="row knx-collapse-panel__content" *ngIf="showPanel" [@collapseInOutAnimation]="showPanel" [attr.height]="contentHeight">
         <ng-content></ng-content>
       </div>
     </div>
   `,
-  animations: [
-    trigger('togglePanel', [
-      state('in', style({ display: 'block', opacity: 1, height: '*' })),
-      transition('void => *', [
-        style({ display: 'block', opacity: 1, height: '*' }),
-        animate('200ms ease-in')
-      ]),
-      transition('* => void', [
-        animate('200ms ease-out', style({ display: 'none', opactiy: 0, height: '0px' }))
-      ])
-    ])
-  ]
+  animations: [ collapseAnimation ]
 })
 export class CollapsePanelComponent  {
   @Input() openLabel: string;

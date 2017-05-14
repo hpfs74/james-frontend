@@ -26,16 +26,16 @@ export class AuthService {
     this.tokenUrl = configService.config.api.james.token;
   }
 
-  /**
-   * get the current user profile based on the current token
-   *
-   * @return {Observable<R>}
-   */
-  public getUserProfile(): Observable<User> {
-    return this.http.get(this.profileUrl, {headers: this.getHeaderWithBearer()})
-      .map((x) => x.json())
-      .map((x) => <User>x);
-  }
+  // /**
+  //  * get the current user profile based on the current token
+  //  *
+  //  * @return {Observable<R>}
+  //  */
+  // public getUserProfile(): Observable<IUser> {
+  //   return this.http.get(this.profileUrl, {headers: this.getHeaderWithBearer()})
+  //     .map((x) => x.json())
+  //     .map((x) => <IUser>x);
+  // }
 
   /**
    * do a hard token reset on the backend, and removes all the local storage vars
