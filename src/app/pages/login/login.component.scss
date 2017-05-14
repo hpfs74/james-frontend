@@ -1,6 +1,17 @@
 .knx-login__welcome {
   margin-top: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+
+  &:after {
+    margin-top: -20px;
+    content: "";
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: url("/assets/images/dumbbell.svg") no-repeat center bottom;
+    background-size: contain;
+  }
 }
 
 h1.knx-login__subline,
@@ -9,11 +20,10 @@ h2.knx-login__subline,
   //color: $knab-secondary-blue;
   color: #3e4a59;
   margin-top: 5px;
-  margin-bottom: 40px;
 }
 
 .knx-login__logo {
-  max-width: 140px;
+  max-width: 120px;
   display: block;
 }
 
@@ -30,9 +40,9 @@ h2.knx-login__subline,
   position: relative;
 }
 
-.btn-show-password {
+.knx-login__showpassword {
   position: absolute;
-  top: 34px;
+  top: 8px;
   right: 10px;
   color: $knab-dark-gray;
   font-size: 20px;

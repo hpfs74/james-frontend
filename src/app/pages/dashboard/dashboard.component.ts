@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   template: `
@@ -34,6 +35,9 @@ import { Component, OnInit } from '@angular/core';
   `
 })
 export class DashboardComponent implements OnInit {
+
+  constructor(private profileService: ProfileService) { }
+
   ngOnInit() {
     return;
   }

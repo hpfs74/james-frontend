@@ -6,11 +6,13 @@ import { AuthHttp } from '../../services/auth-http.service';
 import { User } from '../../models/user';
 import { ConfigService } from '../../config.service';
 import { Car } from '../../models/car';
-import { CarInsurance, MockInsurances } from '../../models/car-insurance';
+import { CarInsurance, } from '../../models/car-insurance';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
 import { CarCoverageRecommendation } from './../../models/coverage';
-import { ICarInsuranceOptions, ICarUser, CarUser } from '../../models/car-prefs';
+import { CarInsuranceOptions, CarUser } from '../../models/car-prefs';
+
+import { MockInsurances } from '../../models/car-insurance.mock';
 
 @Injectable()
 export class CarService {

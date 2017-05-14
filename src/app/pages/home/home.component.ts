@@ -2,7 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Price, Nav, Feature, User } from '../../models';
-import { AuthService, FeatureService, NavigationService, InsuranceService, CookieService, ContentService } from '../../services';
+import {
+  AuthService,
+  ProfileService,
+  FeatureService,
+  NavigationService,
+  CookieService,
+  ContentService
+} from '../../services';
 
 @Component({
   template: `
@@ -37,10 +44,10 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
     private contentService: ContentService,
+    private authService: AuthService,
+    private profileService: ProfileService,
     private navigationService: NavigationService,
-    private insuranceService: InsuranceService,
     private featureService: FeatureService) {
   }
 
@@ -50,7 +57,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();
 
-    this.authService.getUserProfile()
+    this.profileService.getUserProfile()
       .subscribe( (user) => {
         this.profile = user;
       }, (res) => {

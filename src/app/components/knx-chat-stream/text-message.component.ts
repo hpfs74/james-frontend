@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { flyInOutAnimation } from '../../animations/fly-in-out.animation';
 import { IChatMessage } from './chat-message.interface';
 
 @Component({
   selector: 'knx-chat-message',
   template: `
-  <div class='knx-chat-message' [@flyInOut]="'in'">
+  <div class='knx-chat-message' [@flyInOutAnimation]="'in'">
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-12 col-sm-12' [innerHTML]="data"></div>
@@ -13,26 +13,7 @@ import { IChatMessage } from './chat-message.interface';
     </div>
   </div>
   `,
-  animations: [
-    trigger('flyInOut', [
-      state('in', style({ opacity: 1, scale: 0 })),
-      transition('void => *', [
-        style({
-          opacity: 0,
-          scale: 1,
-          transform: 'translateY(100%)',
-        }),
-        animate('0.2s ease-in')
-      ]),
-      transition('* => void', [
-        animate('0.2s 10 ease-out', style({
-          opacity: 0,
-          scale: 0,
-          transform: 'translateY(-100%)'
-        }))
-      ])
-    ])
-  ]
+  animations: [ flyInOutAnimation ]
 })
 export class TextMessageComponent implements OnInit, IChatMessage {
   @Input() data: any;

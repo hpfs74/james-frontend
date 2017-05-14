@@ -1,4 +1,5 @@
 export * from './address';
+export * from './dashboard-item';
 export * from './car-insurance';
 export * from './car-prefs';
 export * from './car';
