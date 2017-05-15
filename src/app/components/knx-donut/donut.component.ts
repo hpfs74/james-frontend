@@ -1,7 +1,5 @@
-import {
-  Component, Input, OnInit, Renderer, ElementRef, ViewChild, AfterViewInit,
-  style, trigger, state, transition, animate
-} from '@angular/core';
+import { Component, Input, OnInit, Renderer, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'knx-donut',

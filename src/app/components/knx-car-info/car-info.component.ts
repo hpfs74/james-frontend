@@ -1,4 +1,5 @@
-import { Component, Input, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Car } from '../../models/car';
 import { CarPreviewComponent } from './car-preview.component';
 import { IChatMessage } from './../knx-chat-stream/chat-message.interface';

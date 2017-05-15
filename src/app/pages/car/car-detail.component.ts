@@ -1,4 +1,6 @@
-import { Component, OnInit, OnChanges, SimpleChanges, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
+} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
@@ -15,6 +17,7 @@ import { CarService } from './car.service';
   selector: 'knx-car-detail-form',
   styleUrls: ['car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailComponent implements OnInit {
   public form: CarDetailForm;
@@ -52,6 +55,8 @@ export class CarDetailComponent implements OnInit {
 
   onLicensePlateChange(licensePlate: string) {
     const validLength = 6;
+    // control valid state is changed externally based on RDC request result,
+    // so we use length here to determine validity
     if (licensePlate && licensePlate.length === validLength) {
       this.licensePlateChange.emit(licensePlate);
     }

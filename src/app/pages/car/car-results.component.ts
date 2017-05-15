@@ -25,6 +25,10 @@ export class CarResultComponent implements OnInit {
     this.total += this.stepAmount;
   }
 
+  trackInsurance(index, item) {
+    return item && item.insurance ? item.insurance.id : undefined;
+  }
+
   selectInsurance(event) {
     this.insuranceSelected$.emit(event);
   }

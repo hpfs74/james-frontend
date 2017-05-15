@@ -6,11 +6,15 @@ import { AuthHttp } from '../../services/auth-http.service';
 import { User } from '../../models/user';
 import { ConfigService } from '../../config.service';
 import { Car } from '../../models/car';
-import { CarInsurance, MockInsurances } from '../../models/car-insurance';
+import { CarInsurance, } from '../../models/car-insurance';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
 import { CarCoverageRecommendation } from './../../models/coverage';
-import { ICarInsuranceOptions, ICarUser, CarUser } from '../../models/car-prefs';
+import { CarInsuranceOptions, CarUser } from '../../models/car-prefs';
+
+// TODO: remove mock data
+import { mockInsurances } from '../../models/car-insurance.mock';
+import { mockCarCoverages } from './../../models/car-coverage.mock';
 
 @Injectable()
 export class CarService {
@@ -36,54 +40,18 @@ export class CarService {
   }
 
   public getInsurances(carRequest: CarUser): Observable<Array<CarInsurance>> {
-    let url = this.profileUrl + '/insurances/compare/car/';
+    //let url = this.profileUrl + '/insurances/compare/car/';
+
+    let url = 'https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile/insurance/compare/car';
 
     // TODO: replace mock with actual
-    return Observable.of(MockInsurances).delay(2000);
+    //return Observable.of(MockInsurances).delay(2000);
 
-    // return this.authHttp.post(url, JSON.stringify(carRequest))
-    //   .map((res:Response) => res.json());
+    return this.authHttp.post(url, JSON.stringify(carRequest))
+      .map((res:Response) => res.json());
   }
 
   public getCoverages(): Array<Price> {
-    return [
-      {
-        id: 'CL',
-        header: 'WA',
-        badge: 'ons advies',
-        features: [
-          'Schade door vandalisme',
-          'Schade door eigen schuld'
-        ],
-        highlight: false
-      },
-      {
-        id: 'CLC',
-        header: 'WA + Casco',
-        badge: 'ons advies',
-        features: [
-          'Brand en storm',
-          'Ruitschade',
-          'Schade door vandalisme',
-          'Schade door eigen schuld'
-        ],
-        highlight: false
-      },
-      {
-        id: 'CAR',
-        header: 'All risk',
-        badge: 'ons advies',
-        features: [
-          'Schade door anderen',
-          'Diefstal',
-          'Inbraak',
-          'Brand en storm',
-          'Ruitschade',
-          'Schade door vandalisme',
-          'Schade door eigen schuld'
-        ],
-        highlight: false
-      }
-    ];
+    return mockCarCoverages;
   }
 }

@@ -8,7 +8,7 @@
     </knx-loader>
 
     <knx-insurance-result
-      *ngFor="let item of insurances | slice:0:total; let i = index;"
+      *ngFor="let item of insurances; trackBy: trackInsurance | slice:0:total; let i = index;"
       [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)">
     </knx-insurance-result>
 

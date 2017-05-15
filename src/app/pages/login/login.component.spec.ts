@@ -56,9 +56,33 @@ describe('Component: Login', () => {
     fixture.detectChanges();
   });
 
-  it('should display error message on wrong email syntax');
+  it('should initialize the form', () => {
+    comp.initForm();
+    expect(comp.formGroupConfig).toBeDefined;
+    expect(comp.formGroupConfig.length).toBe(2);
+    expect(comp.loginForm.get('email')).toBeDefined;
+    expect(comp.loginForm.get('password')).toBeDefined;
+  });
 
-  it('should disable submit button until form is valid');
+  it('email invalid when empty', () => {
+    expect(comp.loginForm.get('email').valid).toBeFalsy();
+  });
+
+  it('password invalid when empty', () => {
+    expect(comp.loginForm.get('password').valid).toBeFalsy();
+  });
+
+  it('should display error message on wrong email syntax', () => {
+    let email = comp.loginForm.get('email');
+    email.setValue('not-an-email');
+    let errors = email.errors || {};
+    expect(errors['email']).toBeTruthy();
+  });
+
+  it('should have submit button enabled by default', () => {
+    let submit = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submit.nativeElement.disabled).toBeFalsy();
+  });
 
   it('should display error message on invalid login');
 

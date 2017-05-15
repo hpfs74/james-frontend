@@ -4,6 +4,7 @@ import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
 import {
   AuthService,
+  ProfileService,
   FeatureService,
   GeolocationService,
   NavigationService,
@@ -12,11 +13,17 @@ import {
   ContentService
 } from './services';
 
-
 @Component({
   selector: 'knx-app',
   template: `<router-outlet></router-outlet>`,
-  providers: [FeatureService, NavigationService, InsuranceService, CookieService, ContentService],
+  providers: [
+    FeatureService,
+    NavigationService,
+    ProfileService,
+    InsuranceService,
+    CookieService,
+    ContentService
+  ],
   //changeDetection: ChangeDetectionStrategy.OnPush
   encapsulation: ViewEncapsulation.None
 })
