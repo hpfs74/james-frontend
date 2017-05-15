@@ -12,7 +12,9 @@ import { Address } from '../../models/address';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsuranceOptions, CarUser } from '../../models/car-prefs';
 
-import { MockInsurances } from '../../models/car-insurance.mock';
+// TODO: remove mock data
+import { mockInsurances } from '../../models/car-insurance.mock';
+import { mockCarCoverages } from './../../models/car-coverage.mock';
 
 @Injectable()
 export class CarService {
@@ -43,51 +45,13 @@ export class CarService {
     let url = 'https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile/insurance/compare/car';
 
     // TODO: replace mock with actual
-    return Observable.of(MockInsurances).delay(2000);
+    //return Observable.of(MockInsurances).delay(2000);
 
-    // return this.authHttp.post(url, JSON.stringify(carRequest))
-    //   .map((res:Response) => res.json());
+    return this.authHttp.post(url, JSON.stringify(carRequest))
+      .map((res:Response) => res.json());
   }
 
   public getCoverages(): Array<Price> {
-    return [
-      {
-        id: 'CL',
-        header: 'WA',
-        badge: 'ons advies',
-        features: [
-          'Schade door vandalisme',
-          'Schade door eigen schuld'
-        ],
-        highlight: false
-      },
-      {
-        id: 'CLC',
-        header: 'WA + Casco',
-        badge: 'ons advies',
-        features: [
-          'Brand en storm',
-          'Ruitschade',
-          'Schade door vandalisme',
-          'Schade door eigen schuld'
-        ],
-        highlight: false
-      },
-      {
-        id: 'CAR',
-        header: 'All risk',
-        badge: 'ons advies',
-        features: [
-          'Schade door anderen',
-          'Diefstal',
-          'Inbraak',
-          'Brand en storm',
-          'Ruitschade',
-          'Schade door vandalisme',
-          'Schade door eigen schuld'
-        ],
-        highlight: false
-      }
-    ];
+    return mockCarCoverages;
   }
 }

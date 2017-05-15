@@ -11,7 +11,7 @@ import { Car, Price, CarUser, User, Address } from '../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance } from '../../models/car-insurance';
-import { MockInsurances } from '../../models/car-insurance.mock';
+import { mockInsurances } from '../../models/car-insurance.mock';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';

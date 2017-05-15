@@ -1,6 +1,6 @@
 import { CarInsurance } from './car-insurance';
 
-export const MockInsurances: Array<CarInsurance> =
+export const mockInsurances: Array<CarInsurance> =
   [
     {
       'id': '2521561',
