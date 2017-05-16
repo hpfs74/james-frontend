@@ -1,5 +1,6 @@
 {
  "name": "Knab Verzekeren Web",
+ "short_name": "Verzekeren",
  "icons": [
   {
    "src": "/assets/icon/android-chrome-36x36.png",

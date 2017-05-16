@@ -18,7 +18,7 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="knx-login__welcome">
-            <img class="knx-login__logo" src="../../../assets/images/knab-logo.svg">
+            <img class="knx-login__logo" alt="Knab" src="../../../assets/images/knab-logo.svg">
             <h2 class="knx-login__subline">Verzekeren</h2>
             <p>Meld je aan met je e-mailadres en wachtwoord en ontdek hoeveel jij kunt besparen op je verzekeringen.</p>
           </div>
@@ -54,7 +54,7 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
                 </div>
             </div>
             <p class="knx-login__reset knx-text-center">
-              <a tabindex="0" rel="nofollow" (click)="goToPasswordReset()">Ik ben mijn wachtwoord vergeten</a>
+              <a tabindex="0" rel="nofollow noopener" target="_blank" (click)="goToPasswordReset()">Ik ben mijn wachtwoord vergeten</a>
             </p>
           </div>
         </div>
@@ -108,7 +108,10 @@ export class LoginComponent {
         formControl: this.loginForm.get('email'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: 'E-mailadres'
+          placeholder: 'E-mailadres',
+          attributes: {
+            'aria-label': 'Vul je e-mailadres in'
+          }
         }
       },
       {
@@ -117,14 +120,18 @@ export class LoginComponent {
         validationErrors: this.validationErrors,
         inputOptions: {
           placeholder: 'Wachtwoord',
-          type: 'password'
+          type: 'password',
+          attributes: {
+            'aria-label': 'Vul je wachtwoord in'
+          }
         }
       }
     ];
   }
 
   goToPasswordReset() {
-    window.location.href  = this.authService.forgotPassword();
+    const redirectUrl = '';
+    window.location.href  = this.authService.forgotPassword(redirectUrl);
   }
 
   togglePassword(event) {

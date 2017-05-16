@@ -58,7 +58,7 @@ export class PasswordResetComponent {
   }
 
   initForm() {
-    this.redirectUrl = this.authService.forgotPassword();
+    this.redirectUrl = this.authService.forgotPassword('');
 
     //TODO
     //password reset just redirects to NICCI page now,
