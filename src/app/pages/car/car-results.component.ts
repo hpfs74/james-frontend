@@ -16,9 +16,21 @@ export class CarResultComponent implements OnInit {
 
   stepAmount: number;
   total: number;
+  filterBy: any;
 
   ngOnInit() {
     this.total = this.stepAmount = 4;
+    this.filterBy = [
+      { id: 'priceQuality', label: 'prijs / kwaliteit', active: true },
+      { id: 'price', label: 'beste prijs', active: false },
+      { id: 'all', label: 'alle verzekeringen', active: false }
+    ];
+  }
+
+  toggleFilter(filter: any) {
+    this.filterBy.forEach(filter => {
+      filter.active = filter.id === filter.id;
+    });
   }
 
   showMore(): void {

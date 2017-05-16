@@ -11,7 +11,7 @@ import { ChatMessage } from './chat-message';
   selector: 'knx-chat-stream',
   template: `
     <div class="knx-chat-stream">
-      <knx-avatar *ngIf="options.showAvatar" [name]="options.avatarName" [title]="options.avatarTitle"></knx-avatar>
+      <knx-avatar *ngIf="options.avatar.show" [name]="options.avatar.name" [title]="options.avatar.title"></knx-avatar>
       <ng-container knxChatMessageHost></ng-container>
     </div>
 `

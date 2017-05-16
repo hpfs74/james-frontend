@@ -45,10 +45,10 @@ export class CarService {
     let url = 'https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile/insurance/compare/car';
 
     // TODO: replace mock with actual
-    //return Observable.of(MockInsurances).delay(2000);
+    return Observable.of(mockInsurances).delay(2000);
 
-    return this.authHttp.post(url, JSON.stringify(carRequest))
-      .map((res:Response) => res.json());
+    // return this.authHttp.post(url, JSON.stringify(carRequest))
+    //   .map((res:Response) => res.json());
   }
 
   public getCoverages(): Array<Price> {

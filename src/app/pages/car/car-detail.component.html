@@ -172,7 +172,11 @@
     <div class="col-sm-12">
       <!-- Summary error message -->
       <div class="cx-form-group" [hidden]="!form.formGroup.touched || (form.formGroup.valid && form.addressForm.valid)">
-        <div class="cx-form__error">Heb je alle velden (correct) ingevuld?</div>
+        <div class="knx-message knx-message--error">
+            <div class="knx-message__content">
+              Heb je alle verplichte velden (correct) ingevuld?
+            </div>
+        </div>
       </div>
     </div>
   </div>

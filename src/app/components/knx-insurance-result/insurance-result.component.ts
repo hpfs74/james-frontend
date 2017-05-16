@@ -52,7 +52,7 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
 export class InsuranceResultComponent {
   @Input() index: number;
   @Input() insurance: InsuranceAdvice;
-  @Input() showDetailPanel: boolean = true;
+  @Input() showDetailPanel: boolean = false;
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
 

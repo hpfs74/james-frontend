@@ -1,5 +1,7 @@
 export interface ChatStreamOptions {
-  showAvatar: boolean;
-  avatarName?: string;
-  avatarTitle?: string;
+  avatar: {
+    show: boolean;
+    name?: string;
+    title?: string;
+  }
 }

@@ -11,10 +11,12 @@ import { Car } from './car';
  */
 export class CarInsuranceOptions {
   active_loan: boolean;
-  cover_occupants?: boolean;
   coverage: string;
   claim_free_years: number;
   household_status: string;
+
+  // these are optional in new car flow
+  cover_occupants?: boolean;
   kilometers_per_year?: string;
   legal_aid?: string;
   no_claim_protection?: boolean;
@@ -23,6 +25,10 @@ export class CarInsuranceOptions {
   road_assistance?: string;
 }
 
+/**
+ * @description
+ * Class representing the payload of the http request for car insurance advice
+ */
 export class CarUser {
   // minimal required options
   active_loan: boolean;
@@ -31,13 +37,13 @@ export class CarUser {
   household_status: string;
 
   // these are optional in new car flow
-  cover_occupants: boolean;
-  kilometers_per_year: string;
-  legal_aid: string;
-  no_claim_protection: boolean;
-  own_risk: number;
-  risk: string;
-  road_assistance: string;
+  cover_occupants?: boolean;
+  kilometers_per_year?: string;
+  legal_aid?: string;
+  no_claim_protection?: boolean;
+  own_risk?: number;
+  risk?: string;
+  road_assistance?: string;
 
   // car
   license: string;

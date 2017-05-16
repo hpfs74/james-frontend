@@ -42,6 +42,11 @@ export class CarDetailComponent implements OnInit {
 
   ngOnInit() {
     this.form = new CarDetailForm(this.fb);
+
+    this.form.formGroup.get('licensePlate').valueChanges.subscribe(data => {
+
+    });
+
     this.form.formGroup.valueChanges.subscribe(data => {
       this.coverageDetailsChange.emit(data);
     });

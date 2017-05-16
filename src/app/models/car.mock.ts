@@ -1,6 +1,6 @@
 import { Car } from './car';
 
-export const MockCar: Car = {
+export const mockCar: Car = {
   'license': '71ZXK6',
   'vin': 'VF1BA0F0G17869206',
   'reporting_code': '9206',
