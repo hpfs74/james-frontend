@@ -1,28 +1,32 @@
 <div class="row">
   <div class="col-sm-12">
-    <h2 *ngIf="car">Beste verzekeringen voor je {{ car.make }} van alle 41</h2>
-    <h2 *ngIf="!car">Beste autoverzekeringen van alle 41</h2>
-
-    <knx-loader [visible]="!insurances">
-      Bezig met ophalen van verzekeringen...
-    </knx-loader>
-
-    <div class="knx-button-group" role="group">
-      <button
-        *ngFor="let item of filterBy"
-        class="knx-button knx-button--toggle"
-        [class.knx-button--toggle-active]="item.active"
-        (click)="toggleFilter($event)">{{ item.label }}
-      </button>
+    <div *ngIf="!insurances; else insuranceResults">
+      <knx-loader [visible]="!insurances">
+        Bezig met ophalen van verzekeringen...
+      </knx-loader>
     </div>
+    <ng-template #insuranceResults>
 
-    <knx-insurance-result
-      *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
-      [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)">
-    </knx-insurance-result>
+      <h2 *ngIf="car">Beste verzekeringen voor je {{ car.make }} van alle 41</h2>
 
-    <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showMore()">
-      Toon {{ insurances.length - total }} meer
-    </button>
+      <div class="knx-button-group" role="group">
+        <button
+          *ngFor="let item of filterBy"
+          class="knx-button knx-button--toggle"
+          [class.knx-button--toggle-active]="item.active"
+          (click)="toggleFilter($event)">{{ item.label }}
+        </button>
+      </div>
+
+      <knx-insurance-result
+        *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
+        [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)">
+      </knx-insurance-result>
+
+      <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showMore()">
+        Toon {{ insurances.length - total }} meer
+      </button>
+
+    </ng-template>
   </div>
 </div>

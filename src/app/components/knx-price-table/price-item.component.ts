@@ -9,22 +9,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       <div *ngIf="highlight" class="knx-price-item__badge">{{ badge }}</div>
     </div>
     <ul class="knx-price-item__features">
-      <li *ngFor="let item of features">
-        <div class="knx-icon-check"></div>
-        <div class="knx-price-item__text">{{ item }}</div>
-      </li>
+      <li *ngFor="let item of features">{{ item }}</li>
     </ul>
     <div *ngIf="price" class="knx-price-item__price">
-      vanaf <span class="knx-price-item__amount">{{ price | currency:'EUR':true:'1.2-2' }}</span>
+      vanaf <span>{{ price | currency:'EUR':true:'1.2-2' }}</span>
     </div>
-    <div class="knx-price-item__select">
-      <button class="knx-button knx-button--ghost">
-        <span *ngIf="selected" class="knx-icon-check"></span>{{ selected ? ' Gekozen' : 'Kies deze' }}
-      </button>
-    </div>
-</div>`,
+    <button class="knx-button knx-button--ghost">{{ selected ? ' Gekozen' : 'Kies deze' }}</button>
+  </div>`,
 })
-export class PriceTableItemComponent {
+export class PriceItemComponent {
   @Input() header: string;
   @Input() badge: string;
   @Input() price: number;

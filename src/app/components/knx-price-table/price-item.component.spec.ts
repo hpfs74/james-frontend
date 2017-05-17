@@ -4,26 +4,26 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 
-import { PriceTableItemComponent } from './price-table-item.component';
+import { PriceItemComponent } from './price-item.component';
 import { Price } from '../../models/price';
 
 
-describe('Component: PriceTableItem', () => {
-  let comp: PriceTableItemComponent;
-  let fixture: ComponentFixture<PriceTableItemComponent>;
+describe('Component: PriceItem', () => {
+  let comp: PriceItemComponent;
+  let fixture: ComponentFixture<PriceItemComponent>;
   let de: DebugElement;
   let el: HTMLElement;
   let prices: Array<Price>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PriceTableItemComponent],
+      declarations: [PriceItemComponent],
       imports: []
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PriceTableItemComponent);
+    fixture = TestBed.createComponent(PriceItemComponent);
     comp = fixture.componentInstance;
     comp.header = 'WA + Casco';
     comp.price = 13.90;
@@ -43,7 +43,7 @@ describe('Component: PriceTableItem', () => {
   });
 
   it('should display the price', () => {
-    let inputDe = fixture.debugElement.query(By.css('span.knx-price-item__amount'));
+    let inputDe = fixture.debugElement.query(By.css('div.knx-price-item__price span'));
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();

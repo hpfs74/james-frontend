@@ -50,9 +50,11 @@ describe('Component: ChatStreamComponent', () => {
   ];
 
   let options: ChatStreamOptions = {
-    showAvatar: true,
-    avatarName: 'Marjolein',
-    avatarTitle: 'Expert autoverzekeringen'
+    avatar: {
+      show: true,
+      name: 'Marjolein',
+      title: 'Expert autoverzekeringen'
+    }
   };
 
   beforeEach(async(() => {
@@ -79,9 +81,9 @@ describe('Component: ChatStreamComponent', () => {
   xit('should show an avatar', () => {
     expect(el).not.toBeNull();
 
-    expect(comp.options.showAvatar).toBe(true);
-    expect(comp.options.avatarName).toEqual('Marjolein');
-    expect(comp.options.avatarTitle).toEqual('Expert autoverzekeringen');
+    expect(comp.options.avatar.show).toBe(true);
+    expect(comp.options.avatar.name).toEqual('Marjolein');
+    expect(comp.options.avatar.title).toEqual('Expert autoverzekeringen');
 
     let avatarEl = el.getElementsByTagName('knx-avatar');
     expect(avatarEl).not.toBeNull();

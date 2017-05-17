@@ -5,12 +5,8 @@ import { IChatMessage } from './chat-message.interface';
 @Component({
   selector: 'knx-chat-message',
   template: `
-  <div class='knx-chat-message' [@flyInOutAnimation]="'in'">
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12 col-sm-12' [innerHTML]="data"></div>
-      </div>
-    </div>
+  <div class='knx-message knx-message--chat' [@flyInOutAnimation]="'in'">
+    <div class="knx-message__content" [innerHTML]="data"></div>
   </div>
   `,
   animations: [ flyInOutAnimation ]

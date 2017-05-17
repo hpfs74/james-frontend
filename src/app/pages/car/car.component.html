@@ -21,15 +21,17 @@
     <div class="col-md-8">
       <div class="car-forms__container">
 
-        <div class="car-form" [ngSwitch]="currentFormStep">
+        <div class="car-form" [ngSwitch]="currentFormStep.id">
           <knx-car-detail-form
             *ngSwitchCase="'carDetails'"
             (licensePlateChange)="getCarInfo($event)"
             (addressChange)="updateAddress($event)"
             (coverageDetailsChange)="getCoverages($event)"
             (coverageSelected)="updateSelectedCoverage($event)"
+            (formControlFocus)="showHelperText($event)"
             [coverages]="coverages"
-            [isCoverageLoading]="isCoverageLoading">
+            [isCoverageLoading]="isCoverageLoading"
+            [submitted]="formSteps[0].submitted">
           </knx-car-detail-form>
 
           <knx-car-result-form

@@ -6,7 +6,7 @@
       <h2>Je gegevens</h2>
 
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-12">
 
         <cx-form-group [options]="{
             type: 'custom',
@@ -21,11 +21,6 @@
           </knx-input-licenseplate>
         </cx-form-group>
 
-        </div>
-        <div class="col-md-7">
-          <div class="cx-form-group">
-            <button class="knx-button knx-button--util inline-formelement" href="">Weet ik niet</button>
-          </div>
         </div>
       </div>
 
@@ -49,12 +44,16 @@
 
       <div class="row">
         <div class="col-md-7">
-          <cx-form-group formControlName="damageFreeYears" [options]="{
+          <cx-form-group
+            formControlName="claimFreeYears"
+            (events)="onFocus('claimFreeYears')"
+            [options]="{
                 label: 'Aantal schadevrije jaren',
-                formControl: form.formGroup.get('damageFreeYears'),
+                formControl: form.formGroup.get('claimFreeYears'),
                 validationErrors: form.validationErrors,
                 inputOptions: {
-                  type: 'number'
+                  type: 'number',
+                  events: ['focus']
                 }
               }">
           </cx-form-group>
@@ -156,14 +155,16 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="car-form__coverages">
+
         <knx-loader [visible]="isCoverageLoading">
           Bezig met ophalen van dekkingsopties...
         </knx-loader>
 
-        <ng-container *ngIf="!isCoverageLoading && coverages">
+        <ng-container *ngIf="coverages">
           <h2>Je dekkingswensen</h2>
           <knx-price-table [items]="coverages" (onSelected)="onSelectCoverage($event)"></knx-price-table>
         </ng-container>
+
       </div>
     </div>
   </div>
@@ -171,10 +172,10 @@
   <div class="row">
     <div class="col-sm-12">
       <!-- Summary error message -->
-      <div class="cx-form-group" [hidden]="!form.formGroup.touched || (form.formGroup.valid && form.addressForm.valid)">
+      <div class="cx-form-group" [hidden]="!form.formGroup.touched && !submitted || (form.formGroup.valid && form.addressForm.valid)">
         <div class="knx-message knx-message--error">
             <div class="knx-message__content">
-              Heb je alle verplichte velden (correct) ingevuld?
+              Heb je alle velden (correct) ingevuld?
             </div>
         </div>
       </div>

@@ -15,6 +15,11 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
  */
 import { TitleCasePipe, RoundPipe } from './pipes/';
 
+/**
+ * Directives
+ */
+import { BlurForwarderDirective } from './directives';
+
 
 /**
  * Shared module for all generic components
@@ -31,7 +36,7 @@ import { LicensePlateComponent } from './components/knx-input-licenseplate/licen
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { NavbarComponent } from './components/knx-navigation';
-import { PriceTableComponent, PriceTableItemComponent } from './components/knx-price-table';
+import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
@@ -50,7 +55,7 @@ export const sharedComponents = [
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
   PriceTableComponent,
-  PriceTableItemComponent,
+  PriceItemComponent,
   LoaderComponent,
   TabsComponent,
   TabComponent,

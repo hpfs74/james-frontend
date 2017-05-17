@@ -20,7 +20,8 @@ export class AppAssistantConfig implements AssistantConfig {
   };
 
   public generic = {
-    address: (address: Address) => `Ik heb je adres gevonden. Woon je op <strong>${address.street} in ${address.city}</strong>?`
+    address: (address: Address) => `Ik heb je adres gevonden. Woon je op <strong>${address.street} in ${address.city}</strong>?`,
+    addressNotFound: 'Helaas kon ik je adres niet vinden. Heb je je postcode en huisnummer juist ingevoerd?'
   };
 
   public dashboard = {
@@ -31,12 +32,11 @@ export class AppAssistantConfig implements AssistantConfig {
   };
 
   public car = {
-    welcome: (firstname: string) =>
-      `Hallo ${firstname}! Ik ben ${this.avatar.name}.
+    welcome: `Hallo! Ik ben ${this.avatar.name}.
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
-      damageFreeYears:
+      claimFreeYears:
         `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
         Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
         korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer

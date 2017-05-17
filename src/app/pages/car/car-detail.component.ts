@@ -1,3 +1,4 @@
+import { BlurForwarderDirective } from './../../directives/blurforwarder.directive';
 import {
   Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
@@ -17,7 +18,7 @@ import { CarService } from './car.service';
   selector: 'knx-car-detail-form',
   styleUrls: ['car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailComponent implements OnInit {
   public form: CarDetailForm;
@@ -28,11 +29,13 @@ export class CarDetailComponent implements OnInit {
   @Input() config: any;
   @Input() coverages: Price[];
   @Input() isCoverageLoading: boolean;
+  @Input() submitted: boolean;
 
   @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
   @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
   @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
+  @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder, elementRef: ElementRef,
@@ -43,13 +46,16 @@ export class CarDetailComponent implements OnInit {
   ngOnInit() {
     this.form = new CarDetailForm(this.fb);
 
-    this.form.formGroup.get('licensePlate').valueChanges.subscribe(data => {
-
-    });
-
     this.form.formGroup.valueChanges.subscribe(data => {
-      this.coverageDetailsChange.emit(data);
+      if (this.form.formGroup.get('licensePlate').valid &&
+        this.form.formGroup.get('loan').valid) {
+        this.coverageDetailsChange.emit(data);
+      }
     });
+  }
+
+  onFocus(controlKey) {
+    this.formControlFocus.emit(controlKey);
   }
 
   onSelectCoverage(coverage: Price) {

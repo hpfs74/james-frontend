@@ -17,7 +17,7 @@ export class CarDetailForm {
     gender: () => `Selecteer je geslacht`,
     address: () => `Vul een geldige postcode en huisnummer combinatie in`,
     houseNumber: () => `Vul een huisnummer in`,
-    damageFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
+    claimFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
   };
 
   constructor(private fb: FormBuilder) {
@@ -35,11 +35,11 @@ export class CarDetailForm {
           birthDateValidator('birthDate')
         ]
       ],
-      damageFreeYears: [null, Validators.compose(
+      claimFreeYears: [null, Validators.compose(
         [
           Validators.required,
-          minNumberValidator('damageFreeYears', 0),
-          maxNumberValidator('damageFreeYears', 50)
+          minNumberValidator('claimFreeYears', 0),
+          maxNumberValidator('claimFreeYears', 50)
         ]
       )],
       houseHold: [null, Validators.required],

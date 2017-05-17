@@ -1,7 +1,6 @@
-import { CarInsuranceOptions } from './../../models/car-prefs';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 
 import { ConfigService } from '../../config.service';
@@ -13,6 +12,7 @@ import { Car, Price, CarUser, User, Address } from '../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance } from '../../models/car-insurance';
+import { CarInsuranceOptions } from './../../models/car-prefs';
 
 // TODO: remove mock data
 import { mockInsurances } from '../../models/car-insurance.mock';
@@ -36,7 +36,7 @@ export class CarComponent implements OnInit {
   coverages: Array<Price>;
 
   formSteps: Array<any>;
-  currentFormStep: string;
+  currentFormStep: any;
   isPendingNext: boolean;
 
   insurances: Observable<Array<CarInsurance>>;
@@ -79,24 +79,24 @@ export class CarComponent implements OnInit {
         this.chatMessages = [ message ];
       });
 
-    this.profileService.getUserProfile()
-      .subscribe(p => this.profile = p);
-
-    this.currentFormStep = 'carDetails';
     this.formSteps = [
       {
         id: 'carDetails',
-        title: 'Je gegevens'
+        title: 'Je gegevens',
+        submitted: false
       },
       {
         id: 'carResults',
-        title: 'Resultaten'
+        title: 'Resultaten',
+        submitted: false
       },
       {
         id: 'carComparison',
-        title: 'Premies vergelijken'
+        title: 'Premies vergelijken',
+        submitted: false
       }
     ];
+    this.currentFormStep = this.formSteps[0];
     this.isPendingNext = true;
 
     this.chatConfig = this.assistantService.config;
@@ -104,34 +104,35 @@ export class CarComponent implements OnInit {
 
     this.profileService.getUserProfile()
       .subscribe(res => {
+        this.profile = res;
 
         let user: string = (res.firstname || res.lastname) ?
           `${res.firstname} ${res.infix} ${res.lastname}` : res.emailaddress;
 
-        this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome(user));
+        this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome);
       });
   }
 
   getCurrentStepIndex(index: number) {
-    return this.formSteps[index].id === this.currentFormStep;
+    return this.formSteps[index].id === this.currentFormStep.id;
   }
 
   goToPreviousStep() {
     // TODO: refactor step navigation in generic/reusable way
-    let index = this.formSteps.findIndex(step => step.id === this.currentFormStep);
+    let index = this.formSteps.findIndex(step => step.id === this.currentFormStep.id);
     if (index === 0) {
       // to home
       this.router.navigate(['/overview']);
     }
     if (index > 0 && index <= this.formSteps.length) {
-      this.currentFormStep = this.formSteps[index - 1].id;
+      this.currentFormStep.id = this.formSteps[index - 1].id;
     }
   }
 
   goToNextStep() {
     // TODO: only supports one step currently, migrate to knx-wizard
 
-    switch (this.currentFormStep) {
+    switch (this.currentFormStep.id) {
       case 'carDetails':
         // let detailForm = this.detailComponent.form.formGroup;
         // let address = this.detailComponent.form.addressForm;
@@ -147,7 +148,7 @@ export class CarComponent implements OnInit {
         // let options: CarInsuranceOptions = {
         //   active_loan: detailForm.value.loan,
         //   coverage: detailForm.value.coverage,
-        //   claim_free_years: +detailForm.value.damageFreeYears,
+        //   claim_free_years: +detailForm.value.claimFreeYears,
         //   household_status: detailForm.value.houseHold
         // };
         // let requestObj = new CarUser(this.profile, this.car, this.profile.address, options);
@@ -170,7 +171,10 @@ export class CarComponent implements OnInit {
         let requestObj = mockRequest;
 
         this.insurances = this.carService.getInsurances(requestObj);
-        this.currentFormStep = 'carResults';
+
+        this.formSteps[0].submitted = true;
+        this.currentFormStep = this.formSteps[1];
+
         break;
       case 'carResults':
         //console.log('Premie gekozen: ' + event);
@@ -189,6 +193,10 @@ export class CarComponent implements OnInit {
 
   updateSelectedCoverage(coverage: Price) {
     this.detailComponent.form.formGroup.get('coverage').patchValue(coverage.id);
+  }
+
+  showHelperText(key) {
+    this.chatNotifierService.addTextMessage(this.chatConfig.car.info[key]);
   }
 
   getCarInfo(licensePlate: string) {
@@ -215,8 +223,12 @@ export class CarComponent implements OnInit {
   }
 
   updateAddress(address: Address) {
-    this.profile.address = address;
-    this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
+    if (address.street && address.city) {
+      this.profile.address = address;
+      this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
+    } else {
+      this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);
+    }
   }
 
   getCoverages(formData) {
@@ -238,7 +250,7 @@ export class CarComponent implements OnInit {
           }
 
         }, error => {
-          this.isCoverageLoading = true;
+          this.isCoverageLoading = false;
         });
     }
   }

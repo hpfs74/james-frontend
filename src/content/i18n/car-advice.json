@@ -47,7 +47,7 @@
 //         "city": {
 //           "label": "Plaats"
 //         },
-//         "damageFreeYears": {
+//         "claimFreeYears": {
 //           "label": "Aantal schadevrije jaren",
 //           "description": "Lorem ipsum description ..."
 //         },
