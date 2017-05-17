@@ -30,12 +30,12 @@ describe('Component: PriceTableItem', () => {
     comp.features = ['Feat1', 'Feat2', 'Feat3', 'Feat4'];
 
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('div.knx-pricing-table-header'));
+    de = fixture.debugElement.query(By.css('div.knx-price-item__header'));
     el = de.nativeElement;
   });
 
   it('should display the header', () => {
-    let inputDe = fixture.debugElement.query(By.css('div.knx-pricing-table-header'));
+    let inputDe = fixture.debugElement.query(By.css('div.knx-price-item__header'));
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();
@@ -43,7 +43,7 @@ describe('Component: PriceTableItem', () => {
   });
 
   it('should display the price', () => {
-    let inputDe = fixture.debugElement.query(By.css('span.knx-pricing-table-amount'));
+    let inputDe = fixture.debugElement.query(By.css('span.knx-price-item__amount'));
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();
@@ -51,25 +51,25 @@ describe('Component: PriceTableItem', () => {
   });
 
   it('should display list of features', () => {
-    let inputDe = fixture.debugElement.query(By.css('ul.knx-pricing-table-features'));
+    let inputDe = fixture.debugElement.query(By.css('ul.knx-price-item__features'));
     let el = inputDe.nativeElement;
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-pricing-table-features > li').length).toBe(4);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-price-item__features > li').length).toBe(4);
   });
 
   it('should display list of features change adding one more', () => {
-    let inputDe = fixture.debugElement.query(By.css('ul.knx-pricing-table-features'));
+    let inputDe = fixture.debugElement.query(By.css('ul.knx-price-item__features'));
     let el = inputDe.nativeElement;
 
     comp.features.push('Feat5');
     fixture.detectChanges();
 
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-pricing-table-features > li').length).toBe(5);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-price-item__features > li').length).toBe(5);
   });
 
   it('should display a not highlighted header by default', () => {
-    let inputDe = fixture.debugElement.query(By.css('div.knx-pricing-table--highlight'));
+    let inputDe = fixture.debugElement.query(By.css('div.knx-price-item--highlight'));
 
     expect(comp.highlight).not.toBeTruthy();
     expect(inputDe).toBeNull();
@@ -79,7 +79,7 @@ describe('Component: PriceTableItem', () => {
     comp.highlight = true;
     fixture.detectChanges();
 
-    let inputDe = fixture.debugElement.query(By.css('div.knx-pricing-table--highlight'));
+    let inputDe = fixture.debugElement.query(By.css('div.knx-price-item--highlight'));
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();
@@ -89,7 +89,7 @@ describe('Component: PriceTableItem', () => {
     comp.selected = true;
     fixture.detectChanges();
 
-    let inputDe = fixture.debugElement.query(By.css('div.knx-pricing-table--selected'));
+    let inputDe = fixture.debugElement.query(By.css('div.knx-price-item--selected'));
     let el = inputDe.nativeElement;
 
     expect(el).not.toBeNull();

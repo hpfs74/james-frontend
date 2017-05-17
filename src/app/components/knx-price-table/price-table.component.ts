@@ -4,8 +4,8 @@ import { Price } from '../../models/price';
 @Component({
   selector: 'knx-price-table',
   template: `
-  <div class="knx-price-table-wrapper">
-    <knx-price-table-item
+  <div class="knx-price-table">
+    <knx-price-item
         *ngFor="let item of items; let i = index"
         [id]="item.id"
         [header]="item.header"
@@ -15,7 +15,7 @@ import { Price } from '../../models/price';
         [selected]="item.selected"
         [features]="item.features"
         (click)="selectItem(i)">
-    </knx-price-table-item>
+    </knx-price-item>
 </div>`,
 })
 export class PriceTableComponent {

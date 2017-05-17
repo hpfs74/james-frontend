@@ -1,16 +1,16 @@
-@import "variables";
+@import 'variables';
 
-.knx-price-table-wrapper {
+.knx-price-table {
   display: flex;
   align-items: flex-end;
   margin-bottom: 60px;
 }
 
-.knx-price-table-wrapper > *:not(:last-child) {
+.knx-price-table > *:not(:last-child) {
   margin-right: 15px;
 }
 
-.knx-pricing-table {
+.knx-price-item {
   border-radius: 0;
   outline: 1px solid $knab-primary-gray;
   color: $knab-primary-blue;
@@ -23,13 +23,13 @@
   }
 }
 
-.knx-pricing-table--selected {
+.knx-price-item--selected {
   outline: 1px solid $knab-primary-green;
   background: $knab-primary-green;
   color: #fff;
 }
 
-.knx-pricing-table-header {
+.knx-price-item__header {
   margin: 0 0 15px;
   padding: 10px;
   font-size: $font-size-base + 2;
@@ -37,17 +37,17 @@
   text-align: center;
 }
 
-.knx-pricing-table--highlight {
+.knx-price-item--highlight {
   position: relative;
   outline-color: $knab-primary-green;
   outline-width: 2px;
 
-  .knx-pricing-table-header {
+  .knx-price-item__header {
     color: $knab-white;
     background: $knab-primary-green;
   }
 
-  .knx-pricing-table-badge {
+  .knx-price-item__badge {
     position: absolute;
     top: -27px;
     left: 5px;
@@ -65,24 +65,24 @@
 }
 
 /* selected state */
-.knx-pricing-table--selected.knx-pricing-table-header {
+.knx-price-item--selected.knx-price-item__header {
   background: #fff;
   color: $knab-primary-green;
 }
 
-.knx-pricing-table--selected .knx-pricing-table-features,
-.knx-pricing-table--selected .knx-pricing-table-features .knx-icon-check {
+.knx-price-item--selected .knx-price-item__features,
+.knx-price-item--selected .knx-price-item__features .knx-icon-check {
   color: #fff;
 }
 
-.knx-pricing-table-features {
+.knx-price-item__features {
   padding: 0 16px;
   list-style-type: none;
 
   & > * {
     margin-bottom: 15px;
 
-    .knx-pricing-table-text {
+    .knx-price-item__text {
       padding-left: 22px;
     }
 
@@ -97,19 +97,19 @@
   }
 }
 
-.knx-pricing-table-price {
+.knx-price-item__price {
   padding: 0 30px;
   text-align: right;
   margin-bottom: 15px;
 }
 
-.knx-pricing-table-amount {
+.knx-price-item__amount {
   font-size: $font-size-base + 5;
   font-weight: bold;
   margin-left: 10px;
 }
 
-.knx-pricing-table-input {
+.knx-price-item__input {
   button.knx-button {
     width: 100%;
     display: block;
@@ -119,8 +119,8 @@
   }
 }
 
-.knx-pricing-table--selected {
-  .knx-pricing-table-input {
+.knx-price-item--selected {
+  .knx-price-item__input {
     button.knx-button {
       border: 0;
       color: #fff;

@@ -24,17 +24,6 @@ describe('Component: PriceTable', () => {
     fixture = TestBed.createComponent(PriceTableComponent);
     comp = fixture.componentInstance;
 
-  // header: string;
-  // price: number;
-  // badge: string;
-  // /**
-  //  * @description
-  //  * List of features
-  //  */
-  // features: Array<string>;
-  // highlight?: boolean;
-  // selected?: boolean;
-
     comp.items = [
       { id: 'a', header: 'Title1', badge: 'Test1', highlight: false, price: 10.00, features: [] },
       { id: 'b', header: 'Title2', badge: 'Test2', highlight: false, price: 20.00, features: [] },
@@ -47,7 +36,7 @@ describe('Component: PriceTable', () => {
   });
 
   it('should render with with 3 elements', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-pricing-table').length).toBe(3);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-price-item').length).toBe(3);
   });
 
   it('should render with 4 elements', () => {
@@ -62,13 +51,13 @@ describe('Component: PriceTable', () => {
     comp.items.push(newItem);
     fixture.detectChanges();
 
-    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-pricing-table').length).toBe(4);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-price-item').length).toBe(4);
   });
 
   it('should show highlight on an element', () => {
     comp.selectItem(0);
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('div.knx-pricing-table--selected'))).not.toBeNull();
+    expect(fixture.debugElement.query(By.css('div.knx-price-item--selected'))).not.toBeNull();
   });
 });

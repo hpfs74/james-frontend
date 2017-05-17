@@ -17,25 +17,15 @@ export class AuthService {
   private profileUrl: string;
   private tokenUrl : string;
 
-  constructor(private http: Http,
-              private configService: ConfigService) {
+  constructor(
+    private http: Http,
+    private configService: ConfigService) {
 
     this.loggedIn = false; // !!localStorage.getItem('a uth_token');
     this.keyUrl = configService.config.api.james.key;
     this.profileUrl = configService.config.api.james.profile;
     this.tokenUrl = configService.config.api.james.token;
   }
-
-  // /**
-  //  * get the current user profile based on the current token
-  //  *
-  //  * @return {Observable<R>}
-  //  */
-  // public getUserProfile(): Observable<IUser> {
-  //   return this.http.get(this.profileUrl, {headers: this.getHeaderWithBearer()})
-  //     .map((x) => x.json())
-  //     .map((x) => <IUser>x);
-  // }
 
   /**
    * do a hard token reset on the backend, and removes all the local storage vars
@@ -130,8 +120,7 @@ export class AuthService {
     throw new Error('Not implemented yet');
   }
 
-  public forgotPassword(): string {
-    const redirectUrl = '';
+  public forgotPassword(redirectUrl: string): string {
     return `https://profile-james-a.nicci.io/password?' +
       'client_id=56a6ab20bb00893f071faddc' +
       '&locale=nl_NL&redirect_uri=${redirectUrl}`;
