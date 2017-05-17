@@ -17,8 +17,9 @@ export class AuthService {
   private profileUrl: string;
   private tokenUrl : string;
 
-  constructor(private http: Http,
-              private configService: ConfigService) {
+  constructor(
+    private http: Http,
+    private configService: ConfigService) {
 
     this.loggedIn = false; // !!localStorage.getItem('a uth_token');
     this.keyUrl = configService.config.api.james.key;

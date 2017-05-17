@@ -77,11 +77,12 @@ export class LoginComponent {
   constructor(private router: Router, private authService: AuthService) {
     this.initForm();
 
-    this.forgotPasswordLink = 'https://profile-james-a.nicci.io/password?client_id=56a6ab20bb00893f071faddc' +
-                                '&locale=nl_NL' +
-                                '&redirect_uri=com.mobgen.knab://' +
-                                '&response_type=code' +
-                                '&scope=basic+emailaddress+social';
+    this.forgotPasswordLink =
+      'https://profile-james-a.nicci.io/password?client_id=56a6ab20bb00893f071faddc' +
+      '&locale=nl_NL' +
+      '&redirect_uri=com.mobgen.knab://' +
+      '&response_type=code' +
+      '&scope=basic+emailaddress+social';
 
   }
 
@@ -174,7 +175,7 @@ export class LoginComponent {
           // Set our navigation extras object
           // that passes on our global query params and fragment
           let navigationExtras: NavigationExtras = {
-            preserveQueryParams: true,
+            queryParamsHandling: 'merge',
             preserveFragment: true
           };
 

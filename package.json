@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "@angular/animations": "~4.1.2",
+    "@angular/app-shell": "^0.1.0",
     "@angular/common": "~4.1.2",
     "@angular/compiler": "~4.1.2",
     "@angular/core": "~4.1.2",

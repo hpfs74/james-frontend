@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AppShellModule } from '@angular/app-shell';
 import { Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -48,7 +49,8 @@ export function ConfigLoader(configService: ConfigService) {
     HomeModule.forRoot(),
     LoginRoutingModule,
     AuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppShellModule.runtime(),
   ],
   declarations: [
     AppComponent,
