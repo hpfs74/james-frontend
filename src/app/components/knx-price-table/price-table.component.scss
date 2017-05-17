@@ -65,13 +65,13 @@
 }
 
 /* selected state */
-.knx-price-item--selected.knx-price-item-header {
+.knx-price-item--selected.knx-price-item__header {
   background: #fff;
   color: $knab-primary-green;
 }
 
-.knx-price-item--selected .knx-price-item-features,
-.knx-price-item--selected .knx-price-item-features .knx-icon-check {
+.knx-price-item--selected .knx-price-item__features,
+.knx-price-item--selected .knx-price-item__features .knx-icon-check {
   color: #fff;
 }
 
