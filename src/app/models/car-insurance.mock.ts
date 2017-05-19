@@ -79,7 +79,7 @@ export const mockInsurances: Array<CarInsurance> =
       'moneyview_id': 'ANWB-ledentarief:Autoverzekering',
       'type': 'car',
       'insurance_name': 'Auto',
-      'fit': 75.66,
+      'fit': 25.66,
       'price_quality': 9,
       'own_risk': 0,
       'monthly_premium': 40.09,

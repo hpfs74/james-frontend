@@ -76,7 +76,11 @@
         </knx-collapse-message>
 
         <knx-collapse-message title="Eigen risico" *ngIf="insurances" [isOpen]="true">
-          Slider: 0, 135, 245, 375, 675, 950
+          <cx-form-group
+            class="own-risk"
+            [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName"
+            [options]="carExtrasForm.formConfig.ownRisk">
+          </cx-form-group>
         </knx-collapse-message>
 
       </knx-chat-stream>

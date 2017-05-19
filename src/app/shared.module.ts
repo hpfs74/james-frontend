@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // @cx
-//Don't import CXFormsModule: breaks lazy loading due to it using BrowserModule instead of CommonModule
+import * as noUiSlider from 'nouislider';
 import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
 import { CXWizardModule } from '../../node_modules/@cx/wizard';
@@ -18,7 +18,7 @@ import { TitleCasePipe, RoundPipe } from './pipes/';
 /**
  * Directives
  */
-import { BlurForwarderDirective } from './directives';
+import { BlurForwarderDirective, JumpToElementDirective } from './directives';
 
 
 /**
@@ -47,6 +47,7 @@ import { UserDetailComponent } from './components/knx-user-detail/user-detail.co
 export const sharedComponents = [
   TitleCasePipe,
   RoundPipe,
+  JumpToElementDirective,
   AddressLookupComponent,
   ButtonIconComponent,
   CookiebarComponent,

@@ -94,3 +94,20 @@
   margin-right: auto !important;
 }
 
+.cx-slider .noUi-pips {
+  font-size: 12px;
+}
+
+.cx-slider .noUi-marker-horizontal.noUi-marker-large {
+  height: 10px;
+  background: $knab-tan-gray;
+}
+
+.cx-slider .noUi-origin {
+  background: $knab-light-gray;
+}
+
+.cx-slider .noUi-value:before {
+  content: '€';
+}
+

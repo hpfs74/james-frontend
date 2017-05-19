@@ -108,21 +108,23 @@ export class CarComponent implements OnInit {
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
 
     this.carExtrasForm = new CarExtrasForm(new FormBuilder());
-    this.carExtrasForm.formGroup.valueChanges.subscribe(data => {
-      console.log(data);
+    this.carExtrasForm.formGroup.valueChanges
+      .debounceTime(1000)
+      .subscribe(data => {
+        console.log(data);
 
-      if (this.formSteps[0].data) {
-        Object.assign(this.formSteps[0].data, {
-          coverage: data.coverage,
-          cover_occupants: data.extraOptions.cover_occupants || false,
-          kilometers_per_year: data.kmPerYear,
-          no_claim_protection: data.extraOptions.noclaim || false,
-          own_risk: data.ownRisk,
-        });
+        if (this.formSteps[0].data) {
+          Object.assign(this.formSteps[0].data, {
+            coverage: data.coverage,
+            cover_occupants: data.extraOptions.cover_occupants || false,
+            kilometers_per_year: data.kmPerYear,
+            no_claim_protection: data.extraOptions.noclaim || false,
+            own_risk: data.ownRisk,
+          });
 
-        // do a new insurance get call
-        this.insurances = this.carService.getInsurances(this.formSteps[0].data);
-      }
+          // do a new insurance get call
+          this.insurances = this.carService.getInsurances(this.formSteps[0].data);
+        }
     });
 
     this.profileService.getUserProfile()
