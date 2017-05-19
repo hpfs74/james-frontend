@@ -13,6 +13,9 @@ import { ChatMessage } from './chat-message';
     <div class="knx-chat-stream">
       <knx-avatar *ngIf="options.avatar.show" [name]="options.avatar.name" [title]="options.avatar.title"></knx-avatar>
       <ng-container knxChatMessageHost></ng-container>
+
+      <!-- slot for filter options -->
+      <ng-content select="knx-collapse-message"></ng-content>
     </div>
 `
 })

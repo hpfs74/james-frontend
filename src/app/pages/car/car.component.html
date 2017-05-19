@@ -34,12 +34,12 @@
             [submitted]="formSteps[0].submitted">
           </knx-car-detail-form>
 
-          <knx-car-result-form
+          <knx-insurance-toplist
             *ngSwitchCase="'carResults'"
             (insuranceSelected$)="goToNextStep($event)"
-            [insurances]="insurances | async"
-            [car]="car">
-          </knx-car-result-form>
+            [stepAmount]="4"
+            [insurances]="insurances | async">
+          </knx-insurance-toplist>
 
         </div>
 
@@ -51,9 +51,34 @@
       </div>
     </div>
     <div class="col-md-4">
-      <knx-chat-stream
-        [options]="chatConfig"
-        [messages]="chatMessages">
+
+      <knx-chat-stream [options]="chatConfig" [messages]="chatMessages" [formGroup]="carExtrasForm.formGroup">
+
+        <knx-collapse-message title="Dekking" *ngIf="insurances" [isOpen]="true">
+          <cx-form-group
+            [formControlName]="carExtrasForm.formConfig.coverage.formControlName"
+            [options]="carExtrasForm.formConfig.coverage">
+          </cx-form-group>
+        </knx-collapse-message>
+
+        <knx-collapse-message title="Aanvullende dekkingen" *ngIf="insurances" [isOpen]="true">
+          <cx-form-group
+            [formControlName]="carExtrasForm.formConfig.extraOptions.formControlName"
+            [options]="carExtrasForm.formConfig.extraOptions">
+          </cx-form-group>
+        </knx-collapse-message>
+
+        <knx-collapse-message title="Aantal KM per jaar" *ngIf="insurances" [isOpen]="true">
+          <cx-form-group
+            [formControlName]="carExtrasForm.formConfig.kmPerYear.formControlName"
+            [options]="carExtrasForm.formConfig.kmPerYear">
+          </cx-form-group>
+        </knx-collapse-message>
+
+        <knx-collapse-message title="Eigen risico" *ngIf="insurances" [isOpen]="true">
+          Slider: 0, 135, 245, 375, 675, 950
+        </knx-collapse-message>
+
       </knx-chat-stream>
     </div>
   </div>

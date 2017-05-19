@@ -1,0 +1,64 @@
+.knx-collapse-message {
+  background: #fff;
+  color: $knab-primary-blue;
+  font-size: $font-size-base - 2;
+  height: 50px;
+}
+
+.knx-collapse-message.knx-collapse-message--open {
+  height: auto;
+}
+
+h4.knx-collapse-message__title,
+.knx-collapse-message__title {
+  color: $knab-primary-blue;
+  font-size: $font-size-base - 2;
+  font-family: $font-family-base;
+  margin-bottom: 20px;
+}
+
+.knx-collapse-message__toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  &:hover {
+    font-weight: normal;
+  }
+
+  &:after {
+    color: $knab-primary-blue;
+    font-family: $font-family-icon;
+    content: map-get($knx-icons, chevron-down);
+    margin-left: 10px;
+    font-size: $base-font-size;
+  }
+}
+
+.knx-collapse-message--open .knx-collapse-message__toggle {
+  &:after {
+    color: $knab-primary-blue;
+    font-family: $font-family-icon;
+    content: map-get($knx-icons, chevron-up);
+    margin-left: 10px;
+    font-size: $base-font-size;
+  }
+}
+
+.knx-collapse-message__content {
+  label,
+  .cx-checkbox__label {
+    font-size: $font-size-base - 2;
+  }
+
+  .cx-form-group {
+    margin-bottom: 0;
+  }
+
+  .cx-radio__control,
+  .cx-checkbox__control {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+  }
+}

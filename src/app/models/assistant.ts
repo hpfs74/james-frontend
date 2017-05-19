@@ -41,7 +41,8 @@ export class AppAssistantConfig implements AssistantConfig {
         Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
         korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
         dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`,
-      adviceResult: 'Dit zijn de 4 beste verzekeringen voor jouw auto. Je kunt er een kiezen of je wensen aanpassen.',
+      adviceResult: 'Vergelijk de 4 beste deals van alle 42 vergeleken verzekeringen',
+      adviceOption: 'Selecteer extra opties voor het beste advies',
       nextAction: 'Wat wil je doen?'
     },
     error: {

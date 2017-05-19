@@ -6,9 +6,9 @@ import { collapseAnimation } from '../../animations/collapse.animation';
   template: `
     <div class="knx-collapse-panel">
       <a role="button" class="knx-button knx-button--link"
-        (click)="toggle()" [class.knx-button--panel-open]="showPanel">{{ showPanel ? closeLabel : openLabel }}</a>
+        (click)="toggle()" [class.knx-button--panel-open]="isOpen">{{ isOpen ? closeLabel : openLabel }}</a>
 
-      <div class="row knx-collapse-panel__content" *ngIf="showPanel" [@collapseInOutAnimation]="showPanel" [attr.height]="contentHeight">
+      <div class="row knx-collapse-panel__content" *ngIf="isOpen" [@collapseInOutAnimation]="isOpen" [attr.height]="contentHeight">
         <ng-content></ng-content>
       </div>
     </div>
@@ -19,10 +19,9 @@ export class CollapsePanelComponent  {
   @Input() openLabel: string;
   @Input() closeLabel: string;
   @Input() contentHeight: string;
-
-  showPanel: boolean = false;
+  @Input() isOpen: boolean = false;
 
   toggle() {
-    this.showPanel = !this.showPanel;
+    this.isOpen = !this.isOpen;
   }
 }

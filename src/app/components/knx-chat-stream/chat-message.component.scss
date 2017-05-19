@@ -1,5 +1,6 @@
 .knx-message--chat {
   line-height: 1.4em;
+  font-size: $font-size-base - 2;
 }
 
 .knx-message--chat:not(:first-child):before {

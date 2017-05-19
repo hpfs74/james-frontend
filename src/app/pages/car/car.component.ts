@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
@@ -13,6 +13,7 @@ import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance } from '../../models/car-insurance';
 import { CarInsuranceOptions } from './../../models/car-prefs';
+import { CarExtrasForm } from './car-extras.form';
 
 // TODO: remove mock data
 import { mockInsurances } from '../../models/car-insurance.mock';
@@ -47,6 +48,9 @@ export class CarComponent implements OnInit {
   isCoverageLoading: boolean = false;
   isInsuranceLoading: boolean = false;
   token: string = '';
+
+  // Car extras
+  carExtrasForm: CarExtrasForm;
 
   constructor(
     private router: Router,
@@ -83,7 +87,8 @@ export class CarComponent implements OnInit {
       {
         id: 'carDetails',
         title: 'Je gegevens',
-        submitted: false
+        submitted: false,
+        data: null
       },
       {
         id: 'carResults',
@@ -101,6 +106,24 @@ export class CarComponent implements OnInit {
 
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
+
+    this.carExtrasForm = new CarExtrasForm(new FormBuilder());
+    this.carExtrasForm.formGroup.valueChanges.subscribe(data => {
+      console.log(data);
+
+      if (this.formSteps[0].data) {
+        Object.assign(this.formSteps[0].data, {
+          coverage: data.coverage,
+          cover_occupants: data.extraOptions.cover_occupants || false,
+          kilometers_per_year: data.kmPerYear,
+          no_claim_protection: data.extraOptions.noclaim || false,
+          own_risk: data.ownRisk,
+        });
+
+        // do a new insurance get call
+        this.insurances = this.carService.getInsurances(this.formSteps[0].data);
+      }
+    });
 
     this.profileService.getUserProfile()
       .subscribe(res => {
@@ -170,10 +193,13 @@ export class CarComponent implements OnInit {
         };
         let requestObj = mockRequest;
 
+        this.formSteps[0].data = requestObj;
         this.insurances = this.carService.getInsurances(requestObj);
 
         this.formSteps[0].submitted = true;
         this.currentFormStep = this.formSteps[1];
+
+        this.chatNotifierService.addTextMessage(this.chatConfig.car.info.adviceResult);
 
         break;
       case 'carResults':

@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+import { fadeInAnimation } from './../../animations/fade-in.animation';
 import { InsuranceAdvice, Insurance } from '../../models/insurance';
 
 @Component({
   selector: 'knx-insurance-result',
   template: `
-    <div class="knx-insurance-result">
+    <div class="knx-insurance-result" *ngFor="let insurance of [insurance]" [@fadeInAnimation]>
       <div class="knx-insurance_advice">
         <div class="knx-insurance-result__counter">{{ index + 1 }}</div>
         <div class="row">
@@ -46,13 +47,15 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
 
       <knx-insurance-result-detail *ngIf="showDetailPanel" [insurance]="insurance" [showDetails]="false"></knx-insurance-result-detail>
     </div>
-  `
+  `,
+  animations: [ fadeInAnimation ]
 })
 
 export class InsuranceResultComponent {
   @Input() index: number;
   @Input() insurance: InsuranceAdvice;
   @Input() showDetailPanel: boolean = false;
+  @Input() orderChange: boolean;
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
 

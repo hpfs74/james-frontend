@@ -30,11 +30,13 @@ import { BreadCrumbComponent } from './components/knx-breadcrumb/breadcrumb.comp
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
+import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
 import { DonutComponent } from './components/knx-donut/donut.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
+import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { LoaderComponent } from './components/knx-loader/loader.component';
@@ -49,11 +51,13 @@ export const sharedComponents = [
   ButtonIconComponent,
   CookiebarComponent,
   CollapsePanelComponent,
+  CollapseMessageComponent,
   DonutComponent,
   FeaturesComponent,
   LicensePlateComponent,
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
+  InsuranceTopListComponent,
   PriceTableComponent,
   PriceItemComponent,
   LoaderComponent,
