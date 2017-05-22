@@ -12,11 +12,7 @@ export class CarExtrasForm {
       kmPerYear: [null]
     });
 
-    //135 - 110 - 130 - 125 - 175, 275
-    const ownRiskRanges = [0, 135, 245, 375, 500, 675, 950];
-
-    console.log(JSON.stringify(this.getRangeConfig(ownRiskRanges)));
-
+    const ownRiskRanges: Array<number> = [0, 135, 245, 375, 500, 675, 950];
 
     this.formConfig = {
       coverage: {
@@ -61,9 +57,6 @@ export class CarExtrasForm {
           ]
         }
       },
-//       function filter500( value, type ){
-// 	return value % 1000 ? 2 : 1;
-// }
       //{"min":[0,135],"15%":[135,110],"29%":[245,130],"43%":[375,125],"58%":[500,175],"72%":[675,275],"max":[950]}
       ownRisk: {
         formControlName: 'ownRisk',
@@ -79,9 +72,10 @@ export class CarExtrasForm {
             pips: {
               mode: 'steps',
               filter: (value, type) => { return ownRiskRanges.indexOf(value) > -1 ? 1 : 0; },
-              density: 50
+              density: 72
             }
-          }
+          },
+          throttle: 400
         }
       },
       roadAssistance: {

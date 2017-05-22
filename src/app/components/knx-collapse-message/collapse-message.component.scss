@@ -2,7 +2,7 @@
   background: #fff;
   color: $knab-primary-blue;
   font-size: $font-size-base - 2;
-  height: 50px;
+  min-height: 50px;
 }
 
 .knx-collapse-message.knx-collapse-message--open {
@@ -60,5 +60,9 @@ h4.knx-collapse-message__title,
     width: 25px;
     height: 25px;
     min-width: 25px;
+  }
+
+  .cx-slider {
+    padding-bottom: 40px;
   }
 }

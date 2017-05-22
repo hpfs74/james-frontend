@@ -31,6 +31,9 @@
 @import '../app/components/knx-car-info/car-preview.component';
 @import '../app/components/knx-tabs/tabs.component';
 
+/* cx and other external component overrides */
+@import './overrides';
+
 .main-container {
   margin-bottom: 60px;
 
@@ -82,32 +85,11 @@
   }
 }
 
-.cx-form-group {
-  font-size: $font-size-base;
-}
-
 .ml-auto {
   margin-left: auto !important;
 }
 
 .mr-auto {
   margin-right: auto !important;
-}
-
-.cx-slider .noUi-pips {
-  font-size: 12px;
-}
-
-.cx-slider .noUi-marker-horizontal.noUi-marker-large {
-  height: 10px;
-  background: $knab-tan-gray;
-}
-
-.cx-slider .noUi-origin {
-  background: $knab-light-gray;
-}
-
-.cx-slider .noUi-value:before {
-  content: '€';
 }
 

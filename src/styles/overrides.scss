@@ -1,0 +1,28 @@
+.cx-form-group {
+  font-size: $font-size-base;
+}
+
+.cx-select:after {
+  line-height: 0.8em;
+}
+
+.cx-slider .noUi-pips {
+  font-size: 12px;
+}
+
+.cx-slider .noUi-marker-horizontal.noUi-marker-large {
+  height: 8px;
+  background: $knab-light-gray;
+}
+
+.cx-slider .noUi-origin {
+  background: $knab-light-gray;
+}
+
+.cx-slider .noUi-value:before {
+  content: '€';
+}
+
+.cx-slider .noUi-value-horizontal {
+  padding-top: 10px;
+}

@@ -109,7 +109,7 @@ export class CarComponent implements OnInit {
 
     this.carExtrasForm = new CarExtrasForm(new FormBuilder());
     this.carExtrasForm.formGroup.valueChanges
-      .debounceTime(1000)
+      .debounceTime(200)
       .subscribe(data => {
         console.log(data);
 
@@ -196,6 +196,8 @@ export class CarComponent implements OnInit {
         let requestObj = mockRequest;
 
         this.formSteps[0].data = requestObj;
+        this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
+
         this.insurances = this.carService.getInsurances(requestObj);
 
         this.formSteps[0].submitted = true;
