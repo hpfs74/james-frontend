@@ -34,6 +34,16 @@
 /* cx and other external component overrides */
 @import './overrides';
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 .main-container {
   margin-bottom: 60px;
 

@@ -98,7 +98,7 @@
     "@cx/utils": "1.4.0",
     "@knx/base": "2.16.1",
     "@knx/grid": "0.0.111",
-    "@knx/wizard": "0.0.11",
+    "@knx/wizard": "0.0.12",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "angular-svg-icon": "^4.1.0",

@@ -2,8 +2,9 @@
   display: flex;
   align-items: flex-center;
   align-content: flex-center;
+  flex-wrap: wrap;
   background: inherit;
-  padding: 50px 0;
+  padding: 50px 20px;
 }
 
 .knx-features__item {
@@ -11,15 +12,15 @@
   flex: 1 1 0;
 
   &:before {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     float: left;
     margin-top: 2px;
     margin-right: 15px;
     content: map-get($knx-icons, check);
     font-family: $font-family-icon;
     line-height: 1.4;
-    font-size: 33px;
+    font-size: 28px;
     text-align: center;
     color: $knab-primary-gray;
     background: $knab-primary-yellow;
@@ -40,4 +41,11 @@
   font-family: $font-family-base;
   font-weight: normal;
   padding-left: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .knx-features__item {
+    flex: 1 1 auto;
+    margin-bottom: 25px;
+  }
 }
