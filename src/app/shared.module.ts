@@ -6,7 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as noUiSlider from 'nouislider';
 import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
-import { CXWizardModule } from '../../node_modules/@cx/wizard';
+
+// @knx
+import { KNXWizardModule } from '../../node_modules/@knx/wizard';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
@@ -74,7 +76,7 @@ export const sharedComponents = [
     ReactiveFormsModule,
     TextMaskModule,
     CXFormsModule,
-    CXWizardModule,
+    KNXWizardModule,
     AngularSvgIconModule
   ],
   declarations: [
@@ -84,7 +86,7 @@ export const sharedComponents = [
     CommonModule,
     FormsModule,
     CXFormsModule,
-    CXWizardModule,
+    KNXWizardModule,
     ReactiveFormsModule,
     AngularSvgIconModule,
     ...sharedComponents

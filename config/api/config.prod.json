@@ -1,7 +1,7 @@
 {
   "app": {
     "enableProdMode": false,
-    "name": "config.json"
+    "name": "config.prod.json"
   },
   "api": {
     "james": {
