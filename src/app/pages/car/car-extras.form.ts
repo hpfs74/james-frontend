@@ -62,12 +62,27 @@ export class CarExtrasForm {
         type: 'select',
         formControl: this.formGroup.get('ownRisk'),
         inputOptions: {
+<<<<<<< HEAD
           items: ownRiskRanges.map((v) => {
             return {
               label: v,
               value: v
             };
           })
+=======
+          sliderOptions: {
+            min: 0,
+            max: 950,
+            start: 0,
+            range: this.getRangeConfig(ownRiskRanges),
+            pips: {
+              mode: 'steps',
+              filter: (value, type) => { return ownRiskRanges.indexOf(value) > -1 ? 1 : 0; },
+              density: 72
+            }
+          },
+          throttle: 400
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
         }
       },
       roadAssistance: {

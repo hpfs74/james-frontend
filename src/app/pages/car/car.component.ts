@@ -33,6 +33,11 @@ import { ProfileService } from '../../services/profile.service';
   templateUrl: 'car.component.html'
 })
 export class CarComponent implements OnInit {
+<<<<<<< HEAD
+=======
+  @ViewChild(CarDetailComponent) detailComponent: CarDetailComponent;
+
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   formData: Array<any>;
@@ -42,8 +47,12 @@ export class CarComponent implements OnInit {
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
   car: Car;
+<<<<<<< HEAD
   profile: Profile;
   address: Address;
+=======
+  profile: User;
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
 
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
@@ -87,7 +96,56 @@ export class CarComponent implements OnInit {
         nextButtonLabel: 'Naar resultaten',
         hideBackButton: true,
         onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome),
+<<<<<<< HEAD
         onBeforeNext: this.submitDetailForm.bind(this)
+=======
+        onBeforeNext: () => {
+
+          this.carDetailSubmitted = true;
+
+          let detailForm = this.detailComponent.form.formGroup;
+          let address = this.detailComponent.form.addressForm;
+
+          this.validateForm(detailForm);
+          this.validateForm(address);
+
+          if (!detailForm.valid && !address.valid) {
+            return new Observable(obs => {
+              throw('cannot move to step');
+            });
+          }
+
+          let options: CarInsuranceOptions = {
+            active_loan: detailForm.value.loan,
+            coverage: detailForm.value.coverage,
+            claim_free_years: +detailForm.value.claimFreeYears,
+            household_status: detailForm.value.houseHold
+          };
+          let requestObj = new CarUser(this.profile, this.car, this.profile.address, options);
+
+          // let mockRequest: CarUser = {
+          //   'license': 'GK906T',
+          //   'first_name': null,
+          //   'gender': 'm',
+          //   'date_of_birth': '1991-10-26',
+          //   'house_number': '234',
+          //   'last_name': null,
+          //   'title': 'Dhr.',
+          //   'zipcode': '2512GH',
+          //   'country': 'NL',
+          //   'coverage': 'CL',
+          //   'claim_free_years': 7,
+          //   'household_status': 'CHMP',
+          //   'active_loan': false
+          // };
+          // let requestObj = mockRequest;
+          this.formData[0] = requestObj;
+
+          this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
+
+          return this.insurances = this.carService.getInsurances(requestObj);
+        }
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
       },
       {
         label: 'Premies vergelijken',
@@ -101,9 +159,12 @@ export class CarComponent implements OnInit {
       }
     ];
     this.formData = new Array(this.formSteps.length);
+<<<<<<< HEAD
 
     let formBuilder = new FormBuilder();
     this.carDetailForm = new CarDetailForm(formBuilder);
+=======
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
 
     this.carExtrasForm = new CarExtrasForm(formBuilder);
     this.carExtrasForm.formGroup.valueChanges
@@ -111,7 +172,10 @@ export class CarComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe(data => {
         if (this.formData[0]) {
+<<<<<<< HEAD
           //console.log(data);
+=======
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
           this.insurances = this.carService.getInsurances(
             Object.assign(
               this.formData[0], {
@@ -120,6 +184,7 @@ export class CarComponent implements OnInit {
                 kilometers_per_year: data.kmPerYear,
                 no_claim_protection: data.extraOptions.noclaim || false,
                 own_risk: data.ownRisk,
+<<<<<<< HEAD
               })
           );
         }
@@ -166,6 +231,18 @@ export class CarComponent implements OnInit {
     // TODO: implement
   }
 
+=======
+            })
+          );
+        }
+    });
+  }
+
+  onSelectPremium(insurance) {
+    // TODO: implement
+  }
+
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
   onStepChange(stepIndex) {
     this.currentStep = stepIndex;
   }

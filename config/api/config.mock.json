@@ -5,6 +5,7 @@
   },
   "api": {
     "james": {
+<<<<<<< HEAD
       "key": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/key",
       "token": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/token",
       "profile": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile",
@@ -14,6 +15,15 @@
       "helper": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper",
       "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare",
       "insurer": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/insurer"
+=======
+      "key": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci/key",
+      "token": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci/token",
+      "profile": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile",
+      "auth": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci",
+      "address": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/address",
+      "car": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/cars",
+      "helper": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/helper"
+>>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
     },
     "external": {}
   }
