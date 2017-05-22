@@ -51,3 +51,10 @@
     margin-bottom: 25px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .knx-features__item {
+    flex: 1 1 auto;
+    margin-bottom: 25px;
+  }
+}
