@@ -66,8 +66,7 @@ export class CarExtrasForm {
           sliderOptions: {
             min: 0,
             max: 950,
-            start: [ ownRiskRanges[0], ownRiskRanges[ownRiskRanges.length-1] ],
-            snap: true,
+            start: 0,
             range: this.getRangeConfig(ownRiskRanges),
             pips: {
               mode: 'steps',
