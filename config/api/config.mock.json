@@ -19,6 +19,7 @@
       "car": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/cars",
       "helper": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper",
 <<<<<<< HEAD
+<<<<<<< HEAD
       "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare",
       "insurer": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/insurer"
 =======
@@ -47,6 +48,10 @@
 =======
       "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare"
 >>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
+=======
+      "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare",
+      "insurer": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/insurer"
+>>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
     },
     "external": {}
   }

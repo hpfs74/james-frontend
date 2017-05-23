@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+<<<<<<< HEAD
 import { Insurance, Insurer, Rating } from './../../models';
+=======
+import { Insurance, Insurer } from './../../models';
+>>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
 
 @Component({
   selector: 'knx-insurance-result-detail',
@@ -35,6 +39,7 @@ import { Insurance, Insurer, Rating } from './../../models';
 })
 export class InsuranceResultDetailComponent implements OnInit {
   @Input() insurance: Insurance;
+<<<<<<< HEAD
 
   reviewItems: Array<Rating>;
 
@@ -48,4 +53,8 @@ export class InsuranceResultDetailComponent implements OnInit {
     ];
   }
 
+=======
+  @Input() insurer: Insurer;
+  @Input() showDetails: boolean;
+>>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
 }

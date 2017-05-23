@@ -20,4 +20,5 @@ export class InsuranceAdvice {
     car: Car;
     insurance: Insurance;
   };
+  insurer?: Insurer;
 }

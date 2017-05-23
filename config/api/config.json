@@ -15,6 +15,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare",
       "insurer": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/insurer"
 =======
@@ -26,6 +27,10 @@
 =======
       "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
 >>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
+=======
+      "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare",
+      "insurer": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/insurer"
+>>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
     },
     "external": {}
   }

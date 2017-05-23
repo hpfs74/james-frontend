@@ -36,6 +36,9 @@ import '../styles/styles.scss';
 // Needed because app initializer doesn't work with anonymous function
 export function ConfigLoader(configService: ConfigService) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
   let configFile = './config/api/config.mock.json';
 
   if (process.env.ENV === 'test') {
@@ -45,9 +48,12 @@ export function ConfigLoader(configService: ConfigService) {
   }
 
   return () => configService.load(configFile);
+<<<<<<< HEAD
 =======
   return () => configService.load('./config/api/config.mock.json');
 >>>>>>> 69976fd... chore(config): use mock api by default
+=======
+>>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
 }
 
 // !! Ensure AppRoutingModule is always imported last
