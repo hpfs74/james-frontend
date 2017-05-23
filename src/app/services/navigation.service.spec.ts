@@ -17,7 +17,11 @@ describe('Service: NavigationService', function () {
     it('should return 3 element array', function () {
       let ret = service.getMenu();
       expect(ret).not.toBeNull();
+<<<<<<< HEAD
       expect(ret.length).toBe(1);
+=======
+      expect(ret.length).toBe(4);
+>>>>>>> 8ea29ad... feat(opening-hours): add opening-hours component to navbar
     });
   });
 
