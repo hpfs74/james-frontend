@@ -7,9 +7,9 @@ export class FeatureService {
 
   getFeatures(): Array<Feature> {
     return [
-      { title: 'Gemak', description: 'Een digitaal overzicht van al je schadeverzekeringen van elke verzekeraar' },
-      { title: 'Proactief', description: 'Altijd direct op de hoogte van de beste deals' },
-      { title: 'Onafhankelijk', description: 'Alle vergelijkingen zijn onafhankelijk. Geen verzekeraar heeft voorrang' }
+      { title: 'Objectief', description: 'We vergelijken meer dan 40 aanbieders' },
+      { title: 'Bespaar', description: 'Tot 15% korting op elke verzekering' },
+      { title: 'Overstaphulp', description: 'Wij regelen je overstap' }
     ];
   }
 }
