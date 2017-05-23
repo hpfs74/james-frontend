@@ -4,7 +4,10 @@ import {
 } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+<<<<<<< HEAD
 import 'rxjs/add/observable/combineLatest';
+=======
+>>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
 import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.masks';
@@ -46,6 +49,10 @@ export class CarDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+<<<<<<< HEAD
+=======
+    this.form = new CarDetailForm(this.fb);
+>>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
     let licensePlate = this.form.formGroup.get('licensePlate');
     let loan = this.form.formGroup.get('loan');
 
@@ -53,10 +60,17 @@ export class CarDetailComponent implements OnInit {
       licensePlate.valueChanges,
       loan.valueChanges)
       .subscribe(data => {
+<<<<<<< HEAD
         if (licensePlate.valid && loan.valid) {
           this.coverageDetailsChange.emit(this.form.formGroup.value);
         }
       });
+=======
+          if (licensePlate.valid && loan.valid) {
+            this.coverageDetailsChange.emit(this.form.formGroup.value);
+          }
+    });
+>>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
   }
 
   onFocus(controlKey) {
