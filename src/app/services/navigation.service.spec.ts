@@ -14,10 +14,10 @@ describe('Service: NavigationService', function () {
   });
 
   describe('navigation getMenu methods', function () {
-    it('should return 4 element array', function () {
+    it('should return 3 element array', function () {
       let ret = service.getMenu();
       expect(ret).not.toBeNull();
-      expect(ret.length).toBe(4);
+      expect(ret.length).toBe(3);
     });
   });
 
