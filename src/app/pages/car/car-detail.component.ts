@@ -3,6 +3,7 @@ import {
   Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
 import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.masks';
@@ -45,12 +46,16 @@ export class CarDetailComponent implements OnInit {
 
   ngOnInit() {
     this.form = new CarDetailForm(this.fb);
+    let licensePlate = this.form.formGroup.get('licensePlate');
+    let loan = this.form.formGroup.get('loan');
 
-    this.form.formGroup.valueChanges.subscribe(data => {
-      if (this.form.formGroup.get('licensePlate').valid &&
-        this.form.formGroup.get('loan').valid) {
-        this.coverageDetailsChange.emit(data);
-      }
+    Observable.combineLatest(
+      licensePlate.valueChanges,
+      loan.valueChanges)
+      .subscribe(data => {
+          if (licensePlate.valid && loan.valid) {
+            this.coverageDetailsChange.emit(this.form.formGroup.value);
+          }
     });
   }
 

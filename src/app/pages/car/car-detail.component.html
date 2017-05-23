@@ -157,7 +157,7 @@
           Bezig met ophalen van dekkingsopties...
         </knx-loader>
 
-        <ng-container *ngIf="coverages">
+        <ng-container *ngIf="coverages && !isCoverageLoading">
           <h2>Je dekkingswensen</h2>
           <knx-price-table [items]="coverages" (onSelected)="onSelectCoverage($event)"></knx-price-table>
         </ng-container>

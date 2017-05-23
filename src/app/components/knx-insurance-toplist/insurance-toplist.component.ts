@@ -41,6 +41,8 @@ interface OrderItem {
             Toon {{ insurances.length - total }} meer
           </button>
 
+          <button class="knx-button knx-button--link">Hoe vergelijken jullie?</button>
+
         </ng-template>
       </div>
     </div>

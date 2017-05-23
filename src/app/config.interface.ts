@@ -28,4 +28,5 @@ export interface NicciEndpoint {
   liability?: string;
   content?: string;
   home?: string;
+  advice?: string;
 }
