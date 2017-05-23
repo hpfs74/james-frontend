@@ -13,11 +13,15 @@
       "car": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/cars",
       "helper": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/helper",
 <<<<<<< HEAD
+<<<<<<< HEAD
       "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare",
       "insurer": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/insurer"
 =======
       "advice": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile/insurances/compare"
 >>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
+=======
+      "advice": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
+>>>>>>> 69976fd... chore(config): use mock api by default
     },
     "external": {}
   }
