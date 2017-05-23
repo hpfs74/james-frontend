@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Insurance } from './../../models/insurance';
+import { Insurance, Insurer } from './../../models';
 
 @Component({
   selector: 'knx-insurance-result-detail',
@@ -21,5 +21,6 @@ import { Insurance } from './../../models/insurance';
 })
 export class InsuranceResultDetailComponent {
   @Input() insurance: Insurance;
+  @Input() insurer: Insurer;
   @Input() showDetails: boolean;
 }

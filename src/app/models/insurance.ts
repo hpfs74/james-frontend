@@ -1,4 +1,5 @@
 import { Car } from './car';
+import { Insurer } from './insurer';
 
 export class Insurance {
   id: number;
@@ -18,4 +19,5 @@ export class InsuranceAdvice {
     car: Car;
     insurance: Insurance;
   };
+  insurer?: Insurer;
 }

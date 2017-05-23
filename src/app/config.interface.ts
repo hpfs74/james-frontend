@@ -16,17 +16,20 @@ export interface ConfigAPIInterface {
 }
 
 export interface NicciEndpoint {
-  base?: string;
-  key?: string;
-  token?: string;
-  auth?: string;
-  address?: string;
-  profile?: string;
-  car?: string;
-  helper?: string;
+  base: string;
+  key: string;
+  token: string;
+  auth: string;
+  address: string;
+  profile: string;
+  compare: string;
+  insurer: string;
+  car: string;
+  helper: string;
+
+  // to be implemented
   travel?: string;
   liability?: string;
   content?: string;
   home?: string;
-  compare?: string;
 }
