@@ -3,7 +3,7 @@ import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { AuthHttp } from '../../services/auth-http.service';
-import { User } from '../../models/user';
+import { Profile } from '../../models/profile';
 import { ConfigService } from '../../config.service';
 import { Car } from '../../models/car';
 import { CarInsurance, } from '../../models/car-insurance';

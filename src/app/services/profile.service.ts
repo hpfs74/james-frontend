@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { AuthHttp } from './auth-http.service';
 import { ConfigService } from '../config.service';
-import { User } from '../models/user';
+import { Profile } from '../models/profile';
 
 @Injectable()
 export class ProfileService {
@@ -19,9 +19,9 @@ export class ProfileService {
    *
    * @return {Observable<R>}
    */
-  public getUserProfile(): Observable<User> {
+  public getUserProfile(): Observable<Profile> {
     return this.http.get(this.baseUrl)
       .map((x) => x.json())
-      .map((x) => <User>x);
+      .map((x) => <Profile>x);
   }
 }

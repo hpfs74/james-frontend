@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Price, Nav, Feature, User } from '../../models';
+import { Price, Nav, Feature, Profile } from '../../models';
 import {
   AuthService,
   ProfileService,
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
-  profile: User;
+  profile: Profile;
 
   constructor(
     private router: Router,

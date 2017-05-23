@@ -10,4 +10,4 @@ export * from './insurer';
 export * from './nav';
 export * from './price';
 export * from './rating';
-export * from './user';
+export * from './profile';

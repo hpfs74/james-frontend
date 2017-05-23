@@ -8,15 +8,7 @@
   </div>
 </div>
 
-<!-- TODO: remove me when refresh implemented -->
-<div #el style="position:absolute;top:50px;right:20px;width:300px;background: yellow;border:1px solid red;padding:10px">
-  <small>Current Token: <br><textarea style="width:100%">{{token}}</textarea></small><br>
-  <a style="margin-right:10px" (click)="refreshToken()">refresh</a>
-  <a (click)="el.style.display = 'none'">hide</a>
-</div>
-
 <div class="container car-forms__container">
-
   <knx-wizard (stepChange)="onStepChange($event)">
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
@@ -27,31 +19,28 @@
             (coverageDetailsChange)="getCoverages($event)"
             (coverageSelected)="updateSelectedCoverage($event)"
             (formControlFocus)="showHelperText($event)"
+            [form]="carDetailForm"
             [coverages]="coverages"
             [submitted]="carDetailSubmitted"
             [isCoverageLoading]="isCoverageLoading">
           </knx-car-detail-form>
-
         </knx-step>
-        <knx-step [options]="formSteps[1]">
 
+        <knx-step [options]="formSteps[1]">
           <knx-insurance-toplist
             (insuranceSelected$)="onSelectPremium($event)"
             [stepAmount]="4"
             [insurances]="insurances | async">
           </knx-insurance-toplist>
-
         </knx-step>
     </div>
 
     <div class="knx-wizard__sidebar" #knxWizardSidebar>
       <knx-chat-stream [options]="chatConfig" [messages]="chatMessages" [formGroup]="carExtrasForm.formGroup">
-
         <!--
           ngIf on individual components used here to get around partial keyframe error of
           animated knx-collapse-message @see https://github.com/angular/material2/issues/3968
         -->
-
         <knx-collapse-message title="Dekking" *ngIf="currentStep === 1" [isOpen]="true">
           <cx-form-group
             [options]="carExtrasForm.formConfig.coverage"
@@ -80,10 +69,8 @@
             [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName">
           </cx-form-group>
         </knx-collapse-message>
-
       </knx-chat-stream>
     </div>
 
   </knx-wizard>
-
 </div>

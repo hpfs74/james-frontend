@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
+import { AssistantService } from '../../services/assistant.service';
+import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
+import { AssistantConfig } from './../../models/assistant';
+import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
+import { Profile } from '../../models';
 
 @Component({
   template: `
     <div class="container knx-container-dashboard">
-      <h2>Je verzekeringen</h2>
-
       <div class="row">
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-12 col-sm-12">
+              <h2>Je verzekeringen</h2>
               <knx-button-icon label="Auto" routerLink="/car">
                 <img class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
               </knx-button-icon>
@@ -38,15 +42,25 @@ import { ProfileService } from '../../services/profile.service';
         </div>
 
         <div class="col-md-4">
-          Assistant
+          <knx-chat-stream [options]="chatConfig" [messages]="chatMessages"></knx-chat-stream>
         </div>
     </div>
   </div>
   `
 })
 export class DashboardComponent implements OnInit {
+  profile: Profile;
+  chatConfig: AssistantConfig;
+  chatMessages: Array<ChatMessage> = [];
 
-  constructor(private profileService: ProfileService) { }
+  constructor(
+    private profileService: ProfileService,
+    private assistantService: AssistantService,
+    private chatNotifierService: ChatStreamService
+  ) {
+    this.chatConfig = assistantService.config;
+    this.chatConfig.avatar.title = 'Expert verzekeringen';
+   }
 
   ngOnInit() {
     return;

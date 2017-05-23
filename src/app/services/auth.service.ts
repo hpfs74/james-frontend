@@ -6,7 +6,7 @@ import { ConfigService } from '../config.service';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
 import 'rxjs/add/operator/mergeMap';
-import { User } from '../models/user';
+import { Profile } from '../models/profile';
 
 @Injectable()
 export class AuthService {

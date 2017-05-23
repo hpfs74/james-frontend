@@ -10,11 +10,12 @@ import { InsuranceService } from '../../services/insurance.service';
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { CarService } from './car.service';
-import { Car, Price, CarUser, User, Address } from '../../models';
+import { Car, Price, CarUser, Profile, Address } from '../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance } from '../../models/car-insurance';
 import { CarInsuranceOptions } from './../../models/car-prefs';
+import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
 
 // TODO: remove mock data
@@ -31,8 +32,6 @@ import { ProfileService } from '../../services/profile.service';
   templateUrl: 'car.component.html'
 })
 export class CarComponent implements OnInit {
-  @ViewChild(CarDetailComponent) detailComponent: CarDetailComponent;
-
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   formData: Array<any>;
@@ -42,7 +41,7 @@ export class CarComponent implements OnInit {
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
   car: Car;
-  profile: User;
+  profile: Profile;
 
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
@@ -52,7 +51,8 @@ export class CarComponent implements OnInit {
   isInsuranceLoading: boolean = false;
   token: string = '';
 
-  // Car extras
+  // Forms
+  carDetailForm: CarDetailForm;
   carExtrasForm: CarExtrasForm;
 
   constructor(
@@ -63,27 +63,16 @@ export class CarComponent implements OnInit {
     private insuranceService: InsuranceService,
     private chatNotifierService: ChatStreamService,
     private authService: AuthService,
-    private profileService: ProfileService) {
-    this.token = localStorage.getItem('access_token');
-  }
-
-  //TODO: for testing
-  refreshToken() {
-    let token = JSON.parse(localStorage.getItem('token'));
-      this.authService.refreshToken(token.refresh_token)
-        .subscribe(newToken => {
-            localStorage.setItem('access_token', newToken.access_token);
-            localStorage.setItem('token', JSON.stringify(newToken));
-
-            this.token = newToken.access_token;
-        });
-  }
+    private profileService: ProfileService
+  ) { }
 
   ngOnInit() {
+    this.profileService.getUserProfile().subscribe(p => this.profile = p);
+
     this.chatNotifierService.addMessage$.subscribe(
       message => {
         // replace messages instead of pushing
-        this.chatMessages = [ message ];
+        this.chatMessages = [message];
       });
 
     this.chatConfig = this.assistantService.config;
@@ -96,53 +85,7 @@ export class CarComponent implements OnInit {
         nextButtonLabel: 'Naar resultaten',
         hideBackButton: true,
         onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome),
-        onBeforeNext: () => {
-
-          this.carDetailSubmitted = true;
-
-          let detailForm = this.detailComponent.form.formGroup;
-          let address = this.detailComponent.form.addressForm;
-
-          this.validateForm(detailForm);
-          this.validateForm(address);
-
-          if (!detailForm.valid && !address.valid) {
-            return new Observable(obs => {
-              throw('cannot move to step');
-            });
-          }
-
-          let options: CarInsuranceOptions = {
-            active_loan: detailForm.value.loan,
-            coverage: detailForm.value.coverage,
-            claim_free_years: +detailForm.value.claimFreeYears,
-            household_status: detailForm.value.houseHold
-          };
-          let requestObj = new CarUser(this.profile, this.car, address, options);
-
-          // let mockRequest: CarUser = {
-          //   'license': 'GK906T',
-          //   'first_name': null,
-          //   'gender': 'm',
-          //   'date_of_birth': '1991-10-26',
-          //   'house_number': '234',
-          //   'last_name': null,
-          //   'title': 'Dhr.',
-          //   'zipcode': '2512GH',
-          //   'country': 'NL',
-          //   'coverage': 'CL',
-          //   'claim_free_years': 7,
-          //   'household_status': 'CHMP',
-          //   'active_loan': false
-          // };
-          // let requestObj = mockRequest;
-
-          this.formData[0] = requestObj;
-
-          this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
-
-          return this.insurances = this.carService.getInsurances(requestObj);
-        }
+        onBeforeNext: this.submitDetailForm.bind(this)
       },
       {
         label: 'Resultaten',
@@ -157,9 +100,13 @@ export class CarComponent implements OnInit {
     ];
     this.formData = new Array(this.formSteps.length);
 
-    this.carExtrasForm = new CarExtrasForm(new FormBuilder());
+    let formBuilder = new FormBuilder();
+    this.carDetailForm = new CarDetailForm(formBuilder);
+
+    this.carExtrasForm = new CarExtrasForm(formBuilder);
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
+      .distinctUntilChanged()
       .subscribe(data => {
         if (this.formData[0]) {
           //console.log(data);
@@ -171,12 +118,56 @@ export class CarComponent implements OnInit {
                 kilometers_per_year: data.kmPerYear,
                 no_claim_protection: data.extraOptions.noclaim || false,
                 own_risk: data.ownRisk,
-            })
+              })
           );
         }
       });
+  }
 
-    this.profileService.getUserProfile().subscribe(p => this.profile = p);
+  submitDetailForm(): Observable<any> {
+    this.carDetailSubmitted = true;
+
+    let detailForm = this.carDetailForm.formGroup;
+    let address = this.carDetailForm.addressForm;
+
+    this.validateForm(detailForm);
+    this.validateForm(address);
+
+    if (!detailForm.valid && !address.valid) {
+      return new Observable(obs => {
+        throw ('cannot move to step');
+      });
+    }
+
+    let options: CarInsuranceOptions = {
+      active_loan: detailForm.value.loan,
+      coverage: detailForm.value.coverage,
+      claim_free_years: +detailForm.value.claimFreeYears,
+      household_status: detailForm.value.houseHold
+    };
+    let requestObj = new CarUser(this.profile, this.car, address, options);
+
+    // let mockRequest: CarUser = {
+    //   'license': 'GK906T',
+    //   'first_name': null,
+    //   'gender': 'm',
+    //   'date_of_birth': '1991-10-26',
+    //   'house_number': '234',
+    //   'last_name': null,
+    //   'title': 'Dhr.',
+    //   'zipcode': '2512GH',
+    //   'country': 'NL',
+    //   'coverage': 'CL',
+    //   'claim_free_years': 7,
+    //   'household_status': 'CHMP',
+    //   'active_loan': false
+    // };
+    // let requestObj = mockRequest;
+
+    this.formData[0] = requestObj;
+    this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
+
+    return this.insurances = this.carService.getInsurances(requestObj);
   }
 
   onSelectPremium(insurance) {
@@ -195,7 +186,7 @@ export class CarComponent implements OnInit {
   }
 
   updateSelectedCoverage(coverage: Price) {
-    this.detailComponent.form.formGroup.get('coverage').patchValue(coverage.id);
+    this.carDetailForm.formGroup.get('coverage').patchValue(coverage.id);
   }
 
   showHelperText(key) {
@@ -214,15 +205,20 @@ export class CarComponent implements OnInit {
           this.chatNotifierService.addCarMessage(this.car);
         } else {
           // Car not found in RDC
-          let c = this.detailComponent.form.formGroup.get('licensePlate');
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.error.carNotFound);
-
-          c.setErrors({ 'licensePlateRDC': true });
-          c.markAsTouched();
+          let c = this.carDetailForm.formGroup.get('licensePlate');
+          this.triggerLicenseInValid();
         }
       }, err => {
-        this.chatNotifierService.addTextMessage(this.chatConfig.car.error.carNotFound);
+        // Treat server error as invalid to prevent continuing flow
+        this.triggerLicenseInValid();
       });
+  }
+
+  triggerLicenseInValid() {
+    let c = this.carDetailForm.formGroup.get('licensePlate');
+    c.setErrors({ 'licensePlateRDC': true });
+    c.markAsTouched();
+    this.chatNotifierService.addTextMessage(this.chatConfig.car.error.carNotFound);
   }
 
   updateAddress(address: Address) {
@@ -233,15 +229,15 @@ export class CarComponent implements OnInit {
     }
   }
 
-  getCoverages(formData) {
-    if (this.car && formData.loan) {
+  getCoverages({ loan }) {
+    if (this.car && loan) {
       this.isCoverageLoading = true;
 
       // get default coverage types
       this.coverages = this.carService.getCoverages();
 
       // fetch recommendation
-      this.carService.getCoverageRecommendation(this.car.license, formData.loan)
+      this.carService.getCoverageRecommendation(this.car.license, loan)
         .subscribe(res => {
           this.isCoverageLoading = false;
 

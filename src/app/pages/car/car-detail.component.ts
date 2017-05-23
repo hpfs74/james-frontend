@@ -23,10 +23,10 @@ import { CarService } from './car.service';
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailComponent implements OnInit {
-  public form: CarDetailForm;
   public CXInputMasks = CXInputMasks;
   public KNXDateMask = KNXDateMask.birthDateMask;
 
+  @Input() form: CarDetailForm;
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];
@@ -46,7 +46,6 @@ export class CarDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form = new CarDetailForm(this.fb);
     let licensePlate = this.form.formGroup.get('licensePlate');
     let loan = this.form.formGroup.get('loan');
 
