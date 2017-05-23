@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // @cx
-import * as noUiSlider from 'nouislider';
 import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
 
