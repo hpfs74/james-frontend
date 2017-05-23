@@ -35,7 +35,7 @@ import '../styles/styles.scss';
 
 // Needed because app initializer doesn't work with anonymous function
 export function ConfigLoader(configService: ConfigService) {
-  return () => configService.load('./config/api/config.json');
+  return () => configService.load('./config/api/config.mock.json');
 }
 
 // !! Ensure AppRoutingModule is always imported last
