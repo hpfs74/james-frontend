@@ -38,6 +38,12 @@ $knx-navbar-font: $font-size-base;
   margin-right: 20px;
 }
 
+.knx-navbar.navbar-toggleable-md .navbar-nav .nav-item > * {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: block;
+}
+
 .collapse {
   display: none;
 

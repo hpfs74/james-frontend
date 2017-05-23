@@ -16,6 +16,7 @@ import {
   <knx-cookiebar></knx-cookiebar>
   <header class="header">
     <knx-navbar [menuItems]="topMenu">
+        <knx-opening-hours></knx-opening-hours>
         <knx-user-detail [isLoggedIn]="isLoggedIn" (signOut)="signOut()" [profile]="profile"></knx-user-detail>
     </knx-navbar>
   </header>

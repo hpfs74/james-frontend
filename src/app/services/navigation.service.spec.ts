@@ -17,7 +17,7 @@ describe('Service: NavigationService', function () {
     it('should return 4 element array', function () {
       let ret = service.getMenu();
       expect(ret).not.toBeNull();
-      expect(ret.length).toBe(5);
+      expect(ret.length).toBe(4);
     });
   });
 
