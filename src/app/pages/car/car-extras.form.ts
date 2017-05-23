@@ -63,12 +63,16 @@ export class CarExtrasForm {
         formControl: this.formGroup.get('ownRisk'),
         inputOptions: {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0cda736... fix(car-options): change slider to dropdown
           items: ownRiskRanges.map((v) => {
             return {
               label: v,
               value: v
             };
           })
+<<<<<<< HEAD
 =======
           sliderOptions: {
             min: 0,
@@ -83,6 +87,8 @@ export class CarExtrasForm {
           },
           throttle: 400
 >>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
+=======
+>>>>>>> 0cda736... fix(car-options): change slider to dropdown
         }
       },
       roadAssistance: {
