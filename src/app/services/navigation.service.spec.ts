@@ -18,10 +18,14 @@ describe('Service: NavigationService', function () {
       let ret = service.getMenu();
       expect(ret).not.toBeNull();
 <<<<<<< HEAD
+<<<<<<< HEAD
       expect(ret.length).toBe(1);
 =======
       expect(ret.length).toBe(4);
 >>>>>>> 8ea29ad... feat(opening-hours): add opening-hours component to navbar
+=======
+      expect(ret.length).toBe(3);
+>>>>>>> d95a30e... fix(styles): minor icon style improvement
     });
   });
 
