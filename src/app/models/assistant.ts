@@ -37,17 +37,30 @@ export class AppAssistantConfig implements AssistantConfig {
       Ben je er klaar voor? Let\'s do this!`,
     info: {
       claimFreeYears:
-        `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
+      `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
         Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
         korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
         dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`,
-      adviceResult: 'Vergelijk de 4 beste deals van alle 42 vergeleken verzekeringen',
-      adviceOption: 'Selecteer extra opties voor het beste advies',
-      nextAction: 'Wat wil je doen?'
+      coverage: {
+        advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`,
+        CL: '',
+        CLC: '',
+        CAR: ''
+      },
+      noClaimProtection: '',
+      legalAid:
+      `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
+        Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
+        ervaren juristen je bijstaan.Dit geldt alleen voor verkeer rechtsbijstand en alleen voor deze auto.`,
+      coverOccupants: '',
+      advice: {
+        result: 'Vergelijk de 4 beste deals van alle 42 vergeleken verzekeringen',
+        option: 'Selecteer extra opties voor het beste advies',
+        next: 'Wat wil je doen?'
+      }
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
-    },
-    coverageAdvice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
+    }
   };
 }
