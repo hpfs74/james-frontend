@@ -121,9 +121,10 @@ export class AuthService {
   }
 
   public forgotPassword(redirectUrl: string): string {
+
     return `https://profile-james-a.nicci.io/password?' +
       'client_id=56a6ab20bb00893f071faddc' +
-      '&locale=nl_NL&redirect_uri=${redirectUrl}`;
+      '&locale=nl_NL&redirect_uri=${encodeURI(redirectUrl)}`;
   }
 
   /**

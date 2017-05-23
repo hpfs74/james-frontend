@@ -131,8 +131,8 @@ export class LoginComponent {
   }
 
   goToPasswordReset() {
-    const redirectUrl = '';
-    window.location.href  = this.authService.forgotPassword(redirectUrl);
+
+    window.location.href  = this.forgotPasswordLink;
   }
 
   togglePassword(event) {
