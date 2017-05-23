@@ -45,10 +45,7 @@ import { InsuranceAdvice, Insurance, Insurer } from '../../models';
         </div>
       </div>
 
-      <knx-insurance-result-detail *ngIf="showDetailPanel"
-        [insurance]="insurance"
-        insurer]="insurer"
-        [showDetails]="false">
+      <knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurance]="insurance">
       </knx-insurance-result-detail>
     </div>
   `,

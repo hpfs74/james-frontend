@@ -6,6 +6,7 @@ export class Insurance {
   insurance_brand: string;
   insurance_logo: string;
   url: string;
+  insurer?: Insurer;
 }
 
 export class InsuranceAdvice {
@@ -19,5 +20,4 @@ export class InsuranceAdvice {
     car: Car;
     insurance: Insurance;
   };
-  insurer?: Insurer;
 }

@@ -15,7 +15,7 @@ interface OrderItem {
   <div class="knx-insurance-toplist">
     <div class="row">
       <div class="col-sm-12">
-        <h2>De beste verzekeringen van alle 42</h2>
+        <h2>De beste verzekeringen van alle 40 aanbieders</h2>
 
         <div class="knx-button-group" role="group">
           <button
