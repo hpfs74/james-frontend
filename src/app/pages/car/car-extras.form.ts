@@ -57,24 +57,17 @@ export class CarExtrasForm {
           ]
         }
       },
-      //{"min":[0,135],"15%":[135,110],"29%":[245,130],"43%":[375,125],"58%":[500,175],"72%":[675,275],"max":[950]}
       ownRisk: {
         formControlName: 'ownRisk',
-        type: 'slider',
+        type: 'select',
         formControl: this.formGroup.get('ownRisk'),
         inputOptions: {
-          sliderOptions: {
-            min: 0,
-            max: 950,
-            start: 0,
-            range: this.getRangeConfig(ownRiskRanges),
-            pips: {
-              mode: 'steps',
-              filter: (value, type) => { return ownRiskRanges.indexOf(value) > -1 ? 1 : 0; },
-              density: 72
-            }
-          },
-          throttle: 400
+          items: ownRiskRanges.map((v) => {
+            return {
+              label: v,
+              value: v
+            };
+          })
         }
       },
       roadAssistance: {
@@ -112,23 +105,5 @@ export class CarExtrasForm {
         }
       }
     };
-  }
-
-  private getRangeConfig(ranges: Array<number>) {
-    let rangers = {};
-    for (let i = 0; i < ranges.length; ++i) {
-      var percentage = Math.ceil((100 / ranges.length) * i);
-      if (i < ranges.length - 1) {
-        if (i === 0) {
-          rangers['min'] = [ranges[i], ranges[i + 1] - ranges[i]];
-        } else {
-          rangers[percentage + '%'] = [ranges[i], ranges[i + 1] - ranges[i]];
-        }
-      }
-      if (i === ranges.length - 1) {
-        rangers['max'] = [ranges[ranges.length - 1]];
-      }
-    }
-    return rangers;
   }
 }

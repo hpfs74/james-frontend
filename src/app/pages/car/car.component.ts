@@ -100,42 +100,42 @@ export class CarComponent implements OnInit {
 
           this.carDetailSubmitted = true;
 
-          let detailForm = this.detailComponent.form.formGroup;
-          let address = this.detailComponent.form.addressForm;
+          // let detailForm = this.detailComponent.form.formGroup;
+          // let address = this.detailComponent.form.addressForm;
 
-          this.validateForm(detailForm);
-          this.validateForm(address);
+          // this.validateForm(detailForm);
+          // this.validateForm(address);
 
-          if (!detailForm.valid && !address.valid) {
-            return new Observable(obs => {
-              throw('cannot move to step');
-            });
-          }
+          // if (!detailForm.valid && !address.valid) {
+          //   return new Observable(obs => {
+          //     throw('cannot move to step');
+          //   });
+          // }
 
-          let options: CarInsuranceOptions = {
-            active_loan: detailForm.value.loan,
-            coverage: detailForm.value.coverage,
-            claim_free_years: +detailForm.value.claimFreeYears,
-            household_status: detailForm.value.houseHold
-          };
-          let requestObj = new CarUser(this.profile, this.car, this.profile.address, options);
-
-          // let mockRequest: CarUser = {
-          //   'license': 'GK906T',
-          //   'first_name': null,
-          //   'gender': 'm',
-          //   'date_of_birth': '1991-10-26',
-          //   'house_number': '234',
-          //   'last_name': null,
-          //   'title': 'Dhr.',
-          //   'zipcode': '2512GH',
-          //   'country': 'NL',
-          //   'coverage': 'CL',
-          //   'claim_free_years': 7,
-          //   'household_status': 'CHMP',
-          //   'active_loan': false
+          // let options: CarInsuranceOptions = {
+          //   active_loan: detailForm.value.loan,
+          //   coverage: detailForm.value.coverage,
+          //   claim_free_years: +detailForm.value.claimFreeYears,
+          //   household_status: detailForm.value.houseHold
           // };
-          // let requestObj = mockRequest;
+          // let requestObj = new CarUser(this.profile, this.car, this.profile.address, options);
+
+          let mockRequest: CarUser = {
+            'license': 'GK906T',
+            'first_name': null,
+            'gender': 'm',
+            'date_of_birth': '1991-10-26',
+            'house_number': '234',
+            'last_name': null,
+            'title': 'Dhr.',
+            'zipcode': '2512GH',
+            'country': 'NL',
+            'coverage': 'CL',
+            'claim_free_years': 7,
+            'household_status': 'CHMP',
+            'active_loan': false
+          };
+          let requestObj = mockRequest;
           this.formData[0] = requestObj;
 
           this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
@@ -161,6 +161,7 @@ export class CarComponent implements OnInit {
       .debounceTime(200)
       .subscribe(data => {
         if (this.formData[0]) {
+          //console.log(data);
           this.insurances = this.carService.getInsurances(
             Object.assign(
               this.formData[0], {
