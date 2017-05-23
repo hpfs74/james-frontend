@@ -11,7 +11,11 @@ export * from './nav';
 export * from './price';
 export * from './rating';
 <<<<<<< HEAD
+<<<<<<< HEAD
 export * from './profile';
 =======
 export * from './user';
 >>>>>>> 5a31a8f... feat(review-summary): add review and star-rating components
+=======
+export * from './profile';
+>>>>>>> 55c1574... refactor(app): clean up car component

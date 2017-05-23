@@ -54,9 +54,12 @@ export class CarDetailComponent implements OnInit {
 
   ngOnInit() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     this.form = new CarDetailForm(this.fb);
 >>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
+=======
+>>>>>>> 55c1574... refactor(app): clean up car component
     let licensePlate = this.form.formGroup.get('licensePlate');
     let loan = this.form.formGroup.get('loan');
 

@@ -20,7 +20,10 @@ import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.
 import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../models';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55c1574... refactor(app): clean up car component
 
 @Component({
 <<<<<<< HEAD
@@ -28,12 +31,11 @@ import { Profile } from '../../models';
 =======
   template: `
     <div class="container knx-container-dashboard">
-      <h2>Je verzekeringen</h2>
-
       <div class="row">
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-12 col-sm-12">
+              <h2>Je verzekeringen</h2>
               <knx-button-icon label="Auto" routerLink="/car">
                 <img class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
               </knx-button-icon>
@@ -62,7 +64,7 @@ import { Profile } from '../../models';
         </div>
 
         <div class="col-md-4">
-          Assistant
+          <knx-chat-stream [options]="chatConfig" [messages]="chatMessages"></knx-chat-stream>
         </div>
     </div>
   </div>
@@ -70,17 +72,32 @@ import { Profile } from '../../models';
 >>>>>>> d95a30e... fix(styles): minor icon style improvement
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
 export  class DashboardComponent implements OnInit, AfterViewInit {
+=======
+export class DashboardComponent implements OnInit {
+>>>>>>> 55c1574... refactor(app): clean up car component
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
 
+<<<<<<< HEAD
   constructor(private profileService: ProfileService,
               private assistantService: AssistantService,
               private chatNotifierService: ChatStreamService) {
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
+=======
+  constructor(
+    private profileService: ProfileService,
+    private assistantService: AssistantService,
+    private chatNotifierService: ChatStreamService
+  ) {
+    this.chatConfig = assistantService.config;
+    this.chatConfig.avatar.title = 'Expert verzekeringen';
+   }
+>>>>>>> 55c1574... refactor(app): clean up car component
 
   ngOnInit() {
 
