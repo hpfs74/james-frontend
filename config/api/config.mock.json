@@ -8,6 +8,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
       "key": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/key",
       "token": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/token",
       "profile": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile",
@@ -15,6 +18,7 @@
       "address": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/address",
       "car": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/cars",
       "helper": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper",
+<<<<<<< HEAD
       "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare",
       "insurer": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/insurer"
 =======
@@ -40,6 +44,9 @@
       "helper": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/helper",
       "advice": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile/insurances/compare"
 >>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
+=======
+      "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare"
+>>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
     },
     "external": {}
   }

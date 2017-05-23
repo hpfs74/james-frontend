@@ -331,11 +331,14 @@ export class CarComponent implements OnInit {
 
   updateAddress(address: Address) {
     if (address.street && address.city) {
+<<<<<<< HEAD
       this.address = address;
       if (this.profile) {
         // TODO: do actual call to backend to patch profile address
         this.profile.address = address;
       }
+=======
+>>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
     } else {
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);

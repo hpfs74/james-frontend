@@ -5,9 +5,13 @@ import {
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'rxjs/add/observable/combineLatest';
 =======
 >>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
+=======
+import 'rxjs/add/observable/combineLatest';
+>>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
 import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.masks';

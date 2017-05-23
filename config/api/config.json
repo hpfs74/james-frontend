@@ -14,6 +14,7 @@
       "helper": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/helper",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare",
       "insurer": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/insurer"
 =======
@@ -22,6 +23,9 @@
 =======
       "advice": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
 >>>>>>> 69976fd... chore(config): use mock api by default
+=======
+      "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
+>>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
     },
     "external": {}
   }
