@@ -10,4 +10,8 @@ export * from './insurer';
 export * from './nav';
 export * from './price';
 export * from './rating';
+<<<<<<< HEAD
 export * from './profile';
+=======
+export * from './user';
+>>>>>>> 5a31a8f... feat(review-summary): add review and star-rating components
