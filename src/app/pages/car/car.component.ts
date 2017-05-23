@@ -227,7 +227,6 @@ export class CarComponent implements OnInit {
 
   updateAddress(address: Address) {
     if (address.street && address.city) {
-      this.profile.address = address;
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
     } else {
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);

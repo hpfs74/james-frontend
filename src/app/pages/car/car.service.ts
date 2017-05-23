@@ -20,12 +20,12 @@ import { mockCarCoverages } from './../../models/car-coverage.mock';
 export class CarService {
   private baseUrl: string;
   private helperUrl: string;
-  private adviceUrl: string;
+  private compareUrl: string;
 
   constructor(private configService: ConfigService, private authHttp: AuthHttp) {
     this.baseUrl = configService.config.api.james.car;
     this.helperUrl = configService.config.api.james.helper;
-    this.adviceUrl = configService.config.api.james.advice;
+    this.compareUrl = configService.config.api.james.compare;
   }
 
   public getByLicense(licensePlate: string): Observable<Car> {
@@ -42,7 +42,7 @@ export class CarService {
   public getInsurances(carRequest: CarUser): Observable<Array<CarInsurance>> {
     // TODO: for testing
     //return Observable.of(mockInsurances).delay(2000);
-    return this.authHttp.post(this.adviceUrl + '/car', JSON.stringify(carRequest))
+    return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest))
       .map((res:Response) => res.json());
   }
 

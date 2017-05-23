@@ -5,14 +5,14 @@
   },
   "api": {
     "james": {
-      "key": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/key",
-      "token": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/token",
-      "profile": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile",
-      "auth": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock",
-      "address": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/address",
-      "car": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/cars",
-      "helper": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/helper",
-      "advice": "https://74tmyjug92.execute-api.eu-west-1.amazonaws.com/niccimock/v1/profile/insurances/compare"
+      "key": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/key",
+      "token": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/token",
+      "profile": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile",
+      "auth": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/",
+      "address": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/address",
+      "car": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/cars",
+      "helper": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper",
+      "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare"
     },
     "external": {}
   }

@@ -12,7 +12,7 @@
       "address": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/address",
       "car": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/cars",
       "helper": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/helper",
-      "advice": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
+      "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
     },
     "external": {}
   }
