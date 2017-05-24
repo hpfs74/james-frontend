@@ -2,7 +2,7 @@
   background: #fff;
   color: $knab-primary-blue;
   font-size: $font-size-base - 2;
-  min-height: 50px;
+  height: 50px;
 }
 
 .knx-collapse-message.knx-collapse-message--open {
@@ -29,7 +29,7 @@ h4.knx-collapse-message__title,
   &:after {
     color: $knab-primary-blue;
     font-family: $font-family-icon;
-    content: map-get($knx-icons, chevron-down);
+    content: map-get($knx-icons, angle-down);
     margin-left: 10px;
     font-size: $base-font-size;
   }
@@ -39,7 +39,7 @@ h4.knx-collapse-message__title,
   &:after {
     color: $knab-primary-blue;
     font-family: $font-family-icon;
-    content: map-get($knx-icons, chevron-up);
+    content: map-get($knx-icons, angle-up);
     margin-left: 10px;
     font-size: $base-font-size;
   }
@@ -53,6 +53,10 @@ h4.knx-collapse-message__title,
 
   .cx-form-group {
     margin-bottom: 0;
+  }
+
+  .cx-select:after {
+    line-height: 0.8em;
   }
 
   .cx-radio__control,

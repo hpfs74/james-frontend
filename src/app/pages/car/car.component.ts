@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
+import { KNXStepOptions } from '../../../../node_modules/@knx/wizard/src/knx-wizard.options';
+
 import { ConfigService } from '../../config.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { AssistantService } from './../../services/assistant.service';
@@ -31,20 +33,21 @@ import { ProfileService } from '../../services/profile.service';
 export class CarComponent implements OnInit {
   @ViewChild(CarDetailComponent) detailComponent: CarDetailComponent;
 
+  formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
-  chatConfig: AssistantConfig;
-  chatMessages: Array<ChatMessage> = [];
+  formData: Array<any>;
+  carDetailSubmitted: boolean = false;
+  currentStep: number;
+
   coverages: Array<Price>;
-
-  formSteps: Array<any>;
-  currentFormStep: any;
-  isPendingNext: boolean;
-
   insurances: Observable<Array<CarInsurance>>;
-
-  assistantMessages: any;
   car: Car;
   profile: User;
+
+  chatConfig: AssistantConfig;
+  chatMessages: Array<ChatMessage> = [];
+  assistantMessages: any;
+
   isCoverageLoading: boolean = false;
   isInsuranceLoading: boolean = false;
   token: string = '';
@@ -83,135 +86,102 @@ export class CarComponent implements OnInit {
         this.chatMessages = [ message ];
       });
 
-    this.formSteps = [
-      {
-        id: 'carDetails',
-        title: 'Je gegevens',
-        submitted: false,
-        data: null
-      },
-      {
-        id: 'carResults',
-        title: 'Resultaten',
-        submitted: false
-      },
-      {
-        id: 'carComparison',
-        title: 'Premies vergelijken',
-        submitted: false
-      }
-    ];
-    this.currentFormStep = this.formSteps[0];
-    this.isPendingNext = true;
-
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
+
+    this.currentStep = 0;
+    this.formSteps = [
+      {
+        label: 'Je gegevens',
+        nextButtonLabel: 'Naar resultaten',
+        hideBackButton: true,
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome),
+        onBeforeNext: () => {
+
+          this.carDetailSubmitted = true;
+
+          // let detailForm = this.detailComponent.form.formGroup;
+          // let address = this.detailComponent.form.addressForm;
+
+          // this.validateForm(detailForm);
+          // this.validateForm(address);
+
+          // if (!detailForm.valid && !address.valid) {
+          //   return new Observable(obs => {
+          //     throw('cannot move to step');
+          //   });
+          // }
+
+          // let options: CarInsuranceOptions = {
+          //   active_loan: detailForm.value.loan,
+          //   coverage: detailForm.value.coverage,
+          //   claim_free_years: +detailForm.value.claimFreeYears,
+          //   household_status: detailForm.value.houseHold
+          // };
+          // let requestObj = new CarUser(this.profile, this.car, this.profile.address, options);
+
+          let mockRequest: CarUser = {
+            'license': 'GK906T',
+            'first_name': null,
+            'gender': 'm',
+            'date_of_birth': '1991-10-26',
+            'house_number': '234',
+            'last_name': null,
+            'title': 'Dhr.',
+            'zipcode': '2512GH',
+            'country': 'NL',
+            'coverage': 'CL',
+            'claim_free_years': 7,
+            'household_status': 'CHMP',
+            'active_loan': false
+          };
+          let requestObj = mockRequest;
+          this.formData[0] = requestObj;
+
+          this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
+
+          return this.insurances = this.carService.getInsurances(requestObj);
+        }
+      },
+      {
+        label: 'Resultaten',
+        backButtonLabel: 'Terug',
+        hideNextButton: true,
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result)
+      },
+      {
+        label: 'Premies vergelijken',
+        backButtonLabel: 'Terug'
+      }
+    ];
+    this.formData = new Array(this.formSteps.length);
 
     this.carExtrasForm = new CarExtrasForm(new FormBuilder());
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
       .subscribe(data => {
-        console.log(data);
-
-        if (this.formSteps[0].data) {
-          Object.assign(this.formSteps[0].data, {
-            coverage: data.coverage,
-            cover_occupants: data.extraOptions.cover_occupants || false,
-            kilometers_per_year: data.kmPerYear,
-            no_claim_protection: data.extraOptions.noclaim || false,
-            own_risk: data.ownRisk,
-          });
-
-          // do a new insurance get call
-          this.insurances = this.carService.getInsurances(this.formSteps[0].data);
+        if (this.formData[0]) {
+          //console.log(data);
+          this.insurances = this.carService.getInsurances(
+            Object.assign(
+              this.formData[0], {
+                coverage: data.coverage,
+                cover_occupants: data.extraOptions.cover_occupants || false,
+                kilometers_per_year: data.kmPerYear,
+                no_claim_protection: data.extraOptions.noclaim || false,
+                own_risk: data.ownRisk,
+            })
+          );
         }
     });
-
-    this.profileService.getUserProfile()
-      .subscribe(res => {
-        this.profile = res;
-
-        let user: string = (res.firstname || res.lastname) ?
-          `${res.firstname} ${res.infix} ${res.lastname}` : res.emailaddress;
-
-        this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome);
-      });
   }
 
-  getCurrentStepIndex(index: number) {
-    return this.formSteps[index].id === this.currentFormStep.id;
+  onSelectPremium(insurance) {
+    // TODO: implement
   }
 
-  goToPreviousStep() {
-    // TODO: refactor step navigation in generic/reusable way
-    let index = this.formSteps.findIndex(step => step.id === this.currentFormStep.id);
-    if (index === 0) {
-      // to home
-      this.router.navigate(['/overview']);
-    }
-    if (index > 0 && index <= this.formSteps.length) {
-      this.currentFormStep.id = this.formSteps[index - 1].id;
-    }
-  }
-
-  goToNextStep() {
-    // TODO: only supports one step currently, migrate to knx-wizard
-
-    switch (this.currentFormStep.id) {
-      case 'carDetails':
-        // let detailForm = this.detailComponent.form.formGroup;
-        // let address = this.detailComponent.form.addressForm;
-
-        // this.validateForm(detailForm);
-        // this.validateForm(address);
-
-        // if (!detailForm.valid && !address.valid) {
-        //   return;
-        // }
-
-        // // build the payload in Nicci format
-        // let options: CarInsuranceOptions = {
-        //   active_loan: detailForm.value.loan,
-        //   coverage: detailForm.value.coverage,
-        //   claim_free_years: +detailForm.value.claimFreeYears,
-        //   household_status: detailForm.value.houseHold
-        // };
-        // let requestObj = new CarUser(this.profile, this.car, this.profile.address, options);
-
-        let mockRequest: CarUser = {
-          'license': 'GK906T',
-          'first_name': null,
-          'gender': 'm',
-          'date_of_birth': '1991-10-26',
-          'house_number': '234',
-          'last_name': null,
-          'title': 'Dhr.',
-          'zipcode': '2512GH',
-          'country': 'NL',
-          'coverage': 'CL',
-          'claim_free_years': 7,
-          'household_status': 'CHMP',
-          'active_loan': false
-        };
-        let requestObj = mockRequest;
-
-        this.formSteps[0].data = requestObj;
-        this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
-
-        this.insurances = this.carService.getInsurances(requestObj);
-
-        this.formSteps[0].submitted = true;
-        this.currentFormStep = this.formSteps[1];
-
-        this.chatNotifierService.addTextMessage(this.chatConfig.car.info.adviceResult);
-
-        break;
-      case 'carResults':
-        //console.log('Premie gekozen: ' + event);
-        break;
-      default:
-        break;
-    }
+  onStepChange(stepIndex) {
+    this.currentStep = stepIndex;
   }
 
   validateForm(form: FormGroup) {
@@ -276,7 +246,7 @@ export class CarComponent implements OnInit {
           let coverage = this.coverages.find(price => price.id === res.recommended_value);
           if (coverage) {
             coverage.highlight = true;
-            this.chatNotifierService.addTextMessage(this.chatConfig.car.coverageAdvice(coverage));
+            this.chatNotifierService.addTextMessage(this.chatConfig.car.info.coverage.advice(coverage));
           }
 
         }, error => {
