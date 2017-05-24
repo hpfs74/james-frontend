@@ -59,8 +59,8 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
 
     this.profileService.getUserProfile()
-      .subscribe( (user) => {
-        this.profile = user;
+      .subscribe( (profile) => {
+        this.profile = profile;
       }, (res) => {
         if (res.status === 403) {
           this.router.navigate(['/login']);
