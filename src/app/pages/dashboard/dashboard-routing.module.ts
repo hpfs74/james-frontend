@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from '../dashboard/dashboard.component';
+<<<<<<< HEAD
 import { DashboardDetailComponent } from '../dashboard/dashboard-detail.component';
+=======
+>>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
 
 export const dashboardRoutes: Routes = [
   {
@@ -11,6 +14,7 @@ export const dashboardRoutes: Routes = [
     data: {
       breadcrumb: 'Overzicht'
     }
+<<<<<<< HEAD
   },
   {
     path: 'cars',
@@ -29,6 +33,18 @@ export const dashboardRoutes: Routes = [
     }
   }
 
+=======
+    // children: [
+    //   {
+    //     path: 'advice',
+    //     component: CarAdviceComponent,
+    //     data: {
+    //       breadcrumb: 'Autoverzekering vergelijken'
+    //     }
+    //   }
+    // ]
+  }
+>>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
 ];
 @NgModule({
   imports: [

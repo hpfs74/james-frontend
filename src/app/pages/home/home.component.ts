@@ -22,11 +22,15 @@ import {
   </header>
 
   <div class="container-fluid knx-container--fullwidth">
-    <knx-breadcrumb></knx-breadcrumb>
+    GOEDEMORGEN, {{firstName}}
   </div>
 
   <div class="main-container">
+<<<<<<< HEAD
 
+=======
+    <knx-breadcrumb></knx-breadcrumb>
+>>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
     <knx-loader [visible]="isLoading"></knx-loader>
     <router-outlet></router-outlet>
   </div>

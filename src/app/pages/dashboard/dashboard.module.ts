@@ -4,7 +4,10 @@ import { ChatStreamModule } from './../../components/knx-chat-stream/chat-stream
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+<<<<<<< HEAD
 import { DashboardDetailComponent } from './dashboard-detail.component';
+=======
+>>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
 
 
 @NgModule({
@@ -14,8 +17,12 @@ import { DashboardDetailComponent } from './dashboard-detail.component';
     DashboardRoutingModule
   ],
   declarations: [
+<<<<<<< HEAD
     DashboardComponent,
     DashboardDetailComponent
+=======
+    DashboardComponent
+>>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
   ]
 })
 export class DashboardModule {
