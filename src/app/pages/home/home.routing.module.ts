@@ -17,12 +17,15 @@ const homeRoutes: Routes = [
         path: 'dashboard',
         canActivateChild: [AuthGuard],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         // component: DashboardComponent,
         data: {
           breadcrumb: 'Overzicht'
         },
 >>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
+=======
+>>>>>>> 0d3cdfc... refactor(dashboard): add detail page for each product
         loadChildren: '../dashboard/dashboard.module#DashboardModule'
       },
       {

@@ -43,6 +43,7 @@ import { Profile } from '../../models';
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <h2>Je verzekeringen</h2>
+              
               <knx-button-icon label="Auto" routerLink="/car">
                 <img class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
               </knx-button-icon>
@@ -74,10 +75,13 @@ import { Profile } from '../../models';
         </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
   </div>
 =======
     <pre>PROFILE: {{profile.firstname}}</pre>
 >>>>>>> a84d0ff... refactor(dashboard): add welcome message on chat box
+=======
+>>>>>>> 0d3cdfc... refactor(dashboard): add detail page for each product
   `
 >>>>>>> d95a30e... fix(styles): minor icon style improvement
 })
@@ -177,9 +181,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-
-
-
 
   }
 }
