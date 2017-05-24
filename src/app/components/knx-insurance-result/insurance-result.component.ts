@@ -55,7 +55,6 @@ import { InsuranceAdvice, Insurance, Insurer } from '../../models';
 export class InsuranceResultComponent {
   @Input() index: number;
   @Input() insurance: InsuranceAdvice;
-  @Input() insurer: Insurer;
   @Input() showDetailPanel: boolean = false;
   @Input() orderChange: boolean;
 

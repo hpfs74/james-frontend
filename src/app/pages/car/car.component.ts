@@ -17,6 +17,7 @@ import { CarInsurance } from '../../models/car-insurance';
 import { CarInsuranceOptions } from './../../models/car-prefs';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
+import { scrollToForm } from '../../utils/base-form.utils';
 
 // TODO: remove mock data
 import { mockInsurances } from '../../models/car-insurance.mock';
@@ -127,7 +128,6 @@ export class CarComponent implements OnInit {
 
   submitDetailForm(): Observable<any> {
     this.carDetailSubmitted = true;
-
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
 

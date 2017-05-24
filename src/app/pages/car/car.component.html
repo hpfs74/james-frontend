@@ -21,7 +21,7 @@
             (formControlFocus)="showHelperText($event)"
             [form]="carDetailForm"
             [coverages]="coverages"
-            [submitted]="carDetailSubmitted"
+            [submitted]="carDetailSubmitted && currentStep === 0"
             [isCoverageLoading]="isCoverageLoading">
           </knx-car-detail-form>
         </knx-step>

@@ -46,7 +46,6 @@
         <div class="col-md-7 col-sm-12">
           <cx-form-group
             formControlName="claimFreeYears"
-            (events)="onFocus('claimFreeYears')"
             [options]="{
                 label: 'Aantal schadevrije jaren',
                 formControl: form.formGroup.get('claimFreeYears'),
@@ -60,7 +59,7 @@
         </div>
         <div class="col-md-4 hidden-sm hidden-xs">
           <div class="cx-form-group">
-            <button class="knx-button knx-button--util inline-formelement" href="">Weet ik niet</button>
+            <button class="knx-button knx-button--util inline-formelement" (click)="onFocus('claimFreeYears')">Weet ik niet</button>
           </div>
         </div>
       </div>

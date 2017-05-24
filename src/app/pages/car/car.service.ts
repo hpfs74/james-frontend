@@ -21,11 +21,13 @@ export class CarService {
   private baseUrl: string;
   private helperUrl: string;
   private compareUrl: string;
+  private insurerUrl: string;
 
   constructor(private configService: ConfigService, private authHttp: AuthHttp) {
     this.baseUrl = configService.config.api.james.car;
     this.helperUrl = configService.config.api.james.helper;
     this.compareUrl = configService.config.api.james.compare;
+    this.insurerUrl = configService.config.api.james.insurer;
   }
 
   public getByLicense(licensePlate: string): Observable<Car> {
@@ -40,10 +42,24 @@ export class CarService {
   }
 
   public getInsurances(carRequest: CarUser): Observable<Array<CarInsurance>> {
-    // TODO: for testing
-    //return Observable.of(mockInsurances).delay(2000);
     return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest))
-      .map((res:Response) => res.json());
+      .map((res: Response) => res.json());
+  }
+
+  public getInsurancesWithDetails(carRequest: CarUser): Observable<Array<CarInsurance>> {
+    return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest)).map(res => res.json())
+      .flatMap((insurance) => {
+        return Observable.forkJoin(
+          Observable.of(insurance),
+          this.authHttp.patch(this.insurerUrl + '/', { product_id: insurance.product_id })
+        );
+      }).map((insuranceDetails) => {
+        var insurance = insuranceDetails[0];
+        var insurer = insuranceDetails[1];
+
+        insurance._embedded.insurance.insurer = insurer;
+        return insurance;
+      });
   }
 
   public getCoverages(): Array<Price> {

@@ -10,7 +10,6 @@ interface OrderItem {
 
 @Component({
   selector: 'knx-insurance-toplist',
-  styleUrls: ['insurance-toplist.component.scss'],
   template: `
   <div class="knx-insurance-toplist">
     <div class="row">
@@ -41,7 +40,9 @@ interface OrderItem {
             Toon {{ insurances.length - total }} meer
           </button>
 
-          <button class="knx-button knx-button--link">Hoe vergelijken jullie?</button>
+          <div class="knx-insurance-toplist__info">
+            <a href="#" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
+          </div>
 
         </ng-template>
       </div>
