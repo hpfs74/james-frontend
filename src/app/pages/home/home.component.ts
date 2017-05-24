@@ -21,10 +21,11 @@ import {
   </header>
 
   <div class="container-fluid knx-container--fullwidth">
-    <knx-breadcrumb></knx-breadcrumb>
+    GOEDEMORGEN, {{firstName}}
   </div>
 
   <div class="main-container">
+    <knx-breadcrumb></knx-breadcrumb>
     <knx-loader [visible]="isLoading"></knx-loader>
     <router-outlet></router-outlet>
   </div>
