@@ -6,9 +6,8 @@ import { Profile } from '../../models/profile';
   selector: 'knx-user-detail',
   template: `
     <div class="knx-user-detail" *ngIf="profile" >
-      <a *ngIf="isLoggedIn" (click)="logOut()">
-        <span class="knx-icon-user"></span> {{ profile.firstname || 'Uitloggen' }}
-      </a>
+      <span class="knx-icon-user"></span> {{ profile.firstname || 'Uitloggen' }}
+      
     </div>
   `
 })

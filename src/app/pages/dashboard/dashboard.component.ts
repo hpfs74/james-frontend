@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { AssistantService } from '../../services/assistant.service';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
@@ -40,29 +40,47 @@ import { Profile } from '../../models';
             </div>
           </div>
         </div>
-
         <div class="col-md-4">
           <knx-chat-stream [options]="chatConfig" [messages]="chatMessages"></knx-chat-stream>
         </div>
       </div>
     </div>
+    <pre>PROFILE: {{profile.firstname}}</pre>
   `
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
 
-  constructor(
-    private profileService: ProfileService,
-    private assistantService: AssistantService,
-    private chatNotifierService: ChatStreamService
-  ) {
+  constructor(private profileService: ProfileService,
+              private assistantService: AssistantService,
+              private chatNotifierService: ChatStreamService) {
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
 
   ngOnInit() {
+
+    this.chatNotifierService.addMessage$.subscribe(
+      message => {
+        // replace messages instead of pushing
+        this.chatMessages = [message];
+      });
+
+    this.profileService.getUserProfile()
+      .subscribe(x => {
+        this.profile = x;
+        this.chatNotifierService.addTextMessage(`Hoi ${this.profile.firstname}, ik ben je persoonlijke verzekeringsassistent. Met welke verzekering kan ik je vandaag helpen?`);
+      });
+
     return;
+  }
+
+  ngAfterViewInit() {
+
+
+
+
   }
 }
