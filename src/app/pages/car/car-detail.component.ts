@@ -53,10 +53,10 @@ export class CarDetailComponent implements OnInit {
       licensePlate.valueChanges,
       loan.valueChanges)
       .subscribe(data => {
-          if (licensePlate.valid && loan.valid) {
-            this.coverageDetailsChange.emit(this.form.formGroup.value);
-          }
-    });
+        if (licensePlate.valid && loan.valid) {
+          this.coverageDetailsChange.emit(this.form.formGroup.value);
+        }
+      });
   }
 
   onFocus(controlKey) {

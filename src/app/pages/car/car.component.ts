@@ -42,6 +42,7 @@ export class CarComponent implements OnInit {
   insurances: Observable<Array<CarInsurance>>;
   car: Car;
   profile: Profile;
+  address: Address;
 
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
@@ -139,13 +140,46 @@ export class CarComponent implements OnInit {
       });
     }
 
+    // Update profile
+      // licensePlate: [null, Validators.compose(
+      //   [
+      //     Validators.required,
+      //     Validators.maxLength(8),
+      //     LicensePlateValidator
+      //   ]
+      // )],
+      // birthDate: [null,
+      //   [
+      //     Validators.required,
+      //     birthDateValidator('birthDate')
+      //   ]
+      // ],
+      // claimFreeYears: [null, Validators.compose(
+      //   [
+      //     Validators.required,
+      //     minNumberValidator('claimFreeYears', 0),
+      //     maxNumberValidator('claimFreeYears', 50)
+      //   ]
+      // )],
+      // houseHold: [null, Validators.required],
+      // loan: [false, Validators.required],
+      // gender: [null, Validators.required],
+      // coverage: [null, Validators.required]
+
+
+    // let details: Profile = {
+    //   gender: detailForm.value.gender,
+    //   birthDate: detaimForm.value.birthDate
+    // };
+
     let options: CarInsuranceOptions = {
       active_loan: detailForm.value.loan,
       coverage: detailForm.value.coverage,
       claim_free_years: +detailForm.value.claimFreeYears,
       household_status: detailForm.value.houseHold
     };
-    let requestObj = new CarUser(this.profile, this.car, address, options);
+    let requestObj = new CarUser(this.profile, this.car, this.address, options);
+    //console.log(requestObj);
 
     // let mockRequest: CarUser = {
     //   'license': 'GK906T',
@@ -223,6 +257,11 @@ export class CarComponent implements OnInit {
 
   updateAddress(address: Address) {
     if (address.street && address.city) {
+      this.address = address;
+      if (this.profile) {
+        // TODO: do actual call to backend to patch profile address
+        this.profile.address = address;
+      }
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
     } else {
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);
@@ -230,7 +269,7 @@ export class CarComponent implements OnInit {
   }
 
   getCoverages({ loan }) {
-    if (this.car && loan) {
+    if (this.car) {
       this.isCoverageLoading = true;
 
       // get default coverage types
