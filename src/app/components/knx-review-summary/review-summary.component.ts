@@ -16,6 +16,7 @@ import { Rating } from '../../models/rating';
             <knx-star-rating class="knx-review-summary__stars" [rating]="item.value" total="5"></knx-star-rating>
           </div>
         </div>
+      </div>
     </div>
   </div>
   `
