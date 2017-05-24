@@ -90,13 +90,13 @@ export class CarComponent implements OnInit {
         onBeforeNext: this.submitDetailForm.bind(this)
       },
       {
-        label: 'Resultaten',
+        label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
         hideNextButton: true,
         onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result)
       },
       {
-        label: 'Premies vergelijken',
+        label: 'Besparen',
         backButtonLabel: 'Terug'
       }
     ];

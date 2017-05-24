@@ -11,6 +11,7 @@ import { ConfigService } from '../../config.service';
 import { CarService } from './car.service';
 import { AuthHttp } from '../../services';
 import { Car } from '../../models/car';
+import { CarInsuranceOptions, CarCompareRequest } from '../../models/car-compare-request';
 
 describe('Service: Car', () => {
   const configServiceStub = {
@@ -57,6 +58,22 @@ describe('Service: Car', () => {
     'slug': [
       'coverage_recommandation_limited_casco_text'
     ]
+  };
+
+  const mockCarCompareRequest: CarCompareRequest = {
+    'license': 'GK906T',
+    'first_name': null,
+    'gender': 'm',
+    'date_of_birth': '1991-10-26',
+    'house_number': '234',
+    'last_name': null,
+    'title': 'Dhr.',
+    'zipcode': '2512GH',
+    'country': 'NL',
+    'coverage': 'CL',
+    'claim_free_years': 7,
+    'household_status': 'CHMP',
+    'active_loan': false
   };
 
   beforeEach(async(() => {
@@ -133,6 +150,26 @@ describe('Service: Car', () => {
       expect(coverages[0].id).toBe('CL');
       expect(coverages[1].id).toBe('CLC');
       expect(coverages[2].id).toBe('CAR');
+    });
+  });
+
+  describe('Car Insurance Compare', () => {
+    it('should define the getInsurances function', () => {
+      expect(this.service.getInsurances).toBeDefined;
+    });
+
+    it('should return an Observable<Array<CarInsurance>>', () => {
+      this.backend.connections.subscribe((connection) => {
+        connection.mockRespond(new Response(new ResponseOptions({
+          body: JSON.stringify({})
+        })));
+      });
+
+      inject([CarService], (carService) => {
+        carService.getInsurances(mockCarCompareRequest).subscribe((res) => {
+          expect(res).toBeDefined;
+        });
+      });
     });
   });
 
