@@ -95,7 +95,23 @@ export class AuthHttp {
           return this.requestWithToken(req, token);
         });
     } else {
-      return this.requestWithToken(req, token);
+      return this.requestWithToken(req, token)
+        .catch((error) => {
+          // Try to get refresh token on not-authorized error
+          if (error.status === 401 || error.status === 403) {
+            let tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
+            return this.authService.refreshToken(tokenObject.refresh_token)
+              .flatMap((data) => {
+                // Retry request with new token
+                if (data) {
+                  token = data.access_token;
+                  return this.http.request(req, token);
+                }
+              });
+          } else {
+            Observable.throw(error);
+          }
+        });
     }
   }
 

@@ -1,0 +1,23 @@
+.knx-review-summary {
+  .knx-review-summary__title {
+    border-bottom: 1px solid $knab-primary-gray;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+
+  .knx-review-summary__rating {
+    [class*='col-'] {
+      padding-left: 0;
+    }
+
+    .knx-review-summary__label {
+      font-size: $font-size-base;
+      margin-top: 0.5em;
+    }
+
+    .knx-review-summary__stars {
+      margin-bottom: 0;
+    }
+  }
+}

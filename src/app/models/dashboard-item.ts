@@ -1,5 +1,5 @@
 export interface DashboardItem {
-  documents: any;
+  documents: Array<any>;
   count: number;
   limit: number;
   offset: number;

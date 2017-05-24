@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // @cx
-import * as noUiSlider from 'nouislider';
 import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
-import { CXWizardModule } from '../../node_modules/@cx/wizard';
+
+// @knx
+import { KNXWizardModule } from '../../node_modules/@knx/wizard';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
@@ -38,7 +39,10 @@ import { InsuranceResultComponent } from './components/knx-insurance-result/insu
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { NavbarComponent } from './components/knx-navigation';
+import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
+import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
+import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
@@ -59,8 +63,11 @@ export const sharedComponents = [
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
+  OpeningHoursComponent,
   PriceTableComponent,
   PriceItemComponent,
+  ReviewSummaryComponent,
+  StarRatingComponent,
   LoaderComponent,
   TabsComponent,
   TabComponent,
@@ -74,7 +81,7 @@ export const sharedComponents = [
     ReactiveFormsModule,
     TextMaskModule,
     CXFormsModule,
-    CXWizardModule,
+    KNXWizardModule,
     AngularSvgIconModule
   ],
   declarations: [
@@ -84,7 +91,7 @@ export const sharedComponents = [
     CommonModule,
     FormsModule,
     CXFormsModule,
-    CXWizardModule,
+    KNXWizardModule,
     ReactiveFormsModule,
     AngularSvgIconModule,
     ...sharedComponents

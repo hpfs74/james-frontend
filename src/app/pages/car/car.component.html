@@ -3,87 +3,74 @@
     <ol *ngIf="formSteps" class="knx-step-navigation">
       <li *ngFor="let step of formSteps; let i = index;"
         class="knx-step-navigation__step"
-        [ngClass]="{ 'knx-step-navigation__step--current': getCurrentStepIndex(i) }">{{ step.title }}</li>
+        [ngClass]="{ 'knx-step-navigation__step--current': i === currentStep }">{{ step.label }}</li>
     </ol>
   </div>
 </div>
 
-<!-- TODO: remove me when refresh implemented -->
-<div #el style="position:absolute;top:50px;right:20px;width:300px;background: yellow;border:1px solid red;padding:10px">
-  <small>Current Token: <br><textarea style="width:100%">{{token}}</textarea></small><br>
-  <a style="margin-right:10px" (click)="refreshToken()">refresh</a>
-  <a (click)="el.style.display = 'none'">hide</a>
-</div>
+<div class="container car-forms__container">
+  <knx-wizard (stepChange)="onStepChange($event)">
+    <div class="knx-wizard__steps">
+      <knx-step [options]="formSteps[0]">
 
-<div class="container">
-
-  <div class="row">
-    <div class="col-md-8">
-      <div class="car-forms__container">
-
-        <div class="car-form" [ngSwitch]="currentFormStep.id">
           <knx-car-detail-form
-            *ngSwitchCase="'carDetails'"
             (licensePlateChange)="getCarInfo($event)"
             (addressChange)="updateAddress($event)"
             (coverageDetailsChange)="getCoverages($event)"
             (coverageSelected)="updateSelectedCoverage($event)"
             (formControlFocus)="showHelperText($event)"
+            [form]="carDetailForm"
             [coverages]="coverages"
-            [isCoverageLoading]="isCoverageLoading"
-            [submitted]="formSteps[0].submitted">
+            [submitted]="carDetailSubmitted"
+            [isCoverageLoading]="isCoverageLoading">
           </knx-car-detail-form>
+        </knx-step>
 
+        <knx-step [options]="formSteps[1]">
           <knx-insurance-toplist
-            *ngSwitchCase="'carResults'"
-            (insuranceSelected$)="goToNextStep($event)"
+            (insuranceSelected$)="onSelectPremium($event)"
             [stepAmount]="4"
             [insurances]="insurances | async">
           </knx-insurance-toplist>
-
-        </div>
-
-        <div class="cx-form-group cx-form-group--space-between">
-          <button class="knx-button knx-button--link knx-button--back" (click)="goToPreviousStep()">Terug</button>
-          <button class="knx-button knx-button--secondary knx-button--arrow" (click)="goToNextStep()">Volgende</button>
-        </div>
-
-      </div>
+        </knx-step>
     </div>
-    <div class="col-md-4">
 
+    <div class="knx-wizard__sidebar" #knxWizardSidebar>
       <knx-chat-stream [options]="chatConfig" [messages]="chatMessages" [formGroup]="carExtrasForm.formGroup">
-
-        <knx-collapse-message title="Dekking" *ngIf="insurances" [isOpen]="true">
+        <!--
+          ngIf on individual components used here to get around partial keyframe error of
+          animated knx-collapse-message @see https://github.com/angular/material2/issues/3968
+        -->
+        <knx-collapse-message title="Dekking" *ngIf="currentStep === 1" [isOpen]="true">
           <cx-form-group
-            [formControlName]="carExtrasForm.formConfig.coverage.formControlName"
-            [options]="carExtrasForm.formConfig.coverage">
+            [options]="carExtrasForm.formConfig.coverage"
+            [formControlName]="carExtrasForm.formConfig.coverage.formControlName">
           </cx-form-group>
         </knx-collapse-message>
 
-        <knx-collapse-message title="Aanvullende dekkingen" *ngIf="insurances" [isOpen]="true">
+        <knx-collapse-message title="Aanvullende dekkingen" *ngIf="currentStep === 1" [isOpen]="true">
           <cx-form-group
-            [formControlName]="carExtrasForm.formConfig.extraOptions.formControlName"
-            [options]="carExtrasForm.formConfig.extraOptions">
+            [options]="carExtrasForm.formConfig.extraOptions"
+            [formControlName]="carExtrasForm.formConfig.extraOptions.formControlName">
           </cx-form-group>
         </knx-collapse-message>
 
-        <knx-collapse-message title="Aantal KM per jaar" *ngIf="insurances" [isOpen]="true">
+        <knx-collapse-message title="Aantal KM per jaar" *ngIf="currentStep === 1" [isOpen]="true">
           <cx-form-group
-            [formControlName]="carExtrasForm.formConfig.kmPerYear.formControlName"
-            [options]="carExtrasForm.formConfig.kmPerYear">
+            [options]="carExtrasForm.formConfig.kmPerYear"
+            [formControlName]="carExtrasForm.formConfig.kmPerYear.formControlName">
           </cx-form-group>
         </knx-collapse-message>
 
-        <knx-collapse-message title="Eigen risico" *ngIf="insurances" [isOpen]="true">
+        <knx-collapse-message title="Eigen risico" *ngIf="currentStep === 1" [isOpen]="true">
           <cx-form-group
             class="own-risk"
-            [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName"
-            [options]="carExtrasForm.formConfig.ownRisk">
+            [options]="carExtrasForm.formConfig.ownRisk"
+            [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName">
           </cx-form-group>
         </knx-collapse-message>
-
       </knx-chat-stream>
     </div>
-  </div>
+
+  </knx-wizard>
 </div>

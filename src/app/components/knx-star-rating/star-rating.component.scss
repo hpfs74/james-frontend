@@ -1,0 +1,32 @@
+.knx-star-rating {
+  background: $knab-primary-gray;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  font-size: $font-size-base * 1.2;
+
+  .knx-icon-star {
+    color: $knab-primary-yellow;
+  }
+
+  .knx-star-rating__remaining.knx-icon-star {
+    color: #fff;
+  }
+
+  & > .knx-star-rating__remaining {
+    margin-left: -6px;
+  }
+
+  & > .knx-star-rating__remaining ~ .knx-star-rating__remaining {
+    margin-left: 0;
+  }
+
+  .knx-star-rating__number {
+    color: $knab-primary-blue;
+    font-size: $font-size-base;
+    font-weight: bold;
+    position: relative;
+    top: -2px;
+    margin-left: 5px;
+  }
+}

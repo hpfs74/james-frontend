@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Price, Nav, Feature, User } from '../../models';
+import { Price, Nav, Feature, Profile } from '../../models';
 import {
   AuthService,
   ProfileService,
@@ -16,6 +16,7 @@ import {
   <knx-cookiebar></knx-cookiebar>
   <header class="header">
     <knx-navbar [menuItems]="topMenu">
+        <knx-opening-hours></knx-opening-hours>
         <knx-user-detail [isLoggedIn]="isLoggedIn" (signOut)="signOut()" [profile]="profile"></knx-user-detail>
     </knx-navbar>
   </header>
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
-  profile: User;
+  profile: Profile;
 
   constructor(
     private router: Router,

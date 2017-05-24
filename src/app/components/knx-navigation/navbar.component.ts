@@ -50,6 +50,8 @@ import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
                 href="{{ item.url }}" target="_blank"
                 class="nav-link"><span *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
           </li>
+          <li class="nav-item hidden-xs"><ng-content select="knx-opening-hours"></ng-content></li>
+
           <!-- TODO: implemement dropdown component
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com"
