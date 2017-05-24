@@ -21,9 +21,12 @@ import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../models';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 55c1574... refactor(app): clean up car component
+=======
+>>>>>>> f69cbeb... refactor(dashboard): add chat assistant
 
 @Component({
 <<<<<<< HEAD
@@ -76,11 +79,15 @@ import { Profile } from '../../models';
 export  class DashboardComponent implements OnInit, AfterViewInit {
 =======
 export class DashboardComponent implements OnInit {
+<<<<<<< HEAD
 >>>>>>> 55c1574... refactor(app): clean up car component
+=======
+>>>>>>> f69cbeb... refactor(dashboard): add chat assistant
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   constructor(private profileService: ProfileService,
               private assistantService: AssistantService,
@@ -89,6 +96,8 @@ export class DashboardComponent implements OnInit {
     this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
 =======
+=======
+>>>>>>> f69cbeb... refactor(dashboard): add chat assistant
   constructor(
     private profileService: ProfileService,
     private assistantService: AssistantService,
@@ -96,8 +105,12 @@ export class DashboardComponent implements OnInit {
   ) {
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
+<<<<<<< HEAD
    }
 >>>>>>> 55c1574... refactor(app): clean up car component
+=======
+  }
+>>>>>>> f69cbeb... refactor(dashboard): add chat assistant
 
   ngOnInit() {
 

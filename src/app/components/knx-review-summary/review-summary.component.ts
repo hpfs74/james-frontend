@@ -17,9 +17,13 @@ import { Rating } from '../../models/rating';
           </div>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
       </div>
 =======
 >>>>>>> 5a31a8f... feat(review-summary): add review and star-rating components
+=======
+      </div>
+>>>>>>> f69cbeb... refactor(dashboard): add chat assistant
     </div>
   </div>
   `
