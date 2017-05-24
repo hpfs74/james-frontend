@@ -1,4 +1,4 @@
-import { User } from './user';
+import { Profile } from './profile';
 import { Address } from './address';
 import { Car } from './car';
 
@@ -61,7 +61,7 @@ export class CarUser {
   insurance?: string;
 
   /* istanbul ignore next: object initializer */
-  constructor(profile: User, car: Car, address: Address, options: CarInsuranceOptions) {
+  constructor(profile: Profile, car: Car, address: Address, options: CarInsuranceOptions) {
 
     this.license = car.license;
     this.date_of_birth = profile.dateOfBirth;

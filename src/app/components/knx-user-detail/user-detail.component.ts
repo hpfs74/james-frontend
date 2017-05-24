@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user';
+import { Profile } from '../../models/profile';
 
 @Component({
   selector: 'knx-user-detail',
@@ -13,7 +13,7 @@ import { User } from '../../models/user';
   `
 })
 export class UserDetailComponent {
-  @Input() profile: User;
+  @Input() profile: Profile;
   @Input() isLoggedIn: boolean = false;
   @Output() signOut = new EventEmitter();
 

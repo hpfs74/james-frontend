@@ -43,7 +43,7 @@
 
 
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7 col-sm-12">
           <cx-form-group
             formControlName="claimFreeYears"
             (events)="onFocus('claimFreeYears')"
@@ -58,7 +58,7 @@
               }">
           </cx-form-group>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 hidden-sm hidden-xs">
           <div class="cx-form-group">
             <button class="knx-button knx-button--util inline-formelement" href="">Weet ik niet</button>
           </div>
@@ -157,7 +157,7 @@
           Bezig met ophalen van dekkingsopties...
         </knx-loader>
 
-        <ng-container *ngIf="coverages">
+        <ng-container *ngIf="coverages && !isCoverageLoading">
           <h2>Je dekkingswensen</h2>
           <knx-price-table [items]="coverages" (onSelected)="onSelectCoverage($event)"></knx-price-table>
         </ng-container>

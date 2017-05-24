@@ -11,7 +11,8 @@
       "auth": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/nicci",
       "address": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/address",
       "car": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/cars",
-      "helper": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/helper"
+      "helper": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/helper",
+      "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
     },
     "external": {}
   }

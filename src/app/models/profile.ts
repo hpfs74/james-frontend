@@ -5,7 +5,7 @@ import { Address, DashboardItem } from './index';
  * @export
  * @class User
  */
-export class User {
+export class Profile {
   firstname: string;
   infix: string;
   lastname: string;
@@ -23,21 +23,21 @@ export class User {
   active: boolean;
   enabled: boolean;
   phone: string;
+  age: number;
+  address?: Address;
 
   _id: string;
   _deleted: boolean;
   _embedded: {
-    car: DashboardItem;
-    travel: DashboardItem;
-    content: DashboardItem;
-    home: DashboardItem;
-    liability: DashboardItem;
+    insurance: DashboardItem;
+    car?: DashboardItem;
+    travel?: DashboardItem;
+    content?: DashboardItem;
+    home?: DashboardItem;
+    liability?: DashboardItem;
     inbox: DashboardItem;
   };
 
   filled_data_percentage: number;
   outdated_data_percentage: number;
-  age: number;
-
-  address?: Address;
 }

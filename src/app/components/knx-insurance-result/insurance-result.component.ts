@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { fadeInAnimation } from './../../animations/fade-in.animation';
-import { InsuranceAdvice, Insurance } from '../../models/insurance';
+import { InsuranceAdvice, Insurance, Insurer } from '../../models';
 
 @Component({
   selector: 'knx-insurance-result',
@@ -45,7 +45,8 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
         </div>
       </div>
 
-      <knx-insurance-result-detail *ngIf="showDetailPanel" [insurance]="insurance" [showDetails]="false"></knx-insurance-result-detail>
+      <knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurance]="insurance">
+      </knx-insurance-result-detail>
     </div>
   `,
   animations: [ fadeInAnimation ]
@@ -54,6 +55,7 @@ import { InsuranceAdvice, Insurance } from '../../models/insurance';
 export class InsuranceResultComponent {
   @Input() index: number;
   @Input() insurance: InsuranceAdvice;
+  @Input() insurer: Insurer;
   @Input() showDetailPanel: boolean = false;
   @Input() orderChange: boolean;
 

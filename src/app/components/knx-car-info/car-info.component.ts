@@ -8,7 +8,7 @@ import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
   selector: 'knx-car-info',
   template: `
   <div class="knx-message knx-message--chat">
-    <div class="container-fluid">
+    <div class="container knx-container--fullwidth">
         <div class="knx-car-info__message">
           Molto bello! Mooie auto die <strong>{{ data.make | titleCase }} {{ data.model | titleCase }}</strong>
           <knx-car-preview [colorCode]="data.color_code"></knx-car-preview>

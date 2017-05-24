@@ -15,7 +15,7 @@ interface OrderItem {
   <div class="knx-insurance-toplist">
     <div class="row">
       <div class="col-sm-12">
-        <h2>De beste verzekeringen van alle 42</h2>
+        <h2>De beste verzekeringen van alle 40 aanbieders</h2>
 
         <div class="knx-button-group" role="group">
           <button
@@ -40,6 +40,8 @@ interface OrderItem {
           <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showMore()">
             Toon {{ insurances.length - total }} meer
           </button>
+
+          <button class="knx-button knx-button--link">Hoe vergelijken jullie?</button>
 
         </ng-template>
       </div>

@@ -43,7 +43,7 @@ export class CarDetailForm {
         ]
       )],
       houseHold: [null, Validators.required],
-      loan: [null, Validators.required],
+      loan: [false, Validators.required],
       gender: [null, Validators.required],
       coverage: [null, Validators.required]
     });
