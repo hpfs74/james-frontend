@@ -10,7 +10,7 @@ import { CarInsurance, } from '../../models/car-insurance';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
 import { CarCoverageRecommendation } from './../../models/coverage';
-import { CarInsuranceOptions, CarUser } from '../../models/car-prefs';
+import { CarInsuranceOptions, CarCompareRequest } from '../../models/car-compare-request';
 
 // TODO: remove mock data
 import { mockInsurances } from '../../models/car-insurance.mock';
@@ -41,12 +41,12 @@ export class CarService {
       .map(res => <CarCoverageRecommendation>res.json());
   }
 
-  public getInsurances(carRequest: CarUser): Observable<Array<CarInsurance>> {
+  public getInsurances(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
     return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest))
       .map((res: Response) => res.json());
   }
 
-  public getInsurancesWithDetails(carRequest: CarUser): Observable<Array<CarInsurance>> {
+  public getInsurancesWithDetails(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
     return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest)).map(res => res.json())
       .flatMap((insurance) => {
         return Observable.forkJoin(
