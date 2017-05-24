@@ -14,12 +14,8 @@ const homeRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
+        path: 'dashboard',
         canActivateChild: [AuthGuard],
-        // component: DashboardComponent,
-        data: {
-          breadcrumb: 'Overzicht'
-        },
         loadChildren: '../dashboard/dashboard.module#DashboardModule'
       },
       {

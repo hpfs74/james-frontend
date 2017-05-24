@@ -4,6 +4,7 @@ import { ChatStreamModule } from './../../components/knx-chat-stream/chat-stream
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardDetailComponent } from './dashboard-detail.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     DashboardRoutingModule
   ],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    DashboardDetailComponent
   ]
 })
 export class DashboardModule {
