@@ -141,36 +141,9 @@ export class CarComponent implements OnInit {
     }
 
     // Update profile
-      // licensePlate: [null, Validators.compose(
-      //   [
-      //     Validators.required,
-      //     Validators.maxLength(8),
-      //     LicensePlateValidator
-      //   ]
-      // )],
-      // birthDate: [null,
-      //   [
-      //     Validators.required,
-      //     birthDateValidator('birthDate')
-      //   ]
-      // ],
-      // claimFreeYears: [null, Validators.compose(
-      //   [
-      //     Validators.required,
-      //     minNumberValidator('claimFreeYears', 0),
-      //     maxNumberValidator('claimFreeYears', 50)
-      //   ]
-      // )],
-      // houseHold: [null, Validators.required],
-      // loan: [false, Validators.required],
-      // gender: [null, Validators.required],
-      // coverage: [null, Validators.required]
-
-
-    // let details: Profile = {
-    //   gender: detailForm.value.gender,
-    //   birthDate: detaimForm.value.birthDate
-    // };
+    this.profile.gender = detailForm.value.gender;
+    this.profile.dateOfBirth = detailForm.value.birthDate;
+    this.profile.gender = detailForm.value.gender;
 
     let options: CarInsuranceOptions = {
       active_loan: detailForm.value.loan,
@@ -179,24 +152,6 @@ export class CarComponent implements OnInit {
       household_status: detailForm.value.houseHold
     };
     let requestObj = new CarUser(this.profile, this.car, this.address, options);
-    //console.log(requestObj);
-
-    // let mockRequest: CarUser = {
-    //   'license': 'GK906T',
-    //   'first_name': null,
-    //   'gender': 'm',
-    //   'date_of_birth': '1991-10-26',
-    //   'house_number': '234',
-    //   'last_name': null,
-    //   'title': 'Dhr.',
-    //   'zipcode': '2512GH',
-    //   'country': 'NL',
-    //   'coverage': 'CL',
-    //   'claim_free_years': 7,
-    //   'household_status': 'CHMP',
-    //   'active_loan': false
-    // };
-    // let requestObj = mockRequest;
 
     this.formData[0] = requestObj;
     this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
