@@ -127,7 +127,6 @@ export class CarComponent implements OnInit {
   }
 
   submitDetailForm(): Observable<any> {
-    this.carDetailSubmitted = true;
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
 
@@ -135,10 +134,14 @@ export class CarComponent implements OnInit {
     this.validateForm(address);
 
     if (!detailForm.valid && !address.valid) {
+      this.carDetailSubmitted = true;
       return new Observable(obs => {
         throw ('cannot move to step');
       });
     }
+
+    // Hide error summary
+    this.carDetailSubmitted = false;
 
     // Update profile
     this.profile.gender = detailForm.value.gender;
@@ -180,6 +183,10 @@ export class CarComponent implements OnInit {
 
   showHelperText(key) {
     this.chatNotifierService.addTextMessage(this.chatConfig.car.info[key]);
+  }
+
+  toggleExtrasPanel() {
+    // TODO: implement
   }
 
   getCarInfo(licensePlate: string) {

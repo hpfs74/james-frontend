@@ -37,11 +37,11 @@ interface OrderItem {
           </knx-insurance-result>
 
           <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showMore()">
-            Toon {{ insurances.length - total }} meer
+            Toon {{ insurances.length - total }} meer verzekeringen
           </button>
 
           <div class="knx-insurance-toplist__info">
-            <a href="#" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
+            <a href="/faq" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
           </div>
 
         </ng-template>

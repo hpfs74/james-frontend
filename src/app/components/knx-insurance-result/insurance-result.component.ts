@@ -12,9 +12,10 @@ import { InsuranceAdvice, Insurance, Insurer } from '../../models';
         <div class="row">
           <div class="col-sm-4">
             <img class="knx-insurance-result__logo" src="{{ insurance._embedded.insurance.insurance_logo}}">
-            <div class="knx-sticker knx-sticker--yellow" title="Op basis van jouw wensen raden we deze premie aan">
+            <!--<div class="knx-sticker knx-sticker--yellow" title="Op basis van jouw wensen raden we deze premie aan">
               <span class="knx-icon-thumbs-o-up"></span>
             </div>
+            -->
           </div>
           <div class="col-sm-4">
             <div class="row">
