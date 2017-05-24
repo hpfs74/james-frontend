@@ -57,6 +57,7 @@ export class CarComponent implements OnInit {
 <<<<<<< HEAD
   profile: Profile;
   address: Address;
+<<<<<<< HEAD
 =======
   profile: User;
 <<<<<<< HEAD
@@ -66,6 +67,8 @@ export class CarComponent implements OnInit {
 =======
   profile: Profile;
 >>>>>>> 55c1574... refactor(app): clean up car component
+=======
+>>>>>>> 08c5ccb... fix(car): fix car detail form issues
 
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
@@ -252,6 +255,7 @@ export class CarComponent implements OnInit {
     this.profile.dateOfBirth = detailForm.value.birthDate;
     this.profile.gender = detailForm.value.gender;
 
+<<<<<<< HEAD
     let options: CarInsuranceOptions = {
       active_loan: detailForm.value.loan,
       coverage: detailForm.value.coverage,
@@ -302,13 +306,16 @@ export class CarComponent implements OnInit {
       });
     }
 
+=======
+>>>>>>> 08c5ccb... fix(car): fix car detail form issues
     let options: CarInsuranceOptions = {
       active_loan: detailForm.value.loan,
       coverage: detailForm.value.coverage,
       claim_free_years: +detailForm.value.claimFreeYears,
       household_status: detailForm.value.houseHold
     };
-    let requestObj = new CarUser(this.profile, this.car, address, options);
+    let requestObj = new CarUser(this.profile, this.car, this.address, options);
+    //console.log(requestObj);
 
     // let mockRequest: CarUser = {
     //   'license': 'GK906T',
@@ -394,13 +401,19 @@ export class CarComponent implements OnInit {
   updateAddress(address: Address) {
     if (address.street && address.city) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 08c5ccb... fix(car): fix car detail form issues
       this.address = address;
       if (this.profile) {
         // TODO: do actual call to backend to patch profile address
         this.profile.address = address;
       }
+<<<<<<< HEAD
 =======
 >>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
+=======
+>>>>>>> 08c5ccb... fix(car): fix car detail form issues
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
     } else {
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);
@@ -409,10 +422,14 @@ export class CarComponent implements OnInit {
 
   getCoverages({ loan }) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (this.car) {
 =======
     if (this.car && loan) {
 >>>>>>> 55c1574... refactor(app): clean up car component
+=======
+    if (this.car) {
+>>>>>>> 08c5ccb... fix(car): fix car detail form issues
       this.isCoverageLoading = true;
 
       // get default coverage types

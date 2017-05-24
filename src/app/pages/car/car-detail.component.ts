@@ -68,16 +68,22 @@ export class CarDetailComponent implements OnInit {
       loan.valueChanges)
       .subscribe(data => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 08c5ccb... fix(car): fix car detail form issues
         if (licensePlate.valid && loan.valid) {
           this.coverageDetailsChange.emit(this.form.formGroup.value);
         }
       });
+<<<<<<< HEAD
 =======
           if (licensePlate.valid && loan.valid) {
             this.coverageDetailsChange.emit(this.form.formGroup.value);
           }
     });
 >>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config
+=======
+>>>>>>> 08c5ccb... fix(car): fix car detail form issues
   }
 
   onFocus(controlKey) {
