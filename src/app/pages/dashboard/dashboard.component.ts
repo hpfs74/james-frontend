@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 =======
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
@@ -14,6 +15,9 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 >>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
+=======
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+>>>>>>> a84d0ff... refactor(dashboard): add welcome message on chat box
 import { ProfileService } from '../../services/profile.service';
 import { AssistantService } from '../../services/assistant.service';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
@@ -65,15 +69,19 @@ import { Profile } from '../../models';
             </div>
           </div>
         </div>
-
         <div class="col-md-4">
           <knx-chat-stream [options]="chatConfig" [messages]="chatMessages"></knx-chat-stream>
         </div>
     </div>
+<<<<<<< HEAD
   </div>
+=======
+    <pre>PROFILE: {{profile.firstname}}</pre>
+>>>>>>> a84d0ff... refactor(dashboard): add welcome message on chat box
   `
 >>>>>>> d95a30e... fix(styles): minor icon style improvement
 })
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 export  class DashboardComponent implements OnInit, AfterViewInit {
@@ -83,10 +91,14 @@ export class DashboardComponent implements OnInit {
 >>>>>>> 55c1574... refactor(app): clean up car component
 =======
 >>>>>>> f69cbeb... refactor(dashboard): add chat assistant
+=======
+export class DashboardComponent implements OnInit, AfterViewInit {
+>>>>>>> a84d0ff... refactor(dashboard): add welcome message on chat box
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   constructor(private profileService: ProfileService,
@@ -103,6 +115,11 @@ export class DashboardComponent implements OnInit {
     private assistantService: AssistantService,
     private chatNotifierService: ChatStreamService
   ) {
+=======
+  constructor(private profileService: ProfileService,
+              private assistantService: AssistantService,
+              private chatNotifierService: ChatStreamService) {
+>>>>>>> a84d0ff... refactor(dashboard): add welcome message on chat box
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
 <<<<<<< HEAD
@@ -156,6 +173,13 @@ export class DashboardComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+
+  }
+
+  ngAfterViewInit() {
+
+
+
 
   }
 }
