@@ -48,7 +48,7 @@ import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
 
               <a *ngIf="!item.routePath" id="{{ item.id }}"
                 href="{{ item.url }}" target="_blank"
-                class="nav-link"><span *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
+                class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
           </li>
           <li class="nav-item hidden-xs"><ng-content select="knx-opening-hours"></ng-content></li>
 

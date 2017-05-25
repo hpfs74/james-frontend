@@ -14,7 +14,7 @@ import { Profile } from '../../models/profile';
         </knx-dropdown-button>
         <knx-dropdown-menu offset="40 0">
           <knx-menu-item (click)="goToProfile()">
-            <span>Mijn profiel</span>
+            <span>Mijn account</span>
           </knx-menu-item>
 
           <div class='knx-menu-divider'></div>
