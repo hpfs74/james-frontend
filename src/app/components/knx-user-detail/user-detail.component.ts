@@ -10,7 +10,7 @@ import { Profile } from '../../models/profile';
     <div class="knx-user-detail" *ngIf="profile" >
       <knx-dropdown>
         <knx-dropdown-button>
-          <span class="knx-icon-user"></span> {{ profile.firstname }}
+          <span class="knx-user-detail__icon knx-icon-user-o"></span> {{ profile.firstname }}
         </knx-dropdown-button>
         <knx-dropdown-menu offset="40 0">
           <knx-menu-item (click)="goToProfile()">
