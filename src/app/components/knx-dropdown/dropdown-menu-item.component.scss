@@ -21,7 +21,7 @@
 }
 
 .ng2-menu-item--selected {
-  background: rgba(158, 158, 158, 0.2);
+  background: $knab-primary-gray;
   outline: 0;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .ng2-menu-item:active {
-  background: rgba(158, 158, 158, 0.4);
+  background: $knab-primary-gray;
 }
 
 :host(ng2-menu-item) /deep/ [ng2-menu-item-icon] {
