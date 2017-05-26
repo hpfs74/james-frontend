@@ -18,8 +18,12 @@ export const dashboardRoutes: Routes = [
     data: {
       breadcrumb: 'Overzicht'
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 <<<<<<< HEAD
+=======
+    }
+>>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
   },
   {
     path: 'cars',
@@ -36,6 +40,7 @@ export const dashboardRoutes: Routes = [
       breadcrumb: 'Je reisverzekering',
       insuranceType: 'reis'
     }
+<<<<<<< HEAD
   }
 
 =======
@@ -63,6 +68,10 @@ export const dashboardRoutes: Routes = [
     // ]
   }
 >>>>>>> f5c3acd... refactor(dashboard): add chat service in the dashboard
+=======
+  }
+
+>>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
 ];
 @NgModule({
   imports: [

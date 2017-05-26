@@ -6,6 +6,7 @@ import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../models';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -29,6 +30,14 @@ import { ActivatedRoute } from '@angular/router';
     </div>
   `
 >>>>>>> 0d3cdfc... refactor(dashboard): add detail page for each product
+=======
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'knab-dashboard-detail',
+  templateUrl: 'dashboard-detail.component.html',
+  styleUrls: ['dashboard-detail.component.scss'],
+>>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
 })
 export class DashboardDetailComponent implements OnInit, AfterViewInit {
   insuranceType: string;
@@ -39,18 +48,25 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
   constructor(private profileService: ProfileService,
               private assistantService: AssistantService,
 <<<<<<< HEAD
+<<<<<<< HEAD
               private chatNotifierService: ChatStreamService,
               private route: ActivatedRoute) {
 
 =======
               private chatNotifierService: ChatStreamService) {
 >>>>>>> 0d3cdfc... refactor(dashboard): add detail page for each product
+=======
+              private chatNotifierService: ChatStreamService,
+              private route: ActivatedRoute) {
+
+>>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
 
   ngOnInit() {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     this.route.data.subscribe(x=> {
       this.insuranceType = x.insuranceType;
@@ -59,6 +75,11 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
     // TODO: get the insurance type parameter
     this.insuranceType = 'auto';
 >>>>>>> 0d3cdfc... refactor(dashboard): add detail page for each product
+=======
+    this.route.data.subscribe(x=> {
+      this.insuranceType = x.insuranceType;
+    });
+>>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
 
     this.chatNotifierService.addMessage$.subscribe(
       message => {

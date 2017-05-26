@@ -34,6 +34,7 @@ import { Profile } from '../../models';
 
 @Component({
 <<<<<<< HEAD
+<<<<<<< HEAD
   templateUrl: 'dashboard.component.html'
 =======
   template: `
@@ -98,6 +99,11 @@ export class DashboardComponent implements OnInit {
 =======
 export class DashboardComponent implements OnInit, AfterViewInit {
 >>>>>>> a84d0ff... refactor(dashboard): add welcome message on chat box
+=======
+  templateUrl: 'dashboard.component.html'
+})
+export  class DashboardComponent implements OnInit, AfterViewInit {
+>>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];

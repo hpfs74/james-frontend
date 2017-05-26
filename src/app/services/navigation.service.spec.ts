@@ -19,6 +19,7 @@ describe('Service: NavigationService', function () {
       expect(ret).not.toBeNull();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       expect(ret.length).toBe(1);
 =======
       expect(ret.length).toBe(4);
@@ -26,6 +27,9 @@ describe('Service: NavigationService', function () {
 =======
       expect(ret.length).toBe(3);
 >>>>>>> d95a30e... fix(styles): minor icon style improvement
+=======
+      expect(ret.length).toBe(1);
+>>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
     });
   });
 
