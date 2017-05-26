@@ -31,7 +31,6 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    // TODO: add
     this.addressFormGroup.setAsyncValidators( (formControl) => this.validateAddress(formControl, this.addressService));
   }
 
@@ -87,7 +86,7 @@ export class AddressLookupComponent implements AfterViewChecked {
               return resolve({ address: true });
             });
         }
-      }, 600);
+      }, 200);
     });
   }
 

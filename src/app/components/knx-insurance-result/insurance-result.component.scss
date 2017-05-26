@@ -164,3 +164,42 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 .knx-insurance-result__details .knx-tab__content {
   padding: 0 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .knx-insurance-result__logo {
+    width: 50%;
+    margin: 40px auto 30px;
+    display: block;
+  }
+
+  .knx-insurance_advice {
+    [class*="col-"] {
+      border-right: $knx-insurance-result-border;
+      font-size: $font-size-base - 2;
+      padding: 0 40px;
+    }
+
+    &:last-child > [class*="col-"]:last-child {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .knx-insurance-result__own-risk {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .knx-insurance-result__own-risk,
+  .knx-insurance-result__reviews,
+  .knx-insurance-result__profilescore,
+  .knx-insurance-result__price-quality {
+    width: 50%;
+  }
+
+  .knx-insurance-result__premium {
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: $knx-insurance-result-border;
+  }
+}

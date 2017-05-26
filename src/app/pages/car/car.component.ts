@@ -10,13 +10,14 @@ import { InsuranceService } from '../../services/insurance.service';
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { CarService } from './car.service';
-import { Car, Price, CarUser, Profile, Address } from '../../models';
+import { Car, Price, CarCompareRequest, Profile, Address } from '../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsurance } from '../../models/car-insurance';
-import { CarInsuranceOptions } from './../../models/car-prefs';
+import { CarInsuranceOptions } from './../../models/car-compare-request';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
+import { scrollToForm } from '../../utils/base-form.utils';
 
 // TODO: remove mock data
 import { mockInsurances } from '../../models/car-insurance.mock';
@@ -89,13 +90,13 @@ export class CarComponent implements OnInit {
         onBeforeNext: this.submitDetailForm.bind(this)
       },
       {
-        label: 'Resultaten',
+        label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
         hideNextButton: true,
         onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result)
       },
       {
-        label: 'Premies vergelijken',
+        label: 'Besparen',
         backButtonLabel: 'Terug'
       }
     ];
@@ -126,8 +127,6 @@ export class CarComponent implements OnInit {
   }
 
   submitDetailForm(): Observable<any> {
-    this.carDetailSubmitted = true;
-
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
 
@@ -135,42 +134,19 @@ export class CarComponent implements OnInit {
     this.validateForm(address);
 
     if (!detailForm.valid && !address.valid) {
+      this.carDetailSubmitted = true;
       return new Observable(obs => {
         throw ('cannot move to step');
       });
     }
 
+    // Hide error summary
+    this.carDetailSubmitted = false;
+
     // Update profile
-      // licensePlate: [null, Validators.compose(
-      //   [
-      //     Validators.required,
-      //     Validators.maxLength(8),
-      //     LicensePlateValidator
-      //   ]
-      // )],
-      // birthDate: [null,
-      //   [
-      //     Validators.required,
-      //     birthDateValidator('birthDate')
-      //   ]
-      // ],
-      // claimFreeYears: [null, Validators.compose(
-      //   [
-      //     Validators.required,
-      //     minNumberValidator('claimFreeYears', 0),
-      //     maxNumberValidator('claimFreeYears', 50)
-      //   ]
-      // )],
-      // houseHold: [null, Validators.required],
-      // loan: [false, Validators.required],
-      // gender: [null, Validators.required],
-      // coverage: [null, Validators.required]
-
-
-    // let details: Profile = {
-    //   gender: detailForm.value.gender,
-    //   birthDate: detaimForm.value.birthDate
-    // };
+    this.profile.gender = detailForm.value.gender;
+    this.profile.dateOfBirth = detailForm.value.birthDate;
+    this.profile.gender = detailForm.value.gender;
 
     let options: CarInsuranceOptions = {
       active_loan: detailForm.value.loan,
@@ -178,25 +154,7 @@ export class CarComponent implements OnInit {
       claim_free_years: +detailForm.value.claimFreeYears,
       household_status: detailForm.value.houseHold
     };
-    let requestObj = new CarUser(this.profile, this.car, this.address, options);
-    //console.log(requestObj);
-
-    // let mockRequest: CarUser = {
-    //   'license': 'GK906T',
-    //   'first_name': null,
-    //   'gender': 'm',
-    //   'date_of_birth': '1991-10-26',
-    //   'house_number': '234',
-    //   'last_name': null,
-    //   'title': 'Dhr.',
-    //   'zipcode': '2512GH',
-    //   'country': 'NL',
-    //   'coverage': 'CL',
-    //   'claim_free_years': 7,
-    //   'household_status': 'CHMP',
-    //   'active_loan': false
-    // };
-    // let requestObj = mockRequest;
+    let requestObj = new CarCompareRequest(this.profile, this.car, this.address, options);
 
     this.formData[0] = requestObj;
     this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
@@ -225,6 +183,10 @@ export class CarComponent implements OnInit {
 
   showHelperText(key) {
     this.chatNotifierService.addTextMessage(this.chatConfig.car.info[key]);
+  }
+
+  toggleExtrasPanel() {
+    // TODO: implement
   }
 
   getCarInfo(licensePlate: string) {

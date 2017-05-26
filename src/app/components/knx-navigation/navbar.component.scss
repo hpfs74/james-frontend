@@ -18,6 +18,11 @@ $knx-navbar-font: $font-size-base;
   color: $knab-primary-blue;
   font-size: $knx-navbar-font;
 
+  .nav-link__icon {
+    color: $knab-primary-green;
+    font-weight: bold;
+  }
+
   &:hover {
     color: $knab-primary-red;
     font-weight: normal;

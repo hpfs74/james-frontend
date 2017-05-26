@@ -107,7 +107,8 @@ export class AuthHttp {
                   token = data.access_token;
                   return this.http.request(req, token);
                 }
-              });
+              })
+              .retry(3);
           } else {
             Observable.throw(error);
           }

@@ -8,6 +8,7 @@ import { TextMaskModule } from '../../node_modules/@cx/input';
 
 // @knx
 import { KNXWizardModule } from '../../node_modules/@knx/wizard';
+import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
@@ -74,15 +75,21 @@ export const sharedComponents = [
   UserDetailComponent,
 ];
 
+export const sharedModules = [
+  CXFormsModule,
+  KNXWizardModule,
+  DropdownModule
+];
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     TextMaskModule,
-    CXFormsModule,
-    KNXWizardModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    ...sharedModules
   ],
   declarations: [
     ...sharedComponents
@@ -90,8 +97,7 @@ export const sharedComponents = [
   exports: [
     CommonModule,
     FormsModule,
-    CXFormsModule,
-    KNXWizardModule,
+    ...sharedModules,
     ReactiveFormsModule,
     AngularSvgIconModule,
     ...sharedComponents

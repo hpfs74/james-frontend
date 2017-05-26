@@ -10,7 +10,7 @@ import { CarInsurance, } from '../../models/car-insurance';
 import { Price } from '../../models/price';
 import { Address } from '../../models/address';
 import { CarCoverageRecommendation } from './../../models/coverage';
-import { CarInsuranceOptions, CarUser } from '../../models/car-prefs';
+import { CarInsuranceOptions, CarCompareRequest } from '../../models/car-compare-request';
 
 // TODO: remove mock data
 import { mockInsurances } from '../../models/car-insurance.mock';
@@ -21,11 +21,13 @@ export class CarService {
   private baseUrl: string;
   private helperUrl: string;
   private compareUrl: string;
+  private insurerUrl: string;
 
   constructor(private configService: ConfigService, private authHttp: AuthHttp) {
     this.baseUrl = configService.config.api.james.car;
     this.helperUrl = configService.config.api.james.helper;
     this.compareUrl = configService.config.api.james.compare;
+    this.insurerUrl = configService.config.api.james.insurer;
   }
 
   public getByLicense(licensePlate: string): Observable<Car> {
@@ -39,11 +41,25 @@ export class CarService {
       .map(res => <CarCoverageRecommendation>res.json());
   }
 
-  public getInsurances(carRequest: CarUser): Observable<Array<CarInsurance>> {
-    // TODO: for testing
-    //return Observable.of(mockInsurances).delay(2000);
+  public getInsurances(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
     return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest))
-      .map((res:Response) => res.json());
+      .map((res: Response) => res.json());
+  }
+
+  public getInsurancesWithDetails(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
+    return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest)).map(res => res.json())
+      .flatMap((insurance) => {
+        return Observable.forkJoin(
+          Observable.of(insurance),
+          this.authHttp.patch(this.insurerUrl + '/', { product_id: insurance.product_id })
+        );
+      }).map((insuranceDetails) => {
+        var insurance = insuranceDetails[0];
+        var insurer = insuranceDetails[1];
+
+        insurance._embedded.insurance.insurer = insurer;
+        return insurance;
+      });
   }
 
   public getCoverages(): Array<Price> {

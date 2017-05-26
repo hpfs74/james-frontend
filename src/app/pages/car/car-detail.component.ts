@@ -8,7 +8,7 @@ import 'rxjs/add/observable/combineLatest';
 
 import { CXFormComponent, getCXValueAccessor } from '../../../../node_modules/@cx/form';
 import * as CXInputMasks from '../../../../node_modules/@cx/input/src/cx-input.masks';
-import * as KNXDateMask from '../../utils/base-form.const';
+import * as KNXDateMask from '../../utils/base-form.utils';
 
 import { CarDetailForm } from './car-detail.form';
 import { Price } from '../../models/price';

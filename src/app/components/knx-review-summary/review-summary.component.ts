@@ -17,6 +17,7 @@ import { Rating } from '../../models/rating';
           </div>
         </div>
     </div>
+  </div>
   `
 })
 export class ReviewSummaryComponent {

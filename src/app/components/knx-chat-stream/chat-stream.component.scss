@@ -8,3 +8,22 @@
   border-radius: 8px;
   margin-bottom: 40px;
 }
+
+.knx-chat-stream > .knx-button {
+  font-family: $font-family-base;
+  font-size: $font-size-base - 2;
+  border-radius: 30px;
+  margin: 10px 0 0;
+  width: 100%;
+  background: $knab-light-gray;
+  color: $knab-primary-blue;
+}
+
+.knx-chat-stream > .knx-button.knx-button--edit {
+  &:before {
+    font-family: $font-family-icon;
+    content: map-get($knx-icons, pencil);
+    color: $knab-primary-blue;
+    padding-right: 15px;
+  }
+}
