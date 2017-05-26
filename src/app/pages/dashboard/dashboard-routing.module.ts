@@ -10,27 +10,25 @@ export const dashboardRoutes: Routes = [
     component: DashboardComponent,
     data: {
       breadcrumb: 'Overzicht'
-    },
-    children: [
-      {
-        path: 'car',
-        component: DashboardDetailComponent,
-        data: {
-          breadcrumb: 'Je autoverzekering',
-          insuranceType: 'car'
-        }
-      }
-    ]
-    // children: [
-    //   {
-    //     path: 'advice',
-    //     component: CarAdviceComponent,
-    //     data: {
-    //       breadcrumb: 'Autoverzekering vergelijken'
-    //     }
-    //   }
-    // ]
+    }
+  },
+  {
+    path: 'cars',
+    component: DashboardDetailComponent,
+    data: {
+      breadcrumb: 'Je autoverzekering',
+      insuranceType: 'car'
+    }
+  },
+  {
+    path: 'reis',
+    component: DashboardDetailComponent,
+    data: {
+      breadcrumb: 'Je reisverzekering',
+      insuranceType: 'reis'
+    }
   }
+
 ];
 @NgModule({
   imports: [
