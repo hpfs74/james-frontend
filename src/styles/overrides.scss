@@ -23,7 +23,7 @@
   padding-top: 10px;
 }
 
-.ng-valid.ng-touched:not(form) {
+.ng-valid.ng-touched:not(form):not(.ng-pristine) {
   input,
   select {
     border: 2px solid $knab-secondary-green;
