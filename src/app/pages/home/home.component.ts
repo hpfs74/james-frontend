@@ -10,7 +10,6 @@ import {
   CookieService,
   ContentService
 } from '../../services';
-import { AppLoaderComponent } from '../../components/knx-app-loader/loader.component';
 
 @Component({
   template: `
