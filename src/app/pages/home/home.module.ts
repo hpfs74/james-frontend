@@ -7,8 +7,10 @@ import { HomeComponent } from './home.component';
 import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { AssistantService } from '../../services/assistant.service';
+import { LoaderService } from '../../components/knx-app-loader/loader.service';
 
 // Layout components
+import { AppLoaderComponent } from '../../components/knx-app-loader/loader.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { NavbarComponent } from '../../components/knx-navigation';
 import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.component';
@@ -26,6 +28,7 @@ import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.
     HomeRoutingModule.forRoot()
   ],
   declarations: [
+    AppLoaderComponent,
     HomeComponent,
     BreadCrumbComponent,
     NavbarComponent,
@@ -39,7 +42,8 @@ export class HomeModule {
       providers: [
         AuthService,
         AuthGuard,
-        AssistantService
+        AssistantService,
+        LoaderService
       ]
     };
   }
