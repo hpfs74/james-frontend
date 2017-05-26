@@ -6,6 +6,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { tokenNotExpired } from '../utils/auth.utils';
 import { AuthService } from './auth.service';
+import { LoaderService } from '../components/knx-app-loader/loader.service';
 
 export enum Action { QueryStart, QueryStop };
 
@@ -19,8 +20,9 @@ export class AuthHttp {
   config: any;
 
   constructor(private http: Http,
-              private authService: AuthService,
-              private defOpts?: RequestOptions, ) {
+    private authService: AuthService,
+    private loaderService: LoaderService,
+    private defOpts?: RequestOptions) {
 
     this.config = {
       globalHeaders: [{'Content-Type': 'application/json'}]
@@ -128,10 +130,23 @@ export class AuthHttp {
   }
 
   private requestHelper(requestArgs: RequestOptionsArgs, additionalOptions?: RequestOptionsArgs): Observable<Response> {
+    this.showLoader();
+
     let options = new RequestOptions(requestArgs);
     if (additionalOptions) {
       options = options.merge(additionalOptions);
     }
-    return this.request(new Request(this.mergeOptions(options, this.defOpts)));
+    return this.request(new Request(this.mergeOptions(options, this.defOpts)))
+      .finally(() => {
+        this.hideLoader();
+      });
+  }
+
+  private showLoader(): void {
+    this.loaderService.show();
+  }
+
+  private hideLoader(): void {
+    this.loaderService.hide();
   }
 }

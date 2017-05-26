@@ -10,6 +10,7 @@ import {
   CookieService,
   ContentService
 } from '../../services';
+import { AppLoaderComponent } from '../../components/knx-app-loader/loader.component';
 
 @Component({
   template: `
@@ -26,7 +27,6 @@ import {
   </div>
 
   <div class="main-container">
-    <knx-loader [visible]="isLoading"></knx-loader>
     <router-outlet></router-outlet>
   </div>
 

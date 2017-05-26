@@ -42,7 +42,7 @@ export class CarComponent implements OnInit {
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
   car: Car;
-  profile: Profile;
+  profile: any|Profile;
   address: Address;
 
   chatConfig: AssistantConfig;
@@ -69,8 +69,6 @@ export class CarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.profileService.getUserProfile().subscribe(p => this.profile = p);
-
     this.chatNotifierService.addMessage$.subscribe(
       message => {
         // replace messages instead of pushing
@@ -143,10 +141,10 @@ export class CarComponent implements OnInit {
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    // Update profile
-    this.profile.gender = detailForm.value.gender;
-    this.profile.dateOfBirth = detailForm.value.birthDate;
-    this.profile.gender = detailForm.value.gender;
+    this.profile = {
+      gender: detailForm.value.gender,
+      dateOfBirth: detailForm.value.birthDate
+    };
 
     let options: CarInsuranceOptions = {
       active_loan: detailForm.value.loan,
@@ -220,10 +218,6 @@ export class CarComponent implements OnInit {
   updateAddress(address: Address) {
     if (address.street && address.city) {
       this.address = address;
-      if (this.profile) {
-        // TODO: do actual call to backend to patch profile address
-        this.profile.address = address;
-      }
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
     } else {
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { Address } from '../../models/address';
 import { ConfigService } from '../../config.service';
 import { AuthHttp, GeolocationService } from '../../services';
+import { LoaderService } from '../knx-app-loader/loader.service';
 import { AddressLookupComponent } from './address-lookup.component';
 import { AddressLookupService } from './address-lookup.service';
 import { AuthModule } from '../../auth.module';
@@ -56,6 +57,7 @@ describe('Component: AddressLookup', () => {
       providers: [
         AuthHttp,
         AuthService,
+        { provide: LoaderService, useValue: {}},
         { provide: AddressLookupService, useValue: addressServiceStub },
         { provide: GeolocationService, useValue: geoLocationServiceStub },
         { provide: ConfigService, useValue: configServiceStub }

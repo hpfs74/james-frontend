@@ -25,6 +25,7 @@ export class CarInsuranceOptions {
   road_assistance?: string;
 }
 
+
 /**
  * @description
  * Class representing the payload of the http request for car insurance advice
@@ -61,7 +62,7 @@ export class CarCompareRequest {
   insurance?: string;
 
   /* istanbul ignore next: object initializer */
-  constructor(profile: Profile, car: Car, address: Address, options: CarInsuranceOptions) {
+  constructor(profile: any|Profile, car: Car, address: Address, options: CarInsuranceOptions) {
 
     this.license = car.license;
     this.date_of_birth = profile.dateOfBirth;
