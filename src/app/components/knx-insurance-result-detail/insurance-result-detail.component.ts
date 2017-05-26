@@ -1,13 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Insurance, Insurer, Rating } from './../../models';
-=======
-import { Insurance, Insurer } from './../../models';
->>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
-=======
-import { Insurance, Insurer, Rating } from './../../models';
->>>>>>> 5a31a8f... feat(review-summary): add review and star-rating components
 
 @Component({
   selector: 'knx-insurance-result-detail',
@@ -27,7 +19,7 @@ import { Insurance, Insurer, Rating } from './../../models';
             <p>{{ insurance.insurer.product }}
           </knx-tab>
           <knx-tab tabTitle="Details">
-          Tab 2 Content
+            Tab 2 Content
           </knx-tab>
           <knx-tab tabTitle="Reviews">
             <knx-review-summary
@@ -43,10 +35,6 @@ import { Insurance, Insurer, Rating } from './../../models';
 })
 export class InsuranceResultDetailComponent implements OnInit {
   @Input() insurance: Insurance;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5a31a8f... feat(review-summary): add review and star-rating components
 
   reviewItems: Array<Rating>;
 
@@ -60,11 +48,4 @@ export class InsuranceResultDetailComponent implements OnInit {
     ];
   }
 
-<<<<<<< HEAD
-=======
-  @Input() insurer: Insurer;
-  @Input() showDetails: boolean;
->>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
-=======
->>>>>>> 5a31a8f... feat(review-summary): add review and star-rating components
 }

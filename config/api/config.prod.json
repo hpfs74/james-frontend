@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-{}
-=======
 {
   "app": {
     "enableProdMode": false,
@@ -20,9 +15,3 @@
     "external": {}
   }
 }
->>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
-=======
->>>>>>> 55c1574... refactor(app): clean up car component
-=======
-{}
->>>>>>> f69cbeb... refactor(dashboard): add chat assistant

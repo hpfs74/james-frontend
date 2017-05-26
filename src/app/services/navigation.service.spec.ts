@@ -17,19 +17,7 @@ describe('Service: NavigationService', function () {
     it('should return 3 element array', function () {
       let ret = service.getMenu();
       expect(ret).not.toBeNull();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       expect(ret.length).toBe(1);
-=======
-      expect(ret.length).toBe(4);
->>>>>>> 8ea29ad... feat(opening-hours): add opening-hours component to navbar
-=======
-      expect(ret.length).toBe(3);
->>>>>>> d95a30e... fix(styles): minor icon style improvement
-=======
-      expect(ret.length).toBe(1);
->>>>>>> 3b84335... refactor(dashboard): add dashboard detail component
     });
   });
 

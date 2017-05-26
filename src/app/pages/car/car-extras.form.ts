@@ -20,19 +20,19 @@ export class CarExtrasForm {
         type: 'radio',
         formControl: this.formGroup.get('coverage'),
         inputOptions: {
-            items: [
-              {
-                  label: 'WA',
-                  value: 'CL'
-              },
-              {
-                  label: 'WA + Beperkt Casco',
-                  value: 'CLC'
-              },
-              {
-                  label: 'WA + Volledig Casco (All Risk)',
-                  value: 'CAR'
-              }
+          items: [
+            {
+              label: 'WA',
+              value: 'CL'
+            },
+            {
+              label: 'WA + Beperkt Casco',
+              value: 'CLC'
+            },
+            {
+              label: 'WA + Volledig Casco (All Risk)',
+              value: 'CAR'
+            }
           ]
         }
       },
@@ -41,19 +41,19 @@ export class CarExtrasForm {
         type: 'checkbox',
         formControl: this.formGroup.get('extraOptions'),
         inputOptions: {
-            items: [
-              {
-                  label: 'Rechtsbijstand',
-                  value: 'legal'
-              },
-              {
-                  label: 'No-claim beschermer',
-                  value: 'noclaim'
-              },
-              {
-                  label: 'Inzittenden verzekering',
-                  value: 'occupants'
-              }
+          items: [
+            {
+              label: 'Rechtsbijstand',
+              value: 'legal'
+            },
+            {
+              label: 'No-claim beschermer',
+              value: 'noclaim'
+            },
+            {
+              label: 'Inzittenden verzekering',
+              value: 'occupants'
+            }
           ]
         }
       },
@@ -62,33 +62,12 @@ export class CarExtrasForm {
         type: 'select',
         formControl: this.formGroup.get('ownRisk'),
         inputOptions: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0cda736... fix(car-options): change slider to dropdown
           items: ownRiskRanges.map((v) => {
             return {
               label: v,
               value: v
             };
           })
-<<<<<<< HEAD
-=======
-          sliderOptions: {
-            min: 0,
-            max: 950,
-            start: 0,
-            range: this.getRangeConfig(ownRiskRanges),
-            pips: {
-              mode: 'steps',
-              filter: (value, type) => { return ownRiskRanges.indexOf(value) > -1 ? 1 : 0; },
-              density: 72
-            }
-          },
-          throttle: 400
->>>>>>> 2357330... feat(car-options): use knx-wizard component for car flow
-=======
->>>>>>> 0cda736... fix(car-options): change slider to dropdown
         }
       },
       roadAssistance: {
@@ -96,15 +75,15 @@ export class CarExtrasForm {
         type: 'radio',
         formControl: this.formGroup.get('roadAssistance'),
         inputOptions: {
-            items: [
-              {
-                  label: 'Binnen Nederland',
-                  value: 'RACO'
-              },
-              {
-                  label: 'In Europa',
-                  value: 'RAE'
-              }
+          items: [
+            {
+              label: 'Binnen Nederland',
+              value: 'RACO'
+            },
+            {
+              label: 'In Europa',
+              value: 'RAE'
+            }
           ]
         }
       },
@@ -113,16 +92,16 @@ export class CarExtrasForm {
         type: 'select',
         formControl: this.formGroup.get('kmPerYear'),
         inputOptions: {
-            items: [
-              { label: '7.500 KM of minder', value: 'KMR1' },
-              { label: '7.501 - 10.000', value: 'KMR2' },
-              { label: '10.001 - 12.000', value: 'KMR3' },
-              { label: '12.001 - 15.000', value: 'KMR4' },
-              { label: '15.001 - 20.000', value: 'KMR5' },
-              { label: '20.001 - 25.000', value: 'KMR6' },
-              { label: '25.001 - 30.000', value: 'KMR7' },
-              { label: '30.000 of meer', value: 'KMR8' }
-            ]
+          items: [
+            { label: '7.500 KM of minder', value: 'KMR1' },
+            { label: '7.501 - 10.000', value: 'KMR2' },
+            { label: '10.001 - 12.000', value: 'KMR3' },
+            { label: '12.001 - 15.000', value: 'KMR4' },
+            { label: '15.001 - 20.000', value: 'KMR5' },
+            { label: '20.001 - 25.000', value: 'KMR6' },
+            { label: '25.001 - 30.000', value: 'KMR7' },
+            { label: '30.000 of meer', value: 'KMR8' }
+          ]
         }
       }
     };

@@ -46,18 +46,7 @@ import { InsuranceAdvice, Insurance, Insurer } from '../../models';
         </div>
       </div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
       <knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurance]="insurance">
-=======
-      <knx-insurance-result-detail *ngIf="showDetailPanel"
-        [insurance]="insurance"
-        insurer]="insurer"
-        [showDetails]="false">
->>>>>>> ef2fa3f... feat(insurer): add insurer class and api config based on env variable
-=======
-      <knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurance]="insurance">
->>>>>>> 5a31a8f... feat(review-summary): add review and star-rating components
       </knx-insurance-result-detail>
     </div>
   `,

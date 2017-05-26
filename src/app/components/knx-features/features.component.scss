@@ -1,4 +1,3 @@
-
 .knx-features {
   display: flex;
   align-items: flex-center;
@@ -43,16 +42,6 @@
   font-family: $font-family-base;
   font-weight: normal;
   padding-left: 55px;
-<<<<<<< HEAD
-}
-
-@media screen and (max-width: 768px) {
-  .knx-features__item {
-    flex: 1 1 auto;
-    margin-bottom: 25px;
-  }
-=======
->>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
 }
 
 @media screen and (max-width: 768px) {

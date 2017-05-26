@@ -12,15 +12,7 @@
       "address": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/address",
       "car": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/cars",
       "helper": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/helper",
-<<<<<<< HEAD
-<<<<<<< HEAD:config/api/config.proxy.json
       "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
-=======
-      "advice": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
->>>>>>> b7e7ce8... fix(car): fix coverage results and add mock api config:config/api/config.proxy.json
-=======
-      "compare": "https://ap5hej1dl4.execute-api.eu-west-1.amazonaws.com/nicci/james/profile/insurances/compare"
->>>>>>> de2c44c... fix(config): change to correct mock api and small mobile fixes
     },
     "external": {}
   }
