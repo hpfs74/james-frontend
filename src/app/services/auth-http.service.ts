@@ -8,7 +8,7 @@ import { tokenNotExpired } from '../utils/auth.utils';
 import { AuthService } from './auth.service';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
 
-export enum Action { QueryStart, QueryStop };
+export enum Action { QueryStart, QueryStop }
 
 export const TOKEN_NAME: string = 'access_token';
 export const TOKEN_OBJECT_NAME: string = 'token';
@@ -18,6 +18,8 @@ export class AuthHttp {
   process: EventEmitter<any> = new EventEmitter<any>();
   authFailed: EventEmitter<any> = new EventEmitter<any>();
   config: any;
+
+  private expireTime: Date;
 
   constructor(private http: Http,
     private authService: AuthService,
