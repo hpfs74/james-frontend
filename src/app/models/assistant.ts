@@ -7,9 +7,12 @@ export interface AssistantConfig {
     name: string;
     title: string;
   };
-  generic: any;
-  dashboard?: any;
-  car?: any;
+  generic: {
+    address: any;
+    addressNotFound: string;
+  };
+  dashboard: any;
+  car: any;
 }
 
 export class AppAssistantConfig implements AssistantConfig {
