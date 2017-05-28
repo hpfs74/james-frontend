@@ -9,7 +9,7 @@ import { AuthGuard } from '../../services/auth-guard.service';
 import { AssistantService } from '../../services/assistant.service';
 
 // Layout components
-import { DashboardComponent } from '../dashboard/dashboard.component';
+// import { DashboardComponent } from '../dashboard/dashboard.component';
 import { NavbarComponent } from '../../components/knx-navigation';
 import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.component';
 
@@ -29,7 +29,7 @@ import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.
     HomeComponent,
     BreadCrumbComponent,
     NavbarComponent,
-    DashboardComponent,
+    // DashboardComponent,
   ]
 })
 export class HomeModule {
