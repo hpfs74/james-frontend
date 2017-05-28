@@ -45,6 +45,6 @@ export  class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    return;
+
   }
 }

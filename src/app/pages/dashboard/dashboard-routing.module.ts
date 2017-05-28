@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { DashboardDetailComponent } from '../dashboard/dashboard-detail.component';
+import { DashboardComponent } from './dashboard.component';
+import { DashboardDetailComponent } from './dashboard-detail.component';
 
 export const dashboardRoutes: Routes = [
   {
@@ -29,7 +29,6 @@ export const dashboardRoutes: Routes = [
     }
   }
 ];
-
 @NgModule({
   imports: [
     RouterModule.forChild(dashboardRoutes)

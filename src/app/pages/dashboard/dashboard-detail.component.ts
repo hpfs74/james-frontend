@@ -31,12 +31,6 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
       this.insuranceType = x.insuranceType;
     });
 
-    // TODO: get the insurance type parameter
-
-    this.route.data.subscribe(x=> {
-      this.insuranceType = x.insuranceType;
-    });
-
     this.chatNotifierService.addMessage$.subscribe(
       message => {
         // replace messages instead of pushing
@@ -50,6 +44,7 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.chatNotifierService.addTextMessage(`Wat wil je doen met je ${this.insuranceType} verzekering?`);
+    this.chatNotifierService
+      .addTextMessage(this.chatConfig.dashboard.insuranceType(this.insuranceType));
   }
 }
