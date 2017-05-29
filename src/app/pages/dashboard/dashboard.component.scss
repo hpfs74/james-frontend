@@ -49,6 +49,10 @@
     a {
       color: $knab-primary-blue;
     }
+
+    a:hover {
+      text-decoration: none;
+    }
   }
 
   h2 {

@@ -21,12 +21,14 @@ export  class DashboardComponent implements OnInit, AfterViewInit {
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
+  carInsurerLogoUrl: string;
+  carInsurance: boolean;
 
   constructor(private profileService: ProfileService,
               private assistantService: AssistantService,
               private chatNotifierService: ChatStreamService) {
     this.chatConfig = assistantService.config;
-    this.chatConfig.avatar.title = this.chatConfig.avatar.title;
+    this.chatConfig.avatar.title = assistantService.config.avatar.title;
   }
 
   ngOnInit() {
@@ -40,11 +42,16 @@ export  class DashboardComponent implements OnInit, AfterViewInit {
     this.profileService.getUserProfile()
       .subscribe(x => {
         this.profile = x;
+        // Notify user via chatbot
         this.chatNotifierService.addTextMessage(this.chatConfig.dashboard.hoi(this.profile.firstname));
+
+        // Get current insurances
+        this.carInsurance = true;
+        this.carInsurerLogoUrl = 'http://www.verzekeringadviseur.com/wp-content/uploads/2011/09/FBTO-logo.png';
       });
   }
 
   ngAfterViewInit() {
-
+    return;
   }
 }

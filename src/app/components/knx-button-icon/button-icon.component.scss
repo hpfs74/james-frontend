@@ -6,3 +6,12 @@
     border: 6px solid $knab-primary-blue;
   }
 }
+
+.knx-button-icon__circle-success {
+  background: #fff;
+  border: 6px solid $knab-primary-dark-green;
+
+  &:hover {
+    border: 6px solid $knab-primary-green;
+  }
+}

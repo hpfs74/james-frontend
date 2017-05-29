@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'knx-button-icon',
   template: `
    <div class="knx-button-icon" [class.knx-button-icon--placeholder]="isPlaceholder">
-    <button class="knx-button-icon__circle">
+    <button class="knx-button-icon__circle" [ngClass]="{ 'knx-button-icon__circle-success': success }">
         <ng-content></ng-content>
         <!-- <ng-content><knx-icon></knx-icon></ng-content> -->
     </button>
@@ -16,4 +16,5 @@ export class ButtonIconComponent {
   @Input() label: string;
   @Input() icon: string;
   @Input() isPlaceholder: boolean = false;
+  @Input() success: boolean = false;
 }

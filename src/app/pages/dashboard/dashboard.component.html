@@ -6,8 +6,9 @@
         <div class="col-md-12 col-sm-12">
           <h2>Je verzekeringen</h2>
 
-          <knx-button-icon label="Auto" routerLink="/car">
-            <img class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
+          <knx-button-icon label="Auto" routerLink="/car" success="carInsurance">
+            <img *ngIf="!carInsurance"  class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
+            <img *ngIf="carInsurance" class="knx-button-icon__icon" [src]="carInsurerLogoUrl" />
           </knx-button-icon>
 
           <knx-button-icon label="Reis">
