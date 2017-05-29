@@ -9,6 +9,35 @@
   .knx-button-icon__icon {
     width: 60px;
   }
+
+  h4 {
+    a {
+      text-transform: capitalize !important;
+      color: $knab-primary-blue;
+    }
+  }
+
+  h2 {
+    text-transform: uppercase;
+    color: $knab-primary-blue;
+  }
+
+  .knx-button-round {
+    background-color: $knab-primary-gray;
+    width: auto !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+
+    .knx-button-round__title {
+      color: $knab-primary-blue;
+      text-transform: capitalize !important;
+
+      span {
+        color: $knab-primary-blue !important;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 458px) {

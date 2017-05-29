@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: 'dashboard-detail.component.html',
-  styleUrls: ['dashboard-detail.component.scss'],
 })
 export class DashboardDetailComponent implements OnInit, AfterViewInit {
   insuranceType: string;
@@ -45,6 +44,6 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.chatNotifierService
-      .addTextMessage(this.chatConfig.dashboard.insuranceType(this.insuranceType));
+      .addTextMessage(this.chatConfig.dashboard.detail(this.insuranceType));
   }
 }

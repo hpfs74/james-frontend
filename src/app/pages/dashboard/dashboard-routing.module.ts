@@ -5,13 +5,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardDetailComponent } from './dashboard-detail.component';
 
 export const dashboardRoutes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent,
-    data: {
-      breadcrumb: 'Overzicht'
-    }
-  },
+
   {
     path: 'cars',
     component: DashboardDetailComponent,
@@ -26,6 +20,13 @@ export const dashboardRoutes: Routes = [
     data: {
       breadcrumb: 'Je reisverzekering',
       insuranceType: 'reis'
+    }
+  },
+  {
+    path: '',
+    component: DashboardComponent,
+    data: {
+      breadcrumb: 'Overzicht'
     }
   }
 ];
