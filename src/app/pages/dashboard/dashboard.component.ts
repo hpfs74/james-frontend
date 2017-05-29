@@ -11,18 +11,16 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
-import { Profile, ProfileViewModel } from '../../models';
-
+import { Profile, DashboardItem } from '../../models';
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
-export  class DashboardComponent implements OnInit, AfterViewInit {
+export  class DashboardComponent implements OnInit {
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
-  simpleProfile: ProfileViewModel;
-
+  myInsurances: Array<DashboardItem>;
 
   constructor(private profileService: ProfileService,
               private assistantService: AssistantService,
@@ -45,11 +43,16 @@ export  class DashboardComponent implements OnInit, AfterViewInit {
         // Notify user via chatbot
         this.chatNotifierService.addTextMessage(this.chatConfig.dashboard.hoi(this.profile.firstname));
 
-        this.simpleProfile = this.profileService.getProfileViewModel(x);
-      });
-  }
+        const validTypes = ['car', 'travel', 'home', 'content', 'liability'];
 
-  ngAfterViewInit() {
-    return;
+        let insuranceItems = this.profile._embedded;
+        this.myInsurances = Object.keys(insuranceItems)
+          .filter(key => validTypes.indexOf(key) !== -1)
+          .map((key) => {
+            return Object.assign(insuranceItems[key], {
+              type: key
+            }) as DashboardItem;
+          });
+      });
   }
 }

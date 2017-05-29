@@ -3,5 +3,6 @@ export interface DashboardItem {
   count: number;
   limit: number;
   offset: number;
+  type: string;
 }
 
