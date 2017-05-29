@@ -41,3 +41,8 @@ export class Profile {
   filled_data_percentage: number;
   outdated_data_percentage: number;
 }
+
+export class ProfileViewModel {
+  car: boolean = false;
+  carLogoUrl: string = '';
+}

@@ -11,7 +11,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
-import { Profile } from '../../models';
+import { Profile, ProfileViewModel } from '../../models';
 
 
 @Component({
@@ -21,8 +21,8 @@ export  class DashboardComponent implements OnInit, AfterViewInit {
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
-  carInsurerLogoUrl: string;
-  carInsurance: boolean;
+  simpleProfile: ProfileViewModel;
+
 
   constructor(private profileService: ProfileService,
               private assistantService: AssistantService,
@@ -45,9 +45,7 @@ export  class DashboardComponent implements OnInit, AfterViewInit {
         // Notify user via chatbot
         this.chatNotifierService.addTextMessage(this.chatConfig.dashboard.hoi(this.profile.firstname));
 
-        // Get current insurances
-        this.carInsurance = true;
-        this.carInsurerLogoUrl = 'http://www.verzekeringadviseur.com/wp-content/uploads/2011/09/FBTO-logo.png';
+        this.simpleProfile = this.profileService.getProfileViewModel(x);
       });
   }
 
