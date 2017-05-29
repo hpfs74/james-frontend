@@ -4,7 +4,7 @@ import { DashboardItem } from './../../models/dashboard-item';
 @Component({
   selector: 'knx-dashboard-item',
   template: `
-    <knx-button-icon [attr.label]="item.type | titleCase">
+    <knx-button-icon [label]="labelMap[item.type] | titleCase" [isPlaceholder]="isPlaceholder">
       <ng-container [ngSwitch]="item.type">
         <div *ngSwitchDefault>Unkown type!!</div>
         <img *ngSwitchCase="'car'" class="knx-button-icon__icon" src="/assets/images/icon-car.svg">
@@ -18,4 +18,13 @@ import { DashboardItem } from './../../models/dashboard-item';
 })
 export class DashboardItemComponent {
   @Input() item: DashboardItem;
+  @Input() isPlaceholder: boolean;
+
+  public labelMap = {
+    car: 'Auto',
+    travel: 'Reis',
+    content: 'Inboedel',
+    home: 'Opstal',
+    liability: 'Aansprakelijkheid'
+  };
 }
