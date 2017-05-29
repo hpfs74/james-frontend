@@ -13,24 +13,26 @@ import {
 
 @Component({
   template: `
-  <knx-cookiebar></knx-cookiebar>
-  <header class="header">
-    <knx-navbar [menuItems]="topMenu">
+    <knx-cookiebar></knx-cookiebar>
+    <header class="header">
+      <knx-navbar [menuItems]="topMenu">
         <knx-opening-hours></knx-opening-hours>
         <knx-user-detail [isLoggedIn]="isLoggedIn" (signOut)="signOut()" [profile]="profile"></knx-user-detail>
-    </knx-navbar>
-  </header>
+      </knx-navbar>
+    </header>
 
-  <div class="container-fluid knx-container--fullwidth">
-    <knx-breadcrumb></knx-breadcrumb>
-  </div>
+    <div class="container-fluid knx-container--fullwidth">
+      <knx-breadcrumb></knx-breadcrumb>
+    </div>
 
   <div class="main-container">
     <router-outlet></router-outlet>
   </div>
 
-  <!-- footer is a features block -->
-  <knx-features [items]="footerItems"></knx-features>
+    <!-- footer is a features block -->
+    <div class="container-fluid knx-container--fullwidth knx-container--gray">
+      <knx-features [items]="footerItems"></knx-features>
+    </div>
   `
 })
 export class HomeComponent implements OnInit {

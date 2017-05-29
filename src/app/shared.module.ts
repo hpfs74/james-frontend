@@ -33,6 +33,7 @@ import { ButtonIconComponent } from './components/knx-button-icon/button-icon.co
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
+import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
 import { DonutComponent } from './components/knx-donut/donut.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
@@ -58,6 +59,7 @@ export const sharedComponents = [
   CookiebarComponent,
   CollapsePanelComponent,
   CollapseMessageComponent,
+  DashboardItemComponent,
   DonutComponent,
   FeaturesComponent,
   LicensePlateComponent,

@@ -32,7 +32,7 @@ import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.
     HomeComponent,
     BreadCrumbComponent,
     NavbarComponent,
-    DashboardComponent,
+    // DashboardComponent,
   ]
 })
 export class HomeModule {

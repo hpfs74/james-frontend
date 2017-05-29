@@ -28,10 +28,14 @@ export class AppAssistantConfig implements AssistantConfig {
   };
 
   public dashboard = {
+    start: 'Waar wil je mee beginnen?',
     welcome:
-    `Verzekeringen die je via Knab afsluit staan automatisch in je overzicht.
-    Maar ook je bestaande verzekeringen voeg je gemakkelijk toe. Super handig!`,
-    start: 'Waar wil je mee beginnen?'
+      (firstName: string) =>
+        `Hoi <strong>${firstName}</strong>, ik ben je persoonlijke verzekeringsassistent.
+        Verzekeringen die je via Knab afsluit staan automatisch in je overzicht.
+        Maar ook je bestaande verzekeringen voeg je gemakkelijk toe.`,
+    detail: (insuranceType: string) => `Wat wil je doen met je ${insuranceType} verzekering?`,
+    addInsurance: 'Voeg verzekeringen toe aan het overzicht en  ik zoek uit het beter kan.'
   };
 
   public car = {

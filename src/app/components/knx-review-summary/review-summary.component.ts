@@ -6,7 +6,6 @@ import { Rating } from '../../models/rating';
   template: `
     <div class="knx-review-summary">
       <div class="knx-review-summary__title">Gemiddeld een {{total}} uit {{reviewCount}} reviews:</div>
-
       <div class="container knx-review-summary__rating">
         <div class="row" *ngFor="let item of items">
           <div class="col-sm-4">
@@ -16,8 +15,8 @@ import { Rating } from '../../models/rating';
             <knx-star-rating class="knx-review-summary__stars" [rating]="item.value" total="5"></knx-star-rating>
           </div>
         </div>
+      </div>
     </div>
-  </div>
   `
 })
 export class ReviewSummaryComponent {

@@ -19,7 +19,7 @@ import { Insurance, Insurer, Rating } from './../../models';
             <p>{{ insurance.insurer.product }}
           </knx-tab>
           <knx-tab tabTitle="Details">
-          Tab 2 Content
+            Tab 2 Content
           </knx-tab>
           <knx-tab tabTitle="Reviews">
             <knx-review-summary

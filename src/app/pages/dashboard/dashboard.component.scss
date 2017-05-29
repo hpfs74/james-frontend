@@ -1,3 +1,36 @@
+.knx-button-round {
+  background-color: $knab-primary-gray;
+  margin: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 25px;
+  width: 400px;
+  max-width: 100%;
+
+  .knx-button-round__title {
+    // vertical alignment
+    vertical-align: middle;
+    line-height: 50px;
+
+    // color and fonts
+    color: $knab-primary-blue;
+    font-family: $font-family-base;
+    font-weight: normal;
+
+    a:hover {
+      text-decoration: none;
+      font-weight: normal;
+    }
+
+    span {
+      color: $knab-primary-blue;
+      font-family: $font-family-icon;
+      font-size: $base-font-size;
+      margin-left: 10px;
+    }
+  }
+}
+
 .knx-container-dashboard {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -8,6 +41,23 @@
 
   .knx-button-icon__icon {
     width: 60px;
+  }
+
+  h4 {
+    font-family: $font-family-base;
+
+    a {
+      color: $knab-primary-blue;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  h2 {
+    text-transform: uppercase;
+    color: $knab-primary-blue;
   }
 }
 
