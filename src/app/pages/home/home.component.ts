@@ -31,7 +31,9 @@ import {
     </div>
 
     <!-- footer is a features block -->
-    <knx-features [items]="footerItems"></knx-features>
+    <div class="container-fluid knx-container--fullwidth knx-container--gray">
+      <knx-features [items]="footerItems"></knx-features>
+    </div>
   `
 })
 export class HomeComponent implements OnInit {
