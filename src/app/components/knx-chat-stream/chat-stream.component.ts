@@ -19,6 +19,9 @@ import { ChatMessage } from './chat-message';
 
       <!-- slot for filter options -->
       <ng-content select="knx-collapse-message"></ng-content>
+
+      <!-- other -->
+      <ng-content select="router-outlet"></ng-content>
     </div>
 `
 })

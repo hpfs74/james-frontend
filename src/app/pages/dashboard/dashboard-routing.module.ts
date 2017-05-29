@@ -5,27 +5,21 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardDetailComponent } from './dashboard-detail.component';
 
 export const dashboardRoutes: Routes = [
-
-  {
-    path: 'cars',
-    component: DashboardDetailComponent,
-    data: {
-      breadcrumb: 'Je autoverzekering'
-    }
-  },
-  {
-    path: 'reis',
-    component: DashboardDetailComponent,
-    data: {
-      breadcrumb: 'Je reisverzekering'
-    }
-  },
   {
     path: '',
     component: DashboardComponent,
     data: {
       breadcrumb: 'Overzicht'
-    }
+    },
+    children: [
+      {
+        path: 'next-action/:type',
+        component: DashboardDetailComponent,
+        data: {
+          breadcrumb: 'Je autoverzekering'
+        }
+      }
+    ]
   }
 ];
 @NgModule({

@@ -16,15 +16,16 @@ import { Profile, DashboardItem, insuranceTypes } from '../../models';
 @Component({
   templateUrl: 'dashboard.component.html'
 })
-export  class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
   insurances: Array<DashboardItem>;
 
-  constructor(private profileService: ProfileService,
-              private assistantService: AssistantService,
-              private chatNotifierService: ChatStreamService) {
+  constructor(private router: Router,
+    private profileService: ProfileService,
+    private assistantService: AssistantService,
+    private chatNotifierService: ChatStreamService) {
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = assistantService.config.avatar.title;
   }
@@ -56,7 +57,11 @@ export  class DashboardComponent implements OnInit {
       });
   }
 
-  getRemainingInsurances(validTypes: Array<string>, items: Array<DashboardItem>): Array<DashboardItem> {
+  goToActions(type) {
+    this.router.navigate(['/next-action', type]);
+  }
+
+  private getRemainingInsurances(validTypes: Array<string>, items: Array<DashboardItem>): Array<DashboardItem> {
     return validTypes.filter(i => items.filter(obj => obj.type !== i).length > 0)
       .map((s) => { return { type: s }; });
   }

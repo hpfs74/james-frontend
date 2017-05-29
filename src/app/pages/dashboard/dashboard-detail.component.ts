@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { AssistantService } from '../../services/assistant.service';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
@@ -8,26 +9,40 @@ import { Profile } from '../../models';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  templateUrl: 'dashboard-detail.component.html',
+  template: `
+  <div class="knx-dashboard-detail">
+    <button class="knx-button knx-button--pill" (click)="goToAdvice()">
+      <span class="knx-icon-money"></span> Advies en vergelijken
+    </button>
+    <button class="knx-button knx-button--pill" (click)="goToCompare()">
+      <span class="knx-icon-money"></span> Huidige verzekering invullen
+    </button>
+  </div>
+  `,
+  styles: [`
+    .knx-dashboard-detail { margin-bottom: 20px };
+  `]
 })
 export class DashboardDetailComponent implements OnInit, AfterViewInit {
   insuranceType: string;
+  message: string;
   profile: Profile;
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
 
-  constructor(private profileService: ProfileService,
-              private assistantService: AssistantService,
-              private chatNotifierService: ChatStreamService,
-              private route: ActivatedRoute) {
+  constructor(private router: Router,
+    private profileService: ProfileService,
+    private assistantService: AssistantService,
+    private chatNotifierService: ChatStreamService,
+    private route: ActivatedRoute) {
 
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
 
   ngOnInit() {
-    this.route.params.subscribe(x=> {
-      this.insuranceType = x.insuranceType;
+    this.route.params.subscribe(params => {
+      this.insuranceType = params['type'];
     });
 
     this.chatNotifierService.addMessage$.subscribe(
@@ -45,5 +60,13 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.chatNotifierService
       .addTextMessage(this.chatConfig.dashboard.detail(this.insuranceType));
+  }
+
+  goToAdvice() {
+    this.router.navigate([this.insuranceType]);
+  }
+
+  goToCompare() {
+    //TODO: implement
   }
 }
