@@ -56,6 +56,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   validateAddress(formGroup: AbstractControl, addressService: AddressLookupService): Promise<any> {
+    const timeOut = 200;
 
     clearTimeout(this.lookupTimeout);
 
@@ -86,7 +87,7 @@ export class AddressLookupComponent implements AfterViewChecked {
               return resolve({ address: true });
             });
         }
-      }, 200);
+      }, timeOut);
     });
   }
 

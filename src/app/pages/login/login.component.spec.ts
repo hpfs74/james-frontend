@@ -9,6 +9,7 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
 import { ConfigService } from '../../config.service';
+import { loginError } from './login-error';
 
 describe('Component: Login', () => {
   let comp: LoginComponent;
@@ -84,10 +85,6 @@ describe('Component: Login', () => {
     expect(submit.nativeElement.disabled).toBeFalsy();
   });
 
-  it('should display error message on invalid login');
-
-  it('should notify success on correct login data');
-
   it('should display generic error', () => {
     let testData = {
       error: 'generic error',
@@ -97,26 +94,23 @@ describe('Component: Login', () => {
     };
 
     comp.handleError(testData);
-
     expect(comp).not.toBeNull;
-    expect(comp.messageTitle).toBe('Login failed');
-    expect(comp.message).toContain('Generic error');
+    //expect(comp.messageTitle).toBe('Login failed');
+    expect(comp.message).toEqual(loginError.default);
   });
 
-  it('should display error on too many attempets', () => {
+  it('should display error on too many attempts', () => {
     comp.handleError({ error: 'too_many_login_attempts', error_description: 'Too many attempts'});
 
     expect(comp).not.toBeNull;
-    expect(comp.messageTitle).toBe('Login failed');
-    expect(comp.message).toBe('Too many attempts');
+    expect(comp.message).toEqual(loginError.too_many_login_attempts);
   });
 
   it('should display error on invalid login data', () => {
     comp.handleError({ error: 'invalid_password'});
 
     expect(comp).not.toBeNull;
-    expect(comp.messageTitle).toBe('Login failed');
-    expect(comp.message).toBe('Invalid email or password');
+    expect(comp.message).toEqual(loginError.invalid_password);
   });
 
 
@@ -124,7 +118,6 @@ describe('Component: Login', () => {
     comp.handleError({ error: 'inactive_profile'});
 
     expect(comp).not.toBeNull;
-    expect(comp.messageTitle).toBe('Login failed');
-    expect(comp.message).toBe('Sorry your profile is inactive');
+    expect(comp.message).toEqual(loginError.inactive_profile);
   });
 });

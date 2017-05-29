@@ -1,4 +1,5 @@
 export * from './address';
+export * from './assistant';
 export * from './dashboard-item';
 export * from './car-insurance';
 export * from './car-compare-request';

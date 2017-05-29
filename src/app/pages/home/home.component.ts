@@ -25,10 +25,9 @@ import {
       <knx-breadcrumb></knx-breadcrumb>
     </div>
 
-    <div class="main-container">
-      <knx-loader [visible]="isLoading"></knx-loader>
-      <router-outlet></router-outlet>
-    </div>
+  <div class="main-container">
+    <router-outlet></router-outlet>
+  </div>
 
     <!-- footer is a features block -->
     <div class="container-fluid knx-container--fullwidth knx-container--gray">
