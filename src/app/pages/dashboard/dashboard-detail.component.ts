@@ -26,7 +26,7 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.route.data.subscribe(x=> {
+    this.route.params.subscribe(x=> {
       this.insuranceType = x.insuranceType;
     });
 
