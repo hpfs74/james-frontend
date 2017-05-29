@@ -10,16 +10,14 @@ export const dashboardRoutes: Routes = [
     path: 'cars',
     component: DashboardDetailComponent,
     data: {
-      breadcrumb: 'Je autoverzekering',
-      insuranceType: 'car'
+      breadcrumb: 'Je autoverzekering'
     }
   },
   {
     path: 'reis',
     component: DashboardDetailComponent,
     data: {
-      breadcrumb: 'Je reisverzekering',
-      insuranceType: 'reis'
+      breadcrumb: 'Je reisverzekering'
     }
   },
   {
