@@ -7,7 +7,7 @@
   text-transform: none;
   font-weight: 400;
   height: 48px;
-  line-height: 48px;
+  line-height: 38px;
   padding: 0.3em 1.25rem;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -21,7 +21,7 @@
 }
 
 .ng2-menu-item--selected {
-  background: rgba(158, 158, 158, 0.2);
+  background: $knab-primary-gray;
   outline: 0;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .ng2-menu-item:active {
-  background: rgba(158, 158, 158, 0.4);
+  background: $knab-primary-gray;
 }
 
 :host(ng2-menu-item) /deep/ [ng2-menu-item-icon] {

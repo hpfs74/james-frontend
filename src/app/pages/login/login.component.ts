@@ -4,6 +4,7 @@ import { Router, RouterLink, NavigationExtras } from '@angular/router';
 
 import { CXEmailValidator } from '../../../../node_modules/@cx/form';
 import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
+import { loginError } from './login-error';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -49,7 +50,7 @@ import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
           <div class="row">
           <div class="col-md-6 offset-md-3">
             <div class="cx-message cx-message--error" *ngIf="submitted && loginForm.valid && message">
-                <div class="cx-message__header">{{ messageTitle }}</div>
+                <div *ngIf="messageTitle" class="cx-message__header">{{ messageTitle }}</div>
                 <div class="cx-message__content">{{ message }}
                 </div>
             </div>
@@ -89,8 +90,8 @@ export class LoginComponent {
   initForm() {
     this.validationErrors = {
       required: () => 'Dit veld is verplicht',
-      email: () => 'Dit veld is verplicht',
-      password: () => 'Dit veld is verplicht'
+      email: () => 'Vul een geldig e-mailadres in',
+      password: () => 'Vul je wachtwoord in'
     };
 
     this.formBuilder = new FormBuilder();
@@ -166,8 +167,6 @@ export class LoginComponent {
           localStorage.setItem(TOKEN_NAME, token.access_token);
           localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(token));
 
-          this.messageTitle = 'Success!';
-          this.message = 'Login succesfull';
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
           let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
@@ -187,28 +186,11 @@ export class LoginComponent {
   }
 
   handleError(data) {
-
     this.isPending = false;
+    this.message = loginError[data.error] || loginError.default;
 
-    if (data.error === 'inactive_profile') {
-      this.messageTitle = 'Login failed';
-      this.message = 'Sorry your profile is inactive';
-      return;
+    if (data.error_description && !this.message) {
+      this.message += `\n${data.error_description}`;
     }
-
-    if (data.error === 'invalid_password') {
-      this.messageTitle = 'Login failed';
-      this.message = 'Invalid email or password';
-      return ;
-    }
-
-    if (data.error === 'too_many_login_attempts') {
-      this.messageTitle = 'Login failed';
-      this.message = data.error_description;
-      return;
-    }
-
-    this.messageTitle = 'Login failed';
-    this.message = `Unexpected error while calling remote (${data})`;
   }
 }

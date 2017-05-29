@@ -7,9 +7,12 @@ export interface AssistantConfig {
     name: string;
     title: string;
   };
-  generic: any;
-  dashboard?: any;
-  car?: any;
+  generic: {
+    address: any;
+    addressNotFound: string;
+  };
+  dashboard: any;
+  car: any;
 }
 
 export class AppAssistantConfig implements AssistantConfig {
@@ -42,10 +45,7 @@ export class AppAssistantConfig implements AssistantConfig {
         korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
         dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`,
       coverage: {
-        advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`,
-        CL: '',
-        CLC: '',
-        CAR: ''
+        advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },
       noClaimProtection: '',
       legalAid:
