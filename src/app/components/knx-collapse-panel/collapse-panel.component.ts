@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { collapseAnimation } from '../../animations/collapse.animation';
+import { collapseInOutAnimation } from '../../animations/collapse.animation';
 
 @Component({
   selector: 'knx-collapse-panel',
@@ -13,9 +13,9 @@ import { collapseAnimation } from '../../animations/collapse.animation';
       </div>
     </div>
   `,
-  animations: [ collapseAnimation ]
+  animations: [collapseInOutAnimation]
 })
-export class CollapsePanelComponent  {
+export class CollapsePanelComponent {
   @Input() openLabel: string;
   @Input() closeLabel: string;
   @Input() contentHeight: string;

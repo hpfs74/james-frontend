@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { collapseInOutAnimation } from '../../animations';
 import { Nav, NavItemType } from '../../models';
 import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
 import { AuthService } from '../../services/auth.service';
@@ -11,23 +12,20 @@ import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
   template: `
   <nav class="knx-navbar navbar navbar-toggleable-md bg-faded">
     <div class="container">
-      <div class="clearfix">
+      <div class="knx-navbar-mobile">
         <button (click)="isCollapsed = !isCollapsed"
-          class="navbar-toggler navbar-toggler-right" type="button"
-          aria-controls="bd-main-nav"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon" [class.knx-icon-bars]="isCollapsed" [class.knx-icon-times]="!isCollapsed"></span>
+          class="navbar-toggler" [ngClass]="{collapsed: isCollapsed}" type="button"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="knx-icon-bars navbar-toggler-icon"></span>
         </button>
 
-        <a (click)="isCollapsed = true"
-          class="navbar-brand hidden-sm-up"
-          routerLink="">
-          <img class="knx-logo" src="/assets/images/knab-logo.svg?la=nl" alt="Logo Knab">
-        </a>
+        <ul class="navbar-nav ml-auto p-2 hidden-md-up">
+          <li class="nav-item"><span class="knx-icon-user-o"></span></li>
+        </ul>
       </div>
 
-      <div class="navbar-collapse navbar-toggleable-xs" id="navbarNavDropdown"
-        [attr.aria-expanded]="!isCollapsed" [ngClass]="{collapse: isCollapsed}">
+      <div class="navbar-collapse navbar-toggleable-xs" id="navbarNavDropdown" [@collapseInOutAnimation]="!isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" *ngIf="!isCollapsed">
         <ul class="navbar-nav mr-auto">
           <li (click)="isCollapsed = true" class="nav-item" routerLinkActive="active">
             <a class="navbar-brand hidden-xs-down" routerLink="">
@@ -46,31 +44,19 @@ import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
               routerLink="{{ item.routePath }}"
               class="nav-link" href="#">{{ item.title }}</a>
 
-              <a *ngIf="!item.routePath" id="{{ item.id }}"
-                href="{{ item.url }}" target="_blank"
-                class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
+            <a *ngIf="!item.routePath" id="{{ item.id }}"
+              href="{{ item.url }}" target="_blank"
+              class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
           </li>
-          <li class="nav-item hidden-xs"><ng-content select="knx-opening-hours"></ng-content></li>
 
-          <!-- TODO: implemement dropdown component
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com"
-            id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown link
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          -->
+          <li class="nav-item hidden-xs"><ng-content select="knx-opening-hours"></ng-content></li>
           <li class="nav-item hidden-xs"><ng-content select="knx-user-detail"></ng-content></li>
         </ul>
       </div>
     </div>
   </nav>
   `,
+  animations: [collapseInOutAnimation]
 })
 export class NavbarComponent {
   @Input() menuItems: Array<Nav>;

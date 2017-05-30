@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { collapseAnimation } from '../../animations/collapse.animation';
+import { collapseInOutAnimation } from '../../animations/collapse.animation';
 
 @Component({
   selector: 'knx-collapse-message',
@@ -13,7 +13,7 @@ import { collapseAnimation } from '../../animations/collapse.animation';
         <ng-content *ngIf="isOpen"></ng-content>
       </div>
     </div>`,
-  animations: [ collapseAnimation ]
+  animations: [collapseInOutAnimation]
 })
 export class CollapseMessageComponent {
   @Input() title: string;
