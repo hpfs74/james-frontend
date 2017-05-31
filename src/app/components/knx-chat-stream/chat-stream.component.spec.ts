@@ -1,12 +1,11 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-import { AvatarComponent } from './../knx-avatar/avatar.component';
+
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
-import { Car } from '../../models/car';
 import { ChatMessage } from './chat-message';
 
 describe('Component: ChatStreamComponent', () => {
@@ -78,7 +77,7 @@ describe('Component: ChatStreamComponent', () => {
     el = de.nativeElement;
   });
 
-  xit('should show an avatar', () => {
+  it('should show an avatar', () => {
     expect(el).not.toBeNull();
 
     expect(comp.options.avatar.show).toBe(true);

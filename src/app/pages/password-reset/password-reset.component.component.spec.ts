@@ -64,10 +64,15 @@ describe('Component: Password Reset', () => {
     expect(navElement).not.toBeNull();
   });
 
-  it('should disable submit button until user provide a correct email');
-  it('should display success message if user provide existing email');
-  it('should display error message if user provide not existing email');
-  it('should display a captcha when is needed');
-  it('should display error message on network error');
+  xit('should disable submit button until user provide a correct email', () => {
+    let buttonEl = fixture.debugElement.query(By.css('button.knx-button'));
 
+    expect(buttonEl).toBeDefined();
+    //expect(buttonEl.attr('disabled')).toBe(true);
+  });
+
+  xit('should display success message if user provide existing email');
+  xit('should display error message if user provide not existing email');
+  xit('should display a captcha when is needed');
+  xit('should display error message on network error');
 });

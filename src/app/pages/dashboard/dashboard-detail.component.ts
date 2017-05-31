@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
   </div>
   `,
   styles: [`
-    .knx-dashboard-detail { margin-bottom: 20px };
+    .knx-dashboard-detail { margin-bottom: 20px }
   `]
 })
 export class DashboardDetailComponent implements OnInit, AfterViewInit {
@@ -42,6 +42,7 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+
       this.insuranceType = params['type'];
     });
 
@@ -68,5 +69,6 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
 
   goToCompare() {
     //TODO: implement
+    this.router.navigate(['/']);
   }
 }
