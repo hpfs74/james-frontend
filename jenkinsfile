@@ -1,0 +1,44 @@
+#!groovy
+
+pipeline {
+    agent any
+    stages {
+        stage('setup') {
+            steps {
+                sh 'npm set registry https://knab-npm.ddns.net'
+                sh 'npm set strict-ssl false'
+                sh 'npm install'
+            }
+        }
+        stage('build') {
+            steps {
+                slackSend color: 'warning', message: 'Build stage started: $JOB_NAME $BUILD_NUMBER'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'git@bitbucket.org:cxtravellers/knab-james-frontend.git']]])
+                sh 'npm run build'
+                slackSend color: 'good', message: 'Build stage finished: $JOB_NAME $BUILD_NUMBER'
+            }
+        }
+        stage('test') {
+            steps {
+                slackSend color: 'warning', message: 'Test stage started: $JOB_NAME $BUILD_NUMBER'
+
+                sh 'npm run test'
+                slackSend color: 'good', message: 'Test stage finished: $JOB_NAME $BUILD_NUMBER'
+            }
+        }
+        stage('deploy') {
+            steps {
+                slackSend color: 'warning', message: 'Deploy stage started: $JOB_NAME $BUILD_NUMBER'
+                // step([$class: 'S3BucketPublisher', consoleLogLevel: <object of type java.util.logging.Level>, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'knab-webapp', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'eu-west-1', showDirectlyInBrowser: false, sourceFile: 'dist/**', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: <object of type hudson.model.Result>, profileName: 'KNAB', userMetadata: []])
+                slackSend color: 'good', message: 'Deploy stage finished: $JOB_NAME $BUILD_NUMBER'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit 'coverage/jasmine.xml'
+            slackSend color: 'good', message: 'Test stage finished: $JOB_NAME $BUILD_NUMBER'
+        }
+    }
+}
