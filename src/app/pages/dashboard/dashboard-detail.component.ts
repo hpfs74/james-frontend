@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
   </div>
   `,
   styles: [`
-    .knx-dashboard-detail { margin-bottom: 20px };
+    .knx-dashboard-detail { margin-bottom: 20px }
   `]
 })
 export class DashboardDetailComponent implements OnInit, AfterViewInit {
