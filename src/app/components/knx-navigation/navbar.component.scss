@@ -50,21 +50,37 @@ $knx-navbar-font: $font-size-base;
   display: block;
 }
 
-.collapse {
-  display: none;
+@media (max-width: 768px) {
+  .knx-navbar.navbar .container {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
-  &.show {
-    display: block;
+  .knx-navbar-mobile {
+    display: flex;
+  }
+
+  .knx-navbar .navbar-nav .nav-item:last-child {
+    margin-right: 0;
   }
 }
 
-.navbar-toggler-icon > * {
-  font-family: $font-family-icon;
-  color: $knab-primary-blue;
+.navbar-toggler {
+  padding: 0;
+  margin: 10px 0;
 }
 
-// @media (max-width: 667px) {}
-//   .navbar-toggleable-md > .container {
-//     margin-right: 10px;
-//     margin-left: 10px;
-// }
+.navbar-toggler-icon.knx-icon-bars {
+  font-family: $font-family-icon;
+  color: $knab-primary-blue;
+  font-size: $font-size-base + 4;
+}
+
+.nav-item .knx-icon-user-o {
+  font-size: $font-size-base + 2;
+}
+
+.navbar-toggleable-xs {
+  border-top: 1px solid $knab-light-gray;
+  padding-left: 20px;
+}
