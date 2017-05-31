@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
     this.profileService.getUserProfile()
       .subscribe(x => {
         this.profile = x;
-        // Notify user via chatbot
         this.chatNotifierService.addTextMessage(this.chatConfig.dashboard.welcome(this.profile.firstname));
 
         let insuranceItems = this.profile._embedded;
