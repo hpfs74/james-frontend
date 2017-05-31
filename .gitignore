@@ -72,6 +72,10 @@ ts-node
 *.iml
 .vscode/angulardoc.json
 
+# Ignore SonarQube configs
+.sonarlint
+.sonarlint.json
+
 dist
 dev
 docs
