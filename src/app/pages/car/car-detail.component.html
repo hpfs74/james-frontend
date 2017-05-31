@@ -8,18 +8,15 @@
       <div class="row">
         <div class="col-sm-12">
 
-        <cx-form-group [options]="{
+          <cx-form-group [options]="{
             type: 'custom',
             label: 'Wat is je kenteken?',
             validationErrors: form.validationErrors,
             formControl: form.formGroup.get('licensePlate')
         }">
-          <knx-input-licenseplate
-            formControlName="licensePlate"
-            (ngModelChange)="onLicensePlateChange($event)"
-            [options]="{ placeholder: '16K-NAB-9' }">
-          </knx-input-licenseplate>
-        </cx-form-group>
+            <knx-input-licenseplate formControlName="licensePlate" (ngModelChange)="onLicensePlateChange($event)" [options]="{ placeholder: '16K-NAB-9' }">
+            </knx-input-licenseplate>
+          </cx-form-group>
 
         </div>
       </div>
@@ -35,18 +32,13 @@
             }
           }"></cx-form-group>
 
-      <knx-address-lookup
-        [addressFormGroup]="form.addressForm"
-        [validationErrors]="form.validationErrors"
-        (addressFound)="onAddressFound($event)">
+      <knx-address-lookup [addressFormGroup]="form.addressForm" [validationErrors]="form.validationErrors" (addressFound)="onAddressFound($event)">
       </knx-address-lookup>
 
 
       <div class="row">
         <div class="col-md-7 col-sm-12">
-          <cx-form-group
-            formControlName="claimFreeYears"
-            [options]="{
+          <cx-form-group formControlName="claimFreeYears" [options]="{
                 label: 'Aantal schadevrije jaren',
                 formControl: form.formGroup.get('claimFreeYears'),
                 validationErrors: form.validationErrors,
@@ -170,9 +162,9 @@
       <!-- Summary error message -->
       <div class="cx-form-group" [hidden]="!submitted || (form.formGroup.valid && form.addressForm.valid)">
         <div class="knx-message knx-message--error">
-            <div class="knx-message__content">
-              Heb je alle velden (correct) ingevuld?
-            </div>
+          <div class="knx-message__content">
+            Heb je alle velden (correct) ingevuld?
+          </div>
         </div>
       </div>
     </div>

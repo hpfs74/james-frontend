@@ -1,9 +1,7 @@
 <div class="container-fluid knx-container--fullwidth knx-container--gray">
   <div class="container">
     <ol *ngIf="formSteps" class="knx-step-navigation">
-      <li *ngFor="let step of formSteps; let i = index;"
-        class="knx-step-navigation__step"
-        [ngClass]="{ 'knx-step-navigation__step--current': i === currentStep }">{{ step.label }}</li>
+      <li *ngFor="let step of formSteps; let i = index;" class="knx-step-navigation__step" [ngClass]="{ 'knx-step-navigation__step--current': i === currentStep }">{{ step.label }}</li>
     </ol>
   </div>
 </div>
@@ -13,26 +11,16 @@
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
 
-          <knx-car-detail-form
-            (licensePlateChange)="getCarInfo($event)"
-            (addressChange)="updateAddress($event)"
-            (coverageDetailsChange)="getCoverages($event)"
-            (coverageSelected)="updateSelectedCoverage($event)"
-            (formControlFocus)="showHelperText($event)"
-            [form]="carDetailForm"
-            [coverages]="coverages"
-            [submitted]="carDetailSubmitted && currentStep === 0"
-            [isCoverageLoading]="isCoverageLoading">
-          </knx-car-detail-form>
-        </knx-step>
+        <knx-car-detail-form (licensePlateChange)="getCarInfo($event)" (addressChange)="updateAddress($event)" (coverageDetailsChange)="getCoverages($event)"
+          (coverageSelected)="updateSelectedCoverage($event)" (formControlFocus)="showHelperText($event)" [form]="carDetailForm"
+          [coverages]="coverages" [submitted]="carDetailSubmitted && currentStep === 0" [isCoverageLoading]="isCoverageLoading">
+        </knx-car-detail-form>
+      </knx-step>
 
-        <knx-step [options]="formSteps[1]">
-          <knx-insurance-toplist
-            (insuranceSelected$)="onSelectPremium($event)"
-            [stepAmount]="4"
-            [insurances]="insurances | async">
-          </knx-insurance-toplist>
-        </knx-step>
+      <knx-step [options]="formSteps[1]">
+        <knx-insurance-toplist (insuranceSelected$)="onSelectPremium($event)" [stepAmount]="4" [insurances]="insurances | async">
+        </knx-insurance-toplist>
+      </knx-step>
     </div>
 
     <div class="knx-wizard__sidebar" #knxWizardSidebar>
@@ -44,31 +32,22 @@
           animated knx-collapse-message @see https://github.com/angular/material2/issues/3968
         -->
         <knx-collapse-message class="hidden-xs" title="Dekking" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group
-            [options]="carExtrasForm.formConfig.coverage"
-            [formControlName]="carExtrasForm.formConfig.coverage.formControlName">
+          <cx-form-group [options]="carExtrasForm.formConfig.coverage" [formControlName]="carExtrasForm.formConfig.coverage.formControlName">
           </cx-form-group>
         </knx-collapse-message>
 
         <knx-collapse-message class="hidden-xs" title="Aanvullende dekkingen" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group
-            [options]="carExtrasForm.formConfig.extraOptions"
-            [formControlName]="carExtrasForm.formConfig.extraOptions.formControlName">
+          <cx-form-group [options]="carExtrasForm.formConfig.extraOptions" [formControlName]="carExtrasForm.formConfig.extraOptions.formControlName">
           </cx-form-group>
         </knx-collapse-message>
 
         <knx-collapse-message class="hidden-xs" title="Aantal KM per jaar" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group
-            [options]="carExtrasForm.formConfig.kmPerYear"
-            [formControlName]="carExtrasForm.formConfig.kmPerYear.formControlName">
+          <cx-form-group [options]="carExtrasForm.formConfig.kmPerYear" [formControlName]="carExtrasForm.formConfig.kmPerYear.formControlName">
           </cx-form-group>
         </knx-collapse-message>
 
         <knx-collapse-message class="hidden-xs" title="Eigen risico" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group
-            class="own-risk"
-            [options]="carExtrasForm.formConfig.ownRisk"
-            [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName">
+          <cx-form-group class="own-risk" [options]="carExtrasForm.formConfig.ownRisk" [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName">
           </cx-form-group>
         </knx-collapse-message>
       </knx-chat-stream>

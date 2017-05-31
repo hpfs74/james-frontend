@@ -1,3 +1,11 @@
+<knx-side-panel #sidePanel title="Wijzig">
+  <div class="container-fluid">
+    <div class="knx-side-panel-content">hello</div>
+    <button class="knx-button knx-button--secondary knx-button--fullwidth">Verder</button>
+  </div>
+</knx-side-panel>
+
+
 <div class="container knx-container-dashboard">
   <div class="row">
     <div class="col-sm-4 push-sm-8">
@@ -10,13 +18,12 @@
         <div class="col-md-12 col-sm-12">
           <h2>Je verzekeringen</h2>
 
-            <router-outlet></router-outlet>
+          <button (click)="sidePanel.open()">Test</button>
 
-            <knx-dashboard-item *ngFor="let item of insurances"
-              (click)="goToActions(item.type)"
-              [item]="item"
-              [isPlaceholder]="!item.documents">
-            </knx-dashboard-item>
+          <router-outlet></router-outlet>
+
+          <knx-dashboard-item *ngFor="let item of insurances" (click)="goToActions(item.type)" [item]="item" [isPlaceholder]="!item.documents">
+          </knx-dashboard-item>
         </div>
       </div>
     </div>

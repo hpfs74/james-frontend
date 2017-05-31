@@ -1,0 +1,27 @@
+.knx-side-panel {
+  background: $knab-app-background;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  z-index: 9999;
+}
+
+.knx-side-panel__toolbar {
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: $knab-primary-blue;
+  font-family: $font-family-head;
+  background: $knab-primary-gray;
+
+  button {
+    font-size: $font-size-base + 2;
+    line-height: 1em;
+    position: absolute;
+    right: 25px;
+    margin: 0;
+    padding: 0;
+  }
+}

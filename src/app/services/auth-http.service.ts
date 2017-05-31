@@ -27,36 +27,36 @@ export class AuthHttp {
     private defOpts?: RequestOptions) {
 
     this.config = {
-      globalHeaders: [{'Content-Type': 'application/json'}]
+      globalHeaders: [{ 'Content-Type': 'application/json' }]
     };
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({body: '', method: RequestMethod.Get, url: url}, options);
+    return this.requestHelper({ body: '', method: RequestMethod.Get, url: url }, options);
   }
 
   public post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({body: body, method: RequestMethod.Post, url: url}, options);
+    return this.requestHelper({ body: body, method: RequestMethod.Post, url: url }, options);
   }
 
   public put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({body: body, method: RequestMethod.Put, url: url}, options);
+    return this.requestHelper({ body: body, method: RequestMethod.Put, url: url }, options);
   }
 
   public delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({body: '', method: RequestMethod.Delete, url: url}, options);
+    return this.requestHelper({ body: '', method: RequestMethod.Delete, url: url }, options);
   }
 
   public patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({body: body, method: RequestMethod.Patch, url: url}, options);
+    return this.requestHelper({ body: body, method: RequestMethod.Patch, url: url }, options);
   }
 
   public head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({body: '', method: RequestMethod.Head, url: url}, options);
+    return this.requestHelper({ body: '', method: RequestMethod.Head, url: url }, options);
   }
 
   public options(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.requestHelper({body: '', method: RequestMethod.Options, url: url}, options);
+    return this.requestHelper({ body: '', method: RequestMethod.Options, url: url }, options);
   }
 
   public requestWithToken(req: Request, token: string): Observable<Response> {
@@ -66,7 +66,7 @@ export class AuthHttp {
     //     });
     req.headers.set('Content-Type', 'application/json');
     req.headers.set('Authorization', 'Bearer ' + token);
-    req.headers.set('Cache-Control', 'no-cache');
+    req.headers.set('Cache-Control', 'no-cache, no-store, max-age=0');
 
     return this.http.request(req);
   }
@@ -89,7 +89,7 @@ export class AuthHttp {
     if (!tokenNotExpired) {
       let tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
       this.authService.refreshToken(tokenObject.refresh_token)
-        .flatMap( (data) => {
+        .flatMap((data) => {
 
           // Update local storage
           token = data.access_token;
