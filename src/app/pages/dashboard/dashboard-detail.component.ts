@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   <div class="knx-dashboard-detail">
     <button class="knx-button knx-button--pill" (click)="goToAdvice()">
       <span class="knx-icon-money"></span> Advies en vergelijken
-    </button>
+    </button>q
     <button class="knx-button knx-button--pill" (click)="goToCompare()">
       <span class="knx-icon-money"></span> Huidige verzekering invullen
     </button>
@@ -42,6 +42,7 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+
       this.insuranceType = params['type'];
     });
 
@@ -68,5 +69,6 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
 
   goToCompare() {
     //TODO: implement
+    this.router.navigate(['/']);
   }
 }
