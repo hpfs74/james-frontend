@@ -15,10 +15,6 @@ describe('Utils: AuthUtils', () => {
     });
   });
 
-  describe('base64url', () => {
-    xit('should encode valid data');
-  });
-
   describe('TokenHelper', () => {
     let tokenHelper = new TokenHelper();
 
