@@ -1,4 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -16,7 +17,7 @@ describe('Component: Navbar', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, BrowserAnimationsModule],
       declarations: [NavbarComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -30,8 +31,8 @@ describe('Component: Navbar', () => {
       { id: 'menu-account', title: 'Mijn account', routePath: 'profile', menuType: NavItemType.RIGHT },
       { id: 'menu-faq', title: 'FAQ', routePath: 'faq', menuType: NavItemType.RIGHT },
       { id: 'menu-about', title: 'Over ons', routePath: 'about', menuType: NavItemType.RIGHT },
-      { id: 'menu-phone', icon: 'knx-icon-phone', title: '020-303 1680', routePath: '', menuType: NavItemType.RIGHT, url: 'tel:0203031680'}
-    ];;
+      { id: 'menu-phone', icon: 'knx-icon-phone', title: '020-303 1680', routePath: '', menuType: NavItemType.RIGHT, url: 'tel:0203031680' }
+    ];
     fixture.detectChanges();
   });
 
