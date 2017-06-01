@@ -1,8 +1,8 @@
-.car-forms__container {
+.knx-car-advice {
   margin-top: 50px;
 }
 
-.car-forms__edit {
+.knx-car-advice__editoptions {
   &:before {
     content: map-get($knx-icons, pencil);
     font-family: $font-family-icon;
@@ -10,12 +10,4 @@
     margin-right: 10px;
     font-size: $base-font-size;
   }
-}
-
-.car-form {
-  margin-bottom: 40px;
-}
-
-.own-risk {
-  padding-bottom: 45px;
 }

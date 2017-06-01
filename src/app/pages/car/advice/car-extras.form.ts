@@ -64,7 +64,7 @@ export class CarExtrasForm {
         inputOptions: {
           items: ownRiskRanges.map((v) => {
             return {
-              label: v,
+              label: '€ ' + v,
               value: v
             };
           })
