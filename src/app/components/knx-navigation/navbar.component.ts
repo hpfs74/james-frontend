@@ -24,8 +24,9 @@ import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
         </ul>
       </div>
 
-      <div class="navbar-collapse navbar-toggleable-xs" id="navbarNavDropdown" [@collapseInOutAnimation]="!isCollapsed"
-        [attr.aria-expanded]="!isCollapsed" *ngIf="!isCollapsed">
+      <div class="navbar-collapse navbar-toggleable-xs"
+        id="navbarNavDropdown" [@collapseInOutAnimation]="!isCollapsed"
+        [attr.aria-expanded]="!isCollapsed">
         <ul class="navbar-nav mr-auto">
           <li (click)="isCollapsed = true" class="nav-item" routerLinkActive="active">
             <a class="navbar-brand hidden-xs-down" routerLink="">
@@ -61,7 +62,7 @@ import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
 export class NavbarComponent {
   @Input() menuItems: Array<Nav>;
 
-  isCollapsed: boolean = false;
+  isCollapsed: boolean = true;
 
   public getMenuItemClasses(menuItem: any) {
     return {

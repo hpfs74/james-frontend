@@ -42,7 +42,7 @@ export class CarComponent implements OnInit {
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
   car: Car;
-  profile: any|Profile;
+  profile: any | Profile;
   address: Address;
 
   chatConfig: AssistantConfig;
@@ -181,10 +181,6 @@ export class CarComponent implements OnInit {
 
   showHelperText(key) {
     this.chatNotifierService.addTextMessage(this.chatConfig.car.info[key]);
-  }
-
-  toggleExtrasPanel() {
-    // TODO: implement
   }
 
   getCarInfo(licensePlate: string) {

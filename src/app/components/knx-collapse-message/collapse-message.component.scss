@@ -3,6 +3,8 @@
   color: $knab-primary-blue;
   font-size: $font-size-base - 2;
   height: 50px;
+  border: 1px solid $knab-primary-gray;
+  border-radius: $knab-border-radius;
 }
 
 .knx-collapse-message.knx-collapse-message--open {
