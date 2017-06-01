@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { createAddress, dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.class';
-import { LicensePlateValidator } from '../../components/knx-input-licenseplate/licenseplate.validator';
+import { createAddress, dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../utils/base-form.class';
+import { LicensePlateValidator } from '../../../components/knx-input-licenseplate/licenseplate.validator';
 
 export class CarDetailForm {
   formGroup: FormGroup;

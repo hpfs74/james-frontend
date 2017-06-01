@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { KNXStepOptions } from '@knx/wizard';
 
-import { ConfigService } from '../../config.service';
-import { AssistantService } from './../../services/assistant.service';
-import { AssistantConfig } from '../../models/assistant';
-import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
-import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
-import { ProfileService } from '../../services/profile.service';
+import { ConfigService } from '../../../config.service';
+import { AssistantService } from './../../../services/assistant.service';
+import { AssistantConfig } from '../../../models/assistant';
+import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
+import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
+import { ProfileService } from '../../../services/profile.service';
 
 @Component({
   templateUrl: 'car-buy.component.html'

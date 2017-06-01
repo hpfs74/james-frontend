@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CarComponent } from './car.component';
-import { CarDetailComponent } from './car-detail.component';
-import { CarBuyComponent } from './car-buy.component';
+import { CarAdviceComponent } from './advice/car-advice.component';
+import { CarDetailComponent } from './advice/car-detail.component';
+import { CarBuyComponent } from './buy/car-buy.component';
 
 export const carRoutes: Routes = [
   {
     path: '',
-    component: CarComponent,
+    component: CarAdviceComponent,
     data: {
       breadcrumb: 'Je autoverzekering vergelijken'
     }
