@@ -28,7 +28,6 @@ import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
 
 @Component({
-  selector: 'knx-car-page',
   templateUrl: 'car.component.html'
 })
 export class CarComponent implements OnInit {
@@ -162,6 +161,9 @@ export class CarComponent implements OnInit {
 
   onSelectPremium(insurance) {
     // TODO: implement
+    // get insurance
+    // pass data to get-insurance route
+    this.router.navigate(['/car/get-insurance']);
   }
 
   onStepChange(stepIndex) {

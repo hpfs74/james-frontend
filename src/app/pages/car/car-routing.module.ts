@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CarComponent } from '../car/car.component';
-import { CarDetailComponent } from '../car/car-detail.component';
+import { CarComponent } from './car.component';
+import { CarDetailComponent } from './car-detail.component';
+import { CarBuyComponent } from './car-buy.component';
 
 export const carRoutes: Routes = [
   {
@@ -11,15 +12,13 @@ export const carRoutes: Routes = [
     data: {
       breadcrumb: 'Je autoverzekering vergelijken'
     }
-    // children: [
-    //   {
-    //     path: 'advice',
-    //     component: CarAdviceComponent,
-    //     data: {
-    //       breadcrumb: 'Autoverzekering vergelijken'
-    //     }
-    //   }
-    // ]
+  },
+  {
+    path: 'get-insurance',
+    component: CarBuyComponent,
+    data: {
+      breadcrumb: 'Nieuwe autoverzekering aanvragen'
+    }
   }
 ];
 @NgModule({
