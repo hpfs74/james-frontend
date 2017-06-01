@@ -20,7 +20,7 @@ export class AddressLookupComponent implements AfterViewChecked {
 
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
 
-  public address : string = null;
+  public address: string = null;
   public postalCodeMask = postalCodeMask;
 
   private lookupTimeout;
@@ -31,7 +31,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    this.addressFormGroup.setAsyncValidators( (formControl) => this.validateAddress(formControl, this.addressService));
+    this.addressFormGroup.setAsyncValidators((formControl) => this.validateAddress(formControl, this.addressService));
   }
 
   public getErrors(): Array<string> {

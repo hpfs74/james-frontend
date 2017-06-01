@@ -12,13 +12,18 @@ export function createAddress(fb: FormBuilder): FormGroup {
         CXPostalCodeValidator
       ]
     )],
-    houseNumber: [null, Validators.required],
+    houseNumber: [null, Validators.compose(
+      [
+        Validators.required,
+        numberValidator('houseNumber')
+      ]
+    )],
     houseNumberExtension: [null]
   });
 }
 
 export function maxNumberValidator(key: string, max: Number) {
-  return (c: FormControl): {[key: string]: any} => {
+  return (c: FormControl): { [key: string]: any } => {
     const input = c.value,
       isValid = input <= max;
     let obj = {};
@@ -28,7 +33,7 @@ export function maxNumberValidator(key: string, max: Number) {
 }
 
 export function minNumberValidator(key: string, min: Number) {
-  return (c: FormControl): {[key: string]: any} => {
+  return (c: FormControl): { [key: string]: any } => {
     const input = c.value,
       isValid = input >= min;
     let obj = {};
@@ -37,8 +42,30 @@ export function minNumberValidator(key: string, min: Number) {
   };
 }
 
+export function numberValidator(key: string) {
+  return (c: FormControl): { [key: string]: any } => {
+    let value = c.value;
+    let valid: boolean = false;
+
+    if (value) {
+      let hasDot: boolean = value.indexOf('.') >= 0 ? true : false;
+      // convert string to number
+      let number: number = Math.floor(value);
+      // get result of isInteger()
+      let integer: boolean = Number.isInteger(number);
+      // validate conditions
+      valid = !hasDot && integer && number > 0;
+    } else {
+      valid = false;
+    }
+    let obj = {};
+    obj[key] = true;
+    return !value || !valid ? obj : null;
+  };
+}
+
 export function dateValidator(key: string) {
-  return (c: FormControl): {[key: string]: any} => {
+  return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
     if (value && !(value instanceof Date)) {
       value = dateMask.decode(value);
@@ -50,7 +77,7 @@ export function dateValidator(key: string) {
 }
 
 export function birthDateValidator(key: string) {
-  return (c: FormControl): {[key: string]: any} => {
+  return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
 
     if (value && !(value instanceof Date)) {

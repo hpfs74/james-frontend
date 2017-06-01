@@ -18,10 +18,10 @@ import { ChatMessage } from './chat-message';
       <ng-content select=".knx-button"></ng-content>
 
       <!-- slot for filter options -->
-      <ng-content select="knx-collapse-message"></ng-content>
+      <ng-content select="knx-car-extras"></ng-content>
 
       <!-- other -->
-      <ng-content select="router-outlet"></ng-content>
+      <ng-content></ng-content>
     </div>
 `
 })

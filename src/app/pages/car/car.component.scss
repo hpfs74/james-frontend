@@ -1,7 +1,15 @@
-@import "../../../styles/variables";
-
 .car-forms__container {
   margin-top: 50px;
+}
+
+.car-forms__edit {
+  &:before {
+    content: map-get($knx-icons, pencil);
+    font-family: $font-family-icon;
+    color: $knab-primary-blue;
+    margin-right: 10px;
+    font-size: $base-font-size;
+  }
 }
 
 .car-form {

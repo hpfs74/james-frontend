@@ -10,13 +10,13 @@
         <div class="col-md-12 col-sm-12">
           <h2>Je verzekeringen</h2>
 
-            <router-outlet></router-outlet>
+          <router-outlet></router-outlet>
 
-            <knx-dashboard-item *ngFor="let item of insurances"
-              (click)="goToActions(item.type)"
-              [item]="item"
-              [isPlaceholder]="!item.documents">
-            </knx-dashboard-item>
+          <knx-dashboard-item *ngFor="let item of insurances"
+            (click)="goToActions(item.type)"
+            [isPlaceholder]="!item.documents"
+            [item]="item">
+          </knx-dashboard-item>
         </div>
       </div>
     </div>

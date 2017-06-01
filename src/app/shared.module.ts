@@ -45,6 +45,7 @@ import { OpeningHoursComponent } from './components/knx-opening-hours/opening-ho
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
 import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
+import { SidePanelComponent } from './components/knx-side-panel/side-panel.component';
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
@@ -70,6 +71,7 @@ export const sharedComponents = [
   PriceTableComponent,
   PriceItemComponent,
   ReviewSummaryComponent,
+  SidePanelComponent,
   StarRatingComponent,
   LoaderComponent,
   TabsComponent,

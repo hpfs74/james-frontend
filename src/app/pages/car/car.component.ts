@@ -29,7 +29,6 @@ import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'knx-car-page',
-  styleUrls: ['car.component.scss'],
   templateUrl: 'car.component.html'
 })
 export class CarComponent implements OnInit {
@@ -42,7 +41,7 @@ export class CarComponent implements OnInit {
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
   car: Car;
-  profile: any|Profile;
+  profile: any | Profile;
   address: Address;
 
   chatConfig: AssistantConfig;
@@ -154,6 +153,7 @@ export class CarComponent implements OnInit {
     };
     let requestObj = new CarCompareRequest(this.profile, this.car, this.address, options);
 
+
     this.formData[0] = requestObj;
     this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
 
@@ -181,10 +181,6 @@ export class CarComponent implements OnInit {
 
   showHelperText(key) {
     this.chatNotifierService.addTextMessage(this.chatConfig.car.info[key]);
-  }
-
-  toggleExtrasPanel() {
-    // TODO: implement
   }
 
   getCarInfo(licensePlate: string) {

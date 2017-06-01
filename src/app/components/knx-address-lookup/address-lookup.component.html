@@ -1,6 +1,4 @@
-<div class="knx-address-lookup"
-  [formGroup]="addressFormGroup"
-  [class.cx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched"
+<div class="knx-address-lookup" [formGroup]="addressFormGroup" [class.cx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched"
   [attr.data-error]="getErrors()">
 
   <div class="row">
@@ -36,7 +34,8 @@
 
     <div class="col-md-2 hidden-sm hidden-xs">
       <div class="cx-form-group knx-address-lookup__button">
-        <button class="knx-button knx-button--inline-form knx-button--primary knx-icon-map-marker" (click)="getLocationAddress()" [disabled]="true"></button>
+        <button class="knx-button knx-button--inline-form knx-button--primary knx-icon-map-marker" (click)="getLocationAddress()"
+          [disabled]="true"></button>
       </div>
     </div>
   </div>

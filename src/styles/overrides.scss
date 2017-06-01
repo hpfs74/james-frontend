@@ -46,3 +46,9 @@
     border: 2px solid $knab-secondary-green;
   }
 }
+
+@media (max-width: 768px) {
+  .knx-wizard-step-content .knx-wizard--controls {
+    margin: 15px 0 !important;
+  }
+}

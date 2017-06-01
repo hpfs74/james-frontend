@@ -84,3 +84,9 @@ $knx-navbar-font: $font-size-base;
   border-top: 1px solid $knab-light-gray;
   padding-left: 20px;
 }
+
+@media (max-width: 768px) {
+  .navbar-toggleable-xs {
+    display: none;
+  }
+}
