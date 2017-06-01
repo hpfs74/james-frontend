@@ -15,13 +15,17 @@ import { slideInOutAnimation } from '../../animations/slide-in-out.animation';
   `,
   animations: [slideInOutAnimation]
 })
-export class SidePanelComponent {
+export class SidePanelComponent implements OnInit {
   @Input() title: string;
   @Input() showCloseButton: boolean = true;
-  show: boolean = false;
+
+  show: boolean;
   animationState: string;
 
-  isVisible: string;
+  ngOnInit() {
+    this.show = false;
+    this.animationState = 'out';
+  }
 
   public open(): void {
     this.show = true;

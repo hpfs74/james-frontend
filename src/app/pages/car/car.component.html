@@ -25,61 +25,33 @@
 
     <div class="knx-wizard__sidebar" #knxWizardSidebar>
       <knx-chat-stream [options]="chatConfig" [messages]="chatMessages" [formGroup]="carExtrasForm.formGroup">
-        <!--
-          ngIf on individual components used here to get around partial keyframe error of
-          animated knx-collapse-message @see https://github.com/angular/material2/issues/3968
-        -->
-        <knx-collapse-message class="hidden-xs" title="Dekking" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group [options]="carExtrasForm.formConfig.coverage" [formControlName]="carExtrasForm.formConfig.coverage.formControlName">
-          </cx-form-group>
-        </knx-collapse-message>
+        <knx-car-extras
+          [form]="carExtrasForm"
+          [show]="currentStep === 1"
+          optionModifierClass="hidden-xs">
+        </knx-car-extras>
 
-        <knx-collapse-message class="hidden-xs" title="Aanvullende dekkingen" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group [options]="carExtrasForm.formConfig.extraOptions" [formControlName]="carExtrasForm.formConfig.extraOptions.formControlName">
-          </cx-form-group>
-        </knx-collapse-message>
+        <!-- alternative view with sidenav for mobile devices -->
+        <ng-container *ngIf="currentStep === 1" [formGroup]="carExtrasForm.formGroup">
+          <knx-side-panel #knxSidePanel title="Wijzig">
+            <div class="container-fluid">
+              <div class="knx-side-panel-content">
+                <knx-car-extras
+                  [form]="carExtrasForm"
+                  [show]="currentStep === 1">
+                </knx-car-extras>
 
-        <knx-collapse-message class="hidden-xs" title="Aantal KM per jaar" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group [options]="carExtrasForm.formConfig.kmPerYear" [formControlName]="carExtrasForm.formConfig.kmPerYear.formControlName">
-          </cx-form-group>
-        </knx-collapse-message>
+                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow" (click)="knxSidePanel.close()">Verder</button>
+              </div>
+            </div>
+          </knx-side-panel>
 
-        <knx-collapse-message class="hidden-xs" title="Eigen risico" *ngIf="currentStep === 1" [isOpen]="true">
-          <cx-form-group class="own-risk" [options]="carExtrasForm.formConfig.ownRisk" [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName">
-          </cx-form-group>
-        </knx-collapse-message>
+          <button class="car-forms__edit hidden-md-up knx-button knx-button--pill" (click)="knxSidePanel.open()">Extra opties selecteren</button>
+        </ng-container>
+        <!-- end mobile view -->
+
       </knx-chat-stream>
     </div>
-
-    <knx-side-panel #knxSidePanel title="Wijzig" [formGroup]="carExtrasForm.formGroup">
-      <div class="container-fluid">
-        <div class="knx-side-panel-content">
-          <knx-collapse-message class="hidden-xs" title="Dekking" *ngIf="currentStep === 1" [isOpen]="true">
-            <cx-form-group [options]="carExtrasForm.formConfig.coverage" [formControlName]="carExtrasForm.formConfig.coverage.formControlName">
-            </cx-form-group>
-          </knx-collapse-message>
-
-          <knx-collapse-message class="hidden-xs" title="Aanvullende dekkingen" *ngIf="currentStep === 1" [isOpen]="true">
-            <cx-form-group [options]="carExtrasForm.formConfig.extraOptions" [formControlName]="carExtrasForm.formConfig.extraOptions.formControlName">
-            </cx-form-group>
-          </knx-collapse-message>
-
-          <knx-collapse-message class="hidden-xs" title="Aantal KM per jaar" *ngIf="currentStep === 1" [isOpen]="true">
-            <cx-form-group [options]="carExtrasForm.formConfig.kmPerYear" [formControlName]="carExtrasForm.formConfig.kmPerYear.formControlName">
-            </cx-form-group>
-          </knx-collapse-message>
-
-          <knx-collapse-message class="hidden-xs" title="Eigen risico" *ngIf="currentStep === 1" [isOpen]="true">
-            <cx-form-group class="own-risk" [options]="carExtrasForm.formConfig.ownRisk" [formControlName]="carExtrasForm.formConfig.ownRisk.formControlName">
-            </cx-form-group>
-          </knx-collapse-message>
-
-          <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow">Verder</button>
-        </div>
-      </div>
-    </knx-side-panel>
-
-    <button *ngIf="currentStep === 1" class="hidden-md-up knx-button knx-button--edit" (click)="knxSidePanel.open()">Extra opties selecteren</button>
 
   </knx-wizard>
 </div>
