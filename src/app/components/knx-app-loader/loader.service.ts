@@ -4,7 +4,6 @@ import { Subject } from 'rxjs/Subject';
 import { LoaderState } from './loader';
 
 @Injectable()
-
 export class LoaderService {
   /* tslint:disable */
   private loaderSubject = new Subject<LoaderState>();
