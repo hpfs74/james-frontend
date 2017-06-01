@@ -44,7 +44,7 @@ export class CarBuyComponent implements OnInit {
     this.currentStep = 0;
     this.formSteps = [
       {
-        label: 'Gekozen verzekering',
+        label: 'Overzicht',
         nextButtonLabel: 'Naar contactgegevens',
         hideBackButton: true,
         //onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome),
@@ -52,18 +52,22 @@ export class CarBuyComponent implements OnInit {
       },
       {
         label: 'Contactgegevens',
+        nextButtonLabel: 'Naar autogegevens',
         backButtonLabel: 'Terug',
       },
       {
         label: 'Autogegevens',
+        nextButtonLabel: 'Naar justitie check',
         backButtonLabel: 'Terug'
       },
       {
         label: 'Check',
+        nextButtonLabel: 'Naar betalingsgegevens',
         backButtonLabel: 'Terug'
       },
       {
         label: 'Betaling',
+        nextButtonLabel: 'Aanvraging versturen',
         backButtonLabel: 'Terug'
       }
     ];
