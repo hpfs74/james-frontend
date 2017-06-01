@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { collapseInOutAnimation } from '../../animations';
 import { Nav, NavItemType } from '../../models';
-import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
+import { NavUserComponent } from './../knx-nav-user/nav-user.component';
 import { AuthService } from '../../services/auth.service';
 import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
 
@@ -51,7 +51,7 @@ import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
           </li>
 
           <li class="nav-item hidden-xs"><ng-content select="knx-opening-hours"></ng-content></li>
-          <li class="nav-item hidden-xs"><ng-content select="knx-user-detail"></ng-content></li>
+          <li class="nav-item hidden-xs"><ng-content select="knx-nav-user"></ng-content></li>
         </ul>
       </div>
     </div>

@@ -5,12 +5,12 @@ import { AuthService } from '../../services/auth.service';
 import { Profile } from '../../models/profile';
 
 @Component({
-  selector: 'knx-user-detail',
+  selector: 'knx-nav-user',
   template: `
-    <div class="knx-user-detail" *ngIf="profile" >
+    <div class="knx-nav-user" *ngIf="profile" >
       <knx-dropdown>
         <knx-dropdown-button>
-          <span class="knx-user-detail__icon knx-icon-user-o"></span> {{ profile.firstname }}
+          <span class="knx-nav-user__icon knx-icon-user-o"></span> {{ profile.firstname }}
         </knx-dropdown-button>
         <knx-dropdown-menu offset="40 0">
           <knx-menu-item (click)="goToProfile()">
@@ -27,7 +27,7 @@ import { Profile } from '../../models/profile';
     </div>
   `
 })
-export class UserDetailComponent {
+export class NavUserComponent {
   @Input() profile: Profile;
   @Input() isLoggedIn: boolean = false;
   @Output() signOut = new EventEmitter();

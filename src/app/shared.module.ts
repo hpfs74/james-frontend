@@ -49,7 +49,7 @@ import { SidePanelComponent } from './components/knx-side-panel/side-panel.compo
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
-import { UserDetailComponent } from './components/knx-user-detail/user-detail.component';
+import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 
 export const sharedComponents = [
   TitleCasePipe,
@@ -76,7 +76,7 @@ export const sharedComponents = [
   LoaderComponent,
   TabsComponent,
   TabComponent,
-  UserDetailComponent,
+  NavUserComponent,
 ];
 
 export const sharedModules = [

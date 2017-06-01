@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { Nav, NavItemType } from '../../models';
 import { NavbarComponent } from './navbar.component';
-import { UserDetailComponent } from './../knx-user-detail/user-detail.component';
+import { NavUserComponent } from './../knx-nav-user/nav-user.component';
 
 describe('Component: Navbar', () => {
   let comp: NavbarComponent;
