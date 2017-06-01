@@ -127,49 +127,31 @@ export class CarComponent implements OnInit {
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
 
-    // this.validateForm(detailForm);
-    // this.validateForm(address);
+    this.validateForm(detailForm);
+    this.validateForm(address);
 
-    // if (!detailForm.valid && !address.valid) {
-    //   this.carDetailSubmitted = true;
-    //   return new Observable(obs => {
-    //     throw ('cannot move to step');
-    //   });
-    // }
+    if (!detailForm.valid && !address.valid) {
+      this.carDetailSubmitted = true;
+      return new Observable(obs => {
+        throw ('cannot move to step');
+      });
+    }
 
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    // this.profile = {
-    //   gender: detailForm.value.gender,
-    //   dateOfBirth: detailForm.value.birthDate
-    // };
-
-    // let options: CarInsuranceOptions = {
-    //   active_loan: detailForm.value.loan,
-    //   coverage: detailForm.value.coverage,
-    //   claim_free_years: +detailForm.value.claimFreeYears,
-    //   household_status: detailForm.value.houseHold
-    // };
-    // let requestObj = new CarCompareRequest(this.profile, this.car, this.address, options);
-
-
-    let mockRequest: CarCompareRequest = {
-      'license': 'GK906T',
-      'first_name': null,
-      'gender': 'm',
-      'date_of_birth': '1991-10-26',
-      'house_number': '234',
-      'last_name': null,
-      'title': 'Dhr.',
-      'zipcode': '2512GH',
-      'country': 'NL',
-      'coverage': 'CL',
-      'claim_free_years': 7,
-      'household_status': 'CHMP',
-      'active_loan': false
+    this.profile = {
+      gender: detailForm.value.gender,
+      dateOfBirth: detailForm.value.birthDate
     };
-    let requestObj = mockRequest;
+
+    let options: CarInsuranceOptions = {
+      active_loan: detailForm.value.loan,
+      coverage: detailForm.value.coverage,
+      claim_free_years: +detailForm.value.claimFreeYears,
+      household_status: detailForm.value.houseHold
+    };
+    let requestObj = new CarCompareRequest(this.profile, this.car, this.address, options);
 
 
     this.formData[0] = requestObj;
