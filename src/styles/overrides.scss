@@ -2,6 +2,10 @@
   font-size: $font-size-base;
 }
 
+.cx-form-group__label + .cx-form-group__description {
+  font-size: $base-font-size - 2;
+}
+
 .cx-slider .noUi-pips {
   font-size: 12px;
 }

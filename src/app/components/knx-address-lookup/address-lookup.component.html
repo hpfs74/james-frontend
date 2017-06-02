@@ -28,7 +28,10 @@
       <cx-form-group formControlName="houseNumberExtension" [options]="{
         formControl: addressFormGroup.get('houseNumberExtension'),
         label: 'Toevoeging',
-        validationErrors: validationErrors
+        validationErrors: validationErrors,
+        inputOptions: {
+          placeholder: 'Optioneel'
+        }
       }"></cx-form-group>
     </div>
 
