@@ -79,6 +79,7 @@ module.exports = function (config) {
     coverageReporter: {
       type: 'in-memory',
       reporters: [
+        { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
         { type: 'json', subdir: '.', file: 'coverage-final.json' },
         { type: 'clover', dir: 'coverage', subdir: '.', file: 'clover.xml' }
       ]
