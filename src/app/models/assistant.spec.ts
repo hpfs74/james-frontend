@@ -1,10 +1,10 @@
-import { AssistantConfig, AppAssistantConfig } from './assistant';
+import { AssistantConfig } from './assistant';
 
 describe('Class: Assistant', () => {
   let config: AssistantConfig;
 
   beforeEach(() => {
-    config = new AppAssistantConfig();
+    config = new AssistantConfig();
   });
 
   it('should create an address message', () => {

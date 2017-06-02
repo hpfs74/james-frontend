@@ -3,12 +3,9 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { nameInitialMask } from '../utils/base-form.utils';
 import { phoneNumberValidator } from '../utils/base-form.class';
 
-import { Options } from '../../../node_modules/@cx/form-group/';
-import { FormGroupConfig } from '../models/form-group-config';
-
 export class ContactDetailForm {
   formGroup: FormGroup;
-  formConfig: FormGroupConfig;
+  formConfig: any;
 
   initialMask = nameInitialMask;
 
@@ -24,7 +21,6 @@ export class ContactDetailForm {
     this.formGroup = this.fb.group({
       initials: [null,
         Validators.compose([
-          Validators.maxLength(5),
           Validators.required
         ])
       ],

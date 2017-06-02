@@ -10,12 +10,16 @@
 
   <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
 
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
   <% if (webpackConfig.htmlElements.headTags) { %>
     <!-- Configured Head Tags  -->
     <%= webpackConfig.htmlElements.headTags %>
-      <% } %>
-        <!-- base url -->
-        <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+  <% } %>
+
+  <!-- base url -->
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
 </head>
 
 <body class="knx-base">

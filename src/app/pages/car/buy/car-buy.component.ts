@@ -10,7 +10,7 @@ import { AssistantConfig } from '../../../models/assistant';
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { ProfileService } from '../../../services/profile.service';
-
+import { Profile } from './../../../models/profile';
 import { CarContactComponent } from './car-contact.component';
 import { ContactDetailForm } from './../../../forms/contact-detail.form';
 
@@ -25,6 +25,8 @@ export class CarBuyComponent implements OnInit {
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
   assistantMessages: any;
+
+  profile: Observable<Profile>;
 
   // Forms
   contactDetailForm: ContactDetailForm;
@@ -53,13 +55,13 @@ export class CarBuyComponent implements OnInit {
         label: 'Overzicht',
         nextButtonLabel: 'Naar contactgegevens',
         hideBackButton: true,
-        //onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome),
-        //onBeforeNext: this.submitDetailForm.bind(this)
       },
       {
         label: 'Contactgegevens',
         nextButtonLabel: 'Naar autogegevens',
         backButtonLabel: 'Terug',
+        onShowStep: () => this.initContactDetails(),
+        onBeforeNext: this.submitContactDetails.bind(this)
       },
       {
         label: 'Autogegevens',
@@ -80,7 +82,18 @@ export class CarBuyComponent implements OnInit {
 
     let formBuilder = new FormBuilder();
     this.contactDetailForm = new ContactDetailForm(formBuilder);
-   }
+  }
+
+  initContactDetails() {
+    this.profile = this.profileService.getUserProfile();
+    this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.contact);
+  }
+
+  submitContactDetails(): Observable<any> {
+    //console.log(this.contactDetailForm.formGroup.value);
+
+    return null;
+  }
 
   onStepChange(event) {
     //TODO: implement
