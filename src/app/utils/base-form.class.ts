@@ -93,3 +93,17 @@ export function birthDateValidator(key: string) {
     return !value ? obj : null;
   };
 }
+
+export function regExValidator(regex : RegExp, errorName : string) {
+  return (fc: FormControl) => {
+    let value = fc.value;
+    let ok = regex.test(value);
+    let result = {};
+    result[errorName] = true;
+    return ok ? null : result;
+  };
+}
+
+export function phoneNumberValidator(key: string) {
+  return regExValidator(/^\+?[0-9]+$/, key);
+}

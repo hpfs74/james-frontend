@@ -1,5 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { nameInitialMask } from '../utils/base-form.utils';
+import { phoneNumberValidator } from '../utils/base-form.class';
 
 export class ContactDetailForm {
   formGroup: FormGroup;
@@ -9,6 +10,9 @@ export class ContactDetailForm {
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
+    minlength: () => 'Ongeldig telefoonnnummer',
+    mobileNumber: () => 'Ongeldig telefoonnummer',
+    phoneNumber: () => 'Ongeldig telefoonnummer',
     maxlength: (err) => `Je kunt maximaal ${err.requiredLength} tekens invullen`
   };
 
@@ -23,8 +27,19 @@ export class ContactDetailForm {
       firstName: [null, Validators.required],
       middleName: [null],
       lastName: [null, Validators.required],
-      mobilePhone: [null, Validators.required],
-      phone: [null],
+      mobileNumber: [null,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(10),
+          phoneNumberValidator('mobileNumber')
+        ])
+      ],
+      phoneNumber: [null,
+        Validators.compose([
+          Validators.minLength(10),
+          phoneNumberValidator('phoneNumber')
+        ])
+      ],
       saveToProfile: [{}]
     });
 
@@ -61,16 +76,17 @@ export class ContactDetailForm {
         validationErrors: this.validationErrors
       },
       mobilePhone: {
-        formControlName: 'mobilePhone',
+        formControlName: 'mobileNumber',
+        description: 'voorbeeld: 0612345678',
         label: 'Mobiel nummer',
-        formControl: this.formGroup.get('mobilePhone'),
+        formControl: this.formGroup.get('mobileNumber'),
         validationErrors: this.validationErrors
       },
       phone: {
-        formControlName: 'phone',
+        formControlName: 'phoneNumber',
         label: 'Vast telefoonnummer',
         placeholder: 'Optioneel',
-        formControl: this.formGroup.get('phone'),
+        formControl: this.formGroup.get('phoneNumber'),
         validationErrors: this.validationErrors
       },
       saveToProfile: {
