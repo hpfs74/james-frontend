@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CarComponent } from '../car/car.component';
-import { CarDetailComponent } from '../car/car-detail.component';
+import { CarAdviceComponent } from './advice/car-advice.component';
+import { CarDetailComponent } from './advice/car-detail.component';
+import { CarBuyComponent } from './buy/car-buy.component';
 
 export const carRoutes: Routes = [
   {
     path: '',
-    component: CarComponent,
+    component: CarAdviceComponent,
     data: {
       breadcrumb: 'Je autoverzekering vergelijken'
     }
-    // children: [
-    //   {
-    //     path: 'advice',
-    //     component: CarAdviceComponent,
-    //     data: {
-    //       breadcrumb: 'Autoverzekering vergelijken'
-    //     }
-    //   }
-    // ]
+  },
+  {
+    path: 'insurance',
+    component: CarBuyComponent,
+    data: {
+      breadcrumb: 'Nieuwe autoverzekering aanvragen'
+    }
   }
 ];
 @NgModule({

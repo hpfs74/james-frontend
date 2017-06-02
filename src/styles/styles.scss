@@ -11,7 +11,7 @@
 @import '../app/pages/dashboard/dashboard.component';
 @import '../app/pages/login/login.component';
 @import '../app/pages/password-reset/password-reset.component';
-@import '../app/pages/car/car.component';
+@import '../app/pages/car/advice/car-advice.component';
 
 /* component styles */
 @import '../app/components/knx-breadcrumb/breadcrumb.component';
@@ -35,7 +35,7 @@
 @import '../app/components/knx-review-summary/review-summary.component';
 @import '../app/components/knx-side-panel/side-panel.component';
 @import '../app/components/knx-star-rating/star-rating.component';
-@import '../app/components/knx-user-detail/user-detail.component';
+@import '../app/components/knx-nav-user/nav-user.component';
 @import '../app/components/knx-car-info/car-info.component';
 @import '../app/components/knx-car-info/car-info.colors';
 @import '../app/components/knx-car-info/car-preview.component';
@@ -47,6 +47,7 @@
 
 html {
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 *,

@@ -29,7 +29,7 @@ import { loginError } from './login-error';
       <form [formGroup]="loginForm" (ngSubmit)="login($event)" (keyup.enter)="login($event)">
         <div class="row">
           <div class="col-md-6 offset-md-3">
-              <cx-form-group [formControlName]='formGroupConfig[0].formControlName'
+              <cx-form-group [formControlName]="formGroupConfig[0].formControlName"
                 [options]="formGroupConfig[0]"></cx-form-group>
 
               <div class="login-password-wrapper">
@@ -84,7 +84,6 @@ export class LoginComponent {
       '&redirect_uri=com.mobgen.knab://' +
       '&response_type=code' +
       '&scope=basic+emailaddress+social';
-
   }
 
   initForm() {

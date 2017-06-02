@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     private assistantService: AssistantService,
     private chatNotifierService: ChatStreamService) {
     this.chatConfig = assistantService.config;
-    this.chatConfig.avatar.title = assistantService.config.avatar.title;
+    this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
 
   ngOnInit() {

@@ -1,0 +1,26 @@
+<div class="container-fluid knx-container--fullwidth knx-container--gray">
+  <div class="container">
+    <ol *ngIf="formSteps" class="knx-step-navigation">
+      <li *ngFor="let step of formSteps; let i = index;" class="knx-step-navigation__step" [ngClass]="{ 'knx-step-navigation__step--current': i === currentStep }">{{ step.label }}</li>
+    </ol>
+  </div>
+</div>
+
+<div class="container knx-car-buy">
+  <knx-wizard (stepChange)="onStepChange($event)">
+    <div class="knx-wizard__steps">
+      <knx-step [options]="formSteps[0]">
+        <!-- first step content here -->
+      </knx-step>
+
+      <knx-step [options]="formSteps[1]">
+        <knx-car-contact-form [form]="contactDetailForm"></knx-car-contact-form>
+      </knx-step>
+    </div>
+
+    <div class="knx-wizard__sidebar" #knxWizardSidebar>
+      <knx-chat-stream [options]="chatConfig" [messages]="chatMessages">
+      </knx-chat-stream>
+    </div>
+  </knx-wizard>
+</div>

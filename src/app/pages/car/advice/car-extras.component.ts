@@ -34,7 +34,12 @@ import { CarExtrasForm } from './car-extras.form';
         </cx-form-group>
       </knx-collapse-message>
     </div>
-  `
+  `,
+  styles: [`
+    .own-risk {
+      padding-bottom: 45px;
+    }
+  `]
 })
 
 export class CarExtrasComponent {

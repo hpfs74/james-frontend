@@ -47,6 +47,10 @@
   }
 }
 
+.knx-step-navigation {
+  margin-bottom: 40px;
+}
+
 @media (max-width: 768px) {
   .knx-wizard-step-content .knx-wizard--controls {
     margin: 15px 0 !important;

@@ -6,25 +6,38 @@
   </div>
 </div>
 
-<div class="container car-forms__container">
+<div class="container knx-car-advice">
   <knx-wizard (stepChange)="onStepChange($event)">
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
-
-        <knx-car-detail-form (licensePlateChange)="getCarInfo($event)" (addressChange)="updateAddress($event)" (coverageDetailsChange)="getCoverages($event)"
-          (coverageSelected)="updateSelectedCoverage($event)" (formControlFocus)="showHelperText($event)" [form]="carDetailForm"
-          [coverages]="coverages" [submitted]="carDetailSubmitted && currentStep === 0" [isCoverageLoading]="isCoverageLoading">
+        <knx-car-detail-form
+          (licensePlateChange)="getCarInfo($event)"
+          (addressChange)="updateAddress($event)"
+          (coverageDetailsChange)="getCoverages($event)"
+          (coverageSelected)="updateSelectedCoverage($event)"
+          (formControlFocus)="showHelperText($event)"
+          [form]="carDetailForm"
+          [coverages]="coverages"
+          [submitted]="carDetailSubmitted && currentStep === 0"
+          [isCoverageLoading]="isCoverageLoading">
         </knx-car-detail-form>
       </knx-step>
 
       <knx-step [options]="formSteps[1]">
-        <knx-insurance-toplist (insuranceSelected$)="onSelectPremium($event)" [stepAmount]="4" [insurances]="insurances | async">
+        <knx-insurance-toplist
+          (insuranceSelected$)="onSelectPremium($event)"
+          [stepAmount]="4"
+          [insurances]="insurances | async">
         </knx-insurance-toplist>
       </knx-step>
     </div>
 
     <div class="knx-wizard__sidebar" #knxWizardSidebar>
-      <knx-chat-stream [options]="chatConfig" [messages]="chatMessages" [formGroup]="carExtrasForm.formGroup">
+      <knx-chat-stream
+        [options]="chatConfig"
+        [messages]="chatMessages"
+        [formGroup]="carExtrasForm.formGroup">
+
         <knx-car-extras
           [form]="carExtrasForm"
           [show]="currentStep === 1"
@@ -46,12 +59,11 @@
             </div>
           </knx-side-panel>
 
-          <button class="car-forms__edit hidden-md-up knx-button knx-button--pill" (click)="knxSidePanel.open()">Extra opties selecteren</button>
+          <button class="knx-car-advice__editoptions hidden-md-up knx-button knx-button--pill" (click)="knxSidePanel.open()">Extra opties selecteren</button>
         </ng-container>
         <!-- end mobile view -->
 
       </knx-chat-stream>
     </div>
-
   </knx-wizard>
 </div>

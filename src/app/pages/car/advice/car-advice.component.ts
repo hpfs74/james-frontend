@@ -3,35 +3,31 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { KNXStepOptions } from '../../../../node_modules/@knx/wizard/src/knx-wizard.options';
+import { KNXStepOptions } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 
-import { ConfigService } from '../../config.service';
-import { InsuranceService } from '../../services/insurance.service';
-import { AssistantService } from './../../services/assistant.service';
-import { AssistantConfig } from '../../models/assistant';
-import { CarService } from './car.service';
-import { Car, Price, CarCompareRequest, Profile, Address } from '../../models';
+import { ConfigService } from '../../../config.service';
+import { InsuranceService } from '../../../services/insurance.service';
+import { AssistantService } from './../../../services/assistant.service';
+import { AssistantConfig } from '../../../models/assistant';
+import { CarService } from '../car.service';
+import { Car, Price, CarCompareRequest, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
-import { CarCoverageRecommendation } from './../../models/coverage';
-import { CarInsurance } from '../../models/car-insurance';
-import { CarInsuranceOptions } from './../../models/car-compare-request';
+import { CarCoverageRecommendation } from './../../../models/coverage';
+import { CarInsurance } from '../../../models/car-insurance';
+import { CarInsuranceOptions } from './../../../models/car-compare-request';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
-import { scrollToForm } from '../../utils/base-form.utils';
+import { scrollToForm } from '../../../utils/base-form.utils';
 
-// TODO: remove mock data
-import { mockInsurances } from '../../models/car-insurance.mock';
-
-import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
-import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
-import { AuthService } from '../../services/auth.service';
-import { ProfileService } from '../../services/profile.service';
+import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
+import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
+import { AuthService } from '../../../services/auth.service';
+import { ProfileService } from '../../../services/profile.service';
 
 @Component({
-  selector: 'knx-car-page',
-  templateUrl: 'car.component.html'
+  templateUrl: 'car-advice.component.html'
 })
-export class CarComponent implements OnInit {
+export class CarAdviceComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   formData: Array<any>;
@@ -162,6 +158,9 @@ export class CarComponent implements OnInit {
 
   onSelectPremium(insurance) {
     // TODO: implement
+    // get insurance
+    // pass data to get-insurance route
+    this.router.navigate(['/car/get-insurance']);
   }
 
   onStepChange(stepIndex) {

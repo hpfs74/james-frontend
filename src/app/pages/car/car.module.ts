@@ -4,9 +4,12 @@ import { ChatStreamModule } from './../../components/knx-chat-stream/chat-stream
 import { CarRoutingModule } from './car-routing.module';
 
 import { CarService } from './car.service';
-import { CarComponent } from './car.component';
-import { CarDetailComponent } from './car-detail.component';
-import { CarExtrasComponent } from './car-extras.component';
+import { CarAdviceComponent } from './advice/car-advice.component';
+import { CarDetailComponent } from './advice/car-detail.component';
+import { CarExtrasComponent } from './advice/car-extras.component';
+
+import { CarBuyComponent } from './buy/car-buy.component';
+import { CarContactComponent } from './buy/car-contact.component';
 
 @NgModule({
   imports: [
@@ -15,9 +18,11 @@ import { CarExtrasComponent } from './car-extras.component';
     CarRoutingModule
   ],
   declarations: [
-    CarComponent,
+    CarAdviceComponent,
     CarDetailComponent,
-    CarExtrasComponent
+    CarExtrasComponent,
+    CarBuyComponent,
+    CarContactComponent
   ],
   providers: [
     CarService

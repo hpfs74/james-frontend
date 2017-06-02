@@ -13,7 +13,7 @@
             label: 'Wat is je kenteken?',
             validationErrors: form.validationErrors,
             formControl: form.formGroup.get('licensePlate')
-        }">
+           }">
             <knx-input-licenseplate formControlName="licensePlate" (ngModelChange)="onLicensePlateChange($event)" [options]="{ placeholder: '16K-NAB-9' }">
             </knx-input-licenseplate>
           </cx-form-group>
