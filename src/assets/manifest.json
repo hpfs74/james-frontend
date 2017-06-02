@@ -1,5 +1,5 @@
 {
- "name": "Knab Verzekeren Web",
+ "name": "Knab Verzekeren",
  "short_name": "Verzekeren",
  "icons": [
   {
@@ -33,6 +33,8 @@
    "type": "image/png"
   }
  ],
-  "theme_color": "cornflowerblue",
-  "background_color": "cornflowerblue"
+  "theme_color": "#003b5a",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait"
 }
