@@ -40,7 +40,8 @@ export class CarDetailComponent implements OnInit {
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
 
   constructor(
-    private fb: FormBuilder, elementRef: ElementRef,
+    private fb: FormBuilder,
+    private elementRef: ElementRef,
     private chatNotifierService: ChatStreamService,
     private carService: CarService) {
   }

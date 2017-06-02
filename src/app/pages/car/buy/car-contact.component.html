@@ -1,0 +1,65 @@
+<form [formGroup]="form.formGroup" class="knx-fancy-form">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-2">
+
+      <h2>Je gegevens</h2>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <cx-form-group
+            [options]="form.formConfig.initials"
+            [formControlName]="form.formConfig.initials.formControlName">
+          </cx-form-group>
+        </div>
+        <div class="col-sm-6">
+          <cx-form-group
+            [options]="form.formConfig.middleName"
+            [formControlName]="form.formConfig.middleName.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <cx-form-group
+        [options]="form.formConfig.firstName"
+        [formControlName]="form.formConfig.firstName.formControlName">
+      </cx-form-group>
+
+      <cx-form-group
+        [options]="form.formConfig.lastName"
+        [formControlName]="form.formConfig.lastName.formControlName">
+      </cx-form-group>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <cx-form-group
+            [options]="form.formConfig.mobilePhone"
+            [formControlName]="form.formConfig.mobilePhone.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <cx-form-group
+            [options]="form.formConfig.phone"
+            [formControlName]="form.formConfig.phone.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Summary error message -->
+      <div class="cx-form-group" [hidden]="!submitted || form.formGroup.valid">
+        <div class="knx-message knx-message--error">
+          <div class="knx-message__content">
+            Heb je alle velden (correct) ingevuld?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

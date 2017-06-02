@@ -28,8 +28,18 @@ export const birthDateMask = {
         return date;
       }
     }
-
     return null;
   },
   pipe: createAutoCorrectedDatePipe('dd / mm / yyyy')
+};
+
+export const nameInitialMask = {
+  mask: [/[a-zA-Z]/, '.', /[a-zA-Z]/, '.', /[a-zA-Z]/, '.', /[a-zA-Z]/, '.', /[a-zA-Z]/, '.'],
+  guide: false,
+  decode: value => {
+    return value.replace(/[ .]/gim, '');
+  },
+  pipe: (conformedValue) => {
+    return conformedValue.toUpperCase();
+  }
 };

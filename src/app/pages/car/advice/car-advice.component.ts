@@ -19,9 +19,6 @@ import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
 import { scrollToForm } from '../../../utils/base-form.utils';
 
-// TODO: remove mock data
-import { mockInsurances } from '../../../models/car-insurance.mock';
-
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../../services/auth.service';

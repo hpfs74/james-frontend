@@ -11,6 +11,9 @@ import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { ProfileService } from '../../../services/profile.service';
 
+import { CarContactComponent } from './car-contact.component';
+import { ContactDetailForm } from './../../../forms/contact-detail.form';
+
 @Component({
   templateUrl: 'car-buy.component.html'
 })
@@ -22,6 +25,9 @@ export class CarBuyComponent implements OnInit {
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
   assistantMessages: any;
+
+  // Forms
+  contactDetailForm: ContactDetailForm;
 
   constructor(
     private router: Router,
@@ -72,7 +78,8 @@ export class CarBuyComponent implements OnInit {
       }
     ];
 
-
+    let formBuilder = new FormBuilder();
+    this.contactDetailForm = new ContactDetailForm(formBuilder);
    }
 
   onStepChange(event) {

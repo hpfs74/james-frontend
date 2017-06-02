@@ -12,6 +12,10 @@
       <knx-step [options]="formSteps[0]">
         <!-- first step content here -->
       </knx-step>
+
+      <knx-step [options]="formSteps[1]">
+        <knx-car-contact-form [form]="contactDetailForm"></knx-car-contact-form>
+      </knx-step>
     </div>
 
     <div class="knx-wizard__sidebar" #knxWizardSidebar>

@@ -14,7 +14,7 @@ export const carRoutes: Routes = [
     }
   },
   {
-    path: 'get-insurance',
+    path: 'insurance',
     component: CarBuyComponent,
     data: {
       breadcrumb: 'Nieuwe autoverzekering aanvragen'
