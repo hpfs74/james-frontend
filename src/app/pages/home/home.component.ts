@@ -22,6 +22,7 @@ import {
     </header>
 
     <div class="main-container">
+      <knx-loader *shellRender></knx-loader>
       <router-outlet></router-outlet>
     </div>
 

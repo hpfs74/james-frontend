@@ -37,12 +37,6 @@ $knx-navbar-font: $font-size-base;
   }
 }
 
-@media (max-width: 768px) {
-  .knx-navbar .knx-button--hamburger {
-    margin-top: 14px;
-  }
-}
-
 .knx-navbar.navbar {
   padding: 0;
 }
@@ -92,8 +86,8 @@ $knx-navbar-font: $font-size-base;
 .navbar > .container .navbar-brand,
 .navbar > .container-fluid .navbar-brand,
 .knx-navbar.navbar-toggleable-md .navbar-nav .nav-item .navbar-brand {
-  margin-left: 0;
-  padding-top: 12px;
+  margin-left: 15px;
+  padding-top: 10px;
 }
 
 .knx-navbar .navbar-nav .nav-item {

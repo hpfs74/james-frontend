@@ -4,42 +4,36 @@
       class="knx-button--hamburger" type="button" aria-label="Toggle navigation">
     </button>
 
-    <div class="navbar-collapse hidden-sm-down"
-      id="navbarNavDropdown" [@collapseInOutAnimation]="!isCollapsed"
-      [attr.aria-expanded]="!isCollapsed">
-      <ul class="navbar-nav mr-auto">
-        <li (click)="isCollapsed = true" class="nav-item" routerLinkActive="active">
-          <a class="navbar-brand hidden-xs-down" routerLink="">
-            <img class="knx-logo" src="/assets/images/knab-logo-inverse.svg" alt="Logo Knab">
-          </a>
-        </li>
-      </ul>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="navbar-brand hidden-xs-down" routerLink="">
+          <img class="knx-logo" src="/assets/images/knab-logo-inverse.svg" alt="Logo Knab">
+        </a>
+      </li>
+    </ul>
 
-      <ul class="navbar-nav ml-auto">
-        <li (click)="isCollapsed = true"
-          class="nav-item active"
-          *ngFor="let item of menuItems; let i = index"
-          routerLinkActive="active"
-          [ngClass]="getMenuItemClasses(item)">
-          <a *ngIf="item.routePath" id="{{ item.id }}"
-            routerLink="{{ item.routePath }}"
-            class="nav-link" href="#">{{ item.title }}</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active hidden-xs-down"
+        *ngFor="let item of menuItems; let i = index"
+        routerLinkActive="active"
+        [ngClass]="getMenuItemClasses(item)">
 
-          <a *ngIf="!item.routePath" id="{{ item.id }}"
-            href="{{ item.url }}" target="_blank"
-            class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
-        </li>
+        <a *ngIf="item.routePath" id="{{ item.id }}"
+          routerLink="{{ item.routePath }}"
+          class="nav-link" href="#">{{ item.title }}</a>
 
-        <li class="nav-item"><ng-content select="knx-opening-hours"></ng-content></li>
-        <li class="nav-item"><ng-content select="knx-nav-user"></ng-content></li>
-      </ul>
-    </div>
+        <a *ngIf="!item.routePath" id="{{ item.id }}"
+          href="{{ item.url }}" target="_blank"
+          class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
+      </li>
+
+      <li class="nav-item hidden-xs-down"><ng-content select="knx-opening-hours"></ng-content></li>
+      <li class="nav-item"><ng-content select="knx-nav-user"></ng-content></li>
+    </ul>
   </div>
 </nav>
 
-<knx-side-panel #knxToolbarPanel title="Wijzig"
-  [fullwidth]="false"
-  title="Menu">
+<knx-side-panel #knxToolbarPanel title="Wijzig" [fullwidth]="false" title="Menu">
   <div class="container-fluid">
     <div class="knx-side-panel-content">
       <ul class="navbar-nav">
@@ -47,12 +41,13 @@
           class="nav-item active"
           *ngFor="let item of menuItems; let i = index"
           routerLinkActive="active">
-          <a *ngIf="item.routePath" id="{{ item.id }}"
+          <a *ngIf="item.routePath"
+            id="{{ item.id }}"
             routerLink="{{ item.routePath }}"
             class="nav-link" href="#">{{ item.title }}</a>
         </li>
-        <li class="nav-item"><a class="nav-link" routerLink="/profile">Mijn account</a></li>
-        <li class="nav-item"><a class="nav-link" (click)="logOut()">Uitloggen</a></li>
+        <li class="nav-item" (click)="knxToolbarPanel.close()"><a class="nav-link" routerLink="/profile">Mijn account</a></li>
+        <li class="nav-item" (click)="knxToolbarPanel.close()"><a class="nav-link" (click)="logOut()">Uitloggen</a></li>
       </ul>
     </div>
   </div>

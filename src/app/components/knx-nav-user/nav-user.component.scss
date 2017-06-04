@@ -19,6 +19,12 @@
   font-weight: bold;
 }
 
+@media (max-width: 768px) {
+  .knx-nav-user {
+    margin-top: -4px;
+  }
+}
+
 .knx-nav-user .ng2-dropdown-container .ng2-dropdown-button__caret svg {
   fill: $knab-nav-item-color;
 }
