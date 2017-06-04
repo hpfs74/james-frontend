@@ -95,7 +95,7 @@ export class ContactDetailForm {
         formControl: this.formGroup.get('saveToProfile'),
         inputOptions: {
           items: [
-            { label: 'Mijn profiel updaten met deze gegevens', value: 'true' }
+            { label: 'Gegevens opslaan in mijn Knab Verzekeren profiel', value: 'true' }
           ]
         }
       }
