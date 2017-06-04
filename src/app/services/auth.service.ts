@@ -32,7 +32,7 @@ export class AuthService {
    *
    * @return {Observable<R>}
    */
-  public signOff() {
+  public logout() {
     return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
       .map(x => {
         localStorage.removeItem('access_token');
@@ -51,7 +51,7 @@ export class AuthService {
    * @param password
    * @return {Observable<R>}
    */
-  public signIn(email, password): Observable<AuthToken> {
+  public login(email, password): Observable<AuthToken> {
     return this.getNicciKey()
       .flatMap((nicci) => {
         let encPass = AuthUtils.encryptPassword(password, nicci.key);

@@ -1,8 +1,8 @@
 .ng2-dropdown-button {
-  background: #fff;
+  background: inherit;
   //padding: 0.45rem 0.25rem;
   font-size: $font-size-base;
-  color: $knab-primary-blue;
+  color: inherit;
   outline: 0;
   cursor: pointer;
   font-weight: 400;
@@ -36,6 +36,8 @@
   margin-top: 0.3em;
   display: flex;
   flex: 1 1 6%;
+  color: inherit;
+  fill: inherit;
 }
 
 :host-context(.ng2-dropdown-button--icon) .ng2-dropdown-button {

@@ -30,7 +30,7 @@ import { Profile } from '../../models/profile';
 export class NavUserComponent {
   @Input() profile: Profile;
   @Input() isLoggedIn: boolean = false;
-  @Output() signOut = new EventEmitter();
+  @Output() onLogOut = new EventEmitter();
 
   constructor(private router: Router) { }
 
@@ -39,6 +39,6 @@ export class NavUserComponent {
   }
 
   logOut() {
-    this.signOut.emit();
+    this.onLogOut.emit();
   }
 }
