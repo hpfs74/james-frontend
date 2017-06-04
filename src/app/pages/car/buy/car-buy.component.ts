@@ -52,14 +52,10 @@ export class CarBuyComponent implements OnInit {
     this.currentStep = 0;
     this.formSteps = [
       {
-        label: 'Overzicht',
-        nextButtonLabel: 'Naar contactgegevens',
-        hideBackButton: true,
-      },
-      {
         label: 'Contactgegevens',
         nextButtonLabel: 'Naar autogegevens',
         backButtonLabel: 'Terug',
+        hideBackButton: true,
         onShowStep: () => this.initContactDetails(),
         onBeforeNext: this.submitContactDetails.bind(this)
       },

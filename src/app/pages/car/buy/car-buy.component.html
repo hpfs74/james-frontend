@@ -10,10 +10,6 @@
   <knx-wizard (stepChange)="onStepChange($event)">
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
-        <!-- first step content here -->
-      </knx-step>
-
-      <knx-step [options]="formSteps[1]">
         <knx-car-contact-form
           [form]="contactDetailForm"
           [profile]="profile | async"></knx-car-contact-form>
