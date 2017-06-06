@@ -1,26 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
-import { CXPostalCodeValidator } from '../../../node_modules/@cx/form';
 import { dateMask } from '../../../node_modules/@cx/input';
-
-export function createAddress(fb: FormBuilder): FormGroup {
-  return fb.group({
-    postalCode: [null, Validators.compose(
-      [
-        Validators.required,
-        CXPostalCodeValidator
-      ]
-    )],
-    houseNumber: [null, Validators.compose(
-      [
-        Validators.required,
-        numberValidator('houseNumber')
-      ]
-    )],
-    houseNumberExtension: [null]
-  });
-}
 
 export function maxNumberValidator(key: string, max: Number) {
   return (c: FormControl): { [key: string]: any } => {

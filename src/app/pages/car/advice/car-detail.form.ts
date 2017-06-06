@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm } from '../../../models/base-form';
-import { createAddress, dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../utils/base-form.class';
+import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../utils/base-form.validators';
 import { LicensePlateValidator } from '../../../components/knx-input-licenseplate/licenseplate.validator';
 
 export class CarDetailForm extends BaseForm {
@@ -52,6 +52,6 @@ export class CarDetailForm extends BaseForm {
       coverage: [null, Validators.required]
     });
 
-    this.addressForm = createAddress(this.fb);
+    this.addressForm = this.createAddress(this.fb);
   }
 }

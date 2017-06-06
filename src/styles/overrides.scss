@@ -35,10 +35,10 @@
     }
 
     .cx-input:after {
-      position: relative;
+      position: absolute;
       line-height: 1em;
       top: 0.6em;
-      right: 30px;
+      right: 10px;
       font-size: $base-font-size + 2;
       content: map-get($knx-icons, check);
       font-family: $font-family-icon;

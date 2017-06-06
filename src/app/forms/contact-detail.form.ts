@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 
 import { BaseForm } from '../models/base-form';
 import { nameInitialMask } from '../utils/base-form.utils';
-import { phoneNumberValidator } from '../utils/base-form.class';
+import { phoneNumberValidator } from '../utils/base-form.validators';
 
 export class ContactDetailForm extends BaseForm {
   formGroup: FormGroup;
