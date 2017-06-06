@@ -29,8 +29,7 @@
 
 .knx-fancy-form {
   .ng-valid.ng-touched:not(form):not(.ng-pristine) {
-    input,
-    select {
+    input {
       border: 2px solid $knab-secondary-green;
     }
 
@@ -46,7 +45,7 @@
     }
   }
 
-  select.ng-valid.ng-touched {
+  cx-select.ng-valid select {
     border: 2px solid $knab-secondary-green;
   }
 }
