@@ -24,4 +24,11 @@ export class BaseForm {
       houseNumberExtension: [null]
     });
   }
+
+  public isMobileNumber(phone: string) {
+    if (phone && phone.length !== 10) {
+      return false;
+    }
+    return (/^06[1-5]/.test(phone) || /^06760/.test(phone));
+  }
 }

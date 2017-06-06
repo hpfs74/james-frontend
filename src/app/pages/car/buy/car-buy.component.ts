@@ -18,7 +18,6 @@ import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   templateUrl: 'car-buy.component.html'
 })
-
 export class CarBuyComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
