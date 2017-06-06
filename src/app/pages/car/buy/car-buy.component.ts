@@ -89,34 +89,18 @@ export class CarBuyComponent implements OnInit {
   submitContactDetails(): Observable<any> {
     FormUtils.validateForm(this.contactDetailForm.formGroup);
 
-    // if (!this.contactDetailForm.formGroup.valid) {
-    //   return new Observable(obs => {
-    //     let error: StepError = { message: 'cannot move to step' };
-    //     throw ({ message: 'cannot move to step' });
-    //   });
-    // }
+    if (!this.contactDetailForm.formGroup.valid) {
+      return Observable.throw(new Error('Heb je alle velden (correct) ingevuld?'));
+    }
 
-    // if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
-    //   return this.profileService.updateUserProfile({
-    //     firstname: this.contactDetailForm.formGroup.value.firstName,
-    //     infix: this.contactDetailForm.formGroup.value.middleName,
-    //     lastname: this.contactDetailForm.formGroup.value.lastName,
-    //     phone: this.contactDetailForm.formGroup.value.phone
-    //   });
-    // }
-
-    return new Observable(obs => {
-      if (!this.contactDetailForm.formGroup.valid) {
-        throw ({ message: 'cannot move to step' });
-      } else if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
-        this.profileService.updateUserProfile({
-          firstname: this.contactDetailForm.formGroup.value.firstName,
-          infix: this.contactDetailForm.formGroup.value.middleName,
-          lastname: this.contactDetailForm.formGroup.value.lastName,
-          phone: this.contactDetailForm.formGroup.value.phone
-        });
-      }
-    });
+    if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
+      return this.profileService.updateUserProfile({
+        firstname: this.contactDetailForm.formGroup.value.firstName,
+        infix: this.contactDetailForm.formGroup.value.middleName,
+        lastname: this.contactDetailForm.formGroup.value.lastName,
+        phone: this.contactDetailForm.formGroup.value.phone
+      });
+    }
   }
 
   onStepChange(event) {
