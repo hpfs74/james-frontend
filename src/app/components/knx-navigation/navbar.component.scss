@@ -60,8 +60,8 @@ $knx-navbar-font: $font-size-base;
   }
 }
 
-.knx-side-panel-content > .navbar-nav {
-  margin-top: 0 !important;
+.knx-side-panel-content > ul.navbar-nav {
+  margin-top: 0;
   margin-left: 15px;
 
   .nav-item {
