@@ -90,20 +90,25 @@ export class CarBuyComponent implements OnInit {
     FormUtils.validateForm(this.contactDetailForm.formGroup);
 
     if (!this.contactDetailForm.formGroup.valid) {
-      return Observable.throw(new Error('Heb je alle velden (correct) ingevuld?'));
+      return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
     }
 
     if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
-      return this.profileService.updateUserProfile({
-        firstname: this.contactDetailForm.formGroup.value.firstName,
-        infix: this.contactDetailForm.formGroup.value.middleName,
-        lastname: this.contactDetailForm.formGroup.value.lastName,
-        phone: this.contactDetailForm.formGroup.value.phone
-      });
+      return this.profileService.updateUserProfile(
+        this.getUpdatedProfile(this.contactDetailForm.formGroup));
     }
   }
 
   onStepChange(event) {
     //TODO: implement
+  }
+
+  private getUpdatedProfile(form: FormGroup) {
+    return {
+      firstname: form.value.firstName,
+      infix: form.value.middleName,
+      lastname: form.value.lastName,
+      phone: form.value.mobileNumber || form.value.phone
+    };
   }
 }

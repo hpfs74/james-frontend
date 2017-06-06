@@ -4,7 +4,7 @@ import { BaseForm } from '../models/base-form';
 import { nameInitialMask } from '../utils/base-form.utils';
 import { phoneNumberValidator } from '../utils/base-form.class';
 
-export class ContactDetailForm implements BaseForm {
+export class ContactDetailForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
 
@@ -19,6 +19,8 @@ export class ContactDetailForm implements BaseForm {
   };
 
   constructor(private fb: FormBuilder) {
+    super();
+
     this.formGroup = this.fb.group({
       initials: [null,
         Validators.compose([

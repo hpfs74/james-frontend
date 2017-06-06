@@ -128,7 +128,7 @@ export class CarAdviceComponent implements OnInit {
 
     if (!detailForm.valid && !address.valid) {
       this.carDetailSubmitted = true;
-      return Observable.throw(new Error('Heb je alle velden (correct) ingevuld?'));
+      return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
     }
 
     // Hide error summary
