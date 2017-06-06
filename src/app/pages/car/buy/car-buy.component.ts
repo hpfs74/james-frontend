@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-import { KNXStepOptions } from '@knx/wizard';
+import { KNXStepOptions, StepError } from '@knx/wizard';
 
 import { ConfigService } from '../../../config.service';
 import { AssistantService } from './../../../services/assistant.service';
@@ -13,6 +13,7 @@ import { ProfileService } from '../../../services/profile.service';
 import { Profile } from './../../../models/profile';
 import { CarContactComponent } from './car-contact.component';
 import { ContactDetailForm } from './../../../forms/contact-detail.form';
+import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
   templateUrl: 'car-buy.component.html'
@@ -86,9 +87,36 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitContactDetails(): Observable<any> {
-    //console.log(this.contactDetailForm.formGroup.value);
+    FormUtils.validateForm(this.contactDetailForm.formGroup);
 
-    return null;
+    // if (!this.contactDetailForm.formGroup.valid) {
+    //   return new Observable(obs => {
+    //     let error: StepError = { message: 'cannot move to step' };
+    //     throw ({ message: 'cannot move to step' });
+    //   });
+    // }
+
+    // if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
+    //   return this.profileService.updateUserProfile({
+    //     firstname: this.contactDetailForm.formGroup.value.firstName,
+    //     infix: this.contactDetailForm.formGroup.value.middleName,
+    //     lastname: this.contactDetailForm.formGroup.value.lastName,
+    //     phone: this.contactDetailForm.formGroup.value.phone
+    //   });
+    // }
+
+    return new Observable(obs => {
+      if (!this.contactDetailForm.formGroup.valid) {
+        throw ({ message: 'cannot move to step' });
+      } else if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
+        this.profileService.updateUserProfile({
+          firstname: this.contactDetailForm.formGroup.value.firstName,
+          infix: this.contactDetailForm.formGroup.value.middleName,
+          lastname: this.contactDetailForm.formGroup.value.lastName,
+          phone: this.contactDetailForm.formGroup.value.phone
+        });
+      }
+    });
   }
 
   onStepChange(event) {

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { KNXStepOptions } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
+import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 
 import { ConfigService } from '../../../config.service';
 import { InsuranceService } from '../../../services/insurance.service';
@@ -17,7 +17,7 @@ import { CarInsurance } from '../../../models/car-insurance';
 import { CarInsuranceOptions } from './../../../models/car-compare-request';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
-import { scrollToForm } from '../../../utils/base-form.utils';
+import * as FormUtils from '../../../utils/base-form.utils';
 
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
@@ -123,14 +123,15 @@ export class CarAdviceComponent implements OnInit {
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
 
-    this.validateForm(detailForm);
-    this.validateForm(address);
+    FormUtils.validateForm(detailForm);
+    FormUtils.validateForm(address);
 
     if (!detailForm.valid && !address.valid) {
       this.carDetailSubmitted = true;
-      return new Observable(obs => {
-        throw ('cannot move to step');
-      });
+      // return new Observable(obs => {
+      //   throw ('cannot move to step');
+      // });
+      throw Observable.throw('cannot move to step');
     }
 
     // Hide error summary
@@ -165,13 +166,6 @@ export class CarAdviceComponent implements OnInit {
 
   onStepChange(stepIndex) {
     this.currentStep = stepIndex;
-  }
-
-  validateForm(form: FormGroup) {
-    Object.keys(form.controls).forEach(key => {
-      form.get(key).markAsTouched();
-    });
-    form.updateValueAndValidity();
   }
 
   updateSelectedCoverage(coverage: Price) {

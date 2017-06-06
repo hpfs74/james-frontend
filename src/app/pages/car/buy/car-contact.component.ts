@@ -20,6 +20,16 @@ export class CarContactComponent implements OnChanges {
         lastName: this.profile.lastname,
         mobileNumber: this.profile.phone
       });
+      // Update validation state of known pre-filled profile fields
+      Object.keys(this.form.formGroup.controls)
+        .filter(key => {
+          return ['firstName', 'middleName', 'lastName', 'mobileNumber'].indexOf(key) > -1 && this.form.formGroup.get(key).value;
+        })
+        .forEach(key => {
+          this.form.formGroup.get(key).markAsTouched();
+          this.form.formGroup.get(key).markAsDirty();
+      });
+      this.form.formGroup.updateValueAndValidity();
     }
    }
 }
