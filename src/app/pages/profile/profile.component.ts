@@ -4,7 +4,9 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <div class="container">
       <div class="row">
-        <h2>Mijn account</h2>
+        <div class="col-sm-12">
+          <h2>Mijn account</h2>
+        </div>
       </div>
     </div>
   `

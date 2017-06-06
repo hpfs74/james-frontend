@@ -15,19 +15,16 @@ import {
   template: `
     <knx-cookiebar></knx-cookiebar>
     <header class="header">
-      <knx-navbar [menuItems]="topMenu">
+      <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user [isLoggedIn]="isLoggedIn" (signOut)="signOut()" [profile]="profile"></knx-nav-user>
+        <knx-nav-user [isLoggedIn]="isLoggedIn" (onLogOut)="logOut()" [profile]="profile"></knx-nav-user>
       </knx-navbar>
     </header>
 
-    <div class="container-fluid knx-container--fullwidth">
-      <knx-breadcrumb></knx-breadcrumb>
+    <div class="main-container">
+      <knx-loader *shellRender></knx-loader>
+      <router-outlet></router-outlet>
     </div>
-
-  <div class="main-container">
-    <router-outlet></router-outlet>
-  </div>
 
     <!-- footer is a features block -->
     <div class="container-fluid knx-container--fullwidth knx-container--gray">
@@ -70,8 +67,8 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  signOut() {
-    this.authService.signOff();
-    this.router.navigate(['']);
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

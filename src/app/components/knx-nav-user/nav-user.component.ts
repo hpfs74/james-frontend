@@ -12,7 +12,7 @@ import { Profile } from '../../models/profile';
         <knx-dropdown-button>
           <span class="knx-nav-user__icon knx-icon-user-o"></span> {{ profile.firstname }}
         </knx-dropdown-button>
-        <knx-dropdown-menu offset="40 0">
+        <knx-dropdown-menu offset="40 -55">
           <knx-menu-item (click)="goToProfile()">
             <span>Mijn account</span>
           </knx-menu-item>
@@ -30,7 +30,7 @@ import { Profile } from '../../models/profile';
 export class NavUserComponent {
   @Input() profile: Profile;
   @Input() isLoggedIn: boolean = false;
-  @Output() signOut = new EventEmitter();
+  @Output() onLogOut = new EventEmitter();
 
   constructor(private router: Router) { }
 
@@ -39,6 +39,6 @@ export class NavUserComponent {
   }
 
   logOut() {
-    this.signOut.emit();
+    this.onLogOut.emit();
   }
 }

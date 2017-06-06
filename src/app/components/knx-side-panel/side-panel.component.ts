@@ -5,7 +5,7 @@ import { slideInOutAnimation } from '../../animations/slide-in-out.animation';
 @Component({
   selector: 'knx-side-panel',
   template: `
-    <div class="knx-side-panel" [@slideInOutAnimation]="animationState">
+    <div class="knx-side-panel" [@slideInOutAnimation]="animationState" [class.knx-side-panel--fullwidth]="fullwidth">
       <div class="knx-side-panel__toolbar">{{ title }}
         <button *ngIf="showCloseButton" class="knx-button knx-button--link knx-icon-close" (click)="close()"></button></div>
       <div class="knx-side-panel__content">
@@ -17,6 +17,7 @@ import { slideInOutAnimation } from '../../animations/slide-in-out.animation';
 })
 export class SidePanelComponent implements OnInit {
   @Input() title: string;
+  @Input() fullwidth: boolean = false;
   @Input() showCloseButton: boolean = true;
 
   show: boolean;
