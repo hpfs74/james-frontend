@@ -79,14 +79,20 @@ export class CarAdviceComponent implements OnInit {
         label: 'Je gegevens',
         nextButtonLabel: 'Naar resultaten',
         hideBackButton: true,
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome),
+        onShowStep: () => {
+          FormUtils.scrollToForm('form');
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome);
+        },
         onBeforeNext: this.submitDetailForm.bind(this)
       },
       {
         label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
         hideNextButton: true,
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result)
+        onShowStep: () => {
+          FormUtils.scrollToForm('.knx-insurance-toplist');
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result);
+        }
       },
       {
         label: 'Besparen',

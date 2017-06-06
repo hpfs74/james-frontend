@@ -14,6 +14,10 @@
           [form]="contactDetailForm"
           [profile]="profile | async"></knx-car-contact-form>
       </knx-step>
+
+      <knx-step [options]="formSteps[1]">
+        hello!
+      </knx-step>
     </div>
 
     <div class="knx-wizard__sidebar" #knxWizardSidebar>

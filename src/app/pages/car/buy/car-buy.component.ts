@@ -71,7 +71,7 @@ export class CarBuyComponent implements OnInit {
       },
       {
         label: 'Betaling',
-        nextButtonLabel: 'Aanvraging versturen',
+        nextButtonLabel: 'Aanvraag versturen',
         backButtonLabel: 'Terug'
       }
     ];
@@ -81,6 +81,7 @@ export class CarBuyComponent implements OnInit {
   }
 
   initContactDetails() {
+    FormUtils.scrollToForm('form');
     this.profile = this.profileService.getUserProfile();
     this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.contact);
   }
