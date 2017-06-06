@@ -97,7 +97,7 @@ export function birthDateValidator(key: string) {
 export function regExValidator(regex : RegExp, errorName : string) {
   return (fc: FormControl) => {
     let value = fc.value;
-    let ok = regex.test(value);
+    let ok = value ? regex.test(value) : true;
     let result = {};
     result[errorName] = true;
     return ok ? null : result;

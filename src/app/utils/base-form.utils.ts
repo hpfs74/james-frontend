@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 
 // Scoll back to form; assumes there's only one form of this type on current page
@@ -42,4 +43,11 @@ export const nameInitialMask = {
   pipe: (conformedValue) => {
     return conformedValue.toUpperCase();
   }
+};
+
+export const validateForm = function (form: FormGroup) {
+  Object.keys(form.controls).forEach(key => {
+    form.get(key).markAsTouched();
+  });
+  form.updateValueAndValidity();
 };
