@@ -1,10 +1,12 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
+import { BaseForm } from '../../../models/base-form';
 import { createAddress, dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../utils/base-form.class';
 import { LicensePlateValidator } from '../../../components/knx-input-licenseplate/licenseplate.validator';
 
-export class CarDetailForm {
+export class CarDetailForm implements BaseForm {
   formGroup: FormGroup;
+  formConfig: any; //TODO: refactor to store options here instead of inside template
   addressForm: any;
 
   public validationErrors = {

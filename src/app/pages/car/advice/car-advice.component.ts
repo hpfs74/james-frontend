@@ -128,10 +128,7 @@ export class CarAdviceComponent implements OnInit {
 
     if (!detailForm.valid && !address.valid) {
       this.carDetailSubmitted = true;
-      // return new Observable(obs => {
-      //   throw ('cannot move to step');
-      // });
-      throw Observable.throw('cannot move to step');
+      return Observable.throw(new Error('Heb je alle velden (correct) ingevuld?'));
     }
 
     // Hide error summary
