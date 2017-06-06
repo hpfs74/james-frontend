@@ -49,6 +49,11 @@
 
 .knx-step-navigation {
   margin-bottom: 40px;
+  padding: 15px 0;
+
+  & > li {
+    font-weight: normal;
+  }
 }
 
 @media (max-width: 768px) {

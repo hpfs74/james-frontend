@@ -160,7 +160,7 @@ export class LoginComponent {
       let password = this.loginForm.get('password');
 
       this.authService
-        .signIn(email.value, password.value)
+        .login(email.value, password.value)
         .subscribe((token) => {
 
           localStorage.setItem(TOKEN_NAME, token.access_token);

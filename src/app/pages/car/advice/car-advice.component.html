@@ -1,4 +1,4 @@
-<div class="container-fluid knx-container--fullwidth knx-container--gray">
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation">
   <div class="container">
     <ol *ngIf="formSteps" class="knx-step-navigation">
       <li *ngFor="let step of formSteps; let i = index;" class="knx-step-navigation__step" [ngClass]="{ 'knx-step-navigation__step--current': i === currentStep }">{{ step.label }}</li>
@@ -46,7 +46,7 @@
 
         <!-- alternative view with sidenav for mobile devices -->
         <ng-container *ngIf="currentStep === 1" [formGroup]="carExtrasForm.formGroup">
-          <knx-side-panel #knxSidePanel title="Wijzig">
+          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true">
             <div class="container-fluid">
               <div class="knx-side-panel-content">
                 <knx-car-extras
