@@ -21,7 +21,18 @@ export class ProfileService {
    */
   public getUserProfile(): Observable<Profile> {
     return this.http.get(this.baseUrl)
-      .map((x) => x.json())
-      .map((x) => <Profile>x);
+      .map((p) => p.json())
+      .map((p) => <Profile>p);
+  }
+
+  /**
+   * update the current user profile
+   * @param profile
+   * @return {Observable<R>}
+   */
+  public updateUserProfile(profile: any): Observable<Profile> {
+    return this.http.patch(this.baseUrl, JSON.stringify(profile))
+      .map((p) => p.json())
+      .map((p) => <Profile>p);
   }
 }

@@ -2,6 +2,10 @@
   font-size: $font-size-base;
 }
 
+.cx-form-group__label + .cx-form-group__description {
+  font-size: $base-font-size - 2;
+}
+
 .cx-slider .noUi-pips {
   font-size: 12px;
 }
@@ -25,16 +29,15 @@
 
 .knx-fancy-form {
   .ng-valid.ng-touched:not(form):not(.ng-pristine) {
-    input,
-    select {
+    input {
       border: 2px solid $knab-secondary-green;
     }
 
     .cx-input:after {
-      position: relative;
+      position: absolute;
       line-height: 1em;
       top: 0.6em;
-      right: 30px;
+      right: 10px;
       font-size: $base-font-size + 2;
       content: map-get($knx-icons, check);
       font-family: $font-family-icon;
@@ -42,7 +45,7 @@
     }
   }
 
-  select.ng-valid.ng-touched {
+  cx-select.ng-valid select {
     border: 2px solid $knab-secondary-green;
   }
 }

@@ -13,7 +13,7 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active hidden-xs-down"
+      <li class="nav-item active hidden-md-down"
         *ngFor="let item of menuItems; let i = index"
         routerLinkActive="active"
         [ngClass]="getMenuItemClasses(item)">
@@ -27,7 +27,7 @@
           class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
       </li>
 
-      <li class="nav-item hidden-xs-down"><ng-content select="knx-opening-hours"></ng-content></li>
+      <li class="nav-item hidden-md-down"><ng-content select="knx-opening-hours"></ng-content></li>
       <li class="nav-item"><ng-content select="knx-nav-user"></ng-content></li>
     </ul>
   </div>

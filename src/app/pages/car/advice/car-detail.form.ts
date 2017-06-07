@@ -1,10 +1,12 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { createAddress, dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../utils/base-form.class';
+import { BaseForm } from '../../../models/base-form';
+import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../utils/base-form.validators';
 import { LicensePlateValidator } from '../../../components/knx-input-licenseplate/licenseplate.validator';
 
-export class CarDetailForm {
+export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
+  formConfig: any; //TODO: refactor to store options here instead of inside template
   addressForm: any;
 
   public validationErrors = {
@@ -21,6 +23,8 @@ export class CarDetailForm {
   };
 
   constructor(private fb: FormBuilder) {
+    super();
+
     this.formGroup = this.fb.group({
       licensePlate: [null, Validators.compose(
         [
@@ -48,6 +52,6 @@ export class CarDetailForm {
       coverage: [null, Validators.required]
     });
 
-    this.addressForm = createAddress(this.fb);
+    this.addressForm = this.createAddress(this.fb);
   }
 }
