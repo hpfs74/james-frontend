@@ -1,4 +1,4 @@
-import { Car } from './car';
+import { Car } from '../car';
 
 export const mockCar: Car = {
   'license': '71ZXK6',
