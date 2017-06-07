@@ -1,2 +1,3 @@
 export * from './round.pipe';
-export * from './titlecase.pipe';
+export * from './titleCase.pipe';
+export * from './licensePlate.pipe';
