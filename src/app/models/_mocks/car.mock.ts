@@ -1,7 +1,7 @@
 import { Car } from '../car';
 
 export const mockCar: Car = {
-  'license': '71ZXK6',
+  'license': 'KG906T',
   'vin': 'VF1BA0F0G17869206',
   'reporting_code': '9206',
   'year': 2016,
