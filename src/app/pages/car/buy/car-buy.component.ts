@@ -18,6 +18,8 @@ import { ContactDetailForm } from './../../../forms/contact-detail.form';
 import { CarReportingCodeComponent } from './car-info.component';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 
+import { mockCar } from '../../../models/_mocks/car.mock';
+
 import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
@@ -67,7 +69,7 @@ export class CarBuyComponent implements OnInit {
       },
       {
         label: 'Autogegevens',
-        nextButtonLabel: 'Naar justitie check',
+        nextButtonLabel: 'Naar check',
         backButtonLabel: 'Terug',
         onShowStep: () => this.initFormWithProfile(),
         onBeforeNext: this.submitReportingCode.bind(this)
@@ -91,7 +93,15 @@ export class CarBuyComponent implements OnInit {
 
   initFormWithProfile() {
     FormUtils.scrollToForm('form');
-    this.profile = this.profileService.getUserProfile();
+
+    // TODO: replace mock data with actual
+    this.profile = this.profileService.getUserProfile()
+      .map((profile) => {
+        let p = profile;
+        p._embedded.car = mockCar;
+        return p;
+      });
+
     this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.fill);
   }
 
@@ -114,7 +124,7 @@ export class CarBuyComponent implements OnInit {
   }
 
   onStepChange(event) {
-    console.log(event);
+    // TODO: implement properly
     this.currentStep += 1;
   }
 

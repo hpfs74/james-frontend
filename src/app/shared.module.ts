@@ -32,6 +32,7 @@ import { BlurForwarderDirective, JumpToElementDirective } from './directives';
 import { AddressLookupComponent } from './components/knx-address-lookup/address-lookup.component';
 import { BreadCrumbComponent } from './components/knx-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
+import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
@@ -60,6 +61,7 @@ export const sharedComponents = [
   JumpToElementDirective,
   AddressLookupComponent,
   ButtonIconComponent,
+  CarSummaryComponent,
   CookiebarComponent,
   CollapsePanelComponent,
   CollapseMessageComponent,

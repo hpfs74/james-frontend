@@ -1,4 +1,4 @@
-import { Address, DashboardItem } from './index';
+import { Address, Car } from './index';
 
 /**
  * NICCI User Profile
@@ -30,7 +30,7 @@ export class Profile {
   _deleted: boolean;
   _embedded: {
     insurance: any;
-    car: any;
+    car?: Car;
     inbox: any;
   };
 
