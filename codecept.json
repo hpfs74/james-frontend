@@ -1,0 +1,20 @@
+{
+  "tests": "./src/e2e/*_test.js",
+  "timeout": 10000,
+  "output": "./.codeceptjs",
+  "helpers": {
+    "Protractor": {
+      "url": "http://localhost:3000/",
+      "driver": "hosted",
+      "browser": "chrome",
+      "rootElement": "body",
+      "useAllAngular2AppRoots": true
+    }
+  },
+  "include": {
+    "I": "./src/e2e/steps_file.js"
+  },
+  "bootstrap": false,
+  "mocha": {},
+  "name": "knab-james-frontend"
+}
