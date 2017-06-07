@@ -7,6 +7,7 @@ import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../models';
 import { ActivatedRoute } from '@angular/router';
+import { insuranceTypes } from './../../models/insurance-map';
 
 @Component({
   template: `
@@ -25,6 +26,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DashboardDetailComponent implements OnInit, AfterViewInit {
   insuranceType: string;
+  label: string;
   message: string;
   profile: Profile;
   chatConfig: AssistantConfig;
@@ -42,7 +44,6 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-
       this.insuranceType = params['type'];
     });
 
@@ -60,7 +61,7 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.chatNotifierService
-      .addTextMessage(this.chatConfig.dashboard.detail(this.insuranceType));
+      .addTextMessage(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType)));
   }
 
   goToAdvice() {
@@ -70,5 +71,9 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
   goToCompare() {
     //TODO: implement
     this.router.navigate(['/']);
+  }
+
+  private getInsuranceLabel(type: string) {
+    return insuranceTypes.filter(obj => obj.type === type)[0].apiType;
   }
 }

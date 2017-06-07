@@ -47,11 +47,21 @@ export class DashboardComponent implements OnInit {
               insuranceType: this.getInsuranceType(obj.type)
             });
           });
-        this.insurances = myInsurances.concat(this.createRemainingInsurances(insuranceTypes, myInsurances));
+        if (this.insurances) {
+          this.insurances = myInsurances.concat(this.createRemainingInsurances(insuranceTypes, myInsurances));
+        } else {
+          this.insurances = insuranceTypes.map((s) => {
+            return {
+              insuranceType: s.type,
+              type: s.apiType
+            };
+          });
+        }
       });
   }
 
-  goToActions(type) {
+  goToActions(type: string) {
+    console.log(type);
     this.router.navigate(['/next-action', type]);
   }
 
