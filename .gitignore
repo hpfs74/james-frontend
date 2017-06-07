@@ -26,6 +26,10 @@ coverage
 # nyc test coverage
 .nyc_output
 
+# CodeceptJS logs and reports
+codeceptjs
+output
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
@@ -86,6 +90,7 @@ dll
 
 src/**/*.js
 src/**/*.js.map
+!src/e2e/*.js
 !src/client/app/shared/test
 nativescript/app
 nativescript/src/app

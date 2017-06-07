@@ -1,7 +1,10 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { nameInitialMask } from '../utils/base-form.utils';
 
-export class ContactDetailForm {
+import { BaseForm } from '../models/base-form';
+import { nameInitialMask } from '../utils/base-form.utils';
+import { phoneNumberValidator } from '../utils/base-form.validators';
+
+export class ContactDetailForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
 
@@ -9,22 +12,37 @@ export class ContactDetailForm {
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
+    minlength: () => 'Ongeldig telefoonnnummer',
+    mobileNumber: () => 'Ongeldig telefoonnummer',
+    phoneNumber: () => 'Ongeldig telefoonnummer',
     maxlength: (err) => `Je kunt maximaal ${err.requiredLength} tekens invullen`
   };
 
   constructor(private fb: FormBuilder) {
+    super();
+
     this.formGroup = this.fb.group({
       initials: [null,
         Validators.compose([
-          Validators.maxLength(5),
           Validators.required
         ])
       ],
       firstName: [null, Validators.required],
       middleName: [null],
       lastName: [null, Validators.required],
-      mobilePhone: [null, Validators.required],
-      phone: [null],
+      mobileNumber: [null,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(10),
+          phoneNumberValidator('mobileNumber')
+        ])
+      ],
+      phoneNumber: [null,
+        Validators.compose([
+          Validators.minLength(10),
+          phoneNumberValidator('phoneNumber')
+        ])
+      ],
       saveToProfile: [{}]
     });
 
@@ -61,16 +79,17 @@ export class ContactDetailForm {
         validationErrors: this.validationErrors
       },
       mobilePhone: {
-        formControlName: 'mobilePhone',
+        formControlName: 'mobileNumber',
+        description: 'voorbeeld: 0612345678',
         label: 'Mobiel nummer',
-        formControl: this.formGroup.get('mobilePhone'),
+        formControl: this.formGroup.get('mobileNumber'),
         validationErrors: this.validationErrors
       },
       phone: {
-        formControlName: 'phone',
+        formControlName: 'phoneNumber',
         label: 'Vast telefoonnummer',
         placeholder: 'Optioneel',
-        formControl: this.formGroup.get('phone'),
+        formControl: this.formGroup.get('phoneNumber'),
         validationErrors: this.validationErrors
       },
       saveToProfile: {
@@ -79,7 +98,7 @@ export class ContactDetailForm {
         formControl: this.formGroup.get('saveToProfile'),
         inputOptions: {
           items: [
-            { label: 'Mijn profiel updaten met deze gegevens', value: 'true' }
+            { label: 'Gegevens opslaan in mijn Knab Verzekeren profiel', value: 'true' }
           ]
         }
       }
