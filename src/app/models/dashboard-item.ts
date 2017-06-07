@@ -1,10 +1,4 @@
 export interface DashboardItem {
-  documents?: Array<any>;
-  count?: number;
-  limit?: number;
-  offset?: number;
-  type: string;
+  insuranceType: string; // 'car', 'travel', ...
+  type: string; // 'Auto', 'Reis', ...
 }
-
-export const insuranceTypes = ['car', 'travel', 'home', 'content', 'liability'];
-
