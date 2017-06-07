@@ -28,6 +28,7 @@ coverage
 
 # CodeceptJS logs and reports
 .codeceptjs
+./output
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt

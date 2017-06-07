@@ -1,7 +1,7 @@
 {
-  "tests": "./src/e2e/*_test.js",
+  "tests": "../src/e2e/*_test.js",
   "timeout": 10000,
-  "output": "./.codeceptjs",
+  "output": "../output",
   "helpers": {
     "Protractor": {
       "url": "http://localhost:3000/",
@@ -12,7 +12,7 @@
     }
   },
   "include": {
-    "I": "./src/e2e/steps_file.js"
+    "I": "../src/e2e/steps_file.js"
   },
   "bootstrap": false,
   "mocha": {},
