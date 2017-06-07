@@ -8,7 +8,9 @@
   }
 }
 
-.knx-wizard__sidebar--sticky {
-  position: sticky;
-  top: 20px;
+@media (min-width: 518px) {
+  .knx-wizard__sidebar--sticky {
+    position: sticky;
+    top: 90px;
+  }
 }
