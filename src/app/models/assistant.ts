@@ -47,7 +47,13 @@ export class AssistantConfig {
         result: 'Vergelijk de 4 beste deals van alle 42 vergeleken verzekeringen',
         option: 'Selecteer extra opties voor het beste advies',
         next: 'Wat wil je doen?'
-      }
+      },
+      review: `Verzekering aanvragen dit kost ongeveer 5 minuten: <br>
+      1. Check je gegevens <br>
+      2. Vul je autogegevens aan <br>
+      3. Beantwoord slotvragen <br>
+      4. Vul je betaalgegevens in <br>
+      5. Aanvraag naar de verzekeraar 6. Akkoord? Zeg je oude verzekering op.`
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'

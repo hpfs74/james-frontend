@@ -29,13 +29,9 @@ export class Profile {
   _id: string;
   _deleted: boolean;
   _embedded: {
-    insurance: DashboardItem;
-    car?: DashboardItem;
-    travel?: DashboardItem;
-    content?: DashboardItem;
-    home?: DashboardItem;
-    liability?: DashboardItem;
-    inbox: DashboardItem;
+    insurance: any;
+    car: any;
+    inbox: any;
   };
 
   filled_data_percentage: number;

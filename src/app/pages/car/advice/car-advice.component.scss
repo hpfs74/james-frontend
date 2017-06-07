@@ -7,3 +7,10 @@
     font-size: $base-font-size;
   }
 }
+
+@media (min-width: 518px) {
+  .knx-wizard__sidebar--sticky {
+    position: sticky;
+    top: 90px;
+  }
+}

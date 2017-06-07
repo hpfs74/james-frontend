@@ -6,6 +6,7 @@ export * from './car-compare-request';
 export * from './car';
 export * from './coverage';
 export * from './feature';
+export * from './insurance-map';
 export * from './insurance';
 export * from './insurer';
 export * from './nav';

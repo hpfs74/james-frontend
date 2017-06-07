@@ -15,3 +15,39 @@
     border: 6px solid $knab-primary-green;
   }
 }
+
+.knx-button-icon__action {
+  display: none;
+}
+
+.knx-button-icon--placeholder .knx-button-icon__circle {
+  border: 4px dashed $knab-primary-gray;
+
+  &:hover {
+    border: 4px dashed $knab-primary-blue;
+  }
+}
+
+.knx-button-icon--placeholder:hover {
+  .knx-button-icon__icon {
+    display: none;
+    transition: all 0.4s ease;
+  }
+
+  .knx-button-icon__action {
+    position: relative;
+    display: inline-block;
+
+    .knx-icon-plus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -18px;
+      margin-top: -33px;
+      font-family: $font-family-icon;
+      font-size: 40px;
+      color: $knab-primary-blue;
+      transition: all 0.4s ease;
+    }
+  }
+}

@@ -11,7 +11,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
-import { Profile, DashboardItem, insuranceTypes } from '../../models';
+import { Profile, InsuranceMap, DashboardItem, insuranceTypes } from '../../models';
 
 @Component({
   templateUrl: 'dashboard.component.html'
@@ -41,27 +41,46 @@ export class DashboardComponent implements OnInit {
         this.profile = x;
         this.chatNotifierService.addTextMessage(this.chatConfig.dashboard.welcome(this.profile.firstname));
 
-        let insuranceItems = this.profile._embedded;
-        this.insurances = Object.keys(insuranceItems)
-          .filter(key => insuranceTypes.indexOf(key) !== -1)
-          .map((key) => {
-            return Object.assign(insuranceItems[key], {
-              type: key
-            }) as DashboardItem;
+        let myInsurances = this.profile._embedded.insurance.documents
+          .map((obj) => {
+            return Object.assign(obj, {
+              insuranceType: this.getInsuranceType(obj.type)
+            });
           });
-
         if (this.insurances) {
-          this.insurances = this.insurances.concat(this.getRemainingInsurances(insuranceTypes, this.insurances));
+          this.insurances = myInsurances.concat(this.createRemainingInsurances(insuranceTypes, myInsurances));
+        } else {
+          this.insurances = insuranceTypes.map((s) => {
+            return {
+              insuranceType: s.type,
+              type: s.apiType
+            };
+          });
         }
       });
   }
 
-  goToActions(type) {
+  goToActions(type: string) {
+    console.log(type);
     this.router.navigate(['/next-action', type]);
   }
 
-  private getRemainingInsurances(validTypes: Array<string>, items: Array<DashboardItem>): Array<DashboardItem> {
-    return validTypes.filter(i => items.filter(obj => obj.type !== i).length > 0)
-      .map((s) => { return { type: s }; });
+  private createRemainingInsurances(validTypes: Array<InsuranceMap>, items: Array<any>): Array<any> {
+    return validTypes
+      .filter(i => items.filter(pi => pi.insuranceType !== i.type).length > 0)
+      .map((s) => {
+        return {
+          insuranceType: s.type,
+          type: s.apiType
+        };
+      });
+  }
+
+  private getInsuranceLabel(type: string) {
+    return insuranceTypes.filter(obj => obj.type === type)[0].apiType;
+  }
+
+  private getInsuranceType(apiType: string) {
+    return insuranceTypes.filter(obj => obj.apiType === apiType)[0].type;
   }
 }
