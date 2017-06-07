@@ -1,4 +1,4 @@
-import { CarInsurance } from './car-insurance';
+import { CarInsurance } from '../car-insurance';
 
 export const mockInsurances: Array<CarInsurance> =
   [
