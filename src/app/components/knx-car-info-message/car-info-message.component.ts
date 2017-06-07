@@ -5,7 +5,7 @@ import { CarPreviewComponent } from './car-preview.component';
 import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
 
 @Component({
-  selector: 'knx-car-info',
+  selector: 'knx-car-info-message',
   template: `
   <div class="knx-message knx-message--chat">
     <div class="container knx-container--fullwidth">
@@ -45,6 +45,6 @@ import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
     </div>
   `
 })
-export class CarInfoComponent implements IChatMessage {
+export class CarInfoMessageComponent implements IChatMessage {
   @Input() data: any;
 }
