@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
     <button class="knx-button knx-button--pill" (click)="goToAdvice()">
       <span class="knx-icon-calculator"></span> Advies en vergelijken
     </button>
-    <button class="knx-button knx-button--pill" (click)="goToCompare()">
+    <button class="knx-button knx-button--pill" [disabled]="true" (click)="goToCompare()">
       <span class="knx-icon-money"></span> Huidige verzekering invullen
     </button>
   </div>
