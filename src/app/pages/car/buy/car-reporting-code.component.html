@@ -20,13 +20,27 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <cx-form-group
             [options]="form.formConfig.accessoryValue"
             [formControlName]="form.formConfig.accessoryValue.formControlName">
           </cx-form-group>
         </div>
       </div>
+
+      <!--<div class="row">
+        <div class="col-sm-6">
+          <cx-form-group
+            [options]="form.formConfig.accessoryValue"
+            [formControlName]="form.formConfig.accessoryValue.formControlName">
+          </cx-form-group>
+        </div>
+      </div>-->
+
+      <cx-form-group
+        [options]="form.formConfig.saveToProfile"
+        [formControlName]="form.formConfig.saveToProfile.formControlName">
+      </cx-form-group>
 
     </div>
   </div>

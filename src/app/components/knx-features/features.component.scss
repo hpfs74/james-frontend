@@ -8,6 +8,13 @@
   padding: 45px 20px;
 }
 
+@media (max-width: 768px) {
+  .knx-features {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+}
+
 .knx-features__item {
   margin-right: 30px;
   flex: 1 1 0;
