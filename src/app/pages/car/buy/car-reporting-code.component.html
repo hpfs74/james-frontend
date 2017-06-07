@@ -5,6 +5,12 @@
       <h2>Je autogegevens</h2>
 
       <div class="row">
+        <div class="col-sm-10">
+          <knx-car-summary *ngIf="profile" [car]="profile._embedded.car"></knx-car-summary>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-sm-4">
           <cx-form-group
             [options]="form.formConfig.reportingCode"

@@ -1,5 +1,4 @@
-import { Address } from './address';
-import { Price } from './price';
+import { Address, Car, Price } from '.';
 
 export class AssistantConfig {
   public avatar = {
@@ -29,6 +28,7 @@ export class AssistantConfig {
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
+      niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>{{ car.make | titleCase }} {{ car.model | titleCase }}`,
       claimFreeYears:
       `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
         Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
