@@ -13,7 +13,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class OpeningHoursComponent implements OnInit {
   @Input() schedule: any;
 
-  public isOpen: boolean = false;
+  public isOpen: boolean;
   public defaultSchedule = {
     Sun: { 'start': -1, 'end': -1 },
     Mon: { 'start': 8, 'end': 22 },
@@ -26,19 +26,26 @@ export class OpeningHoursComponent implements OnInit {
   };
   public message: string;
 
+  private dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
   ngOnInit() {
     if (!this.schedule) {
       this.schedule = this.defaultSchedule;
     }
+    let currentDate = new Date();
+    this.updateIsOpen(currentDate);
+  }
 
-    const dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    var currentDate = new Date();
-    this.message = 'Nu gesloten';
+  updateIsOpen(date: Date): void {
+    let hours = date.getHours();
 
-    var todaySchedule = this.schedule[dow[currentDate.getDay()]];
-    if (todaySchedule.start !== -1) {
+    let todaySchedule = this.schedule[this.dow[date.getDay()]];
+    if (todaySchedule.start <= hours && todaySchedule.end >= hours) {
       this.isOpen = true;
       this.message = 'Nu open (tot ' + todaySchedule.end + ':00)';
+    } else {
+      this.isOpen = false;
+      this.message = 'Nu gesloten';
     }
   }
 }

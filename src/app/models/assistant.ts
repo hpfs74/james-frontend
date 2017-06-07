@@ -1,21 +1,7 @@
 import { Address } from './address';
 import { Price } from './price';
 
-export interface AssistantConfig {
-  avatar: {
-    show: boolean;
-    name: string;
-    title: string;
-  };
-  generic: {
-    address: any;
-    addressNotFound: string;
-  };
-  dashboard: any;
-  car: any;
-}
-
-export class AppAssistantConfig implements AssistantConfig {
+export class AssistantConfig {
   public avatar = {
     show: true,
     name: 'Marjolein',
@@ -71,6 +57,9 @@ export class AppAssistantConfig implements AssistantConfig {
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
+    },
+    buy: {
+      contact: 'We hebben nog een paar gegevens van je nodig om je aanvraag te regelen. Kun je dit lijstje aanvullen?'
     }
   };
 }

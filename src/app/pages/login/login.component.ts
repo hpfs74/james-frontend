@@ -13,55 +13,7 @@ import { loginError } from './login-error';
  * @class LoginComponent
  */
 @Component({
-  selector: 'knx-login',
-  template: `
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <div class="knx-login__welcome">
-            <img class="knx-login__logo" alt="Knab" src="../../../assets/images/knab-logo.svg">
-            <h2 class="knx-login__subline">Verzekeren</h2>
-            <p>Meld je aan met je e-mailadres en wachtwoord en ontdek hoeveel jij kunt besparen op je verzekeringen.</p>
-          </div>
-        </div>
-      </div>
-
-      <form [formGroup]="loginForm" (ngSubmit)="login($event)" (keyup.enter)="login($event)">
-        <div class="row">
-          <div class="col-md-6 offset-md-3">
-              <cx-form-group [formControlName]="formGroupConfig[0].formControlName"
-                [options]="formGroupConfig[0]"></cx-form-group>
-
-              <div class="login-password-wrapper">
-                <cx-form-group [formControlName]="formGroupConfig[1].formControlName"
-                  [options]="formGroupConfig[1]"></cx-form-group>
-                <button type="button"
-                  *ngIf="loginForm.get('password').value"
-                  class="knx-login__showpassword knx-icon-eye"
-                  [class.knx-icon-eye-slash]="showPassword"
-                  [class.knx-icon-eye]="!showPassword"
-                  (click)="togglePassword($event)"></button>
-              </div>
-
-              <button type="submit" class="knx-button knx-button--primary knx-button--fullwidth"
-                [class.knx-button--pending]="isPending">Inloggen</button>
-          </div>
-        </div>
-          <div class="row">
-          <div class="col-md-6 offset-md-3">
-            <div class="cx-message cx-message--error" *ngIf="submitted && loginForm.valid && message">
-                <div *ngIf="messageTitle" class="cx-message__header">{{ messageTitle }}</div>
-                <div class="cx-message__content">{{ message }}
-                </div>
-            </div>
-            <p class="knx-login__reset knx-text-center">
-              <a tabindex="0" rel="nofollow noopener" target="_blank" (click)="goToPasswordReset()">Ik ben mijn wachtwoord vergeten</a>
-            </p>
-          </div>
-        </div>
-        </form>
-    </div>
-  `
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
   submitted: boolean = false;
@@ -131,7 +83,6 @@ export class LoginComponent {
   }
 
   goToPasswordReset() {
-
     window.location.href  = this.forgotPasswordLink;
   }
 
@@ -160,7 +111,7 @@ export class LoginComponent {
       let password = this.loginForm.get('password');
 
       this.authService
-        .signIn(email.value, password.value)
+        .login(email.value, password.value)
         .subscribe((token) => {
 
           localStorage.setItem(TOKEN_NAME, token.access_token);

@@ -4,6 +4,37 @@ $knx-navbar-font: $font-size-base;
 
 .knx-navbar {
   display: flex;
+  background: $knab-primary-blue;
+  color: $knab-nav-item-color;
+  height: 64px;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+  box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+  .knx-navbar {
+    height: 32px;
+  }
+}
+
+.knx-navbar .knx-button--hamburger {
+  background: none;
+  border: 0;
+  color: $knab-nav-item-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1em;
+
+  &:after {
+    content: map-get($knx-icons, bars);
+    font-family: $font-family-icon;
+    font-size: $font-size-base + 6;
+    padding: 0;
+  }
 }
 
 .knx-navbar.navbar {
@@ -15,7 +46,7 @@ $knx-navbar-font: $font-size-base;
 }
 
 .knx-navbar .nav-link {
-  color: $knab-primary-blue;
+  color: $knab-nav-item-color;
   font-size: $knx-navbar-font;
 
   .nav-link__icon {
@@ -26,6 +57,21 @@ $knx-navbar-font: $font-size-base;
   &:hover {
     color: $knab-primary-red;
     font-weight: normal;
+  }
+}
+
+.knx-side-panel-content > ul.navbar-nav {
+  margin-top: 0;
+  margin-left: 15px;
+
+  .nav-item {
+    .nav-link {
+      color: $knab-primary-blue;
+
+      &:hover {
+        color: $knab-primary-red;
+      }
+    }
   }
 }
 
@@ -40,7 +86,7 @@ $knx-navbar-font: $font-size-base;
 .navbar > .container .navbar-brand,
 .navbar > .container-fluid .navbar-brand,
 .knx-navbar.navbar-toggleable-md .navbar-nav .nav-item .navbar-brand {
-  margin-left: 0;
+  margin-left: 15px;
   padding-top: 10px;
 }
 
@@ -58,9 +104,6 @@ $knx-navbar-font: $font-size-base;
   .knx-navbar.navbar .container {
     margin-left: 10px;
     margin-right: 10px;
-  }
-
-  .knx-navbar-mobile {
     display: flex;
   }
 

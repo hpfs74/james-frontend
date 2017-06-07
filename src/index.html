@@ -10,12 +10,16 @@
 
   <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
 
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
   <% if (webpackConfig.htmlElements.headTags) { %>
     <!-- Configured Head Tags  -->
     <%= webpackConfig.htmlElements.headTags %>
-      <% } %>
-        <!-- base url -->
-        <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+  <% } %>
+
+  <!-- base url -->
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
 </head>
 
 <body class="knx-base">
@@ -29,6 +33,11 @@
     <script src="/webpack-dev-server.js"></script>
     <% } %>
 
+  <!--
+    TODO: the webpack env variables currently do not work, see: https://github.com/AngularClass/angular-starter/issues/1727
+    To enable server worker, remove the if block below. Note that this will cache the app resources so
+    this is not desirable for development
+  -->
   <% if (htmlWebpackPlugin.options.metadata.env === 'production') { %>
   <script>
     if ('serviceWorker' in navigator) {

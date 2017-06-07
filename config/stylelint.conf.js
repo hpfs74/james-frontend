@@ -117,7 +117,7 @@
     "selector-pseudo-element-colon-notation": "single",
     "selector-pseudo-element-no-unknown": true,
     "selector-type-case": "lower",
-    "selector-type-no-unknown": [true, { ignoreTypes: ["ng2-menu-item", "/deep/"] }],
+    "selector-type-no-unknown": [true, { ignoreTypes: ["ng2-menu-item", "/deep/", "/^knx-/", "/^cx-/"] }],
     "shorthand-property-no-redundant-values": true,
     "string-no-newline": true,
     "unit-case": "lower",

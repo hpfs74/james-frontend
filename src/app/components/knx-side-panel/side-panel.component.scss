@@ -4,9 +4,13 @@
   overflow: scroll;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 256px;
   height: 100%;
   z-index: 9999;
+}
+
+.knx-side-panel--fullwidth {
+  width: 100%;
 }
 
 .knx-side-panel__toolbar {
@@ -21,7 +25,7 @@
     font-size: $font-size-base + 2;
     line-height: 1em;
     position: absolute;
-    right: 25px;
+    right: 10px;
     margin: 0;
     padding: 0;
   }

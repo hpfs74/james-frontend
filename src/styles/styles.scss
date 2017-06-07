@@ -57,11 +57,30 @@ html {
 }
 
 .main-container {
+  margin-top: 100px;
   margin-bottom: 60px;
 
   h2 {
     margin-top: 0;
     margin-bottom: 30px;
+  }
+}
+
+.main-container .knx-container-stepnavigation {
+  margin-top: -34px;
+}
+
+@media (max-width: 768px) {
+  .main-container .knx-container-stepnavigation {
+    margin-top: -48px;
+  }
+}
+
+@media (min-width: 576px) {
+  .container,
+  .container-fluid .container {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
