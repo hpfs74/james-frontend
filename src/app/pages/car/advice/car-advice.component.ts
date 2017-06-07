@@ -98,8 +98,9 @@ export class CarAdviceComponent implements OnInit {
       {
         label: 'Besparen',
         backButtonLabel: 'Terug',
-        nextButtonLabel: 'Naar resultaten',
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review)
+        nextButtonLabel: 'Koop verzekering',
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review),
+        onBeforeNext: this.startBuyFlow.bind(this)
       }
     ];
     this.formData = new Array(this.formSteps.length);
@@ -169,6 +170,11 @@ export class CarAdviceComponent implements OnInit {
 
   onStepChange(stepIndex) {
     this.currentStep = stepIndex;
+  }
+
+  startBuyFlow(): Observable<any> {
+    this.router.navigate(['/car/insurance']);
+    return;
   }
 
   updateSelectedCoverage(coverage: Price) {
