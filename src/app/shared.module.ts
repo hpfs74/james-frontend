@@ -17,7 +17,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 /**
  * Pipes
  */
-import { TitleCasePipe, RoundPipe } from './pipes/';
+import { TitleCasePipe, RoundPipe, LicensePlatePipe } from './pipes/';
 
 /**
  * Directives
@@ -58,6 +58,7 @@ import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 export const sharedComponents = [
   TitleCasePipe,
   RoundPipe,
+  LicensePlatePipe,
   JumpToElementDirective,
   AddressLookupComponent,
   ButtonIconComponent,

@@ -8,15 +8,15 @@ import { Car, CarInsuranceOptions } from '../../models';
     <div class="container knx-container--fullwidth">
       <div class="row" *ngIf="car.license">
         <div class="col-sm-6 knx-car-summary__label">Kenteken</div>
-        <div class="col-sm-6 knx-car-summary__info">{{ car.license | uppercase  }}</div>
+        <div class="col-sm-6 knx-car-summary__info">{{ car.license | licensePlate }}</div>
       </div>
       <div class="row" *ngIf="car.make">
         <div class="col-sm-6 knx-car-summary__label">Merk</div>
-        <div class="col-sm-6 knx-car-summary__info">{{ car.make | uppercase  }}</div>
+        <div class="col-sm-6 knx-car-summary__info">{{ car.make }}</div>
       </div>
       <div class="row" *ngIf="car.model">
         <div class="col-sm-6 knx-car-summary__label">Model</div>
-        <div class="col-sm-6 knx-car-summary__info">{{ car.model | uppercase }}</div>
+        <div class="col-sm-6 knx-car-summary__info">{{ car.model }}</div>
       </div>
       <div class="row" *ngIf="car.edition">
         <div class="col-sm-6 knx-car-summary__label">Type</div>
@@ -36,7 +36,7 @@ import { Car, CarInsuranceOptions } from '../../models';
       </div>
       <div class="row" *ngIf="car.weight_empty_vehicle">
         <div class="col-sm-6 knx-car-summary__label">Gewicht</div>
-        <div class="col-sm-6 knx-car-summary__info">{{ car.weight_empty_vehicle}} Kg</div>
+        <div class="col-sm-6 knx-car-summary__info">{{ car.weight_empty_vehicle}} kg</div>
       </div>
       <!--<div class="row" *ngIf="options.kilometers_per_year">
         <div class="col-sm-6 knx-car-summary__label">Km. per jaar</div>
