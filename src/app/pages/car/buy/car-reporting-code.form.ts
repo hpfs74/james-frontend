@@ -74,6 +74,16 @@ export class CarReportingCodeForm extends BaseForm {
         inputOptions: {
           items: securityClasses
         }
+      },
+      saveToProfile: {
+        formControlName: 'saveToProfile',
+        type: 'checkbox',
+        formControl: this.formGroup.get('saveToProfile'),
+        inputOptions: {
+          items: [
+            { label: 'Gegevens opslaan in mijn Knab Verzekeren profiel', value: 'true' }
+          ]
+        }
       }
     };
   }

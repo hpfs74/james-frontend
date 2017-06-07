@@ -38,10 +38,11 @@ import { Car, CarInsuranceOptions } from '../../models';
         <div class="col-sm-6 knx-car-summary__label">Gewicht</div>
         <div class="col-sm-6 knx-car-summary__info">{{ car.weight_empty_vehicle}} Kg</div>
       </div>
-      <div class="row" *ngIf="options.kilometers_per_year">
+      <!--<div class="row" *ngIf="options.kilometers_per_year">
         <div class="col-sm-6 knx-car-summary__label">Km. per jaar</div>
         <div class="col-sm-6 knx-car-summary__info">{{ options.kilometers_per_year }}</div>
       </div>
+      -->
     </div>
   </div>
   `
