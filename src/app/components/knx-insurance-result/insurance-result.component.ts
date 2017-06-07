@@ -59,7 +59,7 @@ export class InsuranceResultComponent {
   @Input() showDetailPanel: boolean = false;
   @Input() orderChange: boolean;
 
-  @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
+  @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
 
   select(event) {
     this.insuranceSelected$.emit(this.insurance);

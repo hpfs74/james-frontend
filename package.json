@@ -97,9 +97,11 @@
     "@cx/slider": "0.4.2",
     "@cx/textarea": "0.2.0",
     "@cx/utils": "1.4.0",
-    "@knx/base": "2.21.5",
+    "@knx/base": "2.21.13",
+    "@knx/collapsible-panel": "0.0.5",
     "@knx/grid": "0.0.111",
-    "@knx/wizard": "0.0.34",
+    "@knx/info": "0.0.12",
+    "@knx/wizard": "0.0.50",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "angular-svg-icon": "^4.1.0",
@@ -183,7 +185,8 @@
     "webpack-dev-middleware": "^1.10.1",
     "webpack-dev-server": "~2.4.2",
     "webpack-dll-bundles-plugin": "^1.0.0-beta.5",
-    "webpack-merge": "~4.1.0"
+    "webpack-merge": "~4.1.0",
+    "stylelint": "^7.10.1"
   },
   "repository": {},
   "engines": {
