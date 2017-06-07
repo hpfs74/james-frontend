@@ -101,7 +101,7 @@
     "@knx/collapsible-panel": "0.0.5",
     "@knx/grid": "0.0.111",
     "@knx/info": "0.0.12",
-    "@knx/wizard": "0.0.34",
+    "@knx/wizard": "0.0.49",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "angular-svg-icon": "^4.1.0",
