@@ -61,7 +61,8 @@ export class AppAssistantConfig implements AssistantConfig {
         result: 'Vergelijk de 4 beste deals van alle 42 vergeleken verzekeringen',
         option: 'Selecteer extra opties voor het beste advies',
         next: 'Wat wil je doen?'
-      }
+      },
+      review: `Controleer alstublieft uw info voor de volgende stap.`
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'

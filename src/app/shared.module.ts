@@ -8,6 +8,8 @@ import { TextMaskModule } from '../../node_modules/@cx/input';
 
 // @knx
 import { KNXWizardModule } from '../../node_modules/@knx/wizard';
+import { KNXCollapsiblePanelModule } from '../../node_modules/@knx/collapsible-panel';
+import { KNXInfoModule } from '../../node_modules/@knx/info';
 import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -40,6 +42,7 @@ import { LicensePlateComponent } from './components/knx-input-licenseplate/licen
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
+import { InsuranceReviewComponent } from './components/knx-insurance-review/insurance-review.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
@@ -67,6 +70,7 @@ export const sharedComponents = [
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
+  InsuranceReviewComponent,
   OpeningHoursComponent,
   PriceTableComponent,
   PriceItemComponent,
@@ -82,6 +86,8 @@ export const sharedComponents = [
 export const sharedModules = [
   CXFormsModule,
   KNXWizardModule,
+  KNXCollapsiblePanelModule,
+  KNXInfoModule,
   DropdownModule
 ];
 

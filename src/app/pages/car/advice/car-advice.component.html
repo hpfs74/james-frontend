@@ -7,7 +7,7 @@
 </div>
 
 <div class="container knx-car-advice">
-  <knx-wizard (stepChange)="onStepChange($event)">
+  <knx-wizard #knxWizard (stepChange)="onStepChange($event)">
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
         <knx-car-detail-form
@@ -25,14 +25,18 @@
 
       <knx-step [options]="formSteps[1]">
         <knx-insurance-toplist
-          (insuranceSelected$)="onSelectPremium($event)"
+          (insuranceSelected$)="knxWizard.goToNextStep(); onSelectPremium($event)"
           [stepAmount]="4"
           [insurances]="insurances | async">
         </knx-insurance-toplist>
       </knx-step>
+
+      <knx-step [options]="formSteps[2]">
+        <knx-insurance-review [selectedInsurance]="selectedInsurance"></knx-insurance-review>
+      </knx-step>
     </div>
 
-    <div class="knx-wizard__sidebar" #knxWizardSidebar>
+    <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream
         [options]="chatConfig"
         [messages]="chatMessages"

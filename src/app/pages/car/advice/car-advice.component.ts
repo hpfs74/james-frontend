@@ -36,6 +36,7 @@ export class CarAdviceComponent implements OnInit {
 
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
+  selectedInsurance: CarInsurance;
   car: Car;
   profile: any | Profile;
   address: Address;
@@ -90,7 +91,9 @@ export class CarAdviceComponent implements OnInit {
       },
       {
         label: 'Besparen',
-        backButtonLabel: 'Terug'
+        backButtonLabel: 'Terug',
+        nextButtonLabel: 'Naar resultaten',
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review)
       }
     ];
     this.formData = new Array(this.formSteps.length);
@@ -157,10 +160,7 @@ export class CarAdviceComponent implements OnInit {
   }
 
   onSelectPremium(insurance) {
-    // TODO: implement
-    // get insurance
-    // pass data to get-insurance route
-    this.router.navigate(['/car/get-insurance']);
+    this.selectedInsurance = insurance;
   }
 
   onStepChange(stepIndex) {
