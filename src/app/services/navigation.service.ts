@@ -8,7 +8,7 @@ export class NavigationService {
     return [
       {
         id: 'menu-dashboard',
-        title: 'Verzekeringen',
+        title: 'Dashboard',
         routePath: '/',
         menuType: NavItemType.RIGHT
       },

@@ -92,11 +92,11 @@ describe('Component: DashboardDetail', () => {
       expect(routerStub.navigate).toHaveBeenCalledWith([ '/' ]);
     });
 
-    it('chat assistance should contain "car" word in the message if route from car', () => {
-      expect(comp.chatMessages[0].data).toContain('car');
+    it('chat assistance should contain "Auto" word in the message if route from car', () => {
+      expect(comp.chatMessages[0].data).toContain('Auto');
     });
   });
-  describe('with routing to reis', () => {
+  describe('with routing to travel', () => {
     beforeEach(async(() => {
       routerStub = {
         navigate: jasmine.createSpy('navigate'),
@@ -104,8 +104,8 @@ describe('Component: DashboardDetail', () => {
       };
 
       activatedRouteStub = {
-        queryParams: Observable.of( { type: 'reis' } ),
-        params: Observable.of( { type: 'reis' } )
+        queryParams: Observable.of( { type: 'travel' } ),
+        params: Observable.of( { type: 'travel' } )
       };
 
       TestBed.configureTestingModule({
@@ -143,7 +143,7 @@ describe('Component: DashboardDetail', () => {
     });
 
     it('should contain insurance type parameter', () => {
-      expect(comp.insuranceType).toBe('reis');
+      expect(comp.insuranceType).toBe('travel');
     });
 
     it('should go to new advice if click on button', () => {
@@ -156,8 +156,8 @@ describe('Component: DashboardDetail', () => {
       expect(routerStub.navigate).toHaveBeenCalledWith([ '/' ]);
     });
 
-    it('chat assistance should contain "car" word in the message if route from reis', () => {
-      expect(comp.chatMessages[0].data).toContain('reis');
+    it('chat assistance should contain "Reis" word in the message if route from travel', () => {
+      expect(comp.chatMessages[0].data).toContain('Reis');
     });
   });
 
