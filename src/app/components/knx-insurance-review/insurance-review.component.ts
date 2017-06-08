@@ -30,7 +30,7 @@ interface SectionFields {
             {{sectionField.label}}<span *ngIf="sectionField.info">
               <knx-info size="md" isFloating="true" class="knx-info">
                 <div class="knx-info__content">
-                  <div class="knx-message knx-message--hint knx-message--arrow-top">
+                  <div class="knx-message knx-message--chat knx-message--arrow-top">
                     <div class="knx-message__content" [innerHTML]="sectionField.info"></div>
                   </div>
                 </div>
