@@ -68,7 +68,7 @@ describe('Component: Dashboard', () => {
 
   it('should go to proper action', () => {
     comp.goToActions('car');
-    expect(routerStub.navigate).toHaveBeenCalledWith(['/next-action', 'car']);
+    expect(routerStub.navigate).toHaveBeenCalledWith(['/go', 'car']);
   });
 });
 

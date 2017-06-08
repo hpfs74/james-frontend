@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Insurance, Insurer, Rating } from './../../models';
+import { InsuranceCompareResult, Insurer, Rating } from './../../models';
 
 @Component({
   selector: 'knx-insurance-result-detail',
@@ -34,7 +34,7 @@ import { Insurance, Insurer, Rating } from './../../models';
   `
 })
 export class InsuranceResultDetailComponent implements OnInit {
-  @Input() insurance: Insurance;
+  @Input() insurance: InsuranceCompareResult;
 
   reviewItems: Array<Rating>;
 

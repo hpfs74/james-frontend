@@ -11,7 +11,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
-import { Profile, InsuranceMap, DashboardItem, insuranceTypes } from '../../models';
+import { Profile, ProfileEmbedded, DashboardInsuranceMap, DashboardItem, insuranceTypes } from '../../models';
 
 @Component({
   templateUrl: 'dashboard.component.html'
@@ -41,19 +41,29 @@ export class DashboardComponent implements OnInit {
         this.profile = x;
         this.chatNotifierService.addTextMessage(this.chatConfig.dashboard.welcome(this.profile.firstname));
 
-        let myInsurances = this.profile._embedded.insurance.documents
-          .map((obj) => {
-            return Object.assign(obj, {
-              insuranceType: this.getInsuranceType(obj.type)
+        let embeddedItems = this.profile._embedded;
+        let insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
+
+        let myInsurances = [];
+        Object.keys(this.profile._embedded)
+          .filter((key) => insuranceItems.indexOf(key) !== -1)
+          .forEach((key) => {
+            this.profile._embedded[key].documents.forEach(element => {
+              myInsurances.push(Object.assign(element, {
+                type: key,
+                label: this.getInsuranceLabel(key)
+              }));
             });
           });
-        if (this.insurances) {
-          this.insurances = myInsurances.concat(this.createRemainingInsurances(insuranceTypes, myInsurances));
+
+        if (myInsurances) {
+          this.insurances = myInsurances.concat(this.getRemainingInsurances(insuranceTypes, myInsurances));
         } else {
+          //TODO: also add default insurances if getUserProfile call fails or show error
           this.insurances = insuranceTypes.map((s) => {
             return {
-              insuranceType: s.type,
-              type: s.apiType
+              type: s.type,
+              label: s.label
             };
           });
         }
@@ -61,26 +71,39 @@ export class DashboardComponent implements OnInit {
   }
 
   goToActions(type: string) {
-    console.log(type);
-    this.router.navigate(['/next-action', type]);
+    this.router.navigate(['/go', type]);
   }
 
-  private createRemainingInsurances(validTypes: Array<InsuranceMap>, items: Array<any>): Array<any> {
+  // TODO: merge in insurance property documents into specific insurance type
+  // private extractInsuranceDocuments(embeddedItem: ProfileEmbedded) {
+  //   let types = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
+  //   let labels = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].label);
+
+  //   let contains = (arr, i) => arr.indexOf(i) !== -1;
+  //   let isLabelType = (item) => contains(labels, item);
+  //   let isDefaultType = (item) => contains(types, item);
+
+  //   embeddedItem.documents.forEach((doc) => {
+
+  //   });
+  // }
+
+  private getRemainingInsurances(validTypes: Array<DashboardInsuranceMap>, items: Array<any>): Array<any> {
     return validTypes
-      .filter(i => items.filter(pi => pi.insuranceType !== i.type).length > 0)
+      .filter(i => items.filter(pi => pi.type !== i.type).length > 0)
       .map((s) => {
         return {
-          insuranceType: s.type,
-          type: s.apiType
+          type: s.type,
+          label: s.label
         };
       });
   }
 
   private getInsuranceLabel(type: string) {
-    return insuranceTypes.filter(obj => obj.type === type)[0].apiType;
+    return insuranceTypes.filter(obj => obj.type === type)[0].label;
   }
 
-  private getInsuranceType(apiType: string) {
-    return insuranceTypes.filter(obj => obj.apiType === apiType)[0].type;
+  private getInsuranceType(label: string) {
+    return insuranceTypes.filter(obj => obj.label === label)[0].type;
   }
 }

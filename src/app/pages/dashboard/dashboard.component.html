@@ -15,10 +15,11 @@
 
       <div class="row">
         <div class="col-sm-8 col-sm-offset-4">
-          <knx-dashboard-item *ngFor="let item of insurances"
-            (click)="goToActions(item.insuranceType)"
+          <knx-dashboard-item *ngFor="let item of insurances; let i = index"
+            (click)="goToActions(item.type)"
             [isPlaceholder]="!item._id"
-            [item]="item">
+            [item]="item"
+            [index]="i">
           </knx-dashboard-item>
         </div>
       </div>

@@ -1,0 +1,68 @@
+.knx-dashboard-item {
+  width: 130px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 50px;
+
+  &:hover {
+    cursor: pointer;
+
+    svg {
+      .circle-progress__start,
+      .circle-progress__border {
+        transition: all 0.4s ease;
+        fill: $knab-primary-blue;
+        stroke: $knab-primary-blue;
+      }
+    }
+  }
+}
+
+.knx-dashboard-item--placeholder svg {
+  .circle-progress__start {
+    display: none;
+  }
+
+  .circle-progress__border {
+    fill: #fff;
+    stroke: $knab-primary-gray;
+    stroke-width: 5px;
+    stroke-dasharray: 12;
+    stroke-dashoffset: 5;
+  }
+
+  .circle-progress__inner {
+    fill: #fff;
+  }
+
+  .circle-progress__image {
+    stroke: #fff;
+  }
+
+  &:hover {
+    .circle-progress__border {
+      fill: #fff;
+    }
+  }
+}
+
+.knx-dashboard-item svg {
+  display: inline-block;
+}
+
+.knx-dashboard-item__logo {
+  max-width: 80px;
+  position: relative;
+  top: 50px;
+  left: 50px;
+}
+
+.knx-dashboard-item__label {
+  color: $knab-primary-blue;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: normal;
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+}

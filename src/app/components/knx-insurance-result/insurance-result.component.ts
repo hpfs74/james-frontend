@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { fadeInAnimation } from './../../animations/fade-in.animation';
-import { InsuranceAdvice, Insurance, Insurer } from '../../models';
+import { InsuranceAdvice, InsuranceCompareResult, Insurer } from '../../models';
 
 @Component({
   selector: 'knx-insurance-result',

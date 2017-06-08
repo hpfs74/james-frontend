@@ -7,7 +7,7 @@ import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../models';
 import { ActivatedRoute } from '@angular/router';
-import { insuranceTypes } from './../../models/insurance-map';
+import { insuranceTypes } from './../../models/';
 
 @Component({
   template: `
@@ -24,7 +24,7 @@ import { insuranceTypes } from './../../models/insurance-map';
     .knx-dashboard-detail { margin-bottom: 20px }
   `]
 })
-export class DashboardDetailComponent implements OnInit, AfterViewInit {
+export class DashboardDetailComponent implements OnInit {
   insuranceType: string;
   label: string;
   message: string;
@@ -37,31 +37,26 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
     private assistantService: AssistantService,
     private chatNotifierService: ChatStreamService,
     private route: ActivatedRoute) {
-
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.insuranceType = params['type'];
-    });
-
     this.chatNotifierService.addMessage$.subscribe(
       message => {
-        // replace messages instead of pushing
         this.chatMessages = [message];
       });
+
+    this.route.params.subscribe(params => {
+      this.insuranceType = params['type'];
+      this.chatNotifierService
+          .addTextMessage(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType)));
+    });
 
     this.profileService.getUserProfile()
       .subscribe(x => {
         this.profile = x;
       });
-  }
-
-  ngAfterViewInit() {
-    this.chatNotifierService
-      .addTextMessage(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType)));
   }
 
   goToAdvice() {
@@ -74,6 +69,6 @@ export class DashboardDetailComponent implements OnInit, AfterViewInit {
   }
 
   private getInsuranceLabel(type: string) {
-    return insuranceTypes.filter(obj => obj.type === type)[0].apiType;
+    return insuranceTypes.filter(obj => obj.type === type)[0].label.toLocaleLowerCase();
   }
 }

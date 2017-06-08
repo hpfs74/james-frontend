@@ -14,14 +14,15 @@
 @import '../app/pages/car/advice/car-advice.component';
 
 /* component styles */
+@import '../app/components/knx-address-lookup/address-lookup.component';
 @import '../app/components/knx-breadcrumb/breadcrumb.component';
 @import '../app/components/knx-button-icon/button-icon.component';
-@import '../app/components/knx-address-lookup/address-lookup.component';
 @import '../app/components/knx-chat-stream/chat-stream.component';
 @import '../app/components/knx-chat-stream/chat-message.component';
 @import '../app/components/knx-collapse-panel/collapse-panel.component';
 @import '../app/components/knx-collapse-message/collapse-message.component';
 @import '../app/components/knx-cookiebar/cookiebar.component';
+@import '../app/components/knx-dashboard-item/dashboard-item.component';
 @import '../app/components/knx-donut/donut.component';
 @import '../app/components/knx-dropdown/dropdown-button.component';
 @import '../app/components/knx-dropdown/dropdown-menu-item.component';

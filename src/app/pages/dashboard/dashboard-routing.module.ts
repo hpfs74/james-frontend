@@ -13,11 +13,8 @@ export const dashboardRoutes: Routes = [
     },
     children: [
       {
-        path: 'next-action/:type',
-        component: DashboardDetailComponent,
-        data: {
-          breadcrumb: 'Je autoverzekering'
-        }
+        path: 'go/:type',
+        component: DashboardDetailComponent
       }
     ]
   }
