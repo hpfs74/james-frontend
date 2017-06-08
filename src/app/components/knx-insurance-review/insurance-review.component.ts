@@ -18,21 +18,29 @@ interface SectionFields {
   template: `
     <div *ngIf="selectedInsurance">
       <h2 class="knx-insurance-review__header">
-        {{selectedInsurance._embedded.insurance.insurance_brand}}
-        <img class="knx-insurance-review__logo" src="{{ selectedInsurance._embedded.insurance.insurance_logo}}">
+        Controleer je gegevens
+        <img class="knx-insurance-review__logo" src="{{ selectedInsurance._embedded.insurance.insurance_logo }}">
       </h2>
     </div>
 
-    <knx-collapsible-panel [showStep]="false" *ngFor="let section of sections" title="{{section.label}}">
-      <div class="knx-collapsible-panel__content" *ngFor="let sectionField of section.fields">
-        {{sectionField.label}}<span *ngIf="sectionField.info">
-            <knx-info size="md" isFloating="true" class="knx-info">
-            <div class="knx-info__content">
-              <div class="knx-message knx-message--hint knx-message--arrow-top">
-                <div class="knx-message__content" [innerHTML]="sectionField.info"></div>
-              </div>
-            </div>
-          </knx-info></span>: <strong>{{sectionField.value}}</strong>
+    <knx-collapsible-panel *ngFor="let section of sections" title="{{section.label}}">
+      <div class="knx-collapsible-panel__content">
+        <div class="row"  *ngFor="let sectionField of section.fields">
+          <div class="col col-md-5">
+            {{sectionField.label}}<span *ngIf="sectionField.info">
+              <knx-info size="md" isFloating="true" class="knx-info">
+                <div class="knx-info__content">
+                  <div class="knx-message knx-message--hint knx-message--arrow-top">
+                    <div class="knx-message__content" [innerHTML]="sectionField.info"></div>
+                  </div>
+                </div>
+              </knx-info>
+            </span>
+          </div>
+          <div class="col col-md-5">
+            {{sectionField.value}}
+          </div>
+        </div>
       </div>
     </knx-collapsible-panel>
   `
