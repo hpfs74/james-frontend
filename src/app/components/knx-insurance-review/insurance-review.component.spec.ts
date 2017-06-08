@@ -25,7 +25,7 @@ describe('Component: InsuranceReviewComponent', () => {
   }));
 
 
-  it('should init the form', () => {
-    expect('123').toEqual('123');
-  });
+  // it('should init the form', () => {
+  //   expect('123').toEqual('123');
+  // });
 });
