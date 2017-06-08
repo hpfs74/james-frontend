@@ -65,7 +65,7 @@ export class CircleProgressComponent implements OnInit, OnChanges {
     this.calculateAll();
   }
 
-   public animate() {
+  public animate() {
     if (this.canAnimate && this.percent > 0) {
       this.canAnimate = false;
       let time = this.time * 1000 / this.percent;
@@ -97,14 +97,12 @@ export class CircleProgressComponent implements OnInit, OnChanges {
     this.cx = this.boxSize / 2;
     this.cy = this.boxSize / 2;
 
-
     this.x0 = this.cx;
     this.y0 = this.cy - this.radius;
 
     this.rx = this.ry = this.radius;
 
     this.innerRadius = this.radius - this.border;
-
   }
 
   private calculateAll() {
@@ -122,7 +120,6 @@ export class CircleProgressComponent implements OnInit, OnChanges {
     if (this.percent === 100) {
       this.x--;
     }
-
     this.circleEnd = this.createArgument(null, this.x, this.y);
   }
 
@@ -135,19 +132,16 @@ export class CircleProgressComponent implements OnInit, OnChanges {
   }
 
   private createArgument(prefix: string, val1: number, val2: number) {
-
     if (prefix !== null) {
       return prefix + val1 + ',' + val2 + ' ';
     } else {
       return val1 + ',' + val2 + ' ';
     }
-
   }
 
   private percToAngle(perc: number) {
     return perc * 3.6;
   }
-
 
   private angleToRad(angle) {
     return (angle * Math.PI) / 180;
