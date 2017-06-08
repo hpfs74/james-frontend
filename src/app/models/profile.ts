@@ -1,7 +1,7 @@
 import { Address, Car } from './index';
 
 export interface ProfileEmbedded {
-  documents: Array<any>;
+  documents?: Array<any>;
   count: number;
   limit: number;
   offset: number;

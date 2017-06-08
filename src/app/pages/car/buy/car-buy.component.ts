@@ -101,7 +101,11 @@ export class CarBuyComponent implements OnInit {
     this.profile = this.profileService.getUserProfile()
       .map((profile) => {
         let p = profile;
-        p._embedded.car = mockCar;
+        p._embedded.car = Object.assign(mockCar, {
+          count: 0,
+          limit: 10,
+          offset: 0
+        });
         return p;
       });
 
