@@ -5,14 +5,10 @@ import { CarPreviewComponent } from './car-preview.component';
 import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
 
 @Component({
-  selector: 'knx-car-info',
+  selector: 'knx-car-info-message',
   template: `
   <div class="knx-message knx-message--chat">
     <div class="container knx-container--fullwidth">
-        <div class="knx-car-info__message">
-          Molto bello! Mooie auto die <strong>{{ data.make | titleCase }} {{ data.model | titleCase }}</strong>
-          <knx-car-preview [colorCode]="data.color_code"></knx-car-preview>
-        </div>
         <div class="row">
           <div class="col-sm-6">Merk</div>
           <div class="col-sm-6 knx-car-info__item">{{ data.make | uppercase  }}</div>
@@ -45,6 +41,6 @@ import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
     </div>
   `
 })
-export class CarInfoComponent implements IChatMessage {
+export class CarInfoMessageComponent implements IChatMessage {
   @Input() data: any;
 }

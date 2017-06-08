@@ -10,6 +10,7 @@ import { CarExtrasComponent } from './advice/car-extras.component';
 
 import { CarBuyComponent } from './buy/car-buy.component';
 import { CarContactComponent } from './buy/car-contact.component';
+import { CarReportingCodeComponent } from './buy/car-reporting-code.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { CarContactComponent } from './buy/car-contact.component';
     CarDetailComponent,
     CarExtrasComponent,
     CarBuyComponent,
-    CarContactComponent
+    CarContactComponent,
+    CarReportingCodeComponent
   ],
   providers: [
     CarService

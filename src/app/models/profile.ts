@@ -1,4 +1,4 @@
-import { Address, DashboardItem } from './index';
+import { Address, Car } from './index';
 
 export interface ProfileEmbedded {
   documents: Array<any>;

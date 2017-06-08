@@ -1,5 +1,4 @@
-import { Address } from './address';
-import { Price } from './price';
+import { Address, Car, Price } from '.';
 
 export class AssistantConfig {
   public avatar = {
@@ -29,6 +28,7 @@ export class AssistantConfig {
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
+      niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>{{ car.make | titleCase }} {{ car.model | titleCase }}`,
       claimFreeYears:
       `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
         Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
@@ -48,18 +48,27 @@ export class AssistantConfig {
         option: 'Selecteer extra opties voor het beste advies',
         next: 'Wat wil je doen?'
       },
-      review: `Verzekering aanvragen dit kost ongeveer 5 minuten: <br>
-      1. Check je gegevens <br>
-      2. Vul je autogegevens aan <br>
-      3. Beantwoord slotvragen <br>
-      4. Vul je betaalgegevens in <br>
-      5. Aanvraag naar de verzekeraar 6. Akkoord? Zeg je oude verzekering op.`
+      review: `<div class="text-center"><b>Verzekering aanvragen </b></div>
+        <div class="text-center">Dit kost ongeveer 5 minuten:</div><br>
+        1. Check je gegevens <br>
+        2. Vul je autogegevens aan <br>
+        3. Beantwoord slotvragen <br> 
+        4. Vul je betaalgegevens in <br>
+        5. Aanvraag naar de verzekeraar <br>
+        6. Akkoord? Zeg je oude verzekering op.`
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
     },
     buy: {
-      contact: 'We hebben nog een paar gegevens van je nodig om je aanvraag te regelen. Kun je dit lijstje aanvullen?'
+      fill: 'We hebben nog een paar gegevens van je nodig om je aanvraag te regelen. Kun je dit lijstje aanvullen?',
+      info: {
+        reportingCode: `
+          Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.
+          De verzekeraar geeft dit door aan de RDW (Rijksdienst voor het Wegverkeer). De RDW houdt zo bij of alle
+          auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
+          Het zijn de laatste 4 cijfers van het chassisnummer.`
+      }
     }
   };
 }

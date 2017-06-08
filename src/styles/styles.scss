@@ -38,14 +38,17 @@
 @import '../app/components/knx-side-panel/side-panel.component';
 @import '../app/components/knx-star-rating/star-rating.component';
 @import '../app/components/knx-nav-user/nav-user.component';
-@import '../app/components/knx-car-info/car-info.component';
-@import '../app/components/knx-car-info/car-info.colors';
-@import '../app/components/knx-car-info/car-preview.component';
+@import '../app/components/knx-car-info-message/car-info.component';
+@import '../app/components/knx-car-info-message/car-info.colors';
+@import '../app/components/knx-car-info-message/car-preview.component';
+@import '../app/components/knx-car-summary/car-summary.component';
 @import '../app/components/knx-tabs/tabs.component';
 @import '../app/components/knx-app-loader/loader.component';
 
 /* cx and other external component overrides */
 @import './overrides';
+@import './form-group';
+@import './form-valid';
 
 html {
   box-sizing: border-box;

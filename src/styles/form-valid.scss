@@ -1,0 +1,34 @@
+// Add the knx-fancy-form class to your form element for
+// green checkmarks on ng-valid controls
+
+.knx-fancy-form {
+  .ng-valid.ng-touched:not(form):not(.ng-pristine) {
+    input {
+      border: 2px solid $knab-secondary-green;
+    }
+
+    .cx-input:after {
+      position: absolute;
+      line-height: 1em;
+      top: 0.6em;
+      right: 10px;
+      font-size: $base-font-size + 2;
+      content: map-get($knx-icons, check);
+      font-family: $font-family-icon;
+      color: $knab-secondary-green;
+    }
+  }
+
+  cx-select.ng-valid.ng-dirty select {
+    border: 2px solid $knab-secondary-green;
+  }
+}
+
+.knx-step-navigation {
+  margin-bottom: 40px;
+  padding: 15px 0;
+
+  & > li {
+    font-weight: normal;
+  }
+}
