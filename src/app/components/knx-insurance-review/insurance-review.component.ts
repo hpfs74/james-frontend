@@ -16,6 +16,13 @@ interface SectionFields {
 @Component({
   selector: 'knx-insurance-review',
   template: `
+    <div *ngIf="selectedInsurance">
+      <h2 class="knx-insurance-review__header">
+        {{selectedInsurance._embedded.insurance.insurance_brand}}
+        <img class="knx-insurance-review__logo" src="{{ selectedInsurance._embedded.insurance.insurance_logo}}">
+      </h2>
+    </div>
+
     <knx-collapsible-panel [showStep]="false" *ngFor="let section of sections" title="{{section.label}}">
       <div class="knx-collapsible-panel__content" *ngFor="let sectionField of section.fields">
         {{sectionField.label}}<span *ngIf="sectionField.info">
@@ -32,7 +39,6 @@ interface SectionFields {
 })
 export class InsuranceReviewComponent implements OnChanges {
   @Input() selectedInsurance: CarInsurance;
-  @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
   sections: Array<SectionsItem>;
 
   ngOnChanges() {
