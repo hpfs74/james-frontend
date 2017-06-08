@@ -69,6 +69,7 @@ export class CarReportingCodeForm extends BaseForm {
       securityClass: {
         formControlName: 'securityClass',
         label: 'Hoe is je auto beveiligd?',
+        type: 'select',
         formControl: this.formGroup.get('securityClass'),
         validationErrors: this.validationErrors,
         inputOptions: {

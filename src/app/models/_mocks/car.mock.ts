@@ -23,6 +23,6 @@ export const mockCar: Car = {
   'power_kw': 66,
   'transmission': 'Manual',
   'transmission_nl': 'Handgeschakeld',
-  'edition': null,
+  'edition': '1.9 TDI',
   'doors': 5,
 };

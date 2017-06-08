@@ -5,41 +5,45 @@
       <h2>Je autogegevens</h2>
 
       <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-8">
           <knx-car-summary *ngIf="profile" [car]="profile._embedded.car"></knx-car-summary>
         </div>
       </div>
 
       <div class="row">
         <div class="col-sm-4">
-          <cx-form-group
-            [options]="form.formConfig.reportingCode"
-            [formControlName]="form.formConfig.reportingCode.formControlName">
+          <div class="knx-form-group--info">
+            <cx-form-group [options]="form.formConfig.reportingCode" [formControlName]="form.formConfig.reportingCode.formControlName">
+            </cx-form-group>
+            <knx-info size="md" isFloating="true" class="knx-info">
+              <div class="knx-info__content">
+                <div class="knx-message knx-message--chat knx-message--arrow-top">
+                  <div class="knx-message__content" [innerHTML]="form.infoMessages.reportingCode">
+                  </div>
+                </div>
+              </div>
+            </knx-info>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8">
+          <cx-form-group [options]="form.formConfig.accessoryValue" [formControlName]="form.formConfig.accessoryValue.formControlName">
           </cx-form-group>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-8">
           <cx-form-group
-            [options]="form.formConfig.accessoryValue"
-            [formControlName]="form.formConfig.accessoryValue.formControlName">
+            [options]="form.formConfig.securityClass"
+            [formControlName]="form.formConfig.securityClass.formControlName">
           </cx-form-group>
         </div>
       </div>
 
-      <!--<div class="row">
-        <div class="col-sm-6">
-          <cx-form-group
-            [options]="form.formConfig.accessoryValue"
-            [formControlName]="form.formConfig.accessoryValue.formControlName">
-          </cx-form-group>
-        </div>
-      </div>-->
-
-      <cx-form-group
-        [options]="form.formConfig.saveToProfile"
-        [formControlName]="form.formConfig.saveToProfile.formControlName">
+      <cx-form-group [options]="form.formConfig.saveToProfile" [formControlName]="form.formConfig.saveToProfile.formControlName">
       </cx-form-group>
 
     </div>

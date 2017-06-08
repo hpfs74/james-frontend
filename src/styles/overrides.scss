@@ -31,38 +31,6 @@
   padding-top: 10px;
 }
 
-.knx-fancy-form {
-  .ng-valid.ng-touched:not(form):not(.ng-pristine) {
-    input {
-      border: 2px solid $knab-secondary-green;
-    }
-
-    .cx-input:after {
-      position: absolute;
-      line-height: 1em;
-      top: 0.6em;
-      right: 10px;
-      font-size: $base-font-size + 2;
-      content: map-get($knx-icons, check);
-      font-family: $font-family-icon;
-      color: $knab-secondary-green;
-    }
-  }
-
-  cx-select.ng-valid select {
-    border: 2px solid $knab-secondary-green;
-  }
-}
-
-.knx-step-navigation {
-  margin-bottom: 40px;
-  padding: 15px 0;
-
-  & > li {
-    font-weight: normal;
-  }
-}
-
 @media (max-width: 768px) {
   .knx-wizard-step-content .knx-wizard--controls {
     margin: 15px 0 !important;

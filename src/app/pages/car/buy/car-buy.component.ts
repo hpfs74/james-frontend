@@ -89,6 +89,9 @@ export class CarBuyComponent implements OnInit {
     let formBuilder = new FormBuilder();
     this.contactDetailForm = new ContactDetailForm(formBuilder);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder);
+    this.reportingCodeForm.infoMessages = {
+      reportingCode: this.chatConfig.car.buy.info.reportingCode
+    };
   }
 
   initFormWithProfile() {
@@ -106,16 +109,21 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitContactDetails(): Observable<any> {
-    FormUtils.validateForm(this.contactDetailForm.formGroup);
+    // FormUtils.validateForm(this.contactDetailForm.formGroup);
 
-    if (!this.contactDetailForm.formGroup.valid) {
-      return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
-    }
+    // if (!this.contactDetailForm.formGroup.valid) {
+    //   return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
+    // }
 
-    if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
-      return this.profileService.updateUserProfile(
-        this.getUpdatedProfile(this.contactDetailForm.formGroup));
-    }
+    // if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
+    //   return this.profileService.updateUserProfile(
+    //     this.getUpdatedProfile(this.contactDetailForm.formGroup));
+    // }
+
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
   }
 
   submitReportingCode(): Observable<any> {
