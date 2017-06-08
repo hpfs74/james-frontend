@@ -4,6 +4,15 @@
   justify-content: space-between;
 }
 
+.knx-collapsible-panel__content {
+  padding: 15px 20px;
+  background: $knab-primary-gray;
+
+  .row .col:nth-child(2) {
+    color: $knab-dark-gray;
+  }
+}
+
 .knx-insurance-review__logo {
   max-height: 50px;
   max-width: 150px;
