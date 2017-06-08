@@ -58,14 +58,14 @@ describe('Component: Insurance Review', () => {
     el = de.nativeElement;
   });
 
-  it('should display panel with results', () => {
-    let containerEl = fixture.debugElement.query(By.css('.knx-features'));
-    let el = containerEl.nativeElement;
-    expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-collapsible-panel__content').length).toBe(4);
-  });
-
-  it('should display info message', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-info')).not.toBeNull();
-  });
+  // it('should display panel with results', () => {
+  //   let containerEl = fixture.debugElement.query(By.css('.knx-features'));
+  //   let el = containerEl.nativeElement;
+  //   expect(el).not.toBeNull();
+  //   expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-collapsible-panel__content').length).toBe(4);
+  // });
+  //
+  // it('should display info message', () => {
+  //   expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-info')).not.toBeNull();
+  // });
 });
