@@ -11,8 +11,15 @@ import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { ProfileService } from '../../../services/profile.service';
 import { Profile } from './../../../models/profile';
+
 import { CarContactComponent } from './car-contact.component';
 import { ContactDetailForm } from './../../../forms/contact-detail.form';
+
+import { CarReportingCodeComponent } from './car-info.component';
+import { CarReportingCodeForm } from './car-reporting-code.form';
+
+import { mockCar } from '../../../models/_mocks/car.mock';
+
 import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
@@ -30,6 +37,7 @@ export class CarBuyComponent implements OnInit {
 
   // Forms
   contactDetailForm: ContactDetailForm;
+  reportingCodeForm: CarReportingCodeForm;
 
   constructor(
     private router: Router,
@@ -56,13 +64,15 @@ export class CarBuyComponent implements OnInit {
         nextButtonLabel: 'Naar autogegevens',
         backButtonLabel: 'Terug',
         hideBackButton: true,
-        onShowStep: () => this.initContactDetails(),
+        onShowStep: () => this.initFormWithProfile(),
         onBeforeNext: this.submitContactDetails.bind(this)
       },
       {
         label: 'Autogegevens',
-        nextButtonLabel: 'Naar justitie check',
-        backButtonLabel: 'Terug'
+        nextButtonLabel: 'Naar check',
+        backButtonLabel: 'Terug',
+        onShowStep: () => this.initFormWithProfile(),
+        onBeforeNext: this.submitReportingCode.bind(this)
       },
       {
         label: 'Check',
@@ -78,29 +88,52 @@ export class CarBuyComponent implements OnInit {
 
     let formBuilder = new FormBuilder();
     this.contactDetailForm = new ContactDetailForm(formBuilder);
+    this.reportingCodeForm = new CarReportingCodeForm(formBuilder);
+    this.reportingCodeForm.infoMessages = {
+      reportingCode: this.chatConfig.car.buy.info.reportingCode
+    };
   }
 
-  initContactDetails() {
+  initFormWithProfile() {
     FormUtils.scrollToForm('form');
-    this.profile = this.profileService.getUserProfile();
-    this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.contact);
+
+    // TODO: replace mock data with actual
+    this.profile = this.profileService.getUserProfile()
+      .map((profile) => {
+        let p = profile;
+        p._embedded.car = mockCar;
+        return p;
+      });
+
+    this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.fill);
   }
 
   submitContactDetails(): Observable<any> {
-    FormUtils.validateForm(this.contactDetailForm.formGroup);
+    // FormUtils.validateForm(this.contactDetailForm.formGroup);
 
-    if (!this.contactDetailForm.formGroup.valid) {
-      return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
-    }
+    // if (!this.contactDetailForm.formGroup.valid) {
+    //   return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
+    // }
 
-    if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
-      return this.profileService.updateUserProfile(
-        this.getUpdatedProfile(this.contactDetailForm.formGroup));
-    }
+    // if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
+    //   return this.profileService.updateUserProfile(
+    //     this.getUpdatedProfile(this.contactDetailForm.formGroup));
+    // }
+
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
+  }
+
+  submitReportingCode(): Observable<any> {
+    //TODO: implement
+    return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
   }
 
   onStepChange(event) {
-    //TODO: implement
+    // TODO: implement properly
+    this.currentStep += 1;
   }
 
   private getUpdatedProfile(form: FormGroup) {

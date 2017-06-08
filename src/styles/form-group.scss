@@ -1,0 +1,48 @@
+.knx-form-group--info {
+  .cx-form-group {
+    width: 90%;
+  }
+
+  .cx-form-group.cx-form-group--error {
+    width: 98%;
+  }
+
+  .knx-info {
+    position: absolute;
+    top: 35px;
+    right: 0;
+    display: block;
+  }
+
+  .knx-info--floating {
+    position: absolute;
+    top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .knx-form-group--info {
+    .cx-form-group {
+      width: 95%;
+    }
+
+    .cx-form-group.cx-form-group--error {
+      width: 98%;
+    }
+  }
+
+  .knx-info {
+    .knx-info--floating.knx-info--md {
+      width: 300px;
+      left: -272px;
+    }
+
+    .knx-info--floating .knx-message--arrow-top:before {
+      right: calc(10px);
+    }
+
+    .knx-message--chat:first-child:before {
+      top: -9px;
+    }
+  }
+}
