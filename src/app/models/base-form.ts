@@ -5,6 +5,7 @@ import { numberValidator } from '../utils/base-form.validators';
 export class BaseForm {
   public formGroup: FormGroup;
   public formConfig: any;
+  public infoMessages: any;
   public validationSummaryError: string = 'Heb je alle velden (correct) ingevuld?';
 
   public createAddress(fb: FormBuilder): FormGroup {

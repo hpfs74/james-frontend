@@ -10,15 +10,15 @@ import { ChatStreamService } from './chat-stream.service';
 
 // Types of messages
 import { TextMessageComponent } from './text-message.component';
-import { CarInfoComponent } from '../knx-car-info/car-info.component';
-import { CarPreviewComponent } from '../knx-car-info';
+import { CarInfoMessageComponent } from '../knx-car-info-message/car-info-message.component';
+import { CarPreviewComponent } from '../knx-car-info-message';
 
 const exportableDeclarations = [
   AvatarComponent,
   ChatMessageDirective,
   ChatStreamComponent,
   TextMessageComponent,
-  CarInfoComponent,
+  CarInfoMessageComponent,
   CarPreviewComponent,
 ];
 
@@ -27,7 +27,7 @@ const exportableDeclarations = [
   exports: exportableDeclarations,
   declarations: exportableDeclarations,
   providers: [ChatStreamService],
-  entryComponents: [ TextMessageComponent, CarInfoComponent ]
+  entryComponents: [ TextMessageComponent, CarInfoMessageComponent ]
 })
 export class ChatStreamModule { }
 

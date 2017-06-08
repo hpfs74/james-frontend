@@ -13,7 +13,7 @@ import { CarCoverageRecommendation } from './../../models/coverage';
 import { CarInsuranceOptions, CarCompareRequest } from '../../models/car-compare-request';
 
 // TODO: remove mock data once API is available
-import { mockCarCoverages } from './../../models/car-coverage.mock';
+import { mockCarCoverages } from './../../models/_mocks/car-coverage.mock';
 
 @Injectable()
 export class CarService {

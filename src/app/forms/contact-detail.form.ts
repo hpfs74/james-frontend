@@ -88,9 +88,12 @@ export class ContactDetailForm extends BaseForm {
       phone: {
         formControlName: 'phoneNumber',
         label: 'Vast telefoonnummer',
-        placeholder: 'Optioneel',
+        description: 'voorbeeld: 0701234567',
         formControl: this.formGroup.get('phoneNumber'),
-        validationErrors: this.validationErrors
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Optioneel'
+        }
       },
       saveToProfile: {
         formControlName: 'saveToProfile',

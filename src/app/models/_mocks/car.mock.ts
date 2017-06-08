@@ -1,7 +1,7 @@
-import { Car } from './car';
+import { Car } from '../car';
 
 export const mockCar: Car = {
-  'license': '71ZXK6',
+  'license': 'KG906T',
   'vin': 'VF1BA0F0G17869206',
   'reporting_code': '9206',
   'year': 2016,
@@ -23,6 +23,6 @@ export const mockCar: Car = {
   'power_kw': 66,
   'transmission': 'Manual',
   'transmission_nl': 'Handgeschakeld',
-  'edition': null,
+  'edition': '1.9 TDI',
   'doors': 5,
 };
