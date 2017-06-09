@@ -6,8 +6,12 @@
       <cx-form-group formControlName="postalCode" [options]="{
         formControl: addressFormGroup.get('postalCode'),
         label: 'Postcode',
-        type: 'postal-code',
-        validationErrors: validationErrors
+        validationErrors: validationErrors,
+        inputOptions: {
+          placeholder: '1234 AB',
+          textMask: mask,
+          transform: mask.decode
+        }
       }"></cx-form-group>
     </div>
   </div>

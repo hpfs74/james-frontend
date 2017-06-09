@@ -65,6 +65,17 @@ export const nameInitialMask = {
   }
 };
 
+export const postalCodeMask = {
+  mask: [/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, ' ', /[a-zA-Z]/, /[a-zA-Z]/],
+  guide: true,
+  decode: value => {
+    return value.replace(/[ .]/gim, '');
+  },
+  pipe: function (conformedValue) {
+    return conformedValue.toUpperCase();
+  }
+}
+
 export const validateForm = function (form: FormGroup) {
   Object.keys(form.controls).forEach(key => {
     form.get(key).markAsTouched();

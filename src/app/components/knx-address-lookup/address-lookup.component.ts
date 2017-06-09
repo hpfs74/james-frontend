@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormControl, AbstractControl, FormArray } from '
 import { FormControlOptions } from '@cx/form-control';
 import { FormValidationErrors } from '@cx/form';
 
+import { postalCodeMask } from '../../utils/base-form.utils';
+
 import { Address } from '../../models/address';
 import { AddressLookupService } from './address-lookup.service';
 import { GeolocationService } from '../../services';
@@ -19,6 +21,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
 
   public address: string = null;
+  public mask = postalCodeMask;
   private lookupTimeout;
 
   constructor(
