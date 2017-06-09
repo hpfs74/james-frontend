@@ -5,8 +5,8 @@ import { IChatMessage } from './chat-message.interface';
 @Component({
   selector: 'knx-chat-message',
   template: `
-  <div class='knx-message knx-message--chat' [@flyInOutAnimation]="'in'">
-    <div class="knx-message__content" [innerHTML]="data"></div>
+  <div *ngFor="let message of data" class='knx-message knx-message--chat' [@flyInOutAnimation]="'in'">
+    <div class="knx-message__content" [innerHTML]="message"></div>
   </div>
   `,
   animations: [ flyInOutAnimation ]
@@ -23,5 +23,9 @@ export class TextMessageComponent implements OnInit, IChatMessage {
 
   ngOnInit() {
     this.date = new Date();
+
+    if(!(this.data instanceof Array)) {
+      this.data = [this.data];
+    }
   }
 }
