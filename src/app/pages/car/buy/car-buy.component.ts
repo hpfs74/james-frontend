@@ -131,7 +131,8 @@ export class CarBuyComponent implements OnInit {
 
   submitReportingCode(): Observable<any> {
     //TODO: implement
-    return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
+    console.log(this.reportingCodeForm.formGroup.value);
+    return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
   }
 
   onStepChange(event) {

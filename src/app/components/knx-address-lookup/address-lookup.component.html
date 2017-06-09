@@ -6,12 +6,8 @@
       <cx-form-group formControlName="postalCode" [options]="{
         formControl: addressFormGroup.get('postalCode'),
         label: 'Postcode',
-        validationErrors: validationErrors,
-        inputOptions: {
-          placeholder: '1234 AB',
-          textMask: postalCodeMask,
-          transform: postalCodeMask.decode
-        }
+        type: 'postal-code',
+        validationErrors: validationErrors
       }"></cx-form-group>
     </div>
   </div>
@@ -20,7 +16,10 @@
       <cx-form-group formControlName="houseNumber" [options]="{
         formControl: addressFormGroup.get('houseNumber'),
         label: 'Huisnummer',
-        validationErrors: validationErrors
+        validationErrors: validationErrors,
+        inputOptions: {
+          type: 'text'
+        }
       }"></cx-form-group>
     </div>
 

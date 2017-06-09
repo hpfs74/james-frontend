@@ -83,7 +83,10 @@ export class ContactDetailForm extends BaseForm {
         description: 'voorbeeld: 0612345678',
         label: 'Mobiel nummer',
         formControl: this.formGroup.get('mobileNumber'),
-        validationErrors: this.validationErrors
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          type: 'text'
+        }
       },
       phone: {
         formControlName: 'phoneNumber',
@@ -92,7 +95,8 @@ export class ContactDetailForm extends BaseForm {
         formControl: this.formGroup.get('phoneNumber'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: 'Optioneel'
+          placeholder: 'Optioneel',
+          type: 'text'
         }
       },
       saveToProfile: {

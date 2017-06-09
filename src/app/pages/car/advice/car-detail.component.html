@@ -7,132 +7,63 @@
 
       <div class="row">
         <div class="col-sm-12">
-
-          <cx-form-group [options]="{
-            type: 'custom',
-            label: 'Wat is je kenteken?',
-            validationErrors: form.validationErrors,
-            formControl: form.formGroup.get('licensePlate')
-           }">
-            <knx-input-licenseplate formControlName="licensePlate" (ngModelChange)="onLicensePlateChange($event)" [options]="{ placeholder: '16K-NAB-9' }">
+          <cx-form-group [options]="form.formConfig.licensePlate">
+            <knx-input-licenseplate
+              [formControlName]="form.formConfig.licensePlate.formControlName"
+              (ngModelChange)="onLicensePlateChange($event)"
+              [options]="form.formConfig.licensePlate.inputOptions">
             </knx-input-licenseplate>
           </cx-form-group>
-
         </div>
       </div>
 
-      <cx-form-group formControlName="birthDate" [options]="{
-            label: 'Geboortedatum',
-            formControl: form.formGroup.get('birthDate'),
-            validationErrors: form.validationErrors,
-            inputOptions: {
-              placeholder: 'DD / MM / JJJJ',
-              transform: CXInputMasks.dateMask.decode,
-              textMask: KNXDateMask
-            }
-          }"></cx-form-group>
+      <cx-form-group
+        [formControlName]="form.formConfig.birthDate.formControlName"
+        [options]="form.formConfig.birthDate">
+      </cx-form-group>
 
-      <knx-address-lookup [addressFormGroup]="form.addressForm" [validationErrors]="form.validationErrors" (addressFound)="onAddressFound($event)">
+      <knx-address-lookup
+        [addressFormGroup]="form.addressForm"
+        [validationErrors]="form.validationErrors"
+        (addressFound)="onAddressFound($event)">
       </knx-address-lookup>
-
 
       <div class="row">
         <div class="col-md-7 col-sm-12">
-          <cx-form-group formControlName="claimFreeYears" [options]="{
-                label: 'Aantal schadevrije jaren',
-                formControl: form.formGroup.get('claimFreeYears'),
-                validationErrors: form.validationErrors,
-                inputOptions: {
-                  type: 'number',
-                  events: ['focus']
-                }
-              }">
+          <cx-form-group
+            [formControlName]="form.formConfig.claimFreeYears.formControlName"
+            [options]="form.formConfig.claimFreeYears">
           </cx-form-group>
         </div>
         <div class="col-md-4 hidden-sm hidden-xs">
           <div class="cx-form-group">
-            <button class="knx-button knx-button--util inline-formelement" (click)="onFocus('claimFreeYears')">Weet ik niet</button>
+            <button class="knx-button knx-button--util inline-formelement"
+              (click)="onFocus('claimFreeYears')">
+                Weet ik niet
+            </button>
           </div>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
-          <cx-form-group formControlName="loan" [options]="{
-                label: 'Heb je een lening?',
-                type: 'radio',
-                formControl: form.formGroup.get('loan'),
-                validationErrors: form.validationErrors,
-                inputOptions: {
-                    formGroupModifiers: ['cx-form-group__wrap--spread'],
-                    placeholder: '',
-                    items: [
-                      {
-                          label: 'Ja',
-                          value: 'true'
-                      },
-                      {
-                          label: 'Nee',
-                          value: 'false'
-                      }
-                  ]
-                }
-              }">
+          <cx-form-group
+            [formControlName]="form.formConfig.loan.formControlName"
+            [options]="form.formConfig.loan">
           </cx-form-group>
         </div>
       </div>
 
-      <cx-form-group formControlName="houseHold" [options]="{
-            label: 'Wat is je gezinssituatie?',
-            type: 'select',
-            formControl: form.formGroup.get('houseHold'),
-            validationErrors: form.validationErrors,
-            inputOptions: {
-                placeholder: '',
-                items: [
-                  {
-                      label: 'Alleen ikzelf',
-                      value: 'CHM'
-                  },
-                  {
-                      label: 'Ik en mijn partner',
-                      value: 'CHMP'
-                  },
-                  {
-                      label: 'Ik, mijn partner en de kind(eren)',
-                      value: 'CHMPK'
-                  },
-                  {
-                      label: 'Ik en mijn kind(eren)',
-                      value: 'CHMK'
-                  }
-              ]
-            }
-          }">
+      <cx-form-group
+        [formControlName]="form.formConfig.houseHold.formControlName"
+        [options]="form.formConfig.houseHold">
       </cx-form-group>
 
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
-          <cx-form-group formControlName="gender" [options]="{
-                label: 'Geslacht',
-                type: 'radio',
-                formControl: form.formGroup.get('gender'),
-                validationErrors: form.validationErrors,
-                inputOptions: {
-                    formGroupModifiers: ['cx-form-group__wrap--spread'],
-                    placeholder: 'Selecteer je geslacht',
-                    items: [
-                      {
-                          label: 'Man',
-                          value: 'm'
-                      },
-                      {
-                          label: 'Vrouw',
-                          value: 'f'
-                      }
-                  ]
-                }
-              }">
+          <cx-form-group
+            [formControlName]="form.formConfig.gender.formControlName"
+            [options]="form.formConfig.gender">
           </cx-form-group>
         </div>
       </div>

@@ -11,9 +11,11 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="knx-form-group--info">
-            <cx-form-group [options]="form.formConfig.reportingCode" [formControlName]="form.formConfig.reportingCode.formControlName">
+            <cx-form-group
+              [options]="form.formConfig.reportingCode"
+              [formControlName]="form.formConfig.reportingCode.formControlName">
             </cx-form-group>
             <knx-info size="md" isFloating="true" class="knx-info">
               <div class="knx-info__content">
@@ -29,7 +31,9 @@
 
       <div class="row">
         <div class="col-sm-8">
-          <cx-form-group [options]="form.formConfig.accessoryValue" [formControlName]="form.formConfig.accessoryValue.formControlName">
+          <cx-form-group
+            [options]="form.formConfig.accessoryValue"
+            [formControlName]="form.formConfig.accessoryValue.formControlName">
           </cx-form-group>
         </div>
       </div>
@@ -40,6 +44,13 @@
             [options]="form.formConfig.securityClass"
             [formControlName]="form.formConfig.securityClass.formControlName">
           </cx-form-group>
+
+          <div *ngIf="form.formGroup.get('securityClass').value" class="knx-message knx-message--hint knx-message--arrow-top">
+            <div class="knx-message__header">{{ selectedSecurityClass.title }}: {{ selectedSecurityClass.short }}</div>
+            <div class="knx-message__content">
+                <p>{{ selectedSecurityClass.description }}</p>
+            </div>
+          </div>
         </div>
       </div>
 
