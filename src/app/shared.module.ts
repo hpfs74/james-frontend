@@ -55,6 +55,7 @@ import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
+import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
 
 export const sharedComponents = [
   TitleCasePipe,
@@ -86,6 +87,7 @@ export const sharedComponents = [
   TabsComponent,
   TabComponent,
   NavUserComponent,
+  UserGreetingComponent
 ];
 
 export const sharedModules = [
