@@ -9,17 +9,21 @@ import { KNXInfoComponent } from '../../../../node_modules/@knx/info/index';
 import { CXFormsModule } from '../../../../node_modules/@cx/forms';
 
 @Component({
-  template: `<div><knx-insurance-review [selectedInsurance]="selectedInsuranceFromHost"></knx-insurance-review></div>`
+  template: `
+    <div>
+      <knx-insurance-review [selectedInsurance]="selectedInsuranceFromHost"></knx-insurance-review>
+    </div>`
 })
 export class TestHostComponent {
   @ViewChild(InsuranceReviewComponent)
   public insuranceReviewComponent: InsuranceReviewComponent;
   public selectedInsuranceFromHost: any;
+  public sections: any;
 }
 
 describe('Component: InsuranceReviewComponent', () => {
-  let comp: InsuranceReviewComponent;
-  let fixture: ComponentFixture<InsuranceReviewComponent>;
+  let comp: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,30 +33,20 @@ describe('Component: InsuranceReviewComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InsuranceReviewComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
-
-    comp.sections = [
-      {
-        label: 'Section label',
-        fields: [
-          {
-            label: 'Field label',
-            value: '100',
-            info: 'Information message'
-          }
-        ]
-      },
-      {
-        label: 'Section label',
-        fields: [
-          {
-            label: 'Field label',
-            value: '100'
-          }
-        ]
-      }
-    ];
+    fixture.detectChanges();
+    comp.selectedInsuranceFromHost = {
+      details: '100',
+      own_risk: '100',
+      monthly_premium: '100',
+      one_off_premium: '100',
+      road_assistance: '100',
+      legal_aid: '100',
+      no_claim_protection: '100',
+      cover_occupants: '100',
+      _embedded: {insurance: {insurance_logo: 'logogurl-1'}}
+    };
 
     fixture.detectChanges();
   });
@@ -62,23 +56,24 @@ describe('Component: InsuranceReviewComponent', () => {
   });
 
   it('should update the form with profile data (ngOnChanges)', () => {
-    this.selectedInsuranceFromHost = {
-      details: '100',
-      own_risk: '100',
-      monthly_premium: '100',
-      one_off_premium: '100',
-      road_assistance: '100',
-      legal_aid: '100',
-      no_claim_protection: '100',
-      cover_occupants: '100'
-    };
+debugger;
+    expect(comp.insuranceReviewComponent).toBeDefined();
+    spyOn(comp.insuranceReviewComponent, 'ngOnChanges').and.callThrough();
 
-    // expect(comp.carContactComponent).toBeDefined();
-    // spyOn(comp.carContactComponent, 'ngOnChanges').and.callThrough();
-    // fixture.detectChanges();
-    // expect(comp.carContactComponent.ngOnChanges).toHaveBeenCalled();
-    // expect(comp.carContactComponent.form.formGroup.get('firstName').value).toEqual('John');
-    // expect(comp.carContactComponent.form.formGroup.get('lastName').value).toEqual('Doe');
-    // expect(comp.carContactComponent.form.formGroup.get('mobileNumber').value).toEqual('0612345678');
+    comp.selectedInsuranceFromHost = {
+      details: '200',
+      own_risk: '200',
+      monthly_premium: '200',
+      one_off_premium: '200',
+      road_assistance: '200',
+      legal_aid: '200',
+      no_claim_protection: '200',
+      cover_occupants: '200',
+      _embedded: {insurance: {insurance_logo: 'logogurl-2'}}
+    };
+    fixture.detectChanges();
+
+    expect(comp.insuranceReviewComponent.ngOnChanges).toHaveBeenCalled();
+    expect(comp.insuranceReviewComponent.sections[0].fields[0].value).toEqual('200');
   });
 });
