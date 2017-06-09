@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'knx-user-greeting',
@@ -9,30 +9,31 @@ import { Component, Input, AfterViewInit } from '@angular/core';
     </header>
   `
 })
-export class UserGreetingComponent implements AfterViewInit {
+export class UserGreetingComponent implements OnInit {
   @Input() userName: string;
 
   greeting: string;
 
-  ngAfterViewInit() {
+  ngOnInit() {
     let hourOfDay = new Date().getHours();
     this.greeting = this.getGreeting(hourOfDay);
   }
 
-  private getGreeting(hour: number) {
+  public getGreeting(hour: number) {
     if (this.between(hour, 6, 12)) {
       // morning
       return 'Goedemorgen';
     } else if (this.between(hour, 12, 18)) {
       // afternoon
       return 'Goedemiddag';
-    } else if (this.between(hour, 18, 0)) {
+    } else if (this.between(hour, 18, 23)) {
       // evening
       return 'Goedenavond';
-    } else if (this.between(hour, 0, 6)) {
+    } else if (this.between(hour, 0, 6) && hour > 0) {
       // night
       return 'Goedenacht';
     }
+    return 'Hallo';
   }
 
   private between(num, min, max) {
