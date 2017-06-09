@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { dateMask } from '../../../node_modules/@cx/input';
+import { dateDecode } from '../utils/base-form.utils';
 
 export function maxNumberValidator(key: string, max: Number) {
   return (c: FormControl): { [key: string]: any } => {
@@ -49,7 +49,7 @@ export function dateValidator(key: string) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
     if (value && !(value instanceof Date)) {
-      value = dateMask.decode(value);
+      value = dateDecode(value);
     }
     let obj = {};
     obj[key] = true;
@@ -62,7 +62,7 @@ export function birthDateValidator(key: string) {
     let value = c.value;
 
     if (value && !(value instanceof Date)) {
-      value = dateMask.decode(value);
+      value = dateDecode(value);
     }
 
     if (value && (value.getFullYear() < 1920 || value.getFullYear() > 1999)) {

@@ -2,11 +2,14 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 
 import { BaseForm } from '../../../models/base-form';
 import { nameInitialMask } from '../../utils/base-form.utils';
+import { numberValidator } from '../../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../../utils/base-form.validators';
+import { carSecurityClasses } from '../../../models/car-security-class';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
+  securityClasses = carSecurityClasses;
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
@@ -16,29 +19,6 @@ export class CarReportingCodeForm extends BaseForm {
   constructor(private fb: FormBuilder) {
     super();
 
-    const securityClasses = [
-      {
-        label: 'Weet ik niet',
-        value: ''
-      },
-      {
-        label: 'SCM klasse 1',
-        value: 'SCM1'
-      },
-      {
-        label: 'SCM klasse 2',
-        value: 'SCM2'
-      },
-      {
-        label: 'SCM klasse 3',
-        value: 'SCM3'
-      },
-      {
-        label: 'SCM klasse 5',
-        value: 'SCM5'
-      }
-    ];
-
     this.formGroup = this.fb.group({
       reportingCode: [null,
         Validators.compose([
@@ -47,9 +27,11 @@ export class CarReportingCodeForm extends BaseForm {
         ])
       ],
       accessoryValue: [null,
-        Validators.required
+        Validators.compose([
+          Validators.required
+        ])
       ],
-      securityClass: [{}],
+      securityClass: [null],
       saveToProfile: [{}]
     });
 
@@ -58,11 +40,15 @@ export class CarReportingCodeForm extends BaseForm {
         formControlName: 'reportingCode',
         label: 'Meldcode',
         formControl: this.formGroup.get('reportingCode'),
-        validationErrors: this.validationErrors
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          type: 'text'
+        }
       },
       accessoryValue: {
         formControlName: 'accessoryValue',
         label: 'Waarde accessoires',
+        type: 'currency',
         formControl: this.formGroup.get('accessoryValue'),
         validationErrors: this.validationErrors
       },
@@ -73,7 +59,13 @@ export class CarReportingCodeForm extends BaseForm {
         formControl: this.formGroup.get('securityClass'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          items: securityClasses
+          items: this.securityClasses
+            .map((i) => {
+              return {
+                label: i.short ? `${i.title} - ${i.short}` : i.title,
+                value: i.value
+              };
+            })
         }
       },
       saveToProfile: {
@@ -82,7 +74,10 @@ export class CarReportingCodeForm extends BaseForm {
         formControl: this.formGroup.get('saveToProfile'),
         inputOptions: {
           items: [
-            { label: 'Gegevens opslaan in mijn Knab Verzekeren profiel', value: 'true' }
+            {
+              label: 'Gegevens opslaan in mijn Knab Verzekeren profiel',
+              value: 'true'
+            }
           ]
         }
       }

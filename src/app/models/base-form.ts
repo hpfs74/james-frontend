@@ -1,10 +1,12 @@
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { CXPostalCodeValidator } from '../../../node_modules/@cx/form';
+import { CXEmailValidator, CXPostalCodeValidator } from '@cx/form-control';
+import { CXFormGroupOptions } from '@cx/form-group';
+
 import { numberValidator } from '../utils/base-form.validators';
 
 export class BaseForm {
   public formGroup: FormGroup;
-  public formConfig: any;
+  public formConfig: { any:CXFormGroupOptions<any> };
   public infoMessages: any;
   public validationSummaryError: string = 'Heb je alle velden (correct) ingevuld?';
 

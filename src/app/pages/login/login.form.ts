@@ -1,9 +1,8 @@
 import { FormGroup } from '@angular/forms';
-import { Options as CXFormGroupOptions } from '../../../../node_modules/@cx/form-group/';
+import { BaseForm } from '../../models/base-form';
 
-export class LoginForm {
-  formGroup: FormGroup;
-  formConfig: { any:CXFormGroupOptions };
-
-
+export class LoginForm extends BaseForm {
+  constructor() {
+    super();
+  }
 }
