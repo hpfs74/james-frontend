@@ -1,0 +1,49 @@
+<svg [attr.width] = "boxSize" [attr.height] = "boxSize" >
+  <circle
+    class="circle-progress__border"
+    [attr.cx] = "cx"
+    [attr.cy] = "cy"
+    [attr.r] = "radius"
+    [attr.fill]="backgroundColor"
+    [attr.stroke]="backgroundColor"/>
+
+  <path
+    class="circle-progress__start"
+    [attr.d] = "circleM+ circleL+ circleA+ '0 ' + arcSweep + circleEnd + 'Z'"
+    [attr.stroke]="'#eeebe5'"
+    [attr.fill]="color"/>
+
+  <defs>
+    <pattern
+      [attr.id]="'image' + uniqueId"
+      [attr.x]="imageConfig.x + '%'"
+      [attr.y]="imageConfig.y + '%'"
+      height="100%"
+      width="100%"
+      viewBox="0 0 120 120"
+      patternUnits="userSpaceOnUse">
+        <image x="0%" y="0%"
+          [attr.width]="imageConfig.width || 90"
+          [attr.height]="imageConfig.height || 90"
+          [attr.xlink:href]="imageConfig.url">
+        </image>
+    </pattern>
+  </defs>
+
+  <circle
+    class="circle-progress__inner"
+    [attr.cx] = "cx"
+    [attr.cy] = "cy"
+    [attr.fill] = "'#fff'"
+    [attr.r] = "innerRadius"
+    [attr.stroke]="backgroundColor" />
+    <!--     [attr.fill]="innerFill" -->
+
+  <circle
+    class="circle-progress__image"
+    [attr.cx] = "cx"
+    [attr.cy] = "cy"
+    [attr.fill]="'url(#image' + uniqueId + ')'"
+    [attr.r] = "innerRadius"
+    [attr.stroke]="backgroundColor" />
+</svg>

@@ -1,0 +1,18 @@
+.knx-user-greeting {
+  color: $knab-primary-blue;
+  margin-bottom: 40px;
+  padding: 15px 0;
+
+  h2 {
+    font-size: $font-size-base + 4;
+    text-transform: uppercase;
+
+    .knx-user-greeting__username {
+      color: $knab-primary-green;
+    }
+  }
+}
+
+.main-container .knx-user-greeting h2 {
+  margin-bottom: 5px;
+}

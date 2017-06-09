@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { InsuranceAdvice } from '../../models/insurance';
+import { InsuranceAdvice } from '../../models';
 
 interface OrderItem {
   id: string;

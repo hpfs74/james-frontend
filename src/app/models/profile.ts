@@ -1,5 +1,12 @@
 import { Address, Car } from './index';
 
+export interface ProfileEmbedded {
+  documents?: Array<any>;
+  count: number;
+  limit: number;
+  offset: number;
+}
+
 /**
  * NICCI User Profile
  * @export
@@ -29,9 +36,14 @@ export class Profile {
   _id: string;
   _deleted: boolean;
   _embedded: {
-    insurance: any;
-    car?: Car;
-    inbox: any;
+    car: ProfileEmbedded;
+    travel: ProfileEmbedded;
+    content: ProfileEmbedded;
+    home: ProfileEmbedded;
+    liability: ProfileEmbedded;
+    insurance: ProfileEmbedded;
+    bank_card: ProfileEmbedded;
+    inbox: ProfileEmbedded;
   };
 
   filled_data_percentage: number;
