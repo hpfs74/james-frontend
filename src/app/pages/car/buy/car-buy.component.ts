@@ -31,7 +31,6 @@ export class CarBuyComponent implements OnInit {
 
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
-  assistantMessages: any;
 
   profile: Observable<Profile>;
 

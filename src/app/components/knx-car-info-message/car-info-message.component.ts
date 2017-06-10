@@ -2,12 +2,11 @@ import { Component, Input } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Car } from '../../models/car';
 import { CarPreviewComponent } from './car-preview.component';
-import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
 
 @Component({
   selector: 'knx-car-info-message',
   template: `
-  <div class="knx-message knx-message--chat">
+  <div class="knx-message knx-message--hint">
     <div class="container knx-container--fullwidth">
         <div class="row">
           <div class="col-sm-6">Merk</div>
@@ -41,6 +40,6 @@ import { IChatMessage } from './../knx-chat-stream/chat-message.interface';
     </div>
   `
 })
-export class CarInfoMessageComponent implements IChatMessage {
-  @Input() data: any;
+export class CarInfoMessageComponent {
+  @Input() data: Car;
 }

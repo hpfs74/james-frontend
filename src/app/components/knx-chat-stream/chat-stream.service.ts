@@ -13,11 +13,7 @@ export class ChatStreamService {
 
   addMessage$ = this.addMessageSource.asObservable();
 
-  addTextMessage(data) {
-    this.addMessageSource.next(new ChatMessage(TextMessageComponent, data));
-  }
-
-  addCarMessage(data) {
-    this.addMessageSource.next(new ChatMessage(CarInfoMessageComponent, data));
+  addTextMessage(data, replace: boolean = false) {
+    this.addMessageSource.next(new ChatMessage(TextMessageComponent, data, replace));
   }
 }
