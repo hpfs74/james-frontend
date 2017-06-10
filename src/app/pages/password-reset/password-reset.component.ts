@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { CXEmailValidator } from '../../../../node_modules/@cx/form';
+import { CXEmailValidator } from '@cx/form';
 import { AuthService } from './../../services/auth.service';
 
 /**

@@ -58,23 +58,22 @@ describe('Component: Login', () => {
   });
 
   it('should initialize the form', () => {
-    comp.initForm();
-    expect(comp.formGroupConfig).toBeDefined;
-    expect(comp.formGroupConfig.length).toBe(2);
-    expect(comp.loginForm.get('email')).toBeDefined;
-    expect(comp.loginForm.get('password')).toBeDefined;
+    expect(comp.form.formConfig).toBeDefined();
+    expect(Object.keys(comp.form.formConfig).length).toBe(2);
+    expect(comp.form.formGroup.get('email')).toBeDefined();
+    expect(comp.form.formGroup.get('password')).toBeDefined();
   });
 
   it('email invalid when empty', () => {
-    expect(comp.loginForm.get('email').valid).toBeFalsy();
+    expect(comp.form.formGroup.get('email').valid).toBeFalsy();
   });
 
   it('password invalid when empty', () => {
-    expect(comp.loginForm.get('password').valid).toBeFalsy();
+    expect(comp.form.formGroup.get('password').valid).toBeFalsy();
   });
 
   it('should display error message on wrong email syntax', () => {
-    let email = comp.loginForm.get('email');
+    let email = comp.form.formGroup.get('email');
     email.setValue('not-an-email');
     let errors = email.errors || {};
     expect(errors['email']).toBeTruthy();
@@ -94,7 +93,7 @@ describe('Component: Login', () => {
     };
 
     comp.handleError(testData);
-    expect(comp).not.toBeNull;
+    expect(comp).not.toBeNull();
     //expect(comp.messageTitle).toBe('Login failed');
     expect(comp.message).toEqual(loginError.default);
   });
@@ -102,14 +101,14 @@ describe('Component: Login', () => {
   it('should display error on too many attempts', () => {
     comp.handleError({ error: 'too_many_login_attempts', error_description: 'Too many attempts'});
 
-    expect(comp).not.toBeNull;
+    expect(comp).not.toBeNull();
     expect(comp.message).toEqual(loginError.too_many_login_attempts);
   });
 
   it('should display error on invalid login data', () => {
     comp.handleError({ error: 'invalid_password'});
 
-    expect(comp).not.toBeNull;
+    expect(comp).not.toBeNull();
     expect(comp.message).toEqual(loginError.invalid_password);
   });
 
@@ -117,7 +116,7 @@ describe('Component: Login', () => {
   it('should display error on not yet validate account that try to login', () => {
     comp.handleError({ error: 'inactive_profile'});
 
-    expect(comp).not.toBeNull;
+    expect(comp).not.toBeNull();
     expect(comp.message).toEqual(loginError.inactive_profile);
   });
 });

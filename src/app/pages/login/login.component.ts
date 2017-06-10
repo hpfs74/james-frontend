@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, RouterLink, NavigationExtras } from '@angular/router';
 
-import { CXEmailValidator } from '../../../../node_modules/@cx/form';
+import { LoginForm } from './login.form';
 import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
 import { loginError } from './login-error';
 
@@ -16,19 +16,16 @@ import { loginError } from './login-error';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  submitted: boolean = false;
   isPending: boolean = false;
   showPassword: boolean = false;
-  formBuilder: FormBuilder;
-  loginForm: FormGroup;
-  validationErrors: any;
+
+  form: LoginForm;
   messageTitle: string;
   message: string;
-  formGroupConfig = [];
   forgotPasswordLink: string;
 
   constructor(private router: Router, private authService: AuthService) {
-    this.initForm();
+    this.form = new LoginForm(new FormBuilder());
 
     this.forgotPasswordLink =
       'https://profile-james-a.nicci.io/password?client_id=56a6ab20bb00893f071faddc' +
@@ -38,77 +35,32 @@ export class LoginComponent {
       '&scope=basic+emailaddress+social';
   }
 
-  initForm() {
-    this.validationErrors = {
-      required: () => 'Dit veld is verplicht',
-      email: () => 'Vul een geldig e-mailadres in',
-      password: () => 'Vul je wachtwoord in'
-    };
-
-    this.formBuilder = new FormBuilder();
-    this.loginForm = this.formBuilder.group({
-      email: [null, Validators.compose(
-        [Validators.required, CXEmailValidator]
-      )],
-      password: [null, Validators.compose(
-        [Validators.required]
-      )],
-    });
-
-    this.formGroupConfig = [
-      {
-        formControlName: 'email',
-        formControl: this.loginForm.get('email'),
-        validationErrors: this.validationErrors,
-        inputOptions: {
-          placeholder: 'E-mailadres',
-          attributes: {
-            'aria-label': 'Vul je e-mailadres in'
-          }
-        }
-      },
-      {
-        formControlName: 'password',
-        formControl: this.loginForm.get('password'),
-        validationErrors: this.validationErrors,
-        inputOptions: {
-          placeholder: 'Wachtwoord',
-          type: 'password',
-          attributes: {
-            'aria-label': 'Vul je wachtwoord in'
-          }
-        }
-      }
-    ];
-  }
-
   goToPasswordReset() {
     window.location.href  = this.forgotPasswordLink;
   }
 
   togglePassword(event) {
     event.preventDefault();
-    let passwordControl = this.formGroupConfig[1];
     this.showPassword = !this.showPassword;
 
-    passwordControl.inputOptions.type =
-      (passwordControl.inputOptions.type === 'password')
+    this.form.formConfig.password.inputOptions.type =
+      (this.form.formConfig.password.inputOptions.type === 'password')
         ? 'text' : 'password';
   }
 
   login(event) {
     event.preventDefault();
-    this.submitted = true;
 
-    Object.keys(this.loginForm.controls).forEach(key => {
-      this.loginForm.get(key).markAsTouched();
+    Object.keys(this.form.formGroup.controls).forEach(key => {
+      this.form.formGroup.get(key).markAsTouched();
     });
 
-    if (this.loginForm.valid) {
+    if (this.form.formGroup.valid) {
       this.isPending = true;
+      this.message = undefined;
 
-      let email = this.loginForm.get('email');
-      let password = this.loginForm.get('password');
+      let email = this.form.formGroup.get('email');
+      let password = this.form.formGroup.get('password');
 
       this.authService
         .login(email.value, password.value)
@@ -133,6 +85,10 @@ export class LoginComponent {
         }, (res) => this.handleError(res.json()));
     }
     return;
+  }
+
+  hasErrors() {
+    return this.message && this.form.formGroup.valid;
   }
 
   handleError(data) {
