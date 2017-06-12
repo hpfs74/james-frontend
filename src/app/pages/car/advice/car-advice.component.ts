@@ -93,6 +93,7 @@ export class CarAdviceComponent implements OnInit {
         hideNextButton: true,
         onShowStep: () => {
           FormUtils.scrollToForm('.knx-insurance-toplist');
+          this.chatMessages = [];
           this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result);
         }
       },
