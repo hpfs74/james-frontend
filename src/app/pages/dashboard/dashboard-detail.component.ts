@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { AssistantService } from '../../services/assistant.service';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
+import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
 import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../models';
@@ -25,6 +26,8 @@ import { insuranceTypes } from './../../models/';
   `]
 })
 export class DashboardDetailComponent implements OnInit {
+  @ViewChild(ChatStreamComponent) chatStreamComponent: ChatStreamComponent;
+
   insuranceType: string;
   label: string;
   message: string;
@@ -43,14 +46,14 @@ export class DashboardDetailComponent implements OnInit {
 
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
-      message => {
+      (message) => {
         this.chatMessages = [message];
       });
 
     this.route.params.subscribe(params => {
       this.insuranceType = params['type'];
       this.chatNotifierService
-          .addTextMessage(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType)));
+          .addTextMessage(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType)), true);
     });
 
     this.profileService.getUserProfile()
