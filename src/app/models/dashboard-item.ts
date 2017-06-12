@@ -1,4 +1,7 @@
 export interface DashboardItem {
-  insuranceType: string; // 'car', 'travel', ...
-  type: string; // 'Auto', 'Reis', ...
+  type: string;
+  label: string;
+  insurance_logo?: string;
+  insurance_name?: string;
+  filled_data_percentage?: number;
 }

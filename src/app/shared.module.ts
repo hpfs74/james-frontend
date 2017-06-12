@@ -32,6 +32,7 @@ import { BlurForwarderDirective, JumpToElementDirective } from './directives';
 import { AddressLookupComponent } from './components/knx-address-lookup/address-lookup.component';
 import { BreadCrumbComponent } from './components/knx-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
+import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
 import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
@@ -54,6 +55,7 @@ import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
+import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
 
 export const sharedComponents = [
   TitleCasePipe,
@@ -62,6 +64,7 @@ export const sharedComponents = [
   JumpToElementDirective,
   AddressLookupComponent,
   ButtonIconComponent,
+  CircleProgressComponent,
   CarSummaryComponent,
   CookiebarComponent,
   CollapsePanelComponent,
@@ -84,6 +87,7 @@ export const sharedComponents = [
   TabsComponent,
   TabComponent,
   NavUserComponent,
+  UserGreetingComponent
 ];
 
 export const sharedModules = [

@@ -1,7 +1,7 @@
 import { Car } from './car';
 import { Insurer } from './insurer';
 
-export class Insurance {
+export class InsuranceCompareResult {
   id: number;
   insurance_brand: string;
   insurance_logo: string;
@@ -18,6 +18,6 @@ export class InsuranceAdvice {
   reviews_amount: number;
   _embedded: {
     car: Car;
-    insurance: Insurance;
+    insurance: InsuranceCompareResult;
   };
 }

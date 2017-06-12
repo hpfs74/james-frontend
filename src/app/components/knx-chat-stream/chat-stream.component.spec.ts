@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
 import { ChatMessage } from './chat-message';
@@ -13,40 +12,6 @@ describe('Component: ChatStreamComponent', () => {
   let fixture: ComponentFixture<ChatStreamComponent>;
   let de: DebugElement;
   let el: HTMLElement;
-
-  let myCar = {
-    'license': 'KX-900-Z',
-    'vin': 'VF1BA0F0G17869206',
-    'reporting_code': '9206',
-    'year': 1998,
-    'fuel': 'Gasoline',
-    'secondary_fuel': null,
-    'color': 'Blauw',
-    'color_code': '04',
-    'secondary_color': 'Onbekend',
-    'secondary_color_code': '99',
-    'weight_empty_vehicle': 1030,
-    'price_consumer_excl_vat': 14841,
-    'price_consumer_incl_vat': 16976,
-    'make': 'RENAULT',
-    'model': 'MEGANE',
-    'technical_type': '1.6 E HB RT',
-    'wheels': 4,
-    'top_speed': 184,
-    'engine_capacity': 1598,
-    'power_kw': 66,
-    'transmission': 'Manual',
-    'transmission_nl': 'Handgeschakeld',
-    'edition': null,
-    'doors': 5,
-  };
-
-  let messages: Array<ChatMessage> = [
-    new ChatMessage('text', 'Hello World'),
-    new ChatMessage('car', myCar ),
-    new ChatMessage('text',  'This is a second message' ),
-    new ChatMessage('text',  'This is a second message' )
-  ];
 
   let options: ChatStreamOptions = {
     avatar: {
@@ -70,7 +35,7 @@ describe('Component: ChatStreamComponent', () => {
 
     // Provide Input() data
     comp.options = options;
-    comp.messages = messages;
+   // comp.messages = messages;
 
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('div.knx-chat-stream'));
@@ -88,13 +53,8 @@ describe('Component: ChatStreamComponent', () => {
     expect(avatarEl).not.toBeNull();
   });
 
-  xit('should render the specified number of messages', () => {
-    expect(el).not.toBeNull();
-    expect(el.querySelectorAll('knx-chat-message').length).toBe(messages.length);
-  });
-
-  xit('should render a vehicle type message', () => {
-    expect(el).not.toBeNull();
-    expect(el.querySelectorAll('knx-car-info').length).toBe(1);
-  });
+  // xit('should render the specified number of messages', () => {
+  //   expect(el).not.toBeNull();
+  //   expect(el.querySelectorAll('knx-chat-message').length).toBe(messages.length);
+  // });
 });

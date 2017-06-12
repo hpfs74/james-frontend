@@ -1,10 +1,15 @@
+<div *ngIf="profile" class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation">
+  <div class="container">
+    <knx-user-greeting [userName]="profile?.firstname"></knx-user-greeting>
+  </div>
+</div>
+
 <div class="container knx-container-dashboard">
   <div class="row">
     <div class="col-sm-4 push-sm-8">
       <knx-chat-stream [options]="chatConfig" [messages]="chatMessages">
       </knx-chat-stream>
     </div>
-
     <div class="col-sm-8 pull-sm-4">
       <div class="row">
         <div class="col-sm-12">
@@ -15,10 +20,11 @@
 
       <div class="row">
         <div class="col-sm-8 col-sm-offset-4">
-          <knx-dashboard-item *ngFor="let item of insurances"
-            (click)="goToActions(item.insuranceType)"
+          <knx-dashboard-item *ngFor="let item of insurances; let i = index"
+            (click)="goToActions(item.type)"
             [isPlaceholder]="!item._id"
-            [item]="item">
+            [item]="item"
+            [index]="i">
           </knx-dashboard-item>
         </div>
       </div>

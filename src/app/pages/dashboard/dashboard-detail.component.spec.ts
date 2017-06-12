@@ -13,8 +13,6 @@ import { ConfigService } from '../../config.service';
 import { loginError } from './login-error';
 import { Observable } from 'rxjs/Observable';
 
-
-
 describe('Component: DashboardDetail', () => {
   let comp: DashboardDetailComponent;
   let fixture: ComponentFixture<DashboardDetailComponent>;
@@ -30,7 +28,6 @@ describe('Component: DashboardDetail', () => {
       }
     }
   };
-
 
   describe('with routing to car', () => {
     beforeEach(async(() => {
@@ -93,7 +90,7 @@ describe('Component: DashboardDetail', () => {
     });
 
     it('chat assistance should contain "Auto" word in the message if route from car', () => {
-      expect(comp.chatMessages[0].data).toContain('Auto');
+      expect(comp.chatMessages[0].data).toContain('auto');
     });
   });
   describe('with routing to travel', () => {
@@ -157,7 +154,7 @@ describe('Component: DashboardDetail', () => {
     });
 
     it('chat assistance should contain "Reis" word in the message if route from travel', () => {
-      expect(comp.chatMessages[0].data).toContain('Reis');
+      expect(comp.chatMessages[0].data).toContain('reis');
     });
   });
 

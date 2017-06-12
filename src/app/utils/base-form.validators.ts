@@ -65,7 +65,7 @@ export function birthDateValidator(key: string) {
       value = dateMask.decode(value);
     }
 
-    if (value && (value.getFullYear() < 1897 || value.getFullYear() > 1999)) {
+    if (value && (value.getFullYear() < 1920 || value.getFullYear() > 1999)) {
       value = false;
     }
 

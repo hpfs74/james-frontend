@@ -9,6 +9,7 @@ import { ConfigService } from '../../../config.service';
 import { InsuranceService } from '../../../services/insurance.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
+import { ChatStreamComponent } from './../../../components/knx-chat-stream/chat-stream.component';
 import { CarService } from '../car.service';
 import { Car, Price, CarCompareRequest, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
@@ -28,6 +29,8 @@ import { ProfileService } from '../../../services/profile.service';
   templateUrl: 'car-advice.component.html'
 })
 export class CarAdviceComponent implements OnInit {
+  @ViewChild(ChatStreamComponent) chatStreamComponent: ChatStreamComponent;
+
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   formData: Array<any>;
@@ -43,7 +46,6 @@ export class CarAdviceComponent implements OnInit {
 
   chatConfig: AssistantConfig;
   chatMessages: Array<ChatMessage> = [];
-  assistantMessages: any;
 
   isCoverageLoading: boolean = false;
   isInsuranceLoading: boolean = false;
@@ -66,9 +68,8 @@ export class CarAdviceComponent implements OnInit {
 
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
-      message => {
-        // replace messages instead of pushing
-        this.chatMessages = [message];
+      (message) => {
+        this.chatMessages.push(message);
       });
 
     this.chatConfig = this.assistantService.config;
@@ -198,7 +199,7 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.car = res;
-          this.chatNotifierService.addCarMessage(this.car);
+          //this.chatNotifierService.addCarMessage(this.car);
         } else {
           // Car not found in RDC
           let c = this.carDetailForm.formGroup.get('licensePlate');

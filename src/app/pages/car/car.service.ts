@@ -17,40 +17,39 @@ import { mockCarCoverages } from './../../models/_mocks/car-coverage.mock';
 
 @Injectable()
 export class CarService {
-  private baseUrl: string;
-  private helperUrl: string;
-  private compareUrl: string;
-  private insurerUrl: string;
+  private api: any;
 
   constructor(private configService: ConfigService, private authHttp: AuthHttp) {
-    this.baseUrl = configService.config.api.james.car;
-    this.helperUrl = configService.config.api.james.helper;
-    this.compareUrl = configService.config.api.james.compare;
-    this.insurerUrl = configService.config.api.james.insurer;
+    this.api = {
+      base: configService.config.api.james.car,
+      helper: configService.config.api.james.helper,
+      compare: configService.config.api.james.compare + '/car',
+      coverage: configService.config.api.james.helper + '/car/coverage',
+      insurer: configService.config.api.james.insurer
+    };
   }
 
   public getByLicense(licensePlate: string): Observable<Car> {
-    return this.authHttp.get(this.baseUrl + `/${licensePlate}`)
+    return this.authHttp.get(`${this.api.base}/${licensePlate}`)
       .map(res => <Car>res.json());
   }
 
   public getCoverageRecommendation(licensePlate: string, loan: boolean): Observable<CarCoverageRecommendation> {
-    let url = this.helperUrl + '/car/coverage';
-    return this.authHttp.post(url, { license: licensePlate })
+    return this.authHttp.post(this.api.coverage, { license: licensePlate })
       .map(res => <CarCoverageRecommendation>res.json());
   }
 
   public getInsurances(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
-    return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest))
+    return this.authHttp.post(this.api.compare, JSON.stringify(carRequest))
       .map((res: Response) => res.json());
   }
 
   public getInsurancesWithDetails(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
-    return this.authHttp.post(this.compareUrl + '/car', JSON.stringify(carRequest)).map(res => res.json())
+    return this.authHttp.post(this.api.compare, JSON.stringify(carRequest)).map(res => res.json())
       .flatMap((insurance) => {
         return Observable.forkJoin(
           Observable.of(insurance),
-          this.authHttp.patch(this.insurerUrl + '/', { product_id: insurance.product_id })
+          this.authHttp.patch(this.api.insurer, { product_id: insurance.product_id })
         );
       }).map((insuranceDetails) => {
         var insurance = insuranceDetails[0];

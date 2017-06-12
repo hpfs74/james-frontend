@@ -26,7 +26,6 @@ describe('Component: Dashboard', () => {
     }
   };
 
-
   beforeEach(async(() => {
     routerStub = {
       navigate: jasmine.createSpy('navigate'),
@@ -68,7 +67,7 @@ describe('Component: Dashboard', () => {
 
   it('should go to proper action', () => {
     comp.goToActions('car');
-    expect(routerStub.navigate).toHaveBeenCalledWith(['/next-action', 'car']);
+    expect(routerStub.navigate).toHaveBeenCalledWith(['/insurance', 'car']);
   });
 });
 
