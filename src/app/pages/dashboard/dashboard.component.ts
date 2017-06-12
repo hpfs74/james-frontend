@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { ConfigService } from '../../config.service';
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
+import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
@@ -19,8 +20,8 @@ import { Profile, ProfileEmbedded, DashboardInsuranceMap, DashboardItem, insuran
 export class DashboardComponent implements OnInit {
   profile: Profile;
   chatConfig: AssistantConfig;
-  chatMessages: Array<ChatMessage> = [];
   insurances: Array<DashboardItem>;
+  chatMessages: Array<ChatMessage>;
 
   constructor(private router: Router,
     private profileService: ProfileService,
@@ -32,7 +33,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
-      message => {
+      (message) => {
         this.chatMessages = [message];
       });
 
@@ -71,7 +72,7 @@ export class DashboardComponent implements OnInit {
   }
 
   goToActions(type: string) {
-    this.router.navigate(['/go', type]);
+    this.router.navigate(['/insurance', type]);
   }
 
   // TODO: merge in insurance property documents into specific insurance type

@@ -9,17 +9,21 @@
     </div>
   </div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="login($event)" (keyup.enter)="login($event)">
+  <form [formGroup]="form.formGroup" (ngSubmit)="login($event)" (keyup.enter)="login($event)">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-          <cx-form-group [formControlName]="formGroupConfig[0].formControlName"
-            [options]="formGroupConfig[0]"></cx-form-group>
+          <cx-form-group
+            [formControlName]="form.formConfig.email.formControlName"
+            [options]="form.formConfig.email"></cx-form-group>
 
           <div class="login-password-wrapper">
-            <cx-form-group [formControlName]="formGroupConfig[1].formControlName"
-              [options]="formGroupConfig[1]"></cx-form-group>
+            <cx-form-group
+              [formControlName]="form.formConfig.password.formControlName"
+              [options]="form.formConfig.password">
+            </cx-form-group>
+
             <button type="button"
-              *ngIf="loginForm.get('password').value"
+              *ngIf="form.formGroup.get('password').value"
               class="knx-login__showpassword knx-icon-eye"
               [class.knx-icon-eye-slash]="showPassword"
               [class.knx-icon-eye]="!showPassword"
@@ -32,7 +36,7 @@
     </div>
       <div class="row">
       <div class="col-md-6 offset-md-3">
-        <div class="cx-message cx-message--error" *ngIf="submitted && loginForm.valid && message">
+        <div class="cx-message cx-message--error" *ngIf="hasErrors()">
             <div *ngIf="messageTitle" class="cx-message__header">{{ messageTitle }}</div>
             <div class="cx-message__content">{{ message }}
             </div>

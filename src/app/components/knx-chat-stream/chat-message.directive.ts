@@ -4,5 +4,5 @@ import { Directive, ViewContainerRef } from '@angular/core';
   selector: '[knxChatMessageHost]'
 })
 export class ChatMessageDirective {
-  constructor(public viewContainerRef: ViewContainerRef) { };
+  constructor(public viewContainerRef: ViewContainerRef) { }
 }

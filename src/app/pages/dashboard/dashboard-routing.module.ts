@@ -13,7 +13,7 @@ export const dashboardRoutes: Routes = [
     },
     children: [
       {
-        path: 'go/:type',
+        path: 'insurance/:type',
         component: DashboardDetailComponent
       }
     ]
