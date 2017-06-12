@@ -4,20 +4,22 @@ import { BaseForm } from '../../../models/base-form';
 import { nameInitialMask } from '../../utils/base-form.utils';
 import { numberValidator } from '../../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../../utils/base-form.validators';
-import { carSecurityClasses } from '../../../models/car-security-class';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
-  securityClasses = carSecurityClasses;
+
+  securityClasses: Array<any>;
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
     reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private securityClassContent) {
     super();
+
+    this.securityClasses = securityClassContent;
 
     this.formGroup = this.fb.group({
       reportingCode: [null,

@@ -1,5 +1,6 @@
 import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
+import { ContentService } from './content.service';
 
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -46,6 +47,10 @@ export function ConfigLoader(configService: ConfigService) {
   return () => configService.load(configFile);
 }
 
+export function ContentLoader(contentService: ContentService) {
+  return () => contentService.loadFiles();
+}
+
 // !! Ensure AppRoutingModule is always imported last
 @NgModule({
   imports: [
@@ -72,6 +77,13 @@ export function ConfigLoader(configService: ConfigService) {
       provide: APP_INITIALIZER,
       useFactory: ConfigLoader,
       deps: [ConfigService],
+      multi: true
+    },
+    ContentService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ContentLoader,
+      deps: [ContentService],
       multi: true
     },
     requestOptionsProvider

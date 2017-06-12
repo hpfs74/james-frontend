@@ -5,15 +5,15 @@ import { Observable } from 'rxjs';
 import { AuthHttp } from '../../services/auth-http.service';
 import { Profile } from '../../models/profile';
 import { ConfigService } from '../../config.service';
-import { Car } from '../../models/car';
-import { CarInsurance, } from '../../models/car-insurance';
-import { Price } from '../../models/price';
-import { Address } from '../../models/address';
-import { CarCoverageRecommendation } from './../../models/coverage';
-import { CarInsuranceOptions, CarCompareRequest } from '../../models/car-compare-request';
-
-// TODO: remove mock data once API is available
-import { mockCarCoverages } from './../../models/_mocks/car-coverage.mock';
+import {
+  Car,
+  CarInsurance,
+  CarCoverageRecommendation,
+  CarInsuranceOptions,
+  CarCompareRequest,
+  Price,
+  Address
+} from './../../models';
 
 @Injectable()
 export class CarService {
@@ -58,9 +58,5 @@ export class CarService {
         insurance._embedded.insurance.insurer = insurer;
         return insurance;
       });
-  }
-
-  public getCoverages(): Array<Price> {
-    return mockCarCoverages;
   }
 }

@@ -142,15 +142,6 @@ describe('Service: Car', () => {
         });
       });
     });
-
-    it('should return coverages', () => {
-      let coverages = this.service.getCoverages();
-      expect(coverages).toBeDefined;
-      expect(coverages.length).toBe(3);
-      expect(coverages[0].id).toBe('CL');
-      expect(coverages[1].id).toBe('CLC');
-      expect(coverages[2].id).toBe('CAR');
-    });
   });
 
   describe('Car Insurance Compare', () => {
