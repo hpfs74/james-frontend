@@ -1,9 +1,9 @@
 import { Component, AfterViewChecked, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl, AbstractControl, FormArray } from '@angular/forms';
+import { FormControlOptions } from '@cx/form-control';
+import { FormValidationErrors } from '@cx/form';
 
-import { Options as InputOptions } from '../../../../node_modules/@cx/input/src/cx-input.options';
-import { postalCodeMask } from '../../../../node_modules/@cx/input/src/cx-input.masks';
-import { FormValidationErrors } from '../../../../node_modules/@cx/form';
+import { postalCodeMask } from '../../utils/base-form.utils';
 
 import { Address } from '../../models/address';
 import { AddressLookupService } from './address-lookup.service';
@@ -21,8 +21,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
 
   public address: string = null;
-  public postalCodeMask = postalCodeMask;
-
+  public mask = postalCodeMask;
   private lookupTimeout;
 
   constructor(

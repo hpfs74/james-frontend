@@ -9,8 +9,8 @@
         validationErrors: validationErrors,
         inputOptions: {
           placeholder: '1234 AB',
-          textMask: postalCodeMask,
-          transform: postalCodeMask.decode
+          textMask: mask,
+          transform: mask.decode
         }
       }"></cx-form-group>
     </div>
@@ -20,7 +20,10 @@
       <cx-form-group formControlName="houseNumber" [options]="{
         formControl: addressFormGroup.get('houseNumber'),
         label: 'Huisnummer',
-        validationErrors: validationErrors
+        validationErrors: validationErrors,
+        inputOptions: {
+          type: 'text'
+        }
       }"></cx-form-group>
     </div>
 

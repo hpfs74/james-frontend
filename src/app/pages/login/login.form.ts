@@ -50,5 +50,4 @@ export class LoginForm extends BaseForm {
       }
     };
   }
-
 }
