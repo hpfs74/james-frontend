@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { KNXStepOptions, StepError } from '@knx/wizard';
 
 import { ConfigService } from '../../../config.service';
+import { ContentService } from '../../../content.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
@@ -27,6 +28,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
 })
 export class CarBuyComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
+  formContent: any;
   currentStep: number;
 
   chatConfig: AssistantConfig;
@@ -41,6 +43,7 @@ export class CarBuyComponent implements OnInit {
   constructor(
     private router: Router,
     private configService: ConfigService,
+    private contentService: ContentService,
     private assistantService: AssistantService,
     private chatNotifierService: ChatStreamService,
     private profileService: ProfileService
@@ -86,8 +89,10 @@ export class CarBuyComponent implements OnInit {
     ];
 
     let formBuilder = new FormBuilder();
+    this.formContent = this.contentService.getContentObject();
+
     this.contactDetailForm = new ContactDetailForm(formBuilder);
-    this.reportingCodeForm = new CarReportingCodeForm(formBuilder);
+    this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
     this.reportingCodeForm.infoMessages = {
       reportingCode: this.chatConfig.car.buy.info.reportingCode
     };
@@ -131,7 +136,7 @@ export class CarBuyComponent implements OnInit {
 
   submitReportingCode(): Observable<any> {
     //TODO: implement
-    console.log(this.reportingCodeForm.formGroup.value);
+    //console.log(this.reportingCodeForm.formGroup.value);
     return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
   }
 

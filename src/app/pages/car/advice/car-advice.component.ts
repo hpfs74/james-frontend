@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 
 import { ConfigService } from '../../../config.service';
+import { ContentService } from '../../../content.service';
 import { InsuranceService } from '../../../services/insurance.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
@@ -58,6 +59,7 @@ export class CarAdviceComponent implements OnInit {
   constructor(
     private router: Router,
     private configService: ConfigService,
+    private contentService: ContentService,
     private assistantService: AssistantService,
     private carService: CarService,
     private insuranceService: InsuranceService,
@@ -228,7 +230,7 @@ export class CarAdviceComponent implements OnInit {
       this.isCoverageLoading = true;
 
       // get default coverage types
-      this.coverages = this.carService.getCoverages();
+      this.coverages = this.contentService.getContentObject().car.coverages;
 
       // fetch recommendation
       this.carService.getCoverageRecommendation(this.car.license, loan)

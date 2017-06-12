@@ -31,6 +31,10 @@
   padding-top: 10px;
 }
 
+.knx-message .knx-message__content {
+  line-height: 1.4em;
+}
+
 @media (max-width: 768px) {
   .knx-wizard-step-content .knx-wizard--controls {
     margin: 15px 0 !important;
