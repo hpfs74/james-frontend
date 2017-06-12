@@ -103,6 +103,7 @@
     "@knx/info": "0.0.63",
     "@knx/wizard": "0.0.50",
     "@ngrx/core": "^1.2.0",
+    "@ngrx/effects": "^2.0.3",
     "@ngrx/store": "^2.2.1",
     "angular-svg-icon": "^4.1.0",
     "core-js": "^2.4.1",
