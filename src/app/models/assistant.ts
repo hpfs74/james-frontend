@@ -48,17 +48,17 @@ export class AssistantConfig {
         option: 'Selecteer extra opties voor het beste advies',
         next: 'Wat wil je doen?'
       },
-      review: [
-        `Controleer uw gegevens dat een verzoek om af te sluiten te maken.`,
+      review: {
+        title: `Controleer uw gegevens dat een verzoek om af te sluiten te maken.`,
 
-        `Het proces van het vullen van de aanvraag duurt ongeveer 5 minuten t omvat de volgende stappen:<br>
+        list: `Het proces van het vullen van de aanvraag duurt ongeveer 5 minuten t omvat de volgende stappen:<br>
         1. Check je gegevens <br>
         2. Vul je autogegevens aan <br>
         3. Beantwoord slotvragen <br> 
         4. Vul je betaalgegevens in <br>
         5. Aanvraag naar de verzekeraar <br>
         6. Akkoord? Zeg je oude verzekering op.`
-      ]
+  }
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
