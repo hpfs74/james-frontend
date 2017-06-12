@@ -93,6 +93,7 @@ export class CarAdviceComponent implements OnInit {
         hideNextButton: true,
         onShowStep: () => {
           FormUtils.scrollToForm('.knx-insurance-toplist');
+          this.chatMessages = [];
           this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result);
         }
       },
@@ -100,7 +101,11 @@ export class CarAdviceComponent implements OnInit {
         label: 'Besparen',
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Koop verzekering',
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review),
+        onShowStep: () => {
+          this.chatMessages = [];
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.title);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.list);
+        },
         onBeforeNext: this.startBuyFlow.bind(this)
       }
     ];
