@@ -69,10 +69,5 @@ describe('Service: ConfigService', () => {
         expect(result.api.james.profile).not.toBeNull;
       });
     });
-
-
-
-
   });
-
 });
