@@ -5,7 +5,6 @@ import { ConfigService } from './config.service';
 import {
   AuthService,
   ProfileService,
-  FeatureService,
   GeolocationService,
   NavigationService,
   InsuranceService,
@@ -16,7 +15,6 @@ import {
   selector: 'knx-app',
   template: `<router-outlet></router-outlet>`,
   providers: [
-    FeatureService,
     NavigationService,
     ProfileService,
     InsuranceService,

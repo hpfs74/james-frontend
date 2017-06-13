@@ -1,10 +1,8 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeaturesComponent } from './features.component';
 import { Feature } from '../../models/feature';
-
 
 describe('Component: Features', () => {
   let comp: FeaturesComponent;
@@ -16,7 +14,7 @@ describe('Component: Features', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FeaturesComponent],
-      imports: []
+      imports: [BrowserModule]
     }).compileComponents();
   }));
 

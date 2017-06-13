@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Price, Nav, Feature, Profile } from '../../models';
+import { ContentService } from '../../content.service';
 import {
   AuthService,
   ProfileService,
-  FeatureService,
   NavigationService,
   CookieService
 } from '../../services';
@@ -45,12 +45,13 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private profileService: ProfileService,
     private navigationService: NavigationService,
-    private featureService: FeatureService) {
+    private contentService: ContentService) {
   }
 
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
-    this.footerItems = this.featureService.getFeatures();
+    this.footerItems = this.contentService.getContentObject().layout.footer;
+
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();
 
