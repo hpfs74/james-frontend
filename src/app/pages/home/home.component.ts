@@ -7,8 +7,7 @@ import {
   ProfileService,
   FeatureService,
   NavigationService,
-  CookieService,
-  ContentService
+  CookieService
 } from '../../services';
 
 @Component({
@@ -43,7 +42,6 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private contentService: ContentService,
     private authService: AuthService,
     private profileService: ProfileService,
     private navigationService: NavigationService,

@@ -9,8 +9,7 @@ import {
   GeolocationService,
   NavigationService,
   InsuranceService,
-  CookieService,
-  ContentService
+  CookieService
 } from './services';
 
 @Component({
@@ -22,7 +21,6 @@ import {
     ProfileService,
     InsuranceService,
     CookieService,
-    ContentService
   ],
   //changeDetection: ChangeDetectionStrategy.OnPush
   encapsulation: ViewEncapsulation.None
