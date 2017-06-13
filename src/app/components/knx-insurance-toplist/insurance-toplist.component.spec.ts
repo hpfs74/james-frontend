@@ -1,55 +1,50 @@
-import { DebugElement } from '@angular/core';
+import { Component, DebugElement, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InsuranceTopListComponent } from './insurance-toplist.component';
 
+@Component({
+  template: `<div><knx-insurance-toplist [stepAmount]="stepAmount" [insurances]="insurances"></knx-insurance-toplist></div>`
+})
+export class TestHostComponent {
+  @ViewChild(InsuranceTopListComponent)
+  public testComponent: InsuranceTopListComponent;
+  public stepAmount: number = 4;
+  public insurances = [];
+}
 
-describe('Component: Features', () => {
-  let comp: InsuranceTopListComponent;
-  let fixture: ComponentFixture<InsuranceTopListComponent>;
-  let de: DebugElement;
-  let el: HTMLElement;
-  let items: Array<Feature>;
+describe('Component: InsuranceTopList', () => {
+  let comp: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FeaturesComponent],
-      imports: []
+      declarations: [InsuranceTopListComponent, TestHostComponent],
+      imports: [BrowserModule],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FeaturesComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
-    comp.items = [
-      { title: 'Feat1', description: 'This is feature 1' },
-      { title: 'Feat2', description: 'This is feature 2' },
-      { title: 'Feat3', description: 'This is feature 3' },
-      { title: 'Feat4', description: 'This is feature 4' }
-    ];
-
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('div.knx-features '));
-    el = de.nativeElement;
   });
 
-  it('should display list of features', () => {
-    let containerEl = fixture.debugElement.query(By.css('div.knx-features'));
-    let el = containerEl.nativeElement;
-    expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-features__item').length).toBe(4);
-  });
-
-  it('should display list of features change adding one more', () => {
-    let inputDe = fixture.debugElement.query(By.css('div.knx-features'));
-    let el = inputDe.nativeElement;
-
-    comp.items.push({ title: 'Feat 5', description: 'This is feature 5' });
+  it('should initialize default sorting options', () => {
     fixture.detectChanges();
-
-    expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-features__item').length).toBe(5);
+    expect(comp.testComponent.orderBy.length).toBe(3);
   });
+
+  it('should show more insurances', () => {
+    const increaseAmount = 4;
+    comp.testComponent.total = 0;
+    comp.stepAmount = increaseAmount;
+    comp.testComponent.showMore();
+    fixture.detectChanges();
+    expect(comp.testComponent.total).toBe(increaseAmount);
+  });
+
 });
