@@ -21,7 +21,6 @@ pipeline {
         stage('test') {
             steps {
                 slackSend color: 'warning', message: 'Test stage started: $JOB_NAME $BUILD_NUMBER'
-
                 sh 'npm run test'
                 slackSend color: 'good', message: 'Test stage finished: $JOB_NAME $BUILD_NUMBER'
             }
