@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { KNXStepOptions, StepError } from '@knx/wizard';
 
 import { ConfigService } from '../../../config.service';
-import { ContentService } from '../../../content.service';
+import { ContentService } from '../../../services/content.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
