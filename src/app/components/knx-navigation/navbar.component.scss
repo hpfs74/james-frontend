@@ -29,6 +29,15 @@ $knx-navbar-font: $font-size-base;
   justify-content: center;
   line-height: 1em;
 
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
   &:after {
     content: map-get($knx-icons, bars);
     font-family: $font-family-icon;
