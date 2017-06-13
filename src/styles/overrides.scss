@@ -35,6 +35,10 @@
   line-height: 1.4em;
 }
 
+.knx-info__icon {
+  font-size: $font-size-base + 3;
+}
+
 @media (max-width: 768px) {
   .knx-wizard-step-content .knx-wizard--controls {
     margin: 15px 0 !important;

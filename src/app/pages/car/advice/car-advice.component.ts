@@ -71,7 +71,10 @@ export class CarAdviceComponent implements OnInit {
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
       (message) => {
-        this.chatMessages.push(message);
+        if (!message.replace) {
+          this.chatMessages.push(message);
+        } else
+          this.chatMessages = [message];
       });
 
     this.chatConfig = this.assistantService.config;
@@ -96,7 +99,7 @@ export class CarAdviceComponent implements OnInit {
         onShowStep: () => {
           FormUtils.scrollToForm('.knx-insurance-toplist');
           this.chatMessages = [];
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result, false);
         }
       },
       {
@@ -105,8 +108,8 @@ export class CarAdviceComponent implements OnInit {
         nextButtonLabel: 'Koop verzekering',
         onShowStep: () => {
           this.chatMessages = [];
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.title);
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.list);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.title, false);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.list, false);
         },
         onBeforeNext: this.startBuyFlow.bind(this)
       }
@@ -138,6 +141,8 @@ export class CarAdviceComponent implements OnInit {
   }
 
   submitDetailForm(): Observable<any> {
+    this.chatMessages = [];
+
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
 
