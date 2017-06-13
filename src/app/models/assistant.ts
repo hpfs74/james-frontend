@@ -28,7 +28,7 @@ export class AssistantConfig {
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
-      niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>{{ car.make | titleCase }} {{ car.model | titleCase }}`,
+      niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
       claimFreeYears:
       `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
         Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
@@ -54,7 +54,7 @@ export class AssistantConfig {
         list: `Het proces van het vullen van de aanvraag duurt ongeveer 5 minuten t omvat de volgende stappen:<br>
         1. Check je gegevens <br>
         2. Vul je autogegevens aan <br>
-        3. Beantwoord slotvragen <br> 
+        3. Beantwoord slotvragen <br>
         4. Vul je betaalgegevens in <br>
         5. Aanvraag naar de verzekeraar <br>
         6. Akkoord? Zeg je oude verzekering op.`

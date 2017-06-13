@@ -2,11 +2,10 @@
 
   <div class="row">
     <div class="col-sm-10 col-sm-offset-2">
-
       <h2>Je gegevens</h2>
 
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-7 col-sm-12">
           <cx-form-group [options]="form.formConfig.licensePlate">
             <knx-input-licenseplate
               [formControlName]="form.formConfig.licensePlate.formControlName"
@@ -14,13 +13,19 @@
               [options]="form.formConfig.licensePlate.inputOptions">
             </knx-input-licenseplate>
           </cx-form-group>
+
+          <knx-car-info-message *ngIf="car" [data]="car"></knx-car-info-message>
         </div>
       </div>
 
-      <cx-form-group
-        [formControlName]="form.formConfig.birthDate.formControlName"
-        [options]="form.formConfig.birthDate">
-      </cx-form-group>
+      <div class="row">
+        <div class="col-md-7 col-sm-12">
+          <cx-form-group
+            [formControlName]="form.formConfig.birthDate.formControlName"
+            [options]="form.formConfig.birthDate">
+          </cx-form-group>
+        </div>
+      </div>
 
       <knx-address-lookup
         [addressFormGroup]="form.addressForm"

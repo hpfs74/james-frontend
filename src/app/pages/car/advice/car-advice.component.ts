@@ -207,7 +207,7 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.car = res;
-          //this.chatNotifierService.addCarMessage(this.car);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.niceCar(res), true);
         } else {
           // Car not found in RDC
           let c = this.carDetailForm.formGroup.get('licensePlate');

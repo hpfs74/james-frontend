@@ -7,8 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 
 import { CarDetailForm } from './car-detail.form';
-import { Price } from '../../../models/price';
-import { Address } from '../../../models/address';
+import { Car, Price, Address } from '../../../models';
 import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { CarService } from '../car.service';
 
@@ -20,6 +19,7 @@ import { CarService } from '../car.service';
 })
 export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
+  @Input() car: Car;
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];
