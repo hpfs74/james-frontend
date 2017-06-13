@@ -5,6 +5,6 @@ describe('Round Number Pipe', () => {
     let roundPipe: RoundPipe;
     let testNumber = 33.333;
     roundPipe = new RoundPipe();
-    expect(roundPipe.transform(testNumber)%1).toBe(0);
+    expect(roundPipe.transform(testNumber) % 1).toBe(0);
   });
 });
