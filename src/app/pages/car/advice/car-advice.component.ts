@@ -207,6 +207,7 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.car = res;
+          console.log(this.car);
           this.chatNotifierService.addTextMessage(this.chatConfig.car.info.niceCar(res), true);
         } else {
           // Car not found in RDC
@@ -227,15 +228,17 @@ export class CarAdviceComponent implements OnInit {
   }
 
   updateAddress(address: Address) {
-    if (address.street && address.city) {
+    if (address.street && address.city && this.isObjectEqual<Address>(this.address, address)) {
       this.address = address;
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
-    } else {
+    }
+
+    if (!address.street && !address.city) {
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);
     }
   }
 
-  getCoverages({ loan }) {
+  getCoverages(event) {
     if (this.car) {
       this.isCoverageLoading = true;
 
@@ -243,7 +246,7 @@ export class CarAdviceComponent implements OnInit {
       this.coverages = this.contentService.getContentObject().car.coverages;
 
       // fetch recommendation
-      this.carService.getCoverageRecommendation(this.car.license, loan)
+      this.carService.getCoverageRecommendation(this.car.license, event.loan)
         .subscribe(res => {
           this.isCoverageLoading = false;
 
@@ -257,5 +260,9 @@ export class CarAdviceComponent implements OnInit {
           this.isCoverageLoading = false;
         });
     }
+  }
+
+  private isObjectEqual<T>(prev: T, cur: T): boolean {
+    return JSON.stringify(prev) === JSON.stringify(cur);
   }
 }

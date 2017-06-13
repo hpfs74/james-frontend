@@ -29,11 +29,6 @@ export class AssistantConfig {
       Ben je er klaar voor? Let\'s do this!`,
     info: {
       niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
-      claimFreeYears:
-      `De <strong>schadevrije jaren</strong> vind je op je meest recente polis.<br>
-        Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
-        korting op de premie. Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
-        dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.`,
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },

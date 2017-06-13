@@ -89,12 +89,4 @@ export class AddressLookupComponent implements AfterViewChecked {
       }, timeOut);
     });
   }
-
-  //TODO:
-  // Implement Google Maps API/preview
-  getLocationAddress() {
-    this.geolocationService.getCurrentPosition().subscribe(position => {
-      throw Error('Not implemented');
-    });
-  }
 }
