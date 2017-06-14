@@ -29,6 +29,15 @@ $knx-navbar-font: $font-size-base;
   justify-content: center;
   line-height: 1em;
 
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
   &:after {
     content: map-get($knx-icons, bars);
     font-family: $font-family-icon;
@@ -63,6 +72,8 @@ $knx-navbar-font: $font-size-base;
 .knx-side-panel-content > ul.navbar-nav {
   margin-top: 0;
   margin-left: 15px;
+  margin-bottom: 20px;
+  width: 90%;
 
   .nav-item {
     .nav-link {
@@ -73,6 +84,16 @@ $knx-navbar-font: $font-size-base;
       }
     }
   }
+}
+
+.knx-side-panel-content > .knx-side-panel-content__utils {
+  margin-top: 20px;
+  border-top: 1px solid $knab-primary-gray;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .knx-navbar .knx-nav-user a {

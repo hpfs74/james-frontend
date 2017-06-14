@@ -81,11 +81,11 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
     });
 
     this.insurances = this.sortInsurances(selected.key);
-      if (selected.id === 'all') {
-        this.total = this.insurances.length;
-      } else {
-        this.total = this.stepAmount;
-      }
+    if (selected.id === 'all') {
+      this.total = this.insurances.length;
+    } else {
+      this.total = this.stepAmount;
+    }
   }
 
   sortInsurances(key) {

@@ -8,16 +8,22 @@ export interface AppContent {
   car?: {
     securityClass: any;
     coverages: any;
+  },
+  layout?: {
+    footer: any;
   }
 }
 
 @Injectable()
 export class ContentService {
   // TODO: build based on directory read
-  private jsonFiles = {
+  private jsonFiles: AppContent = {
     car: {
       securityClass: '../content/car/security-class.json',
       coverages: '../content/car/coverage.json'
+    },
+    layout: {
+      footer: '../content/layout/footer.json'
     }
   };
 

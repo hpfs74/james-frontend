@@ -7,8 +7,9 @@
 <div class="container knx-container-dashboard">
   <div class="row">
     <div class="col-sm-4 push-sm-8">
-      <knx-chat-stream [options]="chatConfig" [messages]="chatMessages">
-      </knx-chat-stream>
+      <div class="knx-wizard__sidebar--sticky">
+        <knx-chat-stream [options]="chatConfig" [messages]="chatMessages"></knx-chat-stream>
+      </div>
     </div>
     <div class="col-sm-8 pull-sm-4">
       <div class="row">

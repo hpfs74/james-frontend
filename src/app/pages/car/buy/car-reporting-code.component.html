@@ -17,10 +17,10 @@
               [options]="form.formConfig.reportingCode"
               [formControlName]="form.formConfig.reportingCode.formControlName">
             </cx-form-group>
-            <knx-info size="md" isFloating="true" class="knx-info">
+            <knx-info *ngIf="form.infoMessages" size="md" isFloating="true" class="knx-info">
               <div class="knx-info__content">
                 <div class="knx-message knx-message--chat knx-message--arrow-top">
-                  <div class="knx-message__content" [innerHTML]="form.infoMessages.reportingCode">
+                  <div class="knx-message__content" [innerHTML]="form.infoMessages?.reportingCode">
                   </div>
                 </div>
               </div>

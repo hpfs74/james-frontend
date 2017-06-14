@@ -2,11 +2,10 @@
 
   <div class="row">
     <div class="col-sm-10 col-sm-offset-2">
-
       <h2>Je gegevens</h2>
 
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-7 col-sm-12">
           <cx-form-group [options]="form.formConfig.licensePlate">
             <knx-input-licenseplate
               [formControlName]="form.formConfig.licensePlate.formControlName"
@@ -14,13 +13,19 @@
               [options]="form.formConfig.licensePlate.inputOptions">
             </knx-input-licenseplate>
           </cx-form-group>
+
+          <knx-car-info-message *ngIf="car" [data]="car"></knx-car-info-message>
         </div>
       </div>
 
-      <cx-form-group
-        [formControlName]="form.formConfig.birthDate.formControlName"
-        [options]="form.formConfig.birthDate">
-      </cx-form-group>
+      <div class="row">
+        <div class="col-md-7 col-sm-12">
+          <cx-form-group
+            [formControlName]="form.formConfig.birthDate.formControlName"
+            [options]="form.formConfig.birthDate">
+          </cx-form-group>
+        </div>
+      </div>
 
       <knx-address-lookup
         [addressFormGroup]="form.addressForm"
@@ -30,15 +35,30 @@
 
       <div class="row">
         <div class="col-md-7 col-sm-12">
-          <cx-form-group
-            [formControlName]="form.formConfig.claimFreeYears.formControlName"
-            [options]="form.formConfig.claimFreeYears">
-          </cx-form-group>
+          <div class="knx-form-group--info">
+            <cx-form-group
+              [formControlName]="form.formConfig.claimFreeYears.formControlName"
+              [options]="form.formConfig.claimFreeYears">
+            </cx-form-group>
+            <knx-info size="md" isFloating="true" class="knx-info">
+              <div class="knx-info__content">
+                <div class="knx-message knx-message--chat knx-message--arrow-top">
+                  <div class="knx-message__content">
+                    <p>De <strong>schadevrije jaren</strong> vind je op je meest recente polis.
+                    Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
+                    korting op de premie.</p>
+
+                    <p>Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
+                    dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.</p>
+                  </div>
+                </div>
+              </div>
+            </knx-info>
+          </div>
         </div>
         <div class="col-md-4 hidden-sm hidden-xs">
           <div class="cx-form-group">
-            <button class="knx-button knx-button--util inline-formelement"
-              (click)="onFocus('claimFreeYears')">
+            <button class="knx-button knx-button--util inline-formelement">
                 Weet ik niet
             </button>
           </div>

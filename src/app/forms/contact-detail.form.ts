@@ -8,6 +8,7 @@ export class ContactDetailForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
 
+
   initialMask = nameInitialMask;
 
   public validationErrors = {

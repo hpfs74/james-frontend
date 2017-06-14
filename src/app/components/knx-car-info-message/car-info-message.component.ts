@@ -6,7 +6,7 @@ import { CarPreviewComponent } from './car-preview.component';
 @Component({
   selector: 'knx-car-info-message',
   template: `
-  <div class="knx-message knx-message--hint">
+  <div class="knx-car-info-message knx-message knx-message--hint knx-message--arrow-top">
     <div class="container knx-container--fullwidth">
         <div class="row">
           <div class="col-sm-6">Merk</div>

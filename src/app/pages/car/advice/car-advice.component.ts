@@ -71,7 +71,10 @@ export class CarAdviceComponent implements OnInit {
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
       (message) => {
-        this.chatMessages.push(message);
+        if (!message.replace) {
+          this.chatMessages.push(message);
+        } else
+          this.chatMessages = [message];
       });
 
     this.chatConfig = this.assistantService.config;
@@ -96,7 +99,7 @@ export class CarAdviceComponent implements OnInit {
         onShowStep: () => {
           FormUtils.scrollToForm('.knx-insurance-toplist');
           this.chatMessages = [];
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result, false);
         }
       },
       {
@@ -105,8 +108,8 @@ export class CarAdviceComponent implements OnInit {
         nextButtonLabel: 'Koop verzekering',
         onShowStep: () => {
           this.chatMessages = [];
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.title);
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.list);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.title, false);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.list, false);
         },
         onBeforeNext: this.startBuyFlow.bind(this)
       }
@@ -138,6 +141,8 @@ export class CarAdviceComponent implements OnInit {
   }
 
   submitDetailForm(): Observable<any> {
+    this.chatMessages = [];
+
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
 
@@ -202,7 +207,8 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.car = res;
-          //this.chatNotifierService.addCarMessage(this.car);
+          console.log(this.car);
+          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.niceCar(res), true);
         } else {
           // Car not found in RDC
           let c = this.carDetailForm.formGroup.get('licensePlate');
@@ -222,15 +228,17 @@ export class CarAdviceComponent implements OnInit {
   }
 
   updateAddress(address: Address) {
-    if (address.street && address.city) {
+    if (address.street && address.city && this.isObjectEqual<Address>(this.address, address)) {
       this.address = address;
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
-    } else {
+    }
+
+    if (!address.street && !address.city) {
       this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);
     }
   }
 
-  getCoverages({ loan }) {
+  getCoverages(event) {
     if (this.car) {
       this.isCoverageLoading = true;
 
@@ -238,7 +246,7 @@ export class CarAdviceComponent implements OnInit {
       this.coverages = this.contentService.getContentObject().car.coverages;
 
       // fetch recommendation
-      this.carService.getCoverageRecommendation(this.car.license, loan)
+      this.carService.getCoverageRecommendation(this.car.license, event.loan)
         .subscribe(res => {
           this.isCoverageLoading = false;
 
@@ -252,5 +260,9 @@ export class CarAdviceComponent implements OnInit {
           this.isCoverageLoading = false;
         });
     }
+  }
+
+  private isObjectEqual<T>(prev: T, cur: T): boolean {
+    return JSON.stringify(prev) === JSON.stringify(cur);
   }
 }
