@@ -207,7 +207,6 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.car = res;
-          console.log(this.car);
           this.chatNotifierService.addTextMessage(this.chatConfig.car.info.niceCar(res), true);
         } else {
           // Car not found in RDC
@@ -228,9 +227,11 @@ export class CarAdviceComponent implements OnInit {
   }
 
   updateAddress(address: Address) {
-    if (address.street && address.city && this.isObjectEqual<Address>(this.address, address)) {
+    if (address.street && address.city) {
+      if (!this.address || !this.isObjectEqual<Address>(this.address, address)) {
+        this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
+      }
       this.address = address;
-      this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
     }
 
     if (!address.street && !address.city) {
