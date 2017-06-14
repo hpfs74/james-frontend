@@ -37,7 +37,7 @@
       </knx-step>
     </div>
 
-    <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
+    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>
       <knx-chat-stream
         [options]="chatConfig"
         [messages]="chatMessages"
