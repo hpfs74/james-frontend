@@ -18,6 +18,8 @@ import { ContactDetailForm } from './../../../forms/contact-detail.form';
 
 import { CarReportingCodeComponent } from './car-info.component';
 import { CarReportingCodeForm } from './car-reporting-code.form';
+import { CarCheckComponent } from './car-check.component';
+import { CarCheckForm } from './car-check.form';
 
 import { mockCar } from '../../../models/_mocks/car.mock';
 
@@ -39,6 +41,7 @@ export class CarBuyComponent implements OnInit {
   // Forms
   contactDetailForm: ContactDetailForm;
   reportingCodeForm: CarReportingCodeForm;
+  checkForm: CarCheckForm;
 
   constructor(
     private router: Router,
@@ -79,7 +82,9 @@ export class CarBuyComponent implements OnInit {
       {
         label: 'Check',
         nextButtonLabel: 'Naar betalingsgegevens',
-        backButtonLabel: 'Terug'
+        backButtonLabel: 'Terug',
+        onShowStep: () => this.initFormWithProfile(),
+        onBeforeNext: this.submitReportingCode.bind(this)
       },
       {
         label: 'Betaling',
@@ -93,6 +98,7 @@ export class CarBuyComponent implements OnInit {
 
     this.contactDetailForm = new ContactDetailForm(formBuilder);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
+    this.checkForm = new CarCheckForm(formBuilder, this.formContent.car.securityClass);
     this.reportingCodeForm.infoMessages = {
       reportingCode: this.chatConfig.car.buy.info.reportingCode
     };
@@ -137,7 +143,11 @@ export class CarBuyComponent implements OnInit {
   submitReportingCode(): Observable<any> {
     //TODO: implement
     //console.log(this.reportingCodeForm.formGroup.value);
-    return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    // return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
   }
 
   onStepChange(event) {
