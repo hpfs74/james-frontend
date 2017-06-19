@@ -41,7 +41,11 @@ import { InsuranceAdvice, InsuranceCompareResult, Insurer } from '../../models';
             <div class="knx-insurance-result__premium knx-insurance-result__price">
               {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
             </div>
-            <button role="button" class="knx-button knx-button--secondary knx-button--fullwidth" (click)="select($event)">Kies deze</button>
+            <button role="button" class="knx-button knx-button--secondary knx-button--fullwidth"
+              [disabled]="disableButton"
+              (click)="select($event)">
+                Kies deze
+            </button>
           </div>
         </div>
       </div>
@@ -58,6 +62,7 @@ export class InsuranceResultComponent {
   @Input() insurance: InsuranceAdvice;
   @Input() showDetailPanel: boolean = false;
   @Input() orderChange: boolean;
+  @Input() disableButton: boolean;
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
 

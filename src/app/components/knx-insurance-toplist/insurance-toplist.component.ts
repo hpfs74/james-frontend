@@ -33,7 +33,7 @@ interface OrderItem {
         <ng-template #insuranceResults>
           <knx-insurance-result
             *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
-            [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)">
+            [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)" [disableButton]="disableInsuranceBuy">
           </knx-insurance-result>
 
           <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showMore()">
@@ -54,6 +54,7 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
   @Input() insurances: Array<InsuranceAdvice>;
   @Input() title: string;
   @Input() stepAmount: number;
+  @Input() disableInsuranceBuy: boolean;
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
 
