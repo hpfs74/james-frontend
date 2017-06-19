@@ -92,7 +92,7 @@ export function reducer(state: any, action: any) {
  * }
  * ```
  */
-export const getProfileState = (state: State) => state.profile;
+
 
 /**
  * Every reducer module exports selector functions, however child reducers
@@ -144,6 +144,12 @@ export const getProfileState = (state: State) => state.profile;
 // export const isSelectedBookInCollection = createSelector(getCollectionBookIds, getSelectedBookId, (ids, selected) => {
 //   return ids.indexOf(selected) > -1;
 // });
+
+/**
+ * Profile Reducers
+ */
+export const getProfileState = (state: State) => state.profile;
+export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 
 /**
  * Layout Reducers

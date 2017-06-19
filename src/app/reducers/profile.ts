@@ -18,8 +18,6 @@ export function reducer(state = initialState, action: profile.Actions): State {
   switch (action.type) {
 
     case profile.LOAD_PROFILE_REQUEST: {
-      const profile = action.payload;
-
       return Object.assign({}, state, {
         loading: true
       });
@@ -35,11 +33,9 @@ export function reducer(state = initialState, action: profile.Actions): State {
       });
     }
 
-    case profile.LOAD_PROFILE_FAIL:
-    case profile.LOAD_PROFILE_COMPLETE: {
+    case profile.LOAD_PROFILE_FAIL: {
       return state;
     }
-
 
     // case book.SEARCH_COMPLETE:
     // case collection.LOAD_SUCCESS: {
@@ -98,6 +94,13 @@ export function reducer(state = initialState, action: profile.Actions): State {
  * focused so they can be combined and composed to fit each particular
  * use-case.
  */
+export const getCurrent = (state: State) => state.profile;
+
+// export const getBookCollection = createSelector(getBookEntities, getCollectionBookIds, (entities, ids) => {
+//   return ids.map(id => entities[id]);
+// });
+
+// export const getProfile = createSelector()
 
 // export const getEntities = (state: State) => state.entities;
 

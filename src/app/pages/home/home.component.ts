@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
+import * as fromRoot from '../../reducers';
 import { Price, Nav, Feature, Profile } from '../../models';
 import { ContentService } from '../../content.service';
 import {
@@ -38,15 +41,24 @@ export class HomeComponent implements OnInit {
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
-  profile: Profile;
+  //profile: Profile;
+
+  profile$: Observable<Profile>;
 
   constructor(
     private router: Router,
+    private store: Store<fromRoot.State>,
     private authService: AuthService,
-    private profileService: ProfileService,
     private navigationService: NavigationService,
     private contentService: ContentService) {
   }
+
+  // books$: Observable<Book[]>;
+
+  // constructor(store: Store<fromRoot.State>) {
+  //   this.books$ = store.select(fromRoot.getBookCollection);
+  // }
+
 
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
@@ -55,15 +67,17 @@ export class HomeComponent implements OnInit {
     this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();
 
-    this.profileService.getUserProfile()
-      .subscribe( (profile) => {
-        this.profile = profile;
-      }, (res) => {
-        if (res.status === 403) {
-          this.router.navigate(['/login']);
-        }
-        throw new Error(res);
-      });
+    this.profile$ = this.store.select(fromRoot.getProfile);
+
+    // this.profileService.getUserProfile()
+    //   .subscribe( (profile) => {
+    //     this.profile = profile;
+    //   }, (res) => {
+    //     if (res.status === 403) {
+    //       this.router.navigate(['/login']);
+    //     }
+    //     throw new Error(res);
+    //   });
   }
 
   logOut() {
