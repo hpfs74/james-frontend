@@ -8,8 +8,8 @@ export class CarExtrasForm {
     this.formGroup = this.fb.group({
       coverage: ['', Validators.required],
       extraOptions: [{}],
-      ownRisk: [null],
-      kmPerYear: [null]
+      ownRisk: [null, Validators.required],
+      kmPerYear: [null, Validators.required]
     });
 
     const ownRiskRanges: Array<number> = [0, 135, 245, 375, 500, 675, 950];

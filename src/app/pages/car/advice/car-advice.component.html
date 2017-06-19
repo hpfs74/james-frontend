@@ -28,6 +28,7 @@
         <knx-insurance-toplist
           (insuranceSelected$)="knxWizard.goToNextStep(); onSelectPremium($event)"
           [stepAmount]="4"
+          [disableInsuranceBuy]="!carExtrasForm?.formGroup.valid"
           [insurances]="insurances | async">
         </knx-insurance-toplist>
       </knx-step>
