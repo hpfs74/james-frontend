@@ -20,7 +20,7 @@ export class CarCheckForm extends BaseForm {
       refuse: [null, Validators.compose([Validators.required])],
       driver: [null, Validators.compose([Validators.required])],
       cause: [null, Validators.compose([Validators.required])],
-      register: [null, Validators.compose([Validators.required])],
+      register: [null, Validators.compose([Validators.required])]
     });
 
     this.formConfig = {
