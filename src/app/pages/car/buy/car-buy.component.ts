@@ -21,6 +21,9 @@ import { CarReportingCodeForm } from './car-reporting-code.form';
 import { CarCheckComponent } from './car-check.component';
 import { CarCheckForm } from './car-check.form';
 
+import { CarPaymentComponent } from './car-payment.component';
+import { IbanForm } from '../../../forms/iban.form';
+
 import { mockCar } from '../../../models/_mocks/car.mock';
 
 import * as FormUtils from '../../../utils/base-form.utils';
@@ -42,14 +45,16 @@ export class CarBuyComponent implements OnInit {
   contactDetailForm: ContactDetailForm;
   reportingCodeForm: CarReportingCodeForm;
   checkForm: CarCheckForm;
+  paymentForm: IbanForm;
 
-  constructor( private router: Router,
-               private configService: ConfigService,
-               private contentService: ContentService,
-               private assistantService: AssistantService,
-               private chatNotifierService: ChatStreamService,
-               private profileService: ProfileService ) {
-  }
+  constructor(
+    private router: Router,
+    private configService: ConfigService,
+    private contentService: ContentService,
+    private assistantService: AssistantService,
+    private chatNotifierService: ChatStreamService,
+    private profileService: ProfileService
+  ) { }
 
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
@@ -87,8 +92,16 @@ export class CarBuyComponent implements OnInit {
       },
       {
         label: 'Betaling',
+        nextButtonLabel: 'Naar overzicht',
+        backButtonLabel: 'Terug',
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.payment),
+        onBeforeNext: this.submitPayment.bind(this)
+      },
+      {
+        label: 'Overzicht',
         nextButtonLabel: 'Aanvraag versturen',
-        backButtonLabel: 'Terug'
+        backButtonLabel: 'Terug',
+        //onBeforeNext: this.submitRequest.bind(this)
       }
     ];
 
@@ -98,9 +111,7 @@ export class CarBuyComponent implements OnInit {
     this.contactDetailForm = new ContactDetailForm(formBuilder);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
     this.checkForm = new CarCheckForm(formBuilder);
-    this.reportingCodeForm.infoMessages = {
-      reportingCode: this.chatConfig.car.buy.info.reportingCode
-    };
+    this.paymentForm = new IbanForm(formBuilder);
   }
 
   initFormWithProfile() {
@@ -139,6 +150,7 @@ export class CarBuyComponent implements OnInit {
     //     this.getUpdatedProfile(this.contactDetailForm.formGroup));
     // }
 
+    // TODO: remove placeholder
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -146,17 +158,26 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitReportingCode(): Observable<any> {
-    //TODO: implement
-    //console.log(this.reportingCodeForm.formGroup.value);
-    // return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    FormUtils.validateForm(this.reportingCodeForm.formGroup);
+
+    if (!this.reportingCodeForm.formGroup.valid) {
+      return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    }
     return new Observable(obs => {
       obs.next();
       obs.complete();
     });
   }
 
-  onStepChange( event ) {
-    // TODO: implement properly
+  submitPayment(): Observable<any> {
+    // TODO: remove placeholder
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
+  }
+
+  onStepChange(event) {
     this.currentStep += 1;
   }
 

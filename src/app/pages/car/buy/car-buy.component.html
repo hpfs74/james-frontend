@@ -28,6 +28,16 @@
           [form]="checkForm">
         </knx-car-check>
       </knx-step>
+
+      <knx-step [options]="formSteps[3]">
+        <knx-car-payment-form
+          [form]="paymentForm">
+        </knx-car-payment-form>
+      </knx-step>
+
+      <!--<knx-step [options]="formSteps[4]">
+        <knx-car-summary-form></knx-car-summary-form>
+      </knx-step>-->
     </div>
 
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>

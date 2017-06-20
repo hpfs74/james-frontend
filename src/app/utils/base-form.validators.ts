@@ -58,6 +58,25 @@ export function dateValidator(key: string) {
   };
 }
 
+export function futureDateValidator(key: string) {
+  return (c: FormControl): { [key: string]: any } => {
+    let value = c.value;
+
+    if (value && !(value instanceof Date)) {
+      value = dateDecode(value);
+    }
+
+    let now = new Date().setHours(0, 0, 0, 0);
+    if (value && (value < now)) {
+      value = false;
+    }
+
+    let obj = {};
+    obj[key] = true;
+    return !value ? obj : null;
+  };
+}
+
 export function birthDateValidator(key: string) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
@@ -82,12 +101,12 @@ export function birthDateValidator(key: string) {
  * @param {string} key
  */
 export function ibanValidator(key: string) {
-  return (c: FormControl): { [key: string]: any } => {
+  return (c: FormControl) => {
     let value = c.value;
     let obj = {};
     obj[key] = true;
     const onlyDutch = true;
-    return isValidIban(value, onlyDutch) ? obj : null;
+    return isValidIban(value, onlyDutch) ? null : obj;
   };
 }
 

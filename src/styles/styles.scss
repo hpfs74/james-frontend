@@ -7,11 +7,13 @@
 @import '../../node_modules/@knx/base/index';
 @import '../../node_modules/@knx/grid/index';
 
-/* page component styles */
+/*
+ * page component styles
+ * NOTE: containers, e.g. smart components should not have styles!
+ */
 @import '../app/pages/dashboard/dashboard.component';
 @import '../app/pages/login/login.component';
 @import '../app/pages/password-reset/password-reset.component';
-@import '../app/pages/car/advice/car-advice.component';
 
 /* component styles */
 @import '../app/components/knx-address-lookup/address-lookup.component';
@@ -138,4 +140,30 @@ html {
 
 .mr-auto {
   margin-right: auto !important;
+}
+
+.image-reportingcode {
+  max-width: 250px;
+  display: block;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.knx-button--mobile-edit {
+  &:before {
+    content: map-get($knx-icons, pencil);
+    font-family: $font-family-icon;
+    color: $knab-primary-blue;
+    margin-right: 10px;
+    font-size: $base-font-size;
+  }
+}
+
+@media (min-width: 518px) {
+  .knx-wizard__sidebar--sticky {
+    position: sticky;
+    top: 90px;
+  }
 }
