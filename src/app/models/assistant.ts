@@ -58,7 +58,11 @@ export class AssistantConfig {
     },
     buy: {
       fill: 'We hebben nog een paar gegevens van je nodig om je aanvraag te regelen. Kun je dit lijstje aanvullen?',
+<<<<<<< c07dbb43e657f90b99dd1bf168a69005311154c1
       check: 'Je hebt gekozen voor Avéro Achmea. Avéro Achmea heeft nog een paar vragen voor je voordat we je aanvraag kunnen versturen.'
+=======
+      payment: 'Nog heel even! Van welk rekeningnummer mag je premie straks worden afgeschreven?'
+>>>>>>> feat(assistant): add car payment message
     }
   };
 }

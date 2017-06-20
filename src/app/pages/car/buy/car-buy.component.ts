@@ -44,12 +44,8 @@ export class CarBuyComponent implements OnInit {
   // Forms
   contactDetailForm: ContactDetailForm;
   reportingCodeForm: CarReportingCodeForm;
-<<<<<<< 28070d098e30a07ad5580babc7c7925819abf4ed
   checkForm: CarCheckForm;
-  ibanForm: IbanForm;
-=======
   paymentForm: IbanForm;
->>>>>>> fix(iban-validator): add car payment form
 
   constructor(
     private router: Router,
@@ -98,6 +94,7 @@ export class CarBuyComponent implements OnInit {
         label: 'Betaling',
         nextButtonLabel: 'Naar overzicht',
         backButtonLabel: 'Terug',
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.payment),
         onBeforeNext: this.submitPayment.bind(this)
       },
       {
@@ -113,12 +110,8 @@ export class CarBuyComponent implements OnInit {
 
     this.contactDetailForm = new ContactDetailForm(formBuilder);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
-<<<<<<< 28070d098e30a07ad5580babc7c7925819abf4ed
     this.checkForm = new CarCheckForm(formBuilder);
-    this.ibanForm = new IbanForm(formBuilder);
-=======
     this.paymentForm = new IbanForm(formBuilder);
->>>>>>> fix(iban-validator): add car payment form
   }
 
   initFormWithProfile() {
