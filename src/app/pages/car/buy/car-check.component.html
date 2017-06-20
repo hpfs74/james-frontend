@@ -5,49 +5,64 @@
       <h2>Check</h2>
 
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
+          <cx-form-group
+            [options]="form.formConfig.bankruptcy"
+            [formControlName]="form.formConfig.bankruptcy.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <cx-form-group
+            [options]="form.formConfig.refuse"
+            [formControlName]="form.formConfig.refuse.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <cx-form-group
+            [options]="form.formConfig.debt"
+            [formControlName]="form.formConfig.debt.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
           <div class="knx-form-group--info">
             <cx-form-group
-              [options]="form.formConfig.reportingCode"
-              [formControlName]="form.formConfig.reportingCode.formControlName">
+              [options]="form.formConfig.driver"
+              [formControlName]="form.formConfig.driver.formControlName">
             </cx-form-group>
-            <knx-info *ngIf="form.infoMessages" size="md" isFloating="true" class="knx-info">
-              <div class="knx-info__content">
-                <div class="knx-message knx-message--chat knx-message--arrow-top">
-                  <div class="knx-message__content" [innerHTML]="form.infoMessages?.reportingCode">
-                  </div>
-                </div>
-              </div>
-            </knx-info>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-8">
-          <cx-form-group
-            [options]="form.formConfig.accessoryValue"
-            [formControlName]="form.formConfig.accessoryValue.formControlName">
-          </cx-form-group>
+        <div class="col-sm-12">
+          <div class="knx-form-group--info">
+            <cx-form-group
+              [options]="form.formConfig.cause"
+              [formControlName]="form.formConfig.cause.formControlName">
+            </cx-form-group>
+          </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-8">
-          <cx-form-group
-            [options]="form.formConfig.securityClass"
-            [formControlName]="form.formConfig.securityClass.formControlName">
-          </cx-form-group>
-
-          <div *ngIf="form.formGroup.get('securityClass').value" class="knx-message knx-message--hint knx-message--arrow-top">
-            <div class="knx-message__header">{{ selectedSecurityClass.title }}: {{ selectedSecurityClass.short }}</div>
-            <div class="knx-message__content">
-                <p>{{ selectedSecurityClass.description }}</p>
-            </div>
+        <div class="col-sm-12">
+          <div class="knx-form-group--info">
+            <cx-form-group
+              [options]="form.formConfig.register"
+              [formControlName]="form.formConfig.register.formControlName">
+            </cx-form-group>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </form>
