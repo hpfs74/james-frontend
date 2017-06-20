@@ -142,6 +142,15 @@ html {
   margin-right: auto !important;
 }
 
+.image-reportingcode {
+  max-width: 250px;
+  display: block;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .knx-button--mobile-edit {
   &:before {
     content: map-get($knx-icons, pencil);
