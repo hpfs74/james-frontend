@@ -44,8 +44,12 @@ export class CarBuyComponent implements OnInit {
   // Forms
   contactDetailForm: ContactDetailForm;
   reportingCodeForm: CarReportingCodeForm;
+<<<<<<< 28070d098e30a07ad5580babc7c7925819abf4ed
   checkForm: CarCheckForm;
   ibanForm: IbanForm;
+=======
+  paymentForm: IbanForm;
+>>>>>>> fix(iban-validator): add car payment form
 
   constructor(
     private router: Router,
@@ -93,7 +97,8 @@ export class CarBuyComponent implements OnInit {
       {
         label: 'Betaling',
         nextButtonLabel: 'Aanvraag versturen',
-        backButtonLabel: 'Terug'
+        backButtonLabel: 'Terug',
+        onBeforeNext: this.submitPayment.bind(this)
       }
     ];
 
@@ -102,8 +107,12 @@ export class CarBuyComponent implements OnInit {
 
     this.contactDetailForm = new ContactDetailForm(formBuilder);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
+<<<<<<< 28070d098e30a07ad5580babc7c7925819abf4ed
     this.checkForm = new CarCheckForm(formBuilder);
     this.ibanForm = new IbanForm(formBuilder);
+=======
+    this.paymentForm = new IbanForm(formBuilder);
+>>>>>>> fix(iban-validator): add car payment form
   }
 
   initFormWithProfile() {
@@ -142,6 +151,7 @@ export class CarBuyComponent implements OnInit {
     //     this.getUpdatedProfile(this.contactDetailForm.formGroup));
     // }
 
+    // TODO: remove placeholder
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -150,18 +160,24 @@ export class CarBuyComponent implements OnInit {
 
   submitReportingCode(): Observable<any> {
     //TODO: implement
-    //console.log(this.reportingCodeForm.formGroup.value);
-    // return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
     //return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
 
+    // TODO: remove placeholder
     return new Observable(obs => {
       obs.next();
       obs.complete();
     });
   }
 
-  onStepChange( event ) {
-    // TODO: implement properly
+  submitPayment(): Observable<any> {
+    // TODO: remove placeholder
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
+  }
+
+  onStepChange(event) {
     this.currentStep += 1;
   }
 

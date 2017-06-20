@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   <div class="knx-form-group--info">
     <ng-content select="cx-form-group"></ng-content>
 
-    <knx-info *ngIf="infoMessage" size="md" isFloating="true" class="knx-info">
+    <knx-info *ngIf="infoMessage" size="md" isFloating="true" class="knx-info" [class.knx-info--description]="hasDescription">
       <div class="knx-info__content">
         <div class="knx-message knx-message--chat knx-message--arrow-top">
           <div class="knx-message__content" [innerHTML]="infoMessage">
@@ -19,4 +19,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FormGroupInfoComponent {
   @Input() infoMessage: string;
+  @Input() hasDescription: boolean;
 }

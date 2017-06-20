@@ -1,6 +1,10 @@
 export function isValidIban(value: string, onlyDutch: boolean = false): boolean {
   let result = false;
 
+  if (!value) {
+    return result;
+  }
+
   // Remove spaces and to upper case
   let iban = value.replace(/ /g, '').toUpperCase(),
     ibancheckdigits = '',

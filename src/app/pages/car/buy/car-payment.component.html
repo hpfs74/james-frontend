@@ -15,8 +15,8 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6">
-          <knx-form-group-info [infoMessage]="form.infoMessages.iban">
+        <div class="col-sm-9">
+          <knx-form-group-info [infoMessage]="form.infoMessages?.iban" [hasDescription]="true">
             <cx-form-group
               [options]="form.formConfig.iban"
               [formControlName]="form.formConfig.iban.formControlName">

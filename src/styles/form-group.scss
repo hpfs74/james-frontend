@@ -1,6 +1,6 @@
 .knx-form-group--info {
   .cx-form-group {
-    width: 90%;
+    padding-right: 25px;
   }
 
   .cx-form-group.cx-form-group--error {
@@ -12,6 +12,10 @@
     top: 35px;
     right: 10px;
     display: block;
+  }
+
+  .knx-info--description {
+    top: 64px;
   }
 
   .knx-info--floating {

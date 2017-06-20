@@ -81,24 +81,24 @@ describe('Custom Validators', () => {
     });
   });
 
-  describe('pastDateValidator', () => {
+  describe('futureDateValidator', () => {
     it('should return error on string value', () => {
-      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('hello world')))
+      expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl('hello world')))
         .toEqual({ 'myCtrl': true });
     });
 
     it('should return error on number value', () => {
-      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('323')))
+      expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl('323')))
         .toEqual({ 'myCtrl': true });
     });
 
-    it('should return null on passed date value', () => {
-      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('22/05/2001')))
+    it('should return null on future date value', () => {
+      expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl('22/05/2018')))
         .toBeNull();
     });
 
-    it('should return error on future date value', () => {
-      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('22/05/2030')))
+    it('should return error on past date value', () => {
+      expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl('22/05/2000')))
         .toEqual({ 'myCtrl': true });
     });
   });

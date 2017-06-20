@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm } from '../models/base-form';
-import { pastDateValidator /*, ibanValidator */ } from '../utils/base-form.validators';
+import { futureDateValidator, ibanValidator } from '../utils/base-form.validators';
 import { birthDateMask } from '../utils/base-form.utils';
 import { carReportingCodeValidator } from '../utils/base-form.validators';
 
@@ -31,13 +31,13 @@ export class IbanForm extends BaseForm {
       startDate: [null,
         Validators.compose([
           Validators.required,
-          pastDateValidator('startDate')
+          futureDateValidator('startDate')
         ])
       ],
       iban: [null,
         Validators.compose([
-          Validators.required
-          //ibanValidator('iban')
+          Validators.required,
+          ibanValidator('iban')
         ])
       ],
       acceptConditions: [{}, Validators.required]
@@ -59,6 +59,7 @@ export class IbanForm extends BaseForm {
       iban: {
         formControlName: 'iban',
         label: 'Bankrekening (IBAN)',
+        description: 'De premie wordt maandelijks automatisch afgeschreven',
         formControl: this.formGroup.get('iban'),
         validationErrors: this.validationErrors,
         inputOptions: {
@@ -68,7 +69,6 @@ export class IbanForm extends BaseForm {
       acceptConditions: {
         formControlName: 'acceptConditions',
         type: 'checkbox',
-        description: 'De premie wordt maandelijks automatisch afgeschreven',
         formControl: this.formGroup.get('acceptConditions'),
         validationErrors: this.validationErrors,
         inputOptions: {
