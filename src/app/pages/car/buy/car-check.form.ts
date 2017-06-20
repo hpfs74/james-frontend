@@ -20,7 +20,7 @@ export class CarCheckForm extends BaseForm {
       refuse: [null, Validators.compose([Validators.required])],
       driver: [null, Validators.compose([Validators.required])],
       cause: [null, Validators.compose([Validators.required])],
-      register: [null, Validators.compose([Validators.required])]
+      register: [null, Validators.compose([Validators.required])],
     });
 
     this.formConfig = {
@@ -28,7 +28,7 @@ export class CarCheckForm extends BaseForm {
         formControlName: 'bankruptcy',
         label: 'Ben je de afgelopen 8 jaar in aanraking geweest met politie of justie?',
         type: 'radio',
-        formControl: this.formGroup.get('securityClass'),
+        formControl: this.formGroup.get('bankruptcy'),
         validationErrors: this.validationErrors,
         inputOptions: {
           items: [

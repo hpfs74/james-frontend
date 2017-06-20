@@ -8,17 +8,17 @@ export class AssistantConfig {
   };
 
   public generic = {
-    address: ( address: Address ) => `Ik heb je adres gevonden. Woon je op <strong>${address.street} in ${address.city}</strong>?`,
+    address: (address: Address) => `Ik heb je adres gevonden. Woon je op <strong>${address.street} in ${address.city}</strong>?`,
     addressNotFound: 'Helaas kon ik je adres niet vinden. Heb je je postcode en huisnummer juist ingevoerd?'
   };
 
   public dashboard = {
     start: 'Waar wil je mee beginnen?',
-    welcome: ( firstName: string ) =>
+    welcome: (firstName: string) =>
       `Hoi <strong>${firstName}</strong>, ik ben je persoonlijke verzekeringsassistent.
         Verzekeringen die je via Knab afsluit staan automatisch in je overzicht.
         Maar ook je bestaande verzekeringen voeg je gemakkelijk toe.`,
-    detail: ( insuranceType: string ) => `Wat wil je doen met je ${insuranceType} verzekering?`,
+    detail: (insuranceType: string) => `Wat wil je doen met je ${insuranceType} verzekering?`,
     addInsurance: 'Voeg verzekeringen toe aan het overzicht en  ik zoek uit het beter kan.'
   };
 
@@ -27,9 +27,9 @@ export class AssistantConfig {
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
-      niceCar: ( car: Car ) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
+      niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
       coverage: {
-        advice: ( coverage: Price ) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
+        advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },
       noClaimProtection: '',
       legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
