@@ -1,7 +1,8 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm } from '../models/base-form';
-import { dateValidator } from '../utils/base-form.validators';
+import { pastDateValidator /*, ibanValidator */ } from '../utils/base-form.validators';
+import { birthDateMask } from '../utils/base-form.utils';
 import { carReportingCodeValidator } from '../utils/base-form.validators';
 
 export class IbanForm extends BaseForm {
@@ -11,7 +12,8 @@ export class IbanForm extends BaseForm {
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
     startDate: () => 'Vul een geldige startdatum in',
-    iban: () => 'Vul een geldig bankrekeningnummer (IBAN) in'
+    iban: () => 'Vul een geldig bankrekeningnummer (IBAN) in',
+    acceptConditions: () => `Je dient akkoord te gaan met de gebruiksvoorwaarden`
   };
 
   constructor(private fb: FormBuilder) {
@@ -19,7 +21,7 @@ export class IbanForm extends BaseForm {
 
     this.infoMessages = {
       startDate:
-        `Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkenze kracht een verzekering afsluiten.
+        `Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
         Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.`,
       iban:
         `Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankrekeningafschrift of in je bankieren app.`
@@ -29,34 +31,39 @@ export class IbanForm extends BaseForm {
       startDate: [null,
         Validators.compose([
           Validators.required,
-          dateValidator('startDate')
+          pastDateValidator('startDate')
         ])
       ],
       iban: [null,
         Validators.compose([
           Validators.required
-          //TODO: add ibanValidator
+          //ibanValidator('iban')
         ])
       ],
-      acceptConditions: [{}]
+      acceptConditions: [{}, Validators.required]
     });
 
     this.formConfig = {
       startDate: {
         formControlName: 'startDate',
         label: 'Ingangsdatum',
+        type: 'date-input',
         formControl: this.formGroup.get('startDate'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          type: 'text'
+          placeholder: 'DD / MM / JJJJ',
+          transform: birthDateMask.decode,
+          textMask: birthDateMask
         }
       },
       iban: {
         formControlName: 'iban',
         label: 'Bankrekening (IBAN)',
-        type: 'text',
         formControl: this.formGroup.get('iban'),
-        validationErrors: this.validationErrors
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          type: 'text'
+        }
       },
       acceptConditions: {
         formControlName: 'acceptConditions',

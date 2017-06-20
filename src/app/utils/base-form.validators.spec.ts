@@ -53,7 +53,7 @@ describe('Custom Validators', () => {
         .toEqual({ 'myCtrl': true });
     });
 
-     it('should return error on negative number', () => {
+    it('should return error on negative number', () => {
       expect(CustomValidators.numberValidator('myCtrl')(new FormControl('-30')))
         .toEqual({ 'myCtrl': true });
     });
@@ -78,6 +78,28 @@ describe('Custom Validators', () => {
     it('should return null on date value', () => {
       expect(CustomValidators.dateValidator('myCtrl')(new FormControl('22/05/2001')))
         .toBeNull();
+    });
+  });
+
+  describe('pastDateValidator', () => {
+    it('should return error on string value', () => {
+      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('hello world')))
+        .toEqual({ 'myCtrl': true });
+    });
+
+    it('should return error on number value', () => {
+      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('323')))
+        .toEqual({ 'myCtrl': true });
+    });
+
+    it('should return null on passed date value', () => {
+      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('22/05/2001')))
+        .toBeNull();
+    });
+
+    it('should return error on future date value', () => {
+      expect(CustomValidators.pastDateValidator('myCtrl')(new FormControl('22/05/2030')))
+        .toEqual({ 'myCtrl': true });
     });
   });
 

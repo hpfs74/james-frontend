@@ -58,6 +58,25 @@ export function dateValidator(key: string) {
   };
 }
 
+export function pastDateValidator(key: string) {
+  return (c: FormControl): { [key: string]: any } => {
+    let value = c.value;
+
+    if (value && !(value instanceof Date)) {
+      value = dateDecode(value);
+    }
+
+    let now = new Date().setHours(0, 0, 0, 0);
+    if (value && (value > now)) {
+      value = false;
+    }
+
+    let obj = {};
+    obj[key] = true;
+    return !value ? obj : null;
+  };
+}
+
 export function birthDateValidator(key: string) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;

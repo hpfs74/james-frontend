@@ -152,6 +152,8 @@ export class CarBuyComponent implements OnInit {
     //TODO: implement
     //console.log(this.reportingCodeForm.formGroup.value);
     // return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    //return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+
     return new Observable(obs => {
       obs.next();
       obs.complete();

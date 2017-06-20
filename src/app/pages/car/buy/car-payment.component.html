@@ -3,19 +3,27 @@
     <div class="col-sm-10 col-sm-offset-2">
       <h2>Betaling</h2>
 
-      <knx-form-group-info [infoMessage]="form.infoMessages.startDate">
-        <cx-form-group
-          [options]="form.formConfig.startDate"
-          [formControlName]="form.formConfig.startDate.formControlName">
-        </cx-form-group>
-      </knx-form-group-info>
+      <div class="row">
+        <div class="col-sm-6">
+          <knx-form-group-info [infoMessage]="form.infoMessages.startDate">
+            <cx-form-group
+              [options]="form.formConfig.startDate"
+              [formControlName]="form.formConfig.startDate.formControlName">
+            </cx-form-group>
+          </knx-form-group-info>
+        </div>
+      </div>
 
-      <knx-form-group-info [infoMessage]="form.infoMessages.iban">
-        <cx-form-group
-          [options]="form.formConfig.iban"
-          [formControlName]="form.formConfig.iban.formControlName">
-        </cx-form-group>
-      </knx-form-group-info>
+      <div class="row">
+        <div class="col-sm-6">
+          <knx-form-group-info [infoMessage]="form.infoMessages.iban">
+            <cx-form-group
+              [options]="form.formConfig.iban"
+              [formControlName]="form.formConfig.iban.formControlName">
+            </cx-form-group>
+          </knx-form-group-info>
+        </div>
+      </div>
 
       <cx-form-group
         [options]="form.formConfig.acceptConditions"
