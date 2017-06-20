@@ -14,9 +14,8 @@ export class AssistantConfig {
 
   public dashboard = {
     start: 'Waar wil je mee beginnen?',
-    welcome:
-      (firstName: string) =>
-        `Hoi <strong>${firstName}</strong>, ik ben je persoonlijke verzekeringsassistent.
+    welcome: (firstName: string) =>
+      `Hoi <strong>${firstName}</strong>, ik ben je persoonlijke verzekeringsassistent.
         Verzekeringen die je via Knab afsluit staan automatisch in je overzicht.
         Maar ook je bestaande verzekeringen voeg je gemakkelijk toe.`,
     detail: (insuranceType: string) => `Wat wil je doen met je ${insuranceType} verzekering?`,
@@ -33,8 +32,7 @@ export class AssistantConfig {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },
       noClaimProtection: '',
-      legalAid:
-      `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
+      legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
         Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
         ervaren juristen je bijstaan.Dit geldt alleen voor verkeer rechtsbijstand en alleen voor deze auto.`,
       coverOccupants: '',
@@ -53,13 +51,14 @@ export class AssistantConfig {
         4. Vul je betaalgegevens in <br>
         5. Aanvraag naar de verzekeraar <br>
         6. Akkoord? Zeg je oude verzekering op.`
-  }
+      }
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
     },
     buy: {
       fill: 'We hebben nog een paar gegevens van je nodig om je aanvraag te regelen. Kun je dit lijstje aanvullen?',
+      check: 'Je hebt gekozen voor Avéro Achmea. Avéro Achmea heeft nog een paar vragen voor je voordat we je aanvraag kunnen versturen.',
       info: {
         reportingCode: `
           Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.

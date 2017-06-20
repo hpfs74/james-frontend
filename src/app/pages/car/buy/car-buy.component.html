@@ -22,6 +22,12 @@
           [profile]="profile | async">
         </knx-car-reporting-code-form>
       </knx-step>
+
+      <knx-step [options]="formSteps[2]">
+        <knx-car-check
+          [form]="checkForm">
+        </knx-car-check>
+      </knx-step>
     </div>
 
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>

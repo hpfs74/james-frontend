@@ -18,6 +18,8 @@ import { ContactDetailForm } from './../../../forms/contact-detail.form';
 
 import { CarReportingCodeComponent } from './car-info.component';
 import { CarReportingCodeForm } from './car-reporting-code.form';
+import { CarCheckComponent } from './car-check.component';
+import { CarCheckForm } from './car-check.form';
 
 import { mockCar } from '../../../models/_mocks/car.mock';
 
@@ -39,15 +41,15 @@ export class CarBuyComponent implements OnInit {
   // Forms
   contactDetailForm: ContactDetailForm;
   reportingCodeForm: CarReportingCodeForm;
+  checkForm: CarCheckForm;
 
-  constructor(
-    private router: Router,
-    private configService: ConfigService,
-    private contentService: ContentService,
-    private assistantService: AssistantService,
-    private chatNotifierService: ChatStreamService,
-    private profileService: ProfileService
-  ) { }
+  constructor( private router: Router,
+               private configService: ConfigService,
+               private contentService: ContentService,
+               private assistantService: AssistantService,
+               private chatNotifierService: ChatStreamService,
+               private profileService: ProfileService ) {
+  }
 
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
@@ -79,7 +81,9 @@ export class CarBuyComponent implements OnInit {
       {
         label: 'Check',
         nextButtonLabel: 'Naar betalingsgegevens',
-        backButtonLabel: 'Terug'
+        backButtonLabel: 'Terug',
+        onShowStep: () => this.initCheckForm(),
+        onBeforeNext: this.submitReportingCode.bind(this)
       },
       {
         label: 'Betaling',
@@ -93,6 +97,7 @@ export class CarBuyComponent implements OnInit {
 
     this.contactDetailForm = new ContactDetailForm(formBuilder);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
+    this.checkForm = new CarCheckForm(formBuilder);
     this.reportingCodeForm.infoMessages = {
       reportingCode: this.chatConfig.car.buy.info.reportingCode
     };
@@ -103,7 +108,7 @@ export class CarBuyComponent implements OnInit {
 
     // TODO: replace mock data with actual
     this.profile = this.profileService.getUserProfile()
-      .map((profile) => {
+      .map(( profile ) => {
         let p = profile;
         p._embedded.car = Object.assign(mockCar, {
           count: 0,
@@ -114,6 +119,12 @@ export class CarBuyComponent implements OnInit {
       });
 
     this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.fill);
+  }
+
+  initCheckForm() {
+    FormUtils.scrollToForm('form');
+
+    this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.check);
   }
 
   submitContactDetails(): Observable<any> {
@@ -137,15 +148,19 @@ export class CarBuyComponent implements OnInit {
   submitReportingCode(): Observable<any> {
     //TODO: implement
     //console.log(this.reportingCodeForm.formGroup.value);
-    return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    // return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
   }
 
-  onStepChange(event) {
+  onStepChange( event ) {
     // TODO: implement properly
     this.currentStep += 1;
   }
 
-  private getUpdatedProfile(form: FormGroup) {
+  private getUpdatedProfile( form: FormGroup ) {
     return {
       firstname: form.value.firstName,
       infix: form.value.middleName,
