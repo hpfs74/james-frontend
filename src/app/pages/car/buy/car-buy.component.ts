@@ -87,8 +87,8 @@ export class CarBuyComponent implements OnInit {
         label: 'Check',
         nextButtonLabel: 'Naar betalingsgegevens',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.initCheckForm(),
-        onBeforeNext: this.submitReportingCode.bind(this)
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.check),
+        onBeforeNext: this.submitCheck.bind(this)
       },
       {
         label: 'Betaling',
@@ -132,12 +132,6 @@ export class CarBuyComponent implements OnInit {
     this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.fill);
   }
 
-  initCheckForm() {
-    FormUtils.scrollToForm('form');
-
-    this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.check);
-  }
-
   submitContactDetails(): Observable<any> {
     // FormUtils.validateForm(this.contactDetailForm.formGroup);
 
@@ -162,6 +156,18 @@ export class CarBuyComponent implements OnInit {
 
     if (!this.reportingCodeForm.formGroup.valid) {
       return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    }
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
+  }
+
+  submitCheck(): Observable<any> {
+    FormUtils.validateForm(this.checkForm.formGroup);
+
+    if (!this.checkForm.formGroup.valid) {
+      return Observable.throw(new Error(this.checkForm.validationSummaryError));
     }
     return new Observable(obs => {
       obs.next();
