@@ -87,7 +87,7 @@ export class CarCheckForm extends BaseForm {
         formControlName: 'driver',
         label: 'Is jou, de regelmatige bestuurder of kentekenhouder de afgelopen 8 jaar de ' +
         'rijbevoegdheid (geheel 0f voorwaardelijk) ontzegd?',
-        formControl: this.formGroup.get('reportingCode'),
+        formControl: this.formGroup.get('driver'),
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {
@@ -107,7 +107,7 @@ export class CarCheckForm extends BaseForm {
         formControlName: 'cause',
         label: 'Heb je de afgelopen 5 jaar schade geleden 0f veroorzaakt, die gedekt werd door een ' +
         'soortgelijke verzekering als de verzekering die je nu aanvraagt?',
-        formControl: this.formGroup.get('reportingCode'),
+        formControl: this.formGroup.get('cause'),
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {
@@ -126,7 +126,7 @@ export class CarCheckForm extends BaseForm {
       register: {
         formControlName: 'register',
         label: 'Is de auto vanaf de datum dat deze op naam van de kentekenhouder staat, langer dan IO dagen onverzekerd?',
-        formControl: this.formGroup.get('reportingCode'),
+        formControl: this.formGroup.get('register'),
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {
