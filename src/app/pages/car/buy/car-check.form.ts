@@ -9,57 +9,163 @@ export class CarCheckForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
 
-  checkAnswers: Array<any>;
-
   public validationErrors = {
-    required: () => 'Dit veld is verplicht',
-    reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
+    required: () => 'Dit veld is verplicht'
   };
 
-  constructor( private fb: FormBuilder, private checkAnswersContent ) {
+  constructor( private fb: FormBuilder ) {
     super();
 
-    this.checkAnswers = checkAnswersContent;
-
     this.formGroup = this.fb.group({
-      reportingCode: [null,
-        Validators.compose([
-          Validators.required,
-          carReportingCodeValidator('reportingCode')
-        ])
-      ],
-      accessoryValue: [null,
+      bankruptcy: [null,
         Validators.compose([
           Validators.required
         ])
       ],
-      securityClass: [null]
+      debt: [null,
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      refuse: [null,
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      driver: [null,
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      cause: [null,
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      register: [null,
+        Validators.compose([
+          Validators.required
+        ])
+      ],
     });
 
     this.formConfig = {
-      reportingCode: {
-        formControlName: 'reportingCode',
-        label: 'Meldcode',
-        formControl: this.formGroup.get('reportingCode'),
+      bankruptcy: {
+        formControlName: 'bankruptcy',
+        label: 'Ben je de afgelopen 8 jaar in aanraking geweest met politie of justie?',
+        type: 'radio',
+        formControl: this.formGroup.get('securityClass'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          type: 'text'
+          items: [
+            {
+              label: 'Ja',
+              value: 'wasBankruptcy'
+            },
+            {
+              label: 'Nee',
+              value: 'noBankruptcy'
+            }
+          ]
         }
       },
-      accessoryValue: {
-        formControlName: 'accessoryValue',
-        label: 'Waarde accessoires',
+      refuse: {
+        formControlName: 'refuse',
+        label: 'Ben je de afgelopen 8 jaar geweigerd 0f opgezegd door een verzekeraar? ' +
+        'Of was je betrokken bij verzekeringsfraude? ',
         type: 'radio',
-        formControl: this.formGroup.get('accessoryValue'),
-        validationErrors: this.validationErrors
-      },
-      securityClass: {
-        formControlName: 'securityClass',
-        label: 'Hoe is je auto beveiligd?',
-        type: 'select',
-        formControl: this.formGroup.get('securityClass'),
+        formControl: this.formGroup.get('refuse'),
+        validationErrors: this.validationErrors,
         inputOptions: {
-          items: this.checkAnswers
+          items: [
+            {
+              label: 'Ja',
+              value: 'wasRefuse'
+            },
+            {
+              label: 'Nee',
+              value: 'noRefuse'
+            }
+          ]
+        }
+      },
+      debt: {
+        formControlName: 'debt',
+        label: 'Ben je de afgelopen 5 jaar failliet verklaard? Of in een schuldsanering betrokken geweest? Of heeft ' +
+        'een deurwaarder momenteel beslag gelegd op jouw inkomsten of bezittingen?',
+        formControl: this.formGroup.get('debt'),
+        validationErrors: this.validationErrors,
+        type: 'radio',
+        inputOptions: {
+          items: [
+            {
+              label: 'Ja',
+              value: 'wasDebt'
+            },
+            {
+              label: 'Nee',
+              value: 'noDebt'
+            }
+          ]
+        }
+      },
+      driver: {
+        formControlName: 'driver',
+        label: 'Is jou, de regelmatige bestuurder of kentekenhouder de afgelopen 8 jaar de ' +
+        'rijbevoegdheid (geheel 0f voorwaardelijk) ontzegd?',
+        formControl: this.formGroup.get('reportingCode'),
+        validationErrors: this.validationErrors,
+        type: 'radio',
+        inputOptions: {
+          items: [
+            {
+              label: 'Ja',
+              value: 'isDriver'
+            },
+            {
+              label: 'Nee',
+              value: 'notDriver'
+            }
+          ]
+        }
+      },
+      cause: {
+        formControlName: 'cause',
+        label: 'Heb je de afgelopen 5 jaar schade geleden 0f veroorzaakt, die gedekt werd door een ' +
+        'soortgelijke verzekering als de verzekering die je nu aanvraagt?',
+        formControl: this.formGroup.get('reportingCode'),
+        validationErrors: this.validationErrors,
+        type: 'radio',
+        inputOptions: {
+          items: [
+            {
+              label: 'Ja',
+              value: 'hadCause'
+            },
+            {
+              label: 'Nee',
+              value: 'noCause'
+            }
+          ]
+        }
+      },
+      register: {
+        formControlName: 'register',
+        label: 'Is de auto vanaf de datum dat deze op naam van de kentekenhouder staat, langer dan IO dagen onverzekerd?',
+        formControl: this.formGroup.get('reportingCode'),
+        validationErrors: this.validationErrors,
+        type: 'radio',
+        inputOptions: {
+          items: [
+            {
+              label: 'Ja',
+              value: 'isRegistered'
+            },
+            {
+              label: 'Nee',
+              value: 'notRegistered'
+            }
+          ]
         }
       }
     };
