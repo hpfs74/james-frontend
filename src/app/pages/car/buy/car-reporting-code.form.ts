@@ -19,6 +19,14 @@ export class CarReportingCodeForm extends BaseForm {
   constructor(private fb: FormBuilder, private securityClassContent) {
     super();
 
+    this.infoMessages = {
+      reportingCode: `
+        Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.
+        De verzekeraar geeft dit door aan de RDW (Rijksdienst voor het Wegverkeer). De RDW houdt zo bij of alle
+        auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
+        Het zijn de laatste 4 cijfers van het chassisnummer.`
+    };
+
     this.securityClasses = securityClassContent;
 
     this.formGroup = this.fb.group({

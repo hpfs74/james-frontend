@@ -21,6 +21,9 @@ import { CarReportingCodeForm } from './car-reporting-code.form';
 import { CarCheckComponent } from './car-check.component';
 import { CarCheckForm } from './car-check.form';
 
+import { CarPaymentComponent } from './car-payment.component';
+import { IbanForm } from '../../../forms/iban.form';
+
 import { mockCar } from '../../../models/_mocks/car.mock';
 
 import * as FormUtils from '../../../utils/base-form.utils';
@@ -42,14 +45,16 @@ export class CarBuyComponent implements OnInit {
   contactDetailForm: ContactDetailForm;
   reportingCodeForm: CarReportingCodeForm;
   checkForm: CarCheckForm;
+  ibanForm: IbanForm;
 
-  constructor( private router: Router,
-               private configService: ConfigService,
-               private contentService: ContentService,
-               private assistantService: AssistantService,
-               private chatNotifierService: ChatStreamService,
-               private profileService: ProfileService ) {
-  }
+  constructor(
+    private router: Router,
+    private configService: ConfigService,
+    private contentService: ContentService,
+    private assistantService: AssistantService,
+    private chatNotifierService: ChatStreamService,
+    private profileService: ProfileService
+  ) { }
 
   ngOnInit() {
     this.chatNotifierService.addMessage$.subscribe(
@@ -98,9 +103,7 @@ export class CarBuyComponent implements OnInit {
     this.contactDetailForm = new ContactDetailForm(formBuilder);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
     this.checkForm = new CarCheckForm(formBuilder);
-    this.reportingCodeForm.infoMessages = {
-      reportingCode: this.chatConfig.car.buy.info.reportingCode
-    };
+    this.ibanForm = new IbanForm(formBuilder);
   }
 
   initFormWithProfile() {

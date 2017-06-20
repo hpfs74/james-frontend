@@ -12,6 +12,7 @@ import { CarBuyComponent } from './buy/car-buy.component';
 import { CarContactComponent } from './buy/car-contact.component';
 import { CarReportingCodeComponent } from './buy/car-reporting-code.component';
 import { CarCheckComponent } from './buy/car-check.component';
+import { CarPaymentComponent } from './buy/car-payment.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { CarCheckComponent } from './buy/car-check.component';
     CarBuyComponent,
     CarContactComponent,
     CarReportingCodeComponent,
-    CarCheckComponent
+    CarCheckComponent,
+    CarPaymentComponent
   ],
   providers: [
     CarService
