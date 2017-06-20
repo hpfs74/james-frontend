@@ -96,9 +96,15 @@ export class CarBuyComponent implements OnInit {
       },
       {
         label: 'Betaling',
-        nextButtonLabel: 'Aanvraag versturen',
+        nextButtonLabel: 'Naar overzicht',
         backButtonLabel: 'Terug',
         onBeforeNext: this.submitPayment.bind(this)
+      },
+      {
+        label: 'Overzicht',
+        nextButtonLabel: 'Aanvraag versturen',
+        backButtonLabel: 'Terug',
+        //onBeforeNext: this.submitRequest.bind(this)
       }
     ];
 
@@ -159,10 +165,11 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitReportingCode(): Observable<any> {
-    //TODO: implement
-    //return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    FormUtils.validateForm(this.reportingCodeForm.formGroup);
 
-    // TODO: remove placeholder
+    if (!this.reportingCodeForm.formGroup.valid) {
+      return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    }
     return new Observable(obs => {
       obs.next();
       obs.complete();

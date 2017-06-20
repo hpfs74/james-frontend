@@ -41,7 +41,7 @@ export class CarReportingCodeForm extends BaseForm {
           Validators.required
         ])
       ],
-      securityClass: [null],
+      securityClass: [null, Validators.required],
       saveToProfile: [{}]
     });
 
