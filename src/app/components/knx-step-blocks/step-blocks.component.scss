@@ -1,0 +1,12 @@
+.knx-step-blocks {
+  background: $knab-primary-gray;
+  padding: 20px;
+
+  .knx-step-blocks__title {
+    color: $knab-primary-blue;
+  }
+
+  .knx-step-blocks__inner {
+    display: flex;
+  }
+}
