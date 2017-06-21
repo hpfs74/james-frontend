@@ -24,9 +24,10 @@ import { CarCheckForm } from './car-check.form';
 import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
 
-import { mockCar } from '../../../models/_mocks/car.mock';
-
+import { BaseForm } from '../../../models/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
+
+import { mockCar } from '../../../models/_mocks/car.mock';
 
 @Component({
   templateUrl: 'car-buy.component.html'
@@ -66,6 +67,14 @@ export class CarBuyComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
 
+    let formBuilder = new FormBuilder();
+    this.formContent = this.contentService.getContentObject();
+
+    this.contactDetailForm = new ContactDetailForm(formBuilder);
+    this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
+    this.checkForm = new CarCheckForm(formBuilder);
+    this.paymentForm = new IbanForm(formBuilder);
+
     this.currentStep = 0;
     this.formSteps = [
       {
@@ -74,45 +83,37 @@ export class CarBuyComponent implements OnInit {
         backButtonLabel: 'Terug',
         hideBackButton: true,
         onShowStep: () => this.initFormWithProfile(),
-        onBeforeNext: this.submitContactDetails.bind(this)
+        onBeforeNext: this.submitForm.bind(this, this.contactDetailForm)
       },
       {
         label: 'Autogegevens',
         nextButtonLabel: 'Naar check',
         backButtonLabel: 'Terug',
         onShowStep: () => this.initFormWithProfile(),
-        onBeforeNext: this.submitReportingCode.bind(this)
+        onBeforeNext: this.submitForm.bind(this, this.reportingCodeForm)
       },
       {
         label: 'Check',
         nextButtonLabel: 'Naar betalingsgegevens',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.initCheckForm(),
-        onBeforeNext: this.submitReportingCode.bind(this)
+        onShowStep: () => this.initForm(this.chatConfig.car.buy.check),
+        onBeforeNext: this.submitForm.bind(this, this.checkForm)
       },
       {
         label: 'Betaling',
         nextButtonLabel: 'Naar overzicht',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.payment),
-        onBeforeNext: this.submitPayment.bind(this)
+        onShowStep: () => this.initForm(this.chatConfig.car.buy.payment),
+        onBeforeNext: this.submitForm.bind(this, this.paymentForm)
       },
       {
         label: 'Overzicht',
         nextButtonLabel: 'Verzekering aanvragen',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.summary),
+        onShowStep: () => this.initForm(this.chatConfig.car.buy.summary),
         onBeforeNext: this.submitInsurance.bind(this)
       }
     ];
-
-    let formBuilder = new FormBuilder();
-    this.formContent = this.contentService.getContentObject();
-
-    this.contactDetailForm = new ContactDetailForm(formBuilder);
-    this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
-    this.checkForm = new CarCheckForm(formBuilder);
-    this.paymentForm = new IbanForm(formBuilder);
   }
 
   initFormWithProfile() {
@@ -120,7 +121,7 @@ export class CarBuyComponent implements OnInit {
 
     // TODO: replace mock data with actual
     this.profile = this.profileService.getUserProfile()
-      .map(( profile ) => {
+      .map((profile) => {
         let p = profile;
         p._embedded.car = Object.assign(mockCar, {
           count: 0,
@@ -133,50 +134,23 @@ export class CarBuyComponent implements OnInit {
     this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.fill);
   }
 
-  initCheckForm() {
+  initForm(message: string) {
     FormUtils.scrollToForm('form');
-
-    this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.check);
+    this.chatNotifierService.addTextMessage(message);
   }
 
-  submitContactDetails(): Observable<any> {
-    // FormUtils.validateForm(this.contactDetailForm.formGroup);
+  submitForm(form: BaseForm) {
+    FormUtils.validateForm(form.formGroup);
+    if (!form.formGroup.valid) {
+      return Observable.throw(new Error(form.validationSummaryError));
+    }
 
-    // if (!this.contactDetailForm.formGroup.valid) {
-    //   return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
-    // }
+    if (form.formGroup.get('saveToProfile').value) {
+      return this.profileService.updateUserProfile(
+        this.getUpdatedProfile(this.contactDetailForm.formGroup));
+    }
 
-    // if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
-    //   return this.profileService.updateUserProfile(
-    //     this.getUpdatedProfile(this.contactDetailForm.formGroup));
-    // }
-
-    // TODO: remove placeholder
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-  }
-
-  submitReportingCode(): Observable<any> {
-    // FormUtils.validateForm(this.reportingCodeForm.formGroup);
-
-    // if (!this.reportingCodeForm.formGroup.valid) {
-    //   return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
-    // }
-    // return new Observable(obs => {
-    //   obs.next();
-    //   obs.complete();
-    // });
-
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-  }
-
-  submitPayment(): Observable<any> {
-    // TODO: remove placeholder
+    // TODO: remove, only for testing
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -184,6 +158,7 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitInsurance(): Observable<any> {
+    // Final insurance request submit
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -194,7 +169,7 @@ export class CarBuyComponent implements OnInit {
     this.currentStep += 1;
   }
 
-  private getUpdatedProfile( form: FormGroup ) {
+  private getUpdatedProfile(form: FormGroup) {
     return {
       firstname: form.value.firstName,
       infix: form.value.middleName,
