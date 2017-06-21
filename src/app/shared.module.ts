@@ -46,6 +46,7 @@ import { InsuranceResultComponent } from './components/knx-insurance-result/insu
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { InsuranceReviewComponent } from './components/knx-insurance-review/insurance-review.component';
+import { InsuranceSummaryComponent } from './components/knx-insurance-summary/insurance-summary.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
@@ -79,6 +80,7 @@ export const sharedComponents = [
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
   InsuranceReviewComponent,
+  InsuranceSummaryComponent,
   OpeningHoursComponent,
   PriceTableComponent,
   PriceItemComponent,

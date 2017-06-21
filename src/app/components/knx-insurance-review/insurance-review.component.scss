@@ -17,6 +17,10 @@
   }
 }
 
+.knx-collapsible-panel__content + .knx-collapsible-panel__content {
+  margin-top: 8px;
+}
+
 .knx-insurance-review__logo {
   max-height: 50px;
   max-width: 150px;

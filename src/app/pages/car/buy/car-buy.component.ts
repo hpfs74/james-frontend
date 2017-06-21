@@ -99,9 +99,10 @@ export class CarBuyComponent implements OnInit {
       },
       {
         label: 'Overzicht',
-        nextButtonLabel: 'Aanvraag versturen',
+        nextButtonLabel: 'Verzekering aanvragen',
         backButtonLabel: 'Terug',
-        //onBeforeNext: this.submitRequest.bind(this)
+        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.summary),
+        onBeforeNext: this.submitInsurance.bind(this)
       }
     ];
 
@@ -158,11 +159,16 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitReportingCode(): Observable<any> {
-    FormUtils.validateForm(this.reportingCodeForm.formGroup);
+    // FormUtils.validateForm(this.reportingCodeForm.formGroup);
 
-    if (!this.reportingCodeForm.formGroup.valid) {
-      return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
-    }
+    // if (!this.reportingCodeForm.formGroup.valid) {
+    //   return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
+    // }
+    // return new Observable(obs => {
+    //   obs.next();
+    //   obs.complete();
+    // });
+
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -171,6 +177,13 @@ export class CarBuyComponent implements OnInit {
 
   submitPayment(): Observable<any> {
     // TODO: remove placeholder
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
+  }
+
+  submitInsurance(): Observable<any> {
     return new Observable(obs => {
       obs.next();
       obs.complete();
