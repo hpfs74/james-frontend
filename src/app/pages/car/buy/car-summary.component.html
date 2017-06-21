@@ -1,10 +1,30 @@
-<!--<form [formGroup]="form.formGroup" class="knx-fancy-form" role="form">-->
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-2">
-      <h2>Controleer je gegevens</h2>
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Controleer je gegevens</h2>
 
-      <knx-insurance-summary [sections]="sections"></knx-insurance-summary>
+    <knx-insurance-summary [sections]="sections"></knx-insurance-summary>
 
+    <h2>Betaling</h2>
+
+    <div class="row">
+      <div class="col-md-6">Je betaalt per maand</div>
+      <div class="col-md-6"></div>
     </div>
+
+    <div class="row">
+      <div class="col-md-6">Eenmalige afsluitkosten</div>
+      <div class="col-md-6"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">Rekeningnummer</div>
+      <div class="col-md-6"></div>
+    </div>
+
+    <cx-checkbox
+      class="pull-right"
+      [(ngModel)]="confirm"
+      [options]="{ label: 'Ik ga akkoord met de polisvoorwaarden' }">
+    </cx-checkbox>
   </div>
-<!--</form>-->
+</div>

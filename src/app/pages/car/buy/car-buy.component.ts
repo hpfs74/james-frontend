@@ -47,6 +47,7 @@ export class CarBuyComponent implements OnInit {
   reportingCodeForm: CarReportingCodeForm;
   checkForm: CarCheckForm;
   paymentForm: IbanForm;
+  acceptFinalTerms: boolean;
 
   constructor(
     private router: Router,
@@ -123,6 +124,7 @@ export class CarBuyComponent implements OnInit {
     this.profile = this.profileService.getUserProfile()
       .map((profile) => {
         let p = profile;
+        p.gender = 'm',
         p._embedded.car = Object.assign(mockCar, {
           count: 0,
           limit: 10,
@@ -145,12 +147,12 @@ export class CarBuyComponent implements OnInit {
       return Observable.throw(new Error(form.validationSummaryError));
     }
 
-    if (form.formGroup.get('saveToProfile').value) {
+    let saveCtrl = form.formGroup.get('saveToProfile');
+    if (saveCtrl && saveCtrl.value) {
       return this.profileService.updateUserProfile(
-        this.getUpdatedProfile(this.contactDetailForm.formGroup));
+        this.getUpdatedProfile(form.formGroup));
     }
-
-    // TODO: remove, only for testing
+    // Default success case
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -158,6 +160,8 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitInsurance(): Observable<any> {
+    console.log(this.acceptFinalTerms);
+
     // Final insurance request submit
     return new Observable(obs => {
       obs.next();

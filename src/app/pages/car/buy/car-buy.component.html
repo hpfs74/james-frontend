@@ -35,11 +35,12 @@
         </knx-car-payment-form>
       </knx-step>
 
-      <!--<knx-step [options]="formSteps[4]">
+      <knx-step [options]="formSteps[4]">
         <knx-car-summary-form
+          [confirm]="acceptFinalTerms"
           [profile]="profile | async">
         </knx-car-summary-form>
-      </knx-step>-->
+      </knx-step>
     </div>
 
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
