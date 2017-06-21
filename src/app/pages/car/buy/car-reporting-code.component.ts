@@ -20,6 +20,7 @@ export class CarReportingCodeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    //TODO: determine how/where to store the car details in the NICCI profile
     //if (this.profile && this.profile.car)
   }
 }
