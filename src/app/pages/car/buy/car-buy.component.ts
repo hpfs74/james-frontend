@@ -142,17 +142,17 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitForm(form: BaseForm) {
-    FormUtils.validateForm(form.formGroup);
-    if (!form.formGroup.valid) {
-      return Observable.throw(new Error(form.validationSummaryError));
-    }
+    // FormUtils.validateForm(form.formGroup);
+    // if (!form.formGroup.valid) {
+    //   return Observable.throw(new Error(form.validationSummaryError));
+    // }
 
-    let saveCtrl = form.formGroup.get('saveToProfile');
-    if (saveCtrl && saveCtrl.value) {
-      return this.profileService.updateUserProfile(
-        this.getUpdatedProfile(form.formGroup));
-    }
-    // Default success case
+    // let saveCtrl = form.formGroup.get('saveToProfile');
+    // if (saveCtrl && saveCtrl.value) {
+    //   return this.profileService.updateUserProfile(
+    //     this.getUpdatedProfile(form.formGroup));
+    // }
+
     return new Observable(obs => {
       obs.next();
       obs.complete();

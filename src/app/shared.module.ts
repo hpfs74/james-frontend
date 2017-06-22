@@ -53,6 +53,8 @@ import { PriceTableComponent, PriceItemComponent } from './components/knx-price-
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
 import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
 import { SidePanelComponent } from './components/knx-side-panel/side-panel.component';
+import { StepBlocksComponent } from './components/knx-step-blocks/step-blocks.component';
+import { StepBlockComponent } from './components/knx-step-blocks/step-block.component';
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
@@ -87,6 +89,8 @@ export const sharedComponents = [
   ReviewSummaryComponent,
   SidePanelComponent,
   StarRatingComponent,
+  StepBlocksComponent,
+  StepBlockComponent,
   LoaderComponent,
   TabsComponent,
   TabComponent,
