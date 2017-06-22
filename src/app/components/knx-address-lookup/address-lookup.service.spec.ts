@@ -58,7 +58,7 @@ describe('Service: AddressLookup', () => {
         connection.mockRespond(response);
       }
     });
-  };
+  }
 
   it('should lookup an address', () => {
     setupConnections(this.backend, {

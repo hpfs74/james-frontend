@@ -227,16 +227,7 @@ export class CarAdviceComponent implements OnInit {
   }
 
   updateAddress(address: Address) {
-    if (address.street && address.city) {
-      if (!this.address || !this.isObjectEqual<Address>(this.address, address)) {
-        this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
-      }
-      this.address = address;
-    }
-
-    if (!address.street && !address.city) {
-      this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);
-    }
+    this.address = address;
   }
 
   getCoverages(event) {

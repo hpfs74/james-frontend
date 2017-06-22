@@ -7,11 +7,6 @@ export class AssistantConfig {
     title: 'Expert verzekeringen'
   };
 
-  public generic = {
-    address: (address: Address) => `Ik heb je adres gevonden. Woon je op <strong>${address.street} in ${address.city}</strong>?`,
-    addressNotFound: 'Helaas kon ik je adres niet vinden. Heb je je postcode en huisnummer juist ingevoerd?'
-  };
-
   public dashboard = {
     start: 'Waar wil je mee beginnen?',
     welcome: (firstName: string) =>

@@ -1,5 +1,6 @@
-<div class="knx-address-lookup" [formGroup]="addressFormGroup" [class.cx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched"
-  [attr.data-error]="getErrors()">
+<div class="knx-address-lookup" [formGroup]="addressFormGroup"
+     [class.cx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched"
+     [attr.data-error]="getErrors()">
 
   <div class="row">
     <div class="col-md-12">
@@ -15,6 +16,7 @@
       }"></cx-form-group>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-7">
       <cx-form-group formControlName="houseNumber" [options]="{
@@ -36,6 +38,16 @@
           placeholder: 'Optioneel'
         }
       }"></cx-form-group>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="address">
+    <div class="col-md-12 found-address" *ngIf="address">
+      <span class="knx-icon-map-marker"></span>Found you at <b>{{address}}</b>
+    </div>
+
+    <div class="col-md-12 found-address" *ngIf="!address">
+      Helaas kon ik je adres niet vinden. Heb je je postcode en huisnummer juist ingevoerd?
     </div>
   </div>
 </div>
