@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Profile } from './../../../models/profile';
 import { ContactDetailForm } from './../../../forms/contact-detail.form';
+import { isMobileNumber } from '../../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-contact-form',
@@ -18,8 +19,8 @@ export class CarContactComponent implements OnChanges {
         firstName: this.profile.firstname,
         middleName: this.profile.infix,
         lastName: this.profile.lastname,
-        mobileNumber: this.form.isMobileNumber(this.profile.phone) ? this.profile.phone : null,
-        phoneNumber: !this.form.isMobileNumber(this.profile.phone) ? this.profile.phone : null
+        mobileNumber: isMobileNumber(this.profile.phone) ? this.profile.phone : null,
+        phoneNumber: !isMobileNumber(this.profile.phone) ? this.profile.phone : null
       });
 
       // Update validation state of known pre-filled profile fields

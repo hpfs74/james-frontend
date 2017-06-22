@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { Profile, Car } from '../../../models';
+import { isMobileNumber } from '../../../utils/base-form.utils';
 import { SectionItem, SectionGroup, SectionFields } from '../../../components/knx-insurance-summary/insurance-summary-section';
 
 @Component({
@@ -10,11 +11,34 @@ import { SectionItem, SectionGroup, SectionFields } from '../../../components/kn
 export class CarSummaryComponent implements OnChanges {
   @Input() confirm: boolean;
   @Input() profile: Profile;
+  @Input() formData: any;
+// "{
+//   "initials":"T.V.",
+//   "firstName":"Lloyd",
+//   "middleName":null,
+//   "lastName":"Miner",
+//   "mobileNumber":null,
+//   "phoneNumber":null,
+//   "saveToProfile":{},
+
+//   "reportingCode":"2345",
+//   "accessoryValue":66,
+//   "securityClass":"SCM1",
+//   "bankruptcy":"noBankruptcy",
+//   "debt":"noDebt",
+//   "refuse":"wasRefuse",
+//   "driver":"notDriver",
+//   "cause":"noCause",
+//   "register":
+//   "notRegistered",
+//   "startDate": "2017-06-29T22:00:00.000Z",
+//   "iban":"NL39 RABO 0300 0652 64",
+//   "acceptConditions":{}}"
 
   sections: Array<SectionItem>;
 
   ngOnChanges() {
-    if (this.profile) {
+    if (this.profile && this.isValid(this.profile)) {
       const carInsurance: SectionItem = {
         label: 'Je autoverzekering',
         groups: [
@@ -22,15 +46,15 @@ export class CarSummaryComponent implements OnChanges {
             fields: [
               {
                 label: 'Ingangsdatum',
-                value: ''
+                value: this.formData.startDate
               },
               {
                 label: 'Gekozen dekking',
-                value: ''
+                value: this.formData.coverage
               },
               {
                 label: 'Eigen risico',
-                value: ''
+                value: this.formData.ownRisk
               }
             ]
           },
@@ -38,15 +62,15 @@ export class CarSummaryComponent implements OnChanges {
             fields: [
               {
                 label: 'Rechtsbijstand',
-                value: ''
+                value: '' //this.formData.extraOptions
               },
               {
                 label: 'No-claim beschermer',
-                value: ''
+                value: '' //this.formData.extraOptions
               },
               {
                 label: 'Inzittendenverzekering',
-                value: ''
+                value: '' //this.formData.extraOptions
               }
             ]
           }
@@ -88,7 +112,7 @@ export class CarSummaryComponent implements OnChanges {
               },
               {
                 label: 'Waarde accessoires',
-                value: 'test'
+                value: this.formData.accessoryValue
               },
               {
                 label: 'Dagwaarde',
@@ -100,11 +124,11 @@ export class CarSummaryComponent implements OnChanges {
               },
               {
                 label: 'KM per jaar',
-                value: 'test'
+                value: this.formData.kmPerYear
               },
               {
                 label: 'Beveiliging',
-                value: 'test'
+                value: this.formData.securityClass
               }
             ]
           }
@@ -122,7 +146,7 @@ export class CarSummaryComponent implements OnChanges {
               },
               {
                 label: 'Voorletters',
-                value: 'test'
+                value: this.formData.initials
               },
               {
                 label: 'Voornaam',
@@ -142,23 +166,23 @@ export class CarSummaryComponent implements OnChanges {
             fields: [
               {
                 label: 'Postcode',
-                value: 'test'
+                value: this.profile.address.postcode
               },
               {
                 label: 'Huisnummer',
-                value: 'test'
+                value: this.profile.address.number
               },
               {
                 label: 'Mobiel nummer',
-                value: 'test'
+                value: this.formData.mobileNumber
               },
               {
                 label: 'Vast nummer',
-                value: 'test'
+                value: this.formData.phoneNumber
               },
               {
                 label: 'E-mailadres',
-                value: 'test'
+                value: this.profile.emailaddress
               }
             ]
           }
@@ -171,5 +195,18 @@ export class CarSummaryComponent implements OnChanges {
         personalDetails
       ];
     }
+  }
+
+  private isValid(profile: Profile) {
+    //TODO: make (address) data from first advice step available here
+    // console.log(this.isEmpty(profile));
+    // console.log(this.isEmpty(profile.address));
+    // console.log(this.isEmpty(profile._embedded.car));
+
+    return !(this.isEmpty(profile) || this.isEmpty(profile.address) || this.isEmpty(profile._embedded.car));
+  }
+
+  private isEmpty(obj: any) {
+    return !obj || Object.keys(obj).length <= 0;
   }
 }

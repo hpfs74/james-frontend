@@ -1,0 +1,15 @@
+.car-summary {
+  .row {
+    margin-bottom: 15px;
+  }
+
+  .row [class^='col-']:nth-child(2) {
+    color: $knab-dark-gray;
+  }
+
+  span.premium-note {
+    color: $knab-secondary-orange;
+    font-size: $font-size-base - 2;
+    display: block;
+  }
+}
