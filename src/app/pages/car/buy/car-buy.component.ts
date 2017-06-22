@@ -48,6 +48,7 @@ export class CarBuyComponent implements OnInit {
   checkForm: CarCheckForm;
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
+  formData: any;
 
   constructor(
     private router: Router,
@@ -111,7 +112,7 @@ export class CarBuyComponent implements OnInit {
         label: 'Overzicht',
         nextButtonLabel: 'Verzekering aanvragen',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.initForm(this.chatConfig.car.buy.summary),
+        onShowStep: () => this.initSummaryForm(this.chatConfig.car.buy.summary),
         onBeforeNext: this.submitInsurance.bind(this)
       }
     ];
@@ -139,6 +140,28 @@ export class CarBuyComponent implements OnInit {
   initForm(message: string) {
     FormUtils.scrollToForm('form');
     this.chatNotifierService.addTextMessage(message);
+  }
+
+  initSummaryForm(message: string) {
+    this.initForm(message);
+
+    // Collect all form data
+    let forms = [
+      this.contactDetailForm.formGroup.value,
+      this.reportingCodeForm.formGroup.value,
+      this.checkForm.formGroup.value,
+      this.paymentForm.formGroup.value
+    ];
+
+    let data = forms.reduce((acc, x) => {
+      for (let key in x) {
+        acc[key] = x[key];
+      }
+      return acc;
+    }, {});
+
+    console.log(data);
+    this.formData = data;
   }
 
   submitForm(form: BaseForm) {

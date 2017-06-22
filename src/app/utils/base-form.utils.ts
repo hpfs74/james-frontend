@@ -74,11 +74,18 @@ export const postalCodeMask = {
   pipe: function (conformedValue) {
     return conformedValue.toUpperCase();
   }
-}
+};
 
 export const validateForm = function (form: FormGroup) {
   Object.keys(form.controls).forEach(key => {
     form.get(key).markAsTouched();
   });
   form.updateValueAndValidity();
+};
+
+export const isMobileNumber = function (phone: string) {
+  if (phone && phone.length !== 10) {
+    return false;
+  }
+  return (/^06[1-5]/.test(phone) || /^06760/.test(phone));
 };
