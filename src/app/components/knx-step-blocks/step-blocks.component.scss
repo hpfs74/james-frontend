@@ -1,0 +1,15 @@
+.knx-step-blocks {
+  background: $knab-primary-gray;
+  border-radius: $knab-border-radius;
+  padding: 20px;
+
+  .knx-step-blocks__title {
+    color: $knab-primary-blue;
+    margin-bottom: 20px;
+    font-size: $font-size-base + 2;
+  }
+
+  .knx-step-blocks__inner {
+    display: flex;
+  }
+}

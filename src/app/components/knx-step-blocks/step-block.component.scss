@@ -1,0 +1,23 @@
+knx-step-block {
+  flex: 1 auto;
+  height: 100%;
+}
+
+.knx-step-block {
+  border-radius: $knab-border-radius - 2;
+  background: $knab-white;
+  padding: 20px;
+  margin-right: 10px;
+
+  p {
+    margin-bottom: 0;
+    font-size: $font-size-base - 2;
+    line-height: 1.4em;
+  }
+
+  h3 {
+    font-size: $font-size-base;
+    font-family: $font-family-base;
+    margin-bottom: 10px;
+  }
+}

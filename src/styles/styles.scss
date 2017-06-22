@@ -14,6 +14,7 @@
 @import '../app/pages/dashboard/dashboard.component';
 @import '../app/pages/login/login.component';
 @import '../app/pages/password-reset/password-reset.component';
+@import '../app/pages/car/buy/car-summary.component';
 
 /* component styles */
 @import '../app/components/knx-address-lookup/address-lookup.component';
@@ -40,6 +41,8 @@
 @import '../app/components/knx-review-summary/review-summary.component';
 @import '../app/components/knx-side-panel/side-panel.component';
 @import '../app/components/knx-star-rating/star-rating.component';
+@import '../app/components/knx-step-blocks/step-blocks.component';
+@import '../app/components/knx-step-blocks/step-block.component';
 @import '../app/components/knx-tabs/tabs.component';
 @import '../app/components/knx-user-greeting/user-greeting.component';
 @import '../app/components/knx-car-info-message/car-info.component';

@@ -36,7 +36,7 @@ export class Profile {
   _id: string;
   _deleted: boolean;
   _embedded: {
-    car: ProfileEmbedded;
+    car: any;
     travel: ProfileEmbedded;
     content: ProfileEmbedded;
     home: ProfileEmbedded;

@@ -24,9 +24,10 @@ import { CarCheckForm } from './car-check.form';
 import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
 
-import { mockCar } from '../../../models/_mocks/car.mock';
-
+import { BaseForm } from '../../../models/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
+
+import { mockCar } from '../../../models/_mocks/car.mock';
 
 @Component({
   templateUrl: 'car-buy.component.html'
@@ -46,6 +47,8 @@ export class CarBuyComponent implements OnInit {
   reportingCodeForm: CarReportingCodeForm;
   checkForm: CarCheckForm;
   paymentForm: IbanForm;
+  acceptFinalTerms: boolean;
+  formData: any;
 
   constructor(
     private router: Router,
@@ -66,6 +69,14 @@ export class CarBuyComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
 
+    let formBuilder = new FormBuilder();
+    this.formContent = this.contentService.getContentObject();
+
+    this.contactDetailForm = new ContactDetailForm(formBuilder);
+    this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
+    this.checkForm = new CarCheckForm(formBuilder);
+    this.paymentForm = new IbanForm(formBuilder);
+
     this.currentStep = 0;
     this.formSteps = [
       {
@@ -74,44 +85,37 @@ export class CarBuyComponent implements OnInit {
         backButtonLabel: 'Terug',
         hideBackButton: true,
         onShowStep: () => this.initFormWithProfile(),
-        onBeforeNext: this.submitContactDetails.bind(this)
+        onBeforeNext: this.submitForm.bind(this, this.contactDetailForm)
       },
       {
         label: 'Autogegevens',
         nextButtonLabel: 'Naar check',
         backButtonLabel: 'Terug',
         onShowStep: () => this.initFormWithProfile(),
-        onBeforeNext: this.submitReportingCode.bind(this)
+        onBeforeNext: this.submitForm.bind(this, this.reportingCodeForm)
       },
       {
         label: 'Check',
         nextButtonLabel: 'Naar betalingsgegevens',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.check),
-        onBeforeNext: this.submitCheck.bind(this)
+        onShowStep: () => this.initForm(this.chatConfig.car.buy.check),
+        onBeforeNext: this.submitForm.bind(this, this.checkForm)
       },
       {
         label: 'Betaling',
         nextButtonLabel: 'Naar overzicht',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.payment),
-        onBeforeNext: this.submitPayment.bind(this)
+        onShowStep: () => this.initForm(this.chatConfig.car.buy.payment),
+        onBeforeNext: this.submitForm.bind(this, this.paymentForm)
       },
       {
         label: 'Overzicht',
-        nextButtonLabel: 'Aanvraag versturen',
+        nextButtonLabel: 'Verzekering aanvragen',
         backButtonLabel: 'Terug',
-        //onBeforeNext: this.submitRequest.bind(this)
+        onShowStep: () => this.initSummaryForm(this.chatConfig.car.buy.summary),
+        onBeforeNext: this.submitInsurance.bind(this)
       }
     ];
-
-    let formBuilder = new FormBuilder();
-    this.formContent = this.contentService.getContentObject();
-
-    this.contactDetailForm = new ContactDetailForm(formBuilder);
-    this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
-    this.checkForm = new CarCheckForm(formBuilder);
-    this.paymentForm = new IbanForm(formBuilder);
   }
 
   initFormWithProfile() {
@@ -119,8 +123,9 @@ export class CarBuyComponent implements OnInit {
 
     // TODO: replace mock data with actual
     this.profile = this.profileService.getUserProfile()
-      .map(( profile ) => {
+      .map((profile) => {
         let p = profile;
+        p.gender = 'm',
         p._embedded.car = Object.assign(mockCar, {
           count: 0,
           limit: 10,
@@ -132,51 +137,55 @@ export class CarBuyComponent implements OnInit {
     this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.fill);
   }
 
-  submitContactDetails(): Observable<any> {
-    // FormUtils.validateForm(this.contactDetailForm.formGroup);
+  initForm(message: string) {
+    FormUtils.scrollToForm('form');
+    this.chatNotifierService.addTextMessage(message);
+  }
 
-    // if (!this.contactDetailForm.formGroup.valid) {
-    //   return Observable.throw(new Error(this.contactDetailForm.validationSummaryError));
+  initSummaryForm(message: string) {
+    this.initForm(message);
+
+    // Collect all form data
+    let forms = [
+      this.contactDetailForm.formGroup.value,
+      this.reportingCodeForm.formGroup.value,
+      this.checkForm.formGroup.value,
+      this.paymentForm.formGroup.value
+    ];
+
+    let data = forms.reduce((acc, x) => {
+      for (let key in x) {
+        acc[key] = x[key];
+      }
+      return acc;
+    }, {});
+
+    console.log(data);
+    this.formData = data;
+  }
+
+  submitForm(form: BaseForm) {
+    // FormUtils.validateForm(form.formGroup);
+    // if (!form.formGroup.valid) {
+    //   return Observable.throw(new Error(form.validationSummaryError));
     // }
 
-    // if (this.contactDetailForm.formGroup.get('saveToProfile').value) {
+    // let saveCtrl = form.formGroup.get('saveToProfile');
+    // if (saveCtrl && saveCtrl.value) {
     //   return this.profileService.updateUserProfile(
-    //     this.getUpdatedProfile(this.contactDetailForm.formGroup));
+    //     this.getUpdatedProfile(form.formGroup));
     // }
 
-    // TODO: remove placeholder
     return new Observable(obs => {
       obs.next();
       obs.complete();
     });
   }
 
-  submitReportingCode(): Observable<any> {
-    FormUtils.validateForm(this.reportingCodeForm.formGroup);
+  submitInsurance(): Observable<any> {
+    console.log(this.acceptFinalTerms);
 
-    if (!this.reportingCodeForm.formGroup.valid) {
-      return Observable.throw(new Error(this.reportingCodeForm.validationSummaryError));
-    }
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-  }
-
-  submitCheck(): Observable<any> {
-    FormUtils.validateForm(this.checkForm.formGroup);
-
-    if (!this.checkForm.formGroup.valid) {
-      return Observable.throw(new Error(this.checkForm.validationSummaryError));
-    }
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-  }
-
-  submitPayment(): Observable<any> {
-    // TODO: remove placeholder
+    // Final insurance request submit
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -187,7 +196,7 @@ export class CarBuyComponent implements OnInit {
     this.currentStep += 1;
   }
 
-  private getUpdatedProfile( form: FormGroup ) {
+  private getUpdatedProfile(form: FormGroup) {
     return {
       firstname: form.value.firstName,
       infix: form.value.middleName,

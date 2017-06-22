@@ -46,12 +46,15 @@ import { InsuranceResultComponent } from './components/knx-insurance-result/insu
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { InsuranceReviewComponent } from './components/knx-insurance-review/insurance-review.component';
+import { InsuranceSummaryComponent } from './components/knx-insurance-summary/insurance-summary.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
 import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
 import { SidePanelComponent } from './components/knx-side-panel/side-panel.component';
+import { StepBlocksComponent } from './components/knx-step-blocks/step-blocks.component';
+import { StepBlockComponent } from './components/knx-step-blocks/step-block.component';
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
@@ -79,12 +82,15 @@ export const sharedComponents = [
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
   InsuranceReviewComponent,
+  InsuranceSummaryComponent,
   OpeningHoursComponent,
   PriceTableComponent,
   PriceItemComponent,
   ReviewSummaryComponent,
   SidePanelComponent,
   StarRatingComponent,
+  StepBlocksComponent,
+  StepBlockComponent,
   LoaderComponent,
   TabsComponent,
   TabComponent,
