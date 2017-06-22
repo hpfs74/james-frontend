@@ -4,6 +4,8 @@
     <div class="col-sm-10 col-sm-offset-2">
       <h2>Je gegevens</h2>
 
+      <h3>Over je auto</h3>
+
       <div class="row">
         <div class="col-md-7 col-sm-12">
           <cx-form-group [options]="form.formConfig.licensePlate">
@@ -20,21 +22,6 @@
 
       <div class="row">
         <div class="col-md-7 col-sm-12">
-          <cx-form-group
-            [formControlName]="form.formConfig.birthDate.formControlName"
-            [options]="form.formConfig.birthDate">
-          </cx-form-group>
-        </div>
-      </div>
-
-      <knx-address-lookup
-        [addressFormGroup]="form.addressForm"
-        [validationErrors]="form.validationErrors"
-        (addressFound)="onAddressFound($event)">
-      </knx-address-lookup>
-
-      <div class="row">
-        <div class="col-md-7 col-sm-12">
           <div class="knx-form-group--info">
             <cx-form-group
               [formControlName]="form.formConfig.claimFreeYears.formControlName"
@@ -45,11 +32,11 @@
                 <div class="knx-message knx-message--chat knx-message--arrow-top">
                   <div class="knx-message__content">
                     <p>De <strong>schadevrije jaren</strong> vind je op je meest recente polis.
-                    Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
-                    korting op de premie.</p>
+                      Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
+                      korting op de premie.</p>
 
                     <p>Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
-                    dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.</p>
+                      dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.</p>
                   </div>
                 </div>
               </div>
@@ -59,7 +46,7 @@
         <div class="col-md-4 hidden-sm hidden-xs">
           <div class="cx-form-group">
             <button class="knx-button knx-button--util inline-formelement">
-                Weet ik niet
+              Weet ik niet
             </button>
           </div>
         </div>
@@ -74,10 +61,18 @@
         </div>
       </div>
 
-      <cx-form-group
-        [formControlName]="form.formConfig.houseHold.formControlName"
-        [options]="form.formConfig.houseHold">
-      </cx-form-group>
+      <hr>
+
+      <h3>Over you</h3>
+
+      <div class="row">
+        <div class="col-md-7 col-sm-12">
+          <cx-form-group
+            [formControlName]="form.formConfig.birthDate.formControlName"
+            [options]="form.formConfig.birthDate">
+          </cx-form-group>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
@@ -87,6 +82,17 @@
           </cx-form-group>
         </div>
       </div>
+
+      <knx-address-lookup
+        [addressFormGroup]="form.addressForm"
+        [validationErrors]="form.validationErrors"
+        (addressFound)="onAddressFound($event)">
+      </knx-address-lookup>
+
+      <cx-form-group
+        [formControlName]="form.formConfig.houseHold.formControlName"
+        [options]="form.formConfig.houseHold">
+      </cx-form-group>
 
     </div>
   </div>
