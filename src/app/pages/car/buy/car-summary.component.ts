@@ -38,7 +38,11 @@ export class CarSummaryComponent implements OnChanges {
   sections: Array<SectionItem>;
 
   ngOnChanges() {
+<<<<<<< HEAD
     if (this.profile && this.isProfileValid(this.profile)) {
+=======
+    if (this.profile && this.isValid(this.profile)) {
+>>>>>>> 9cadd214846ed827d2061ad5f265cf1344ed9d5e
       const carInsurance: SectionItem = {
         label: 'Je autoverzekering',
         groups: [
