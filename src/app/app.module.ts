@@ -10,7 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
 
 import { reducer } from './reducers';
-//import { ProfileEffects } from './effects/profile';
+import { ProfileEffects } from './effects/profile';
 
 import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
@@ -69,8 +69,8 @@ export function ContentLoader(contentService: ContentService) {
      * the store as the single source of truth for the router's state.
      */
     RouterStoreModule.connectRouter(),
+    EffectsModule.runAfterBootstrap(ProfileEffects),
 
-    //EffectsModule.run(ProfileEffects),
     LoginRoutingModule,
     AuthModule,
     AppRoutingModule,
@@ -97,7 +97,7 @@ export function ContentLoader(contentService: ContentService) {
       deps: [ContentService],
       multi: true
     },
-    requestOptionsProvider
+    requestOptionsProvider,
   ],
   bootstrap: [AppComponent],
 })

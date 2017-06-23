@@ -24,12 +24,10 @@ export function reducer(state = initialState, action: profile.Actions): State {
     }
 
     case profile.LOAD_PROFILE_SUCCESS: {
-      const profile = action.payload;
-
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
-        profile: Object.assign({}, state.profile, profile)
+        profile: Object.assign({}, action.payload)
       });
     }
 

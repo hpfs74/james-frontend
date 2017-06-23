@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../../reducers';
+import * as profile from '../../actions/profile';
+
 import { Price, Nav, Feature, Profile } from '../../models';
 import { ContentService } from '../../content.service';
 import {
@@ -19,7 +21,7 @@ import {
     <header class="header">
       <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user [isLoggedIn]="isLoggedIn" (onLogOut)="logOut()" [profile]="profile"></knx-nav-user>
+        <knx-nav-user [isLoggedIn]="isLoggedIn" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
     </header>
 
@@ -41,8 +43,6 @@ export class HomeComponent implements OnInit {
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
-  //profile: Profile;
-
   profile$: Observable<Profile>;
 
   constructor(
@@ -53,13 +53,6 @@ export class HomeComponent implements OnInit {
     private contentService: ContentService) {
   }
 
-  // books$: Observable<Book[]>;
-
-  // constructor(store: Store<fromRoot.State>) {
-  //   this.books$ = store.select(fromRoot.getBookCollection);
-  // }
-
-
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
     this.footerItems = this.contentService.getContentObject().layout.footer;
@@ -69,6 +62,7 @@ export class HomeComponent implements OnInit {
 
     this.profile$ = this.store.select(fromRoot.getProfile);
 
+    //TODO: 403 on profile redirect
     // this.profileService.getUserProfile()
     //   .subscribe( (profile) => {
     //     this.profile = profile;

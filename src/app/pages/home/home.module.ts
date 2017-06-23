@@ -1,4 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+
 import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.module';
 
@@ -8,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { AssistantService } from '../../services/assistant.service';
 import { LoaderService } from '../../components/knx-app-loader/loader.service';
+import { ProfileService } from '../../services/profile.service';
 
 // Layout components
 import { AppLoaderComponent } from '../../components/knx-app-loader/loader.component';
@@ -43,7 +45,8 @@ export class HomeModule {
         AuthService,
         AuthGuard,
         AssistantService,
-        LoaderService
+        LoaderService,
+        ProfileService
       ]
     };
   }
