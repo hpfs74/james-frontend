@@ -17,12 +17,14 @@ export const initialState: State = {
 export function reducer(state = initialState, action: profile.Actions): State {
   switch (action.type) {
 
+    case profile.SAVE_PROFILE_REQUEST:
     case profile.LOAD_PROFILE_REQUEST: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
+    case profile.SAVE_PROFILE_SUCCESS:
     case profile.LOAD_PROFILE_SUCCESS: {
       return Object.assign({}, state, {
         loading: false,
@@ -31,6 +33,7 @@ export function reducer(state = initialState, action: profile.Actions): State {
       });
     }
 
+    case profile.SAVE_PROFILE_FAIL:
     case profile.LOAD_PROFILE_FAIL: {
       return state;
     }

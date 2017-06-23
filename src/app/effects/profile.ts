@@ -1,3 +1,4 @@
+import { SaveSuccessAction } from './../actions/profile';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
@@ -26,6 +27,15 @@ export class ProfileEffects {
       this.profileService.getUserProfile()
         .map((p: Profile) => new profile.LoadSuccessAction(p))
         .catch(error => Observable.of(new profile.LoadFailAction(error))));
+
+  @Effect()
+  saveProfile$: Observable<Action> = this.action$
+    .ofType(profile.SAVE_PROFILE_REQUEST)
+    .map((action: profile.SaveAction) => action.payload)
+    .switchMap((p) =>
+      this.profileService.updateUserProfile(p)
+        .map((p: Profile) => new profile.SaveSuccessAction(p))
+        .catch(error => Observable.of(new profile.SaveFailAction(error))));
 
   constructor(private action$: Actions, private profileService: ProfileService) { }
 }
