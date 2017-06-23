@@ -6,18 +6,18 @@
 $knx-insurance-result-border: 1px solid $knab-primary-gray;
 
 .knx-insurance-result {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   opacity: 1;
 }
 
 .knx-insurance_advice {
   border: $knx-insurance-result-border;
-  margin: 40px 0 0;
+  margin: 20px 0 0;
 
   [class*="col-"] {
     border-right: $knx-insurance-result-border;
     font-size: $font-size-base - 2;
-    padding: 40px 40px 15px 25px;
+    padding: 20px 40px 10px 25px;
 
     &:last-child {
       border-right: 0;
@@ -108,11 +108,11 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 .knx-insurance-result__profilescore {
   padding-left: 0 !important;
   padding-right: 0 !important;
-  padding-top: 25px !important;
+  padding-top: 5px !important;
   text-align: center;
 
   .knx-donut {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 }
 
@@ -120,12 +120,12 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   text-align: left;
   padding-left: 15px !important;
   padding-right: 0 !important;
-  padding-top: 44px !important;
+  padding-top: 24px !important;
 
   .knx-insurance-result__amount {
     font-family: $font-family-head;
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     span {
       vertical-align: super;
