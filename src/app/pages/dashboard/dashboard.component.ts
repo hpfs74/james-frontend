@@ -12,7 +12,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
-import { Profile, ProfileEmbedded, DashboardInsuranceMap, DashboardItem, insuranceTypes } from '../../models';
+import { Profile, DashboardInsuranceMap, DashboardItem, insuranceTypes } from '../../models';
 
 @Component({
   templateUrl: 'dashboard.component.html'

@@ -26,7 +26,6 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginRoutingModule } from './pages/login/login-routing.module';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
-//TODO: needed on login?
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
 // Feature modules

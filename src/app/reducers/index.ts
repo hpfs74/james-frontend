@@ -39,6 +39,7 @@ import { combineReducers } from '@ngrx/store';
  */
 import * as fromProfile from './profile';
 import * as fromLayout from './layout';
+import * as fromInsurances from './insurances';
 
 
 /**
@@ -150,6 +151,7 @@ export function reducer(state: any, action: any) {
  */
 export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
+export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
 
 /**
  * Layout Reducers

@@ -96,6 +96,7 @@ export function reducer(state = initialState, action: profile.Actions): State {
  * use-case.
  */
 export const getCurrent = (state: State) => state.profile;
+export const getLoading = (state: State) => state.loading;
 
 // export const getBookCollection = createSelector(getBookEntities, getCollectionBookIds, (entities, ids) => {
 //   return ids.map(id => entities[id]);

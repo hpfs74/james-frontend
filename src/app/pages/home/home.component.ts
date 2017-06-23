@@ -37,12 +37,13 @@ import {
   `
 })
 export class HomeComponent implements OnInit {
-  isLoading: boolean = true;
   isLoggedIn: boolean = false;
   coverages: Array<Price>;
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
+
+  loading$: Observable<boolean>;
   profile$: Observable<Profile>;
 
   constructor(
@@ -57,10 +58,10 @@ export class HomeComponent implements OnInit {
     this.topMenu = this.navigationService.getMenu();
     this.footerItems = this.contentService.getContentObject().layout.footer;
 
-    this.isLoading = false;
     this.isLoggedIn = this.authService.isLoggedIn();
 
     this.profile$ = this.store.select(fromRoot.getProfile);
+    this.loading$ = this.store.select(fromRoot.getProfileLoading);
 
     //TODO: 403 on profile redirect
     // this.profileService.getUserProfile()
