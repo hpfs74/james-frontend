@@ -93,6 +93,7 @@ describe('Component: DashboardDetail', () => {
       expect(comp.chatMessages[0].data).toContain('auto');
     });
   });
+
   describe('with routing to travel', () => {
     beforeEach(async(() => {
       routerStub = {

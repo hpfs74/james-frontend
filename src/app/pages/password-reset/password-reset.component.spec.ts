@@ -63,16 +63,4 @@ describe('Component: Password Reset', () => {
     let navElement = fixture.debugElement.query(By.css('div.knx-password-reset__welcome > p'));
     expect(navElement).not.toBeNull();
   });
-
-  xit('should disable submit button until user provide a correct email', () => {
-    let buttonEl = fixture.debugElement.query(By.css('button.knx-button'));
-
-    expect(buttonEl).toBeDefined();
-    //expect(buttonEl.attr('disabled')).toBe(true);
-  });
-
-  xit('should display success message if user provide existing email');
-  xit('should display error message if user provide not existing email');
-  xit('should display a captcha when is needed');
-  xit('should display error message on network error');
 });

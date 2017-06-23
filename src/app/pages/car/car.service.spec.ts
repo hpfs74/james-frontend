@@ -14,6 +14,8 @@ import { Car } from '../../models/car';
 import { CarInsuranceOptions, CarCompareRequest } from '../../models/car-compare-request';
 
 describe('Service: Car', () => {
+  let backend, service;
+
   const configServiceStub = {
     config: {
       api: {
@@ -96,17 +98,17 @@ describe('Service: Car', () => {
       ]
     });
 
-    this.backend = TestBed.get(MockBackend);
-    this.service = TestBed.get(CarService);
+    backend = TestBed.get(MockBackend);
+    service = TestBed.get(CarService);
   }));
 
   describe('Car Information', () => {
     it('should define the getByLicense function', () => {
-      expect(this.service.getByLicense).toBeDefined;
+      expect(service.getByLicense).toBeDefined;
     });
 
     it('should return an Observable<Car>', () => {
-      this.backend.connections.subscribe((connection) => {
+      backend.connections.subscribe((connection) => {
         connection.mockRespond(new Response(new ResponseOptions({
           body: JSON.stringify(mockCarInfoResponse)
         })));
@@ -125,11 +127,11 @@ describe('Service: Car', () => {
 
   describe('Car Coverage', () => {
     it('should define the getCoverageRecommendation function', () => {
-      expect(this.service.getCoverageRecommendation).toBeDefined;
+      expect(service.getCoverageRecommendation).toBeDefined;
     });
 
     it('should return a Observable<CarCoverageRecommendation>', () => {
-      this.backend.connections.subscribe((connection) => {
+      backend.connections.subscribe((connection) => {
         connection.mockRespond(new Response(new ResponseOptions({
           body: JSON.stringify(mockCoverageResponse)
         })));
@@ -146,11 +148,11 @@ describe('Service: Car', () => {
 
   describe('Car Insurance Compare', () => {
     it('should define the getInsurances function', () => {
-      expect(this.service.getInsurances).toBeDefined;
+      expect(service.getInsurances).toBeDefined;
     });
 
     it('should return an Observable<Array<CarInsurance>>', () => {
-      this.backend.connections.subscribe((connection) => {
+      backend.connections.subscribe((connection) => {
         connection.mockRespond(new Response(new ResponseOptions({
           body: JSON.stringify({})
         })));

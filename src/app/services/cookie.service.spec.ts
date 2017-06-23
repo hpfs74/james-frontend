@@ -42,11 +42,11 @@ describe('Service: CookieService', () => {
       expect(service.get('notexisting')).toBe('');
     });
 
-    it('should set the correct expire date in days', () => {
+    xit('should set the correct expire date in days', () => {
       pending();
     });
 
-    it('should set the correct expire date with a date object', () => {
+    xit('should set the correct expire date with a date object', () => {
       pending();
     });
 
