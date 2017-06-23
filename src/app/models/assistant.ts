@@ -22,6 +22,7 @@ export class AssistantConfig {
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
+      houseHold: `<b>Approve message!</b> <br> Uw premie kan veranderen afhankelijk van de huishoudelijke status`,
       niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`

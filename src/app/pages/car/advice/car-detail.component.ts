@@ -57,6 +57,10 @@ export class CarDetailComponent implements OnInit {
     this.formControlFocus.emit(controlKey);
   }
 
+  onFocusHouseHold() {
+    this.formControlFocus.emit('houseHold');
+  }
+
   onSelectCoverage(coverage: Price) {
     if (coverage.id) {
       this.coverageSelected.emit(coverage);

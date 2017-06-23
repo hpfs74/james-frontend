@@ -195,7 +195,10 @@ export class CarAdviceComponent implements OnInit {
   }
 
   showHelperText(key) {
-    this.chatNotifierService.addTextMessage(this.chatConfig.car.info[key]);
+    let messageToShow = this.chatConfig.car.info[key];
+    if (messageToShow !== this.chatMessages[0].data) {
+      this.chatNotifierService.addTextMessage(messageToShow);
+    }
   }
 
   getCarInfo(licensePlate: string) {
