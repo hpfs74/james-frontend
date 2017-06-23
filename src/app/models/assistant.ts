@@ -27,6 +27,9 @@ export class AssistantConfig {
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },
+      CL: `<b>Approve message!</b> <br> WA has these and these benefits`,
+      CLC: `<b>Approve message!</b> <br> WA + Casco has these and these benefits`,
+      CAR: `<b>Approve message!</b> <br> WA has these and these benefits`,
       noClaimProtection: '',
       legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
         Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat

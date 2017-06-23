@@ -192,6 +192,7 @@ export class CarAdviceComponent implements OnInit {
 
   updateSelectedCoverage(coverage: Price) {
     this.carDetailForm.formGroup.get('coverage').patchValue(coverage.id);
+    this.showHelperText(coverage.id);
   }
 
   showHelperText(key) {
