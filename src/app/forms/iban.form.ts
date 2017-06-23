@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { BaseForm } from '../models/base-form';
+import { BaseForm } from '../forms/base-form';
 import { futureDateValidator, ibanValidator } from '../utils/base-form.validators';
 import { birthDateMask } from '../utils/base-form.utils';
 import { carReportingCodeValidator } from '../utils/base-form.validators';

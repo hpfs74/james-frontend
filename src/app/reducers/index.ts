@@ -49,9 +49,9 @@ import * as fromInsurances from './insurances';
 export interface State {
   profile: fromProfile.State;
   layout: fromLayout.State;
+  //insurances: fromInsurances.State;
   router: fromRouter.RouterState;
 }
-
 
 /**
  * Because metareducers take a reducer function and return a new reducer,
@@ -63,6 +63,7 @@ export interface State {
 const reducers = {
   profile: fromProfile.reducer,
   layout: fromLayout.reducer,
+  //insurances: fromInsurances.reducer,
   router: fromRouter.routerReducer,
 };
 

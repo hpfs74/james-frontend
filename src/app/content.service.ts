@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { CarSecurityClass } from './models/car-security-class';
+import { CarSecurityClass } from './content.interface';
 
 export interface AppContent {
   car?: {

@@ -32,17 +32,15 @@ export function reducer(state = initialState, action: insurances.Actions): State
       };
     }
 
-    // case collection.ADD_INSURANCE_SUCCESS: {
-    //   const insurance = action.payload;
+    case insurances.ADD_INSURANCE_SUCCESS: {
+      const insurance = action.payload;
 
-    //   if (state.ids.indexOf(book.id) > -1) {
-    //     return state;
-    //   }
-
-    //   return Object.assign({}, state, {
-    //     ids: [ ...state.ids, book.id ]
-    //   });
-    // }
+      return {
+        loaded: true,
+        loading: false,
+        insurances: [ ...state.insurances, insurance ]
+      };
+    }
 
     // case collection.REMOVE_BOOK_SUCCESS:
     // case collection.ADD_BOOK_FAIL: {

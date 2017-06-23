@@ -1,13 +1,5 @@
 import { Car } from './car';
-import { Insurer } from './insurer';
-
-export class InsuranceCompareResult {
-  id: number;
-  insurance_brand: string;
-  insurance_logo: string;
-  url: string;
-  insurer?: Insurer;
-}
+import { Insurance } from './insurance';
 
 export class InsuranceAdvice {
   fit: number;
@@ -18,6 +10,6 @@ export class InsuranceAdvice {
   reviews_amount: number;
   _embedded: {
     car: Car;
-    insurance: InsuranceCompareResult;
+    insurance: Insurance;
   };
 }

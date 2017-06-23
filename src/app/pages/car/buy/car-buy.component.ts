@@ -24,7 +24,7 @@ import { CarCheckForm } from './car-check.form';
 import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
 
-import { BaseForm } from '../../../models/base-form';
+import { BaseForm } from '../../../forms/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
 import { mockCar } from '../../../models/_mocks/car.mock';

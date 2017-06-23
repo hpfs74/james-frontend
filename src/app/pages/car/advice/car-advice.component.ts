@@ -12,11 +12,11 @@ import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { ChatStreamComponent } from './../../../components/knx-chat-stream/chat-stream.component';
 import { CarService } from '../car.service';
-import { Car, Price, CarCompareRequest, Profile, Address } from '../../../models';
+import { Car, Price, CarCompare, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../../models/coverage';
 import { CarInsurance } from '../../../models/car-insurance';
-import { CarInsuranceOptions } from './../../../models/car-compare-request';
+import { CarInsuranceOptions } from './../../../models/car-compare';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
 import * as FormUtils from '../../../utils/base-form.utils';
@@ -168,7 +168,7 @@ export class CarAdviceComponent implements OnInit {
       claim_free_years: +detailForm.value.claimFreeYears,
       household_status: detailForm.value.houseHold
     };
-    let requestObj = new CarCompareRequest(this.profile, this.car, this.address, options);
+    let requestObj = new CarCompare(this.profile, this.car, this.address, options);
 
 
     this.formData[0] = requestObj;

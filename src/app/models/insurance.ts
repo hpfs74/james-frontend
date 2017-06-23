@@ -11,6 +11,7 @@ export interface Insurance {
   insurance?: string;
   insurance_logo?: string;
   insurance_brand?: string;
+  insurance_name?: string;
   details?: string;
   policy_number?: string;
   filled_data_percentage?: number;

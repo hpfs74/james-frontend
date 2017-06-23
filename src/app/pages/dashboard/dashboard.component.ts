@@ -12,7 +12,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
-import { Profile, DashboardInsuranceMap, DashboardItem, insuranceTypes } from '../../models';
+import { Profile, InsuranceMap, Insurance, insuranceTypes } from '../../models';
 
 @Component({
   templateUrl: 'dashboard.component.html'
@@ -20,7 +20,7 @@ import { Profile, DashboardInsuranceMap, DashboardItem, insuranceTypes } from '.
 export class DashboardComponent implements OnInit {
   profile: Profile;
   chatConfig: AssistantConfig;
-  insurances: Array<DashboardItem>;
+  insurances: Array<Insurance>;
   chatMessages: Array<ChatMessage>;
 
   constructor(private router: Router,
@@ -63,6 +63,9 @@ export class DashboardComponent implements OnInit {
           //TODO: also add default insurances if getUserProfile call fails or show error
           this.insurances = insuranceTypes.map((s) => {
             return {
+              _id: null,
+              status: null,
+              reference: null,
               type: s.type,
               label: s.label
             };
@@ -89,7 +92,7 @@ export class DashboardComponent implements OnInit {
   //   });
   // }
 
-  private getRemainingInsurances(validTypes: Array<DashboardInsuranceMap>, items: Array<any>): Array<any> {
+  private getRemainingInsurances(validTypes: Array<InsuranceMap>, items: Array<any>): Array<any> {
     return validTypes
       .filter(i => items.filter(pi => pi.type !== i.type).length > 0)
       .map((s) => {
