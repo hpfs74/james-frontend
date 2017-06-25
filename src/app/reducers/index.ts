@@ -40,7 +40,7 @@ import { combineReducers } from '@ngrx/store';
 import * as fromProfile from './profile';
 import * as fromLayout from './layout';
 import * as fromInsurances from './insurances';
-
+import * as fromAssistant from './assistant';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -49,7 +49,8 @@ import * as fromInsurances from './insurances';
 export interface State {
   profile: fromProfile.State;
   layout: fromLayout.State;
-  //insurances: fromInsurances.State;
+  insurances: fromInsurances.State;
+  assistant: fromAssistant.State;
   router: fromRouter.RouterState;
 }
 
@@ -63,7 +64,8 @@ export interface State {
 const reducers = {
   profile: fromProfile.reducer,
   layout: fromLayout.reducer,
-  //insurances: fromInsurances.reducer,
+  insurances: fromInsurances.reducer,
+  assistant: fromAssistant.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -154,9 +156,20 @@ export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
 
+/*
+ * Insurances Reducers
+ */
+export const getInsurancesState = (state: State) => state.insurances;
+export const getInsurances = createSelector(getInsurancesState, fromInsurances.getInsurances);
+
 /**
  * Layout Reducers
  */
 export const getLayoutState = (state: State) => state.layout;
-
 export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowSidenav);
+
+/**
+ * Chat Assistant Reducers
+ */
+export const getAsisstantState = (state: State) => state.assistant;
+export const getAssistantMessageState = createSelector(getAsisstantState, fromAssistant.getMessages);

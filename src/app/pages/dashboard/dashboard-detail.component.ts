@@ -1,8 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from '../../services/profile.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
+import * as fromRoot from '../../reducers';
+import * as profile from '../../actions/profile';
+import * as assistant from '../../actions/assistant';
+
 import { AssistantService } from '../../services/assistant.service';
-import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
 import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
@@ -31,35 +36,27 @@ export class DashboardDetailComponent implements OnInit {
   insuranceType: string;
   label: string;
   message: string;
-  profile: Profile;
   chatConfig: AssistantConfig;
-  chatMessages: Array<ChatMessage> = [];
 
-  constructor(private router: Router,
-    private profileService: ProfileService,
+  profile$: Observable<Profile>;
+  chatMessages$: Observable<Array<ChatMessage>>;
+
+  constructor(
+    private router: Router,
+    private store: Store<fromRoot.State>,
     private assistantService: AssistantService,
-    private chatNotifierService: ChatStreamService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute
+  ) {
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
   }
 
   ngOnInit() {
-    this.chatNotifierService.addMessage$.subscribe(
-      (message) => {
-        this.chatMessages = [message];
-      });
-
     this.route.params.subscribe(params => {
       this.insuranceType = params['type'];
-      this.chatNotifierService
-          .addTextMessage(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType)), true);
-    });
 
-    this.profileService.getUserProfile()
-      .subscribe(x => {
-        this.profile = x;
-      });
+      this.store.dispatch(new assistant.AddAction(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType))));
+    });
   }
 
   goToAdvice() {

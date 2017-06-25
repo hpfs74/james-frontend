@@ -1,77 +1,82 @@
+import { getMessages } from './../../reducers/assistant';
 import { Component, OnInit, AfterViewInit, ViewChild, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from '../../config.service';
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
 
+import * as fromRoot from '../../reducers';
+import * as assistant from '../../actions/assistant';
+
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
-import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../services/auth.service';
-import { ProfileService } from '../../services/profile.service';
 import { Profile, InsuranceMap, Insurance, insuranceTypes } from '../../models';
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  profile: Profile;
   chatConfig: AssistantConfig;
   insurances: Array<Insurance>;
-  chatMessages: Array<ChatMessage>;
 
-  constructor(private router: Router,
-    private profileService: ProfileService,
-    private assistantService: AssistantService,
-    private chatNotifierService: ChatStreamService) {
+  profile$: Observable<Profile>;
+  chatMessages$: Observable<Array<ChatMessage>>;
+
+  constructor(
+    private router: Router,
+    private store: Store<fromRoot.State>,
+    private assistantService: AssistantService
+  ) {
     this.chatConfig = assistantService.config;
     this.chatConfig.avatar.title = 'Expert verzekeringen';
+    this.chatMessages$ = store.select(fromRoot.getAssistantMessageState);
   }
 
   ngOnInit() {
-    this.chatNotifierService.addMessage$.subscribe(
-      (message) => {
-        this.chatMessages = [message];
-      });
+    this.profile$ = this.store.select(fromRoot.getProfile);
+    //this.insurances$ = this.store.select(fromRoot.getInsurances);
+    //this.store.select(fromRoot.getInsurances).subscribe(x => console.log(x));
 
-    this.profileService.getUserProfile()
-      .subscribe(x => {
-        this.profile = x;
-        this.chatNotifierService.addTextMessage(this.chatConfig.dashboard.welcome(this.profile.firstname));
+    this.profile$.subscribe((profile) => {
+      if (Object.keys(profile).length > 0) {
+        this.store.dispatch(new assistant.AddAction(this.chatConfig.dashboard.welcome(profile.firstname)));
 
-        let embeddedItems = this.profile._embedded;
-        let insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
+        // let embeddedItems = profile._embedded;
+        // let insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
 
-        let myInsurances = [];
-        Object.keys(this.profile._embedded)
-          .filter((key) => insuranceItems.indexOf(key) !== -1)
-          .forEach((key) => {
-            this.profile._embedded[key].documents.forEach(element => {
-              myInsurances.push(Object.assign(element, {
-                type: key,
-                label: this.getInsuranceLabel(key)
-              }));
-            });
-          });
+        // let myInsurances = [];
+        // Object.keys(profile._embedded)
+        //   .filter((key) => insuranceItems.indexOf(key) !== -1)
+        //   .forEach((key) => {
+        //     profile._embedded[key].documents.forEach(element => {
+        //       myInsurances.push(Object.assign(element, {
+        //         type: key,
+        //         label: this.getInsuranceLabel(key)
+        //       }));
+        //     });
+        //   });
 
-        if (myInsurances) {
-          this.insurances = myInsurances.concat(this.getRemainingInsurances(insuranceTypes, myInsurances));
-        } else {
-          //TODO: also add default insurances if getUserProfile call fails or show error
-          this.insurances = insuranceTypes.map((s) => {
-            return {
-              _id: null,
-              status: null,
-              reference: null,
-              type: s.type,
-              label: s.label
-            };
-          });
-        }
-      });
+        // if (myInsurances) {
+        //   this.insurances = myInsurances.concat(this.getRemainingInsurances(insuranceTypes, myInsurances));
+        // } else {
+        //   //TODO: also add default insurances if getUserProfile call fails or show error
+        //   this.insurances = insuranceTypes.map((s) => {
+        //     return {
+        //       _id: null,
+        //       status: null,
+        //       reference: null,
+        //       type: s.type,
+        //       label: s.label
+        //     };
+        //   });
+        // }
+      }
+    });
   }
 
   goToActions(type: string) {

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/toArray';
 
 import { ProfileService } from '../services/profile.service';
 import * as profile from '../actions/profile';
+import * as insurances from '../actions/insurances';
 import { Profile } from '../models/profile';
 
 @Injectable()
@@ -25,7 +26,12 @@ export class ProfileEffects {
     .startWith(new profile.LoadAction)
     .switchMap(() =>
       this.profileService.getUserProfile()
-        .map((p: Profile) => new profile.LoadSuccessAction(p))
+        .mergeMap((p: Profile) => {
+          return [
+            new profile.LoadSuccessAction(p),
+            new insurances.LoadSuccessAction(p._embedded.insurance.documents)
+          ];
+        })
         .catch(error => Observable.of(new profile.LoadFailAction(error))));
 
   @Effect()

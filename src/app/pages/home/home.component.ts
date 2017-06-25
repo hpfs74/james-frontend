@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -34,7 +34,8 @@ import {
     <div class="container-fluid knx-container--fullwidth knx-container--gray">
       <knx-features [items]="footerItems"></knx-features>
     </div>
-  `
+  `,
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
