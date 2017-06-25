@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { reducer } from './reducers';
 import { ProfileEffects } from './effects/profile';
@@ -62,7 +63,9 @@ export function ContentLoader(contentService: ContentService) {
     SharedModule,
     HomeModule.forRoot(),
     StoreModule.provideStore(reducer),
-
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 5
+    }),
     /**
      * @ngrx/router-store keeps router state up-to-date in the store and uses
      * the store as the single source of truth for the router's state.
