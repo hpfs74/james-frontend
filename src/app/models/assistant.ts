@@ -7,11 +7,6 @@ export class AssistantConfig {
     title: 'Expert verzekeringen'
   };
 
-  public generic = {
-    address: (address: Address) => `Ik heb je adres gevonden. Woon je op <strong>${address.street} in ${address.city}</strong>?`,
-    addressNotFound: 'Helaas kon ik je adres niet vinden. Heb je je postcode en huisnummer juist ingevoerd?'
-  };
-
   public dashboard = {
     start: 'Waar wil je mee beginnen?',
     welcome: (firstName: string) =>
@@ -27,10 +22,14 @@ export class AssistantConfig {
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
+      houseHold: `<b>Approve message!</b> <br> Uw premie kan veranderen afhankelijk van de huishoudelijke status`,
       niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },
+      CL: `<b>Approve message!</b> <br> WA has these and these benefits`,
+      CLC: `<b>Approve message!</b> <br> WA + Casco has these and these benefits`,
+      CAR: `<b>Approve message!</b> <br> WA has these and these benefits`,
       noClaimProtection: '',
       legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
         Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
@@ -44,7 +43,7 @@ export class AssistantConfig {
       review: {
         title: `Controleer uw gegevens dat een verzoek om af te sluiten te maken.`,
 
-        list: `Het proces van het vullen van de aanvraag duurt ongeveer 5 minuten t omvat de volgende stappen:<br>
+        list: `Het proces van het vullen van de aanvraag duurt ongeveer 5 minuten en omvat de volgende stappen:<br>
         1. Check je gegevens <br>
         2. Vul je autogegevens aan <br>
         3. Beantwoord slotvragen <br>

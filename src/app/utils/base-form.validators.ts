@@ -80,12 +80,14 @@ export function futureDateValidator(key: string) {
 export function birthDateValidator(key: string) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
+    let today = new Date();
+    const minimumAge = today.setFullYear(today.getFullYear() - 18);
 
     if (value && !(value instanceof Date)) {
       value = dateDecode(value);
     }
 
-    if (value && (value.getFullYear() < 1920 || value.getFullYear() > 1999)) {
+    if (value && (value.getFullYear() < 1897 || value > minimumAge)) {
       value = false;
     }
 

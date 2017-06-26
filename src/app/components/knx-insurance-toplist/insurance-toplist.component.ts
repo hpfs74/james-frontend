@@ -14,7 +14,7 @@ interface OrderItem {
   <div class="knx-insurance-toplist">
     <div class="row">
       <div class="col-sm-12">
-        <h2>De beste verzekeringen van alle 40 aanbieders</h2>
+        <h2>De beste verzekeringen van alle {{total}} aanbieders</h2>
 
         <div class="knx-button-group" role="group">
           <button
@@ -36,8 +36,8 @@ interface OrderItem {
             [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)" [disableButton]="disableInsuranceBuy">
           </knx-insurance-result>
 
-          <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showMore()">
-            Toon {{ insurances.length - total }} meer verzekeringen
+          <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showAll()">
+            Alle verzekeringen
           </button>
 
           <div class="knx-insurance-toplist__info">
@@ -65,8 +65,7 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
     this.total = this.stepAmount || 4;
     this.orderBy = [
       { id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true },
-      { id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false },
-      { id: 'all', label: 'alle verzekeringen', key: '', active: false }
+      { id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false }
     ];
   }
 
@@ -82,11 +81,6 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
     });
 
     this.insurances = this.sortInsurances(selected.key);
-    if (selected.id === 'all') {
-      this.total = this.insurances.length;
-    } else {
-      this.total = this.stepAmount;
-    }
   }
 
   sortInsurances(key) {
@@ -114,8 +108,8 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
     }) : this.insurances;
   }
 
-  showMore(): void {
-    this.total += this.stepAmount;
+  showAll(): void {
+    this.total = this.insurances.length;
   }
 
   trackInsurance(index, item) {
