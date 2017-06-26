@@ -43,7 +43,7 @@ pipeline {
                 slackSend color: 'warning', message: "Deploy stage started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
 
                 withAWS(credentials: "${AWS_JENKINS_CREDENTIALS}") {
-                  s3Upload(file:'output', bucket:"${AWS_S3_BUCKETNAME}", path:'')
+                  s3Upload(file:'dist', bucket:"${AWS_S3_BUCKETNAME}", path:'')
                   cfInvalidate(distribution: "${AWS_CLOUDFRONT_DISTRIBUTIONID}", paths:['/*'])
                 }
                 slackSend color: 'good', message: "Deploy stage finished: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
