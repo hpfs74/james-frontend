@@ -1,4 +1,3 @@
-import { BlurForwarderDirective } from './../../../directives/blurforwarder.directive';
 import {
   Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
@@ -14,7 +13,7 @@ import { CarService } from '../car.service';
   selector: 'knx-car-detail-form',
   styleUrls: ['car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;

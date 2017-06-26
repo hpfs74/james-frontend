@@ -15,7 +15,6 @@ import { ProfileService } from '../../services/profile.service';
 import { AppLoaderComponent } from '../../components/knx-app-loader/loader.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { NavbarComponent } from '../../components/knx-navigation';
-import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.component';
 
 /**
  * Home is the container module for all feature modules that are available after logging in
@@ -32,7 +31,6 @@ import { BreadCrumbComponent } from '../../components/knx-breadcrumb/breadcrumb.
   declarations: [
     AppLoaderComponent,
     HomeComponent,
-    BreadCrumbComponent,
     NavbarComponent,
     // DashboardComponent,
   ]

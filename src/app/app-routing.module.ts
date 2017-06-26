@@ -18,7 +18,7 @@ export const routes: Routes = [
     path: 'cookies',
     component: CookiesPageComponent,
     data: {
-      breadcrumb: 'Cookie-beleid'
+      title: 'Cookie-beleid'
     }
   },
   {

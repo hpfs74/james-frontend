@@ -194,6 +194,7 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.car = res;
+          this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(res)));
         } else {
           // Car not found in RDC
@@ -210,18 +211,21 @@ export class CarAdviceComponent implements OnInit {
     let c = this.carDetailForm.formGroup.get('licensePlate');
     c.setErrors({ 'licensePlateRDC': true });
     c.markAsTouched();
+    this.store.dispatch(new assistant.ClearAction);
     this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.error.carNotFound));
   }
 
   updateAddress(address: Address) {
     if (address.street && address.city) {
       if (!this.address || !this.isObjectEqual<Address>(this.address, address)) {
+        this.store.dispatch(new assistant.ClearAction);
         this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.generic.address(address)));
       }
       this.address = address;
     }
 
     if (!address.street && !address.city) {
+      this.store.dispatch(new assistant.ClearAction);
       this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.generic.addressNotFound));
     }
   }
@@ -241,6 +245,7 @@ export class CarAdviceComponent implements OnInit {
           let coverage = this.coverages.find(price => price.id === res.recommended_value);
           if (coverage) {
             coverage.highlight = true;
+            this.store.dispatch(new assistant.ClearAction);
             this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
           }
 

@@ -30,7 +30,6 @@ import { BlurForwarderDirective, JumpToElementDirective } from './directives';
  * import components in alphabetic order: easier to find something!
  */
 import { AddressLookupComponent } from './components/knx-address-lookup/address-lookup.component';
-import { BreadCrumbComponent } from './components/knx-breadcrumb/breadcrumb.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
