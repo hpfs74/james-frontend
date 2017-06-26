@@ -42,6 +42,7 @@ import * as fromLayout from './layout';
 import * as fromInsurances from './insurances';
 import * as fromAssistant from './assistant';
 import * as fromCompare from './compare';
+import * as fromAdvice from './advice';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -53,6 +54,7 @@ export interface State {
   insurances: fromInsurances.State;
   assistant: fromAssistant.State;
   compare: fromCompare.State;
+  advice: fromAdvice.State;
   router: fromRouter.RouterState;
 }
 
@@ -69,6 +71,7 @@ const reducers = {
   insurances: fromInsurances.reducer,
   assistant: fromAssistant.reducer,
   compare: fromCompare.reducer,
+  advice: fromAdvice.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -145,3 +148,11 @@ export const getAssistantMessageState = createSelector(getAsisstantState, fromAs
 export const getCompareState = (state: State) => state.compare;
 export const getCompareResult = createSelector(getCompareState, fromCompare.getCompareResult);
 export const getCompareLoading = createSelector(getCompareState, fromCompare.getLoading);
+
+/**
+ * Advice Reducers
+ * Advice is similar to an insurance object. It is the data from the advice flow that is
+ * optionally saved to the profile to support anonymous flow.
+ */
+export const getAdviceState = (state: State) => state.advice;
+export const getAdvice = createSelector(getAdviceState, fromAdvice.getAdvice);
