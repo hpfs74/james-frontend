@@ -133,6 +133,7 @@ export class CarAdviceComponent implements OnInit {
             no_claim_protection: data.extraOptions.noclaim || false,
             own_risk: data.ownRisk,
           };
+          //console.log(compareObj);
           this.store.dispatch(new advice.UpdateAction(compareObj));
         }
       });
