@@ -42,7 +42,6 @@
     "protractor": "protractor",
     "protractor:delay": "sleep 3 && protractor",
     "protractor:live": "protractor --elementExplorer",
-    "publish:invalidate": "node scripts/invalidate-site.js",
     "server:dev:hmr": "npm run server:dev -- --inline --hot",
     "server:dev": "webpack-dev-server --config config/webpack.dev.js --open --progress --profile --watch --content-base src/",
     "server:prod": "http-server dist -c-1 --cors",
