@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 export const ADD_ADVICE =     '[Advice] Add';
+export const UPDATE_ADVICE =  '[Advice] Update';
 export const REMOVE_ADVICE =  '[Advice] Remove';
 
 /**
@@ -8,6 +9,12 @@ export const REMOVE_ADVICE =  '[Advice] Remove';
  */
 export class AddAction implements Action {
   readonly type = ADD_ADVICE;
+
+  constructor(public payload: any) { }
+}
+
+export class UpdateAction implements Action {
+  readonly type = UPDATE_ADVICE;
 
   constructor(public payload: any) { }
 }
@@ -20,5 +27,6 @@ export class RemoveAction implements Action {
 
 export type Actions
   = AddAction
+  | UpdateAction
   | RemoveAction;
 

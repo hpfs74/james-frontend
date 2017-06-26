@@ -6,9 +6,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 import * as fromRoot from '../../../reducers';
+import * as profile from '../../../actions/profile';
 import * as assistant from '../../../actions/assistant';
 import * as car from '../../../actions/car';
 import * as insurance from '../../../actions/insurances';
+import * as advice from '../../../actions/advice';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -43,13 +45,15 @@ export class CarAdviceComponent implements OnInit {
   insurances: Observable<Array<CarInsurance>>;
 
   //TODO: refactor
-  selectedInsurance: CarInsurance;
-  car: Car;
-  profile: any | Profile;
-  address: Address;
+  // selectedInsurance: CarInsurance;
+  // car: Car;
+  // profile: any | Profile;
+  // address: Address;
 
   chatConfig: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
+
+  car$: Observable<Car>;
 
   isCoverageLoading: boolean = false;
   isInsuranceLoading: boolean = false;
@@ -135,6 +139,31 @@ export class CarAdviceComponent implements OnInit {
           );
         }
       });
+
+
+    // On car info found
+    // TODO: refactor
+    this.store.select(fromRoot.getCarInfoLoaded)
+      .switchMap(isLoaded => {
+        if (isLoaded) {
+          return this.store.select(fromRoot.getCarInfo);
+        } else {
+          return Observable.empty();
+        }
+      }).subscribe((res: Array<Car>) => {
+        let lastFound = res.slice(-1)[0];
+        if (lastFound && lastFound.license) {
+          this.store.dispatch(new assistant.ClearAction);
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(lastFound)));
+        } else {
+          // Car not found in RDC
+          let c = this.carDetailForm.formGroup.get('licensePlate');
+          this.triggerLicenseInValid();
+        }
+      }, err => {
+        // Treat server error as invalid to prevent continuing flow
+        this.triggerLicenseInValid();
+      });
   }
 
   submitDetailForm(): Observable<any> {
@@ -154,28 +183,28 @@ export class CarAdviceComponent implements OnInit {
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    this.profile = {
-      gender: detailForm.value.gender,
-      dateOfBirth: detailForm.value.birthDate
-    };
+    // this.store.dispatch(new profile.UpdateAction({
+    //   gender: detailForm.value.gender,
+    //   date_of_birth: detailForm.value.birthDate
+    // }));
 
-    let options: CarInsuranceOptions = {
-      active_loan: detailForm.value.loan,
-      coverage: detailForm.value.coverage,
-      claim_free_years: +detailForm.value.claimFreeYears,
-      household_status: detailForm.value.houseHold
-    };
-    let requestObj = new CarCompare(this.profile, this.car, this.address, options);
+    // let options: CarInsuranceOptions = {
+    //   active_loan: detailForm.value.loan,
+    //   coverage: detailForm.value.coverage,
+    //   claim_free_years: +detailForm.value.claimFreeYears,
+    //   household_status: detailForm.value.houseHold
+    // };
+    // let requestObj = new CarCompare(this.profile, this.car, this.address, options);
 
 
-    this.formData[0] = requestObj;
-    this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
+    // this.formData[0] = requestObj;
+    // this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
 
-    return this.insurances = this.carService.getInsurances(requestObj);
+    // return this.insurances = this.carService.getInsurances(requestObj);
   }
 
   onSelectPremium(insurance) {
-    this.selectedInsurance = insurance;
+    //this.selectedInsurance = insurance;
   }
 
   onStepChange(stepIndex) {
@@ -201,27 +230,9 @@ export class CarAdviceComponent implements OnInit {
   }
 
   getCarInfo(licensePlate: string) {
-    if (!licensePlate) {
-      return;
+    if (licensePlate) {
+      this.store.dispatch(new car.GetInfoAction(licensePlate));
     }
-
-    //this.store.dispatch(new car.GetInfoAction(licensePlate));
-
-    this.carService.getByLicense(licensePlate)
-      .subscribe(res => {
-        if (res.license) {
-          this.car = res;
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(res)));
-        } else {
-          // Car not found in RDC
-          let c = this.carDetailForm.formGroup.get('licensePlate');
-          this.triggerLicenseInValid();
-        }
-      }, err => {
-        // Treat server error as invalid to prevent continuing flow
-        this.triggerLicenseInValid();
-      });
   }
 
   triggerLicenseInValid() {
@@ -232,33 +243,35 @@ export class CarAdviceComponent implements OnInit {
     this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.error.carNotFound));
   }
 
-  updateAddress(address: Address) {
-    this.address = address;
+  onAddressChange(address: Address) {
+    this.store.dispatch(new profile.UpdateAction({
+      address: address
+    }));
   }
 
   getCoverages(event) {
-    if (this.car) {
-      this.isCoverageLoading = true;
+    // if (this.car) {
+    //   this.isCoverageLoading = true;
 
-      // get default coverage types
-      this.coverages = this.contentService.getContentObject().car.coverages;
+    //   // get default coverage types
+    //   this.coverages = this.contentService.getContentObject().car.coverages;
 
-      // fetch recommendation
-      this.carService.getCoverageRecommendation(this.car.license, event.loan)
-        .subscribe(res => {
-          this.isCoverageLoading = false;
+    //   // fetch recommendation
+    //   this.carService.getCoverageRecommendation(this.car.license, event.loan)
+    //     .subscribe(res => {
+    //       this.isCoverageLoading = false;
 
-          let coverage = this.coverages.find(price => price.id === res.recommended_value);
-          if (coverage) {
-            coverage.highlight = true;
-            this.store.dispatch(new assistant.ClearAction);
-            this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
-          }
+    //       let coverage = this.coverages.find(price => price.id === res.recommended_value);
+    //       if (coverage) {
+    //         coverage.highlight = true;
+    //         this.store.dispatch(new assistant.ClearAction);
+    //         this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
+    //       }
 
-        }, error => {
-          this.isCoverageLoading = false;
-        });
-    }
+    //     }, error => {
+    //       this.isCoverageLoading = false;
+    //     });
+    // }
   }
 
   private isObjectEqual<T>(prev: T, cur: T): boolean {

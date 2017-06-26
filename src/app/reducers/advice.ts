@@ -26,6 +26,15 @@ export function reducer(state = initialState, action: advice.Actions): State {
       });
     }
 
+    case advice.UPDATE_ADVICE: {
+      const advice = action.payload;
+
+      return Object.assign({}, state, {
+        advice: state.advice
+          .map(item => item.id === action.payload.id ? Object.assign(item, action.payload) : item)
+      });
+    }
+
     case advice.REMOVE_ADVICE: {
       const advice = action.payload;
 

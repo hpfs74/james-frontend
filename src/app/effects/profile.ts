@@ -38,10 +38,18 @@ export class ProfileEffects {
   saveProfile$: Observable<Action> = this.action$
     .ofType(profile.SAVE_PROFILE_REQUEST)
     .map((action: profile.SaveAction) => action.payload)
-    .switchMap((p) =>
-      this.profileService.updateUserProfile(p)
+    .switchMap((payload: Profile) => {
+      let flatProfile = payload;
+      let address = payload.address;
+      delete flatProfile.address;
+      flatProfile = Object.assign(flatProfile, address);
+
+      console.log(flatProfile);
+
+      return this.profileService.updateUserProfile(flatProfile)
         .map((p: Profile) => new profile.SaveSuccessAction(p))
-        .catch(error => Observable.of(new profile.SaveFailAction(error))));
+        .catch(error => Observable.of(new profile.SaveFailAction(error)));
+    });
 
   constructor(private action$: Actions, private profileService: ProfileService) { }
 }
