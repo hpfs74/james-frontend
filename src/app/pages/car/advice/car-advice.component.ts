@@ -177,6 +177,8 @@ export class CarAdviceComponent implements OnInit {
   }
 
   startBuyFlow(): Observable<any> {
+    //TODO: store all data in profile store here
+
     this.router.navigate(['/car/insurance']);
     return;
   }

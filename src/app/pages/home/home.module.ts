@@ -31,8 +31,7 @@ import { NavbarComponent } from '../../components/knx-navigation';
   declarations: [
     AppLoaderComponent,
     HomeComponent,
-    NavbarComponent,
-    // DashboardComponent,
+    NavbarComponent
   ]
 })
 export class HomeModule {

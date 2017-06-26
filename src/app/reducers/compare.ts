@@ -1,11 +1,10 @@
 import { createSelector } from 'reselect';
-import { Insurance } from '../models/insurance';
-import * as insurances from '../actions/insurances';
+import * as compare from '../actions/compare';
 
 export interface State {
   loading: boolean;
   loaded: boolean;
-  insurances: Insurance[];
+  insurances: any[];
 }
 
 export const initialState: State = {
@@ -14,22 +13,21 @@ export const initialState: State = {
   insurances: []
 };
 
-export function reducer(state = initialState, action: insurances.Actions): State {
+export function reducer(state = initialState, action: compare.Actions): State {
   switch (action.type) {
-    case insurances.LOAD: {
+    case compare.LOAD_COMPARE: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case insurances.ADD_INSURANCE_SUCCESS:
-    case insurances.LOAD_SUCCESS: {
-      const insurances = action.payload;
+    case compare.LOAD_COMPARE_SUCCESS: {
+      const compareResult = action.payload;
 
       return Object.assign({}, state, {
         loaded: true,
         loading: false,
-        insurances: [ ...state.insurances, insurances ]
+        insurances: [ ...state.insurances, compareResult ]
       });
 
     }
@@ -43,6 +41,4 @@ export function reducer(state = initialState, action: insurances.Actions): State
 
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
-export const getInsurances = (state: State) => state.insurances;
-
-//export const getIds = (state: State) => state.ids;
+export const getCompareResult = (state: State) => state.insurances;

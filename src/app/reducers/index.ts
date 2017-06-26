@@ -41,6 +41,7 @@ import * as fromProfile from './profile';
 import * as fromLayout from './layout';
 import * as fromInsurances from './insurances';
 import * as fromAssistant from './assistant';
+import * as fromCompare from './compare';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -51,6 +52,7 @@ export interface State {
   layout: fromLayout.State;
   insurances: fromInsurances.State;
   assistant: fromAssistant.State;
+  compare: fromCompare.State;
   router: fromRouter.RouterState;
 }
 
@@ -66,6 +68,7 @@ const reducers = {
   layout: fromLayout.reducer,
   insurances: fromInsurances.reducer,
   assistant: fromAssistant.reducer,
+  compare: fromCompare.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -108,46 +111,7 @@ export function reducer(state: any, action: any) {
  * The created selectors can also be composed together to select different
  * pieces of state.
  */
-//  export const getBookEntities = createSelector(getBooksState, fromBooks.getEntities);
-//  export const getBookIds = createSelector(getBooksState, fromBooks.getIds);
-//  export const getSelectedBookId = createSelector(getBooksState, fromBooks.getSelectedId);
-//  export const getSelectedBook = createSelector(getBooksState, fromBooks.getSelected);
 
-
-/**
- * Just like with the books selectors, we also have to compose the search
- * reducer's and collection reducer's selectors.
- */
-// export const getSearchState = (state: State) => state.search;
-
-// export const getSearchBookIds = createSelector(getSearchState, fromSearch.getIds);
-// export const getSearchQuery = createSelector(getSearchState, fromSearch.getQuery);
-// export const getSearchLoading = createSelector(getSearchState, fromSearch.getLoading);
-
-
-/**
- * Some selector functions create joins across parts of state. This selector
- * composes the search result IDs to return an array of books in the store.
- */
-// export const getSearchResults = createSelector(getBookEntities, getSearchBookIds, (books, searchIds) => {
-//   return searchIds.map(id => books[id]);
-// });
-
-
-
-// export const getCollectionState = (state: State) => state.collection;
-
-// export const getCollectionLoaded = createSelector(getCollectionState, fromCollection.getLoaded);
-// export const getCollectionLoading = createSelector(getCollectionState, fromCollection.getLoading);
-// export const getCollectionBookIds = createSelector(getCollectionState, fromCollection.getIds);
-
-// export const getBookCollection = createSelector(getBookEntities, getCollectionBookIds, (entities, ids) => {
-//   return ids.map(id => entities[id]);
-// });
-
-// export const isSelectedBookInCollection = createSelector(getCollectionBookIds, getSelectedBookId, (ids, selected) => {
-//   return ids.indexOf(selected) > -1;
-// });
 
 /**
  * Profile Reducers
@@ -155,6 +119,7 @@ export function reducer(state: any, action: any) {
 export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
+//export const getProfileLoaded= createSelector(getProfileState, fromProfile.getLoaded);
 
 /*
  * Insurances Reducers
@@ -173,3 +138,10 @@ export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowS
  */
 export const getAsisstantState = (state: State) => state.assistant;
 export const getAssistantMessageState = createSelector(getAsisstantState, fromAssistant.getMessages);
+
+/**
+ * Compare Insurance Reducers
+ */
+export const getCompareState = (state: State) => state.compare;
+export const getCompareResult = createSelector(getCompareState, fromCompare.getCompareResult);
+export const getCompareLoading = createSelector(getCompareState, fromCompare.getLoading);
