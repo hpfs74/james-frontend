@@ -158,7 +158,7 @@ export class CarSummaryComponent implements OnChanges {
               },
               {
                 label: 'Geboortedatum',
-                value: this.profile.dateOfBirth
+                value: this.profile.birthday
               }
             ]
           },

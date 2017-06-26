@@ -5,13 +5,16 @@ import { Observable } from 'rxjs';
 import { AuthHttp } from './auth-http.service';
 import { ConfigService } from '../config.service';
 import { Profile } from '../models/profile';
+import { Insurance } from '../models/insurance';
 
 @Injectable()
 export class ProfileService {
   private baseUrl: string;
+  private insurancesUrl: string;
 
   constructor(private configService: ConfigService, private http: AuthHttp) {
     this.baseUrl = configService.config.api.james.profile;
+    this.insurancesUrl = this.baseUrl + '/insurances';
   }
 
   /**
@@ -34,5 +37,21 @@ export class ProfileService {
     return this.http.patch(this.baseUrl, JSON.stringify(profile))
       .map((p) => p.json())
       .map((p) => <Profile>p);
+  }
+
+  /**
+   * add a new insurance to the user profile
+   */
+  public addInsurance(insurance: Insurance): Observable<Insurance> {
+    return this.http.post(this.insurancesUrl, JSON.stringify(insurance))
+      .map((res) => res.json());
+  }
+
+  /**
+   * update an existing insurance
+   */
+  public updateInsurance(insurance: Insurance): Observable<Insurance> {
+    return this.http.post(`this.insurancesUrl/${insurance._id}`, JSON.stringify(insurance))
+      .map((res) => res.json());
   }
 }

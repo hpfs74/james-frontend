@@ -10,14 +10,14 @@ export const carRoutes: Routes = [
     path: '',
     component: CarAdviceComponent,
     data: {
-      breadcrumb: 'Je autoverzekering vergelijken'
+      title: 'Je autoverzekering vergelijken'
     }
   },
   {
     path: 'insurance',
     component: CarBuyComponent,
     data: {
-      breadcrumb: 'Nieuwe autoverzekering aanvragen'
+      title: 'Nieuwe autoverzekering aanvragen'
     }
   }
 ];

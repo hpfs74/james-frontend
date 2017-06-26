@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { KNXStepOptions, StepError } from '@knx/wizard';
+
+import * as fromRoot from '../../../reducers';
+import * as assistant from '../../../actions/assistant';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
-import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { ProfileService } from '../../../services/profile.service';
 import { Profile } from './../../../models/profile';
 
@@ -24,7 +27,7 @@ import { CarCheckForm } from './car-check.form';
 import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
 
-import { BaseForm } from '../../../models/base-form';
+import { BaseForm } from '../../../forms/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
 import { mockCar } from '../../../models/_mocks/car.mock';
@@ -38,9 +41,9 @@ export class CarBuyComponent implements OnInit {
   currentStep: number;
 
   chatConfig: AssistantConfig;
-  chatMessages: Array<ChatMessage> = [];
+  chatMessages$: Observable<Array<ChatMessage>>;
 
-  profile: Observable<Profile>;
+  profile$: Observable<Profile>;
 
   // Forms
   contactDetailForm: ContactDetailForm;
@@ -52,22 +55,17 @@ export class CarBuyComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private store: Store<fromRoot.State>,
     private configService: ConfigService,
     private contentService: ContentService,
     private assistantService: AssistantService,
-    private chatNotifierService: ChatStreamService,
     private profileService: ProfileService
   ) { }
 
   ngOnInit() {
-    this.chatNotifierService.addMessage$.subscribe(
-      message => {
-        // replace messages instead of pushing
-        this.chatMessages = [message];
-      });
-
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
+    this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
 
     let formBuilder = new FormBuilder();
     this.formContent = this.contentService.getContentObject();
@@ -121,25 +119,16 @@ export class CarBuyComponent implements OnInit {
   initFormWithProfile() {
     FormUtils.scrollToForm('form');
 
-    // TODO: replace mock data with actual
-    this.profile = this.profileService.getUserProfile()
-      .map((profile) => {
-        let p = profile;
-        p.gender = 'm',
-        p._embedded.car = Object.assign(mockCar, {
-          count: 0,
-          limit: 10,
-          offset: 0
-        });
-        return p;
-      });
+    this.profile$ = this.store.select(fromRoot.getProfile);
 
-    this.chatNotifierService.addTextMessage(this.chatConfig.car.buy.fill);
+    this.store.dispatch(new assistant.ClearAction);
+    this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.buy.fill));
   }
 
   initForm(message: string) {
     FormUtils.scrollToForm('form');
-    this.chatNotifierService.addTextMessage(message);
+    this.store.dispatch(new assistant.ClearAction);
+    this.store.dispatch(new assistant.AddMessageAction(message));
   }
 
   initSummaryForm(message: string) {

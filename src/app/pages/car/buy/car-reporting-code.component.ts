@@ -1,7 +1,8 @@
 import { Component, OnChanges, Input, OnInit, SimpleChanges } from '@angular/core';
 
 import { CarReportingCodeForm } from './car-reporting-code.form';
-import { Car, Profile, CarSecurityClass } from '../../../models/';
+import { Car, Profile } from '../../../models/';
+import { CarSecurityClass } from '../../../content.interface';
 
 @Component({
   selector: 'knx-car-reporting-code-form',

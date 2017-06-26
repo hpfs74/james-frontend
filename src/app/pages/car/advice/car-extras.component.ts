@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CarExtrasForm } from './car-extras.form';
 
@@ -39,7 +39,8 @@ import { CarExtrasForm } from './car-extras.form';
     .own-risk {
       padding-bottom: 45px;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class CarExtrasComponent {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DashboardItem } from './../../models/dashboard-item';
+import { Insurance } from './../../models/insurance';
 import { insuranceTypes, InsuranceMap } from './../../models/insurance-map';
 import { ImageConfig } from '../knx-circle-progress/circle-progress-image';
 
@@ -28,7 +28,7 @@ import { ImageConfig } from '../knx-circle-progress/circle-progress-image';
   `
 })
 export class DashboardItemComponent implements OnInit {
-  @Input() item: DashboardItem;
+  @Input() item: Insurance;
   @Input() isPlaceholder: boolean;
   @Input() index: number;
 

@@ -9,7 +9,7 @@ export const dashboardRoutes: Routes = [
     path: '',
     component: DashboardComponent,
     data: {
-      breadcrumb: 'Overzicht'
+      title: 'Overzicht'
     },
     children: [
       {

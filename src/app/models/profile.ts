@@ -1,17 +1,5 @@
-import { Address, Car } from './index';
+import { Address } from './index';
 
-export interface ProfileEmbedded {
-  documents?: Array<any>;
-  count: number;
-  limit: number;
-  offset: number;
-}
-
-/**
- * NICCI User Profile
- * @export
- * @class User
- */
 export class Profile {
   firstname: string;
   infix: string;
@@ -21,8 +9,7 @@ export class Profile {
   anonymous: boolean;
   id: number;
   emailaddress: string;
-  birthday: string;
-  dateOfBirth: string; // alias
+  birthday: string; //1989-09-27
   nickname: string;
   profile_image: string;
   needs: any;
@@ -31,20 +18,26 @@ export class Profile {
   enabled: boolean;
   phone: string;
   age: number;
+  bsn: string;
+  initials: string;
+
   address?: Address;
 
   _id: string;
   _deleted: boolean;
-  _embedded: {
-    car: any;
-    travel: ProfileEmbedded;
-    content: ProfileEmbedded;
-    home: ProfileEmbedded;
-    liability: ProfileEmbedded;
-    insurance: ProfileEmbedded;
-    bank_card: ProfileEmbedded;
-    inbox: ProfileEmbedded;
-  };
+
+
+  _embedded: any;
+  // _embedded: {
+  //   car: any;
+  //   travel: ProfileEmbedded;
+  //   content: ProfileEmbedded;
+  //   home: ProfileEmbedded;
+  //   liability: ProfileEmbedded;
+  //   insurance: ProfileEmbedded;
+  //   bank_card: ProfileEmbedded;
+  //   inbox: ProfileEmbedded;
+  // };
 
   filled_data_percentage: number;
   outdated_data_percentage: number;

@@ -1,4 +1,3 @@
-import { BlurForwarderDirective } from './../../../directives/blurforwarder.directive';
 import {
   Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
@@ -8,14 +7,13 @@ import 'rxjs/add/observable/combineLatest';
 
 import { CarDetailForm } from './car-detail.form';
 import { Car, Price, Address } from '../../../models';
-import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { CarService } from '../car.service';
 
 @Component({
   selector: 'knx-car-detail-form',
   styleUrls: ['car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
@@ -35,7 +33,6 @@ export class CarDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private elementRef: ElementRef,
-    private chatNotifierService: ChatStreamService,
     private carService: CarService) {
   }
 

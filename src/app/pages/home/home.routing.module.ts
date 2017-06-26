@@ -33,7 +33,7 @@ const homeRoutes: Routes = [
       //   canActivateChild: [AuthGuard],
       //   // component: DashboardComponent, //FaqComponent
       //   data: {
-      //     breadcrumb: 'FAQ'
+      //     title: 'FAQ'
       //   }
       // },
       // {
@@ -41,7 +41,7 @@ const homeRoutes: Routes = [
       //   canActivateChild: [AuthGuard],
       //   // component: DashboardComponent, //AboutComponent
       //   data: {
-      //     breadcrumb: 'Over ons'
+      //     title: 'Over ons'
       //   }
       // },
     ]

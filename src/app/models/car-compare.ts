@@ -30,7 +30,7 @@ export class CarInsuranceOptions {
  * @description
  * Class representing the payload of the http request for car insurance advice
  */
-export class CarCompareRequest {
+export class CarCompare {
   // minimal required options
   active_loan: boolean;
   coverage: string;

@@ -6,7 +6,7 @@ export const liabilityRoutes: Routes = [
     // path: '',
     // component: LiabilityComponent,
     // data: {
-    //   breadcrumb: 'Je aansprakelijkheidsverzekering vergelijken'
+    //   title: 'Je aansprakelijkheidsverzekering vergelijken'
     // }
   }
 ];
