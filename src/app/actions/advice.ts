@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
-export const ADD_ADVICE =     '[Advice] Add';
-export const UPDATE_ADVICE =  '[Advice] Update';
-export const REMOVE_ADVICE =  '[Advice] Remove';
-export const SELECT_ADVICE =  '[Advice] Select';
+export const ADD_ADVICE =             '[Advice] Add';
+export const UPDATE_ADVICE =          '[Advice] Update';
+export const REMOVE_ADVICE =          '[Advice] Remove';
+export const SELECT_ADVICE =          '[Advice] Select';
 
 /**
  * Advice Actions

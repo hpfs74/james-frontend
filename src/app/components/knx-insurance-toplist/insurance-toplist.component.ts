@@ -41,9 +41,8 @@ interface OrderItem {
           </button>
 
           <div class="knx-insurance-toplist__info">
-            <a href="/faq" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
+            <a routerLink="/faq" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
           </div>
-
         </ng-template>
       </div>
     </div>
@@ -74,12 +73,11 @@ export class InsuranceTopListComponent implements OnInit {
     this.orderBy.forEach(orderItem => {
       orderItem.active = orderItem.id === selected.id;
     });
-
-    this.insurances = this.sortInsurances(selected.key);
+    this.sortByKey(this.insurances, selected.key);
   }
 
-  sortInsurances(key) {
-    return key ? this.insurances.sort((i1, i2) => {
+  sortByKey(arr, key) {
+    return key ? arr.sort((i1, i2) => {
       if (key === 'price_quality') {
         // highest amount first
         if (i1[key] < i2[key]) {
@@ -99,8 +97,7 @@ export class InsuranceTopListComponent implements OnInit {
         }
         return 0;
       }
-
-    }) : this.insurances;
+    }) : arr;
   }
 
   showAll(): void {

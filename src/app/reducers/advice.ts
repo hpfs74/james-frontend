@@ -36,7 +36,7 @@ export function reducer(state = initialState, action: advice.Actions): State {
 
       return Object.assign({}, state, {
         advice: Object.assign({}, state.advice, {
-          [state.selectedId]: advice
+          [state.selectedId]: Object.assign({}, state.advice[state.selectedId], advice)
         }),
       });
     }
@@ -69,4 +69,7 @@ export const getIds = (state: State) => state.ids;
 export const getSelectedId = (state: State) => state.selectedId;
 export const getSelected = createSelector(getAdvice, getSelectedId, (advice, selectedId) => {
   return advice[selectedId];
+});
+export const getSelectedInsurance = createSelector(getAdvice, getSelectedId, (advice, selectedId) => {
+  return advice[selectedId] ? advice[selectedId].insurance : null;
 });

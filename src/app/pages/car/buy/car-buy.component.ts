@@ -7,6 +7,8 @@ import { KNXStepOptions, StepError } from '@knx/wizard';
 
 import * as fromRoot from '../../../reducers';
 import * as assistant from '../../../actions/assistant';
+import * as profile from '../../../actions/profile';
+import * as advice from '../../../actions/advice';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -66,6 +68,8 @@ export class CarBuyComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
+
+    this.store.select(fromRoot.getSelectedAdvice).subscribe(x => console.log(x));
 
     let formBuilder = new FormBuilder();
     this.formContent = this.contentService.getContentObject();

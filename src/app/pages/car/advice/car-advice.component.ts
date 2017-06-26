@@ -51,6 +51,7 @@ export class CarAdviceComponent implements OnInit {
 
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
+  selectedInsurance$: Observable<CarInsurance>;
 
   isCoverageLoading: boolean = false;
 
@@ -73,8 +74,9 @@ export class CarAdviceComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
-    this.insurances$ = this.store.select(fromRoot.getCompareResult);
+    this.insurances$ = this.getCompareResultCopy();
     this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
+    this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
 
     this.store.dispatch(new advice.AddAction({
       id: UUID.UUID()
@@ -206,7 +208,7 @@ export class CarAdviceComponent implements OnInit {
   }
 
   onSelectPremium(insurance) {
-    //this.store.dispatch(new advice.UpdateAction({ insurance: insurance }));
+    this.store.dispatch(new advice.UpdateAction({ insurance: insurance }));
   }
 
   onStepChange(stepIndex) {
@@ -214,8 +216,6 @@ export class CarAdviceComponent implements OnInit {
   }
 
   startBuyFlow(): Observable<any> {
-    //TODO: store all data in profile store here
-
     this.router.navigate(['/car/insurance']);
     return;
   }
@@ -277,5 +277,14 @@ export class CarAdviceComponent implements OnInit {
           this.isCoverageLoading = false;
         });
     }
+  }
+
+  private getCompareResultCopy(): Observable<CarInsurance[]> {
+    // This is needed because the ngrx-datatable modifies the result to add an $$index to each
+    // result item and modifies the source array order when sorting
+    return this.store.select(fromRoot.getCompareResult)
+      .map(obs => {
+        return obs.map(v => JSON.parse(JSON.stringify(v)));
+      });
   }
 }

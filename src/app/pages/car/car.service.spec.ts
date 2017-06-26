@@ -11,7 +11,7 @@ import { ConfigService } from '../../config.service';
 import { CarService } from './car.service';
 import { AuthHttp } from '../../services';
 import { Car } from '../../models/car';
-import { CarInsuranceOptions, CarCompare } from '../../models/car-compare';
+import { CarCompare } from '../../models/car-compare';
 
 describe('Service: Car', () => {
   let backend, service;
@@ -64,11 +64,9 @@ describe('Service: Car', () => {
 
   const mockCarCompareRequest: CarCompare = {
     'license': 'GK906T',
-    'first_name': null,
     'gender': 'm',
     'date_of_birth': '1991-10-26',
     'house_number': '234',
-    'last_name': null,
     'title': 'Dhr.',
     'zipcode': '2512GH',
     'country': 'NL',
@@ -104,7 +102,7 @@ describe('Service: Car', () => {
 
   describe('Car Information', () => {
     it('should define the getByLicense function', () => {
-      expect(service.getByLicense).toBeDefined;
+      expect(service.getByLicense).toBeDefined();
     });
 
     it('should return an Observable<Car>', () => {
@@ -116,7 +114,7 @@ describe('Service: Car', () => {
 
       inject([CarService], (carService) => {
         carService.getByLicense(testLicense).subscribe((res) => {
-          expect(res).toBeDefined;
+          expect(res).toBeDefined();
           expect(res.license).toEqual(testLicense);
           expect(res.vin).toEqual(mockCarInfoResponse.vin);
           // TODO: ... other properties
@@ -127,7 +125,7 @@ describe('Service: Car', () => {
 
   describe('Car Coverage', () => {
     it('should define the getCoverageRecommendation function', () => {
-      expect(service.getCoverageRecommendation).toBeDefined;
+      expect(service.getCoverageRecommendation).toBeDefined();
     });
 
     it('should return a Observable<CarCoverageRecommendation>', () => {
@@ -139,7 +137,7 @@ describe('Service: Car', () => {
 
       inject([CarService], (carService) => {
         carService.getCoverageRecommendation(testLicense).subscribe((res) => {
-          expect(res).toBeDefined;
+          expect(res).toBeDefined();
           expect(res.recommended_value).toEqual('CLC');
         });
       });
@@ -148,7 +146,7 @@ describe('Service: Car', () => {
 
   describe('Car Insurance Compare', () => {
     it('should define the getInsurances function', () => {
-      expect(service.getInsurances).toBeDefined;
+      expect(service.getInsurances).toBeDefined();
     });
 
     it('should return an Observable<Array<CarInsurance>>', () => {
@@ -160,7 +158,7 @@ describe('Service: Car', () => {
 
       inject([CarService], (carService) => {
         carService.getInsurances(mockCarCompareRequest).subscribe((res) => {
-          expect(res).toBeDefined;
+          expect(res).toBeDefined();
         });
       });
     });

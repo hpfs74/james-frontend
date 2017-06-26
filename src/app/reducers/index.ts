@@ -163,7 +163,7 @@ export const getAdviceIds = createSelector(getAdviceState, fromAdvice.getIds);
 
 export const getSelectedAdviceId = createSelector(getAdviceState, fromAdvice.getSelectedId);
 export const getSelectedAdvice = createSelector(getAdviceState, fromAdvice.getSelected);
-
+export const getSelectedInsurance = createSelector(getAdviceState, fromAdvice.getSelectedInsurance);
 
 /**
  * Car Info Reducers
