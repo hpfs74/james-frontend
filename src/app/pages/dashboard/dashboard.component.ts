@@ -40,41 +40,43 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.profile$ = this.store.select(fromRoot.getProfile);
     //this.insurances$ = this.store.select(fromRoot.getInsurances);
-    //this.store.select(fromRoot.getInsurances).subscribe(x => console.log(x));
+
+    this.store.dispatch(new assistant.ClearAction);
 
     this.profile$.subscribe((profile) => {
       if (Object.keys(profile).length > 0) {
-        this.store.dispatch(new assistant.AddAction(this.chatConfig.dashboard.welcome(profile.firstname)));
+        this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.dashboard.welcome(profile.firstname)));
+      }
+    });
 
-        // let embeddedItems = profile._embedded;
-        // let insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
+    this.store.select(fromRoot.getInsurances).subscribe((docs) => {
+      let insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
 
-        // let myInsurances = [];
-        // Object.keys(profile._embedded)
-        //   .filter((key) => insuranceItems.indexOf(key) !== -1)
-        //   .forEach((key) => {
-        //     profile._embedded[key].documents.forEach(element => {
-        //       myInsurances.push(Object.assign(element, {
-        //         type: key,
-        //         label: this.getInsuranceLabel(key)
-        //       }));
-        //     });
-        //   });
+      let myInsurances = [];
+      Object.keys(docs)
+        .filter((key) => insuranceItems.indexOf(key) !== -1)
+        .forEach((key) => {
+          docs[key].documents.forEach(element => {
+            myInsurances.push(Object.assign(element, {
+              type: key,
+              label: this.getInsuranceLabel(key)
+            }));
+          });
+        });
 
-        // if (myInsurances) {
-        //   this.insurances = myInsurances.concat(this.getRemainingInsurances(insuranceTypes, myInsurances));
-        // } else {
-        //   //TODO: also add default insurances if getUserProfile call fails or show error
-        //   this.insurances = insuranceTypes.map((s) => {
-        //     return {
-        //       _id: null,
-        //       status: null,
-        //       reference: null,
-        //       type: s.type,
-        //       label: s.label
-        //     };
-        //   });
-        // }
+      if (myInsurances && myInsurances.length > 0) {
+        this.insurances = myInsurances.concat(this.getRemainingInsurances(insuranceTypes, myInsurances));
+      } else {
+        //TODO: also add default insurances if getUserProfile call fails or show error
+        this.insurances = insuranceTypes.map((s) => {
+          return {
+            _id: null,
+            status: null,
+            reference: null,
+            type: s.type,
+            label: s.label
+          };
+        });
       }
     });
   }

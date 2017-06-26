@@ -21,7 +21,7 @@ import { insuranceTypes } from './../../models/';
     <button class="knx-button knx-button--pill" (click)="goToAdvice()">
       <span class="knx-icon-calculator"></span> Advies en vergelijken
     </button>
-    <button class="knx-button knx-button--pill" [disabled]="true" (click)="goToCompare()">
+    <button class="knx-button knx-button--pill" [disabled]="true" (click)="goToInsurance()">
       <span class="knx-icon-money"></span> Huidige verzekering invullen
     </button>
   </div>
@@ -31,11 +31,7 @@ import { insuranceTypes } from './../../models/';
   `]
 })
 export class DashboardDetailComponent implements OnInit {
-  @ViewChild(ChatStreamComponent) chatStreamComponent: ChatStreamComponent;
-
   insuranceType: string;
-  label: string;
-  message: string;
   chatConfig: AssistantConfig;
 
   profile$: Observable<Profile>;
@@ -55,7 +51,8 @@ export class DashboardDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.insuranceType = params['type'];
 
-      this.store.dispatch(new assistant.AddAction(this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType))));
+      let message = this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType));
+      this.store.dispatch(new assistant.AddMessageAction(message));
     });
   }
 
@@ -63,8 +60,8 @@ export class DashboardDetailComponent implements OnInit {
     this.router.navigate([this.insuranceType]);
   }
 
-  goToCompare() {
-    //TODO: implement
+  goToInsurance() {
+    //TODO: implement ProfileInsuranceComponent
     this.router.navigate(['/']);
   }
 

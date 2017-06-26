@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
+
+import * as fromRoot from '../../../reducers';
+import * as assistant from '../../../actions/assistant';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -22,7 +26,6 @@ import { CarExtrasForm } from './car-extras.form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
-import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { AuthService } from '../../../services/auth.service';
 import { ProfileService } from '../../../services/profile.service';
 
@@ -58,25 +61,17 @@ export class CarAdviceComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private store: Store<fromRoot.State>,
     private configService: ConfigService,
     private contentService: ContentService,
     private assistantService: AssistantService,
     private carService: CarService,
     private insuranceService: InsuranceService,
-    private chatNotifierService: ChatStreamService,
     private authService: AuthService,
     private profileService: ProfileService
   ) { }
 
   ngOnInit() {
-    this.chatNotifierService.addMessage$.subscribe(
-      (message) => {
-        if (!message.replace) {
-          this.chatMessages.push(message);
-        } else
-          this.chatMessages = [message];
-      });
-
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
 
@@ -88,7 +83,7 @@ export class CarAdviceComponent implements OnInit {
         hideBackButton: true,
         onShowStep: () => {
           FormUtils.scrollToForm('form');
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.welcome);
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.welcome));
         },
         onBeforeNext: this.submitDetailForm.bind(this)
       },
@@ -99,7 +94,7 @@ export class CarAdviceComponent implements OnInit {
         onShowStep: () => {
           FormUtils.scrollToForm('.knx-insurance-toplist');
           this.chatMessages = [];
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.advice.result, false);
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
         }
       },
       {
@@ -107,9 +102,9 @@ export class CarAdviceComponent implements OnInit {
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Koop verzekering',
         onShowStep: () => {
-          this.chatMessages = [];
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.title, false);
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.review.list, false);
+          this.store.dispatch(new assistant.ClearAction);
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.review.title));
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.review.list));
         },
         onBeforeNext: this.startBuyFlow.bind(this)
       }
@@ -141,7 +136,7 @@ export class CarAdviceComponent implements OnInit {
   }
 
   submitDetailForm(): Observable<any> {
-    this.chatMessages = [];
+    this.store.dispatch(new assistant.ClearAction);
 
     let detailForm = this.carDetailForm.formGroup;
     let address = this.carDetailForm.addressForm;
@@ -194,10 +189,6 @@ export class CarAdviceComponent implements OnInit {
     this.carDetailForm.formGroup.get('coverage').patchValue(coverage.id);
   }
 
-  showHelperText(key) {
-    this.chatNotifierService.addTextMessage(this.chatConfig.car.info[key]);
-  }
-
   getCarInfo(licensePlate: string) {
     if (!licensePlate) {
       return;
@@ -207,7 +198,7 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(res => {
         if (res.license) {
           this.car = res;
-          this.chatNotifierService.addTextMessage(this.chatConfig.car.info.niceCar(res), true);
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(res)));
         } else {
           // Car not found in RDC
           let c = this.carDetailForm.formGroup.get('licensePlate');
@@ -223,19 +214,19 @@ export class CarAdviceComponent implements OnInit {
     let c = this.carDetailForm.formGroup.get('licensePlate');
     c.setErrors({ 'licensePlateRDC': true });
     c.markAsTouched();
-    this.chatNotifierService.addTextMessage(this.chatConfig.car.error.carNotFound);
+    this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.error.carNotFound));
   }
 
   updateAddress(address: Address) {
     if (address.street && address.city) {
       if (!this.address || !this.isObjectEqual<Address>(this.address, address)) {
-        this.chatNotifierService.addTextMessage(this.chatConfig.generic.address(address));
+        this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.generic.address(address)));
       }
       this.address = address;
     }
 
     if (!address.street && !address.city) {
-      this.chatNotifierService.addTextMessage(this.chatConfig.generic.addressNotFound);
+      this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.generic.addressNotFound));
     }
   }
 
@@ -254,7 +245,7 @@ export class CarAdviceComponent implements OnInit {
           let coverage = this.coverages.find(price => price.id === res.recommended_value);
           if (coverage) {
             coverage.highlight = true;
-            this.chatNotifierService.addTextMessage(this.chatConfig.car.info.coverage.advice(coverage));
+            this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
           }
 
         }, error => {

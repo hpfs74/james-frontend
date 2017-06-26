@@ -4,10 +4,7 @@ export interface Insurance {
   status: string;
   reference: string;
   label: string;
-}
 
-// Optional props
-export interface Insurance {
   insurance?: string;
   insurance_logo?: string;
   insurance_brand?: string;

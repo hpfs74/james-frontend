@@ -22,24 +22,16 @@ export function reducer(state = initialState, action: insurances.Actions): State
       });
     }
 
+    case insurances.ADD_INSURANCE_SUCCESS:
     case insurances.LOAD_SUCCESS: {
       const insurances = action.payload;
 
-      return {
+      return Object.assign({}, state, {
         loaded: true,
         loading: false,
-        insurances: Object.assign({}, state.insurances, insurances)
-      };
-    }
+        insurances: [ ...state.insurances, insurances ]
+      });
 
-    case insurances.ADD_INSURANCE_SUCCESS: {
-      const insurance = action.payload;
-
-      return {
-        loaded: true,
-        loading: false,
-        insurances: [ ...state.insurances, insurance ]
-      };
     }
 
     // case collection.REMOVE_BOOK_SUCCESS:
