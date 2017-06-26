@@ -117,6 +117,7 @@ export class CarDetailForm extends BaseForm {
         validationErrors: this.validationErrors,
         inputOptions: {
           placeholder: '',
+          events: ['focus'],
           items: [
             {
               label: 'Alleen ikzelf',

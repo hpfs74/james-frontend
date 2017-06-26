@@ -14,6 +14,7 @@ import { Address } from '../../models/address';
 
 
 describe('Service: AddressLookup', () => {
+  let backend, service;
 
   let configServiceStub = {
     config: {
@@ -45,8 +46,8 @@ describe('Service: AddressLookup', () => {
       ]
     });
 
-    this.backend = TestBed.get(MockBackend);
-    this.service = TestBed.get(AddressLookupService);
+    backend = TestBed.get(MockBackend);
+    service = TestBed.get(AddressLookupService);
   }));
 
   function setupConnections(backend: MockBackend, options: any) {
@@ -58,10 +59,10 @@ describe('Service: AddressLookup', () => {
         connection.mockRespond(response);
       }
     });
-  };
+  }
 
   it('should lookup an address', () => {
-    setupConnections(this.backend, {
+    setupConnections(backend, {
       body:
       {
         '_id': '4641BB71',
@@ -95,7 +96,7 @@ describe('Service: AddressLookup', () => {
       status: 200
     });
 
-    this.service.lookupAddress('4641BB', '71').subscribe((res) => {
+    service.lookupAddress('4641BB', '71').subscribe((res) => {
 
       let data = res.json();
 

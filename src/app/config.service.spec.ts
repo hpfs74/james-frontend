@@ -10,6 +10,8 @@ import { ConfigService } from './config.service';
 import { ConfigInterface } from './config.interface';
 
 describe('Service: ConfigService', () => {
+  let backend, service;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -29,44 +31,40 @@ describe('Service: ConfigService', () => {
       ]
     });
 
-    this.backend = TestBed.get(MockBackend);
-    this.service = TestBed.get(ConfigService);
+    backend = TestBed.get(MockBackend);
+    service = TestBed.get(ConfigService);
   }));
 
   it('should intialize the service', () => {
-    expect(this.backend).not.toBeNull;
-    expect(this.service).not.toBeNull;
+    expect(backend).toBeDefined();
+    expect(service).toBeDefined();
   });
 
   describe('james api', () => {
     it('should load a config from disk', () => {
-      expect(this.service.config).toBeNull;
-      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
-        expect(result.api).not.toBeNull;
+      service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api).toBeDefined();
       });
     });
 
     it('should contain token url', () => {
-      expect(this.service.config).toBeNull;
-      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
-        expect(result.api.james).not.toBeNull;
-        expect(result.api.james.token).not.toBeNull;
+      service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api.james).toBeDefined();
+        expect(result.api.james.token).toBeDefined();
       });
     });
 
     it('should contain key url', () => {
-      expect(this.service.config).toBeNull;
-      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
-        expect(result.api.james).not.toBeNull;
-        expect(result.api.james.key).not.toBeNull;
+      service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api.james).toBeDefined();
+        expect(result.api.james.key).toBeDefined();
       });
     });
 
     it('should contain profile url', () => {
-      expect(this.service.config).toBeNull;
-      this.service.load('../../config/api/config.json').then((result: ConfigInterface) => {
-        expect(result.api.james).not.toBeNull;
-        expect(result.api.james.profile).not.toBeNull;
+      service.load('../../config/api/config.json').then((result: ConfigInterface) => {
+        expect(result.api.james).toBeDefined();
+        expect(result.api.james.profile).toBeDefined();
       });
     });
   });

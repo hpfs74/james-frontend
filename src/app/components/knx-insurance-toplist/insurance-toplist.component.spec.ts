@@ -12,7 +12,7 @@ export class TestHostComponent {
   @ViewChild(InsuranceTopListComponent)
   public testComponent: InsuranceTopListComponent;
   public stepAmount: number = 4;
-  public insurances = [];
+  public insurances = [{fit: 100}, {fit: 100}, {fit: 100}, {fit: 100}, {fit: 100}];
 }
 
 describe('Component: InsuranceTopList', () => {
@@ -35,16 +35,14 @@ describe('Component: InsuranceTopList', () => {
 
   it('should initialize default sorting options', () => {
     fixture.detectChanges();
-    expect(comp.testComponent.orderBy.length).toBe(3);
+    expect(comp.testComponent.orderBy.length).toBe(2);
   });
 
-  it('should show more insurances', () => {
-    const increaseAmount = 4;
+  it('should show all insurances', () => {
     comp.testComponent.total = 0;
-    comp.stepAmount = increaseAmount;
-    comp.testComponent.showMore();
+    comp.testComponent.showAll();
     fixture.detectChanges();
-    expect(comp.testComponent.total).toBe(increaseAmount);
+    expect(comp.testComponent.total).toBeTruthy();
   });
 
 });

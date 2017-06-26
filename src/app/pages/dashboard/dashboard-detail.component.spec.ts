@@ -97,6 +97,7 @@ describe('Component: DashboardDetail', () => {
     });
 
   });
+
   describe('with routing to travel', () => {
     beforeEach(async(() => {
       routerStub = {

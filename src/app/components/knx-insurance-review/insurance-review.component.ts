@@ -63,7 +63,7 @@ export class InsuranceReviewComponent implements OnChanges {
               label: 'Eigen risico',
               value: '€ ' + this.selectedInsurance.own_risk,
               info: 'Dit eigen risico is van toepassing als je jouw auto aat maken bij een door de verzekeraar gekozen ' +
-              'schadehersteller, wil je jouw auto door iemand anders laten maken, dan geldt er een hoger eigen rlslco.'
+              'schadehersteller, wil je jouw auto door iemand anders laten maken, dan geldt er een hoger eigen risico.'
             },
             {
               label: 'Totaal premie per maand, inclusief 10% provisie van Knab',

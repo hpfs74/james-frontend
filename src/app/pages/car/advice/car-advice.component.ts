@@ -185,6 +185,13 @@ export class CarAdviceComponent implements OnInit {
 
   updateSelectedCoverage(coverage: Price) {
     this.carDetailForm.formGroup.get('coverage').patchValue(coverage.id);
+    this.showHelperText(coverage.id);
+  }
+
+  showHelperText(key) {
+    let messageToShow = this.chatConfig.car.info[key];
+    this.store.dispatch(new assistant.ClearAction);
+    this.store.dispatch(new assistant.AddMessageAction(messageToShow));
   }
 
   getCarInfo(licensePlate: string) {
@@ -218,18 +225,7 @@ export class CarAdviceComponent implements OnInit {
   }
 
   updateAddress(address: Address) {
-    if (address.street && address.city) {
-      if (!this.address || !this.isObjectEqual<Address>(this.address, address)) {
-        this.store.dispatch(new assistant.ClearAction);
-        this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.generic.address(address)));
-      }
-      this.address = address;
-    }
-
-    if (!address.street && !address.city) {
-      this.store.dispatch(new assistant.ClearAction);
-      this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.generic.addressNotFound));
-    }
+    this.address = address;
   }
 
   getCoverages(event) {

@@ -29,11 +29,30 @@ import { InsuranceAdvice, Insurer } from '../../models';
             <div class="row">
               <div class="col-sm-6 knx-insurance-result__profilescore">
                 <knx-donut *ngIf="insurance.fit" [percentage]="insurance.fit"></knx-donut>
-                <div class="knx-insurance-result__label">Profielscore</div>
+                <div class="knx-insurance-result__label">
+                  Profielscore
+                  <knx-info size="md" isFloating="true" class="knx-info">
+                    <div class="knx-info__content">
+                      <div class="knx-message knx-message--chat knx-message--arrow-top">
+                        <div class="knx-message__content" [innerHTML]="infoMessages.profileScore"></div>
+                      </div>
+                    </div>
+                  </knx-info>
+                </div>
+
               </div>
               <div class="col-sm-6 knx-insurance-result__price-quality">
                 <div class="knx-insurance-result__amount">{{ insurance.price_quality }}<span>/10</span></div>
-                <div class="knx-insurance-result__label">Prijs kwaliteit</div>
+                <div class="knx-insurance-result__label">
+                  Prijs kwaliteit
+                  <knx-info size="md" isFloating="true" class="knx-info">
+                    <div class="knx-info__content">
+                      <div class="knx-message knx-message--chat knx-message--arrow-top">
+                        <div class="knx-message__content" [innerHTML]="infoMessages.priceQuality"></div>
+                      </div>
+                    </div>
+                  </knx-info>
+                </div>
               </div>
             </div>
           </div>
@@ -42,9 +61,9 @@ import { InsuranceAdvice, Insurer } from '../../models';
               {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
             </div>
             <button role="button" class="knx-button knx-button--secondary knx-button--fullwidth"
-              [disabled]="disableButton"
-              (click)="select($event)">
-                Kies deze
+                    [disabled]="disableButton"
+                    (click)="select($event)">
+              Kies deze
             </button>
           </div>
         </div>
@@ -66,6 +85,11 @@ export class InsuranceResultComponent {
   @Input() disableButton: boolean;
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
+
+  public infoMessages = {
+    profileScore: '<b>Approve message!</b> <br> Profiel score is erg belangrijk',
+    priceQuality: '<b>Approve message!</b> <br> Prijskwaliteit is erg belangrijk'
+  };
 
   select(event) {
     this.insuranceSelected$.emit(this.insurance);

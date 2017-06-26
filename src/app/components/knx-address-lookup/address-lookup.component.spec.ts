@@ -111,7 +111,7 @@ describe('Component: AddressLookup', () => {
       });
   });
 
-  it('should emit an addressFound', (done) => {
+  it('should get address', (done) => {
 
     inject([AddressLookupService], (addressServiceStub) => {
       comp.addressFound.subscribe((data) => {

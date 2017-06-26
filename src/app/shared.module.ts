@@ -12,7 +12,7 @@ import { KNXCollapsiblePanelModule } from '../../node_modules/@knx/collapsible-p
 import { KNXInfoModule } from '../../node_modules/@knx/info';
 import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 
-import { AngularSvgIconModule } from 'angular-svg-icon';
+import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
 
 /**
  * Pipes

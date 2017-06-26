@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { ConfigService } from '../config.service';
 
 describe('Service: AuthService', () => {
+  let backend, service;
   let configServiceStub = {
     config: {
       api: {
@@ -37,8 +38,8 @@ describe('Service: AuthService', () => {
       ]
     });
 
-    this.backend = TestBed.get(MockBackend);
-    this.service = TestBed.get(AuthService);
+    backend = TestBed.get(MockBackend);
+    service = TestBed.get(AuthService);
   }));
 
   function setupConnections(backend: MockBackend, options: any) {
@@ -60,7 +61,7 @@ describe('Service: AuthService', () => {
   //           emailaddress: 'matteo.s@hcl.com'
   //         }
   //       };
-  //       setupConnections(this.backend, mockResponse);
+  //       setupConnections(backend, mockResponse);
 
   //       authService.getUserProfile().subscribe((user) => {
   //         expect(user).not.toBeNull;
