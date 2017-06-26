@@ -10,6 +10,7 @@ import { AuthGuard } from '../../services/auth-guard.service';
 import { AssistantService } from '../../services/assistant.service';
 import { LoaderService } from '../../components/knx-app-loader/loader.service';
 import { ProfileService } from '../../services/profile.service';
+import { CarService } from '../car/car.service';
 
 // Layout components
 import { AppLoaderComponent } from '../../components/knx-app-loader/loader.component';
@@ -43,7 +44,8 @@ export class HomeModule {
         AuthGuard,
         AssistantService,
         LoaderService,
-        ProfileService
+        ProfileService,
+        CarService
       ]
     };
   }

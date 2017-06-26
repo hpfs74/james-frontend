@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
-export const LOAD_COMPARE =                       '[Compare] Load';
-export const LOAD_COMPARE_SUCCESS =               '[Compare] Load Success';
-export const LOAD_COMPARE_FAIL =                  '[Compare] Load Fail';
+export const LOAD_COMPARE =            '[Compare] Load';
+export const LOAD_COMPARE_SUCCESS =    '[Compare] Load Success';
+export const LOAD_COMPARE_FAIL =       '[Compare] Load Fail';
 
 /**
  * Add Compare Insurance Actions

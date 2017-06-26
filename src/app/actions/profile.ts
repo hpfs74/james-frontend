@@ -1,13 +1,13 @@
 import { Action } from '@ngrx/store';
 import { Profile } from '../models/profile';
 
-export const LOAD_PROFILE_REQUEST = '[Profile] Load Request';
-export const LOAD_PROFILE_SUCCESS = '[Profile] Load Success';
-export const LOAD_PROFILE_FAIL = '[Profile] Load Fail';
+export const LOAD_PROFILE_REQUEST =   '[Profile] Load Request';
+export const LOAD_PROFILE_SUCCESS =   '[Profile] Load Success';
+export const LOAD_PROFILE_FAIL =      '[Profile] Load Fail';
 
-export const SAVE_PROFILE_REQUEST = '[Profile] Save Request';
-export const SAVE_PROFILE_SUCCESS = '[Profile] Save Success';
-export const SAVE_PROFILE_FAIL = '[Profile] Save Fail';
+export const SAVE_PROFILE_REQUEST =   '[Profile] Save Request';
+export const SAVE_PROFILE_SUCCESS =   '[Profile] Save Success';
+export const SAVE_PROFILE_FAIL =      '[Profile] Save Fail';
 
 
 export class LoadAction implements Action {

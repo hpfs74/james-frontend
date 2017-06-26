@@ -2,10 +2,18 @@
  * @description
  * Class definition for address type used by user profile
  */
+interface NumberExtended {
+  number_only: number;
+  number_letter: string;
+  number_addition: string;
+  number_extension: string;
+}
+
 export class Address {
   _id: string;
   postcode?: string;
   number: string;
+  number_extended?: NumberExtended;
   street: string;
   city: string;
   county: string;
@@ -22,7 +30,6 @@ export class Address {
   house_info_roof_condition_text?: string;
   house_info_house_type_text?: string;
   house_info_house_use_text?: string;
-  number_extended?: any;
   rooms?: number;
   build_type?: any;
   isolation_glass?: boolean;

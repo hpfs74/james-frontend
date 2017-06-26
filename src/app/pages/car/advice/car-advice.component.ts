@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Rx';
 
 import * as fromRoot from '../../../reducers';
 import * as assistant from '../../../actions/assistant';
+import * as car from '../../../actions/car';
+import * as insurance from '../../../actions/insurances';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -39,6 +41,8 @@ export class CarAdviceComponent implements OnInit {
 
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
+
+  //TODO: refactor
   selectedInsurance: CarInsurance;
   car: Car;
   profile: any | Profile;
@@ -117,6 +121,8 @@ export class CarAdviceComponent implements OnInit {
       .subscribe(data => {
         if (this.formData[0]) {
           //console.log(data);
+          //this.insurances = this.store.select(fromRoot.getInsurances);
+
           this.insurances = this.carService.getInsurances(
             Object.assign(
               this.formData[0], {
@@ -198,6 +204,8 @@ export class CarAdviceComponent implements OnInit {
     if (!licensePlate) {
       return;
     }
+
+    //this.store.dispatch(new car.GetInfoAction(licensePlate));
 
     this.carService.getByLicense(licensePlate)
       .subscribe(res => {

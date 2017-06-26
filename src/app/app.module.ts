@@ -12,6 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { reducer } from './reducers';
 import { ProfileEffects } from './effects/profile';
+import { CarEffects } from './effects/car';
+//import { CompareEffects } from './effects/compare';
 
 import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
@@ -69,10 +71,12 @@ export function ContentLoader(contentService: ContentService) {
     /**
      * @ngrx/router-store keeps router state up-to-date in the store and uses
      * the store as the single source of truth for the router's state.
+     *
+     * Use runAfterBootstrap because services require api endpoints from ConfigLoader
      */
     RouterStoreModule.connectRouter(),
     EffectsModule.runAfterBootstrap(ProfileEffects),
-
+    EffectsModule.runAfterBootstrap(CarEffects),
     LoginRoutingModule,
     AuthModule,
     AppRoutingModule,
