@@ -15,7 +15,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       vanaf <span>{{ price | currency:'EUR':true:'1.2-2' }}</span>
     </div>
     <button class="knx-button knx-button--ghost">{{ selected ? ' Gekozen' : 'Kies deze' }}</button>
-  </div>`,
+  </div>`
 })
 export class PriceItemComponent {
   @Input() header: string;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -35,7 +35,8 @@ import * as FormUtils from '../../../utils/base-form.utils';
 import { mockCar } from '../../../models/_mocks/car.mock';
 
 @Component({
-  templateUrl: 'car-buy.component.html'
+  templateUrl: 'car-buy.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarBuyComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
@@ -139,22 +140,21 @@ export class CarBuyComponent implements OnInit {
     this.initForm(message);
 
     // Collect all form data
-    let forms = [
-      this.contactDetailForm.formGroup.value,
-      this.reportingCodeForm.formGroup.value,
-      this.checkForm.formGroup.value,
-      this.paymentForm.formGroup.value
-    ];
+    // let forms = [
+    //   this.contactDetailForm.formGroup.value,
+    //   this.reportingCodeForm.formGroup.value,
+    //   this.checkForm.formGroup.value,
+    //   this.paymentForm.formGroup.value
+    // ];
 
-    let data = forms.reduce((acc, x) => {
-      for (let key in x) {
-        acc[key] = x[key];
-      }
-      return acc;
-    }, {});
+    // let data = forms.reduce((acc, x) => {
+    //   for (let key in x) {
+    //     acc[key] = x[key];
+    //   }
+    //   return acc;
+    // }, {});
 
-    console.log(data);
-    this.formData = data;
+    // this.formData = data;
   }
 
   submitForm(form: BaseForm) {

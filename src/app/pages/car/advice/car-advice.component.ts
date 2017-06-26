@@ -136,6 +136,12 @@ export class CarAdviceComponent implements OnInit {
           this.store.dispatch(new advice.UpdateAction(compareObj));
         }
       });
+    this.store.select(fromRoot.getSelectedAdvice)
+      .subscribe(advice => {
+        if (advice.coverage) {
+          this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
+        }
+      });
 
     // On car info found
     // TODO: refactor to be more reactive
@@ -185,7 +191,6 @@ export class CarAdviceComponent implements OnInit {
 
     this.store.select(fromRoot.getProfile)
       .subscribe((profile: Profile) => {
-
         let compareObj: CarCompare = {
           active_loan: detailForm.value.loan,
           coverage: detailForm.value.coverage,
@@ -253,8 +258,6 @@ export class CarAdviceComponent implements OnInit {
 
   //TODO: change to reactive
   getCoverages(event) {
-    console.log(event);
-
     if (this.car) {
       this.isCoverageLoading = true;
 

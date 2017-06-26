@@ -37,7 +37,7 @@ interface OrderItem {
           </knx-insurance-result>
 
           <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showAll()">
-            Alle verzekeringen
+            Toon all verzekeringen
           </button>
 
           <div class="knx-insurance-toplist__info">
