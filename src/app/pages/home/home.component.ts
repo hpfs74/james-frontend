@@ -35,7 +35,7 @@ import {
       <knx-features [items]="footerItems"></knx-features>
     </div>
   `,
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -28,7 +28,8 @@ import { insuranceTypes } from './../../models/';
   `,
   styles: [`
     .knx-dashboard-detail { margin-bottom: 20px }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardDetailComponent implements OnInit {
   insuranceType: string;

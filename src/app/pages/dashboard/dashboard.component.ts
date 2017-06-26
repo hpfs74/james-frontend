@@ -1,5 +1,4 @@
-import { getMessages } from './../../reducers/assistant';
-import { Component, OnInit, AfterViewInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -18,7 +17,8 @@ import { AuthService } from '../../services/auth.service';
 import { Profile, InsuranceMap, Insurance, insuranceTypes } from '../../models';
 
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
   chatConfig: AssistantConfig;

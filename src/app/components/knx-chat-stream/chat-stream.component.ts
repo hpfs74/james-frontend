@@ -1,4 +1,3 @@
-import { ChatStreamService } from './chat-stream.service';
 import { Observable } from 'rxjs/Observable';
 import {
   Component, Input, OnChanges, SimpleChanges, OnInit, ViewChild, AfterViewInit,

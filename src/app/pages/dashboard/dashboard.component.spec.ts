@@ -6,7 +6,6 @@ import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
-import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { DashboardComponent } from './dashboard.component';
 import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
 import { ConfigService } from '../../config.service';
@@ -41,7 +40,6 @@ describe('Component: Dashboard', () => {
         AuthService,
         AssistantService,
         ProfileService,
-        ChatStreamService,
         {provide: Router, useValue: routerStub},
         {provide: ConfigService, useValue: configServiceStub},
         {

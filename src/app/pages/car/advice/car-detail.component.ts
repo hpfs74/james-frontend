@@ -8,7 +8,6 @@ import 'rxjs/add/observable/combineLatest';
 
 import { CarDetailForm } from './car-detail.form';
 import { Car, Price, Address } from '../../../models';
-import { ChatStreamService } from '../../../components/knx-chat-stream/chat-stream.service';
 import { CarService } from '../car.service';
 
 @Component({
@@ -35,7 +34,6 @@ export class CarDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private elementRef: ElementRef,
-    private chatNotifierService: ChatStreamService,
     private carService: CarService) {
   }
 

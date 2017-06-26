@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-
-import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 
 import * as fromRoot from '../../../reducers';
 import * as assistant from '../../../actions/assistant';
@@ -14,7 +13,6 @@ import { ContentService } from '../../../content.service';
 import { InsuranceService } from '../../../services/insurance.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
-import { ChatStreamComponent } from './../../../components/knx-chat-stream/chat-stream.component';
 import { CarService } from '../car.service';
 import { Car, Price, CarCompare, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
@@ -27,14 +25,12 @@ import * as FormUtils from '../../../utils/base-form.utils';
 
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { AuthService } from '../../../services/auth.service';
-import { ProfileService } from '../../../services/profile.service';
 
 @Component({
-  templateUrl: 'car-advice.component.html'
+  templateUrl: 'car-advice.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarAdviceComponent implements OnInit {
-  @ViewChild(ChatStreamComponent) chatStreamComponent: ChatStreamComponent;
-
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   formData: Array<any>;
@@ -49,11 +45,10 @@ export class CarAdviceComponent implements OnInit {
   address: Address;
 
   chatConfig: AssistantConfig;
-  chatMessages: Array<ChatMessage> = [];
+  chatMessages$: Observable<Array<ChatMessage>>;
 
   isCoverageLoading: boolean = false;
   isInsuranceLoading: boolean = false;
-  token: string = '';
 
   // Forms
   carDetailForm: CarDetailForm;
@@ -67,13 +62,13 @@ export class CarAdviceComponent implements OnInit {
     private assistantService: AssistantService,
     private carService: CarService,
     private insuranceService: InsuranceService,
-    private authService: AuthService,
-    private profileService: ProfileService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
+    this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
 
     this.currentStep = 0;
     this.formSteps = [
@@ -83,6 +78,7 @@ export class CarAdviceComponent implements OnInit {
         hideBackButton: true,
         onShowStep: () => {
           FormUtils.scrollToForm('form');
+          this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.welcome));
         },
         onBeforeNext: this.submitDetailForm.bind(this)
@@ -93,7 +89,7 @@ export class CarAdviceComponent implements OnInit {
         hideNextButton: true,
         onShowStep: () => {
           FormUtils.scrollToForm('.knx-insurance-toplist');
-          this.chatMessages = [];
+          this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
         }
       },

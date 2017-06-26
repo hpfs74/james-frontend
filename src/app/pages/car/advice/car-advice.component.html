@@ -15,7 +15,6 @@
           (addressChange)="updateAddress($event)"
           (coverageDetailsChange)="getCoverages($event)"
           (coverageSelected)="updateSelectedCoverage($event)"
-          (formControlFocus)="showHelperText($event)"
           [form]="carDetailForm"
           [car]="car"
           [coverages]="coverages"
@@ -41,7 +40,7 @@
     <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>
       <knx-chat-stream
         [options]="chatConfig"
-        [messages]="chatMessages"
+        [messages]="chatMessages$ | async"
         [formGroup]="carExtrasForm.formGroup">
 
         <knx-car-extras
