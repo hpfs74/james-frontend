@@ -13,6 +13,7 @@ import * as assistant from '../../../actions/assistant';
 import * as car from '../../../actions/car';
 import * as insurance from '../../../actions/insurances';
 import * as advice from '../../../actions/advice';
+import * as compare from '../../../actions/compare';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -38,24 +39,20 @@ import { AuthService } from '../../../services/auth.service';
 export class CarAdviceComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
-  formData: Array<any>;
   carDetailSubmitted: boolean = false;
   currentStep: number;
 
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
 
-  //TODO: refactor
-  // selectedInsurance: CarInsurance;
   car: Car;
-  // profile: any | Profile;
-  // address: Address;
-
   chatConfig: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
 
+  insurances$: Observable<Array<CarInsurance>>;
+  isInsuranceLoading$: Observable<boolean>;
+
   isCoverageLoading: boolean = false;
-  isInsuranceLoading: boolean = false;
 
   // Forms
   carDetailForm: CarDetailForm;
@@ -76,6 +73,8 @@ export class CarAdviceComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
+    this.insurances$ = this.store.select(fromRoot.getCompareResult);
+    this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
 
     this.store.dispatch(new advice.AddAction({
       id: UUID.UUID()
@@ -116,8 +115,6 @@ export class CarAdviceComponent implements OnInit {
         onBeforeNext: this.startBuyFlow.bind(this)
       }
     ];
-    this.formData = new Array(this.formSteps.length);
-
     let formBuilder = new FormBuilder();
     this.carDetailForm = new CarDetailForm(formBuilder);
 
@@ -126,23 +123,17 @@ export class CarAdviceComponent implements OnInit {
       .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(data => {
-        if (this.formData[0]) {
-          //console.log(data);
-          //this.insurances = this.store.select(fromRoot.getInsurances);
-
-          this.insurances = this.carService.getInsurances(
-            Object.assign(
-              this.formData[0], {
-                coverage: data.coverage,
-                cover_occupants: data.extraOptions.cover_occupants || false,
-                kilometers_per_year: data.kmPerYear,
-                no_claim_protection: data.extraOptions.noclaim || false,
-                own_risk: data.ownRisk,
-              })
-          );
+        if (this.currentStep === 1) {
+          let compareObj = {
+            coverage: data.coverage,
+            cover_occupants: data.extraOptions.cover_occupants || false,
+            kilometers_per_year: data.kmPerYear,
+            no_claim_protection: data.extraOptions.noclaim || false,
+            own_risk: data.ownRisk,
+          };
+          this.store.dispatch(new advice.UpdateAction(compareObj));
         }
       });
-
 
     // On car info found
     // TODO: refactor to be more reactive
@@ -171,8 +162,6 @@ export class CarAdviceComponent implements OnInit {
   }
 
   submitDetailForm(): Observable<any> {
-    this.store.dispatch(new assistant.ClearAction);
-
     let detailForm = this.carDetailForm.formGroup;
     let addressForm = this.carDetailForm.addressForm;
 
@@ -191,14 +180,6 @@ export class CarAdviceComponent implements OnInit {
       gender: detailForm.value.gender,
       date_of_birth: detailForm.value.birthDate
     }));
-
-      // this.formData[0] = requestObj;
-    // this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
-    this.store.select(fromRoot.getSelectedAdvice)
-      .subscribe(x => {
-        console.log(x);
-        //return this.insurances = this.carService.getInsurances(x);
-    });
 
     this.store.select(fromRoot.getProfile)
       .subscribe((profile: Profile) => {
@@ -219,6 +200,9 @@ export class CarAdviceComponent implements OnInit {
 
         this.store.dispatch(new advice.UpdateAction(compareObj));
       });
+
+    return this.store.select(fromRoot.getSelectedAdvice)
+      .map(options => this.store.dispatch(new compare.LoadCarAction(options)));
   }
 
   onSelectPremium(insurance) {
@@ -267,7 +251,10 @@ export class CarAdviceComponent implements OnInit {
     }));
   }
 
+  //TODO: change to reactive
   getCoverages(event) {
+    console.log(event);
+
     if (this.car) {
       this.isCoverageLoading = true;
 

@@ -13,7 +13,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './reducers';
 import { ProfileEffects } from './effects/profile';
 import { CarEffects } from './effects/car';
-//import { CompareEffects } from './effects/compare';
+import { CompareEffects } from './effects/compare';
 
 import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
@@ -77,6 +77,7 @@ export function ContentLoader(contentService: ContentService) {
     RouterStoreModule.connectRouter(),
     EffectsModule.runAfterBootstrap(ProfileEffects),
     EffectsModule.runAfterBootstrap(CarEffects),
+    EffectsModule.runAfterBootstrap(CompareEffects),
     LoginRoutingModule,
     AuthModule,
     AppRoutingModule,

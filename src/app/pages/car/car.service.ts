@@ -5,15 +5,7 @@ import { Observable } from 'rxjs';
 import { AuthHttp } from '../../services/auth-http.service';
 import { Profile } from '../../models/profile';
 import { ConfigService } from '../../config.service';
-import {
-  Car,
-  CarInsurance,
-  CarCoverageRecommendation,
-  CarInsuranceOptions,
-  CarCompare,
-  Price,
-  Address
-} from './../../models';
+import { Car, CarInsurance, CarCoverageRecommendation, CarCompare } from './../../models';
 
 @Injectable()
 export class CarService {

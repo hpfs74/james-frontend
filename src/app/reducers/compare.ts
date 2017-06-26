@@ -1,10 +1,11 @@
 import { createSelector } from 'reselect';
 import * as compare from '../actions/compare';
+import { InsuranceAdvice } from './../models/insurance-advice';
 
 export interface State {
   loading: boolean;
   loaded: boolean;
-  insurances: any[];
+  insurances: InsuranceAdvice[];
 }
 
 export const initialState: State = {
@@ -15,21 +16,20 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: compare.Actions): State {
   switch (action.type) {
-    case compare.LOAD_COMPARE: {
+    case compare.LOAD_CAR_COMPARE: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case compare.LOAD_COMPARE_SUCCESS: {
+    case compare.LOAD_CAR_COMPARE_SUCCESS: {
       const compareResult = action.payload;
 
       return Object.assign({}, state, {
         loaded: true,
         loading: false,
-        insurances: [ ...state.insurances, compareResult ]
+        insurances: compareResult
       });
-
     }
 
     default: {

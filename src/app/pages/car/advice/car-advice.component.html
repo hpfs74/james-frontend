@@ -18,7 +18,6 @@
           [form]="carDetailForm"
           [car]="car"
           [coverages]="coverages"
-          [submitted]="carDetailSubmitted && currentStep === 0"
           [isCoverageLoading]="isCoverageLoading">
         </knx-car-detail-form>
       </knx-step>
@@ -27,14 +26,15 @@
         <knx-insurance-toplist
           (insuranceSelected$)="knxWizard.goToNextStep(); onSelectPremium($event)"
           [stepAmount]="4"
+          [isLoading]="isInsuranceLoading$| async"
           [disableInsuranceBuy]="!carExtrasForm?.formGroup.valid"
-          [insurances]="insurances | async">
+          [insurances]="insurances$ | async">
         </knx-insurance-toplist>
       </knx-step>
 
-      <knx-step [options]="formSteps[2]">
+      <!--<knx-step [options]="formSteps[2]">
         <knx-insurance-review [selectedInsurance]="selectedInsurance"></knx-insurance-review>
-      </knx-step>
+      </knx-step>-->
     </div>
 
     <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>

@@ -22,7 +22,6 @@ export class CarDetailComponent implements OnInit {
   @Input() config: any;
   @Input() coverages: Price[];
   @Input() isCoverageLoading: boolean;
-  @Input() submitted: boolean;
 
   @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
   @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();

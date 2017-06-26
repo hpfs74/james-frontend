@@ -25,8 +25,8 @@ interface OrderItem {
           </button>
         </div>
 
-        <div *ngIf="!insurances; else insuranceResults">
-          <knx-loader [visible]="!insurances">
+        <div *ngIf="isLoading; else insuranceResults">
+          <knx-loader [visible]="isLoading">
             Bezig met ophalen van verzekeringen...
           </knx-loader>
         </div>
@@ -50,8 +50,9 @@ interface OrderItem {
   </div>
   `
 })
-export class InsuranceTopListComponent implements OnInit, OnChanges {
+export class InsuranceTopListComponent implements OnInit {
   @Input() insurances: Array<InsuranceAdvice>;
+  @Input() isLoading: boolean;
   @Input() title: string;
   @Input() stepAmount: number;
   @Input() disableInsuranceBuy: boolean;
@@ -67,12 +68,6 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
       { id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true },
       { id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false }
     ];
-  }
-
-  ngOnChanges() {
-    if (this.insurances) {
-      this.insurances = this.sortInsurances('price_quality');
-    }
   }
 
   changeOrderBy(selected: OrderItem) {
