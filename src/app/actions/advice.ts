@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 export const ADD_ADVICE =     '[Advice] Add';
 export const UPDATE_ADVICE =  '[Advice] Update';
 export const REMOVE_ADVICE =  '[Advice] Remove';
+export const SELECT_ADVICE =  '[Advice] Select';
 
 /**
  * Advice Actions
@@ -25,8 +26,15 @@ export class RemoveAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class SelectAction implements Action {
+  readonly type = SELECT_ADVICE;
+
+  constructor(public payload: any) { }
+}
+
 export type Actions
   = AddAction
   | UpdateAction
-  | RemoveAction;
+  | RemoveAction
+  | SelectAction;
 

@@ -159,6 +159,11 @@ export const getCompareLoading = createSelector(getCompareState, fromCompare.get
  */
 export const getAdviceState = (state: State) => state.advice;
 export const getAdvice = createSelector(getAdviceState, fromAdvice.getAdvice);
+export const getAdviceIds = createSelector(getAdviceState, fromAdvice.getIds);
+
+export const getSelectedAdviceId = createSelector(getAdviceState, fromAdvice.getSelectedId);
+export const getSelectedAdvice = createSelector(getAdviceState, fromAdvice.getSelected);
+
 
 /**
  * Car Info Reducers

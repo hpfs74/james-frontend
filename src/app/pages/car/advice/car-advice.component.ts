@@ -4,6 +4,8 @@ import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wiza
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import { UUID } from 'angular2-uuid';
+import * as moment from 'moment';
 
 import * as fromRoot from '../../../reducers';
 import * as profile from '../../../actions/profile';
@@ -22,7 +24,6 @@ import { Car, Price, CarCompare, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../../models/coverage';
 import { CarInsurance } from '../../../models/car-insurance';
-import { CarInsuranceOptions } from './../../../models/car-compare';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
 import * as FormUtils from '../../../utils/base-form.utils';
@@ -46,14 +47,12 @@ export class CarAdviceComponent implements OnInit {
 
   //TODO: refactor
   // selectedInsurance: CarInsurance;
-  // car: Car;
+  car: Car;
   // profile: any | Profile;
   // address: Address;
 
   chatConfig: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
-
-  car$: Observable<Car>;
 
   isCoverageLoading: boolean = false;
   isInsuranceLoading: boolean = false;
@@ -77,6 +76,10 @@ export class CarAdviceComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
+
+    this.store.dispatch(new advice.AddAction({
+      id: UUID.UUID()
+    }));
 
     this.currentStep = 0;
     this.formSteps = [
@@ -142,7 +145,7 @@ export class CarAdviceComponent implements OnInit {
 
 
     // On car info found
-    // TODO: refactor
+    // TODO: refactor to be more reactive
     this.store.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {
         if (isLoaded) {
@@ -153,6 +156,7 @@ export class CarAdviceComponent implements OnInit {
       }).subscribe((res: Array<Car>) => {
         let lastFound = res.slice(-1)[0];
         if (lastFound && lastFound.license) {
+          this.car = lastFound;
           this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(lastFound)));
         } else {
@@ -170,12 +174,12 @@ export class CarAdviceComponent implements OnInit {
     this.store.dispatch(new assistant.ClearAction);
 
     let detailForm = this.carDetailForm.formGroup;
-    let address = this.carDetailForm.addressForm;
+    let addressForm = this.carDetailForm.addressForm;
 
     FormUtils.validateForm(detailForm);
-    FormUtils.validateForm(address);
+    FormUtils.validateForm(addressForm);
 
-    if (!detailForm.valid && !address.valid) {
+    if (!detailForm.valid && !addressForm.valid) {
       this.carDetailSubmitted = true;
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
     }
@@ -183,28 +187,42 @@ export class CarAdviceComponent implements OnInit {
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    // this.store.dispatch(new profile.UpdateAction({
-    //   gender: detailForm.value.gender,
-    //   date_of_birth: detailForm.value.birthDate
-    // }));
+    this.store.dispatch(new profile.UpdateAction({
+      gender: detailForm.value.gender,
+      date_of_birth: detailForm.value.birthDate
+    }));
 
-    // let options: CarInsuranceOptions = {
-    //   active_loan: detailForm.value.loan,
-    //   coverage: detailForm.value.coverage,
-    //   claim_free_years: +detailForm.value.claimFreeYears,
-    //   household_status: detailForm.value.houseHold
-    // };
-    // let requestObj = new CarCompare(this.profile, this.car, this.address, options);
-
-
-    // this.formData[0] = requestObj;
+      // this.formData[0] = requestObj;
     // this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
+    this.store.select(fromRoot.getSelectedAdvice)
+      .subscribe(x => {
+        console.log(x);
+        //return this.insurances = this.carService.getInsurances(x);
+    });
 
-    // return this.insurances = this.carService.getInsurances(requestObj);
+    this.store.select(fromRoot.getProfile)
+      .subscribe((profile: Profile) => {
+
+        let compareObj: CarCompare = {
+          active_loan: detailForm.value.loan,
+          coverage: detailForm.value.coverage,
+          claim_free_years: +detailForm.value.claimFreeYears,
+          household_status: detailForm.value.houseHold,
+          license: this.car.license,
+          gender: detailForm.value.gender.toUpperCase(),
+          title: detailForm.value.gender.toLowerCase() === 'm' ? 'Dhr.' : 'Mw.',
+          date_of_birth: moment(detailForm.value.birthDate).format('YYYY-MM-DD'),
+          house_number: profile.address.number,
+          zipcode: profile.address.postcode,
+          country: 'NL'
+        };
+
+        this.store.dispatch(new advice.UpdateAction(compareObj));
+      });
   }
 
   onSelectPremium(insurance) {
-    //this.selectedInsurance = insurance;
+    //this.store.dispatch(new advice.UpdateAction({ insurance: insurance }));
   }
 
   onStepChange(stepIndex) {
@@ -250,31 +268,27 @@ export class CarAdviceComponent implements OnInit {
   }
 
   getCoverages(event) {
-    // if (this.car) {
-    //   this.isCoverageLoading = true;
+    if (this.car) {
+      this.isCoverageLoading = true;
 
-    //   // get default coverage types
-    //   this.coverages = this.contentService.getContentObject().car.coverages;
+      // get default coverage types
+      this.coverages = this.contentService.getContentObject().car.coverages;
 
-    //   // fetch recommendation
-    //   this.carService.getCoverageRecommendation(this.car.license, event.loan)
-    //     .subscribe(res => {
-    //       this.isCoverageLoading = false;
+      // fetch recommendation
+      this.carService.getCoverageRecommendation(this.car.license, event.loan)
+        .subscribe(res => {
+          this.isCoverageLoading = false;
 
-    //       let coverage = this.coverages.find(price => price.id === res.recommended_value);
-    //       if (coverage) {
-    //         coverage.highlight = true;
-    //         this.store.dispatch(new assistant.ClearAction);
-    //         this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
-    //       }
+          let coverage = this.coverages.find(price => price.id === res.recommended_value);
+          if (coverage) {
+            coverage.highlight = true;
+            this.store.dispatch(new assistant.ClearAction);
+            this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
+          }
 
-    //     }, error => {
-    //       this.isCoverageLoading = false;
-    //     });
-    // }
-  }
-
-  private isObjectEqual<T>(prev: T, cur: T): boolean {
-    return JSON.stringify(prev) === JSON.stringify(cur);
+        }, error => {
+          this.isCoverageLoading = false;
+        });
+    }
   }
 }

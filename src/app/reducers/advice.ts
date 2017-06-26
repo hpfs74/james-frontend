@@ -2,13 +2,15 @@ import { createSelector } from 'reselect';
 import * as advice from '../actions/advice';
 
 export interface State {
+  selectedId: string | null;
   ids: string[];
-  advice: any[];
+  advice: { [id: string]: any };
 }
 
 export const initialState: State = {
+  selectedId: null,
   ids: [],
-  advice: []
+  advice: {}
 };
 
 export function reducer(state = initialState, action: advice.Actions): State {
@@ -21,8 +23,11 @@ export function reducer(state = initialState, action: advice.Actions): State {
       }
 
       return Object.assign({}, state, {
-        ids: [ ...state.ids, advice.id ],
-        advice: [ ...state.advice, action.payload ]
+        ids: [...state.ids, advice.id],
+        selectedId: advice.id,
+        advice: Object.assign({}, state.advice, {
+          [advice.id] : action.payload
+        })
       });
     }
 
@@ -30,9 +35,18 @@ export function reducer(state = initialState, action: advice.Actions): State {
       const advice = action.payload;
 
       return Object.assign({}, state, {
-        advice: state.advice
-          .map(item => item.id === action.payload.id ? Object.assign(item, action.payload) : item)
+        advice: Object.assign({}, state.advice, {
+          [state.selectedId]: advice
+        }),
       });
+    }
+
+    case advice.SELECT_ADVICE: {
+      return {
+        ids: state.ids,
+        advice: state.advice,
+        selectedId: action.payload
+      };
     }
 
     case advice.REMOVE_ADVICE: {
@@ -40,7 +54,7 @@ export function reducer(state = initialState, action: advice.Actions): State {
 
       return Object.assign({}, state, {
         ids: state.ids.filter(id => id !== advice.id),
-        advice: state.advice.filter(el => el.id !== advice.id)
+        advice: Object.assign({}, Object.keys(state.advice).filter(id => id !== advice.id))
       });
     }
 
@@ -51,3 +65,8 @@ export function reducer(state = initialState, action: advice.Actions): State {
 }
 
 export const getAdvice = (state: State) => state.advice;
+export const getIds = (state: State) => state.ids;
+export const getSelectedId = (state: State) => state.selectedId;
+export const getSelected = createSelector(getAdvice, getSelectedId, (advice, selectedId) => {
+  return advice[selectedId];
+});
