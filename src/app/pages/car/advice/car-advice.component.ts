@@ -110,6 +110,7 @@ export class CarAdviceComponent implements OnInit {
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Koop verzekering',
         onShowStep: () => {
+          FormUtils.scrollToForm('knx-insurance-review');
           this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.review.title));
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.review.list));
