@@ -25,8 +25,8 @@ interface OrderItem {
           </button>
         </div>
 
-        <div *ngIf="!insurances; else insuranceResults">
-          <knx-loader [visible]="!insurances">
+        <div *ngIf="isLoading; else insuranceResults">
+          <knx-loader [visible]="isLoading">
             Bezig met ophalen van verzekeringen...
           </knx-loader>
         </div>
@@ -37,21 +37,21 @@ interface OrderItem {
           </knx-insurance-result>
 
           <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showAll()">
-            Alle verzekeringen
+            Toon all verzekeringen
           </button>
 
           <div class="knx-insurance-toplist__info">
-            <a href="/faq" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
+            <a routerLink="/faq" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
           </div>
-
         </ng-template>
       </div>
     </div>
   </div>
   `
 })
-export class InsuranceTopListComponent implements OnInit, OnChanges {
+export class InsuranceTopListComponent implements OnInit {
   @Input() insurances: Array<InsuranceAdvice>;
+  @Input() isLoading: boolean;
   @Input() title: string;
   @Input() stepAmount: number;
   @Input() disableInsuranceBuy: boolean;
@@ -69,22 +69,15 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
     ];
   }
 
-  ngOnChanges() {
-    if (this.insurances) {
-      this.insurances = this.sortInsurances('price_quality');
-    }
-  }
-
   changeOrderBy(selected: OrderItem) {
     this.orderBy.forEach(orderItem => {
       orderItem.active = orderItem.id === selected.id;
     });
-
-    this.insurances = this.sortInsurances(selected.key);
+    this.sortByKey(this.insurances, selected.key);
   }
 
-  sortInsurances(key) {
-    return key ? this.insurances.sort((i1, i2) => {
+  sortByKey(arr, key) {
+    return key ? arr.sort((i1, i2) => {
       if (key === 'price_quality') {
         // highest amount first
         if (i1[key] < i2[key]) {
@@ -104,8 +97,7 @@ export class InsuranceTopListComponent implements OnInit, OnChanges {
         }
         return 0;
       }
-
-    }) : this.insurances;
+    }) : arr;
   }
 
   showAll(): void {

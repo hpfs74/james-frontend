@@ -5,6 +5,8 @@ export const LOAD_PROFILE_REQUEST =   '[Profile] Load Request';
 export const LOAD_PROFILE_SUCCESS =   '[Profile] Load Success';
 export const LOAD_PROFILE_FAIL =      '[Profile] Load Fail';
 
+export const UPDATE_PROFILE =         '[Profile] Update (Local)';
+
 export const SAVE_PROFILE_REQUEST =   '[Profile] Save Request';
 export const SAVE_PROFILE_SUCCESS =   '[Profile] Save Success';
 export const SAVE_PROFILE_FAIL =      '[Profile] Save Fail';
@@ -24,6 +26,12 @@ export class LoadFailAction implements Action {
   readonly type = LOAD_PROFILE_FAIL;
 
   constructor(public payload: Profile) { }
+}
+
+export class UpdateAction implements Action {
+  readonly type = UPDATE_PROFILE;
+
+  constructor(public payload: any) { }
 }
 
 export class SaveAction implements Action {
@@ -49,6 +57,7 @@ export type Actions
   = LoadAction
   | LoadSuccessAction
   | LoadFailAction
+  | UpdateAction
   | SaveAction
   | SaveSuccessAction
   | SaveFailAction;

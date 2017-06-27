@@ -43,12 +43,12 @@
 
   <div class="row" *ngIf="address">
     <div class="col-md-12 found-address" *ngIf="address; else noAddress">
-      <span class="knx-icon-map-marker"></span>Ik heb je adres op <b>{{address}}</b>
+      <span class="knx-icon-map-marker"></span><strong>{{address}}</strong>
     </div>
 
     <ng-template #noAddress>
       <div class="col-md-12 found-address" >
-        Helaas kon ik je adres niet vinden. Heb je je postcode en huisnummer juist ingevoerd?
+        Adres niet gevonden. Heb je je postcode en huisnummer juist ingevoerd?
       </div>
     </ng-template>
   </div>

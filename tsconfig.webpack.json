@@ -21,7 +21,7 @@
     "types": [
       "hammerjs",
       "node",
-      "nouislider"
+      "cuid"
     ]
   },
   "exclude": [

@@ -6,7 +6,7 @@
 
       <div class="row">
         <div class="col-sm-8">
-          <knx-car-summary *ngIf="profile" [car]="profile._embedded.car"></knx-car-summary>
+          <knx-car-summary *ngIf="advice" [car]="advice.insurance?._embedded.car"></knx-car-summary>
         </div>
       </div>
 

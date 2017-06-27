@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,6 +7,9 @@ import { KNXStepOptions, StepError } from '@knx/wizard';
 
 import * as fromRoot from '../../../reducers';
 import * as assistant from '../../../actions/assistant';
+import * as profile from '../../../actions/profile';
+import * as car from '../../../actions/car';
+import * as advice from '../../../actions/advice';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -33,7 +36,8 @@ import * as FormUtils from '../../../utils/base-form.utils';
 import { mockCar } from '../../../models/_mocks/car.mock';
 
 @Component({
-  templateUrl: 'car-buy.component.html'
+  templateUrl: 'car-buy.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarBuyComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
@@ -42,8 +46,8 @@ export class CarBuyComponent implements OnInit {
 
   chatConfig: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
-
   profile$: Observable<Profile>;
+  advice$: Observable<any>;
 
   // Forms
   contactDetailForm: ContactDetailForm;
@@ -66,6 +70,8 @@ export class CarBuyComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
+    this.profile$ = this.store.select(fromRoot.getProfile);
+    this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
 
     let formBuilder = new FormBuilder();
     this.formContent = this.contentService.getContentObject();
@@ -133,38 +139,18 @@ export class CarBuyComponent implements OnInit {
 
   initSummaryForm(message: string) {
     this.initForm(message);
-
-    // Collect all form data
-    let forms = [
-      this.contactDetailForm.formGroup.value,
-      this.reportingCodeForm.formGroup.value,
-      this.checkForm.formGroup.value,
-      this.paymentForm.formGroup.value
-    ];
-
-    let data = forms.reduce((acc, x) => {
-      for (let key in x) {
-        acc[key] = x[key];
-      }
-      return acc;
-    }, {});
-
-    console.log(data);
-    this.formData = data;
   }
 
   submitForm(form: BaseForm) {
-    // FormUtils.validateForm(form.formGroup);
-    // if (!form.formGroup.valid) {
-    //   return Observable.throw(new Error(form.validationSummaryError));
-    // }
+    FormUtils.validateForm(form.formGroup);
+    if (!form.formGroup.valid) {
+      return Observable.throw(new Error(form.validationSummaryError));
+    }
 
     // let saveCtrl = form.formGroup.get('saveToProfile');
     // if (saveCtrl && saveCtrl.value) {
-    //   return this.profileService.updateUserProfile(
-    //     this.getUpdatedProfile(form.formGroup));
+    //     return this.store.dispatch(new profile.UpdateAction(getUpdatedProfile(form.formGroup.value)));
     // }
-
     return new Observable(obs => {
       obs.next();
       obs.complete();

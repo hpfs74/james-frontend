@@ -4,11 +4,16 @@ import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wiza
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import * as cuid from 'cuid';
+import * as moment from 'moment';
 
 import * as fromRoot from '../../../reducers';
+import * as profile from '../../../actions/profile';
 import * as assistant from '../../../actions/assistant';
 import * as car from '../../../actions/car';
 import * as insurance from '../../../actions/insurances';
+import * as advice from '../../../actions/advice';
+import * as compare from '../../../actions/compare';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -20,7 +25,6 @@ import { Car, Price, CarCompare, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from './../../../models/coverage';
 import { CarInsurance } from '../../../models/car-insurance';
-import { CarInsuranceOptions } from './../../../models/car-compare';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
 import * as FormUtils from '../../../utils/base-form.utils';
@@ -35,24 +39,21 @@ import { AuthService } from '../../../services/auth.service';
 export class CarAdviceComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
-  formData: Array<any>;
   carDetailSubmitted: boolean = false;
   currentStep: number;
 
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
 
-  //TODO: refactor
-  selectedInsurance: CarInsurance;
   car: Car;
-  profile: any | Profile;
-  address: Address;
-
   chatConfig: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
 
+  insurances$: Observable<Array<CarInsurance>>;
+  isInsuranceLoading$: Observable<boolean>;
+  selectedInsurance$: Observable<CarInsurance>;
+
   isCoverageLoading: boolean = false;
-  isInsuranceLoading: boolean = false;
 
   // Forms
   carDetailForm: CarDetailForm;
@@ -73,6 +74,13 @@ export class CarAdviceComponent implements OnInit {
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
+    this.insurances$ = this.getCompareResultCopy();
+    this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
+    this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
+
+    this.store.dispatch(new advice.AddAction({
+      id: cuid()
+    }));
 
     this.currentStep = 0;
     this.formSteps = [
@@ -109,8 +117,6 @@ export class CarAdviceComponent implements OnInit {
         onBeforeNext: this.startBuyFlow.bind(this)
       }
     ];
-    this.formData = new Array(this.formSteps.length);
-
     let formBuilder = new FormBuilder();
     this.carDetailForm = new CarDetailForm(formBuilder);
 
@@ -119,34 +125,59 @@ export class CarAdviceComponent implements OnInit {
       .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(data => {
-        if (this.formData[0]) {
-          //console.log(data);
-          //this.insurances = this.store.select(fromRoot.getInsurances);
-
-          this.insurances = this.carService.getInsurances(
-            Object.assign(
-              this.formData[0], {
-                coverage: data.coverage,
-                cover_occupants: data.extraOptions.cover_occupants || false,
-                kilometers_per_year: data.kmPerYear,
-                no_claim_protection: data.extraOptions.noclaim || false,
-                own_risk: data.ownRisk,
-              })
-          );
+        if (this.currentStep === 1) {
+          let compareObj = {
+            coverage: data.coverage,
+            cover_occupants: data.extraOptions.cover_occupants || false,
+            kilometers_per_year: data.kmPerYear,
+            no_claim_protection: data.extraOptions.noclaim || false,
+            own_risk: data.ownRisk,
+          };
+          //console.log(compareObj);
+          this.store.dispatch(new advice.UpdateAction(compareObj));
         }
+      });
+    this.store.select(fromRoot.getSelectedAdvice)
+      .subscribe(advice => {
+        if (advice.coverage) {
+          this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
+        }
+      });
+
+    // On car info found
+    // TODO: refactor to be more reactive
+    this.store.select(fromRoot.getCarInfoLoaded)
+      .switchMap(isLoaded => {
+        if (isLoaded) {
+          return this.store.select(fromRoot.getCarInfo);
+        } else {
+          return Observable.empty();
+        }
+      }).subscribe((res: Array<Car>) => {
+        let lastFound = res.slice(-1)[0];
+        if (lastFound && lastFound.license) {
+          this.car = lastFound;
+          this.store.dispatch(new assistant.ClearAction);
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(lastFound)));
+        } else {
+          // Car not found in RDC
+          let c = this.carDetailForm.formGroup.get('licensePlate');
+          this.triggerLicenseInValid();
+        }
+      }, err => {
+        // Treat server error as invalid to prevent continuing flow
+        this.triggerLicenseInValid();
       });
   }
 
   submitDetailForm(): Observable<any> {
-    this.store.dispatch(new assistant.ClearAction);
-
     let detailForm = this.carDetailForm.formGroup;
-    let address = this.carDetailForm.addressForm;
+    let addressForm = this.carDetailForm.addressForm;
 
     FormUtils.validateForm(detailForm);
-    FormUtils.validateForm(address);
+    FormUtils.validateForm(addressForm);
 
-    if (!detailForm.valid && !address.valid) {
+    if (!detailForm.valid && !addressForm.valid) {
       this.carDetailSubmitted = true;
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
     }
@@ -154,28 +185,36 @@ export class CarAdviceComponent implements OnInit {
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    this.profile = {
+    this.store.dispatch(new profile.UpdateAction({
       gender: detailForm.value.gender,
-      dateOfBirth: detailForm.value.birthDate
-    };
+      date_of_birth: detailForm.value.birthDate
+    }));
 
-    let options: CarInsuranceOptions = {
-      active_loan: detailForm.value.loan,
-      coverage: detailForm.value.coverage,
-      claim_free_years: +detailForm.value.claimFreeYears,
-      household_status: detailForm.value.houseHold
-    };
-    let requestObj = new CarCompare(this.profile, this.car, this.address, options);
+    this.store.select(fromRoot.getProfile)
+      .subscribe((profile: Profile) => {
+        let compareObj: CarCompare = {
+          active_loan: detailForm.value.loan,
+          coverage: detailForm.value.coverage,
+          claim_free_years: +detailForm.value.claimFreeYears,
+          household_status: detailForm.value.houseHold,
+          license: this.car.license,
+          gender: detailForm.value.gender.toUpperCase(),
+          title: detailForm.value.gender.toLowerCase() === 'm' ? 'Dhr.' : 'Mw.',
+          date_of_birth: moment(detailForm.value.birthDate).format('YYYY-MM-DD'),
+          house_number: profile.address.number,
+          zipcode: profile.address.postcode,
+          country: 'NL'
+        };
 
+        this.store.dispatch(new advice.UpdateAction(compareObj));
+      });
 
-    this.formData[0] = requestObj;
-    this.carExtrasForm.formGroup.get('coverage').patchValue(requestObj.coverage);
-
-    return this.insurances = this.carService.getInsurances(requestObj);
+    return this.store.select(fromRoot.getSelectedAdvice)
+      .map(options => this.store.dispatch(new compare.LoadCarAction(options)));
   }
 
   onSelectPremium(insurance) {
-    this.selectedInsurance = insurance;
+    this.store.dispatch(new advice.UpdateAction({ insurance: insurance }));
   }
 
   onStepChange(stepIndex) {
@@ -183,8 +222,6 @@ export class CarAdviceComponent implements OnInit {
   }
 
   startBuyFlow(): Observable<any> {
-    //TODO: store all data in profile store here
-
     this.router.navigate(['/car/insurance']);
     return;
   }
@@ -201,27 +238,9 @@ export class CarAdviceComponent implements OnInit {
   }
 
   getCarInfo(licensePlate: string) {
-    if (!licensePlate) {
-      return;
+    if (licensePlate) {
+      this.store.dispatch(new car.GetInfoAction(licensePlate));
     }
-
-    //this.store.dispatch(new car.GetInfoAction(licensePlate));
-
-    this.carService.getByLicense(licensePlate)
-      .subscribe(res => {
-        if (res.license) {
-          this.car = res;
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(res)));
-        } else {
-          // Car not found in RDC
-          let c = this.carDetailForm.formGroup.get('licensePlate');
-          this.triggerLicenseInValid();
-        }
-      }, err => {
-        // Treat server error as invalid to prevent continuing flow
-        this.triggerLicenseInValid();
-      });
   }
 
   triggerLicenseInValid() {
@@ -232,10 +251,13 @@ export class CarAdviceComponent implements OnInit {
     this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.error.carNotFound));
   }
 
-  updateAddress(address: Address) {
-    this.address = address;
+  onAddressChange(address: Address) {
+    this.store.dispatch(new profile.UpdateAction({
+      address: address
+    }));
   }
 
+  //TODO: change to reactive
   getCoverages(event) {
     if (this.car) {
       this.isCoverageLoading = true;
@@ -261,7 +283,12 @@ export class CarAdviceComponent implements OnInit {
     }
   }
 
-  private isObjectEqual<T>(prev: T, cur: T): boolean {
-    return JSON.stringify(prev) === JSON.stringify(cur);
+  private getCompareResultCopy(): Observable<CarInsurance[]> {
+    // This is needed because the ngrx-datatable modifies the result to add an $$index to each
+    // result item and modifies the source array order when sorting
+    return this.store.select(fromRoot.getCompareResult)
+      .map(obs => {
+        return obs.map(v => JSON.parse(JSON.stringify(v)));
+      });
   }
 }

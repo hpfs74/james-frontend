@@ -20,12 +20,18 @@ export class Profile {
   age: number;
   bsn: string;
   initials: string;
+  birthplace: string;
+  maritalstatus: string;
+  maritaldistribution: string;
+  education: string;
+  smoking: boolean;
+  testament: string;
+  yearsabroad: number;
 
   address?: Address;
 
   _id: string;
   _deleted: boolean;
-
 
   _embedded: any;
   // _embedded: {

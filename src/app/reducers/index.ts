@@ -43,6 +43,7 @@ import * as fromInsurances from './insurances';
 import * as fromAssistant from './assistant';
 import * as fromCompare from './compare';
 import * as fromAdvice from './advice';
+import * as fromCar from './car';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -55,6 +56,7 @@ export interface State {
   assistant: fromAssistant.State;
   compare: fromCompare.State;
   advice: fromAdvice.State;
+  car: fromCar.State;
   router: fromRouter.RouterState;
 }
 
@@ -72,6 +74,7 @@ const reducers = {
   assistant: fromAssistant.reducer,
   compare: fromCompare.reducer,
   advice: fromAdvice.reducer,
+  car: fromCar.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -156,3 +159,15 @@ export const getCompareLoading = createSelector(getCompareState, fromCompare.get
  */
 export const getAdviceState = (state: State) => state.advice;
 export const getAdvice = createSelector(getAdviceState, fromAdvice.getAdvice);
+export const getAdviceIds = createSelector(getAdviceState, fromAdvice.getIds);
+
+export const getSelectedAdviceId = createSelector(getAdviceState, fromAdvice.getSelectedId);
+export const getSelectedAdvice = createSelector(getAdviceState, fromAdvice.getSelected);
+export const getSelectedInsurance = createSelector(getAdviceState, fromAdvice.getSelectedInsurance);
+
+/**
+ * Car Info Reducers
+ */
+export const getCarState = (state: State) => state.car;
+export const getCarInfo = createSelector(getCarState, fromCar.getInfo);
+export const getCarInfoLoaded = createSelector(getCarState, fromCar.getLoaded);

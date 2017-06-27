@@ -19,7 +19,7 @@ export class CarEffects {
 
   @Effect()
   loadCarInfo$: Observable<Action> = this.action$
-    .ofType(car.GET_INFO)
+    .ofType(car.GET_INFO_REQUEST)
     .map((action: car.GetInfoAction) => action.payload)
     .switchMap((license) =>
       this.carService.getByLicense(license)

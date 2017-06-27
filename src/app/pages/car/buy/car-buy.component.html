@@ -12,14 +12,15 @@
       <knx-step [options]="formSteps[0]">
         <knx-car-contact-form
           [form]="contactDetailForm"
-          [profile]="profile | async">
+          [profile]="profile$ | async">
         </knx-car-contact-form>
       </knx-step>
 
       <knx-step [options]="formSteps[1]">
         <knx-car-reporting-code-form
           [form]="reportingCodeForm"
-          [profile]="profile | async">
+          [advice]="advice$ | async"
+          [profile]="profile$ | async">
         </knx-car-reporting-code-form>
       </knx-step>
 
@@ -38,8 +39,7 @@
       <knx-step [options]="formSteps[4]">
         <knx-car-summary-form
           [confirm]="acceptFinalTerms"
-          [profile]="profile | async"
-          [formData]="formData">
+          [profile]="profile$ | async">
         </knx-car-summary-form>
       </knx-step>
     </div>

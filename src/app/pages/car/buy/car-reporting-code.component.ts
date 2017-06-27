@@ -11,6 +11,7 @@ import { CarSecurityClass } from '../../../content.interface';
 export class CarReportingCodeComponent implements OnInit, OnChanges {
   @Input() form: CarReportingCodeForm;
   @Input() profile: Profile;
+  @Input() advice: any;
 
   selectedSecurityClass: CarSecurityClass;
 

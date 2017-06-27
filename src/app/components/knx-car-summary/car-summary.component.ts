@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Car, CarInsuranceOptions } from '../../models';
+import { Car } from '../../models';
 
 @Component({
   selector: 'knx-car-summary',
@@ -51,6 +51,6 @@ import { Car, CarInsuranceOptions } from '../../models';
 })
 export class CarSummaryComponent {
   @Input() car: Car;
-  @Input() options: CarInsuranceOptions;
+  @Input() options: any;
 
 }

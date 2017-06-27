@@ -24,6 +24,14 @@ export function reducer(state = initialState, action: profile.Actions): State {
       });
     }
 
+    case profile.UPDATE_PROFILE: {
+      // Patch the store copy with new data
+      // WARNING: gets overwritten on a new load action!
+      return Object.assign({}, state, {
+        profile: Object.assign({}, state.profile, action.payload)
+      });
+    }
+
     case profile.SAVE_PROFILE_SUCCESS:
     case profile.LOAD_PROFILE_SUCCESS: {
       return Object.assign({}, state, {
