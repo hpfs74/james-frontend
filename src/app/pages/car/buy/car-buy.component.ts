@@ -139,37 +139,18 @@ export class CarBuyComponent implements OnInit {
 
   initSummaryForm(message: string) {
     this.initForm(message);
-
-    // Collect all form data
-    // let forms = [
-    //   this.contactDetailForm.formGroup.value,
-    //   this.reportingCodeForm.formGroup.value,
-    //   this.checkForm.formGroup.value,
-    //   this.paymentForm.formGroup.value
-    // ];
-
-    // let data = forms.reduce((acc, x) => {
-    //   for (let key in x) {
-    //     acc[key] = x[key];
-    //   }
-    //   return acc;
-    // }, {});
-
-    // this.formData = data;
   }
 
   submitForm(form: BaseForm) {
-    // FormUtils.validateForm(form.formGroup);
-    // if (!form.formGroup.valid) {
-    //   return Observable.throw(new Error(form.validationSummaryError));
-    // }
+    FormUtils.validateForm(form.formGroup);
+    if (!form.formGroup.valid) {
+      return Observable.throw(new Error(form.validationSummaryError));
+    }
 
     // let saveCtrl = form.formGroup.get('saveToProfile');
     // if (saveCtrl && saveCtrl.value) {
-    //   return this.profileService.updateUserProfile(
-    //     this.getUpdatedProfile(form.formGroup));
+    //     return this.store.dispatch(new profile.UpdateAction(getUpdatedProfile(form.formGroup.value)));
     // }
-
     return new Observable(obs => {
       obs.next();
       obs.complete();

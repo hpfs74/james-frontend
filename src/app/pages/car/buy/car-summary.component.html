@@ -3,7 +3,11 @@
     <div class="col-sm-12">
       <h2>Controleer je gegevens</h2>
 
-      <knx-insurance-summary [sections]="sections"></knx-insurance-summary>
+      <knx-data-summary *ngFor="let section of sections" label="section.label">
+        <knx-data-summary-group *ngFor="let group of section.groups">
+          <knx-data-summary-row *ngFor="let row of group.fields" label="row.label">{{ row.value }}</knx-data-summary-row>
+        </knx-data-summary-group>
+      </knx-data-summary>
 
       <h3>Betaling</h3>
 

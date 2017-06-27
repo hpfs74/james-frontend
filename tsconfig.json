@@ -22,9 +22,9 @@
       "hammerjs",
       "jasmine",
       "node",
-      "nouislider",
       "source-map",
       "uglify-js",
+      "cuid",
       "webpack"
     ]
   },

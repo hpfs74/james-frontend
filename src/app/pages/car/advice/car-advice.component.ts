@@ -4,7 +4,7 @@ import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wiza
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-import { UUID } from 'angular2-uuid';
+import * as cuid from 'cuid';
 import * as moment from 'moment';
 
 import * as fromRoot from '../../../reducers';
@@ -79,7 +79,7 @@ export class CarAdviceComponent implements OnInit {
     this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
 
     this.store.dispatch(new advice.AddAction({
-      id: UUID.UUID()
+      id: cuid()
     }));
 
     this.currentStep = 0;
