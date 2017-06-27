@@ -5,16 +5,22 @@
       <h2>Je contactgegevens</h2>
 
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <cx-form-group
             [options]="form.formConfig.initials"
             [formControlName]="form.formConfig.initials.formControlName">
           </cx-form-group>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <cx-form-group
             [options]="form.formConfig.middleName"
             [formControlName]="form.formConfig.middleName.formControlName">
+          </cx-form-group>
+        </div>
+        <div class="col-sm-6">
+          <cx-form-group
+            [options]="form.formConfig.lastName"
+            [formControlName]="form.formConfig.lastName.formControlName">
           </cx-form-group>
         </div>
       </div>
@@ -22,11 +28,6 @@
       <cx-form-group
         [options]="form.formConfig.firstName"
         [formControlName]="form.formConfig.firstName.formControlName">
-      </cx-form-group>
-
-      <cx-form-group
-        [options]="form.formConfig.lastName"
-        [formControlName]="form.formConfig.lastName.formControlName">
       </cx-form-group>
 
       <div class="row">

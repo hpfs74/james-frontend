@@ -100,7 +100,7 @@ export class CarAdviceComponent implements OnInit {
         backButtonLabel: 'Terug',
         hideNextButton: true,
         onShowStep: () => {
-          FormUtils.scrollToForm('.knx-insurance-toplist');
+          //FormUtils.scrollToForm('.knx-insurance-toplist');
           this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
         }
@@ -131,10 +131,9 @@ export class CarAdviceComponent implements OnInit {
             cover_occupants: data.extraOptions.cover_occupants || false,
             kilometers_per_year: data.kmPerYear,
             no_claim_protection: data.extraOptions.noclaim || false,
-            own_risk: data.ownRisk,
+            own_risk: data.ownRisk
           };
-          //console.log(compareObj);
-          this.store.dispatch(new advice.UpdateAction(compareObj));
+          this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
         }
       });
     this.store.select(fromRoot.getSelectedAdvice)
@@ -205,7 +204,6 @@ export class CarAdviceComponent implements OnInit {
           zipcode: profile.address.postcode,
           country: 'NL'
         };
-
         this.store.dispatch(new advice.UpdateAction(compareObj));
       });
 

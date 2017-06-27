@@ -19,7 +19,7 @@ interface SectionFields {
     <div *ngIf="selectedInsurance">
       <h2 class="knx-insurance-review__header">
         Controleer je gegevens
-        <img class="knx-insurance-review__logo" src="{{ selectedInsurance._embedded.insurance.insurance_logo }}">
+        <img class="knx-insurance-review__logo" src="{{ selectedInsurance?._embedded?.insurance?.insurance_logo }}">
       </h2>
     </div>
 

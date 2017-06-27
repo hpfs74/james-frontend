@@ -29,11 +29,8 @@ import { CarCheckForm } from './car-check.form';
 
 import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
-
 import { BaseForm } from '../../../forms/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
-
-import { mockCar } from '../../../models/_mocks/car.mock';
 
 @Component({
   templateUrl: 'car-buy.component.html',
@@ -87,7 +84,6 @@ export class CarBuyComponent implements OnInit {
         label: 'Contactgegevens',
         nextButtonLabel: 'Naar autogegevens',
         backButtonLabel: 'Terug',
-        hideBackButton: true,
         onShowStep: () => this.initFormWithProfile(),
         onBeforeNext: this.submitForm.bind(this, this.contactDetailForm)
       },
@@ -151,6 +147,10 @@ export class CarBuyComponent implements OnInit {
     // if (saveCtrl && saveCtrl.value) {
     //     return this.store.dispatch(new profile.UpdateAction(getUpdatedProfile(form.formGroup.value)));
     // }
+
+    console.log(form.formGroup.value);
+    this.store.dispatch(new advice.UpdateAction(form.formGroup.value));
+
     return new Observable(obs => {
       obs.next();
       obs.complete();
@@ -158,7 +158,7 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitInsurance(): Observable<any> {
-    console.log(this.acceptFinalTerms);
+    //console.log(this.acceptFinalTerms);
 
     // Final insurance request submit
     return new Observable(obs => {
