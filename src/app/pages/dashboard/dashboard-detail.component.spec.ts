@@ -1,12 +1,13 @@
+import { getAssistantMessageState } from './../../reducers/index';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
+import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
-import { ChatStreamService } from '../../components/knx-chat-stream/chat-stream.service';
 import { DashboardDetailComponent } from './dashboard-detail.component';
 import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
 import { ConfigService } from '../../config.service';
@@ -48,7 +49,6 @@ describe('Component: DashboardDetail', () => {
           AuthService,
           AssistantService,
           ProfileService,
-          ChatStreamService,
           { provide: Router, useValue: routerStub },
           { provide: ActivatedRoute, useValue: activatedRouteStub},
           { provide: ConfigService, useValue: configServiceStub },
@@ -63,7 +63,14 @@ describe('Component: DashboardDetail', () => {
             }
           }
         ],
-        imports: [RouterTestingModule],
+        imports: [
+          RouterTestingModule,
+          StoreModule.provideStore({
+            profile: {
+              firstname: 'test'
+            }
+          })
+        ],
         declarations: [DashboardDetailComponent],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -85,13 +92,10 @@ describe('Component: DashboardDetail', () => {
     });
 
     it('should go to compare if click on compare button', () => {
-      comp.goToCompare();
+      comp.goToInsurance();
       expect(routerStub.navigate).toHaveBeenCalledWith([ '/' ]);
     });
 
-    it('chat assistance should contain "Auto" word in the message if route from car', () => {
-      expect(comp.chatMessages[0].data).toContain('auto');
-    });
   });
 
   describe('with routing to travel', () => {
@@ -113,7 +117,6 @@ describe('Component: DashboardDetail', () => {
           AuthService,
           AssistantService,
           ProfileService,
-          ChatStreamService,
           { provide: Router, useValue: routerStub },
           { provide: ActivatedRoute, useValue: activatedRouteStub},
           { provide: ConfigService, useValue: configServiceStub },
@@ -128,7 +131,14 @@ describe('Component: DashboardDetail', () => {
             }
           }
         ],
-        imports: [RouterTestingModule],
+        imports: [
+          RouterTestingModule,
+          StoreModule.provideStore({
+            profile: {
+              firstname: 'test'
+            }
+          })
+        ],
         declarations: [DashboardDetailComponent],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -150,13 +160,10 @@ describe('Component: DashboardDetail', () => {
     });
 
     it('should go to compare if click on compare button', () => {
-      comp.goToCompare();
+      comp.goToInsurance();
       expect(routerStub.navigate).toHaveBeenCalledWith([ '/' ]);
     });
 
-    it('chat assistance should contain "Reis" word in the message if route from travel', () => {
-      expect(comp.chatMessages[0].data).toContain('reis');
-    });
   });
 
 });

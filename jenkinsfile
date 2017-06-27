@@ -3,33 +3,50 @@
 pipeline {
     agent any
     stages {
-        stage('setup') {
+        stage('SCM') {
+            steps {
+                git 'git@bitbucket.org:cxtravellers/knab-james-frontend.git'
+            }
+        }
+        stage('SETUP') {
             steps {
                 sh 'npm set registry https://knab-npm.ddns.net'
                 sh 'npm set strict-ssl false'
                 sh 'npm install'
             }
         }
-        stage('build') {
+        stage('BUILD') {
             steps {
-                slackSend color: 'warning', message: 'Build stage started: $JOB_NAME $BUILD_NUMBER'
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'git@bitbucket.org:cxtravellers/knab-james-frontend.git']]])
+                slackSend color: 'warning', message: "Build stage started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
                 sh 'npm run build'
-                slackSend color: 'good', message: 'Build stage finished: $JOB_NAME $BUILD_NUMBER'
+                slackSend color: 'good', message: "Build stage finished: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
             }
         }
-        stage('test') {
+        stage('TEST') {
             steps {
-                slackSend color: 'warning', message: 'Test stage started: $JOB_NAME $BUILD_NUMBER'
+                slackSend color: 'warning', message: "Test stage started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+
                 sh 'npm run test'
-                slackSend color: 'good', message: 'Test stage finished: $JOB_NAME $BUILD_NUMBER'
+                slackSend color: 'good', message: "Test stage finished: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
             }
         }
-        stage('deploy') {
+        stage('QUALITY') {
             steps {
-                slackSend color: 'warning', message: 'Deploy stage started: $JOB_NAME $BUILD_NUMBER'
-                // step([$class: 'S3BucketPublisher', consoleLogLevel: <object of type java.util.logging.Level>, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'knab-webapp', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'eu-west-1', showDirectlyInBrowser: false, sourceFile: 'dist/**', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: <object of type hudson.model.Result>, profileName: 'KNAB', userMetadata: []])
-                slackSend color: 'good', message: 'Deploy stage finished: $JOB_NAME $BUILD_NUMBER'
+                script {
+                    def scannerHome = tool 'knab';
+                    sh "${scannerHome}/bin/sonar-scanner -D sonar.login=${SONARQUBE_TOKEN}"
+                }
+            }
+        }
+        stage('DEPLOY') {
+            steps {
+                slackSend color: 'warning', message: "Deploy stage started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+
+                withAWS(credentials: "${AWS_JENKINS_CREDENTIALS}") {
+                  s3Upload(file:'dist', bucket:"${AWS_S3_BUCKETNAME}", path:'')
+                  cfInvalidate(distribution: "${AWS_CLOUDFRONT_DISTRIBUTIONID}", paths:['/*'])
+                }
+                slackSend color: 'good', message: "Deploy stage finished: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
             }
         }
     }
@@ -37,7 +54,7 @@ pipeline {
     post {
         always {
             junit 'coverage/jasmine.xml'
-            slackSend color: 'good', message: 'Test stage finished: $JOB_NAME $BUILD_NUMBER'
+            slackSend color: 'good', message: "Test stage finished: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
         }
     }
 }

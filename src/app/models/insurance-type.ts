@@ -1,9 +1,9 @@
-export interface DashboardInsuranceMap {
+export interface InsuranceMap {
   label: string;  // 'Auto', 'Reis', ...
   type: string;   // 'car', 'travel', ...
 }
 
-export const insuranceTypes: Array<DashboardInsuranceMap> = [
+export const insuranceTypes: Array<InsuranceMap> = [
   {
     label: 'Auto',
     type: 'car',

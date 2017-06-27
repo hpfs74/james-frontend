@@ -1,5 +1,6 @@
-import { InsuranceAdvice, InsuranceCompareResult } from './insurance-compare-result';
 import { Car } from './car';
+import { Insurance } from './insurance';
+import { InsuranceAdvice } from './insurance-advice';
 
 export class CarInsurance extends InsuranceAdvice {
   id: string;
@@ -31,7 +32,7 @@ export class CarInsurance extends InsuranceAdvice {
   additional_products: any;
   _embedded: {
     car: Car,
-    insurance: InsuranceCompareResult
+    insurance: Insurance
   };
   product_id: string;
   terms_conditions_pdf_url: string;

@@ -4,8 +4,6 @@ import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
 import {
   AuthService,
-  ProfileService,
-  GeolocationService,
   NavigationService,
   InsuranceService,
   CookieService
@@ -16,7 +14,6 @@ import {
   template: `<router-outlet></router-outlet>`,
   providers: [
     NavigationService,
-    ProfileService,
     InsuranceService,
     CookieService,
   ],

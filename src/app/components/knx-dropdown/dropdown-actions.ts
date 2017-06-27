@@ -56,7 +56,7 @@ const onItemClicked = (index: number, items: MenuItemComponent[], state: Dropdow
     return state.selectedItem ? state.selectedItem.click() : undefined;
 };
 
-export const ACTIONS = {
+export const DROPDOWN_ACTIONS = {
     [KEYS.BACKSPACE]: onBackspace,
     [KEYS.PREV]: onSwitchPrev,
     [KEYS.NEXT]: onSwitchNext,

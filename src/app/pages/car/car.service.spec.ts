@@ -11,7 +11,7 @@ import { ConfigService } from '../../config.service';
 import { CarService } from './car.service';
 import { AuthHttp } from '../../services';
 import { Car } from '../../models/car';
-import { CarInsuranceOptions, CarCompareRequest } from '../../models/car-compare-request';
+import { CarInsuranceOptions, CarCompare } from '../../models/car-compare';
 
 describe('Service: Car', () => {
   let backend, service;
@@ -62,7 +62,7 @@ describe('Service: Car', () => {
     ]
   };
 
-  const mockCarCompareRequest: CarCompareRequest = {
+  const mockCarCompareRequest: CarCompare = {
     'license': 'GK906T',
     'first_name': null,
     'gender': 'm',

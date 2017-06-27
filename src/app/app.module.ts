@@ -1,7 +1,3 @@
-import { ConfigInterface } from './config.interface';
-import { ConfigService } from './config.service';
-import { ContentService } from './content.service';
-
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppShellModule } from '@angular/app-shell';
 import { Router } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { reducer } from './reducers';
+import { ProfileEffects } from './effects/profile';
+import { CarEffects } from './effects/car';
+//import { CompareEffects } from './effects/compare';
+
+import { ConfigInterface } from './config.interface';
+import { ConfigService } from './config.service';
+import { ContentService } from './content.service';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,14 +26,9 @@ import { requestOptionsProvider } from './services/default-request-opts.service'
 import { AuthModule } from './auth.module';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
-
-
 import { LoginComponent } from './pages/login/login.component';
 import { LoginRoutingModule } from './pages/login/login-routing.module';
-
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
-
-//TODO: needed on login?
 import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
 // Feature modules
@@ -60,6 +64,19 @@ export function ContentLoader(contentService: ContentService) {
     HttpModule,
     SharedModule,
     HomeModule.forRoot(),
+    StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 5
+    }),
+    /**
+     * @ngrx/router-store keeps router state up-to-date in the store and uses
+     * the store as the single source of truth for the router's state.
+     *
+     * Use runAfterBootstrap because services require api endpoints from ConfigLoader
+     */
+    RouterStoreModule.connectRouter(),
+    EffectsModule.runAfterBootstrap(ProfileEffects),
+    EffectsModule.runAfterBootstrap(CarEffects),
     LoginRoutingModule,
     AuthModule,
     AppRoutingModule,
@@ -86,7 +103,7 @@ export function ContentLoader(contentService: ContentService) {
       deps: [ContentService],
       multi: true
     },
-    requestOptionsProvider
+    requestOptionsProvider,
   ],
   bootstrap: [AppComponent],
 })

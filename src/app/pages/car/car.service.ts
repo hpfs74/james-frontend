@@ -10,7 +10,7 @@ import {
   CarInsurance,
   CarCoverageRecommendation,
   CarInsuranceOptions,
-  CarCompareRequest,
+  CarCompare,
   Price,
   Address
 } from './../../models';
@@ -39,12 +39,12 @@ export class CarService {
       .map(res => <CarCoverageRecommendation>res.json());
   }
 
-  public getInsurances(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
+  public getInsurances(carRequest: CarCompare): Observable<Array<CarInsurance>> {
     return this.authHttp.post(this.api.compare, JSON.stringify(carRequest))
       .map((res: Response) => res.json());
   }
 
-  public getInsurancesWithDetails(carRequest: CarCompareRequest): Observable<Array<CarInsurance>> {
+  public getInsurancesWithDetails(carRequest: CarCompare): Observable<Array<CarInsurance>> {
     return this.authHttp.post(this.api.compare, JSON.stringify(carRequest)).map(res => res.json())
       .flatMap((insurance) => {
         return Observable.forkJoin(

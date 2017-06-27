@@ -8,7 +8,7 @@ export const profileRoutes: Routes = [
     path: '',
     component: ProfileComponent,
     data: {
-      breadcrumb: 'Mijn account'
+      title: 'Mijn account'
     }
   }
 ];

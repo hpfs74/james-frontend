@@ -1,4 +1,3 @@
-import { ChatStreamService } from './chat-stream.service';
 import { Observable } from 'rxjs/Observable';
 import {
   Component, Input, OnChanges, SimpleChanges, OnInit, ViewChild, AfterViewInit,
@@ -18,7 +17,7 @@ import { ChatMessage } from './chat-message';
     <div class="knx-chat-stream">
       <knx-avatar *ngIf="options.avatar.show" [name]="options.avatar.name" [title]="options.avatar.title"></knx-avatar>
 
-      <knx-chat-message *ngFor="let message of messages" [data]="message.data"></knx-chat-message>
+      <knx-chat-message *ngFor="let message of messages" [data]="message?.data"></knx-chat-message>
 
       <!-- slot for filter options -->
       <ng-content select="knx-car-extras"></ng-content>

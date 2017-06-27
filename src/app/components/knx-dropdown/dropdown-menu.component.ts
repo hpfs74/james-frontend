@@ -13,7 +13,7 @@ import {
   state
 } from '@angular/core';
 
-import { ACTIONS, arrowKeysHandler } from './dropdown-actions';
+import { DROPDOWN_ACTIONS, arrowKeysHandler } from './dropdown-actions';
 
 import { MenuItemComponent } from './dropdown-menu-item.component';
 import { DropdownStateService } from './dropdown-state.service';
@@ -160,11 +160,11 @@ export class DropdownMenuComponent {
     const items = this.items.toArray();
     const index = items.indexOf(this.state.dropdownState.selectedItem);
 
-    if (!ACTIONS.hasOwnProperty(key)) {
+    if (!DROPDOWN_ACTIONS.hasOwnProperty(key)) {
       return;
     }
 
-    ACTIONS[key].call(this, index, items, this.state.dropdownState);
+    DROPDOWN_ACTIONS[key].call(this, index, items, this.state.dropdownState);
   }
 
   /**

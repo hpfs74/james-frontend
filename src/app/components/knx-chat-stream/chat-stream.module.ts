@@ -6,7 +6,6 @@ import { AvatarComponent } from '../knx-avatar/avatar.component';
 import { ChatMessageDirective } from './chat-message.directive';
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatMessage } from './chat-message';
-import { ChatStreamService } from './chat-stream.service';
 
 // Types of messages
 import { TextMessageComponent } from './text-message.component';
@@ -26,7 +25,6 @@ const exportableDeclarations = [
   imports: [ CommonModule, SharedModule ],
   exports: exportableDeclarations,
   declarations: exportableDeclarations,
-  providers: [ChatStreamService],
   entryComponents: [ TextMessageComponent, CarInfoMessageComponent ]
 })
 export class ChatStreamModule { }
