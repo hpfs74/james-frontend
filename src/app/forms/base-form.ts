@@ -21,10 +21,11 @@ export class BaseForm {
       houseNumber: [null, Validators.compose(
         [
           Validators.required,
+          Validators.maxLength(15),
           numberValidator('houseNumber')
         ]
       )],
-      houseNumberExtension: [null]
+      houseNumberExtension: [null, Validators.maxLength(15)]
     });
   }
 }
