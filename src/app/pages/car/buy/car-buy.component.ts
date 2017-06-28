@@ -52,7 +52,6 @@ export class CarBuyComponent implements OnInit {
   checkForm: CarCheckForm;
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
-  formData: any;
 
   constructor(
     private router: Router,
@@ -148,7 +147,6 @@ export class CarBuyComponent implements OnInit {
     //     return this.store.dispatch(new profile.UpdateAction(getUpdatedProfile(form.formGroup.value)));
     // }
 
-    console.log(form.formGroup.value);
     this.store.dispatch(new advice.UpdateAction(form.formGroup.value));
 
     return new Observable(obs => {
@@ -158,9 +156,16 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitInsurance(): Observable<any> {
-    //console.log(this.acceptFinalTerms);
-
     // Final insurance request submit
+    let formData = Object.assign({},
+      this.contactDetailForm.formGroup.value,
+      this.reportingCodeForm.formGroup.value,
+      this.checkForm.formGroup.value,
+      this.paymentForm.formGroup.value,
+      this.acceptFinalTerms
+    );
+    console.log(formData);
+
     return new Observable(obs => {
       obs.next();
       obs.complete();

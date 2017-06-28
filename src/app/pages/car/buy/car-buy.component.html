@@ -26,19 +26,22 @@
 
       <knx-step [options]="formSteps[2]">
         <knx-car-check
-          [form]="checkForm">
+          [form]="checkForm"
+          [advice]="advice$ | async">
         </knx-car-check>
       </knx-step>
 
       <knx-step [options]="formSteps[3]">
         <knx-car-payment-form
-          [form]="paymentForm">
+          [form]="paymentForm"
+          [advice]="advice$ | async">
         </knx-car-payment-form>
       </knx-step>
 
       <knx-step [options]="formSteps[4]">
         <knx-car-summary-form
           [confirm]="acceptFinalTerms"
+          [advice]="advice$ | async"
           [profile]="profile$ | async">
         </knx-car-summary-form>
       </knx-step>
