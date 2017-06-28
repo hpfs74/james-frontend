@@ -15,7 +15,7 @@ export class CarCheckForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      bankruptcy: [null, Validators.compose([Validators.required])],
+      crime: [null, Validators.compose([Validators.required])],
       debt: [null, Validators.compose([Validators.required])],
       refuse: [null, Validators.compose([Validators.required])],
       driver: [null, Validators.compose([Validators.required])],
@@ -24,11 +24,11 @@ export class CarCheckForm extends BaseForm {
     });
 
     this.formConfig = {
-      bankruptcy: {
-        formControlName: 'bankruptcy',
+      crime: {
+        formControlName: 'crime',
         label: 'Ben je de afgelopen 8 jaar in aanraking geweest met politie of justitie?',
         type: 'radio',
-        formControl: this.formGroup.get('bankruptcy'),
+        formControl: this.formGroup.get('crime'),
         validationErrors: this.validationErrors,
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],

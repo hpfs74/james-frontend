@@ -52,7 +52,7 @@ describe('Component: CarCheckComponent', () => {
   });
 
   it('should check for all questions to be answered', () => {
-    const formFields = ['bankruptcy', 'debt', 'refuse', 'driver', 'cause'];
+    const formFields = ['crime', 'debt', 'refuse', 'driver', 'cause'];
     const lastField = 'register';
 
     formFields.forEach(( formField ) => {

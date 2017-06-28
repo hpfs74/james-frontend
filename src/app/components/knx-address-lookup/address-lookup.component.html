@@ -3,7 +3,7 @@
      [attr.data-error]="getErrors()">
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
       <cx-form-group formControlName="postalCode" [options]="{
         formControl: addressFormGroup.get('postalCode'),
         label: 'Postcode',
@@ -15,10 +15,7 @@
         }
       }"></cx-form-group>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-4">
       <cx-form-group formControlName="houseNumber" [options]="{
         formControl: addressFormGroup.get('houseNumber'),
         label: 'Huisnummer',
@@ -28,8 +25,7 @@
         }
       }"></cx-form-group>
     </div>
-
-    <div class="col-md-5">
+    <div class="col-md-4">
       <cx-form-group formControlName="houseNumberExtension" [options]="{
         formControl: addressFormGroup.get('houseNumberExtension'),
         label: 'Toevoeging',
@@ -43,12 +39,16 @@
 
   <div class="row" *ngIf="address">
     <div class="col-md-12 found-address" *ngIf="address; else noAddress">
-      <span class="knx-icon-map-marker"></span><strong>{{address}}</strong>
+      <div class="knx-message knx-message--hint">
+        <span class="knx-icon-map-marker"></span><strong>{{address}}</strong>
+      </div>
     </div>
 
     <ng-template #noAddress>
       <div class="col-md-12 found-address" >
-        Adres niet gevonden. Heb je je postcode en huisnummer juist ingevoerd?
+        <div class="knx-message knx-message--hint">
+          Adres niet gevonden. Heb je je postcode en huisnummer juist ingevoerd?
+        </div>
       </div>
     </ng-template>
   </div>
