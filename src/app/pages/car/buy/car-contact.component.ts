@@ -12,17 +12,22 @@ import { isMobileNumber } from '../../../utils/base-form.utils';
 export class CarContactComponent implements OnChanges {
   @Input() form: ContactDetailForm;
   @Input() profile: Profile;
+  @Input() set advice(value: any) {
+    if (value) {
+      this.form.formGroup.patchValue({
+        initials: value.initials,
+        firstName: value.firstName,
+        middleName: value.middleName,
+        lastName: value.lastName,
+        mobileNumber: value.mobileNumber,
+        phoneNumber: value.phoneNumber,
+        saveToProfile: value.saveToProfile
+      }, { emitEvent: false });
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.profile) {
-      this.form.formGroup.patchValue({
-        firstName: this.profile.firstname,
-        middleName: this.profile.infix,
-        lastName: this.profile.lastname,
-        mobileNumber: isMobileNumber(this.profile.phone) ? this.profile.phone : null,
-        phoneNumber: !isMobileNumber(this.profile.phone) ? this.profile.phone : null
-      });
-
       // Update validation state of known pre-filled profile fields
       // Note: only seems to get triggered if touched/dirty state is
       // updated on each individual control

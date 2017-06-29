@@ -9,8 +9,8 @@ import { CarCheckForm } from './car-check.form';
 export class CarCheckComponent {
   @Input() form: CarCheckForm;
   @Input() set advice(value: any) {
-    if (this.advice) {
-      this.form.formGroup.patchValue(this.advice);
+    if (value) {
+      this.form.formGroup.patchValue(value);
     }
   }
 }

@@ -12,12 +12,8 @@ export class CarReportingCodeComponent implements OnInit {
   @Input() form: CarReportingCodeForm;
   @Input() profile: Profile;
   @Input() set advice(value: any) {
-    if (this.advice) {
-      this.form.formGroup.patchValue({
-        reportingCode: this.advice.reportingCode,
-        accessoryValue: this.advice.accessoryValue,
-        securityClass: this.advice.securityClass
-      });
+    if (value) {
+      this.form.formGroup.patchValue(value);
     }
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import * as moment from 'moment';
 
 import { Profile, Car } from '../../../models';
 import { isMobileNumber } from '../../../utils/base-form.utils';
@@ -12,7 +13,7 @@ export class CarSummaryComponent {
   @Input() confirm: boolean;
   @Input() profile: Profile;
   @Input() set advice(value: any) {
-    if (this.isValidAdvice(this.advice)) {
+    if (this.isValidAdvice(value)) {
       const carInsurance: SectionItem = {
         label: 'Je autoverzekering',
         groups: [
@@ -20,15 +21,15 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Ingangsdatum',
-                value: this.advice.startDate
+                value: moment(value.startDate).format('DD-MM-YYYY')
               },
               {
                 label: 'Gekozen dekking',
-                value: this.advice.coverage
+                value: value.coverage
               },
               {
                 label: 'Eigen risico',
-                value: this.advice.insurance.ownRisk
+                value: value.insurance.own_risk
               }
             ]
           },
@@ -36,15 +37,15 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Rechtsbijstand',
-                value: this.advice.insurance.legal_aid
+                value: value.insurance.legal_aid
               },
               {
                 label: 'No-claim beschermer',
-                value: this.advice.insurance.no_claim_protection
+                value: value.insurance.no_claim_protection
               },
               {
                 label: 'Inzittendenverzekering',
-                value: this.advice.insurance.cover_occupants
+                value: value.insurance.cover_occupants
               }
             ]
           }
@@ -58,23 +59,23 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Kenteken',
-                value: this.advice._embedded.car.license
+                value: value.insurance._embedded.car.license
               },
               {
                 label: 'Merk',
-                value: this.advice._embedded.car.make
+                value: value.insurance._embedded.car.make
               },
               {
                 label: 'Model',
-                value: this.advice._embedded.car.model
+                value: value.insurance._embedded.car.model
               },
               {
                 label: 'Type',
-                value: this.advice._embedded.car.edition
+                value: value.insurance._embedded.car.edition
               },
               {
                 label: 'Bouwjaar',
-                value: this.advice._embedded.car.year
+                value: value.insurance._embedded.car.year
               }
             ]
           },
@@ -82,27 +83,27 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Cataloguswaarde',
-                value: this.advice._embedded.car.price_consumer_incl_vat
+                value: value.insurance._embedded.car.price_consumer_incl_vat
               },
               {
                 label: 'Waarde accessoires',
-                value: this.advice.accessoryValue
+                value: value.accessoryValue
               },
               {
                 label: 'Dagwaarde',
-                value: this.advice._embedded.car.current_value
+                value: value.insurance._embedded.car.current_value
               },
               {
                 label: 'Gewicht',
-                value: this.advice._embedded.car.weight_empty_vehicle
+                value: value.insurance._embedded.car.weight_empty_vehicle
               },
               {
                 label: 'KM per jaar',
-                value: this.advice.insurance.kilometers_per_year
+                value: value.insurance.kilometers_per_year
               },
               {
                 label: 'Beveiliging',
-                value: this.advice.securityClass
+                value: value.securityClass
               }
             ]
           }
@@ -116,23 +117,23 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Geslacht',
-                value: this.advice.gender.toLowerCase() === 'm' ? 'Man' : 'Vrouw'
+                value: value.gender.toLowerCase() === 'm' ? 'Man' : 'Vrouw'
               },
               {
                 label: 'Voorletters',
-                value: this.advice.initials
+                value: value.initials
               },
               {
                 label: 'Voornaam',
-                value: this.advice.firstname
+                value: value.firstName
               },
               {
                 label: 'Achternaam',
-                value: this.advice.lastname
+                value: value.lastName
               },
               {
                 label: 'Geboortedatum',
-                value: this.advice.date_of_birth
+                value: moment(value.date_of_birth).format('DD-MM-YYYY')
               }
             ]
           },
@@ -140,24 +141,25 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Postcode',
-                value: this.advice.address.postcode
+                value: value.address.postcode
               },
               {
                 label: 'Huisnummer',
-                value: this.advice.address.number
+                value: value.address.number
               },
               {
                 label: 'Mobiel nummer',
-                value: this.advice.address.mobileNumber
+                value: value.address.mobileNumber
               },
               {
                 label: 'Vast nummer',
-                value: this.advice.address.phoneNumber
+                value: value.address.phoneNumber
               },
-              {
-                label: 'E-mailadres',
-                value: this.advice.address.emailaddress
-              }
+              // TODO: add in contact detail form
+              // {
+              //   label: 'E-mailadres',
+              //   value: value.address.emailaddress
+              // }
             ]
           }
         ]
@@ -178,7 +180,7 @@ export class CarSummaryComponent {
       !this.isEmpty(obj) &&
       !this.isEmpty(obj.insurance) &&
       !this.isEmpty(obj.insurance._embedded) &&
-      !this.isEmpty(obj.insurance._embedded['car']) &&
+      !this.isEmpty(obj.insurance._embedded.car) &&
       !this.isEmpty(obj.address));
   }
 
