@@ -6,11 +6,9 @@ import { CarCheckForm } from './car-check.form';
   selector: 'knx-car-check',
   templateUrl: 'car-check.component.html'
 })
-export class CarCheckComponent implements OnChanges {
+export class CarCheckComponent {
   @Input() form: CarCheckForm;
-  @Input() advice: any;
-
-  ngOnChanges() {
+  @Input() set advice(value: any) {
     if (this.advice) {
       this.form.formGroup.patchValue(this.advice);
     }

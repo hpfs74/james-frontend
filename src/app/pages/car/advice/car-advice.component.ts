@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
 import * as moment from 'moment';
@@ -46,8 +47,12 @@ export class CarAdviceComponent implements OnInit {
   insurances: Observable<Array<CarInsurance>>;
 
   car: Car;
+  address: Address;
   chatConfig: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
+
+  // State of the advice forms data
+  advice$: Observable<any>;
 
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
@@ -77,6 +82,7 @@ export class CarAdviceComponent implements OnInit {
     this.insurances$ = this.getCompareResultCopy();
     this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
     this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
+    this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
 
     this.store.dispatch(new advice.AddAction({
       id: cuid()
@@ -123,7 +129,6 @@ export class CarAdviceComponent implements OnInit {
     this.carExtrasForm = new CarExtrasForm(formBuilder);
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
-      .distinctUntilChanged()
       .subscribe(data => {
         if (this.currentStep === 1) {
           let compareObj = {
@@ -189,23 +194,29 @@ export class CarAdviceComponent implements OnInit {
       date_of_birth: detailForm.value.birthDate
     }));
 
-    this.store.select(fromRoot.getProfile)
-      .subscribe((profile: Profile) => {
-        let compareObj: CarCompare = {
-          active_loan: detailForm.value.loan,
-          coverage: detailForm.value.coverage,
-          claim_free_years: +detailForm.value.claimFreeYears,
-          household_status: detailForm.value.houseHold,
-          license: this.car.license,
-          gender: detailForm.value.gender.toUpperCase(),
-          title: detailForm.value.gender.toLowerCase() === 'm' ? 'Dhr.' : 'Mw.',
-          date_of_birth: moment(detailForm.value.birthDate).format('YYYY-MM-DD'),
-          house_number: profile.address.number,
-          zipcode: profile.address.postcode,
-          country: 'NL'
-        };
-        this.store.dispatch(new advice.UpdateAction(compareObj));
-      });
+    // TODO: update profile with new data
+    // this.store.select(fromRoot.getProfile)
+    //   .subscribe((profile: Profile) => {
+    //   });
+
+    let compareObj: CarCompare = {
+      active_loan: detailForm.value.loan,
+      coverage: detailForm.value.coverage,
+      claim_free_years: +detailForm.value.claimFreeYears,
+      household_status: detailForm.value.houseHold,
+      license: this.car.license,
+      gender: detailForm.value.gender.toUpperCase(),
+      title: detailForm.value.gender.toLowerCase() === 'm' ? 'Dhr.' : 'Mw.',
+      date_of_birth: moment(detailForm.value.birthDate).format('YYYY-MM-DD'),
+      zipcode: this.address.postcode,
+      house_number: this.address.number,
+      country: 'NL'
+    };
+
+    // add address in format for profile
+    this.store.dispatch(new advice.UpdateAction(Object.assign({}, compareObj, {
+      address: this.address
+    })));
 
     return this.store.select(fromRoot.getSelectedAdvice)
       .map(options => this.store.dispatch(new compare.LoadCarAction(options)));
@@ -220,7 +231,8 @@ export class CarAdviceComponent implements OnInit {
   }
 
   startBuyFlow(): Observable<any> {
-    this.router.navigate(['/car/insurance']);
+    this.store.dispatch(go('/car/insurance'));
+    //this.router.navigate(['/car/insurance']);
     return;
   }
 
@@ -253,6 +265,7 @@ export class CarAdviceComponent implements OnInit {
     this.store.dispatch(new profile.UpdateAction({
       address: address
     }));
+    this.address = address;
   }
 
   //TODO: change to reactive

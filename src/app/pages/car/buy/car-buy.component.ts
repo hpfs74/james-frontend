@@ -31,6 +31,7 @@ import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
 import { BaseForm } from '../../../forms/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
+import { Proposal, CarProposalHelper } from './../../../models/proposal';
 
 @Component({
   templateUrl: 'car-buy.component.html',
@@ -164,7 +165,10 @@ export class CarBuyComponent implements OnInit {
       this.paymentForm.formGroup.value,
       this.acceptFinalTerms
     );
+    console.log('------- FINAL ------');
     console.log(formData);
+    let proposalRequest = new CarProposalHelper(formData);
+    console.log(proposalRequest.getItems());
 
     return new Observable(obs => {
       obs.next();

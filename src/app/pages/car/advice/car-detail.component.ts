@@ -4,6 +4,7 @@ import {
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
+import * as moment from 'moment';
 
 import { CarDetailForm } from './car-detail.form';
 import { Car, Price, Address } from '../../../models';
@@ -22,6 +23,25 @@ export class CarDetailComponent implements OnInit {
   @Input() config: any;
   @Input() coverages: Price[];
   @Input() isCoverageLoading: boolean;
+
+  @Input() set advice(value: any) {
+    if (value) {
+      this.form.formGroup.patchValue(Object.assign({}, {
+        licensePlate: value.license || null,
+        birthDate: value.date_of_birth ? moment(value.date_of_birth).format('DD-MM-YYYY') : null,
+        claimFreeYears: value.claim_free_years || null,
+        houseHold: value.household_status || null,
+        loan: value.active_loan || null,
+        gender: value.gender ? value.gender.toLowerCase() : null,
+        coverage: value.coverage || null,
+      }));
+      this.form.addressForm.patchValue(Object.assign({}, {
+        postalCode: value.address ? value.address.postcode : null,
+        houseNumber: value.address ? value.address.number : null,
+        houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null
+      }));
+    }
+  }
 
   @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
   @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
@@ -42,6 +62,7 @@ export class CarDetailComponent implements OnInit {
     Observable.combineLatest(
       licensePlate.valueChanges,
       loan.valueChanges)
+      .distinctUntilChanged()
       .subscribe(data => {
         if (licensePlate.valid && loan.valid) {
           this.coverageDetailsChange.emit(this.form.formGroup.value);

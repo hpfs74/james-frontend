@@ -17,7 +17,7 @@ export interface Proposal {
 /**
  * Buy Flow Request Helper
  */
-export class CarPropsalHelper {
+export class CarProposalHelper {
   payload: any;
 
   propMapping = [

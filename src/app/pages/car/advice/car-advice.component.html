@@ -17,6 +17,7 @@
           (coverageSelected)="updateSelectedCoverage($event)"
           [form]="carDetailForm"
           [car]="car"
+          [advice]="advice$ | async"
           [coverages]="coverages"
           [isCoverageLoading]="isCoverageLoading">
         </knx-car-detail-form>
@@ -45,6 +46,7 @@
 
         <knx-car-extras
           [form]="carExtrasForm"
+          [advice]="advice$ | async"
           [show]="currentStep === 1"
           optionModifierClass="hidden-xs">
         </knx-car-extras>
@@ -56,6 +58,7 @@
               <div class="knx-side-panel-content">
                 <knx-car-extras
                   [form]="carExtrasForm"
+                  [advice]="advice$ | async"
                   [show]="currentStep === 1">
                 </knx-car-extras>
 

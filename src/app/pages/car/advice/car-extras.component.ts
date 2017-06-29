@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CarExtrasForm } from './car-extras.form';
 
@@ -47,5 +47,20 @@ export class CarExtrasComponent {
   @Input() form: CarExtrasForm;
   @Input() show: boolean;
   @Input() optionModifierClass: string;
+
+  @Input() set advice(value: any) {
+    if (value && value.insurance) {
+      this.form.formGroup.patchValue({
+        coverage: value.insurance.coverage,
+        extraOptions: {
+          legal: value.insurance.legal_aid,
+          noclaim: value.insurance.no_claim_protection,
+          occupants: value.insurance.cover_occupants
+        },
+        ownRisk: value.insurance.own_risk,
+        kmPerYear: value.insurance.kilometers_per_year
+      }, { emitEvent: false }); // prevent infinite loop; valueChanges subscription CarAdviceComponent
+    }
+  }
 }
 

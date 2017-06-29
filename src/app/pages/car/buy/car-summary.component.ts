@@ -8,15 +8,11 @@ import { SectionItem, SectionGroup, SectionFields } from '../../../components/kn
   selector: 'knx-car-summary-form',
   templateUrl: 'car-summary.component.html'
 })
-export class CarSummaryComponent implements OnChanges {
+export class CarSummaryComponent {
   @Input() confirm: boolean;
   @Input() profile: Profile;
-  @Input() advice: any;
-
-  sections: Array<SectionItem>;
-
-  ngOnChanges() {
-    if (this.advice && !this.isEmpty(this.advice)) {
+  @Input() set advice(value: any) {
+    if (this.isValidAdvice(this.advice)) {
       const carInsurance: SectionItem = {
         label: 'Je autoverzekering',
         groups: [
@@ -32,7 +28,7 @@ export class CarSummaryComponent implements OnChanges {
               },
               {
                 label: 'Eigen risico',
-                value: this.advice.ownRisk
+                value: this.advice.insurance.ownRisk
               }
             ]
           },
@@ -40,15 +36,15 @@ export class CarSummaryComponent implements OnChanges {
             fields: [
               {
                 label: 'Rechtsbijstand',
-                value: this.advice.legal
+                value: this.advice.insurance.legal_aid
               },
               {
                 label: 'No-claim beschermer',
-                value: this.advice.no_claim
+                value: this.advice.insurance.no_claim_protection
               },
               {
                 label: 'Inzittendenverzekering',
-                value: this.advice.cover_occupants
+                value: this.advice.insurance.cover_occupants
               }
             ]
           }
@@ -102,7 +98,7 @@ export class CarSummaryComponent implements OnChanges {
               },
               {
                 label: 'KM per jaar',
-                value: this.advice.kmPerYear
+                value: this.advice.insurance.kilometers_per_year
               },
               {
                 label: 'Beveiliging',
@@ -173,6 +169,17 @@ export class CarSummaryComponent implements OnChanges {
         personalDetails
       ];
     }
+  }
+
+  sections: Array<SectionItem>;
+
+  private isValidAdvice(obj: any) {
+    return (obj &&
+      !this.isEmpty(obj) &&
+      !this.isEmpty(obj.insurance) &&
+      !this.isEmpty(obj.insurance._embedded) &&
+      !this.isEmpty(obj.insurance._embedded['car']) &&
+      !this.isEmpty(obj.address));
   }
 
   private isEmpty(obj: any) {
