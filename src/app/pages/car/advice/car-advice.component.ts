@@ -240,7 +240,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   startBuyFlow(): Observable<any> {
     this.store.dispatch(go('/car/insurance'));
-    //this.router.navigate(['/car/insurance']);
     return;
   }
 
@@ -250,6 +249,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   showHelperText(key) {
+    console.log(key);
     let messageToShow = this.chatConfig.car.info[key];
     this.store.dispatch(new assistant.ClearAction);
     this.store.dispatch(new assistant.AddMessageAction(messageToShow));
