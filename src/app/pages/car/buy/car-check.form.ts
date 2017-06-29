@@ -15,7 +15,7 @@ export class CarCheckForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      bankruptcy: [null, Validators.compose([Validators.required])],
+      crime: [null, Validators.compose([Validators.required])],
       debt: [null, Validators.compose([Validators.required])],
       refuse: [null, Validators.compose([Validators.required])],
       driver: [null, Validators.compose([Validators.required])],
@@ -24,24 +24,15 @@ export class CarCheckForm extends BaseForm {
     });
 
     this.formConfig = {
-      bankruptcy: {
-        formControlName: 'bankruptcy',
+      crime: {
+        formControlName: 'crime',
         label: 'Ben je de afgelopen 8 jaar in aanraking geweest met politie of justitie?',
         type: 'radio',
-        formControl: this.formGroup.get('bankruptcy'),
+        formControl: this.formGroup.get('crime'),
         validationErrors: this.validationErrors,
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
-          items: [
-            {
-              label: 'Ja',
-              value: 'wasBankruptcy'
-            },
-            {
-              label: 'Nee',
-              value: 'noBankruptcy'
-            }
-          ]
+          items: this.getBooleanItems()
         }
       },
       refuse: {
@@ -53,16 +44,7 @@ export class CarCheckForm extends BaseForm {
         validationErrors: this.validationErrors,
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
-          items: [
-            {
-              label: 'Ja',
-              value: 'wasRefuse'
-            },
-            {
-              label: 'Nee',
-              value: 'noRefuse'
-            }
-          ]
+          items: this.getBooleanItems()
         }
       },
       debt: {
@@ -74,16 +56,7 @@ export class CarCheckForm extends BaseForm {
         type: 'radio',
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
-          items: [
-            {
-              label: 'Ja',
-              value: 'wasDebt'
-            },
-            {
-              label: 'Nee',
-              value: 'noDebt'
-            }
-          ]
+          items: this.getBooleanItems()
         }
       },
       driver: {
@@ -95,16 +68,7 @@ export class CarCheckForm extends BaseForm {
         type: 'radio',
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
-          items: [
-            {
-              label: 'Ja',
-              value: 'isDriver'
-            },
-            {
-              label: 'Nee',
-              value: 'notDriver'
-            }
-          ]
+          items: this.getBooleanItems()
         }
       },
       cause: {
@@ -116,16 +80,7 @@ export class CarCheckForm extends BaseForm {
         type: 'radio',
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
-          items: [
-            {
-              label: 'Ja',
-              value: 'hadCause'
-            },
-            {
-              label: 'Nee',
-              value: 'noCause'
-            }
-          ]
+          items: this.getBooleanItems()
         }
       },
       register: {
@@ -136,18 +91,16 @@ export class CarCheckForm extends BaseForm {
         type: 'radio',
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
-          items: [
-            {
-              label: 'Ja',
-              value: 'isRegistered'
-            },
-            {
-              label: 'Nee',
-              value: 'notRegistered'
-            }
-          ]
+          items: this.getBooleanItems()
         }
       }
     };
+  }
+
+  private getBooleanItems() {
+    return [
+      { label: 'Ja', value: true },
+      { label: 'Nee', value: false }
+    ];
   }
 }

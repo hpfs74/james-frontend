@@ -12,8 +12,7 @@ export class IbanForm extends BaseForm {
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
     startDate: () => 'Vul een geldige startdatum in',
-    iban: () => 'Vul een geldig bankrekeningnummer (IBAN) in',
-    acceptConditions: () => `Je dient akkoord te gaan met de gebruiksvoorwaarden`
+    iban: () => 'Vul een geldig bankrekeningnummer (IBAN) in'
   };
 
   constructor(private fb: FormBuilder) {
@@ -39,8 +38,7 @@ export class IbanForm extends BaseForm {
           Validators.required,
           ibanValidator('iban')
         ])
-      ],
-      acceptConditions: [{}, Validators.required]
+      ]
     });
 
     this.formConfig = {
@@ -64,17 +62,6 @@ export class IbanForm extends BaseForm {
         validationErrors: this.validationErrors,
         inputOptions: {
           type: 'text'
-        }
-      },
-      acceptConditions: {
-        formControlName: 'acceptConditions',
-        type: 'checkbox',
-        formControl: this.formGroup.get('acceptConditions'),
-        validationErrors: this.validationErrors,
-        inputOptions: {
-          items: [
-            { label: 'Ik ga akkoord met de gebruiksvoorwaarden', value: 'true' }
-          ]
         }
       }
     };

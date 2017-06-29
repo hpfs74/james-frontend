@@ -8,4 +8,9 @@ import { CarCheckForm } from './car-check.form';
 })
 export class CarCheckComponent {
   @Input() form: CarCheckForm;
+  @Input() set advice(value: any) {
+    if (value) {
+      this.form.formGroup.patchValue(value);
+    }
+  }
 }

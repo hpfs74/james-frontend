@@ -13,3 +13,4 @@ export * from './nav';
 export * from './price';
 export * from './rating';
 export * from './profile';
+export * from './proposal';

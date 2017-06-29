@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import * as moment from 'moment';
 
 import { Profile, Car } from '../../../models';
 import { isMobileNumber } from '../../../utils/base-form.utils';
@@ -8,179 +9,179 @@ import { SectionItem, SectionGroup, SectionFields } from '../../../components/kn
   selector: 'knx-car-summary-form',
   templateUrl: 'car-summary.component.html'
 })
-export class CarSummaryComponent implements OnChanges {
+export class CarSummaryComponent {
   @Input() confirm: boolean;
   @Input() profile: Profile;
-  @Input() advice: any;
+  @Input() set advice(value: any) {
+    if (this.isValidAdvice(value)) {
+      const carInsurance: SectionItem = {
+        label: 'Je autoverzekering',
+        groups: [
+          {
+            fields: [
+              {
+                label: 'Ingangsdatum',
+                value: moment(value.startDate).format('DD-MM-YYYY')
+              },
+              {
+                label: 'Gekozen dekking',
+                value: value.coverage
+              },
+              {
+                label: 'Eigen risico',
+                value: value.insurance.own_risk
+              }
+            ]
+          },
+          {
+            fields: [
+              {
+                label: 'Rechtsbijstand',
+                value: value.insurance.legal_aid
+              },
+              {
+                label: 'No-claim beschermer',
+                value: value.insurance.no_claim_protection
+              },
+              {
+                label: 'Inzittendenverzekering',
+                value: value.insurance.cover_occupants
+              }
+            ]
+          }
+        ]
+      };
+
+      const carDetails: SectionItem = {
+        label: 'Details van je auto',
+        groups: [
+          {
+            fields: [
+              {
+                label: 'Kenteken',
+                value: value.insurance._embedded.car.license
+              },
+              {
+                label: 'Merk',
+                value: value.insurance._embedded.car.make
+              },
+              {
+                label: 'Model',
+                value: value.insurance._embedded.car.model
+              },
+              {
+                label: 'Type',
+                value: value.insurance._embedded.car.edition
+              },
+              {
+                label: 'Bouwjaar',
+                value: value.insurance._embedded.car.year
+              }
+            ]
+          },
+          {
+            fields: [
+              {
+                label: 'Cataloguswaarde',
+                value: value.insurance._embedded.car.price_consumer_incl_vat
+              },
+              {
+                label: 'Waarde accessoires',
+                value: value.accessoryValue
+              },
+              {
+                label: 'Dagwaarde',
+                value: value.insurance._embedded.car.current_value
+              },
+              {
+                label: 'Gewicht',
+                value: value.insurance._embedded.car.weight_empty_vehicle
+              },
+              {
+                label: 'KM per jaar',
+                value: value.insurance.kilometers_per_year
+              },
+              {
+                label: 'Beveiliging',
+                value: value.securityClass
+              }
+            ]
+          }
+        ]
+      };
+
+      const personalDetails: SectionItem = {
+        label: 'Persoonlijke gegevens',
+        groups: [
+          {
+            fields: [
+              {
+                label: 'Geslacht',
+                value: value.gender.toLowerCase() === 'm' ? 'Man' : 'Vrouw'
+              },
+              {
+                label: 'Voorletters',
+                value: value.initials
+              },
+              {
+                label: 'Voornaam',
+                value: value.firstName
+              },
+              {
+                label: 'Achternaam',
+                value: value.lastName
+              },
+              {
+                label: 'Geboortedatum',
+                value: moment(value.date_of_birth).format('DD-MM-YYYY')
+              }
+            ]
+          },
+          {
+            fields: [
+              {
+                label: 'Postcode',
+                value: value.address.postcode
+              },
+              {
+                label: 'Huisnummer',
+                value: value.address.number
+              },
+              {
+                label: 'Mobiel nummer',
+                value: value.address.mobileNumber
+              },
+              {
+                label: 'Vast nummer',
+                value: value.address.phoneNumber
+              },
+              // TODO: add in contact detail form
+              // {
+              //   label: 'E-mailadres',
+              //   value: value.address.emailaddress
+              // }
+            ]
+          }
+        ]
+      };
+
+      this.sections = [
+        carInsurance,
+        carDetails,
+        personalDetails
+      ];
+    }
+  }
 
   sections: Array<SectionItem>;
 
-  ngOnChanges() {
-    // if (this.profile && this.isProfileValid(this.profile)) {
-    //   const carInsurance: SectionItem = {
-    //     label: 'Je autoverzekering',
-    //     groups: [
-    //       {
-    //         fields: [
-    //           {
-    //             label: 'Ingangsdatum',
-    //             value: this.advice.startDate
-    //           },
-    //           {
-    //             label: 'Gekozen dekking',
-    //             value: this.advice.coverage
-    //           },
-    //           {
-    //             label: 'Eigen risico',
-    //             value: this.advice.ownRisk
-    //           }
-    //         ]
-    //       },
-    //       {
-    //         fields: [
-    //           {
-    //             label: 'Rechtsbijstand',
-    //             value: '' //this.advice.extraOptions
-    //           },
-    //           {
-    //             label: 'No-claim beschermer',
-    //             value: '' //this.advice.extraOptions
-    //           },
-    //           {
-    //             label: 'Inzittendenverzekering',
-    //             value: '' //this.advice.extraOptions
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   };
-
-    //   const carDetails: SectionItem = {
-    //     label: 'Details van je auto',
-    //     groups: [
-    //       {
-    //         fields: [
-    //           {
-    //             label: 'Kenteken',
-    //             value: this.advice._embedded.car.license
-    //           },
-    //           {
-    //             label: 'Merk',
-    //             value: this.advice._embedded.car.make
-    //           },
-    //           {
-    //             label: 'Model',
-    //             value: this.advice._embedded.car.model
-    //           },
-    //           {
-    //             label: 'Type',
-    //             value: this.advice._embedded.car.edition
-    //           },
-    //           {
-    //             label: 'Bouwjaar',
-    //             value: this.advice._embedded.car.year
-    //           }
-    //         ]
-    //       },
-    //       {
-    //         fields: [
-    //           {
-    //             label: 'Cataloguswaarde',
-    //             value: this.advice._embedded.car.price_consumer_incl_vat
-    //           },
-    //           {
-    //             label: 'Waarde accessoires',
-    //             value: this.advice.accessoryValue
-    //           },
-    //           {
-    //             label: 'Dagwaarde',
-    //             value: this.advice._embedded.car.current_value
-    //           },
-    //           {
-    //             label: 'Gewicht',
-    //             value: this.advice._embedded.car.weight_empty_vehicle
-    //           },
-    //           {
-    //             label: 'KM per jaar',
-    //             value: this.advice.kmPerYear
-    //           },
-    //           {
-    //             label: 'Beveiliging',
-    //             value: this.advice.securityClass
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   };
-
-    //   const personalDetails: SectionItem = {
-    //     label: 'Persoonlijke gegevens',
-    //     groups: [
-    //       {
-    //         fields: [
-    //           {
-    //             label: 'Geslacht',
-    //             value: this.advice.gender.toLowerCase() === 'm' ? 'Man' : 'Vrouw'
-    //           },
-    //           {
-    //             label: 'Voorletters',
-    //             value: this.advice.initials
-    //           },
-    //           {
-    //             label: 'Voornaam',
-    //             value: this.advice.firstname
-    //           },
-    //           {
-    //             label: 'Achternaam',
-    //             value: this.advice.lastname
-    //           },
-    //           {
-    //             label: 'Geboortedatum',
-    //             value: this.advice.date_of_birth
-    //           }
-    //         ]
-    //       },
-    //       {
-    //         fields: [
-    //           {
-    //             label: 'Postcode',
-    //             value: this.advice.address.postcode
-    //           },
-    //           {
-    //             label: 'Huisnummer',
-    //             value: this.advice.address.number
-    //           },
-    //           {
-    //             label: 'Mobiel nummer',
-    //             value: .address.mobileNumber
-    //           },
-    //           {
-    //             label: 'Vast nummer',
-    //             value: .address.phoneNumber
-    //           },
-    //           {
-    //             label: 'E-mailadres',
-    //             value: .address.emailaddress
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   };
-
-    //   this.sections = [
-    //     carInsurance,
-    //     carDetails,
-    //     personalDetails
-    //   ];
-    // }
-  }
-
-  private isProfileValid(profile: Profile) {
-    //TODO: make (address) data from first advice step available here
-    // console.log(this.isEmpty(profile));
-    // console.log(this.isEmpty(profile.address));
-    // console.log(this.isEmpty(profile._embedded.car));
-    return !(this.isEmpty(profile) || this.isEmpty(profile.address) || this.isEmpty(profile._embedded.car));
+  private isValidAdvice(obj: any) {
+    return (obj &&
+      !this.isEmpty(obj) &&
+      !this.isEmpty(obj.insurance) &&
+      !this.isEmpty(obj.insurance._embedded) &&
+      !this.isEmpty(obj.insurance._embedded.car) &&
+      !this.isEmpty(obj.address));
   }
 
   private isEmpty(obj: any) {
