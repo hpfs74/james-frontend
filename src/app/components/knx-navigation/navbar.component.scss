@@ -133,6 +133,10 @@ $knx-navbar-font: $font-size-base;
   }
 }
 
+.knx-navbar.navbar .container {
+  display: flex;
+}
+
 .navbar-toggler {
   padding: 0;
   margin: 10px 0;

@@ -2,7 +2,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { CXEmailValidator, CXPostalCodeValidator } from '@cx/form-control';
 import { CXFormGroupOptions } from '@cx/form-group';
 
-import { numberValidator } from '../utils/base-form.validators';
+import { houseNumberalidator } from '../utils/base-form.validators';
 
 export class BaseForm {
   public formGroup: FormGroup;
@@ -21,10 +21,11 @@ export class BaseForm {
       houseNumber: [null, Validators.compose(
         [
           Validators.required,
-          numberValidator('houseNumber')
+          Validators.maxLength(15),
+          houseNumberalidator('houseNumber')
         ]
       )],
-      houseNumberExtension: [null]
+      houseNumberExtension: [null, Validators.maxLength(15)]
     });
   }
 }

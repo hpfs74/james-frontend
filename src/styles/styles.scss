@@ -76,6 +76,31 @@ hr {
   border-bottom: 1px $knab-primary-gray solid;
 }
 
+//remove the browser-specific styles that overlapped by the validation indicators
+input[type='number'] {
+  appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+/*
+  Styles to validate keyboard accessibility
+
+*:focus {
+  opacity: 1 !important;
+  outline-width: 10px !important;
+  outline-style: dashed !important;
+  outline-color: red !important;
+}
+*/
+
 .main-container {
   margin-top: 100px;
   margin-bottom: 60px;

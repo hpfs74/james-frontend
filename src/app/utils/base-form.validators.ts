@@ -129,3 +129,7 @@ export function phoneNumberValidator(key: string) {
 export function carReportingCodeValidator(key: string) {
   return regExValidator(/^[0-9]{4}$/, key);
 }
+
+export function houseNumberalidator(key: string) {
+  return regExValidator(/^\d+(-\d+)*$/, key);
+}

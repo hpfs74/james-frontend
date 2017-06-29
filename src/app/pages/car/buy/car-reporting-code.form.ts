@@ -53,7 +53,7 @@ export class CarReportingCodeForm extends BaseForm {
         formControl: this.formGroup.get('reportingCode'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          type: 'text'
+          type: 'number'
         }
       },
       accessoryValue: {
