@@ -8,6 +8,7 @@ import { TextMaskModule } from '../../node_modules/@cx/input';
 
 // @knx
 import { KNXWizardModule } from '../../node_modules/@knx/wizard';
+import { KNXStepNavigationModule } from '../../node_modules/@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '../../node_modules/@knx/collapsible-panel';
 import { KNXInfoModule } from '../../node_modules/@knx/info';
 import { DropdownModule } from './components/knx-dropdown/dropdown.module';
@@ -104,6 +105,7 @@ export const sharedComponents = [
 export const sharedModules = [
   CXFormsModule,
   KNXWizardModule,
+  KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
   KNXInfoModule,
   DropdownModule

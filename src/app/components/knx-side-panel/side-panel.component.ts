@@ -5,10 +5,18 @@ import { slideInOutAnimation } from '../../animations/slide-in-out.animation';
 @Component({
   selector: 'knx-side-panel',
   template: `
-    <div class="knx-side-panel" [@slideInOutAnimation]="animationState" [class.knx-side-panel--fullwidth]="fullwidth">
+    <div class="knx-side-panel"
+         (@slideInOutAnimation.done)="onAnimationEnd()"
+         [@slideInOutAnimation]="animationState"
+         [class.knx-side-panel--fullwidth]="fullwidth">
       <div class="knx-side-panel__toolbar">{{ title }}
-        <button *ngIf="showCloseButton" class="knx-button knx-button--link knx-icon-close" (click)="close()"></button></div>
-      <div class="knx-side-panel__content">
+        <button *ngIf="showCloseButton && (show || animationInProgress)"
+                class="knx-button knx-button--link knx-icon-close"
+                (click)="close()">
+        </button>
+      </div>
+
+      <div class="knx-side-panel__content" *ngIf="show || animationInProgress">
         <ng-content></ng-content>
       </div>
     </div>
@@ -22,6 +30,7 @@ export class SidePanelComponent implements OnInit {
 
   show: boolean;
   animationState: string;
+  animationInProgress: boolean = false;
 
   ngOnInit() {
     this.show = false;
@@ -29,12 +38,19 @@ export class SidePanelComponent implements OnInit {
   }
 
   public open(): void {
+    this.animationInProgress = true;
     this.show = true;
     this.animationState = 'in';
   }
 
   public close(): void {
+    this.animationInProgress = true;
     this.show = false;
     this.animationState = 'out';
+  }
+
+  onAnimationEnd() {
+    //hide the side panel links if they are not visible for keyboard accessibility
+    this.animationInProgress = false;
   }
 }

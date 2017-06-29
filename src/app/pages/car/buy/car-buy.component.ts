@@ -176,8 +176,8 @@ export class CarBuyComponent implements OnInit {
     });
   }
 
-  onStepChange(event) {
-    this.currentStep += 1;
+  onStepChange(stepIndex) {
+    this.currentStep = stepIndex;
   }
 
   private getUpdatedProfile(form: FormGroup) {

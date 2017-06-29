@@ -12,7 +12,7 @@ export class ContactDetailForm extends BaseForm {
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
-    minlength: () => 'Ongeldig telefoonnnummer',
+    minlength: () => 'Ongeldig telefoonnummer',
     mobileNumber: () => 'Ongeldig telefoonnummer',
     phoneNumber: () => 'Ongeldig telefoonnummer',
     maxlength: (err) => `Je kunt maximaal ${err.requiredLength} tekens invullen`
@@ -34,12 +34,14 @@ export class ContactDetailForm extends BaseForm {
         Validators.compose([
           Validators.required,
           Validators.minLength(10),
+          Validators.maxLength(10),
           phoneNumberValidator('mobileNumber')
         ])
       ],
       phoneNumber: [null,
         Validators.compose([
           Validators.minLength(10),
+          Validators.maxLength(10),
           phoneNumberValidator('phoneNumber')
         ])
       ],
