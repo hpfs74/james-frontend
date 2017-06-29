@@ -26,6 +26,9 @@ export interface NicciEndpoint {
   car: string;
   helper: string;
 
+  // buy flow
+  carbuy: string;
+
   // to be implemented
   travel?: string;
   liability?: string;

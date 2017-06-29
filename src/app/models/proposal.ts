@@ -36,7 +36,7 @@ export class CarProposalHelper {
     { key: 'Geboortedatum', value: 'birthDate'},
     { key: 'Mobiel telefoonnummer', value: 'phone'},
     { key: 'Vast telefoonnummer', value: 'phone'},
-    { key: 'Rekeningnummer', value: 'iban'},
+    { key: 'Rekeningnummer', value: 'iban', transform: this.removeWhiteSpace },
     { key: 'Betalingstermijn', value: ''},
     { key: 'Emailadres', value: 'email'},
     { key: 'Facebook account', value: ''},
@@ -97,13 +97,11 @@ export class CarProposalHelper {
     this.payload = payload;
   }
 
-  getItems(): any[] {
-    let itemObj = [];
+  getItems(): { [id: string]: string } {
+    let itemObj = {};
     this.propMapping.forEach((el) => {
       if (this.payload && this.payload.hasOwnProperty(el.value)) {
-        itemObj.push({
-          [el.key]: el['transform'] ? el['transform'](el.value) : el.value
-        });
+        itemObj[el.key] = el['transform'] ? el['transform'](this.payload[el.value]) : this.payload[el.value];
       }
     });
     return itemObj;
@@ -129,6 +127,10 @@ export class CarProposalHelper {
       default:
         break;
     }
+  }
+
+  private removeWhiteSpace(value: string) {
+    return value.replace(/[ _]/gim, '');
   }
 
   private getKilomterPerYear(kmrType: string) {

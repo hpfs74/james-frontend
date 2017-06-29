@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 import { Router } from '@angular/router';
@@ -37,7 +37,7 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarAdviceComponent implements OnInit {
+export class CarAdviceComponent implements OnInit, OnDestroy {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   carDetailSubmitted: boolean = false;
@@ -59,6 +59,8 @@ export class CarAdviceComponent implements OnInit {
   selectedInsurance$: Observable<CarInsurance>;
 
   isCoverageLoading: boolean = false;
+
+  subscription$: any;
 
   // Forms
   carDetailForm: CarDetailForm;
@@ -128,21 +130,22 @@ export class CarAdviceComponent implements OnInit {
     this.carDetailForm = new CarDetailForm(formBuilder);
 
     this.carExtrasForm = new CarExtrasForm(formBuilder);
-    this.carExtrasForm.formGroup.valueChanges
+    this.subscription$ = this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
       .subscribe(data => {
         if (this.currentStep === 1) {
           let compareObj = {
             coverage: data.coverage,
-            cover_occupants: data.extraOptions.cover_occupants || false,
-            kilometers_per_year: data.kmPerYear,
+            cover_occupants: data.extraOptions.occupants || false,
             no_claim_protection: data.extraOptions.noclaim || false,
+            legal_aid: data.extraOptions.legal || false,
+            kilometers_per_year: data.kmPerYear,
             own_risk: data.ownRisk
           };
           this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
         }
       });
-    this.store.select(fromRoot.getSelectedAdvice)
+    this.subscription$ = this.store.select(fromRoot.getSelectedAdvice)
       .subscribe(advice => {
         if (advice.coverage) {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
@@ -173,6 +176,10 @@ export class CarAdviceComponent implements OnInit {
         // Treat server error as invalid to prevent continuing flow
         this.triggerLicenseInValid();
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription$.unsubscribe();
   }
 
   submitDetailForm(): Observable<any> {

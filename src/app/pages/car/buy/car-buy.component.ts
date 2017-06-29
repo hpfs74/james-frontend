@@ -165,10 +165,16 @@ export class CarBuyComponent implements OnInit {
       this.paymentForm.formGroup.value,
       this.acceptFinalTerms
     );
-    console.log('------- FINAL ------');
-    console.log(formData);
     let proposalRequest = new CarProposalHelper(formData);
-    console.log(proposalRequest.getItems());
+    this.store.select(fromRoot.getSelectedAdvice).subscribe(advice => {
+      let proposal: Proposal = {
+        proposal: advice.insurance,
+        items: proposalRequest.getItems()
+      };
+      console.log(proposal);
+      this.store.dispatch(new car.BuyAction(proposal));
+    });
+
 
     return new Observable(obs => {
       obs.next();
