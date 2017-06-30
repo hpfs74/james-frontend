@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { Insurance } from './insurance';
 
 /**
@@ -20,38 +21,41 @@ export interface Proposal {
 export class CarProposalHelper {
   payload: any;
 
+  /* tslint:disable:max-line-length */
   propMapping = [
-    { key: 'Verzekeraar', value: '' },
-    { key: 'Product', value: 'product' },
+    { key: 'Verzekeraar', value: 'moneyview_id', transform: (val) => val.split(':')[0] },
+    { key: 'Product', value: 'moneyview_id', transform: (val) => val.split(':')[1] },
     { key: 'Geslacht', value: 'gender', transform: (val) => val === 'm' ? 'Man' : 'Vrouw' },
     { key: 'Voorletters', value: 'initials' },
-    { key: 'Voornaam', value: 'firstname' },
+    { key: 'Voornaam', value: 'firstName' },
     { key: 'Voorvoegsels', value: 'infix' },
-    { key: 'Achternaam', value: 'lastname' },
-    { key: 'Straat', value: 'street'},
-    { key: 'Huisnummer', value: 'number'},
-    { key: 'Huisnummer toevoeging', value: 'number_extended'},
-    { key: 'Postcode', value: 'postcode'},
-    { key: 'Woonplaats', value: 'city' },
+    { key: 'Achternaam', value: 'lastName' },
+    { key: 'Straat', value: 'address.street'},
+    { key: 'Huisnummer', value: 'address.number'},
+    { key: 'Huisnummer toevoeging', value: 'address.number_extended'},
+    { key: 'Postcode', value: 'address.postcode'},
+    { key: 'Woonplaats', value: 'address.city' },
     { key: 'Geboortedatum', value: 'birthDate'},
-    { key: 'Mobiel telefoonnummer', value: 'phone'},
-    { key: 'Vast telefoonnummer', value: 'phone'},
-    { key: 'Rekeningnummer', value: 'iban'},
+    { key: 'Mobiel telefoonnummer', value: 'mobileNumber'},
+    { key: 'Vast telefoonnummer', value: 'phoneNumber'},
+    { key: 'Rekeningnummer', value: 'iban', transform: this.removeWhiteSpace },
     { key: 'Betalingstermijn', value: ''},
     { key: 'Emailadres', value: 'email'},
     { key: 'Facebook account', value: ''},
-    { key: 'Twitter account', value: ''},
-    { key: 'Ingangsdatum', value: 'startDate' },
-    { key: 'Kenteken', value: 'license '},
-    { key: 'Merk', value: 'make '},
-    { key: 'Model', value: 'model '},
-    { key: 'Type', value: 'type' },
-    { key: 'Bouwjaar', value: 'year' },
-    { key: 'Cataloguswaarde', value: 'price_consumer_incl_vat' },
+    { key: 'Twitter account', value: '' },
+    { key: 'Startdatum', value: 'startDate', transform: this.formatDate },
+    { key: 'Ingangsdatum', value: 'startDate', transform: this.formatDate },
+    // Car
+    { key: 'Kenteken', value: 'car.license' },
+    { key: 'Merk', value: 'car.make' },
+    { key: 'Model', value: 'car.model' },
+    { key: 'Type', value: 'car.type' },
+    { key: 'Bouwjaar', value: 'car.year' },
+    { key: 'Cataloguswaarde', value: 'car.price_consumer_incl_vat' },
     { key: 'Waarde accessoires', value: 'accessoryValue' },
-    { key: 'Dagwaarde', value: 'current_value'},
-    { key: 'Gewicht', value: 'weight_empty_vehicle' },
-    { key: 'Kilometrage', value: 'kmPerYear', transform: this.getKilomterPerYear },
+    { key: 'Dagwaarde', value: 'car.current_value'},
+    { key: 'Gewicht', value: 'car.weight_empty_vehicle' },
+    { key: 'Kilometrage', value: 'kilometers_per_year' },
     { key: 'Beveiliging', value: 'securityClass', transform: (value) => 'SCM klasse ' + value.slice(-1) },
     { key: 'Hoofddekking', value: 'coverage', transform: this.getCoverage },
     { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
@@ -63,26 +67,23 @@ export class CarProposalHelper {
       transform: this.getBoolean
     },
     {
-      key: `Ben jij in de laatste 8 jaar geweigerd of opgezegd door een verzekeraar of betrokken
-          (geweest) bij verzekeringsfraude?`,
+      key: `Ben jij in de laatste 8 jaar geweigerd of opgezegd door een verzekeraar of betrokken (geweest) bij verzekeringsfraude?`,
       value: 'refuse',
       transform: this.getBoolean
     },
     {
-      key: `Ben jij in de laatste 5 jaar failliet verklaard of in een schuldsanering betrokken geweest,
-            of heeft een deurwaarder momenteel beslag gelegd op jouw inkomsten of bezittingen?`,
+
+      key: `Ben jij in de laatste 5 jaar failliet verklaard of in een schuldsanering betrokken geweest, of heeft een deurwaarder momenteel beslag gelegd op jouw inkomsten of bezittingen?`,
       value: 'debt',
       transform: this.getBoolean
     },
     {
-      key: `Is jou, de regelmatige bestuurder of kentekenhouder in de laatste 8 jaar de rijbevoegdheid
-            (geheel of voorwaardelijk) ontzegd?`,
+      key: `Is jou, de regelmatige bestuurder of kentekenhouder in de laatste 8 jaar de rijbevoegdheid (geheel of voorwaardelijk) ontzegd?`,
       value: 'driver',
       transform: this.getBoolean
     },
     {
-      key: `Heb jij de laatste 5 jaar schade geleden of veroorzaakt, die gedekt werd door een soortgelijke
-            verzekering als je nu aanvraagt?`,
+      key: `Heb jij de laatste 5 jaar schade geleden of veroorzaakt, die gedekt werd door een soortgelijke verzekering als je nu aanvraagt?`,
       value: 'crime',
       transform: this.getBoolean
     },
@@ -92,19 +93,26 @@ export class CarProposalHelper {
       transform: this.getBoolean
     }
   ];
+  /* tslint:enable */
 
   constructor(payload: any) {
     this.payload = payload;
   }
 
-  getItems(): any[] {
-    let itemObj = [];
+  getItems(data: any): { [id: string]: string } {
+    if (!data) {
+      return;
+    }
+
+    let itemObj = {};
     this.propMapping.forEach((el) => {
-      if (this.payload && this.payload.hasOwnProperty(el.value)) {
-        itemObj.push({
-          [el.key]: el['transform'] ? el['transform'](el.value) : el.value
-        });
+      let value;
+      if (el.value.indexOf('.') > -1) {
+        value = el.value.split('.').reduce((o, i) => o[i], data);
+      } else if (data.hasOwnProperty(el.value)) {
+        value = data[el.value];
       }
+      itemObj[el.key] = el['transform'] ? el['transform'](value) : value;
     });
     return itemObj;
   }
@@ -131,37 +139,11 @@ export class CarProposalHelper {
     }
   }
 
-  private getKilomterPerYear(kmrType: string) {
-    let value: string;
+  private formatDate(value: Date) {
+    return moment(value).format('DD-MM-YYYY');
+  }
 
-    switch (kmrType.toUpperCase()) {
-      case 'KMR1':
-        value = '<7.500';
-        break;
-      case 'KMR2':
-        value = '7.500 - 10.000';
-        break;
-      case 'KMR3':
-        value = '10.001 - 12.000';
-        break;
-      case 'KMR4':
-        value = '12.001 - 15.000';
-        break;
-      case 'KMR5':
-        value = '15.001 - 20.000';
-        break;
-      case 'KMR6':
-        value = '20.001 - 25.000';
-        break;
-      case 'KMR7':
-        value = '25.001 - 30.000';
-        break;
-      case 'KMR8':
-        value = '> 30.000';
-        break;
-      default:
-        break;
-    }
-    return value;
+  private removeWhiteSpace(value: string) {
+    return value.replace(/[ _]/gim, '');
   }
 }

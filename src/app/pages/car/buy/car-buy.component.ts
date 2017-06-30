@@ -31,6 +31,7 @@ import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
 import { BaseForm } from '../../../forms/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
+import * as ObjUtils from '../../../utils/obj.util';
 import { Proposal, CarProposalHelper } from './../../../models/proposal';
 
 @Component({
@@ -165,10 +166,23 @@ export class CarBuyComponent implements OnInit {
       this.paymentForm.formGroup.value,
       this.acceptFinalTerms
     );
-    console.log('------- FINAL ------');
-    console.log(formData);
-    let proposalRequest = new CarProposalHelper(formData);
-    console.log(proposalRequest.getItems());
+    this.store.select(fromRoot.getSelectedAdvice).subscribe(advice => {
+      // flatten car data into proposal
+      let flatData = Object.assign({},
+        advice,
+        advice.address,
+        advice.insurance,
+        advice.insurance._embedded.insurance,
+        { car: advice.insurance._embedded.car });
+
+      let proposalRequest = new CarProposalHelper(flatData);
+      let proposal: Proposal = {
+        proposal: advice.insurance,
+        items: proposalRequest.getItems(flatData)
+      };
+      this.store.dispatch(new car.BuyAction(proposal));
+    });
+
 
     return new Observable(obs => {
       obs.next();

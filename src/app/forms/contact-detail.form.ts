@@ -72,13 +72,20 @@ export class ContactDetailForm extends BaseForm {
         formControlName: 'firstName',
         label: 'Voornaam',
         formControl: this.formGroup.get('firstName'),
-        validationErrors: this.validationErrors
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          type: 'text'
+        }
       },
       lastName: {
         formControlName: 'lastName',
         label: 'Achternaam',
+        type: 'text',
         formControl: this.formGroup.get('lastName'),
-        validationErrors: this.validationErrors
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          type: 'text'
+        }
       },
       mobilePhone: {
         formControlName: 'mobileNumber',

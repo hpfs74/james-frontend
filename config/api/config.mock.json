@@ -11,6 +11,7 @@
       "auth": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/",
       "address": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/address",
       "car": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/cars",
+      "carbuy": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/car/buystatic",
       "helper": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper",
       "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare",
       "insurer": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/insurer"

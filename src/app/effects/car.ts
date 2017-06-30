@@ -26,5 +26,15 @@ export class CarEffects {
         .map((res: Car) => new car.GetInfoCompleteAction(res))
         .catch(error => Observable.of(new car.GetInfoFailAction(error))));
 
+
+  @Effect()
+  buyCarInsurance$: Observable<Action> = this.action$
+    .ofType(car.BUY_REQUEST)
+    .map((action: car.BuyAction) => action.payload)
+    .switchMap((payload) =>
+      this.carService.buyStatic(payload)
+        .map((res: Response) => new car.BuyCompleteAction(res))
+        .catch(error => Observable.of(new car.BuyFailAction(error))));
+
   constructor(private action$: Actions, private carService: CarService) { }
 }

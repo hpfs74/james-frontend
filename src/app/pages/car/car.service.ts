@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AuthHttp } from '../../services/auth-http.service';
 import { Profile } from '../../models/profile';
 import { ConfigService } from '../../config.service';
-import { Car, CarInsurance, CarCoverageRecommendation, CarCompare } from './../../models';
+import { Car, CarInsurance, CarCoverageRecommendation, CarCompare, Proposal } from './../../models';
 
 @Injectable()
 export class CarService {
@@ -17,7 +17,8 @@ export class CarService {
       helper: configService.config.api.james.helper,
       compare: configService.config.api.james.compare + '/car',
       coverage: configService.config.api.james.helper + '/car/coverage',
-      insurer: configService.config.api.james.insurer
+      insurer: configService.config.api.james.insurer,
+      buy: configService.config.api.james.carbuy
     };
   }
 
@@ -50,5 +51,10 @@ export class CarService {
         insurance._embedded.insurance.insurer = insurer;
         return insurance;
       });
+  }
+
+  public buyStatic(payload: Proposal): Observable<any> {
+    return this.authHttp.post(this.api.buy, JSON.stringify(payload))
+      .map((res: Response) => res.json());
   }
 }

@@ -77,6 +77,7 @@ module.exports = function (config) {
     reporters: ['mocha', 'dots', 'coverage', 'remap-coverage', 'html', 'junit'],
 
     coverageReporter: {
+      includeAllSources: true,
       type: 'in-memory',
       reporters: [
         { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },

@@ -9,6 +9,6 @@ export interface SectionGroup {
 
 export interface SectionFields {
   label: string;
-  value: number | string;
+  value: any;
   info?: string;
 }

@@ -10,10 +10,10 @@ import { IbanForm } from './../../../forms/iban.form';
 export class CarPaymentComponent {
   @Input() form: IbanForm;
   @Input() set advice(value: any) {
-    if (this.advice) {
+    if (value) {
       this.form.formGroup.patchValue({
-        startDate: moment(this.advice.startDate).format('DD-MM-YYYY'),
-        iban: this.advice.iban
+        startDate: moment(value.startDate).format('DD-MM-YYYY'),
+        iban: value.iban
       });
     }
   }

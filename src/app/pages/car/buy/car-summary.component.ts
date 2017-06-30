@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import * as moment from 'moment';
 
 import { Profile, Car } from '../../../models';
@@ -25,11 +26,11 @@ export class CarSummaryComponent {
               },
               {
                 label: 'Gekozen dekking',
-                value: value.coverage
+                value: this.getCoverage(value.coverage)
               },
               {
                 label: 'Eigen risico',
-                value: value.insurance.own_risk
+                value: this.currencyPipe.transform(value.insurance.own_risk, 'EUR', true)
               }
             ]
           },
@@ -37,15 +38,15 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Rechtsbijstand',
-                value: value.insurance.legal_aid
+                value: this.formatBoolean(value.insurance.legal_aid)
               },
               {
                 label: 'No-claim beschermer',
-                value: value.insurance.no_claim_protection
+                value: this.formatBoolean(value.insurance.no_claim_protection)
               },
               {
                 label: 'Inzittendenverzekering',
-                value: value.insurance.cover_occupants
+                value: this.formatBoolean(value.insurance.cover_occupants)
               }
             ]
           }
@@ -83,19 +84,19 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Cataloguswaarde',
-                value: value.insurance._embedded.car.price_consumer_incl_vat
+                value: this.currencyPipe.transform(value.insurance._embedded.car.price_consumer_incl_vat, 'EUR', true)
               },
               {
                 label: 'Waarde accessoires',
-                value: value.accessoryValue
+                value: this.currencyPipe.transform(value.accessoryValue, 'EUR', true)
               },
               {
                 label: 'Dagwaarde',
-                value: value.insurance._embedded.car.current_value
+                value: this.currencyPipe.transform(value.insurance._embedded.car.current_value, 'EUR', true)
               },
               {
                 label: 'Gewicht',
-                value: value.insurance._embedded.car.weight_empty_vehicle
+                value: value.insurance._embedded.car.weight_empty_vehicle + ' kg'
               },
               {
                 label: 'KM per jaar',
@@ -175,6 +176,8 @@ export class CarSummaryComponent {
 
   sections: Array<SectionItem>;
 
+  constructor(private currencyPipe: CurrencyPipe) { }
+
   private isValidAdvice(obj: any) {
     return (obj &&
       !this.isEmpty(obj) &&
@@ -186,5 +189,27 @@ export class CarSummaryComponent {
 
   private isEmpty(obj: any) {
     return !obj || Object.keys(obj).length <= 0;
+  }
+
+  private formatBoolean(value: boolean) {
+    return value ? 'Ja' : 'Nee';
+  }
+
+  private getCoverage(coverage: string) {
+    let value: string;
+
+    switch (coverage) {
+      case 'CL':
+        value = 'Aansprakelijkheid';
+        break;
+      case 'CLC':
+        value = 'Aansprakelijkheid + Beperkt casco';
+        break;
+      case 'CAR':
+        value = 'Aansprakelijkheid + Volledig casco';
+        break;
+      default:
+        break;
+    }
   }
 }
