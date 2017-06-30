@@ -50,7 +50,7 @@
     "sw": "sw-precache --root=dist --config=config/sw-precache.config.js",
     "start:hmr": "npm run server:dev:hmr",
     "start": "npm run server:dev",
-    "test": "karma start",
+    "test": "karma start ",
     "security": "nsp check",
     "version": "npm run build",
     "watch:dev:hmr": "npm run watch:dev -- --hot",
