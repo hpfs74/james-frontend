@@ -3,6 +3,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { Car, Profile } from '../../../models/';
 import { CarSecurityClass } from '../../../content.interface';
+import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-reporting-code-form',
@@ -14,6 +15,7 @@ export class CarReportingCodeComponent implements OnInit {
   @Input() set advice(value: any) {
     if (value) {
       this.form.formGroup.patchValue(value);
+      FormUtils.validateForm(this.form.formGroup);
     }
   }
 
