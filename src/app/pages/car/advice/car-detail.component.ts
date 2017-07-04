@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { CarDetailForm } from './car-detail.form';
 import { Car, Price, Address } from '../../../models';
 import { CarService } from '../car.service';
+import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-detail-form',
@@ -40,6 +41,8 @@ export class CarDetailComponent implements OnInit {
         houseNumber: value.address ? value.address.number : null,
         houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null
       }));
+      FormUtils.validateForm(this.form.formGroup);
+      FormUtils.validateForm(this.form.addressForm);
     }
   }
 

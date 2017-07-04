@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Profile } from './../../../models/profile';
 import { ContactDetailForm } from './../../../forms/contact-detail.form';
 import { isMobileNumber } from '../../../utils/base-form.utils';
+import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-contact-form',
@@ -23,6 +24,7 @@ export class CarContactComponent implements OnChanges {
         phoneNumber: value.phoneNumber,
         saveToProfile: value.saveToProfile
       }, { emitEvent: false });
+      FormUtils.validateForm(this.form.formGroup);
     }
   }
 
