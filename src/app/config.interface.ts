@@ -24,8 +24,8 @@ export interface NicciEndpoint {
   insurer: string;
 
   cars: string;
-  car_compare: string;
-  car_coverage: string;
-  car_damagefree: string;
-  car_buy: string;
+  carCompare: string;
+  carCoverage: string;
+  carDamageFree: string;
+  carBuyStatic: string;
 }

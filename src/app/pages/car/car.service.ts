@@ -18,17 +18,17 @@ export class CarService {
   }
 
   public getCoverageRecommendation(licensePlate: string, loan: boolean): Observable<CarCoverageRecommendation> {
-    return this.authHttp.post(this.configService.config.api.james.car_coverage, { license: licensePlate })
+    return this.authHttp.post(this.configService.config.api.james.carCoverage, { license: licensePlate })
       .map(res => <CarCoverageRecommendation>res.json());
   }
 
   public getInsurances(carRequest: CarCompare): Observable<Array<CarInsurance>> {
-    return this.authHttp.post(this.configService.config.api.james.car_compare, JSON.stringify(carRequest))
+    return this.authHttp.post(this.configService.config.api.james.carCompare, JSON.stringify(carRequest))
       .map((res: Response) => res.json());
   }
 
   public getInsurancesWithDetails(carRequest: CarCompare): Observable<Array<CarInsurance>> {
-    return this.authHttp.post(this.configService.config.api.james.car_compare, JSON.stringify(carRequest)).map(res => res.json())
+    return this.authHttp.post(this.configService.config.api.james.carCompare, JSON.stringify(carRequest)).map(res => res.json())
       .flatMap((insurance) => {
         return Observable.forkJoin(
           Observable.of(insurance),
@@ -44,7 +44,7 @@ export class CarService {
   }
 
   public buyStatic(payload: Proposal): Observable<any> {
-    return this.authHttp.post(this.configService.config.api.james.car_buy, JSON.stringify(payload))
+    return this.authHttp.post(this.configService.config.api.james.carBuyStatic, JSON.stringify(payload))
       .map((res: Response) => res.json());
   }
 }

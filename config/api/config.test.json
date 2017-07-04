@@ -11,10 +11,10 @@
       "auth": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy",
       "address": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/isLocationValid",
       "cars": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carInfo",
-      "car_compare": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/advisedCarInsurance",
-      "car_coverage": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carCoverageHelp",
-      "car_damagefree": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carDamageFreeHelp",
-      "car_buy": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carBuyStatic",
+      "carCompare": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/advisedCarInsurance",
+      "carCoverage": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carCoverageHelp",
+      "carDamageFree": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carDamageFreeHelp",
+      "carBuyStatic": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carBuyStatic",
       "insurer": "<< not supported >>"
     },
     "external": {}
