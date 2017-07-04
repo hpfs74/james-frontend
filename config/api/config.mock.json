@@ -10,11 +10,11 @@
       "profile": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile",
       "auth": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/",
       "address": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/address",
-      "car": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/cars",
-      "carbuy": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/car/buystatic",
-      "helper": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper",
-      "compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare",
-      "insurer": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/insurer"
+      "cars": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/cars",
+      "car_compare": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare/car",
+      "car_coverage": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper/car/coverage",
+      "car_damagefree": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper/car/damagefree",
+      "car_buy": "https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/car/buystatic"
     },
     "external": {}
   }

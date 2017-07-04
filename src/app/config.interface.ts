@@ -19,19 +19,13 @@ export interface NicciEndpoint {
   key: string;
   token: string;
   auth: string;
-  address: string;
   profile: string;
-  compare: string;
+  address: string;
   insurer: string;
-  car: string;
-  helper: string;
 
-  // buy flow
-  carbuy: string;
-
-  // to be implemented
-  travel?: string;
-  liability?: string;
-  content?: string;
-  home?: string;
+  cars: string;
+  car_compare: string;
+  car_coverage: string;
+  car_damagefree: string;
+  car_buy: string;
 }
