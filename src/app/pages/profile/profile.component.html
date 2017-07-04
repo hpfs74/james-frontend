@@ -1,0 +1,54 @@
+<div class="container knx-container-dashboard">
+  <div class="row">
+    <div class="col-sm-4 push-sm-8">
+      <div class="knx-wizard__sidebar--sticky">
+        <knx-chat-stream [options]="chatConfig" [messages]="chatMessages$ | async"></knx-chat-stream>
+      </div>
+    </div>
+    <div class="col-sm-8 pull-sm-4">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Mijn account</h2>
+          <!--<router-outlet></router-outlet>-->
+        </div>
+      </div>
+
+      <div class="row">
+        <form [formGroup]="profileForm" (submit)="save($event)">
+
+          <div class="knx-avatar">
+            <img class="knx-avatar-profile__image" src="{{avatar || '../../../assets/images/avatars/assistant.png'}}">
+          </div>
+
+          <style>
+            .knx-avatar-profile__image{
+              border: 1px #eeebe5 solid;
+              width: 90px;
+              height: 90px;
+              border-radius: 50%;
+            }
+          </style>
+
+          <cx-form-group formControlName="avatar" [options]="form.avatar"></cx-form-group>
+          <a href="" (click)="getAvatar($event)">get avatar</a>
+
+          <cx-form-group formControlName="gender" [options]="form.gender"></cx-form-group>
+          <cx-form-group formControlName="firstName" [options]="form.firstName"></cx-form-group>
+          <cx-form-group formControlName="secondName" [options]="form.secondName"></cx-form-group>
+          <cx-form-group formControlName="birthday" [options]="form.birthday"></cx-form-group>
+
+          <knx-address-lookup
+          [addressFormGroup]="addressForm"
+          [validationErrors]="form.address.validationErrors"
+          (addressFound)="onAddressFound($event)">
+          </knx-address-lookup>
+
+          <cx-form-group formControlName="pushNotifications" [options]="form.pushNotifications"></cx-form-group>
+          <cx-form-group formControlName="emailNotifications" [options]="form.emailNotifications"></cx-form-group>
+
+          <button class="cx-button cx-button--secondary cx-button--arrow">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
