@@ -15,6 +15,7 @@ import * as car from '../../../actions/car';
 import * as insurance from '../../../actions/insurances';
 import * as advice from '../../../actions/advice';
 import * as compare from '../../../actions/compare';
+import * as coverage from '../../../actions/coverage';
 
 import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
@@ -58,7 +59,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   isInsuranceLoading$: Observable<boolean>;
   selectedInsurance$: Observable<CarInsurance>;
 
-  isCoverageLoading: boolean = false;
+  isCoverageLoading$: Observable<boolean>;
 
   subscription$: any;
 
@@ -85,6 +86,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
     this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
     this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
+    this.isCoverageLoading$ = this.store.select(fromRoot.getCompareLoading);
 
     this.store.dispatch(new advice.AddAction({
       id: cuid()
@@ -152,7 +154,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         }
       });
 
-    // On car info found
+    // Car info subscription
     // TODO: refactor to be more reactive
     this.store.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {
@@ -176,6 +178,19 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         // Treat server error as invalid to prevent continuing flow
         this.triggerLicenseInValid();
       });
+
+    // Coverage subscription
+    this.store.select(fromRoot.getCoverage)
+      .filter(coverage => Object.keys(coverage).length > 0)
+      .subscribe(coverageAdvice => {
+        this.coverages = this.contentService.getContentObject().car.coverages;
+        let coverage = this.coverages.find(price => price.id === coverageAdvice.recommended_value);
+        if (coverage) {
+          coverage.highlight = true;
+          this.store.dispatch(new assistant.ClearAction);
+          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
+        }
+    });
   }
 
   ngOnDestroy() {
@@ -275,29 +290,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.address = address;
   }
 
-  //TODO: change to reactive
   getCoverages(event) {
     if (this.car) {
-      this.isCoverageLoading = true;
-
-      // get default coverage types
-      this.coverages = this.contentService.getContentObject().car.coverages;
-
-      // fetch recommendation
-      this.carService.getCoverageRecommendation(this.car.license, event.loan)
-        .subscribe(res => {
-          this.isCoverageLoading = false;
-
-          let coverage = this.coverages.find(price => price.id === res.recommended_value);
-          if (coverage) {
-            coverage.highlight = true;
-            this.store.dispatch(new assistant.ClearAction);
-            this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
-          }
-
-        }, error => {
-          this.isCoverageLoading = false;
-        });
+      this.store.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
     }
   }
 

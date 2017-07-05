@@ -11,7 +11,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toArray';
 
 import { CarService } from '../pages/car/car.service';
-import { Car } from '../models/car';
+import { Car, CarCoverageRecommendation } from '../models';
 import * as car from '../actions/car';
 
 @Injectable()
