@@ -22,14 +22,14 @@ export class AssistantConfig {
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
       Ben je er klaar voor? Let\'s do this!`,
     info: {
-      houseHold: `<b>Approve message!</b> <br> Uw premie kan veranderen afhankelijk van de huishoudelijke status`,
+      houseHold: `Je premie kan veranderen afhankelijk van je huishoudelijke status`,
       niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },
-      CL: `<b>Approve message!</b> <br> WA has these and these benefits`,
-      CLC: `<b>Approve message!</b> <br> WA + Casco has these and these benefits`,
-      CAR: `<b>Approve message!</b> <br> WA has these and these benefits`,
+      CL: `<strong>WA - Wettelijke Aansprakelijkheid:</strong> alleen schade die jij toebrengt aan anderen is gedekt.`,
+      CLC: `<strong>Beperkt casco:</strong> naast schade aan anderen is ook brand- ruit- en diefstalschade van je eigen auto gedekt.`,
+      CAR: `<strong>All risk:</strong> Schade aan anderen en vrijwel alle eigen schade is gedekt.`,
       noClaimProtection: '',
       legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
         Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
