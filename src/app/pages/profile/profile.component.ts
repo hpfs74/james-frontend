@@ -5,38 +5,40 @@ import { Observable } from 'rxjs/Observable';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
-import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { birthDateMask } from '../../utils/base-form.utils';
 import { CXPostalCodeValidator } from '@cx/form-control';
 import { BaseForm } from '../../forms/base-form';
+import * as assistant from '../../actions/assistant';
 
 @Component({
   templateUrl: 'profile.component.html'
 })
-export class ProfileComponent {
-  public chatConfig: AssistantConfig;
-  public formBuilder: FormBuilder;
-  public profileForm: FormGroup;
-  public form: any;
-  public avatar: string;
-  formGroup: FormGroup;
-  formConfig: any; //TODO: refactor to store options here instead of inside template
+export class ProfileComponent implements OnInit {
+  formBuilder: FormBuilder;
+  profileForm: FormGroup;
+  chatConfig: AssistantConfig;
+  baseForm: BaseForm;
   addressForm: FormGroup;
-  public baseForm: BaseForm;
+  form: any;
+  avatar: string;
+  formGroup: FormGroup;
+  chatMessages$: Observable<Array<ChatMessage>>;
 
-  constructor( private assistantService: AssistantService, private fb: FormBuilder ) {
+  constructor( private assistantService: AssistantService, private fb: FormBuilder, private store: Store<fromRoot.State>, ) {
+    this.baseForm = new BaseForm();
+    this.addressForm = this.baseForm.createAddress(this.fb);
+
     this.chatConfig = assistantService.config;
-    this.formBuilder = new FormBuilder();
-    var ha = new BaseForm();
-    this.addressForm = ha.createAddress(this.fb);
+    this.chatMessages$ = store.select(fromRoot.getAssistantMessageState);
 
     this.form = {
       avatar: {
         label: '',
         type: 'file',
+        events: ['file-uploaded'],
         inputOptions: {
-          placeholder: 'edit avatar'
+          placeholder: ' '
         },
         validationErrors: {
           regexp: 'Your name has to have exactly 5 characters'
@@ -124,53 +126,41 @@ export class ProfileComponent {
       },
     };
 
+    this.formBuilder = new FormBuilder();
     this.profileForm = this.formBuilder.group({
-      avatar: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10)]
-      )],
-      gender: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10)]
-      )],
-      firstName: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10)]
-      )],
-      secondName: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10)]
-      )],
-      birthday: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10)]
-      )],
-      postcode: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10), CXPostalCodeValidator],
-      )],
-      pushNotifications: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10)]
-      )],
-      emailNotifications: ['', Validators.compose(
-        [Validators.required, Validators.maxLength(10)]
-      )],
+      avatar: ['', Validators.compose([])],
+      gender: ['', Validators.compose([])],
+      firstName: ['', Validators.compose([Validators.maxLength(20)])],
+      secondName: ['', Validators.compose([Validators.maxLength(20)])],
+      birthday: ['', Validators.compose([])],
+      postcode: ['', Validators.compose([CXPostalCodeValidator],)],
+      pushNotifications: ['', Validators.compose([])],
+      emailNotifications: ['', Validators.compose([])],
     });
   }
 
-  onAddressFound() {
-    debugger;
+  ngOnInit() {
+    this.store.dispatch(new assistant.ClearAction());
+    this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.profile.hello));
   }
 
-  getAvatar($event) {
-    debugger;
-    this.avatar = this.form.avatar.formControl.value[0].dataUrl;
-    $event.preventDefault();
+  loadAvatar( $event ) {
+    if (this.form.avatar.formControl.value.length) {
+      this.avatar = this.form.avatar.formControl.value[0].dataUrl;
+    }
+
+    $event.event.preventDefault();
   }
 
-  save( event ) {
-    event.preventDefault();
+  save( $event ) {
     Object.keys(this.profileForm.controls).forEach(key => {
       this.profileForm.get(key).markAsTouched();
     });
 
     if (this.profileForm.valid) {
-      console.info('valid!');
+      // console.info('valid! make the backend call!');
     }
-    console.info(this);
+
+    $event.preventDefault();
   }
 }
