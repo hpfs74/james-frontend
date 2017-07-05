@@ -26,7 +26,7 @@ export class CarDetailComponent implements OnInit {
   @Input() isCoverageLoading: boolean;
 
   @Input() set advice(value: any) {
-    if (value) {
+    if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold || value.loan || value.gender || value.coverage) {
       this.form.formGroup.patchValue(Object.assign({}, {
         licensePlate: value.license || null,
         birthDate: value.date_of_birth ? moment(value.date_of_birth).format('DD-MM-YYYY') : null,

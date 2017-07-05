@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <form [formGroup]="form.formGroup" (ngSubmit)="login($event)" (keyup.enter)="login($event)">
+  <form [formGroup]="form.formGroup" (ngSubmit)="login($event)" (keyup.enter)="login($event)" autocomplete="off">
     <div class="row">
       <div class="col-md-6 offset-md-3">
           <cx-form-group
