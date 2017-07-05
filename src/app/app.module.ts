@@ -44,7 +44,7 @@ export function ConfigLoader(configService: ConfigService) {
   let configFile = './config/api/config.mock.json';
 
   if (process.env.ENV === 'test') {
-    configFile = './config/api/config.json';
+    configFile = './config/api/config.test.json';
   } else if (process.env.ENV === 'production') {
     configFile = './config/api/config.prod.json';
   }
