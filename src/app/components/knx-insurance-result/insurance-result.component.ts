@@ -87,8 +87,15 @@ export class InsuranceResultComponent {
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
 
   public infoMessages = {
-    profileScore: '<b>Approve message!</b> <br> Profiel score is erg belangrijk',
-    priceQuality: '<b>Approve message!</b> <br> Prijskwaliteit is erg belangrijk'
+    profileScore: `De profielscore geeft aan hoe goed de verzekering past bij jouw profiel: hoe hoger, hoe beter.
+      Een score van 75% betekent dat de verzekering goed aansluit bij jouw wensen en situatie.<br>Wij berekenen de
+      score op basis van het profiel dat jij instelt. We toetsen de verzekering op meer dan 100 criteria om te bepalen
+      wat jij belangrijk vindt ook goed scoort binnen de verzekering. Zo betaal je voor wat jij
+      belangrijk vindt en voorkom je verassingen.`,
+    priceQuality: `In het overzicht zie je een profielscore en prijs\-kwaliteitscore. De verzekering met de hoogste prijs\-kwaliteitscore
+      staat bovenaan. Verzekeringen die je via Knab afsluit, regel je direct tegen een vaste lage vergoeding van 10%. Verzekeringen die je
+      niet via ons kunt afsluiten, laten we toch zien. We verwijzen je dan naar de website van de verzekeraar. Zo heb je altijd een compleet
+      beeld van wat er te koop is. Wel zo eerlijk natuurlijk.`
   };
 
   select(event) {

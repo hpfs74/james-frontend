@@ -44,6 +44,7 @@ import * as fromAssistant from './assistant';
 import * as fromCompare from './compare';
 import * as fromAdvice from './advice';
 import * as fromCar from './car';
+import * as fromCoverage from './coverage';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -57,6 +58,7 @@ export interface State {
   compare: fromCompare.State;
   advice: fromAdvice.State;
   car: fromCar.State;
+  coverage: fromCoverage.State;
   router: fromRouter.RouterState;
 }
 
@@ -75,6 +77,7 @@ const reducers = {
   compare: fromCompare.reducer,
   advice: fromAdvice.reducer,
   car: fromCar.reducer,
+  coverage: fromCoverage.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -171,3 +174,10 @@ export const getSelectedInsurance = createSelector(getAdviceState, fromAdvice.ge
 export const getCarState = (state: State) => state.car;
 export const getCarInfo = createSelector(getCarState, fromCar.getInfo);
 export const getCarInfoLoaded = createSelector(getCarState, fromCar.getLoaded);
+
+/**
+ * Coverage Reducers
+ */
+export const getCoverageState = (state: State) => state.coverage;
+export const getCoverage = createSelector(getCoverageState, fromCoverage.getCoverage);
+export const getCoverageLoading = createSelector(getCoverageState, fromCoverage.getLoading);

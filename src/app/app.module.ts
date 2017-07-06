@@ -15,6 +15,7 @@ import { reducer } from './reducers';
 import { ProfileEffects } from './effects/profile';
 import { CarEffects } from './effects/car';
 import { CompareEffects } from './effects/compare';
+import { CoverageEffects } from './effects/coverage';
 
 import { ConfigInterface } from './config.interface';
 import { ConfigService } from './config.service';
@@ -79,6 +80,7 @@ export function ContentLoader(contentService: ContentService) {
     EffectsModule.runAfterBootstrap(ProfileEffects),
     EffectsModule.runAfterBootstrap(CarEffects),
     EffectsModule.runAfterBootstrap(CompareEffects),
+    EffectsModule.runAfterBootstrap(CoverageEffects),
     LoginRoutingModule,
     AuthModule,
     AppRoutingModule,
