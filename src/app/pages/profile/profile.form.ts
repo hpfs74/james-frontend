@@ -31,7 +31,6 @@ export class ProfileForm extends BaseForm {
       firstName: [null, Validators.compose([Validators.maxLength(20)])],
       lastName: [null, Validators.compose([Validators.maxLength(20)])],
       birthDate: [null, Validators.required],
-      postcode: [null, Validators.compose([CXPostalCodeValidator],)],
       pushNotifications: [null],
       emailNotifications: [null],
     });
@@ -60,11 +59,11 @@ export class ProfileForm extends BaseForm {
           items: [
             {
               label: 'Man',
-              value: 'man'
+              value: 'm'
             },
             {
               label: 'Vrouw',
-              value: 'woman'
+              value: 'v'
             }
           ]
         }

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProfileForm } from './profile.form';
+import { Address } from './../../models/address';
 
 @Component({
   selector: 'knx-profile-edit',
@@ -48,6 +49,7 @@ import { ProfileForm } from './profile.form';
     </div>
 
     <knx-address-lookup
+      (addressFound)="updateAddress($event)"
       [addressFormGroup]="form.addressForm"
       [validationErrors]="form.validationErrors">
     </knx-address-lookup>
@@ -73,6 +75,7 @@ export class ProfileEditComponent {
   @Output() goBack$: EventEmitter<any> = new EventEmitter();
 
   avatarUrl: string;
+  address: Address;
 
   loadAvatar($event) {
     let ctrl = this.form.formGroup.get('avatar');
@@ -81,13 +84,21 @@ export class ProfileEditComponent {
     }
   }
 
+  updateAddress(event) {
+    this.address = event;
+  }
+
   save() {
     Object.keys(this.form.formGroup.controls).forEach(key => {
       this.form.formGroup.get(key).markAsTouched();
     });
+    this.form.formGroup.updateValueAndValidity();
 
     if (this.form.formGroup.valid) {
-      this.formSaved$.emit();
+      this.formSaved$.emit(Object.assign({},
+        this.form.formGroup.value,
+        this.form.addressForm.value,
+        { address: this.address }));
     }
   }
 }
