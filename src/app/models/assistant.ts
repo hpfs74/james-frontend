@@ -17,6 +17,10 @@ export class AssistantConfig {
     addInsurance: 'Voeg verzekeringen toe aan het overzicht en  ik zoek uit het beter kan.'
   };
 
+  public profile = {
+    hello: `Hallo vriend, wil je jouw info veranderen?`
+  };
+
   public car = {
     welcome: `Hallo! Ik ben ${this.avatar.name}.
       Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
