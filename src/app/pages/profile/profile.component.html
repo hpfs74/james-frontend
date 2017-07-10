@@ -9,56 +9,15 @@
       <div class="row">
         <div class="col-sm-12">
           <h2>Mijn account</h2>
-          <!--<router-outlet></router-outlet>-->
+
+          <knx-profile-edit
+            (formSaved$)="save()"
+            (goBack$)="navigateBack()"
+            [form]="profileForm">
+          </knx-profile-edit>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-12">
-          <form [formGroup]="profileForm" (submit)="save($event)">
-            <div class="knx-avatar-profile">
-              <img class="knx-avatar-profile__image" src="{{avatar || '../../../assets/images/avatars/assistant.png'}}">
-
-              <cx-form-group class="cx-styleguide-icon__icon knx-icon-pencil"
-                             formControlName="avatar"
-                             (events)="loadAvatar($event)"
-                             [options]="form.avatar">
-              </cx-form-group>
-            </div>
-
-            <cx-form-group formControlName="gender" [options]="form.gender"></cx-form-group>
-
-            <div class="row">
-              <div class="col-md-6">
-                <cx-form-group formControlName="firstName" [options]="form.firstName"></cx-form-group>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <cx-form-group formControlName="secondName" [options]="form.secondName"></cx-form-group>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-4">
-                <cx-form-group formControlName="birthday" [options]="form.birthday"></cx-form-group>
-              </div>
-            </div>
-
-            <knx-address-lookup
-              [addressFormGroup]="addressForm"
-              [validationErrors]="form.address.validationErrors">
-            </knx-address-lookup>
-
-            <cx-form-group formControlName="pushNotifications" [options]="form.pushNotifications"></cx-form-group>
-            <cx-form-group formControlName="emailNotifications" [options]="form.emailNotifications"></cx-form-group>
-
-            <button class="knx-button knx-button--link knx-button--back">Terug</button>
-            <button class="knx-button knx-button--primary pull-right">Bijwerken</button>
-          </form>
-        </div>
-      </div>
     </div>
   </div>
 </div>
