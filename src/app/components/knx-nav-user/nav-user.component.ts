@@ -19,6 +19,12 @@ import { Profile } from '../../models/profile';
 
           <div class='knx-menu-divider'></div>
 
+          <knx-menu-item (click)="goToSettings()">
+            <span>Instellingen</span>
+          </knx-menu-item>
+
+          <div class='knx-menu-divider'></div>
+
           <knx-menu-item (click)="logOut()">
             <span class="knx-icon-sign-out"></span> Uitloggen
           </knx-menu-item>
@@ -34,8 +40,12 @@ export class NavUserComponent {
 
   constructor(private router: Router) { }
 
-  goToProfile(event) {
+  goToProfile() {
     this.router.navigate(['/profile']);
+  }
+
+  goToSettings() {
+    this.router.navigate(['/profile/settings']);
   }
 
   logOut() {

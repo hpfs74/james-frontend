@@ -284,9 +284,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   onAddressChange(address: Address) {
-    this.store.dispatch(new profile.UpdateAction({
-      address: address
-    }));
+    this.store.dispatch(new profile.UpdateAction(address));
     this.address = address;
   }
 

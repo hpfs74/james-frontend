@@ -12,11 +12,9 @@ export class ProfileForm extends BaseForm {
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
-    avatar: () => '',
-    gender: () => '',
     firstName: () => '',
     lastName: () => '',
-    birthDate: () => '',
+    birthDate: () => 'Vul een geldige geboortedatum in',
     postalCode: () => `Vul een geldige postcode in`,
     address: () => `Vul een geldige postcode en huisnummer combinatie in`,
     houseNumber: () => `Vul een huisnummer in`,
@@ -28,8 +26,8 @@ export class ProfileForm extends BaseForm {
     this.formGroup = this.fb.group({
       avatar: [null],
       gender: [{}, Validators.required],
-      firstName: [null, Validators.compose([Validators.maxLength(20)])],
-      lastName: [null, Validators.compose([Validators.maxLength(20)])],
+      firstName: [null, Validators.compose([Validators.maxLength(40)])],
+      lastName: [null, Validators.compose([Validators.maxLength(40)])],
       birthDate: [null, Validators.required],
       pushNotifications: [null],
       emailNotifications: [null],

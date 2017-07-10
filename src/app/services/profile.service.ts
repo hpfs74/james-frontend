@@ -39,6 +39,14 @@ export class ProfileService {
       .map((p) => <Profile>p);
   }
 
+  public updateAddress(postcode: string, houseNumber: string, houseNumberAddition: string): Observable<Profile> {
+    return this.http.patch(this.baseUrl, {
+      address: `${postcode}${houseNumber}${houseNumberAddition}`.toUpperCase().replace(/[ .]/gim, '')
+    })
+      .map((p) => p.json())
+      .map((p) => <Profile>p);
+  }
+
   /**
    * add a new insurance to the user profile
    */

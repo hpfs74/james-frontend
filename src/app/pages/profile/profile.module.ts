@@ -5,6 +5,7 @@ import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.m
 
 import { ProfileComponent } from './profile.component';
 import { ProfileEditComponent } from './profile-edit.component';
+import { ProfileSettingsComponent } from './profile-settings.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ProfileEditComponent } from './profile-edit.component';
   ],
   declarations: [
     ProfileComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    ProfileSettingsComponent
   ],
   providers: [
   ]
