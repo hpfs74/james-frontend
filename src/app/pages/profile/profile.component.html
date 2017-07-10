@@ -17,6 +17,7 @@
           <knx-profile-edit
             (formSaved$)="save($event)"
             (goBack$)="navigateBack()"
+            [profile]="profile$ | async"
             [form]="profileForm">
           </knx-profile-edit>
         </div>

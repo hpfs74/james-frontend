@@ -84,6 +84,16 @@ export const validateForm = function (form: FormGroup) {
   form.updateValueAndValidity();
 };
 
+export const validateControls = function (form: FormGroup, controls: string[]) {
+  Object.keys(form.controls)
+    .filter(key => controls.indexOf(key) !== -1)
+    .forEach(key => {
+      form.get(key).markAsTouched();
+      form.get(key).markAsDirty();
+    });
+  form.updateValueAndValidity();
+};
+
 export const isMobileNumber = function (phone: string) {
   if (phone && phone.length !== 10) {
     return false;

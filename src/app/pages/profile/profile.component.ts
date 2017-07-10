@@ -9,6 +9,7 @@ import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { BaseForm } from '../../forms/base-form';
+import { Profile } from '../../models/profile';
 import { ProfileForm } from './profile.form';
 
 import * as fromRoot from '../../reducers';
@@ -23,9 +24,12 @@ export class ProfileComponent implements OnInit {
   chatConfig: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
 
+  profile$: Observable<Profile>;
+
   constructor( private assistantService: AssistantService, private store: Store<fromRoot.State>, ) {
     this.chatConfig = assistantService.config;
     this.chatMessages$ = store.select(fromRoot.getAssistantMessageState);
+    this.profile$ = this.store.select(fromRoot.getProfile);
   }
 
   ngOnInit() {

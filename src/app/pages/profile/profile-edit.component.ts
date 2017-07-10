@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProfileForm } from './profile.form';
-import { Address } from './../../models/address';
+import { Profile, Address } from './../../models';
+import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-profile-edit',
@@ -71,6 +72,25 @@ import { Address } from './../../models/address';
 
 export class ProfileEditComponent {
   @Input() form: ProfileForm;
+  @Input() set profile(value: Profile) {
+    if (value) {
+      this.form.formGroup.patchValue({
+        avatar: value.profile_image,
+        gender: value.gender,
+        firstName: value.firstname,
+        lastName: value.lastname,
+      }, { emitEvent: false });
+
+      if (value.address) {
+        this.form.addressForm.patchValue({
+          postalCode: value.address.postcode,
+          houseNumber: value.address.number,
+          houseNumberExtension: value.address.number_extended ? value.address.number_extended.number_letter : ''
+        }, { emitEvent: false });
+        FormUtils.validateForm(this.form.addressForm);
+      }
+    }
+  }
   @Output() formSaved$: EventEmitter<any> = new EventEmitter();
   @Output() goBack$: EventEmitter<any> = new EventEmitter();
 
