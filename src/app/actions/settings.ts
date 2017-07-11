@@ -8,7 +8,7 @@ export const UPDATE_SETTINGS_FAIL =          '[Settings] Settings Fail';
 export class UpdateSettingsAction implements Action {
   readonly type = UPDATE_SETTINGS_REQUEST;
 
-  constructor(public payload: Settings) { }
+  constructor(public payload: any) { }
 }
 
 export class UpdateSettingsSuccessAction implements Action {

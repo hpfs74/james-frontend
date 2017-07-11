@@ -48,8 +48,8 @@ export class ProfileService {
       .map((p) => <Profile>p);
   }
 
-  public updateSettings(settings: Settings): Observable<Settings> {
-    return this.http.patch(this.baseUrl + '/settings', settings)
+  public updateSettings(profileId: string, settings: Settings): Observable<Settings> {
+    return this.http.patch(`${this.baseUrl}/settings/${profileId}`, settings)
       .map((res) => <Settings>res.json());
   }
 

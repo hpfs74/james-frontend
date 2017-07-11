@@ -45,13 +45,13 @@ export class ProfileComponent implements OnInit {
   }
 
   save(event) {
-    this.store.dispatch(new profile.UpdateAction(Object.assign({}, {
-        avatar: event.avatar,
-        gender: event.gender,
-        firstname: event.firstName,
-        lastname: event.lastName,
-        birthday: moment(event.birthDate).format('YYYY-MM-DD')
-      }, event.address)));
+    // this.store.dispatch(new profile.UpdateAction(Object.assign({}, {
+    //     avatar: event.avatar,
+    //     gender: event.gender,
+    //     firstname: event.firstName,
+    //     lastname: event.lastName,
+    //     birthday: moment(event.birthDate).format('YYYY-MM-DD')
+    //   }, event.address)));
 
     this.store.dispatch(new settings.UpdateSettingsAction({
       push_notifications: !!event.pushNotifications,

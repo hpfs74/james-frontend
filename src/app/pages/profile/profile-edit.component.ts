@@ -86,12 +86,12 @@ export class ProfileEditComponent {
         lastName: value.lastname,
       }, { emitEvent: false });
 
-      this.form.addressForm.patchValue({
-        postalCode: value.postcode,
-        houseNumber: value.number,
-        houseNumberExtension: value.number_extended ? value.number_extended.number_letter : ''
-      }, { emitEvent: false });
-      FormUtils.validateForm(this.form.addressForm);
+      // this.form.addressForm.patchValue({
+      //   postalCode: value.postcode,
+      //   houseNumber: value.number,
+      //   houseNumberExtension: value.number_extended ? value.number_extended.number_letter : ''
+      // }, { emitEvent: false });
+      // FormUtils.validateForm(this.form.addressForm);
     }
   }
   @Output() formSaved$: EventEmitter<any> = new EventEmitter();
