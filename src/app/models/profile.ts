@@ -1,4 +1,4 @@
-import { Address } from './index';
+import { NumberExtended } from './address';
 
 export class Profile {
   firstname: string;
@@ -28,22 +28,36 @@ export class Profile {
   testament: string;
   yearsabroad: number;
 
-  address?: Address;
+  // Address
+  postcode?: string;
+  number: string;
+  number_extended?: NumberExtended;
+  street: string;
+  city: string;
+  county: string;
+  province: string;
+  fullname: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+  built?: number;
+  size?: number;
+  house_size?: number;
+  house_value?: number;
+  house_info_roof_condition_text?: string;
+  house_info_house_type_text?: string;
+  house_info_house_use_text?: string;
+  rooms?: number;
+  build_type?: any;
+  isolation_glass?: boolean;
+  house_type?: any;
+  house_subtype?: any;
+  // End Address
 
   _id: string;
   _deleted: boolean;
-
   _embedded: any;
-  // _embedded: {
-  //   car: any;
-  //   travel: ProfileEmbedded;
-  //   content: ProfileEmbedded;
-  //   home: ProfileEmbedded;
-  //   liability: ProfileEmbedded;
-  //   insurance: ProfileEmbedded;
-  //   bank_card: ProfileEmbedded;
-  //   inbox: ProfileEmbedded;
-  // };
 
   filled_data_percentage: number;
   outdated_data_percentage: number;

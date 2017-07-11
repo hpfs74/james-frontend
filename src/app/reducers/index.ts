@@ -38,6 +38,7 @@ import { combineReducers } from '@ngrx/store';
  * notation packages up all of the exports into a single object.
  */
 import * as fromProfile from './profile';
+import * as fromSettings from './settings';
 import * as fromLayout from './layout';
 import * as fromInsurances from './insurances';
 import * as fromAssistant from './assistant';
@@ -52,6 +53,7 @@ import * as fromCoverage from './coverage';
  */
 export interface State {
   profile: fromProfile.State;
+  settings: fromSettings.State;
   layout: fromLayout.State;
   insurances: fromInsurances.State;
   assistant: fromAssistant.State;
@@ -71,6 +73,7 @@ export interface State {
  */
 const reducers = {
   profile: fromProfile.reducer,
+  settings: fromSettings.reducer,
   layout: fromLayout.reducer,
   insurances: fromInsurances.reducer,
   assistant: fromAssistant.reducer,
@@ -129,6 +132,14 @@ export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
 //export const getProfileLoaded= createSelector(getProfileState, fromProfile.getLoaded);
+
+
+/**
+ * Settings Reducers
+ */
+export const getSettingsState = (state: State) => state.settings;
+export const getSettings = createSelector(getSettingsState, fromSettings.getCurrent);
+export const getSettingsLoading = createSelector(getSettingsState, fromSettings.getLoading);
 
 /*
  * Insurances Reducers

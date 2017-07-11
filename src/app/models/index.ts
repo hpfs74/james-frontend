@@ -14,3 +14,4 @@ export * from './price';
 export * from './rating';
 export * from './profile';
 export * from './proposal';
+export * from './settings';

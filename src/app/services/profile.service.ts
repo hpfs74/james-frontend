@@ -6,6 +6,7 @@ import { AuthHttp } from './auth-http.service';
 import { ConfigService } from '../config.service';
 import { Profile } from '../models/profile';
 import { Insurance } from '../models/insurance';
+import { Settings } from '../models/settings';
 
 @Injectable()
 export class ProfileService {
@@ -37,6 +38,19 @@ export class ProfileService {
     return this.http.patch(this.baseUrl, JSON.stringify(profile))
       .map((p) => p.json())
       .map((p) => <Profile>p);
+  }
+
+  public updateAddress(postcode: string, houseNumber: string, houseNumberAddition: string): Observable<Profile> {
+    return this.http.patch(this.baseUrl, {
+      address: `${postcode}${houseNumber}${houseNumberAddition}`.toUpperCase().replace(/[ .]/gim, '')
+    })
+      .map((p) => p.json())
+      .map((p) => <Profile>p);
+  }
+
+  public updateSettings(profileId: string, settings: Settings): Observable<Settings> {
+    return this.http.patch(`${this.baseUrl}/settings/${profileId}`, settings)
+      .map((res) => <Settings>res.json());
   }
 
   /**

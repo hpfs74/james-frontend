@@ -34,7 +34,7 @@ export class NavUserComponent {
 
   constructor(private router: Router) { }
 
-  goToProfile(event) {
+  goToProfile() {
     this.router.navigate(['/profile']);
   }
 

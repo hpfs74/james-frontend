@@ -18,7 +18,7 @@ export class AssistantConfig {
   };
 
   public profile = {
-    hello: `Hallo vriend, wil je jouw info veranderen?`
+    hello: `Vul hier je persoonlijke gegevens in.`
   };
 
   public car = {

@@ -2,7 +2,7 @@
  * @description
  * Class definition for address type used by user profile
  */
-interface NumberExtended {
+export interface NumberExtended {
   number_only: number;
   number_letter: string;
   number_addition: string;
