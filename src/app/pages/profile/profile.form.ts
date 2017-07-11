@@ -94,7 +94,7 @@ export class ProfileForm extends BaseForm {
         formControlName: 'pushNotifications',
         formControl: this.formGroup.get('pushNotifications'),
         validationErrors: this.validationErrors,
-        label: 'Nieuwsbrief',
+        label: 'Notificaties',
         type: 'checkbox',
         inputOptions: {
           label: 'lk wil pushberichten ontvangen van Knab Verzekeren',

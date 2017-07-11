@@ -55,6 +55,16 @@ import * as FormUtils from '../../utils/base-form.utils';
         [addressFormGroup]="form.addressForm"
         [validationErrors]="form.validationErrors">
       </knx-address-lookup>
+
+      <cx-form-group
+        [options]="form.formConfig.pushNotifications"
+        [formControlName]="form.formConfig.pushNotifications.formControlName">
+      </cx-form-group>
+
+      <cx-form-group
+        [options]="form.formConfig.emailNotifications"
+        [formControlName]="form.formConfig.emailNotifications.formControlName">
+      </cx-form-group>
     </form>
   </div>
 
@@ -76,14 +86,12 @@ export class ProfileEditComponent {
         lastName: value.lastname,
       }, { emitEvent: false });
 
-      if (value.address) {
-        this.form.addressForm.patchValue({
-          postalCode: value.address.postcode,
-          houseNumber: value.address.number,
-          houseNumberExtension: value.address.number_extended ? value.address.number_extended.number_letter : ''
-        }, { emitEvent: false });
-        FormUtils.validateForm(this.form.addressForm);
-      }
+      this.form.addressForm.patchValue({
+        postalCode: value.postcode,
+        houseNumber: value.number,
+        houseNumberExtension: value.number_extended ? value.number_extended.number_letter : ''
+      }, { emitEvent: false });
+      FormUtils.validateForm(this.form.addressForm);
     }
   }
   @Output() formSaved$: EventEmitter<any> = new EventEmitter();

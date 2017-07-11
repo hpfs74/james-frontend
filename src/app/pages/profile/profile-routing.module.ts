@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProfileComponent } from './profile.component';
-import { ProfileSettingsComponent } from './profile-settings.component';
+import { ProfileComponent } from './profile.component';;
 
 export const profileRoutes: Routes = [
   {
@@ -11,13 +10,6 @@ export const profileRoutes: Routes = [
     data: {
       title: 'Mijn account'
     },
-  },
-  {
-    path: 'settings',
-    component: ProfileSettingsComponent,
-    data: {
-      title: 'Instellingen'
-    }
   }
 ];
 @NgModule({

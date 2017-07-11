@@ -10,11 +10,13 @@ import { AssistantConfig } from '../../models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { BaseForm } from '../../forms/base-form';
 import { Profile } from '../../models/profile';
+import { Settings } from '../../models/settings';
 import { ProfileForm } from './profile.form';
 
 import * as fromRoot from '../../reducers';
 import * as assistant from '../../actions/assistant';
 import * as profile from '../../actions/profile';
+import * as settings from '../../actions/settings';
 
 @Component({
   templateUrl: 'profile.component.html'
@@ -50,5 +52,10 @@ export class ProfileComponent implements OnInit {
         lastname: event.lastName,
         birthday: moment(event.birthDate).format('YYYY-MM-DD')
       }, event.address)));
+
+    this.store.dispatch(new settings.UpdateSettingsAction({
+      push_notifications: !!event.pushNotifications,
+      email_notifications: !!event.emailNotifications
+    }));
   }
 }
