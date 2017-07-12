@@ -6,72 +6,72 @@ import * as FormUtils from '../../utils/base-form.utils';
 @Component({
   selector: 'knx-profile-edit',
   template: `
-  <div class="col-sm-10 col-sm-offset-2">
-    <form [formGroup]="form.formGroup">
-      <div class="knx-avatar-profile">
-        <img class="knx-avatar-profile__image" src="{{avatarUrl || '../../../assets/images/avatars/assistant.png'}}">
+  <form [formGroup]="form.formGroup">
+    <div class="knx-avatar-profile">
+      <img class="knx-avatar-profile__image" src="{{avatarUrl || '../../../assets/images/avatars/assistant.png'}}">
 
-        <cx-form-group class="cx-styleguide-icon__icon knx-icon-pencil"
-          [formControlName]="form.formConfig.avatar.formControlName"
-          (events)="loadAvatar($event)"
-          [options]="form.formConfig.avatar">
+      <cx-form-group class="cx-styleguide-icon__icon knx-icon-pencil"
+        [formControlName]="form.formConfig.avatar.formControlName"
+        (events)="loadAvatar($event)"
+        [options]="form.formConfig.avatar">
+      </cx-form-group>
+    </div>
+
+    <cx-form-group
+      [options]="form.formConfig.gender"
+      [formControlName]="form.formConfig.gender.formControlName">
+    </cx-form-group>
+
+    <div class="row">
+      <div class="col-md-6">
+        <cx-form-group
+          [options]="form.formConfig.firstName"
+          [formControlName]="form.formConfig.firstName.formControlName">
         </cx-form-group>
       </div>
+    </div>
 
-      <cx-form-group
-        [options]="form.formConfig.gender"
-        [formControlName]="form.formConfig.gender.formControlName">
-      </cx-form-group>
-
-      <div class="row">
-        <div class="col-md-6">
-          <cx-form-group
-            [options]="form.formConfig.firstName"
-            [formControlName]="form.formConfig.firstName.formControlName">
-          </cx-form-group>
-        </div>
+    <div class="row">
+      <div class="col-md-6">
+        <cx-form-group
+          [options]="form.formConfig.lastName"
+          [formControlName]="form.formConfig.lastName.formControlName">
+        </cx-form-group>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          <cx-form-group
-            [options]="form.formConfig.lastName"
-            [formControlName]="form.formConfig.lastName.formControlName">
-          </cx-form-group>
-        </div>
+    <div class="row">
+      <div class="col-md-6">
+        <cx-form-group
+          [options]="form.formConfig.birthDate"
+          [formControlName]="form.formConfig.birthDate.formControlName">
+        </cx-form-group>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-4">
-          <cx-form-group
-            [options]="form.formConfig.birthDate"
-            [formControlName]="form.formConfig.birthDate.formControlName">
-          </cx-form-group>
-        </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-4">
+        <knx-address-lookup
+          (addressFound)="updateAddress($event)"
+          [addressFormGroup]="form.addressForm"
+          [validationErrors]="form.validationErrors">
+        </knx-address-lookup>
       </div>
+    </div>
 
-      <knx-address-lookup
-        (addressFound)="updateAddress($event)"
-        [addressFormGroup]="form.addressForm"
-        [validationErrors]="form.validationErrors">
-      </knx-address-lookup>
+    <cx-form-group
+      [options]="form.formConfig.pushNotifications"
+      [formControlName]="form.formConfig.pushNotifications.formControlName">
+    </cx-form-group>
 
-      <cx-form-group
-        [options]="form.formConfig.pushNotifications"
-        [formControlName]="form.formConfig.pushNotifications.formControlName">
-      </cx-form-group>
+    <cx-form-group
+      [options]="form.formConfig.emailNotifications"
+      [formControlName]="form.formConfig.emailNotifications.formControlName">
+    </cx-form-group>
+  </form>
 
-      <cx-form-group
-        [options]="form.formConfig.emailNotifications"
-        [formControlName]="form.formConfig.emailNotifications.formControlName">
-      </cx-form-group>
-    </form>
-  </div>
-
-  <div class="col-sm-12">
-    <button class="knx-button knx-button--link knx-button--back" (click)="goBack$.emit()">Terug</button>
-    <button class="knx-button knx-button--primary pull-right" (click)="save()">Opslaan</button>
-  </div>
+  <button class="knx-button knx-button--link knx-button--back" (click)="goBack$.emit()">Terug</button>
+  <button class="knx-button knx-button--primary pull-right" (click)="save()">Opslaan</button>
   `
 })
 
