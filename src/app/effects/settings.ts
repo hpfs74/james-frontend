@@ -23,14 +23,12 @@ export class SettingsEffects {
   updateSettings$ = this.action$
     .ofType(settings.UPDATE_SETTINGS_REQUEST)
     .withLatestFrom(this.store$, (action, state) => {
-      console.log(action);
-      console.log(state);
       return {
         payload: action.payload,
         profile: state.profile.profile
       };
     })
-    .map((stateAndAction: any) => {
+    .switchMap((stateAndAction: any) => {
       return this.profileService.updateSettings(stateAndAction.profile._id, stateAndAction.payload)
         .map((p: Settings) => new settings.UpdateSettingsSuccessAction(p))
         .catch(error => Observable.of(new settings.UpdateSettingsFailAction(error)));

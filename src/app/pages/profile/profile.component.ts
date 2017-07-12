@@ -53,10 +53,9 @@ export class ProfileComponent implements OnInit {
         birthday: FormUtils.toNicciDate(event.birthDate)
       }, event.address)));
 
-    // TODO implement switchMap in settings effect
-    // this.store.dispatch(new settings.UpdateSettingsAction({
-    //   push_notifications: !!event.pushNotifications,
-    //   email_notifications: !!event.emailNotifications
-    // }));
+    this.store.dispatch(new settings.UpdateSettingsAction({
+      push_notifications: !!event.pushNotifications,
+      email_notifications: !!event.emailNotifications
+    }));
   }
 }
