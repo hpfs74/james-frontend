@@ -23,6 +23,8 @@ export class SettingsEffects {
   updateSettings$ = this.action$
     .ofType(settings.UPDATE_SETTINGS_REQUEST)
     .withLatestFrom(this.store$, (action, state) => {
+      console.log(action);
+      console.log(state);
       return {
         payload: action.payload,
         profile: state.profile.profile

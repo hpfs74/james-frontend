@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import * as moment from 'moment';
 import { IbanForm } from './../../../forms/iban.form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
@@ -13,7 +12,7 @@ export class CarPaymentComponent {
   @Input() set advice(value: any) {
     if (value) {
       this.form.formGroup.patchValue({
-        startDate: moment(value.startDate).format('DD-MM-YYYY'),
+        startDate: FormUtils.toDateFormat(value.startDate),
         iban: value.iban
       });
       FormUtils.validateForm(this.form.formGroup);

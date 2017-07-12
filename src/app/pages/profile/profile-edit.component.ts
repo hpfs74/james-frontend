@@ -6,9 +6,9 @@ import * as FormUtils from '../../utils/base-form.utils';
 @Component({
   selector: 'knx-profile-edit',
   template: `
-  <form [formGroup]="form.formGroup">
+  <form [formGroup]="form.formGroup" class="knx-fancy-form">
     <div class="knx-avatar-profile">
-      <img class="knx-avatar-profile__image" src="{{avatarUrl || '../../../assets/images/avatars/assistant.png'}}">
+      <img class="knx-avatar-profile__image" src="{{ avatarUrl || '../../../assets/images/avatars/assistant.png' }}">
 
       <cx-form-group class="cx-styleguide-icon__icon knx-icon-pencil"
         [formControlName]="form.formConfig.avatar.formControlName"
@@ -17,10 +17,14 @@ import * as FormUtils from '../../utils/base-form.utils';
       </cx-form-group>
     </div>
 
-    <cx-form-group
-      [options]="form.formConfig.gender"
-      [formControlName]="form.formConfig.gender.formControlName">
-    </cx-form-group>
+    <div class="row">
+      <div class="col-md-4">
+        <cx-form-group
+          [options]="form.formConfig.gender"
+          [formControlName]="form.formConfig.gender.formControlName">
+        </cx-form-group>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-md-6">
@@ -79,19 +83,27 @@ export class ProfileEditComponent {
   @Input() form: ProfileForm;
   @Input() set profile(value: Profile) {
     if (value) {
-      this.form.formGroup.patchValue({
+      let patchObj = {
         avatar: value.profile_image,
         gender: value.gender,
         firstName: value.firstname,
         lastName: value.lastname,
-      }, { emitEvent: false });
+        birthDate: value.birthday ? FormUtils.toDateFormat(FormUtils.parseNicciDate(value.birthday)) : value.birthday
+      };
 
-      // this.form.addressForm.patchValue({
-      //   postalCode: value.postcode,
-      //   houseNumber: value.number,
-      //   houseNumberExtension: value.number_extended ? value.number_extended.number_letter : ''
-      // }, { emitEvent: false });
-      // FormUtils.validateForm(this.form.addressForm);
+      this.form.formGroup.patchValue(patchObj, { emitEvent: false });
+
+      FormUtils.validateControls(this.form.formGroup, Object.keys(patchObj)
+        .filter(key => patchObj[key] !== null));
+
+      if (value.number && value.postcode) {
+        this.form.addressForm.patchValue({
+          postalCode: value.postcode,
+          houseNumber: value.number,
+          houseNumberExtension: value.number_extended ? value.number_extended.number_letter : ''
+        }, { emitEvent: false });
+        FormUtils.validateForm(this.form.addressForm);
+      }
     }
   }
   @Output() formSaved$: EventEmitter<any> = new EventEmitter();

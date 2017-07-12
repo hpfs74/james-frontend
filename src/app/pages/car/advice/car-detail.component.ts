@@ -4,7 +4,6 @@ import {
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
-import * as moment from 'moment';
 
 import { CarDetailForm } from './car-detail.form';
 import { Car, Price, Address } from '../../../models';
@@ -29,7 +28,7 @@ export class CarDetailComponent implements OnInit {
     if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold || value.loan || value.gender || value.coverage) {
       this.form.formGroup.patchValue(Object.assign({}, {
         licensePlate: value.license || null,
-        birthDate: value.date_of_birth ? moment(value.date_of_birth).format('DD-MM-YYYY') : null,
+        birthDate: value.date_of_birth ? FormUtils.toDateFormat(value.date_of_birth) : null,
         claimFreeYears: value.claim_free_years || null,
         houseHold: value.household_status || null,
         loan: value.active_loan || null,

@@ -1,9 +1,9 @@
+import { toDateFormat } from './../../../utils/base-form.utils';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import * as moment from 'moment';
 
 import { Profile, Car } from '../../../models';
-import { isMobileNumber } from '../../../utils/base-form.utils';
+import * as FormUtils from '../../../utils/base-form.utils';
 import { SectionItem, SectionGroup, SectionFields } from '../../../components/knx-data-summary/data-summary';
 
 @Component({
@@ -22,7 +22,7 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Ingangsdatum',
-                value: moment(value.startDate).format('DD-MM-YYYY')
+                value: FormUtils.toDateFormat(value.startDate)
               },
               {
                 label: 'Gekozen dekking',
@@ -134,7 +134,7 @@ export class CarSummaryComponent {
               },
               {
                 label: 'Geboortedatum',
-                value: moment(value.date_of_birth).format('DD-MM-YYYY')
+                value: FormUtils.toDateFormat(value.date_of_birth)
               }
             ]
           },
@@ -150,11 +150,11 @@ export class CarSummaryComponent {
               },
               {
                 label: 'Mobiel nummer',
-                value: value.address.mobileNumber
+                value: value.mobileNumber
               },
               {
                 label: 'Vast nummer',
-                value: value.address.phoneNumber
+                value: value.phoneNumber
               },
               // TODO: add in contact detail form
               // {

@@ -13,9 +13,9 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toArray';
 
 import { ProfileService } from '../services/profile.service';
+import { Profile } from '../models/profile';
 import * as profile from '../actions/profile';
 import * as insurances from '../actions/insurances';
-import { Profile } from '../models/profile';
 
 @Injectable()
 export class ProfileEffects {

@@ -3,6 +3,7 @@ import { CXPostalCodeValidator } from '@cx/form-control';
 
 import { BaseForm } from '../../forms/base-form';
 import { nameInitialMask } from '../../utils/base-form.utils';
+import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';
 
 export class ProfileForm extends BaseForm {
@@ -12,8 +13,8 @@ export class ProfileForm extends BaseForm {
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
-    firstName: () => '',
-    lastName: () => '',
+    firstName: () => 'Vul een voornaam van maximaal 50 karakters in',
+    lastName: () => 'Vul een achternaam van maximaal 50 karakters in',
     birthDate: () => 'Vul een geldige geboortedatum in',
     postalCode: () => `Vul een geldige postcode in`,
     address: () => `Vul een geldige postcode en huisnummer combinatie in`,
@@ -25,10 +26,10 @@ export class ProfileForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       avatar: [null],
-      gender: [{}, Validators.required],
-      firstName: [null, Validators.compose([Validators.maxLength(40)])],
-      lastName: [null, Validators.compose([Validators.maxLength(40)])],
-      birthDate: [null, Validators.required],
+      gender: [{}],
+      firstName: [null, Validators.compose([Validators.maxLength(50)])],
+      lastName: [null, Validators.compose([Validators.maxLength(50)])],
+      birthDate: [null, birthDateValidator('birthDate')],
       pushNotifications: [null],
       emailNotifications: [null],
     });

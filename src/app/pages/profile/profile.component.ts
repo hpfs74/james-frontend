@@ -3,12 +3,12 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-import * as moment from 'moment';
 
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { BaseForm } from '../../forms/base-form';
+import * as FormUtils from '../../utils/base-form.utils';
 import { Profile } from '../../models/profile';
 import { Settings } from '../../models/settings';
 import { ProfileForm } from './profile.form';
@@ -45,17 +45,18 @@ export class ProfileComponent implements OnInit {
   }
 
   save(event) {
-    // this.store.dispatch(new profile.UpdateAction(Object.assign({}, {
-    //     avatar: event.avatar,
-    //     gender: event.gender,
-    //     firstname: event.firstName,
-    //     lastname: event.lastName,
-    //     birthday: moment(event.birthDate).format('YYYY-MM-DD')
-    //   }, event.address)));
+    this.store.dispatch(new profile.UpdateAction(Object.assign({}, {
+        avatar: event.avatar,
+        gender: event.gender,
+        firstname: event.firstName,
+        lastname: event.lastName,
+        birthday: FormUtils.toNicciDate(event.birthDate)
+      }, event.address)));
 
-    this.store.dispatch(new settings.UpdateSettingsAction({
-      push_notifications: !!event.pushNotifications,
-      email_notifications: !!event.emailNotifications
-    }));
+    // TODO implement switchMap in settings effect
+    // this.store.dispatch(new settings.UpdateSettingsAction({
+    //   push_notifications: !!event.pushNotifications,
+    //   email_notifications: !!event.emailNotifications
+    // }));
   }
 }
