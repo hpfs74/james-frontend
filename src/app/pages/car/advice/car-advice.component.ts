@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
-import * as moment from 'moment';
 
 import * as fromRoot from '../../../reducers';
 import * as profile from '../../../actions/profile';
@@ -230,7 +229,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       license: this.car.license,
       gender: detailForm.value.gender.toUpperCase(),
       title: detailForm.value.gender.toLowerCase() === 'm' ? 'Dhr.' : 'Mw.',
-      date_of_birth: moment(detailForm.value.birthDate).format('YYYY-MM-DD'),
+      date_of_birth: FormUtils.toNicciDate(detailForm.value.birthDate),
       zipcode: this.address.postcode,
       house_number: this.address.number,
       country: 'NL'

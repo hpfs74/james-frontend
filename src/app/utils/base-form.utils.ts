@@ -1,5 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
+import * as moment from 'moment';
 
 // Scoll back to form; assumes there's only one form of this type on current page
 export function scrollToForm(cssClass: string): void {
@@ -99,4 +100,22 @@ export const isMobileNumber = function (phone: string) {
     return false;
   }
   return (/^06[1-5]/.test(phone) || /^06760/.test(phone));
+};
+
+export const toDateFormat = function (date: Date) {
+  if (date === null) {
+    return null;
+  }
+  return moment(date).format('DD-MM-YYYY');
+};
+
+export const parseNicciDate = function (date: string): Date {
+  if (date === null) {
+    return null;
+  }
+  return moment(date, 'YYYY-MM-DD').toDate();
+};
+
+export const toNicciDate = function (date: Date|string) {
+  return moment(date).format('YYYY-MM-DD');
 };
