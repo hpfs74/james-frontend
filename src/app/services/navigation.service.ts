@@ -15,7 +15,7 @@ export class NavigationService {
       {
         id: 'menu-faq',
         title: 'FAQ',
-        routePath: 'faq',
+        routePath: '/faq',
         menuType: NavItemType.RIGHT
       },
       {

@@ -21,7 +21,7 @@
           [car]="car"
           [advice]="advice$ | async"
           [coverages]="coverages"
-          [isCoverageLoading]="isCoverageLoading">
+          [isCoverageLoading]="isCoverageLoading$ | async">
         </knx-car-detail-form>
       </knx-step>
 

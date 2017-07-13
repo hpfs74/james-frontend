@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { HomeComponent } from './home.component';
+import { FaqComponent } from '../faq/faq.component';
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 import { Address } from './../../models/address';
 
@@ -28,14 +29,11 @@ const homeRoutes: Routes = [
         canActivateChild: [AuthGuard],
         loadChildren: '../profile/profile.module#ProfileModule'
       },
-      // {
-      //   path: 'faq',
-      //   canActivateChild: [AuthGuard],
-      //   // component: DashboardComponent, //FaqComponent
-      //   data: {
-      //     title: 'FAQ'
-      //   }
-      // },
+      {
+        path: 'faq',
+        canActivateChild: [AuthGuard],
+        component: FaqComponent
+      },
       // {
       //   path: 'about',
       //   canActivateChild: [AuthGuard],
