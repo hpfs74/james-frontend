@@ -6,7 +6,10 @@
         <div class="col-sm-12">
           <h2>FAQ</h2>
 
-
+          <knx-chat-input
+            buttonLabel="Verzenden"
+            (sendMessage)="onSubmit($event)">
+          </knx-chat-input>
         </div>
       </div>
     </div>

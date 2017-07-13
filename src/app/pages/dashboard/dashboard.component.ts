@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
 
     this.profile$
       .distinctUntilChanged((prev, next) => prev._id === next._id)
+      .take(1)
       .subscribe((profile) => {
       if (Object.keys(profile).length > 0) {
         this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.dashboard.welcome(profile.firstname)));

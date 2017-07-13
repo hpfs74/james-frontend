@@ -4,5 +4,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'faq.component.html'
 })
 export class FaqComponent  {
-
+  onSubmit(event) {
+    //TODO: implement
+  }
 }

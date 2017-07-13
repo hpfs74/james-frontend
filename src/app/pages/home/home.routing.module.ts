@@ -33,15 +33,7 @@ const homeRoutes: Routes = [
         path: 'faq',
         canActivateChild: [AuthGuard],
         component: FaqComponent
-      },
-      // {
-      //   path: 'about',
-      //   canActivateChild: [AuthGuard],
-      //   // component: DashboardComponent, //AboutComponent
-      //   data: {
-      //     title: 'Over ons'
-      //   }
-      // },
+      }
     ]
   }
 ];
