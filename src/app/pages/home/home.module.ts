@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.module';
 
 import { HomeRoutingModule } from './home.routing.module';
+import { CanActivateBuyFlowGuard } from '../../services/buy-guard.service';
 import { HomeComponent } from './home.component';
 import { FaqComponent } from '../faq/faq.component';
 import { AuthService } from '../../services/auth.service';
@@ -48,7 +49,8 @@ export class HomeModule {
         AssistantService,
         LoaderService,
         ProfileService,
-        CarService
+        CarService,
+        CanActivateBuyFlowGuard
       ]
     };
   }
