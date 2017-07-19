@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  template: `
-    <h2>Veelgestelde vragen</h2>
-  `
+  templateUrl: 'faq.component.html'
 })
 export class FaqComponent  {
-
+  onSubmit(event) {
+    //TODO: implement
+  }
 }

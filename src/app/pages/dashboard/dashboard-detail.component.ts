@@ -53,6 +53,7 @@ export class DashboardDetailComponent implements OnInit {
       this.insuranceType = params['type'];
 
       let message = this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType));
+      this.store.dispatch(new assistant.ClearAction);
       this.store.dispatch(new assistant.AddMessageAction(message));
     });
   }

@@ -17,6 +17,8 @@
       "carBuyStatic": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carBuyStatic",
       "insurer": "<< not supported >>"
     },
-    "external": {}
+    "external": {
+      "inbenta": ""
+    }
   }
 }

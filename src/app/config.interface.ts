@@ -10,7 +10,8 @@ export interface ConfigInterface {
 export interface ConfigAPIInterface {
   james: NicciEndpoint,
   external?: {
-    //TODO: for config endpoints like Blueconic, Google Analytics
+    // for config endpoints like Blueconic, Google Analytics
+    inbenta: string
   }
 }
 

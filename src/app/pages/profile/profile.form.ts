@@ -55,6 +55,7 @@ export class ProfileForm extends BaseForm {
         label: 'Geslacht',
         type: 'radio',
         inputOptions: {
+          formGroupModifiers: ['cx-form-group__wrap--spread'],
           items: [
             {
               label: 'Man',

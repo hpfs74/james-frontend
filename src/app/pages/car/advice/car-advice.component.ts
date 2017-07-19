@@ -253,7 +253,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   startBuyFlow(): Observable<any> {
-    this.store.dispatch(go('/car/insurance'));
+    this.store.select(fromRoot.getSelectedAdviceId).subscribe(
+      id => this.store.dispatch(go(['/car/insurance', { adviceId: id }])));
     return;
   }
 

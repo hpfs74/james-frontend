@@ -5,6 +5,8 @@ import { CarAdviceComponent } from './advice/car-advice.component';
 import { CarDetailComponent } from './advice/car-detail.component';
 import { CarBuyComponent } from './buy/car-buy.component';
 
+import { CanActivateBuyFlowGuard } from '../../services/buy-guard.service';
+
 export const carRoutes: Routes = [
   {
     path: '',
@@ -16,6 +18,7 @@ export const carRoutes: Routes = [
   {
     path: 'insurance',
     component: CarBuyComponent,
+    canActivate: [CanActivateBuyFlowGuard],
     data: {
       title: 'Nieuwe autoverzekering aanvragen'
     }

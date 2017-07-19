@@ -5,7 +5,9 @@ import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.module';
 
 import { HomeRoutingModule } from './home.routing.module';
+import { CanActivateBuyFlowGuard } from '../../services/buy-guard.service';
 import { HomeComponent } from './home.component';
+import { FaqComponent } from '../faq/faq.component';
 import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { AssistantService } from '../../services/assistant.service';
@@ -33,7 +35,8 @@ import { NavbarComponent } from '../../components/knx-navigation';
   declarations: [
     AppLoaderComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    FaqComponent
   ]
 })
 export class HomeModule {
@@ -46,7 +49,8 @@ export class HomeModule {
         AssistantService,
         LoaderService,
         ProfileService,
-        CarService
+        CarService,
+        CanActivateBuyFlowGuard
       ]
     };
   }
