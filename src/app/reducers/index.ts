@@ -47,6 +47,8 @@ import * as fromAdvice from './advice';
 import * as fromCar from './car';
 import * as fromCoverage from './coverage';
 
+import { analyticsMetaReducer } from './analytics';
+
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
@@ -81,7 +83,7 @@ const reducers = {
   advice: fromAdvice.reducer,
   car: fromCar.reducer,
   coverage: fromCoverage.reducer,
-  router: fromRouter.routerReducer,
+  router: analyticsMetaReducer(fromRouter.routerReducer),
 };
 
 const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);

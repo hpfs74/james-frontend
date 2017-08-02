@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppShellModule } from '@angular/app-shell';
 import { Router } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Action } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
