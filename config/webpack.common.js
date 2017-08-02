@@ -28,13 +28,15 @@ const ProvidePlugin = require('webpack/lib/ProvidePlugin');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
+const GA_ID = process.env.GA_ID; // inject Google Analytics ID from CI server
 const METADATA = {
   title: 'Knab Verzekeren Web',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   ga: {
-    id: 'UA-XXXXXXXX-X',
-    url: 'https://www.google-analytics.com/analytics_debug.js'
+    id: GA_ID || 'UA-XXXXXXXX-X',
+    url: helpers.isWebpackDevServer() ? 'https://www.google-analytics.com/analytics_debug.js' :
+      'https://www.google-analytics.com/analytics.js'
   }
 };
 
