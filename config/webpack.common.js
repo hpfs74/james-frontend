@@ -31,7 +31,11 @@ const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
   title: 'Knab Verzekeren Web',
   baseUrl: '/',
-  isDevServer: helpers.isWebpackDevServer()
+  isDevServer: helpers.isWebpackDevServer(),
+  ga: {
+    id: 'UA-XXXXXXXX-X',
+    url: 'https://www.google-analytics.com/analytics_debug.js'
+  }
 };
 
 /*
