@@ -1,6 +1,13 @@
 import { StoreModule, Action } from '@ngrx/store';
-import { GoogleAnalytics, PageView } from 'redux-beacon/targets/google-analytics';
 import { createMetaReducer } from 'redux-beacon';
+import {
+  GoogleAnalytics,
+  PageView,
+  Event,
+  UserTiming,
+  SocialInteraction,
+  Exception
+} from 'redux-beacon/targets/google-analytics';
 
 // Define an analytics event
 const pageView = (action: Action): PageView => ({
