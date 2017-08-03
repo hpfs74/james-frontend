@@ -26,11 +26,10 @@ Once you have those, you should install these globals with `npm install -g`:
 
 ### Using CX-Shared-Library
 
+> NEEDS UPDATE
 > NOTE: March 2017 TG: replaced cx-grid with bootstrap 4 grid, recommended not to use it until fully stable
 
-Since we're going to use the cx-shared-library we will need to include
-the packages from that project so we need to follow the instructions 
-to include the packages from them.
+Since we're going to use the cx-shared-library we will need to include the packages from that project so we need to follow the instructions to include the packages from them.
 
 > You can use the .npmrc provided in this repo and skip this step
 
@@ -77,9 +76,7 @@ The following are some things you should follow because not doing so will make A
 
 ## <a name="architecture"></a> App architecture
 
-Use a smart-container component that has dumb child, or sub-, components. For example, for the Car insurances there is a `CarModule` that groups
-all related car Components, Directives, Services, etc. into one piece of functionality. In the `CarModule`, the `CarComponent` is the smart root container
-that passes data into it's child components and receives events back, using `Input()` and `Output()` decorators.
+Use a smart-container component that has dumb child, or sub-, components. For example, for the Car insurances there is a `CarModule` that groups all related car Components, Directives, Services, etc. into one piece of functionality. In the `CarModule`, the `CarComponent` is the smart root container that passes data into it's child components and receives events back, using `Input()` and `Output()` decorators.
 
 See: http://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/
 
@@ -140,8 +137,7 @@ Check the linting config files for our formatting conventions:
 
 ## <a name="scrum-done"></a> Definition of Done
 
-At the end of each development interval, we must have integrated, tested, working, and potentially shippable code, demonstrated
-in a production-like environment, created from the master branch, using an automated process, validated with automated  tests.
+At the end of each development interval, we must have integrated, tested, working, and potentially shippable code, demonstrated in a production-like environment, created from the master branch, using an automated process, validated with automated  tests.
 
 
 ## <a name="vscode"></a> Support for debugging in VSCode
