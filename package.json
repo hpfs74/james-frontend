@@ -5,7 +5,7 @@
   "author": "cXstudio",
   "scripts": {
     "commitmsg": "node config/hooks/commit.js && npm run lint:styles && npm run lint",
-    "prepush": "npm run test && npm run security",
+    "prepush": "nsp check",
     "ng": "ng",
     "start": "ng serve",
     "start:qa": "ng serve --environment=qa",
