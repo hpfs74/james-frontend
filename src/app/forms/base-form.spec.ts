@@ -1,7 +1,7 @@
 import { BaseForm } from './base-form';
 
 describe('Class: BaseForm', () => {
-  let form = new BaseForm();
+  const form = new BaseForm();
 
   it('should provide an address creator', () => {
     expect(form.createAddress).toBeDefined();

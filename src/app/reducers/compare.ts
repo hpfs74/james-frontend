@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@ngrx/store';
 import * as compare from '../actions/compare';
 import { InsuranceAdvice } from './../models/insurance-advice';
 

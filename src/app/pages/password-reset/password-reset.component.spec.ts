@@ -60,7 +60,7 @@ describe('Component: Password Reset', () => {
   });
 
   it('should contain a proper message to explain how to use correctly', () => {
-    let navElement = fixture.debugElement.query(By.css('div.knx-password-reset__welcome > p'));
+    const navElement = fixture.debugElement.query(By.css('div.knx-password-reset__welcome > p'));
     expect(navElement).not.toBeNull();
   });
 });

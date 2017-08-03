@@ -27,7 +27,7 @@ export class MenuItemComponent {
    * @desc if true, clicking on the item won't close the dropdown
    * @type {boolean}
    */
-  @Input() public preventClose: boolean = false;
+  @Input() public preventClose = false;
 
   /**
    * @name value

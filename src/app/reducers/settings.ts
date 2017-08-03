@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@ngrx/store';
 import { Settings } from '../models/settings';
 import * as settings from '../actions/settings';
 

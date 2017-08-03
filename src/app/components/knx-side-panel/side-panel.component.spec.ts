@@ -27,8 +27,8 @@ describe('Component: SidePanel', () => {
   });
 
   it('should define the container element', () => {
-    let navElement = fixture.debugElement.query(By.css('div.knx-side-panel'));
-    let el = navElement.nativeElement;
+    const navElement = fixture.debugElement.query(By.css('div.knx-side-panel'));
+    const el = navElement.nativeElement;
     expect(navElement).not.toBeNull();
   });
 

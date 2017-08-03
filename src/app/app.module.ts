@@ -8,10 +8,10 @@ import { AppShellModule } from '@angular/app-shell';
 import { Router } from '@angular/router';
 import { StoreModule, Action } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { reducer } from './reducers';
+import { reducers, metaReducers } from './reducers';
 import { ProfileEffects } from './effects/profile';
 import { CarEffects } from './effects/car';
 import { CompareEffects } from './effects/compare';
@@ -23,6 +23,7 @@ import { ConfigService } from './config.service';
 import { ContentService } from './content.service';
 
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { requestOptionsProvider } from './services/default-request-opts.service';
 
@@ -39,15 +40,13 @@ import { SharedModule } from './shared.module';
 import { HomeModule } from './pages/home/home.module';
 
 // Styles 'barrel'
-import '../styles/styles.scss';
+// import '../styles/styles.scss';
 
 // Needed because app initializer doesn't work with anonymous function
 export function ConfigLoader(configService: ConfigService) {
   let configFile = './config/api/config.mock.json';
 
-  if (process.env.ENV === 'test') {
-    configFile = './config/api/config.test.json';
-  } else if (process.env.ENV === 'production') {
+  if (environment.production) {
     configFile = './config/api/config.prod.json';
   }
   return () => configService.load(configFile);
@@ -66,22 +65,19 @@ export function ContentLoader(contentService: ContentService) {
     HttpModule,
     SharedModule,
     HomeModule.forRoot(),
-    StoreModule.provideStore(reducer),
-    StoreDevtoolsModule.instrumentOnlyWithExtension({
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({
       maxAge: 5
     }),
-    /**
-     * @ngrx/router-store keeps router state up-to-date in the store and uses
-     * the store as the single source of truth for the router's state.
-     *
-     * Use runAfterBootstrap because services require api endpoints from ConfigLoader
-     */
-    RouterStoreModule.connectRouter(),
-    EffectsModule.runAfterBootstrap(ProfileEffects),
-    EffectsModule.runAfterBootstrap(CarEffects),
-    EffectsModule.runAfterBootstrap(CompareEffects),
-    EffectsModule.runAfterBootstrap(CoverageEffects),
-    EffectsModule.runAfterBootstrap(SettingsEffects),
+    StoreRouterConnectingModule,
+    EffectsModule.forRoot(
+    [
+      ProfileEffects,
+      CarEffects,
+      CompareEffects,
+      CoverageEffects,
+      SettingsEffects
+    ]),
     LoginRoutingModule,
     AuthModule,
     AppRoutingModule,

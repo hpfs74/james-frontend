@@ -27,28 +27,28 @@ describe('Component: CarContactComponent', () => {
   });
 
   it('should be closed on sundays', () => {
-    var date = new Date(2017, 6, 11); //11th june 2017
+    let date = new Date(2017, 6, 11); // 11th june 2017
     comp.updateIsOpen(date);
     fixture.detectChanges();
     expect(comp.isOpen).toBeFalsy();
   });
 
   it('should be closed before 8am', () => {
-    var date = new Date(2017, 6, 7, 6, 0, 0); //6th june 2017, 6:00
+    let date = new Date(2017, 6, 7, 6, 0, 0); // 6th june 2017, 6:00
     comp.updateIsOpen(date);
     fixture.detectChanges();
     expect(comp.isOpen).toBeFalsy();
   });
 
   it('should be closed after 22pm', () => {
-    var date = new Date(2017, 6, 7, 23, 0, 0); //6th june 2017, 23:00
+    let date = new Date(2017, 6, 7, 23, 0, 0); // 6th june 2017, 23:00
     comp.updateIsOpen(date);
     fixture.detectChanges();
     expect(comp.isOpen).toBeFalsy();
   });
 
   it('should be open between 8am and 22pm', () => {
-    var date = new Date(2017, 6, 7, 9, 0, 0); //6th june 2017, 9:00
+    let date = new Date(2017, 6, 7, 9, 0, 0); // 6th june 2017, 9:00
     comp.updateIsOpen(date);
     fixture.detectChanges();
     expect(comp.isOpen).toBeTruthy();

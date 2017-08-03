@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class LoaderComponent {
-  @Input() visible: boolean = false;
+  @Input() visible = false;
 }

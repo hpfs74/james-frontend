@@ -15,6 +15,6 @@ import { Component, Input } from '@angular/core';
 export class ButtonIconComponent {
   @Input() label: string;
   @Input() icon: string;
-  @Input() isPlaceholder: boolean = false;
-  @Input() success: boolean = false;
+  @Input() isPlaceholder = false;
+  @Input() success = false;
 }

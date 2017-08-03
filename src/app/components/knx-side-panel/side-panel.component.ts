@@ -25,12 +25,12 @@ import { slideInOutAnimation } from '../../animations/slide-in-out.animation';
 })
 export class SidePanelComponent implements OnInit {
   @Input() title: string;
-  @Input() fullwidth: boolean = false;
-  @Input() showCloseButton: boolean = true;
+  @Input() fullwidth = false;
+  @Input() showCloseButton = true;
 
   show: boolean;
   animationState: string;
-  animationInProgress: boolean = false;
+  animationInProgress = false;
 
   ngOnInit() {
     this.show = false;
@@ -50,7 +50,7 @@ export class SidePanelComponent implements OnInit {
   }
 
   onAnimationEnd() {
-    //hide the side panel links if they are not visible for keyboard accessibility
+    // hide the side panel links if they are not visible for keyboard accessibility
     this.animationInProgress = false;
   }
 }

@@ -35,7 +35,7 @@ describe('Component: CarPaymentComponent', () => {
   });
 
   it('should init the form', () => {
-    let element = fixture.debugElement.query(By.css('form'));
+    const element = fixture.debugElement.query(By.css('form'));
     expect(element).toBeDefined();
     expect(comp.carPaymentComponent).toBeDefined();
     expect(comp.carPaymentComponent.form).toBeDefined();

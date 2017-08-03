@@ -2,7 +2,7 @@ import { getLicenseFormats, getLicenseSideCode, formatLicensePlate } from './lic
 
 describe('Utils: LicensePlate', () => {
   it('should provide valid formats', () => {
-    let formats = getLicenseFormats();
+    const formats = getLicenseFormats();
     expect(formats).toBeDefined();
     expect(formats.length).toBeGreaterThan(0);
   });

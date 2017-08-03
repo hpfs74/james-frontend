@@ -52,7 +52,7 @@ export class DashboardDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.insuranceType = params['type'];
 
-      let message = this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType));
+      const message = this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType));
       this.store.dispatch(new assistant.ClearAction);
       this.store.dispatch(new assistant.AddMessageAction(message));
     });
@@ -63,7 +63,7 @@ export class DashboardDetailComponent implements OnInit {
   }
 
   goToInsurance() {
-    //TODO: implement ProfileInsuranceComponent
+    // TODO: implement ProfileInsuranceComponent
     this.router.navigate(['/']);
   }
 

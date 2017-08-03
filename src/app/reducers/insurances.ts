@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@ngrx/store';
 import { Insurance } from '../models/insurance';
 import * as insurances from '../actions/insurances';
 
@@ -40,9 +40,6 @@ export function reducer(state = initialState, action: insurances.Actions): State
   }
 }
 
-
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getInsurances = (state: State) => state.insurances;
-
-//export const getIds = (state: State) => state.ids;

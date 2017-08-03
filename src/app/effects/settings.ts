@@ -22,6 +22,7 @@ export class SettingsEffects {
   @Effect()
   updateSettings$ = this.action$
     .ofType(settings.UPDATE_SETTINGS_REQUEST)
+    .map((action: settings.UpdateSettingsAction) => action.payload)
     .withLatestFrom(this.store$, (action, state) => {
       return {
         payload: action.payload,

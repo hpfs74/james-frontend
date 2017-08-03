@@ -41,7 +41,7 @@ describe('Component: CarCheckComponent', () => {
   });
 
   it('should init the form', () => {
-    let element = fixture.debugElement.query(By.css('form'));
+    const element = fixture.debugElement.query(By.css('form'));
     expect(element).toBeDefined();
     expect(comp.targetComponent).toBeDefined();
     expect(comp.targetComponent.form).toBeDefined();

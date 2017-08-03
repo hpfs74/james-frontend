@@ -9,7 +9,6 @@ import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 import { DashboardComponent } from './dashboard.component';
 import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
 import { ConfigService } from '../../config.service';
-import { loginError } from './login-error';
 
 describe('Component: Dashboard', () => {
   let comp: DashboardComponent;
@@ -55,11 +54,11 @@ describe('Component: Dashboard', () => {
       ],
       imports: [
         RouterTestingModule,
-        StoreModule.provideStore({
-          profile: {
-            firstname: 'test'
-          }
-        })
+        // StoreModule.provideStore({
+        //   profile: {
+        //     firstname: 'test'
+        //   }
+        // })
       ],
       declarations: [DashboardComponent],
       schemas: [NO_ERRORS_SCHEMA]
@@ -71,12 +70,6 @@ describe('Component: Dashboard', () => {
     comp = fixture.componentInstance;
     store = fixture.debugElement.injector.get(Store);
     fixture.detectChanges();
-  });
-
-  //TODO: implement
-  xit('should go to proper action', () => {
-    comp.goToActions('car');
-    expect(routerStub.navigate).toHaveBeenCalledWith(['/insurance', 'car']);
   });
 });
 

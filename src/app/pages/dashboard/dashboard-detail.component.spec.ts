@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
 describe('Component: DashboardDetail', () => {
   let comp: DashboardDetailComponent;
   let fixture: ComponentFixture<DashboardDetailComponent>;
-  let routerStub:any;
+  let routerStub: any;
   let activatedRouteStub: any;
 
   const configServiceStub = {

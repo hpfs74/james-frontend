@@ -15,7 +15,7 @@ export class UserGreetingComponent implements OnInit {
   greeting: string;
 
   ngOnInit() {
-    let hourOfDay = new Date().getHours();
+    const hourOfDay = new Date().getHours();
     this.greeting = this.getGreeting(hourOfDay);
   }
 

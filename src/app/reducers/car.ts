@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@ngrx/store';
 import { Car } from '../models/car';
 import * as car from '../actions/car';
 
@@ -25,7 +25,7 @@ export function reducer(state = initialState, action: car.Actions): State {
     }
 
     case car.GET_INFO_SUCCESS: {
-      let car = action.payload;
+      const car = action.payload;
 
       return Object.assign({}, state, {
         loading: false,

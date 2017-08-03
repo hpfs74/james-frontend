@@ -8,10 +8,10 @@ export interface AppContent {
   car?: {
     securityClass: any;
     coverages: any;
-  },
+  };
   layout?: {
     footer: any;
-  }
+  };
 }
 
 @Injectable()
@@ -37,7 +37,7 @@ export class ContentService {
   }
 
   public loadFiles() {
-    let obj = this.jsonFiles;
+    const obj = this.jsonFiles;
     this.content = {};
     Object.keys(obj).forEach((key) => {
       this.content[key] = {};

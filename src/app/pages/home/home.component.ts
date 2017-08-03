@@ -38,7 +38,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
   coverages: Array<Price>;
   topMenu: Array<Nav>;
   phone: Object;
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
     this.profile$ = this.store.select(fromRoot.getProfile);
     this.loading$ = this.store.select(fromRoot.getProfileLoading);
 
-    //TODO: 403 on profile redirect
+    // TODO: 403 on profile redirect
     // this.profileService.getUserProfile()
     //   .subscribe( (profile) => {
     //     this.profile = profile;

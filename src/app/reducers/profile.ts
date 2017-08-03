@@ -1,11 +1,10 @@
-import { createSelector } from 'reselect';
 import { Profile } from '../models/profile';
 import * as profile from '../actions/profile';
 
 export interface State {
   loading: boolean;
   loaded: boolean;
-  profile: Profile | {};
+  profile: any;
 }
 
 export const initialState: State = {

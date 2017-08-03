@@ -27,7 +27,7 @@ export class DropdownComponent implements OnInit {
     @ContentChild(DropdownButtonComponent) public button: DropdownButtonComponent;
     @ContentChild(DropdownMenuComponent) public menu: DropdownMenuComponent;
 
-    @Input() public dynamicUpdate: boolean = true;
+    @Input() public dynamicUpdate = true;
 
     // outputs
     @Output() public onItemClicked: EventEmitter<string> = new EventEmitter<string>();

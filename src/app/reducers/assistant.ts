@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@ngrx/store';
 import { ChatMessage } from '../components/knx-chat-stream/chat-message';
 import { Profile } from '../models/profile';
 import * as assistant from '../actions/assistant';

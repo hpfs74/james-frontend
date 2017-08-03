@@ -27,7 +27,7 @@ describe('Component: AddressLookup', () => {
 
   const addressServiceStub = {
     lookupAddress: (postalCode: string, houseNumber: string, houseNumberExtension: string) => {
-      let ret = new Response(
+      const ret = new Response(
         new ResponseOptions({
           body: [
             { street: 'streetname', city: 'cityname' }
@@ -71,7 +71,7 @@ describe('Component: AddressLookup', () => {
     fixture = TestBed.createComponent(AddressLookupComponent);
     comp = fixture.componentInstance;
 
-    let fb = new FormBuilder();
+    const fb = new FormBuilder();
     comp.addressFormGroup = fb.group({
       postalCode: [null, Validators.required ],
       houseNumber: [null, Validators.required],
@@ -82,7 +82,7 @@ describe('Component: AddressLookup', () => {
   });
 
   it('should initialize with a formGroup', () => {
-    expect(comp.addressFormGroup).not.toBeNull;
+    expect(comp.addressFormGroup).not.toBeNull();
   });
 
   it('should get formGroup errors', () => {
@@ -93,10 +93,10 @@ describe('Component: AddressLookup', () => {
 
     fixture.detectChanges();
 
-    expect(comp.addressFormGroup.errors).not.toBeNull;
+    expect(comp.addressFormGroup.errors).not.toBeNull();
 
-    let errors = comp.getErrors();
-    expect(errors).toBeDefined;
+    const errors = comp.getErrors();
+    expect(errors).toBeDefined();
   });
 
   it('should get error messages', () => {
@@ -106,8 +106,8 @@ describe('Component: AddressLookup', () => {
 
   it('should validate an address', () => {
       inject([AddressLookupService], (addressServiceStub) => {
-        let isValid = comp.validateAddress(comp.addressFormGroup, addressServiceStub);
-        expect(isValid).toBeUndefined;
+        const isValid = comp.validateAddress(comp.addressFormGroup, addressServiceStub);
+        expect(isValid).toBeUndefined();
       });
   });
 
@@ -115,7 +115,7 @@ describe('Component: AddressLookup', () => {
 
     inject([AddressLookupService], (addressServiceStub) => {
       comp.addressFound.subscribe((data) => {
-        expect(data).not.toBeNull;
+        expect(data).not.toBeNull();
         expect(data.street).not.toBe('streetname');
         expect(data.city).not.toBe('cityname');
 
@@ -131,9 +131,5 @@ describe('Component: AddressLookup', () => {
 
       comp.validateAddress(comp.addressFormGroup, addressServiceStub);
     })();
-  });
-
-  xit('should get your current geolocation', () => {
-    //TO BE IMPLEMENTED
   });
 });

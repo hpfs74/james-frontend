@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 import { AssistantService } from './../../services/assistant.service';
@@ -14,6 +13,7 @@ import { Settings } from '../../models/settings';
 import { ProfileForm } from './profile.form';
 
 import * as fromRoot from '../../reducers';
+import * as RouterActions from '../../actions/router';
 import * as assistant from '../../actions/assistant';
 import * as profile from '../../actions/profile';
 import * as settings from '../../actions/settings';
@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
   }
 
   navigateBack() {
-    this.store.dispatch(back());
+    this.store.dispatch(new RouterActions.Back());
   }
 
   save(event) {

@@ -13,7 +13,7 @@ describe('Component: ChatStreamComponent', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  let options: ChatStreamOptions = {
+  const options: ChatStreamOptions = {
     avatar: {
       show: true,
       name: 'Marjolein',
@@ -49,7 +49,7 @@ describe('Component: ChatStreamComponent', () => {
     expect(comp.options.avatar.name).toEqual('Marjolein');
     expect(comp.options.avatar.title).toEqual('Expert autoverzekeringen');
 
-    let avatarEl = el.getElementsByTagName('knx-avatar');
+    const avatarEl = el.getElementsByTagName('knx-avatar');
     expect(avatarEl).not.toBeNull();
   });
 

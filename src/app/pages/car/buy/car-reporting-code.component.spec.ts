@@ -46,7 +46,7 @@ describe('Component: CarReportingCodeComponent', () => {
   });
 
   it('should init the form', () => {
-    let element = fixture.debugElement.query(By.css('form'));
+    const element = fixture.debugElement.query(By.css('form'));
     expect(element).toBeDefined();
     expect(comp.targetComponent).toBeDefined();
     expect(comp.targetComponent.form).toBeDefined();
@@ -57,7 +57,7 @@ describe('Component: CarReportingCodeComponent', () => {
   });
 
   it('should check for a valid reporting code', () => {
-    let ctrl = comp.targetComponent.form.formGroup.get('reportingCode');
+    const ctrl = comp.targetComponent.form.formGroup.get('reportingCode');
     expect(ctrl.valid).toBeFalsy();
     // invalid
     ctrl.setValue('123');
@@ -77,7 +77,7 @@ describe('Component: CarReportingCodeComponent', () => {
 
   it('should toggle the security class explanation', () => {
     expect(comp.targetComponent.selectedSecurityClass).toBeUndefined();
-    let ctrl = comp.formFromHost.formGroup.get('securityClass').setValue('SCM5');
+    const ctrl = comp.formFromHost.formGroup.get('securityClass').setValue('SCM5');
     fixture.detectChanges();
     expect(comp.targetComponent.selectedSecurityClass.value).toEqual('SCM5');
     expect(comp.targetComponent.selectedSecurityClass.title).toEqual('Test');

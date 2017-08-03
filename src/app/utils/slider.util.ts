@@ -1,7 +1,7 @@
 export const getRangeConfig = function (ranges: Array<number>) {
-  let rangers = {};
+  const rangers = {};
   for (let i = 0; i < ranges.length; ++i) {
-    var percentage = Math.ceil((100 / ranges.length) * i);
+    const percentage = Math.ceil((100 / ranges.length) * i);
     if (i < ranges.length - 1) {
       if (i === 0) {
         rangers['min'] = [ranges[i], ranges[i + 1] - ranges[i]];

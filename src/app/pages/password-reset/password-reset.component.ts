@@ -43,8 +43,8 @@ import { AuthService } from './../../services/auth.service';
   `
 })
 export class PasswordResetComponent {
-  submitted: boolean = false;
-  isPending: boolean = false;
+  submitted = false;
+  isPending = false;
   formBuilder: FormBuilder;
   forgotPasswordForm: FormGroup;
   validationErrors: any;
@@ -60,9 +60,9 @@ export class PasswordResetComponent {
   initForm() {
     this.redirectUrl = this.authService.forgotPassword('com.mobgen.knab://');
 
-    //TODO
-    //password reset just redirects to NICCI page now,
-    //reset from here through endpoint to be implemented
+    // TODO
+    // password reset just redirects to NICCI page now,
+    // reset from here through endpoint to be implemented
     this.formBuilder = new FormBuilder();
     this.forgotPasswordForm = this.formBuilder.group({
       email: [null, Validators.compose(

@@ -61,20 +61,20 @@ export class AddressLookupComponent implements AfterViewChecked {
 
     return new Promise((resolve, reject) => {
       this.lookupTimeout = setTimeout(() => {
-        let postalCode = formGroup.get('postalCode').value;
-        let houseNumber = formGroup.get('houseNumber').value;
-        let houseNumberExtension = formGroup.get('houseNumberExtension').value;
+        const postalCode = formGroup.get('postalCode').value;
+        const houseNumber = formGroup.get('houseNumber').value;
+        const houseNumberExtension = formGroup.get('houseNumberExtension').value;
 
         if (!postalCode && !houseNumber) {
           return resolve(null);
         }
 
         if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
-          let isValid: boolean = false;
+          let isValid = false;
 
           addressService.lookupAddress(postalCode, houseNumber, houseNumberExtension)
             .subscribe((data) => {
-              let res = <Address>data.json();
+              const res = <Address>data.json();
 
               isValid = !!(res.street && res.city);
 

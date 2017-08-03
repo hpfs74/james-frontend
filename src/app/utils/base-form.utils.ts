@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 // Scoll back to form; assumes there's only one form of this type on current page
 export function scrollToForm(cssClass: string): void {
-  var element = <HTMLElement>document.querySelector(cssClass);
+  const element = <HTMLElement>document.querySelector(cssClass);
   if (element) {
     window.scrollTo(0, element.offsetTop);
   }
@@ -24,8 +24,8 @@ export const birthDateMask = {
     if (day > 0 && month >= 0 && year > 999) {
       const date = new Date(year, month, day);
 
-      //check if day or month are not bigger then valid
-      //note: in JS new Date(50, 60, 2016) is completely valid
+      // check if day or month are not bigger then valid
+      // note: in JS new Date(50, 60, 2016) is completely valid
       if (date.getDate() === day && date.getMonth() === month) {
         return date;
       }
@@ -45,15 +45,15 @@ export function dateDecode(value) {
   if (day > 0 && month >= 0 && year > 999) {
     const date = new Date(year, month, day);
 
-    //check if day or month are not bigger then valid
-    //note: in JS new Date(50, 60, 2016) is completely valid
+    // check if day or month are not bigger then valid
+    // note: in JS new Date(50, 60, 2016) is completely valid
     if (date.getDate() === day && date.getMonth() === month) {
       return date;
     }
   }
 
   return null;
-};
+}
 
 export const nameInitialMask = {
   mask: [/[a-zA-Z]/, '.', /[a-zA-Z]/, '.', /[a-zA-Z]/, '.', /[a-zA-Z]/, '.', /[a-zA-Z]/, '.'],

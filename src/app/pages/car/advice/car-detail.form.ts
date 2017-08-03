@@ -7,7 +7,7 @@ import { LicensePlateValidator } from '../../../components/knx-input-licenseplat
 
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
-  formConfig: any; //TODO: refactor to store options here instead of inside template
+  formConfig: any; // TODO: refactor to store options here instead of inside template
   addressForm: FormGroup;
 
   public validationErrors = {

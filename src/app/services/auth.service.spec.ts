@@ -6,7 +6,7 @@ import { ConfigService } from '../config.service';
 
 describe('Service: AuthService', () => {
   let backend, service;
-  let configServiceStub = {
+  const configServiceStub = {
     config: {
       api: {
         james: {

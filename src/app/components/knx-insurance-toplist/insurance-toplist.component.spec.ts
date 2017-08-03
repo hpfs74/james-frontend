@@ -11,7 +11,7 @@ import { InsuranceTopListComponent } from './insurance-toplist.component';
 export class TestHostComponent {
   @ViewChild(InsuranceTopListComponent)
   public testComponent: InsuranceTopListComponent;
-  public stepAmount: number = 4;
+  public stepAmount = 4;
   public insurances = [{fit: 100}, {fit: 100}, {fit: 100}, {fit: 100}, {fit: 100}];
 }
 

@@ -8,10 +8,10 @@ export interface ConfigInterface {
 }
 
 export interface ConfigAPIInterface {
-  james: NicciEndpoint,
+  james: NicciEndpoint;
   external?: {
     inbenta: string
-  }
+  };
 }
 
 export interface NicciEndpoint {

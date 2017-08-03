@@ -19,7 +19,7 @@ export class CollapsePanelComponent {
   @Input() openLabel: string;
   @Input() closeLabel: string;
   @Input() contentHeight: string;
-  @Input() isOpen: boolean = false;
+  @Input() isOpen = false;
 
   toggle() {
     this.isOpen = !this.isOpen;

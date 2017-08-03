@@ -10,8 +10,8 @@ import { LoaderService } from '../components/knx-app-loader/loader.service';
 
 export enum Action { QueryStart, QueryStop }
 
-export const TOKEN_NAME: string = 'access_token';
-export const TOKEN_OBJECT_NAME: string = 'token';
+export const TOKEN_NAME = 'access_token';
+export const TOKEN_OBJECT_NAME = 'token';
 
 @Injectable()
 export class AuthHttp {
@@ -60,7 +60,7 @@ export class AuthHttp {
   }
 
   public requestWithToken(req: Request, token: string): Observable<Response> {
-    //TODO: check expired check here
+    // TODO: check expired check here
     //     return new Observable<Response>((obs: any) => {
     //       obs.error(new AuthHttpError('No JWT present or has expired'));
     //     });
@@ -76,18 +76,18 @@ export class AuthHttp {
       request.headers = new Headers();
     }
     headers.forEach((header: Object) => {
-      let key: string = Object.keys(header)[0];
-      let headerValue: string = (header as any)[key];
+      const key: string = Object.keys(header)[0];
+      const headerValue: string = (header as any)[key];
       (request.headers as Headers).set(key, headerValue);
     });
   }
 
   public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-    let req: Request = url as Request;
+    const req: Request = url as Request;
     let token: string = localStorage.getItem(TOKEN_NAME);
 
     if (!tokenNotExpired) {
-      let tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
+      const tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
       this.authService.refreshToken(tokenObject.refresh_token)
         .flatMap((data) => {
 
@@ -103,7 +103,7 @@ export class AuthHttp {
         .catch((error) => {
           // Try to get refresh token on not-authorized error
           if (error.status === 401 || error.status === 403) {
-            let tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
+            const tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
             return this.authService.refreshToken(tokenObject.refresh_token)
               .flatMap((data) => {
                 // Retry request with new token

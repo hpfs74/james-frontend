@@ -16,8 +16,8 @@ import { loginError } from './login-error';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  isPending: boolean = false;
-  showPassword: boolean = false;
+  isPending = false;
+  showPassword = false;
 
   form: LoginForm;
   messageTitle: string;
@@ -59,8 +59,8 @@ export class LoginComponent {
       this.isPending = true;
       this.message = undefined;
 
-      let email = this.form.formGroup.get('email');
-      let password = this.form.formGroup.get('password');
+      const email = this.form.formGroup.get('email');
+      const password = this.form.formGroup.get('password');
 
       this.authService
         .login(email.value, password.value)
@@ -71,11 +71,11 @@ export class LoginComponent {
 
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
-          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
+          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
 
           // Set our navigation extras object
           // that passes on our global query params and fragment
-          let navigationExtras: NavigationExtras = {
+          const navigationExtras: NavigationExtras = {
             queryParamsHandling: 'merge',
             preserveFragment: true
           };

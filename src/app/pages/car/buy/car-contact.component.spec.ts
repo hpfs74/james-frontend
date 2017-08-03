@@ -36,7 +36,7 @@ describe('Component: CarContactComponent', () => {
   });
 
   it('should init the form', () => {
-    let element = fixture.debugElement.query(By.css('form'));
+    const element = fixture.debugElement.query(By.css('form'));
     expect(element).toBeDefined();
     expect(comp.carContactComponent).toBeDefined();
     expect(comp.carContactComponent.form).toBeDefined();
@@ -51,7 +51,7 @@ describe('Component: CarContactComponent', () => {
   });
 
   it('should validate the mobile number', () => {
-    let ctrl = comp.carContactComponent.form.formGroup.get('mobileNumber');
+    const ctrl = comp.carContactComponent.form.formGroup.get('mobileNumber');
 
     ctrl.setValue('061234');
     expect(comp.carContactComponent.form.formGroup.valid).toBeFalsy();
@@ -62,7 +62,7 @@ describe('Component: CarContactComponent', () => {
   });
 
   it('should validate the phone number', () => {
-    let ctrl = comp.carContactComponent.form.formGroup.get('phoneNumber');
+    const ctrl = comp.carContactComponent.form.formGroup.get('phoneNumber');
     ctrl.setValue('061234');
     expect(comp.carContactComponent.form.formGroup.valid).toBeFalsy();
     expect(ctrl.valid).toBeFalsy();

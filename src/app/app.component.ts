@@ -17,17 +17,17 @@ import {
     InsuranceService,
     CookieService,
   ],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor(private configService: ConfigService, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.isLoading = false;
-    //console.log('Configuration loaded: ' + JSON.stringify(this.configService.config));
+    // console.log('Configuration loaded: ' + JSON.stringify(this.configService.config));
   }
 }

@@ -29,7 +29,7 @@ import { Profile } from '../../models/profile';
 })
 export class NavUserComponent {
   @Input() profile: Profile;
-  @Input() isLoggedIn: boolean = false;
+  @Input() isLoggedIn = false;
   @Output() onLogOut = new EventEmitter();
 
   constructor(private router: Router) { }

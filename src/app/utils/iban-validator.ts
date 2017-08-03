@@ -1,5 +1,5 @@
 export function isValidIban(value: string, onlyDutch: boolean = false): boolean {
-  let result = false;
+  const result = false;
 
   if (!value) {
     return result;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { AuthHttp } from '../../services/auth-http.service';
 import { Profile } from '../../models/profile';
@@ -35,8 +35,8 @@ export class CarService {
           this.authHttp.patch(this.configService.config.api.james.insurer, { product_id: insurance.product_id })
         );
       }).map((insuranceDetails) => {
-        var insurance = insuranceDetails[0];
-        var insurer = insuranceDetails[1];
+        const insurance = insuranceDetails[0];
+        const insurer = insuranceDetails[1];
 
         insurance._embedded.insurance.insurer = insurer;
         return insurance;

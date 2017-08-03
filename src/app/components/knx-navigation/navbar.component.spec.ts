@@ -37,8 +37,8 @@ describe('Component: Navbar', () => {
   });
 
   it('should display the title', () => {
-    let navElement = fixture.debugElement.query(By.css('ul.navbar-nav'));
-    let el = navElement.nativeElement;
+    const navElement = fixture.debugElement.query(By.css('ul.navbar-nav'));
+    const el = navElement.nativeElement;
     expect(navElement).not.toBeNull();
   });
 });
