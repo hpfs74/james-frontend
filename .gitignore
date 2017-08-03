@@ -71,10 +71,17 @@ ts-node
 .tsdrc
 .typingsrc
 
-#IDE configuration files
+#IDE and editors
 .idea
 *.iml
 .vscode/angulardoc.json
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
 # Ignore SonarQube configs
 .sonarlint
@@ -109,9 +116,16 @@ gulpfile.js.map
 #VSCode Chrome Debugger Extension (launch.json configuration)
 ChromeDebugger-UserData
 
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
 # OS X trash files
 .DS_Store
-
+Thumbs.db
 
 # Test reports
 test-reports

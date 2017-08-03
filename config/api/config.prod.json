@@ -5,16 +5,17 @@
   },
   "api": {
     "james": {
-      "key": "",
-      "token": "",
-      "profile": "",
-      "auth": "",
-      "address": "",
-      "cars": "",
-      "carCompare": "",
-      "carCoverage": "",
-      "carDamageFree": "",
-      "carBuy": ""
+      "key": "https://middleware.verzekeren.knab.nl/key",
+      "token": "https://middleware.verzekeren.knab.nl/token",
+      "profile": "https://middleware.verzekeren.knab.nl/userInfo",
+      "auth": "https://middleware.verzekeren.knab.nl/proxy",
+      "address": "https://middleware.verzekeren.knab.nl/isLocationValid",
+      "cars": "https://middleware.verzekeren.knab.nl/carInfo",
+      "carCompare": "https://middleware.verzekeren.knab.nl/advisedCarInsurance",
+      "carCoverage": "https://middleware.verzekeren.knab.nl/carCoverageHelp",
+      "carDamageFree": "https://middleware.verzekeren.knab.nl/carDamageFreeHelp",
+      "carBuy": "https://middleware.verzekeren.knab.nl/carBuyStatic",
+      "insurer": "<< not supported >>"
     },
     "external": {
       "inbenta": ""
