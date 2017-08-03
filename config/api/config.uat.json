@@ -1,0 +1,24 @@
+{
+  "app": {
+    "enableProdMode": true,
+    "name": "config.uat.json"
+  },
+  "api": {
+    "james": {
+      "key": "https://uat.middleware.knabverzekeren.nl/key",
+      "token": "https://uat.middleware.knabverzekeren.nl/token",
+      "profile": "https://uat.middleware.knabverzekeren.nl/userInfo",
+      "auth": "https://uat.middleware.knabverzekeren.nl/proxy",
+      "address": "https://uat.middleware.knabverzekeren.nl/isLocationValid",
+      "cars": "https://uat.middleware.knabverzekeren.nl/carInfo",
+      "carCompare": "https://uat.middleware.knabverzekeren.nl/advisedCarInsurance",
+      "carCoverage": "https://uat.middleware.knabverzekeren.nl/carCoverageHelp",
+      "carDamageFree": "https://uat.middleware.knabverzekeren.nl/carDamageFreeHelp",
+      "carBuy": "https://uat.middleware.knabverzekeren.nl/carBuyStatic",
+      "insurer": "<< not supported >>"
+    },
+    "external": {
+      "inbenta": ""
+    }
+  }
+}

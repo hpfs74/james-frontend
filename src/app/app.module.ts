@@ -50,7 +50,6 @@ export function ConfigLoader(configService: ConfigService) {
   } else if (process.env.ENV === 'production') {
     configFile = './config/api/config.prod.json';
   }
-
   return () => configService.load(configFile);
 }
 
