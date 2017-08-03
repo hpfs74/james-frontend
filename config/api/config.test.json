@@ -14,7 +14,7 @@
       "carCompare": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/advisedCarInsurance",
       "carCoverage": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carCoverageHelp",
       "carDamageFree": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carDamageFreeHelp",
-      "carBuyStatic": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carBuyStatic",
+      "carBuy": "http://aegon-middleware-dev.mobgen.com:3000/api/v1/proxy/carBuyStatic",
       "insurer": "<< not supported >>"
     },
     "external": {

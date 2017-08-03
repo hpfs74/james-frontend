@@ -1,0 +1,23 @@
+{
+  "app": {
+    "enableProdMode": true,
+    "name": "config.prod.json"
+  },
+  "api": {
+    "james": {
+      "key": "",
+      "token": "",
+      "profile": "",
+      "auth": "",
+      "address": "",
+      "cars": "",
+      "carCompare": "",
+      "carCoverage": "",
+      "carDamageFree": "",
+      "carBuy": ""
+    },
+    "external": {
+      "inbenta": ""
+    }
+  }
+}

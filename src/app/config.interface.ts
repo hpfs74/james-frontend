@@ -27,5 +27,5 @@ export interface NicciEndpoint {
   carCompare: string;
   carCoverage: string;
   carDamageFree: string;
-  carBuyStatic: string;
+  carBuy: string;
 }

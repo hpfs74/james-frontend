@@ -44,7 +44,7 @@ export class CarService {
   }
 
   public buyStatic(payload: Proposal): Observable<any> {
-    return this.authHttp.post(this.configService.config.api.james.carBuyStatic, JSON.stringify(payload))
+    return this.authHttp.post(this.configService.config.api.james.carBuy, JSON.stringify(payload))
       .map((res: Response) => res.json());
   }
 }
