@@ -8,7 +8,6 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
-import { ConfigService } from '../../config.service';
 import { loginError } from './login-error';
 
 describe('Component: Login', () => {
@@ -33,7 +32,6 @@ describe('Component: Login', () => {
         BaseRequestOptions,
         MockBackend,
         AuthService,
-        { provide: ConfigService, useValue: configServiceStub },
         {
           deps: [
             MockBackend,

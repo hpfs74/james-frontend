@@ -8,7 +8,6 @@ import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import { DashboardComponent } from './dashboard.component';
 import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
-import { ConfigService } from '../../config.service';
 
 describe('Component: Dashboard', () => {
   let comp: DashboardComponent;
@@ -40,7 +39,6 @@ describe('Component: Dashboard', () => {
         AssistantService,
         ProfileService,
         {provide: Router, useValue: routerStub},
-        {provide: ConfigService, useValue: configServiceStub},
         {
           deps: [
             MockBackend,

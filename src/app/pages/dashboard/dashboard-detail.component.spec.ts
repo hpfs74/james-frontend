@@ -10,8 +10,6 @@ import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import { DashboardDetailComponent } from './dashboard-detail.component';
 import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
-import { ConfigService } from '../../config.service';
-import { loginError } from './login-error';
 import { Observable } from 'rxjs/Observable';
 
 describe('Component: DashboardDetail', () => {
@@ -51,7 +49,6 @@ describe('Component: DashboardDetail', () => {
           ProfileService,
           { provide: Router, useValue: routerStub },
           { provide: ActivatedRoute, useValue: activatedRouteStub},
-          { provide: ConfigService, useValue: configServiceStub },
           {
             deps: [
               MockBackend,
@@ -65,11 +62,11 @@ describe('Component: DashboardDetail', () => {
         ],
         imports: [
           RouterTestingModule,
-          StoreModule.provideStore({
-            profile: {
-              firstname: 'test'
-            }
-          })
+          // StoreModule.provideStore({
+          //   profile: {
+          //     firstname: 'test'
+          //   }
+          // })
         ],
         declarations: [DashboardDetailComponent],
         schemas: [NO_ERRORS_SCHEMA]
@@ -118,8 +115,7 @@ describe('Component: DashboardDetail', () => {
           AssistantService,
           ProfileService,
           { provide: Router, useValue: routerStub },
-          { provide: ActivatedRoute, useValue: activatedRouteStub},
-          { provide: ConfigService, useValue: configServiceStub },
+          { provide: ActivatedRoute, useValue: activatedRouteStub },
           {
             deps: [
               MockBackend,
@@ -133,11 +129,11 @@ describe('Component: DashboardDetail', () => {
         ],
         imports: [
           RouterTestingModule,
-          StoreModule.provideStore({
-            profile: {
-              firstname: 'test'
-            }
-          })
+          // StoreModule.provideStore({
+          //   profile: {
+          //     firstname: 'test'
+          //   }
+          // })
         ],
         declarations: [DashboardDetailComponent],
         schemas: [NO_ERRORS_SCHEMA]

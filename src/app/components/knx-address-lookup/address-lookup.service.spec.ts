@@ -7,7 +7,6 @@ import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from '../../config.service';
 import { AddressLookupService } from './address-lookup.service';
 import { AuthHttp } from '../../services';
 import { Address } from '../../models/address';
@@ -29,7 +28,6 @@ describe('Service: AddressLookup', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: ConfigService, useValue: configServiceStub },
         BaseRequestOptions,
         MockBackend,
         AddressLookupService,

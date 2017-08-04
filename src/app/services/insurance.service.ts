@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthHttp } from './auth-http.service';
-import { ConfigService } from './../config.service';
+import { environment } from '../../environments/environment';
 import { Insurer } from '../models';
 
 @Injectable()
 export class InsuranceService {
   private baseUrl: string;
 
-  constructor(private configService: ConfigService, private authHttp: AuthHttp) {
-    this.baseUrl = configService.config.api.james.insurer;
+  constructor(private authHttp: AuthHttp) {
+    this.baseUrl = environment.james.insurer;
   }
 
   public getInsurers(): Observable<Array<Insurer>> {

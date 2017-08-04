@@ -7,7 +7,6 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { Address } from '../../models/address';
-import { ConfigService } from '../../config.service';
 import { AuthHttp, GeolocationService } from '../../services';
 import { LoaderService } from '../knx-app-loader/loader.service';
 import { AddressLookupComponent } from './address-lookup.component';
@@ -59,8 +58,7 @@ describe('Component: AddressLookup', () => {
         AuthService,
         { provide: LoaderService, useValue: {}},
         { provide: AddressLookupService, useValue: addressServiceStub },
-        { provide: GeolocationService, useValue: geoLocationServiceStub },
-        { provide: ConfigService, useValue: configServiceStub }
+        { provide: GeolocationService, useValue: geoLocationServiceStub }
       ],
       declarations: [AddressLookupComponent],
       schemas: [NO_ERRORS_SCHEMA]

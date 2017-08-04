@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { environment } from '../../../environments/environment';
 import { AuthHttp } from '../../services';
-import { ConfigService } from '../../config.service';
 import { Address } from '../../models/address';
 
 @Injectable()
 export class AddressLookupService {
   private baseUrl: string;
 
-  constructor(private configService: ConfigService, private authHttp: AuthHttp) {
-    this.baseUrl = configService.config.api.james.address;
+  constructor(private authHttp: AuthHttp) {
+    this.baseUrl = environment.james.address;
   }
 
   /**

@@ -12,10 +12,19 @@ const environment = argv.environment;
 const isProd = environment === 'prod';
 const targetPath = isProd ? `./src/environments/environment.prod.ts` : `./src/environments/environment.ts`;
 
+// TODO: also move to environment variable
+const forgetPasswordLink =
+  'https://profile-james-a.nicci.io/password?client_id=56a6ab20bb00893f071faddc' +
+  '&locale=nl_NL' +
+  '&redirect_uri=com.mobgen.knab://' +
+  '&response_type=code' +
+  '&scope=basic+emailaddress+social';
+
 let envConfigFile = `
 export const environment = {
   production: ${isProd},
   james: {
+    forgetPassword: '${forgetPasswordLink}',
     key: '${process.env.JAMES_API_KEY}',
     token: '${process.env.JAMES_API_TOKEN}',
     profile: '${process.env.JAMES_API_PROFILE}',
@@ -25,7 +34,8 @@ export const environment = {
     carCompare: '${process.env.JAMES_API_CAR_COMPARE}',
     carCoverage: '${process.env.JAMES_API_CAR_COVERAGE}',
     carDamageFree: '${process.env.JAMES_API_CAR_DAMAGEFREE}',
-    carBuy: '${process.env.JAMES_API_CAR_BUY}'
+    carBuy: '${process.env.JAMES_API_CAR_BUY}',
+    insurer: '${process.env.JAMES_API_INSURER}'
   }
 };
 `;
@@ -42,7 +52,9 @@ if (isProd && process.env.GA_ID) {
   </script>\`);`;
 }
 
-envConfigFile += `\n`;
+// Disable linting of environment config
+envConfigFile = '/* tslint:disable */' + envConfigFile;
+envConfigFile += `/* tslint:enable */\n`;
 
 writeFile(targetPath, envConfigFile, function (err) {
   if (err) {

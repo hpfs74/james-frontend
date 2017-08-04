@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from '../config.service';
+import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
 import 'rxjs/add/operator/mergeMap';
@@ -17,14 +17,11 @@ export class AuthService {
   private profileUrl: string;
   private tokenUrl: string;
 
-  constructor(
-    private http: Http,
-    private configService: ConfigService) {
-
+  constructor(private http: Http) {
     this.loggedIn = false; // !!localStorage.getItem('a uth_token');
-    this.keyUrl = configService.config.api.james.key;
-    this.profileUrl = configService.config.api.james.profile;
-    this.tokenUrl = configService.config.api.james.token;
+    this.keyUrl = environment.james.key;
+    this.profileUrl = environment.james.profile;
+    this.tokenUrl = environment.james.token;
   }
 
   /**

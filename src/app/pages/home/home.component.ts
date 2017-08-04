@@ -63,17 +63,6 @@ export class HomeComponent implements OnInit {
 
     this.profile$ = this.store.select(fromRoot.getProfile);
     this.loading$ = this.store.select(fromRoot.getProfileLoading);
-
-    // TODO: 403 on profile redirect
-    // this.profileService.getUserProfile()
-    //   .subscribe( (profile) => {
-    //     this.profile = profile;
-    //   }, (res) => {
-    //     if (res.status === 403) {
-    //       this.router.navigate(['/login']);
-    //     }
-    //     throw new Error(res);
-    //   });
   }
 
   logOut() {

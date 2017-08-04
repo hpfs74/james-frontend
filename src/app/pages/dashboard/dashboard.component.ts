@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from '../../config.service';
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
