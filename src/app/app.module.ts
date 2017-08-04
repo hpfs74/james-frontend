@@ -13,7 +13,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { reducers, metaReducers } from './reducers';
 import { ProfileEffects } from './effects/profile';
-import { CarEffects } from './effects/car';
+
 import { CompareEffects } from './effects/compare';
 import { CoverageEffects } from './effects/coverage';
 import { SettingsEffects } from './effects/settings';
@@ -69,18 +69,18 @@ export function ContentLoader(contentService: ContentService) {
     StoreDevtoolsModule.instrument({
       maxAge: 5
     }),
+    LoginRoutingModule,
+    AppRoutingModule,
     StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot(
     [
       ProfileEffects,
-      CarEffects,
       CompareEffects,
       CoverageEffects,
       SettingsEffects
     ]),
-    LoginRoutingModule,
     AuthModule,
-    AppRoutingModule,
     AppShellModule.runtime(),
   ],
   declarations: [

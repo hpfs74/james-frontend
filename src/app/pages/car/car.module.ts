@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from './../../components/knx-chat-stream/chat-stream.module';
@@ -16,11 +17,16 @@ import { CarCheckComponent } from './buy/car-check.component';
 import { CarPaymentComponent } from './buy/car-payment.component';
 import { CarSummaryComponent } from './buy/car-summary.component';
 
+import { CarEffects } from '../../effects/car';
+
 @NgModule({
   imports: [
     SharedModule,
     ChatStreamModule,
-    CarRoutingModule
+    CarRoutingModule,
+    EffectsModule.forFeature([
+      CarEffects
+    ])
   ],
   declarations: [
     CarAdviceComponent,

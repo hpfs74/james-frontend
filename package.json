@@ -8,7 +8,6 @@
     "prepush": "nsp check",
     "ng": "ng",
     "start": "ng serve",
-    "start:qa": "ng serve --environment=qa",
     "build": "ng build",
     "build:prod": "ng build --prod --environment=prod",
     "test": "ng test",
