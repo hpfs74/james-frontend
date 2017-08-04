@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';

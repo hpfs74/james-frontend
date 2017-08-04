@@ -1,5 +1,7 @@
 import { Profile } from '../models/profile';
-import * as profile from '../actions/profile';
+import * as ProfileActions from '../actions/profile';
+
+export type Action = ProfileActions.All;
 
 export interface State {
   loading: boolean;
@@ -13,18 +15,18 @@ export const initialState: State = {
   profile: {}
 };
 
-export function reducer(state = initialState, action: profile.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
 
-    case profile.SAVE_PROFILE_REQUEST:
-    case profile.UPDATE_ADDRESS_REQUEST:
-    case profile.LOAD_PROFILE_REQUEST: {
+    case ProfileActions.SAVE_PROFILE_REQUEST:
+    case ProfileActions.UPDATE_ADDRESS_REQUEST:
+    case ProfileActions.LOAD_PROFILE_REQUEST: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case profile.UPDATE_PROFILE: {
+    case ProfileActions.UPDATE_PROFILE: {
       // Patch the store copy with new data
       // WARNING: gets overwritten on a new load action!
       return Object.assign({}, state, {
@@ -32,9 +34,9 @@ export function reducer(state = initialState, action: profile.Actions): State {
       });
     }
 
-    case profile.UPDATE_ADDRESS_SUCCESS:
-    case profile.SAVE_PROFILE_SUCCESS:
-    case profile.LOAD_PROFILE_SUCCESS: {
+    case ProfileActions.UPDATE_ADDRESS_SUCCESS:
+    case ProfileActions.SAVE_PROFILE_SUCCESS:
+    case ProfileActions.LOAD_PROFILE_SUCCESS: {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,

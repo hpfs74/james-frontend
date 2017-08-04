@@ -1,6 +1,8 @@
 import { createSelector } from '@ngrx/store';
-import * as compare from '../actions/compare';
+import * as CompareActions from '../actions/compare';
 import { InsuranceAdvice } from './../models/insurance-advice';
+
+export type Action = CompareActions.All;
 
 export interface State {
   loading: boolean;
@@ -14,15 +16,15 @@ export const initialState: State = {
   insurances: []
 };
 
-export function reducer(state = initialState, action: compare.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case compare.LOAD_CAR_COMPARE: {
+    case CompareActions.LOAD_CAR_COMPARE: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case compare.LOAD_CAR_COMPARE_SUCCESS: {
+    case CompareActions.LOAD_CAR_COMPARE_SUCCESS: {
       const compareResult = action.payload;
 
       return Object.assign({}, state, {

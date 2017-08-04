@@ -15,6 +15,9 @@ import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 
 import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
 
+/** Util pages */
+import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
+
 /**
  * Pipes
  */
@@ -23,7 +26,7 @@ import { TitleCasePipe, RoundPipe, LicensePlatePipe } from './pipes/';
 /**
  * Directives
  */
-import { BlurForwarderDirective, JumpToElementDirective } from './directives';
+import { JumpToElementDirective } from './directives';
 
 
 /**
@@ -101,7 +104,8 @@ export const sharedComponents = [
   TabsComponent,
   TabComponent,
   NavUserComponent,
-  UserGreetingComponent
+  UserGreetingComponent,
+  PageNotFoundComponent
 ];
 
 export const sharedModules = [

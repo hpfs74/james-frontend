@@ -75,7 +75,7 @@ export class UpdateAddressFailAction implements Action {
 }
 
 
-export type Actions
+export type All
   = LoadAction
   | LoadSuccessAction
   | LoadFailAction

@@ -51,10 +51,14 @@ export function ContentLoader(contentService: ContentService) {
     SharedModule,
     HomeModule.forRoot(),
     StoreModule.forRoot(reducers, {
-      initialState: {},
+      initialState: {
+        profile: {},
+        insurances: [],
+        messages: []
+      },
       metaReducers
     }),
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
+    // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
     LoginRoutingModule,
     AppRoutingModule,
     StoreRouterConnectingModule,

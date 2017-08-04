@@ -23,7 +23,7 @@ export class Forward implements Action {
   readonly type = FORWARD;
 }
 
-export type Actions
+export type All
   = Go
   | Back
   | Forward;

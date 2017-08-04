@@ -1,7 +1,9 @@
 import { createSelector } from '@ngrx/store';
 import { ChatMessage } from '../components/knx-chat-stream/chat-message';
 import { Profile } from '../models/profile';
-import * as assistant from '../actions/assistant';
+import * as AssistantActions from '../actions/assistant';
+
+export type Action = AssistantActions.All;
 
 export interface State {
   messages: Array<ChatMessage>;
@@ -11,16 +13,16 @@ export const initialState: State = {
   messages: []
 };
 
-export function reducer(state = initialState, action: assistant.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
 
-    case assistant.ADD_MESSAGE: {
+    case AssistantActions.ADD_MESSAGE: {
       return Object.assign({}, state, {
         messages: [ ...state.messages, new ChatMessage(null, action.payload, false) ]
       });
     }
 
-    case assistant.CLEAR_MESSAGES: {
+    case AssistantActions.CLEAR_MESSAGES: {
       return Object.assign({}, state, {
         messages: []
       });

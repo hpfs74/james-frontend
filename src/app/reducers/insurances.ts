@@ -1,6 +1,8 @@
 import { createSelector } from '@ngrx/store';
 import { Insurance } from '../models/insurance';
-import * as insurances from '../actions/insurances';
+import * as InsuranceActions from '../actions/insurances';
+
+export type Action = InsuranceActions.All;
 
 export interface State {
   loading: boolean;
@@ -14,16 +16,19 @@ export const initialState: State = {
   insurances: []
 };
 
-export function reducer(state = initialState, action: insurances.Actions): State {
+export function reducer(state = initialState, action: Action): State {
+  console.log(action);
+
+
   switch (action.type) {
-    case insurances.LOAD: {
+    case InsuranceActions.LOAD: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case insurances.ADD_INSURANCE_SUCCESS:
-    case insurances.LOAD_SUCCESS: {
+    case InsuranceActions.ADD_INSURANCE_SUCCESS:
+    case InsuranceActions.LOAD_SUCCESS: {
       const insurances = action.payload;
 
       return Object.assign({}, state, {

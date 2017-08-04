@@ -1,6 +1,8 @@
 import { createSelector } from '@ngrx/store';
 import { Car } from '../models/car';
-import * as car from '../actions/car';
+import * as CarActions from '../actions/car';
+
+export type Action = CarActions.All;
 
 export interface State {
   loading: boolean;
@@ -16,15 +18,15 @@ export const initialState: State = {
   info: []
 };
 
-export function reducer(state = initialState, action: car.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case car.GET_INFO_REQUEST: {
+    case CarActions.GET_INFO_REQUEST: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case car.GET_INFO_SUCCESS: {
+    case CarActions.GET_INFO_SUCCESS: {
       const car = action.payload;
 
       return Object.assign({}, state, {
