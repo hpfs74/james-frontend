@@ -3,7 +3,7 @@ import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthHttp } from './auth-http.service';
-import { ConfigService } from '../config.service';
+import { environment } from '../../environments/environment';
 import { Profile } from '../models/profile';
 import { Insurance } from '../models/insurance';
 import { Settings } from '../models/settings';
@@ -13,8 +13,8 @@ export class ProfileService {
   private baseUrl: string;
   private insurancesUrl: string;
 
-  constructor(private configService: ConfigService, private http: AuthHttp) {
-    this.baseUrl = configService.config.api.james.profile;
+  constructor(private http: AuthHttp) {
+    this.baseUrl = environment.james.profile;
     this.insurancesUrl = this.baseUrl + '/insurances';
   }
 

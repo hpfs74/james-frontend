@@ -25,7 +25,8 @@ export const environment = {
     carCompare: '${process.env.JAMES_API_CAR_COMPARE}',
     carCoverage: '${process.env.JAMES_API_CAR_COVERAGE}',
     carDamageFree: '${process.env.JAMES_API_CAR_DAMAGEFREE}',
-    carBuy: '${process.env.JAMES_API_CAR_BUY}'
+    carBuy: '${process.env.JAMES_API_CAR_BUY}',
+    insurer: '${process.env.JAMES_API_INSURER}'
   }
 };
 `;

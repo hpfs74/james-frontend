@@ -11,7 +11,6 @@ import * as profile from '../../../actions/profile';
 import * as car from '../../../actions/car';
 import * as advice from '../../../actions/advice';
 
-import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
@@ -58,7 +57,6 @@ export class CarBuyComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store<fromRoot.State>,
-    private configService: ConfigService,
     private contentService: ContentService,
     private assistantService: AssistantService,
     private profileService: ProfileService

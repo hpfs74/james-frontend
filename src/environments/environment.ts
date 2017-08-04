@@ -11,6 +11,8 @@ export const environment = {
     carCompare: 'https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/profile/insurances/compare/car',
     carCoverage: 'https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper/car/coverage',
     carDamageFree: 'https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/helper/car/damagefree',
-    carBuy: 'https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/car/buystatic'
+    carBuy: 'https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/car/buystatic',
+    insurer: 'https://dftq0qi31m.execute-api.eu-west-1.amazonaws.com/dev/v1/insurer'
   }
 };
+

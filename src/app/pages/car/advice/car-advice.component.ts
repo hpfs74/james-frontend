@@ -16,7 +16,6 @@ import * as advice from '../../../actions/advice';
 import * as compare from '../../../actions/compare';
 import * as coverage from '../../../actions/coverage';
 
-import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
 import { InsuranceService } from '../../../services/insurance.service';
 import { AssistantService } from './../../../services/assistant.service';
@@ -69,7 +68,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private store: Store<fromRoot.State>,
-    private configService: ConfigService,
     private contentService: ContentService,
     private assistantService: AssistantService,
     private carService: CarService,

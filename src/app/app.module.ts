@@ -18,8 +18,6 @@ import { CompareEffects } from './effects/compare';
 import { CoverageEffects } from './effects/coverage';
 import { SettingsEffects } from './effects/settings';
 
-import { ConfigInterface } from './config.interface';
-import { ConfigService } from './config.service';
 import { ContentService } from './content.service';
 
 import { AppComponent } from './app.component';
@@ -38,19 +36,6 @@ import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 // Feature modules
 import { SharedModule } from './shared.module';
 import { HomeModule } from './pages/home/home.module';
-
-// Styles 'barrel'
-// import '../styles/styles.scss';
-
-// Needed because app initializer doesn't work with anonymous function
-export function ConfigLoader(configService: ConfigService) {
-  let configFile = './config/api/config.mock.json';
-
-  if (environment.production) {
-    configFile = './config/api/config.prod.json';
-  }
-  return () => configService.load(configFile);
-}
 
 export function ContentLoader(contentService: ContentService) {
   return () => contentService.loadFiles();
@@ -90,13 +75,6 @@ export function ContentLoader(contentService: ContentService) {
     CookiesPageComponent,
   ],
   providers: [
-    ConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: ConfigLoader,
-      deps: [ConfigService],
-      multi: true
-    },
     ContentService,
     {
       provide: APP_INITIALIZER,

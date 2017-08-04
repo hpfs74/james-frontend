@@ -8,7 +8,7 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 
 import { PasswordResetComponent } from './password-reset.component';
 import { AuthService } from '../../services/auth.service';
-import { ConfigService } from '../../config.service';
+import { environment } from '../../../environments/environment';
 
 describe('Component: Password Reset', () => {
   let comp: PasswordResetComponent;
@@ -35,7 +35,6 @@ describe('Component: Password Reset', () => {
         BaseRequestOptions,
         MockBackend,
         AuthService,
-        { provide: ConfigService, useValue: configServiceStub },
         {
           deps: [
             MockBackend,
