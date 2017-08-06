@@ -66,7 +66,7 @@ describe('Utils: AuthUtils', () => {
     it('should return true if token is valid', () => {
       localStorage.setItem('token', ' { "expires_in": "12218018281" }');
       const res = AuthUtils.tokenNotExpired('token');
-      expect(res).toBeFalsy();
+      expect(res).toBeTruthy();
     });
   });
 });

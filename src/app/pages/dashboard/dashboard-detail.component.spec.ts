@@ -62,11 +62,7 @@ describe('Component: DashboardDetail', () => {
         ],
         imports: [
           RouterTestingModule,
-          // StoreModule.provideStore({
-          //   profile: {
-          //     firstname: 'test'
-          //   }
-          // })
+          StoreModule.forRoot({})
         ],
         declarations: [DashboardDetailComponent],
         schemas: [NO_ERRORS_SCHEMA]
@@ -129,11 +125,11 @@ describe('Component: DashboardDetail', () => {
         ],
         imports: [
           RouterTestingModule,
-          // StoreModule.provideStore({
-          //   profile: {
-          //     firstname: 'test'
-          //   }
-          // })
+          StoreModule.forRoot({
+            profile: {
+              firstname: 'test'
+            }
+          })
         ],
         declarations: [DashboardDetailComponent],
         schemas: [NO_ERRORS_SCHEMA]

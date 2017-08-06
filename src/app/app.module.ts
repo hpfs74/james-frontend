@@ -41,7 +41,6 @@ export function ContentLoader(contentService: ContentService) {
   return () => contentService.loadFiles();
 }
 
-// !! Ensure AppRoutingModule is always imported last
 @NgModule({
   imports: [
     BrowserModule,

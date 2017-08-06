@@ -7,12 +7,11 @@ import { postalCodeMask } from '../../utils/base-form.utils';
 
 import { Address } from '../../models/address';
 import { AddressLookupService } from './address-lookup.service';
-import { GeolocationService } from '../../services';
 
 @Component({
   selector: 'knx-address-lookup',
   templateUrl: './address-lookup.component.html',
-  providers: [AddressLookupService, GeolocationService]
+  providers: [AddressLookupService]
 })
 export class AddressLookupComponent implements AfterViewChecked {
   @Input() addressFormGroup: FormGroup;
@@ -24,9 +23,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   public mask = postalCodeMask;
   private lookupTimeout;
 
-  constructor(
-    private addressService: AddressLookupService,
-    private geolocationService: GeolocationService) {
+  constructor(private addressService: AddressLookupService) {
   }
 
   ngAfterViewChecked(): void {
