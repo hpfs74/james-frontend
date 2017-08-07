@@ -17,7 +17,7 @@ import { collapseInOutAnimation } from '../../animations/collapse.animation';
 })
 export class CollapseMessageComponent {
   @Input() title: string;
-  @Input() isOpen: boolean = false;
+  @Input() isOpen = false;
 
   toggle(event) {
     if (event.target.className.indexOf('knx-collapse-message') > -1 || event.target.className === 'knx-collapse-message__title') {

@@ -3,5 +3,5 @@ export interface ChatStreamOptions {
     show: boolean;
     name?: string;
     title?: string;
-  }
+  };
 }

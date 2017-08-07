@@ -22,7 +22,7 @@ export class PriceItemComponent {
   @Input() badge: string;
   @Input() price: number;
   @Input() features: Array<string>;
-  @Input() highlight: boolean = false;
-  @Input() selectable: boolean = false;
-  @Input() selected: boolean = false;
+  @Input() highlight = false;
+  @Input() selectable = false;
+  @Input() selected = false;
 }

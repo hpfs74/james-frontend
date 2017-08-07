@@ -10,14 +10,12 @@ import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import { DashboardDetailComponent } from './dashboard-detail.component';
 import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
-import { ConfigService } from '../../config.service';
-import { loginError } from './login-error';
 import { Observable } from 'rxjs/Observable';
 
 describe('Component: DashboardDetail', () => {
   let comp: DashboardDetailComponent;
   let fixture: ComponentFixture<DashboardDetailComponent>;
-  let routerStub:any;
+  let routerStub: any;
   let activatedRouteStub: any;
 
   const configServiceStub = {
@@ -51,7 +49,6 @@ describe('Component: DashboardDetail', () => {
           ProfileService,
           { provide: Router, useValue: routerStub },
           { provide: ActivatedRoute, useValue: activatedRouteStub},
-          { provide: ConfigService, useValue: configServiceStub },
           {
             deps: [
               MockBackend,
@@ -65,11 +62,7 @@ describe('Component: DashboardDetail', () => {
         ],
         imports: [
           RouterTestingModule,
-          StoreModule.provideStore({
-            profile: {
-              firstname: 'test'
-            }
-          })
+          StoreModule.forRoot({})
         ],
         declarations: [DashboardDetailComponent],
         schemas: [NO_ERRORS_SCHEMA]
@@ -118,8 +111,7 @@ describe('Component: DashboardDetail', () => {
           AssistantService,
           ProfileService,
           { provide: Router, useValue: routerStub },
-          { provide: ActivatedRoute, useValue: activatedRouteStub},
-          { provide: ConfigService, useValue: configServiceStub },
+          { provide: ActivatedRoute, useValue: activatedRouteStub },
           {
             deps: [
               MockBackend,
@@ -133,7 +125,7 @@ describe('Component: DashboardDetail', () => {
         ],
         imports: [
           RouterTestingModule,
-          StoreModule.provideStore({
+          StoreModule.forRoot({
             profile: {
               firstname: 'test'
             }

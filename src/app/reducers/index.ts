@@ -1,5 +1,9 @@
-import { createSelector } from 'reselect';
-import { ActionReducer } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  createSelector,
+  createFeatureSelector,
+  ActionReducer,
+} from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../environments/environment';
 
@@ -11,7 +15,7 @@ import { environment } from '../../environments/environment';
  *
  * More: https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch5.html
  */
-import { compose } from '@ngrx/core/compose';
+import { compose } from '@ngrx/store';
 
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
@@ -20,16 +24,7 @@ import { compose } from '@ngrx/core/compose';
  */
 import { storeFreeze } from 'ngrx-store-freeze';
 
-/**
- * combineReducers is another useful metareducer that takes a map of reducer
- * functions and creates a new reducer that gathers the values
- * of each reducer and stores them using the reducer's key. Think of it
- * almost like a database, where every reducer is a table in the db.
- *
- * More: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
- */
-import { combineReducers } from '@ngrx/store';
-
+// TODO: wait for fix https://github.com/codewareio/ngrx-store-freeze/issues/17
 
 /**
  * Every reducer module's default export is the reducer function itself. In
@@ -63,7 +58,7 @@ export interface State {
   advice: fromAdvice.State;
   car: fromCar.State;
   coverage: fromCoverage.State;
-  router: fromRouter.RouterState;
+  routerReducer: fromRouter.RouterReducerState;
 }
 
 /**
@@ -73,7 +68,7 @@ export interface State {
  * wrapping that in storeLogger. Remember that compose applies
  * the result from right to left.
  */
-const reducers = {
+export const reducers: ActionReducerMap<State> = {
   profile: fromProfile.reducer,
   settings: fromSettings.reducer,
   layout: fromLayout.reducer,
@@ -83,19 +78,28 @@ const reducers = {
   advice: fromAdvice.reducer,
   car: fromCar.reducer,
   coverage: fromCoverage.reducer,
-  router: analyticsMetaReducer(fromRouter.routerReducer),
+  routerReducer: fromRouter.routerReducer
+  // routerReducer: analyticsMetaReducer(fromRouter.routerReducer)
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = combineReducers(reducers);
+// console.log all actions
+export function logger(reducer: ActionReducer<State>): ActionReducer<any, any> {
+  return function(state: State, action: any): State {
+    console.log('state', state);
+    console.log('action', action);
 
-export function reducer(state: any, action: any) {
-  if (environment.production) {
-    return productionReducer(state, action);
-  } else {
-    return developmentReducer(state, action);
-  }
+    return reducer(state, action);
+  };
 }
+
+/**
+ * By default, @ngrx/store uses combineReducers with the reducer map to compose
+ * the root meta-reducer. To add more meta-reducers, provide an array of meta-reducers
+ * that will be composed to form the root meta-reducer.
+ */
+export const metaReducers: ActionReducer<any, any>[] = !environment.production
+  ? [logger]
+  : [];
 
 
 /**
@@ -133,7 +137,7 @@ export function reducer(state: any, action: any) {
 export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
-//export const getProfileLoaded= createSelector(getProfileState, fromProfile.getLoaded);
+// export const getProfileLoaded= createSelector(getProfileState, fromProfile.getLoaded);
 
 
 /**

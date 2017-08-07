@@ -13,7 +13,7 @@ import { IChatMessage } from './chat-message.interface';
 })
 export class TextMessageComponent implements OnInit, IChatMessage {
   @Input() data: any;
-  @Input() showDate: boolean = false;
+  @Input() showDate = false;
 
   date: Date;
 

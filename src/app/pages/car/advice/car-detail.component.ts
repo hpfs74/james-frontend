@@ -58,8 +58,8 @@ export class CarDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    let licensePlate = this.form.formGroup.get('licensePlate');
-    let loan = this.form.formGroup.get('loan');
+    const licensePlate = this.form.formGroup.get('licensePlate');
+    const loan = this.form.formGroup.get('loan');
 
     Observable.combineLatest(
       licensePlate.valueChanges,

@@ -1,5 +1,7 @@
-import { createSelector } from 'reselect';
-import * as advice from '../actions/advice';
+import { createSelector } from '@ngrx/store';
+import * as AdviceActions from '../actions/advice';
+
+export type Action = AdviceActions.All;
 
 export interface State {
   selectedId: string | null;
@@ -13,9 +15,9 @@ export const initialState: State = {
   advice: {}
 };
 
-export function reducer(state = initialState, action: advice.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case advice.ADD_ADVICE: {
+    case AdviceActions.ADD_ADVICE: {
       const advice = action.payload;
 
       if (state.ids.indexOf(advice.id) > -1) {
@@ -31,7 +33,7 @@ export function reducer(state = initialState, action: advice.Actions): State {
       });
     }
 
-    case advice.UPDATE_ADVICE: {
+    case AdviceActions.UPDATE_ADVICE: {
       const advice = action.payload;
 
       return Object.assign({}, state, {
@@ -41,7 +43,7 @@ export function reducer(state = initialState, action: advice.Actions): State {
       });
     }
 
-    case advice.SELECT_ADVICE: {
+    case AdviceActions.SELECT_ADVICE: {
       return {
         ids: state.ids,
         advice: state.advice,
@@ -49,7 +51,7 @@ export function reducer(state = initialState, action: advice.Actions): State {
       };
     }
 
-    case advice.REMOVE_ADVICE: {
+    case AdviceActions.REMOVE_ADVICE: {
       const advice = action.payload;
 
       return Object.assign({}, state, {

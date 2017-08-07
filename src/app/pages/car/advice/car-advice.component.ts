@@ -3,11 +3,11 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
 
 import * as fromRoot from '../../../reducers';
+import * as RouterActions from '../../../actions/router';
 import * as profile from '../../../actions/profile';
 import * as assistant from '../../../actions/assistant';
 import * as car from '../../../actions/car';
@@ -16,7 +16,6 @@ import * as advice from '../../../actions/advice';
 import * as compare from '../../../actions/compare';
 import * as coverage from '../../../actions/coverage';
 
-import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
 import { InsuranceService } from '../../../services/insurance.service';
 import { AssistantService } from './../../../services/assistant.service';
@@ -40,7 +39,7 @@ import { AuthService } from '../../../services/auth.service';
 export class CarAdviceComponent implements OnInit, OnDestroy {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
-  carDetailSubmitted: boolean = false;
+  carDetailSubmitted = false;
   currentStep: number;
 
   coverages: Array<Price>;
@@ -69,7 +68,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private store: Store<fromRoot.State>,
-    private configService: ConfigService,
     private contentService: ContentService,
     private assistantService: AssistantService,
     private carService: CarService,
@@ -109,7 +107,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         backButtonLabel: 'Terug',
         hideNextButton: true,
         onShowStep: () => {
-          //FormUtils.scrollToForm('.knx-insurance-toplist');
+          // FormUtils.scrollToForm('.knx-insurance-toplist');
           this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
         }
@@ -127,7 +125,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         onBeforeNext: this.startBuyFlow.bind(this)
       }
     ];
-    let formBuilder = new FormBuilder();
+    const formBuilder = new FormBuilder();
     this.carDetailForm = new CarDetailForm(formBuilder);
 
     this.carExtrasForm = new CarExtrasForm(formBuilder);
@@ -135,7 +133,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       .debounceTime(200)
       .subscribe(data => {
         if (this.currentStep === 1) {
-          let compareObj = {
+          const compareObj = {
             coverage: data.coverage,
             cover_occupants: data.extraOptions.occupants || false,
             no_claim_protection: data.extraOptions.noclaim || false,
@@ -163,14 +161,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           return Observable.empty();
         }
       }).subscribe((res: Array<Car>) => {
-        let lastFound = res.slice(-1)[0];
+        const lastFound = res.slice(-1)[0];
         if (lastFound && lastFound.license) {
           this.car = lastFound;
           this.store.dispatch(new assistant.ClearAction);
           this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(lastFound)));
         } else {
           // Car not found in RDC
-          let c = this.carDetailForm.formGroup.get('licensePlate');
+          const c = this.carDetailForm.formGroup.get('licensePlate');
           this.triggerLicenseInValid();
         }
       }, err => {
@@ -183,7 +181,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       .filter(coverage => Object.keys(coverage).length > 0)
       .subscribe(coverageAdvice => {
         this.coverages = this.contentService.getContentObject().car.coverages;
-        let coverage = this.coverages.find(price => price.id === coverageAdvice.recommended_value);
+        const coverage = this.coverages.find(price => price.id === coverageAdvice.recommended_value);
         if (coverage) {
           coverage.highlight = true;
           this.store.dispatch(new assistant.ClearAction);
@@ -197,8 +195,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   submitDetailForm(): Observable<any> {
-    let detailForm = this.carDetailForm.formGroup;
-    let addressForm = this.carDetailForm.addressForm;
+    const detailForm = this.carDetailForm.formGroup;
+    const addressForm = this.carDetailForm.addressForm;
 
     FormUtils.validateForm(detailForm);
     FormUtils.validateForm(addressForm);
@@ -221,7 +219,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     //   .subscribe((profile: Profile) => {
     //   });
 
-    let compareObj: CarCompare = {
+    const compareObj: CarCompare = {
       active_loan: detailForm.value.loan,
       coverage: detailForm.value.coverage,
       claim_free_years: +detailForm.value.claimFreeYears,
@@ -254,7 +252,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   startBuyFlow(): Observable<any> {
     this.store.select(fromRoot.getSelectedAdviceId).subscribe(
-      id => this.store.dispatch(go(['/car/insurance', { adviceId: id }])));
+      id => {
+        this.store.dispatch(new RouterActions.Go({
+          path: ['/car/insurance', { adviceId: id }],
+        }));
+      });
     return;
   }
 
@@ -264,7 +266,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   showHelperText(key) {
-    let messageToShow = this.chatConfig.car.info[key];
+    const messageToShow = this.chatConfig.car.info[key];
     this.store.dispatch(new assistant.ClearAction);
     this.store.dispatch(new assistant.AddMessageAction(messageToShow));
   }
@@ -276,7 +278,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   triggerLicenseInValid() {
-    let c = this.carDetailForm.formGroup.get('licensePlate');
+    const c = this.carDetailForm.formGroup.get('licensePlate');
     c.setErrors({ 'licensePlateRDC': true });
     c.markAsTouched();
     this.store.dispatch(new assistant.ClearAction);

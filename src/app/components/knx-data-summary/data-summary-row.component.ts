@@ -22,7 +22,7 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class DataSummaryRowComponent {
-  @Input() showInfo: boolean = false;
+  @Input() showInfo = false;
   @Input() label: string;
   @Input() infoText: string;
 }

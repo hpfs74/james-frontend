@@ -11,7 +11,7 @@ export interface Proposal {
   proposal: Insurance;
   items: {
     [id: string]: string
-  }
+  };
 }
 
 
@@ -23,20 +23,20 @@ export class CarProposalHelper {
 
   /* tslint:disable:max-line-length */
   propMapping = [
-    { key: 'Verzekeraar', value: 'moneyview_id', transform: (val) => val.split(':')[0] },
-    { key: 'Product', value: 'moneyview_id', transform: (val) => val.split(':')[1] },
-    { key: 'Geslacht', value: 'gender', transform: (val) => val === 'm' ? 'Man' : 'Vrouw' },
-    { key: 'Voorletters', value: 'initials' },
-    { key: 'Voornaam', value: 'firstName' },
-    { key: 'Voorvoegsels', value: 'infix' },
-    { key: 'Achternaam', value: 'lastName' },
+    { key: 'Verzekeraar',  value: 'moneyview_id', transform: (val) => val.split(':')[0] },
+    { key: 'Product',  value: 'moneyview_id', transform: (val) => val.split(':')[1] },
+    { key: 'Geslacht',  value: 'gender', transform: (val) => val === 'm' ? 'Man' : 'Vrouw' },
+    { key: 'Voorletters',  value: 'initials' },
+    { key: 'Voornaam',  value: 'firstName' },
+    { key: 'Voorvoegsels', value:  'infix' },
+    { key: 'Achternaam',  value: 'lastName' },
     { key: 'Straat', value: 'address.street'},
-    { key: 'Huisnummer', value: 'address.number'},
+    { key: 'Huisnummer',  value: 'address.number'},
     { key: 'Huisnummer toevoeging', value: 'address.number_extended'},
-    { key: 'Postcode', value: 'address.postcode'},
+    { key: 'Postcode', value:  'address.postcode'},
     { key: 'Woonplaats', value: 'address.city' },
-    { key: 'Geboortedatum', value: 'birthDate'},
-    { key: 'Mobiel telefoonnummer', value: 'mobileNumber'},
+    { key: 'Geboortedatum', value:  'birthDate'},
+    { key: 'Mobiel telefoonnummer', value:  'mobileNumber'},
     { key: 'Vast telefoonnummer', value: 'phoneNumber'},
     { key: 'Rekeningnummer', value: 'iban', transform: this.removeWhiteSpace },
     { key: 'Betalingstermijn', value: ''},
@@ -46,8 +46,8 @@ export class CarProposalHelper {
     { key: 'Startdatum', value: 'startDate', transform: this.formatDate },
     { key: 'Ingangsdatum', value: 'startDate', transform: this.formatDate },
     // Car
-    { key: 'Kenteken', value: 'car.license' },
-    { key: 'Merk', value: 'car.make' },
+    { key: 'Kenteken',  value: 'car.license' },
+    { key: 'Merk',  value: 'car.make' },
     { key: 'Model', value: 'car.model' },
     { key: 'Type', value: 'car.type' },
     { key: 'Bouwjaar', value: 'car.year' },
@@ -60,7 +60,7 @@ export class CarProposalHelper {
     { key: 'Hoofddekking', value: 'coverage', transform: this.getCoverage },
     { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
     { key: 'Inzittenden meeverzekeren', value: 'cover_occupants', transform: this.getBoolean },
-    { key: 'Slotvragen', value: '' },
+    { key: 'Slotvragen', value:  '' },
     {
       key: 'Ben jij in de laatste 8 jaar, in aanraking geweest met politie of justitie?',
       value: 'crime',
@@ -104,7 +104,7 @@ export class CarProposalHelper {
       return;
     }
 
-    let itemObj = {};
+    const itemObj = {};
     this.propMapping.forEach((el) => {
       let value;
       if (el.value.indexOf('.') > -1) {

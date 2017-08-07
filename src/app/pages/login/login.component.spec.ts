@@ -8,7 +8,6 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
-import { ConfigService } from '../../config.service';
 import { loginError } from './login-error';
 
 describe('Component: Login', () => {
@@ -33,7 +32,6 @@ describe('Component: Login', () => {
         BaseRequestOptions,
         MockBackend,
         AuthService,
-        { provide: ConfigService, useValue: configServiceStub },
         {
           deps: [
             MockBackend,
@@ -73,28 +71,28 @@ describe('Component: Login', () => {
   });
 
   it('should display error message on wrong email syntax', () => {
-    let email = comp.form.formGroup.get('email');
+    const email = comp.form.formGroup.get('email');
     email.setValue('not-an-email');
-    let errors = email.errors || {};
+    const errors = email.errors || {};
     expect(errors['email']).toBeTruthy();
   });
 
   it('should have submit button enabled by default', () => {
-    let submit = fixture.debugElement.query(By.css('button[type="submit"]'));
+    const submit = fixture.debugElement.query(By.css('button[type="submit"]'));
     expect(submit.nativeElement.disabled).toBeFalsy();
   });
 
   it('should display generic error', () => {
-    let testData = {
+    const testData = {
       error: 'generic error',
-      toString: () : string => {
+      toString: (): string => {
         return 'Generic error';
       }
     };
 
     comp.handleError(testData);
     expect(comp).not.toBeNull();
-    //expect(comp.messageTitle).toBe('Login failed');
+    // expect(comp.messageTitle).toBe('Login failed');
     expect(comp.message).toEqual(loginError.default);
   });
 

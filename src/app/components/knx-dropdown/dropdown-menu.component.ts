@@ -74,14 +74,14 @@ export class DropdownMenuComponent {
    * @name width
    * @type {number} [2, 4, 6]
    */
-  @Input() public width: number = 4;
+  @Input() public width = 4;
 
   /**
    * @description if set to true, the first element of the dropdown will be automatically focused
    * @name focusFirstElement
    * @type {boolean}
    */
-  @Input() public focusFirstElement: boolean = true;
+  @Input() public focusFirstElement = true;
 
   /**
    * @description sets dropdown offset from the button
@@ -93,7 +93,7 @@ export class DropdownMenuComponent {
    * @name appendToBody
    * @type {boolean}
    */
-  @Input() public appendToBody: boolean = true;
+  @Input() public appendToBody = true;
 
   /**
    * @name items

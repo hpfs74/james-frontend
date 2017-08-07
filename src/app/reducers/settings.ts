@@ -1,6 +1,8 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@ngrx/store';
 import { Settings } from '../models/settings';
-import * as settings from '../actions/settings';
+import * as SettingsActions from '../actions/settings';
+
+export type Action = SettingsActions.All;
 
 export interface State {
   loading: boolean;
@@ -14,16 +16,16 @@ export const initialState: State = {
   settings: {}
 };
 
-export function reducer(state = initialState, action: settings.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
 
-    case settings.UPDATE_SETTINGS_REQUEST: {
+    case SettingsActions.UPDATE_SETTINGS_REQUEST: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case settings.UPDATE_SETTINGS_SUCCESS: {
+    case SettingsActions.UPDATE_SETTINGS_SUCCESS: {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,

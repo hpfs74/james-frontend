@@ -34,15 +34,15 @@ describe('Component: Features', () => {
   });
 
   it('should display list of features', () => {
-    let containerEl = fixture.debugElement.query(By.css('div.knx-features'));
-    let el = containerEl.nativeElement;
+    const containerEl = fixture.debugElement.query(By.css('div.knx-features'));
+    const el = containerEl.nativeElement;
     expect(el).not.toBeNull();
     expect(fixture.debugElement.nativeElement.querySelectorAll('.knx-features__item').length).toBe(4);
   });
 
   it('should display list of features change adding one more', () => {
-    let inputDe = fixture.debugElement.query(By.css('div.knx-features'));
-    let el = inputDe.nativeElement;
+    const inputDe = fixture.debugElement.query(By.css('div.knx-features'));
+    const el = inputDe.nativeElement;
 
     comp.items.push({ title: 'Feat 5', description: 'This is feature 5' });
     fixture.detectChanges();

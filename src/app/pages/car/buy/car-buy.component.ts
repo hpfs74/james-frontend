@@ -11,7 +11,6 @@ import * as profile from '../../../actions/profile';
 import * as car from '../../../actions/car';
 import * as advice from '../../../actions/advice';
 
-import { ConfigService } from '../../../config.service';
 import { ContentService } from '../../../content.service';
 import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
@@ -22,7 +21,7 @@ import { Profile } from './../../../models/profile';
 import { CarContactComponent } from './car-contact.component';
 import { ContactDetailForm } from './../../../forms/contact-detail.form';
 
-import { CarReportingCodeComponent } from './car-info.component';
+import { CarReportingCodeComponent } from './car-reporting-code.component';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { CarCheckComponent } from './car-check.component';
 import { CarCheckForm } from './car-check.form';
@@ -58,7 +57,6 @@ export class CarBuyComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store<fromRoot.State>,
-    private configService: ConfigService,
     private contentService: ContentService,
     private assistantService: AssistantService,
     private profileService: ProfileService
@@ -71,7 +69,7 @@ export class CarBuyComponent implements OnInit {
     this.profile$ = this.store.select(fromRoot.getProfile);
     this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
 
-    let formBuilder = new FormBuilder();
+    const formBuilder = new FormBuilder();
     this.formContent = this.contentService.getContentObject();
 
     this.contactDetailForm = new ContactDetailForm(formBuilder);
@@ -159,7 +157,7 @@ export class CarBuyComponent implements OnInit {
 
   submitInsurance(): Observable<any> {
     // Final insurance request submit
-    let formData = Object.assign({},
+    const formData = Object.assign({},
       this.contactDetailForm.formGroup.value,
       this.reportingCodeForm.formGroup.value,
       this.checkForm.formGroup.value,
@@ -168,15 +166,15 @@ export class CarBuyComponent implements OnInit {
     );
     this.store.select(fromRoot.getSelectedAdvice).subscribe(advice => {
       // flatten car data into proposal
-      let flatData = Object.assign({},
+      const flatData = Object.assign({},
         advice,
         advice.address,
         advice.insurance,
         advice.insurance._embedded.insurance,
         { car: advice.insurance._embedded.car });
 
-      let proposalRequest = new CarProposalHelper(flatData);
-      let proposal: Proposal = {
+      const proposalRequest = new CarProposalHelper(flatData);
+      const proposal: Proposal = {
         proposal: advice.insurance,
         items: proposalRequest.getItems(flatData)
       };

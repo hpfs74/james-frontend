@@ -16,8 +16,8 @@ export class CookieService {
    */
   public check(name: string): boolean {
     name = encodeURIComponent(name);
-    let regexp = new RegExp('(?:^' + name + '|;\\s*' + name + ')=(.*?)(?:;|$)', 'g');
-    let exists = regexp.test(document.cookie);
+    const regexp = new RegExp('(?:^' + name + '|;\\s*' + name + ')=(.*?)(?:;|$)', 'g');
+    const exists = regexp.test(document.cookie);
     return exists;
   }
 
@@ -33,8 +33,8 @@ export class CookieService {
     }
 
     name = encodeURIComponent(name);
-    let regexp = new RegExp('(?:^' + name + '|;\\s*' + name + ')=(.*?)(?:;|$)', 'g');
-    let result = regexp.exec(document.cookie);
+    const regexp = new RegExp('(?:^' + name + '|;\\s*' + name + ')=(.*?)(?:;|$)', 'g');
+    const result = regexp.exec(document.cookie);
     return decodeURIComponent(result[1]);
   }
 
@@ -44,12 +44,12 @@ export class CookieService {
    * @returns a collection of all the cookies
    */
   public getAll(): any {
-    let cookies: any = {};
+    const cookies: any = {};
 
     if (document.cookie && document.cookie !== '') {
-      let split = document.cookie.split(';');
+      const split = document.cookie.split(';');
       for (let i = 0; i < split.length; i++) {
-        let currCookie = split[i].split('=');
+        const currCookie = split[i].split('=');
         currCookie[0] = currCookie[0].replace(/^ /, '');
         cookies[decodeURIComponent(currCookie[0])] = decodeURIComponent(currCookie[1]);
       }
@@ -74,7 +74,7 @@ export class CookieService {
 
     if (expires) {
       if (typeof expires === 'number') {
-        let dtExpires = new Date(new Date().getTime() + expires * 1000 * 60 * 60 * 24);
+        const dtExpires = new Date(new Date().getTime() + expires * 1000 * 60 * 60 * 24);
         cookieStr += 'expires=' + dtExpires.toUTCString() + ';';
       } else {
         cookieStr += 'expires=' + expires.toUTCString() + ';';
@@ -114,9 +114,9 @@ export class CookieService {
    * TODO: consider path and domain usage
    */
   public deleteAll(path?: string, domain?: string): any {
-    let cookies: any = this.getAll();
+    const cookies: any = this.getAll();
 
-    for (let cookieName in cookies) {
+    for (const cookieName of Object.keys(cookies)) {
       this.delete(cookieName, path, domain);
     }
   }

@@ -2,11 +2,10 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { Http, Response, ResponseOptions, XHRBackend, BaseRequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { AuthService } from './auth.service';
-import { ConfigService } from '../config.service';
 
 describe('Service: AuthService', () => {
   let backend, service;
-  let configServiceStub = {
+  const configServiceStub = {
     config: {
       api: {
         james: {
@@ -20,7 +19,6 @@ describe('Service: AuthService', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: ConfigService, useValue: configServiceStub },
         BaseRequestOptions,
         MockBackend,
         AuthService,

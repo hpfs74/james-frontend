@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/for
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/distinctUntilChanged';
 
-import { ConfigService } from '../../config.service';
 import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
@@ -39,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.profile$ = this.store.select(fromRoot.getProfile);
-    //this.insurances$ = this.store.select(fromRoot.getInsurances);
+    // this.insurances$ = this.store.select(fromRoot.getInsurances);
 
     this.store.dispatch(new assistant.ClearAction);
 
@@ -53,9 +54,9 @@ export class DashboardComponent implements OnInit {
     });
 
     this.store.select(fromRoot.getInsurances).subscribe((docs) => {
-      let insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
+      const insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
 
-      let myInsurances = [];
+      const myInsurances = [];
       Object.keys(docs)
         .filter((key) => insuranceItems.indexOf(key) !== -1)
         .forEach((key) => {
@@ -70,7 +71,7 @@ export class DashboardComponent implements OnInit {
       if (myInsurances && myInsurances.length > 0) {
         this.insurances = myInsurances.concat(this.getRemainingInsurances(insuranceTypes, myInsurances));
       } else {
-        //TODO: also add default insurances if getUserProfile call fails or show error
+        // TODO: also add default insurances if getUserProfile call fails or show error
         this.insurances = insuranceTypes.map((s) => {
           return {
             _id: null,

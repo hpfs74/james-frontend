@@ -40,7 +40,7 @@ describe('Component: PriceTable', () => {
   });
 
   it('should render with 4 elements', () => {
-    let newItem: Price = {
+    const newItem: Price = {
       id: 'd',
       header: 'Title4',
       badge: 'Test4',

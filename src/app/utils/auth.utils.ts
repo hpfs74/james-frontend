@@ -3,19 +3,19 @@ import * as crypto from 'crypto-js';
 export class TokenHelper {
 
   public getTokenExpirationDate(token: string): Date {
-    let tokenObj = JSON.parse(token);
+    const tokenObj = JSON.parse(token);
 
     if (!tokenObj.hasOwnProperty('expires_in')) {
       return null;
     }
 
-    let date = new Date(0); // The 0 here is the key, which sets the date to the epoch
+    const date = new Date(0); // The 0 here is the key, which sets the date to the epoch
     date.setUTCSeconds(tokenObj.expires_in);
     return date;
   }
 
   public isTokenExpired(token: string, offsetSeconds?: number): boolean {
-    let date = this.getTokenExpirationDate(token);
+    const date = this.getTokenExpirationDate(token);
     offsetSeconds = offsetSeconds || 0;
 
     if (date === null) {
@@ -59,16 +59,16 @@ export function base64url(source) {
  * @return {string}
  */
 export function encryptPassword(password, secret) {
-  let header = {'alg': 'HS256', 'typ': 'JWT'};
-  let data = password;
-  let stringifiedHeader = crypto.enc.Utf8.parse(JSON.stringify(header));
-  let encodedHeader = base64url(stringifiedHeader);
-  let stringifiedData = crypto.enc.Utf8.parse(JSON.stringify(data));
-  let encodedData = base64url(stringifiedData);
+  const header = {'alg': 'HS256', 'typ': 'JWT'};
+  const data = password;
+  const stringifiedHeader = crypto.enc.Utf8.parse(JSON.stringify(header));
+  const encodedHeader = base64url(stringifiedHeader);
+  const stringifiedData = crypto.enc.Utf8.parse(JSON.stringify(data));
+  const encodedData = base64url(stringifiedData);
   let signature = encodedHeader + '.' + encodedData;
 
   signature = crypto.HmacSHA256(signature, secret);
   signature = base64url(signature);
-  //TODO: what's the use here of hashing when we return encodedData?
+  // TODO: what's the use here of hashing when we return encodedData?
   return encodedHeader + '.' + encodedData + '.' + signature;
 }

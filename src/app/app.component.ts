@@ -1,7 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
-import { ConfigInterface } from './config.interface';
-import { ConfigService } from './config.service';
 import {
   AuthService,
   NavigationService,
@@ -17,17 +15,12 @@ import {
     InsuranceService,
     CookieService,
   ],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit {
-  isLoading: boolean = true;
+export class AppComponent {
+  isLoading = true;
 
-  constructor(private configService: ConfigService, private authService: AuthService) {
-  }
-
-  ngOnInit() {
-    this.isLoading = false;
-    //console.log('Configuration loaded: ' + JSON.stringify(this.configService.config));
+  constructor(private authService: AuthService) {
   }
 }

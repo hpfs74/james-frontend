@@ -1,59 +1,59 @@
 /* this file will be extracted to main dist folder and is imported in index.html */
 
 /* keep before @cx and @knx */
-@import 'variables';
+@import 'styles/variables';
 
 /* import shared library styles */
-@import '../../node_modules/@knx/base/index';
-@import '../../node_modules/@knx/grid/index';
+@import '../node_modules/@knx/base/index';
+@import '../node_modules/@knx/grid/index';
 
 /*
  * page component styles
  * NOTE: containers, e.g. smart components should not have styles!
  */
-@import '../app/pages/dashboard/dashboard.component';
-@import '../app/pages/login/login.component';
-@import '../app/pages/password-reset/password-reset.component';
-@import '../app/pages/car/buy/car-summary.component';
+@import 'app/pages/dashboard/dashboard.component';
+@import 'app/pages/login/login.component';
+@import 'app/pages/password-reset/password-reset.component';
+@import 'app/pages/car/buy/car-summary.component';
 
 /* component styles */
-@import '../app/components/knx-address-lookup/address-lookup.component';
-@import '../app/components/knx-button-icon/button-icon.component';
-@import '../app/components/knx-chat-stream/chat-stream.component';
-@import '../app/components/knx-chat-stream/chat-message.component';
-@import '../app/components/knx-collapse-panel/collapse-panel.component';
-@import '../app/components/knx-collapse-message/collapse-message.component';
-@import '../app/components/knx-cookiebar/cookiebar.component';
-@import '../app/components/knx-dashboard-item/dashboard-item.component';
-@import '../app/components/knx-donut/donut.component';
-@import '../app/components/knx-dropdown/dropdown-button.component';
-@import '../app/components/knx-dropdown/dropdown-menu-item.component';
-@import '../app/components/knx-dropdown/dropdown-menu.component';
-@import '../app/components/knx-features/features.component';
-@import '../app/components/knx-insurance-result/insurance-result.component';
-@import '../app/components/knx-insurance-review/insurance-review.component';
-@import '../app/components/knx-insurance-result-detail/insurance-result-detail.component';
-@import '../app/components/knx-insurance-toplist/insurance-toplist.component';
-@import '../app/components/knx-nav-user/nav-user.component';
-@import '../app/components/knx-navigation/navbar.component';
-@import '../app/components/knx-opening-hours/opening-hours.component';
-@import '../app/components/knx-review-summary/review-summary.component';
-@import '../app/components/knx-side-panel/side-panel.component';
-@import '../app/components/knx-star-rating/star-rating.component';
-@import '../app/components/knx-step-blocks/step-blocks.component';
-@import '../app/components/knx-step-blocks/step-block.component';
-@import '../app/components/knx-tabs/tabs.component';
-@import '../app/components/knx-user-greeting/user-greeting.component';
-@import '../app/components/knx-car-info-message/car-info.component';
-@import '../app/components/knx-car-info-message/car-info.colors';
-@import '../app/components/knx-car-info-message/car-preview.component';
-@import '../app/components/knx-car-summary/car-summary.component';
-@import '../app/components/knx-app-loader/loader.component';
+@import 'app/components/knx-address-lookup/address-lookup.component';
+@import 'app/components/knx-button-icon/button-icon.component';
+@import 'app/components/knx-chat-stream/chat-stream.component';
+@import 'app/components/knx-chat-stream/chat-message.component';
+@import 'app/components/knx-collapse-panel/collapse-panel.component';
+@import 'app/components/knx-collapse-message/collapse-message.component';
+@import 'app/components/knx-cookiebar/cookiebar.component';
+@import 'app/components/knx-dashboard-item/dashboard-item.component';
+@import 'app/components/knx-donut/donut.component';
+@import 'app/components/knx-dropdown/dropdown-button.component';
+@import 'app/components/knx-dropdown/dropdown-menu-item.component';
+@import 'app/components/knx-dropdown/dropdown-menu.component';
+@import 'app/components/knx-features/features.component';
+@import 'app/components/knx-insurance-result/insurance-result.component';
+@import 'app/components/knx-insurance-review/insurance-review.component';
+@import 'app/components/knx-insurance-result-detail/insurance-result-detail.component';
+@import 'app/components/knx-insurance-toplist/insurance-toplist.component';
+@import 'app/components/knx-nav-user/nav-user.component';
+@import 'app/components/knx-navigation/navbar.component';
+@import 'app/components/knx-opening-hours/opening-hours.component';
+@import 'app/components/knx-review-summary/review-summary.component';
+@import 'app/components/knx-side-panel/side-panel.component';
+@import 'app/components/knx-star-rating/star-rating.component';
+@import 'app/components/knx-step-blocks/step-blocks.component';
+@import 'app/components/knx-step-blocks/step-block.component';
+@import 'app/components/knx-tabs/tabs.component';
+@import 'app/components/knx-user-greeting/user-greeting.component';
+@import 'app/components/knx-car-info-message/car-info.component';
+@import 'app/components/knx-car-info-message/car-info.colors';
+@import 'app/components/knx-car-info-message/car-preview.component';
+@import 'app/components/knx-car-summary/car-summary.component';
+@import 'app/components/knx-app-loader/loader.component';
 
 /* cx and other external component overrides */
-@import './overrides';
-@import './form-group';
-@import './form-valid';
+@import 'styles/overrides';
+@import 'styles/form-group';
+@import 'styles/form-valid';
 
 html {
   box-sizing: border-box;

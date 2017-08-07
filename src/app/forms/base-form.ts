@@ -6,9 +6,9 @@ import { houseNumberalidator } from '../utils/base-form.validators';
 
 export class BaseForm {
   public formGroup: FormGroup;
-  public formConfig: { any:CXFormGroupOptions<any> };
+  public formConfig: { any: CXFormGroupOptions<any> };
   public infoMessages: any;
-  public validationSummaryError: string = 'Heb je alle velden (correct) ingevuld?';
+  public validationSummaryError = 'Heb je alle velden (correct) ingevuld?';
 
   public createAddress(fb: FormBuilder): FormGroup {
     return fb.group({

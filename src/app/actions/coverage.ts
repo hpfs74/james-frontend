@@ -23,7 +23,7 @@ export class CarCoverageFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-export type Actions
+export type All
   = CarCoverageAction
   | CarCoverageCompleteAction
   | CarCoverageFailAction;

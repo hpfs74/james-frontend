@@ -1,5 +1,7 @@
-import { createSelector } from 'reselect';
-import * as coverage from '../actions/coverage';
+import { createSelector } from '@ngrx/store';
+import * as CoverageActions from '../actions/coverage';
+
+export type Action = CoverageActions.All;
 
 export interface State {
   loading: boolean;
@@ -13,15 +15,15 @@ export const initialState: State = {
   coverage: {}
 };
 
-export function reducer(state = initialState, action: coverage.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case coverage.CAR_COVERAGE_REQUEST: {
+    case CoverageActions.CAR_COVERAGE_REQUEST: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case coverage.CAR_COVERAGE_SUCCESS: {
+    case CoverageActions.CAR_COVERAGE_SUCCESS: {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,

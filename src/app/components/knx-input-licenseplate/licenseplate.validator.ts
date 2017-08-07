@@ -9,9 +9,9 @@ export function LicensePlateValidator(c: FormControl) {
   } else {
     // length should be at least 6
     if (LICENSEPLATE_REGEXP.test(c.value)) {
-      let formats = getLicenseFormats();
+      const formats = getLicenseFormats();
 
-      for (let licensePlateRegEx of formats) {
+      for (const licensePlateRegEx of formats) {
         if (licensePlateRegEx.test(c.value)) {
           return null;
         }

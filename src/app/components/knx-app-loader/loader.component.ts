@@ -16,7 +16,7 @@ import { LoaderState } from './loader';
 })
 export class AppLoaderComponent implements OnInit, OnDestroy {
 
-  public show: boolean = false;
+  public show = false;
 
   private subscription: Subscription;
 

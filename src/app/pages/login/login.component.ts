@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, RouterLink, NavigationExtras } from '@angular/router';
 
+import { environment } from '../../../environments/environment';
 import { LoginForm } from './login.form';
 import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
 import { loginError } from './login-error';
@@ -16,8 +17,8 @@ import { loginError } from './login-error';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  isPending: boolean = false;
-  showPassword: boolean = false;
+  isPending = false;
+  showPassword = false;
 
   form: LoginForm;
   messageTitle: string;
@@ -26,13 +27,7 @@ export class LoginComponent {
 
   constructor(private router: Router, private authService: AuthService) {
     this.form = new LoginForm(new FormBuilder());
-
-    this.forgotPasswordLink =
-      'https://profile-james-a.nicci.io/password?client_id=56a6ab20bb00893f071faddc' +
-      '&locale=nl_NL' +
-      '&redirect_uri=com.mobgen.knab://' +
-      '&response_type=code' +
-      '&scope=basic+emailaddress+social';
+    this.forgotPasswordLink = environment.james.forgetPassword;
   }
 
   goToPasswordReset() {
@@ -59,8 +54,8 @@ export class LoginComponent {
       this.isPending = true;
       this.message = undefined;
 
-      let email = this.form.formGroup.get('email');
-      let password = this.form.formGroup.get('password');
+      const email = this.form.formGroup.get('email');
+      const password = this.form.formGroup.get('password');
 
       this.authService
         .login(email.value, password.value)
@@ -71,11 +66,11 @@ export class LoginComponent {
 
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
-          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
+          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/overview';
 
           // Set our navigation extras object
           // that passes on our global query params and fragment
-          let navigationExtras: NavigationExtras = {
+          const navigationExtras: NavigationExtras = {
             queryParamsHandling: 'merge',
             preserveFragment: true
           };

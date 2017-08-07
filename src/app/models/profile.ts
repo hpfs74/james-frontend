@@ -9,7 +9,7 @@ export class Profile {
   anonymous: boolean;
   id: number;
   emailaddress: string;
-  birthday: string; //1989-09-27
+  birthday: string; // 1989-09-27
   nickname: string;
   profile_image: string;
   needs: any;

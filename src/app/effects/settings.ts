@@ -10,6 +10,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/withLatestFrom';
 
 import { ProfileService } from '../services/profile.service';
 import { Profile, Settings } from '../models';
@@ -22,6 +23,7 @@ export class SettingsEffects {
   @Effect()
   updateSettings$ = this.action$
     .ofType(settings.UPDATE_SETTINGS_REQUEST)
+    .map((action: settings.UpdateSettingsAction) => action.payload)
     .withLatestFrom(this.store$, (action, state) => {
       return {
         payload: action.payload,

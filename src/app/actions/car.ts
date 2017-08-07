@@ -46,7 +46,7 @@ export class BuyFailAction implements Action {
 }
 
 
-export type Actions
+export type All
   = GetInfoAction
   | GetInfoCompleteAction
   | GetInfoFailAction

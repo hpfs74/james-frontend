@@ -5,7 +5,6 @@ import { collapseInOutAnimation } from '../../animations';
 import { Nav, NavItemType } from '../../models';
 import { NavUserComponent } from './../knx-nav-user/nav-user.component';
 import { AuthService } from '../../services/auth.service';
-import { Init } from 'awesome-typescript-loader/dist/checker/protocol';
 
 @Component({
   selector: 'knx-navbar',
@@ -16,7 +15,7 @@ export class NavbarComponent {
   @Input() menuItems: Array<Nav>;
   @Output() onLogOut = new EventEmitter();
 
-  isCollapsed: boolean = true;
+  isCollapsed = true;
 
   public getMenuItemClasses(menuItem: any) {
     return {

@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm } from '../../../forms/base-form';
-import { nameInitialMask } from '../../utils/base-form.utils';
+import { nameInitialMask } from '../../../utils/base-form.utils';
 import { numberValidator } from '../../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../../utils/base-form.validators';
 

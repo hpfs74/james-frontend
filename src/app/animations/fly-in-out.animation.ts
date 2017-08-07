@@ -12,7 +12,7 @@ export const flyInOutAnimation =
       animate('0.2s ease-in')
     ]),
     transition('* => void', [
-      animate('0.2s 10 ease-out', style({
+      animate('0.2s 10s ease-out', style({
         opacity: 0,
         scale: 0,
         transform: 'translateY(-100%)'

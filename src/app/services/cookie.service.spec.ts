@@ -1,5 +1,5 @@
 
-import { CookieService }  from './cookie.service';
+import { CookieService } from './cookie.service';
 
 describe('Service: CookieService', () => {
   let service: CookieService;
@@ -31,7 +31,7 @@ describe('Service: CookieService', () => {
     it('should be able to get the list of all the cookies', () => {
       service.set('cook1', '1234');
       service.set('cook2', '5678');
-      let ret = service.getAll();
+      const ret = service.getAll();
       expect(Object.keys(ret).length).toBeGreaterThan(2);
     });
   });
@@ -52,7 +52,7 @@ describe('Service: CookieService', () => {
 
     it('should be able to add a new cookie', () => {
       service.set('cook3', '9999');
-      let ret = service.get('cook3');
+      const ret = service.get('cook3');
       expect(ret).toBe('9999');
     });
 
@@ -64,7 +64,7 @@ describe('Service: CookieService', () => {
 
     it ('should be able delete all cookie', () => {
       service.deleteAll();
-      let ret = service.getAll();
+      const ret = service.getAll();
 
       expect(Object.keys(ret).length).toBe(0);
     });

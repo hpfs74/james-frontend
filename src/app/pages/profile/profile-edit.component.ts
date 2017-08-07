@@ -83,7 +83,7 @@ export class ProfileEditComponent {
   @Input() form: ProfileForm;
   @Input() set profile(value: Profile) {
     if (value) {
-      let patchObj = {
+      const patchObj = {
         avatar: value.profile_image,
         gender: value.gender,
         firstName: value.firstname,
@@ -113,7 +113,7 @@ export class ProfileEditComponent {
   address: Address;
 
   loadAvatar($event) {
-    let ctrl = this.form.formGroup.get('avatar');
+    const ctrl = this.form.formGroup.get('avatar');
     if (ctrl.value.length) {
       this.avatarUrl = ctrl.value[0].dataUrl;
     }

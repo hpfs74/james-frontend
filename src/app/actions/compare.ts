@@ -25,7 +25,7 @@ export class LoadCarFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-export type Actions
+export type All
   = LoadCarAction
   | LoadCarSuccessAction
   | LoadCarFailAction;

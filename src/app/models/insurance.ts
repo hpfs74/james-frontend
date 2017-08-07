@@ -17,7 +17,7 @@ export interface Insurance {
   end_date?: string;
   price?: string;
   own_risk?: string;
-  reviews?: string
+  reviews?: string;
   insurance_phone_number?: string;
   adviser_phone_number?: string;
   damage_free?: string;

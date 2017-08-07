@@ -7,7 +7,6 @@ import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from '../../config.service';
 import { CarService } from './car.service';
 import { AuthHttp } from '../../services';
 import { Car } from '../../models/car';
@@ -79,7 +78,6 @@ describe('Service: Car', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: ConfigService, useValue: configServiceStub },
         BaseRequestOptions,
         MockBackend,
         CarService,

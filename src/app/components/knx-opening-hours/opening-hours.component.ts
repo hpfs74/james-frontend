@@ -32,14 +32,14 @@ export class OpeningHoursComponent implements OnInit {
     if (!this.schedule) {
       this.schedule = this.defaultSchedule;
     }
-    let currentDate = new Date();
+    const currentDate = new Date();
     this.updateIsOpen(currentDate);
   }
 
   updateIsOpen(date: Date): void {
-    let hours = date.getHours();
+    const hours = date.getHours();
 
-    let todaySchedule = this.schedule[this.dow[date.getDay()]];
+    const todaySchedule = this.schedule[this.dow[date.getDay()]];
     if (todaySchedule.start <= hours && todaySchedule.end >= hours) {
       this.isOpen = true;
       this.message = 'Nu open (tot ' + todaySchedule.end + ':00)';

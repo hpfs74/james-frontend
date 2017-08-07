@@ -24,7 +24,7 @@ export class UpdateSettingsFailAction implements Action {
 }
 
 
-export type Actions
+export type All
   = UpdateSettingsAction
   | UpdateSettingsSuccessAction
   | UpdateSettingsFailAction;

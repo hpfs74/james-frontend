@@ -3,7 +3,7 @@ import { FormControlOptions } from '@cx/form-control';
 import { CXFormComponent, getCXValueAccessor } from '@cx/form-control';
 import { CXInputOptions } from '@cx/input';
 
-import { LicensePlateOptions, LICENSE_PLATE_DEFAULT_OPTIONS } from './licenseplate.options';
+import { LICENSE_PLATE_DEFAULT_OPTIONS } from './licenseplate.options';
 import { licensePlateMask } from './licenseplate.mask';
 
 @Component({
@@ -27,7 +27,7 @@ import { licensePlateMask } from './licenseplate.mask';
 `
 })
 export class LicensePlateComponent extends CXFormComponent implements OnInit {
-  @Input() options: LicensePlateOptions;
+  @Input() options: CXInputOptions;
 
   textMask: any = licensePlateMask;
 

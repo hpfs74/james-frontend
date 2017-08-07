@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
  * Jumps to a specific element on the page (by id) like the old way of linking to a anchor tag
  * example: <a href="#myElement"></a>
  */
-@Directive({ selector: '[jumpToEl]' })
+@Directive({ selector: '[knxJumpToEl]' })
 export class JumpToElementDirective {
 
     @Input() href;
@@ -16,14 +16,14 @@ export class JumpToElementDirective {
     constructor(private router: Router) {}
 
     private preventDefault(event) {
-        if(!this.href) { return; }
+        if (!this.href) { return; }
         if (this.href.length === 0 || this.href.charAt(0) === '#') {
             event.preventDefault();
 
-            let el = this.href.substring(1);
+            const el = this.href.substring(1);
 
             document.getElementById(el).scrollIntoView();
-            //window.scrollTo(0, 0)
+            // window.scrollTo(0, 0)
         } else {
 
             // Use router from angular2

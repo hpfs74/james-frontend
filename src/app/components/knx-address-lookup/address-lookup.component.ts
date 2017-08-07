@@ -7,12 +7,11 @@ import { postalCodeMask } from '../../utils/base-form.utils';
 
 import { Address } from '../../models/address';
 import { AddressLookupService } from './address-lookup.service';
-import { GeolocationService } from '../../services';
 
 @Component({
   selector: 'knx-address-lookup',
   templateUrl: './address-lookup.component.html',
-  providers: [AddressLookupService, GeolocationService]
+  providers: [AddressLookupService]
 })
 export class AddressLookupComponent implements AfterViewChecked {
   @Input() addressFormGroup: FormGroup;
@@ -24,9 +23,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   public mask = postalCodeMask;
   private lookupTimeout;
 
-  constructor(
-    private addressService: AddressLookupService,
-    private geolocationService: GeolocationService) {
+  constructor(private addressService: AddressLookupService) {
   }
 
   ngAfterViewChecked(): void {
@@ -61,20 +58,20 @@ export class AddressLookupComponent implements AfterViewChecked {
 
     return new Promise((resolve, reject) => {
       this.lookupTimeout = setTimeout(() => {
-        let postalCode = formGroup.get('postalCode').value;
-        let houseNumber = formGroup.get('houseNumber').value;
-        let houseNumberExtension = formGroup.get('houseNumberExtension').value;
+        const postalCode = formGroup.get('postalCode').value;
+        const houseNumber = formGroup.get('houseNumber').value;
+        const houseNumberExtension = formGroup.get('houseNumberExtension').value;
 
         if (!postalCode && !houseNumber) {
           return resolve(null);
         }
 
         if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
-          let isValid: boolean = false;
+          let isValid = false;
 
           addressService.lookupAddress(postalCode, houseNumber, houseNumberExtension)
             .subscribe((data) => {
-              let res = <Address>data.json();
+              const res = <Address>data.json();
 
               isValid = !!(res.street && res.city);
 

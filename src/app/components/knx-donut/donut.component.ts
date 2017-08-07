@@ -39,8 +39,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class DonutComponent {
   @Input() percentage: number;
-  @Input() radius: number = 25;
-  @Input() width: number = 3;
+  @Input() radius = 25;
+  @Input() width = 3;
 
   get circumference() {
     return Math.PI * 2 * this.radius;

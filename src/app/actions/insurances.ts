@@ -47,7 +47,7 @@ export class LoadFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-export type Actions
+export type All
   = AddInsuranceAction
   | AddInsuranceSuccessAction
   | AddInsuranceFailAction

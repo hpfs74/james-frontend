@@ -7,21 +7,21 @@ import { ImageConfig } from './circle-progress-image';
 })
 export class CircleProgressComponent implements OnInit, OnChanges {
 
-  @Input() percent: number = 0;
-  @Input() boxSize: number = 200;
+  @Input() percent = 0;
+  @Input() boxSize = 200;
   @Input() radius: number = 0.9 * this.boxSize;
-  @Input() time: number = 0;
-  @Input() border: number = 20;
-  @Input() color: string = '#003b5a';
-  @Input() backgroundColor: string = 'white';
+  @Input() time = 0;
+  @Input() border = 20;
+  @Input() color = '#003b5a';
+  @Input() backgroundColor = 'white';
 
   @Input() lowColor: string = this.color;
   @Input() middleColor: string = this.color;
   @Input() interColor: string = this.color;
   @Input() highColor: string = this.color;
 
-  @Input() innerFill: string = 'white';
-  @Input() textAnchor: string = 'middle';
+  @Input() innerFill = 'white';
+  @Input() textAnchor = 'middle';
 
   @Input() imageConfig: ImageConfig;
   @Input() uniqueId: string;
@@ -38,7 +38,7 @@ export class CircleProgressComponent implements OnInit, OnChanges {
   ry: number;
 
   innerRadius: number;
-  circleText: string = '0%';
+  circleText = '0%';
 
   x;
   y;
@@ -49,7 +49,7 @@ export class CircleProgressComponent implements OnInit, OnChanges {
   circleA;
   circleEnd;
 
-  canAnimate: boolean = true;
+  canAnimate = true;
 
   ngOnInit() {
     this.setInputs();
@@ -68,7 +68,7 @@ export class CircleProgressComponent implements OnInit, OnChanges {
   public animate() {
     if (this.canAnimate && this.percent > 0) {
       this.canAnimate = false;
-      let time = this.time * 1000 / this.percent;
+      const time = this.time * 1000 / this.percent;
 
       this.animationLoop(1, time);
 

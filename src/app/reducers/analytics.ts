@@ -8,9 +8,10 @@ import {
   SocialInteraction,
   Exception
 } from 'redux-beacon/targets/google-analytics';
+import { AnalyticsAction } from '../actions/analytics';
 
 // Define an analytics event
-const pageView = (action: Action): PageView => ({
+const pageView = (action: AnalyticsAction): PageView => ({
   hitType: 'pageview',
   page: action.payload.path,
 });

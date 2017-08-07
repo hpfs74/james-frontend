@@ -1,5 +1,6 @@
-import * as layout from '../actions/layout';
+import * as LayoutActions from '../actions/layout';
 
+export type Action = LayoutActions.All;
 
 export interface State {
   showSidenav: boolean;
@@ -9,14 +10,14 @@ const initialState: State = {
   showSidenav: false,
 };
 
-export function reducer(state = initialState, action: layout.Actions): State {
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case layout.CLOSE_SIDENAV:
+    case LayoutActions.CLOSE_SIDENAV:
       return {
         showSidenav: false
       };
 
-    case layout.OPEN_SIDENAV:
+    case LayoutActions.OPEN_SIDENAV:
       return {
         showSidenav: true
       };

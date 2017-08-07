@@ -9,7 +9,7 @@ describe('Util: IBAN Validator', () => {
   });
 
   it('should validate other iban numbers', () => {
-    //http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx
+    // http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx
 
     expect(isValidIban('AL47 2121 1009 0000 0002 3569 8741')).toBeTruthy();
     expect(isValidIban('AD12 0001 2030 2003 5910 0100')).toBeTruthy();
@@ -69,7 +69,7 @@ describe('Util: IBAN Validator', () => {
     expect(isValidIban('TR33 0006 1005 1978 6457 8413 26')).toBeTruthy();
     expect(isValidIban('AE07 0331 2345 6789 0123 456')).toBeTruthy();
     // United Kingdom
-    //expect(isValidIban('GB29 RBOS 6016 1331 9268 19')).toBeTruthy();
+    // expect(isValidIban('GB29 RBOS 6016 1331 9268 19')).toBeTruthy();
   });
 });
 

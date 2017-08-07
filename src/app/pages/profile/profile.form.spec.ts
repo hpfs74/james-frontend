@@ -26,6 +26,4 @@ describe('Form: Profile', () => {
   it('should init validation errors', () => {
     expect(form.validationErrors).toBeDefined();
   });
-
-  //TODO: add more tests
 });

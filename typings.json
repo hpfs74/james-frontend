@@ -1,7 +1,0 @@
-{
-  "name": "knab-web",
-  "dependencies": {},
-  "globalDependencies": {
-    "three": "registry:dt/three#0.83.0+20170217155006"
-  }
-}

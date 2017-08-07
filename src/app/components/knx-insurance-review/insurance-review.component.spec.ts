@@ -56,7 +56,6 @@ describe('Component: InsuranceReviewComponent', () => {
   });
 
   it('should update the form with profile data (ngOnChanges)', () => {
-debugger;
     expect(comp.insuranceReviewComponent).toBeDefined();
     spyOn(comp.insuranceReviewComponent, 'ngOnChanges').and.callThrough();
 

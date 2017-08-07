@@ -32,7 +32,7 @@ export class SelectAction implements Action {
   constructor(public payload: any) { }
 }
 
-export type Actions
+export type All
   = AddAction
   | UpdateAction
   | RemoveAction

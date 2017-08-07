@@ -1,4 +1,4 @@
-//TODO: generate mask based on input pattern, see licenseplate.validator.ts for valid patterns
+// TODO: generate mask based on input pattern, see licenseplate.validator.ts for valid patterns
 
 export const licensePlateMask = {
   mask: (rawValue: string) => {

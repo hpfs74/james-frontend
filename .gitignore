@@ -1,7 +1,6 @@
 
 # Created by https://www.gitignore.io/api/node
 
-
 ### Typedoc ###
 docs
 
@@ -129,5 +128,9 @@ Thumbs.db
 
 # Test reports
 test-reports
+
+# Angular-CLI
+environment.ts
+src/environments/*.ts
 
 # End of https://www.gitignore.io/api/node

@@ -8,7 +8,7 @@ export function maxNumberValidator(key: string, max: Number) {
   return (c: FormControl): { [key: string]: any } => {
     const input = c.value,
       isValid = input <= max;
-    let obj = {};
+    const obj = {};
     obj[key] = true;
     return !isValid ? obj : null;
   };
@@ -18,7 +18,7 @@ export function minNumberValidator(key: string, min: Number) {
   return (c: FormControl): { [key: string]: any } => {
     const input = c.value,
       isValid = input >= min;
-    let obj = {};
+    const obj = {};
     obj[key] = true;
     return !isValid ? obj : null;
   };
@@ -26,21 +26,21 @@ export function minNumberValidator(key: string, min: Number) {
 
 export function numberValidator(key: string) {
   return (c: FormControl): { [key: string]: any } => {
-    let value = c.value;
-    let valid: boolean = false;
+    const value = c.value;
+    let valid = false;
 
     if (value) {
-      let hasDot: boolean = value.indexOf('.') >= 0 ? true : false;
+      const hasDot: boolean = value.indexOf('.') >= 0 ? true : false;
       // convert string to number
-      let number: number = Math.floor(value);
+      const number: number = Math.floor(value);
       // get result of isInteger()
-      let integer: boolean = Number.isInteger(number);
+      const integer: boolean = Number.isInteger(number);
       // validate conditions
       valid = !hasDot && integer && number > 0;
     } else {
       valid = false;
     }
-    let obj = {};
+    const obj = {};
     obj[key] = true;
     return !value || !valid ? obj : null;
   };
@@ -52,7 +52,7 @@ export function dateValidator(key: string) {
     if (value && !(value instanceof Date)) {
       value = dateDecode(value);
     }
-    let obj = {};
+    const obj = {};
     obj[key] = true;
     return !value ? obj : null;
   };
@@ -66,12 +66,12 @@ export function futureDateValidator(key: string) {
       value = dateDecode(value);
     }
 
-    let now = new Date().setHours(0, 0, 0, 0);
+    const now = new Date().setHours(0, 0, 0, 0);
     if (value && (value < now)) {
       value = false;
     }
 
-    let obj = {};
+    const obj = {};
     obj[key] = true;
     return !value ? obj : null;
   };
@@ -80,7 +80,7 @@ export function futureDateValidator(key: string) {
 export function birthDateValidator(key: string) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
-    let today = new Date();
+    const today = new Date();
     const minimumAge = today.setFullYear(today.getFullYear() - 18);
 
     if (value && !(value instanceof Date)) {
@@ -91,7 +91,7 @@ export function birthDateValidator(key: string) {
       value = false;
     }
 
-    let obj = {};
+    const obj = {};
     obj[key] = true;
     return !value ? obj : null;
   };
@@ -104,19 +104,19 @@ export function birthDateValidator(key: string) {
  */
 export function ibanValidator(key: string) {
   return (c: FormControl) => {
-    let value = c.value;
-    let obj = {};
+    const value = c.value;
+    const obj = {};
     obj[key] = true;
     const onlyDutch = true;
     return isValidIban(value, onlyDutch) ? null : obj;
   };
 }
 
-export function regExValidator(regex : RegExp, errorName : string) {
+export function regExValidator(regex: RegExp, errorName: string) {
   return (fc: FormControl) => {
-    let value = fc.value;
-    let ok = value ? regex.test(value) : true;
-    let result = {};
+    const value = fc.value;
+    const ok = value ? regex.test(value) : true;
+    const result = {};
     result[errorName] = true;
     return ok ? null : result;
   };

@@ -13,6 +13,6 @@ export class ClearAction implements Action {
   readonly type = CLEAR_MESSAGES;
 }
 
-export type Actions
+export type All
   = AddMessageAction
   | ClearAction;

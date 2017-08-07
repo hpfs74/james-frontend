@@ -8,7 +8,7 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 
 import { PasswordResetComponent } from './password-reset.component';
 import { AuthService } from '../../services/auth.service';
-import { ConfigService } from '../../config.service';
+import { environment } from '../../../environments/environment';
 
 describe('Component: Password Reset', () => {
   let comp: PasswordResetComponent;
@@ -35,7 +35,6 @@ describe('Component: Password Reset', () => {
         BaseRequestOptions,
         MockBackend,
         AuthService,
-        { provide: ConfigService, useValue: configServiceStub },
         {
           deps: [
             MockBackend,
@@ -60,7 +59,7 @@ describe('Component: Password Reset', () => {
   });
 
   it('should contain a proper message to explain how to use correctly', () => {
-    let navElement = fixture.debugElement.query(By.css('div.knx-password-reset__welcome > p'));
+    const navElement = fixture.debugElement.query(By.css('div.knx-password-reset__welcome > p'));
     expect(navElement).not.toBeNull();
   });
 });
