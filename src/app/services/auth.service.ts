@@ -118,10 +118,7 @@ export class AuthService {
   }
 
   public forgotPassword(redirectUrl: string): string {
-
-    return `https://profile-james-a.nicci.io/password?' +
-      'client_id=56a6ab20bb00893f071faddc' +
-      '&locale=nl_NL&redirect_uri=${encodeURI(redirectUrl)}`;
+    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(redirectUrl)}`;
   }
 
   /**
@@ -146,7 +143,7 @@ export class AuthService {
   private getBasicHeader(): Headers {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Basic NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=');
+    headers.append('Authorization', `Basic ${environment.james.nicciKey}`);
 
     return headers;
   }
@@ -154,7 +151,6 @@ export class AuthService {
   private getBasicHeaderWithKey(data: AuthKey): Headers {
     const headers = this.getBasicHeader();
     headers.append('NICCI-Key', data.id);
-
     return headers;
   }
 
