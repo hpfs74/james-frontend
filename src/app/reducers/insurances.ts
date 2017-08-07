@@ -17,9 +17,6 @@ export const initialState: State = {
 };
 
 export function reducer(state = initialState, action: Action): State {
-  console.log(action);
-
-
   switch (action.type) {
     case InsuranceActions.LOAD: {
       return Object.assign({}, state, {
