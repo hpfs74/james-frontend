@@ -12,11 +12,10 @@ const environment = argv.environment;
 const isProd = environment === 'prod';
 const targetPath = isProd ? `./src/environments/environment.prod.ts` : `./src/environments/environment.ts`;
 
-// TODO: also move to environment variable
+// TODO: provide the correct client id
 const forgetPasswordLink =
-  'https://profile-james-a.nicci.io/password?client_id=56a6ab20bb00893f071faddc' +
+  `${process.env.NICCI_URL}` + '/password?client_id=56a6ab20bb00893f071faddc' +
   '&locale=nl_NL' +
-  '&redirect_uri=com.mobgen.knab://' +
   '&response_type=code' +
   '&scope=basic+emailaddress+social';
 
@@ -24,6 +23,7 @@ let envConfigFile = `
 export const environment = {
   production: ${isProd},
   james: {
+    nicciKey: '${process.env.NICCI_KEY}',
     forgetPassword: '${forgetPasswordLink}',
     key: '${process.env.JAMES_API_KEY}',
     token: '${process.env.JAMES_API_TOKEN}',
