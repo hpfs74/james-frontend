@@ -18,12 +18,16 @@ export class CarService {
   }
 
   public getCoverageRecommendation(licensePlate: string, loan: boolean): Observable<CarCoverageRecommendation> {
-    return this.authHttp.post(environment.james.carCoverage, { license: licensePlate })
+    const headers = new Headers();
+    headers.append('version', 'v2');
+    return this.authHttp.post(environment.james.carCoverage, { active_loan: loan, license: licensePlate })
       .map(res => <CarCoverageRecommendation>res.json());
   }
 
   public getInsurances(carRequest: CarCompare): Observable<Array<CarInsurance>> {
-    return this.authHttp.post(environment.james.carCompare, JSON.stringify(carRequest))
+    const headers = new Headers();
+    headers.append('version', 'v2');
+    return this.authHttp.post(environment.james.carCompare, JSON.stringify(carRequest), { headers })
       .map((res: Response) => res.json());
   }
 

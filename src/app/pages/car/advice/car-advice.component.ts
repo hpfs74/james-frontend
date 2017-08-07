@@ -220,7 +220,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     //   });
 
     const compareObj: CarCompare = {
-      active_loan: detailForm.value.loan,
+      active_loan: !!detailForm.value.loan,
       coverage: detailForm.value.coverage,
       claim_free_years: +detailForm.value.claimFreeYears,
       household_status: detailForm.value.houseHold,
