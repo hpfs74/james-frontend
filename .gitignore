@@ -73,6 +73,7 @@ ts-node
 #IDE and editors
 .idea
 *.iml
+.vscode
 .vscode/angulardoc.json
 /.idea
 .project
