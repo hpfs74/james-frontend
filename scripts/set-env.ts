@@ -14,7 +14,7 @@ const targetPath = isProd ? `./src/environments/environment.prod.ts` : `./src/en
 
 // TODO: provide the correct client id
 const forgetPasswordLink =
-  `${process.env.NICCI_URL}` + '/password?client_id=56a6ab20bb00893f071faddc' +
+  `${process.env.NICCI_BASE_URL}` + '/password?client_id=56a6ab20bb00893f071faddc' +
   '&locale=nl_NL' +
   '&response_type=code' +
   '&scope=basic+emailaddress+social';

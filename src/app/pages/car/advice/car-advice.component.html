@@ -1,9 +1,10 @@
 <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation">
   <div class="container">
-    <knx-step-navigation [steps]="formSteps"
-                         [currentStep]="currentStep"
-                         [clickable]="true"
-                         (stepChange)="knxWizard.goToPreviousStep($event);">
+    <knx-step-navigation
+      [steps]="formSteps"
+      [currentStep]="currentStep"
+      [clickable]="true"
+      (stepChange)="knxWizard.goToPreviousStep($event);">
     </knx-step-navigation>
   </div>
 </div>
