@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
 
 import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
-import 'rxjs/add/operator/mergeMap';
 import { Profile } from '../models/profile';
 
 @Injectable()
 export class AuthService {
-  // store the URL so we can redirect after logging in
   redirectUrl: string;
   private loggedIn = false;
   private keyUrl: string;
@@ -22,6 +21,7 @@ export class AuthService {
     this.keyUrl = environment.james.key;
     this.profileUrl = environment.james.profile;
     this.tokenUrl = environment.james.token;
+    this.redirectUrl = window.location.origin;
   }
 
   /**
@@ -117,8 +117,8 @@ export class AuthService {
     throw new Error('Not implemented yet');
   }
 
-  public forgotPassword(redirectUrl: string): string {
-    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(redirectUrl)}`;
+  public getPasswordResetLink(): string {
+    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(this.redirectUrl)}`;
   }
 
   /**
