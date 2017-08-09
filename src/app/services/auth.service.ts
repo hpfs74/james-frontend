@@ -17,7 +17,7 @@ export class AuthService {
   private tokenUrl: string;
 
   constructor(private http: Http) {
-    this.loggedIn = false; // !!localStorage.getItem('a uth_token');
+    this.loggedIn = !!localStorage.getItem('auth_token');
     this.keyUrl = environment.james.key;
     this.profileUrl = environment.james.profile;
     this.tokenUrl = environment.james.token;
@@ -41,13 +41,6 @@ export class AuthService {
       });
   }
 
-  /**
-   * do a sing in
-   *
-   * @param email
-   * @param password
-   * @return {Observable<R>}
-   */
   public login(email, password): Observable<AuthToken> {
     return this.getNicciKey()
       .flatMap((nicci) => {
@@ -69,11 +62,6 @@ export class AuthService {
       });
   }
 
-  /**
-   *
-   * @param refreshToken
-   * @return {Observable<R>}
-   */
   public refreshToken(refreshToken: string): Observable<AuthToken> {
 
     return this.getNicciKey()
@@ -89,11 +77,6 @@ export class AuthService {
       });
   }
 
-
-  /**
-   *
-   * @param profile
-   */
   public isActive(email: string) {
     this.getNicciKey()
       .flatMap((nicci: AuthKey) => {
@@ -109,10 +92,6 @@ export class AuthService {
     return localStorage.getItem('access_token') !== null;
   }
 
-  /**
-   *
-   * @param email
-   */
   public resendActivation(email) {
     throw new Error('Not implemented yet');
   }
@@ -121,10 +100,6 @@ export class AuthService {
     return environment.james.forgetPassword + `&redirect_uri=${encodeURI(this.redirectUrl)}`;
   }
 
-  /**
-   *
-   * @return {Observable<R>}
-   */
   private getNicciKey(): Observable<AuthKey> {
 
     const headers = this.getBasicHeader();

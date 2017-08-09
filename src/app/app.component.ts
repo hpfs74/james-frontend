@@ -19,8 +19,5 @@ import {
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  isLoading = true;
-
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService) {}
 }
