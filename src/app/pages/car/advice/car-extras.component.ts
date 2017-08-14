@@ -57,8 +57,8 @@ export class CarExtrasComponent {
           noclaim: value.insurance.no_claim_protection,
           occupants: value.insurance.cover_occupants
         },
-        ownRisk: value.insurance.own_risk,
-        kmPerYear: value.insurance.kilometers_per_year
+        ownRisk: value.insurance.own_risk || 0,
+        kmPerYear: value.insurance.kilometers_per_year || 'KMR3'
       }, { emitEvent: false }); // prevent infinite loop; valueChanges subscription CarAdviceComponent
     }
   }
