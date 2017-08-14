@@ -29,7 +29,7 @@ export class AuthService {
    *
    * @return {Observable<R>}
    */
-  public logout() {
+  public logout(): Observable<AuthToken> {
     return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
       .map(x => {
         localStorage.removeItem('access_token');
