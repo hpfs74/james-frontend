@@ -8,6 +8,7 @@ export class CarExtrasForm {
     this.formGroup = this.fb.group({
       coverage: ['', Validators.required],
       extraOptions: [{}],
+      roadAssistance: [{}],
       ownRisk: [null, Validators.required],
       kmPerYear: [null, Validators.required]
     });
@@ -43,6 +44,10 @@ export class CarExtrasForm {
         inputOptions: {
           items: [
             {
+              label: 'Pechhulp',
+              value: 'RACO'
+            },
+            {
               label: 'Rechtsbijstand',
               value: 'legal'
             },
@@ -53,6 +58,23 @@ export class CarExtrasForm {
             {
               label: 'Inzittenden verzekering',
               value: 'occupants'
+            }
+          ]
+        }
+      },
+      roadAssistance: {
+        formControlName: 'roadAssistance',
+        type: 'radio',
+        formControl: this.formGroup.get('roadAssistance'),
+        inputOptions: {
+          items: [
+            {
+              label: 'Binnen Nederland',
+              value: 'RACO'
+            },
+            {
+              label: 'Binnen Europa',
+              value: 'RAE'
             }
           ]
         }
@@ -70,23 +92,7 @@ export class CarExtrasForm {
           })
         }
       },
-      roadAssistance: {
-        formControlName: 'roadAssistance',
-        type: 'radio',
-        formControl: this.formGroup.get('roadAssistance'),
-        inputOptions: {
-          items: [
-            {
-              label: 'Binnen Nederland',
-              value: 'RACO'
-            },
-            {
-              label: 'In Europa',
-              value: 'RAE'
-            }
-          ]
-        }
-      },
+
       kmPerYear: {
         formControlName: 'kmPerYear',
         type: 'select',
