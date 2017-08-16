@@ -46,6 +46,10 @@ import { CarExtrasForm } from './car-extras.form';
     .own-risk {
       padding-bottom: 45px;
     }
+
+    h4.knx-collapse-message__title {
+      letter-spacing: 0.05em;
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
