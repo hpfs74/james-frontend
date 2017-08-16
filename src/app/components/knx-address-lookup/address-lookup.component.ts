@@ -71,12 +71,15 @@ export class AddressLookupComponent implements AfterViewChecked {
 
           addressService.lookupAddress(postalCode, houseNumber, houseNumberExtension)
             .subscribe((data) => {
-              const res = <Address>data.json();
+              /*const res = <Address>data.json();
 
               isValid = !!(res.street && res.city);
 
               this.addressFound.emit(res);
-              this.address = `${res.street} in ${res.city}`;
+               this.address = `${res.street} in ${res.city}`;*/
+               isValid = true;
+               
+              this.address = data.json().Output;
 
               return resolve(isValid ? null : { address: true });
             }, err => {
