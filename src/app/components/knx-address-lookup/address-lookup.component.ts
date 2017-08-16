@@ -78,7 +78,7 @@ export class AddressLookupComponent implements AfterViewChecked {
               this.addressFound.emit(res);
                this.address = `${res.street} in ${res.city}`;*/
                isValid = true;
-               
+
               this.address = data.json().Output;
 
               return resolve(isValid ? null : { address: true });
