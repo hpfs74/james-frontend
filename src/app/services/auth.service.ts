@@ -105,8 +105,8 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    // return AuthUtils.tokenNotExpired('token');
-    return localStorage.getItem('access_token') !== null;
+    return AuthUtils.tokenNotExpired('token');
+    // return localStorage.getItem('access_token') !== null;
   }
 
   /**

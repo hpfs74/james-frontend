@@ -3,27 +3,18 @@ import * as crypto from 'crypto-js';
 export class TokenHelper {
 
   public getTokenExpirationDate(token: string): Date {
-    const tokenObj = JSON.parse(token);
-
-    if (!tokenObj.hasOwnProperty('expires_in')) {
-      return null;
-    }
-
-    const date = new Date(0); // The 0 here is the key, which sets the date to the epoch
-    date.setUTCSeconds(tokenObj.expires_in);
-    return date;
+    return JSON.parse(token).expiration_time;
   }
 
   public isTokenExpired(token: string, offsetSeconds?: number): boolean {
     const date = this.getTokenExpirationDate(token);
-    offsetSeconds = offsetSeconds || 0;
 
-    if (date === null) {
+    if (date == null) {
       return false;
     }
 
     // Token expired?
-    return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
+    return !(date.valueOf() > (new Date().valueOf()));
   }
 }
 
