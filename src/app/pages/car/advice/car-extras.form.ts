@@ -44,6 +44,10 @@ export class CarExtrasForm {
         inputOptions: {
           items: [
             {
+              label: 'Pechhulp',
+              value: 'RACO'
+            },
+            {
               label: 'Rechtsbijstand',
               value: 'legal'
             },

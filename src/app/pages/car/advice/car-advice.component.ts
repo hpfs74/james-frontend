@@ -33,6 +33,7 @@ import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
+  selector: 'knx-car-advice',
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
