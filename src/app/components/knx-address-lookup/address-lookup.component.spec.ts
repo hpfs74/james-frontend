@@ -109,7 +109,6 @@ describe('Component: AddressLookup', () => {
         expect(data).not.toBeNull();
         // expect(data.street).not.toBe('streetname');
         // expect(data.city).not.toBe('cityname');
-
         done();
       });
 

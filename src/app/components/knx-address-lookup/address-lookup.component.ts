@@ -77,9 +77,26 @@ export class AddressLookupComponent implements AfterViewChecked {
 
               this.addressFound.emit(res);
                this.address = `${res.street} in ${res.city}`;*/
-               isValid = true;
 
-              this.address = data.json().Output;
+              const dataObject = data.json();
+              const res = <Address>{
+                '_id': dataObject.Payload.ID,
+                'postcode': dataObject.Payload.Postcode.P6,
+                'number': dataObject.Payload.Number,
+                'street': dataObject.Payload.Street,
+                'city': dataObject.Payload.City,
+                'county': dataObject.Payload.County,
+                'province': dataObject.Payload.Province,
+                'fullname': dataObject.Output,
+                'location': {
+                  'lat': dataObject.Location.lat,
+                  'lng': dataObject.Location.lon
+                }
+              };
+
+              isValid = true;
+              this.addressFound.emit(res);
+              this.address = res.fullname;
 
               return resolve(isValid ? null : { address: true });
             }, err => {
