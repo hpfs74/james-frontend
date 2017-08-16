@@ -17,7 +17,8 @@ const forgetPasswordLink =
   `${process.env.NICCI_BASE_URL}` + '/password?client_id=56a6ab20bb00893f071faddc' +
   '&locale=nl_NL' +
   '&response_type=code' +
-  '&scope=basic+emailaddress+social';
+  '&scope=basic+emailaddress+social'
+  '&redirect_uri=com.mobgen.knab://';
 
 let envConfigFile = `
 export const environment = {
