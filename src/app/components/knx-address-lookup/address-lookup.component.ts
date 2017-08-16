@@ -81,10 +81,10 @@ export class AddressLookupComponent implements AfterViewChecked {
               const dataObject = data.json();
               const res = <Address>{
                 '_id': dataObject.Payload.ID,
-                'postcode': dataObject.Payload.Postcode.P6,
-                'number': dataObject.Payload.Number,
-                'street': dataObject.Payload.Street,
-                'city': dataObject.Payload.City,
+                'postcode': dataObject.Payload.Main.Postcode.P6,
+                'number': dataObject.Payload.Main.Number,
+                'street': dataObject.Payload.Main.Street,
+                'city': dataObject.Payload.Main.City,
                 'county': dataObject.Payload.County,
                 'province': dataObject.Payload.Province,
                 'fullname': dataObject.Output,
