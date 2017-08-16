@@ -14,7 +14,7 @@
     "lint": "ng lint --type-check",
     "lint:styles": "stylelint 'src/**/*.scss' --syntax scss --config stylelint.conf.js",
     "e2e": "ng e2e",
-    "clean": "npm cache clean --force && npm run rimraf -- node_modules dist"
+    "clean": "npm cache clean --force && rimraf -- node_modules dist"
   },
   "private": true,
   "dependencies": {
