@@ -59,7 +59,7 @@ describe('Service: AddressLookup', () => {
     });
   }
 
-  xit('should lookup an address', (done) => {
+  it('should lookup an address', (done) => {
     setupConnections(backend, {
       body:
       {

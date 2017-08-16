@@ -102,14 +102,13 @@ describe('Component: AddressLookup', () => {
       });
   });
 
-  xit('should get address', (done) => {
+  it('should get address', (done) => {
 
     inject([AddressLookupService], (addressServiceStub) => {
       comp.addressFound.subscribe((data) => {
         expect(data).not.toBeNull();
         // expect(data.street).not.toBe('streetname');
         // expect(data.city).not.toBe('cityname');
-
         done();
       });
 
