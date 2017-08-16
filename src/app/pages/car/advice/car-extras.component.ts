@@ -20,6 +20,13 @@ import { CarExtrasForm } from './car-extras.form';
         </cx-form-group>
       </knx-collapse-message>
 
+      <knx-collapse-message [ngClass]="optionModifierClass" title="Pechhulp" [isOpen]="true">
+        <cx-form-group
+          [options]="form.formConfig.roadAssistance"
+          [formControlName]="form.formConfig.roadAssistance.formControlName">
+        </cx-form-group>
+      </knx-collapse-message>
+
       <knx-collapse-message [ngClass]="optionModifierClass" title="Aantal KM per jaar" [isOpen]="true">
         <cx-form-group
           [options]="form.formConfig.kmPerYear"
@@ -39,6 +46,10 @@ import { CarExtrasForm } from './car-extras.form';
     .own-risk {
       padding-bottom: 45px;
     }
+
+    h4.knx-collapse-message__title {
+      letter-spacing: 0.05em;
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -57,6 +68,7 @@ export class CarExtrasComponent {
           noclaim: value.insurance.no_claim_protection,
           occupants: value.insurance.cover_occupants
         },
+        roadAssistance: value.insurance.road_assistance,
         ownRisk: value.insurance.own_risk,
         kmPerYear: value.insurance.kilometers_per_year
       }, { emitEvent: false }); // prevent infinite loop; valueChanges subscription CarAdviceComponent
