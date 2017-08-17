@@ -33,6 +33,7 @@ import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
+  selector: 'knx-car-advice',
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -138,8 +139,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             cover_occupants: data.extraOptions.occupants || false,
             no_claim_protection: data.extraOptions.noclaim || false,
             legal_aid: data.extraOptions.legal || false,
-            kilometers_per_year: data.kmPerYear,
-            own_risk: data.ownRisk
+            road_assistance: data.roadAssistance || 'RACO',
+            kilometers_per_year: data.kmPerYear || 'KMR3',
+            own_risk: data.ownRisk || 0
           };
           this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
         }

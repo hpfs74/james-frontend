@@ -50,57 +50,33 @@ describe('Service: AddressLookup', () => {
 
   function setupConnections(backend: MockBackend, options: any) {
     backend.connections.subscribe((connection: MockConnection) => {
-      if (connection.request.url === 'api/address') {
+      // if (connection.request.url.startsWith('api/address')) {
         const responseOptions = new ResponseOptions(options);
         const response = new Response(responseOptions);
 
         connection.mockRespond(response);
-      }
+      // }
     });
   }
 
-  it('should lookup an address', () => {
+  it('should lookup an address', (done) => {
     setupConnections(backend, {
       body:
       {
-        '_id': '4641BB71',
-        'postcode': '4641BB',
-        'number': '71',
-        'street': 'Molenstraat',
-        'city': 'Ossendrecht',
-        'county': 'Woensdrecht',
-        'province': 'Noord-Brabant',
-        'fullname': 'Molenstraat 71, Ossendrecht',
-        'location': {
-          'lat': 51.392211711345,
-          'lng': 4.3359184058694
-        },
-        'built': 1955,
-        'house_size': 96,
-        'house_value': 0,
-        'house_info_roof_condition_text': 'Onbekend',
-        'house_info_house_type_text': '',
-        'house_info_house_use_text': 'residence',
-        'number_extended': {
-          'number_only': 71,
-          'number_addition': ''
-        },
-        'rooms': 0,
-        'build_type': '',
-        'isolation_glass': false,
-        'house_type': '',
-        'house_subtype': null
+        'Output': 'streetname, city'
       },
       status: 200
     });
 
     service.lookupAddress('4641BB', '71').subscribe((res) => {
-
       const data = res.json();
 
       expect(data).not.toBeNull();
-      expect(data.street).toBe('Molenstraat');
-      expect(data.city).toBe('Ossendrecht');
+      // expect(data.street).toBe('Molenstraat');
+      // expect(data.city).toBe('Ossendrecht');
+      expect(data.Output).toBe('streetname, city');
+
+      done();
     });
   });
 
