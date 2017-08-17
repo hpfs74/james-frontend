@@ -1,0 +1,13 @@
+image: node:6.9.4
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: 
+          - npm set registry https://knab-npm.ddns.net
+          - npm set strict-ssl false
+          - npm install
+          - npm run build
+          - npm run test
