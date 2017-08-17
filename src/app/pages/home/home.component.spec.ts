@@ -1,84 +1,61 @@
-import { CarCheckForm } from './car-check.form';
-import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { CXFormsModule } from '../../../../node_modules/@cx/forms';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MockBackend } from '@angular/http/testing';
+import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 
-import { SharedModule } from '../../shared.module';
+
 import { HomeComponent } from './home.component';
+import { AuthService } from '../../services/auth.service';
 
-@Component({
-  template: `
-    <div>
-      <knx-cookiebar></knx-cookiebar>
-      <header class="header">
-        <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
-          <knx-opening-hours></knx-opening-hours>
-          <knx-nav-user [isLoggedIn]="isLoggedIn" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
-        </knx-navbar>
-      </header>
+describe('Component: Login', () => {
+  let comp: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+  let de: DebugElement;
+  let el: HTMLElement;
 
-      <div class="main-container">
-        <knx-loader *shellRender></knx-loader>
-        <router-outlet></router-outlet>
-      </div>
-
-      <!-- footer is a features block -->
-      <div class="container-fluid knx-container--fullwidth knx-container--gray">
-        <knx-features [items]="footerItems"></knx-features>
-      </div>
-    </div>`
-})
-export class TestHostComponent {
-  @ViewChild(HomeComponent)
-  public targetComponent: HomeComponent;
-  public formFromHost: CarCheckForm = new CarCheckForm(new FormBuilder());
-}
-
-describe('Component: HomeComponent', () => {
-  let comp: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+  const configServiceStub = {
+    config: {
+      api: {
+        james: {
+          address: 'api/reset/password'
+        }
+      }
+    }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
-      declarations: [HomeComponent, TestHostComponent]
+      providers: [
+        BaseRequestOptions,
+        MockBackend,
+        AuthService,
+        {
+          deps: [
+            MockBackend,
+            BaseRequestOptions
+          ],
+          provide: Http,
+          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backend, defaultOptions);
+          }
+        }
+      ],
+      imports: [RouterTestingModule],
+      declarations: [HomeComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
+    fixture = TestBed.createComponent(HomeComponent);
     comp = fixture.componentInstance;
-    comp.formFromHost.infoMessages = {
-      reportingCode: 'Example explanation icon text'
-    };
     fixture.detectChanges();
   });
 
-  it('should init the form', () => {
-    const element = fixture.debugElement.query(By.css('form'));
-    expect(element).toBeDefined();
-    expect(comp.targetComponent).toBeDefined();
-    expect(comp.targetComponent.form).toBeDefined();
-  });
-
-  it('should have invalid form controls on init', () => {
-    expect(comp.targetComponent.form.formGroup.valid).toBeFalsy();
-  });
-
-  it('should check for all questions to be answered', () => {
-    const formFields = ['crime', 'debt', 'refuse', 'driver', 'cause'];
-    const lastField = 'register';
-
-    formFields.forEach(( formField ) => {
-      comp.targetComponent.form.formGroup.get(formField).setValue(true);
-    });
-    fixture.detectChanges();
-    expect(comp.targetComponent.form.formGroup.valid).toBeFalsy();
-
-    comp.targetComponent.form.formGroup.get(lastField).setValue(true);
-    fixture.detectChanges();
-    expect(comp.targetComponent.form.formGroup.valid).toBeTruthy();
+  it('should have submit button enabled by default', () => {
+    const submit = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submit.nativeElement.disabled).toBeFalsy();
   });
 });
