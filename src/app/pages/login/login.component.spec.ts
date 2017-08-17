@@ -9,12 +9,17 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
 import { loginError } from './login-error';
+import { Store } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
+import * as profile from '../../actions/profile';
+import * as fromRoot from '../../reducers';
 
 describe('Component: Login', () => {
   let comp: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let de: DebugElement;
   let el: HTMLElement;
+  let store: Store<any>;
 
   const configServiceStub = {
     config: {
@@ -43,7 +48,11 @@ describe('Component: Login', () => {
           }
         }
       ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, StoreModule.forRoot({
+        profile: {
+          firstname: 'test'
+        }
+      })],
       declarations: [LoginComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -52,6 +61,7 @@ describe('Component: Login', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     comp = fixture.componentInstance;
+    store = fixture.debugElement.injector.get(Store);
     fixture.detectChanges();
   });
 

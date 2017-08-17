@@ -2,7 +2,7 @@ import * as crypto from 'crypto-js';
 
 export class TokenHelper {
 
-  public getTokenExpirationDate(token: string): Date {
+  public getTokenExpirationDate(token: string): Number {
     return JSON.parse(token).expiration_time;
   }
 
@@ -16,6 +16,10 @@ export class TokenHelper {
     // Token expired?
     return !(date.valueOf() > (new Date().valueOf()));
   }
+}
+
+export function setTokenExpirationDate(token): Object {
+  return token.expiration_time = new Date().setUTCSeconds(token.expires_in);
 }
 
 export function tokenNotExpired(tokenName: string): boolean {

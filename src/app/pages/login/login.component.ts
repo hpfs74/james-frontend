@@ -63,7 +63,7 @@ export class LoginComponent {
       this.authService
         .login(email.value, password.value)
         .subscribe((token) => {
-          token.expiration_time = new Date().setUTCSeconds(token.expires_in);
+          this.authService.setTokenExpirationDate(token);
           localStorage.setItem(TOKEN_NAME, token.access_token);
           localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(token));
 

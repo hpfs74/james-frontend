@@ -121,6 +121,10 @@ export class AuthService {
     return environment.james.forgetPassword + `&redirect_uri=${encodeURI(redirectUrl)}`;
   }
 
+
+  public setTokenExpirationDate(token: AuthToken): Object {
+    return AuthUtils.setTokenExpirationDate(token);
+  }
   /**
    *
    * @return {Observable<R>}
