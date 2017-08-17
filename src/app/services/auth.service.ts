@@ -122,7 +122,7 @@ export class AuthService {
   }
 
 
-  public setTokenExpirationDate(token: AuthToken): Object {
+  public setTokenExpirationDate(token: string): Object {
     return AuthUtils.setTokenExpirationDate(token);
   }
   /**

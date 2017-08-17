@@ -63,7 +63,7 @@ export class LoginComponent {
       this.authService
         .login(email.value, password.value)
         .subscribe((token) => {
-          this.authService.setTokenExpirationDate(token);
+          this.authService.setTokenExpirationDate(JSON.stringify(token));
           localStorage.setItem(TOKEN_NAME, token.access_token);
           localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(token));
 
