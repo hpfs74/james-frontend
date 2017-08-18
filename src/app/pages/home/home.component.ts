@@ -16,6 +16,7 @@ import {
 } from '../../services';
 
 @Component({
+  selector: 'knx-home',
   template: `
     <knx-cookiebar></knx-cookiebar>
     <header class="header">
