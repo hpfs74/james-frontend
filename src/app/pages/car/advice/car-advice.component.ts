@@ -114,7 +114,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         }
       },
       {
-        label: 'Besparen',
+        label: 'Aanvragen',
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Koop verzekering',
         onShowStep: () => {
