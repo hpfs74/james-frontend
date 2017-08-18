@@ -1,7 +1,7 @@
 export const loginError = {
-  inactive_profile: 'Ongeldig e-mailadres of wachtwoord',
-  invalid_password: 'Ongeldig e-mailadres of wachtwoord',
+  inactive_profile: 'De combinatie gebruikersnaam en wachtwoord klopt niet',
+  invalid_password: 'De combinatie gebruikersnaam en wachtwoord klopt niet',
   too_many_login_attempts: 'Teveel foutieve inlogpogingen',
-  default: 'Onbekende server fout'
+  default: 'De combinatie gebruikersnaam en wachtwoord klopt niet'
 };
 
