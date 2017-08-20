@@ -38,7 +38,7 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Rechtsbijstand',
-                value: this.formatBoolean(value.insurance.legal_aid)
+                value: this.formatBoolean(value.insurance.legal_aid === 'LAY' )
               },
               {
                 label: 'No-claim beschermer',
