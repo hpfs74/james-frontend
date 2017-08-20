@@ -14,16 +14,15 @@ import { CarExtrasForm } from './car-extras.form';
       </knx-collapse-message>
 
       <knx-collapse-message [ngClass]="optionModifierClass" title="Aanvullende dekkingen" [isOpen]="true">
+
+       <cx-form-group
+          [options]="form.formConfig.roadAssistance"
+          [formControlName]="form.formConfig.roadAssistance.formControlName">
+       </cx-form-group>
+
         <cx-form-group
           [options]="form.formConfig.extraOptions"
           [formControlName]="form.formConfig.extraOptions.formControlName">
-        </cx-form-group>
-      </knx-collapse-message>
-
-      <knx-collapse-message [ngClass]="optionModifierClass" title="Pechhulp" [isOpen]="true">
-        <cx-form-group
-          [options]="form.formConfig.roadAssistance"
-          [formControlName]="form.formConfig.roadAssistance.formControlName">
         </cx-form-group>
       </knx-collapse-message>
 
@@ -64,7 +63,7 @@ export class CarExtrasComponent {
       this.form.formGroup.patchValue({
         coverage: value.insurance.coverage,
         extraOptions: {
-          legal: value.insurance.legal_aid,
+          legal: (value.insurance.legal_aid === 'LAY' || value.insurance.legal_aid === 'LAE'),
           noclaim: value.insurance.no_claim_protection,
           occupants: value.insurance.cover_occupants
         },
