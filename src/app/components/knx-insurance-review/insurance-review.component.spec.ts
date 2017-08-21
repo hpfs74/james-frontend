@@ -45,6 +45,7 @@ describe('Component: InsuranceReviewComponent', () => {
       legal_aid: '100',
       no_claim_protection: '100',
       cover_occupants: '100',
+      documents: [{name: 'document name', url: 'https://document.com'}],
       _embedded: {insurance: {insurance_logo: 'logogurl-1'}}
     };
 
@@ -68,6 +69,7 @@ describe('Component: InsuranceReviewComponent', () => {
       legal_aid: '200',
       no_claim_protection: '200',
       cover_occupants: '200',
+      documents: [{name: 'document name', url: 'https://document.com'}],
       _embedded: {insurance: {insurance_logo: 'logogurl-2'}}
     };
     fixture.detectChanges();
