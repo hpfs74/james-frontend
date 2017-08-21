@@ -1,3 +1,4 @@
+import { birthDateMask } from './../../../utils/base-form.utils';
 import { Component, OnInit, OnDestroy, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
@@ -210,11 +211,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       gender: detailForm.value.gender,
       date_of_birth: detailForm.value.birthDate
     }));
-
-    // TODO: update profile with new data
-    // this.store.select(fromRoot.getProfile)
-    //   .subscribe((profile: Profile) => {
-    //   });
 
     const compareObj: CarCompare = {
       active_loan: !!detailForm.value.loan,

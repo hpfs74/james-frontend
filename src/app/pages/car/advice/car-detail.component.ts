@@ -28,13 +28,16 @@ export class CarDetailComponent implements OnInit {
     if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold || value.loan || value.gender || value.coverage) {
       this.form.formGroup.patchValue(Object.assign({}, {
         licensePlate: value.license || null,
-        birthDate: value.date_of_birth ? FormUtils.toDateFormat(value.date_of_birth) : null,
         claimFreeYears: value.claim_free_years || null,
         houseHold: value.household_status || null,
         loan: value.active_loan || null,
         gender: value.gender ? value.gender.toLowerCase() : null,
         coverage: value.coverage || null,
       }));
+
+      // textmask decode doesn't work correctly with patchValue, so use setValue on control instead
+      this.form.formGroup.get('birthDate').setValue = value.date_of_birth ? value.date_of_birth : null;
+
       this.form.addressForm.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
         houseNumber: value.address ? value.address.number : null,
