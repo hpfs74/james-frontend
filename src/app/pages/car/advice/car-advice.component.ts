@@ -30,7 +30,6 @@ import { CarExtrasForm } from './car-extras.form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
-import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'knx-car-advice',
@@ -68,8 +67,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     private contentService: ContentService,
     private assistantService: AssistantService,
     private carService: CarService,
-    private insuranceService: InsuranceService,
-    private authService: AuthService
+    private insuranceService: InsuranceService
   ) { }
 
   ngOnInit() {

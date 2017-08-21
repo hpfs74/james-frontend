@@ -9,3 +9,10 @@ export class AuthKey {
   public id: string;
   public key: string;
 }
+
+export interface Authenticate {
+  grant_type?: string;
+  username: string;
+  password: string;
+  scope?: string;
+}

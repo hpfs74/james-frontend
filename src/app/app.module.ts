@@ -14,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
 
 import { RouterEffects } from './effects/router';
+import { AuthEffects } from './effects/auth';
 
 import { ContentService } from './content.service';
 
@@ -23,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { requestOptionsProvider } from './services/default-request-opts.service';
 
 import { AuthModule } from './auth.module';
+// TODO: init auth and login-page ngrx stuff in auth module instead of here
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './pages/login/login.component';
@@ -60,7 +62,8 @@ export function ContentLoader(contentService: ContentService) {
     StoreRouterConnectingModule,
     EffectsModule.forRoot(
     [
-      RouterEffects
+        RouterEffects,
+        AuthEffects
     ]),
     AuthModule,
     AppShellModule.runtime(),
