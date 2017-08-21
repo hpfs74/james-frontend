@@ -41,10 +41,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   formControlOptions: any;
   carDetailSubmitted = false;
   currentStep: number;
-
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
-
   car: Car;
   address: Address;
   chatConfig: AssistantConfig;
@@ -52,11 +50,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   // State of the advice forms data
   advice$: Observable<any>;
-
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
   selectedInsurance$: Observable<CarInsurance>;
-
   isCoverageLoading$: Observable<boolean>;
 
   subscription$: any;
@@ -108,8 +104,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         hideNextButton: true,
         onShowStep: () => {
           // FormUtils.scrollToForm('.knx-insurance-toplist');
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
+          //this.store.dispatch(new assistant.ClearAction);
+          //this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
         }
       },
       {
