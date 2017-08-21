@@ -12,13 +12,14 @@ export interface CarCompare {
   household_status: string;
 
   // these are optional in new car flow (v1.2)
-  cover_occupants?: boolean;
-  kilometers_per_year?: string;
-  legal_aid?: string;
-  no_claim_protection?: boolean;
-  own_risk?: number;
+  // these fields are all mandatory
+  cover_occupants: boolean;
+  kilometers_per_year: string;
+  legal_aid: string;
+  no_claim_protection: boolean;
+  own_risk: number;
   risk?: string;
-  road_assistance?: string;
+  road_assistance: string;
 
   // car
   license: string;
@@ -31,5 +32,8 @@ export interface CarCompare {
   zipcode: string;
   country: string;
 
-  insurance?: string;
+  // insurance?: string;
+
+  // needed for v2
+  insurance_id: string;
 }

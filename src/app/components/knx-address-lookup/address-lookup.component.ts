@@ -1,7 +1,5 @@
 import { Component, AfterViewChecked, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, Validators, FormControl, AbstractControl, FormArray } from '@angular/forms';
-import { FormControlOptions } from '@cx/form-control';
-import { FormValidationErrors } from '@cx/form';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { postalCodeMask } from '../../utils/base-form.utils';
 
@@ -89,8 +87,8 @@ export class AddressLookupComponent implements AfterViewChecked {
                 'province': dataObject.Payload.Province,
                 'fullname': dataObject.Output,
                 'location': {
-                  'lat': dataObject.Location.lat,
-                  'lng': dataObject.Location.lon
+                  'lat': dataObject.Payload.Location.lat,
+                  'lng': dataObject.Payload.Location.lon
                 }
               };
 
@@ -100,8 +98,9 @@ export class AddressLookupComponent implements AfterViewChecked {
 
               return resolve(isValid ? null : { address: true });
             }, err => {
+              // TODO: check to change this with reject
               isValid = false; // cannot validate: server error?
-              return resolve({ address: true });
+              return resolve({ address: true, error: err });
             });
         }
       }, timeOut);
