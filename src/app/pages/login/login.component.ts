@@ -78,7 +78,6 @@ export class LoginComponent {
             preserveFragment: true
           };
 
-          this.store.dispatch(new profile.LoadAction());
           // Redirect the user
           this.router.navigate([redirect], navigationExtras);
         }, (res) => this.handleError(res.json()));
