@@ -44,10 +44,6 @@ export class CarExtrasForm {
         inputOptions: {
           items: [
             {
-              label: 'Pechhulp',
-              value: 'RACO'
-            },
-            {
               label: 'Rechtsbijstand',
               value: 'legal'
             },
@@ -64,10 +60,14 @@ export class CarExtrasForm {
       },
       roadAssistance: {
         formControlName: 'roadAssistance',
-        type: 'radio',
+        type: 'select',
         formControl: this.formGroup.get('roadAssistance'),
         inputOptions: {
           items: [
+            {
+              label: 'Geen Pechhulp',
+              value: 'RANO'
+            },
             {
               label: 'Binnen Nederland',
               value: 'RACO'

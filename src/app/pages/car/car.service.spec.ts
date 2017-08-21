@@ -72,7 +72,15 @@ describe('Service: Car', () => {
     'coverage': 'CL',
     'claim_free_years': 7,
     'household_status': 'CHMP',
-    'active_loan': false
+    'active_loan': false,
+    'kilometers_per_year': 'KMR3',
+    'own_risk': 0,
+    'risk': 'RTUD',
+    'road_assistance': 'RANO',
+    'legal_aid': 'LAY',
+    'cover_occupants': false,
+    'no_claim_protection': false,
+    'insurance_id': ''
   };
 
   beforeEach(async(() => {
