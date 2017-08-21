@@ -2,6 +2,11 @@ import { Car } from './car';
 import { Insurance } from './insurance';
 import { InsuranceAdvice } from './insurance-advice';
 
+interface Document {
+  name: string;
+  url: string;
+}
+
 export class CarInsurance extends InsuranceAdvice {
   id: string;
   insurance_id: string;
@@ -12,6 +17,7 @@ export class CarInsurance extends InsuranceAdvice {
   price_quality: number;
   own_risk: number;
   monthly_premium: number;
+  documents: Array<Document>;
   wa_nett: number;
   bonus_malus_step_wa: string;
   bonus_malus_discount_percentage_wa: string;
