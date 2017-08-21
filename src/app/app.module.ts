@@ -12,12 +12,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { reducers, metaReducers } from './reducers';
-import { ProfileEffects } from './effects/profile';
 
 import { RouterEffects } from './effects/router';
-import { CompareEffects } from './effects/compare';
-import { CoverageEffects } from './effects/coverage';
-import { SettingsEffects } from './effects/settings';
 
 import { ContentService } from './content.service';
 
@@ -64,11 +60,7 @@ export function ContentLoader(contentService: ContentService) {
     StoreRouterConnectingModule,
     EffectsModule.forRoot(
     [
-      RouterEffects,
-      ProfileEffects,
-      CompareEffects,
-      CoverageEffects,
-      SettingsEffects
+      RouterEffects
     ]),
     AuthModule,
     AppShellModule.runtime(),
