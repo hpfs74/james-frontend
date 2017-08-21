@@ -79,7 +79,8 @@ describe('Service: Car', () => {
     'road_assistance': 'RANO',
     'legal_aid': 'LAY',
     'cover_occupants': false,
-    'no_claim_protection': false
+    'no_claim_protection': false,
+    'insurance_id': ''
   };
 
   beforeEach(async(() => {
