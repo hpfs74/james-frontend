@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -72,6 +72,10 @@ export function ContentLoader(contentService: ContentService) {
     CookiesPageComponent,
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'nl-NL'
+    },
     ContentService,
     {
       provide: APP_INITIALIZER,
