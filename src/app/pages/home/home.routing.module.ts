@@ -5,7 +5,6 @@ import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { HomeComponent } from './home.component';
 import { FaqComponent } from '../faq/faq.component';
-// import { DashboardComponent } from '../dashboard/dashboard.component';
 import { Address } from './../../models/address';
 
 const homeRoutes: Routes = [

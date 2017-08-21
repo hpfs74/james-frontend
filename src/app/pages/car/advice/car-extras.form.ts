@@ -8,7 +8,7 @@ export class CarExtrasForm {
     this.formGroup = this.fb.group({
       coverage: ['', Validators.required],
       extraOptions: [{}],
-      roadAssistance: [{}],
+      roadAssistance: [null, Validators.required],
       ownRisk: [null, Validators.required],
       kmPerYear: [null, Validators.required]
     });

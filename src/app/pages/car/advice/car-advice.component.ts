@@ -42,10 +42,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   formControlOptions: any;
   carDetailSubmitted = false;
   currentStep: number;
-
   coverages: Array<Price>;
   insurances: Observable<Array<CarInsurance>>;
-
   car: Car;
   address: Address;
   chatConfig: AssistantConfig;
@@ -53,11 +51,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   // State of the advice forms data
   advice$: Observable<any>;
-
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
   selectedInsurance$: Observable<CarInsurance>;
-
   isCoverageLoading$: Observable<boolean>;
 
   subscription$: any;
@@ -109,8 +105,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         hideNextButton: true,
         onShowStep: () => {
           // FormUtils.scrollToForm('.knx-insurance-toplist');
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
+          // this.store.dispatch(new assistant.ClearAction);
+          // this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
         }
       },
       {
@@ -138,12 +134,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             coverage: data.coverage,
             cover_occupants: data.extraOptions.occupants || false,
             no_claim_protection: data.extraOptions.noclaim || false,
-            legal_aid: data.extraOptions.legal || 'AAA',
-            road_assistance: data.roadAssistance || 'RACO',
+            legal_aid: data.extraOptions.legal || 'LAN',
+            road_assistance: data.roadAssistance || 'RANO',
             kilometers_per_year: data.kmPerYear || 'KMR3',
-            own_risk: data.ownRisk || 0
+            own_risk: data.ownRisk || 0,
+            insurance_id: ''
           };
-          this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
+          // this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
+          this.store.dispatch(new advice.UpdateAction(compareObj));
         }
       });
     this.subscription$ = this.store.select(fromRoot.getSelectedAdvice)
@@ -293,6 +291,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   onAddressChange(address: Address) {
     this.store.dispatch(new profile.UpdateAction(address));
+
+    // TODO: not in ngrx form should be this.store.select('address') something
     this.address = address;
   }
 

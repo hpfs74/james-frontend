@@ -9,12 +9,12 @@
     "config": "ts-node ./scripts/set-env.ts",
     "start": "npm run config && ng serve --open --aot",
     "build": "npm run config && ng build --aot",
-    "build:prod": "npm run config -- --environment=prod && ng build --prod --aot --environment=prod",
+    "build:prod": "npm run config -- --environment=prod && ng build --prod --aot --environment=prod --base-href=/james/ ",
     "test": "npm run config && ng test --code-coverage",
     "lint": "ng lint --type-check",
     "lint:styles": "stylelint 'src/**/*.scss' --syntax scss --config stylelint.conf.js",
     "e2e": "ng e2e",
-    "clean": "npm cache clean --force && rimraf -- node_modules dist"
+    "clean": "npm cache clean && npm run rimraf -- node_modules dist"
   },
   "private": true,
   "dependencies": {
@@ -22,7 +22,7 @@
     "@angular/app-shell": "^0.1.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
-    "@angular/core": "^4.0.0",
+    "@angular/core": "^4.3.3",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
