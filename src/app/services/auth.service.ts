@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
 
 import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
-import 'rxjs/add/operator/mergeMap';
 import { Profile } from '../models/profile';
 
 @Injectable()
 export class AuthService {
-  // store the URL so we can redirect after logging in
   redirectUrl: string;
   private loggedIn = false;
   private keyUrl: string;
@@ -18,10 +17,11 @@ export class AuthService {
   private tokenUrl: string;
 
   constructor(private http: Http) {
-    this.loggedIn = false; // !!localStorage.getItem('a uth_token');
+    this.loggedIn = !!localStorage.getItem('auth_token');
     this.keyUrl = environment.james.key;
     this.profileUrl = environment.james.profile;
     this.tokenUrl = environment.james.token;
+    this.redirectUrl = window.location.origin;
   }
 
   /**
@@ -41,13 +41,6 @@ export class AuthService {
       });
   }
 
-  /**
-   * do a sing in
-   *
-   * @param email
-   * @param password
-   * @return {Observable<R>}
-   */
   public login(email, password): Observable<AuthToken> {
     return this.getNicciKey()
       .flatMap((nicci) => {
@@ -69,11 +62,6 @@ export class AuthService {
       });
   }
 
-  /**
-   *
-   * @param refreshToken
-   * @return {Observable<R>}
-   */
   public refreshToken(refreshToken: string): Observable<AuthToken> {
 
     return this.getNicciKey()
@@ -89,11 +77,6 @@ export class AuthService {
       });
   }
 
-
-  /**
-   *
-   * @param profile
-   */
   public isActive(email: string) {
     this.getNicciKey()
       .flatMap((nicci: AuthKey) => {
@@ -109,16 +92,12 @@ export class AuthService {
     // return localStorage.getItem('access_token') !== null;
   }
 
-  /**
-   *
-   * @param email
-   */
   public resendActivation(email) {
     throw new Error('Not implemented yet');
   }
 
-  public forgotPassword(redirectUrl: string): string {
-    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(redirectUrl)}`;
+  public getPasswordResetLink(): string {
+    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(this.redirectUrl)}`;
   }
 
 

@@ -26,15 +26,15 @@ export class LoginComponent {
   form: LoginForm;
   messageTitle: string;
   message: string;
-  forgotPasswordLink: string;
+  passwordResetUrl: string;
 
   constructor(private router: Router, private authService: AuthService, private store: Store<fromRoot.State>) {
     this.form = new LoginForm(new FormBuilder());
-    this.forgotPasswordLink = environment.james.forgetPassword;
+    this.passwordResetUrl = authService.getPasswordResetLink();
   }
 
   goToPasswordReset() {
-    window.location.href  = this.forgotPasswordLink;
+    window.location.href  = this.passwordResetUrl;
   }
 
   togglePassword(event) {

@@ -13,6 +13,10 @@ export class CanActivateBuyFlowGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // only allow buy flow when an advice is in the store
+
+    // thomas [9-aug-2017]: there's a bug with guard and ngrx router store creating an infinite loop
+    // @see https://github.com/ngrx/platform/issues/201
+
     let adviceExists = false;
 
     if (route.params) {

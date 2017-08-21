@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.module';
@@ -14,6 +15,12 @@ import { AssistantService } from '../../services/assistant.service';
 import { LoaderService } from '../../components/knx-app-loader/loader.service';
 import { ProfileService } from '../../services/profile.service';
 import { CarService } from '../car/car.service';
+
+// Effects
+import { ProfileEffects } from '../../effects/profile';
+import { CompareEffects } from '../../effects/compare';
+import { CoverageEffects } from '../../effects/coverage';
+import { SettingsEffects } from '../../effects/settings';
 
 // Layout components
 import { AppLoaderComponent } from '../../components/knx-app-loader/loader.component';
@@ -30,6 +37,12 @@ import { NavbarComponent } from '../../components/knx-navigation';
   imports: [
     SharedModule,
     ChatStreamModule,
+    EffectsModule.forFeature([
+      ProfileEffects,
+      CompareEffects,
+      CoverageEffects,
+      SettingsEffects
+    ]),
     HomeRoutingModule.forRoot()
   ],
   declarations: [

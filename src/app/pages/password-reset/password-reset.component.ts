@@ -51,14 +51,14 @@ export class PasswordResetComponent {
   messageTitle: string;
   message: string;
   formGroupConfig = [];
-  redirectUrl: string;
+  goToUrl: string;
 
   constructor(private router: Router, private authService: AuthService) {
     this.initForm();
   }
 
   initForm() {
-    this.redirectUrl = this.authService.forgotPassword('com.mobgen.knab://');
+    this.goToUrl = this.authService.getPasswordResetLink();
 
     // TODO
     // password reset just redirects to NICCI page now,
@@ -86,8 +86,8 @@ export class PasswordResetComponent {
   }
 
   resetPasswordRequest(event) {
-    if (this.redirectUrl) {
-      window.location.href = this.redirectUrl;
+    if (this.goToUrl) {
+      window.location.href = this.goToUrl;
     }
   }
 }

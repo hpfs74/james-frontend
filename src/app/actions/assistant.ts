@@ -6,7 +6,7 @@ export const CLEAR_MESSAGES =   '[Assistant] Clear';
 export class AddMessageAction implements Action {
   readonly type = ADD_MESSAGE;
 
-  constructor(public payload: string) { }
+  constructor(public payload: any) { }
 }
 
 export class ClearAction implements Action {
