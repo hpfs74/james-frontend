@@ -27,6 +27,7 @@ export class CarService {
   public getInsurances(carRequest: CarCompare): Observable<Array<CarInsurance>> {
     const headers = new Headers();
     headers.append('version', 'v2');
+
     return this.authHttp.post(environment.james.carCompare, JSON.stringify(carRequest), { headers })
       .map((res: Response) => res.json());
   }

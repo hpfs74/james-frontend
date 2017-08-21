@@ -18,12 +18,12 @@ import * as coverage from '../../../actions/coverage';
 
 import { ContentService } from '../../../content.service';
 import { InsuranceService } from '../../../services/insurance.service';
-import { AssistantService } from './../../../services/assistant.service';
+import { AssistantService } from '../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { CarService } from '../car.service';
 import { Car, Price, CarCompare, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
-import { CarCoverageRecommendation } from './../../../models/coverage';
+import { CarCoverageRecommendation } from '../../../models/coverage';
 import { CarInsurance } from '../../../models/car-insurance';
 import { CarDetailForm } from './car-detail.form';
 import { CarExtrasForm } from './car-extras.form';
@@ -33,6 +33,7 @@ import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
+  selector: 'knx-car-advice',
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -133,9 +134,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             coverage: data.coverage,
             cover_occupants: data.extraOptions.occupants || false,
             no_claim_protection: data.extraOptions.noclaim || false,
-            legal_aid: data.extraOptions.legal || false,
-            kilometers_per_year: data.kmPerYear,
-            own_risk: data.ownRisk
+            legal_aid: data.extraOptions.legal || 'AAA',
+            road_assistance: data.roadAssistance || 'RACO',
+            kilometers_per_year: data.kmPerYear || 'KMR3',
+            own_risk: data.ownRisk || 0
           };
           this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
         }
@@ -146,9 +148,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
         }
       });
-
-    // Car info subscription
-    // TODO: refactor to be more reactive
     this.store.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {
         if (isLoaded) {
@@ -226,7 +225,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       date_of_birth: FormUtils.toNicciDate(detailForm.value.birthDate),
       zipcode: this.address.postcode,
       house_number: this.address.number,
-      country: 'NL'
+      country: 'NL',
+      kilometers_per_year: detailForm.value.kmPerYear,
+      own_risk: detailForm.value.ownRisk,
+      cover_occupants: false,
+      legal_aid: 'LAN',
+      no_claim_protection: false,
+      road_assistance: 'RANO',
+      insurance_id: ''
     };
 
     // add address in format for profile

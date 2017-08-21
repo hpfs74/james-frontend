@@ -109,7 +109,7 @@ export class AuthService {
       .map(data => data.json())
       .map(data => {
         return <AuthKey> {
-          id: data._id,
+          id: data.id,
           key: data.key
         };
       });
