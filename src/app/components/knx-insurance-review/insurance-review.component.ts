@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { InsuranceAdvice } from '../../models';
 import { CarInsurance } from '../../models/car-insurance';
 
@@ -9,7 +9,7 @@ interface SectionsItem {
 
 interface SectionFields {
   label: string;
-  value: number | string;
+  value?: number | string;
   info?: string;
 }
 
@@ -23,11 +23,23 @@ interface SectionFields {
       </h2>
     </div>
 
+    <p class="knx-collapsible-panel__title">
+      {{info.label}}
+
+      <knx-info size="md" isFloating="true" class="knx-info">
+        <div class="knx-info__content">
+          <div class="knx-message knx-message--chat knx-message--arrow-top">
+            <div class="knx-message__content" [innerHTML]="info.text"></div>
+          </div>
+        </div>
+      </knx-info>
+    </p>
+
     <knx-collapsible-panel *ngFor="let section of sections" title="{{section.label}}">
       <div class="knx-collapsible-panel__content">
-        <div class="row"  *ngFor="let sectionField of section.fields">
-          <div class="col col-md-5">
-            {{sectionField.label}}<span *ngIf="sectionField.info">
+        <div class="row" *ngFor="let sectionField of section.fields">
+          <div class="col" [ngClass]="{'col-md-5': sectionField.value, 'col-md-12': !sectionField.value}">
+            <span [innerHTML]="sectionField.label"></span><span *ngIf="sectionField.info">
               <knx-info size="md" isFloating="true" class="knx-info">
                 <div class="knx-info__content">
                   <div class="knx-message knx-message--chat knx-message--arrow-top">
@@ -45,9 +57,24 @@ interface SectionFields {
     </knx-collapsible-panel>
   `
 })
-export class InsuranceReviewComponent implements OnChanges {
+export class InsuranceReviewComponent implements OnChanges, OnInit {
   @Input() selectedInsurance: CarInsurance;
   sections: Array<SectionsItem>;
+  info: any;
+
+  ngOnInit() {
+    this.info = {
+      label: 'Slim verzekerd via Knab',
+      text: 'AAROM VERZEKEREN VIA KNAB? <br>' +
+      'Verzekeren via Knab is een goed idee want:<br>' +
+      'Scherpe prijs: bij Knab betaal je namelijk maar 10% provisie. Bij andere aanbieders is dat tot wel 25% per maand.<br>' +
+      'We zijn er voor je: we helpen je bij schade, of als je er niet uitkomt met je verzekeraar.<br>' +
+      'Gemak: je regelt alles voor je verzekeringen heel eenvoudig in de app. Zoals je gegevens aanpassen, of je ' +
+      'vraag aap’en aan de Knab Servicedesk.<br>' +
+      'Slim: loopt je verzekering bijna af en kun je kijken voor een betere deal? Dan krijg je een seintje van ons. ' +
+      'Zodat je altijd slim en voordelig verzekerd bent.'
+    };
+  }
 
   ngOnChanges() {
     if (this.selectedInsurance) {
@@ -100,6 +127,24 @@ export class InsuranceReviewComponent implements OnChanges {
             {
               label: 'Inzittenden verzekering',
               value: this.selectedInsurance.cover_occupants ? 'Ja' : 'Nee'
+            }
+          ]
+        },
+        {
+          label: 'Documenten',
+          fields: [
+            {
+              label: 'Hier vind je de voorwaarden van de verzekeringen die je hebt gekozen',
+              info: 'MEER INFORMATIE <br>' +
+              'In de documenten staan de polisvoorwaarden. Daarin lees je bijvoorbeeld waar je precies voor gedekt bent, ' +
+              'welke vergoeding je ontvangt bij een schade en of je een vrije keuze hebt voor het bedrijf dat je schade ' +
+              'gaat herstellen. <br>' +
+              'In de documentlijst staan ook de voorwaarden voor extra dekkingen. Heb je die niet geselecteerd? ' +
+              'Dan kun je die natuurlijk negeren.'
+            },
+            {
+              label: '<a href="' + this.selectedInsurance.terms_conditions_pdf_url + '" class="knx-button--util">' +
+              'Voorwaarden Autoverzekering</a>'
             }
           ]
         }

@@ -116,7 +116,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       {
         label: 'Aanvragen',
         backButtonLabel: 'Terug',
-        nextButtonLabel: 'Koop verzekering',
+        nextButtonLabel: 'Verzekering aanvragen',
         onShowStep: () => {
           FormUtils.scrollToForm('knx-insurance-review');
           this.store.dispatch(new assistant.ClearAction);
