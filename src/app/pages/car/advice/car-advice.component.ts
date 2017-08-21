@@ -105,8 +105,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         hideNextButton: true,
         onShowStep: () => {
           // FormUtils.scrollToForm('.knx-insurance-toplist');
-          //this.store.dispatch(new assistant.ClearAction);
-          //this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
+          // this.store.dispatch(new assistant.ClearAction);
+          // this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
         }
       },
       {
