@@ -13,13 +13,14 @@ import { CarExtrasForm } from './car-extras.form';
         </cx-form-group>
       </knx-collapse-message>
 
-      <knx-collapse-message [ngClass]="optionModifierClass" title="Aanvullende dekkingen" [isOpen]="true">
-
-       <cx-form-group
+      <knx-collapse-message [ngClass]="optionModifierClass" title="Pechhulp" [isOpen]="true">
+        <cx-form-group
           [options]="form.formConfig.roadAssistance"
           [formControlName]="form.formConfig.roadAssistance.formControlName">
-       </cx-form-group>
+        </cx-form-group>
+      </knx-collapse-message>
 
+      <knx-collapse-message [ngClass]="optionModifierClass" title="Aanvullende dekkingen" [isOpen]="true">
         <cx-form-group
           [options]="form.formConfig.extraOptions"
           [formControlName]="form.formConfig.extraOptions.formControlName">
@@ -47,7 +48,7 @@ import { CarExtrasForm } from './car-extras.form';
     }
 
     h4.knx-collapse-message__title {
-      letter-spacing: 0.05em;
+      font-size: 16px;
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -59,17 +60,17 @@ export class CarExtrasComponent {
   @Input() optionModifierClass: string;
 
   @Input() set advice(value: any) {
-    if (value && value.insurance) {
+    if (value /*&& value.insurance*/) {
       this.form.formGroup.patchValue({
-        coverage: value.insurance.coverage,
+        coverage: value.coverage,
         extraOptions: {
-          legal: (value.insurance.legal_aid === 'LAY' || value.insurance.legal_aid === 'LAE'),
-          noclaim: value.insurance.no_claim_protection,
-          occupants: value.insurance.cover_occupants
+          legal: (value.legal_aid === 'LAY' || value.legal_aid === 'LAE'),
+          noclaim: value.no_claim_protection,
+          occupants: value.cover_occupants
         },
-        roadAssistance: value.insurance.road_assistance,
-        ownRisk: value.insurance.own_risk,
-        kmPerYear: value.insurance.kilometers_per_year
+        roadAssistance: value.road_assistance,
+        ownRisk: value.own_risk,
+        kmPerYear: value.kilometers_per_year
       }, { emitEvent: false }); // prevent infinite loop; valueChanges subscription CarAdviceComponent
     }
   }
