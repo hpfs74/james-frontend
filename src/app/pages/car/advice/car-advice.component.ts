@@ -135,12 +135,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             coverage: data.coverage,
             cover_occupants: data.extraOptions.occupants || false,
             no_claim_protection: data.extraOptions.noclaim || false,
-            legal_aid: data.extraOptions.legal || 'AAA',
-            road_assistance: data.roadAssistance || 'RACO',
+            legal_aid: data.extraOptions.legal || 'LAN',
+            road_assistance: data.roadAssistance || 'RANO',
             kilometers_per_year: data.kmPerYear || 'KMR3',
-            own_risk: data.ownRisk || 0
+            own_risk: data.ownRisk || 0,
+            insurance_id: ''
           };
-          this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
+          // this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
+          this.store.dispatch(new advice.UpdateAction(compareObj));
         }
       });
     this.subscription$ = this.store.select(fromRoot.getSelectedAdvice)
@@ -285,6 +287,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   onAddressChange(address: Address) {
     this.store.dispatch(new profile.UpdateAction(address));
+
+    // TODO: not in ngrx form should be this.store.select('address') something
     this.address = address;
   }
 
