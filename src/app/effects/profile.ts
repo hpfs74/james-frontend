@@ -29,7 +29,8 @@ export class ProfileEffects {
         .mergeMap((p: Profile) => {
           return [
             new profile.LoadSuccessAction(p),
-            new insurances.LoadSuccessAction(p._embedded ? p._embedded.insurance.documents : [])
+            // TODO: change to insurances[] according to MW spec
+            // new insurances.LoadSuccessAction(p._embedded.insurance.documents)
           ];
         })
         .catch(error => Observable.of(new profile.LoadFailAction(error))));

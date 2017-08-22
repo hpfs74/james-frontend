@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/throw';
 
 import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
-import { Profile } from '../models/profile';
+import { Profile, Authenticate } from '../models';
 
 @Injectable()
 export class AuthService {
@@ -41,24 +42,23 @@ export class AuthService {
       });
   }
 
-  public login(email, password): Observable<AuthToken> {
+  public login(auth: Authenticate): Observable<AuthToken> {
     return this.getNicciKey()
       .flatMap((nicci) => {
-        const encPass = AuthUtils.encryptPassword(password, nicci.key);
-
-        // let encPass = this.encryptPassword(password, nicci.key);
+        const encPass = AuthUtils.encryptPassword(auth.password, nicci.key);
         const headers = this.getBasicHeaderWithKey(nicci);
 
         const tokenRequest = {
-          grant_type: 'password',
-          username: email,
+          grant_type: auth.grant_type || 'password',
+          username: auth.username,
           password: encPass,
           scope: 'profile/basic'
         };
 
         return this.http.post(this.tokenUrl, tokenRequest, {headers})
           .map((res) => res.json())
-          .map((token) => <AuthToken>token);
+          .map((token) => <AuthToken>token)
+          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
       });
   }
 
@@ -96,11 +96,6 @@ export class AuthService {
     throw new Error('Not implemented yet');
   }
 
-  public getPasswordResetLink(): string {
-    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(this.redirectUrl)}`;
-  }
-
-
   public setTokenExpirationDate(token: string): Object {
     return AuthUtils.setTokenExpirationDate(token);
   }
@@ -109,7 +104,6 @@ export class AuthService {
    * @return {Observable<R>}
    */
   private getNicciKey(): Observable<AuthKey> {
-
     const headers = this.getBasicHeader();
 
     return this.http

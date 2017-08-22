@@ -32,6 +32,8 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
+import * as fromAuth from './auth';
+import * as fromLoginPage from './login-page';
 import * as fromProfile from './profile';
 import * as fromSettings from './settings';
 import * as fromLayout from './layout';
@@ -49,6 +51,8 @@ import { analyticsMetaReducer } from './analytics';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
+  auth: fromAuth.State; // TODO: move to AuthState
+  loginPage: fromLoginPage.State; // TODO: move to AuthState
   profile: fromProfile.State;
   settings: fromSettings.State;
   layout: fromLayout.State;
@@ -69,6 +73,8 @@ export interface State {
  * the result from right to left.
  */
 export const reducers: ActionReducerMap<State> = {
+  auth: fromAuth.reducer,
+  loginPage: fromLoginPage.reducer,
   profile: fromProfile.reducer,
   settings: fromSettings.reducer,
   layout: fromLayout.reducer,
@@ -138,6 +144,16 @@ export const getProfile = createSelector(getProfileState, fromProfile.getCurrent
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
 // export const getProfileLoaded= createSelector(getProfileState, fromProfile.getLoaded);
 
+/**
+ * Auth Reducers
+ */
+export const getAuthState = (state: State) => state.auth;
+// export const selectAuthState = createFeatureSelector<State>('auth');
+
+
+export const selectLoginPageState = (state: State) => state.loginPage;
+export const getLoginPageError = createSelector(selectLoginPageState, fromLoginPage.getError);
+export const getLoginPagePending = createSelector(selectLoginPageState, fromLoginPage.getPending);
 
 /**
  * Settings Reducers

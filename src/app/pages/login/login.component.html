@@ -31,14 +31,14 @@
           </div>
 
           <button type="submit" class="knx-button knx-button--primary knx-button--fullwidth"
-            [class.knx-button--pending]="isPending">Inloggen</button>
+            [class.knx-button--pending]="pending$ | async">Inloggen</button>
       </div>
     </div>
       <div class="row">
       <div class="col-md-6 offset-md-3">
-        <div class="cx-message cx-message--error" *ngIf="hasErrors()">
-            <div *ngIf="messageTitle" class="cx-message__header">{{ messageTitle }}</div>
-            <div class="cx-message__content">{{ message }}
+        <div class="cx-message cx-message--error" *ngIf="form.formGroup.valid && errorMessage">
+            <div class="cx-message__header">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</div>
+            <div class="cx-message__content">{{ errorMessage }}
             </div>
         </div>
         <p class="knx-login__reset knx-text-center">

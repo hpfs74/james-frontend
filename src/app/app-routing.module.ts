@@ -21,10 +21,10 @@ export const routes: Routes = [
       title: 'Cookie-beleid'
     }
   },
-  {
-    path: 'forgot-password',
-    component: PasswordResetComponent
-  },
+  // {
+  //   path: 'forgot-password',
+  //   component: PasswordResetComponent,
+  // },
   {
     path: 'login',
     component: LoginComponent
