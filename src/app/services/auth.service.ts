@@ -29,7 +29,7 @@ export class AuthService {
    *
    * @return {Observable<R>}
    */
-  public logout() {
+  public logout(): Observable<AuthToken> {
     return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
       .map(x => {
         localStorage.removeItem('access_token');
@@ -88,8 +88,8 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    // return AuthUtils.tokenNotExpired('token');
-    return localStorage.getItem('access_token') !== null;
+    return AuthUtils.tokenNotExpired('token');
+    // return localStorage.getItem('access_token') !== null;
   }
 
   public resendActivation(email) {
@@ -100,6 +100,14 @@ export class AuthService {
     return environment.james.forgetPassword + `&redirect_uri=${encodeURI(this.redirectUrl)}`;
   }
 
+
+  public setTokenExpirationDate(token: string): Object {
+    return AuthUtils.setTokenExpirationDate(token);
+  }
+  /**
+   *
+   * @return {Observable<R>}
+   */
   private getNicciKey(): Observable<AuthKey> {
 
     const headers = this.getBasicHeader();

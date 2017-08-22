@@ -6,6 +6,9 @@ import { environment } from '../../../environments/environment';
 import { LoginForm } from './login.form';
 import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
 import { loginError } from './login-error';
+import { Store } from '@ngrx/store';
+import * as profile from '../../actions/profile';
+import * as fromRoot from '../../reducers';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -25,7 +28,7 @@ export class LoginComponent {
   message: string;
   passwordResetUrl: string;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private store: Store<fromRoot.State>) {
     this.form = new LoginForm(new FormBuilder());
     this.passwordResetUrl = authService.getPasswordResetLink();
   }
@@ -60,7 +63,7 @@ export class LoginComponent {
       this.authService
         .login(email.value, password.value)
         .subscribe((token) => {
-
+          this.authService.setTokenExpirationDate(JSON.stringify(token));
           localStorage.setItem(TOKEN_NAME, token.access_token);
           localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(token));
 

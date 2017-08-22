@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { tokenNotExpired } from '../utils/auth.utils';
 import { AuthService } from './auth.service';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
+import * as AuthUtils from '../utils/auth.utils';
 
 export enum Action { QueryStart, QueryStop }
 
@@ -86,7 +87,7 @@ export class AuthHttp {
     const req: Request = url as Request;
     let token: string = localStorage.getItem(TOKEN_NAME);
 
-    if (!tokenNotExpired) {
+    if (!AuthUtils.tokenNotExpired('token')) {
       const tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
       this.authService.refreshToken(tokenObject.refresh_token)
         .flatMap((data) => {

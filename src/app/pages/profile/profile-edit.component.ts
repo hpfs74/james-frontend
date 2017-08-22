@@ -8,7 +8,7 @@ import * as FormUtils from '../../utils/base-form.utils';
   template: `
   <form [formGroup]="form.formGroup" class="knx-fancy-form">
     <div class="knx-avatar-profile">
-      <img class="knx-avatar-profile__image" src="{{ avatarUrl || '../../../assets/images/avatars/assistant.png' }}">
+      <img class="knx-avatar-profile__image" src="{{ avatarUrl }}">
 
       <cx-form-group class="cx-styleguide-icon__icon knx-icon-pencil"
         [formControlName]="form.formConfig.avatar.formControlName"
@@ -84,12 +84,13 @@ export class ProfileEditComponent {
   @Input() set profile(value: Profile) {
     if (value) {
       const patchObj = {
-        avatar: value.profile_image,
         gender: value.gender,
         firstName: value.firstname,
         lastName: value.lastname,
         birthDate: value.birthday ? FormUtils.toDateFormat(FormUtils.parseNicciDate(value.birthday)) : value.birthday
       };
+
+      this.avatarUrl = value.profile_image;
 
       this.form.formGroup.patchValue(patchObj, { emitEvent: false });
 
