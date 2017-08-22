@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/throw';
 
 import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
@@ -93,10 +94,6 @@ export class AuthService {
 
   public resendActivation(email) {
     throw new Error('Not implemented yet');
-  }
-
-  public getPasswordResetLink(): string {
-    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(this.redirectUrl)}`;
   }
 
   private getNicciKey(): Observable<AuthKey> {
