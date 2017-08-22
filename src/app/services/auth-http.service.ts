@@ -4,6 +4,13 @@ import {
   Response, RequestMethod, Request, Connection, ConnectionBackend
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/retry';
+
 import { tokenNotExpired } from '../utils/auth.utils';
 import { AuthService } from './auth.service';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
