@@ -1,20 +1,33 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Action } from '@ngrx/store';
+import { Effect, Actions } from '@ngrx/effects';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { defer } from 'rxjs/observable/defer';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/exhaustMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Effect, Actions } from '@ngrx/effects';
-import { of } from 'rxjs/observable/of';
 
 import { AuthService } from '../services/auth.service';
 import * as Auth from '../actions/auth';
 import * as Profile from '../actions/profile';
-import { AuthToken } from '../models';
+import { AuthToken, TOKEN_NAME, TOKEN_OBJECT_NAME } from '../models/auth';
 
 @Injectable()
 export class AuthEffects {
+
+  // @Effect()
+  // init$: Observable<any> = defer(() => {
+  //   let token = localStorage.getItem(TOKEN_NAME);
+  //   return of([
+  //     new Auth.LoginSuccess({})
+  //     new Profile.LoadAction()
+  //   ]);
+  // });
+
   @Effect()
   login$ = this.actions$
     .ofType(Auth.LOGIN)
@@ -23,6 +36,10 @@ export class AuthEffects {
       this.authService
         .login(auth)
         .mergeMap((token: AuthToken) => {
+          if (token) {
+            localStorage.setItem(TOKEN_NAME, token.access_token);
+            localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(token));
+          }
           return [
             new Auth.LoginSuccess({ token }),
             new Profile.LoadAction()

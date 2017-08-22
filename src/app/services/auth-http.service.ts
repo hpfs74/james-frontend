@@ -13,13 +13,11 @@ import 'rxjs/add/operator/retry';
 
 import { tokenNotExpired } from '../utils/auth.utils';
 import { AuthService } from './auth.service';
+import { TOKEN_NAME, TOKEN_OBJECT_NAME } from '../models/auth';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
 import * as AuthUtils from '../utils/auth.utils';
 
 export enum Action { QueryStart, QueryStop }
-
-export const TOKEN_NAME = 'access_token';
-export const TOKEN_OBJECT_NAME = 'token';
 
 @Injectable()
 export class AuthHttp {

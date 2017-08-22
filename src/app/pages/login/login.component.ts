@@ -6,13 +6,11 @@ import { Store } from '@ngrx/store';
 
 import * as fromAuth from '../../reducers';
 import * as auth from '../../actions/auth';
-import { AuthToken } from '../../models/auth';
 import { environment } from '../../../environments/environment';
 
 import { LoginForm } from './login.form';
-import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
+import { AuthService } from './../../services';
 import { loginError } from './login-error';
-import { Store } from '@ngrx/store';
 import * as profile from '../../actions/profile';
 import * as fromRoot from '../../reducers';
 
@@ -38,14 +36,6 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private store: Store<fromAuth.State>) {}
 
   ngOnInit() {
-    this.store.select(fromAuth.getAuthState)
-      .subscribe((state) => {
-        if (state.token) {
-          localStorage.setItem(TOKEN_NAME, state.token.access_token);
-          localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(state.token));
-        }
-      });
-
     this.store.select(fromAuth.getLoginPageError)
       .subscribe((error) => {
         this.errorMessage = loginError[error] || null;

@@ -15,10 +15,6 @@ import { LoginForm } from './login.form';
 import { AuthService } from '../../services/auth.service';
 import { loginError } from './login-error';
 
-@Component({
-  templateUrl: './login.component.html'
-})
-
 describe('Component: Login', () => {
   let comp: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
