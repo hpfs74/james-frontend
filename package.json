@@ -7,7 +7,7 @@
     "commitmsg": "node hooks/commit.js && npm run lint:styles && npm run lint",
     "prepush": "npm run test && nsp check",
     "config": "ts-node ./scripts/set-env.ts",
-    "start": "npm run config && ng serve --open --aot --locale",
+    "start": "npm run config && ng serve --open --locale",
     "build": "npm run config && ng build --aot --locale",
     "build:prod": "npm run config -- --environment=prod && ng build --prod --aot --environment=prod --base-href=/james/ ",
     "test": "npm run config && ng test --code-coverage",

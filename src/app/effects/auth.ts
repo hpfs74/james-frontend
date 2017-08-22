@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 
 import { AuthService } from '../services/auth.service';
+import * as fromRoot from '../reducers';
 import * as Auth from '../actions/auth';
 import * as Profile from '../actions/profile';
 import { AuthToken, TOKEN_NAME, TOKEN_OBJECT_NAME } from '../models/auth';
@@ -19,14 +20,15 @@ import { AuthToken, TOKEN_NAME, TOKEN_OBJECT_NAME } from '../models/auth';
 @Injectable()
 export class AuthEffects {
 
-  // @Effect()
-  // init$: Observable<any> = defer(() => {
-  //   let token = localStorage.getItem(TOKEN_NAME);
-  //   return of([
-  //     new Auth.LoginSuccess({})
-  //     new Profile.LoadAction()
-  //   ]);
-  // });
+  @Effect({ dispatch: false })
+  init$: Observable<any> = defer(() => {
+    if (this.authService.isLoggedIn()) {
+      let token = localStorage.getItem(TOKEN_OBJECT_NAME);
+
+      this.store$.dispatch(new Auth.LoginSuccess({ token: JSON.parse(token) }));
+      this.store$.dispatch(new Auth.LoginRedirect());
+    }
+  });
 
   @Effect()
   login$ = this.actions$
@@ -70,6 +72,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store$: Store<fromRoot.State>
   ) {}
 }
