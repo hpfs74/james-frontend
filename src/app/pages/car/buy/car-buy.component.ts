@@ -137,7 +137,7 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitForm(form: BaseForm) {
-    FormUtils.validateForm(form.formGroup);
+    FormUtils.validateControls(form.formGroup, Object.keys(form.formGroup.controls));
     if (!form.formGroup.valid) {
       return Observable.throw(new Error(form.validationSummaryError));
     }

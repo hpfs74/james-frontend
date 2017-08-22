@@ -10,12 +10,12 @@ import * as FormUtils from '../../../utils/base-form.utils';
 export class CarPaymentComponent {
   @Input() form: IbanForm;
   @Input() set advice(value: any) {
-    if (value) {
+    if (value && value.startDate || value.iban) {
       this.form.formGroup.patchValue({
         startDate: FormUtils.toDateFormat(value.startDate),
         iban: value.iban
       });
-      FormUtils.validateForm(this.form.formGroup);
+      FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     }
   }
 }
