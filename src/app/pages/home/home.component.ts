@@ -16,6 +16,7 @@ import {
 } from '../../services';
 
 @Component({
+  selector: 'knx-home',
   template: `
     <knx-cookiebar></knx-cookiebar>
     <header class="header">
@@ -66,7 +67,9 @@ export class HomeComponent implements OnInit {
   }
 
   logOut() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.authService.logout()
+      .subscribe(() => {
+        this.router.navigate(['/login']);
+      });
   }
 }

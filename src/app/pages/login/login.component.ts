@@ -12,6 +12,9 @@ import { environment } from '../../../environments/environment';
 import { LoginForm } from './login.form';
 import { AuthService, TOKEN_NAME, TOKEN_OBJECT_NAME } from './../../services';
 import { loginError } from './login-error';
+import { Store } from '@ngrx/store';
+import * as profile from '../../actions/profile';
+import * as fromRoot from '../../reducers';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in

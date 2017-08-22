@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -8,26 +8,22 @@ import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import * as fromAuth from '../../reducers';
 import * as auth from '../../actions/auth';
+import { FormBuilder } from '@angular/forms';
 
 import { LoginComponent } from './login.component';
+import { LoginForm } from './login.form';
 import { AuthService } from '../../services/auth.service';
 import { loginError } from './login-error';
+
+@Component({
+  templateUrl: './login.component.html'
+})
 
 describe('Component: Login', () => {
   let comp: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let de: DebugElement;
   let el: HTMLElement;
-
-  const configServiceStub = {
-    config: {
-      api: {
-        james: {
-          address: 'api/reset/password'
-        }
-      }
-    }
-  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

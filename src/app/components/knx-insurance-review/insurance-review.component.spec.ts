@@ -45,14 +45,15 @@ describe('Component: InsuranceReviewComponent', () => {
       legal_aid: '100',
       no_claim_protection: '100',
       cover_occupants: '100',
+      documents: [{name: 'document name', url: 'https://document.com'}],
       _embedded: {insurance: {insurance_logo: 'logogurl-1'}}
     };
 
     fixture.detectChanges();
   });
 
-  it('should render 2 sections', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-collapsible-panel').length).toBe(2);
+  it('should render 3 sections', () => {
+    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-collapsible-panel').length).toBe(3);
   });
 
   it('should update the form with profile data (ngOnChanges)', () => {
@@ -68,6 +69,7 @@ describe('Component: InsuranceReviewComponent', () => {
       legal_aid: '200',
       no_claim_protection: '200',
       cover_occupants: '200',
+      documents: [{name: 'document name', url: 'https://document.com'}],
       _embedded: {insurance: {insurance_logo: 'logogurl-2'}}
     };
     fixture.detectChanges();

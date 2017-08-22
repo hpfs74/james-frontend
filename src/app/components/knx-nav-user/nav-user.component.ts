@@ -32,6 +32,7 @@ export class NavUserComponent {
   @Input() isLoggedIn = false;
   @Output() onLogOut = new EventEmitter();
 
+
   constructor(private router: Router) { }
 
   goToProfile() {

@@ -21,12 +21,11 @@ describe('Utils: AuthUtils', () => {
     it('should get expiration date', () => {
 
       const token = '{ "expires_in": "1200" }';
-      const res = tokenHelper.getTokenExpirationDate(token);
-      const exp = new Date(0);
-      exp.setUTCSeconds(1200);
+      const resToken = AuthUtils.setTokenExpirationDate(token);
+      const res = tokenHelper.getTokenExpirationDate(resToken);
+      const exp = new Date().setUTCSeconds(1200);
 
       expect(res).not.toBeNull();
-      expect(typeof res).toBe('object');
       expect(res.toString()).toBe(exp.toString());
     });
 
@@ -37,10 +36,10 @@ describe('Utils: AuthUtils', () => {
     });
 
     it('should say that token is expired when token is expired', () => {
-      const token = ' { "expires_in": "1200" }';
-      const res = tokenHelper.isTokenExpired(token);
+      const token = ' { "expires_in": "0" }';
+      const resToken = AuthUtils.setTokenExpirationDate(token);
 
-      expect(tokenHelper.isTokenExpired(token)).toBeTruthy();
+      expect(tokenHelper.isTokenExpired(resToken)).toBeTruthy();
     });
 
     it('should say that token is valid when token is not expired', () => {
@@ -58,7 +57,9 @@ describe('Utils: AuthUtils', () => {
     });
 
     it('should return false if token is expired', () => {
-      localStorage.setItem('token', ' { "expires_in": "1200" }');
+      const token = '{ "expires_in": "0" }';
+      const resToken = AuthUtils.setTokenExpirationDate(token);
+      localStorage.setItem('token', resToken);
       const res = AuthUtils.tokenNotExpired('token');
       expect(res).toBeFalsy();
     });
