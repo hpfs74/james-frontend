@@ -4,7 +4,10 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
+import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
+import * as fromAuth from '../../reducers';
+import * as auth from '../../actions/auth';
 
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
@@ -43,7 +46,7 @@ describe('Component: Login', () => {
           }
         }
       ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, StoreModule.forRoot(fromAuth.reducers)],
       declarations: [LoginComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -82,39 +85,26 @@ describe('Component: Login', () => {
     expect(submit.nativeElement.disabled).toBeFalsy();
   });
 
-  it('should display generic error', () => {
-    const testData = {
-      error: 'generic error',
-      toString: (): string => {
-        return 'Generic error';
-      }
-    };
+  it('should display a login error', () => {
+    const testError = 'Ongeldig e-mailadres of wachtwoord';
+    comp.errorMessage = testError;
+    comp.form.formGroup.patchValue({
+      email: 'test@mail.com',
+      password: 'test'
+    });
+    comp.form.formGroup.updateValueAndValidity();
+    fixture.detectChanges();
 
-    comp.handleError(testData);
-    expect(comp).not.toBeNull();
-    // expect(comp.messageTitle).toBe('Login failed');
-    expect(comp.message).toEqual(loginError.default);
-  });
-
-  it('should display error on too many attempts', () => {
-    comp.handleError({ error: 'too_many_login_attempts', error_description: 'Too many attempts'});
+    de = fixture.debugElement.query(By.css('.cx-message__content'));
+    el = de.nativeElement;
 
     expect(comp).not.toBeNull();
-    expect(comp.message).toEqual(loginError.too_many_login_attempts);
+    expect(el).toBeDefined();
+    expect(el.textContent).toContain(testError);
   });
 
-  it('should display error on invalid login data', () => {
-    comp.handleError({ error: 'invalid_password'});
-
-    expect(comp).not.toBeNull();
-    expect(comp.message).toEqual(loginError.invalid_password);
+  it('should return a password reset link', () => {
+    expect(comp.getPasswordResetLink()).toBeDefined();
   });
 
-
-  it('should display error on not yet validate account that try to login', () => {
-    comp.handleError({ error: 'inactive_profile'});
-
-    expect(comp).not.toBeNull();
-    expect(comp.message).toEqual(loginError.inactive_profile);
-  });
 });

@@ -23,7 +23,6 @@ import { loginError } from './login-error';
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  isPending = false;
   showPassword = false;
 
   pending$ = this.store.select(fromAuth.getLoginPagePending);
@@ -39,7 +38,6 @@ export class LoginComponent implements OnInit {
     this.store.select(fromAuth.getAuthState)
       .subscribe((state) => {
         if (state.token) {
-          this.isPending = false;
           localStorage.setItem(TOKEN_NAME, state.token.access_token);
           localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(state.token));
         }
