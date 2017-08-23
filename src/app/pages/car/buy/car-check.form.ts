@@ -16,17 +16,17 @@ export class CarCheckForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       crime: [null, Validators.required],
-      crimeComment: [null, Validators.required],
+      crimeComment: [null],
       debt: [null, Validators.required],
-      debtComment: [null, Validators.required],
+      debtComment: [null],
       refuse: [null, Validators.required],
-      refuseComment: [null, Validators.required],
+      refuseComment: [null],
       driver: [null, Validators.required],
-      driverComment: [null, Validators.required],
+      driverComment: [null],
       cause: [null, Validators.required],
-      causeComment: [null, Validators.required],
+      causeComment: [null],
       register: [null, Validators.required],
-      registerComment: [null, Validators.required]
+      registerComment: [null]
     });
 
     this.formConfig = {

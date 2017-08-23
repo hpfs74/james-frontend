@@ -17,23 +17,24 @@ export class CarCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-    // bind radio buttons to comment text areas
-    this.form.formGroup.get('crime').valueChanges.subscribe(val => this.toggleTextArea('crime', 'crimeComment', val));
-    this.form.formGroup.get('crime').valueChanges.subscribe(val => this.toggleTextArea('debt', 'debtComment', val));
-    this.form.formGroup.get('crime').valueChanges.subscribe(val => this.toggleTextArea('refuse', 'refuseComment', val));
-    this.form.formGroup.get('crime').valueChanges.subscribe(val => this.toggleTextArea('driver', 'driverComment', val));
-    this.form.formGroup.get('crime').valueChanges.subscribe(val => this.toggleTextArea('cause', 'causeComment', val));
-    this.form.formGroup.get('crime').valueChanges.subscribe(val => this.toggleTextArea('register', 'registerComment', val));
+    // bind comment text areas to radio button value
+    this.form.formGroup.get('crime').valueChanges.subscribe(val => this.toggleTextArea('crimeComment', val));
+    this.form.formGroup.get('debt').valueChanges.subscribe(val => this.toggleTextArea('debtComment', val));
+    this.form.formGroup.get('refuse').valueChanges.subscribe(val => this.toggleTextArea('refuseComment', val));
+    this.form.formGroup.get('driver').valueChanges.subscribe(val => this.toggleTextArea('driverComment', val));
+    this.form.formGroup.get('cause').valueChanges.subscribe(val => this.toggleTextArea('causeComment', val));
+    this.form.formGroup.get('register').valueChanges.subscribe(val => this.toggleTextArea('registerComment', val));
   }
 
-  toggleTextArea(radioControlName: string, textAreaControlName: string, value: any) {
-    let fc = this.form.formGroup.get(radioControlName);
+  toggleTextArea(textAreaControlName: string, value: boolean) {
     let textArea = this.form.formGroup.get(textAreaControlName);
-
     if (value) {
       textArea.setValidators(Validators.required);
     } else {
       textArea.clearValidators();
+      textArea.markAsPristine();
+      textArea.markAsUntouched();
     }
+    textArea.updateValueAndValidity();
   }
 }
