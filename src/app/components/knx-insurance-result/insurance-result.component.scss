@@ -146,6 +146,11 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   .knx-insurance-result__label {
     font-family: $font-family-base;
     font-size: $font-size-base - 2;
+    white-space: nowrap;
+
+    .knx-message {
+      white-space: normal;
+    }
   }
 }
 
