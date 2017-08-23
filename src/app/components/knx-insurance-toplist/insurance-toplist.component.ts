@@ -41,7 +41,29 @@ interface OrderItem {
           </button>
 
           <div class="knx-insurance-toplist__info">
-            <a routerLink="/faq" class="knx-button knx-button--link">Hoe vergelijken jullie?</a>
+            <knx-info infoLabel="Hoe komen we tot deze resultaten?" class="knx-info">
+              <div class="knx-info__content">
+                <div class="knx-message knx-message--arrow-top">
+                  <div class="knx-message__content">
+                    <p>
+                      Op basis van de informatie die jij over jezelf gaf, gaat onze slimme technologie voor je werken.
+                      We zoeken bij meer dan 30 aanbieders en stellen een overzicht samen.
+                      Daarbij kijken we niet alleen naar prijs. Want geode polisvoorwaarden en een dekking die past bij
+                      jouw persoonlijke situatie zijn ook belangrijk.
+                    </p>
+                    <p>
+                      Profielscore en prijs-kwaliteit
+                      In het overzicht zie je een profielscore en prijs-kwaliteitscore. De verzekering met de hoogste
+                      profielscore - de verzekering die het best bij jou past – staat vooraan. Verzekeringen
+                      die je via Knab afsluit, regel je direct tegen een vast lag percentage.
+                      Verzekeringen die je niet via ons kunt afsluiten, laten we toch zien. We verwijzen je dan naar de
+                      website van de verzekeraar. Zo heb je altijd een compleet beeld van wat er te koop is.
+                      Wel zo eerlijk natuurlijk.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </knx-info>
           </div>
         </ng-template>
       </div>

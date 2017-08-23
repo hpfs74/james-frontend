@@ -18,6 +18,10 @@
   transform: rotate(-90deg);
   display: block;
   fill: none;
+  stroke: $knab-medium-gray;
+}
+
+.knx-insurance_advice__supported .knx-donut__circle {
   stroke: $knab-primary-green;
 }
 

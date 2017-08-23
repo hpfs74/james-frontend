@@ -179,6 +179,15 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   padding: 0 20px;
 }
 
+.knx-button + .knx-button__extra {
+  position: relative;
+  display: block;
+  margin-top: -30px;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+}
+
 @media screen and (max-width: 768px) {
   .knx-insurance-result__logo {
     width: 50%;
