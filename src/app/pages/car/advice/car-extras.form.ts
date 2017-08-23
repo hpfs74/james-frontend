@@ -5,9 +5,12 @@ export class CarExtrasForm {
   formConfig: any;
 
   constructor(private fb: FormBuilder) {
+
     this.formGroup = this.fb.group({
       coverage: ['', Validators.required],
-      extraOptions: [{}],
+      extraOptionsLegal: [{}],
+      extraOptionsNoClaim: [{}],
+      extraOptionsOccupants: [{}],
       roadAssistance: [null, Validators.required],
       ownRisk: [null, Validators.required],
       kmPerYear: [null, Validators.required]
@@ -37,25 +40,26 @@ export class CarExtrasForm {
           ]
         }
       },
-      extraOptions: {
-        formControlName: 'extraOptions',
+      extraOptionsLegal: {
+        formControlName: 'extraOptionsLegal',
         type: 'checkbox',
-        formControl: this.formGroup.get('extraOptions'),
+        formControl: this.formGroup.get('extraOptionsLegal'),
+        inputOptions: { label: 'Rechtsbijstand', value: 'legal'}
+      },
+      extraOptionsNoClaim: {
+        formControlName: 'extraOptionsNoClaim',
+        type: 'checkbox',
+        formControl: this.formGroup.get('extraOptionsNoClaim'),
+        inputOptions: { label: 'No-claim beschermer',
+          value: 'noclaim'}
+      },
+      extraOptionsOccupants: {
+        formControlName: 'extraOptionsOccupants',
+        type: 'checkbox',
+        formControl: this.formGroup.get('extraOptionsOccupants'),
         inputOptions: {
-          items: [
-            {
-              label: 'Rechtsbijstand',
-              value: 'legal'
-            },
-            {
-              label: 'No-claim beschermer',
-              value: 'noclaim'
-            },
-            {
-              label: 'Inzittenden verzekering',
-              value: 'occupants'
-            }
-          ]
+          label: 'Inzittenden verzekering',
+          value: 'occupants'
         }
       },
       roadAssistance: {

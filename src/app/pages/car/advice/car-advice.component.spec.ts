@@ -29,7 +29,8 @@ describe('Component: CarAdviceComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
-      declarations: [CarAdviceComponent, TestHostComponent]
+      declarations: [CarAdviceComponent, TestHostComponent],
+      providers: []
     }).compileComponents();
   }));
 
@@ -48,4 +49,12 @@ describe('Component: CarAdviceComponent', () => {
   xit('should have invalid form controls on init', () => {
     // expect(comp.targetComponent.form.formGroup.valid).toBeFalsy();
   });
+
+  xit('should have a CarExtraForm init with proper default values', () => {
+    const carExtraForm = comp.targetComponent.carExtrasForm;
+
+    // expect(carExtraForm.formGroup.valid).toBeTruthy();
+    expect(carExtraForm.formConfig.extraOptionsLegal).toBeFalsy();
+  });
+
 });
