@@ -4,12 +4,14 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../reducers';
+import * as auth from '../actions/auth';
 import * as router from '../actions/router';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private router: Router, private store: Store<fromRoot.State>) {
+  constructor(private router: Router, private store: Store<fromRoot.State>, private authService: AuthService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -28,7 +30,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   checkLogin(url: string): boolean {
     this.store.select(fromRoot.getAuthState).subscribe(auth => {
-      if (!auth.loggedIn) {
+      if (!auth.loggedIn || !this.authService.isLoggedIn()) {
         this.router.navigate(['/login']);
       }
     });
