@@ -92,7 +92,7 @@ export class AuthHttp {
     const req: Request = url as Request;
     let token: string = localStorage.getItem(TOKEN_NAME);
 
-    if (!AuthUtils.tokenNotExpired('token')) {
+    if (token && !AuthUtils.tokenNotExpired('token')) {
       const tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
       this.authService.refreshToken(tokenObject.refresh_token)
         .flatMap((data) => {
