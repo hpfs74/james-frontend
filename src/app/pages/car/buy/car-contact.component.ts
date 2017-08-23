@@ -13,19 +13,9 @@ import * as FormUtils from '../../../utils/base-form.utils';
 export class CarContactComponent implements OnChanges {
   @Input() form: ContactDetailForm;
   @Input() profile: Profile;
+
   @Input() set advice(value: any) {
-    if (value) {
-      this.form.formGroup.patchValue({
-        initials: value.initials,
-        firstName: value.firstName,
-        middleName: value.middleName,
-        lastName: value.lastName,
-        mobileNumber: value.mobileNumber,
-        phoneNumber: value.phoneNumber,
-        saveToProfile: value.saveToProfile
-      }, { emitEvent: false });
-      FormUtils.validateForm(this.form.formGroup);
-    }
+    FormUtils.updateAndValidateControls(this.form.formGroup, value);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -33,16 +23,7 @@ export class CarContactComponent implements OnChanges {
       // Update validation state of known pre-filled profile fields
       // Note: only seems to get triggered if touched/dirty state is
       // updated on each individual control
-      Object.keys(this.form.formGroup.controls)
-        .filter(key => {
-          return ['firstName', 'middleName', 'lastName', 'mobileNumber', 'phone']
-            .indexOf(key) > -1 && this.form.formGroup.get(key).value;
-        })
-        .forEach(key => {
-          this.form.formGroup.get(key).markAsTouched();
-          this.form.formGroup.get(key).markAsDirty();
-      });
-      this.form.formGroup.updateValueAndValidity();
+      FormUtils.updateAndValidateControls(this.form.formGroup, this.profile);
     }
    }
 }

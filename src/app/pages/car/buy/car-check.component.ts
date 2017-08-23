@@ -11,8 +11,7 @@ export class CarCheckComponent {
   @Input() form: CarCheckForm;
   @Input() set advice(value: any) {
     if (value) {
-      this.form.formGroup.patchValue(value);
-      FormUtils.validateForm(this.form.formGroup);
+      FormUtils.updateAndValidateControls(this.form.formGroup, value);
     }
   }
 }
