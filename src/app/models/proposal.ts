@@ -61,37 +61,6 @@ export class CarProposalHelper {
     { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
     { key: 'Inzittenden meeverzekeren', value: 'cover_occupants', transform: this.getBoolean },
     { key: 'Slotvragen', value:  '' },
-    {
-      key: 'Ben jij in de laatste 8 jaar, in aanraking geweest met politie of justitie?',
-      value: 'crime',
-      transform: this.getBoolean
-    },
-    {
-      key: `Ben jij in de laatste 8 jaar geweigerd of opgezegd door een verzekeraar of betrokken (geweest) bij verzekeringsfraude?`,
-      value: 'refuse',
-      transform: this.getBoolean
-    },
-    {
-
-      key: `Ben jij in de laatste 5 jaar failliet verklaard of in een schuldsanering betrokken geweest, of heeft een deurwaarder momenteel beslag gelegd op jouw inkomsten of bezittingen?`,
-      value: 'debt',
-      transform: this.getBoolean
-    },
-    {
-      key: `Is jou, de regelmatige bestuurder of kentekenhouder in de laatste 8 jaar de rijbevoegdheid (geheel of voorwaardelijk) ontzegd?`,
-      value: 'driver',
-      transform: this.getBoolean
-    },
-    {
-      key: `Heb jij de laatste 5 jaar schade geleden of veroorzaakt, die gedekt werd door een soortgelijke verzekering als je nu aanvraagt?`,
-      value: 'crime',
-      transform: this.getBoolean
-    },
-    {
-      key: `Is de auto vanaf de datum dat deze op naam van de kentekenhouder staat, langer dan 10 dagen onverzekerd?`,
-      value: 'cause',
-      transform: this.getBoolean
-    }
   ];
   /* tslint:enable */
 
@@ -115,6 +84,42 @@ export class CarProposalHelper {
       itemObj[el.key] = el['transform'] ? el['transform'](value) : value;
     });
     return itemObj;
+  }
+
+  getFinalQuestions(data: any) {
+    /* tslint:disable */
+    return [
+      {
+        key: 'Ben jij in de laatste 8 jaar, in aanraking geweest met politie of justitie?',
+        value: this.getCheckAnswer(data.crime, data.crimeComment || null)
+      },
+      {
+        key: `Ben jij in de laatste 8 jaar geweigerd of opgezegd door een verzekeraar of betrokken (geweest) bij verzekeringsfraude?`,
+        value: this.getCheckAnswer(data.refuse, data.refuseComment || null)
+      },
+      {
+        key: `Ben jij in de laatste 5 jaar failliet verklaard of in een schuldsanering betrokken geweest, of heeft een deurwaarder momenteel beslag gelegd op jouw inkomsten of bezittingen?`,
+        value: this.getCheckAnswer(data.debt, data.debtComment || null)
+      },
+      {
+        key: `Is jou, de regelmatige bestuurder of kentekenhouder in de laatste 8 jaar de rijbevoegdheid (geheel of voorwaardelijk) ontzegd?`,
+        value: this.getCheckAnswer(data.driver, data.driverComment || null)
+      },
+      {
+        key: `Heb jij de laatste 5 jaar schade geleden of veroorzaakt, die gedekt werd door een soortgelijke verzekering als je nu aanvraagt?`,
+        value: this.getCheckAnswer(data.cause, data.causeComment || null)
+      },
+      {
+        key: `Is de auto vanaf de datum dat deze op naam van de kentekenhouder staat, langer dan 10 dagen onverzekerd?`,
+        value: this.getCheckAnswer(data.register, data.registerComment || null)
+      }
+    ];
+    /* tslint:enable */
+  }
+
+  getCheckAnswer(value: boolean, comment: string) {
+    let yesNo = this.getBoolean(value);
+    return comment ? yesNo + ', ' + comment : yesNo;
   }
 
   private getBoolean(value: boolean) {
