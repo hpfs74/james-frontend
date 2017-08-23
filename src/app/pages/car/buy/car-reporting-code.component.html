@@ -25,10 +25,12 @@
 
       <div class="row">
         <div class="col-sm-8">
-          <cx-form-group
-            [options]="form.formConfig.accessoryValue"
-            [formControlName]="form.formConfig.accessoryValue.formControlName">
-          </cx-form-group>
+          <knx-form-group-info [infoMessage]="form.infoMessages?.accessory">
+            <cx-form-group
+              [options]="form.formConfig.accessoryValue"
+              [formControlName]="form.formConfig.accessoryValue.formControlName">
+            </cx-form-group>
+          </knx-form-group-info>
         </div>
       </div>
 
@@ -48,7 +50,9 @@
         </div>
       </div>
 
-      <cx-form-group [options]="form.formConfig.saveToProfile" [formControlName]="form.formConfig.saveToProfile.formControlName">
+      <cx-form-group
+        [options]="form.formConfig.saveToProfile"
+        [formControlName]="form.formConfig.saveToProfile.formControlName">
       </cx-form-group>
 
     </div>
