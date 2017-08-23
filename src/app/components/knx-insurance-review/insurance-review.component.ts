@@ -1,4 +1,5 @@
 import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { InsuranceAdvice } from '../../models';
 import { CarInsurance } from '../../models/car-insurance';
 
@@ -61,6 +62,7 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
   @Input() selectedInsurance: CarInsurance;
   sections: Array<SectionsItem>;
   info: any;
+  constructor(private currencyPipe: CurrencyPipe) { }
 
   ngOnInit() {
     this.info = {
@@ -88,13 +90,13 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
             },
             {
               label: 'Eigen risico',
-              value: '€ ' + this.selectedInsurance.own_risk,
+              value: this.currencyPipe.transform(this.selectedInsurance.own_risk, 'EUR', true),
               info: 'Dit eigen risico is van toepassing als je jouw auto aat maken bij een door de verzekeraar gekozen ' +
               'schadehersteller, wil je jouw auto door iemand anders laten maken, dan geldt er een hoger eigen risico.'
             },
             {
               label: 'Totaal premie per maand, inclusief 10% provisie van Knab',
-              value: '€ ' + this.selectedInsurance.monthly_premium,
+              value: this.currencyPipe.transform(this.selectedInsurance.monthly_premium, 'EUR', true),
               info: 'Vraag je een verzekering via Knab aan, dan ontvangen we een percentage van wat jij per maand aan ' +
               'premie betaalt. Dat heet \'provisie\'. We krijgen een doorlopende vaste lage vergoeding van 10% ' +
               'van de premie, zolang de verzekering loopt. Omdat Knab Verzekeren 100% online is, kunnen we onze ' +
@@ -105,7 +107,7 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
             },
             {
               label: 'Eenmalige afsluitkosten',
-              value: '€ ' + this.selectedInsurance.one_off_premium
+              value: this.currencyPipe.transform(this.selectedInsurance.one_off_premium, 'EUR', true)
             }
           ]
         },

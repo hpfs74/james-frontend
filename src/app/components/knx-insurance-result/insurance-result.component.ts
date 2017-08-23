@@ -22,9 +22,9 @@ import { InsuranceAdvice, Insurer } from '../../models';
               <div class="col-sm-6 knx-insurance-result__own-risk knx-insurance-result__price">
                 {{ insurance.own_risk | currency:'EUR':true }}<br><span>Eigen risico</span>
               </div>
-              <div class="col-sm-6 knx-insurance-result__reviews">
+              <!--div class="col-sm-6 knx-insurance-result__reviews">
                 9.3<br><span>{{ insurance.reviews_amount }} reviews</span>
-              </div>
+              </div-->
             </div>
             <div class="row">
               <div class="col-sm-6 knx-insurance-result__profilescore">
@@ -63,7 +63,7 @@ import { InsuranceAdvice, Insurer } from '../../models';
             <button role="button" class="knx-button knx-button--secondary knx-button--fullwidth"
                     [disabled]="disableButton"
                     (click)="select($event)">
-              Kies deze
+              Bekijk
             </button>
           </div>
         </div>
