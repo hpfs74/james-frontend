@@ -23,10 +23,13 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   init$: Observable<any> = defer(() => {
     if (this.authService.isLoggedIn()) {
-      let token = localStorage.getItem(TOKEN_OBJECT_NAME);
-
-      this.store$.dispatch(new Auth.LoginSuccess({ token: JSON.parse(token) }));
-      this.store$.dispatch(new Auth.LoginRedirect());
+      let token = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME) || null);
+      if (token !== null && token.access_token) {
+        this.store$.dispatch(new Auth.LoginSuccess({ token: token }));
+        this.router.navigate(['/']);
+      } else {
+        this.store$.dispatch(new Auth.LoginRedirect());
+      }
     }
   });
 
