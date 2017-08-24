@@ -173,11 +173,17 @@ export class CarBuyComponent implements OnInit {
         advice.insurance._embedded.insurance,
         { car: advice.insurance._embedded.car });
 
-      const proposalRequest = new CarProposalHelper(flatData);
+      const proposalRequest = new CarProposalHelper();
       const proposal: Proposal = {
         proposal: advice.insurance,
-        items: proposalRequest.getItems(flatData)
+        items: Object.assign(
+          proposalRequest.getItems(flatData),
+          proposalRequest.getItems(proposalRequest.getFinalQuestions(flatData))
+        )
       };
+      // TODO: check if merging is done correctly
+      // console.log(proposalRequest.getFinalQuestions(flatData));
+      // console.log(proposal)
       this.store.dispatch(new car.BuyAction(proposal));
     });
 
