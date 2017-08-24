@@ -40,6 +40,13 @@ export function ContentLoader(contentService: ContentService) {
   return () => contentService.loadFiles();
 }
 
+export function getInitialState() {
+  return {
+    profile: {},
+    insurances: []
+  };
+}
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -49,10 +56,7 @@ export function ContentLoader(contentService: ContentService) {
     SharedModule,
     HomeModule.forRoot(),
     StoreModule.forRoot(reducers, {
-      initialState: {
-        profile: {},
-        insurances: []
-      },
+      initialState: getInitialState(),
       metaReducers
     }),
     // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
