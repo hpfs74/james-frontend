@@ -25,7 +25,10 @@ export class CarReportingCodeForm extends BaseForm {
         Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.
         De verzekeraar geeft dit door aan de RDW (Rijksdienst voor het Wegverkeer). De RDW houdt zo bij of alle
         auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
-        Het zijn de laatste 4 cijfers van het chassisnummer.`
+        Het zijn de laatste 4 cijfers van het chassisnummer.`,
+      accessory: `
+        <p>Accessoires zijn bijvoorbeeld een alarminstallatie, een trekhaak, lichtmetalen velgen of een ingebouwde autoradio.</p>
+        <p>Bij diefstal krijg je de dagwaarde terug van de verzekering.</p>`
     };
 
     this.securityClasses = securityClassContent;

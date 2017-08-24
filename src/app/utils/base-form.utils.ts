@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 import * as moment from 'moment';
 
@@ -77,21 +77,70 @@ export const postalCodeMask = {
   }
 };
 
-export const validateForm = function (form: FormGroup) {
-  Object.keys(form.controls).forEach(key => {
-    form.get(key).markAsTouched();
-    form.get(key).markAsDirty();
+export const pick = function (data, keys) {
+  let result = {};
+  keys.forEach(function (key) {
+    if (data.hasOwnProperty(key)) {
+      result[key] = data[key];
+    }
   });
-  form.updateValueAndValidity();
+  return result;
+};
+
+export const pickDefined = function (data, keys) {
+  let result = {};
+  keys.forEach(function (key) {
+    if (data.hasOwnProperty(key) && data[key] !== null) {
+      result[key] = data[key];
+    }
+  });
+  return result;
+};
+
+export const hasControlRequiredValidator = function (fc: FormControl | AbstractControl) {
+  let required = false;
+  if (fc.validator) {
+    let validationResult = fc.validator(fc);
+    required = (validationResult !== null && validationResult.required);
+  }
+  return required;
+};
+
+export const getMatchingValueObj = function (form: FormGroup, valueObj: any) {
+  return pickDefined(valueObj, Object.keys(form.controls));
 };
 
 export const validateControls = function (form: FormGroup, controls: string[]) {
   Object.keys(form.controls)
     .filter(key => controls.indexOf(key) !== -1)
     .forEach(key => {
-      form.get(key).markAsTouched();
-      form.get(key).markAsDirty();
+      let ctrl = form.get(key);
+
+      if (hasControlRequiredValidator(ctrl)) {
+        ctrl.markAsTouched();
+        ctrl.markAsDirty();
+        ctrl.updateValueAndValidity();
+      }
     });
+};
+
+export const updateAndValidateControls = function (fg: FormGroup, valueObj: any) {
+  let updateObj = getMatchingValueObj(fg, valueObj);
+
+  if (updateObj && Object.keys(updateObj).length > 0) {
+    // update form control values
+    fg.patchValue(updateObj, { emitEvent: false });
+
+    // run validation only on updated controls
+    validateControls(fg, Object.keys(updateObj));
+  }
+};
+
+export const validateForm = function (form: FormGroup) {
+  Object.keys(form.controls).forEach(key => {
+    form.get(key).markAsTouched();
+    form.get(key).markAsDirty();
+  });
   form.updateValueAndValidity();
 };
 

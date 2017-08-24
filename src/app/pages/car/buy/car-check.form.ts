@@ -15,12 +15,18 @@ export class CarCheckForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      crime: [null, Validators.compose([Validators.required])],
-      debt: [null, Validators.compose([Validators.required])],
-      refuse: [null, Validators.compose([Validators.required])],
-      driver: [null, Validators.compose([Validators.required])],
-      cause: [null, Validators.compose([Validators.required])],
-      register: [null, Validators.compose([Validators.required])],
+      crime: [null, Validators.required],
+      crimeComment: [null],
+      debt: [null, Validators.required],
+      debtComment: [null],
+      refuse: [null, Validators.required],
+      refuseComment: [null],
+      driver: [null, Validators.required],
+      driverComment: [null],
+      cause: [null, Validators.required],
+      causeComment: [null],
+      register: [null, Validators.required],
+      registerComment: [null]
     });
 
     this.formConfig = {
@@ -35,6 +41,15 @@ export class CarCheckForm extends BaseForm {
           items: this.getBooleanItems()
         }
       },
+      crimeComment: {
+        formControlName: 'crimeComment',
+        type: 'textarea',
+        formControl: this.formGroup.get('crimeComment'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Waar ging dat om?'
+        }
+      },
       refuse: {
         formControlName: 'refuse',
         label: 'Ben je de afgelopen 8 jaar geweigerd of opgezegd door een verzekeraar? ' +
@@ -45,6 +60,15 @@ export class CarCheckForm extends BaseForm {
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
           items: this.getBooleanItems()
+        }
+      },
+      refuseComment: {
+        formControlName: 'refuseComment',
+        type: 'textarea',
+        formControl: this.formGroup.get('refuseComment'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Waar ging dat om?'
         }
       },
       debt: {
@@ -59,6 +83,15 @@ export class CarCheckForm extends BaseForm {
           items: this.getBooleanItems()
         }
       },
+      debtComment: {
+        formControlName: 'debtComment',
+        type: 'textarea',
+        formControl: this.formGroup.get('debtComment'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Waar ging dat om?'
+        }
+      },
       driver: {
         formControlName: 'driver',
         label: 'Is jou, de regelmatige bestuurder of kentekenhouder de afgelopen 8 jaar de ' +
@@ -69,6 +102,15 @@ export class CarCheckForm extends BaseForm {
         inputOptions: {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
           items: this.getBooleanItems()
+        }
+      },
+      driverComment: {
+        formControlName: 'driverComment',
+        type: 'textarea',
+        formControl: this.formGroup.get('driverComment'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Waar ging dat om?'
         }
       },
       cause: {
@@ -83,6 +125,15 @@ export class CarCheckForm extends BaseForm {
           items: this.getBooleanItems()
         }
       },
+      causeComment: {
+        formControlName: 'causeComment',
+        type: 'textarea',
+        formControl: this.formGroup.get('causeComment'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Waar ging dat om?'
+        }
+      },
       register: {
         formControlName: 'register',
         label: 'Is de auto vanaf de datum dat deze op naam van de kentekenhouder staat, langer dan 10 dagen onverzekerd?',
@@ -93,7 +144,16 @@ export class CarCheckForm extends BaseForm {
           formGroupModifiers: ['cx-form-group__wrap--spread'],
           items: this.getBooleanItems()
         }
-      }
+      },
+      registerComment: {
+        formControlName: 'registerComment',
+        type: 'textarea',
+        formControl: this.formGroup.get('registerComment'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Waar ging dat om?'
+        }
+      },
     };
   }
 

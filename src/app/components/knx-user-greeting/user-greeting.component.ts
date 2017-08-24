@@ -4,7 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'knx-user-greeting',
   template: `
     <header class="knx-user-greeting">
-      <h2>{{ greeting }}, <span class="knx-user-greeting__username">{{ userName }}</span></h2>
+      <h2 *ngIf="!userName">{{ greeting }}</h2>
+      <h2 *ngIf="userName">{{ greeting }}, <span class="knx-user-greeting__username">{{ userName }}</span></h2>
       <ng-content></ng-content>
     </header>
   `

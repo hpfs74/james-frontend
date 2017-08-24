@@ -15,9 +15,27 @@
 
       <div class="row">
         <div class="col-sm-12">
+          <cx-form-group *ngIf="form.formGroup.get('crime').value"
+            [options]="form.formConfig.crimeComment"
+            [formControlName]="form.formConfig.crimeComment.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
           <cx-form-group
             [options]="form.formConfig.refuse"
             [formControlName]="form.formConfig.refuse.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <cx-form-group *ngIf="form.formGroup.get('refuse').value"
+            [options]="form.formConfig.refuseComment"
+            [formControlName]="form.formConfig.refuseComment.formControlName">
           </cx-form-group>
         </div>
       </div>
@@ -32,6 +50,15 @@
       </div>
 
       <div class="row">
+          <div class="col-sm-12">
+            <cx-form-group *ngIf="form.formGroup.get('debt').value"
+              [options]="form.formConfig.debtComment"
+              [formControlName]="form.formConfig.debtComment.formControlName">
+            </cx-form-group>
+          </div>
+        </div>
+
+      <div class="row">
         <div class="col-sm-12">
           <cx-form-group
             [options]="form.formConfig.driver"
@@ -39,6 +66,15 @@
           </cx-form-group>
         </div>
       </div>
+
+      <div class="row">
+          <div class="col-sm-12">
+            <cx-form-group *ngIf="form.formGroup.get('driver').value"
+              [options]="form.formConfig.driverComment"
+              [formControlName]="form.formConfig.driverComment.formControlName">
+            </cx-form-group>
+          </div>
+        </div>
 
       <div class="row">
         <div class="col-sm-12">
@@ -51,12 +87,31 @@
 
       <div class="row">
         <div class="col-sm-12">
+          <cx-form-group *ngIf="form.formGroup.get('cause').value"
+            [options]="form.formConfig.causeComment"
+            [formControlName]="form.formConfig.causeComment.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
           <cx-form-group
             [options]="form.formConfig.register"
             [formControlName]="form.formConfig.register.formControlName">
           </cx-form-group>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <cx-form-group *ngIf="form.formGroup.get('register').value"
+            [options]="form.formConfig.registerComment"
+            [formControlName]="form.formConfig.registerComment.formControlName">
+          </cx-form-group>
+        </div>
+      </div>
+
     </div>
   </div>
 </form>

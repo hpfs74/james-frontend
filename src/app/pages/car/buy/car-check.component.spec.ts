@@ -52,7 +52,9 @@ describe('Component: CarCheckComponent', () => {
   });
 
   it('should check for all questions to be answered', () => {
-    const formFields = ['crime', 'debt', 'refuse', 'driver', 'cause'];
+    const formFields = [
+      'crime', 'debt', 'refuse', 'driver', 'cause',
+      'crimeComment', 'debtComment', 'refuseComment', 'driverComment', 'causeComment', 'registerComment'];
     const lastField = 'register';
 
     formFields.forEach(( formField ) => {
@@ -64,5 +66,23 @@ describe('Component: CarCheckComponent', () => {
     comp.targetComponent.form.formGroup.get(lastField).setValue(true);
     fixture.detectChanges();
     expect(comp.targetComponent.form.formGroup.valid).toBeTruthy();
+  });
+
+  it('should hide comment input when radio is false', () => {
+    const crimeComment = comp.targetComponent.form.formGroup.get('crimeComment');
+    const crimeRadio = comp.targetComponent.form.formGroup.get('crime');
+    crimeRadio.setValue(false);
+
+    expect(crimeComment).toBeDefined();
+    expect(crimeComment.valid).toBeTruthy();
+  });
+
+  it('should show comment input when radio is true', () => {
+    const crimeComment = comp.targetComponent.form.formGroup.get('crimeComment');
+    const crimeRadio = comp.targetComponent.form.formGroup.get('crime');
+    crimeRadio.setValue(true);
+
+    expect(crimeComment).toBeDefined();
+    expect(crimeComment.valid).toBeFalsy();
   });
 });
