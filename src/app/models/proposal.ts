@@ -19,8 +19,6 @@ export interface Proposal {
  * Buy Flow Request Helper
  */
 export class CarProposalHelper {
-  payload: any;
-
   /* tslint:disable:max-line-length */
   propMapping = [
     { key: 'Verzekeraar',  value: 'moneyview_id', transform: (val) => val.split(':')[0] },
@@ -63,10 +61,6 @@ export class CarProposalHelper {
     { key: 'Slotvragen', value:  '' },
   ];
   /* tslint:enable */
-
-  constructor(payload: any) {
-    this.payload = payload;
-  }
 
   getItems(data: any): { [id: string]: string } {
     if (!data) {

@@ -173,7 +173,7 @@ export class CarBuyComponent implements OnInit {
         advice.insurance._embedded.insurance,
         { car: advice.insurance._embedded.car });
 
-      const proposalRequest = new CarProposalHelper(flatData);
+      const proposalRequest = new CarProposalHelper();
       const proposal: Proposal = {
         proposal: advice.insurance,
         items: Object.assign(
