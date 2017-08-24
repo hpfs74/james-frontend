@@ -20,7 +20,7 @@ import { InsuranceAdvice, Insurer } from '../../models';
 
           <div class="col-sm-4">
             <div class="row">
-              <div class="col-sm-6 knx-insurance-result__own-risk knx-insurance-result__price">
+              <div class="col-sm-12 text-center knx-insurance-result__own-risk knx-insurance-result__price">
                 {{ insurance.own_risk | currency:'EUR':true }}<br><span>Eigen risico</span>
               </div>
               <!--div class="col-sm-6 knx-insurance-result__reviews">
@@ -46,7 +46,7 @@ import { InsuranceAdvice, Insurer } from '../../models';
               <div class="col-sm-6 knx-insurance-result__price-quality">
                 <div class="knx-insurance-result__amount">{{ insurance.price_quality }}<span>/10</span></div>
                 <div class="knx-insurance-result__label">
-                  Prijs kwaliteit
+                  Prijs <br> kwaliteit
 
                   <knx-info size="md" isFloating="true" class="knx-info">
                     <div class="knx-info__content">

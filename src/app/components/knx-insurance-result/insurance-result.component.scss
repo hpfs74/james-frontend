@@ -17,7 +17,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   [class*="col-"] {
     border-right: $knx-insurance-result-border;
     font-size: $font-size-base - 2;
-    padding: 20px 40px 10px 25px;
+    padding: 20px 25px 10px;
 
     &:last-child {
       border-right: 0;
@@ -30,7 +30,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 
   & > .row {
     // counter height
-    margin-top: -40px;
+    margin: -40px 0 0 0;
 
     > [class*="col-"]:first-child {
       padding-right: 15px;
@@ -90,6 +90,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   font-family: $font-family-head;
   background: $knab-primary-gray;
   font-size: 18px;
+  margin-top: 3px;
   padding: 5px 10px;
 
   span {
@@ -146,11 +147,6 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   .knx-insurance-result__label {
     font-family: $font-family-base;
     font-size: $font-size-base - 2;
-    white-space: nowrap;
-
-    .knx-message {
-      white-space: normal;
-    }
   }
 }
 
