@@ -5,6 +5,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { InsuranceReviewComponent } from './insurance-review.component';
 import { KNXCollapsiblePanelComponent } from '../../../../node_modules/@knx/collapsible-panel/index';
 import { KNXInfoComponent } from '../../../../node_modules/@knx/info/index';
+import { CurrencyPipe } from '@angular/common';
 
 import { CXFormsModule } from '../../../../node_modules/@cx/forms';
 
@@ -28,7 +29,8 @@ describe('Component: InsuranceReviewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule],
-      declarations: [InsuranceReviewComponent, KNXCollapsiblePanelComponent, TestHostComponent, KNXInfoComponent]
+      declarations: [InsuranceReviewComponent, KNXCollapsiblePanelComponent, TestHostComponent, KNXInfoComponent],
+      providers: [CurrencyPipe]
     }).compileComponents();
   }));
 

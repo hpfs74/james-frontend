@@ -17,7 +17,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   [class*="col-"] {
     border-right: $knx-insurance-result-border;
     font-size: $font-size-base - 2;
-    padding: 20px 40px 10px 25px;
+    padding: 20px 25px 10px;
 
     &:last-child {
       border-right: 0;
@@ -30,7 +30,11 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 
   & > .row {
     // counter height
-    margin-top: -40px;
+    margin: -40px 0 0 0;
+
+    > [class*="col-"]:first-child {
+      padding-right: 15px;
+    }
   }
 }
 
@@ -51,9 +55,10 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 }
 
 .knx-insurance-result__logo {
+  display: block;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px auto;
+  max-width: 120px;
 }
 
 .knx-sticker {
@@ -85,6 +90,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   font-family: $font-family-head;
   background: $knab-primary-gray;
   font-size: 18px;
+  margin-top: 3px;
   padding: 5px 10px;
 
   span {
@@ -172,6 +178,15 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 .knx-insurance-result__details .knx-tabs,
 .knx-insurance-result__details .knx-tab__content {
   padding: 0 20px;
+}
+
+.knx-button + .knx-button__extra {
+  position: relative;
+  display: block;
+  margin-top: -30px;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 768px) {
