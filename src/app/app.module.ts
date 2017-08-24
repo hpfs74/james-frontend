@@ -51,8 +51,7 @@ export function ContentLoader(contentService: ContentService) {
     StoreModule.forRoot(reducers, {
       initialState: {
         profile: {},
-        insurances: [],
-        messages: []
+        insurances: []
       },
       metaReducers
     }),
