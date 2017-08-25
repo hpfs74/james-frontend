@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
 import { Profile, Authenticate } from '../models';
+import { LocalStorageService } from './localstorage.service';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
   private profileUrl: string;
   private tokenUrl: string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private localStorageService: LocalStorageService) {
     this.loggedIn = !!localStorage.getItem('auth_token');
     this.keyUrl = environment.james.key;
     this.profileUrl = environment.james.profile;
@@ -33,11 +34,7 @@ export class AuthService {
   public logout(): Observable<AuthToken> {
     return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
       .map(x => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('token');
-        localStorage.removeItem('nicci_key');
-        localStorage.removeItem('nicci_id');
-
+        this.localStorageService.clearToken();
         return x.json();
       });
   }
@@ -63,7 +60,6 @@ export class AuthService {
   }
 
   public refreshToken(refreshToken: string): Observable<AuthToken> {
-
     return this.getNicciKey()
       .flatMap((nicci) => {
         const headers = this.getBasicHeaderWithKey(nicci);
@@ -71,7 +67,6 @@ export class AuthService {
           grant_type: 'refresh_token',
           refresh_token: refreshToken
         };
-
         return this.http.post(this.tokenUrl, refreshTokenBody, { headers })
           .map(data => data.json());
       });
@@ -81,7 +76,6 @@ export class AuthService {
     this.getNicciKey()
       .flatMap((nicci: AuthKey) => {
         const headers = this.getBasicHeaderWithKey(nicci);
-
         return this.http.post(this.keyUrl, {email}, {headers})
           .map((res: Response) => res.json());
       });
@@ -89,16 +83,12 @@ export class AuthService {
 
   public isLoggedIn() {
     return AuthUtils.tokenNotExpired('token');
-    // return localStorage.getItem('access_token') !== null;
   }
 
   public resendActivation(email) {
     throw new Error('Not implemented yet');
   }
 
-  public setTokenExpirationDate(token: string): Object {
-    return AuthUtils.setTokenExpirationDate(token);
-  }
   /**
    *
    * @return {Observable<R>}

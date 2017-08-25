@@ -1,3 +1,4 @@
+import { RefreshToken } from './../actions/auth';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
@@ -12,10 +13,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 
 import { AuthService } from '../services/auth.service';
+import { LocalStorageService } from '../services/localstorage.service';
 import * as fromRoot from '../reducers';
 import * as Auth from '../actions/auth';
 import * as Profile from '../actions/profile';
-import { AuthToken, TOKEN_NAME, TOKEN_OBJECT_NAME } from '../models/auth';
+import { AuthToken } from '../models/auth';
 
 @Injectable()
 export class AuthEffects {
@@ -23,7 +25,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   init$: Observable<any> = defer(() => {
     if (this.authService.isLoggedIn()) {
-      let token = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME) || null);
+      let token: AuthToken = this.localStorageService.getToken();
       if (token !== null && token.access_token) {
         this.store$.dispatch(new Auth.LoginSuccess({ token: token }));
         this.router.navigate(['/']);
@@ -40,10 +42,10 @@ export class AuthEffects {
     .exhaustMap(auth =>
       this.authService
         .login(auth)
+        .do((token: AuthToken) => this.localStorageService.setToken(token))
         .mergeMap((token: AuthToken) => {
           if (token) {
-            localStorage.setItem(TOKEN_NAME, token.access_token);
-            localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(token));
+            this.localStorageService.setToken(token);
           }
           return [
             new Auth.LoginSuccess({ token }),
@@ -51,7 +53,22 @@ export class AuthEffects {
           ];
         })
         .catch(error => of(new Auth.LoginFailure(error)))
-    );
+  );
+
+  @Effect()
+  refreshToken$ = this.actions$
+    .ofType(Auth.REFRESH_TOKEN)
+    .map((action: Auth.RefreshToken) => action.payload)
+    .throttleTime(3000)
+    .switchMap((refreshToken) => this.authService.refreshToken(refreshToken)
+      .map((token) => {
+        if (token && token.access_token) {
+          this.localStorageService.setToken(token);
+        } else {
+          return new Auth.RefreshTokenFailure(token);
+        }
+      }))
+    .catch(error => of(new Auth.RefreshTokenFailure(error)));
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$
@@ -65,17 +82,18 @@ export class AuthEffects {
       this.router.navigate(['/login']);
     });
 
-    @Effect()
-    logout$ = this.actions$
-      .ofType(Auth.LOGOUT)
-      .exhaustMap(auth =>
-        this.authService.logout()
-      );
+  @Effect()
+  logout$ = this.actions$
+    .ofType(Auth.LOGOUT)
+    .exhaustMap(auth =>
+      this.authService.logout()
+    );
 
   constructor(
     private actions$: Actions,
     private authService: AuthService,
     private router: Router,
+    private localStorageService: LocalStorageService,
     private store$: Store<fromRoot.State>
   ) {}
 }

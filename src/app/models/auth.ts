@@ -17,6 +17,3 @@ export interface Authenticate {
   password: string;
   scope?: string;
 }
-
-export const TOKEN_NAME = 'access_token';
-export const TOKEN_OBJECT_NAME = 'token';
