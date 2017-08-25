@@ -187,6 +187,7 @@ export const getAssistantMessageState = createSelector(getAsisstantState, fromAs
 export const getCompareState = (state: State) => state.compare;
 export const getCompareResult = createSelector(getCompareState, fromCompare.getCompareResult);
 export const getCompareLoading = createSelector(getCompareState, fromCompare.getLoading);
+export const getCompareError = createSelector(getCompareState, fromCompare.getError);
 
 /**
  * Advice Reducers
@@ -207,6 +208,7 @@ export const getSelectedInsurance = createSelector(getAdviceState, fromAdvice.ge
 export const getCarState = (state: State) => state.car;
 export const getCarInfo = createSelector(getCarState, fromCar.getInfo);
 export const getCarInfoLoaded = createSelector(getCarState, fromCar.getLoaded);
+export const getCarInfoError = createSelector(getCarState, fromCar.getError);
 
 /**
  * Coverage Reducers

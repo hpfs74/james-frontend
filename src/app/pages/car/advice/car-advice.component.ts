@@ -55,6 +55,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   isInsuranceLoading$: Observable<boolean>;
   selectedInsurance$: Observable<CarInsurance>;
   isCoverageLoading$: Observable<boolean>;
+  isCoverageError$: Observable<boolean>;
 
   subscription$: any;
 
@@ -76,10 +77,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
     this.insurances$ = this.getCompareResultCopy();
-    this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
+    this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading); // TODO: SAME AS COVERAGE?
     this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
     this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
     this.isCoverageLoading$ = this.store.select(fromRoot.getCompareLoading);
+    this.isCoverageError$ = this.store.select(fromRoot.getCompareError);
 
     this.store.dispatch(new advice.AddAction({
       id: cuid()
@@ -149,6 +151,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
         }
       });
+
+    this.store.select(fromRoot.getCarInfoError)
+      .subscribe( () => {
+        const c = this.carDetailForm.formGroup.get('licensePlate');
+        this.triggerLicenseInValid();
+      });
+
     this.store.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {
         if (isLoaded) {
@@ -157,7 +166,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           return Observable.empty();
         }
       }).subscribe((res: Array<Car>) => {
+
         const lastFound = res.slice(-1)[0];
+
         if (lastFound && lastFound.license) {
           this.car = lastFound;
           this.store.dispatch(new assistant.ClearAction);

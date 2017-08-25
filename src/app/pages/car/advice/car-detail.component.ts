@@ -23,6 +23,7 @@ export class CarDetailComponent implements OnInit {
   @Input() config: any;
   @Input() coverages: Price[];
   @Input() isCoverageLoading: boolean;
+  @Input() isCoverageError: boolean;
 
   @Input() set advice(value: any) {
     if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold || value.loan || value.gender || value.coverage) {
