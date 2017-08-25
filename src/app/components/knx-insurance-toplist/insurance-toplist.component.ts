@@ -12,7 +12,16 @@ interface OrderItem {
   selector: 'knx-insurance-toplist',
   template: `
   <div class="knx-insurance-toplist">
-    <div class="row">
+
+    <div class="row" *ngIf="!insuranceAvailable()">
+      <div class="col-sm-12">
+        <div class="knx-message knx-message--hint">
+          Niets gevonden. Ga terug om je keuze aan te passen. Kom je er niet uit? Neem contact op.
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="insuranceAvailable()">
       <div class="col-sm-12">
         <h2>De beste verzekeringen van alle {{total}} aanbieders</h2>
 
@@ -30,7 +39,9 @@ interface OrderItem {
             Bezig met ophalen van verzekeringen...
           </knx-loader>
         </div>
+
         <ng-template #insuranceResults>
+
           <knx-insurance-result
             *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
             [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)" [disableButton]="disableInsuranceBuy">
@@ -133,5 +144,10 @@ export class InsuranceTopListComponent implements OnInit {
   selectInsurance(event) {
     this.insuranceSelected$.emit(event);
   }
+
+  insuranceAvailable() {
+    return this.insurances && this.insurances.length > 0;
+  }
+
 }
 
