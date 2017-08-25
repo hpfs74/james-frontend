@@ -55,10 +55,7 @@ export function getInitialState() {
     HttpModule,
     SharedModule,
     HomeModule.forRoot(),
-    StoreModule.forRoot(reducers, {
-      initialState: getInitialState(),
-      metaReducers
-    }),
+    StoreModule.forRoot(reducers, { metaReducers }),
     // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
     LoginRoutingModule,
     AppRoutingModule,
