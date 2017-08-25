@@ -29,13 +29,14 @@ describe('Component: AddressLookup', () => {
 
   const addressServiceStub = {
     lookupAddress: (postalCode: string, houseNumber: string, houseNumberExtension: string) => {
+
       const ret = new Response(
         new ResponseOptions({
           body: [{
-              street: 'streetname',
-              city: 'cityname',
-              Output: 'streetname in the city'
-            }]
+            street: 'streetname',
+            city: 'cityname',
+            Output: 'streetname in the city'
+          }]
         }));
 
       return Observable.of(ret);
@@ -44,12 +45,12 @@ describe('Component: AddressLookup', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [  HttpModule ],
+      imports: [HttpModule],
       providers: [
         AuthHttp,
         AuthService,
-        { provide: LoaderService, useValue: {}},
-        { provide: AddressLookupService, useValue: addressServiceStub },
+        {provide: LoaderService, useValue: {}},
+        {provide: AddressLookupService, useValue: addressServiceStub},
       ],
       declarations: [AddressLookupComponent],
       schemas: [NO_ERRORS_SCHEMA]
@@ -57,6 +58,8 @@ describe('Component: AddressLookup', () => {
   }));
 
   beforeEach(() => {
+
+
     fixture = TestBed.createComponent(AddressLookupComponent);
     comp = fixture.componentInstance;
 
@@ -96,30 +99,26 @@ describe('Component: AddressLookup', () => {
   });
 
   it('should validate an address', () => {
-      inject([AddressLookupService], (addressServiceStub) => {
-        const isValid = comp.validateAddress(comp.addressFormGroup, addressServiceStub);
-        expect(isValid).toBeUndefined();
-      });
+    inject([AddressLookupService], (addressServiceStub) => {
+      const isValid = comp.validateAddress(comp.addressFormGroup, addressServiceStub);
+      expect(isValid).toBeUndefined();
+    });
   });
 
   xit('should get address', (done) => {
 
-    inject([AddressLookupService], (addressServiceStub) => {
-      comp.addressFound.subscribe((data) => {
-        expect(data).not.toBeNull();
-        // expect(data.street).not.toBe('streetname');
-        // expect(data.city).not.toBe('cityname');
-        done();
-      });
+    fixture.detectChanges();
 
-      comp.addressFormGroup.controls['postalCode']
-        .setValue('2273DE');
-      comp.addressFormGroup.controls['houseNumber']
-        .setValue('220');
+    comp.addressFound.subscribe((data) => {
+      expect(data).not.toBeNull();
+      expect(data.street).not.toBe('street');
+      expect(data.city).not.toBe('city');
+      done();
+    });
 
-      fixture.detectChanges();
-
-      comp.validateAddress(comp.addressFormGroup, addressServiceStub);
-    })();
+    comp.addressFormGroup.controls['postalCode']
+      .setValue('1234AB');
+    comp.addressFormGroup.controls['houseNumber']
+      .setValue('100');
   });
 });

@@ -77,6 +77,11 @@ export class AddressLookupComponent implements AfterViewChecked {
                this.address = `${res.street} in ${res.city}`;*/
 
               const dataObject = data.json();
+
+              if (!dataObject.Payload) {
+                return reject('no payload object found for the address');
+              }
+
               const res = <Address>{
                 '_id': dataObject.Payload.ID,
                 'postcode': dataObject.Payload.Main.Postcode.P6,
@@ -99,8 +104,9 @@ export class AddressLookupComponent implements AfterViewChecked {
               return resolve(isValid ? null : { address: true });
             }, err => {
               // TODO: check to change this with reject
-              isValid = false; // cannot validate: server error?
-              return resolve({ address: true, error: err });
+              // isValid = false; // cannot validate: server error?
+              // return resolve({ address: true, error: err });
+              return reject('address not found');
             });
         }
       }, timeOut);

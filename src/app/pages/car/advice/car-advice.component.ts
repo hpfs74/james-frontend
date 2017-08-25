@@ -131,9 +131,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         if (this.currentStep === 1) {
           const compareObj = {
             coverage: data.coverage,
-            cover_occupants: data.extraOptions.occupants || false,
-            no_claim_protection: data.extraOptions.noclaim || false,
-            legal_aid: data.extraOptions.legal || 'LAN',
+            cover_occupants: data.extraOptionsOccupants || false,
+            no_claim_protection: data.extraOptionsNoClaim || false,
+            legal_aid: data.extraOptionsLegal || 'LAN',
             road_assistance: data.roadAssistance || 'RANO',
             kilometers_per_year: data.kmPerYear || 'KMR3',
             own_risk: data.ownRisk || 0,
