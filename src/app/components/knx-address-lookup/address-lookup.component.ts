@@ -69,13 +69,6 @@ export class AddressLookupComponent implements AfterViewChecked {
 
           addressService.lookupAddress(postalCode, houseNumber, houseNumberExtension)
             .subscribe((data) => {
-              /*const res = <Address>data.json();
-
-              isValid = !!(res.street && res.city);
-
-              this.addressFound.emit(res);
-               this.address = `${res.street} in ${res.city}`;*/
-
               const dataObject = data.json();
 
               if (!dataObject.Payload) {
@@ -102,10 +95,7 @@ export class AddressLookupComponent implements AfterViewChecked {
               this.address = res.fullname;
 
               return resolve(isValid ? null : { address: true });
-            }, err => {
-              // TODO: check to change this with reject
-              // isValid = false; // cannot validate: server error?
-              // return resolve({ address: true, error: err });
+            }, () => {
               return reject('address not found');
             });
         }
