@@ -19,7 +19,6 @@ describe('Utils: AuthUtils', () => {
     const tokenHelper = new TokenHelper();
 
     it('should get expiration date', () => {
-
       const token = '{ "expires_in": "1200" }';
       let resToken = AuthUtils.setTokenExpirationDate(token);
       let res = tokenHelper.getTokenExpirationDate(resToken);

@@ -20,8 +20,8 @@ export class TokenHelper {
 
 export function setTokenExpirationDate(token: string): string {
   let tokenObj = JSON.parse(token);
-  tokenObj.iat = new Date();
   tokenObj.expiration_time = new Date().setUTCSeconds(tokenObj.expires_in);
+  tokenObj.iat = new Date();
   return JSON.stringify(tokenObj);
 }
 
