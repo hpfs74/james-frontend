@@ -18,7 +18,6 @@ import {
 @Component({
   selector: 'knx-home',
   template: `
-    <knx-cookiebar></knx-cookiebar>
     <header class="header">
       <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
