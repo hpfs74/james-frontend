@@ -14,7 +14,6 @@ import { LocalStorageService } from './localstorage.service';
 @Injectable()
 export class AuthService {
   redirectUrl: string;
-  private loggedIn = false;
   private keyUrl: string;
   private profileUrl: string;
   private tokenUrl: string;
@@ -23,7 +22,6 @@ export class AuthService {
   private refreshSubscription: any;
 
   constructor(private http: Http, private localStorageService: LocalStorageService) {
-    this.loggedIn = !!localStorage.getItem('auth_token');
     this.keyUrl = environment.james.key;
     this.profileUrl = environment.james.profile;
     this.tokenUrl = environment.james.token;
