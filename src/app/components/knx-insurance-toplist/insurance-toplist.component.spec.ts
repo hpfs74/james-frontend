@@ -45,4 +45,10 @@ describe('Component: InsuranceTopList', () => {
     expect(comp.testComponent.total).toBeTruthy();
   });
 
+  it ('should show empty insurance list message', () => {
+    comp.testComponent.insurances = [];
+    fixture.detectChanges();
+    expect(comp.testComponent.insuranceAvailable()).toBeFalsy();
+  });
+
 });
