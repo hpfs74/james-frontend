@@ -11,6 +11,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/exhaustMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/throttleTime';
 
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localstorage.service';
@@ -42,10 +43,10 @@ export class AuthEffects {
     .exhaustMap(auth =>
       this.authService
         .login(auth)
-        .do((token: AuthToken) => this.localStorageService.setToken(token))
         .mergeMap((token: AuthToken) => {
           if (token) {
             this.localStorageService.setToken(token);
+            this.authService.scheduleRefresh();
           }
           return [
             new Auth.LoginSuccess({ token }),

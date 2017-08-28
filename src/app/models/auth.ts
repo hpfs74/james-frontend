@@ -4,6 +4,7 @@ export class AuthToken {
   expires_in: number;
   refresh_token: string;
   expiration_time?: number;
+  iat?: number;
 }
 
 export class AuthKey {

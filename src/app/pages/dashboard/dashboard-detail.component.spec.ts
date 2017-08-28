@@ -9,7 +9,7 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import { DashboardDetailComponent } from './dashboard-detail.component';
-import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
+import { AuthService, ProfileService, AuthHttp, AssistantService, LocalStorageService } from '../../services/';
 import { Observable } from 'rxjs/Observable';
 
 describe('Component: DashboardDetail', () => {
@@ -45,6 +45,7 @@ describe('Component: DashboardDetail', () => {
           BaseRequestOptions,
           MockBackend,
           AuthService,
+          LocalStorageService,
           AssistantService,
           ProfileService,
           { provide: Router, useValue: routerStub },

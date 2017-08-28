@@ -3,6 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/interval';
 
 import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
@@ -18,12 +19,19 @@ export class AuthService {
   private profileUrl: string;
   private tokenUrl: string;
 
+  private tokenStream: Observable<AuthToken>;
+  private refreshSubscription: any;
+
   constructor(private http: Http, private localStorageService: LocalStorageService) {
     this.loggedIn = !!localStorage.getItem('auth_token');
     this.keyUrl = environment.james.key;
     this.profileUrl = environment.james.profile;
     this.tokenUrl = environment.james.token;
     this.redirectUrl = window.location.origin;
+
+    this.tokenStream = new Observable<AuthToken>((obs: any) => {
+      obs.next(this.localStorageService.getToken());
+    });
   }
 
   /**
@@ -35,6 +43,7 @@ export class AuthService {
     return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
       .map(x => {
         this.localStorageService.clearToken();
+        this.unscheduleRefresh();
         return x.json();
       });
   }
@@ -87,6 +96,35 @@ export class AuthService {
 
   public resendActivation(email) {
     throw new Error('Not implemented yet');
+  }
+
+  public scheduleRefresh() {
+    // If the user is authenticated, use the token stream and flatMap the token
+    let source = this.tokenStream.flatMap(
+      token => {
+        // The delay to generate in this case is the difference
+        // between the expiry time and the issued at time
+        let tokenIat = token.iat;
+        let tokenExp = token.expiration_time;
+        let iat = new Date(0);
+        let exp = new Date(0);
+
+        let delay = (exp.setUTCSeconds(tokenExp) - iat.setUTCSeconds(tokenIat));
+
+        return Observable.interval(delay);
+      });
+
+    this.refreshSubscription = source.subscribe(() => {
+      let refreshToken = this.localStorageService.getRefreshToken();
+      this.refreshToken(refreshToken);
+    });
+  }
+
+  public unscheduleRefresh() {
+    // Unsubscribe fromt the refresh
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
   }
 
   /**

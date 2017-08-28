@@ -9,17 +9,20 @@ export const TOKEN_OBJECT_NAME = 'token';
 @Injectable()
 export class LocalStorageService {
 
-  constructor() { }
-
   setToken(token: AuthToken) {
-    let convertToken = AuthUtils.setTokenExpirationDate(token);
-    localStorage.setItem(TOKEN_NAME, token.access_token);
+    let convertToken = JSON.parse(AuthUtils.setTokenExpirationDate(JSON.stringify(token)));
+    localStorage.setItem(TOKEN_NAME, convertToken.access_token);
     localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(convertToken));
   }
 
   getToken(): AuthToken {
     let token = localStorage.getItem(TOKEN_OBJECT_NAME);
     return JSON.parse(token) || null;
+  }
+
+  getRefreshToken(): string {
+    let token = this.getToken();
+    return token ? token.refresh_token : null;
   }
 
   getAccessToken(): string {

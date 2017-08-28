@@ -2,13 +2,14 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, TestBed, inject } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { StoreModule, Store } from '@ngrx/store';
 
 import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { CarService } from './car.service';
-import { AuthHttp } from '../../services';
+import { AuthHttp, LocalStorageService } from '../../services';
 import { Car } from '../../models/car';
 import { CarCompare } from '../../models/car-compare';
 
@@ -85,9 +86,11 @@ describe('Service: Car', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [StoreModule.forRoot({})],
       providers: [
         BaseRequestOptions,
         MockBackend,
+        LocalStorageService,
         CarService,
         {
           deps: [

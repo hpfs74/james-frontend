@@ -18,10 +18,11 @@ export class TokenHelper {
   }
 }
 
-export function setTokenExpirationDate(token): string {
-  token = JSON.parse(token);
-  token.expiration_time = new Date().setUTCSeconds(token.expires_in);
-  return JSON.stringify(token);
+export function setTokenExpirationDate(token: string): string {
+  let tokenObj = JSON.parse(token);
+  tokenObj.iat = new Date();
+  tokenObj.expiration_time = new Date().setUTCSeconds(tokenObj.expires_in);
+  return JSON.stringify(tokenObj);
 }
 
 export function tokenNotExpired(tokenName: string): boolean {
