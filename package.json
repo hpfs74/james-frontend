@@ -51,7 +51,7 @@
     "@knx/grid": "0.0.278",
     "@knx/info": "0.0.102",
     "@knx/step-navigation": "0.0.12",
-    "@knx/wizard": "0.0.111",
+    "@knx/wizard": "0.0.129",
     "@ngrx/effects": "^4.0.2",
     "@ngrx/router-store": "^4.0.2",
     "@ngrx/store": "^4.0.2",

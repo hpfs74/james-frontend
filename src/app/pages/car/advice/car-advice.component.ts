@@ -56,7 +56,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   selectedInsurance$: Observable<CarInsurance>;
   isCoverageLoading$: Observable<boolean>;
 
-  subscription$: any;
+  subscription$: Array<any>;
 
   // Forms
   carDetailForm: CarDetailForm;
@@ -72,6 +72,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.subscription$ = [];
     this.chatConfig = this.assistantService.config;
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
@@ -125,7 +126,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.carDetailForm = new CarDetailForm(formBuilder);
 
     this.carExtrasForm = new CarExtrasForm(formBuilder);
-    this.subscription$ = this.carExtrasForm.formGroup.valueChanges
+    this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
       .subscribe(data => {
         if (this.currentStep === 1) {
@@ -143,7 +144,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           this.store.dispatch(new advice.UpdateAction(compareObj));
         }
       });
-    this.subscription$ = this.store.select(fromRoot.getSelectedAdvice)
+    this.store.select(fromRoot.getSelectedAdvice)
       .subscribe(advice => {
         if (advice.coverage) {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
@@ -187,7 +188,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription$.unsubscribe();
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
   submitDetailForm(): Observable<any> {
@@ -249,12 +250,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   startBuyFlow(): Observable<any> {
-    this.store.select(fromRoot.getSelectedAdviceId).subscribe(
+    this.subscription$.push(this.store.select(fromRoot.getSelectedAdviceId).subscribe(
       id => {
         this.store.dispatch(new RouterActions.Go({
           path: ['/car/insurance', { adviceId: id }],
         }));
-      });
+      }));
     return;
   }
 

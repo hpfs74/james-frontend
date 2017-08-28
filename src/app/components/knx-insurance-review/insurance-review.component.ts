@@ -67,7 +67,7 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
   ngOnInit() {
     this.info = {
       label: 'Slim verzekerd via Knab',
-      text: 'AAROM VERZEKEREN VIA KNAB? <br>' +
+      text: 'WAAROM VERZEKEREN VIA KNAB? <br>' +
       'Verzekeren via Knab is een goed idee want:<br>' +
       'Scherpe prijs: bij Knab betaal je namelijk maar 10% provisie. Bij andere aanbieders is dat tot wel 25% per maand.<br>' +
       'We zijn er voor je: we helpen je bij schade, of als je er niet uitkomt met je verzekeraar.<br>' +
