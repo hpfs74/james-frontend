@@ -56,6 +56,8 @@ export class AuthEffects {
         .catch(error => of(new Auth.LoginFailure(error)))
   );
 
+  // TODO: this is currently not used; find way to integrate
+  // with auth(http) service
   @Effect()
   refreshToken$ = this.actions$
     .ofType(Auth.REFRESH_TOKEN)
