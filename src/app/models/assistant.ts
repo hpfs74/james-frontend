@@ -1,5 +1,10 @@
 import { Address, Car, Price } from '.';
 
+export interface CannedMessageType {
+  key: string;
+  value: any;
+}
+
 export class AssistantConfig {
   public avatar = {
     show: true,

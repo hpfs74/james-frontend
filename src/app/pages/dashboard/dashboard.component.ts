@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
 
@@ -22,20 +21,23 @@ import { Profile, InsuranceMap, Insurance, insuranceTypes } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
-  chatConfig: AssistantConfig;
   insurances: Array<Insurance>;
 
+  chatConfig$: Observable<AssistantConfig>;
   profile$: Observable<Profile>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
   constructor(
     private router: Router,
-    private store: Store<fromRoot.State>,
-    private assistantService: AssistantService
+    private store: Store<fromRoot.State>
   ) {
-    this.chatConfig = assistantService.config;
-    this.chatConfig.avatar.title = 'Expert verzekeringen';
+    this.chatConfig$ = store.select(fromRoot.getAssistantConfig);
     this.chatMessages$ = store.select(fromRoot.getAssistantMessageState);
+    this.store.dispatch(new assistant.UpdateConfigAction({
+      avatar: {
+        title: 'Expert verzekeringen'
+      }
+    }));
   }
 
   ngOnInit() {
@@ -49,7 +51,10 @@ export class DashboardComponent implements OnInit {
       .take(1)
       .subscribe((profile) => {
       if (Object.keys(profile).length > 0) {
-        this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.dashboard.welcome(profile.firstname)));
+        this.store.dispatch(new assistant.AddCannedMessage({
+          key: 'dashboard.welcome',
+          value: profile.firstname
+        }));
       }
     });
 
