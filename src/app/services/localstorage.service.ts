@@ -5,6 +5,8 @@ import * as AuthUtils from '../utils/auth.utils';
 
 export const TOKEN_NAME = 'access_token';
 export const TOKEN_OBJECT_NAME = 'token';
+export const NICCI_KEY = 'nicci_key';
+export const NICCI_ID = 'nicci_id';
 
 @Injectable()
 export class LocalStorageService {
@@ -30,9 +32,9 @@ export class LocalStorageService {
   }
 
   clearToken() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('token');
-    localStorage.removeItem('nicci_key');
-    localStorage.removeItem('nicci_id');
+    localStorage.removeItem(TOKEN_NAME);
+    localStorage.removeItem(TOKEN_OBJECT_NAME);
+    localStorage.removeItem(NICCI_KEY);
+    localStorage.removeItem(NICCI_ID);
   }
 }

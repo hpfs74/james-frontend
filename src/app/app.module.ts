@@ -40,13 +40,6 @@ export function ContentLoader(contentService: ContentService) {
   return () => contentService.loadFiles();
 }
 
-// export function getInitialState() {
-//   return {
-//     profile: {},
-//     insurances: []
-//   };
-// }
-
 @NgModule({
   imports: [
     BrowserModule,
