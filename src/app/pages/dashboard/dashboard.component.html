@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-sm-4 push-sm-8">
       <div class="knx-wizard__sidebar--sticky">
-        <knx-chat-stream [options]="chatConfig" [messages]="chatMessages$ | async"></knx-chat-stream>
+        <knx-chat-stream [options]="chatConfig$ | async" [messages]="chatMessages$ | async"></knx-chat-stream>
       </div>
     </div>
     <div class="col-sm-8 pull-sm-4">

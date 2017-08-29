@@ -29,11 +29,11 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private store: Store<fromRoot.State>
+    private store$: Store<fromRoot.State>
   ) {
-    this.chatConfig$ = store.select(fromRoot.getAssistantConfig);
-    this.chatMessages$ = store.select(fromRoot.getAssistantMessageState);
-    this.store.dispatch(new assistant.UpdateConfigAction({
+    this.chatConfig$ = store$.select(fromRoot.getAssistantConfig);
+    this.chatMessages$ = store$.select(fromRoot.getAssistantMessageState);
+    this.store$.dispatch(new assistant.UpdateConfigAction({
       avatar: {
         title: 'Expert verzekeringen'
       }
@@ -41,24 +41,22 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.profile$ = this.store.select(fromRoot.getProfile);
+    this.profile$ = this.store$.select(fromRoot.getProfile);
     // this.insurances$ = this.store.select(fromRoot.getInsurances);
 
-    this.store.dispatch(new assistant.ClearAction);
+    this.store$.dispatch(new assistant.ClearAction);
 
     this.profile$
       .distinctUntilChanged((prev, next) => prev._id === next._id)
       .take(1)
       .subscribe((profile) => {
-      if (Object.keys(profile).length > 0) {
-        this.store.dispatch(new assistant.AddCannedMessage({
+        this.store$.dispatch(new assistant.AddCannedMessage({
           key: 'dashboard.welcome',
-          value: profile.firstname
+          value: profile.firstname || null
         }));
-      }
-    });
+      });
 
-    this.store.select(fromRoot.getInsurances).subscribe((docs) => {
+    this.store$.select(fromRoot.getInsurances).subscribe((docs) => {
       const insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
 
       const myInsurances = [];

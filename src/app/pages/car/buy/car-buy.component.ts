@@ -42,7 +42,7 @@ export class CarBuyComponent implements OnInit {
   formContent: any;
   currentStep: number;
 
-  chatConfig: AssistantConfig;
+  chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   profile$: Observable<Profile>;
   advice$: Observable<any>;
@@ -56,18 +56,22 @@ export class CarBuyComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private store: Store<fromRoot.State>,
+    private store$: Store<fromRoot.State>,
     private contentService: ContentService,
-    private assistantService: AssistantService,
     private profileService: ProfileService
   ) { }
 
   ngOnInit() {
-    this.chatConfig = this.assistantService.config;
-    this.chatConfig.avatar.title = 'Expert autoverzekeringen';
-    this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
-    this.profile$ = this.store.select(fromRoot.getProfile);
-    this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
+    this.store$.dispatch(new assistant.UpdateConfigAction({
+      avatar: {
+        title: 'Expert autoverzekeringen'
+      }
+    }));
+    this.chatConfig$ = this.store$.select(fromRoot.getAssistantConfig);
+    this.chatMessages$ = this.store$.select(fromRoot.getAssistantMessageState);
+    this.chatMessages$ = this.store$.select(fromRoot.getAssistantMessageState);
+    this.profile$ = this.store$.select(fromRoot.getProfile);
+    this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
 
     const formBuilder = new FormBuilder();
     this.formContent = this.contentService.getContentObject();
@@ -97,21 +101,21 @@ export class CarBuyComponent implements OnInit {
         label: 'Check',
         nextButtonLabel: 'Naar betalingsgegevens',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.initForm(this.chatConfig.car.buy.check),
+        onShowStep: () => this.initForm('car.buy.check'),
         onBeforeNext: this.submitForm.bind(this, this.checkForm)
       },
       {
         label: 'Betaling',
         nextButtonLabel: 'Naar overzicht',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.initForm(this.chatConfig.car.buy.payment),
+        onShowStep: () => this.initForm('car.buy.payment'),
         onBeforeNext: this.submitForm.bind(this, this.paymentForm)
       },
       {
         label: 'Overzicht',
         nextButtonLabel: 'Verzekering aanvragen',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.initSummaryForm(this.chatConfig.car.buy.summary),
+        onShowStep: () => this.initSummaryForm('car.buy.summary'),
         onBeforeNext: this.submitInsurance.bind(this)
       }
     ];
@@ -120,16 +124,16 @@ export class CarBuyComponent implements OnInit {
   initFormWithProfile() {
     FormUtils.scrollToForm('form');
 
-    this.profile$ = this.store.select(fromRoot.getProfile);
+    this.profile$ = this.store$.select(fromRoot.getProfile);
 
-    this.store.dispatch(new assistant.ClearAction);
-    this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.buy.fill));
+    this.store$.dispatch(new assistant.ClearAction);
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.fill' }));
   }
 
-  initForm(message: string) {
+  initForm(messageKey: string) {
     FormUtils.scrollToForm('form');
-    this.store.dispatch(new assistant.ClearAction);
-    this.store.dispatch(new assistant.AddMessageAction(message));
+    this.store$.dispatch(new assistant.ClearAction);
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: messageKey }));
   }
 
   initSummaryForm(message: string) {
@@ -147,7 +151,7 @@ export class CarBuyComponent implements OnInit {
     //     return this.store.dispatch(new profile.UpdateAction(getUpdatedProfile(form.formGroup.value)));
     // }
 
-    this.store.dispatch(new advice.UpdateAction(form.formGroup.value));
+    this.store$.dispatch(new advice.UpdateAction(form.formGroup.value));
 
     return new Observable(obs => {
       obs.next();
@@ -164,7 +168,7 @@ export class CarBuyComponent implements OnInit {
       this.paymentForm.formGroup.value,
       this.acceptFinalTerms
     );
-    this.store.select(fromRoot.getSelectedAdvice).subscribe(advice => {
+    this.store$.select(fromRoot.getSelectedAdvice).subscribe(advice => {
       // flatten car data into proposal
       const flatData = Object.assign({},
         advice,
@@ -184,7 +188,7 @@ export class CarBuyComponent implements OnInit {
       // TODO: check if merging is done correctly
       // console.log(proposalRequest.getFinalQuestions(flatData));
       // console.log(proposal)
-      this.store.dispatch(new car.BuyAction(proposal));
+      this.store$.dispatch(new car.BuyAction(proposal));
     });
 
 

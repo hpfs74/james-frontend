@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AssistantConfig, CannedMessageType } from './../models/assistant';
+import { AssistantConfig, CannedMessageType } from './../models';
 
 export const ADD_MESSAGE = '[Assistant] Add Message';
 export const ADD_CANNED_MESSAGE = '[Assistant] Add Canned Message';
@@ -17,7 +17,7 @@ export class AddMessageAction implements Action {
 export class AddCannedMessage implements Action {
   readonly type = ADD_CANNED_MESSAGE;
 
-  constructor(public payload: any) { }
+  constructor(public payload: CannedMessageType) { }
 }
 
 export class ClearAction implements Action {

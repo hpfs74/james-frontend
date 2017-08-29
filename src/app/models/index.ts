@@ -1,6 +1,7 @@
 export * from './address';
 export * from './assistant';
 export * from './auth';
+export * from './canned-message';
 export * from './car-insurance';
 export * from './car-compare';
 export * from './car';

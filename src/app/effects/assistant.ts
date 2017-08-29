@@ -13,7 +13,7 @@ import 'rxjs/add/operator/take';
 import * as fromRoot from '../reducers';
 import * as assistant from '../actions/assistant';
 import { AssistantService } from '../services/assistant.service';
-import { AssistantConfig, CannedMessageType } from './../models/assistant';
+import { AssistantConfig, CannedMessageType } from './../models';
 
 @Injectable()
 export class AssistantEffects {
@@ -25,21 +25,33 @@ export class AssistantEffects {
     }
   });
 
-  @Effect({ dispatch: false })
+  @Effect()
   cannedMessage$ = this.actions$
     .ofType(assistant.ADD_CANNED_MESSAGE)
     .map((action: assistant.AddCannedMessage) => action.payload)
     .withLatestFrom(this.store$, (action, state) => {
       return {
-        payload: action.payload,
+        payload: action,
         config: state.assistant.config
       };
     })
-    .do((combined: any) => {
+    .switchMap((combined: any) => {
       let key = combined.payload.key;
       let value = combined.payload.value;
-      let message = combined.config[key](value);
-      this.store$.dispatch(new assistant.AddMessageAction(message));
+
+      let message;
+      let prop = key.split('.').reduce((o, i) => o[i], combined.config);
+      if (typeof prop === 'function') {
+        let fnCall = value ? prop(value) : prop();
+        message = fnCall;
+      } else {
+        message = prop;
+      }
+      return combined.payload.clear ?
+        Observable.of(
+          { type: assistant.CLEAR_MESSAGES, payload: message },
+          { type: assistant.ADD_MESSAGE, payload: message })
+        : Observable.of({ type: assistant.ADD_MESSAGE, payload: message });
     });
 
   constructor(private actions$: Actions, private store$: Store<fromRoot.State>, private assistantService: AssistantService) { }
