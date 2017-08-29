@@ -154,7 +154,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
     this.store.select(fromRoot.getCarInfoError)
       .subscribe( () => {
-        const c = this.carDetailForm.formGroup.get('licensePlate');
         this.triggerLicenseInValid();
       });
 
