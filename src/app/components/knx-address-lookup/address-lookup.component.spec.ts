@@ -3,11 +3,12 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpModule, Response, ResponseOptions } from '@angular/http';
+import { StoreModule, Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { Address } from '../../models/address';
-import { AuthHttp, GeolocationService } from '../../services';
+import { AuthHttp, GeolocationService, LocalStorageService } from '../../services';
 import { LoaderService } from '../knx-app-loader/loader.service';
 import { AddressLookupComponent } from './address-lookup.component';
 import { AddressLookupService } from './address-lookup.service';
@@ -45,10 +46,11 @@ describe('Component: AddressLookup', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule],
+      imports: [HttpModule, StoreModule.forRoot({})],
       providers: [
         AuthHttp,
         AuthService,
+        LocalStorageService,
         {provide: LoaderService, useValue: {}},
         {provide: AddressLookupService, useValue: addressServiceStub},
       ],

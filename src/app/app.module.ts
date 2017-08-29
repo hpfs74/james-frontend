@@ -24,9 +24,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { requestOptionsProvider } from './services/default-request-opts.service';
 
 import { AuthModule } from './auth.module';
-// TODO: init auth and login-page ngrx stuff in auth module instead of here
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
+import { LocalStorageService } from './services/localstorage.service';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginRoutingModule } from './pages/login/login-routing.module';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
@@ -38,13 +38,6 @@ import { HomeModule } from './pages/home/home.module';
 
 export function ContentLoader(contentService: ContentService) {
   return () => contentService.loadFiles();
-}
-
-export function getInitialState() {
-  return {
-    profile: {},
-    insurances: []
-  };
 }
 
 @NgModule({
@@ -87,6 +80,7 @@ export function getInitialState() {
       multi: true
     },
     requestOptionsProvider,
+    LocalStorageService,
     CurrencyPipe
   ],
   bootstrap: [AppComponent],
