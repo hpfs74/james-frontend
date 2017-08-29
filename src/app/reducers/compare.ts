@@ -5,12 +5,16 @@ import { InsuranceAdvice } from './../models/insurance-advice';
 export type Action = CompareActions.All;
 
 export interface State {
-  status: string;
+  loading: boolean;
+  loaded: boolean;
+  error: boolean;
   insurances: InsuranceAdvice[];
 }
 
 export const initialState: State = {
-  status: 'init',
+  loading: false,
+  loaded: false,
+  error: false,
   insurances: []
 };
 
@@ -18,7 +22,8 @@ export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
     case CompareActions.LOAD_CAR_COMPARE: {
       return Object.assign({}, state, {
-        status: 'loading',
+        loading: true,
+        error: false
       });
     }
 
@@ -26,17 +31,15 @@ export function reducer(state = initialState, action: Action): State {
       const compareResult = action.payload;
 
       return Object.assign({}, state, {
-        status: 'ready',
+        loaded: true,
+        loading: false,
         insurances: compareResult
       });
     }
 
     case CompareActions.LOAD_CAR_COMPARE_FAIL: {
-      const compareResult = action.payload;
-
       return Object.assign({}, state, {
-        status: 'error',
-        insurances: compareResult
+        error: true
       });
     }
 
@@ -46,7 +49,8 @@ export function reducer(state = initialState, action: Action): State {
   }
 }
 
-export const getLoaded = (state: State) => state.status === 'ready';
-export const getLoading = (state: State) => state.status === 'loading';
-export const getError = (state: State) => state.status === 'error';
+
+export const getLoaded = (state: State) => state.loaded;
+export const getLoading = (state: State) => state.loading;
+export const getError = (state: State) => state.error;
 export const getCompareResult = (state: State) => state.insurances;

@@ -178,8 +178,8 @@ export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowS
 /**
  * Chat Assistant Reducers
  */
-export const getAsisstantState = (state: State) => state.assistant;
-export const getAssistantMessageState = createSelector(getAsisstantState, fromAssistant.getMessages);
+export const getAssisstantState = (state: State) => state.assistant;
+export const getAssistantMessageState = createSelector(getAssisstantState, fromAssistant.getMessages);
 
 /**
  * Compare Insurance Reducers
