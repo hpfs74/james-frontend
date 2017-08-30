@@ -138,10 +138,8 @@ export const updateAndValidateControls = function (fg: FormGroup, valueObj: any)
 
 export const validateForm = function (form: FormGroup) {
   Object.keys(form.controls).forEach(key => {
-    if (hasControlRequiredValidator(form.get(key))) {
-      form.get(key).markAsTouched();
-      form.get(key).markAsDirty();
-    }
+    form.get(key).markAsTouched();
+    form.get(key).markAsDirty();
   });
   form.updateValueAndValidity();
 };
