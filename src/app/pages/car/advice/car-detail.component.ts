@@ -48,8 +48,8 @@ export class CarDetailComponent implements OnInit {
 
       // give address-lookup component time to set AsyncValidators before validate it
       setTimeout(() => {
-        FormUtils.validateForm(this.form.formGroup);
-        FormUtils.validateForm(this.form.addressForm);
+        FormUtils.updateAndValidateControls(this.form.formGroup, value);
+        FormUtils.updateAndValidateControls(this.form.addressForm, value);
       });
     }
   }

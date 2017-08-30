@@ -1,4 +1,6 @@
 .knx-address-lookup {
+  margin-bottom: 60px;
+
   // error message
   &:after {
     margin-top: -12px;
@@ -13,7 +15,7 @@
     }
   }
 
-  .found-address {
-    margin: -35px 0 20px;
+  .knx-address-lookup__result {
+    background: $knab-disabled-gray;
   }
 }

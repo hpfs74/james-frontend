@@ -146,7 +146,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             legal_aid: data.extraOptionsLegal || 'LAN',
             road_assistance: data.roadAssistance || 'RANO',
             kilometers_per_year: data.kmPerYear || 'KMR3',
-            own_risk: data.ownRisk || 0,
+            own_risk: +data.ownRisk || 0,
             insurance_id: ''
           };
           // this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
@@ -242,7 +242,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       house_number: this.address.number,
       country: 'NL',
       kilometers_per_year: detailForm.value.kmPerYear,
-      own_risk: detailForm.value.ownRisk,
+      own_risk: +detailForm.value.ownRisk,
       cover_occupants: false,
       legal_aid: 'LAN',
       no_claim_protection: false,
@@ -313,7 +313,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   getCoverages(event) {
     if (this.car) {
       this.store$.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
-      FormUtils.scrollToForm('form');
     }
   }
 
