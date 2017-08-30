@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../../reducers';
 import * as profile from '../../actions/profile';
+import * as auth from '../../actions/auth';
 
 import { Price, Nav, Feature, Profile } from '../../models';
 import { ContentService } from '../../content.service';
@@ -21,7 +22,7 @@ import {
     <header class="header">
       <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user [isLoggedIn]="isLoggedIn" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
+        <knx-nav-user (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
     </header>
 
@@ -38,7 +39,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn = false;
   coverages: Array<Price>;
   topMenu: Array<Nav>;
   phone: Object;
@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store<fromRoot.State>,
-    private authService: AuthService,
     private navigationService: NavigationService,
     private contentService: ContentService) {
   }
@@ -58,17 +57,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
     this.footerItems = this.contentService.getContentObject().layout.footer;
-
-    this.isLoggedIn = this.authService.isLoggedIn();
-
     this.profile$ = this.store.select(fromRoot.getProfile);
     this.loading$ = this.store.select(fromRoot.getProfileLoading);
   }
 
   logOut() {
-    this.authService.logout()
-      .subscribe(() => {
-        this.router.navigate(['/login']);
-      });
+    this.store.dispatch(new auth.Logout);
   }
 }

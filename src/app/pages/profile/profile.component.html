@@ -4,7 +4,7 @@
     <div class="col-sm-4 push-sm-8">
       <div class="knx-wizard__sidebar--sticky">
         <knx-chat-stream
-          [options]="chatConfig"
+          [options]="chatConfig$ | async"
           [messages]="chatMessages$ | async">
         </knx-chat-stream>
       </div>

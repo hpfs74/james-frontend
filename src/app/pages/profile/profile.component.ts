@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
-import { AssistantService } from './../../services/assistant.service';
 import { AssistantConfig } from '../../models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { BaseForm } from '../../forms/base-form';
@@ -23,29 +22,29 @@ import * as settings from '../../actions/settings';
 })
 export class ProfileComponent implements OnInit {
   profileForm: ProfileForm;
-  chatConfig: AssistantConfig;
+  chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
   profile$: Observable<Profile>;
 
-  constructor(private assistantService: AssistantService, private store: Store<fromRoot.State>) {
-    this.chatConfig = assistantService.config;
-    this.chatMessages$ = store.select(fromRoot.getAssistantMessageState);
-    this.profile$ = this.store.select(fromRoot.getProfile);
+  constructor(private store$: Store<fromRoot.State>) {
+    this.chatConfig$ = store$.select(fromRoot.getAssistantConfig);
+    this.chatMessages$ = store$.select(fromRoot.getAssistantMessageState);
+    this.profile$ = this.store$.select(fromRoot.getProfile);
   }
 
   ngOnInit() {
-    this.store.dispatch(new assistant.ClearAction());
-    this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.profile.hello));
+    this.store$.dispatch(new assistant.ClearAction());
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'profile.hello' }));
     this.profileForm = new ProfileForm(new FormBuilder());
   }
 
   navigateBack() {
-    this.store.dispatch(new RouterActions.Back());
+    this.store$.dispatch(new RouterActions.Back());
   }
 
   save(event) {
-    this.store.dispatch(new profile.UpdateAction(Object.assign({}, {
+    this.store$.dispatch(new profile.UpdateAction(Object.assign({}, {
         avatar: event.avatar,
         gender: event.gender,
         firstname: event.firstName,
@@ -53,7 +52,7 @@ export class ProfileComponent implements OnInit {
         birthday: FormUtils.toNicciDate(event.birthDate)
       }, event.address)));
 
-    this.store.dispatch(new settings.UpdateSettingsAction({
+    this.store$.dispatch(new settings.UpdateSettingsAction({
       push_notifications: !!event.pushNotifications,
       email_notifications: !!event.emailNotifications
     }));
