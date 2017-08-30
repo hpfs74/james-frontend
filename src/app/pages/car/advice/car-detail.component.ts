@@ -43,8 +43,8 @@ export class CarDetailComponent implements OnInit {
         houseNumber: value.address ? value.address.number : null,
         houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null
       }));
-      FormUtils.validateForm(this.form.formGroup);
-      FormUtils.validateForm(this.form.addressForm);
+      FormUtils.updateAndValidateControls(this.form.formGroup, value);
+      FormUtils.updateAndValidateControls(this.form.addressForm, value);
     }
   }
 
