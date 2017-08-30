@@ -81,6 +81,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
     this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
     this.isCoverageLoading$ = this.store.select(fromRoot.getCompareLoading);
+
     this.isCoverageError$ = this.store.select(fromRoot.getCompareError);
 
     this.store.dispatch(new advice.AddAction({
