@@ -48,7 +48,7 @@ describe('Component: InsuranceTopList', () => {
   it ('should show empty insurance list message', () => {
     comp.testComponent.insurances = [];
     fixture.detectChanges();
-    expect(comp.testComponent.insuranceAvailable()).toBeFalsy();
+    expect(comp.testComponent.noResult()).toBeTruthy();
   });
 
 });

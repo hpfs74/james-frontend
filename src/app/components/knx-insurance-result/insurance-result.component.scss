@@ -180,13 +180,20 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   padding: 0 20px;
 }
 
-.knx-button + .knx-button__extra {
-  position: relative;
+.knx-button--extra-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 50px;
+}
+
+.knx-button .knx-button__extra {
   display: block;
-  margin-top: -30px;
   text-align: center;
   color: #fff;
-  pointer-events: none;
+  font-size: $font-size-base - 2;
+  font-family: $font-family-base;
+  text-transform: none;
+  margin-top: -2px;
 }
 
 @media screen and (max-width: 768px) {
