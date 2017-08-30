@@ -55,7 +55,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   selectedInsurance$: Observable<CarInsurance>;
   isCoverageLoading$: Observable<boolean>;
 
-  subscription$: any;
+  subscription$: Array<any>;
 
   // Forms
   carDetailForm: CarDetailForm;
@@ -75,6 +75,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         title: 'Expert autoverzekeringen'
       }
     }));
+    this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromRoot.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromRoot.getAssistantMessageState);
     this.insurances$ = this.getCompareResultCopy();
@@ -83,9 +84,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
     this.isCoverageLoading$ = this.store$.select(fromRoot.getCompareLoading);
 
-    this.store$.dispatch(new advice.AddAction({
-      id: cuid()
-    }));
+    // start new advice only if there is no current one
+    this.advice$.subscribe(currentAdvice => {
+        if (currentAdvice && this.address) {
+          this.store$.select(fromRoot.getProfile).subscribe(currentProfile => {
+            this.address.postcode = currentProfile.postcode;
+            this.address.number = currentProfile.number;
+          });
+
+        } else if (!currentAdvice) {
+          this.store$.dispatch(new advice.AddAction({
+            id: cuid()
+          }));
+        }
+      });
 
     this.currentStep = 0;
     this.formSteps = [
@@ -123,7 +135,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.carDetailForm = new CarDetailForm(formBuilder);
 
     this.carExtrasForm = new CarExtrasForm(formBuilder);
-    this.subscription$ = this.carExtrasForm.formGroup.valueChanges
+    this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
       .subscribe(data => {
         if (this.currentStep === 1) {
@@ -141,7 +153,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           this.store$.dispatch(new advice.UpdateAction(compareObj));
         }
       });
-    this.subscription$ = this.store$.select(fromRoot.getSelectedAdvice)
+    this.store$.select(fromRoot.getSelectedAdvice)
       .subscribe(advice => {
         if (advice.coverage) {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
@@ -194,7 +206,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription$.unsubscribe();
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
   submitDetailForm(): Observable<any> {
@@ -256,12 +268,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   startBuyFlow(): Observable<any> {
-    this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
+    this.subscription$.push(this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
       id => {
         this.store$.dispatch(new RouterActions.Go({
           path: ['/car/insurance', { adviceId: id }],
         }));
-      });
+      }));
     return;
   }
 

@@ -34,6 +34,13 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case CompareActions.LOAD_CAR_COMPARE_FAIL: {
+      return Object.assign({}, state, {
+        loaded: false,
+        loading: false
+      });
+    }
+
     default: {
       return state;
     }
