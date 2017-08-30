@@ -13,26 +13,8 @@ interface OrderItem {
   template: `
   <div class="knx-insurance-toplist">
 
-    <div class="row" *ngIf="!insuranceAvailable()">
+    <div class="row">
       <div class="col-sm-12">
-        <div class="knx-message knx-message--hint">
-          Niets gevonden. Ga terug om je keuze aan te passen. Kom je er niet uit? Neem contact op.
-        </div>
-      </div>
-    </div>
-
-    <div class="row" *ngIf="insuranceAvailable()">
-      <div class="col-sm-12">
-        <h2>De beste verzekeringen van alle {{total}} aanbieders</h2>
-
-        <div class="knx-button-group" role="group">
-          <button
-            *ngFor="let item of orderBy"
-            class="knx-button knx-button--toggle"
-            [class.knx-button--toggle-active]="item.active"
-            (click)="changeOrderBy(item)">{{ item.label }}
-          </button>
-        </div>
 
         <div *ngIf="isLoading; else insuranceResults">
           <knx-loader [visible]="isLoading">
@@ -40,7 +22,21 @@ interface OrderItem {
           </knx-loader>
         </div>
 
+        <div *ngIf="noResult()" class="knx-message knx-message--hint">
+          Niets gevonden. Ga terug om je keuze aan te passen. Kom je er niet uit? Neem contact op.
+        </div>
+
         <ng-template #insuranceResults>
+          <h2>De beste verzekeringen van alle {{total}} aanbieders</h2>
+
+          <div class="knx-button-group" role="group">
+            <button
+              *ngFor="let item of orderBy"
+              class="knx-button knx-button--toggle"
+              [class.knx-button--toggle-active]="item.active"
+              (click)="changeOrderBy(item)">{{ item.label }}
+            </button>
+          </div>
 
           <knx-insurance-result
             *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
@@ -145,8 +141,8 @@ export class InsuranceTopListComponent implements OnInit {
     this.insuranceSelected$.emit(event);
   }
 
-  insuranceAvailable() {
-    return this.insurances && this.insurances.length > 0;
+  noResult() {
+    return (this.insurances && this.insurances.length <= 0) && !this.isLoading;
   }
 
 }

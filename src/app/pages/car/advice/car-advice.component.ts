@@ -56,7 +56,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
 
-  subscription$: any;
+  subscription$: Array<any>;
 
   // Forms
   carDetailForm: CarDetailForm;
@@ -76,6 +76,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         title: 'Expert autoverzekeringen'
       }
     }));
+    this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromRoot.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromRoot.getAssistantMessageState);
     this.insurances$ = this.getCompareResultCopy();
@@ -84,9 +85,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
     this.isCoverageLoading$ = this.store$.select(fromRoot.getCompareLoading);
 
-    this.store$.dispatch(new advice.AddAction({
-      id: cuid()
-    }));
+    // start new advice only if there is no current one
+    this.advice$.subscribe(currentAdvice => {
+        if (currentAdvice && this.address) {
+          this.store$.select(fromRoot.getProfile).subscribe(currentProfile => {
+            this.address.postcode = currentProfile.postcode;
+            this.address.number = currentProfile.number;
+          });
+
+        } else if (!currentAdvice) {
+          this.store$.dispatch(new advice.AddAction({
+            id: cuid()
+          }));
+        }
+      });
 
     this.isCoverageError$ = this.store$.select(fromRoot.getCompareError);
 
@@ -126,7 +138,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.carDetailForm = new CarDetailForm(formBuilder);
 
     this.carExtrasForm = new CarExtrasForm(formBuilder);
-    this.subscription$ = this.carExtrasForm.formGroup.valueChanges
+    this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
       .subscribe(data => {
         if (this.currentStep === 1) {
@@ -137,14 +149,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             legal_aid: data.extraOptionsLegal || 'LAN',
             road_assistance: data.roadAssistance || 'RANO',
             kilometers_per_year: data.kmPerYear || 'KMR3',
-            own_risk: data.ownRisk || 0,
+            own_risk: +data.ownRisk || 0,
             insurance_id: ''
           };
           // this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
           this.store$.dispatch(new advice.UpdateAction(compareObj));
         }
       });
-    this.subscription$ = this.store$.select(fromRoot.getSelectedAdvice)
+    this.store$.select(fromRoot.getSelectedAdvice)
       .subscribe(advice => {
         if (advice.coverage) {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
@@ -201,7 +213,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription$.unsubscribe();
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
   submitDetailForm(): Observable<any> {
@@ -237,7 +249,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       house_number: this.address.number,
       country: 'NL',
       kilometers_per_year: detailForm.value.kmPerYear,
-      own_risk: detailForm.value.ownRisk,
+      own_risk: +detailForm.value.ownRisk,
       cover_occupants: false,
       legal_aid: 'LAN',
       no_claim_protection: false,
@@ -263,12 +275,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   startBuyFlow(): Observable<any> {
-    this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
+    this.subscription$.push(this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
       id => {
         this.store$.dispatch(new RouterActions.Go({
           path: ['/car/insurance', { adviceId: id }],
         }));
-      });
+      }));
     return;
   }
 
@@ -308,7 +320,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   getCoverages(event) {
     if (this.car) {
       this.store$.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
-      FormUtils.scrollToForm('form');
     }
   }
 
