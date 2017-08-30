@@ -145,8 +145,7 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
               'Dan kun je die natuurlijk negeren.'
             },
             {
-              label: '<a href="' + this.selectedInsurance.terms_conditions_pdf_url + '" class="knx-button--util">' +
-              'Voorwaarden Autoverzekering</a>'
+              label: `<a href="${this.selectedInsurance.terms_conditions_pdf_url}" class="knx-button--util">Voorwaarden Autoverzekering</a>`
             }
           ]
         }
@@ -160,4 +159,3 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
     }
   }
 }
-
