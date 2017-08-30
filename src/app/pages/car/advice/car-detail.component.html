@@ -101,11 +101,15 @@
     <div class="col-sm-12">
       <div class="car-form__coverages">
 
+        <div class="knx-message knx-message--error" *ngIf="isCoverageError">
+          Sorry there was an error loading the coverage
+        </div>
+
         <knx-loader [visible]="isCoverageLoading">
           Bezig met ophalen van dekkingsopties...
         </knx-loader>
 
-        <ng-container *ngIf="coverages && !isCoverageLoading">
+        <ng-container *ngIf="coverages && !isCoverageLoading && !isCoverageError">
           <h2>Je dekkingswensen</h2>
           <knx-price-table [items]="coverages" (onSelected)="onSelectCoverage($event)"></knx-price-table>
         </ng-container>

@@ -54,6 +54,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   isInsuranceLoading$: Observable<boolean>;
   selectedInsurance$: Observable<CarInsurance>;
   isCoverageLoading$: Observable<boolean>;
+  isCoverageError$: Observable<boolean>;
 
   subscription$: Array<any>;
 
@@ -98,6 +99,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           }));
         }
       });
+
+    this.isCoverageError$ = this.store$.select(fromRoot.getCompareError);
 
     this.currentStep = 0;
     this.formSteps = [
@@ -158,6 +161,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         if (advice.coverage) {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
         }
+      });
+    this.store$.select(fromRoot.getCarInfoError)
+      .subscribe( () => {
+        this.triggerLicenseInValid();
       });
     this.store$.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {

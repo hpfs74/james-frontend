@@ -7,6 +7,7 @@ export type Action = CarActions.All;
 export interface State {
   loading: boolean;
   loaded: boolean;
+  error: boolean;
   licenses: string[];
   info: Car[];
 }
@@ -14,6 +15,7 @@ export interface State {
 export const initialState: State = {
   loading: false,
   loaded: false,
+  error: false,
   licenses: [],
   info: []
 };
@@ -37,6 +39,12 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case CarActions.GET_INFO_FAIL: {
+      return Object.assign({}, state, {
+        error: true,
+      });
+    }
+
     default: {
       return state;
     }
@@ -45,6 +53,7 @@ export function reducer(state = initialState, action: Action): State {
 
 export const getInfo = (state: State) => state.info;
 export const getLoaded = (state: State) => state.loaded;
+export const getError = (state: State) => state.error;
 export const getCarInfo = license => {
   return createSelector(
     getCarInfo, (list) => list.get(license) || new Map()
