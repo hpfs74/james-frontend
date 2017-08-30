@@ -36,15 +36,21 @@ export class CarDetailComponent implements OnInit {
       }));
 
       // textmask decode doesn't work correctly with patchValue, so use setValue on control instead
-      this.form.formGroup.get('birthDate').setValue = value.date_of_birth ? value.date_of_birth : null;
-
+      let dob = new Date(value.date_of_birth);
+      this.form.formGroup.get('birthDate').setValue(
+        value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
+      );
       this.form.addressForm.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
         houseNumber: value.address ? value.address.number : null,
         houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null
       }));
-      FormUtils.validateForm(this.form.formGroup);
-      FormUtils.validateForm(this.form.addressForm);
+
+      // give address-lookup component time to set AsyncValidators before validate it
+      setTimeout(() => {
+        FormUtils.validateForm(this.form.formGroup);
+        FormUtils.validateForm(this.form.addressForm);
+      });
     }
   }
 
