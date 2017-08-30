@@ -30,7 +30,7 @@ export class CarDetailComponent implements OnInit {
         licensePlate: value.license || null,
         claimFreeYears: value.claim_free_years || null,
         houseHold: value.household_status || null,
-        loan: value.active_loan ? 'ja' : 'nee',
+        loan: !!value.active_loan,
         gender: value.gender ? value.gender.toLowerCase() : null,
         coverage: value.coverage || null,
       }));

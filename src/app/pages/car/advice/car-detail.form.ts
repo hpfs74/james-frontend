@@ -48,7 +48,7 @@ export class CarDetailForm extends BaseForm {
         ]
       )],
       houseHold: [null, Validators.required],
-      loan: [null, Validators.required],
+      loan: [false, Validators.required],
       gender: [null, Validators.required],
       coverage: [null, Validators.required]
     });
@@ -100,11 +100,11 @@ export class CarDetailForm extends BaseForm {
           items: [
             {
               label: 'Ja',
-              value: 'ja'
+              value: true
             },
             {
               label: 'Nee',
-              value: 'nee'
+              value: false
             }
           ]
         }
