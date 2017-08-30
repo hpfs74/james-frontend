@@ -7,7 +7,7 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import { DashboardComponent } from './dashboard.component';
-import { AuthService, ProfileService, AuthHttp, AssistantService } from '../../services/';
+import { AuthService, ProfileService, AuthHttp, AssistantService, LocalStorageService } from '../../services/';
 
 describe('Component: Dashboard', () => {
   let comp: DashboardComponent;
@@ -38,6 +38,7 @@ describe('Component: Dashboard', () => {
         AuthService,
         AssistantService,
         ProfileService,
+        LocalStorageService,
         {provide: Router, useValue: routerStub},
         {
           deps: [
@@ -52,11 +53,7 @@ describe('Component: Dashboard', () => {
       ],
       imports: [
         RouterTestingModule,
-        // StoreModule.provideStore({
-        //   profile: {
-        //     firstname: 'test'
-        //   }
-        // })
+        StoreModule.forRoot({})
       ],
       declarations: [DashboardComponent],
       schemas: [NO_ERRORS_SCHEMA]

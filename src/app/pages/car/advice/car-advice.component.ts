@@ -19,7 +19,6 @@ import * as coverage from '../../../actions/coverage';
 
 import { ContentService } from '../../../content.service';
 import { InsuranceService } from '../../../services/insurance.service';
-import { AssistantService } from '../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { CarService } from '../car.service';
 import { Car, Price, CarCompare, Profile, Address } from '../../../models';
@@ -46,7 +45,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   insurances: Observable<Array<CarInsurance>>;
   car: Car;
   address: Address;
-  chatConfig: AssistantConfig;
+  chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
   // State of the advice forms data
@@ -65,28 +64,31 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private store: Store<fromRoot.State>,
+    private store$: Store<fromRoot.State>,
     private contentService: ContentService,
-    private assistantService: AssistantService,
     private carService: CarService,
     private insuranceService: InsuranceService
   ) { }
 
   ngOnInit() {
-    this.chatConfig = this.assistantService.config;
-    this.chatConfig.avatar.title = 'Expert autoverzekeringen';
-    this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
+    this.store$.dispatch(new assistant.UpdateConfigAction({
+      avatar: {
+        title: 'Expert autoverzekeringen'
+      }
+    }));
+    this.chatConfig$ = this.store$.select(fromRoot.getAssistantConfig);
+    this.chatMessages$ = this.store$.select(fromRoot.getAssistantMessageState);
     this.insurances$ = this.getCompareResultCopy();
-    this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
-    this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
-    this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
-    this.isCoverageLoading$ = this.store.select(fromRoot.getCompareLoading);
+    this.isInsuranceLoading$ = this.store$.select(fromRoot.getCompareLoading);
+    this.selectedInsurance$ = this.store$.select(fromRoot.getSelectedInsurance);
+    this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
+    this.isCoverageLoading$ = this.store$.select(fromRoot.getCompareLoading);
 
-    this.isCoverageError$ = this.store.select(fromRoot.getCompareError);
-
-    this.store.dispatch(new advice.AddAction({
+    this.store$.dispatch(new advice.AddAction({
       id: cuid()
     }));
+
+    this.isCoverageError$ = this.store$.select(fromRoot.getCompareError);
 
     this.currentStep = 0;
     this.formSteps = [
@@ -96,8 +98,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         hideBackButton: true,
         onShowStep: () => {
           FormUtils.scrollToForm('form');
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.welcome));
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
         },
         onBeforeNext: this.submitDetailForm.bind(this)
       },
@@ -106,9 +107,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         backButtonLabel: 'Terug',
         hideNextButton: true,
         onShowStep: () => {
-          // FormUtils.scrollToForm('.knx-insurance-toplist');
-          // this.store.dispatch(new assistant.ClearAction);
-          // this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.advice.result));
+          // this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.result', clear: true }));
         }
       },
       {
@@ -117,9 +116,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         nextButtonLabel: 'Verzekering aanvragen',
         onShowStep: () => {
           FormUtils.scrollToForm('knx-insurance-review');
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.review.title));
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.review.list));
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title', clear: true }));
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.list' }));
         },
         onBeforeNext: this.startBuyFlow.bind(this)
       }
@@ -143,34 +141,37 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             insurance_id: ''
           };
           // this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
-          this.store.dispatch(new advice.UpdateAction(compareObj));
+          this.store$.dispatch(new advice.UpdateAction(compareObj));
         }
       });
-    this.subscription$ = this.store.select(fromRoot.getSelectedAdvice)
+    this.subscription$ = this.store$.select(fromRoot.getSelectedAdvice)
       .subscribe(advice => {
         if (advice.coverage) {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
         }
       });
-
-    this.store.select(fromRoot.getCarInfoError)
+    this.store$.select(fromRoot.getCarInfoError)
       .subscribe( () => {
         this.triggerLicenseInValid();
       });
-
-    this.store.select(fromRoot.getCarInfoLoaded)
+    this.store$.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {
         if (isLoaded) {
-          return this.store.select(fromRoot.getCarInfo);
+          return this.store$.select(fromRoot.getCarInfo);
         } else {
           return Observable.empty();
         }
-      }).subscribe((res: Array<Car>) => {
+      })
+      .take(1)
+      .subscribe((res: Array<Car>) => {
         const lastFound = res.slice(-1)[0];
         if (lastFound && lastFound.license) {
           this.car = lastFound;
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.niceCar(lastFound)));
+          this.store$.dispatch(new assistant.AddCannedMessage({
+            key: 'car.info.niceCar',
+            value: lastFound,
+            clear: true
+          }));
         } else {
           // Car not found in RDC
           const c = this.carDetailForm.formGroup.get('licensePlate');
@@ -182,15 +183,19 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       });
 
     // Coverage subscription
-    this.store.select(fromRoot.getCoverage)
+    this.store$.select(fromRoot.getCoverage)
       .filter(coverage => Object.keys(coverage).length > 0)
+      .take(1)
       .subscribe(coverageAdvice => {
         this.coverages = this.contentService.getContentObject().car.coverages;
         const coverage = this.coverages.find(price => price.id === coverageAdvice.recommended_value);
         if (coverage) {
           coverage.highlight = true;
-          this.store.dispatch(new assistant.ClearAction);
-          this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.info.coverage.advice(coverage)));
+          this.store$.dispatch(new assistant.AddCannedMessage({
+            key: 'car.info.coverage.advice',
+            value: coverage,
+            clear: true
+          }));
         }
     });
   }
@@ -214,7 +219,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    this.store.dispatch(new profile.UpdateAction({
+    this.store$.dispatch(new profile.UpdateAction({
       gender: detailForm.value.gender,
       date_of_birth: detailForm.value.birthDate
     }));
@@ -241,16 +246,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     };
 
     // add address in format for profile
-    this.store.dispatch(new advice.UpdateAction(Object.assign({}, compareObj, {
+    this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compareObj, {
       address: this.address
     })));
 
-    return this.store.select(fromRoot.getSelectedAdvice)
-      .map(options => this.store.dispatch(new compare.LoadCarAction(options)));
+    return this.store$.select(fromRoot.getSelectedAdvice)
+      .map(options => this.store$.dispatch(new compare.LoadCarAction(options)));
   }
 
   onSelectPremium(insurance) {
-    this.store.dispatch(new advice.UpdateAction({ insurance: insurance }));
+    this.store$.dispatch(new advice.UpdateAction({ insurance: insurance }));
   }
 
   onStepChange(stepIndex) {
@@ -258,9 +263,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   startBuyFlow(): Observable<any> {
-    this.store.select(fromRoot.getSelectedAdviceId).subscribe(
+    this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
       id => {
-        this.store.dispatch(new RouterActions.Go({
+        this.store$.dispatch(new RouterActions.Go({
           path: ['/car/insurance', { adviceId: id }],
         }));
       });
@@ -273,14 +278,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   showHelperText(key) {
-    const messageToShow = this.chatConfig.car.info[key];
-    this.store.dispatch(new assistant.ClearAction);
-    this.store.dispatch(new assistant.AddMessageAction(messageToShow));
+    this.store$.dispatch(new assistant.AddCannedMessage({
+      key: 'car.info.' + key,
+      value: coverage,
+      clear: true
+    }));
   }
 
   getCarInfo(licensePlate: string) {
     if (licensePlate) {
-      this.store.dispatch(new car.GetInfoAction(licensePlate));
+      this.store$.dispatch(new car.GetInfoAction(licensePlate));
     }
   }
 
@@ -288,12 +295,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     const c = this.carDetailForm.formGroup.get('licensePlate');
     c.setErrors({ 'licensePlateRDC': true });
     c.markAsTouched();
-    this.store.dispatch(new assistant.ClearAction);
-    this.store.dispatch(new assistant.AddMessageAction(this.chatConfig.car.error.carNotFound));
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
   }
 
   onAddressChange(address: Address) {
-    this.store.dispatch(new profile.UpdateAction(address));
+    this.store$.dispatch(new profile.UpdateAction(address));
 
     // TODO: not in ngrx form should be this.store.select('address') something
     this.address = address;
@@ -301,7 +307,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   getCoverages(event) {
     if (this.car) {
-      this.store.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
+      this.store$.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
       FormUtils.scrollToForm('form');
     }
   }
@@ -309,7 +315,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   private getCompareResultCopy(): Observable<CarInsurance[]> {
     // This is needed because the ngrx-datatable modifies the result to add an $$index to each
     // result item and modifies the source array order when sorting
-    return this.store.select(fromRoot.getCompareResult)
+    return this.store$.select(fromRoot.getCompareResult)
       .map(obs => {
         return obs.map(v => JSON.parse(JSON.stringify(v)));
       });

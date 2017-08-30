@@ -17,6 +17,7 @@ import { ProfileService } from '../../services/profile.service';
 import { CarService } from '../car/car.service';
 
 // Effects
+import { AssistantEffects } from '../../effects/assistant';
 import { ProfileEffects } from '../../effects/profile';
 import { CompareEffects } from '../../effects/compare';
 import { CoverageEffects } from '../../effects/coverage';
@@ -38,6 +39,7 @@ import { NavbarComponent } from '../../components/knx-navigation';
     SharedModule,
     ChatStreamModule,
     EffectsModule.forFeature([
+      AssistantEffects,
       ProfileEffects,
       CompareEffects,
       CoverageEffects,

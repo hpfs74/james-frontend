@@ -180,6 +180,7 @@ export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowS
  */
 export const getAsisstantState = (state: State) => state.assistant;
 export const getAssistantMessageState = createSelector(getAsisstantState, fromAssistant.getMessages);
+export const getAssistantConfig = createSelector(getAsisstantState, fromAssistant.getConfig);
 
 /**
  * Compare Insurance Reducers

@@ -51,7 +51,7 @@
     </div>
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream
-        [options]="chatConfig"
+        [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async">
       </knx-chat-stream>
     </div>

@@ -3,26 +3,33 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/interval';
 
 import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../utils/auth.utils';
 import { Profile, Authenticate } from '../models';
+import { LocalStorageService } from './localstorage.service';
 
 @Injectable()
 export class AuthService {
   redirectUrl: string;
-  private loggedIn = false;
   private keyUrl: string;
   private profileUrl: string;
   private tokenUrl: string;
 
-  constructor(private http: Http) {
-    this.loggedIn = !!localStorage.getItem('auth_token');
+  private tokenStream: Observable<AuthToken>;
+  private refreshSubscription: any;
+
+  constructor(private http: Http, private localStorageService: LocalStorageService) {
     this.keyUrl = environment.james.key;
     this.profileUrl = environment.james.profile;
     this.tokenUrl = environment.james.token;
     this.redirectUrl = window.location.origin;
+
+    this.tokenStream = new Observable<AuthToken>((obs: any) => {
+      obs.next(this.localStorageService.getToken());
+    });
   }
 
   /**
@@ -33,11 +40,8 @@ export class AuthService {
   public logout(): Observable<AuthToken> {
     return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
       .map(x => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('token');
-        localStorage.removeItem('nicci_key');
-        localStorage.removeItem('nicci_id');
-
+        this.localStorageService.clearToken();
+        this.unscheduleRefresh();
         return x.json();
       });
   }
@@ -63,7 +67,6 @@ export class AuthService {
   }
 
   public refreshToken(refreshToken: string): Observable<AuthToken> {
-
     return this.getNicciKey()
       .flatMap((nicci) => {
         const headers = this.getBasicHeaderWithKey(nicci);
@@ -71,7 +74,6 @@ export class AuthService {
           grant_type: 'refresh_token',
           refresh_token: refreshToken
         };
-
         return this.http.post(this.tokenUrl, refreshTokenBody, { headers })
           .map(data => data.json());
       });
@@ -81,7 +83,6 @@ export class AuthService {
     this.getNicciKey()
       .flatMap((nicci: AuthKey) => {
         const headers = this.getBasicHeaderWithKey(nicci);
-
         return this.http.post(this.keyUrl, {email}, {headers})
           .map((res: Response) => res.json());
       });
@@ -89,16 +90,41 @@ export class AuthService {
 
   public isLoggedIn() {
     return AuthUtils.tokenNotExpired('token');
-    // return localStorage.getItem('access_token') !== null;
   }
 
   public resendActivation(email) {
     throw new Error('Not implemented yet');
   }
 
-  public setTokenExpirationDate(token: string): Object {
-    return AuthUtils.setTokenExpirationDate(token);
+  public scheduleRefresh() {
+    // If the user is authenticated, use the token stream and flatMap the token
+    let source = this.tokenStream.flatMap(
+      token => {
+        // The delay to generate in this case is the difference
+        // between the expiry time and the issued at time
+        let tokenIat = token.iat;
+        let tokenExp = token.expiration_time;
+        let iat = new Date(0);
+        let exp = new Date(0);
+
+        let delay = (exp.setUTCSeconds(tokenExp) - iat.setUTCSeconds(tokenIat));
+
+        return Observable.interval(delay);
+      });
+
+    this.refreshSubscription = source.subscribe(() => {
+      let refreshToken = this.localStorageService.getRefreshToken();
+      this.refreshToken(refreshToken);
+    });
   }
+
+  public unscheduleRefresh() {
+    // Unsubscribe fromt the refresh
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+  }
+
   /**
    *
    * @return {Observable<R>}

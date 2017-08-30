@@ -2,13 +2,14 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { StoreModule, Store } from '@ngrx/store';
 
 import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { AddressLookupService } from './address-lookup.service';
-import { AuthHttp } from '../../services';
+import { AuthHttp, LocalStorageService } from '../../services';
 import { Address } from '../../models/address';
 
 
@@ -27,10 +28,12 @@ describe('Service: AddressLookup', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [StoreModule.forRoot({})],
       providers: [
         BaseRequestOptions,
         MockBackend,
         AddressLookupService,
+        LocalStorageService,
         {
           deps: [
             MockBackend,

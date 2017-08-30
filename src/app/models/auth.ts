@@ -4,6 +4,7 @@ export class AuthToken {
   expires_in: number;
   refresh_token: string;
   expiration_time?: number;
+  iat?: number;
 }
 
 export class AuthKey {
@@ -17,6 +18,3 @@ export interface Authenticate {
   password: string;
   scope?: string;
 }
-
-export const TOKEN_NAME = 'access_token';
-export const TOKEN_OBJECT_NAME = 'token';

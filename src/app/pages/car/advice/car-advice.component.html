@@ -43,7 +43,7 @@
 
     <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>
       <knx-chat-stream
-        [options]="chatConfig"
+        [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async"
         [formGroup]="carExtrasForm.formGroup">
 

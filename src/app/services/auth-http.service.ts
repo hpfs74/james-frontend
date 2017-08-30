@@ -3,6 +3,7 @@ import {
   Http, Headers, RequestOptions, RequestOptionsArgs,
   Response, RequestMethod, Request, Connection, ConnectionBackend
 } from '@angular/http';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -11,27 +12,29 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/retry';
 
+import * as fromRoot from '../reducers';
+import * as Auth from '../actions/auth';
+
 import { tokenNotExpired } from '../utils/auth.utils';
 import { AuthService } from './auth.service';
-import { TOKEN_NAME, TOKEN_OBJECT_NAME } from '../models/auth';
+import { AuthToken } from '../models/auth';
+import { LocalStorageService } from './localstorage.service';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
 import * as AuthUtils from '../utils/auth.utils';
 
-export enum Action { QueryStart, QueryStop }
+export class AuthHttpError extends Error {}
 
 @Injectable()
 export class AuthHttp {
-  process: EventEmitter<any> = new EventEmitter<any>();
-  authFailed: EventEmitter<any> = new EventEmitter<any>();
   config: any;
-
-  private expireTime: Date;
 
   constructor(private http: Http,
     private authService: AuthService,
     private loaderService: LoaderService,
-    private defOpts?: RequestOptions) {
-
+    private localStorageService: LocalStorageService,
+    private store: Store<fromRoot.State>,
+    private defOpts?: RequestOptions,
+  ) {
     this.config = {
       globalHeaders: [{ 'Content-Type': 'application/json' }]
     };
@@ -65,14 +68,17 @@ export class AuthHttp {
     return this.requestHelper({ body: '', method: RequestMethod.Options, url: url }, options);
   }
 
-  public requestWithToken(req: Request, token: string): Observable<Response> {
-    // TODO: check expired check here
-    //     return new Observable<Response>((obs: any) => {
-    //       obs.error(new AuthHttpError('No JWT present or has expired'));
-    //     });
-    req.headers.set('Content-Type', 'application/json');
-    req.headers.set('Authorization', 'Bearer ' + token);
-    req.headers.set('Cache-Control', 'no-cache, no-store, max-age=0');
+  public requestWithToken(req: Request): Observable<Response> {
+    if (!AuthUtils.tokenNotExpired('token')) {
+      return new Observable<Response>((obs: any) => {
+        obs.error(new AuthHttpError('No JWT present or has expired'));
+      });
+    } else {
+      let token: string = this.localStorageService.getAccessToken();
+      req.headers.set('Content-Type', 'application/json');
+      req.headers.set('Authorization', 'Bearer ' + token);
+      req.headers.set('Cache-Control', 'no-cache, no-store, max-age=0');
+    }
 
     return this.http.request(req);
   }
@@ -90,40 +96,24 @@ export class AuthHttp {
 
   public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     const req: Request = url as Request;
-    let token: string = localStorage.getItem(TOKEN_NAME);
+    return this.requestWithToken(req);
 
-    if (token && !AuthUtils.tokenNotExpired('token')) {
-      const tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
-      this.authService.refreshToken(tokenObject.refresh_token)
-        .flatMap((data) => {
-
-          // Update local storage
-          token = data.access_token;
-          localStorage.setItem(TOKEN_NAME, token);
-          localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(data));
-
-          return this.requestWithToken(req, token);
-        });
-    } else {
-      return this.requestWithToken(req, token)
-        .catch((error) => {
-          // Try to get refresh token on not-authorized error
-          if (error.status === 401 || error.status === 403) {
-            const tokenObject = JSON.parse(localStorage.getItem(TOKEN_OBJECT_NAME));
-            return this.authService.refreshToken(tokenObject.refresh_token)
-              .flatMap((data) => {
-                // Retry request with new token
-                if (data) {
-                  token = data.access_token;
-                  return this.http.request(req, token);
-                }
-              })
-              .retry(3);
-          } else {
-            Observable.throw(error);
-          }
-        });
-    }
+    // if (AuthUtils.tokenNotExpired('token')) {
+    //   // Token is valid
+    //   return this.requestWithToken(req, token.access_token)
+    //     .catch((error) => {
+    //       // Try to get refresh token on not-authorized error
+    //       if (error.status === 401 || error.status === 403) {
+    //         console.log('dispatch refreshtoken!');
+    //         // this.store.dispatch(new Auth.RefreshToken(token.refresh_token));
+    //       }
+    //     });
+    // } else if (token) {
+    //   // There is a token but it's expired, try to refresh
+    //   return this.refreshToken(req, token.access_token);
+    // } else {
+    //   // Logout
+    // }
   }
 
   private mergeOptions(providedOpts: RequestOptionsArgs, defaultOpts?: RequestOptions) {

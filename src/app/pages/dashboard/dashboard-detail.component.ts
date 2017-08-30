@@ -7,8 +7,6 @@ import * as fromRoot from '../../reducers';
 import * as profile from '../../actions/profile';
 import * as assistant from '../../actions/assistant';
 
-import { AssistantService } from '../../services/assistant.service';
-import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
 import { AssistantConfig } from './../../models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../models';
@@ -33,28 +31,35 @@ import { insuranceTypes } from './../../models/';
 })
 export class DashboardDetailComponent implements OnInit {
   insuranceType: string;
-  chatConfig: AssistantConfig;
 
+  chatConfig$: Observable<AssistantConfig>;
   profile$: Observable<Profile>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
   constructor(
     private router: Router,
-    private store: Store<fromRoot.State>,
-    private assistantService: AssistantService,
+    private store$: Store<fromRoot.State>,
     private route: ActivatedRoute
   ) {
-    this.chatConfig = assistantService.config;
-    this.chatConfig.avatar.title = 'Expert verzekeringen';
+    this.chatConfig$ = store$.select(fromRoot.getAssistantConfig);
+    this.chatMessages$ = store$.select(fromRoot.getAssistantMessageState);
+    this.store$.dispatch(new assistant.UpdateConfigAction({
+      avatar: {
+        title: 'Expert verzekeringen'
+      }
+    }));
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.insuranceType = params['type'];
+      const insuranceType = this.getInsuranceLabel(this.insuranceType);
 
-      const message = this.chatConfig.dashboard.detail(this.getInsuranceLabel(this.insuranceType));
-      this.store.dispatch(new assistant.ClearAction);
-      this.store.dispatch(new assistant.AddMessageAction(message));
+      this.store$.dispatch(new assistant.AddCannedMessage({
+        key: 'dashboard.detail',
+        value: insuranceType,
+        clear: true
+      }));
     });
   }
 
