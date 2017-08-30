@@ -77,7 +77,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.chatConfig.avatar.title = 'Expert autoverzekeringen';
     this.chatMessages$ = this.store.select(fromRoot.getAssistantMessageState);
     this.insurances$ = this.getCompareResultCopy();
-    this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading); // TODO: SAME AS COVERAGE?
+    this.isInsuranceLoading$ = this.store.select(fromRoot.getCompareLoading);
     this.selectedInsurance$ = this.store.select(fromRoot.getSelectedInsurance);
     this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
     this.isCoverageLoading$ = this.store.select(fromRoot.getCompareLoading);
@@ -165,9 +165,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           return Observable.empty();
         }
       }).subscribe((res: Array<Car>) => {
-
         const lastFound = res.slice(-1)[0];
-
         if (lastFound && lastFound.license) {
           this.car = lastFound;
           this.store.dispatch(new assistant.ClearAction);
@@ -303,6 +301,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   getCoverages(event) {
     if (this.car) {
       this.store.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
+      FormUtils.scrollToForm('form');
     }
   }
 
