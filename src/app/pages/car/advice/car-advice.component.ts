@@ -301,7 +301,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   getCoverages(event) {
     if (this.car) {
       this.store$.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
-      FormUtils.scrollToForm('form');
     }
   }
 
