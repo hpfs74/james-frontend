@@ -66,15 +66,17 @@ import { InsuranceAdvice, Insurer } from '../../models';
             </div>
 
             <button role="button" class="knx-button knx-button--fullwidth"
-                    [ngClass]="{'knx-button--primary': insurance.supported, 'knx-button--secondary': !insurance.supported}"
-                    [disabled]="disableButton"
-                    (click)="select($event)">
+              [ngClass]="{
+                'knx-button--primary': insurance.supported,
+                'knx-button--secondary': !insurance.supported,
+                'knx-button--extra-padding': insurance.supported}"
+              [disabled]="disableButton"
+              (click)="select($event)">
               Bekijk
+              <span *ngIf="insurance.supported" class="knx-button__extra" (click)="select($event)">
+                via Knab
+              </span>
             </button>
-
-            <span *ngIf="insurance.supported" class="knx-button__extra" (click)="select($event)">
-              via Knab
-            </span>
           </div>
         </div>
       </div>
