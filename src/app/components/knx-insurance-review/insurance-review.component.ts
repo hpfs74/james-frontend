@@ -154,7 +154,7 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
 
       this.selectedInsurance.documents.forEach((document) => {
         this.sections[this.sections.length - 1].fields.push({
-          label: '<a href="' + document.url + '" class="knx-button--util">' + document.name + '</a>'
+          label: `<a href="${document.url}" class="knx-button--util">${document.name}</a>`
         });
       });
     }

@@ -82,9 +82,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.advice$ = this.store.select(fromRoot.getSelectedAdvice);
     this.isCoverageLoading$ = this.store.select(fromRoot.getCompareLoading);
 
-    this.store.dispatch(new advice.AddAction({
-      id: cuid()
-    }));
+    // start new advice only if there is no current one
+    this.advice$.subscribe(currentAdvice => {
+        if (currentAdvice && this.address) {
+          this.store.select(fromRoot.getProfile).subscribe(currentProfile => {
+            this.address.postcode = currentProfile.postcode;
+            this.address.number = currentProfile.number;
+          });
+
+        } else if (!currentAdvice) {
+          this.store.dispatch(new advice.AddAction({
+            id: cuid()
+          }));
+        }
+      });
 
     this.currentStep = 0;
     this.formSteps = [
