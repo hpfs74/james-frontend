@@ -12,67 +12,67 @@ interface OrderItem {
   selector: 'knx-insurance-toplist',
   template: `
   <div class="knx-insurance-toplist">
-    <div class="row" *ngIf="!insuranceAvailable() && !isLoading">
+
+    <div class="row">
       <div class="col-sm-12">
-        <div class="knx-message knx-message--hint">
+
+        <div *ngIf="isLoading; else insuranceResults">
+          <knx-loader [visible]="isLoading">
+            Bezig met ophalen van verzekeringen...
+          </knx-loader>
+        </div>
+
+        <div *ngIf="noResult()" class="knx-message knx-message--hint">
           Niets gevonden. Ga terug om je keuze aan te passen. Kom je er niet uit? Neem contact op.
         </div>
-      </div>
-    </div>
 
-    <div *ngIf="isLoading">
-      <knx-loader [visible]="isLoading">
-        Bezig met ophalen van verzekeringen...
-      </knx-loader>
-    </div>
+        <ng-template #insuranceResults>
+          <h2>De beste verzekeringen van alle {{total}} aanbieders</h2>
 
-    <div class="row" *ngIf="insuranceAvailable() && !isLoading">
-      <div class="col-sm-12">
-        <h2>De beste verzekeringen van alle {{total}} aanbieders</h2>
+          <div class="knx-button-group" role="group">
+            <button
+              *ngFor="let item of orderBy"
+              class="knx-button knx-button--toggle"
+              [class.knx-button--toggle-active]="item.active"
+              (click)="changeOrderBy(item)">{{ item.label }}
+            </button>
+          </div>
 
-        <div class="knx-button-group" role="group">
-          <button
-            *ngFor="let item of orderBy"
-            class="knx-button knx-button--toggle"
-            [class.knx-button--toggle-active]="item.active"
-            (click)="changeOrderBy(item)">{{ item.label }}
+          <knx-insurance-result
+            *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
+            [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)" [disableButton]="disableInsuranceBuy">
+          </knx-insurance-result>
+
+          <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showAll()">
+            Toon all verzekeringen
           </button>
-        </div>
 
-        <knx-insurance-result
-          *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
-          [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)" [disableButton]="disableInsuranceBuy">
-        </knx-insurance-result>
-
-        <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showAll()">
-          Toon all verzekeringen
-        </button>
-
-        <div class="knx-insurance-toplist__info">
-          <knx-info infoLabel="Hoe komen we tot deze resultaten?" class="knx-info">
-            <div class="knx-info__content">
-              <div class="knx-message knx-message--arrow-top">
-                <div class="knx-message__content">
-                  <p>
-                    Op basis van de informatie die jij over jezelf gaf, gaat onze slimme technologie voor je werken.
-                    We zoeken bij meer dan 30 aanbieders en stellen een overzicht samen.
-                    Daarbij kijken we niet alleen naar prijs. Want geode polisvoorwaarden en een dekking die past bij
-                    jouw persoonlijke situatie zijn ook belangrijk.
-                  </p>
-                  <p>
-                    Profielscore en prijs-kwaliteit
-                    In het overzicht zie je een profielscore en prijs-kwaliteitscore. De verzekering met de hoogste
-                    profielscore - de verzekering die het best bij jou past – staat vooraan. Verzekeringen
-                    die je via Knab afsluit, regel je direct tegen een vast lag percentage.
-                    Verzekeringen die je niet via ons kunt afsluiten, laten we toch zien. We verwijzen je dan naar de
-                    website van de verzekeraar. Zo heb je altijd een compleet beeld van wat er te koop is.
-                    Wel zo eerlijk natuurlijk.
-                  </p>
+          <div class="knx-insurance-toplist__info">
+            <knx-info infoLabel="Hoe komen we tot deze resultaten?" class="knx-info">
+              <div class="knx-info__content">
+                <div class="knx-message knx-message--arrow-top">
+                  <div class="knx-message__content">
+                    <p>
+                      Op basis van de informatie die jij over jezelf gaf, gaat onze slimme technologie voor je werken.
+                      We zoeken bij meer dan 30 aanbieders en stellen een overzicht samen.
+                      Daarbij kijken we niet alleen naar prijs. Want geode polisvoorwaarden en een dekking die past bij
+                      jouw persoonlijke situatie zijn ook belangrijk.
+                    </p>
+                    <p>
+                      Profielscore en prijs-kwaliteit
+                      In het overzicht zie je een profielscore en prijs-kwaliteitscore. De verzekering met de hoogste
+                      profielscore - de verzekering die het best bij jou past – staat vooraan. Verzekeringen
+                      die je via Knab afsluit, regel je direct tegen een vast lag percentage.
+                      Verzekeringen die je niet via ons kunt afsluiten, laten we toch zien. We verwijzen je dan naar de
+                      website van de verzekeraar. Zo heb je altijd een compleet beeld van wat er te koop is.
+                      Wel zo eerlijk natuurlijk.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </knx-info>
-        </div>
+            </knx-info>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -141,8 +141,8 @@ export class InsuranceTopListComponent implements OnInit {
     this.insuranceSelected$.emit(event);
   }
 
-  insuranceAvailable() {
-    return this.insurances && this.insurances.length > 0;
+  noResult() {
+    return (this.insurances && this.insurances.length <= 0) && !this.isLoading;
   }
 
 }
