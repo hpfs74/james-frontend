@@ -7,10 +7,13 @@ export const LOGOUT = '[Auth] Logout';
 export const LOGIN_SUCCESS = '[Auth] Login Success';
 export const LOGIN_FAILURE = '[Auth] Login Failure';
 export const LOGIN_REDIRECT = '[Auth] Login Redirect';
+export const LOGIN_EXPIRED = '[Auth] Login Expired';
 
 export const REFRESH_TOKEN = '[Auth] Refresh Token';
 export const REFRESH_SUCCESS = '[Auth] Refresh Token Success';
 export const REFRESH_FAILURE = '[Auth] Refresh Token Failure';
+
+export const SCHEDULE_TOKEN_REFRESH = '[Auth] Schedule Token Refresh';
 
 // TODO: implement popup requesting to login again
 export const REQUEST_CREDENTIALS = '[Auth] Request Credentials';
@@ -37,6 +40,10 @@ export class LoginRedirect implements Action {
   readonly type = LOGIN_REDIRECT;
 }
 
+export class LoginExpired implements Action {
+  readonly type = LOGIN_EXPIRED;
+}
+
 export class Logout implements Action {
   readonly type = LOGOUT;
 }
@@ -59,6 +66,12 @@ export class RefreshTokenSuccess implements Action {
   constructor(public payload: any) { }
 }
 
+export class ScheduleTokenRefresh implements Action {
+  readonly type = SCHEDULE_TOKEN_REFRESH;
+
+  constructor(public payload: any) { }
+}
+
 export class RequestCredentials implements Action {
   readonly type = REQUEST_CREDENTIALS;
 }
@@ -69,4 +82,8 @@ export type Actions =
   | LoginFailure
   | LoginRedirect
   | Logout
+  | RefreshToken
+  | RefreshTokenFailure
+  | RefreshTokenSuccess
+  | ScheduleTokenRefresh
   | RequestCredentials;

@@ -75,6 +75,7 @@ export class AddressLookupComponent implements AfterViewChecked {
               return resolve(isValid ? null : { address: true });
             }, err => {
               isValid = false;
+              this.address = null;
               return resolve({
                 address: true
               });
