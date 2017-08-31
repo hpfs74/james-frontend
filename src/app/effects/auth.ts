@@ -22,22 +22,6 @@ import { AuthToken } from '../models/auth';
 
 @Injectable()
 export class AuthEffects {
-  @Effect({ dispatch: false })
-  init$: Observable<any> = defer(() => {
-    if (this.authService.isLoggedIn()) {
-      // Token is not expired
-      let token: AuthToken = this.localStorageService.getToken();
-      if (token !== null && token.access_token) {
-        this.store$.dispatch(new Auth.LoginSuccess({ token: token }));
-        this.router.navigate(['/']);
-      } else {
-        this.store$.dispatch(new Auth.LoginRedirect());
-      }
-    } else {
-      // Token is expired
-      this.localStorageService.clearToken();
-    }
-  });
 
   @Effect()
   login$ = this.actions$
@@ -97,11 +81,12 @@ export class AuthEffects {
           let exp = new Date(0);
 
           // for testing / 100000 to get seconds
-          let delay = (exp.setUTCSeconds(tokenExp) - iat.setUTCSeconds(tokenIat)) / 100000 /*1000*/;
+          let delay = (exp.setUTCSeconds(tokenExp) - iat.setUTCSeconds(tokenIat)) / 1000;
           return of(new Auth.RefreshToken(token.refresh_token)).delay(delay);
         })
-    );
+  );
 
+  // TODO: catch any failed http requests
   @Effect()
   refreshToken$ = this.actions$
     .ofType(Auth.REFRESH_TOKEN)
@@ -118,6 +103,25 @@ export class AuthEffects {
         }
       }))
     .catch(error => of(new Auth.RefreshTokenFailure(error)));
+
+    // NOTE: the order of the init effect needs to be preserved as last
+    // see: https://github.com/ngrx/platform/issues/246
+    @Effect()
+    init$: Observable<Action> = defer(() => {
+      if (this.authService.isLoggedIn()) {
+        // Token is not expired
+        let token: AuthToken = this.localStorageService.getToken();
+        if (token !== null && token.access_token) {
+          this.store$.dispatch(new Auth.LoginSuccess({ token: token }));
+          this.store$.dispatch(new Auth.ScheduleTokenRefresh(token));
+        } else {
+          this.store$.dispatch(new Auth.LoginRedirect());
+        }
+      } else {
+        // Token is expired
+        this.store$.dispatch(new Auth.Logout());
+      }
+    });
 
   constructor(
     private actions$: Actions,
