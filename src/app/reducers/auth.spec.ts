@@ -1,4 +1,4 @@
-import { Login, LoginSuccess, LoginFailure, LoginRedirect, Logout, RequestCredentials } from '../actions/auth';
+import { Login, LoginSuccess, LoginFailure, LoginRedirect, Logout, RefreshTokenSuccess, RequestCredentials } from '../actions/auth';
 import * as fromAuth from './auth';
 
 describe('Auth reducer', () => {
@@ -40,6 +40,26 @@ describe('Auth reducer', () => {
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, logoutAction);
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  describe('REFRESH_SUCCESS', () => {
+    it('should update the token', () => {
+      const token = {
+        access_token: 'kCJl5Wnz4q|UPpY?DV3sv:v,$Na7/iC@ajAZW=$yOEaMv*/wi&3Dg^us[Xbh5Dvg',
+        token_type: 'bearer',
+        expires_in: 1200,
+        refresh_token: 'kCJl5Wnz4q|UPpY?DV3sv:v,$Na7/iC@ajAZW=$yOEaMv*/wi&3Dg^us[Xbh5Dvg',
+      };
+      const refreshAction = new RefreshTokenSuccess(token);
+
+      const expectedResult = {
+        loggedIn: true,
+        token: token
+      };
+
+      const result = fromAuth.reducer(fromAuth.initialState, refreshAction);
       expect(result).toEqual(expectedResult);
     });
   });
