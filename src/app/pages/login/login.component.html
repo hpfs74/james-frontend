@@ -38,7 +38,7 @@
       <div class="col-md-6 offset-md-3">
         <div class="cx-message cx-message--error" *ngIf="form.formGroup.valid && errorMessage">
             <div class="cx-message__header">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</div>
-            <div class="cx-message__content">{{ errorMessage }}
+            <div class="cx-message__content"><strong>{{ errorMessage }}</strong>.
             </div>
         </div>
         <p class="knx-login__reset knx-text-center">

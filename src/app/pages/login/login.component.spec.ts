@@ -78,7 +78,7 @@ describe('Component: Login', () => {
   });
 
   it('should display a login error', () => {
-    const testError = 'Ongeldig e-mailadres of wachtwoord';
+    const testError = 'De combinatie gebruikersnaam en wachtwoord klopt niet';
     comp.errorMessage = testError;
     comp.form.formGroup.patchValue({
       email: 'test@mail.com',
