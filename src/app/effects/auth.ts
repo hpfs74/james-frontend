@@ -26,6 +26,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   init$: Observable<any> = defer(() => {
     if (this.authService.isLoggedIn()) {
+      // Token is not expired
       let token: AuthToken = this.localStorageService.getToken();
       if (token !== null && token.access_token) {
         this.store$.dispatch(new Auth.LoginSuccess({ token: token }));
@@ -33,6 +34,9 @@ export class AuthEffects {
       } else {
         this.store$.dispatch(new Auth.LoginRedirect());
       }
+    } else {
+      // Token is expired
+      this.localStorageService.clearToken();
     }
   });
 

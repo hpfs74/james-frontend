@@ -7,6 +7,7 @@ export const LOGOUT = '[Auth] Logout';
 export const LOGIN_SUCCESS = '[Auth] Login Success';
 export const LOGIN_FAILURE = '[Auth] Login Failure';
 export const LOGIN_REDIRECT = '[Auth] Login Redirect';
+export const LOGIN_EXPIRED = '[Auth] Login Expired';
 
 export const REFRESH_TOKEN = '[Auth] Refresh Token';
 export const REFRESH_SUCCESS = '[Auth] Refresh Token Success';
@@ -35,6 +36,10 @@ export class LoginFailure implements Action {
 
 export class LoginRedirect implements Action {
   readonly type = LOGIN_REDIRECT;
+}
+
+export class LoginExpired implements Action {
+  readonly type = LOGIN_EXPIRED;
 }
 
 export class Logout implements Action {

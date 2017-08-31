@@ -23,7 +23,6 @@ export class ProfileEffects {
   @Effect()
   loadProfile$: Observable<Action> = this.action$
     .ofType(profile.LOAD_PROFILE_REQUEST)
-    .startWith(new profile.LoadAction)
     .switchMap(() =>
       this.profileService.getUserProfile()
         .mergeMap((p: Profile) => {
