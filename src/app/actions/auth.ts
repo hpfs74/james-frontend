@@ -13,6 +13,8 @@ export const REFRESH_TOKEN = '[Auth] Refresh Token';
 export const REFRESH_SUCCESS = '[Auth] Refresh Token Success';
 export const REFRESH_FAILURE = '[Auth] Refresh Token Failure';
 
+export const SCHEDULE_TOKEN_REFRESH = '[Auth] Refresh Token Schedule';
+
 // TODO: implement popup requesting to login again
 export const REQUEST_CREDENTIALS = '[Auth] Request Credentials';
 
@@ -64,6 +66,12 @@ export class RefreshTokenSuccess implements Action {
   constructor(public payload: any) { }
 }
 
+export class ScheduleTokenRefresh implements Action {
+  readonly type = SCHEDULE_TOKEN_REFRESH;
+
+  constructor(public payload: any) { }
+}
+
 export class RequestCredentials implements Action {
   readonly type = REQUEST_CREDENTIALS;
 }
@@ -74,4 +82,8 @@ export type Actions =
   | LoginFailure
   | LoginRedirect
   | Logout
+  | RefreshToken
+  | RefreshTokenFailure
+  | RefreshTokenSuccess
+  | ScheduleTokenRefresh
   | RequestCredentials;
