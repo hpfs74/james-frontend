@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, Route, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 
 import * as RouterActions from '../actions/router';
 import * as fromRoot from '../reducers';

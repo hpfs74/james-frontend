@@ -1,7 +1,7 @@
 import { SaveSuccessAction } from './../actions/profile';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 
 // import { Database } from '@ngrx/db';
 import { Observable } from 'rxjs/Observable';

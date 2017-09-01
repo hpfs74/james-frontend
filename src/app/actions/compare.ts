@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export const LOAD_CAR_COMPARE =            '[Compare Car] Load';
 export const LOAD_CAR_COMPARE_SUCCESS =    '[Compare Car] Load Success';
-export const LOAD_CAR_COMPARE_FAIL =       '[Compare Car] Load Fail';
+export const LOAD_CAR_COMPARE_FAILURE =    '[Compare Car] Load Failure';
 
 /**
  * Add Compare Insurance Actions
@@ -20,7 +20,7 @@ export class LoadCarSuccessAction implements Action {
 }
 
 export class LoadCarFailAction implements Action {
-  readonly type = LOAD_CAR_COMPARE_FAIL;
+  readonly type = LOAD_CAR_COMPARE_FAILURE;
 
   constructor(public payload: any) { }
 }

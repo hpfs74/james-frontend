@@ -39,7 +39,7 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case CarActions.GET_INFO_FAIL: {
+    case CarActions.GET_INFO_FAILURE: {
       return Object.assign({}, state, {
         error: true,
       });

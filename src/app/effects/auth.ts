@@ -1,7 +1,8 @@
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
@@ -19,6 +20,10 @@ import * as fromRoot from '../reducers';
 import * as Auth from '../actions/auth';
 import * as Profile from '../actions/profile';
 import { AuthToken } from '../models/auth';
+
+// Tmp test
+import { UserDialogService } from './../components/knx-user-dialog/user-dialog.service';
+
 
 @Injectable()
 export class AuthEffects {
@@ -64,11 +69,11 @@ export class AuthEffects {
 
   @Effect()
   scheduleRefresh$ = this.actions$
-    .ofType(
+    .ofType<Auth.ScheduleTokenRefresh | Auth.RefreshToken>(
       Auth.SCHEDULE_TOKEN_REFRESH,
       Auth.REFRESH_SUCCESS
     )
-    .map(toPayload)
+    .map(action => action.payload)
     .switchMap((token) =>
       // If the user is authenticated, use the token stream and flatMap the token
       this.authService.tokenStream.flatMap(
@@ -85,6 +90,13 @@ export class AuthEffects {
           return of(new Auth.RefreshToken(token.refresh_token)).delay(delay);
         })
   );
+
+  @Effect({ dispatch: false})
+  requestCredentials$ = this.actions$
+    .ofType<Auth.RequestCredentials>(Auth.REQUEST_CREDENTIALS)
+    .do(() => this.dialogService.openDialog());
+    // .switchMap(() => {
+    // });
 
   // TODO: catch any failed http requests
   @Effect()
@@ -129,6 +141,7 @@ export class AuthEffects {
     private authService: AuthService,
     private router: Router,
     private localStorageService: LocalStorageService,
-    private store$: Store<fromRoot.State>
+    private store$: Store<fromRoot.State>,
+    private dialogService: UserDialogService
   ) {}
 }

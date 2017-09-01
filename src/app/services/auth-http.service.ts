@@ -32,7 +32,7 @@ export class AuthHttp {
     private authService: AuthService,
     private loaderService: LoaderService,
     private localStorageService: LocalStorageService,
-    private store: Store<fromRoot.State>,
+    private store$: Store<fromRoot.State>,
     private defOpts?: RequestOptions,
   ) {
     this.config = {
@@ -79,7 +79,6 @@ export class AuthHttp {
       req.headers.set('Authorization', 'Bearer ' + token);
       req.headers.set('Cache-Control', 'no-cache, no-store, max-age=0');
     }
-
     return this.http.request(req);
   }
 
@@ -97,23 +96,6 @@ export class AuthHttp {
   public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     const req: Request = url as Request;
     return this.requestWithToken(req);
-
-    // if (AuthUtils.tokenNotExpired('token')) {
-    //   // Token is valid
-    //   return this.requestWithToken(req, token.access_token)
-    //     .catch((error) => {
-    //       // Try to get refresh token on not-authorized error
-    //       if (error.status === 401 || error.status === 403) {
-    //         console.log('dispatch refreshtoken!');
-    //         // this.store.dispatch(new Auth.RefreshToken(token.refresh_token));
-    //       }
-    //     });
-    // } else if (token) {
-    //   // There is a token but it's expired, try to refresh
-    //   return this.refreshToken(req, token.access_token);
-    // } else {
-    //   // Logout
-    // }
   }
 
   private mergeOptions(providedOpts: RequestOptionsArgs, defaultOpts?: RequestOptions) {
@@ -123,7 +105,6 @@ export class AuthHttp {
     }
 
     newOptions = newOptions.merge(new RequestOptions(providedOpts));
-
     return newOptions;
   }
 
