@@ -5,7 +5,6 @@ import { Action, Store } from '@ngrx/store';
 import { Response } from '@angular/http';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
@@ -51,7 +50,7 @@ export class ErrorEffects {
       // console.log('Unauthenticated');
       // console.log(error);
     })
-    .switchMap(error => of(new auth.RequestCredentials));
+    .switchMap(error => Observable.of(new auth.RequestCredentials));
 
   constructor(private actions$: Actions, private store$: Store<fromRoot.State>) { }
 }

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -16,14 +15,12 @@ import 'rxjs/add/operator/delay';
 
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localstorage.service';
+import { UserDialogService } from './../components/knx-user-dialog/user-dialog.service';
+
 import * as fromRoot from '../reducers';
 import * as Auth from '../actions/auth';
 import * as Profile from '../actions/profile';
 import { AuthToken } from '../models/auth';
-
-// Tmp test
-import { UserDialogService } from './../components/knx-user-dialog/user-dialog.service';
-
 
 @Injectable()
 export class AuthEffects {
@@ -40,12 +37,12 @@ export class AuthEffects {
             this.localStorageService.setToken(token);
           }
           return [
-            new Auth.LoginSuccess({ token }),
+            new Auth.LoginSuccess({ token: token }),
             new Auth.ScheduleTokenRefresh(token),
             new Profile.LoadAction()
           ];
         })
-        .catch(error => of(new Auth.LoginFailure(error)))
+        .catch(error => Observable.of(new Auth.LoginFailure(error)))
   );
 
   @Effect({ dispatch: false })
@@ -87,10 +84,11 @@ export class AuthEffects {
 
           // for testing / 100000 to get seconds
           let delay = (exp.setUTCSeconds(tokenExp) - iat.setUTCSeconds(tokenIat)) / 1000;
-          return of(new Auth.RefreshToken(token.refresh_token)).delay(delay);
+          return Observable.of(new Auth.RefreshToken(token.refresh_token)).delay(delay);
         })
   );
 
+  // TODO: replace with actual dialog call
   @Effect({ dispatch: false})
   requestCredentials$ = this.actions$
     .ofType<Auth.RequestCredentials>(Auth.REQUEST_CREDENTIALS)
@@ -114,7 +112,7 @@ export class AuthEffects {
           return new Auth.RefreshTokenFailure(token);
         }
       }))
-    .catch(error => of(new Auth.RefreshTokenFailure(error)));
+    .catch(error => Observable.of(new Auth.RefreshTokenFailure(error)));
 
     // NOTE: the order of the init effect needs to be preserved as last
     // see: https://github.com/ngrx/platform/issues/246

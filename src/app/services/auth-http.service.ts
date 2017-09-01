@@ -32,7 +32,6 @@ export class AuthHttp {
     private authService: AuthService,
     private loaderService: LoaderService,
     private localStorageService: LocalStorageService,
-    private store$: Store<fromRoot.State>,
     private defOpts?: RequestOptions,
   ) {
     this.config = {

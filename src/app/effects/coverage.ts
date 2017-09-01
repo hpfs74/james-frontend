@@ -25,6 +25,5 @@ export class CoverageEffects {
         .map((res: any) => new coverage.CarCoverageCompleteAction(res))
         .catch(error => Observable.of(new coverage.CarCoverageFailAction(error))));
 
-
   constructor(private action$: Actions, private carService: CarService) { }
 }
