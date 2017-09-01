@@ -8,7 +8,7 @@
   </knx-collapse-message>
 
   <knx-collapse-message [ngClass]="optionModifierClass" title="Pechhulp" [isOpen]="true">
-    <div class="knx-form-group--info">
+    <div class="knx-form-group--info knx-form-group--no-label-info">
 
       <cx-form-group
         [options]="form.formConfig.roadAssistance"
@@ -87,7 +87,6 @@
     </div>
 
     <div class="">
-
       <!---->
       <cx-checkbox
         [formControlName]="form.formConfig.extraOptionsOccupants.formControlName"
