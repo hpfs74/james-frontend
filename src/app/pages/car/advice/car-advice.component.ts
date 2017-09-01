@@ -165,22 +165,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
 
     this.store$.select(fromRoot.getCarInfoError)
-      .subscribe( (error) => {
+      .subscribe((error) => {
         if (error) {
           this.triggerLicenseInValid();
         }
       });
 
-
-    this.store$.select(fromRoot.getCarInfoLoaded)
-      .switchMap(isLoaded => {
-        if (isLoaded) {
-          return this.store$.select(fromRoot.getCarInfo);
-        } else {
-          return Observable.empty();
-        }
-      })
-      .take(1)
+    this.store$.select(fromRoot.getCarInfo)
       .subscribe((res: Array<Car>) => {
         const lastFound = res.slice(-1)[0];
         if (lastFound && lastFound.license) {
