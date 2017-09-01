@@ -85,10 +85,15 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   }
 }
 
-[class*="col-"].knx-insurance-result__own-risk,
 .knx-insurance-result__own-risk {
-  font-family: $font-family-head;
   background: $knab-primary-gray;
+}
+
+[class*="col-"].knx-insurance-result__own-risk,
+[class*="col-"].knx-insurance-result__price-quality,
+.knx-insurance-result__own-risk,
+.knx-insurance-result__price-quality {
+  font-family: $font-family-head;
   font-size: 18px;
   margin-top: 3px;
   padding: 5px 10px;
@@ -124,18 +129,18 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   .knx-info {
     text-align: left;
   }
+
+  .knx-insurance-result__label {
+    line-height: 65px;
+  }
 }
 
 .knx-insurance-result__price-quality {
   text-align: left;
-  padding-left: 15px !important;
-  padding-right: 0 !important;
-  padding-top: 24px !important;
 
   .knx-insurance-result__amount {
     font-family: $font-family-head;
     font-size: 18px;
-    margin-bottom: 20px;
 
     span {
       vertical-align: super;
@@ -181,9 +186,9 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 }
 
 .knx-button--extra-padding {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  min-height: 50px;
+  padding-top: 16px;
+  padding-bottom: 18px;
+  min-height: 60px;
 }
 
 .knx-button .knx-button__extra {
