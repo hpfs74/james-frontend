@@ -162,10 +162,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
         }
       });
-    this.store$.select(fromRoot.getCarInfoError)
-      .subscribe( () => {
-        this.triggerLicenseInValid();
-      });
+
     this.store$.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {
         if (isLoaded) {
@@ -184,10 +181,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             value: lastFound,
             clear: true
           }));
-        } else {
-          // Car not found in RDC
-          const c = this.carDetailForm.formGroup.get('licensePlate');
-          this.triggerLicenseInValid();
         }
       }, err => {
         // Treat server error as invalid to prevent continuing flow
