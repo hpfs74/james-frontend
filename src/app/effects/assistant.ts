@@ -17,14 +17,6 @@ import { AssistantConfig, CannedMessageType } from './../models';
 
 @Injectable()
 export class AssistantEffects {
-  @Effect({ dispatch: false })
-  init$: Observable<any> = defer(() => {
-    let config = this.assistantService.config;
-    if (config) {
-      this.store$.dispatch(new assistant.LoadConfigAction(config));
-    }
-  });
-
   @Effect()
   cannedMessage$ = this.actions$
     .ofType(assistant.ADD_CANNED_MESSAGE)
@@ -52,6 +44,14 @@ export class AssistantEffects {
           { type: assistant.CLEAR_MESSAGES, payload: message },
           { type: assistant.ADD_MESSAGE, payload: message })
         : Observable.of({ type: assistant.ADD_MESSAGE, payload: message });
+    });
+
+    @Effect({ dispatch: false })
+    init$: Observable<any> = defer(() => {
+      let config = this.assistantService.config;
+      if (config) {
+        this.store$.dispatch(new assistant.LoadConfigAction(config));
+      }
     });
 
   constructor(private actions$: Actions, private store$: Store<fromRoot.State>, private assistantService: AssistantService) { }

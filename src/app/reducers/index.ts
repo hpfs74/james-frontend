@@ -8,6 +8,8 @@ import {
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../environments/environment';
 
+import { LOGOUT } from '../actions/auth';
+
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -98,14 +100,33 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   };
 }
 
+export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
+  return function (state, action) {
+    return reducer(action.type === LOGOUT ? {
+      auth: state.auth,
+      loginPage: state.loginPage,
+      profile: undefined,
+      settings: state.settings,
+      layout: state.layout,
+      insurances: undefined,
+      assistant: state.assistant,
+      compare: undefined,
+      advice: undefined,
+      car: undefined,
+      coverage: undefined,
+      routerReducer: state.routerReducer
+    } : state, action);
+  };
+}
+
 /**
  * By default, @ngrx/store uses combineReducers with the reducer map to compose
  * the root meta-reducer. To add more meta-reducers, provide an array of meta-reducers
  * that will be composed to form the root meta-reducer.
  */
 export const metaReducers: MetaReducer<State>[] = !environment.production
-? [logger]
-: [];
+? [logger, logout]
+: [logout];
 
 
 /**

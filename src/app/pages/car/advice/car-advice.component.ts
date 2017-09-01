@@ -158,7 +158,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       });
     this.store$.select(fromRoot.getSelectedAdvice)
       .subscribe(advice => {
-        if (advice.coverage) {
+        if (advice && advice.coverage) {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
         }
       });

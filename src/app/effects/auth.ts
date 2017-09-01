@@ -119,7 +119,8 @@ export class AuthEffects {
         }
       } else {
         // Token is expired
-        this.store$.dispatch(new Auth.Logout());
+        this.localStorageService.clearToken();
+        this.store$.dispatch(new Auth.LoginRedirect());
       }
     });
 
