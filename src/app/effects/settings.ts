@@ -1,7 +1,7 @@
 import { SaveSuccessAction } from './../actions/profile';
 import { Injectable } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -21,7 +21,7 @@ import * as settings from '../actions/settings';
 export class SettingsEffects {
 
   @Effect()
-  updateSettings$ = this.action$
+  updateSettings$ = this.actions$
     .ofType(settings.UPDATE_SETTINGS_REQUEST)
     .map((action: settings.UpdateSettingsAction) => action.payload)
     .withLatestFrom(this.store$, (action, state) => {
@@ -36,5 +36,5 @@ export class SettingsEffects {
         .catch(error => Observable.of(new settings.UpdateSettingsFailAction(error)));
     });
 
-  constructor(private action$: Actions, private store$: Store<fromRoot.State>, private profileService: ProfileService) { }
+  constructor(private actions$: Actions, private store$: Store<fromRoot.State>, private profileService: ProfileService) { }
 }

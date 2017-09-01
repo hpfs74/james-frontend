@@ -3,11 +3,11 @@ import { Car } from '../models/car';
 
 export const GET_INFO_REQUEST =     '[Car] Info';
 export const GET_INFO_SUCCESS =     '[Car] Info Success';
-export const GET_INFO_FAIL =        '[Car] Info Fail';
+export const GET_INFO_FAILURE =        '[Car] Info Failure';
 
 export const BUY_REQUEST =          '[Car] Buy';
 export const BUY_SUCCESS =          '[Car] Buy Success';
-export const BUY_FAIL =             '[Car] Buy Fail';
+export const BUY_FAILURE =             '[Car] Buy Failure';
 
 export class GetInfoAction implements Action {
   readonly type = GET_INFO_REQUEST;
@@ -22,7 +22,7 @@ export class GetInfoCompleteAction implements Action {
 }
 
 export class GetInfoFailAction implements Action {
-  readonly type = GET_INFO_FAIL;
+  readonly type = GET_INFO_FAILURE;
 
   constructor(public payload: any) { }
 }
@@ -40,7 +40,7 @@ export class BuyCompleteAction implements Action {
 }
 
 export class BuyFailAction implements Action {
-  readonly type = BUY_FAIL;
+  readonly type = BUY_FAILURE;
 
   constructor(public payload: any) { }
 }

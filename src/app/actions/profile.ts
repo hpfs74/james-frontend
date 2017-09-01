@@ -3,17 +3,17 @@ import { Profile } from '../models/profile';
 
 export const LOAD_PROFILE_REQUEST =   '[Profile] Load Request';
 export const LOAD_PROFILE_SUCCESS =   '[Profile] Load Success';
-export const LOAD_PROFILE_FAIL =      '[Profile] Load Fail';
+export const LOAD_PROFILE_FAILURE =      '[Profile] Load Failure';
 
 export const UPDATE_PROFILE =         '[Profile] Update (Local)';
 
 export const SAVE_PROFILE_REQUEST =   '[Profile] Save Request';
 export const SAVE_PROFILE_SUCCESS =   '[Profile] Save Success';
-export const SAVE_PROFILE_FAIL =      '[Profile] Save Fail';
+export const SAVE_PROFILE_FAILURE =      '[Profile] Save Fail';
 
 export const UPDATE_ADDRESS_REQUEST = '[Profile] Update Address Request';
 export const UPDATE_ADDRESS_SUCCESS = '[Profile] Update Address Success';
-export const UPDATE_ADDRESS_FAIL =    '[Profile] Update Address Fail';
+export const UPDATE_ADDRESS_FAILURE =    '[Profile] Update Address Failure';
 
 
 export class LoadAction implements Action {
@@ -27,7 +27,7 @@ export class LoadSuccessAction implements Action {
 }
 
 export class LoadFailAction implements Action {
-  readonly type = LOAD_PROFILE_FAIL;
+  readonly type = LOAD_PROFILE_FAILURE;
 
   constructor(public payload: Profile) { }
 }
@@ -51,7 +51,7 @@ export class SaveSuccessAction implements Action {
 }
 
 export class SaveFailAction implements Action {
-  readonly type = SAVE_PROFILE_FAIL;
+  readonly type = SAVE_PROFILE_FAILURE;
 
   constructor(public payload: Profile) { }
 }
@@ -69,7 +69,7 @@ export class UpdateAddressSuccessAction implements Action {
 }
 
 export class UpdateAddressFailAction implements Action {
-  readonly type = UPDATE_ADDRESS_FAIL;
+  readonly type = UPDATE_ADDRESS_FAILURE;
 
   constructor(public payload: Profile) { }
 }

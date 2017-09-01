@@ -1,8 +1,6 @@
 
 import { NgModule, Injector } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { Action, Store } from '@ngrx/store';
-import { StoreModule } from '@ngrx/store';
 
 import * as fromRoot from './reducers/index';
 
@@ -14,9 +12,8 @@ export function authHttpServiceFactory(
   authService: AuthService,
   options: RequestOptions,
   loaderService: LoaderService,
-  store: Store<any>,
   localStorageService: LocalStorageService) {
-    return new AuthHttp(http, authService, loaderService, localStorageService, store, options);
+    return new AuthHttp(http, authService, loaderService, localStorageService, options);
 }
 
 @NgModule({
@@ -25,7 +22,7 @@ export function authHttpServiceFactory(
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
-      deps: [Http, AuthService, RequestOptions, LoaderService, Store, LocalStorageService]
+      deps: [Http, AuthService, RequestOptions, LoaderService, LocalStorageService]
     }
   ]
 })

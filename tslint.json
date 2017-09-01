@@ -4,6 +4,9 @@
   ],
   "rules": {
     "arrow-return-shorthand": true,
+    "space-before-function-paren": [false, "always"],
+    "no-irregular-whitespace": true,
+    "space-within-parens": false,
     "callable-types": true,
     "class-name": true,
     "comment-format": [

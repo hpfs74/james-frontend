@@ -3,7 +3,7 @@ import { Settings } from '../models/settings';
 
 export const UPDATE_SETTINGS_REQUEST =       '[Settings] Settings Request';
 export const UPDATE_SETTINGS_SUCCESS =       '[Settings] Settings Success';
-export const UPDATE_SETTINGS_FAIL =          '[Settings] Settings Fail';
+export const UPDATE_SETTINGS_FAILURE =          '[Settings] Settings Failure';
 
 export class UpdateSettingsAction implements Action {
   readonly type = UPDATE_SETTINGS_REQUEST;
@@ -18,7 +18,7 @@ export class UpdateSettingsSuccessAction implements Action {
 }
 
 export class UpdateSettingsFailAction implements Action {
-  readonly type = UPDATE_SETTINGS_FAIL;
+  readonly type = UPDATE_SETTINGS_FAILURE;
 
   constructor(public payload: Settings) { }
 }

@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -24,7 +24,6 @@ export class CoverageEffects {
       this.carService.getCoverageRecommendation(payload.license, payload.loan)
         .map((res: any) => new coverage.CarCoverageCompleteAction(res))
         .catch(error => Observable.of(new coverage.CarCoverageFailAction(error))));
-
 
   constructor(private action$: Actions, private carService: CarService) { }
 }

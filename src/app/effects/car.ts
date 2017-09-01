@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -18,7 +18,7 @@ import * as car from '../actions/car';
 export class CarEffects {
 
   @Effect()
-  loadCarInfo$: Observable<Action> = this.action$
+  loadCarInfo$: Observable<Action> = this.actions$
     .ofType(car.GET_INFO_REQUEST)
     .map((action: car.GetInfoAction) => action.payload)
     .switchMap((license) =>
@@ -28,7 +28,7 @@ export class CarEffects {
 
 
   @Effect()
-  buyCarInsurance$: Observable<Action> = this.action$
+  buyCarInsurance$: Observable<Action> = this.actions$
     .ofType(car.BUY_REQUEST)
     .map((action: car.BuyAction) => action.payload)
     .switchMap((payload) =>
@@ -36,5 +36,5 @@ export class CarEffects {
         .map((res: Response) => new car.BuyCompleteAction(res))
         .catch(error => Observable.of(new car.BuyFailAction(error))));
 
-  constructor(private action$: Actions, private carService: CarService) { }
+  constructor(private actions$: Actions, private carService: CarService) { }
 }

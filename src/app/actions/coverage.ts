@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export const CAR_COVERAGE_REQUEST =     '[Car] Coverage';
 export const CAR_COVERAGE_SUCCESS =     '[Car] Coverage Success';
-export const CAR_COVERAGE_FAIL =        '[Car] Coverage Fail';
+export const CAR_COVERAGE_FAILURE =        '[Car] Coverage Failure';
 
 
 export class CarCoverageAction implements Action {
@@ -18,7 +18,7 @@ export class CarCoverageCompleteAction implements Action {
 }
 
 export class CarCoverageFailAction implements Action {
-  readonly type = CAR_COVERAGE_FAIL;
+  readonly type = CAR_COVERAGE_FAILURE;
 
   constructor(public payload: any) { }
 }

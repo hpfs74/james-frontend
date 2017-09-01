@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
 
 // @cx
 import { CXFormsModule } from '../../node_modules/@cx/forms';
@@ -11,11 +12,14 @@ import { KNXWizardModule } from '../../node_modules/@knx/wizard';
 import { KNXStepNavigationModule } from '../../node_modules/@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '../../node_modules/@knx/collapsible-panel';
 import { KNXInfoModule } from '../../node_modules/@knx/info';
+
+/**
+ * Shared Modules
+ */
 import { DropdownModule } from './components/knx-dropdown/dropdown.module';
+import { UserDialogModule } from './components/knx-user-dialog/user-dialog.module';
 
-import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
-
-/** Util pages */
+/** Util Pages */
 import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
 
 /**
@@ -114,7 +118,8 @@ export const sharedModules = [
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
   KNXInfoModule,
-  DropdownModule
+  DropdownModule,
+  UserDialogModule
 ];
 
 
