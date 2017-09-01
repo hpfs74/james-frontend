@@ -1,18 +1,45 @@
 import { Action } from '@ngrx/store';
 
-export const OPEN_SIDENAV =   '[Layout] Open Sidenav';
-export const CLOSE_SIDENAV =  '[Layout] Close Sidenav';
+export const OPEN_LEFT_SIDENAV = '[Layout] Open Left Sidenav';
+export const CLOSE_LEFT_SIDENAV = '[Layout] Close Left Sidenav';
+
+export const OPEN_RIGHT_SIDENAV = '[Layout] Open Right Sidenav';
+export const CLOSE_RIGHT_SIDENAV = '[Layout] Close Right Sidenav';
+
+export const OPEN_MODAL = '[Layout] Open Modal';
+export const CLOSE_MODAL = '[Layout] Close Modal';
 
 
-export class OpenSidenavAction implements Action {
-  readonly type = OPEN_SIDENAV;
+export class OpenLeftSideNav implements Action {
+  readonly type = OPEN_LEFT_SIDENAV;
 }
 
-export class CloseSidenavAction implements Action {
-  readonly type = CLOSE_SIDENAV;
+export class CloseLeftSideNav implements Action {
+  readonly type = CLOSE_LEFT_SIDENAV;
 }
 
+export class OpenRightSideNav implements Action {
+  readonly type = OPEN_RIGHT_SIDENAV;
+}
+
+export class CloseRightSideNav implements Action {
+  readonly type = CLOSE_RIGHT_SIDENAV;
+}
+
+export class OpenModal implements Action {
+  readonly type = OPEN_MODAL;
+
+  constructor(public payload: any) { }
+}
+
+export class CloseModal implements Action {
+  readonly type = CLOSE_MODAL;
+}
 
 export type All
-  = OpenSidenavAction
-  | CloseSidenavAction;
+  = OpenLeftSideNav
+  | CloseLeftSideNav
+  | OpenRightSideNav
+  | CloseRightSideNav
+  | OpenModal
+  | CloseModal;

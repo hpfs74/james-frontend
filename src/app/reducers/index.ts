@@ -194,7 +194,8 @@ export const getInsurances = createSelector(getInsurancesState, fromInsurances.g
  * Layout Reducers
  */
 export const getLayoutState = (state: State) => state.layout;
-export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowSidenav);
+export const getLeftSidenavState = createSelector(getLayoutState, fromLayout.getLeftSidenavState);
+export const getRightSidenavState = createSelector(getLayoutState, fromLayout.getRightSidenavState);
 
 /**
  * Chat Assistant Reducers

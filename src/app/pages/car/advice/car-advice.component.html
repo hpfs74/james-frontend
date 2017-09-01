@@ -55,7 +55,7 @@
 
         <!-- alternative view with sidenav for mobile devices -->
         <ng-container *ngIf="currentStep === 1" [formGroup]="carExtrasForm.formGroup">
-          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true">
+          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true" (onChangeVisibile)="toggleSideNavState($event)">
             <div class="container-fluid">
               <div class="knx-side-panel-content">
                 <knx-car-extras

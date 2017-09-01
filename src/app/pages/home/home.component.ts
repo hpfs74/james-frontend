@@ -26,7 +26,7 @@ import {
       </knx-navbar>
     </header>
 
-    <div class="main-container">
+    <div class="main-container" knxSidePanelState>
       <knx-loader *shellRender></knx-loader>
       <router-outlet></router-outlet>
     </div>
