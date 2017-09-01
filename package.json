@@ -9,7 +9,7 @@
     "config": "ts-node ./scripts/set-env.ts",
     "start": "npm run config && ng serve --open --locale",
     "build": "npm run config && ng build --aot --locale",
-    "build:prod": "npm run config -- --environment=prod && ng build --prod --locale --base-href=/james/ ",
+    "build:prod": "npm run config -- --environment=prod && ng build --prod --locale",
     "test": "npm run config && ng test --code-coverage",
     "lint": "ng lint --type-check",
     "lint:styles": "stylelint 'src/**/*.scss' --syntax scss --config stylelint.conf.js",
