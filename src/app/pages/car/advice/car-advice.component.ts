@@ -163,6 +163,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         }
       });
 
+
+    this.store$.select(fromRoot.getCarInfoError)
+      .subscribe( (error) => {
+        if (error) {
+          this.triggerLicenseInValid();
+        }
+      });
+
+
     this.store$.select(fromRoot.getCarInfoLoaded)
       .switchMap(isLoaded => {
         if (isLoaded) {
@@ -301,6 +310,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     c.setErrors({ 'licensePlateRDC': true });
     c.markAsTouched();
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
+    this.car = null;
   }
 
   onAddressChange(address: Address) {
