@@ -1,8 +1,10 @@
 .knx-side-panel {
   background: $knab-app-background;
   position: fixed;
-  left: 0;
+  overflow-y: auto;
   top: 0;
+  bottom: 0;
+  left: 0;
   width: 256px;
   height: 100%;
   z-index: 9999;
@@ -10,6 +12,10 @@
 
 .knx-side-panel--fullwidth {
   width: 100%;
+
+  .knx-side-panel-content {
+    overflow: hidden;
+  }
 }
 
 .knx-side-panel__toolbar {
@@ -19,6 +25,7 @@
   color: $knab-primary-blue;
   font-family: $font-family-head;
   background: $knab-primary-gray;
+  text-transform: uppercase;
 
   button {
     font-size: $font-size-base + 2;
@@ -27,6 +34,7 @@
     right: 10px;
     margin: 0;
     padding: 0;
+    top: 0.1em;
   }
 }
 

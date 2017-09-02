@@ -9,6 +9,7 @@ import * as cuid from 'cuid';
 
 import * as fromRoot from '../../../reducers';
 import * as RouterActions from '../../../actions/router';
+import * as layout from '../../../actions/layout';
 import * as profile from '../../../actions/profile';
 import * as assistant from '../../../actions/assistant';
 import * as car from '../../../actions/car';
@@ -315,6 +316,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     if (this.car) {
       this.store$.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
     }
+  }
+
+  toggleSideNavState(event) {
+    event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
   }
 
   private getCompareResultCopy(): Observable<CarInsurance[]> {

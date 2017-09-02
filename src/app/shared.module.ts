@@ -30,7 +30,7 @@ import { TitleCasePipe, RoundPipe, LicensePlatePipe } from './pipes/';
 /**
  * Directives
  */
-import { JumpToElementDirective } from './directives';
+import { JumpToElementDirective, SidePanelStateDirective } from './directives';
 
 
 /**
@@ -75,6 +75,7 @@ export const sharedComponents = [
   TitleCasePipe,
   RoundPipe,
   LicensePlatePipe,
+  SidePanelStateDirective,
   JumpToElementDirective,
   AddressLookupComponent,
   ButtonIconComponent,

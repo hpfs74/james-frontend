@@ -9,37 +9,37 @@ import { CarPreviewComponent } from './car-preview.component';
   <div class="knx-car-info-message knx-message knx-message--hint knx-message--arrow-top">
     <div class="container knx-container--fullwidth">
         <div class="row">
-          <div class="col-sm-6">Merk</div>
-          <div class="col-sm-6 knx-car-info__item">{{ data.make | uppercase  }}</div>
+          <div class="col">Merk</div>
+          <div class="col knx-car-info__item">{{ data.make | uppercase  }}</div>
         </div>
         <div class="row">
-          <div class="col-sm-6">Model</div>
-          <div class="col-sm-6 knx-car-info__item">{{ data.model | uppercase }}</div>
+          <div class="col">Model</div>
+          <div class="col knx-car-info__item">{{ data.model | uppercase }}</div>
         </div>
         <div class="row" *ngIf="data.color">
-          <div class="col-sm-6">Kleur</div>
-          <div class="col-sm-6 knx-car-info__item">{{ data.color | uppercase }}</div>
+          <div class="col">Kleur</div>
+          <div class="col knx-car-info__item">{{ data.color | uppercase }}</div>
         </div>
         <div class="row" *ngIf="data.fuel">
-          <div class="col-sm-6">Brandstof</div>
-          <div class="col-sm-6 knx-car-info__item">{{ data.fuel }}</div>
+          <div class="col">Brandstof</div>
+          <div class="col knx-car-info__item">{{ data.fuel }}</div>
         </div>
         <div class="row" *ngIf="transmission">
-        <div class="col-sm-6">Transmissie</div>
-        <div class="col-sm-6 knx-car-info__item">{{ transmission }}
+        <div class="col">Transmissie</div>
+        <div class="col knx-car-info__item">{{ transmission }}
         </div>
       </div>
         <div class="row" *ngIf="data.year">
-          <div class="col-sm-6">Bouwjaar</div>
-          <div class="col-sm-6 knx-car-info__item">{{ data.year }}</div>
+          <div class="col">Bouwjaar</div>
+          <div class="col knx-car-info__item">{{ data.year }}</div>
         </div>
         <div class="row" *ngIf="data.price_consumer_incl_vat">
-          <div class="col-sm-6">Aanschafwaarde</div>
-          <div class="col-sm-6 knx-car-info__item">{{ data.price_consumer_incl_vat | currency:'EUR':true }}</div>
+          <div class="col">Aanschafwaarde</div>
+          <div class="col knx-car-info__item">{{ data.price_consumer_incl_vat | currency:'EUR':true }}</div>
         </div>
         <div class="row" *ngIf="data.current_value">
-          <div class="col-sm-6">Dagwaarde</div>
-          <div class="col-sm-6 knx-car-info__item">{{ data.current_value | currency:'EUR':true }}</div>
+          <div class="col">Dagwaarde</div>
+          <div class="col knx-car-info__item">{{ data.current_value | currency:'EUR':true }}</div>
       </div>
       </div>
     </div>
