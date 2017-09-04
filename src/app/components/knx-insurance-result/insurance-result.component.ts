@@ -58,7 +58,7 @@ import { InsuranceAdvice, Insurer } from '../../models';
               </div>
             </div>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-4 knx-insurance-result__buy">
             <div class="knx-insurance-result__premium knx-insurance-result__price">
               {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
             </div>

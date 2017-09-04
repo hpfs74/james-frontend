@@ -21,14 +21,12 @@
   stroke: $knab-medium-gray;
 }
 
-.knx-insurance_advice__supported {
-  .col-sm-4:last-child {
-    background: $knab-primary-green;
+.knx-insurance-result__buy {
+  background: $knab-primary-green;
 
-    .knx-insurance-result__premium,
-    .knx-insurance-result__premium span {
-      color: $knab-white;
-    }
+  .knx-insurance-result__premium,
+  .knx-insurance-result__premium span {
+    color: $knab-white;
   }
 
   .knx-donut__circle {
