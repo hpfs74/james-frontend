@@ -6,7 +6,7 @@ import { SectionItem, SectionGroup, SectionFields } from './data-summary';
   selector: 'knx-data-summary',
   template: `
     <knx-collapsible-panel *ngFor="let section of sections" [title]="section.label">
-      <knx-data-summary-group *ngFor="let group of section.groups">
+      <knx-data-summary-group class="knx-collapsible-panel__content" *ngFor="let group of section.groups">
         <knx-data-summary-row *ngFor="let row of group.fields" [label]="row.label">{{ row.value }}</knx-data-summary-row>
       </knx-data-summary-group>
     </knx-collapsible-panel>
