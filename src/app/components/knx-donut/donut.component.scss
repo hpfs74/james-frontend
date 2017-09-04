@@ -21,16 +21,18 @@
   stroke: $knab-medium-gray;
 }
 
-.knx-insurance-result__buy {
-  background: $knab-primary-green;
+.knx-insurance_advice__supported {
+  .knx-insurance-result__buy {
+    background: $knab-primary-green;
 
-  .knx-insurance-result__premium,
-  .knx-insurance-result__premium span {
-    color: $knab-white;
-  }
+    .knx-insurance-result__premium,
+    .knx-insurance-result__premium span {
+      color: $knab-white;
+    }
 
-  .knx-donut__circle {
-    stroke: $knab-primary-green;
+    .knx-donut__circle {
+      stroke: $knab-primary-green;
+    }
   }
 }
 // .circle_animation {
