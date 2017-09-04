@@ -29,7 +29,7 @@ export class CloseRightSideNav implements Action {
 export class OpenModal implements Action {
   readonly type = OPEN_MODAL;
 
-  constructor(public payload: any) { }
+  constructor(public payload: string) { }
 }
 
 export class CloseModal implements Action {

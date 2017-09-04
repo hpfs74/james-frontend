@@ -25,9 +25,9 @@
             <button type="button"
               *ngIf="form.formGroup.get('password').value"
               class="knx-login__showpassword knx-icon-eye"
-              [class.knx-icon-eye-slash]="showPassword"
-              [class.knx-icon-eye]="!showPassword"
-              (click)="togglePassword($event)"></button>
+              [class.knx-icon-eye-slash]="form.showPassword"
+              [class.knx-icon-eye]="!form.showPassword"
+              (click)="form.toggleShowPassword($event)"></button>
           </div>
 
           <button type="submit" class="knx-button knx-button--primary knx-button--fullwidth"

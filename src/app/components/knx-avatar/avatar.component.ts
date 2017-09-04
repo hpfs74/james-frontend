@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-avatar',
+  styleUrls: ['./avatar.component.scss'],
   template: `
   <div class="knx-avatar">
       <div class="knx-avatar__detail">

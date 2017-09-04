@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router, RouterLink, NavigationExtras } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import * as fromAuth from '../../reducers';
@@ -24,16 +23,14 @@ import * as fromRoot from '../../reducers';
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  showPassword = false;
-
   pending$ = this.store.select(fromAuth.getLoginPagePending);
   error$ = this.store.select(fromAuth.getLoginPageError);
   errorMessage: string;
 
-  form: LoginForm  = new LoginForm(new FormBuilder());
+  form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
 
-  constructor(private router: Router, private store: Store<fromAuth.State>) {}
+  constructor(private store: Store<fromAuth.State>) {}
 
   ngOnInit() {
     this.store.select(fromAuth.getLoginPageError)
@@ -45,15 +42,6 @@ export class LoginComponent implements OnInit {
 
   goToPasswordReset() {
     window.location.href  = this.passwordResetUrl;
-  }
-
-  togglePassword(event) {
-    event.preventDefault();
-    this.showPassword = !this.showPassword;
-
-    this.form.formConfig.password.inputOptions.type =
-      (this.form.formConfig.password.inputOptions.type === 'password')
-        ? 'text' : 'password';
   }
 
   login(event) {

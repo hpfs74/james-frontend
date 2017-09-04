@@ -1,42 +1,55 @@
-import * as LayoutActions from '../actions/layout';
+import * as layout from '../actions/layout';
 
-export type Action = LayoutActions.All;
+export type Action = layout.All;
 
 export interface State {
   leftSideBarOpen: boolean;
   rightSideBarOpen: boolean;
-  openModalName: string;
+  openedModalName: string;
 }
 
 const initialState: State = {
   leftSideBarOpen: false,
   rightSideBarOpen: false,
-  openModalName: null
+  openedModalName: null
 };
 
 export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case LayoutActions.OPEN_LEFT_SIDENAV: {
+    case layout.OPEN_LEFT_SIDENAV: {
       return Object.assign({}, state, {
         leftSideBarOpen: true
       });
     }
 
-    case LayoutActions.CLOSE_LEFT_SIDENAV: {
+    case layout.CLOSE_LEFT_SIDENAV: {
       return Object.assign({}, state, {
         leftSideBarOpen: false
       });
     }
 
-    case LayoutActions.OPEN_RIGHT_SIDENAV: {
+    case layout.OPEN_RIGHT_SIDENAV: {
       return Object.assign({}, state, {
         rightSideBarOpen: true
       });
     }
 
-    case LayoutActions.CLOSE_RIGHT_SIDENAV: {
+    case layout.CLOSE_RIGHT_SIDENAV: {
       return Object.assign({}, state, {
         rightSideBarOpen: false
+      });
+    }
+
+    case layout.OPEN_MODAL: {
+      const name = action.payload;
+      return Object.assign({}, state, {
+        openedModalName: name
+      });
+    }
+
+    case layout.CLOSE_MODAL: {
+      return Object.assign({}, state, {
+        openedModalName: null
       });
     }
 
@@ -47,3 +60,4 @@ export function reducer(state = initialState, action: Action): State {
 
 export const getLeftSidenavState = (state: State) => state.leftSideBarOpen;
 export const getRightSidenavState = (state: State) => state.rightSideBarOpen;
+export const getOpenedModalName = (state: State) => state.openedModalName;
