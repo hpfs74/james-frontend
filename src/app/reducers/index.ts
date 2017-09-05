@@ -170,6 +170,7 @@ export const getProfileLoading = createSelector(getProfileState, fromProfile.get
  * Auth Reducers
  */
 export const getAuthState = (state: State) => state.auth;
+export const getLoggedIn = createSelector(getAuthState, fromAuth.getLoggedIn);
 // export const selectAuthState = createFeatureSelector<State>('auth');
 
 
@@ -196,6 +197,7 @@ export const getInsurances = createSelector(getInsurancesState, fromInsurances.g
 export const getLayoutState = (state: State) => state.layout;
 export const getLeftSidenavState = createSelector(getLayoutState, fromLayout.getLeftSidenavState);
 export const getRightSidenavState = createSelector(getLayoutState, fromLayout.getRightSidenavState);
+export const getOpenedModalNameState = createSelector(getLayoutState, fromLayout.getOpenedModalName);
 
 /**
  * Chat Assistant Reducers

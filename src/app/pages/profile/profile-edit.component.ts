@@ -7,8 +7,8 @@ import * as FormUtils from '../../utils/base-form.utils';
   selector: 'knx-profile-edit',
   template: `
   <form [formGroup]="form.formGroup" class="knx-fancy-form">
-    <div class="knx-avatar-profile">
-      <img class="knx-avatar-profile__image" src="{{ avatarUrl }}">
+    <div class="knx-avatar knx-avatar--editable">
+      <img class="knx-avatar__profile-image" src="{{ avatarUrl }}">
 
       <cx-form-group class="cx-styleguide-icon__icon knx-icon-pencil"
         [formControlName]="form.formConfig.avatar.formControlName"

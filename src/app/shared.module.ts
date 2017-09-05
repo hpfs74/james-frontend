@@ -8,16 +8,16 @@ import { CXFormsModule } from '../../node_modules/@cx/forms';
 import { TextMaskModule } from '../../node_modules/@cx/input';
 
 // @knx
-import { KNXWizardModule } from '../../node_modules/@knx/wizard';
-import { KNXStepNavigationModule } from '../../node_modules/@knx/step-navigation';
-import { KNXCollapsiblePanelModule } from '../../node_modules/@knx/collapsible-panel';
-import { KNXInfoModule } from '../../node_modules/@knx/info';
+import { KNXWizardModule } from '@knx/wizard';
+import { KNXStepNavigationModule } from '@knx/step-navigation';
+import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
+import { KNXInfoModule } from '@knx/info';
+import { KNXModalDialogModule } from '@knx/modal';
 
 /**
  * Shared Modules
  */
 import { DropdownModule } from './components/knx-dropdown/dropdown.module';
-import { UserDialogModule } from './components/knx-user-dialog/user-dialog.module';
 
 /** Util Pages */
 import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
@@ -119,8 +119,8 @@ export const sharedModules = [
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
   KNXInfoModule,
-  DropdownModule,
-  UserDialogModule
+  KNXModalDialogModule,
+  DropdownModule
 ];
 
 

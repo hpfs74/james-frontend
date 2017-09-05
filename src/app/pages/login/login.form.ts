@@ -12,6 +12,8 @@ export class LoginForm extends BaseForm {
     password: () => 'Vul je wachtwoord in'
   };
 
+  showPassword = false;
+
   constructor(private fb: FormBuilder) {
     super();
 
@@ -49,5 +51,14 @@ export class LoginForm extends BaseForm {
         }
       }
     };
+  }
+
+  toggleShowPassword() {
+    event.preventDefault();
+    this.showPassword = !this.showPassword;
+
+    this.formConfig.password.inputOptions.type =
+      (this.formConfig.password.inputOptions.type === 'password')
+        ? 'text' : 'password';
   }
 }

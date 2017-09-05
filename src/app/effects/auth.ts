@@ -13,62 +13,63 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/delay';
 
+import { AuthToken } from '../models/auth';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localstorage.service';
-import { UserDialogService } from './../components/knx-user-dialog/user-dialog.service';
+import { UserDialogService } from './../components/knx-modal/user-dialog.service';
 
 import * as fromRoot from '../reducers';
-import * as Auth from '../actions/auth';
-import * as Profile from '../actions/profile';
-import { AuthToken } from '../models/auth';
+import * as auth from '../actions/auth';
+import * as profile from '../actions/profile';
+import * as layout from '../actions/layout';
 
 @Injectable()
 export class AuthEffects {
 
   @Effect()
   login$ = this.actions$
-    .ofType(Auth.LOGIN)
-    .map((action: Auth.Login) => action.payload)
-    .exhaustMap(auth =>
+    .ofType(auth.LOGIN)
+    .map((action: auth.Login) => action.payload)
+    .exhaustMap(isAuthenticated =>
       this.authService
-        .login(auth)
+        .login(isAuthenticated)
         .mergeMap((token: AuthToken) => {
           if (token) {
             this.localStorageService.setToken(token);
           }
           return [
-            new Auth.LoginSuccess({ token: token }),
-            new Auth.ScheduleTokenRefresh(token),
-            new Profile.LoadAction()
+            new auth.LoginSuccess({ token: token }),
+            new auth.ScheduleTokenRefresh(token),
+            new profile.LoadAction()
           ];
         })
-        .catch(error => Observable.of(new Auth.LoginFailure(error)))
+        .catch(error => Observable.of(new auth.LoginFailure(error)))
   );
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$
-    .ofType(Auth.LOGIN_SUCCESS)
+    .ofType(auth.LOGIN_SUCCESS)
     .do(() => this.router.navigate(['/']));
 
   @Effect({ dispatch: false })
   loginRedirect$ = this.actions$
-    .ofType(Auth.LOGIN_REDIRECT, Auth.LOGOUT)
+    .ofType(auth.LOGIN_REDIRECT, auth.LOGOUT)
     .do(authed => {
       this.router.navigate(['/login']);
     });
 
   @Effect({ dispatch: false })
   logout$ = this.actions$
-    .ofType(Auth.LOGOUT)
+    .ofType(auth.LOGOUT)
     .exhaustMap(auth =>
       this.authService.logout()
   );
 
   @Effect()
   scheduleRefresh$ = this.actions$
-    .ofType<Auth.ScheduleTokenRefresh | Auth.RefreshToken>(
-      Auth.SCHEDULE_TOKEN_REFRESH,
-      Auth.REFRESH_SUCCESS
+    .ofType<auth.ScheduleTokenRefresh | auth.RefreshToken>(
+      auth.SCHEDULE_TOKEN_REFRESH,
+      auth.REFRESH_SUCCESS
     )
     .map(action => action.payload)
     .switchMap((token) =>
@@ -84,35 +85,32 @@ export class AuthEffects {
 
           // for testing / 100000 to get seconds
           let delay = (exp.setUTCSeconds(tokenExp) - iat.setUTCSeconds(tokenIat)) / 1000;
-          return Observable.of(new Auth.RefreshToken(token.refresh_token)).delay(delay);
+          return Observable.of(new auth.RefreshToken(token.refresh_token)).delay(delay);
         })
   );
 
-  // TODO: replace with actual dialog call
-  @Effect({ dispatch: false})
+  @Effect()
   requestCredentials$ = this.actions$
-    .ofType<Auth.RequestCredentials>(Auth.REQUEST_CREDENTIALS)
-    .do(() => this.dialogService.openDialog());
-    // .switchMap(() => {
-    // });
+    .ofType<auth.RequestCredentials>(auth.REQUEST_CREDENTIALS)
+    .switchMap(() => Observable.of(new layout.OpenModal('loginModal')));
 
   // TODO: catch any failed http requests
   @Effect()
   refreshToken$ = this.actions$
-    .ofType(Auth.REFRESH_TOKEN)
-    .map((action: Auth.RefreshToken) => action.payload)
+    .ofType(auth.REFRESH_TOKEN)
+    .map((action: auth.RefreshToken) => action.payload)
     // .throttleTime(3000)
     .switchMap((refreshToken) => this.authService.refreshToken(refreshToken)
       .map((token) => {
         if (token && token.access_token) {
           this.localStorageService.setToken(token);
-          return new Auth.RefreshTokenSuccess(token);
+          return new auth.RefreshTokenSuccess(token);
         } else {
           // TODO: show login user dialog
-          return new Auth.RefreshTokenFailure(token);
+          return new auth.RefreshTokenFailure(token);
         }
       }))
-    .catch(error => Observable.of(new Auth.RefreshTokenFailure(error)));
+    .catch(error => Observable.of(new auth.RefreshTokenFailure(error)));
 
     // NOTE: the order of the init effect needs to be preserved as last
     // see: https://github.com/ngrx/platform/issues/246
@@ -122,15 +120,15 @@ export class AuthEffects {
         // Token is not expired
         let token: AuthToken = this.localStorageService.getToken();
         if (token !== null && token.access_token) {
-          this.store$.dispatch(new Auth.LoginSuccess({ token: token }));
-          this.store$.dispatch(new Auth.ScheduleTokenRefresh(token));
+          this.store$.dispatch(new auth.LoginSuccess({ token: token }));
+          this.store$.dispatch(new auth.ScheduleTokenRefresh(token));
         } else {
-          this.store$.dispatch(new Auth.LoginRedirect());
+          this.store$.dispatch(new auth.LoginRedirect());
         }
       } else {
         // Token is expired
         this.localStorageService.clearToken();
-        this.store$.dispatch(new Auth.LoginRedirect());
+        this.store$.dispatch(new auth.LoginRedirect());
       }
     });
 

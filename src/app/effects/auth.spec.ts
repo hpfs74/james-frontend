@@ -11,7 +11,7 @@ import { AuthEffects } from './auth';
 import { AuthToken } from './../models/auth';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localstorage.service';
-import { UserDialogService } from './../components/knx-user-dialog/user-dialog.service';
+import { UserDialogService } from './../components/knx-modal/user-dialog.service';
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';

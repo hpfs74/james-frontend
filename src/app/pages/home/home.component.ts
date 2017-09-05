@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +8,8 @@ import * as profile from '../../actions/profile';
 import * as auth from '../../actions/auth';
 
 import { Price, Nav, Feature, Profile } from '../../models';
+import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
+import { LoginModalComponent } from '../login/login-modal.component';
 import { ContentService } from '../../content.service';
 import {
   AuthService,
@@ -39,6 +41,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
+  loginModalName = 'loginModal';
+
   coverages: Array<Price>;
   topMenu: Array<Nav>;
   phone: Object;
@@ -48,20 +52,33 @@ export class HomeComponent implements OnInit {
   profile$: Observable<Profile>;
 
   constructor(
+    private viewContainerRef: ViewContainerRef,
     private router: Router,
-    private store: Store<fromRoot.State>,
+    private store$: Store<fromRoot.State>,
     private navigationService: NavigationService,
-    private contentService: ContentService) {
+    private contentService: ContentService,
+    private userDialogService: UserDialogService) {
   }
 
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
     this.footerItems = this.contentService.getContentObject().layout.footer;
-    this.profile$ = this.store.select(fromRoot.getProfile);
-    this.loading$ = this.store.select(fromRoot.getProfileLoading);
+    this.profile$ = this.store$.select(fromRoot.getProfile);
+    this.loading$ = this.store$.select(fromRoot.getProfileLoading);
+
+    this.store$
+      .select(fromRoot.getOpenedModalNameState)
+      .subscribe(modalName => {
+        // console.log(modalName);
+        if (modalName === this.loginModalName) {
+          this.userDialogService.openModal(modalName, 'Sessie verlopen', this.viewContainerRef, LoginModalComponent, {
+            fullwidthButtons: true
+          });
+        }
+      });
   }
 
   logOut() {
-    this.store.dispatch(new auth.Logout);
+    this.store$.dispatch(new auth.Logout);
   }
 }

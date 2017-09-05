@@ -4,6 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from '../../components/knx-chat-stream/chat-stream.module';
+import { UserDialogModule } from '../../components/knx-modal/user-dialog.module';
 
 import { HomeRoutingModule } from './home.routing.module';
 import { CanActivateBuyFlowGuard } from '../../services/buy-guard.service';
@@ -39,6 +40,7 @@ import { NavbarComponent } from '../../components/knx-navigation';
   imports: [
     SharedModule,
     ChatStreamModule,
+    UserDialogModule,
     EffectsModule.forFeature([
       ErrorEffects,
       AssistantEffects,
