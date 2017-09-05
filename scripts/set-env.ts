@@ -10,7 +10,8 @@ require('dotenv').config();
 // we get it from yargs's argv object
 const environment = argv.environment;
 const isProd = environment === 'prod';
-const targetPath = isProd ? `./src/environments/environment.prod.ts` : `./src/environments/environment.ts`;
+const defaultTarget = './src/environments/environment.ts';
+const targetPath = isProd ? `./src/environments/environment.prod.ts` : defaultTarget;
 
 // TODO: provide the correct client id
 const forgetPasswordLink =
@@ -63,3 +64,13 @@ writeFile(targetPath, envConfigFile, function (err) {
   }
   console.log(`Output generated at ${targetPath}`);
 });
+
+// Also write production config to environment.ts due to angular-cli bug
+if (isProd) {
+  writeFile(defaultTarget, envConfigFile, function (err) {
+    if (err) {
+      console.log(err);
+    }
+    console.log(`Output generated at ${defaultTarget}`);
+  });
+}
