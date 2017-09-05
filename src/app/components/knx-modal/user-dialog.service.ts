@@ -1,7 +1,7 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
-import { KNXModalDialogService } from '@knx/modal';
+import { KNXModalDialogService, KNXModalDialogSettings } from '@knx/modal';
 import { LoginModalComponent } from '../../pages/login/login-modal.component';
 
 import * as fromRoot from '../../reducers';
@@ -12,10 +12,11 @@ export class UserDialogService {
 
   constructor(private modalService: KNXModalDialogService, private store$: Store<fromRoot.State>) { }
 
-  public openModal(modalName: string, title: string, viewRef: ViewContainerRef, component: any) {
+  public openModal(modalName: string, title: string, viewRef: ViewContainerRef, component: any, settings?: KNXModalDialogSettings) {
     this.modalService.openDialog(viewRef, {
       title: title,
-      childComponent: component
+      childComponent: component,
+      settings: settings
     });
     this.store$.dispatch(new layout.OpenModal(modalName));
   }

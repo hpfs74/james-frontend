@@ -45,7 +45,8 @@ export class LoginModalComponent implements KNXModalDialog {
   constructor(private store$: Store<fromRoot.State>) {
     this.actionButtons = [
       {
-        text: 'Inloggen', onAction: this.login
+        text: 'Inloggen',
+        onAction: this.login.bind(this)
       }
     ];
   }
@@ -66,7 +67,7 @@ export class LoginModalComponent implements KNXModalDialog {
       }));
       return this.store$.select(fromRoot.getAuthState)
         .flatMap(authenticated => {
-          if (authenticated.loggedIn && !authenticated.loginExpired) {
+          if (authenticated.loggedIn && authenticated.loginExpired) {
             return Observable.of(true);
           } else {
             Observable.throw(new Error(this.loginFailError));

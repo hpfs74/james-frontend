@@ -71,7 +71,9 @@ export class HomeComponent implements OnInit {
       .subscribe(modalName => {
         // console.log(modalName);
         if (modalName === this.loginModalName) {
-          this.userDialogService.openModal(modalName, 'Sessie verlopen', this.viewContainerRef, LoginModalComponent);
+          this.userDialogService.openModal(modalName, 'Sessie verlopen', this.viewContainerRef, LoginModalComponent, {
+            fullwidthButtons: true
+          });
         }
       });
   }

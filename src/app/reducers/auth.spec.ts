@@ -37,7 +37,7 @@ describe('Auth reducer', () => {
 
       const expectedResult = {
         loggedIn: false,
-        loginExpired: true,
+        loginExpired: false,
         token: null,
       };
 
