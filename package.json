@@ -45,7 +45,7 @@
     "@cx/slider": "2.1.2",
     "@cx/textarea": "2.1.2",
     "@cx/utils": "1.4.0",
-    "@knx/base": "2.26.3",
+    "@knx/base": "2.28.4",
     "@knx/collapsible-panel": "0.0.92",
     "@knx/grid": "0.0.278",
     "@knx/info": "0.0.102",
