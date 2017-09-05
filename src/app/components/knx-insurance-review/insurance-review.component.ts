@@ -143,9 +143,6 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
               'gaat herstellen. <br>' +
               'In de documentlijst staan ook de voorwaarden voor extra dekkingen. Heb je die niet geselecteerd? ' +
               'Dan kun je die natuurlijk negeren.'
-            },
-            {
-              label: `<a href="${this.selectedInsurance.terms_conditions_pdf_url}" class="knx-button--util">Voorwaarden Autoverzekering</a>`
             }
           ]
         }
