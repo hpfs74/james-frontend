@@ -13,6 +13,7 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/delay';
 
+import { AuthToken } from '../models/auth';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localstorage.service';
 import { UserDialogService } from './../components/knx-modal/user-dialog.service';
@@ -21,7 +22,6 @@ import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
 import * as profile from '../actions/profile';
 import * as layout from '../actions/layout';
-import { AuthToken } from '../models/auth';
 
 @Injectable()
 export class AuthEffects {
@@ -89,7 +89,6 @@ export class AuthEffects {
         })
   );
 
-  // TODO: replace with actual dialog call
   @Effect()
   requestCredentials$ = this.actions$
     .ofType<auth.RequestCredentials>(auth.REQUEST_CREDENTIALS)

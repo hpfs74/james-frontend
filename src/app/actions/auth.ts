@@ -86,4 +86,5 @@ export type Actions =
   | RefreshTokenFailure
   | RefreshTokenSuccess
   | ScheduleTokenRefresh
+  | LoginExpired
   | RequestCredentials;

@@ -1,9 +1,10 @@
 import { Component, ComponentRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@knx/modal';
 
-import * as fromAuth from '../../reducers';
+import * as fromRoot from '../../reducers';
 import * as auth from '../../actions/auth';
 
 import { LoginForm } from './login.form';
@@ -39,19 +40,40 @@ export class LoginModalComponent implements KNXModalDialog {
   actionButtons: KNXModalDialogButton[];
   showPassword = false;
 
-  constructor(private store$: Store<fromAuth.State>) {
+  private loginFailError = 'No valid email or password';
+
+  constructor(private store$: Store<fromRoot.State>) {
     this.actionButtons = [
       {
-        text: 'Inloggen', onAction: () => {
-          // this.store$.dispatch(new layout.closeModal('loginModal'));
-          return true;
-        }
+        text: 'Inloggen', onAction: this.login
       }
     ];
   }
 
   dialogInit(reference: ComponentRef<KNXModalDialog>, options?: KNXModalDialogOptions) {
     // no processing needed
+  }
+
+  login(): Observable<boolean> {
+    event.preventDefault();
+    if (this.form.formGroup.valid) {
+      const email = this.form.formGroup.get('email').value.trim();
+      const password = this.form.formGroup.get('password').value.trim();
+
+      this.store$.dispatch(new auth.Login({
+        username: email,
+        password: password
+      }));
+      return this.store$.select(fromRoot.getAuthState)
+        .flatMap(authenticated => {
+          if (authenticated.loggedIn && !authenticated.loginExpired) {
+            return Observable.of(true);
+          } else {
+            Observable.throw(new Error(this.loginFailError));
+          }
+        });
+    }
+    return Observable.throw(new Error(this.loginFailError));
   }
 
   togglePassword(event) {

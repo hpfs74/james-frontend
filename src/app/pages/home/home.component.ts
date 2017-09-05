@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private viewContainerRef: ViewContainerRef,
     private router: Router,
-    private store: Store<fromRoot.State>,
+    private store$: Store<fromRoot.State>,
     private navigationService: NavigationService,
     private contentService: ContentService,
     private userDialogService: UserDialogService) {
@@ -63,10 +63,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
     this.footerItems = this.contentService.getContentObject().layout.footer;
-    this.profile$ = this.store.select(fromRoot.getProfile);
-    this.loading$ = this.store.select(fromRoot.getProfileLoading);
+    this.profile$ = this.store$.select(fromRoot.getProfile);
+    this.loading$ = this.store$.select(fromRoot.getProfileLoading);
 
-    this.store
+    this.store$
       .select(fromRoot.getOpenedModalNameState)
       .subscribe(modalName => {
         // console.log(modalName);
@@ -77,7 +77,6 @@ export class HomeComponent implements OnInit {
   }
 
   logOut() {
-    this.store.dispatch(new auth.RequestCredentials);
-    // this.store.dispatch(new auth.Logout);
+    this.store$.dispatch(new auth.Logout);
   }
 }

@@ -170,6 +170,7 @@ export const getProfileLoading = createSelector(getProfileState, fromProfile.get
  * Auth Reducers
  */
 export const getAuthState = (state: State) => state.auth;
+export const getLoggedIn = createSelector(getAuthState, fromAuth.getLoggedIn);
 // export const selectAuthState = createFeatureSelector<State>('auth');
 
 
