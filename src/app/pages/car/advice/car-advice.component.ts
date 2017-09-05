@@ -1,4 +1,3 @@
-import { birthDateMask } from './../../../utils/base-form.utils';
 import { Component, OnInit, OnDestroy, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
@@ -168,7 +167,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.store$.select(fromRoot.getCarInfoError)
       .subscribe((error) => {
         if (error) {
-          this.triggerLicenseInValid();
+          this.triggerLicenseInvalid();
         }
       });
 
@@ -185,7 +184,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         }
       }, err => {
         // Treat server error as invalid to prevent continuing flow
-        this.triggerLicenseInValid();
+        this.triggerLicenseInvalid();
       });
 
     // Coverage subscription
@@ -297,12 +296,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     }
   }
 
-  triggerLicenseInValid() {
+  triggerLicenseInvalid() {
     const c = this.carDetailForm.formGroup.get('licensePlate');
     c.setErrors({ 'licensePlateRDC': true });
     c.markAsTouched();
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
     this.car = null;
+  }
+
+  onLicensePlateInvalid(licensePlate: string) {
+    this.triggerLicenseInvalid();
   }
 
   onAddressChange(address: Address) {
