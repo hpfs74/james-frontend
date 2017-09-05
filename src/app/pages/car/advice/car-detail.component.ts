@@ -55,6 +55,7 @@ export class CarDetailComponent implements OnInit {
     }
   }
 
+  @Output() licensePlateInvalid: EventEmitter<string> = new EventEmitter();
   @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
   @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
@@ -102,6 +103,8 @@ export class CarDetailComponent implements OnInit {
     // so we use length here to determine validity
     if (licensePlate && licensePlate.length === validLength) {
       this.licensePlateChange.emit(licensePlate);
+    } else {
+      this.licensePlateInvalid.emit(licensePlate);
     }
   }
 

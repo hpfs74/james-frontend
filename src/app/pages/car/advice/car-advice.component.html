@@ -15,6 +15,7 @@
       <knx-step [options]="formSteps[0]">
         <knx-car-detail-form
           (licensePlateChange)="getCarInfo($event)"
+          (licensePlateInvalid)="onLicensePlateInvalid($event)"
           (addressChange)="onAddressChange($event)"
           (coverageDetailsChange)="getCoverages($event)"
           (coverageSelected)="updateSelectedCoverage($event)"
