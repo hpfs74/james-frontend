@@ -164,7 +164,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
-// export const getProfileLoaded= createSelector(getProfileState, fromProfile.getLoaded);
+export const getProfileLoaded = createSelector(getProfileState, fromProfile.getLoaded);
 
 /**
  * Auth Reducers
