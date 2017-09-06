@@ -35,5 +35,5 @@ export interface CarCompare {
   // insurance?: string;
 
   // needed for v2
-  insurance_id: string;
+  insurance_id?: string;
 }

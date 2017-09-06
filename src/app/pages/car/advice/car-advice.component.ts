@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
@@ -18,9 +17,7 @@ import * as compare from '../../../actions/compare';
 import * as coverage from '../../../actions/coverage';
 
 import { ContentService } from '../../../content.service';
-import { InsuranceService } from '../../../services/insurance.service';
 import { AssistantConfig } from '../../../models/assistant';
-import { CarService } from '../car.service';
 import { Car, Price, CarCompare, Profile, Address } from '../../../models';
 import { CarDetailComponent } from './car-detail.component';
 import { CarCoverageRecommendation } from '../../../models/coverage';
@@ -62,13 +59,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   carDetailForm: CarDetailForm;
   carExtrasForm: CarExtrasForm;
 
-  constructor(
-    private router: Router,
-    private store$: Store<fromRoot.State>,
-    private contentService: ContentService,
-    private carService: CarService,
-    private insuranceService: InsuranceService
-  ) { }
+  constructor(private store$: Store<fromRoot.State>, private contentService: ContentService) { }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -87,21 +78,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
-        if (currentAdvice && this.address) {
-          this.store$.select(fromRoot.getProfile).subscribe(currentProfile => {
-            this.address.postcode = currentProfile.postcode;
-            this.address.number = currentProfile.number;
-          });
+      if (currentAdvice && this.address) {
+        this.store$.select(fromRoot.getProfile).subscribe(currentProfile => {
+          this.address.postcode = currentProfile.postcode;
+          this.address.number = currentProfile.number;
+        });
 
-        } else if (!currentAdvice) {
-          this.store$.dispatch(new advice.AddAction({
-            id: cuid()
-          }));
-        }
-      });
+      } else if (!currentAdvice) {
+        this.store$.dispatch(new advice.AddAction({
+          id: cuid()
+        }));
+      }
+    });
 
     this.isCoverageError$ = this.store$.select(fromRoot.getCompareError);
-
     this.coverages = this.contentService.getContentObject().car.coverages;
 
     this.currentStep = 0;
@@ -110,29 +100,23 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         label: 'Je gegevens',
         nextButtonLabel: 'Naar resultaten',
         hideBackButton: true,
-        onShowStep: () => {
-          FormUtils.scrollToForm('form');
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
+        onBeforeShow: () => {
+          return Observable.of(true);
         },
+        onShowStep: this.onShowDetailsForm.bind(this),
         onBeforeNext: this.submitDetailForm.bind(this)
       },
       {
         label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
-        hideNextButton: true,
-        onShowStep: () => {
-          // this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.result', clear: true }));
-        }
+        onBeforeShow: this.onResults.bind(this),
+        hideNextButton: true
       },
       {
         label: 'Aanvragen',
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Verzekering aanvragen',
-        onShowStep: () => {
-          FormUtils.scrollToForm('knx-insurance-review');
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title', clear: true }));
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.list' }));
-        },
+        onShowStep: this.onShowSummary.bind(this),
         onBeforeNext: this.startBuyFlow.bind(this)
       }
     ];
@@ -152,9 +136,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             road_assistance: data.roadAssistance || 'RANO',
             kilometers_per_year: data.kmPerYear || 'KMR3',
             own_risk: +data.ownRisk || 0,
+            // optional: only provide this based on current insurance in profile
             insurance_id: ''
           };
-          // this.store.dispatch(new advice.UpdateAction({ insurance: compareObj }));
           this.store$.dispatch(new advice.UpdateAction(compareObj));
         }
       });
@@ -164,7 +148,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
         }
       });
-
 
     this.store$.select(fromRoot.getCarInfoError)
       .subscribe((error) => {
@@ -178,11 +161,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         const lastFound = res.slice(-1)[0];
         if (lastFound && lastFound.license) {
           this.car = lastFound;
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.niceCar',
-            value: lastFound,
-            clear: true
-          }));
+          if (this.currentStep === 0) {
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: 'car.info.niceCar',
+              value: lastFound,
+              clear: true
+            }));
+          }
         }
       }, err => {
         // Treat server error as invalid to prevent continuing flow
@@ -209,7 +194,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           }
         }
 
-    });
+      });
   }
 
   ngOnDestroy() {
@@ -263,7 +248,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     })));
 
     return this.store$.select(fromRoot.getSelectedAdvice)
-      .map(options => this.store$.dispatch(new compare.LoadCarAction(options)));
+      .map((advice) => {
+        this.store$.dispatch(new compare.LoadCarAction(advice));
+      });
   }
 
   onSelectPremium(insurance) {
@@ -330,6 +317,22 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
   toggleSideNavState(event) {
     event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
+  }
+
+  private onShowDetailsForm() {
+    FormUtils.scrollToForm('form');
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
+  }
+
+  private onResults() {
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
+  }
+
+  private onShowSummary() {
+    FormUtils.scrollToForm('knx-insurance-review');
+    this.store$.dispatch(new assistant.ClearAction);
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title', clear: true }));
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.list' }));
   }
 
   private getCompareResultCopy(): Observable<CarInsurance[]> {
