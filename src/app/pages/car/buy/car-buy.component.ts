@@ -182,12 +182,9 @@ export class CarBuyComponent implements OnInit {
         proposal: advice.insurance,
         items: Object.assign(
           proposalRequest.getItems(flatData),
-          proposalRequest.getItems(proposalRequest.getFinalQuestions(flatData))
+          proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
         )
       };
-      // TODO: check if merging is done correctly
-      // console.log(proposalRequest.getFinalQuestions(flatData));
-      // console.log(proposal)
       this.store$.dispatch(new car.BuyAction(proposal));
     });
 
