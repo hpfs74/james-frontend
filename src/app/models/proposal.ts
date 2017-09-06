@@ -111,6 +111,19 @@ export class CarProposalHelper {
     /* tslint:enable */
   }
 
+  getFinalQuestionsItems(data: Array<{key: string, value: string}>) {
+    if (!data) {
+      return;
+    }
+
+    const itemObj = {};
+    data.forEach((el) => {
+      itemObj[el.key] = el.value;
+    });
+
+    return itemObj;
+  }
+
   getCheckAnswer(value: boolean, comment: string) {
     let yesNo = this.getBoolean(value);
     return comment ? yesNo + ', ' + comment : yesNo;
