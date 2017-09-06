@@ -76,6 +76,7 @@ export class CarDetailComponent implements OnInit {
       licensePlate.valueChanges,
       loan.valueChanges)
       .distinctUntilChanged()
+      .throttleTime(1000)
       .subscribe(data => {
         if (licensePlate.valid && loan.valid) {
           this.coverageDetailsChange.emit(this.form.formGroup.value);

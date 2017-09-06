@@ -102,6 +102,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
     this.isCoverageError$ = this.store$.select(fromRoot.getCompareError);
 
+    this.coverages = this.contentService.getContentObject().car.coverages;
+
     this.currentStep = 0;
     this.formSteps = [
       {
@@ -187,18 +189,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         this.triggerLicenseInvalid();
       });
 
-    // Coverage subscription
+    // Subscribe to coverage recommendation request
     this.store$.select(fromRoot.getCoverage)
       .filter(coverage => Object.keys(coverage).length > 0)
       .take(1)
       .subscribe(coverageAdvice => {
-        this.coverages = this.contentService.getContentObject().car.coverages;
-        const coverage = this.coverages.find(price => price.id === coverageAdvice.recommended_value);
-        if (coverage) {
-          coverage.highlight = true;
+        // Copy array here to trigger change detection in CarDetailComponent
+        let coverages = this.coverages.slice(0);
+        const coverageItem = coverages.find(price => price.id === coverageAdvice.recommended_value);
+        if (coverageItem) {
+          coverageItem.highlight = true;
+          this.coverages = coverages;
           this.store$.dispatch(new assistant.AddCannedMessage({
             key: 'car.info.coverage.advice',
-            value: coverage,
+            value: coverageItem,
             clear: true
           }));
         }

@@ -76,6 +76,14 @@ export class HomeComponent implements OnInit {
           });
         }
       });
+
+    // Explicitly load profile if not loaded yet (on page refresh)
+    this.store$.select(fromRoot.getProfileLoaded)
+      .subscribe((loaded) => {
+        if (!loaded) {
+          this.store$.dispatch(new profile.LoadAction());
+        }
+      });
   }
 
   logOut() {

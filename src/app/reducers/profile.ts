@@ -52,3 +52,4 @@ export function reducer(state = initialState, action: Action): State {
 
 export const getCurrent = (state: State) => state.profile;
 export const getLoading = (state: State) => state.loading;
+export const getLoaded = (state: State) => state.loaded;
