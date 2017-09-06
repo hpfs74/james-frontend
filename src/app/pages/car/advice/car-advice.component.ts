@@ -195,17 +195,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(coverageAdvice => {
         // Copy array here to trigger change detection in CarDetailComponent
-        let coverages = this.coverages.slice(0);
-        const coverageItem = coverages.find(price => price.id === coverageAdvice.recommended_value);
-        if (coverageItem) {
-          coverageItem.highlight = true;
-          this.coverages = coverages;
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.coverage.advice',
-            value: coverageItem,
-            clear: true
-          }));
+        if (this.coverages) {
+          let coverages = this.coverages.slice(0);
+          const coverageItem = coverages.find(price => price.id === coverageAdvice.recommended_value);
+          if (coverageItem) {
+            coverageItem.highlight = true;
+            this.coverages = coverages;
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: 'car.info.coverage.advice',
+              value: coverageItem,
+              clear: true
+            }));
+          }
         }
+
     });
   }
 

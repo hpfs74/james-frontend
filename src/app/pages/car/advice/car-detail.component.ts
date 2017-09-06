@@ -69,6 +69,7 @@ export class CarDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    const ONCHANGE_THROTTLE = 1000;
     const licensePlate = this.form.formGroup.get('licensePlate');
     const loan = this.form.formGroup.get('loan');
 
@@ -76,7 +77,7 @@ export class CarDetailComponent implements OnInit {
       licensePlate.valueChanges,
       loan.valueChanges)
       .distinctUntilChanged()
-      .throttleTime(1000)
+      .throttleTime(ONCHANGE_THROTTLE)
       .subscribe(data => {
         if (licensePlate.valid && loan.valid) {
           this.coverageDetailsChange.emit(this.form.formGroup.value);
