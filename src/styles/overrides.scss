@@ -31,16 +31,31 @@
   padding-top: 10px;
 }
 
-// .knx-base h4 {
-//   text-transform: none;
-// }
-
 .knx-message .knx-message__content {
   line-height: 1.4em;
 }
 
+.knx-info__content > .knx-message,
+.knx-info__content > .knx-message p {
+  color: $knab-primary-blue;
+}
+
+.knx-info__content > .knx-message p {
+  margin-bottom: 10px;
+}
+
+.knx-info__content > .knx-message p:last-child {
+  margin-bottom: 0;
+}
+
 .knx-message.knx-message--hint {
   margin-bottom: 15px;
+}
+
+.knx-wizard--controls {
+  .knx-message {
+    margin-bottom: 15px;
+  }
 }
 
 @media (max-width: 768px) {

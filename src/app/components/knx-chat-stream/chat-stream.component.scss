@@ -1,3 +1,5 @@
+$knx-chat-stream-zindex: 1020;
+$knx-chat-stream-message-zindex: 1010;
 
 .knx-chat-stream {
   padding: 20px;
@@ -5,6 +7,8 @@
   background: $knab-primary-gray;
   border-radius: $knab-border-radius;
   margin-bottom: 40px;
+  z-index: $knx-chat-stream-zindex;
+  overflow: hidden;
 }
 
 .knx-chat-stream > .knx-button {
@@ -24,4 +28,9 @@
     color: $knab-primary-blue;
     padding-right: 15px;
   }
+}
+
+.knx-chat-stream .knx-message--chat {
+  z-index: $knx-chat-stream-message-zindex;
+  margin-top: 15px;
 }
