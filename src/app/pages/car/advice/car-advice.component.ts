@@ -92,7 +92,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
             this.address.postcode = currentProfile.postcode;
             this.address.number = currentProfile.number;
           });
-
         } else if (!currentAdvice) {
           this.store$.dispatch(new advice.AddAction({
             id: cuid()
@@ -127,9 +126,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Verzekering aanvragen',
         onShowStep: () => {
+          let that = this;
+
           FormUtils.scrollToForm('knx-insurance-review');
+
           this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title', clear: true }));
           this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.list' }));
+          this.store$.select(fromRoot.getSelectedInsurance).take(1)
+            .subscribe(selectedInsurance => {
+              that.formSteps[2].hideNextButton = !selectedInsurance.supported;
+          });
         },
         onBeforeNext: this.startBuyFlow.bind(this)
       }
