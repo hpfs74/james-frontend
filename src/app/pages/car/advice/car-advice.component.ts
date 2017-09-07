@@ -67,6 +67,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         title: 'Expert autoverzekeringen'
       }
     }));
+    // bind observables
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromRoot.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromRoot.getAssistantMessageState);
@@ -75,6 +76,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.selectedInsurance$ = this.store$.select(fromRoot.getSelectedInsurance);
     this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
     this.isCoverageLoading$ = this.store$.select(fromRoot.getCompareLoading);
+
+    // initialize forms
+    const formBuilder = new FormBuilder();
+    this.carDetailForm = new CarDetailForm(formBuilder);
+    this.carExtrasForm = new CarExtrasForm(formBuilder);
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
@@ -100,9 +106,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         label: 'Je gegevens',
         nextButtonLabel: 'Naar resultaten',
         hideBackButton: true,
-        onBeforeShow: () => {
-          return Observable.of(true);
-        },
         onShowStep: this.onShowDetailsForm.bind(this),
         onBeforeNext: this.submitDetailForm.bind(this)
       },
@@ -110,7 +113,29 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
         onBeforeShow: this.onResults.bind(this),
-        hideNextButton: true
+        hideNextButton: true,
+        onShowStep: () => {
+          this.carExtrasForm.formGroup.valueChanges
+            .debounceTime(200)
+            .subscribe(data => {
+              if (this.currentStep === 1) {
+                const compareObj = {
+                  coverage: data.coverage,
+                  cover_occupants: data.extraOptionsOccupants || false,
+                  no_claim_protection: data.extraOptionsNoClaim || false,
+                  legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
+                  road_assistance: data.roadAssistance || 'RANO',
+                  kilometers_per_year: data.kmPerYear || 'KMR3',
+                  own_risk: +data.ownRisk || 0,
+                  insurance_id: ''
+                };
+                this.store$.dispatch(new advice.UpdateAction(compareObj));
+              }
+            });
+
+          FormUtils.scrollToForm('form');
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
+        }
       },
       {
         label: 'Aanvragen',
@@ -120,90 +145,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         onBeforeNext: this.startBuyFlow.bind(this)
       }
     ];
-    const formBuilder = new FormBuilder();
-    this.carDetailForm = new CarDetailForm(formBuilder);
-
-    this.carExtrasForm = new CarExtrasForm(formBuilder);
-    this.carExtrasForm.formGroup.valueChanges
-      .debounceTime(200)
-      .subscribe(data => {
-        if (this.currentStep === 1) {
-          const compareObj = {
-            coverage: data.coverage,
-            cover_occupants: data.extraOptionsOccupants || false,
-            no_claim_protection: data.extraOptionsNoClaim || false,
-            legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
-            road_assistance: data.roadAssistance || 'RANO',
-            kilometers_per_year: data.kmPerYear || 'KMR3',
-            own_risk: +data.ownRisk || 0,
-            // optional: only provide this based on current insurance in profile
-            insurance_id: ''
-          };
-          this.store$.dispatch(new advice.UpdateAction(compareObj));
-        }
-      });
-    this.store$.select(fromRoot.getSelectedAdvice)
-      .subscribe(advice => {
-        if (advice && advice.coverage) {
-          this.carExtrasForm.formGroup.get('coverage').patchValue(advice.coverage);
-        }
-      });
-
-    this.store$.select(fromRoot.getCarInfoError)
-      .subscribe((error) => {
-        if (error) {
-          this.triggerLicenseInvalid();
-        }
-      });
-
-    this.store$.select(fromRoot.getCarInfo)
-      .subscribe((res: Array<Car>) => {
-        const lastFound = res.slice(-1)[0];
-        if (lastFound && lastFound.license) {
-          this.car = lastFound;
-          if (this.currentStep === 0) {
-            this.store$.dispatch(new assistant.AddCannedMessage({
-              key: 'car.info.niceCar',
-              value: lastFound,
-              clear: true
-            }));
-          }
-        }
-      }, err => {
-        // Treat server error as invalid to prevent continuing flow
-        this.triggerLicenseInvalid();
-      });
-
-    // Subscribe to coverage recommendation request
-    this.store$.select(fromRoot.getCoverage)
-      .filter(coverage => Object.keys(coverage).length > 0)
-      .take(1)
-      .subscribe(coverageAdvice => {
-        // Copy array here to trigger change detection in CarDetailComponent
-        if (this.coverages) {
-          let coverages = this.coverages.slice(0);
-          const coverageItem = coverages.find(price => price.id === coverageAdvice.recommended_value);
-          if (coverageItem) {
-            coverageItem.highlight = true;
-            this.coverages = coverages;
-            this.store$.dispatch(new assistant.AddCannedMessage({
-              key: 'car.info.coverage.advice',
-              value: coverageItem,
-              clear: true
-            }));
-          }
-        }
-
-      });
   }
 
   ngOnDestroy() {
     this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
-  submitDetailForm(): Observable<any> {
+  submitDetailForm() {
     const detailForm = this.carDetailForm.formGroup;
     const addressForm = this.carDetailForm.addressForm;
+
+    console.log(detailForm.value);
 
     FormUtils.validateForm(detailForm);
     FormUtils.validateForm(addressForm);
@@ -234,7 +186,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       house_number: this.address.number,
       country: 'NL',
       kilometers_per_year: detailForm.value.kmPerYear,
-      own_risk: +detailForm.value.ownRisk,
+      own_risk: +detailForm.value.ownRisk || 375,
       cover_occupants: false,
       legal_aid: 'LAN',
       no_claim_protection: false,
@@ -242,12 +194,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       insurance_id: ''
     };
 
+    console.log(compareObj);
+
     // add address in format for profile
     this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compareObj, {
       address: this.address
     })));
 
     return this.store$.select(fromRoot.getSelectedAdvice)
+      .take(1)
       .map((advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
       });
@@ -285,8 +240,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   getCarInfo(licensePlate: string) {
-    if (licensePlate) {
-      this.store$.dispatch(new car.GetInfoAction(licensePlate));
+    if (this.currentStep === 0) {
+      if (licensePlate) {
+        this.store$.dispatch(new car.GetInfoAction(licensePlate));
+      }
     }
   }
 
@@ -320,6 +277,55 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   private onShowDetailsForm() {
+    this.store$.select(fromRoot.getCarInfoError)
+      .filter(() => this.currentStep === 0)
+      .subscribe((error) => {
+        if (error) {
+          this.triggerLicenseInvalid();
+        }
+      });
+
+    this.store$.select(fromRoot.getCarInfo)
+      .filter(() => this.currentStep === 0)
+      .subscribe((res: Array<Car>) => {
+        const lastFound = res.slice(-1)[0];
+        if (lastFound && lastFound.license) {
+          this.car = lastFound;
+          this.store$.dispatch(new assistant.AddCannedMessage({
+            key: 'car.info.niceCar',
+            value: lastFound,
+            clear: true
+          }));
+        }
+      }, err => {
+        // Treat server error as invalid to prevent continuing flow
+        this.triggerLicenseInvalid();
+      });
+
+    // Subscribe to coverage recommendation request
+    this.store$.select(fromRoot.getCoverage)
+      .filter(coverage => Object.keys(coverage).length > 0)
+      .take(1)
+      .subscribe(coverageAdvice => {
+        // Copy array here to trigger change detection in CarDetailComponent
+        if (this.coverages) {
+          let coverages = this.coverages.slice(0);
+          const coverageItem = coverages.find(price => price.id === coverageAdvice.recommended_value);
+          if (coverageItem) {
+            coverageItem.highlight = true;
+            this.coverages = coverages;
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: 'car.info.coverage.advice',
+              value: coverageItem,
+              clear: true
+            }));
+          }
+        }
+      });
+
+    FormUtils.scrollToForm('form');
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
+
     FormUtils.scrollToForm('form');
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
   }

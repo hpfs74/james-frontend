@@ -68,6 +68,7 @@ export class AuthHttp {
   }
 
   public requestWithToken(req: Request): Observable<Response> {
+    console.warn(req.url);
     if (!AuthUtils.tokenNotExpired('token')) {
       return new Observable<Response>((obs: any) => {
         obs.error(new AuthHttpError('No token present or has expired'));

@@ -17,7 +17,7 @@ export interface CarCompare {
   kilometers_per_year: string;
   legal_aid: string;
   no_claim_protection: boolean;
-  own_risk: number;
+  own_risk?: number;
   risk?: string;
   road_assistance: string;
 
