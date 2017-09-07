@@ -32,7 +32,7 @@ import { InsuranceAdvice, Insurer } from '../../models';
                   Prijs <br> kwaliteit
                   <knx-info size="md" isFloating="true" class="knx-info">
                     <div class="knx-info__content">
-                      <div class="knx-message knx-message--chat knx-message--arrow-top">
+                      <div class="knx-message knx-message--arrow-top">
                         <div class="knx-message__content" [innerHTML]="infoMessages.priceQuality"></div>
                       </div>
                     </div>
@@ -46,7 +46,7 @@ import { InsuranceAdvice, Insurer } from '../../models';
                   Profielscore
                   <knx-info size="md" isFloating="true" class="knx-info">
                     <div class="knx-info__content">
-                      <div class="knx-message knx-message--chat knx-message--arrow-top">
+                      <div class="knx-message knx-message--arrow-top">
                         <div class="knx-message__content" [innerHTML]="infoMessages.profileScore"></div>
                       </div>
                     </div>

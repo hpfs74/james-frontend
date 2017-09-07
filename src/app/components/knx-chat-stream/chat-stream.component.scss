@@ -30,7 +30,7 @@ $knx-chat-stream-message-zindex: 1010;
   }
 }
 
-.knx-chat-stream > .knx-message--chat {
+.knx-chat-stream .knx-message--chat {
   z-index: $knx-chat-stream-message-zindex;
   margin-top: 15px;
 }

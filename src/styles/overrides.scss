@@ -35,6 +35,19 @@
   line-height: 1.4em;
 }
 
+.knx-info__content > .knx-message,
+.knx-info__content > .knx-message p {
+  color: $knab-primary-blue;
+}
+
+.knx-info__content > .knx-message p {
+  margin-bottom: 10px;
+}
+
+.knx-info__content > .knx-message p:last-child {
+  margin-bottom: 0;
+}
+
 .knx-message.knx-message--hint {
   margin-bottom: 15px;
 }
