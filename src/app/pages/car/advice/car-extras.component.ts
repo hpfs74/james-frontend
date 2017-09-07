@@ -13,6 +13,18 @@ import { CarExtrasForm } from './car-extras.form';
     h4.knx-collapse-message__title {
       font-size: 16px;
     }
+
+    .knx-message__content {
+      color: #fff;
+    }
+
+    .knx-message__content ul {
+      margin-top: 10px;
+    }
+
+    .knx-message__content ul > li {
+      font-size: 14px;
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

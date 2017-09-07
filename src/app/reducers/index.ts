@@ -164,7 +164,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
-// export const getProfileLoaded= createSelector(getProfileState, fromProfile.getLoaded);
+export const getProfileLoaded = createSelector(getProfileState, fromProfile.getLoaded);
 
 /**
  * Auth Reducers
@@ -213,6 +213,7 @@ export const getCompareState = (state: State) => state.compare;
 export const getCompareResult = createSelector(getCompareState, fromCompare.getCompareResult);
 export const getCompareLoading = createSelector(getCompareState, fromCompare.getLoading);
 export const getCompareError = createSelector(getCompareState, fromCompare.getError);
+export const getCompareLoaded = createSelector(getCompareState, fromCompare.getLoaded);
 
 /**
  * Advice Reducers

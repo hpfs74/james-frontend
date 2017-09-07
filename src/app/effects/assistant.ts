@@ -22,16 +22,20 @@ export class AssistantEffects {
     .ofType(assistant.ADD_CANNED_MESSAGE)
     .map((action: assistant.AddCannedMessage) => action.payload)
     .withLatestFrom(this.store$, (action, state) => {
+      let prev = state.assistant.messages[state.assistant.messages.length - 1];
+      let previousMessage = prev ? prev.data : null;
+
       return {
         payload: action,
-        config: state.assistant.config
+        config: state.assistant.config,
+        prev: previousMessage
       };
     })
     .switchMap((combined: any) => {
       let key = combined.payload.key;
       let value = combined.payload.value;
 
-      let message;
+      let message: any;
       let prop = key.split('.').reduce((o, i) => o[i], combined.config);
       if (typeof prop === 'function') {
         let fnCall = value ? prop(value) : prop();
@@ -39,11 +43,15 @@ export class AssistantEffects {
       } else {
         message = prop;
       }
-      return combined.payload.clear ?
+      if (message !== combined.prev) {
+        // Only emit add message action if it's different than previous
+        return combined.payload.clear ?
         Observable.of(
-          { type: assistant.CLEAR_MESSAGES, payload: message },
+          { type: assistant.CLEAR_MESSAGES, payload: null },
           { type: assistant.ADD_MESSAGE, payload: message })
         : Observable.of({ type: assistant.ADD_MESSAGE, payload: message });
+      }
+      return Observable.of({ type: 'NO_ACTION' });
     });
 
     @Effect({ dispatch: false })
