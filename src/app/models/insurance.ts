@@ -5,6 +5,7 @@ export interface Insurance {
   reference: string;
   label: string;
 
+  url?: string;
   insurance?: string;
   insurance_logo?: string;
   insurance_brand?: string;

@@ -78,18 +78,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
-      if (currentAdvice && this.address) {
-        this.store$.select(fromRoot.getProfile).subscribe(currentProfile => {
-          this.address.postcode = currentProfile.postcode;
-          this.address.number = currentProfile.number;
-        });
+        if (currentAdvice && this.address) {
+          this.store$.select(fromRoot.getProfile).subscribe(currentProfile => {
+            this.address.postcode = currentProfile.postcode;
+            this.address.number = currentProfile.number;
+          });
 
-      } else if (!currentAdvice) {
-        this.store$.dispatch(new advice.AddAction({
-          id: cuid()
-        }));
-      }
-    });
+        } else if (!currentAdvice) {
+          this.store$.dispatch(new advice.AddAction({
+            id: cuid()
+          }));
+        }
+      });
 
     this.isCoverageError$ = this.store$.select(fromRoot.getCompareError);
     this.coverages = this.contentService.getContentObject().car.coverages;
@@ -329,10 +329,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   private onShowSummary() {
+    let that = this;
     FormUtils.scrollToForm('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title', clear: true }));
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.list' }));
+    this.store$.select(fromRoot.getSelectedInsurance).take(1)
+      .subscribe(selectedInsurance => {
+        that.formSteps[2].hideNextButton = !selectedInsurance.supported;
+      });
   }
 
   private getCompareResultCopy(): Observable<CarInsurance[]> {

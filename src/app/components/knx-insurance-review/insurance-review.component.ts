@@ -56,6 +56,33 @@ interface SectionFields {
         </div>
       </div>
     </knx-collapsible-panel>
+
+    <p *ngIf="!selectedInsurance?.supported; else supportedBenefits">Deze verzekering kan niet via Knab Verzekeren worden gekocht.
+      Dit omdat FBTO geen premier directe link heeft
+      met Knab Verzekeren. Wij werken er altijd in om zoveel mogelijk verzekeringsmaatschappijen samen te werken met ons.
+      Voor dit moment kunt u deze verzekering via de FBTO website krijgen.
+    </p>
+
+    <ng-template #supportedBenefits>
+      <div class="knx-insurance-review__disclaimer">
+        <strong>De voordelen van Knab Verzekeren</strong>
+
+        <ul>
+          <li>
+            <i class="knx-icon-check"></i> Met de Knab Verzekeren App altijd de nodige informatie bij de hand.</li>
+          <li>
+            <i class="knx-icon-check"></i> Eén overzicht van al je verzekeringen.</li>
+          <li>
+            <i class="knx-icon-check"></i> Eén overzicht van al je verzekeringen.</li>
+        </ul>
+
+        <div class="knx-insurance-review__thumbs-up-guy"></div>
+      </div>
+    </ng-template>
+
+      <a *ngIf="!selectedInsurance?.supported"
+       [attr.href]="selectedInsurance?._embedded.insurance.url"
+       class="knx-button knx-button--secondary pull-right">Ga naar website</a>
   `
 })
 export class InsuranceReviewComponent implements OnChanges, OnInit {
