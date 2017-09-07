@@ -76,7 +76,7 @@ interface SectionFields {
             <i class="knx-icon-check"></i> Eén overzicht van al je verzekeringen.</li>
         </ul>
 
-        <div class="thumbs-up-guy"></div>
+        <div class="knx-insurance-review__thumbs-up-guy"></div>
       </div>
     </ng-template>
 

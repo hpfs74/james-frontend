@@ -27,15 +27,6 @@
   max-width: 150px;
 }
 
-.thumbs-up-guy {
-  position: absolute;
-  right: 10px;
-  bottom: 0;
-  width: 141px;
-  height: 159px;
-  background: url("/assets/images/characters/thumbs-up-guy.png") no-repeat center bottom;
-}
-
 .knx-insurance-review__disclaimer {
   position: relative;
   padding: 20px;
@@ -59,4 +50,13 @@
       }
     }
   }
+}
+
+.knx-insurance-review__thumbs-up-guy {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  width: 141px;
+  height: 159px;
+  background: url("/assets/images/characters/thumbs-up-guy.png") no-repeat center bottom;
 }
