@@ -26,7 +26,8 @@ export class CarDetailComponent implements OnInit {
   @Input() isCoverageError: boolean;
 
   @Input() set advice(value: any) {
-    if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold || value.loan || value.gender || value.coverage) {
+    if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold ||
+      value.coverage || value.gender || value.active_loan) {
       this.form.formGroup.patchValue(Object.assign({}, {
         licensePlate: value.license || null,
         claimFreeYears: value.claim_free_years || null,
@@ -43,7 +44,7 @@ export class CarDetailComponent implements OnInit {
       );
       this.form.addressForm.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
-        houseNumber: value.address ? value.address.number : null,
+        houseNumber: value.address ? FormUtils.getNumbers(value.address.number) : null,
         houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null
       }));
 
