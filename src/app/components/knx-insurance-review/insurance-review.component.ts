@@ -57,10 +57,12 @@ interface SectionFields {
       </div>
     </knx-collapsible-panel>
 
-    <p *ngIf="!selectedInsurance?.supported; else supportedBenefits">Deze verzekering kan niet via Knab Verzekeren worden gekocht.
-      Dit omdat FBTO geen premier directe link heeft
-      met Knab Verzekeren. Wij werken er altijd in om zoveel mogelijk verzekeringsmaatschappijen samen te werken met ons.
-      Voor dit moment kunt u deze verzekering via de FBTO website krijgen.
+    <p *ngIf="!selectedInsurance?.supported; else supportedBenefits">
+      This insurance cannot be bought via Knab Verzekeren. This because FBTO doesn't
+      have a premium direct link with Knab Verzekeren.
+      We are always working to get as much as possibLe insurance companies to working
+      together with us. For now you can get this insurance via the FBTO website.
+
     </p>
 
     <ng-template #supportedBenefits>

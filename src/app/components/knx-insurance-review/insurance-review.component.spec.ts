@@ -79,4 +79,29 @@ describe('Component: InsuranceReviewComponent', () => {
     expect(comp.insuranceReviewComponent.ngOnChanges).toHaveBeenCalled();
     expect(comp.insuranceReviewComponent.sections[0].fields[0].value).toEqual('200');
   });
+
+  it('should have different flows for supported and unsupported insurances', () => {
+    comp.selectedInsuranceFromHost = {
+      details: '200',
+      own_risk: '200',
+      monthly_premium: '200',
+      one_off_premium: '200',
+      road_assistance: '200',
+      legal_aid: '200',
+      no_claim_protection: '200',
+      cover_occupants: '200',
+      supported: false,
+      documents: [{name: 'document name', url: 'https://document.com'}],
+      _embedded: {insurance: {insurance_logo: 'logogurl-2', url: 'http://test.test'}}
+    };
+    fixture.detectChanges();
+
+    let de = fixture.debugElement.nativeElement.querySelectorAll('.knx-button.knx-button--secondary.pull-right');
+    expect(de.length).toEqual(1);
+
+    comp.selectedInsuranceFromHost.supported = true;
+    fixture.detectChanges();
+    de = fixture.debugElement.nativeElement.querySelectorAll('.knx-button.knx-button--secondary.pull-right');
+    expect(de.length).toEqual(0);
+  });
 });
