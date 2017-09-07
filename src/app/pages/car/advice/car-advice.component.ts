@@ -97,6 +97,22 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         }
       });
 
+    this.carExtrasForm.formGroup.valueChanges
+      .debounceTime(200)
+      .subscribe(data => {
+        const compareObj = {
+          coverage: data.coverage,
+          cover_occupants: data.extraOptionsOccupants || false,
+          no_claim_protection: data.extraOptionsNoClaim || false,
+          legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
+          road_assistance: data.roadAssistance || 'RANO',
+          kilometers_per_year: data.kmPerYear || 'KMR3',
+          own_risk: +data.ownRisk || 0,
+          insurance_id: ''
+        };
+        this.store$.dispatch(new advice.UpdateAction(compareObj));
+      });
+
     this.isCoverageError$ = this.store$.select(fromRoot.getCompareError);
     this.coverages = this.contentService.getContentObject().car.coverages;
 
@@ -115,24 +131,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         onBeforeShow: this.onResults.bind(this),
         hideNextButton: true,
         onShowStep: () => {
-          this.carExtrasForm.formGroup.valueChanges
-            .debounceTime(200)
-            .subscribe(data => {
-              if (this.currentStep === 1) {
-                const compareObj = {
-                  coverage: data.coverage,
-                  cover_occupants: data.extraOptionsOccupants || false,
-                  no_claim_protection: data.extraOptionsNoClaim || false,
-                  legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
-                  road_assistance: data.roadAssistance || 'RANO',
-                  kilometers_per_year: data.kmPerYear || 'KMR3',
-                  own_risk: +data.ownRisk || 0,
-                  insurance_id: ''
-                };
-                this.store$.dispatch(new advice.UpdateAction(compareObj));
-              }
-            });
-
           FormUtils.scrollToForm('form');
           this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
         }
@@ -154,8 +152,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   submitDetailForm() {
     const detailForm = this.carDetailForm.formGroup;
     const addressForm = this.carDetailForm.addressForm;
-
-    console.log(detailForm.value);
 
     FormUtils.validateForm(detailForm);
     FormUtils.validateForm(addressForm);
@@ -194,15 +190,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       insurance_id: ''
     };
 
-    console.log(compareObj);
-
     // add address in format for profile
     this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compareObj, {
       address: this.address
     })));
 
     return this.store$.select(fromRoot.getSelectedAdvice)
-      .take(1)
+      // .take(1) => prevents carExtras from triggering new compare action
       .map((advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
       });

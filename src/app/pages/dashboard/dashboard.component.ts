@@ -42,12 +42,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.profile$ = this.store$.select(fromRoot.getProfile);
-    // this.insurances$ = this.store.select(fromRoot.getInsurances);
-
     this.store$.dispatch(new assistant.ClearAction);
 
     this.profile$
-      .distinctUntilChanged((prev, next) => prev._id === next._id)
+      .filter((profile) => profile.firstname !== undefined)
+      // .distinctUntilChanged((prev, next) => prev._id === next._id)
       .take(1)
       .subscribe((profile) => {
         this.store$.dispatch(new assistant.AddCannedMessage({

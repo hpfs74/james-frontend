@@ -10,7 +10,7 @@ export class AssistantConfig {
   public dashboard = {
     start: 'Waar wil je mee beginnen?',
     welcome: (firstName: string) =>
-      firstName ? `Hoi <strong>${firstName}</strong>` : `Hoi,` +
+      (firstName ? `Hoi <strong>${firstName}</strong>,` : `Hoi,`) +
         ` ik ben je persoonlijke verzekeringsassistent.
         Verzekeringen die je via Knab afsluit staan automatisch in je overzicht.
         Maar ook je bestaande verzekeringen voeg je gemakkelijk toe.`,

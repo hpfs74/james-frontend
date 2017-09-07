@@ -97,6 +97,10 @@ export const pickDefined = function (data, keys) {
   return result;
 };
 
+export const getNumbers = function (str: string) {
+  return str.match(/\d+/g);
+};
+
 export const hasControlRequiredValidator = function (fc: FormControl | AbstractControl) {
   let required = false;
   if (fc.validator) {

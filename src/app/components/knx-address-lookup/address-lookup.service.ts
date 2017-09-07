@@ -26,6 +26,10 @@ export class AddressLookupService {
     // Deprecated request to NICCI Api
     // const body = { address: postalCode + houseNumber + (houseNumberExtension || '') };
     // return this.authHttp.post(this.baseUrl, body);
+    if (houseNumberExtension) {
+      houseNumberExtension = houseNumberExtension.toUpperCase();
+    }
+
     const address = `${this.baseUrl}/${postalCode}${houseNumber}${houseNumberExtension || ''}`;
     return this.authHttp.get(address)
       .map((response) => {

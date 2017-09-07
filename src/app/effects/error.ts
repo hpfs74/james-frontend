@@ -46,10 +46,6 @@ export class ErrorEffects {
     )
     .map(action => action.payload)
     .filter(error => error instanceof Response && error.status === 401 || error.status === 403)
-    .do(error => {
-      // console.log('Unauthenticated');
-      // console.log(error);
-    })
     .switchMap(error => Observable.of(new auth.RequestCredentials));
 
   constructor(private actions$: Actions, private store$: Store<fromRoot.State>) { }
