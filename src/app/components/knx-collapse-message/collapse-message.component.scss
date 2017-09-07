@@ -14,9 +14,10 @@
 h4.knx-collapse-message__title,
 .knx-collapse-message__title {
   color: $knab-primary-blue;
-  font-size: $font-size-base - 2;
+  font-size: $font-size-base;
   font-family: $font-family-base;
   margin-bottom: 20px;
+  text-transform: none;
 }
 
 .knx-collapse-message__toggle {
@@ -49,8 +50,9 @@ h4.knx-collapse-message__title,
 
 .knx-collapse-message__content {
   label,
+  .cx-radio__label,
   .cx-checkbox__label {
-    font-size: $font-size-base - 2;
+    font-size: $font-size-base;
   }
 
   .cx-form-group {

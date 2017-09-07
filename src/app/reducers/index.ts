@@ -213,6 +213,7 @@ export const getCompareState = (state: State) => state.compare;
 export const getCompareResult = createSelector(getCompareState, fromCompare.getCompareResult);
 export const getCompareLoading = createSelector(getCompareState, fromCompare.getLoading);
 export const getCompareError = createSelector(getCompareState, fromCompare.getError);
+export const getCompareLoaded = createSelector(getCompareState, fromCompare.getLoaded);
 
 /**
  * Advice Reducers

@@ -47,7 +47,7 @@ export class AssistantEffects {
         // Only emit add message action if it's different than previous
         return combined.payload.clear ?
         Observable.of(
-          { type: assistant.CLEAR_MESSAGES, payload: message },
+          { type: assistant.CLEAR_MESSAGES, payload: null },
           { type: assistant.ADD_MESSAGE, payload: message })
         : Observable.of({ type: assistant.ADD_MESSAGE, payload: message });
       }

@@ -19,18 +19,15 @@
         <div class="knx-info__content">
           <div class="knx-message knx-message--chat knx-message--arrow-top">
             <div class="knx-message__content">
-              <p>
-                Pechhulp : Deze extra dekking sluit je af vanaf  € 3 per maand. <br/>
-                Fijn als je bij pech kunt rekenen op pechhulp en snel weer de weg op kunt.
-                Heb je een reisverzekering? Check dan even of pechhulp in het buitenland daar al in zit.
-                En heb je een nieuwe auto? Dan heb je vaak het eerste jaar gratis pechhulp van de dealer.
-              </p>
+              Pechhulp : Deze extra dekking sluit je af vanaf  € 3 per maand. <br/>
+              Fijn als je bij pech kunt rekenen op pechhulp en snel weer de weg op kunt.
+              Heb je een reisverzekering? Check dan even of pechhulp in het buitenland daar al in zit.
+              En heb je een nieuwe auto? Dan heb je vaak het eerste jaar gratis pechhulp van de dealer.
 
               <ul>
                 <li>Binnen Nederland : Pechhulp in heel Nederland is gedekt.</li>
                 <li>Binnen Europa : Pechhulp in heel Europa is gedekt</li>
               </ul>
-
             </div>
           </div>
         </div>
@@ -39,12 +36,7 @@
   </knx-collapse-message>
 
   <knx-collapse-message [ngClass]="optionModifierClass" title="Aanvullende dekkingen" [isOpen]="true">
-    <!--<cx-form-group-->
-      <!--[options]="form.formConfig.extraOptions"-->
-      <!--[formControlName]="form.formConfig.extraOptions.formControlName">-->
-    <!--</cx-form-group>-->
     <div class="">
-
       <!---->
       <cx-checkbox
         [formControlName]="form.formConfig.extraOptionsLegal.formControlName"
@@ -54,18 +46,15 @@
         <div class="knx-info__content">
           <div class="knx-message knx-message--chat knx-message--arrow-top">
             <div class="knx-message__content">
-              <p>
-                <b>Rechtsbijstand</b>: Deze extra dekking sluit je af vanaf  € 3 per maand. <br/>
-                Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat ervaren juristen je bijstaan. Dit geldt alleen voor verkeer rechtsbijstand en alleen voor deze auto.
-              </p>
+              <strong>Rechtsbijstand</strong>: Deze extra dekking sluit je af vanaf  € 3 per maand. <br/>
+              Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat ervaren juristen je bijstaan. Dit geldt alleen voor verkeer rechtsbijstand en alleen voor deze auto.
             </div>
           </div>
         </div>
       </knx-info>
     </div>
 
-    <div class="">
-
+    <div>
       <!---->
       <cx-checkbox
         [formControlName]="form.formConfig.extraOptionsNoClaim.formControlName"
@@ -75,18 +64,16 @@
         <div class="knx-info__content">
           <div class="knx-message knx-message--chat knx-message--arrow-top">
             <div class="knx-message__content">
-              <p>
-                <b>No-claim beschermer</b>: Deze extra dekking sluit je af vanaf  € 4 per maand. <br/>
-                Hiermee kun je elk jaar een keer schade door je eigen schuld claimen zonder dat de premie van je lopende verzekering omhoog gaat. <br/>
-                Nadeel is dat de registratie van je schadevrije jaren wel wordt aangepast. Dat is vervelend als je wilt veranderen van verzekeraar, want dan betaal je plots een hogere premie vanwege je schadevrije jaren.
-              </p>
+              <strong>No-claim beschermer</strong>: Deze extra dekking sluit je af vanaf  € 4 per maand. <br/>
+              Hiermee kun je elk jaar een keer schade door je eigen schuld claimen zonder dat de premie van je lopende verzekering omhoog gaat. <br/>
+              Nadeel is dat de registratie van je schadevrije jaren wel wordt aangepast. Dat is vervelend als je wilt veranderen van verzekeraar, want dan betaal je plots een hogere premie vanwege je schadevrije jaren.
             </div>
           </div>
         </div>
       </knx-info>
     </div>
 
-    <div class="">
+    <div>
       <!---->
       <cx-checkbox
         [formControlName]="form.formConfig.extraOptionsOccupants.formControlName"
@@ -96,16 +83,13 @@
         <div class="knx-info__content">
           <div class="knx-message knx-message--chat knx-message--arrow-top">
             <div class="knx-message__content">
-              <p>
-                <b>Inzittenden verzekering</b> : Deze extra dekking sluit je af vanaf  € 4 per maand. <br/>
-                Hiermee dek je de materiele schade die jij als bestuurder, je passagiers of bagage oplopen bij een aanrijding. Zeker handig om af te sluiten als je bijvoorbeeld regelmatig met je hele gezin in de auto zit.
-              </p>
+              <strong>Inzittenden verzekering</strong> : Deze extra dekking sluit je af vanaf  € 4 per maand. <br/>
+              Hiermee dek je de materiele schade die jij als bestuurder, je passagiers of bagage oplopen bij een aanrijding. Zeker handig om af te sluiten als je bijvoorbeeld regelmatig met je hele gezin in de auto zit.
             </div>
           </div>
         </div>
       </knx-info>
     </div>
-
 
   </knx-collapse-message>
 
@@ -118,8 +102,8 @@
 
   <knx-collapse-message [ngClass]="optionModifierClass" title="Eigen risico" [isOpen]="true">
     <cx-form-group class="own-risk"
-                   [options]="form.formConfig.ownRisk"
-                   [formControlName]="form.formConfig.ownRisk.formControlName">
+      [options]="form.formConfig.ownRisk"
+      [formControlName]="form.formConfig.ownRisk.formControlName">
     </cx-form-group>
   </knx-collapse-message>
 </div>
