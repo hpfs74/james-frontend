@@ -107,7 +107,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
           road_assistance: data.roadAssistance || 'RANO',
           kilometers_per_year: data.kmPerYear || 'KMR3',
-          own_risk: +data.ownRisk || 0,
+          own_risk: +data.ownRisk || null,
           insurance_id: ''
         };
         this.store$.dispatch(new advice.UpdateAction(compareObj));
@@ -128,12 +128,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       {
         label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
-        onBeforeShow: this.onResults.bind(this),
+        onBeforeShow: this.onShowResults.bind(this),
         hideNextButton: true,
-        onShowStep: () => {
-          FormUtils.scrollToForm('form');
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
-        }
+        onShowStep: this.onShowResults.bind(this)
       },
       {
         label: 'Aanvragen',
@@ -182,7 +179,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
       house_number: this.address.number,
       country: 'NL',
       kilometers_per_year: detailForm.value.kmPerYear,
-      own_risk: +detailForm.value.ownRisk || 375,
+      own_risk: +detailForm.value.ownRisk || 0,
       cover_occupants: false,
       legal_aid: 'LAN',
       no_claim_protection: false,
@@ -324,7 +321,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
   }
 
-  private onResults() {
+  private onShowResults() {
+    FormUtils.scrollToForm('form');
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
   }
 
