@@ -6,12 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InsuranceTopListComponent } from './insurance-toplist.component';
 
 @Component({
-  template: `<div><knx-insurance-toplist [stepAmount]="stepAmount" [insurances]="insurances"></knx-insurance-toplist></div>`
+  template: `<div><knx-insurance-toplist [initialAmount]="initialAmount" [insurances]="insurances"></knx-insurance-toplist></div>`
 })
 export class TestHostComponent {
   @ViewChild(InsuranceTopListComponent)
   public testComponent: InsuranceTopListComponent;
-  public stepAmount = 4;
+  public initialAmount = 4;
   public insurances = [{fit: 100}, {fit: 100}, {fit: 100}, {fit: 100}, {fit: 100}];
 }
 

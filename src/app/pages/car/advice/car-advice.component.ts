@@ -107,7 +107,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
           legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
           road_assistance: data.roadAssistance || 'RANO',
           kilometers_per_year: data.kmPerYear || 'KMR3',
-          own_risk: +data.ownRisk || null,
+          own_risk: +data.ownRisk || 0,
           insurance_id: ''
         };
         this.store$.dispatch(new advice.UpdateAction(compareObj));

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { InsuranceAdvice } from '../../models';
 
 interface OrderItem {
@@ -27,7 +27,7 @@ interface OrderItem {
         </div>
 
         <ng-template #insuranceResults>
-          <h2>De beste verzekeringen van alle {{total}} aanbieders</h2>
+          <h2>De beste verzekeringen van alle {{totalTitle}} aanbieders</h2>
 
           <div class="knx-button-group" role="group">
             <button
@@ -82,7 +82,8 @@ export class InsuranceTopListComponent implements OnInit {
   @Input() insurances: Array<InsuranceAdvice>;
   @Input() isLoading: boolean;
   @Input() title: string;
-  @Input() stepAmount: number;
+  @Input() totalTitle: number;
+  @Input() initialAmount: number;
   @Input() disableInsuranceBuy: boolean;
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
@@ -91,7 +92,7 @@ export class InsuranceTopListComponent implements OnInit {
   orderBy: Array<OrderItem>;
 
   ngOnInit() {
-    this.total = this.stepAmount || 4;
+    this.total = this.initialAmount;
     this.orderBy = [
       { id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true },
       { id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false }
