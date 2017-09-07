@@ -200,7 +200,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   onSelectPremium(insurance) {
-    this.store$.dispatch(new advice.UpdateAction({ insurance: insurance }));
+    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
   }
 
   onStepChange(stepIndex) {

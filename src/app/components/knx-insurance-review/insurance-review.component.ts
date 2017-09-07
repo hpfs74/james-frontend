@@ -1,7 +1,6 @@
 import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { InsuranceAdvice } from '../../models';
-import { CarInsurance } from '../../models/car-insurance';
 
 interface SectionsItem {
   label: string;
@@ -58,11 +57,11 @@ interface SectionFields {
     </knx-collapsible-panel>
 
     <p *ngIf="!selectedInsurance?.supported; else supportedBenefits">
+      <!-- TODO: replace with Dutch -->
       This insurance cannot be bought via Knab Verzekeren. This because FBTO doesn't
       have a premium direct link with Knab Verzekeren.
       We are always working to get as much as possibLe insurance companies to working
       together with us. For now you can get this insurance via the FBTO website.
-
     </p>
 
     <ng-template #supportedBenefits>
@@ -88,7 +87,7 @@ interface SectionFields {
   `
 })
 export class InsuranceReviewComponent implements OnChanges, OnInit {
-  @Input() selectedInsurance: CarInsurance;
+  @Input() selectedInsurance: InsuranceAdvice;
   sections: Array<SectionsItem>;
   info: any;
   constructor(private currencyPipe: CurrencyPipe) { }
@@ -136,29 +135,29 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
             },
             {
               label: 'Eenmalige afsluitkosten',
-              value: this.currencyPipe.transform(this.selectedInsurance.one_off_premium, 'EUR', true)
+              // value: this.currencyPipe.transform(this.selectedInsurance.one_off_premium, 'EUR', true)
             }
           ]
         },
         {
           label: 'Jouw extra\'s',
           fields: [
-            {
-              label: 'Pechhulp',
-              value: this.selectedInsurance.road_assistance
-            },
-            {
-              label: 'Rechtsbijstand',
-              value: this.selectedInsurance.legal_aid
-            },
-            {
-              label: 'No-claim beschermer',
-              value: this.selectedInsurance.no_claim_protection ? 'Ja' : 'Nee'
-            },
-            {
-              label: 'Inzittenden verzekering',
-              value: this.selectedInsurance.cover_occupants ? 'Ja' : 'Nee'
-            }
+            // {
+            //   label: 'Pechhulp',
+            //   value: this.selectedInsurance.road_assistance
+            // },
+            // {
+            //   label: 'Rechtsbijstand',
+            //   value: this.selectedInsurance.legal_aid
+            // },
+            // {
+            //   label: 'No-claim beschermer',
+            //   value: this.selectedInsurance.no_claim_protection ? 'Ja' : 'Nee'
+            // },
+            // {
+            //   label: 'Inzittenden verzekering',
+            //   value: this.selectedInsurance.cover_occupants ? 'Ja' : 'Nee'
+            // }
           ]
         },
         {
@@ -178,9 +177,9 @@ export class InsuranceReviewComponent implements OnChanges, OnInit {
       ];
 
       this.selectedInsurance.documents.forEach((document) => {
-        this.sections[this.sections.length - 1].fields.push({
-          label: `<a href="${document.url}" class="knx-button--util">${document.name}</a>`
-        });
+        // this.sections[this.sections.length - 1].fields.push({
+        //   label: `<a href="${document.url}" class="knx-button--util">${document.name}</a>`
+        // });
       });
     }
   }

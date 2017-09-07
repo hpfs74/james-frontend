@@ -5,6 +5,10 @@
   height: 50px;
   border: 1px solid $knab-primary-gray;
   border-radius: $knab-border-radius;
+
+  &.knx-message {
+    padding: 15px;
+  }
 }
 
 .knx-collapse-message.knx-collapse-message--open {

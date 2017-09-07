@@ -45,6 +45,12 @@ export class ErrorEffects {
       insurances.LOAD_FAILURE
     )
     .map(action => action.payload)
+    .withLatestFrom(this.store$)
+    .filter(([action, storeState]) => {
+      // only continue if user is logged in to prevent credentials modal on login page
+      return storeState.auth.loggedIn;
+    })
+    .map((actionAndStoreState) => actionAndStoreState[0])
     .filter(error => error instanceof Response && error.status === 401 || error.status === 403)
     .switchMap(error => Observable.of(new auth.RequestCredentials));
 

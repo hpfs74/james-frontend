@@ -8,22 +8,11 @@ interface Document {
 }
 
 export class CarInsurance extends InsuranceAdvice {
-  id: string;
-  insurance_id: string;
-  moneyview_id: string;
-  type: string;
-  insurance_name: string;
-  fit: number;
-  price_quality: number;
-  own_risk: number;
-  monthly_premium: number;
-  documents: Array<Document>;
   wa_nett: number;
   bonus_malus_step_wa: string;
   bonus_malus_discount_percentage_wa: string;
   kilometers_per_year: string;
-  details: string;
-  price: number;
+
   main_coverage: string;
   one_off_premium: number;
   car_current_value: string | number;
@@ -40,9 +29,4 @@ export class CarInsurance extends InsuranceAdvice {
     car: Car,
     insurance: Insurance
   };
-  product_id: string;
-  terms_conditions_pdf_url: string;
-  reviews: number;
-  reviews_amount: number;
-  supported: boolean;
 }
