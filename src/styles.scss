@@ -135,6 +135,16 @@ input::-ms-clear {
   margin-left: -15px;
 }
 
+.knx-logo-text {
+  color: $knab-white;
+  font-family: $font-family-head;
+  text-transform: uppercase;
+  margin-left: 8px;
+  font-size: $font-size-base;
+  position: absolute;
+  bottom: 15px;
+}
+
 .noborder {
   border: 0;
 }
