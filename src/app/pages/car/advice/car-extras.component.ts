@@ -14,10 +14,6 @@ import { CarExtrasForm } from './car-extras.form';
       font-size: 16px;
     }
 
-    .knx-message__content {
-      color: #fff;
-    }
-
     .knx-message__content ul {
       margin-top: 10px;
     }

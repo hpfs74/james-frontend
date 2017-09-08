@@ -8,7 +8,7 @@ $knx-chat-stream-message-zindex: 1010;
   border-radius: $knab-border-radius;
   margin-bottom: 40px;
   z-index: $knx-chat-stream-zindex;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .knx-chat-stream > .knx-button {
