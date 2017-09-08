@@ -1,5 +1,6 @@
 import { Car } from './car';
 import { Insurance } from './insurance';
+import { InsuranceDocument } from './insurance-document';
 
 export class InsuranceAdvice {
   id: string;
@@ -11,7 +12,7 @@ export class InsuranceAdvice {
   price_quality: number;
   own_risk: number;
   monthly_premium: number;
-  documents: Array<Document>;
+  documents: Array<InsuranceDocument>;
   details: string;
   price: number;
   product_id: string;

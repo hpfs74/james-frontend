@@ -8,6 +8,10 @@ interface Document {
 }
 
 export class CarInsurance extends InsuranceAdvice {
+  constructor() {
+    super();
+  }
+
   wa_nett: number;
   bonus_malus_step_wa: string;
   bonus_malus_discount_percentage_wa: string;
