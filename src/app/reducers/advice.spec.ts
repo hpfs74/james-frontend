@@ -22,7 +22,8 @@ describe('Advice reducer', () => {
           '20304': {
             id: '20304', test: 'value'
           }
-        }
+        },
+        selectedInsurance: null
       };
 
       const result = fromAdvice.reducer(fromAdvice.initialState, addAction);

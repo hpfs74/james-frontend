@@ -4,6 +4,10 @@
   justify-content: space-between;
 }
 
+knx-collapsible-panel {
+  counter-reset: collapsible;
+}
+
 .knx-collapsible-panel__content {
   display: block;
   padding: 15px 20px;
@@ -27,36 +31,7 @@
   max-width: 150px;
 }
 
-.knx-insurance-review__disclaimer {
-  position: relative;
-  padding: 20px;
-  background: #eeebe5;
-  border-radius: 8px;
-
-  ul {
-    padding-left: 0;
-
-    li {
-      max-width: calc(100% - 200px);
-      margin-top: 10px;
-      padding-left: 30px;
-      text-indent: -15px;
-      list-style: none;
-
-      i {
-        padding-right: 10px;
-        color: $knab-primary-green;
-        font-weight: bold;
-      }
-    }
-  }
-}
-
-.knx-insurance-review__thumbs-up-guy {
-  position: absolute;
-  right: 10px;
-  bottom: 0;
-  width: 141px;
-  height: 159px;
-  background: url("/assets/images/characters/thumbs-up-guy.png") no-repeat center bottom;
+p.knx-collapsible-panel__title {
+  color: $knab-primary-blue;
+  font-weight: bold;
 }

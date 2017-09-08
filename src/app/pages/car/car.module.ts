@@ -3,6 +3,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared.module';
 import { ChatStreamModule } from './../../components/knx-chat-stream/chat-stream.module';
+import { InsuranceReviewModule } from './../../components/knx-insurance-review/insurance-review.module';
 import { CarRoutingModule } from './car-routing.module';
 
 import { CarService } from './car.service';
@@ -23,6 +24,7 @@ import { CarEffects } from '../../effects/car';
   imports: [
     SharedModule,
     ChatStreamModule,
+    InsuranceReviewModule,
     CarRoutingModule,
     EffectsModule.forFeature([
       CarEffects
