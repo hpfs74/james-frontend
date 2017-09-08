@@ -15,3 +15,8 @@ $font-weight-base: 400;
 $knab-border-radius: 4px; // same as $knx-button-border-radius
 $knab-app-background: #fff;
 $knab-nav-item-color: #fff;
+
+$z-index-navbar-dropdown: 4200;
+$z-index-navbar: 4000;
+$z-index-chat-stream: 1020;
+$z-index-chat-stream-message: 1010;

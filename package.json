@@ -52,7 +52,7 @@
     "@knx/info": "0.0.123",
     "@knx/modal": "0.0.12",
     "@knx/step-navigation": "0.0.12",
-    "@knx/wizard": "0.0.129",
+    "@knx/wizard": "0.0.152",
     "@ngrx/effects": "^4.0.2",
     "@ngrx/router-store": "^4.0.2",
     "@ngrx/store": "^4.0.2",
