@@ -40,7 +40,6 @@ import { InsuranceAdvice, CarInsurance } from '../../models';
 
     <!-- benefits -->
     <knx-insurance-review-benefits
-      [brand]="selectedInsurance?.insurance?.brand"
       [supported]="selectedInsurance?.supported">
     </knx-insurance-review-benefits>
 
