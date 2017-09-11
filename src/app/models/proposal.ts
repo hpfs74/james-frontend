@@ -77,11 +77,6 @@ export class CarProposalHelper {
         value = data[el.value];
       }
 
-      // TEMP
-      // if (el.key === 'Voornaam') {
-      //   value = 'blabla';
-      // }
-
       itemArr.push({[el.key]: el['transform'] ? el['transform'](value) : (value ? value.toString() : '')});
     });
     return itemArr;
