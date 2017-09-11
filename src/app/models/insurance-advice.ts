@@ -7,6 +7,7 @@ export class InsuranceAdvice {
   insurance_id: string;
   moneyview_id: string;
   type: string;
+  car: Car;
   insurance_name: string;
   fit: number;
   price_quality: number;
