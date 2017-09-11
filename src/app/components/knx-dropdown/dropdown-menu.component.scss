@@ -1,5 +1,5 @@
 .ng2-dropdown-menu {
-  z-index: 100;
+  z-index: $z-index-navbar-dropdown;
   overflow-y: auto;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   position: absolute;

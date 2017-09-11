@@ -33,6 +33,7 @@
 @import 'app/components/knx-insurance-result/insurance-result.component';
 @import 'app/components/knx-insurance-review/insurance-review.component';
 @import 'app/components/knx-insurance-review/insurance-review-benefits.component';
+@import 'app/components/knx-insurance-review/insurance-review-documents.component';
 @import 'app/components/knx-insurance-result-detail/insurance-result-detail.component';
 @import 'app/components/knx-insurance-toplist/insurance-toplist.component';
 @import 'app/components/knx-nav-user/nav-user.component';
@@ -58,6 +59,10 @@
 
 html {
   box-sizing: border-box;
+}
+
+body {
+  width: 100%;
 }
 
 *,
@@ -134,6 +139,16 @@ input::-ms-clear {
   margin-left: -15px;
 }
 
+.knx-logo-text {
+  color: $knab-white;
+  font-family: $font-family-head;
+  text-transform: uppercase;
+  margin-left: 8px;
+  font-size: $font-size-base;
+  position: absolute;
+  bottom: 15px;
+}
+
 .noborder {
   border: 0;
 }
@@ -203,8 +218,4 @@ input::-ms-clear {
     position: sticky;
     top: 90px;
   }
-}
-
-.knx-info .knx-message {
-  box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.24);
 }

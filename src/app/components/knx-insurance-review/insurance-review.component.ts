@@ -39,7 +39,9 @@ import { InsuranceAdvice, CarInsurance } from '../../models';
       title="Documenten" [documents]="selectedInsurance?.documents"></knx-insurance-review-documents>
 
     <!-- benefits -->
-    <knx-insurance-review-benefits [supported]="selectedInsurance?.supported"></knx-insurance-review-benefits>
+    <knx-insurance-review-benefits
+      [supported]="selectedInsurance?.supported">
+    </knx-insurance-review-benefits>
 
     <a *ngIf="!selectedInsurance?.supported"
       [attr.href]="selectedInsurance?._embedded.insurance.url"

@@ -32,9 +32,11 @@ import { InsuranceDocument } from './../../models/insurance-document';
         <!-- documents -->
         <div class="row">
           <div class="col col-md-12">
-            <span *ngFor="let doc of documents">
-              <a href="{{doc.url}}}" class="knx-button--util">{{doc.name}}</a>
-            </span>
+            <ul class="knx-insurance-review-documents__list">
+              <li *ngFor="let doc of documents"><span class="knx-icon-file-o"></span>
+                <a href="{{doc.url}}}" target="_blank" rel="noopener">{{doc.name}}</a>
+              </li>
+            </ul>
           </div>
           <div class="col col-md-5"></div>
         </div>

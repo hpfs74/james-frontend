@@ -136,6 +136,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
         label: 'Aanvragen',
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Verzekering aanvragen',
+        nextButtonClass: 'knx-button knx-button--cta knx-button--arrow',
         onShowStep: this.onShowSummary.bind(this),
         onBeforeNext: this.startBuyFlow.bind(this)
       }

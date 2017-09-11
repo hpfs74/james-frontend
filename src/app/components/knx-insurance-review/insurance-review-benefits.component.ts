@@ -3,18 +3,17 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'knx-insurance-review-benefits',
   template: `
-    <p *ngIf="!supported; else supportedBenefits">
-      <!-- TODO: replace with Dutch -->
-      This insurance cannot be bought via Knab Verzekeren. This because FBTO doesn't
-      have a premium direct link with Knab Verzekeren.
-      We are always working to get as much as possibLe insurance companies to working
-      together with us. For now you can get this insurance via the FBTO website.
-    </p>
+    <div *ngIf="!supported; else supportedBenefits" class="knx-message knx-message--information knx-message--icon-center">
+      <div class="knx-message__content">
+        Deze verzekering is nog niet aangesloten bij Knab Verzekeren. Hij staat er
+        wel tussen, omdat we je graag een passend en compleet advies en vergelijking
+        geven.
+      </div>
+    </div>
 
     <ng-template #supportedBenefits>
       <div class="knx-insurance-review-benefits__disclaimer">
         <strong>De voordelen van Knab Verzekeren</strong>
-
         <ul>
           <li>
             <i class="knx-icon-check"></i> Met de Knab Verzekeren App altijd de nodige informatie bij de hand.</li>
@@ -30,5 +29,6 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class InsuranceReviewBenefitsComponent {
+  @Input() brand: string;
   @Input() supported: boolean;
 }

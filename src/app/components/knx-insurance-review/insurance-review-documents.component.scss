@@ -1,0 +1,15 @@
+.knx-insurance-review-documents__list {
+  list-style-type: none;
+  padding-left: 0;
+
+  & > li > a {
+    color: $knab-primary-blue;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+      color: $knab-primary-red;
+      text-decoration: none;
+    }
+  }
+}

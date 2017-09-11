@@ -46,9 +46,8 @@ export class AssistantConfig {
         next: 'Wat wil je doen?'
       },
       review: {
-        title: `Controleer uw gegevens dat een verzoek om af te sluiten te maken.`,
-
-        list: `Het proces van het vullen van de aanvraag duurt ongeveer 5 minuten en omvat de volgende stappen:<br>
+        title: `In 3 minuten doe je een aanvraag:`,
+        list: `
         1. Check je gegevens <br>
         2. Vul je autogegevens aan <br>
         3. Beantwoord slotvragen <br>

@@ -20,7 +20,7 @@ export class NavigationService {
       },
       {
         id: 'menu-phone',
-        icon: 'knx-icon-whatsapp',
+        icon: 'knx-icon-phone',
         title: '020-303 1680',
         routePath: '',
         menuType: NavItemType.RIGHT,
