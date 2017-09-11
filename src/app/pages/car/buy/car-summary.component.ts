@@ -13,8 +13,9 @@ import { SectionItem, SectionGroup, SectionFields } from '../../../components/kn
 export class CarSummaryComponent {
   @Input() confirm: boolean;
   @Input() profile: Profile;
+  @Input() insurance: any;
   @Input() set advice(value: any) {
-    if (this.isValidAdvice(value)) {
+    if (this.isValidAdvice(value) && this.isValidInsurance(this.insurance)) {
       const carInsurance: SectionItem = {
         label: 'Je autoverzekering',
         groups: [
@@ -30,7 +31,7 @@ export class CarSummaryComponent {
               },
               {
                 label: 'Eigen risico',
-                value: this.currencyPipe.transform(value.insurance.own_risk, 'EUR', true)
+                value: this.currencyPipe.transform(this.insurance.own_risk, 'EUR', true)
               }
             ]
           },
@@ -38,15 +39,15 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Rechtsbijstand',
-                value: this.formatBoolean(value.insurance.legal_aid === 'LAY' )
+                value: this.formatBoolean(this.insurance.legal_aid === 'LAY' )
               },
               {
                 label: 'No-claim beschermer',
-                value: this.formatBoolean(value.insurance.no_claim_protection)
+                value: this.formatBoolean(this.insurance.no_claim_protection)
               },
               {
                 label: 'Inzittendenverzekering',
-                value: this.formatBoolean(value.insurance.cover_occupants)
+                value: this.formatBoolean(this.insurance.cover_occupants)
               }
             ]
           }
@@ -60,23 +61,23 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Kenteken',
-                value: value.insurance._embedded.car.license
+                value: this.insurance._embedded.car.license
               },
               {
                 label: 'Merk',
-                value: value.insurance._embedded.car.make
+                value: this.insurance._embedded.car.make
               },
               {
                 label: 'Model',
-                value: value.insurance._embedded.car.model
+                value: this.insurance._embedded.car.model
               },
               {
                 label: 'Type',
-                value: value.insurance._embedded.car.edition
+                value: this.insurance._embedded.car.edition
               },
               {
                 label: 'Bouwjaar',
-                value: value.insurance._embedded.car.year
+                value: this.insurance._embedded.car.year
               }
             ]
           },
@@ -84,7 +85,7 @@ export class CarSummaryComponent {
             fields: [
               {
                 label: 'Cataloguswaarde',
-                value: this.currencyPipe.transform(value.insurance._embedded.car.price_consumer_incl_vat, 'EUR', true)
+                value: this.currencyPipe.transform(this.insurance._embedded.car.price_consumer_incl_vat, 'EUR', true)
               },
               {
                 label: 'Waarde accessoires',
@@ -92,15 +93,15 @@ export class CarSummaryComponent {
               },
               {
                 label: 'Dagwaarde',
-                value: this.currencyPipe.transform(value.insurance._embedded.car.current_value, 'EUR', true)
+                value: this.currencyPipe.transform(this.insurance._embedded.car.current_value, 'EUR', true)
               },
               {
                 label: 'Gewicht',
-                value: value.insurance._embedded.car.weight_empty_vehicle + ' kg'
+                value: this.insurance._embedded.car.weight_empty_vehicle + ' kg'
               },
               {
                 label: 'KM per jaar',
-                value: value.insurance.kilometers_per_year
+                value: this.insurance.kilometers_per_year
               },
               {
                 label: 'Beveiliging',
@@ -180,11 +181,15 @@ export class CarSummaryComponent {
 
   private isValidAdvice(obj: any) {
     return (obj &&
+    !this.isEmpty(obj) &&
+    !this.isEmpty(obj.address));
+  }
+
+  private isValidInsurance(obj: any) {
+    return (obj &&
       !this.isEmpty(obj) &&
-      !this.isEmpty(obj.insurance) &&
-      !this.isEmpty(obj.insurance._embedded) &&
-      !this.isEmpty(obj.insurance._embedded.car) &&
-      !this.isEmpty(obj.address));
+      !this.isEmpty(obj._embedded) &&
+      !this.isEmpty(obj._embedded.car));
   }
 
   private isEmpty(obj: any) {
