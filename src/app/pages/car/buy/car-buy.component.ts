@@ -47,6 +47,7 @@ export class CarBuyComponent implements OnInit {
   profile$: Observable<Profile>;
   advice$: Observable<any>;
   insurance$: Observable<any>;
+  car$: Observable<any>;
 
   // Forms
   contactDetailForm: ContactDetailForm;
@@ -74,6 +75,7 @@ export class CarBuyComponent implements OnInit {
     this.profile$ = this.store$.select(fromRoot.getProfile);
     this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
     this.insurance$ = this.store$.select(fromRoot.getSelectedInsurance);
+    this.car$ = this.store$.select(fromRoot.getCarInfo);
 
     const formBuilder = new FormBuilder();
     this.formContent = this.contentService.getContentObject();
@@ -171,33 +173,30 @@ export class CarBuyComponent implements OnInit {
       this.acceptFinalTerms
     );
 
-    this.store$.select(fromRoot.getProfile).take(1).subscribe(profile => {
-      this.store$.select(fromRoot.getSelectedAdvice).take(1).subscribe(advice => {
-        this.store$.select(fromRoot.getSelectedInsurance).take(1).subscribe(insurance => {
-          this.store$.select(fromRoot.getCarInfo).take(1).subscribe(carInfo => {
-            // flatten car data into proposal
-            const flatData = Object.assign({},
-              advice,
-              advice.address,
-              insurance,
-              profile,
-              insurance._embedded.insurance,
-              { car: carInfo[0] });
+    Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
+      (profile, advice, insurance, car) => {
+      return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
+    })
+      .subscribe((value) => {
+        const flatData = Object.assign({},
+          value.adviceInfo,
+          value.adviceInfo.address,
+          value.insuranceInfo,
+          value.profileInfo,
+          value.insuranceInfo._embedded.insurance,
+          { car: value.carInfo[0] });
 
-            const proposalRequest = new CarProposalHelper();
-            const proposalData: Proposal = {
-              proposal: insurance,
-              items: Object.assign(
-                proposalRequest.getItems(flatData),
-                proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
-              )
-            };
-            proposalData.proposal.car = carInfo[0];
-            this.store$.dispatch(new car.BuyAction(proposalData));
-          });
-        });
+        const proposalRequest = new CarProposalHelper();
+        const proposalData: Proposal = {
+          proposal: value.insuranceInfo,
+          items: Object.assign(
+            proposalRequest.getItems(flatData),
+            proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
+          )
+        };
+        proposalData.proposal.car = value.carInfo[0];
+        this.store$.dispatch(new car.BuyAction(proposalData));
       });
-    });
 
     return new Observable(obs => {
       obs.next();
