@@ -12,6 +12,7 @@ const environment = argv.environment;
 const isProd = environment === 'prod';
 const defaultTarget = './src/environments/environment.ts';
 const targetPath = isProd ? `./src/environments/environment.prod.ts` : defaultTarget;
+const logger = console.log;
 
 // TODO: provide the correct client id
 const forgetPasswordLink =
@@ -37,7 +38,16 @@ export const environment = {
     carCoverage: '${process.env.JAMES_API_CAR_COVERAGE}',
     carDamageFree: '${process.env.JAMES_API_CAR_DAMAGEFREE}',
     carBuy: '${process.env.JAMES_API_CAR_BUY}',
-    insurer: '${process.env.JAMES_API_INSURER}'
+    insurer: '${process.env.JAMES_API_INSURER}',
+    payloadEncryption: {
+      client: {
+        id: '${process.env.PAYLOAD_CLIENT_ID}',
+        secret: '${process.env.PAYLOAD_SECRET}',
+      },
+      key: '${process.env.PAYLOAD_KEY_URL}',
+      profile: '${process.env.PAYLOAD_PROFILE_URL}',
+      token: '${process.env.PAYLOAD_TOKEN_URL}'
+    },
   }
 };
 `;
@@ -60,17 +70,17 @@ envConfigFile += `/* tslint:enable */\n`;
 
 writeFile(targetPath, envConfigFile, function (err) {
   if (err) {
-    console.log(err);
+    logger(err);
   }
-  console.log(`Output generated at ${targetPath}`);
+  logger(`Output generated at ${targetPath}`);
 });
 
 // Also write production config to environment.ts due to angular-cli bug
 if (isProd) {
   writeFile(defaultTarget, envConfigFile, function (err) {
     if (err) {
-      console.log(err);
+      logger(err);
     }
-    console.log(`Output generated at ${defaultTarget}`);
+    logger(`Output generated at ${defaultTarget}`);
   });
 }
