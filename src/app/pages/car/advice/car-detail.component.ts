@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter, AfterViewChecked
+  Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -20,7 +20,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
   templateUrl: 'car-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarDetailComponent implements OnInit, AfterViewChecked {
+export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
   @Input() car: Car;
   @Input() userProfile: any;
@@ -61,18 +61,11 @@ export class CarDetailComponent implements OnInit, AfterViewChecked {
   }
 
   @Output() licensePlateInvalid: EventEmitter<string> = new EventEmitter();
-  // @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
+  @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
   @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
   @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
-
-  constructor(private store$: Store<fromRoot.State>) { }
-
-  ngAfterViewChecked() {
-    let licenseControl = this.form.formGroup.get('licensePlate');
-    licenseControl.setAsyncValidators((formControl) => this.validateLicenseAsync(formControl));
-  }
 
   ngOnInit() {
     const ONCHANGE_THROTTLE = 1000;
@@ -110,42 +103,11 @@ export class CarDetailComponent implements OnInit, AfterViewChecked {
     // control valid state is changed externally based on RDC request result,
     // so we use length here to determine when to proceed
     if (licensePlate && licensePlate.length === validLength) {
-      this.store$.dispatch(new car.GetInfoAction(licensePlate));
+      this.licensePlateChange.emit(licensePlate);
     }
   }
 
   onAddressFound(event: Address) {
     this.addressChange.emit(event);
-  }
-
-  // thomas-g: this dependency on store here is unwanted because this
-  // should be a dumb component that only has inputs and outputs, but because we
-  // don't have forms integrated with the store, async validation is done here using
-  // the store state for now
-  validateLicenseAsync(licenseControl: AbstractControl): Observable<any> {
-    const debounceTime = 500;
-
-    return Observable.timer(debounceTime).switchMap(() => {
-      const validLength = 6;
-
-      const license = licenseControl.value;
-
-      if (!license || license.length !== validLength) {
-        return new Observable(obs => obs.next(null));
-      }
-
-      const error = { licensePlateRDC: true };
-      return this.store$.select(fromRoot.getCarInfo)
-        .map((car) => {
-          if (car && car.license) {
-            return null;
-          } else {
-            return error;
-          }
-        }, err => {
-          return error;
-        });
-
-    });
   }
 }
