@@ -8,16 +8,16 @@ export interface State {
   loading: boolean;
   loaded: boolean;
   error: boolean;
-  licenses: string[];
-  info: Car[];
+  license: string;
+  info: Car;
 }
 
 export const initialState: State = {
   loading: false,
   loaded: false,
   error: false,
-  licenses: [],
-  info: []
+  license: null,
+  info: null
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -34,14 +34,19 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
-        licenses: [ ...state.licenses.filter(license => license !== car.license), car.license ],
-        info: [ ...state.info.filter(el => el.license !== car.license), car ]
+        error: false,
+        license: car.license,
+        info: car
       });
     }
 
     case CarActions.GET_INFO_FAILURE: {
       return Object.assign({}, state, {
+        loading: false,
+        loaded: false,
         error: true,
+        license: null,
+        info: null
       });
     }
 
@@ -54,8 +59,5 @@ export function reducer(state = initialState, action: Action): State {
 export const getInfo = (state: State) => state.info;
 export const getLoaded = (state: State) => state.loaded;
 export const getError = (state: State) => state.error;
-export const getCarInfo = license => {
-  return createSelector(
-    getCarInfo, (list) => list.get(license) || new Map()
-  );
-};
+export const getCarInfo = (state: State) => state.info;
+export const getLicense = (state: State) => state.license;

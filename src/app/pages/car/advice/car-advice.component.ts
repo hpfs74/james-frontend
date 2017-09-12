@@ -231,26 +231,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     }));
   }
 
-  getCarInfo(licensePlate: string) {
-    if (this.currentStep === 0) {
-      if (licensePlate) {
-        this.store$.dispatch(new car.GetInfoAction(licensePlate));
-      }
-    }
-  }
-
-  triggerLicenseInvalid() {
-    const c = this.carDetailForm.formGroup.get('licensePlate');
-    c.setErrors({ 'licensePlateRDC': true });
-    c.markAsTouched();
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
-    this.car = null;
-  }
-
-  onLicensePlateInvalid(licensePlate: string) {
-    this.triggerLicenseInvalid();
-  }
-
   onAddressChange(address: Address) {
     this.store$.dispatch(new profile.UpdateAction(address));
 
@@ -269,29 +249,28 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   }
 
   private onShowDetailsForm() {
+    // Subscribe to car errors
     this.store$.select(fromRoot.getCarInfoError)
       .filter(() => this.currentStep === 0)
       .subscribe((error) => {
         if (error) {
-          this.triggerLicenseInvalid();
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
+          this.car = null;
         }
       });
 
+    // Subscribe to car info
     this.store$.select(fromRoot.getCarInfo)
       .filter(() => this.currentStep === 0)
-      .subscribe((res: Array<Car>) => {
-        const lastFound = res.slice(-1)[0];
-        if (lastFound && lastFound.license) {
-          this.car = lastFound;
+      .subscribe((car: Car) => {
+        if (car && car.license) {
+          this.car = car;
           this.store$.dispatch(new assistant.AddCannedMessage({
             key: 'car.info.niceCar',
-            value: lastFound,
+            value: car,
             clear: true
           }));
         }
-      }, err => {
-        // Treat server error as invalid to prevent continuing flow
-        this.triggerLicenseInvalid();
       });
 
     // Subscribe to coverage recommendation request

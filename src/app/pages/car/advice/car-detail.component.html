@@ -10,8 +10,8 @@
         <div class="col-md-7 col-sm-12">
           <cx-form-group [options]="form.formConfig.licensePlate">
             <knx-input-licenseplate
-              [formControlName]="form.formConfig.licensePlate.formControlName"
               (ngModelChange)="onLicensePlateChange($event)"
+              [formControlName]="form.formConfig.licensePlate.formControlName"
               [options]="form.formConfig.licensePlate.inputOptions">
             </knx-input-licenseplate>
           </cx-form-group>
