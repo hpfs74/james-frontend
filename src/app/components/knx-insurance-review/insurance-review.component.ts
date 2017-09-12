@@ -30,18 +30,20 @@ import { InsuranceAdvice, CarInsurance } from '../../models';
       </knx-ir-tooltip>
     </p>
 
-    <!-- car insurance -->
-    <knx-insurance-review-car *ngIf="selectedInsurance"
-      [carInsurance]="selectedInsurance"></knx-insurance-review-car>
+    <div class="knx-insurance-review__panels">
+      <!-- car insurance -->
+      <knx-insurance-review-car *ngIf="selectedInsurance"
+        [carInsurance]="selectedInsurance"></knx-insurance-review-car>
 
-    <!-- documents -->
-    <knx-insurance-review-documents *ngIf="selectedInsurance"
-      title="Documenten" [documents]="selectedInsurance?.documents"></knx-insurance-review-documents>
+      <!-- documents -->
+      <knx-insurance-review-documents *ngIf="selectedInsurance"
+        title="Documenten" [documents]="selectedInsurance?.documents"></knx-insurance-review-documents>
 
-    <!-- benefits -->
-    <knx-insurance-review-benefits
-      [supported]="selectedInsurance?.supported">
-    </knx-insurance-review-benefits>
+      <!-- benefits -->
+      <knx-insurance-review-benefits
+        [supported]="selectedInsurance?.supported">
+      </knx-insurance-review-benefits>
+    </div>
 
     <a *ngIf="!selectedInsurance?.supported"
       [attr.href]="selectedInsurance?._embedded.insurance.url"

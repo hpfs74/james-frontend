@@ -1,3 +1,18 @@
+.knx-insurance-review__panels {
+  counter-reset: ir-collapse-counter;
+
+  .knx-collapsible-panel {
+    counter-increment: ir-collapse-counter;
+  }
+
+  // Override inner collapse-panel container because we use components inside of knx-insurance-review
+  .knx-collapsible-container__content.knx-collapsible-container__content--step .knx-collapsible-panel__title {
+    &:before {
+      content: counter(ir-collapse-counter) !important;
+    }
+  }
+}
+
 .knx-insurance-review__header {
   display: flex;
   align-items: center;
