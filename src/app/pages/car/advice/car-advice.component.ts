@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
 import { Store } from '@ngrx/store';
@@ -33,7 +33,7 @@ import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarAdviceComponent implements OnInit, OnDestroy {
+export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   carDetailSubmitted = false;
@@ -60,6 +60,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
   carExtrasForm: CarExtrasForm;
 
   constructor(private store$: Store<fromRoot.State>, private contentService: ContentService) { }
+
+  ngAfterViewChecked() {
+    // bind async validator for car info
+    let licenseControl = this.carDetailForm.formGroup.get('licensePlate');
+    licenseControl.setAsyncValidators((formControl) => this.validateLicenseAsync(formControl));
+  }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -231,26 +237,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     }));
   }
 
-  getCarInfo(licensePlate: string) {
-    if (this.currentStep === 0) {
-      if (licensePlate) {
-        this.store$.dispatch(new car.GetInfoAction(licensePlate));
-      }
-    }
-  }
-
-  triggerLicenseInvalid() {
-    const c = this.carDetailForm.formGroup.get('licensePlate');
-    c.setErrors({ 'licensePlateRDC': true });
-    c.markAsTouched();
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
-    this.car = null;
-  }
-
-  onLicensePlateInvalid(licensePlate: string) {
-    this.triggerLicenseInvalid();
-  }
-
   onAddressChange(address: Address) {
     this.store$.dispatch(new profile.UpdateAction(address));
 
@@ -264,34 +250,64 @@ export class CarAdviceComponent implements OnInit, OnDestroy {
     }
   }
 
+  getCarInfo(licensePlate) {
+    this.store$.dispatch(new car.GetInfoAction(licensePlate));
+  }
+
   toggleSideNavState(event) {
     event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
   }
 
+  validateLicenseAsync(licenseControl: AbstractControl): Observable<any> {
+    const debounceTime = 500;
+
+    return Observable.timer(debounceTime).switchMap(() => {
+      const validLength = 6;
+
+      const license = licenseControl.value;
+
+      if (!license || license.length !== validLength) {
+        return new Observable(obs => obs.next(null));
+      }
+
+      const error = { licensePlateRDC: true };
+      return this.store$.select(fromRoot.getCarInfo)
+        .map((car) => {
+          if (car && car.license) {
+            return null;
+          } else {
+            return error;
+          }
+        }, err => error
+      );
+    });
+  }
+
   private onShowDetailsForm() {
+    // Subscribe to car errors
     this.store$.select(fromRoot.getCarInfoError)
       .filter(() => this.currentStep === 0)
       .subscribe((error) => {
         if (error) {
-          this.triggerLicenseInvalid();
+          this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
+          this.car = null;
         }
       });
 
+    // Subscribe to car info
     this.store$.select(fromRoot.getCarInfo)
       .filter(() => this.currentStep === 0)
-      .subscribe((res: Array<Car>) => {
-        const lastFound = res.slice(-1)[0];
-        if (lastFound && lastFound.license) {
-          this.car = lastFound;
+      .subscribe((car: Car) => {
+        if (car && car.license) {
+          this.car = car;
+          this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
           this.store$.dispatch(new assistant.AddCannedMessage({
             key: 'car.info.niceCar',
-            value: lastFound,
+            value: car,
             clear: true
           }));
         }
-      }, err => {
-        // Treat server error as invalid to prevent continuing flow
-        this.triggerLicenseInvalid();
       });
 
     // Subscribe to coverage recommendation request
