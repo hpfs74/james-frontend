@@ -17,7 +17,7 @@ import { CarReportingCodeComponent } from './buy/car-reporting-code.component';
 import { CarCheckComponent } from './buy/car-check.component';
 import { CarPaymentComponent } from './buy/car-payment.component';
 import { CarSummaryComponent } from './buy/car-summary.component';
-
+import { CarThankYouComponent } from './thank-you/car-thank-you.component';
 import { CarEffects } from '../../effects/car';
 
 @NgModule({
@@ -39,7 +39,8 @@ import { CarEffects } from '../../effects/car';
     CarReportingCodeComponent,
     CarCheckComponent,
     CarPaymentComponent,
-    CarSummaryComponent
+    CarSummaryComponent,
+    CarThankYouComponent
   ],
   providers: [
     CarService

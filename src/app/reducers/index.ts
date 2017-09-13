@@ -236,6 +236,8 @@ export const getCarInfo = createSelector(getCarState, fromCar.getInfo);
 export const getCarInfoLoaded = createSelector(getCarState, fromCar.getLoaded);
 export const getCarInfoError = createSelector(getCarState, fromCar.getError);
 export const getCarLicense = createSelector(getCarState, fromCar.getLicense);
+export const getCarBuyComplete = createSelector(getCarState, fromCar.getBuyComplete);
+export const getCarBuyError = createSelector(getCarState, fromCar.getBuyError);
 
 /**
  * Coverage Reducers

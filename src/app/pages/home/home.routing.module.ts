@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { HomeComponent } from './home.component';
 import { FaqComponent } from '../faq/faq.component';
-import { Address } from './../../models/address';
+import { ThankYouComponent } from '../thank-you/thank-you.component';
 
 const homeRoutes: Routes = [
   {
