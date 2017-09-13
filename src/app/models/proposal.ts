@@ -10,7 +10,7 @@ import { InsuranceAdvice } from './insurance-advice';
  */
 export interface Proposal {
   proposal: InsuranceAdvice;
-  items: Array<any>;
+  items: Array<Object>;
 }
 
 
