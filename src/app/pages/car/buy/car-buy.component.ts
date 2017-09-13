@@ -10,6 +10,7 @@ import * as assistant from '../../../actions/assistant';
 import * as profile from '../../../actions/profile';
 import * as car from '../../../actions/car';
 import * as advice from '../../../actions/advice';
+import * as router from '../../../actions/router';
 
 import { ContentService } from '../../../content.service';
 import { AssistantService } from './../../../services/assistant.service';
@@ -202,6 +203,22 @@ export class CarBuyComponent implements OnInit {
       obs.next();
       obs.complete();
     });
+
+    // TODO: return based on buy request call
+    // return this.store$.combineLatest(
+    //   this.store$.select(fromRoot.getCarBuyComplete),
+    //   this.store$.select(fromRoot.getCarBuyError),
+    //   (complete, error) => ({ complete: complete, error: error })
+    // )
+    // .map(combined => {
+    //   if (combined.error) {
+    //     return Observable.throw(new Error('Buy request error'));
+    //   } else {
+    //     // Navigate to thank you page
+    //     this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
+    //     return;
+    //   }
+    // });
   }
 
   onStepChange(stepIndex) {

@@ -10,6 +10,8 @@ export interface State {
   error: boolean;
   license: string;
   info: Car;
+  buyComplete: boolean;
+  buyError: boolean;
 }
 
 export const initialState: State = {
@@ -17,7 +19,9 @@ export const initialState: State = {
   loaded: false,
   error: false,
   license: null,
-  info: null
+  info: null,
+  buyComplete: false,
+  buyError: false
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -50,6 +54,20 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case CarActions.BUY_SUCCESS: {
+      return Object.assign({}, state, {
+        buyComplete: true,
+        buyError: false
+      });
+    }
+
+    case CarActions.BUY_FAILURE: {
+      return Object.assign({}, state, {
+        buyComplete: false,
+        buyError: true
+      });
+    }
+
     default: {
       return state;
     }
@@ -61,3 +79,5 @@ export const getLoaded = (state: State) => state.loaded;
 export const getError = (state: State) => state.error;
 export const getCarInfo = (state: State) => state.info;
 export const getLicense = (state: State) => state.license;
+export const getBuyComplete = (state: State) => state.buyComplete;
+export const getBuyError = (state: State) => state.buyError;
