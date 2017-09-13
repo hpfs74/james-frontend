@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/interval';
-import * as Forge from 'node-forge';
+import * as forge from 'node-forge';
 import uuidv4 from 'uuid/v4';
 
 import { environment } from '../../environments/environment';
@@ -65,15 +65,10 @@ export class AuthServiceWithPayloadEncryption {
    * @param {Authenticate} auth
    * @return {Observable<AuthToken>}
    */
-  public login(username: string, password: string): Observable<PayloadAuth> {
-    const tokenRequest = {
-             grant_type: 'password',
-             username: username,
-             password: password,
-             scope: 'profile/basic'
-           };
+  public login(auth: Authenticate): Observable<AuthToken> {
 
-    return this.play(environment.james.payloadEncryption.token, tokenRequest);
+    return this.play(environment.james.payloadEncryption.token, auth)
+      .map((res: Response) => res.json());
 
     // return this.getNicciKey()
     //   .flatMap((nicci) => {
@@ -99,7 +94,7 @@ export class AuthServiceWithPayloadEncryption {
    * @param {string} refreshToken
    * @return {Observable<AuthToken>}
    */
-  public refreshToken(payloadAuth: PayloadAuth): Observable<AuthToken> {
+  public refreshToken(refreshToken: string): Observable<AuthToken> {
     // return this.getNicciKey()
     //   .flatMap((nicci) => {
     //     const headers = this.getBasicHeaderWithKey(nicci);
@@ -179,17 +174,17 @@ export class AuthServiceWithPayloadEncryption {
 
   //  STEP 3 - PRIVATE KEY ENCRYPTION
   private getEncryptedNicciKey(payload: PayloadAuth): Observable<PayloadAuth> {
-    let key = Forge.random.getBytesSync(32);
+    let key = forge.random.getBytesSync(32);
     let pem = new Buffer(payload.public_key, 'base64').toString('ascii');
-    let publicKey = Forge.pki.publicKeyFromPem(pem);
+    let publicKey = forge.pki.publicKeyFromPem(pem);
     let  encBuffer = publicKey.encrypt(key, 'RSA-OAEP', {
-      md: Forge.md.sha256.create(),
+      md: forge.md.sha256.create(),
       mgf1: {
-        md: Forge.md.sha256.create()
+        md: forge.md.sha256.create()
       }
     });
 
-    let encrypted = new Buffer(Forge.util.encode64(encBuffer), 'base64');
+    let encrypted = new Buffer(forge.util.encode64(encBuffer), 'base64');
 
     return Observable.of(Object.assign(payload, { encrypted_key: encrypted, aes_key: key }));
   }
@@ -230,7 +225,7 @@ export class AuthServiceWithPayloadEncryption {
     // Initial Vector (random data to do encryption) it must be passed
     // with the return object to perfom decryption. Newest accept also
     // a nonce object 12x0
-    let iv = Forge.random.getBytesSync(12);
+    let iv = forge.random.getBytesSync(12);
     let textToEncrypt = text;
 
     // Checking if the parameter is string or object
@@ -239,11 +234,11 @@ export class AuthServiceWithPayloadEncryption {
     }
 
     // encrypt some bytes using GCM mode
-    let cipher = Forge.cipher.createCipher('AES-GCM', key);
+    let cipher = forge.cipher.createCipher('AES-GCM', key);
     cipher.start({
       iv: iv, // should be a 12-byte binary-encoded string or byte buffer
     });
-    cipher.update(Forge.util.createBuffer(textToEncrypt));
+    cipher.update(forge.util.createBuffer(textToEncrypt));
     cipher.finish();
 
     let ret = Buffer.concat([

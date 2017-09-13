@@ -42,7 +42,7 @@ export const environment = {
     payloadEncryption: {
       client: {
         id: '${process.env.PAYLOAD_CLIENT_ID}',
-        secret: '${process.env.PAYLOAD_SECRET}',
+        secret: '${process.env.PAYLOAD_CLIENT_SECRET}',
       },
       key: '${process.env.PAYLOAD_KEY_URL}',
       profile: '${process.env.PAYLOAD_PROFILE_URL}',
