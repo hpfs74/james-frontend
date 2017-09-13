@@ -21,6 +21,7 @@ import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 
 /** Util Pages */
 import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
+import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 
 /**
  * Pipes
@@ -38,6 +39,7 @@ import { JumpToElementDirective, SidePanelStateDirective } from './directives';
  * import components in alphabetic order: easier to find something!
  */
 import { AddressLookupComponent } from './components/knx-address-lookup/address-lookup.component';
+import { AppPromoBlockComponent } from './components/knx-app-promo/app-promo.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
@@ -73,6 +75,7 @@ import { UserGreetingComponent } from './components/knx-user-greeting/user-greet
 export const sharedComponents = [
   TitleCasePipe,
   RoundPipe,
+  AppPromoBlockComponent,
   LicensePlatePipe,
   SidePanelStateDirective,
   JumpToElementDirective,
@@ -107,8 +110,12 @@ export const sharedComponents = [
   TabsComponent,
   TabComponent,
   NavUserComponent,
-  UserGreetingComponent,
-  PageNotFoundComponent
+  UserGreetingComponent
+];
+
+export const sharedPages = [
+  PageNotFoundComponent,
+  ThankYouComponent
 ];
 
 export const sharedModules = [
@@ -132,7 +139,8 @@ export const sharedModules = [
     ...sharedModules
   ],
   declarations: [
-    ...sharedComponents
+    ...sharedComponents,
+    ...sharedPages
   ],
   exports: [
     CommonModule,
@@ -140,7 +148,8 @@ export const sharedModules = [
     ...sharedModules,
     ReactiveFormsModule,
     AngularSvgIconModule,
-    ...sharedComponents
+    ...sharedComponents,
+    ...sharedPages
   ]
 })
 export class SharedModule { }

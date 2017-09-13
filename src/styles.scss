@@ -15,9 +15,11 @@
 @import 'app/pages/login/login.component';
 @import 'app/pages/password-reset/password-reset.component';
 @import 'app/pages/car/buy/car-summary.component';
+@import 'app/pages/thank-you/thank-you.component';
 
 /* component styles */
 @import 'app/components/knx-address-lookup/address-lookup.component';
+@import 'app/components/knx-app-promo/app-promo.component';
 @import 'app/components/knx-button-icon/button-icon.component';
 @import 'app/components/knx-chat-stream/chat-stream.component';
 @import 'app/components/knx-chat-stream/chat-message.component';
@@ -78,7 +80,11 @@ h3 {
 hr {
   margin: -8px 0 16px;
   border: 0;
-  border-bottom: 1px $knab-primary-gray solid;
+  border-bottom: 2px $knab-primary-gray solid;
+}
+
+p {
+  font-size: $font-size-base;
 }
 
 //remove the browser-specific styles that overlapped by the validation indicators
