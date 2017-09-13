@@ -21,7 +21,7 @@ export interface PayloadAuth {
   public_key: string;
   aes_key: string;
   nicci_key: string;
-  encrypted_key: Buffer;
+  encrypted_key: string;
 }
 
 @Injectable()
@@ -124,7 +124,7 @@ export class AuthService {
    * @param {string} email
    */
   public isActive(email: string) {
-    // this.getNicciKey()
+    // this.getNicciKey()c
     //   .flatMap((nicci: AuthKey) => {
     //     const headers = this.getBasicHeaderWithKey(nicci);
     //     return this.http.post(this.keyUrl, {email}, {headers})
@@ -189,7 +189,7 @@ export class AuthService {
 
     let encrypted = new Buffer(forge.util.encode64(encBuffer), 'base64');
 
-    return Observable.of(Object.assign(payload, { encrypted_key: encrypted, aes_key: key }));
+    return Observable.of(Object.assign(payload, { nicci_key: encrypted.toString('base64'), aes_key: key }));
   }
 
   // STEP 4 - PAYLOAD ENCRYPTION
@@ -201,7 +201,7 @@ export class AuthService {
     headers.append( 'NICCI-Key-ID', payloadAuth.id);
     headers.append('NICCI-key', payloadAuth.nicci_key);
 
-    const payload_encrypted = this.getAesGcmEncryptedBuffer(payload, payloadAuth.encrypted_key);
+    const payload_encrypted = this.getAesGcmEncryptedBuffer(payload, payloadAuth.aes_key);
 
     return this.http.post(url, payload_encrypted, { headers: headers });
   }
@@ -223,7 +223,7 @@ export class AuthService {
    * @param {Buffer} key - the buffer containing the key
    * @return {Buffer} - the encrypted object [iv, encrypt, tag]
    */
-  private getAesGcmEncryptedBuffer(text: any, key: Buffer): Buffer {
+  private getAesGcmEncryptedBuffer(text: any, key: string): Buffer {
     // Initial Vector (random data to do encryption) it must be passed
     // with the return object to perfom decryption. Newest accept also
     // a nonce object 12x0
