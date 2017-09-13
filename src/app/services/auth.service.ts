@@ -193,10 +193,9 @@ export class AuthService {
     headers.append('NICCI-Key', payloadAuth.nicci_key);
 
     const encryptedPayload = this.getAesGcmEncryptedBuffer(payload, payloadAuth.aes_key);
-    const encryptedPayloadToString = encryptedPayload.toString('binary');
-    const blob = new Blob(encryptedPayload.toJSON().data);
+    const blob = new Blob([encryptedPayload]);
 
-    return this.http.post(url, encryptedPayloadToString, {
+    return this.http.post(url, blob, {
       headers: headers,
     });
   }
