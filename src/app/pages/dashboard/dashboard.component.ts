@@ -6,14 +6,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { AssistantConfig } from '../../models/assistant';
-import { ChatStreamComponent } from './../../components/knx-chat-stream/chat-stream.component';
-
 import * as fromRoot from '../../reducers';
 import * as assistant from '../../actions/assistant';
 
+import { AssistantConfig } from '../../models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
-import { AuthService } from '../../services/auth.service';
 import { Profile, InsuranceMap, Insurance, insuranceTypes } from '../../models';
 
 @Component({

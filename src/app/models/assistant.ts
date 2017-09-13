@@ -63,7 +63,8 @@ export class AssistantConfig {
       fill: 'We hebben nog een paar gegevens van je nodig om je aanvraag te regelen. Kun je dit lijstje aanvullen?',
       check: 'Je hebt gekozen voor Avéro Achmea. Avéro Achmea heeft nog een paar vragen voor je voordat we je aanvraag kunnen versturen.',
       payment: 'Nog heel even! Van welk rekeningnummer mag je premie straks worden afgeschreven?',
-      summary: 'Voilà! Een overzicht van de verzekering die we voor je gaan aanvragen. Klopt alles zo?'
+      summary: 'Voilà! Een overzicht van de verzekering die we voor je gaan aanvragen. Klopt alles zo?',
+      thankyou: 'Je verzekering is aangevraagd. Nu is het tijd om te relaxen en te genieten!'
     }
   };
 }

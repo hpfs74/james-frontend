@@ -35,6 +35,10 @@
   line-height: 1.4em;
 }
 
+.knx-message .knx-message__header {
+  font-size: $font-size-base;
+}
+
 .knx-info__content > .knx-message,
 .knx-info__content > .knx-message p {
   color: $knab-white;

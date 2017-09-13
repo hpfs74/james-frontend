@@ -26,6 +26,7 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
+    case CarActions.BUY_REQUEST:
     case CarActions.GET_INFO_REQUEST: {
       return Object.assign({}, state, {
         loading: true
@@ -56,6 +57,7 @@ export function reducer(state = initialState, action: Action): State {
 
     case CarActions.BUY_SUCCESS: {
       return Object.assign({}, state, {
+        loading: false,
         buyComplete: true,
         buyError: false
       });
@@ -63,6 +65,7 @@ export function reducer(state = initialState, action: Action): State {
 
     case CarActions.BUY_FAILURE: {
       return Object.assign({}, state, {
+        loading: false,
         buyComplete: false,
         buyError: true
       });
