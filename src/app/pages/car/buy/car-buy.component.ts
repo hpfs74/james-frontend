@@ -184,7 +184,7 @@ export class CarBuyComponent implements OnInit {
           value.insuranceInfo,
           value.profileInfo,
           value.insuranceInfo._embedded.insurance,
-          { car: value.carInfo[0] });
+          { car: value.carInfo });
 
         const proposalRequest = new CarProposalHelper();
         const proposalData: Proposal = {
@@ -194,7 +194,7 @@ export class CarBuyComponent implements OnInit {
             proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
           )
         };
-        proposalData.proposal.car = value.carInfo[0];
+        proposalData.proposal.car = value.carInfo;
         this.store$.dispatch(new car.BuyAction(proposalData));
       });
 
