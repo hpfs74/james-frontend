@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 import { Insurance } from './insurance';
+import { InsuranceAdvice } from './insurance-advice';
 
 /**
  * Buy Flow Request
@@ -8,10 +9,8 @@ import { Insurance } from './insurance';
  * @interface Proposal
  */
 export interface Proposal {
-  proposal: Insurance;
-  items: {
-    [id: string]: string
-  };
+  proposal: InsuranceAdvice;
+  items: Array<Object>;
 }
 
 
@@ -59,15 +58,17 @@ export class CarProposalHelper {
     { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
     { key: 'Inzittenden meeverzekeren', value: 'cover_occupants', transform: this.getBoolean },
     { key: 'Slotvragen', value: '' },
+    // FirstName is a mandatory field to buy an insurance
+    { key: 'Voornaam', value: 'name'},
   ];
   /* tslint:enable */
 
-  getItems(data: any): { [id: string]: string } {
+  getItems(data: any): Array<Object> {
     if (!data) {
       return;
     }
 
-    const itemObj = {};
+    const itemArr = [];
     this.propMapping.forEach((el) => {
       let value;
       if (el.value.indexOf('.') > -1) {
@@ -75,9 +76,10 @@ export class CarProposalHelper {
       } else if (data.hasOwnProperty(el.value)) {
         value = data[el.value];
       }
-      itemObj[el.key] = el['transform'] ? el['transform'](value) : value;
+
+      itemArr.push({[el.key]: el['transform'] ? el['transform'](value) : (value ? value.toString() : '')});
     });
-    return itemObj;
+    return itemArr;
   }
 
   getFinalQuestions(data: any) {
@@ -111,14 +113,14 @@ export class CarProposalHelper {
     /* tslint:enable */
   }
 
-  getFinalQuestionsItems(data: Array<{key: string, value: string}>) {
+  getFinalQuestionsItems(data: Array<{key: string, value: string}>): Array<Object> {
     if (!data) {
       return;
     }
 
-    const itemObj = {};
+    const itemObj = [];
     data.forEach((el) => {
-      itemObj[el.key] = el.value;
+      itemObj.push({[el.key]: el.value.toString()});
     });
 
     return itemObj;
