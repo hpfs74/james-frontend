@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, ResponseContentType, ResponseType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/throw';
@@ -21,7 +21,6 @@ export interface PayloadAuth {
   public_key: string;
   aes_key: string;
   nicci_key: string;
-  encrypted_key: string;
 }
 
 @Injectable()
@@ -54,12 +53,11 @@ export class AuthService {
    * @return {Observable<R>}
    */
   public logout(): Observable<AuthToken> {
-    // return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
-    //   .map(x => {
-    //     this.localStorageService.clearToken();
-    //     return x.json();
-    //   });
-    return null;
+    return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
+      .map(x => {
+        this.localStorageService.clearToken();
+        return x.json();
+      });
   }
 
   /**
@@ -69,26 +67,15 @@ export class AuthService {
    */
   public login(auth: Authenticate): Observable<AuthToken> {
 
-    return this.play(environment.james.payloadEncryption.token, auth)
-      .map((res: Response) => res.json());
+    let auth2: Authenticate = {
+      grant_type: 'password',
+      username: 'andrei.mobgen+token@gmail.com',
+      password: 'Qwerty12',
+      scope: 'basic'
+    };
 
-    // return this.getNicciKey()
-    //   .flatMap((nicci) => {
-    //     const encPass = AuthUtils.encryptPassword(auth.password, nicci.key);
-    //     const headers = this.getBasicHeaderWithKey(nicci);
-    //
-    //     const tokenRequest = {
-    //       grant_type: auth.grant_type || 'password',
-    //       username: auth.username,
-    //       password: encPass,
-    //       scope: 'profile/basic'
-    //     };
-    //
-    //     return this.http.post(this.tokenUrl, tokenRequest, {headers})
-    //       .map((res) => res.json())
-    //       .map((token) => <AuthToken>token)
-    //       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    //   });
+    return this.play(environment.james.payloadEncryption.login, auth2)
+      .map((res: Response) => res.json());
   }
 
   /**
@@ -97,19 +84,22 @@ export class AuthService {
    * @return {Observable<AuthToken>}
    */
   public refreshToken(refreshToken: string): Observable<AuthToken> {
-    // return this.getNicciKey()
-    //   .flatMap((nicci) => {
-    //     const headers = this.getBasicHeaderWithKey(nicci);
-    //     const refreshTokenBody = {
-    //       grant_type: 'refresh_token',
-    //       refresh_token: refreshToken
-    //     };
-    //     return this.http.post(this.tokenUrl, refreshTokenBody, { headers })
-    //       .map(data => data.json());
-    //   });
-    return null;
+
+    const payload = {
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken
+    };
+
+    return this.play(environment.james.payloadEncryption.token, payload)
+      .map((res: Response) => res.json());
   }
 
+  /**
+   *
+   * @param {string} url
+   * @param body
+   * @return {Observable<any>}
+   */
   private play(url: string, body: any): Observable<any> {
 
     return this.getPayloadToken()
@@ -124,7 +114,7 @@ export class AuthService {
    * @param {string} email
    */
   public isActive(email: string) {
-    // this.getNicciKey()c
+    // this.getNicciKey()
     //   .flatMap((nicci: AuthKey) => {
     //     const headers = this.getBasicHeaderWithKey(nicci);
     //     return this.http.post(this.keyUrl, {email}, {headers})
@@ -194,16 +184,21 @@ export class AuthService {
 
   // STEP 4 - PAYLOAD ENCRYPTION
   private doPayloadEncryption(url: string, payloadAuth: PayloadAuth, payload: any): Observable<any> {
+
     const headers = new Headers();
 
-    headers.append('Authorization', payloadAuth.access_token);
-    headers.append('Content-Type', 'application/json');
-    headers.append( 'NICCI-Key-ID', payloadAuth.id);
-    headers.append('NICCI-key', payloadAuth.nicci_key);
+    headers.append('Authorization', this.getHttpAuthorizationHeader(this.clientId, this.clientSecret));
+    headers.append('Content-Type', 'application/octet-stream; charset=utf-8');
+    headers.append('NICCI-Key-ID', payloadAuth.id);
+    headers.append('NICCI-Key', payloadAuth.nicci_key);
 
-    const payload_encrypted = this.getAesGcmEncryptedBuffer(payload, payloadAuth.aes_key);
+    const encryptedPayload = this.getAesGcmEncryptedBuffer(payload, payloadAuth.aes_key);
+    const encryptedPayloadToString = encryptedPayload.toString('binary');
+    const blob = new Blob(encryptedPayload.toJSON().data);
 
-    return this.http.post(url, payload_encrypted, { headers: headers });
+    return this.http.post(url, encryptedPayloadToString, {
+      headers: headers,
+    });
   }
   /**
    * Get the content for the authorization header
@@ -225,7 +220,7 @@ export class AuthService {
    */
   private getAesGcmEncryptedBuffer(text: any, key: string): Buffer {
     // Initial Vector (random data to do encryption) it must be passed
-    // with the return object to perfom decryption. Newest accept also
+    // with the return object to perform decryption. Newest accept also
     // a nonce object 12x0
     let iv = forge.random.getBytesSync(12);
     let textToEncrypt = text;
@@ -237,10 +232,7 @@ export class AuthService {
 
     // encrypt some bytes using GCM mode
     let cipher = forge.cipher.createCipher('AES-GCM', key);
-
-    cipher.start({
-      iv: iv, // should be a 12-byte binary-encoded string or byte buffer
-    });
+    cipher.start({ iv: iv });
     cipher.update(forge.util.createBuffer(textToEncrypt));
     cipher.finish();
 
@@ -252,45 +244,18 @@ export class AuthService {
 
     return ret;
   }
+
   /**
+   * Prepare headers for old calls
    *
-   * @return {Observable<R>}
+   * @return {Headers}
    */
-  // private getNicciKey(): Observable<AuthKey> {
-  //   const headers = this.getBasicHeader();
-  //
-  //   return this.http
-  //     .post(this.keyUrl, '', {headers})
-  //     .map(data => data.json())
-  //     .map(data => {
-  //       return <AuthKey> {
-  //         id: data.id,
-  //         key: data.key
-  //       };
-  //     });
-  // }
+  private getHeaderWithBearer(): Headers {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+    headers.set('Cache-Control', 'no-cache');
 
-  // private getBasicHeader(): Headers {
-  //   const headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   headers.append('Authorization', `Basic ${environment.james.nicciKey}`);
-  //
-  //   return headers;
-  // }
-  //
-  // private getBasicHeaderWithKey(data: AuthKey): Headers {
-  //   const headers = this.getBasicHeader();
-  //   headers.append('NICCI-Key', data.id);
-  //   return headers;
-  // }
-  // private getHeaderWithBearer(): Headers {
-  //   const headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
-  //   headers.set('Cache-Control', 'no-cache');
-  //
-  //   return headers;
-  // }
-
-
+    return headers;
+  }
 }

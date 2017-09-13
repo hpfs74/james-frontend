@@ -46,7 +46,8 @@ export const environment = {
       },
       key: '${process.env.PAYLOAD_KEY_URL}',
       profile: '${process.env.PAYLOAD_PROFILE_URL}',
-      token: '${process.env.PAYLOAD_TOKEN_URL}'
+      token: '${process.env.PAYLOAD_TOKEN_URL}',
+      login: '${process.env.PAYLOAD_LOGIN_URL}'
     },
   }
 };
