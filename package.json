@@ -64,6 +64,7 @@
     "hammerjs": "^2.0.8",
     "intl": "^1.2.5",
     "moment": "^2.18.1",
+    "node-forge": "^0.7.1",
     "normalizr": "^3.2.3",
     "redux-beacon": "^1.1.0",
     "rxjs": "^5.4.1",
