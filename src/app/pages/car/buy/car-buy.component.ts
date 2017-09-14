@@ -199,26 +199,22 @@ export class CarBuyComponent implements OnInit {
         this.store$.dispatch(new car.BuyAction(proposalData));
       });
 
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-
     // TODO: return based on buy request call
-    // return this.store$.combineLatest(
-    //   this.store$.select(fromRoot.getCarBuyComplete),
-    //   this.store$.select(fromRoot.getCarBuyError),
-    //   (complete, error) => ({ complete: complete, error: error })
-    // )
-    // .map(combined => {
-    //   if (combined.error) {
-    //     return Observable.throw(new Error('Buy request error'));
-    //   } else {
-    //     // Navigate to thank you page
-    //     this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
-    //     return;
-    //   }
-    // });
+    return this.store$.combineLatest(
+      this.store$.select(fromRoot.getCarBuyComplete),
+      this.store$.select(fromRoot.getCarBuyError),
+      (complete, error) => ({ complete: complete, error: error })
+    )
+    .take(1)
+    .map(combined => {
+      if (combined.error) {
+        return Observable.throw(new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.'));
+      } else {
+        // Navigate to thank you page
+        this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
+        return;
+      }
+    });
   }
 
   onStepChange(stepIndex) {

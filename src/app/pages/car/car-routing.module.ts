@@ -26,8 +26,7 @@ export const carRoutes: Routes = [
   },
   {
     path: 'thank-you',
-    component: CarThankYouComponent,
-    canActivate: [CanActivateBuyFlowGuard],
+    component: CarThankYouComponent
   }
 ];
 @NgModule({
