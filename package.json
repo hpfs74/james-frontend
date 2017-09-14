@@ -68,7 +68,6 @@
     "normalizr": "^3.2.3",
     "redux-beacon": "^1.1.0",
     "rxjs": "^5.4.1",
-    "uuid": "^3.1.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
