@@ -64,7 +64,9 @@ export class AuthService {
    * @return {Observable<AuthToken>}
    */
   public login(auth: Authenticate): Observable<AuthToken> {
-    return this.play(environment.james.payloadEncryption.login, auth)
+    const payload = Object.assign(auth, { grant_type: 'password', scope: 'basic'});
+
+    return this.play(environment.james.payloadEncryption.login, payload)
       .map((res: Response) => res.json());
   }
 
