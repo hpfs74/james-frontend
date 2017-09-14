@@ -13,10 +13,8 @@ import * as advice from '../../../actions/advice';
 import * as router from '../../../actions/router';
 
 import { ContentService } from '../../../content.service';
-import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
-import { ProfileService } from '../../../services/profile.service';
 import { Profile } from './../../../models/profile';
 
 import { CarContactComponent } from './car-contact.component';
@@ -60,8 +58,7 @@ export class CarBuyComponent implements OnInit {
   constructor(
     private router: Router,
     private store$: Store<fromRoot.State>,
-    private contentService: ContentService,
-    private profileService: ProfileService
+    private contentService: ContentService
   ) { }
 
   ngOnInit() {
@@ -174,6 +171,10 @@ export class CarBuyComponent implements OnInit {
       this.acceptFinalTerms
     );
 
+    if (!this.acceptFinalTerms) {
+      return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd'));
+    }
+
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
       return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
@@ -199,7 +200,6 @@ export class CarBuyComponent implements OnInit {
         this.store$.dispatch(new car.BuyAction(proposalData));
       });
 
-    // TODO: return based on buy request call
     return this.store$.combineLatest(
       this.store$.select(fromRoot.getCarBuyComplete),
       this.store$.select(fromRoot.getCarBuyError),

@@ -44,7 +44,7 @@
 
       <knx-step [options]="formSteps[4]">
         <knx-car-summary-form
-          [confirm]="acceptFinalTerms"
+          [(confirm)]="acceptFinalTerms"
           [advice]="advice$ | async"
           [insurance]="insurance$ | async"
           [profile]="profile$ | async">

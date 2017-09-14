@@ -1,5 +1,4 @@
-import { toDateFormat } from './../../../utils/base-form.utils';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 
 import { Profile, Car } from '../../../models';
@@ -11,7 +10,18 @@ import { SectionItem, SectionGroup, SectionFields } from '../../../components/kn
   templateUrl: 'car-summary.component.html'
 })
 export class CarSummaryComponent {
-  @Input() confirm: boolean;
+  @Output() confirmChange = new EventEmitter();
+
+  @Input()
+  get confirm() {
+    return this.confirm;
+  }
+
+  set confirm(val) {
+    this.confirm = val;
+    this.confirmChange.emit(this.confirm);
+  }
+
   @Input() profile: Profile;
   @Input() insurance: any;
   @Input() set advice(value: any) {
