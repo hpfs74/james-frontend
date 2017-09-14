@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, ResponseContentType, ResponseType } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/interval';
 import * as forge from 'node-forge';
-import uuidv4 from 'uuid/v4';
-
-
+import * as cuid from 'cuid';
 
 import { environment } from '../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
@@ -53,7 +51,7 @@ export class AuthService {
    * @return {Observable<R>}
    */
   public logout(): Observable<AuthToken> {
-    return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer()})
+    return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer() })
       .map(x => {
         this.localStorageService.clearToken();
         return x.json();
@@ -66,15 +64,7 @@ export class AuthService {
    * @return {Observable<AuthToken>}
    */
   public login(auth: Authenticate): Observable<AuthToken> {
-
-    let auth2: Authenticate = {
-      grant_type: 'password',
-      username: 'andrei.mobgen+token@gmail.com',
-      password: 'Qwerty12',
-      scope: 'basic'
-    };
-
-    return this.play(environment.james.payloadEncryption.login, auth2)
+    return this.play(environment.james.payloadEncryption.login, auth)
       .map((res: Response) => res.json());
   }
 
@@ -103,9 +93,9 @@ export class AuthService {
   private play(url: string, body: any): Observable<any> {
 
     return this.getPayloadToken()
-      .flatMap( (payload) => this.getPayloadKey(payload))
-      .flatMap( (payload) => this.getEncryptedNicciKey(payload))
-      .flatMap( (payload) => this.doPayloadEncryption(url, payload, body));
+      .flatMap((payload) => this.getPayloadKey(payload))
+      .flatMap((payload) => this.getEncryptedNicciKey(payload))
+      .flatMap((payload) => this.doPayloadEncryption(url, payload, body));
   }
 
   /**
@@ -142,14 +132,14 @@ export class AuthService {
     };
 
     return this.http
-      .post(this.tokenUrl, body, {headers: headers})
+      .post(this.tokenUrl, body, { headers: headers })
       .map((res: Response) => res.json())
-      .map( body => <PayloadAuth>{ access_token: body.access_token });
+      .map(body => <PayloadAuth>{ access_token: body.access_token });
   }
 
   // PAYLOAD - STEP2
   private getPayloadKey(payloadauth: PayloadAuth): Observable<PayloadAuth> {
-    const session = uuidv4();
+    const session = cuid();
     const headers = new Headers();
 
     headers.append('Authorization', `Bearer ${payloadauth.access_token}`);
@@ -158,7 +148,7 @@ export class AuthService {
     return this.http
       .post(environment.james.payloadEncryption.key, `uuid=${session}`, { headers: headers })
       .map((res: Response) => res.json())
-      .map( body => <PayloadAuth>Object.assign(payloadauth, {
+      .map(body => <PayloadAuth>Object.assign(payloadauth, {
         id: body.id,
         public_key: body['public']
       }));
@@ -170,7 +160,7 @@ export class AuthService {
     let key = forge.random.getBytesSync(32);
     let pem = new Buffer(payload.public_key, 'base64').toString('ascii');
     let publicKey = forge.pki.publicKeyFromPem(pem);
-    let  encBuffer = publicKey.encrypt(key, 'RSA-OAEP', {
+    let encBuffer = publicKey.encrypt(key, 'RSA-OAEP', {
       md: forge.md.sha256.create(),
       mgf1: {
         md: forge.md.sha256.create()
@@ -225,7 +215,7 @@ export class AuthService {
     let textToEncrypt = text;
 
     // Checking if the parameter is string or object
-    if (typeof(text) === 'object') {
+    if (typeof (text) === 'object') {
       textToEncrypt = JSON.stringify(text);
     }
 
