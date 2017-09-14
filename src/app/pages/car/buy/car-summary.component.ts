@@ -14,12 +14,12 @@ export class CarSummaryComponent {
 
   @Input()
   get confirm() {
-    return this.confirm;
+    return this.confirmValue;
   }
 
   set confirm(val) {
-    this.confirm = val;
-    this.confirmChange.emit(this.confirm);
+    this.confirmValue = val;
+    this.confirmChange.emit(this.confirmValue);
   }
 
   @Input() profile: Profile;
@@ -185,6 +185,7 @@ export class CarSummaryComponent {
     }
   }
 
+  confirmValue: boolean;
   sections: Array<SectionItem>;
 
   constructor(private currencyPipe: CurrencyPipe) { }
