@@ -7,16 +7,11 @@ import * as fromRoot from '../../reducers';
 import * as profile from '../../actions/profile';
 import * as auth from '../../actions/auth';
 
-import { Price, Nav, Feature, Profile } from '../../models';
+import { Nav, Feature, Profile } from '../../models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 import { LoginModalComponent } from '../login/login-modal.component';
 import { ContentService } from '../../content.service';
-import {
-  AuthService,
-  ProfileService,
-  NavigationService,
-  CookieService
-} from '../../services';
+import { NavigationService } from '../../services';
 
 @Component({
   selector: 'knx-home',
@@ -24,7 +19,7 @@ import {
     <header class="header">
       <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
+        <knx-nav-user [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
     </header>
 
@@ -43,7 +38,6 @@ import {
 export class HomeComponent implements OnInit {
   loginModalName = 'loginModal';
 
-  coverages: Array<Price>;
   topMenu: Array<Nav>;
   phone: Object;
   footerItems: Array<Feature>;
@@ -53,7 +47,6 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private router: Router,
     private store$: Store<fromRoot.State>,
     private navigationService: NavigationService,
     private contentService: ContentService,

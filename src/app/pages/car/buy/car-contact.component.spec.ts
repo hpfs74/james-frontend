@@ -74,20 +74,4 @@ describe('Component: CarContactComponent', () => {
     ctrl.setValue('0203031680');
     expect(ctrl.valid).toBeTruthy();
   });
-
-  xit('should update the form with profile data (ngOnChanges)', () => {
-    comp.profileFromHost = {
-      firstname: 'John',
-      infix: null,
-      lastname: 'Doe',
-      phone: '0612345678'
-    };
-    expect(comp.carContactComponent).toBeDefined();
-    spyOn(comp.carContactComponent, 'ngOnChanges').and.callThrough();
-    fixture.detectChanges();
-    expect(comp.carContactComponent.ngOnChanges).toHaveBeenCalled();
-    expect(comp.carContactComponent.form.formGroup.get('firstName').value).toEqual('John');
-    expect(comp.carContactComponent.form.formGroup.get('lastName').value).toEqual('Doe');
-    expect(comp.carContactComponent.form.formGroup.get('mobileNumber').value).toEqual('0612345678');
-  });
 });

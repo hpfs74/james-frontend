@@ -1,7 +1,6 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
@@ -24,7 +23,6 @@ describe('Component: ChatStreamComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ChatStreamComponent],
-      imports: [FormsModule],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -32,12 +30,10 @@ describe('Component: ChatStreamComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ChatStreamComponent);
     comp = fixture.componentInstance;
-
-    // Provide Input() data
     comp.options = options;
-   // comp.messages = messages;
 
     fixture.detectChanges();
+
     de = fixture.debugElement.query(By.css('div.knx-chat-stream'));
     el = de.nativeElement;
   });
@@ -52,9 +48,4 @@ describe('Component: ChatStreamComponent', () => {
     const avatarEl = el.getElementsByTagName('knx-avatar');
     expect(avatarEl).not.toBeNull();
   });
-
-  // xit('should render the specified number of messages', () => {
-  //   expect(el).not.toBeNull();
-  //   expect(el.querySelectorAll('knx-chat-message').length).toBe(messages.length);
-  // });
 });

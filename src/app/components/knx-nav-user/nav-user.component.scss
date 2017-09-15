@@ -14,6 +14,13 @@
   }
 }
 
+.knx-nav-user .ng2-dropdown-button__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 0;
+}
+
 .knx-nav-user__icon {
   color: $knab-primary-green;
   font-weight: bold;

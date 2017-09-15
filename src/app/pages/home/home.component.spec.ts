@@ -1,19 +1,24 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { RouterOutlet } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
-import { CXFormsModule } from '../../../../node_modules/@cx/forms';
+// import { CXFormsModule } from '../../../../node_modules/@cx/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockBackend } from '@angular/http/testing';
-import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
+// import { MockBackend } from '@angular/http/testing';
+import { HttpModule } from '@angular/http';
 import { SharedModule } from '../../shared.module';
-import { NavbarComponent } from '../../components/knx-navigation';
+// import { NavbarComponent } from '../../components/knx-navigation';
+import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import { HomeComponent } from './home.component';
-import { AuthService } from '../../services/auth.service';
-import { Store } from '@ngrx/store';
+import { NavbarComponent } from './../../components/knx-navigation/navbar.component';
+import { NavigationService } from '../../services/navigation.service';
+import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
+import { ContentService } from '../../content.service';
 
+import * as fromRoot from '../../reducers';
+import * as auth from '../../actions/auth';
 @Component({
   template: `
     <div>
@@ -29,12 +34,42 @@ export class TestHostComponent {
 describe('Component: Home', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
+  let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserModule, FormsModule, ReactiveFormsModule, RouterTestingModule, CXFormsModule, SharedModule],
-      declarations: [HomeComponent, TestHostComponent, NavbarComponent]
+      imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpModule,
+        RouterTestingModule,
+        SharedModule,
+        StoreModule.forRoot({
+        ...fromRoot.reducers
+      })],
+      declarations: [HomeComponent, TestHostComponent, NavbarComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        NavigationService,
+        {
+          provide: ContentService,
+          useValue: jasmine.createSpyObj('ContentService', {
+            'getContentObject': {
+              layout: {
+                footer: []
+              }
+            }
+          })
+        },
+        {
+          provide: UserDialogService,
+          useValue: {}
+        }
+      ]
     }).compileComponents();
+
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
   }));
 
   beforeEach(() => {
@@ -44,13 +79,9 @@ describe('Component: Home', () => {
     fixture.detectChanges();
   });
 
-  xit('should initialize the component', () => {
-    // console.log(comp.targetComponent);
-    expect(comp.targetComponent).toBeDefined();
+  it('should logout the user', () => {
+    const action = new auth.Logout;
+    comp.targetComponent.logOut();
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
-
-  // xit('should logout the user', () => {
-  //   console.log(comp.targetComponent.logOut);
-  //   expect(comp.targetComponent.logOut).toBeDefined();
-  // });
 });
