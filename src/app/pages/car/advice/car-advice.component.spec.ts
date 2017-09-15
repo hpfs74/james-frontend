@@ -116,22 +116,17 @@ describe('Component: CarAdviceComponent', () => {
       expect(comp.targetComponent).toBeDefined();
     });
 
-    xit('should have a CarExtraForm init with proper default values', () => {
+    it('should have a CarExtraForm init with proper default values', () => {
       const carExtraForm = comp.targetComponent.carExtrasForm;
 
-      expect(carExtraForm.formGroup.valid).toBeDefined();
-      expect(carExtraForm.formConfig.extraOptionsLegal).toEqual({});
-      expect(carExtraForm.formConfig.extraOptionsNoClaim).toEqual({});
-      expect(carExtraForm.formConfig.extraOptionsOccupants).toEqual({});
+      expect(carExtraForm.formConfig.extraOptionsLegal).toBeDefined();
+      expect(carExtraForm.formConfig.extraOptionsNoClaim).toBeDefined();
+      expect(carExtraForm.formConfig.extraOptionsOccupants).toBeDefined();
 
-      expect(carExtraForm.formConfig.roadAssistance).toBeNull({});
-      expect(carExtraForm.formConfig.ownRisk).toBeNull({});
-      expect(carExtraForm.formConfig.kmPerYear).toBeNull({});
+      expect(carExtraForm.formConfig.roadAssistance).toBeDefined();
+      expect(carExtraForm.formConfig.ownRisk).toBeDefined();
+      expect(carExtraForm.formConfig.kmPerYear).toBeDefined();
     });
-  });
-
-  describe('Observables', () => {
-
   });
 
   describe('Car Advice orchestration', () => {

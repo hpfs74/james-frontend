@@ -1,7 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PriceTableComponent } from './price-table.component';
 import { PriceItemComponent } from './price-item.component';
 import { Price } from '../../models/price';
@@ -16,7 +15,6 @@ describe('Component: PriceTable', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PriceTableComponent, PriceItemComponent],
-      imports: []
     }).compileComponents();
   }));
 

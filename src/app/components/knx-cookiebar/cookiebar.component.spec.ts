@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { CookiebarComponent } from './cookiebar.component';
@@ -11,7 +10,7 @@ describe('Component: Cookiebarl', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserModule, FormsModule, RouterModule],
+      imports: [BrowserModule, RouterModule],
       declarations: [CookiebarComponent],
       providers: [
         CookieService,

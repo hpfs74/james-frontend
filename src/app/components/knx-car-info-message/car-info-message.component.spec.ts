@@ -2,7 +2,6 @@ import { NO_ERRORS_SCHEMA, DebugElement, LOCALE_ID } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
 import { CarInfoMessageComponent } from './car-info-message.component';
 import { Car } from '../../models';
@@ -45,7 +44,6 @@ describe('Component: CarInfoMessageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CarInfoMessageComponent],
-      imports: [FormsModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         {
