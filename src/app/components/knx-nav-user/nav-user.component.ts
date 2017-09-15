@@ -13,7 +13,7 @@ import { Profile } from '../../models/profile';
           <span class="knx-nav-user__icon knx-icon-user-o"></span> {{ profile?.firstname || 'Account' }}
         </knx-dropdown-button>
         <knx-dropdown-menu offset="0 -55">
-          <knx-menu-item (click)="goToProfile()">
+          <knx-menu-item *ngIf="showAccount" (click)="goToProfile()">
             <span>Mijn account</span>
           </knx-menu-item>
 
@@ -29,9 +29,9 @@ import { Profile } from '../../models/profile';
 })
 export class NavUserComponent {
   @Input() profile: Profile;
+  @Input() showAccount: boolean;
   @Input() isLoggedIn = false;
   @Output() onLogOut = new EventEmitter();
-
 
   constructor(private router: Router) { }
 

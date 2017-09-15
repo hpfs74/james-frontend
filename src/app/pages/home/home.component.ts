@@ -24,7 +24,7 @@ import {
     <header class="header">
       <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
+        <knx-nav-user [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
     </header>
 
