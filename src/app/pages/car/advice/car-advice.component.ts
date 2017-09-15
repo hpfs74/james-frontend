@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
 
 import * as fromRoot from '../../../reducers';
-import * as RouterActions from '../../../actions/router';
+import * as router from '../../../actions/router';
 import * as layout from '../../../actions/layout';
 import * as profile from '../../../actions/profile';
 import * as assistant from '../../../actions/assistant';
@@ -135,8 +135,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
         onBeforeShow: this.onShowResults.bind(this),
-        hideNextButton: true,
-        onShowStep: this.onShowResults.bind(this)
+        onShowStep: this.onShowResults.bind(this),
+        hideNextButton: true
       },
       {
         label: 'Aanvragen',
@@ -207,7 +207,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onSelectPremium(insurance) {
-    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
+    this.store$.dispatch(new advice.SelectInsuranceAction(insurance));
   }
 
   onStepChange(stepIndex) {
@@ -217,7 +217,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   startBuyFlow(): Observable<any> {
     this.subscription$.push(this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
       id => {
-        this.store$.dispatch(new RouterActions.Go({
+        this.store$.dispatch(new router.Go({
           path: ['/car/insurance', { adviceId: id }],
         }));
       }));
@@ -226,13 +226,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   updateSelectedCoverage(coverage: Price) {
     this.carDetailForm.formGroup.get('coverage').patchValue(coverage.id);
-    this.showHelperText(coverage.id);
-  }
-
-  showHelperText(key) {
     this.store$.dispatch(new assistant.AddCannedMessage({
-      key: 'car.info.' + key,
-      value: coverage,
+      key: 'car.info.' + coverage.id,
       clear: true
     }));
   }
