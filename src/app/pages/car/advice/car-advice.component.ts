@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
 
 import * as fromRoot from '../../../reducers';
-import * as RouterActions from '../../../actions/router';
+import * as router from '../../../actions/router';
 import * as layout from '../../../actions/layout';
 import * as profile from '../../../actions/profile';
 import * as assistant from '../../../actions/assistant';
@@ -207,7 +207,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onSelectPremium(insurance) {
-    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
+    this.store$.dispatch(new advice.SelectInsuranceAction(insurance));
   }
 
   onStepChange(stepIndex) {
@@ -217,7 +217,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   startBuyFlow(): Observable<any> {
     this.subscription$.push(this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
       id => {
-        this.store$.dispatch(new RouterActions.Go({
+        this.store$.dispatch(new router.Go({
           path: ['/car/insurance', { adviceId: id }],
         }));
       }));

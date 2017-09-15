@@ -6,6 +6,7 @@ import { CarInsurance } from '../models/car-insurance';
 
 export type Action = AdviceActions.All;
 
+// TODO: make more clear what selected Id's are
 export interface State {
   selectedId: string | null;
   ids: string[];
@@ -38,22 +39,13 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case AdviceActions.SET_INSURANCE: {
-      const insurance = action.payload;
-
-      return Object.assign({}, state, {
-        selectedInsurance: Object.assign({}, state.selectedInsurance, insurance)
-      });
-    }
-
-    case AdviceActions.REMOVE_ADVICE: {
-      return Object.assign({}, state, {
-        selectedInsurance: null
-      });
-    }
-
     case AdviceActions.UPDATE_ADVICE: {
       const advice = action.payload;
+
+      // Do nothing if no advice is selected as active
+      if (!state.selectedId || !state.advice) {
+        return state;
+      }
 
       return Object.assign({}, state, {
         advice: Object.assign({}, state.advice, {
@@ -63,20 +55,38 @@ export function reducer(state = initialState, action: Action): State {
     }
 
     case AdviceActions.SELECT_ADVICE: {
-      return {
-        ids: state.ids,
-        advice: state.advice,
-        selectedId: action.payload,
-        selectedInsurance: state.selectedInsurance
-      };
+      return Object.assign({}, state, {
+        selectedId: action.payload
+      });
     }
 
     case AdviceActions.REMOVE_ADVICE: {
       const advice = action.payload;
 
+      const updatedIds = state.ids.filter(id => id !== advice.id);
+
+      let copy = Object.assign({}, state.advice);
+      delete copy[advice.id];
+
+      return {
+        selectedId: state.selectedId === advice.id ? null : state.selectedId,
+        ids: updatedIds,
+        advice: Object.assign({}, copy),
+        selectedInsurance: null
+      };
+    }
+
+    case AdviceActions.SET_INSURANCE: {
+      const insurance = action.payload;
+
       return Object.assign({}, state, {
-        ids: state.ids.filter(id => id !== advice.id),
-        advice: Object.assign({}, Object.keys(state.advice).filter(id => id !== advice.id))
+        selectedInsurance: insurance
+      });
+    }
+
+    case AdviceActions.REMOVE_INSURANCE: {
+      return Object.assign({}, state, {
+        selectedInsurance: null
       });
     }
 
@@ -92,7 +102,4 @@ export const getSelectedId = (state: State) => state.selectedId;
 export const getSelected = createSelector(getAdvice, getSelectedId, (advice, selectedId) => {
   return advice[selectedId];
 });
-// export const getSelectedInsurance = createSelector(getAdvice, getSelectedId, (advice, selectedId) => {
-//   return advice[selectedId] ? advice[selectedId].insurance : null;
-// });
 export const getSelectedInsurance = (state: State) => state.selectedInsurance;

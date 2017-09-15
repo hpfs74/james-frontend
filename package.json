@@ -11,7 +11,7 @@
     "build": "npm run config && ng build --aot --locale",
     "build:prod": "npm run config -- --environment=prod && ng build --prod --environment=prod --locale",
     "serve:prod": "ng serve --open --locale --prod",
-    "test": "npm run config && ng test --code-coverage",
+    "test": "npm run config && ng test --code-coverage --single-run",
     "lint": "ng lint --type-check",
     "lint:styles": "stylelint 'src/**/*.scss' --syntax scss --config stylelint.conf.js",
     "e2e": "ng e2e",
