@@ -60,7 +60,7 @@ describe('CarProposalHelper', () => {
     expect(Object.keys(resultItems[0])[0]).toEqual(result[0].key);
   });
 
-  it('should basic questions to request format', () => {
+  it('should convert basic questions to request format', () => {
     let helper = new CarProposalHelper();
 
     const data = {
@@ -106,7 +106,7 @@ describe('CarProposalHelper', () => {
       causeComment: null,
       register: false,
       registerComment: null,
-      startDate: '2017-12-11T23:00:00.000Z',
+      startDate: '2020-12-12',
       iban: 'NL91 ABNA 0417 1643 00',
       _id: 'b6a0s8m5t2pg00e4rhdg',
       postcode: '2518CB',
@@ -270,8 +270,8 @@ describe('CarProposalHelper', () => {
       {'Emailadres': ''},
       {'Facebook account': ''},
       {'Twitter account': ''},
-      {'Startdatum': '12-12-2017'},
-      {'Ingangsdatum': '12-12-2017'},
+      {'Startdatum': '12-12-2020'},
+      {'Ingangsdatum': '12-12-2020'},
       {'Kenteken': '01XLXL'},
       {'Merk': 'VOLVO'},
       {'Model': 'V70'},
