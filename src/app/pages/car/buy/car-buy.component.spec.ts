@@ -82,26 +82,14 @@ describe('Component: CarBuyComponent', () => {
         CarService,
         ContentService,
         {
-          provide: ContentService, useValue: {
-          getContentObject: function () {
-            return {
-              'car': {
-                'securityClass': [{
-                  'value': 'SCM_NONE',
-                  'title': 'Weet ik niet / Geen',
-                  'description': 'Ik weet niet welke klasse alarmsysteem ik heb. Of ik heb geen alarmsysteem.'
-                }],
-                'coverages': [{
-                  'id': 'CL',
-                  'header': 'WA',
-                  'badge': 'ons advies',
-                  'features': ['Schade door vandalisme', 'Schade door eigen schuld'],
-                  'highlight': false
-                }]
+          provide: ContentService,
+          useValue: jasmine.createSpyObj('ContentService', {
+            'getContentObject': {
+              car: {
+                securityClass: []
               }
-            };
-          }
-        }
+            }
+          })
         },
         AssistantService,
         ProfileService,
