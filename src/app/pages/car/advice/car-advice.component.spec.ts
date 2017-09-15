@@ -168,20 +168,6 @@ describe('Component: CarAdviceComponent', () => {
       expect(comp.targetComponent.currentStep).toEqual(step);
     });
 
-    it('should show a helper text', () => {
-      const action = new assistant.AddCannedMessage({
-        key: 'car.info.houseHold',
-        value: 'test',
-        clear: true
-      });
-      comp.targetComponent.showHelperText('car.info.houseHold');
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    });
-
-    xit('should trigger on address change', () => {
-      // TODO: implement
-    });
-
     it('should toggle the side nav bar', () => {
       const open = true;
       const action = new layout.OpenLeftSideNav;

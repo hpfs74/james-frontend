@@ -226,13 +226,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   updateSelectedCoverage(coverage: Price) {
     this.carDetailForm.formGroup.get('coverage').patchValue(coverage.id);
-    this.showHelperText(coverage.id);
-  }
-
-  showHelperText(key) {
     this.store$.dispatch(new assistant.AddCannedMessage({
-      key: 'car.info.' + key,
-      value: coverage,
+      key: 'car.info.' + coverage.id,
       clear: true
     }));
   }
