@@ -44,7 +44,7 @@ import { ButtonIconComponent } from './components/knx-button-icon/button-icon.co
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
 import { ChatInputComponent } from './components/knx-chat-input/chat-input.component';
-// import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
+import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
 import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
@@ -84,7 +84,7 @@ export const sharedComponents = [
   CircleProgressComponent,
   CarSummaryComponent,
   ChatInputComponent,
-  // CookiebarComponent,
+  CookiebarComponent,
   CollapsePanelComponent,
   CollapseMessageComponent,
   DashboardItemComponent,
