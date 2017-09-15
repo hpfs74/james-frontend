@@ -12,12 +12,12 @@ export class NavigationService {
         routePath: '/',
         menuType: NavItemType.RIGHT
       },
-      {
-        id: 'menu-faq',
-        title: 'FAQ',
-        routePath: '/faq',
-        menuType: NavItemType.RIGHT
-      },
+      // {
+      //   id: 'menu-faq',
+      //   title: 'FAQ',
+      //   routePath: '/faq',
+      //   menuType: NavItemType.RIGHT
+      // },
       {
         id: 'menu-phone',
         icon: 'knx-icon-phone',

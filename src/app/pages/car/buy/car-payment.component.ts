@@ -7,7 +7,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
   selector: 'knx-car-payment-form',
   templateUrl: 'car-payment.component.html'
 })
-export class CarPaymentComponent {
+export class CarPaymentComponent implements OnInit {
   @Input() form: IbanForm;
   @Input() set advice(value: any) {
     if (value && value.startDate || value && value.iban) {
@@ -17,5 +17,12 @@ export class CarPaymentComponent {
       });
       FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     }
+  }
+
+  ngOnInit() {
+    const startDate = this.form.formGroup.get('startDate');
+    const currentDate = FormUtils.toDateFormat(new Date());
+    startDate.setValue(currentDate);
+    FormUtils.validateControls(this.form.formGroup, ['startDate']);
   }
 }

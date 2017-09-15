@@ -10,12 +10,11 @@ import * as assistant from '../../../actions/assistant';
 import * as profile from '../../../actions/profile';
 import * as car from '../../../actions/car';
 import * as advice from '../../../actions/advice';
+import * as router from '../../../actions/router';
 
 import { ContentService } from '../../../content.service';
-import { AssistantService } from './../../../services/assistant.service';
 import { AssistantConfig } from '../../../models/assistant';
 import { ChatMessage } from '../../../components/knx-chat-stream/chat-message';
-import { ProfileService } from '../../../services/profile.service';
 import { Profile } from './../../../models/profile';
 
 import { CarContactComponent } from './car-contact.component';
@@ -60,8 +59,7 @@ export class CarBuyComponent implements OnInit {
   constructor(
     private router: Router,
     private store$: Store<fromRoot.State>,
-    private contentService: ContentService,
-    private profileService: ProfileService
+    private contentService: ContentService
   ) { }
 
   ngOnInit() {
@@ -160,6 +158,19 @@ export class CarBuyComponent implements OnInit {
   }
 
   submitInsurance(): Observable<any> {
+    // Final insurance request submit
+    const formData = Object.assign({},
+      this.contactDetailForm.formGroup.value,
+      this.reportingCodeForm.formGroup.value,
+      this.checkForm.formGroup.value,
+      this.paymentForm.formGroup.value,
+      this.acceptFinalTerms
+    );
+
+    if (!this.acceptFinalTerms) {
+      return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd'));
+    }
+
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
       return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
@@ -185,9 +196,20 @@ export class CarBuyComponent implements OnInit {
         this.store$.dispatch(new car.BuyAction(proposalData));
       });
 
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
+    return this.store$.combineLatest(
+      this.store$.select(fromRoot.getCarBuyComplete),
+      this.store$.select(fromRoot.getCarBuyError),
+      (complete, error) => ({ complete: complete, error: error })
+    )
+    .take(1)
+    .map(combined => {
+      if (combined.error) {
+        return Observable.throw(new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.'));
+      } else {
+        // Navigate to thank you page
+        this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
+        return;
+      }
     });
   }
 

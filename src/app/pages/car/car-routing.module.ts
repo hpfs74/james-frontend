@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CarAdviceComponent } from './advice/car-advice.component';
 import { CarDetailComponent } from './advice/car-detail.component';
 import { CarBuyComponent } from './buy/car-buy.component';
+import { CarThankYouComponent } from './thank-you/car-thank-you.component';
 
 import { CanActivateBuyFlowGuard } from '../../services/buy-guard.service';
 
@@ -22,6 +23,10 @@ export const carRoutes: Routes = [
     data: {
       title: 'Nieuwe autoverzekering aanvragen'
     }
+  },
+  {
+    path: 'thank-you',
+    component: CarThankYouComponent
   }
 ];
 @NgModule({

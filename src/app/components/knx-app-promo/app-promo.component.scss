@@ -1,0 +1,41 @@
+.knx-app-promo-block__subtitle {
+  font-size: $font-size-base;
+  color: $knab-primary-blue;
+  margin-bottom: 10px;
+}
+
+.knx-app-promo-block__title {
+  margin-bottom: 20px;
+}
+
+.knx-list--checks {
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 30px;
+}
+
+.knx-app-promo-block__iphone {
+  display: block;
+  max-width: 200px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .knx-app-promo-block__iphone {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+  }
+}
+
+.knx-app-promo-block__buttons {
+  margin-top: 15px;
+  margin-left: 30px;
+
+  .knx-button {
+    &:before {
+      margin-right: 10px;
+      line-height: 0;
+    }
+  }
+}
