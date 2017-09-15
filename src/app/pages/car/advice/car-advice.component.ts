@@ -135,8 +135,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         label: 'Premies vergelijken',
         backButtonLabel: 'Terug',
         onBeforeShow: this.onShowResults.bind(this),
-        hideNextButton: true,
-        onShowStep: this.onShowResults.bind(this)
+        onShowStep: this.onShowResults.bind(this),
+        hideNextButton: true
       },
       {
         label: 'Aanvragen',

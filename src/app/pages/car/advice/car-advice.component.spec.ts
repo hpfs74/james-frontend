@@ -103,6 +103,30 @@ describe('Component: CarAdviceComponent', () => {
     it('should init the wizard steps', () => {
       expect(comp.targetComponent.formSteps).toBeDefined();
       expect(comp.targetComponent.formSteps.length).toBeGreaterThan(0);
+
+      comp.targetComponent.formSteps.forEach(step => {
+        expect(step.label).toBeDefined();
+        expect(step.onShowStep).toBeDefined();
+      });
+    });
+
+    it('should init the form template', () => {
+      const element = fixture.debugElement.query(By.css('form'));
+      expect(element).toBeDefined();
+      expect(comp.targetComponent).toBeDefined();
+    });
+
+    xit('should have a CarExtraForm init with proper default values', () => {
+      const carExtraForm = comp.targetComponent.carExtrasForm;
+
+      expect(carExtraForm.formGroup.valid).toBeDefined();
+      expect(carExtraForm.formConfig.extraOptionsLegal).toEqual({});
+      expect(carExtraForm.formConfig.extraOptionsNoClaim).toEqual({});
+      expect(carExtraForm.formConfig.extraOptionsOccupants).toEqual({});
+
+      expect(carExtraForm.formConfig.roadAssistance).toBeNull({});
+      expect(carExtraForm.formConfig.ownRisk).toBeNull({});
+      expect(carExtraForm.formConfig.kmPerYear).toBeNull({});
     });
   });
 
@@ -110,21 +134,60 @@ describe('Component: CarAdviceComponent', () => {
 
   });
 
-  describe('Wizard', () => {
+  describe('Car Advice orchestration', () => {
+    it('should dispatch when premium is selected', () => {
+      const insurance = {
+        id: '2516227',
+        insurance_id: 'ohra-autoverzekering-aanvullend',
+        moneyview_id: 'ohra-autoverzekering-aanvullend',
+        type: 'car',
+        car: null,
+        insurance_name: 'Auto',
+        fit: 78.09,
+        price_quality: 10,
+        own_risk: 0,
+        monthly_premium: 121.99,
+        documents: [],
+        details: 'WAVC',
+        price: 121.99,
+        product_id: '2516227',
+        terms_conditions_pdf_url: '',
+        reviews: 2,
+        reviews_amount: 4,
+        supported: true,
+        _embedded: null
+      };
+      const action = new advice.SelectInsuranceAction(insurance);
+      comp.targetComponent.onSelectPremium(insurance);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
 
-  });
+    it('should change the wizard step', () => {
+      const step = 2;
+      comp.targetComponent.onStepChange(step);
+      expect(comp.targetComponent.currentStep).toEqual(step);
+    });
 
-  it('should init the form', () => {
-    const element = fixture.debugElement.query(By.css('form'));
-    expect(element).toBeDefined();
-    expect(comp.targetComponent).toBeDefined();
-  });
+    it('should show a helper text', () => {
+      const action = new assistant.AddCannedMessage({
+        key: 'car.info.houseHold',
+        value: 'test',
+        clear: true
+      });
+      comp.targetComponent.showHelperText('car.info.houseHold');
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
 
-  xit('should have a CarExtraForm init with proper default values', () => {
-    const carExtraForm = comp.targetComponent.carExtrasForm;
+    xit('should trigger on address change', () => {
+      // TODO: implement
+    });
 
-    // expect(carExtraForm.formGroup.valid).toBeTruthy();
-    expect(carExtraForm.formConfig.extraOptionsLegal).toBeFalsy();
+    it('should toggle the side nav bar', () => {
+      const open = true;
+      const action = new layout.OpenLeftSideNav;
+      comp.targetComponent.toggleSideNavState(open);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
   });
 
 });
