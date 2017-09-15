@@ -12,7 +12,7 @@ import { Profile } from '../../models/profile';
         <knx-dropdown-button>
           <span class="knx-nav-user__icon knx-icon-user-o"></span> {{ profile?.firstname || 'Account' }}
         </knx-dropdown-button>
-        <knx-dropdown-menu offset="0 -10">
+        <knx-dropdown-menu offset="0 -55">
           <knx-menu-item *ngIf="showAccount" (click)="goToProfile()">
             <span>Mijn account</span>
           </knx-menu-item>
