@@ -124,9 +124,6 @@ describe('Component: CarBuyComponent', () => {
   it('should init all the forms', () => {
     const element = fixture.debugElement.query(By.css('form'));
     expect(element).toBeDefined();
-    // Object.keys(element).forEach((key) => {
-    //   console.log(key.parent);
-    // })
     expect(comp.targetComponent).toBeDefined();
     expect(comp.targetComponent.contactDetailForm).toBeDefined();
     expect(comp.targetComponent.reportingCodeForm).toBeDefined();
@@ -140,28 +137,12 @@ describe('Component: CarBuyComponent', () => {
   });
 
   it('should validate the form before next step', () => {
-    // comp.targetComponent.formSteps[0].onBeforeNext();
-    // console.log(typeof comp.targetComponent.formSteps[0].onBeforeNext());
-    expect(comp.targetComponent.formSteps[0].onBeforeNext() instanceof Error).toBeTruthy();
-    // console.log(comp.targetComponent.contactDetailForm.formGroup.get('mobilePhone'));
-
     comp.targetComponent.contactDetailForm.formGroup.get('initials').setValue('A');
     comp.targetComponent.contactDetailForm.formGroup.get('middleName').setValue('A');
     comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('A');
     comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('A');
-    comp.targetComponent.contactDetailForm.formGroup.get('mobilePhone').setValue('0612345678');
-    comp.targetComponent.contactDetailForm.formGroup.get('phone').setValue('0613822660');
-
-    // expect(comp.targetComponent.formSteps[0].onBeforeNext() instanceof Observable).toBeTruthy();
-
-
-    // Object.keys(comp.targetComponent.formSteps[0].onBeforeNext()).forEach((key) => {
-    //   console.log(key);
-    // });
+    comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0612345678');
+    comp.targetComponent.contactDetailForm.formGroup.get('phoneNumber').setValue('0613822660');
+    expect(comp.targetComponent.formSteps[0].onBeforeNext() instanceof Observable).toBeTruthy();
   });
-
-  // xit('should submit the insurance', () => {
-  //   comp.targetComponent.onStepChange(4);
-  //   expect(comp.targetComponent.currentStep).toEqual(4);
-  // });
 });
