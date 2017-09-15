@@ -10,7 +10,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
 export class CarPaymentComponent {
   @Input() form: IbanForm;
   @Input() set advice(value: any) {
-    if (value && value.startDate || value.iban) {
+    if (value && value.startDate || value && value.iban) {
       this.form.formGroup.patchValue({
         startDate: FormUtils.toDateFormat(value.startDate),
         iban: value.iban

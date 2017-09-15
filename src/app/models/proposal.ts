@@ -27,11 +27,11 @@ export class CarProposalHelper {
     { key: 'Voornaam', value: 'firstName' },
     { key: 'Voorvoegsels', value: 'infix' },
     { key: 'Achternaam', value: 'lastName' },
-    { key: 'Straat', value: 'address.street' },
-    { key: 'Huisnummer', value: 'address.number' },
-    { key: 'Huisnummer toevoeging', value: 'address.number_extended' },
-    { key: 'Postcode', value: 'address.postcode' },
-    { key: 'Woonplaats', value: 'address.city' },
+    { key: 'Straat', value: 'street' },
+    { key: 'Huisnummer', value: 'number' },
+    { key: 'Huisnummer toevoeging', value: 'number_extended' },
+    { key: 'Postcode', value: 'postcode' },
+    { key: 'Woonplaats', value: 'city' },
     { key: 'Geboortedatum', value: 'birthDate' },
     { key: 'Mobiel telefoonnummer', value: 'mobileNumber' },
     { key: 'Vast telefoonnummer', value: 'phoneNumber' },
@@ -59,7 +59,7 @@ export class CarProposalHelper {
     { key: 'Inzittenden meeverzekeren', value: 'cover_occupants', transform: this.getBoolean },
     { key: 'Slotvragen', value: '' },
     // FirstName is a mandatory field to buy an insurance
-    { key: 'Voornaam', value: 'name'},
+    { key: 'Voornaam', value: 'name'}
   ];
   /* tslint:enable */
 
@@ -149,8 +149,11 @@ export class CarProposalHelper {
         value = 'Aansprakelijkheid + Volledig casco';
         break;
       default:
+        value = null;
         break;
     }
+
+    return value;
   }
 
   private formatDate(value: Date) {

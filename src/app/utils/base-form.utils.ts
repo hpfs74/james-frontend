@@ -80,7 +80,7 @@ export const postalCodeMask = {
 export const pick = function (data, keys) {
   let result = {};
   keys.forEach(function (key) {
-    if (data.hasOwnProperty(key)) {
+    if (data && data.hasOwnProperty(key)) {
       result[key] = data[key];
     }
   });
@@ -90,7 +90,7 @@ export const pick = function (data, keys) {
 export const pickDefined = function (data, keys) {
   let result = {};
   keys.forEach(function (key) {
-    if (data.hasOwnProperty(key) && data[key] !== null) {
+    if (data && data.hasOwnProperty(key) && data[key] !== null) {
       result[key] = data[key];
     }
   });
