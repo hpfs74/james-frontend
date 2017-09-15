@@ -8,7 +8,7 @@ module.exports = function(config) {
         plugins: [
             require('karma-jasmine'),
             // require('karma-electron'),
-            // require('karma-phantomjs-launcher'),
+            require('karma-phantomjs-launcher'),
             require('karma-mocha-reporter'),
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
@@ -92,9 +92,9 @@ module.exports = function(config) {
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
-        autoWatch: process.env.KARMA_WATCH ? true : false,
-        browsers: ['ChromeHeadless'],
-        singleRun: process.env.KARMA_WATCH ? false : true
+        autoWatch: process.env.CI ? true : false,
+        browsers: process.env.CI ? ['PhantomJS'] : ['ChromeHeadless'],
+        singleRun: process.env.CI ? false : true
     };
 
     // CI
