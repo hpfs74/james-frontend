@@ -13,7 +13,7 @@ import { InsuranceAdvice, CarInsurance } from '../../models';
       </h2>
     </div>
 
-    <p class="knx-collapsible-panel__title">
+    <p class="knx-collapsible-panel__title" *ngIf="selectedInsurance?.supported">
       Slim verzekerd via Knab
 
       <knx-ir-tooltip>
@@ -45,9 +45,11 @@ import { InsuranceAdvice, CarInsurance } from '../../models';
       </knx-insurance-review-benefits>
     </div>
 
-    <a *ngIf="!selectedInsurance?.supported"
-      [attr.href]="selectedInsurance?._embedded.insurance.url"
-      class="knx-button knx-button--secondary pull-right">Ga naar website</a>
+    <div class="knx-insurance-review__unsupported-button">
+      <a *ngIf="!selectedInsurance?.supported"
+        [attr.href]="selectedInsurance?._embedded.insurance.url"
+        class="knx-button knx-button--secondary pull-right">Ga naar website</a>
+    </div>
   `
 })
 export class InsuranceReviewComponent {
