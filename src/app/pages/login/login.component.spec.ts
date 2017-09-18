@@ -99,4 +99,8 @@ describe('Component: Login', () => {
     expect(comp.getPasswordResetLink()).toBeDefined();
   });
 
+  it('should redirect to registration', () => {
+    expect(comp.goToRegister).toBeDefined();
+  });
+
 });

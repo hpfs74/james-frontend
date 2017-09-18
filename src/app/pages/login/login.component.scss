@@ -26,12 +26,27 @@ h2.knx-login__subline,
   display: block;
 }
 
-.knx-login__reset {
+.knx-login__actions {
   margin-top: 20px;
+  text-align: center;
+
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 5px;
+    }
+  }
 
   a {
-    color: $knab-primary-red;
+    color: $knab-primary-blue;
     font-size: $font-size-base - 2;
+
+    &:hover {
+      text-decoration: none;
+      color: $knab-primary-red;
+    }
   }
 }
 

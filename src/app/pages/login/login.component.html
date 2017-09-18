@@ -41,9 +41,13 @@
             <div class="cx-message__content"><strong>{{ errorMessage }}</strong>.
             </div>
         </div>
-        <p class="knx-login__reset knx-text-center">
-          <a tabindex="0" rel="nofollow noopener" target="_blank" (click)="goToPasswordReset()">Ik ben mijn wachtwoord vergeten</a>
-        </p>
+
+        <div class="knx-login__actions">
+          <ul class="knx-list--unstyled">
+            <li><a tabindex="0" rel="nofollow noopener" target="_blank" (click)="goToPasswordReset()">Ik ben mijn wachtwoord vergeten</a></li>
+            <li *ngIf="registrationLink" ><a tabindex="0" rel="nofollow noopener" (click)="goToRegister()">Of, maak een account aan</a></li>
+          </ul>
+        </div>
       </div>
     </div>
     </form>
