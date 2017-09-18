@@ -33,6 +33,7 @@ import * as ObjUtils from '../../../utils/obj.util';
 import { Proposal, CarProposalHelper } from './../../../models/proposal';
 
 @Component({
+  selector: 'knx-car-buy',
   templateUrl: 'car-buy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -147,11 +148,6 @@ export class CarBuyComponent implements OnInit {
     if (!form.formGroup.valid) {
       return Observable.throw(new Error(form.validationSummaryError));
     }
-
-    // let saveCtrl = form.formGroup.get('saveToProfile');
-    // if (saveCtrl && saveCtrl.value) {
-    //     return this.store.dispatch(new profile.UpdateAction(getUpdatedProfile(form.formGroup.value)));
-    // }
 
     this.store$.dispatch(new advice.UpdateAction(form.formGroup.value));
 
