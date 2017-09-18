@@ -14,15 +14,12 @@ const defaultTarget = './src/environments/environment.ts';
 const targetPath = isProd ? `./src/environments/environment.prod.ts` : defaultTarget;
 const logger = console.log;
 
-
 function getEnvVar(name) {
   if (!process.env[name]) {
     throw new Error(`Sorry cannot find any value for "${name}" env var. Please provide one!!!`);
   }
   return process.env[name];
 }
-
-
 
 // TODO: provide the correct client id
 const forgetPasswordLink =

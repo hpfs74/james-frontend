@@ -26,14 +26,12 @@ export class LoginComponent implements OnInit {
   pending$ = this.store.select(fromAuth.getLoginPagePending);
   error$ = this.store.select(fromAuth.getLoginPageError);
   errorMessage: string;
-  registrationLink: string;
 
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
+  registrationLink = environment.external.registration;
 
-  constructor(private store: Store<fromAuth.State>) {
-    this.registrationLink = environment.external.registration;
-  }
+  constructor(private store: Store<fromAuth.State>) {}
 
   ngOnInit() {
     this.store.select(fromAuth.getLoginPageError)
@@ -45,6 +43,16 @@ export class LoginComponent implements OnInit {
 
   goToPasswordReset() {
     window.location.href  = this.passwordResetUrl;
+  }
+
+  getPasswordResetLink(): string {
+    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(window.location.origin)}`;
+  }
+
+  goToRegister() {
+    if (this.registrationLink) {
+      window.location.href = this.registrationLink;
+    }
   }
 
   login(event) {
@@ -61,15 +69,5 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(new auth.Login({ username: email.value, password: password.value }));
     }
     return;
-  }
-
-  getPasswordResetLink(): string {
-    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(window.location.origin)}`;
-  }
-
-  goToRegister() {
-    if (this.registrationLink) {
-      window.location.href = this.registrationLink;
-    }
   }
 }
