@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
+  registrationLink = environment.external.registration;
 
   constructor(private store: Store<fromAuth.State>) {}
 
@@ -42,6 +43,16 @@ export class LoginComponent implements OnInit {
 
   goToPasswordReset() {
     window.location.href  = this.passwordResetUrl;
+  }
+
+  getPasswordResetLink(): string {
+    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(window.location.origin)}`;
+  }
+
+  goToRegister() {
+    if (this.registrationLink) {
+      window.location.href = this.registrationLink;
+    }
   }
 
   login(event) {
@@ -58,9 +69,5 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(new auth.Login({ username: email.value, password: password.value }));
     }
     return;
-  }
-
-  public getPasswordResetLink(): string {
-    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(window.location.origin)}`;
   }
 }
