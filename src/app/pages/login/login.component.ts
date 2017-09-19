@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   passwordResetUrl: string = this.getPasswordResetLink();
   registrationLink = environment.external.registration;
 
-  constructor(private store: Store<fromAuth.State>) {}
+  constructor(@Inject(LOCALE_ID) private locale: string, private store: Store<fromAuth.State>) {}
 
   ngOnInit() {
     this.store.select(fromAuth.getLoginPageError)
@@ -46,7 +46,11 @@ export class LoginComponent implements OnInit {
   }
 
   getPasswordResetLink(): string {
-    return environment.james.forgetPassword + `&redirect_uri=${encodeURI(window.location.origin)}`;
+    const locale = this.locale || 'nl-NL';
+
+    return environment.james.forgetPassword
+      + `&redirect_uri=${encodeURI(window.location.origin)}`
+      + `&locale=${locale}`;
   }
 
   goToRegister() {

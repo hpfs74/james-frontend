@@ -96,7 +96,14 @@ describe('Component: Login', () => {
   });
 
   it('should return a password reset link', () => {
-    expect(comp.getPasswordResetLink()).toBeDefined();
+    const resetLink = comp.getPasswordResetLink();
+
+    expect(resetLink).toBeDefined();
+    expect(resetLink).toContain('redirect_uri=');
+    expect(resetLink).toContain('response_type=');
+    expect(resetLink).toContain('client_id=');
+    expect(resetLink).toContain('locale=');
+    expect(resetLink).toContain('scope=basic+emailaddress+social');
   });
 
   it('should redirect to registration', () => {
