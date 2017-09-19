@@ -44,6 +44,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   address: Address;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
+  showStepBlock = false;
 
   // State of the advice forms data
   advice$: Observable<any>;
@@ -343,10 +344,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     FormUtils.scrollToForm('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title', clear: true }));
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.list' }));
     this.store$.select(fromRoot.getSelectedInsurance).take(1)
       .subscribe(selectedInsurance => {
         that.formSteps[2].hideNextButton = !selectedInsurance.supported;
+        that.showStepBlock = selectedInsurance.supported;
+        if (selectedInsurance.supported) {
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.steps' }));
+        }
       });
   }
 
