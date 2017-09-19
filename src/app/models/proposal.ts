@@ -37,7 +37,7 @@ export class CarProposalHelper {
     { key: 'Vast telefoonnummer', value: 'phoneNumber' },
     { key: 'Rekeningnummer', value: 'iban', transform: this.removeWhiteSpace },
     { key: 'Betalingstermijn', value: '' },
-    { key: 'Emailadres', value: 'email' },
+    { key: 'Emailadres', value: 'emailaddress' },
     { key: 'Facebook account', value: '' },
     { key: 'Twitter account', value: '' },
     { key: 'Startdatum', value: 'startDate', transform: this.formatDate },
