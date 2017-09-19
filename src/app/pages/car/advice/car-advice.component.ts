@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, StepError } from '../../../../../node_modules/@knx/wizard/src/knx-wizard.options';
+import { KNXWizardComponent } from '@knx/wizard';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
@@ -59,6 +60,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   // Forms
   carDetailForm: CarDetailForm;
   carExtrasForm: CarExtrasForm;
+
+  @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
 
   constructor(private store$: Store<fromRoot.State>, private contentService: ContentService) { }
 
@@ -208,7 +211,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onSelectPremium(insurance) {
-    this.store$.dispatch(new advice.SelectInsuranceAction(insurance));
+    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
+    this.knxWizard.goToNextStep();
   }
 
   onStepChange(stepIndex) {
@@ -343,13 +347,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     let that = this;
     FormUtils.scrollToForm('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title', clear: true }));
+
+
     this.store$.select(fromRoot.getSelectedInsurance).take(1)
       .subscribe(selectedInsurance => {
         that.formSteps[2].hideNextButton = !selectedInsurance.supported;
         that.showStepBlock = selectedInsurance.supported;
+
         if (selectedInsurance.supported) {
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title' }));
           this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.steps' }));
+        } else {
+          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.unsupported', clear: true }));
         }
       });
   }

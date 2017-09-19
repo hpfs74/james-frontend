@@ -152,7 +152,7 @@ describe('Component: CarAdviceComponent', () => {
         supported: true,
         _embedded: null
       };
-      const action = new advice.SelectInsuranceAction(insurance);
+      const action = new advice.SetInsuranceAction(insurance);
       comp.targetComponent.onSelectPremium(insurance);
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });

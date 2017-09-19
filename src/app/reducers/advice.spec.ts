@@ -1,4 +1,4 @@
-import { AddAction, UpdateAction, RemoveAction, SelectAction, SelectInsuranceAction, RemoveInsuranceAction } from '../actions/advice';
+import { AddAction, UpdateAction, RemoveAction, SelectAction, SetInsuranceAction, RemoveInsuranceAction } from '../actions/advice';
 import * as fromAdvice from './advice';
 
 describe('Advice reducer', () => {
@@ -207,7 +207,7 @@ describe('Advice reducer', () => {
         selectedInsurance: payload
       };
 
-      const selectAction = new SelectInsuranceAction(payload);
+      const selectAction = new SetInsuranceAction(payload);
       const result = fromAdvice.reducer(fromAdvice.initialState, selectAction);
       expect(result).toEqual(expectedResult);
     });
