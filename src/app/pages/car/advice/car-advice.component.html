@@ -28,7 +28,7 @@
 
       <knx-step [options]="formSteps[1]">
         <knx-insurance-toplist
-          (insuranceSelected$)="onSelectPremium($event); knxWizard.goToNextStep();"
+          (insuranceSelected$)="onSelectPremium($event)"
           [totalTitle]="(insurances$ | async)?.length"
           [initialAmount]="4"
           [isLoading]="isInsuranceLoading$ | async"

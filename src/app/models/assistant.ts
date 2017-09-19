@@ -46,6 +46,8 @@ export class AssistantConfig {
         next: 'Wat wil je doen?'
       },
       review: {
+        unsupported: `Dit zou jouw nieuwe verzekering kunnen zijn! Bekijk alle gegevens even goed om
+          een goed beeld te krijgen van de verzekering.`,
         title: `In 3 minuten doe je een aanvraag:`,
         steps: `
         1. Check je gegevens <br>

@@ -38,7 +38,7 @@ export class SelectAction implements Action {
   constructor(public payload: any) {}
 }
 
-export class SelectInsuranceAction implements Action {
+export class SetInsuranceAction implements Action {
   readonly type = SET_INSURANCE;
 
   constructor(public payload: InsuranceAdvice | CarInsurance) {}
@@ -53,6 +53,6 @@ export type All
   | UpdateAction
   | RemoveAction
   | SelectAction
-  | SelectInsuranceAction
+  | SetInsuranceAction
   | RemoveInsuranceAction;
 

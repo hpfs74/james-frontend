@@ -104,6 +104,7 @@ export class InsuranceResultComponent {
   };
 
   select(event) {
+    event.stopPropagation(); // prevent click event bubbling up and triggering twice
     this.insuranceSelected$.emit(this.insurance);
   }
 }
