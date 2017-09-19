@@ -3,17 +3,6 @@ import { TokenHelper, tokenNotExpired } from './auth.utils';
 
 describe('Utils: AuthUtils', () => {
 
-  describe('encryptPassword', () => {
-    it('should provide an encrypted password', () => {
-      const result = AuthUtils.encryptPassword('test123', 'supersecret');
-      expect(result).not.toBeNull();
-    });
-
-    it('should provide a valid three dot separated token', () => {
-      const result = AuthUtils.encryptPassword('test123', 'supersecret');
-    });
-  });
-
   describe('TokenHelper', () => {
     const tokenHelper = new TokenHelper();
 

@@ -106,7 +106,6 @@ export class AuthEffects {
           this.localStorageService.setToken(token);
           return new auth.RefreshTokenSuccess(token);
         } else {
-          // TODO: show login user dialog
           return new auth.RefreshTokenFailure(token);
         }
       }))
