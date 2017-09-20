@@ -13,9 +13,9 @@
  */
 @import 'app/auth/containers/login-page.component';
 @import 'app/auth/containers/password-reset-page.component';
-@import 'app/pages/dashboard/dashboard.component';
-@import 'app/pages/car/buy/car-summary.component';
-@import 'app/pages/thank-you/thank-you.component';
+@import 'app/dashboard/containers/dashboard.component';
+@import 'app/car/components/buy/car-summary.component';
+@import 'app/core/containers/thank-you.component';
 
 /* component styles */
 @import 'app/components/knx-address-lookup/address-lookup.component';

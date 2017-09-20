@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { InsuranceAdvice } from '../models/insurance-advice';
-import { CarInsurance } from '../models/car-insurance';
+import { CarInsurance } from '../car/models/car-insurance';
 
 export const ADD_ADVICE =             '[Advice] Add';
 export const UPDATE_ADVICE =          '[Advice] Update';

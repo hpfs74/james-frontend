@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CarInsurance } from '../../models/car-insurance';
+import { CarInsurance } from '../../car/models/car-insurance';
 
 @Component({
   selector: 'knx-insurance-review-car',

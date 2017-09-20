@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { collapseInOutAnimation } from '../../animations';
-import { Nav, NavItemType } from '../../models';
+import { Nav, NavItemType } from '../../core/models/nav';
 import { NavUserComponent } from './../knx-nav-user/nav-user.component';
 @Component({
   selector: 'knx-navbar',

@@ -3,7 +3,7 @@ import { Router, Route, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot
 import { Action, Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
-import * as RouterActions from '../actions/router';
+import * as RouterActions from '../core/actions/router';
 import * as fromRoot from '../reducers';
 
 @Injectable()

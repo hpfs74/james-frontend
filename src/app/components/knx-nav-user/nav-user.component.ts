@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Profile } from '../../models/profile';
+import { Profile } from '../../profile/models';
 
 @Component({
   selector: 'knx-nav-user',

@@ -15,21 +15,19 @@ import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
 import { reducers, metaReducers } from './reducers';
 
-import { RouterEffects } from './effects/router';
-
 import { ContentService } from './content.service';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './core/containers/app.component';
 import { environment } from '../environments/environment';
 import { requestOptionsProvider } from './services/default-request-opts.service';
 
+// Feature modules
+import { SharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
 
 import { LocalStorageService } from './services/localstorage.service';
 
-// Feature modules
-import { SharedModule } from './shared.module';
-import { HomeModule } from './pages/home/home.module';
 
 export function ContentLoader(contentService: ContentService) {
   return () => contentService.loadFiles();
@@ -49,8 +47,6 @@ export function ContentLoader(contentService: ContentService) {
 
     SharedModule,
 
-    HomeModule.forRoot(),
-
     StoreModule.forRoot(reducers, { metaReducers }),
 
     // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
@@ -61,10 +57,9 @@ export function ContentLoader(contentService: ContentService) {
 
     AuthModule.forRoot(),
 
+    CoreModule.forRoot(),
+
     AppShellModule.runtime(),
-  ],
-  declarations: [
-    AppComponent
   ],
   providers: [
     {

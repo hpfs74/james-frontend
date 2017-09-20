@@ -19,10 +19,6 @@ import { KNXModalDialogModule } from '@knx/modal';
  */
 import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 
-/** Util Pages */
-import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
-import { ThankYouComponent } from './pages/thank-you/thank-you.component';
-
 /**
  * Pipes
  */
@@ -113,11 +109,6 @@ export const sharedComponents = [
   UserGreetingComponent
 ];
 
-export const sharedPages = [
-  PageNotFoundComponent,
-  ThankYouComponent
-];
-
 export const sharedModules = [
   CXFormsModule,
   KNXWizardModule,
@@ -140,7 +131,6 @@ export const sharedModules = [
   ],
   declarations: [
     ...sharedComponents,
-    ...sharedPages
   ],
   exports: [
     CommonModule,
@@ -149,7 +139,6 @@ export const sharedModules = [
     ReactiveFormsModule,
     AngularSvgIconModule,
     ...sharedComponents,
-    ...sharedPages
   ]
 })
 export class SharedModule { }

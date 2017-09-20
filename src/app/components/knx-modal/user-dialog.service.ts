@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { KNXModalDialogService, KNXModalDialogSettings } from '@knx/modal';
 
 import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout';
+import * as layout from '../../core/actions/layout';
 
 @Injectable()
 export class UserDialogService {

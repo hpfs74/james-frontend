@@ -33,34 +33,21 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as fromProfile from './profile';
-import * as fromSettings from './settings';
-import * as fromLayout from './layout';
-import * as fromInsurances from './insurances';
-import * as fromAssistant from './assistant';
-import * as fromCompare from './compare';
-import * as fromAdvice from './advice';
-import * as fromCar from './car';
-import * as fromCoverage from './coverage';
 
-import { analyticsMetaReducer } from './analytics';
+
+
+// import { analyticsMetaReducer } from './analytics';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
-export interface State {
-  profile: fromProfile.State;
-  settings: fromSettings.State;
-  layout: fromLayout.State;
-  insurances: fromInsurances.State;
-  assistant: fromAssistant.State;
-  compare: fromCompare.State;
-  advice: fromAdvice.State;
-  car: fromCar.State;
-  coverage: fromCoverage.State;
-  // router: fromRouter.RouterReducerState;
-}
+
+ /* tslint:disable */
+export interface State {}
+  // insurances: fromInsurances.State;
+  // advice: fromAdvice.State;
+/* tslint:enable */
 
 /**
  * Because metareducers take a reducer function and return a new reducer,
@@ -70,17 +57,8 @@ export interface State {
  * the result from right to left.
  */
 export const reducers: ActionReducerMap<State> = {
-  profile: fromProfile.reducer,
-  settings: fromSettings.reducer,
-  layout: fromLayout.reducer,
-  insurances: fromInsurances.reducer,
-  assistant: fromAssistant.reducer,
-  compare: fromCompare.reducer,
-  advice: fromAdvice.reducer,
-  car: fromCar.reducer,
-  coverage: fromCoverage.reducer,
-  // router: fromRouter.routerReducer
-  // routerReducer: analyticsMetaReducer(fromRouter.routerReducer)
+  // insurances: fromInsurances.reducer,
+  // advice: fromAdvice.reducer
 };
 
 // console.log all actions
@@ -118,12 +96,6 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 ? [logger] /* [logger, storeFreeze] */
 : [];
 
-/* thomas: storeFreeze seems to also freeze objects in zone.js so it gives read only
- * errors on component properties. Disable for now, but it's recommended to use it
- * to enforce not modifying anything in the store directly.
- * See https://github.com/codewareio/ngrx-store-freeze/issues/17
- * /
-
 /**
  * A selector function is a map function factory. We pass it parameters and it
  * returns a function that maps from the larger state tree into a smaller
@@ -151,80 +123,3 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
  * The created selectors can also be composed together to select different
  * pieces of state.
  */
-
-
-/**
- * Profile Reducers
- */
-export const getProfileState = (state: State) => state.profile;
-export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
-export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
-export const getProfileLoaded = createSelector(getProfileState, fromProfile.getLoaded);
-
-/**
- * Settings Reducers
- */
-export const getSettingsState = (state: State) => state.settings;
-export const getSettings = createSelector(getSettingsState, fromSettings.getCurrent);
-export const getSettingsLoading = createSelector(getSettingsState, fromSettings.getLoading);
-
-/*
- * Insurances Reducers
- */
-export const getInsurancesState = (state: State) => state.insurances;
-export const getInsurances = createSelector(getInsurancesState, fromInsurances.getInsurances);
-
-/**
- * Layout Reducers
- */
-export const getLayoutState = (state: State) => state.layout;
-export const getLeftSidenavState = createSelector(getLayoutState, fromLayout.getLeftSidenavState);
-export const getRightSidenavState = createSelector(getLayoutState, fromLayout.getRightSidenavState);
-export const getOpenedModalNameState = createSelector(getLayoutState, fromLayout.getOpenedModalName);
-
-/**
- * Chat Assistant Reducers
- */
-export const getAsisstantState = (state: State) => state.assistant;
-export const getAssistantMessageState = createSelector(getAsisstantState, fromAssistant.getMessages);
-export const getAssistantConfig = createSelector(getAsisstantState, fromAssistant.getConfig);
-
-/**
- * Compare Insurance Reducers
- */
-export const getCompareState = (state: State) => state.compare;
-export const getCompareResult = createSelector(getCompareState, fromCompare.getCompareResult);
-export const getCompareLoading = createSelector(getCompareState, fromCompare.getLoading);
-export const getCompareError = createSelector(getCompareState, fromCompare.getError);
-export const getCompareLoaded = createSelector(getCompareState, fromCompare.getLoaded);
-
-/**
- * Advice Reducers
- * Advice is similar to an insurance object. It is the data from the advice flow that is
- * optionally saved to the profile to support anonymous flow.
- */
-export const getAdviceState = (state: State) => state.advice;
-export const getAdvice = createSelector(getAdviceState, fromAdvice.getAdvice);
-export const getAdviceIds = createSelector(getAdviceState, fromAdvice.getIds);
-
-export const getSelectedAdviceId = createSelector(getAdviceState, fromAdvice.getSelectedId);
-export const getSelectedAdvice = createSelector(getAdviceState, fromAdvice.getSelected);
-export const getSelectedInsurance = createSelector(getAdviceState, fromAdvice.getSelectedInsurance);
-
-/**
- * Car Info Reducers
- */
-export const getCarState = (state: State) => state.car;
-export const getCarInfo = createSelector(getCarState, fromCar.getInfo);
-export const getCarInfoLoaded = createSelector(getCarState, fromCar.getLoaded);
-export const getCarInfoError = createSelector(getCarState, fromCar.getError);
-export const getCarLicense = createSelector(getCarState, fromCar.getLicense);
-export const getCarBuyComplete = createSelector(getCarState, fromCar.getBuyComplete);
-export const getCarBuyError = createSelector(getCarState, fromCar.getBuyError);
-
-/**
- * Coverage Reducers
- */
-export const getCoverageState = (state: State) => state.coverage;
-export const getCoverage = createSelector(getCoverageState, fromCoverage.getCoverage);
-export const getCoverageLoading = createSelector(getCoverageState, fromCoverage.getLoading);

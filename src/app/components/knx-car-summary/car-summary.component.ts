@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Car } from '../../models';
+import { Car } from '../../car/models';
 
 @Component({
   selector: 'knx-car-summary',

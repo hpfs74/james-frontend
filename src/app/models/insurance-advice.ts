@@ -1,4 +1,4 @@
-import { Car } from './car';
+import { Car } from '../car/models';
 import { Insurance } from './insurance';
 import { InsuranceDocument } from './insurance-document';
 

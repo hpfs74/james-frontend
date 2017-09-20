@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
-import * as router from '../../actions/router';
+import * as router from '../../core/actions/router';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
