@@ -115,9 +115,14 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
  * that will be composed to form the root meta-reducer.
  */
 export const metaReducers: MetaReducer<State>[] = !environment.production
-? [logger, storeFreeze]
+? [logger] /* [logger, storeFreeze] */
 : [];
 
+/* thomas: storeFreeze seems to also freeze objects in zone.js so it gives read only
+ * errors on component properties. Disable for now, but it's recommended to use it
+ * to enforce not modifying anything in the store directly.
+ * See https://github.com/codewareio/ngrx-store-freeze/issues/17
+ * /
 
 /**
  * A selector function is a map function factory. We pass it parameters and it
