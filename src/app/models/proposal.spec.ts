@@ -267,7 +267,7 @@ describe('CarProposalHelper', () => {
       {'Vast telefoonnummer': ''},
       {'Rekeningnummer': 'NL91ABNA0417164300'},
       {'Betalingstermijn': ''},
-      {'Emailadres': ''},
+      {'Emailadres': 'knabtest002@gmail.com'},
       {'Facebook account': ''},
       {'Twitter account': ''},
       {'Startdatum': '12-12-2020'},
