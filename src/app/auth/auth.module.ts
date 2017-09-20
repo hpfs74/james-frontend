@@ -14,10 +14,14 @@ import { LocalStorageService } from '../services';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
 
 import { LoginPageComponent } from './containers/login-page.component';
+import { PasswordResetPageComponent } from './containers/password-reset-page.component';
 
 import { reducers } from './reducers';
 
-export const COMPONENTS = [LoginPageComponent];
+export const COMPONENTS = [
+  LoginPageComponent,
+  PasswordResetPageComponent
+];
 
 export function authHttpServiceFactory(
   http: Http,

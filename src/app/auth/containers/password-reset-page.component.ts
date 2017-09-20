@@ -3,13 +3,12 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router, NavigationExtras } from '@angular/router';
 
 import { CXEmailValidator } from '@cx/form';
-import { AuthService } from '../../auth/services/auth.service';
 
 /**
  * Forgot password component
  *
  * @export
- * @class ForgotPasswordComponent
+ * @class PasswordResetPageComponent
  */
 @Component({
   selector: 'knx-password-reset',
@@ -31,9 +30,9 @@ import { AuthService } from '../../auth/services/auth.service';
         </div>
           <div class="row">
           <div class="col-md-6 offset-md-3">
-            <div class="cx-message cx-message--error" *ngIf="submitted && forgotPasswordForm.valid && message">
-                <div class="cx-message__header">{{ messageTitle }}</div>
-                <div class="cx-message__content">{{ message }}
+            <div class="knx-message knx-message--error" *ngIf="submitted && forgotPasswordForm.valid && message">
+                <div class="knx-message__header">{{ messageTitle }}</div>
+                <div class="knx-message__content">{{ message }}
                 </div>
             </div>
           </div>
@@ -42,7 +41,7 @@ import { AuthService } from '../../auth/services/auth.service';
     </div>
   `
 })
-export class PasswordResetComponent {
+export class PasswordResetPageComponent {
   submitted = false;
   isPending = false;
   formBuilder: FormBuilder;
@@ -53,37 +52,35 @@ export class PasswordResetComponent {
   formGroupConfig = [];
   goToUrl: string;
 
-  constructor(private router: Router, private authService: AuthService) {
-    this.initForm();
-  }
+  constructor() {}
 
-  initForm() {
-    // this.goToUrl = this.authService.getPasswordResetLink();
+  // initForm() {
+  //   // this.goToUrl = this.authService.getPasswordResetLink();
 
-    // TODO
-    // password reset just redirects to NICCI page now,
-    // reset from here through endpoint to be implemented
-    this.formBuilder = new FormBuilder();
-    this.forgotPasswordForm = this.formBuilder.group({
-      email: [null, Validators.compose(
-        [Validators.required, CXEmailValidator]
-      )],
-      password: [null, Validators.compose(
-        [Validators.required]
-      )],
-    });
+  //   // TODO
+  //   // password reset just redirects to NICCI page now,
+  //   // reset from here through endpoint to be implemented
+  //   this.formBuilder = new FormBuilder();
+  //   this.forgotPasswordForm = this.formBuilder.group({
+  //     email: [null, Validators.compose(
+  //       [Validators.required, CXEmailValidator]
+  //     )],
+  //     password: [null, Validators.compose(
+  //       [Validators.required]
+  //     )],
+  //   });
 
-    this.formGroupConfig = [
-      {
-        formControlName: 'email',
-        label: 'E-mailadres',
-        formControl: this.forgotPasswordForm.get('email'),
-        inputOptions: {
-          placeholder: 'voorbeeld@mail.com',
-        }
-      }
-    ];
-  }
+  //   this.formGroupConfig = [
+  //     {
+  //       formControlName: 'email',
+  //       label: 'E-mailadres',
+  //       formControl: this.forgotPasswordForm.get('email'),
+  //       inputOptions: {
+  //         placeholder: 'voorbeeld@mail.com',
+  //       }
+  //     }
+  //   ];
+  // }
 
   resetPasswordRequest(event) {
     if (this.goToUrl) {

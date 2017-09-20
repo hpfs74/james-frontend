@@ -26,8 +26,6 @@ import { requestOptionsProvider } from './services/default-request-opts.service'
 import { AuthModule } from './auth/auth.module';
 
 import { LocalStorageService } from './services/localstorage.service';
-import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
-import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
 // Feature modules
 import { SharedModule } from './shared.module';
