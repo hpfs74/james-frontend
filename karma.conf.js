@@ -3,11 +3,7 @@
 
 module.exports = function(config) {
 
-    console.log('--- DEBUG -----------');
-    console.log(process.env);
-    console.log('---------------------');
-
-    var configuration = {
+   var configuration = {
         basePath: '',
         frameworks: ['jasmine', '@angular/cli'],
         plugins: [
