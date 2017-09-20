@@ -7,7 +7,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 import { CXFormsModule } from '@cx/forms/index';
 
 // Components
@@ -20,19 +20,13 @@ import { CarPaymentComponent } from './car-payment.component';
 import { CarBuyComponent } from './car-buy.component';
 import { CarService } from '../car.service';
 
-// Services
-import * as fromAuth from '../../../reducers';
-import { SharedModule } from '../../../shared.module';
-import { ChatStreamComponent } from '../../../components/knx-chat-stream/chat-stream.component';
-import { AvatarComponent } from '../../../components/knx-avatar/avatar.component';
-import { TextMessageComponent } from '../../../components/knx-chat-stream/text-message.component';
-import { AuthHttp, AuthService } from '../../../auth/services';
+import * as fromRoot from '../../../reducers';
+import * as fromAuth from '../../../auth/reducers';
 
-import { LocalStorageService } from '../../../services/localstorage.service';
-import { LoaderService } from '../../../components/knx-app-loader/loader.service';
+import { SharedModule } from '../../../shared.module';
+import { TextMessageComponent } from '../../../components/knx-chat-stream/text-message.component';
+
 import { ContentService } from '../../../content.service';
-import { ProfileService } from '../../../services/profile.service';
-import { AssistantService } from '../../../services/assistant.service';
 
 @Component({
   template: `
@@ -46,9 +40,26 @@ export class TestHostComponent {
   public formFromHost: CarCheckForm = new CarCheckForm(new FormBuilder());
 }
 
+export function getInitialState() {
+  return {
+    assistant: {
+      config: {
+        avatar: {
+          name: 'Test',
+          title: 'Expert'
+        },
+        dashboard: null,
+        profile: null,
+        car: null,
+      }
+    }
+  };
+}
+
 describe('Component: CarBuyComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
+  let store: Store<fromAuth.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -56,17 +67,19 @@ describe('Component: CarBuyComponent', () => {
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         CXFormsModule,
         SharedModule,
-        BrowserAnimationsModule,
-        StoreModule.forRoot(fromAuth.reducers)
+        StoreModule.forRoot({
+          ...fromRoot.reducers,
+          auth: combineReducers(fromAuth.reducers)
+        }, {
+            initialState: getInitialState
+          })
       ],
       declarations: [
         CarBuyComponent,
-        ChatStreamComponent,
-        TextMessageComponent,
         CarSummaryComponent,
-        AvatarComponent,
         TestHostComponent,
         CarPaymentComponent,
         CarContactComponent,
@@ -75,11 +88,7 @@ describe('Component: CarBuyComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        AuthHttp,
-        AuthService,
-        LocalStorageService,
-        LoaderService,
-        CarService,
+        CurrencyPipe,
         ContentService,
         {
           provide: ContentService,
@@ -91,9 +100,6 @@ describe('Component: CarBuyComponent', () => {
             }
           })
         },
-        AssistantService,
-        ProfileService,
-        CurrencyPipe,
         {
           provide: Router,
           useClass: class {
@@ -101,6 +107,8 @@ describe('Component: CarBuyComponent', () => {
           }
         }]
     }).compileComponents();
+
+    store = TestBed.get(Store);
   }));
 
   beforeEach(() => {

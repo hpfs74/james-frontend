@@ -2,7 +2,6 @@ import { Address, Car, Price } from '.';
 
 export class AssistantConfig {
   public avatar = {
-    show: true,
     name: 'Marjolein',
     title: 'Expert verzekeringen'
   };

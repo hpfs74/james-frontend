@@ -14,7 +14,6 @@ describe('Component: ChatStreamComponent', () => {
 
   const options: ChatStreamOptions = {
     avatar: {
-      show: true,
       name: 'Marjolein',
       title: 'Expert autoverzekeringen'
     }
@@ -41,7 +40,6 @@ describe('Component: ChatStreamComponent', () => {
   it('should show an avatar', () => {
     expect(el).not.toBeNull();
 
-    expect(comp.options.avatar.show).toBe(true);
     expect(comp.options.avatar.name).toEqual('Marjolein');
     expect(comp.options.avatar.title).toEqual('Expert autoverzekeringen');
 

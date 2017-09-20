@@ -42,7 +42,7 @@ describe('Component: Login', () => {
       imports: [
         RouterTestingModule,
         StoreModule.forRoot({
-          auth: combineReducers(fromAuth.reducers),
+          auth: combineReducers(fromAuth.reducers)
         })
       ],
       declarations: [LoginPageComponent],
