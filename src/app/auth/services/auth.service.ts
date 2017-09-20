@@ -7,11 +7,11 @@ import 'rxjs/add/observable/interval';
 import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
-import * as AuthUtils from '../utils/auth.utils';
-import { Profile, Authenticate } from '../models';
-import { LocalStorageService } from './localstorage.service';
+import * as AuthUtils from '../../utils/auth.utils';
+import { Authenticate } from '../models/auth';
+import { LocalStorageService } from '../../services/localstorage.service';
 
 export interface PayloadAuth {
   access_token: string;
@@ -64,7 +64,12 @@ export class AuthService {
    * @return {Observable<AuthToken>}
    */
   public login(auth: Authenticate): Observable<AuthToken> {
-    const payload = Object.assign(auth, { grant_type: 'password', scope: 'basic'});
+    const payload = {
+      grant_type: 'password',
+      scope: 'basic',
+      username: auth.username,
+      password: auth.password
+    };
 
     return this.play(environment.james.payloadEncryption.login, payload)
       .map((res: Response) => res.json());
@@ -100,19 +105,19 @@ export class AuthService {
       .flatMap((payload) => this.doPayloadEncryption(url, payload, body));
   }
 
-  /**
-   * check if the user is active??
-   *
-   * @param {string} email
-   */
-  public isActive(email: string) {
-    // this.getNicciKey()
-    //   .flatMap((nicci: AuthKey) => {
-    //     const headers = this.getBasicHeaderWithKey(nicci);
-    //     return this.http.post(this.keyUrl, {email}, {headers})
-    //       .map((res: Response) => res.json());
-    //   });
-  }
+  // /**
+  //  * check if the user is active??
+  //  *
+  //  * @param {string} email
+  //  */
+  // public isActive(email: string) {
+  //   // this.getNicciKey()
+  //   //   .flatMap((nicci: AuthKey) => {
+  //   //     const headers = this.getBasicHeaderWithKey(nicci);
+  //   //     return this.http.post(this.keyUrl, {email}, {headers})
+  //   //       .map((res: Response) => res.json());
+  //   //   });
+  // }
 
   public isLoggedIn() {
     return AuthUtils.tokenNotExpired('token');

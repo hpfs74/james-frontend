@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthHttp } from './auth-http.service';
+import { AuthHttp } from '../auth/services/auth-http.service';
 import { environment } from '../../environments/environment';
 import { Insurer } from '../models';
 

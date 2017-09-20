@@ -2,7 +2,6 @@ import { Injectable, ViewContainerRef } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
 import { KNXModalDialogService, KNXModalDialogSettings } from '@knx/modal';
-import { LoginModalComponent } from '../../pages/login/login-modal.component';
 
 import * as fromRoot from '../../reducers';
 import * as layout from '../../actions/layout';

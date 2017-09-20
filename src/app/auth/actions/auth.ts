@@ -1,6 +1,6 @@
 
 import { Action } from '@ngrx/store';
-import { AuthToken, Profile, Authenticate } from '../models';
+import { AuthToken, Authenticate } from '../models/auth';
 
 export const LOGIN = '[Auth] Login';
 export const LOGOUT = '[Auth] Logout';

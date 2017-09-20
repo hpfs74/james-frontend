@@ -1,5 +1,3 @@
-export * from './auth.service';
-export * from './auth-http.service';
 export * from './geolocation.service';
 export * from './insurance.service';
 export * from './localstorage.service';

@@ -15,13 +15,13 @@ import 'rxjs/add/operator/delay';
 
 import { AuthToken } from '../models/auth';
 import { AuthService } from '../services/auth.service';
-import { LocalStorageService } from '../services/localstorage.service';
-import { UserDialogService } from './../components/knx-modal/user-dialog.service';
+import { LocalStorageService } from '../../services/localstorage.service';
+import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
-import * as profile from '../actions/profile';
-import * as layout from '../actions/layout';
+import * as profile from '../../actions/profile';
+import * as layout from '../../actions/layout';
 
 @Injectable()
 export class AuthEffects {
@@ -43,7 +43,10 @@ export class AuthEffects {
             new profile.LoadAction()
           ];
         })
-        .catch(error => Observable.of(new auth.LoginFailure(error)))
+        .catch((error) => {
+          let errorText = JSON.parse(error.text()) || error;
+          return Observable.of(new auth.LoginFailure(errorText.error || errorText));
+        })
   );
 
   @Effect({ dispatch: false })
@@ -106,7 +109,6 @@ export class AuthEffects {
           this.localStorageService.setToken(token);
           return new auth.RefreshTokenSuccess(token);
         } else {
-          // TODO: show login user dialog
           return new auth.RefreshTokenFailure(token);
         }
       }))

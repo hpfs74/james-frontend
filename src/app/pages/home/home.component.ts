@@ -5,11 +5,11 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../../reducers';
 import * as profile from '../../actions/profile';
-import * as auth from '../../actions/auth';
+import * as auth from '../../auth/actions/auth';
 
 import { Nav, Feature, Profile } from '../../models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { LoginModalComponent } from '../login/login-modal.component';
+import { LoginModalComponent } from '../../auth/components/login-modal.component';
 import { ContentService } from '../../content.service';
 import { NavigationService } from '../../services';
 

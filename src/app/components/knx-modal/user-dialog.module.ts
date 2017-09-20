@@ -4,7 +4,7 @@ import { KNXModalDialogModule } from '@knx/modal';
 
 import { SharedModule } from '../../shared.module';
 import { UserDialogService } from './user-dialog.service';
-import { LoginModalComponent } from '../../pages/login/login-modal.component';
+import { LoginModalComponent } from '../../auth/components/login-modal.component';
 
 @NgModule({
   imports: [

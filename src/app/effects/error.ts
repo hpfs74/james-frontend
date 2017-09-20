@@ -12,7 +12,9 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/filter';
 
 import * as fromRoot from '../reducers';
-import * as auth from '../actions/auth';
+import * as fromAuth from '../auth/reducers';
+
+import * as auth from '../auth/actions/auth';
 import * as car from '../actions/car';
 import * as compare from '../actions/compare';
 import * as coverage from '../actions/coverage';
@@ -48,12 +50,12 @@ export class ErrorEffects {
     .withLatestFrom(this.store$)
     .filter(([action, storeState]) => {
       // only continue if user is logged in to prevent credentials modal on login page
-      return storeState.auth.loggedIn;
+      return storeState.auth.status.loggedIn;
     })
     .map((actionAndStoreState) => actionAndStoreState[0])
     .filter(error => error instanceof Response && error.status === 401 || error.status === 403)
     .switchMap(error => Observable.of(new auth.RequestCredentials));
 
-  constructor(private actions$: Actions, private store$: Store<fromRoot.State>) { }
+  constructor(private actions$: Actions, private store$: Store<fromAuth.State>) { }
 }
 

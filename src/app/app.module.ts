@@ -5,32 +5,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppShellModule } from '@angular/app-shell';
-import { Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { StoreModule, Action } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { routes } from './routes';
+import { CustomRouterStateSerializer } from './utils/routersnapshot';
 import { reducers, metaReducers } from './reducers';
 
 import { RouterEffects } from './effects/router';
-import { AuthEffects } from './effects/auth';
 
 import { ContentService } from './content.service';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
 import { requestOptionsProvider } from './services/default-request-opts.service';
 
-import { AuthModule } from './auth.module';
-import { AuthGuard } from './services/auth-guard.service';
-import { AuthService } from './services/auth.service';
+import { AuthModule } from './auth/auth.module';
+
 import { LocalStorageService } from './services/localstorage.service';
-import { LoginComponent } from './pages/login/login.component';
-import { LoginRoutingModule } from './pages/login/login-routing.module';
-import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
-import { CookiesPageComponent } from './pages/cookies/cookies-page.component';
 
 // Feature modules
 import { SharedModule } from './shared.module';
@@ -43,29 +38,33 @@ export function ContentLoader(contentService: ContentService) {
 @NgModule({
   imports: [
     BrowserModule,
+
     BrowserAnimationsModule,
+
     FormsModule,
+
     HttpModule,
+
+    RouterModule.forRoot(routes),
+
     SharedModule,
+
     HomeModule.forRoot(),
+
     StoreModule.forRoot(reducers, { metaReducers }),
+
     // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
-    LoginRoutingModule,
-    AppRoutingModule,
+
     StoreRouterConnectingModule,
-    EffectsModule.forRoot(
-    [
-        RouterEffects,
-        AuthEffects
-    ]),
-    AuthModule,
+
+    EffectsModule.forRoot([]),
+
+    AuthModule.forRoot(),
+
     AppShellModule.runtime(),
   ],
   declarations: [
-    AppComponent,
-    LoginComponent,
-    PasswordResetComponent,
-    CookiesPageComponent,
+    AppComponent
   ],
   providers: [
     {
@@ -79,6 +78,12 @@ export function ContentLoader(contentService: ContentService) {
       deps: [ContentService],
       multi: true
     },
+    /**
+     * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
+     * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
+     * by `@ngrx/router-store` to include only the desired pieces of the snapshot.
+     */
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
     requestOptionsProvider,
     LocalStorageService,
     CurrencyPipe
