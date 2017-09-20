@@ -9,7 +9,8 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { CarService } from './car.service';
-import { AuthHttp, LocalStorageService } from '../../services';
+import { LocalStorageService } from '../../services';
+import { AuthHttp } from '../../auth/services';
 import { Car } from '../../models/car';
 import { CarCompare } from '../../models/car-compare';
 

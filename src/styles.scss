@@ -12,7 +12,7 @@
  * NOTE: containers, e.g. smart components should not have styles!
  */
 @import 'app/pages/dashboard/dashboard.component';
-@import 'app/pages/login/login.component';
+@import 'app/auth/containers/login-page.component';
 @import 'app/pages/password-reset/password-reset.component';
 @import 'app/pages/car/buy/car-summary.component';
 @import 'app/pages/thank-you/thank-you.component';

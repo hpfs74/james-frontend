@@ -26,8 +26,8 @@ import { SharedModule } from '../../../shared.module';
 import { ChatStreamComponent } from '../../../components/knx-chat-stream/chat-stream.component';
 import { AvatarComponent } from '../../../components/knx-avatar/avatar.component';
 import { TextMessageComponent } from '../../../components/knx-chat-stream/text-message.component';
-import { AuthHttp } from '../../../services/auth-http.service';
-import { AuthService } from '../../../services/auth.service';
+import { AuthHttp, AuthService } from '../../../auth/services';
+
 import { LocalStorageService } from '../../../services/localstorage.service';
 import { LoaderService } from '../../../components/knx-app-loader/loader.service';
 import { ContentService } from '../../../content.service';

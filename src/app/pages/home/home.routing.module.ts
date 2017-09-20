@@ -1,8 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthService } from '../../services/auth.service';
-import { AuthGuard } from '../../services/auth-guard.service';
+import { AuthGuard } from '../../auth/services/auth-guard.service';
 import { HomeComponent } from './home.component';
 import { FaqComponent } from '../faq/faq.component';
 import { ThankYouComponent } from '../thank-you/thank-you.component';
@@ -48,7 +47,7 @@ export class HomeRoutingModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: HomeRoutingModule,
-      providers: [AuthService, AuthGuard]
+      providers: [AuthGuard]
     };
   }
 }

@@ -9,7 +9,8 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { AddressLookupService } from './address-lookup.service';
-import { AuthHttp, LocalStorageService } from '../../services';
+import { AuthHttp } from '../../auth/services';
+import { LocalStorageService } from '../../services';
 import { Address } from '../../models/address';
 
 

@@ -3,15 +3,13 @@ import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID } from '@ang
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import * as fromAuth from '../../reducers';
-import * as auth from '../../actions/auth';
+import * as fromAuth from '../reducers';
+import * as auth from '../actions/auth';
 import { environment } from '../../../environments/environment';
 
-import { LoginForm } from './login.form';
-import { AuthService } from './../../services';
-import { loginError } from './login-error';
+import { LoginForm } from '../components/login.form';
+import { loginError } from '../models/login-error';
 import * as profile from '../../actions/profile';
-import * as fromRoot from '../../reducers';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -20,9 +18,9 @@ import * as fromRoot from '../../reducers';
  * @class LoginComponent
  */
 @Component({
-  templateUrl: './login.component.html'
+  templateUrl: './login-page.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginPageComponent implements OnInit {
   pending$ = this.store.select(fromAuth.getLoginPagePending);
   error$ = this.store.select(fromAuth.getLoginPageError);
   errorMessage: string;

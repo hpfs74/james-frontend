@@ -12,8 +12,6 @@ import { CanActivateBuyFlowGuard } from '../../services/buy-guard.service';
 import { HomeComponent } from './home.component';
 import { FaqComponent } from '../faq/faq.component';
 
-import { AuthService } from '../../services/auth.service';
-import { AuthGuard } from '../../services/auth-guard.service';
 import { AssistantService } from '../../services/assistant.service';
 import { LoaderService } from '../../components/knx-app-loader/loader.service';
 import { ProfileService } from '../../services/profile.service';
@@ -65,8 +63,6 @@ export class HomeModule {
     return {
       ngModule: HomeModule,
       providers: [
-        AuthService,
-        AuthGuard,
         AssistantService,
         LoaderService,
         ProfileService,

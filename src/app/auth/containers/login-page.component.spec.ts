@@ -4,20 +4,20 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
-import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
+import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 
 import * as fromAuth from '../../reducers';
-import * as auth from '../../actions/auth';
+import * as auth from '../actions/auth';
 import { FormBuilder } from '@angular/forms';
 
-import { LoginComponent } from './login.component';
-import { LoginForm } from './login.form';
-import { AuthService } from '../../services/auth.service';
-import { loginError } from './login-error';
+import { LoginPageComponent } from '../containers/login-page.component';
+import { LoginForm } from '../components/login.form';
+import { AuthService } from '../services/auth.service';
+import { loginError } from '../models/login-error';
 
 describe('Component: Login', () => {
-  let comp: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  let comp: LoginPageComponent;
+  let fixture: ComponentFixture<LoginPageComponent>;
   let de: DebugElement;
   let el: HTMLElement;
 
@@ -38,14 +38,19 @@ describe('Component: Login', () => {
           }
         }
       ],
-      imports: [RouterTestingModule, StoreModule.forRoot(fromAuth.reducers)],
-      declarations: [LoginComponent],
+      imports: [
+        RouterTestingModule,
+        StoreModule.forRoot({
+          auth: combineReducers(fromAuth.reducers),
+        })
+      ],
+      declarations: [LoginPageComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(LoginPageComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   });

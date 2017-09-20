@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@knx/modal';
 
-import * as fromRoot from '../../reducers';
-import * as auth from '../../actions/auth';
+import * as fromAuth from '../reducers';
+import * as auth from '../actions/auth';
 
 import { LoginForm } from './login.form';
-import { AuthService } from './../../services';
-import { loginError } from './login-error';
+import { AuthService } from '../services/auth.service';
+import { loginError } from '../models/login-error';
 
 @Component({
   selector: 'knx-login-modal',
@@ -42,7 +42,7 @@ export class LoginModalComponent implements KNXModalDialog {
 
   private loginFailError = 'No valid email or password';
 
-  constructor(private store$: Store<fromRoot.State>) {
+  constructor(private store$: Store<fromAuth.State>) {
     this.actionButtons = [
       {
         text: 'Inloggen',
@@ -65,9 +65,9 @@ export class LoginModalComponent implements KNXModalDialog {
         username: email,
         password: password
       }));
-      return this.store$.select(fromRoot.getAuthState)
+      return this.store$.select(fromAuth.selectAuthState)
         .flatMap(authenticated => {
-          if (authenticated.loggedIn && authenticated.loginExpired) {
+          if (authenticated.status.loggedIn && authenticated.status.loginExpired) {
             return Observable.of(true);
           } else {
             Observable.throw(new Error(this.loginFailError));

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router, NavigationExtras } from '@angular/router';
 
 import { CXEmailValidator } from '@cx/form';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 /**
  * Forgot password component

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthHttp } from './auth-http.service';
+import { AuthHttp } from '../auth/services/auth-http.service';
 import { environment } from '../../environments/environment';
 import { Profile } from '../models/profile';
 import { Insurance } from '../models/insurance';

@@ -1,4 +1,4 @@
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,11 +8,12 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { Address } from '../../models/address';
-import { AuthHttp, GeolocationService, LocalStorageService } from '../../services';
+import { AuthHttp  } from '../../auth/services';
+import { LocalStorageService } from '../../services';
 import { LoaderService } from '../knx-app-loader/loader.service';
 import { AddressLookupComponent } from './address-lookup.component';
 import { AddressLookupService } from './address-lookup.service';
-import { AuthModule } from '../../auth.module';
+import { AuthModule } from '../../auth/auth.module';
 
 describe('Component: AddressLookup', () => {
   let comp: AddressLookupComponent;

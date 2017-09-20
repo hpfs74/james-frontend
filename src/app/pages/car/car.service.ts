@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthHttp } from '../../services/auth-http.service';
+import { AuthHttp } from '../../auth/services/auth-http.service';
 import { Profile } from '../../models/profile';
 import { environment } from '../../../environments/environment';
 import { Car, CarInsurance, CarCoverageRecommendation, CarCompare, Proposal } from './../../models';

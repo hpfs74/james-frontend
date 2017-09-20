@@ -18,7 +18,7 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 import { ContentService } from '../../content.service';
 
 import * as fromRoot from '../../reducers';
-import * as auth from '../../actions/auth';
+import * as auth from '../../auth/actions/auth';
 @Component({
   template: `
     <div>

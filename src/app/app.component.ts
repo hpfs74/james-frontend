@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
 import {
-  AuthService,
   NavigationService,
   InsuranceService,
   CookieService
@@ -18,6 +17,4 @@ import {
   // changeDetection: ChangeDetectionStrategy.OnPush
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
-  constructor(private authService: AuthService) { }
-}
+export class AppComponent {}

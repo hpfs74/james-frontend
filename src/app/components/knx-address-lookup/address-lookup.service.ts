@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../../environments/environment';
-import { AuthHttp } from '../../services';
+import { AuthHttp } from '../../auth/services';
 import { Address } from '../../models/address';
 
 @Injectable()

@@ -8,8 +8,6 @@ import {
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../environments/environment';
 
-import { LOGOUT } from '../actions/auth';
-
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -35,8 +33,6 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as fromAuth from './auth';
-import * as fromLoginPage from './login-page';
 import * as fromProfile from './profile';
 import * as fromSettings from './settings';
 import * as fromLayout from './layout';
@@ -54,8 +50,6 @@ import { analyticsMetaReducer } from './analytics';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  auth: fromAuth.State; // TODO: move to AuthState
-  loginPage: fromLoginPage.State; // TODO: move to AuthState
   profile: fromProfile.State;
   settings: fromSettings.State;
   layout: fromLayout.State;
@@ -65,7 +59,7 @@ export interface State {
   advice: fromAdvice.State;
   car: fromCar.State;
   coverage: fromCoverage.State;
-  routerReducer: fromRouter.RouterReducerState;
+  // router: fromRouter.RouterReducerState;
 }
 
 /**
@@ -76,8 +70,6 @@ export interface State {
  * the result from right to left.
  */
 export const reducers: ActionReducerMap<State> = {
-  auth: fromAuth.reducer,
-  loginPage: fromLoginPage.reducer,
   profile: fromProfile.reducer,
   settings: fromSettings.reducer,
   layout: fromLayout.reducer,
@@ -87,7 +79,7 @@ export const reducers: ActionReducerMap<State> = {
   advice: fromAdvice.reducer,
   car: fromCar.reducer,
   coverage: fromCoverage.reducer,
-  routerReducer: fromRouter.routerReducer
+  // router: fromRouter.routerReducer
   // routerReducer: analyticsMetaReducer(fromRouter.routerReducer)
 };
 
@@ -100,24 +92,22 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   };
 }
 
-export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
-  return function (state, action) {
-    return reducer(action.type === LOGOUT ? {
-      auth: state.auth,
-      loginPage: state.loginPage,
-      profile: undefined,
-      settings: state.settings,
-      layout: state.layout,
-      insurances: undefined,
-      assistant: state.assistant,
-      compare: undefined,
-      advice: undefined,
-      car: undefined,
-      coverage: undefined,
-      routerReducer: state.routerReducer
-    } : state, action);
-  };
-}
+// export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
+//   return function (state, action) {
+//     return reducer(action.type === LOGOUT ? {
+//       profile: undefined,
+//       settings: state.settings,
+//       layout: state.layout,
+//       insurances: undefined,
+//       assistant: state.assistant,
+//       compare: undefined,
+//       advice: undefined,
+//       car: undefined,
+//       coverage: undefined,
+//       routerReducer: state.routerReducer
+//     } : state, action);
+//   };
+// }
 
 /**
  * By default, @ngrx/store uses combineReducers with the reducer map to compose
@@ -125,8 +115,8 @@ export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
  * that will be composed to form the root meta-reducer.
  */
 export const metaReducers: MetaReducer<State>[] = !environment.production
-? [logger, logout]
-: [logout];
+? [logger, storeFreeze]
+: [];
 
 
 /**
@@ -165,18 +155,6 @@ export const getProfileState = (state: State) => state.profile;
 export const getProfile = createSelector(getProfileState, fromProfile.getCurrent);
 export const getProfileLoading = createSelector(getProfileState, fromProfile.getLoading);
 export const getProfileLoaded = createSelector(getProfileState, fromProfile.getLoaded);
-
-/**
- * Auth Reducers
- */
-export const getAuthState = (state: State) => state.auth;
-export const getLoggedIn = createSelector(getAuthState, fromAuth.getLoggedIn);
-// export const selectAuthState = createFeatureSelector<State>('auth');
-
-
-export const selectLoginPageState = (state: State) => state.loginPage;
-export const getLoginPageError = createSelector(selectLoginPageState, fromLoginPage.getError);
-export const getLoginPagePending = createSelector(selectLoginPageState, fromLoginPage.getPending);
 
 /**
  * Settings Reducers

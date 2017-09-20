@@ -4,8 +4,6 @@ import { RouterLink } from '@angular/router';
 import { collapseInOutAnimation } from '../../animations';
 import { Nav, NavItemType } from '../../models';
 import { NavUserComponent } from './../knx-nav-user/nav-user.component';
-import { AuthService } from '../../services/auth.service';
-
 @Component({
   selector: 'knx-navbar',
   templateUrl: './navbar.component.html',

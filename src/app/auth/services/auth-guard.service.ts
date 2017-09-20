@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
-import * as router from '../actions/router';
+import * as router from '../../actions/router';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
@@ -29,8 +29,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    this.store.select(fromRoot.getAuthState).subscribe(auth => {
-      if (!auth.loggedIn || !this.authService.isLoggedIn()) {
+    this.store.select(fromRoot.selectAuthState).subscribe(auth => {
+      if (!auth.status.loggedIn || !this.authService.isLoggedIn()) {
         this.router.navigate(['/login']);
       }
     });
