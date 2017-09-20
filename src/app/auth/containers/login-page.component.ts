@@ -33,7 +33,6 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(fromAuth.getLoginPageError)
-      .take(1)
       .subscribe((error) => {
         this.errorMessage = loginError[error] || null;
       });

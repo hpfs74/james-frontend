@@ -43,7 +43,10 @@ export class AuthEffects {
             new profile.LoadAction()
           ];
         })
-        .catch(error => Observable.of(new auth.LoginFailure(error)))
+        .catch((error) => {
+          let errorText = JSON.parse(error.text()) || error;
+          return Observable.of(new auth.LoginFailure(errorText.error || errorText));
+        })
   );
 
   @Effect({ dispatch: false })

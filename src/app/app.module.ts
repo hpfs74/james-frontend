@@ -47,7 +47,7 @@ export function ContentLoader(contentService: ContentService) {
 
     HttpModule,
 
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes),
 
     SharedModule,
 

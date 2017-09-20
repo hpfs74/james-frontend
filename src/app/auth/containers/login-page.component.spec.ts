@@ -6,7 +6,7 @@ import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 
-import * as fromAuth from '../../reducers';
+import * as fromAuth from '../reducers';
 import * as auth from '../actions/auth';
 import { FormBuilder } from '@angular/forms';
 
@@ -16,6 +16,7 @@ import { AuthService } from '../services/auth.service';
 import { loginError } from '../models/login-error';
 
 describe('Component: Login', () => {
+  let store: Store<fromAuth.State>;
   let comp: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
   let de: DebugElement;
@@ -47,6 +48,8 @@ describe('Component: Login', () => {
       declarations: [LoginPageComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
+    store = TestBed.get(Store);
   }));
 
   beforeEach(() => {
