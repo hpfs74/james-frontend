@@ -29,7 +29,6 @@ import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '../../../forms/iban.form';
 import { BaseForm } from '../../../forms/base-form';
 import * as FormUtils from '../../../utils/base-form.utils';
-import * as ObjUtils from '../../../utils/obj.util';
 import { Proposal, CarProposalHelper } from './../../../models/proposal';
 
 @Component({
