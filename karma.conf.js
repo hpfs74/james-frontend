@@ -2,6 +2,11 @@
 // https://karma-runner.github.io/0.13/config/configuration-file.html
 
 module.exports = function(config) {
+
+    console.log('--- DEBUG -----------');
+    console.log(process.env);
+    console.log('---------------------');
+
     var configuration = {
         basePath: '',
         frameworks: ['jasmine', '@angular/cli'],
