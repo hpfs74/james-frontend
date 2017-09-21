@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormGroup } from '@angular/forms';
 
 import { Profile } from './../../../profile/models';
-import { ContactDetailForm } from './../../../forms/contact-detail.form';
+import { ContactDetailForm } from './../../../shared/forms/contact-detail.form';
 import { isMobileNumber } from '../../../utils/base-form.utils';
 import * as FormUtils from '../../../utils/base-form.utils';
 
