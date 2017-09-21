@@ -12,7 +12,7 @@ export class CarPaymentComponent implements OnInit {
   @Input() set advice(value: any) {
     if (value && value.startDate || value && value.iban) {
       this.form.formGroup.patchValue({
-        startDate: FormUtils.toDateFormat(value.startDate),
+        startDate: FormUtils.toDateFormat(FormUtils.toDateType(value.startDate)),
         iban: value.iban
       });
       FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
