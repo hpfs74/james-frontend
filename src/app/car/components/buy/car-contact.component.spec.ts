@@ -5,7 +5,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
 
 import { CarContactComponent } from './car-contact.component';
-import { ContactDetailForm } from '../../../forms/contact-detail.form';
+import { ContactDetailForm } from '../../../shared/forms/contact-detail.form';
 import { nameInitialMask } from '../../../utils/base-form.utils';
 
 @Component({

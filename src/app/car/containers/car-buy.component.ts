@@ -24,7 +24,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from './../../profile/models';
 
 import { CarContactComponent } from '../components/buy/car-contact.component';
-import { ContactDetailForm } from './../../forms/contact-detail.form';
+import { ContactDetailForm } from '../../shared/forms/contact-detail.form';
 import { Proposal, CarProposalHelper } from '../models/proposal';
 
 import { CarReportingCodeComponent } from '../components/buy/car-reporting-code.component';
@@ -33,8 +33,8 @@ import { CarCheckComponent } from '../components/buy/car-check.component';
 import { CarCheckForm } from '../components/buy/car-check.form';
 import { CarPaymentComponent } from '../components/buy/car-payment.component';
 
-import { IbanForm } from '../../forms/iban.form';
-import { BaseForm } from '../../forms/base-form';
+import { IbanForm } from '../../shared/forms/iban.form';
+import { BaseForm } from '../../shared/forms/base-form';
 import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({

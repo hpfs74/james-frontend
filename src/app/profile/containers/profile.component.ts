@@ -5,7 +5,7 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
-import { BaseForm } from '../../forms/base-form';
+import { BaseForm } from '../../shared/forms/base-form';
 import * as FormUtils from '../../utils/base-form.utils';
 import { Profile } from '../models/profile';
 import { Settings } from '../models/settings';

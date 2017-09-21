@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { BaseForm } from '../../../forms/base-form';
+import { BaseForm } from '../../../shared/forms/base-form';
 import { nameInitialMask } from '../../../utils/base-form.utils';
 
 export class CarCheckForm extends BaseForm {

@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CXPostalCodeValidator } from '@cx/form-control';
 
-import { BaseForm } from '../../forms/base-form';
+import { BaseForm } from '../../shared/forms/base-form';
 import { nameInitialMask } from '../../utils/base-form.utils';
 import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';

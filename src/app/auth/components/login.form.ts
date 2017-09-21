@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CXEmailValidator } from '@cx/form';
-import { BaseForm } from './../../forms/base-form';
+import { BaseForm } from './../../shared/forms/base-form';
 
 export class LoginForm extends BaseForm {
   formGroup: FormGroup;
