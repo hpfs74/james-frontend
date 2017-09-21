@@ -19,19 +19,15 @@ import { KNXModalDialogModule } from '@knx/modal';
  */
 import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 
-/** Util Pages */
-import { PageNotFoundComponent } from './pages/error/pagenotfound.component';
-import { ThankYouComponent } from './pages/thank-you/thank-you.component';
-
 /**
  * Pipes
  */
-import { TitleCasePipe, RoundPipe, LicensePlatePipe } from './pipes/';
+import { TitleCasePipe, RoundPipe, LicensePlatePipe } from './shared/pipes/';
 
 /**
  * Directives
  */
-import { JumpToElementDirective, SidePanelStateDirective } from './directives';
+import { JumpToElementDirective, SidePanelStateDirective } from './shared/directives';
 
 
 /**
@@ -69,6 +65,7 @@ import { StepBlockComponent } from './components/knx-step-blocks/step-block.comp
 import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
+import { ThankYouComponent } from './components/knx-thank-you/thank-you.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
 
@@ -109,13 +106,9 @@ export const sharedComponents = [
   LoaderComponent,
   TabsComponent,
   TabComponent,
+  ThankYouComponent,
   NavUserComponent,
   UserGreetingComponent
-];
-
-export const sharedPages = [
-  PageNotFoundComponent,
-  ThankYouComponent
 ];
 
 export const sharedModules = [
@@ -140,7 +133,6 @@ export const sharedModules = [
   ],
   declarations: [
     ...sharedComponents,
-    ...sharedPages
   ],
   exports: [
     CommonModule,
@@ -149,7 +141,6 @@ export const sharedModules = [
     ReactiveFormsModule,
     AngularSvgIconModule,
     ...sharedComponents,
-    ...sharedPages
   ]
 })
 export class SharedModule { }

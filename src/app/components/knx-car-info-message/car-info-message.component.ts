@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { Car } from '../../models/car';
+import { Car } from '../../car/models';
 import { CarPreviewComponent } from './car-preview.component';
 
 @Component({

@@ -10,7 +10,7 @@ import { CXFormsModule } from '@cx/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './effects/auth.effects';
 import { AuthService, AuthHttp, AuthGuard } from './services';
-import { LocalStorageService } from '../services';
+import { LocalStorageService } from '../core/services';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
 
 import { LoginPageComponent } from './containers/login-page.component';

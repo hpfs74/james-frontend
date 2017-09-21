@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CookieService } from '../../services/cookie.service';
+import { CookieService } from '../../core/services/cookie.service';
 
 @Component({
   selector: 'knx-cookiebar',

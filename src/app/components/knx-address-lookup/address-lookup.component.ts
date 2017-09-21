@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { postalCodeMask } from '../../utils/base-form.utils';
 
-import { Address } from '../../models/address';
+import { Address } from '../../profile/models/address';
 import { AddressLookupService } from './address-lookup.service';
 
 @Component({

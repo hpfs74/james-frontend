@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 
 import { LoginForm } from '../components/login.form';
 import { loginError } from '../models/login-error';
-import * as profile from '../../actions/profile';
+import * as profile from '../../profile/actions/profile';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in

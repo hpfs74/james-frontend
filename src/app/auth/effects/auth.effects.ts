@@ -8,6 +8,7 @@ import { defer } from 'rxjs/observable/defer';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/exhaustMap';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/throttleTime';
@@ -15,13 +16,13 @@ import 'rxjs/add/operator/delay';
 
 import { AuthToken } from '../models/auth';
 import { AuthService } from '../services/auth.service';
-import { LocalStorageService } from '../../services/localstorage.service';
+import { LocalStorageService } from '../../core/services/localstorage.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
-import * as profile from '../../actions/profile';
-import * as layout from '../../actions/layout';
+import * as profile from '../../profile/actions/profile';
+import * as layout from '../../core/actions/layout';
 
 @Injectable()
 export class AuthEffects {

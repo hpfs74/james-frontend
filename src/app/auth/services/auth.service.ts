@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 import { AuthKey, AuthToken } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
-import { LocalStorageService } from '../../services/localstorage.service';
+import { LocalStorageService } from '../../core/services/localstorage.service';
 
 export interface PayloadAuth {
   access_token: string;

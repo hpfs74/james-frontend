@@ -18,7 +18,7 @@ import * as Auth from '../actions/auth';
 import { tokenNotExpired } from '../../utils/auth.utils';
 import { AuthService } from './auth.service';
 import { AuthToken } from '../models/auth';
-import { LocalStorageService } from '../../services/localstorage.service';
+import { LocalStorageService } from '../../core/services/localstorage.service';
 import { LoaderService } from '../../components/knx-app-loader/loader.service';
 import * as AuthUtils from '../../utils/auth.utils';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Insurance } from './../../models/insurance';
-import { insuranceTypes, InsuranceMap } from './../../models/insurance-type';
+import { Insurance } from './../../insurance/models/insurance';
+import { insuranceTypes, InsuranceMap } from './../../insurance/models/insurance-type';
 import { ImageConfig } from '../knx-circle-progress/circle-progress-image';
 
 @Component({

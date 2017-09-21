@@ -1,7 +1,8 @@
 import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 
-import { InsuranceAdvice, CarInsurance } from '../../models';
+import { InsuranceAdvice } from '../../insurance/models';
+import { CarInsurance } from '../../car/models';
 
 @Component({
   selector: 'knx-insurance-review',

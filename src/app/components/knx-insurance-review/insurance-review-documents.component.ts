@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { InsuranceDocument } from './../../models/insurance-document';
+import { InsuranceDocument } from './../../insurance/models';
 
 @Component({
   selector: 'knx-insurance-review-documents',

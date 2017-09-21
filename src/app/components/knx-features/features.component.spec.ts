@@ -2,7 +2,7 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { FeaturesComponent } from './features.component';
-import { Feature } from '../../models/feature';
+import { Feature } from '../../shared/models/feature';
 
 describe('Component: Features', () => {
   let comp: FeaturesComponent;
