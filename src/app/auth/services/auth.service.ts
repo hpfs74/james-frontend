@@ -51,7 +51,13 @@ export class AuthService {
    * @return {Observable<R>}
    */
   public logout(): Observable<AuthToken> {
-    return this.http.delete(this.tokenUrl, { headers: this.getHeaderWithBearer() })
+    const headers = new Headers();
+    const accessToken = this.localStorageService.getAccessToken();
+    // do not set Content-Type here!
+    headers.set('Authorization', 'Bearer ' + accessToken);
+    headers.set('Cache-Control', 'no-cache');
+
+    return this.http.delete(this.tokenUrl, { headers: headers})
       .map(x => {
         this.localStorageService.clearToken();
         return x.json();
@@ -248,8 +254,9 @@ export class AuthService {
    */
   private getHeaderWithBearer(): Headers {
     const headers = new Headers();
+    const accessToken = this.localStorageService.getAccessToken();
     headers.append('Content-Type', 'application/json');
-    headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+    headers.set('Authorization', 'Bearer ' + accessToken);
     headers.set('Cache-Control', 'no-cache');
 
     return headers;
