@@ -14,12 +14,13 @@ export interface CarCompare {
   // these are optional in new car flow (v1.2)
   // these fields are all mandatory
   cover_occupants: boolean;
-  kilometers_per_year: string;
   legal_aid: string;
   no_claim_protection: boolean;
+  road_assistance: string;
+
+  kilometers_per_year?: string;
   own_risk?: number;
   risk?: string;
-  road_assistance: string;
 
   // car
   license: string;
