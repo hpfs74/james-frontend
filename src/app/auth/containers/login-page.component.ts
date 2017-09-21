@@ -44,9 +44,10 @@ export class LoginPageComponent implements OnInit {
 
   getPasswordResetLink(): string {
     const locale = this.locale || 'nl-NL';
+    const profileReset = environment.external.login;
 
     return environment.james.forgetPassword
-      + `&redirect_uri=${encodeURI(window.location.origin)}`
+      + `&redirect_uri=${encodeURI(profileReset)}`
       + `&locale=${locale}`;
   }
 
