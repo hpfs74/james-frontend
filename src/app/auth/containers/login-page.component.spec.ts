@@ -95,7 +95,7 @@ describe('Component: Login', () => {
     comp.form.formGroup.updateValueAndValidity();
     fixture.detectChanges();
 
-    de = fixture.debugElement.query(By.css('.knx-message__content'));
+    de = fixture.debugElement.query(By.css('.knx-login__error'));
     el = de.nativeElement;
 
     expect(comp).not.toBeNull();

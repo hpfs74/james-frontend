@@ -30,17 +30,16 @@
               (click)="form.toggleShowPassword($event)"></button>
           </div>
 
+          <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
+            {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+          </div>
+
           <button type="submit" class="knx-button knx-button--primary knx-button--fullwidth"
             [class.knx-button--pending]="pending$ | async">Inloggen</button>
       </div>
     </div>
       <div class="row">
       <div class="col-md-6 offset-md-3">
-        <div class="knx-message knx-message--error" *ngIf="form.formGroup.valid && errorMessage">
-            <div class="knx-message__header">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</div>
-            <div class="knx-message__content"><em>{{ errorMessage }}</em></div>
-        </div>
-
         <div class="knx-login__actions">
           <ul class="knx-list--unstyled">
             <li><a tabindex="0" rel="nofollow noopener" target="_blank" (click)="goToPasswordReset()">Ik ben mijn wachtwoord vergeten</a></li>
