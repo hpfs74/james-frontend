@@ -1,5 +1,5 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -90,7 +90,8 @@ export class CoreModule {
           multi: true
         },
         requestOptionsProvider,
-        CurrencyPipe
+        CurrencyPipe,
+        DatePipe
       ],
     };
   }

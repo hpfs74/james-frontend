@@ -22,7 +22,7 @@ import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 /**
  * Pipes
  */
-import { TitleCasePipe, RoundPipe, LicensePlatePipe } from './shared/pipes/';
+import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe } from './shared/pipes/';
 
 /**
  * Directives
@@ -72,6 +72,7 @@ import { UserGreetingComponent } from './components/knx-user-greeting/user-greet
 export const sharedComponents = [
   TitleCasePipe,
   RoundPipe,
+  BooleanPipe,
   AppPromoBlockComponent,
   LicensePlatePipe,
   SidePanelStateDirective,

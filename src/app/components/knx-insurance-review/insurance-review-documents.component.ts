@@ -40,7 +40,6 @@ import { InsuranceDocument } from './../../insurance/models';
           </div>
           <div class="col col-md-5"></div>
         </div>
-
       </div>
     </knx-collapsible-panel>
   `
