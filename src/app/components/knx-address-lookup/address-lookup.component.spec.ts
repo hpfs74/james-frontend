@@ -7,9 +7,9 @@ import { StoreModule, Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
-import { Address } from '../../models/address';
+import { Address } from '../../profile/models/address';
 import { AuthHttp  } from '../../auth/services';
-import { LocalStorageService } from '../../services';
+import { LocalStorageService } from '../../core/services';
 import { LoaderService } from '../knx-app-loader/loader.service';
 import { AddressLookupComponent } from './address-lookup.component';
 import { AddressLookupService } from './address-lookup.service';

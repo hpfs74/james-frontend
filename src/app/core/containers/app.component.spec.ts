@@ -11,16 +11,13 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './../../components/knx-navigation/navbar.component';
 import { NavigationService } from '../services/navigation.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { ContentService } from '../../content.service';
+import { ContentService } from '../../core/services/content.service';
 
 import * as fromRoot from '../../reducers';
 import * as auth from '../../auth/actions/auth';
 
 @Component({
-  template: `
-    <div>
-      <knx-app></knx-app>
-    </div>`
+  template: `<div><knx-app></knx-app></div>`
 })
 export class TestHostComponent {
   @ViewChild(AppComponent)
@@ -28,7 +25,7 @@ export class TestHostComponent {
   public topMenu = [];
 }
 
-describe('Component: Home', () => {
+describe('Component: AppComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
   let store: Store<fromRoot.State>;

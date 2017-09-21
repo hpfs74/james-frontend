@@ -11,28 +11,27 @@ import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx
 import { CXFormsModule } from '@cx/forms/index';
 
 // Components
-import { CarContactComponent } from './car-contact.component';
-import { CarSummaryComponent } from './car-summary.component';
-import { CarReportingCodeComponent } from './car-reporting-code.component';
-import { CarCheckComponent } from './car-check.component';
-import { CarCheckForm } from './car-check.form';
-import { CarPaymentComponent } from './car-payment.component';
+import { CarContactComponent } from '../components/buy/car-contact.component';
+import { CarSummaryComponent } from '../components/buy/car-summary.component';
+import { CarReportingCodeComponent } from '../components/buy/car-reporting-code.component';
+import { CarCheckComponent } from '../components/buy/car-check.component';
+import { CarCheckForm } from '../components/buy/car-check.form';
+import { CarPaymentComponent } from '../components/buy/car-payment.component';
 import { CarBuyComponent } from './car-buy.component';
-import { CarService } from '../car.service';
+import { CarService } from '../services/car.service';
 
-import * as fromRoot from '../../../reducers';
-import * as fromAuth from '../../../auth/reducers';
+import * as fromCore from '../../core/reducers';
+import * as fromCar from '../reducers';
+import * as fromAuth from '../../auth/reducers';
+import * as fromAdvice from '../../insurance/reducers';
 
-import { SharedModule } from '../../../shared.module';
-import { TextMessageComponent } from '../../../components/knx-chat-stream/text-message.component';
+import { SharedModule } from '../../shared.module';
+import { TextMessageComponent } from '../../components/knx-chat-stream/text-message.component';
 
-import { ContentService } from '../../../content.service';
+import { ContentService } from '../../core/services/content.service';
 
 @Component({
-  template: `
-    <div>
-      <knx-car-buy></knx-car-buy>
-    </div>`
+  template: `<div><knx-car-buy></knx-car-buy></div>`
 })
 export class TestHostComponent {
   @ViewChild(CarBuyComponent)
@@ -71,8 +70,10 @@ describe('Component: CarBuyComponent', () => {
         CXFormsModule,
         SharedModule,
         StoreModule.forRoot({
-          ...fromRoot.reducers,
-          auth: combineReducers(fromAuth.reducers)
+          ...fromCore.reducers,
+          ...fromAuth.reducers,
+          ...fromCar.reducers,
+          ...fromAdvice.reducers
         }, {
             initialState: getInitialState
           })

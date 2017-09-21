@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { CarInfoMessageComponent } from './car-info-message.component';
-import { Car } from '../../models';
+import { Car } from '../../car/models';
 
 describe('Component: CarInfoMessageComponent', () => {
   let comp: CarInfoMessageComponent;

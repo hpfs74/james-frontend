@@ -4,7 +4,7 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { CurrencyPipe } from '@angular/common';
 
 import { PriceItemComponent } from './price-item.component';
-import { Price } from '../../models/price';
+import { Price } from '../../shared/models/price';
 
 
 describe('Component: PriceItem', () => {

@@ -1,4 +1,4 @@
-import { getAssistantMessageState } from './../../reducers/index';
+import { getAssistantMessageState } from '../../core/reducers/index';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -9,7 +9,8 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import { DashboardDetailComponent } from './dashboard-detail.component';
-import { ProfileService, AssistantService, LocalStorageService } from '../../services/';
+import { AssistantService, LocalStorageService } from '../../core/services/';
+import { ProfileService } from '../../profile/services/profile.service';
 import { AuthHttp, AuthService } from '../../auth/services';
 
 import { Observable } from 'rxjs/Observable';

@@ -7,7 +7,8 @@ import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer } from '@ngrx/store';
 
 import { DashboardComponent } from './dashboard.component';
-import { ProfileService, AssistantService, LocalStorageService } from '../../services/';
+import { AssistantService, LocalStorageService } from '../../core/services';
+import { ProfileService } from '../../profile/services/profile.service';
 import { AuthHttp, AuthService } from '../../auth/services';
 
 describe('Component: Dashboard', () => {

@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Nav, NavItemType } from '../../models';
+import { Nav, NavItemType } from '../../core/models';
 import { NavbarComponent } from './navbar.component';
 import { NavUserComponent } from './../knx-nav-user/nav-user.component';
 

@@ -10,8 +10,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { AddressLookupService } from './address-lookup.service';
 import { AuthHttp } from '../../auth/services';
-import { LocalStorageService } from '../../services';
-import { Address } from '../../models/address';
+import { LocalStorageService } from '../../core/services';
+import { Address } from '../../profile/models/address';
 
 
 describe('Service: AddressLookup', () => {

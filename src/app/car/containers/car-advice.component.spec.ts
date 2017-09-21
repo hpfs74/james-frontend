@@ -7,30 +7,32 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
 
-import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
+import { CXFormsModule } from '@cx/forms';
 
-import * as fromRoot from '../../../reducers';
-import * as router from '../../../actions/router';
-import * as layout from '../../../actions/layout';
-import * as profile from '../../../actions/profile';
-import * as assistant from '../../../actions/assistant';
-import * as car from '../../../actions/car';
-import * as insurance from '../../../actions/insurances';
-import * as advice from '../../../actions/advice';
-import * as compare from '../../../actions/compare';
-import * as coverage from '../../../actions/coverage';
+import * as fromCore from '../../core/reducers';
+import * as fromCar from '../reducers';
+import * as fromAuth from '../../auth/reducers';
+import * as fromAdvice from '../../insurance/reducers';
 
-import { SharedModule } from '../../../shared.module';
-import { ContentService } from './../../../content.service';
+import * as router from '../../core/actions/router';
+import * as layout from '../../core/actions/layout';
+import * as assistant from '../../core/actions/assistant';
+
+import * as profile from '../../profile/actions/profile';
+import * as car from '../../car/actions/car';
+import * as insurance from '../../insurance/actions/insurances';
+import * as advice from '../../insurance/actions/advice';
+import * as compare from '../../car/actions/compare';
+import * as coverage from '../../car/actions/coverage';
+
+import { SharedModule } from '../../shared.module';
+import { ContentService } from '../../core/services/content.service';
 import { CarAdviceComponent } from './car-advice.component';
-import { CarExtrasForm } from './car-extras.form';
-import { CarDetailForm } from './car-detail.form';
+import { CarExtrasForm } from '../components/advice/car-extras.form';
+import { CarDetailForm } from '../components/advice/car-detail.form';
 
 @Component({
-  template: `
-    <div>
-      <knx-car-advice></knx-car-advice>
-    </div>`
+  template: `<div><knx-car-advice></knx-car-advice></div>`
 })
 export class TestHostComponent {
   @ViewChild(CarAdviceComponent)
@@ -43,7 +45,7 @@ describe('Component: CarAdviceComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   let actions: Observable<any>;
-  let store: Store<fromRoot.State>;
+  let store: Store<fromCar.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -55,7 +57,10 @@ describe('Component: CarAdviceComponent', () => {
         CXFormsModule,
         SharedModule,
         StoreModule.forRoot({
-          ...fromRoot.reducers
+          ...fromCore.reducers,
+          ...fromAuth.reducers,
+          ...fromCar.reducers,
+          ...fromAdvice.reducers
         })
       ],
       declarations: [

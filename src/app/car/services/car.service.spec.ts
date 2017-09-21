@@ -9,10 +9,9 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { CarService } from './car.service';
-import { LocalStorageService } from '../../services';
+import { LocalStorageService } from '../../core/services';
 import { AuthHttp } from '../../auth/services';
-import { Car } from '../../models/car';
-import { CarCompare } from '../../models/car-compare';
+import { Car, CarCompare } from '../../car/models';
 
 describe('Service: Car', () => {
   let backend, service;

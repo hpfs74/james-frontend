@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { PriceTableComponent } from './price-table.component';
 import { PriceItemComponent } from './price-item.component';
-import { Price } from '../../models/price';
+import { Price } from '../../shared/models/price';
 
 
 describe('Component: PriceTable', () => {
