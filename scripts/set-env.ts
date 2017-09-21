@@ -33,7 +33,6 @@ export const environment = {
     login: '${getEnvVar('LOGIN')}'
   },
   james: {
-    nicciKey: '${getEnvVar('NICCI_KEY')}',
     forgetPassword: '${forgetPasswordLink}',
     key: '${getEnvVar('JAMES_API_KEY')}',
     token: '${getEnvVar('JAMES_API_TOKEN')}',
