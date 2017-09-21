@@ -122,16 +122,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
       .subscribe(data => {
-        const compareObj = {
+        let compareObj = {
           coverage: data.coverage,
           cover_occupants: data.extraOptionsOccupants || false,
           no_claim_protection: data.extraOptionsNoClaim || false,
           legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
           road_assistance: data.roadAssistance || 'RANO',
-          kilometers_per_year: data.kmPerYear || 'KMR3',
           own_risk: +data.ownRisk || 0,
           insurance_id: ''
         };
+        if (data.kmPerYear) {
+          compareObj = Object.assign(compareObj, {
+            kilometers_per_year: data.kmPerYear
+          });
+        }
         this.store$.dispatch(new advice.UpdateAction(compareObj));
       });
 
