@@ -14,6 +14,14 @@
   }
 }
 
+.row.knx-car-summary__payment {
+  margin-bottom: 20px;
+
+  strong {
+    color: $knab-primary-blue;
+  }
+}
+
 .knx-car-summary__terms {
   margin-top: 20px;
 }

@@ -29,24 +29,7 @@ export class CarSummaryComponent {
 
   confirmValue: boolean;
 
-  private isValidAdvice(obj: any) {
-    return (obj &&
-    !this.isEmpty(obj) &&
-    !this.isEmpty(obj.address));
-  }
-
-  private isValidInsurance(obj: any) {
-    return (obj &&
-      !this.isEmpty(obj) &&
-      !this.isEmpty(obj._embedded) &&
-      !this.isEmpty(obj._embedded.car));
-  }
-
-  private isEmpty(obj: any) {
-    return !obj || Object.keys(obj).length <= 0;
-  }
-
-  private getCoverage(coverage: string) {
+  getCoverage(coverage: string) {
     let value: string;
 
     switch (coverage) {
@@ -63,5 +46,22 @@ export class CarSummaryComponent {
         break;
     }
     return value;
+  }
+
+  public isValidInsurance(obj: any) {
+    return (obj &&
+      !this.isEmpty(obj) &&
+      !this.isEmpty(obj._embedded) &&
+      !this.isEmpty(obj._embedded.car));
+  }
+
+  private isValidAdvice(obj: any) {
+    return (obj &&
+    !this.isEmpty(obj) &&
+    !this.isEmpty(obj.address));
+  }
+
+  private isEmpty(obj: any) {
+    return !obj || Object.keys(obj).length <= 0;
   }
 }
