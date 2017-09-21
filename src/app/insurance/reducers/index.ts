@@ -5,16 +5,16 @@ import * as fromInsurances from './insurances';
 import * as fromAdvice from './advice';
 
 export interface InsuranceState {
-  insurances: fromInsurances.State;
+  insurance: fromInsurances.State;
   advice: fromAdvice.State;
 }
 
 export interface State extends fromRoot.State {
-  insurance: InsuranceState;
+  'insurance': InsuranceState;
 }
 
 export const reducers = {
-  insurances: fromInsurances.reducer,
+  insurance: fromInsurances.reducer,
   advice: fromAdvice.reducer
 };
 
@@ -24,7 +24,7 @@ export const selectInsuranceState = createFeatureSelector<InsuranceState>('insur
 /*
  * Insurances Reducers
  */
-export const getInsurancesState = createSelector(selectInsuranceState, (state: InsuranceState) => state.insurances);
+export const getInsurancesState = createSelector(selectInsuranceState, (state: InsuranceState) => state.insurance);
 export const getInsurances = createSelector(getInsurancesState, fromInsurances.getInsurances);
 
 /**

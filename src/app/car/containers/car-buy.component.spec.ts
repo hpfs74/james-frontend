@@ -20,10 +20,13 @@ import { CarPaymentComponent } from '../components/buy/car-payment.component';
 import { CarBuyComponent } from './car-buy.component';
 import { CarService } from '../services/car.service';
 
+import * as fromRoot from '../reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromCar from '../reducers';
+import * as fromInsurance from '../../insurance/reducers';
 import * as fromAuth from '../../auth/reducers';
 import * as fromAdvice from '../../insurance/reducers';
+import * as fromProfile from '../../profile/reducers';
 
 import { SharedModule } from '../../shared.module';
 import { TextMessageComponent } from '../../components/knx-chat-stream/text-message.component';
@@ -41,15 +44,17 @@ export class TestHostComponent {
 
 export function getInitialState() {
   return {
-    assistant: {
-      config: {
-        avatar: {
-          name: 'Test',
-          title: 'Expert'
-        },
-        dashboard: null,
-        profile: null,
-        car: null,
+    'core': {
+      assistant: {
+        config: {
+          avatar: {
+            name: 'Test',
+            title: 'Expert'
+          },
+          dashboard: null,
+          profile: null,
+          car: null,
+        }
       }
     }
   };
@@ -70,10 +75,12 @@ describe('Component: CarBuyComponent', () => {
         CXFormsModule,
         SharedModule,
         StoreModule.forRoot({
-          ...fromCore.reducers,
-          ...fromAuth.reducers,
-          ...fromCar.reducers,
-          ...fromAdvice.reducers
+          ...fromRoot.reducers,
+          'auth': combineReducers(fromAuth.reducers),
+          'core': combineReducers(fromCore.reducers),
+          'car': combineReducers(fromCar.reducers),
+          'insurance': combineReducers(fromInsurance.reducers),
+          'profile': combineReducers(fromProfile.reducers)
         }, {
             initialState: getInitialState
           })

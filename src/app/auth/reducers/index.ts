@@ -9,7 +9,7 @@ export interface AuthState {
 }
 
 export interface State extends fromRoot.State {
-  auth: AuthState;
+  'auth': AuthState;
 }
 
 export const reducers = {

@@ -14,6 +14,10 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 import { ContentService } from '../../core/services/content.service';
 
 import * as fromRoot from '../../reducers';
+import * as fromAuth from '../../auth/reducers';
+import * as fromCore from '../../core/reducers';
+import * as fromProfile from '../../profile/reducers';
+
 import * as auth from '../../auth/actions/auth';
 
 @Component({
@@ -39,7 +43,10 @@ describe('Component: AppComponent', () => {
         RouterTestingModule,
         SharedModule,
         StoreModule.forRoot({
-        ...fromRoot.reducers
+        ...fromRoot.reducers,
+        'auth': combineReducers(fromAuth.reducers),
+        'core': combineReducers(fromCore.reducers),
+        'profile': combineReducers(fromProfile.reducers)
       })],
       declarations: [AppComponent, TestHostComponent, NavbarComponent],
       schemas: [NO_ERRORS_SCHEMA],

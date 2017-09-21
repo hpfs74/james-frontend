@@ -12,7 +12,7 @@ export interface CoreState {
 }
 
 export interface State extends fromRoot.State {
-  core: CoreState;
+  'core': CoreState;
 }
 
 export const reducers = {

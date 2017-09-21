@@ -9,10 +9,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { CXFormsModule } from '@cx/forms';
 
+import * as fromRoot from '../reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromCar from '../reducers';
 import * as fromAuth from '../../auth/reducers';
-import * as fromAdvice from '../../insurance/reducers';
+import * as fromInsurance from '../../insurance/reducers';
+import * as fromProfile from '../../profile/reducers';
 
 import * as router from '../../core/actions/router';
 import * as layout from '../../core/actions/layout';
@@ -57,10 +59,12 @@ describe('Component: CarAdviceComponent', () => {
         CXFormsModule,
         SharedModule,
         StoreModule.forRoot({
-          ...fromCore.reducers,
-          ...fromAuth.reducers,
-          ...fromCar.reducers,
-          ...fromAdvice.reducers
+          ...fromRoot.reducers,
+          'auth': combineReducers(fromAuth.reducers),
+          'core': combineReducers(fromCore.reducers),
+          'car': combineReducers(fromCar.reducers),
+          'insurance': combineReducers(fromInsurance.reducers),
+          'profile': combineReducers(fromProfile.reducers)
         })
       ],
       declarations: [

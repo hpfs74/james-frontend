@@ -10,7 +10,7 @@ export interface ProfileState {
 }
 
 export interface State extends fromRoot.State {
-  profile: ProfileState;
+  'profile': ProfileState;
 }
 
 export const reducers = {

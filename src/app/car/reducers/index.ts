@@ -18,7 +18,7 @@ export interface CarState {
 }
 
 export interface State extends fromRoot.State {
-  car: CarState;
+  'car': CarState;
 }
 
 export const reducers = {
