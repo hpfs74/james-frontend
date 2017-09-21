@@ -228,5 +228,6 @@ export class CarSummaryComponent {
       default:
         break;
     }
+    return value;
   }
 }
