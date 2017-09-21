@@ -24,7 +24,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from './../../profile/models';
 
 import { CarContactComponent } from '../components/buy/car-contact.component';
-import { ContactDetailForm } from './../../shared/forms/contact-detail.form';
+import { ContactDetailForm } from '../../shared/forms/contact-detail.form';
 import { Proposal, CarProposalHelper } from '../models/proposal';
 
 import { CarReportingCodeComponent } from '../components/buy/car-reporting-code.component';

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IbanForm } from './../../../shared/forms/iban.form';
+import { IbanForm } from '../../../shared/forms/iban.form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
