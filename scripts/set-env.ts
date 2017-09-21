@@ -29,7 +29,8 @@ let envConfigFile = `
 export const environment = {
   production: ${isProd},
   external: {
-    registration: '${getEnvVar('WEBSITE_REGISTRATION')}'
+    registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
+    login: '${getEnvVar('LOGIN')}'
   },
   james: {
     nicciKey: '${getEnvVar('NICCI_KEY')}',
