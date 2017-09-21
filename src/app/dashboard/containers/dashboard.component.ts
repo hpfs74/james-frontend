@@ -9,13 +9,14 @@ import 'rxjs/add/operator/filter';
 
 import * as fromRoot from '../../reducers';
 import * as fromCore from '../../core/reducers';
+import * as fromInsurance from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
 import * as assistant from '../../core/actions/assistant';
 
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../profile/models';
-import { InsuranceMap, Insurance, insuranceTypes } from '../../models';
+import { InsuranceMap, Insurance, insuranceTypes } from '../../insurance/models';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -56,7 +57,7 @@ export class DashboardComponent implements OnInit {
         }));
       });
 
-    this.store$.select(fromRoot.getInsurances).subscribe((docs) => {
+    this.store$.select(fromInsurance.getInsurances).subscribe((docs) => {
       const insuranceItems = Object.keys(insuranceTypes).map((i) => insuranceTypes[i].type);
 
       const myInsurances = [];

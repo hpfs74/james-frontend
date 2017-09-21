@@ -1,6 +1,6 @@
 import * as moment from 'moment';
-import { Insurance } from '../../models/insurance';
-import { InsuranceAdvice } from '../../models/insurance-advice';
+import { Insurance } from '../../insurance/models/insurance';
+import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
 
 /**
  * Buy Flow Request

@@ -15,8 +15,6 @@ import { CarBuyComponent } from './containers/car-buy.component';
 import { CarThankYouComponent } from './containers/car-thank-you.component';
 
 // Dumb components
-import { ThankYouComponent } from './../core/containers/thank-you.component';
-
 import { CarDetailComponent } from './components/advice/car-detail.component';
 import { CarExtrasComponent } from './components/advice/car-extras.component';
 
@@ -27,11 +25,15 @@ import { CarPaymentComponent } from './components/buy/car-payment.component';
 import { CarSummaryComponent } from './components/buy/car-summary.component';
 
 import { CarEffects } from './effects/car';
+import { CompareEffects } from './effects/compare';
+import { CoverageEffects } from './effects/coverage';
 
 import { reducers } from './reducers';
 
 export const COMPONENTS = [
-  ThankYouComponent,
+  CarAdviceComponent,
+  CarBuyComponent,
+  CarThankYouComponent,
   CarDetailComponent,
   CarExtrasComponent,
   CarContactComponent,
@@ -49,7 +51,9 @@ export const COMPONENTS = [
     CarRoutingModule,
     StoreModule.forFeature('car', reducers),
     EffectsModule.forFeature([
-      CarEffects
+      CarEffects,
+      CompareEffects,
+      CoverageEffects
     ])
   ],
   declarations: COMPONENTS,

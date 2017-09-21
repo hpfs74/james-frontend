@@ -11,7 +11,7 @@ import { AssistantConfig } from './../../core/models/assistant';
 import { ChatMessage } from './../../components/knx-chat-stream/chat-message';
 import { Profile } from '../../profile/models';
 import { ActivatedRoute } from '@angular/router';
-import { insuranceTypes } from './../../models/';
+import { insuranceTypes } from './../../insurance/models/';
 
 @Component({
   template: `

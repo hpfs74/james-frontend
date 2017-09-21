@@ -3,7 +3,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { Profile } from '../../../profile/models';
 import { Car } from '../../models/';
-import { CarSecurityClass } from '../../../content.interface';
+import { CarSecurityClass } from '../../../core/models/content';
 import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({

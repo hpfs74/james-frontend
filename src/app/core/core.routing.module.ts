@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth/services/auth-guard.service';
 import { AppComponent } from './containers/app.component';
-import { ThankYouComponent } from './containers/thank-you.component';
 
 const coreRoutes: Routes = [
   {

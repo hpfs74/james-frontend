@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 
-import { InsuranceAdvice } from '../../models';
+import { InsuranceAdvice } from '../../insurance/models';
 import { CarInsurance } from '../../car/models';
 
 @Component({

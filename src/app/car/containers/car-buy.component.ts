@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { KNXStepOptions, StepError } from '@knx/wizard';
 
 import * as fromRoot from '../../reducers';
+import * as fromInsurance from '../../insurance/reducers';
 import * as fromCar from '../reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromProfile from '../../profile/reducers';
@@ -15,9 +16,9 @@ import * as router from '../../core/actions/router';
 
 import * as profile from '../../profile/actions/profile';
 import * as car from '../actions/car';
-import * as advice from '../../actions/advice';
+import * as advice from '../../insurance/actions/advice';
 
-import { ContentService } from '../../content.service';
+import { ContentService } from '../../core/services/content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from './../../profile/models';
@@ -76,8 +77,8 @@ export class CarBuyComponent implements OnInit {
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
-    this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
-    this.insurance$ = this.store$.select(fromRoot.getSelectedInsurance);
+    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.car$ = this.store$.select(fromCar.getCarInfo);
 
     const formBuilder = new FormBuilder();

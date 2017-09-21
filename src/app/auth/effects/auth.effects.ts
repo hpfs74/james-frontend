@@ -16,7 +16,7 @@ import 'rxjs/add/operator/delay';
 
 import { AuthToken } from '../models/auth';
 import { AuthService } from '../services/auth.service';
-import { LocalStorageService } from '../../services/localstorage.service';
+import { LocalStorageService } from '../../core/services/localstorage.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 
 import * as fromRoot from '../reducers';

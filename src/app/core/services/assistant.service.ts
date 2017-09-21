@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AssistantConfig } from './../models/assistant';
+import { AssistantConfig } from '../models/assistant';
 
 @Injectable()
 export class AssistantService {

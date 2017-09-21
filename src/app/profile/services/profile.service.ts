@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthHttp } from '../../auth/services/auth-http.service';
 import { environment } from '../../../environments/environment';
 import { Profile } from '../models/profile';
-import { Insurance } from '../../models/insurance';
+import { Insurance } from '../../insurance/models';
 import { Settings } from '../models/settings';
 
 @Injectable()

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Price } from '../../models/price';
+import { Price } from '../../shared/models/price';
 
 @Component({
   selector: 'knx-price-table',

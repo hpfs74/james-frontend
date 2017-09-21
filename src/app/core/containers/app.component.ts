@@ -12,11 +12,11 @@ import * as profile from '../../profile/actions/profile';
 import * as auth from '../../auth/actions/auth';
 
 import { Nav } from '../models/nav';
-import { Feature } from '../../models';
+import { Feature } from '../../shared/models';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 import { LoginModalComponent } from '../../auth/components/login-modal.component';
-import { ContentService } from '../../content.service';
+import { ContentService } from '../../core/services/content.service';
 import { NavigationService } from '../services';
 
 @Component({

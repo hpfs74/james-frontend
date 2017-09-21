@@ -2,7 +2,7 @@ import { Inject, Directive, ElementRef, Renderer, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
-import * as fromCore from '../core/reducers';
+import * as fromCore from '../../core/reducers';
 
 @Directive({
   selector: '[knxSidePanelState]'

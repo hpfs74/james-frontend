@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { collapseInOutAnimation } from '../../animations/collapse.animation';
+import { collapseInOutAnimation } from '../../shared/animations/collapse.animation';
 
 @Component({
   selector: 'knx-collapse-message',

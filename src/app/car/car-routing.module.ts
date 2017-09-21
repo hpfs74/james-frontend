@@ -5,7 +5,7 @@ import { CarAdviceComponent } from './containers/car-advice.component';
 import { CarBuyComponent } from './containers/car-buy.component';
 import { CarThankYouComponent } from './containers/car-thank-you.component';
 
-import { CanActivateBuyFlowGuard } from '../services/buy-guard.service';
+import { CanActivateBuyFlowGuard } from '../core/services/buy-guard.service';
 
 export const carRoutes: Routes = [
   {

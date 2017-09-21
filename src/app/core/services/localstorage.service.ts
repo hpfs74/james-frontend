@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { AuthKey, AuthToken } from '../auth/models/auth';
-import * as AuthUtils from '../utils/auth.utils';
+import { AuthKey, AuthToken } from '../../auth/models/auth';
+import * as AuthUtils from '../../utils/auth.utils';
 
 export const TOKEN_NAME = 'access_token';
 export const TOKEN_OBJECT_NAME = 'token';

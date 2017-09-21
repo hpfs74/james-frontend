@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Insurer, Rating } from './../../models';
+import { Insurer } from '../../insurance/models';
+import { Rating } from '../../shared/models';
 
 @Component({
   selector: 'knx-insurance-result-detail',

@@ -18,7 +18,7 @@ import * as auth from '../../auth/actions/auth';
 import * as car from '../../car/actions/car';
 import * as compare from '../../car/actions/compare';
 import * as coverage from '../../car/actions/coverage';
-import * as insurances from '../../actions/insurances';
+import * as insurances from '../../insurance/actions/insurances';
 import * as profile from '../../profile/actions/profile';
 
 @Injectable()

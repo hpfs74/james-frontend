@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { getLicenseSideCode, formatLicensePlate } from '../utils/licensePlate.util';
+import { getLicenseSideCode, formatLicensePlate } from '../../utils/licensePlate.util';
 
 /**
  * @description

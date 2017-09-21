@@ -1,4 +1,4 @@
-import { Price } from '../../models';
+import { Price } from '../../shared/models';
 import { Address } from '../../profile/models/address';
 import { Car } from '../../car/models';
 

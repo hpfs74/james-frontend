@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { CoreRoutingModule } from './core.routing.module';
 import { SharedModule } from '../shared.module';
+
 import { ChatStreamModule } from '../components/knx-chat-stream/chat-stream.module';
 import { UserDialogModule } from '../components/knx-modal/user-dialog.module';
 import { ProfileModule } from '../profile/profile.module';
@@ -18,26 +19,36 @@ import { ErrorEffects } from './effects/error';
 // Layout components
 import { AppComponent } from './containers/app.component';
 import { PageNotFoundComponent } from './containers/pagenotfound.component';
-import { ThankYouComponent } from './containers/thank-you.component';
 
 import { AppLoaderComponent } from '../components/knx-app-loader/loader.component';
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 import { NavbarComponent } from '../components/knx-navigation';
 
 // Services
-import { AssistantService, CookieService, NavigationService } from './services';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
+import { requestOptionsProvider } from './services/default-request-opts.service';
+import {
+  AssistantService,
+  CanActivateBuyFlowGuard,
+  ContentService,
+  CookieService,
+  GeolocationService,
+  LocalStorageService,
+  NavigationService
+} from './services';
 
 // Feature module reducer
 import { reducers } from './reducers';
 
+export function ContentLoader(contentService: ContentService) {
+  return () => contentService.loadFiles();
+}
 
 export const COMPONENTS = [
   AppComponent,
   PageNotFoundComponent,
   AppLoaderComponent,
-  NavbarComponent,
-  ThankYouComponent
+  NavbarComponent
 ];
 
 @NgModule({
@@ -66,9 +77,20 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         AssistantService,
+        CanActivateBuyFlowGuard,
         CookieService,
+        GeolocationService,
+        LocalStorageService,
         NavigationService,
-        LoaderService
+        ContentService,
+        {
+          provide: APP_INITIALIZER,
+          useFactory: ContentLoader,
+          deps: [ContentService],
+          multi: true
+        },
+        requestOptionsProvider,
+        CurrencyPipe
       ],
     };
   }

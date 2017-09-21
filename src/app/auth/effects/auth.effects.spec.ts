@@ -10,12 +10,12 @@ import { Observable } from 'rxjs/Observable';
 import { AuthEffects } from './auth.effects';
 import { AuthToken } from './../models/auth';
 import { AuthService } from '../services/auth.service';
-import { LocalStorageService } from '../../services/localstorage.service';
+import { LocalStorageService } from '../../core/services/localstorage.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
-import * as profile from '../../actions/profile';
+import * as profile from '../../profile/actions/profile';
 import { Authenticate } from '../models/auth';
 
 describe('AuthEffects', () => {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { flyInOutAnimation } from '../../animations/fly-in-out.animation';
+import { flyInOutAnimation } from '../../shared/animations/fly-in-out.animation';
 import { IChatMessage } from './chat-message.interface';
 
 @Component({

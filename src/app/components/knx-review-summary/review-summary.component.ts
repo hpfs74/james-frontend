@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Rating } from '../../models/rating';
+import { Rating } from '../../shared/models/rating';
 
 @Component({
   selector: 'knx-review-summary',

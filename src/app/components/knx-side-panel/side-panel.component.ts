@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { slideInOutAnimation } from '../../animations/slide-in-out.animation';
+import { slideInOutAnimation } from '../../shared/animations/slide-in-out.animation';
 
 @Component({
   selector: 'knx-side-panel',

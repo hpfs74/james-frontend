@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Feature } from '../../models/feature';
+import { Feature } from '../../shared/models/feature';
 
 @Component({
   selector: 'knx-features',

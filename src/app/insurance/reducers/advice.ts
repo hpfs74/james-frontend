@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 import * as AdviceActions from '../actions/advice';
 
 import { InsuranceAdvice } from '../models/insurance-advice';
-import { CarInsurance } from '../car/models/car-insurance';
+import { CarInsurance } from '../../car/models/car-insurance';
 
 export type Action = AdviceActions.All;
 

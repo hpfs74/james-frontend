@@ -1,5 +1,4 @@
 import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -15,23 +14,14 @@ import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
 import { reducers, metaReducers } from './reducers';
 
-import { ContentService } from './content.service';
-
 import { AppComponent } from './core/containers/app.component';
 import { environment } from '../environments/environment';
-import { requestOptionsProvider } from './services/default-request-opts.service';
 
 // Feature modules
 import { SharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
-
-import { LocalStorageService } from './services/localstorage.service';
-
-
-export function ContentLoader(contentService: ContentService) {
-  return () => contentService.loadFiles();
-}
+import { InsuranceModule } from './insurance/insurance.module';
 
 @NgModule({
   imports: [
@@ -59,6 +49,8 @@ export function ContentLoader(contentService: ContentService) {
 
     CoreModule.forRoot(),
 
+    InsuranceModule.forRoot(),
+
     AppShellModule.runtime(),
   ],
   providers: [
@@ -66,22 +58,12 @@ export function ContentLoader(contentService: ContentService) {
       provide: LOCALE_ID,
       useValue: 'nl-NL'
     },
-    ContentService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: ContentLoader,
-      deps: [ContentService],
-      multi: true
-    },
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
      * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
      * by `@ngrx/router-store` to include only the desired pieces of the snapshot.
      */
-    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
-    requestOptionsProvider,
-    LocalStorageService,
-    CurrencyPipe
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
   ],
   bootstrap: [AppComponent],
 })

@@ -8,9 +8,9 @@ import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
 import { SharedModule } from '../../../shared.module';
 import { CarInfoMessageComponent } from '../../../components/knx-car-info-message/car-info-message.component';
 import { CarDetailComponent } from './car-detail.component';
-import { CarService } from '../car.service';
+import { CarService } from '../../services/car.service';
 import { AuthHttp, AuthService } from '../../../auth/services';
-import { LocalStorageService } from '../../../services/localstorage.service';
+import { LocalStorageService } from '../../../core/services/localstorage.service';
 import { LoaderService } from '../../../components/knx-app-loader/loader.service';
 
 @Component({

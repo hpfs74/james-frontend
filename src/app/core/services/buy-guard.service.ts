@@ -3,8 +3,10 @@ import { Router, Route, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot
 import { Action, Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
-import * as RouterActions from '../core/actions/router';
+import * as RouterActions from '../../core/actions/router';
 import * as fromRoot from '../reducers';
+
+import * as fromInsurance from '../../insurance/reducers';
 
 @Injectable()
 export class CanActivateBuyFlowGuard implements CanActivate {
@@ -22,7 +24,7 @@ export class CanActivateBuyFlowGuard implements CanActivate {
     if (route.params) {
       const requestedAdvice = route.params.adviceId;
 
-      this.store$.select(fromRoot.getAdvice).subscribe(advice => {
+      this.store$.select(fromInsurance.getAdvice).subscribe(advice => {
         adviceExists = Object.keys(advice).filter(id => id === requestedAdvice).length > 0;
       });
     }

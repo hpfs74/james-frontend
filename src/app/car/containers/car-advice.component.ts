@@ -8,6 +8,7 @@ import * as cuid from 'cuid';
 
 import * as fromRoot from '../../reducers';
 import * as fromCore from '../../core/reducers';
+import * as fromInsurance from '../../insurance/reducers';
 import * as fromCar from '../reducers';
 import * as fromProfile from '../../profile/reducers';
 
@@ -22,16 +23,16 @@ import * as compare from '../actions/compare';
 import * as coverage from '../actions/coverage';
 
 // Other actions
-import * as insurance from '../../actions/insurances';
-import * as advice from '../../actions/advice';
+import * as insurance from '../../insurance/actions/insurances';
+import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 
 
-import { ContentService } from '../../content.service';
+import { ContentService } from '../../core/services/content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { Profile, Address } from '../../profile/models';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
-import { Price } from '../../models/price';
+import { Price } from '../../shared/models/price';
 
 import { CarDetailComponent } from '../components/advice/car-detail.component';
 import { CarDetailForm } from '../components/advice/car-detail.form';
@@ -94,8 +95,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.insurances$ = this.getCompareResultCopy();
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
-    this.selectedInsurance$ = this.store$.select(fromRoot.getSelectedInsurance);
-    this.advice$ = this.store$.select(fromRoot.getSelectedAdvice);
+    this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
+    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
 
     // initialize forms
@@ -214,7 +215,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       address: this.address
     })));
 
-    return this.store$.select(fromRoot.getSelectedAdvice)
+    return this.store$.select(fromInsurance.getSelectedAdvice)
       // .take(1) => prevents carExtras from triggering new compare action
       .map((advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
@@ -231,7 +232,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   startBuyFlow(): Observable<any> {
-    this.subscription$.push(this.store$.select(fromRoot.getSelectedAdviceId).subscribe(
+    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
       id => {
         this.store$.dispatch(new router.Go({
           path: ['/car/insurance', { adviceId: id }],
@@ -360,7 +361,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.store$.dispatch(new assistant.ClearAction);
 
 
-    this.store$.select(fromRoot.getSelectedInsurance).take(1)
+    this.store$.select(fromInsurance.getSelectedInsurance).take(1)
       .subscribe(selectedInsurance => {
         that.formSteps[2].hideNextButton = !selectedInsurance.supported;
         that.showStepBlock = selectedInsurance.supported;

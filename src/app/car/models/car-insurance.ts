@@ -1,6 +1,6 @@
 import { Car } from './car';
-import { Insurance } from '../../models/insurance';
-import { InsuranceAdvice } from '../../models/insurance-advice';
+import { Insurance } from '../../insurance/models/insurance';
+import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
 
 interface Document {
   name: string;

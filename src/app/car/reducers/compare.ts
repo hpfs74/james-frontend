@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import * as CompareActions from '../actions/compare';
-import { InsuranceAdvice } from '../../models/insurance-advice';
+import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
 
 export type Action = CompareActions.All;
 
