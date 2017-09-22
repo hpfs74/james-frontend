@@ -6,12 +6,12 @@ export class NavigationService {
 
   getMenu(): Array<Nav> {
     return [
-      {
-        id: 'menu-dashboard',
-        title: 'Dashboard',
-        routePath: '/',
-        menuType: NavItemType.RIGHT
-      },
+      // {
+      //   id: 'menu-dashboard',
+      //   title: 'Dashboard',
+      //   routePath: '/',
+      //   menuType: NavItemType.RIGHT
+      // },
       // {
       //   id: 'menu-faq',
       //   title: 'FAQ',
