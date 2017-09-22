@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -30,7 +30,6 @@ import { requestOptionsProvider } from './services/default-request-opts.service'
 import {
   AssistantService,
   CanActivateBuyFlowGuard,
-  ContentService,
   CookieService,
   GeolocationService,
   LocalStorageService,
@@ -39,10 +38,6 @@ import {
 
 // Feature module reducer
 import { reducers } from './reducers';
-
-export function ContentLoader(contentService: ContentService) {
-  return () => contentService.loadFiles();
-}
 
 export const COMPONENTS = [
   AppComponent,
@@ -69,7 +64,7 @@ export const COMPONENTS = [
     CoreRoutingModule.forRoot()
   ],
   declarations: COMPONENTS,
-  exports: COMPONENTS,
+  exports: COMPONENTS
 })
 export class CoreModule {
   static forRoot() {
@@ -82,13 +77,6 @@ export class CoreModule {
         GeolocationService,
         LocalStorageService,
         NavigationService,
-        ContentService,
-        {
-          provide: APP_INITIALIZER,
-          useFactory: ContentLoader,
-          deps: [ContentService],
-          multi: true
-        },
         requestOptionsProvider,
         CurrencyPipe,
         DatePipe

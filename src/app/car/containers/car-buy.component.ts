@@ -18,7 +18,7 @@ import * as profile from '../../profile/actions/profile';
 import * as car from '../actions/car';
 import * as advice from '../../insurance/actions/advice';
 
-import { ContentService } from '../../core/services/content.service';
+import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from './../../profile/models';

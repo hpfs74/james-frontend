@@ -7,25 +7,20 @@ import { AppComponent } from './containers/app.component';
 const coreRoutes: Routes = [
   {
     path: '',
-    component: AppComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        canActivateChild: [AuthGuard],
-        loadChildren: '../dashboard/dashboard.module#DashboardModule'
-      },
-      {
-        path: 'car',
-        canActivateChild: [AuthGuard],
-        loadChildren: '../car/car.module#CarModule'
-      },
-      {
-        path: 'account',
-        canActivateChild: [AuthGuard],
-        loadChildren: '../profile/profile.module#ProfileModule'
-      }
-    ]
+    redirectTo: 'car',
+    pathMatch: 'full'
+    // canActivateChild: [AuthGuard],
+    // loadChildren: '../dashboard/dashboard.module#DashboardModule',
+  },
+  {
+    path: 'car',
+    canActivateChild: [AuthGuard],
+    loadChildren: '../car/car.module#CarModule'
+  },
+  {
+    path: 'account',
+    canActivateChild: [AuthGuard],
+    loadChildren: '../profile/profile.module#ProfileModule'
   }
 ];
 @NgModule({

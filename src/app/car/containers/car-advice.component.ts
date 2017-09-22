@@ -28,7 +28,7 @@ import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 
 
-import { ContentService } from '../../core/services/content.service';
+import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { Profile, Address } from '../../profile/models';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
@@ -128,14 +128,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
           no_claim_protection: data.extraOptionsNoClaim || false,
           legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
           road_assistance: data.roadAssistance || 'RANO',
+          kilometers_per_year: data.kmPerYear || 'KMR3',
           own_risk: +data.ownRisk || 0,
           insurance_id: ''
         };
-        if (data.kmPerYear) {
-          compareObj = Object.assign(compareObj, {
-            kilometers_per_year: data.kmPerYear
-          });
-        }
         this.store$.dispatch(new advice.UpdateAction(compareObj));
       });
 
@@ -205,7 +201,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       zipcode: this.address.postcode,
       house_number: this.address.number,
       country: 'NL',
-      kilometers_per_year: detailForm.value.kmPerYear,
+      kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
       own_risk: +detailForm.value.ownRisk || 0,
       cover_occupants: false,
       legal_aid: 'LAN',
