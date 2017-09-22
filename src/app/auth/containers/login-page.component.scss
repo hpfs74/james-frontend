@@ -77,3 +77,12 @@ h2.knx-login__subline,
     color: $knab-primary-gray;
   }
 }
+
+.knx-login__error {
+  color: $knab-secondary-red;
+  margin-bottom: 20px;
+  margin-top: -15px;
+  display: block;
+  font-size: $font-size-base - 2;
+  text-align: center;
+}
