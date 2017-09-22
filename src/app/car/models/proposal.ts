@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 import { Insurance } from '../../insurance/models/insurance';
 import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
+import { dateDecode } from '../../utils/base-form.utils';
 
 /**
  * Buy Flow Request
@@ -157,7 +158,7 @@ export class CarProposalHelper {
   }
 
   private formatDate(value: Date) {
-    return moment(value).format('DD-MM-YYYY');
+    return moment(dateDecode(value)).format('DD-MM-YYYY');
   }
 
   private removeWhiteSpace(value: string) {
