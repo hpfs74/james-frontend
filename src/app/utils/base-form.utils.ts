@@ -109,6 +109,7 @@ export const getNumbers = function (str: string) {
 
 export const hasControlRequiredValidator = function (fc: FormControl | AbstractControl) {
   let required = false;
+
   if (fc.validator) {
     let validationResult = fc.validator(fc);
     required = (validationResult !== null && validationResult.required);
