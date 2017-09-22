@@ -36,7 +36,13 @@ export const birthDateMask = {
 };
 
 export function dateDecode(value) {
-  const parts = value.replace(/[ _]/gim, '').split('/');
+  let parts = value.replace(/[ _]/gim, '');
+
+  if (value.indexOf('/') !== -1) {
+    parts = parts.split('/');
+  } else if (value.indexOf('-') !== -1) {
+    parts = parts.split('-');
+  }
 
   const day = +parts[0];
   const month = +parts[1] - 1;
@@ -107,6 +113,7 @@ export const hasControlRequiredValidator = function (fc: FormControl | AbstractC
     let validationResult = fc.validator(fc);
     required = (validationResult !== null && validationResult.required);
   }
+
   return required;
 };
 
@@ -160,6 +167,13 @@ export const toDateFormat = function (date: Date) {
     return null;
   }
   return moment(date).format('DD-MM-YYYY');
+};
+
+export const toDateType = function (date: string) {
+  if (date === null) {
+    return null;
+  }
+  return moment(date, 'DD-MM-YYYY').toDate();
 };
 
 export const parseNicciDate = function (date: string): Date {
