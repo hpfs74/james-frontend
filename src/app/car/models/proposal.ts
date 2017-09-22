@@ -33,7 +33,7 @@ export class CarProposalHelper {
     { key: 'Huisnummer toevoeging', value: 'number_extended' },
     { key: 'Postcode', value: 'postcode' },
     { key: 'Woonplaats', value: 'city' },
-    { key: 'Geboortedatum', value: 'birthDate' },
+    { key: 'Geboortedatum', value: 'date_of_birth' },
     { key: 'Mobiel telefoonnummer', value: 'mobileNumber' },
     { key: 'Vast telefoonnummer', value: 'phoneNumber' },
     { key: 'Rekeningnummer', value: 'iban', transform: this.removeWhiteSpace },
