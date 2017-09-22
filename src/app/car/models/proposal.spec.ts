@@ -262,7 +262,7 @@ describe('CarProposalHelper', () => {
       {'Huisnummer toevoeging': '[object Object]'},
       {'Postcode': '2518CB'},
       {'Woonplaats': 's-Gravenhage'},
-      {'Geboortedatum': ''},
+      {'Geboortedatum': '1989-11-11'},
       {'Mobiel telefoonnummer': '0612345678'},
       {'Vast telefoonnummer': ''},
       {'Rekeningnummer': 'NL91ABNA0417164300'},
