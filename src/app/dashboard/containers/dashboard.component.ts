@@ -19,7 +19,8 @@ import { Profile } from '../../profile/models';
 import { InsuranceMap, Insurance, insuranceTypes } from '../../insurance/models';
 
 @Component({
-  templateUrl: 'dashboard.component.html',
+  template: '<span></span>',
+  // templateUrl: 'dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
@@ -87,6 +88,8 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
+
+    this.router.navigate(['/car']);
   }
 
   goToActions(type: string) {
