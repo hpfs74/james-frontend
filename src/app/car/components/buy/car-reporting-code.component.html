@@ -44,7 +44,7 @@
           <div *ngIf="form.formGroup.get('securityClass').value && selectedSecurityClass" class="knx-message knx-message--hint knx-message--arrow-top">
             <div class="knx-message__header">{{ selectedSecurityClass.title }}: {{ selectedSecurityClass.short }}</div>
             <div class="knx-message__content">
-                <p>{{ selectedSecurityClass.description }}</p>
+              {{ selectedSecurityClass.description }}
             </div>
           </div>
         </div>

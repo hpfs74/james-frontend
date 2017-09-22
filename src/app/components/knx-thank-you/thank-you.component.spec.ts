@@ -27,7 +27,7 @@ describe('Component: Thank You', () => {
 
   it('should take input parameters', () => {
     comp.title = 'Hello World';
-    comp.insurance = 'autoverzekering';
+    comp.insuranceType = 'autoverzekering';
     comp.email = 'test@mail.com';
 
     fixture.detectChanges();

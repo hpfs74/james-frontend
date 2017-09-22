@@ -6,7 +6,7 @@ export type Action = ProfileActions.All;
 export interface State {
   loading: boolean;
   loaded: boolean;
-  profile: any;
+  profile: any; // TODO: change to Profile if profile is more strictly defined
 }
 
 export const initialState: State = {

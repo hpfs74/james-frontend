@@ -1,12 +1,15 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Input, Component, OnInit, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
+import { Profile } from '../../profile/models/profile';
 
 import * as fromRoot from '../../reducers';
 import * as fromCore from '../../core/reducers';
+import * as fromProfile from '../../profile/reducers';
 import * as assistant from '../../core/actions/assistant';
 
 @Component({
@@ -20,19 +23,29 @@ import * as assistant from '../../core/actions/assistant';
           </div>
         </div>
         <div class="col-sm-8 pull-sm-4">
-          <knx-thank-you title="Autoverzekering aangevraagd!" insurance="autoverzekering" email="test@mail.nl"></knx-thank-you>
+          <knx-thank-you title="Autoverzekering aangevraagd!"
+            insuranceType="autoverzekering"
+            [email]="email"></knx-thank-you>
         </div>
       </div>
     </div>
   `
 })
-export class CarThankYouComponent implements AfterViewInit {
+export class CarThankYouComponent implements AfterViewInit, OnInit {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
-  constructor(private store$: Store<fromRoot.State>) {
+  email: string;
+
+  constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+       this.email = params['email'];
+    });
   }
 
   ngAfterViewInit() {

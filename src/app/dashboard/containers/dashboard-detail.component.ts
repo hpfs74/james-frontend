@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromCore from '../../core/reducers';
+import * as router from '../../core/actions/router';
 import * as profile from '../../profile/actions/profile';
 import * as assistant from '../../core/actions/assistant';
 
@@ -37,7 +38,6 @@ export class DashboardDetailComponent implements OnInit {
   chatMessages$: Observable<Array<ChatMessage>>;
 
   constructor(
-    private router: Router,
     private store$: Store<fromCore.State>,
     private route: ActivatedRoute
   ) {
@@ -64,12 +64,12 @@ export class DashboardDetailComponent implements OnInit {
   }
 
   goToAdvice() {
-    this.router.navigate([this.insuranceType]);
+    this.store$.dispatch(new router.Go({ path: [this.insuranceType] }));
   }
 
   goToInsurance() {
     // TODO: implement ProfileInsuranceComponent
-    this.router.navigate(['/']);
+    this.store$.dispatch(new router.Go({ path: ['/'] }));
   }
 
   private getInsuranceLabel(type: string) {
