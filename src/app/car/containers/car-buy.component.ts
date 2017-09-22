@@ -193,10 +193,9 @@ export class CarBuyComponent implements OnInit {
         const proposalRequest = new CarProposalHelper();
         const proposalData: Proposal = {
           proposal: value.insuranceInfo,
-          items: Object.assign(
-            proposalRequest.getItems(flatData),
-            proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
-          )
+          items:  proposalRequest.getItems(flatData).concat(
+              proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
+            )
         };
         proposalData.proposal.car = value.carInfo;
         this.store$.dispatch(new car.BuyAction(proposalData));
