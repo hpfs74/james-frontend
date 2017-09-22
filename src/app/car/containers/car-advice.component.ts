@@ -128,14 +128,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
           no_claim_protection: data.extraOptionsNoClaim || false,
           legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
           road_assistance: data.roadAssistance || 'RANO',
+          kilometers_per_year: data.kmPerYear || 'KMR3',
           own_risk: +data.ownRisk || 0,
           insurance_id: ''
         };
-        if (data.kmPerYear) {
-          compareObj = Object.assign(compareObj, {
-            kilometers_per_year: data.kmPerYear
-          });
-        }
         this.store$.dispatch(new advice.UpdateAction(compareObj));
       });
 
