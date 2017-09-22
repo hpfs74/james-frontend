@@ -86,8 +86,7 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
-
-    this.router.navigate(['/car']);
+    this.store$.dispatch(new fromRouter.Go({ path: [ '/car' ] }));
   }
 
   goToActions(insuranceType: string) {
