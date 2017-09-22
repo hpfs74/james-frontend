@@ -123,6 +123,7 @@ export class CarBuyComponent implements OnInit {
         label: 'Overzicht',
         nextButtonLabel: 'Verzekering aanvragen',
         backButtonLabel: 'Terug',
+        nextButtonClass: 'knx-button knx-button--cta knx-button--arrow',
         onShowStep: () => this.initSummaryForm('car.buy.summary'),
         onBeforeNext: this.submitInsurance.bind(this)
       }
