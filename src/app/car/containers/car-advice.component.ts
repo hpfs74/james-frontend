@@ -23,7 +23,7 @@ import * as compare from '../actions/compare';
 import * as coverage from '../actions/coverage';
 
 // Other actions
-import * as insurance from '../../insurance/actions/insurances';
+import * as insurance from '../../insurance/actions/insurance';
 import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 

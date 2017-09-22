@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { Insurance } from '../models/insurance';
-import * as InsuranceActions from '../actions/insurances';
+import * as InsuranceActions from '../actions/insurance';
 
 export type Action = InsuranceActions.All;
 

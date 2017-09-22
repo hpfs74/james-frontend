@@ -8,7 +8,7 @@ export interface State {
   openedModalName: string;
 }
 
-const initialState: State = {
+export const initialState: State = {
   leftSideBarOpen: false,
   rightSideBarOpen: false,
   openedModalName: null

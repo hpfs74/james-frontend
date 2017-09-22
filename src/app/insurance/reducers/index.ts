@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 import * as fromRoot from '../../reducers';
-import * as fromInsurances from './insurances';
+import * as fromInsurances from './insurance';
 import * as fromAdvice from './advice';
 
 export interface InsuranceState {
