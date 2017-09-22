@@ -16,13 +16,13 @@ describe('Base Form Util', () => {
     expect(birthDateMask.decode(testDate)).toEqual(new Date(testDate));
   });
 
-  it('should decode date', () => {
+  it('should decode initials', () => {
     expect(nameInitialMask.decode('A. B. ')).toEqual('AB');
   });
 
-  it('should decode initials', () => {
-    expect(dateDecode('12-12-2020')).toEqual(new Date('12-12-2020'));
-    expect(dateDecode('12/12/2020')).toEqual(new Date('12-12-2020'));
+  it('should decode date', () => {
+    expect(dateDecode('12-12-2020')).toEqual(new Date(2020, 11, 12));
+    expect(dateDecode('12/12/2020')).toEqual(new Date(2020, 11, 12));
   });
 
   it('should validate form', () => {
@@ -41,7 +41,7 @@ describe('Base Form Util', () => {
   });
 
   it('should format a date in Date format', () => {
-    expect(toDateType('30-04-2017')).toEqual(new Date('04-30-2017'));
+    expect(toDateType('30-04-2020')).toEqual(new Date(2020, 3, 30));
   });
 
   it('should parse a date in NICCI format', () => {
