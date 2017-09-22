@@ -106,7 +106,7 @@ describe('CarProposalHelper', () => {
       causeComment: null,
       register: false,
       registerComment: null,
-      startDate: '2020-12-12',
+      startDate: '12-12-2020',
       iban: 'NL91 ABNA 0417 1643 00',
       _id: 'b6a0s8m5t2pg00e4rhdg',
       postcode: '2518CB',
