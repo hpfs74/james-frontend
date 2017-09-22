@@ -33,13 +33,13 @@ import { InsuranceModule } from './insurance/insurance.module';
 
     HttpModule,
 
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
 
     SharedModule,
 
     StoreModule.forRoot(reducers, { metaReducers }),
 
-    // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
 
     StoreRouterConnectingModule,
 

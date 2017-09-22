@@ -8,6 +8,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
 
 import * as fromRoot from '../../reducers';
+import * as fromRouter from '../../core/actions/router';
 import * as fromCore from '../../core/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
@@ -29,10 +30,7 @@ export class DashboardComponent implements OnInit {
   profile$: Observable<Profile>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
-  constructor(
-    private router: Router,
-    private store$: Store<fromRoot.State>
-  ) {
+  constructor(private store$: Store<fromRoot.State>) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -89,8 +87,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  goToActions(type: string) {
-    this.router.navigate(['/insurance', type]);
+  goToActions(insuranceType: string) {
+    this.store$.dispatch(new fromRouter.Go({ path: [ '/insurance', insuranceType ] }));
   }
 
   // TODO: merge in insurance property documents into specific insurance type

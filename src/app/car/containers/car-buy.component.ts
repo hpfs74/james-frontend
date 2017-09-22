@@ -213,8 +213,11 @@ export class CarBuyComponent implements OnInit {
         return Observable.throw(new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.'));
       } else {
         // Navigate to thank you page
-        this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
-        return;
+        return this.store$.select(fromProfile.getProfile)
+          .filter(profile => !!profile.emailaddress)
+          .subscribe((profile) => {
+            this.store$.dispatch(new router.Go({ path: ['/car/thank-you', profile.emailaddress ] }));
+          });
       }
     });
   }

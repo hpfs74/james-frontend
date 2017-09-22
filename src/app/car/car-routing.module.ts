@@ -24,7 +24,7 @@ export const carRoutes: Routes = [
     }
   },
   {
-    path: 'thank-you',
+    path: 'thank-you/:email',
     component: CarThankYouComponent
   }
 ];

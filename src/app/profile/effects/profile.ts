@@ -15,7 +15,7 @@ import 'rxjs/add/operator/toArray';
 import { ProfileService } from '../services/profile.service';
 import { Profile } from '../models/profile';
 import * as profile from '../actions/profile';
-import * as insurances from '../../insurance/actions/insurances';
+import * as insurances from '../../insurance/actions/insurance';
 
 @Injectable()
 export class ProfileEffects {

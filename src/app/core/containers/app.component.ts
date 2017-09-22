@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -41,7 +41,7 @@ import { NavigationService } from '../services';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   loginModalName = 'loginModal';
 
   topMenu: Array<Nav>;
@@ -60,8 +60,11 @@ export class AppComponent implements OnInit {
     private userDialogService: UserDialogService) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
+  }
+
+  ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
     this.footerItems = this.contentService.getContentObject().layout.footer;
     this.profile$ = this.store$.select(fromProfile.getProfile);

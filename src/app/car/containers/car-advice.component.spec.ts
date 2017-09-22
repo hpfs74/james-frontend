@@ -22,7 +22,7 @@ import * as assistant from '../../core/actions/assistant';
 
 import * as profile from '../../profile/actions/profile';
 import * as car from '../../car/actions/car';
-import * as insurance from '../../insurance/actions/insurances';
+import * as insurance from '../../insurance/actions/insurance';
 import * as advice from '../../insurance/actions/advice';
 import * as compare from '../../car/actions/compare';
 import * as coverage from '../../car/actions/coverage';

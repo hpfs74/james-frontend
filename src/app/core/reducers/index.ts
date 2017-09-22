@@ -1,4 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
+import * as fromRouter from '@ngrx/router-store';
 
 import * as fromRoot from '../../reducers';
 // import * as fromAnalytics from './analytics';
@@ -8,7 +9,7 @@ import * as fromLayout from './layout';
 export interface CoreState {
   assistant: fromAssistant.State;
   layout: fromLayout.State;
-  // router: fromRouter.RouterReducerState;
+  router: fromRouter.RouterReducerState;
 }
 
 export interface State extends fromRoot.State {
@@ -17,8 +18,8 @@ export interface State extends fromRoot.State {
 
 export const reducers = {
   assistant: fromAssistant.reducer,
-  layout: fromLayout.reducer
-  // router: fromRouter.routerReducer
+  layout: fromLayout.reducer,
+  router: fromRouter.routerReducer
   // routerReducer: analyticsMetaReducer(fromRouter.routerReducer)
 };
 
