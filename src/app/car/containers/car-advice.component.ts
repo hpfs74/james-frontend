@@ -201,7 +201,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       zipcode: this.address.postcode,
       house_number: this.address.number,
       country: 'NL',
-      kilometers_per_year: detailForm.value.kmPerYear,
+      kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
       own_risk: +detailForm.value.ownRisk || 0,
       cover_occupants: false,
       legal_aid: 'LAN',
