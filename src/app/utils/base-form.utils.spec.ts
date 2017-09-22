@@ -1,10 +1,12 @@
 import {
   birthDateMask,
   nameInitialMask,
+  dateDecode,
   validateForm,
   toDateFormat,
   parseNicciDate,
-  toNicciDate
+  toNicciDate,
+  toDateType
 } from './base-form.utils';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -14,8 +16,13 @@ describe('Base Form Util', () => {
     expect(birthDateMask.decode(testDate)).toEqual(new Date(testDate));
   });
 
-  it('should decode initials', () => {
+  it('should decode date', () => {
     expect(nameInitialMask.decode('A. B. ')).toEqual('AB');
+  });
+
+  it('should decode initials', () => {
+    expect(dateDecode('12-12-2020')).toEqual(new Date('12-12-2020'));
+    expect(dateDecode('12/12/2020')).toEqual(new Date('12-12-2020'));
   });
 
   it('should validate form', () => {
@@ -31,6 +38,10 @@ describe('Base Form Util', () => {
 
   it('should format a Dutch date', () => {
     expect(toDateFormat(new Date(2016, 3, 30))).toEqual('30-04-2016');
+  });
+
+  it('should format a date in Date format', () => {
+    expect(toDateType('30-04-2017')).toEqual(new Date('04-30-2017'));
   });
 
   it('should parse a date in NICCI format', () => {

@@ -113,6 +113,7 @@ export const hasControlRequiredValidator = function (fc: FormControl | AbstractC
     let validationResult = fc.validator(fc);
     required = (validationResult !== null && validationResult.required);
   }
+
   return required;
 };
 
