@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './../../components/knx-navigation/navbar.component';
 import { NavigationService } from '../services/navigation.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { ContentService } from '../../core/services/content.service';
+import { ContentService } from '../../content.service';
 
 import * as fromRoot from '../../reducers';
 import * as fromAuth from '../../auth/reducers';

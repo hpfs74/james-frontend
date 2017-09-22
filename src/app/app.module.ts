@@ -12,6 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
+import { ContentService } from './content.service';
+
 import { reducers, metaReducers } from './reducers';
 
 import { AppComponent } from './core/containers/app.component';
@@ -22,6 +24,10 @@ import { SharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
+
+export function ContentLoader(contentService: ContentService) {
+  return () => contentService.loadFiles();
+}
 
 @NgModule({
   imports: [
@@ -63,7 +69,17 @@ import { InsuranceModule } from './insurance/insurance.module';
      * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
      * by `@ngrx/router-store` to include only the desired pieces of the snapshot.
      */
-    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomRouterStateSerializer
+    },
+    ContentService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ContentLoader,
+      deps: [ContentService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

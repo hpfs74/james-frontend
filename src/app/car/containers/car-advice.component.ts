@@ -28,7 +28,7 @@ import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 
 
-import { ContentService } from '../../core/services/content.service';
+import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { Profile, Address } from '../../profile/models';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';

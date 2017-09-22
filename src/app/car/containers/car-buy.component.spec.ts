@@ -31,7 +31,7 @@ import * as fromProfile from '../../profile/reducers';
 import { SharedModule } from '../../shared.module';
 import { TextMessageComponent } from '../../components/knx-chat-stream/text-message.component';
 
-import { ContentService } from '../../core/services/content.service';
+import { ContentService } from '../../content.service';
 
 @Component({
   template: `<div><knx-car-buy></knx-car-buy></div>`

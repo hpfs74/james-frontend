@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { CarSecurityClass } from '../models/content';
+import { CarSecurityClass } from './core/models/content';
 
 export interface AppContent {
   car?: {
@@ -19,18 +19,17 @@ export class ContentService {
   // TODO: build based on directory read
   private jsonFiles: AppContent = {
     car: {
-      securityClass: '../../../content/car/security-class.json',
-      coverages: '../../../content/car/coverage.json'
+      securityClass: '../content/car/security-class.json',
+      coverages: '../content/car/coverage.json'
     },
     layout: {
-      footer: '../../../content/layout/footer.json'
+      footer: '../content/layout/footer.json'
     }
   };
 
   private content: AppContent;
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http) {}
 
   public getContentObject(): AppContent {
     return this.content || {};
