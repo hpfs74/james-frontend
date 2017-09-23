@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -33,8 +33,10 @@ import {
   CookieService,
   GeolocationService,
   LocalStorageService,
+  LoggingService,
   NavigationService
 } from './services';
+import { GlobalErrorHandler } from './services/error-handler';
 
 // Feature module reducer
 import { reducers } from './reducers';
@@ -77,9 +79,14 @@ export class CoreModule {
         GeolocationService,
         LocalStorageService,
         NavigationService,
+        LoggingService,
         requestOptionsProvider,
         CurrencyPipe,
-        DatePipe
+        DatePipe,
+        {
+          provide: ErrorHandler,
+          useClass: GlobalErrorHandler
+        }
       ],
     };
   }
