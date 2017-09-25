@@ -23,7 +23,7 @@ export class CarProposalHelper {
   propMapping = [
     { key: 'Verzekeraar', value: 'moneyview_id', transform: (val) => val.split(':')[0] },
     { key: 'Product', value: 'moneyview_id', transform: (val) => val.split(':')[1] },
-    { key: 'Geslacht', value: 'gender', transform: (val) => val === 'm' ? 'Man' : 'Vrouw' },
+    { key: 'Geslacht', value: 'gender', transform: (val) => val === 'M' ? 'Man' : 'Vrouw' },
     { key: 'Voorletters', value: 'initials' },
     { key: 'Voornaam', value: 'firstName' },
     { key: 'Voorvoegsels', value: 'infix' },

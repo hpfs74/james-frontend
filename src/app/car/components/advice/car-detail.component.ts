@@ -39,7 +39,7 @@ export class CarDetailComponent implements OnInit {
         claimFreeYears: value.claim_free_years || null,
         houseHold: value.household_status || null,
         loan: !!value.active_loan,
-        gender: value.gender ? value.gender.toLowerCase() : null,
+        gender: value.gender ? value.gender : null,
         coverage: value.coverage || null,
       }));
 

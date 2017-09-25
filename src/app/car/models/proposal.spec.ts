@@ -70,7 +70,7 @@ describe('CarProposalHelper', () => {
       claim_free_years: 1,
       household_status: 'CHM',
       license: '01XLXL',
-      gender: 'm',
+      gender: 'M',
       title: 'Dhr.',
       date_of_birth: '1989-11-11',
       zipcode: '2518CB',
