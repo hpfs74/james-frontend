@@ -8,7 +8,7 @@ import { InsuranceDocument } from './../../insurance/models';
     <knx-collapsible-panel [title]="title">
       <div class="knx-collapsible-panel__content">
         <div class="row">
-          <div class="col col-md-12">
+          <div class="col-sm-12">
             <span>Hier vind je de voorwaarden van de verzekering die je hebt gekozen:</span>
             <span>
               <knx-info size="md" isFloating="true" class="knx-info">
@@ -26,19 +26,17 @@ import { InsuranceDocument } from './../../insurance/models';
               </knx-info>
             </span>
           </div>
-          <div class="col col-md-5"></div>
         </div>
 
         <!-- documents -->
         <div class="row">
-          <div class="col col-md-12">
+          <div class="col-sm-12">
             <ul class="knx-insurance-review-documents__list">
               <li *ngFor="let doc of documents"><span class="knx-icon-file-o"></span>
                 <a href="{{doc.url}}}" target="_blank" rel="noopener">{{doc.name}}</a>
               </li>
             </ul>
           </div>
-          <div class="col col-md-5"></div>
         </div>
       </div>
     </knx-collapsible-panel>
