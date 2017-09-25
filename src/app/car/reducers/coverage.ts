@@ -1,18 +1,19 @@
 import { createSelector } from '@ngrx/store';
 import * as CoverageActions from '../actions/coverage';
+import { CarCoverageRecommendation } from '../models/coverage';
 
 export type Action = CoverageActions.All;
 
 export interface State {
   loading: boolean;
   loaded: boolean;
-  coverage: any; // TODO: add interface when API spec is more consistent
+  coverage: CarCoverageRecommendation;
 }
 
 export const initialState: State = {
   loading: false,
   loaded: false,
-  coverage: {}
+  coverage: null
 };
 
 export function reducer(state = initialState, action: Action): State {

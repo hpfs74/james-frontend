@@ -66,6 +66,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   selectedInsurance$: Observable<CarInsurance>;
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
+  coverageRecommendation$: Observable<CarCoverageRecommendation>;
 
   subscription$: Array<any>;
 
@@ -98,6 +99,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
+    this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
 
     // initialize forms
     const formBuilder = new FormBuilder();
@@ -324,23 +326,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Subscribe to coverage recommendation request
     this.store$.select(fromCar.getCoverage)
-      .filter(coverage => Object.keys(coverage).length > 0)
+      .filter(coverage => coverage !== null)
       .take(1)
       .subscribe(coverageAdvice => {
-        // Copy array here to trigger change detection in CarDetailComponent
-        if (this.coverages) {
-          let coverages = this.coverages.slice(0);
-          const coverageItem = coverages.find(price => price.id === coverageAdvice.recommended_value);
-          if (coverageItem) {
-            coverageItem.highlight = true;
-            this.coverages = coverages;
-            this.store$.dispatch(new assistant.AddCannedMessage({
-              key: 'car.info.coverage.advice',
-              value: coverageItem,
-              clear: true
-            }));
-          }
-        }
+        this.store$.dispatch(new assistant.AddCannedMessage({
+          key: 'car.info.coverage.advice',
+          value: coverageAdvice.recommended_value,
+          clear: true
+        }));
       });
 
     FormUtils.scrollToForm('form');

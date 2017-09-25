@@ -10,7 +10,7 @@ import * as fromRoot from '../../../reducers';
 import * as car from '../../actions/car';
 
 import { CarDetailForm } from './car-detail.form';
-import { Car } from '../../models';
+import { Car, CarCoverageRecommendation } from '../../models';
 import { Price } from '../../../shared/models';
 import { Address } from '../../../profile/models';
 import { CarService } from '../../services/car.service';
@@ -28,6 +28,7 @@ export class CarDetailComponent implements OnInit {
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];
+  @Input() coverageRecommendation: CarCoverageRecommendation;
   @Input() isCoverageLoading: boolean;
   @Input() isCoverageError: boolean;
 
@@ -70,15 +71,12 @@ export class CarDetailComponent implements OnInit {
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
 
   ngOnInit() {
-    const ONCHANGE_THROTTLE = 1000;
     const licensePlate = this.form.formGroup.get('licensePlate');
     const loan = this.form.formGroup.get('loan');
 
     Observable.combineLatest(
       licensePlate.valueChanges,
       loan.valueChanges)
-      .distinctUntilChanged()
-      .throttleTime(ONCHANGE_THROTTLE)
       .subscribe(data => {
         if (licensePlate.valid && loan.valid) {
           this.coverageDetailsChange.emit(this.form.formGroup.value);
