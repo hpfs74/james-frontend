@@ -21,7 +21,7 @@ function getEnvVar(name) {
 
 // TODO: provide the correct client id
 const forgetPasswordLink =
-  `${getEnvVar('NICCI_BASE_URL')}` + '/password?client_id=56a6ab20bb00893f071faddc' +
+  `${getEnvVar('NICCI_BASE_URL')}/password?client_id=${getEnvVar('PAYLOAD_CLIENT_ID')}` +
   '&response_type=code' +
   '&scope=basic+emailaddress+social';
 
