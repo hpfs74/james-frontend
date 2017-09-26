@@ -1,7 +1,7 @@
 import { isValidIban } from './iban-validator';
 
 describe('Util: IBAN Validator', () => {
-  it('should validate a Duch iban number', () => {
+  it('should validate a Dutch iban number', () => {
     expect(isValidIban('NL39RABO0300065264')).toBeTruthy();
     expect(isValidIban('NL39 RABO 0300 0652 64')).toBeTruthy();
     expect(isValidIban('NL39RABO030')).toBeFalsy();
