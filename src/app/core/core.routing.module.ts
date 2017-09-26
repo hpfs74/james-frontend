@@ -8,8 +8,8 @@ const coreRoutes: Routes = [
   {
     path: '',
     redirectTo: 'car',
-    pathMatch: 'full'
-    // canActivateChild: [AuthGuard],
+    pathMatch: 'full',
+    canActivateChild: [AuthGuard]
     // loadChildren: '../dashboard/dashboard.module#DashboardModule',
   },
   {
