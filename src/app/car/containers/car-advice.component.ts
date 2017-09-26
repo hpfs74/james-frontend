@@ -66,6 +66,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   selectedInsurance$: Observable<CarInsurance>;
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
+  coverageRecommendation$: Observable<CarCoverageRecommendation>;
 
   subscription$: Array<any>;
 
@@ -98,6 +99,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
+    this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
 
     // initialize forms
     const formBuilder = new FormBuilder();
@@ -249,17 +251,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     }));
   }
 
+  updateActiveLoan(event: boolean) {
+    this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(event));
+  }
+
   onAddressChange(address: Address) {
     this.store$.dispatch(new profile.UpdateAction(address));
 
     // TODO: not in ngrx form should be this.store.select('address') something
     this.address = address;
-  }
-
-  getCoverages(event) {
-    if (this.car) {
-      this.store$.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
-    }
   }
 
   getCarInfo(licensePlate) {
@@ -324,22 +324,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Subscribe to coverage recommendation request
     this.store$.select(fromCar.getCoverage)
-      .filter(coverage => Object.keys(coverage).length > 0)
+      .filter(coverage => coverage !== null)
       .take(1)
       .subscribe(coverageAdvice => {
-        // Copy array here to trigger change detection in CarDetailComponent
-        if (this.coverages) {
-          let coverages = this.coverages.slice(0);
-          const coverageItem = coverages.find(price => price.id === coverageAdvice.recommended_value);
-          if (coverageItem) {
-            coverageItem.highlight = true;
-            this.coverages = coverages;
-            this.store$.dispatch(new assistant.AddCannedMessage({
-              key: 'car.info.coverage.advice',
-              value: coverageItem,
-              clear: true
-            }));
-          }
+        let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
+        if (coverageItem) {
+          this.store$.dispatch(new assistant.AddCannedMessage({
+            key: 'car.info.coverage.advice',
+            value: coverageItem,
+            clear: true
+          }));
         }
       });
 
