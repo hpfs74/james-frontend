@@ -29,8 +29,6 @@ describe('Component: PriceTable', () => {
     ];
 
     fixture.detectChanges();
-    // de = fixture.debugElement.query(By.css('input'));
-    // el = de.nativeElement;
   });
 
   it('should render with with 3 elements', () => {

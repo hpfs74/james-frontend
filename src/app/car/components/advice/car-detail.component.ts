@@ -19,8 +19,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   selector: 'knx-car-detail-form',
   styleUrls: ['car-detail.component.scss'],
-  templateUrl: 'car-detail.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'car-detail.component.html'
 })
 export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
@@ -65,7 +64,8 @@ export class CarDetailComponent implements OnInit {
 
   @Output() licensePlateInvalid: EventEmitter<string> = new EventEmitter();
   @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
-  @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
+  @Output() activeLoanChange: EventEmitter<boolean> = new EventEmitter();
+
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
   @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
@@ -74,14 +74,11 @@ export class CarDetailComponent implements OnInit {
     const licensePlate = this.form.formGroup.get('licensePlate');
     const loan = this.form.formGroup.get('loan');
 
-    Observable.combineLatest(
-      licensePlate.valueChanges,
-      loan.valueChanges)
-      .subscribe(data => {
-        if (licensePlate.valid && loan.valid) {
-          this.coverageDetailsChange.emit(this.form.formGroup.value);
-        }
-      });
+    loan.valueChanges.subscribe((value) => {
+      if (value !== null && loan.valid) {
+        this.activeLoanChange.emit(value);
+      }
+    });
   }
 
   onFocus(controlKey) {

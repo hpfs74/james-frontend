@@ -7,12 +7,14 @@ export type Action = CoverageActions.All;
 export interface State {
   loading: boolean;
   loaded: boolean;
+  activeLoan: boolean;
   coverage: CarCoverageRecommendation;
 }
 
 export const initialState: State = {
   loading: false,
   loaded: false,
+  activeLoan: null,
   coverage: null
 };
 
@@ -32,6 +34,12 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case CoverageActions.CAR_COVERAGE_SET_ACTIVE_LOAN: {
+      return Object.assign({}, state, {
+        activeLoan: action.payload
+      });
+    }
+
     default: {
       return state;
     }
@@ -39,5 +47,6 @@ export function reducer(state = initialState, action: Action): State {
 }
 
 export const getCoverage = (state: State) => state.coverage;
+export const GetActiveLoan = (state: State) => state.activeLoan;
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;

@@ -251,17 +251,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     }));
   }
 
+  updateActiveLoan(event: boolean) {
+    this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(event));
+  }
+
   onAddressChange(address: Address) {
     this.store$.dispatch(new profile.UpdateAction(address));
 
     // TODO: not in ngrx form should be this.store.select('address') something
     this.address = address;
-  }
-
-  getCoverages(event) {
-    if (this.car) {
-      this.store$.dispatch(new coverage.CarCoverageAction({ license: this.car.license, loan: event.loan }));
-    }
   }
 
   getCarInfo(licensePlate) {
@@ -329,11 +327,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       .filter(coverage => coverage !== null)
       .take(1)
       .subscribe(coverageAdvice => {
-        this.store$.dispatch(new assistant.AddCannedMessage({
-          key: 'car.info.coverage.advice',
-          value: coverageAdvice.recommended_value,
-          clear: true
-        }));
+        let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
+        if (coverageItem) {
+          this.store$.dispatch(new assistant.AddCannedMessage({
+            key: 'car.info.coverage.advice',
+            value: coverageItem,
+            clear: true
+          }));
+        }
       });
 
     FormUtils.scrollToForm('form');

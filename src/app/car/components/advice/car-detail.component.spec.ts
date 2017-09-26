@@ -1,11 +1,11 @@
-import { CarDetailForm } from './car-detail.form';
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
 
 import { SharedModule } from '../../../shared.module';
+import { CarDetailForm } from './car-detail.form';
 import { CarInfoMessageComponent } from '../../../components/knx-car-info-message/car-info-message.component';
 import { CarDetailComponent } from './car-detail.component';
 import { CarService } from '../../services/car.service';
@@ -15,10 +15,7 @@ import { LoaderService } from '../../../components/knx-app-loader/loader.service
 
 @Component({
   template: `
-    <div>
-      <knx-car-detail-form [form]="formFromHost">
-      </knx-car-detail-form>
-    </div>`
+    <div><knx-car-detail-form [form]="formFromHost"></knx-car-detail-form></div>`
 })
 export class TestHostComponent {
   @ViewChild(CarDetailComponent)
@@ -73,16 +70,28 @@ describe('Component: CarCheckComponent', () => {
     expect(elementCarInfo).toBeNull();
   });
 
-  xit('should display car info if license plate is invalid', () => {
-    const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
-    expect(element).toBeDefined();
-    comp.targetComponent.form.formGroup.get('licensePlate').setValue('gk908t');
+  it('should only emit a valid active loan', () => {
+    spyOn(comp.targetComponent.activeLoanChange, 'emit');
+
+    let nativeElement = fixture.nativeElement;
+    let loanCtrl = comp.targetComponent.form.formGroup.get('loan');
+    loanCtrl.setValue(true);
+
     fixture.detectChanges();
 
-    expect(comp.targetComponent.form.formGroup.get('licensePlate').valid).toBeTruthy();
+    expect(comp.targetComponent.activeLoanChange.emit).toHaveBeenCalledWith(true);
+ });
 
-    const elementCarInfo = fixture.debugElement.query(By.css('knx-car-info-message'));
-    expect(elementCarInfo).not.toBeNull();
-  });
+  // xit('should display car info if license plate is invalid', () => {
+  //   const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
+  //   expect(element).toBeDefined();
+  //   comp.targetComponent.form.formGroup.get('licensePlate').setValue('gk908t');
+  //   fixture.detectChanges();
+
+  //   expect(comp.targetComponent.form.formGroup.get('licensePlate').valid).toBeTruthy();
+
+  //   const elementCarInfo = fixture.debugElement.query(By.css('knx-car-info-message'));
+  //   expect(elementCarInfo).not.toBeNull();
+  // });
 
 });
