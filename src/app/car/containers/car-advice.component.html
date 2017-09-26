@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="container knx-car-advice">
+<div class="container knx-car-advice" [ngClass]="'knx-car-advice--step-' + (currentStep + 1)">
   <knx-wizard #knxWizard (stepChange)="onStepChange($event)">
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">

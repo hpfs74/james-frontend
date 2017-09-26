@@ -225,3 +225,19 @@ input::-ms-clear {
     top: 90px;
   }
 }
+
+// Car advice summary
+// Hide back button on small screens
+@media (max-width: 768px) {
+  .knx-car-advice--step-3 {
+    .knx-wizard__buttons {
+      .knx-button--back {
+        display: none;
+      }
+
+      .knx-button--cta {
+        width: 100%;
+      }
+    }
+  }
+}

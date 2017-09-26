@@ -31,3 +31,20 @@
   height: 159px;
   background: url("/assets/images/characters/thumbs-up-guy.png") no-repeat center bottom;
 }
+
+@media (max-width: 768px) {
+  .knx-insurance-review-benefits__disclaimer {
+    ul {
+      li {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .knx-insurance-review-benefits__thumbs-up-guy {
+    position: static;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
