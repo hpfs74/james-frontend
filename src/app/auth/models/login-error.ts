@@ -1,8 +1,10 @@
+const defaultError = 'De combinatie gebruikersnaam en wachtwoord klopt niet';
+
 export const loginError = {
-  inactive_profile: 'De combinatie gebruikersnaam en wachtwoord klopt niet',
-  invalid_username: 'De combinatie gebruikersnaam en wachtwoord klopt niet',
-  invalid_password: 'De combinatie gebruikersnaam en wachtwoord klopt niet',
+  inactive_profile: defaultError,
+  invalid_username: defaultError,
+  invalid_password: defaultError,
   too_many_login_attempts: 'Teveel foutieve inlogpogingen',
-  default: 'De combinatie gebruikersnaam en wachtwoord klopt niet'
+  default: defaultError
 };
 
