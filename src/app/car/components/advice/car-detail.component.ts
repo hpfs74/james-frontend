@@ -71,9 +71,7 @@ export class CarDetailComponent implements OnInit {
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
 
   ngOnInit() {
-    const licensePlate = this.form.formGroup.get('licensePlate');
     const loan = this.form.formGroup.get('loan');
-
     loan.valueChanges.subscribe((value) => {
       if (value !== null && loan.valid) {
         this.activeLoanChange.emit(value);

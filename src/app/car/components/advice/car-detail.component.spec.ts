@@ -5,6 +5,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
 
 import { SharedModule } from '../../../shared.module';
+import { Address } from '../../../profile/models';
 import { CarDetailForm } from './car-detail.form';
 import { CarInfoMessageComponent } from '../../../components/knx-car-info-message/car-info-message.component';
 import { CarDetailComponent } from './car-detail.component';
@@ -80,18 +81,49 @@ describe('Component: CarCheckComponent', () => {
     fixture.detectChanges();
 
     expect(comp.targetComponent.activeLoanChange.emit).toHaveBeenCalledWith(true);
- });
+  });
 
-  // xit('should display car info if license plate is invalid', () => {
-  //   const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
-  //   expect(element).toBeDefined();
-  //   comp.targetComponent.form.formGroup.get('licensePlate').setValue('gk908t');
-  //   fixture.detectChanges();
+  it('should emit a form control key', () => {
+    const id = 'my.test.key';
+    spyOn(comp.targetComponent.formControlFocus, 'emit');
+    comp.targetComponent.onFocus(id);
+    fixture.detectChanges();
+    expect(comp.targetComponent.formControlFocus.emit).toHaveBeenCalledWith(id);
+  });
 
-  //   expect(comp.targetComponent.form.formGroup.get('licensePlate').valid).toBeTruthy();
+  it('should emit a selected coverage', () => {
+    spyOn(comp.targetComponent.coverageSelected, 'emit');
+    const coverageItem = {
+      id: 'testId',
+      header: 'this is a price item',
+      badge: '',
+      features: []
+    };
+    comp.targetComponent.onSelectCoverage(coverageItem);
+    fixture.detectChanges();
 
-  //   const elementCarInfo = fixture.debugElement.query(By.css('knx-car-info-message'));
-  //   expect(elementCarInfo).not.toBeNull();
-  // });
+    expect(comp.targetComponent.coverageSelected.emit).toHaveBeenCalledWith(coverageItem);
+  });
+
+  it('should emit an address', () => {
+    const address = {
+      _id: '2132JK25',
+      postcode: '2132JK',
+      number: '25',
+      street: 'Capellalaan',
+      city: 'Hoofddorp',
+      county: 'haarlemmermeer',
+      province: 'noord_holland',
+      fullname: 'Capellalaan 25 2132JK Hoofddorp',
+      location: {
+        lat: 52.293848662962866,
+        lng: 4.705527419663116
+      }
+    } as Address;
+    spyOn(comp.targetComponent.addressChange, 'emit');
+    comp.targetComponent.onAddressFound(address);
+    fixture.detectChanges();
+    expect(comp.targetComponent.addressChange.emit).toHaveBeenCalledWith(address);
+  });
 
 });
