@@ -22,3 +22,9 @@ knx-step-block {
     text-transform: none;
   }
 }
+
+@media (max-width: 768px) {
+  .knx-step-block {
+    margin-bottom: 10px;
+  }
+}
