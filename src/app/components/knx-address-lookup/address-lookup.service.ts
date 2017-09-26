@@ -14,15 +14,13 @@ export class AddressLookupService {
     this.baseUrl = environment.james.address;
   }
 
-  /**
-   * Get street, city and geolocation from postalcode
-   * @param {string} postalCode
-   * @param {string} houseNumber
-   * @returns {Observable<Address>}
-   *
-   * @memberOf AddressLookupService
-   */
-  public lookupAddress(postalCode: string, houseNumber: string, houseNumberExtension?: string) {
+  public lookupAddress(postalCode: string, houseNumber: string, houseNumberExtension?: string): Observable<Address> {
+    const body = { zipcode: postalCode, number: + houseNumber + (houseNumberExtension || '') };
+    return this.authHttp.post(this.baseUrl, body)
+      .map((res) => res.json());
+  }
+
+  public lookupAddressJumba(postalCode: string, houseNumber: string, houseNumberExtension?: string) {
     // Deprecated request to NICCI Api
     // const body = { address: postalCode + houseNumber + (houseNumberExtension || '') };
     // return this.authHttp.post(this.baseUrl, body);

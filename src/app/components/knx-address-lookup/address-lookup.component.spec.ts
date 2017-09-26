@@ -81,21 +81,6 @@ describe('Component: AddressLookup', () => {
     expect(comp.addressFormGroup).not.toBeNull();
   });
 
-  // TODO: fix
-  // it('should get formGroup errors', () => {
-  //   Object.keys(comp.addressFormGroup.controls).forEach(key => {
-  //     comp.addressFormGroup.get(key).markAsTouched();
-  //   });
-  //   comp.addressFormGroup.markAsTouched();
-
-  //   fixture.detectChanges();
-
-  //   expect(comp.addressFormGroup.errors).not.toBeNull();
-
-  //   // const errors = comp.getErrors();
-  //   // expect(errors).toBeDefined();
-  // });
-
   it('should get error messages', () => {
     comp.validationErrors = validationErrors;
     expect(comp.getErrorMessage('address')).toEqual('Error');

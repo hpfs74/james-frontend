@@ -54,59 +54,13 @@ describe('Service: AddressLookup', () => {
 
   function setupConnections(backend: MockBackend, options: any) {
     backend.connections.subscribe((connection: MockConnection) => {
-      // if (connection.request.url.startsWith('api/address')) {
       const responseOptions = new ResponseOptions(options);
       const response = new Response(responseOptions);
 
       connection.mockRespond(response);
-      // }
     });
   }
 
-  it('should lookup an address', (done) => {
-    setupConnections(backend, {
-      body:
-      {
-        'Output': 'streetname, city',
-        'Payload': {
-          'ID': '4641BB271',
-          'Address': '067218bee73ca8adf50447cd',
-          'Country':  'NL',
-          'Province': 'Zuid-Holland',
-          'County': 's-Gravenhage',
-          'Main': {
-             'City': 's-Gravenhage',
-             'Street': 'Streetname',
-             'Postcode': {
-                'P4': '4641BB',
-                'P6':  '4641BB'
-             },
-             'Number': '71',
-             'NumberOnly': 71,
-             'NumberLetter':  '',
-             'NumberAddition' : ''
-          },
-          'Built': 1879,
-          'Size': 137,
-          'Function': 'residence',
-          'Forsale': false,
-          'Sold': false,
-          'Location': {
-             'lat': 52.07228648874988,
-             'lon': 4.300587351428723
-          }
-     }
-
-      },
-      status: 200
-    });
-
-service.lookupAddress('4641BB', '71').subscribe((data) => {
-  expect(data).not.toBeNull();
-  expect(data.street).toBe('Streetname');
-  expect(data.city).toBe('s-Gravenhage');
-  done();
-});
-  });
+  // TODO: implement tests
 
 });
