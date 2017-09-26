@@ -197,7 +197,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       license: this.car.license,
       gender: detailForm.value.gender,
       title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
-      date_of_birth: FormUtils.toNicciDate(detailForm.value.birthDate),
+      date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
+        FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
       zipcode: this.address.postcode,
       house_number: this.address.number,
       country: 'NL',
