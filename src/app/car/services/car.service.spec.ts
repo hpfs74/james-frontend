@@ -64,7 +64,7 @@ describe('Service: Car', () => {
 
   const mockCarCompareRequest: CarCompare = {
     'license': 'GK906T',
-    'gender': 'm',
+    'gender': 'M',
     'date_of_birth': '1991-10-26',
     'house_number': '234',
     'title': 'Dhr.',

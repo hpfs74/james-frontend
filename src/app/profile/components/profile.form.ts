@@ -59,11 +59,11 @@ export class ProfileForm extends BaseForm {
           items: [
             {
               label: 'Man',
-              value: 'm'
+              value: 'M'
             },
             {
               label: 'Vrouw',
-              value: 'v'
+              value: 'F'
             }
           ]
         }

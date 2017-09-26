@@ -85,7 +85,7 @@
         <knx-ir-content title="Persoonlijke gegevens" *ngIf="insurance">
           <knx-ir-row>
             <knx-ir-label>Geslacht</knx-ir-label>
-            <knx-ir-value>{{ advice.gender.toLowerCase() === 'm' ? 'Man' : 'Vrouw' }}</knx-ir-value>
+            <knx-ir-value>{{ advice.gender === 'M' ? 'Man' : 'Vrouw' }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>

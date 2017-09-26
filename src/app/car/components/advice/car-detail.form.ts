@@ -150,11 +150,11 @@ export class CarDetailForm extends BaseForm {
           items: [
             {
               label: 'Man',
-              value: 'm'
+              value: 'M'
             },
             {
               label: 'Vrouw',
-              value: 'f'
+              value: 'F'
             }
           ]
         }
