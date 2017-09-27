@@ -114,10 +114,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
         if (currentAdvice && this.address) {
-          this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
-            this.address.postcode = currentProfile.postcode;
-            this.address.number = currentProfile.number;
-          });
+          // do not pre-fill address
+          // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
+          //   this.address.postcode = currentProfile.postcode;
+          //   this.address.number = currentProfile.number;
+          // });
 
         } else if (!currentAdvice) {
           this.store$.dispatch(new advice.AddAction({
@@ -262,8 +263,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onAddressChange(address: Address) {
-    this.store$.dispatch(new profile.UpdateAction(address));
-
+    // this.store$.dispatch(new profile.UpdateAction(address));
     // TODO: not in ngrx form should be this.store.select('address') something
     this.address = address;
   }

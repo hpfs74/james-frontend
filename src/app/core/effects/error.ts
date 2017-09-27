@@ -14,6 +14,7 @@ import 'rxjs/add/operator/filter';
 import * as fromRoot from '../reducers';
 import * as fromAuth from '../../auth/reducers';
 
+import * as address from '../../address/actions/address';
 import * as auth from '../../auth/actions/auth';
 import * as car from '../../car/actions/car';
 import * as compare from '../../car/actions/compare';
@@ -28,6 +29,7 @@ export class ErrorEffects {
   forbiddenError$: Observable<Action> = this.actions$
     .ofType
     <auth.RefreshTokenFailure |
+    address.GetAddressFailure |
     profile.LoadFailAction |
     profile.SaveFailAction |
     car.GetInfoFailAction |
@@ -37,6 +39,7 @@ export class ErrorEffects {
     insurances.AddInsuranceFailAction |
     insurances.LoadFailAction>(
     auth.REFRESH_FAILURE,
+    address.GET_ADDRESS_FAILURE,
     profile.LOAD_PROFILE_FAILURE,
       profile.SAVE_PROFILE_FAILURE,
       car.GET_INFO_FAILURE,
