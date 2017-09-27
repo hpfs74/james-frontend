@@ -4,7 +4,7 @@ import { Car } from '../../car/models';
 
 export class AssistantConfig {
   public avatar = {
-    name: 'Marjolein',
+    name: 'Lisa',
     title: 'Expert verzekeringen'
   };
 
