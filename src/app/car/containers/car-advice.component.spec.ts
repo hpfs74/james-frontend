@@ -137,6 +137,15 @@ describe('Component: CarAdviceComponent', () => {
       expect(carExtraForm.formConfig.ownRisk).toBeDefined();
       expect(carExtraForm.formConfig.kmPerYear).toBeDefined();
     });
+
+    it('should bind async validator for car info', () => {
+      comp.targetComponent.ngAfterViewChecked();
+      fixture.detectChanges();
+
+      let licenseInput = comp.targetComponent.carDetailForm.formGroup.get('licensePlate');
+      expect(licenseInput).toBeDefined();
+      expect(licenseInput.validator.length).toBeGreaterThan(0);
+    });
   });
 
   describe('Car Advice orchestration', () => {
@@ -180,5 +189,23 @@ describe('Component: CarAdviceComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
   });
+
+  // describe('Car Advice Flow', () => {
+  //   it('should disable next button on invalid form', () => {
+
+  //   });
+
+  //   it('should enable next button on valid form', () => {
+
+  //   });
+
+  //   it('should load car info', () => {
+
+  //   });
+
+  //   it('should show insurance result', () => {
+
+  //   });
+  // });
 
 });

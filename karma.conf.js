@@ -44,7 +44,7 @@ module.exports = function(config) {
                     statements: 74,
                     branches: 53,
                     functions: 54,
-                    lines: 72
+                    lines: 73
                 },
                 // per file
                 // each: {

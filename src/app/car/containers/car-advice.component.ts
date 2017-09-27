@@ -192,10 +192,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    this.store$.dispatch(new profile.UpdateAction({
-      gender: detailForm.value.gender,
-      date_of_birth: detailForm.value.birthDate
-    }));
+    // no implicit updating of profile
+    // this.store$.dispatch(new profile.UpdateAction({
+    //   gender: detailForm.value.gender,
+    //   date_of_birth: detailForm.value.birthDate
+    // }));
 
     const compareObj: CarCompare = {
       active_loan: !!detailForm.value.loan,
@@ -225,7 +226,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     })));
 
     return this.store$.select(fromInsurance.getSelectedAdvice)
-      // .take(1) => prevents carExtras from triggering new compare action
       .map((advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
       });
@@ -359,7 +359,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     let that = this;
     FormUtils.scrollToForm('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
-
 
     this.store$.select(fromInsurance.getSelectedInsurance).take(1)
       .subscribe(selectedInsurance => {
