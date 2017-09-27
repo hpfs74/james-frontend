@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { async, TestBed, inject } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { StoreModule, Store } from '@ngrx/store';
@@ -27,6 +27,39 @@ describe('Service: AddressLookup', () => {
     }
   };
 
+  const testAddressObj = {
+    '_id': '2512CB',
+    'postcode': '2512CB',
+    'number': '2',
+    'street': 'Lutherse Burgwal',
+    'city': 's-Gravenhage',
+    'county': 's-Gravenhage',
+    'province': 'Zuid-Holland',
+    'fullname': 'Lutherse Burgwal 2 s-Gravenhage',
+    'location': {
+       'lat': 52.07535,
+       'lng': 4.309771
+    },
+    'built': 1934,
+    'house_size': 182,
+    'house_value': 0,
+    'house_info_roof_condition_text': 'Onbekend',
+    'house_info_house_type_text': '',
+    'house_info_house_use_text': 'residence',
+    'number_extended': {
+       'number_only': 2,
+       'number_letter': '',
+       'number_addition': '',
+       'number_extension': ''
+    },
+    'rooms': 0,
+    'build_type': '',
+    'isolation_glass': false,
+    'house_type': '',
+    'house_subtype': null,
+    'id': '2512CB2'
+  } as Address;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
@@ -52,61 +85,21 @@ describe('Service: AddressLookup', () => {
     service = TestBed.get(AddressLookupService);
   }));
 
-  function setupConnections(backend: MockBackend, options: any) {
-    backend.connections.subscribe((connection: MockConnection) => {
-      // if (connection.request.url.startsWith('api/address')) {
-      const responseOptions = new ResponseOptions(options);
-      const response = new Response(responseOptions);
-
-      connection.mockRespond(response);
-      // }
-    });
-  }
-
-  it('should lookup an address', (done) => {
-    setupConnections(backend, {
-      body:
-      {
-        'Output': 'streetname, city',
-        'Payload': {
-          'ID': '4641BB271',
-          'Address': '067218bee73ca8adf50447cd',
-          'Country':  'NL',
-          'Province': 'Zuid-Holland',
-          'County': 's-Gravenhage',
-          'Main': {
-             'City': 's-Gravenhage',
-             'Street': 'Streetname',
-             'Postcode': {
-                'P4': '4641BB',
-                'P6':  '4641BB'
-             },
-             'Number': '71',
-             'NumberOnly': 71,
-             'NumberLetter':  '',
-             'NumberAddition' : ''
-          },
-          'Built': 1879,
-          'Size': 137,
-          'Function': 'residence',
-          'Forsale': false,
-          'Sold': false,
-          'Location': {
-             'lat': 52.07228648874988,
-             'lon': 4.300587351428723
-          }
-     }
-
-      },
-      status: 200
+  it('should return an address', () => {
+    backend.connections.subscribe((connection) => {
+      connection.mockRespond(new Response(new ResponseOptions({
+        body: JSON.stringify(testAddressObj)
+      })));
     });
 
-service.lookupAddress('4641BB', '71').subscribe((data) => {
-  expect(data).not.toBeNull();
-  expect(data.street).toBe('Streetname');
-  expect(data.city).toBe('s-Gravenhage');
-  done();
-});
+    inject([AddressLookupService], (service) => {
+      service.lookupAddress('2512CB', '2')
+        .subscribe((res: Address) => {
+          expect(res).toBeDefined();
+          expect(res.postcode).toEqual('2512CB');
+          expect(res.number).toEqual('2');
+        });
+    });
   });
 
 });
