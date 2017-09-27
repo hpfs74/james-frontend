@@ -10,6 +10,7 @@ import * as fromRoot from '../../reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromCar from '../reducers';
+import * as fromAddress from '../../address/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 // Core actions
@@ -30,7 +31,8 @@ import * as profile from '../../profile/actions/profile';
 
 import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
-import { Profile, Address } from '../../profile/models';
+import { Profile } from '../../profile/models';
+import { Address } from '../../address/models';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
 
@@ -52,14 +54,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   carDetailSubmitted = false;
   currentStep: number;
   coverages: Array<Price>;
-  insurances: Observable<Array<CarInsurance>>;
-  car: Car;
-  address: Address;
+
+  car: Car; // TODO: use ngrx store
+  address: Address; // TODO: use ngrx store
+
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   showStepBlock = false;
 
   // State of the advice forms data
+  address$: Observable<Address>;
   advice$: Observable<any>;
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
@@ -94,6 +98,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
+    this.address$ = this.store$.select(fromAddress.getAddress);
     this.insurances$ = this.getCompareResultCopy();
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);

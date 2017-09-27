@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProfileForm } from './profile.form';
-import { Profile, Address } from '../models';
+import { Profile } from '../models';
+import { Address } from '../../address/models';
 import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({

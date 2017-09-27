@@ -3,6 +3,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared.module';
+import { AddressModule } from '../address/address.module';
 import { ChatStreamModule } from './../components/knx-chat-stream/chat-stream.module';
 import { InsuranceReviewModule } from './../components/knx-insurance-review/insurance-review.module';
 import { CarRoutingModule } from './car-routing.module';
@@ -46,6 +47,7 @@ export const COMPONENTS = [
 @NgModule({
   imports: [
     SharedModule,
+    AddressModule,
     ChatStreamModule,
     InsuranceReviewModule,
     CarRoutingModule,

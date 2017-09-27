@@ -26,7 +26,7 @@ describe('Component: CarExtrasComponent', () => {
     TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule, BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
       providers: [],
-      declarations: [CarExtrasComponent, TestHostComponent]
+      declarations: [CarExtrasComponent, TestHostComponent],
     }).compileComponents();
   }));
 

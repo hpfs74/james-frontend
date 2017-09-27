@@ -12,7 +12,7 @@ import * as car from '../../actions/car';
 import { CarDetailForm } from './car-detail.form';
 import { Car, CarCoverageRecommendation } from '../../models';
 import { Price } from '../../../shared/models';
-import { Address } from '../../../profile/models';
+import { Address } from '../../../address/models';
 import { CarService } from '../../services/car.service';
 import * as FormUtils from '../../../utils/base-form.utils';
 

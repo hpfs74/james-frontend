@@ -18,7 +18,7 @@ export class CarDetailForm extends BaseForm {
     birthDate: () => 'Vul een geldige geboortedatum in',
     postalCode: () => `Vul een geldige postcode in`,
     gender: () => `Selecteer je geslacht`,
-    address: () => `Vul een geldige postcode en huisnummer combinatie in`,
+    address: () => `Dit adres bestaat niet. Probeer het nog eens`,
     houseNumber: () => `Vul een huisnummer in`,
     claimFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
   };

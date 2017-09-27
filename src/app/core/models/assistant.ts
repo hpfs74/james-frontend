@@ -1,5 +1,5 @@
 import { Price } from '../../shared/models';
-import { Address } from '../../profile/models/address';
+import { Address } from '../../address/models/address';
 import { Car } from '../../car/models';
 
 export class AssistantConfig {

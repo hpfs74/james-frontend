@@ -1,4 +1,4 @@
-import { NumberExtended } from './address';
+import { NumberExtended } from '../../address/models';
 
 export class Profile {
   firstname: string;

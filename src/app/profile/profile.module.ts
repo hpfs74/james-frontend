@@ -3,6 +3,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared.module';
+import { AddressModule } from '../address/address.module';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ChatStreamModule } from '../components/knx-chat-stream/chat-stream.module';
 import { ProfileService } from './services/profile.service';
@@ -18,6 +19,7 @@ import { reducers } from './reducers';
 @NgModule({
   imports: [
     SharedModule,
+    AddressModule,
     ChatStreamModule,
     ProfileRoutingModule,
     StoreModule.forFeature('profile', reducers),

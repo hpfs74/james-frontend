@@ -5,7 +5,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
 
 import { SharedModule } from '../../../shared.module';
-import { Address } from '../../../profile/models';
+import { Address } from '../../../address/models';
 import { CarDetailForm } from './car-detail.form';
 import { CarInfoMessageComponent } from '../../../components/knx-car-info-message/car-info-message.component';
 import { CarDetailComponent } from './car-detail.component';
@@ -32,7 +32,8 @@ describe('Component: CarCheckComponent', () => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
       providers: [ AuthHttp, AuthService, LocalStorageService, LoaderService, CarService ],
-      declarations: [CarDetailComponent, CarInfoMessageComponent, TestHostComponent]
+      declarations: [CarDetailComponent, CarInfoMessageComponent, TestHostComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 

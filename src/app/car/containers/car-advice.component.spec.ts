@@ -28,6 +28,7 @@ import * as compare from '../../car/actions/compare';
 import * as coverage from '../../car/actions/coverage';
 
 import { SharedModule } from '../../shared.module';
+import { AddressModule } from '../../address/address.module';
 import { ContentService } from '../../content.service';
 import { CarAdviceComponent } from './car-advice.component';
 import { CarExtrasForm } from '../components/advice/car-extras.form';

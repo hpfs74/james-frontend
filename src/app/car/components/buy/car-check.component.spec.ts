@@ -27,7 +27,8 @@ describe('Component: CarCheckComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
-      declarations: [CarCheckComponent, TestHostComponent]
+      declarations: [CarCheckComponent, TestHostComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 

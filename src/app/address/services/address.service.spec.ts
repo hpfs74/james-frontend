@@ -8,10 +8,10 @@ import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
-import { AddressLookupService } from './address-lookup.service';
+import { AddressService } from './address.service';
 import { AuthHttp } from '../../auth/services';
 import { LocalStorageService } from '../../core/services';
-import { Address } from '../../profile/models/address';
+import { Address } from '../models/address';
 
 
 describe('Service: AddressLookup', () => {
@@ -66,7 +66,7 @@ describe('Service: AddressLookup', () => {
       providers: [
         BaseRequestOptions,
         MockBackend,
-        AddressLookupService,
+        AddressService,
         LocalStorageService,
         {
           deps: [
@@ -82,7 +82,7 @@ describe('Service: AddressLookup', () => {
     });
 
     backend = TestBed.get(MockBackend);
-    service = TestBed.get(AddressLookupService);
+    service = TestBed.get(AddressService);
   }));
 
   it('should return an address', () => {
@@ -92,7 +92,7 @@ describe('Service: AddressLookup', () => {
       })));
     });
 
-    inject([AddressLookupService], (service) => {
+    inject([AddressService], (service) => {
       service.lookupAddress('2512CB', '2')
         .subscribe((res: Address) => {
           expect(res).toBeDefined();

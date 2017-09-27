@@ -4,10 +4,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../../environments/environment';
 import { AuthHttp } from '../../auth/services';
-import { Address } from '../../profile/models/address';
+import { Address } from '../models/address';
 
 @Injectable()
-export class AddressLookupService {
+export class AddressService {
   private baseUrl: string;
 
   constructor(private authHttp: AuthHttp) {

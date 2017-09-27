@@ -34,7 +34,6 @@ import { JumpToElementDirective, SidePanelStateDirective } from './shared/direct
  * Shared module for all generic components
  * import components in alphabetic order: easier to find something!
  */
-import { AddressLookupComponent } from './components/knx-address-lookup/address-lookup.component';
 import { AppPromoBlockComponent } from './components/knx-app-promo/app-promo.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
@@ -74,7 +73,6 @@ export const sharedComponents = [
   LicensePlatePipe,
   SidePanelStateDirective,
   JumpToElementDirective,
-  AddressLookupComponent,
   ButtonIconComponent,
   CircleProgressComponent,
   CarSummaryComponent,
