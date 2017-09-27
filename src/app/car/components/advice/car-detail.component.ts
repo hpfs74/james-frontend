@@ -43,11 +43,11 @@ export class CarDetailComponent implements OnInit {
         coverage: value.coverage || null,
       }));
 
-      // textmask decode doesn't work correctly with patchValue, so use setValue on control instead
       let dob = new Date(value.date_of_birth);
       this.form.formGroup.get('birthDate').setValue(
         value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
       );
+
       this.form.addressForm.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
         houseNumber: value.address ? FormUtils.getNumbers(value.address.number) : null,

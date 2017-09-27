@@ -186,3 +186,7 @@ export const parseNicciDate = function (date: string): Date {
 export const toNicciDate = function (date: Date|string) {
   return moment(date).format('YYYY-MM-DD');
 };
+
+export const isMaskFormatted = function (date: string | string) {
+  return (typeof date === 'string' && moment(date, 'DD / MM / YYYY', true).isValid());
+};
