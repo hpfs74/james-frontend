@@ -26,7 +26,8 @@ describe('Component: AddressLookup', () => {
     required: () => 'Dit veld is verplicht',
     address: () => 'Error',
     postalCode: () => `Vul een geldige postcode`,
-    houseNumber: () => `Vul een huisnummer in`
+    houseNumber: () => `Vul een huisnummer in`,
+    stringTest: 'test'
   };
 
   const testAddressObj = {
@@ -105,6 +106,7 @@ describe('Component: AddressLookup', () => {
     it('should get error messages', () => {
       comp.validationErrors = validationErrors;
       expect(comp.getErrorMessage('address')).toEqual('Error');
+      expect(comp.getErrorMessage('stringTest')).toEqual('test');
     });
 
     it('should validate an address', () => {
