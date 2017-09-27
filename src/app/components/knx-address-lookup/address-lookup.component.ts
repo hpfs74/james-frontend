@@ -21,8 +21,7 @@ export class AddressLookupComponent implements AfterViewChecked {
   public mask = postalCodeMask;
   private lookupTimeout;
 
-  constructor(private addressService: AddressLookupService) {
-  }
+  constructor(private addressService: AddressLookupService) {}
 
   ngAfterViewChecked(): void {
     this.addressFormGroup.setAsyncValidators((formControl) => this.validateAddress(formControl, this.addressService));
@@ -61,7 +60,7 @@ export class AddressLookupComponent implements AfterViewChecked {
         const houseNumberExtension = formGroup.get('houseNumberExtension').value;
 
         if (!postalCode && !houseNumber) {
-          return resolve(null);
+          return resolve({ address: true });
         }
 
         if (formGroup.get('postalCode').valid && formGroup.get('houseNumber').valid) {
