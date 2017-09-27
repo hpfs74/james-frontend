@@ -99,6 +99,11 @@
           </knx-ir-row>
 
           <knx-ir-row>
+            <knx-ir-label>Tussenvoegsel</knx-ir-label>
+            <knx-ir-value>{{ advice.middleName }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
             <knx-ir-label>Achternaam</knx-ir-label>
             <knx-ir-value>{{ advice.lastName }}</knx-ir-value>
           </knx-ir-row>
@@ -107,6 +112,18 @@
             <knx-ir-label>Geboortedatum</knx-ir-label>
             <knx-ir-value>{{ advice.date_of_birth | date:'shortDate' }}</knx-ir-value>
           </knx-ir-row>
+        </knx-ir-content>
+
+        <knx-ir-content>
+          <knx-ir-row>
+            <knx-ir-label>Street</knx-ir-label>
+            <knx-ir-value>{{ advice.address.street }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Huisnummer</knx-ir-label>
+            <knx-ir-value>{{ advice.address.number }}</knx-ir-value>
+          </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Postcode</knx-ir-label>
@@ -114,8 +131,8 @@
           </knx-ir-row>
 
           <knx-ir-row>
-            <knx-ir-label>Huisnummer</knx-ir-label>
-            <knx-ir-value>{{ advice.address.number }}</knx-ir-value>
+            <knx-ir-label>City</knx-ir-label>
+            <knx-ir-value>{{ advice.address.city }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
@@ -125,7 +142,12 @@
 
           <knx-ir-row>
             <knx-ir-label>Vast nummer</knx-ir-label>
-            <knx-ir-value>{{ advice.phoneNumber }}</knx-ir-value>
+            <knx-ir-value>{{ advice.phoneNumber || '-' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>E-mailadres</knx-ir-label>
+            <knx-ir-value>{{ profile.emailaddress }}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
 
@@ -142,7 +164,7 @@
           <span class="premium-note">Incl. 10% provisie aan Knab</span></div>
       </div>
 
-      <div class="row" *ngIf="insurance?.one_off_premium">
+      <div class="row">
         <div class="col-md-5">Eenmalige afsluitkosten</div>
         <div class="col-md-5">{{ insurance?.one_off_premium | currency:'EUR':true }}</div>
       </div>
@@ -154,9 +176,13 @@
 
       <div class="row knx-car-summary__terms">
         <div class="col col-sm-12 align-self-end">
+          <hr>
+        </div>
+        <div class="col col-sm-6 align-self-end"></div>
+        <div class="col col-sm-6 align-self-end">
           <cx-checkbox class="pull-right"
             [(ngModel)]="confirm"
-            [options]="{ label: 'Ik heb de polisvoorwaarden hierboven gelezen en ga akkoord' }">
+            [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
           </cx-checkbox>
         </div>
       </div>
