@@ -48,12 +48,12 @@ cx-checkbox + .knx-info {
   .knx-info {
     .knx-info--floating.knx-info--md {
       width: 300px;
-      left: -272px;
+      //left: -272px;
     }
 
-    .knx-info--floating .knx-message--arrow-top:before {
-      right: calc(10px);
-    }
+    //.knx-info--floating .knx-message--arrow-top:before {
+    //  right: calc(10px);
+    //}
 
     .knx-message--chat:first-child:before {
       top: -9px;
