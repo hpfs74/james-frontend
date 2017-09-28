@@ -36,5 +36,4 @@ import { reducers } from './reducers';
     ProfileService
   ]
 })
-export class ProfileModule {
-}
+export class ProfileModule {}

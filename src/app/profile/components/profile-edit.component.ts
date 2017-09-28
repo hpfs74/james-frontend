@@ -57,9 +57,8 @@ import * as FormUtils from '../../utils/base-form.utils';
     <div class="row">
       <div class="col-md-8 col-md-offset-4">
         <knx-address-lookup
-          (addressFound)="updateAddress($event)"
-          [addressFormGroup]="form.addressForm.formGroup"
-          [validationErrors]="form.addressForm.validationErrors">
+          [addressForm]="form.addressForm"
+          (addressFound)="updateAddress($event)">
         </knx-address-lookup>
       </div>
     </div>
