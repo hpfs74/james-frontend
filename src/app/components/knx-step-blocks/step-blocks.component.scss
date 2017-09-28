@@ -13,3 +13,11 @@
     display: flex;
   }
 }
+
+@media (max-width: 768px) {
+  .knx-step-blocks {
+    .knx-step-blocks__inner {
+      flex-direction: column;
+    }
+  }
+}

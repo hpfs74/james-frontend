@@ -19,10 +19,20 @@ import { Price } from '../../shared/models/price';
 </div>`,
 })
 export class PriceTableComponent {
+  @Output() onSelected: EventEmitter<Price> = new EventEmitter();
+
   @Input() items: Array<Price>;
   @Input() selectable: boolean;
-
-  @Output() onSelected: EventEmitter<Price> = new EventEmitter();
+  @Input() set highlight(value: string) {
+    if (this.items) {
+      this.items.forEach(i => {
+        i.highlight = false;
+        if (i.id === value) {
+          i.highlight = true;
+        }
+      });
+    }
+  }
 
   selectItem(index: number) {
     this.items.map((item, i) => {

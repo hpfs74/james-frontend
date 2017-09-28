@@ -1,6 +1,6 @@
 import { AuthService } from '../../auth/services/auth.service';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpModule, Response, ResponseOptions } from '@angular/http';
 import { StoreModule, Store } from '@ngrx/store';
@@ -26,22 +26,45 @@ describe('Component: AddressLookup', () => {
     required: () => 'Dit veld is verplicht',
     address: () => 'Error',
     postalCode: () => `Vul een geldige postcode`,
-    houseNumber: () => `Vul een huisnummer in`
+    houseNumber: () => `Vul een huisnummer in`,
+    stringTest: 'test'
+  };
+
+  const testAddressObj = {
+    'postcode': '2512CB',
+    'number': '2',
+    'street': 'Lutherse Burgwal',
+    'city': 's-Gravenhage',
+    'county': 's-Gravenhage',
+    'province': 'Zuid-Holland',
+    'fullname': 'Lutherse Burgwal 2 s-Gravenhage',
+    'location': {
+       'lat': 52.07535,
+       'lng': 4.309771
+    },
+    'built': 1934,
+    'house_size': 182,
+    'house_value': 0,
+    'house_info_roof_condition_text': 'Onbekend',
+    'house_info_house_type_text': '',
+    'house_info_house_use_text': 'residence',
+    'number_extended': {
+       'number_only': 2,
+       'number_letter': '',
+       'number_addition': '',
+       'number_extension': ''
+    },
+    'rooms': 0,
+    'build_type': '',
+    'isolation_glass': false,
+    'house_type': '',
+    'house_subtype': null,
+    'id': '2512CB2'
   };
 
   const addressServiceStub = {
     lookupAddress: (postalCode: string, houseNumber: string, houseNumberExtension: string) => {
-
-      const ret = new Response(
-        new ResponseOptions({
-          body: [{
-            street: 'streetname',
-            city: 'cityname',
-            Output: 'streetname in the city'
-          }]
-        }));
-
-      return Observable.of(ret);
+      return Observable.of(testAddressObj);
     }
   };
 
@@ -61,8 +84,6 @@ describe('Component: AddressLookup', () => {
   }));
 
   beforeEach(() => {
-
-
     fixture = TestBed.createComponent(AddressLookupComponent);
     comp = fixture.componentInstance;
 
@@ -77,51 +98,72 @@ describe('Component: AddressLookup', () => {
     fixture.detectChanges();
   });
 
-  it('should initialize with a formGroup', () => {
-    expect(comp.addressFormGroup).not.toBeNull();
-  });
+  describe('Form and service', () => {
+    it('should initialize with a formGroup', () => {
+      expect(comp.addressFormGroup).not.toBeNull();
+    });
 
-  // TODO: fix
-  // it('should get formGroup errors', () => {
-  //   Object.keys(comp.addressFormGroup.controls).forEach(key => {
-  //     comp.addressFormGroup.get(key).markAsTouched();
-  //   });
-  //   comp.addressFormGroup.markAsTouched();
+    it('should get error messages', () => {
+      comp.validationErrors = validationErrors;
+      expect(comp.getErrorMessage('address')).toEqual('Error');
+      expect(comp.getErrorMessage('stringTest')).toEqual('test');
+    });
 
-  //   fixture.detectChanges();
-
-  //   expect(comp.addressFormGroup.errors).not.toBeNull();
-
-  //   // const errors = comp.getErrors();
-  //   // expect(errors).toBeDefined();
-  // });
-
-  it('should get error messages', () => {
-    comp.validationErrors = validationErrors;
-    expect(comp.getErrorMessage('address')).toEqual('Error');
-  });
-
-  it('should validate an address', () => {
-    inject([AddressLookupService], (addressServiceStub) => {
-      const isValid = comp.validateAddress(comp.addressFormGroup, addressServiceStub);
-      expect(isValid).toBeUndefined();
+    it('should validate an address', () => {
+      inject([AddressLookupService], (addressServiceStub) => {
+        const isValid = comp.validateAddress(comp.addressFormGroup, addressServiceStub);
+        expect(isValid).toBeUndefined();
+      });
     });
   });
 
-  xit('should get address', (done) => {
+  describe('Async validator', () => {
+    it('should return error object on empty form values', () => {
+      inject([AddressLookupService], (addressServiceStub) => {
+        const validatorResult = null;
+        const validatorErrorResult = { address: true };
 
-    fixture.detectChanges();
+        let testObj = {
+          validatorPromise: comp.validateAddress(comp.addressFormGroup, addressServiceStub)
+        };
+        let spy = spyOn(testObj, 'validatorPromise');
 
-    comp.addressFound.subscribe((data) => {
-      expect(data).not.toBeNull();
-      expect(data.street).not.toBe('street');
-      expect(data.city).not.toBe('city');
-      done();
+        testObj.validatorPromise.then(result => {
+          expect(result).toEqual(validatorErrorResult);
+        });
+      });
     });
 
-    comp.addressFormGroup.controls['postalCode']
-      .setValue('1234AB');
-    comp.addressFormGroup.controls['houseNumber']
-      .setValue('100');
+    it('should return null on valid form values', async(() => {
+      inject([AddressLookupService], (addressServiceStub) => {
+        const validatorResult = null;
+        const validatorErrorResult = { address: true };
+
+        comp.addressFormGroup.get('postalCode').setValue('2512CB');
+        comp.addressFormGroup.get('houseNumber').setValue('22');
+
+        let testObj = {
+          validatorPromise: comp.validateAddress(comp.addressFormGroup, addressServiceStub)
+        };
+        let spy = spyOn(testObj, 'validatorPromise');
+
+        testObj.validatorPromise.then(result => {
+          expect(result).toEqual(validatorErrorResult);
+        });
+      });
+    }));
+
+    // it('should return error on empty form values', async(() => {
+    //   comp.addressFormGroup.get('postalCode').setValue('');
+    //   comp.addressFormGroup.get('houseNumber').setValue('');
+
+    //   fixture.detectChanges();
+    //   fixture.whenStable().then(() => {
+    //     fixture.detectChanges();
+    //     expect(comp.addressFormGroup.hasError('address')).toBe(true);
+    //   });
+    // }));
+
   });
+
 });

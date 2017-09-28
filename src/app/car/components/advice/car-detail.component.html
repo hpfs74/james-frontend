@@ -104,7 +104,11 @@
       <div class="car-form__coverages">
         <ng-container>
           <h2>Je dekkingswensen</h2>
-          <knx-price-table [items]="coverages" (onSelected)="onSelectCoverage($event)"></knx-price-table>
+          <knx-price-table
+            [items]="coverages"
+            [highlight]="coverageRecommendation?.recommended_value"
+            (onSelected)="onSelectCoverage($event)">
+          </knx-price-table>
         </ng-container>
 
         <div class="knx-message knx-message--error" *ngIf="isCoverageError">

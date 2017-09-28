@@ -31,3 +31,9 @@
   z-index: $z-index-chat-stream-message;
   margin-top: 15px;
 }
+
+@media (max-width: 576px) {
+  .knx-chat-stream {
+    background: $knab-white;
+  }
+}

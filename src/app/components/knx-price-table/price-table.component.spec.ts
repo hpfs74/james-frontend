@@ -29,8 +29,6 @@ describe('Component: PriceTable', () => {
     ];
 
     fixture.detectChanges();
-    // de = fixture.debugElement.query(By.css('input'));
-    // el = de.nativeElement;
   });
 
   it('should render with with 3 elements', () => {
@@ -52,10 +50,18 @@ describe('Component: PriceTable', () => {
     expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-price-item').length).toBe(4);
   });
 
-  it('should show highlight on an element', () => {
+  it('should show selected state on an element', () => {
     comp.selectItem(0);
     fixture.detectChanges();
 
     expect(fixture.debugElement.query(By.css('div.knx-price-item--selected'))).not.toBeNull();
+  });
+
+  it('should highlight an item', () => {
+    comp.highlight = 'b';
+    fixture.detectChanges();
+
+    expect(comp.items[1].highlight).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('div.knx-price-item--highlight'))).not.toBeNull();
   });
 });

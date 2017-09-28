@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, URLSearchParams } from '@angular/http';
+import { Http, Headers, Response, URLSearchParams, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthHttp } from '../../auth/services/auth-http.service';
@@ -17,10 +17,10 @@ export class CarService {
       .map(res => <Car>res.json());
   }
 
-  public getCoverageRecommendation(licensePlate: string, loan: boolean): Observable<CarCoverageRecommendation> {
+  public getCoverageRecommendation(licensePlate: string, loan: boolean = false): Observable<CarCoverageRecommendation> {
     const headers = new Headers();
     headers.append('version', 'v2');
-    return this.authHttp.post(environment.james.carCoverage, { active_loan: loan, license: licensePlate })
+    return this.authHttp.post(environment.james.carCoverage, { active_loan: !!loan, license: licensePlate }, { headers })
       .map(res => <CarCoverageRecommendation>res.json());
   }
 

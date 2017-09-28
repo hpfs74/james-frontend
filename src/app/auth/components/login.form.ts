@@ -1,6 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CXEmailValidator } from '@cx/form';
 import { BaseForm } from './../../shared/forms/base-form';
+
+import { EmailValidator } from '../../utils/email-validator';
 
 export class LoginForm extends BaseForm {
   formGroup: FormGroup;
@@ -19,7 +20,7 @@ export class LoginForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       email: [null, Validators.compose(
-        [Validators.required, CXEmailValidator]
+        [Validators.required, EmailValidator]
       )],
       password: [null, Validators.compose(
         [Validators.required]

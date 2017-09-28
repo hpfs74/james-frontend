@@ -10,7 +10,7 @@ import * as fromRoot from '../../../reducers';
 import * as car from '../../actions/car';
 
 import { CarDetailForm } from './car-detail.form';
-import { Car } from '../../models';
+import { Car, CarCoverageRecommendation } from '../../models';
 import { Price } from '../../../shared/models';
 import { Address } from '../../../profile/models';
 import { CarService } from '../../services/car.service';
@@ -28,6 +28,7 @@ export class CarDetailComponent implements OnInit {
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];
+  @Input() coverageRecommendation: CarCoverageRecommendation;
   @Input() isCoverageLoading: boolean;
   @Input() isCoverageError: boolean;
 
@@ -64,26 +65,19 @@ export class CarDetailComponent implements OnInit {
 
   @Output() licensePlateInvalid: EventEmitter<string> = new EventEmitter();
   @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
-  @Output() coverageDetailsChange: EventEmitter<any> = new EventEmitter();
+  @Output() activeLoanChange: EventEmitter<boolean> = new EventEmitter();
+
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
   @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
 
   ngOnInit() {
-    const ONCHANGE_THROTTLE = 1000;
-    const licensePlate = this.form.formGroup.get('licensePlate');
     const loan = this.form.formGroup.get('loan');
-
-    Observable.combineLatest(
-      licensePlate.valueChanges,
-      loan.valueChanges)
-      .distinctUntilChanged()
-      .throttleTime(ONCHANGE_THROTTLE)
-      .subscribe(data => {
-        if (licensePlate.valid && loan.valid) {
-          this.coverageDetailsChange.emit(this.form.formGroup.value);
-        }
-      });
+    loan.valueChanges.subscribe((value) => {
+      if (value !== null && loan.valid) {
+        this.activeLoanChange.emit(value);
+      }
+    });
   }
 
   onFocus(controlKey) {
