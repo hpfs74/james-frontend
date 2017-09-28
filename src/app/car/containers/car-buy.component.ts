@@ -109,7 +109,7 @@ export class CarBuyComponent implements OnInit {
         label: 'Check',
         nextButtonLabel: 'Naar betalingsgegevens',
         backButtonLabel: 'Terug',
-        onShowStep: () => this.initForm('car.buy.check'),
+        onShowStep: () => this.initCheckForm('car.buy.check'),
         onBeforeNext: this.submitForm.bind(this, this.checkForm)
       },
       {
@@ -141,8 +141,21 @@ export class CarBuyComponent implements OnInit {
 
   initForm(messageKey: string) {
     FormUtils.scrollToForm('form');
-    this.store$.dispatch(new assistant.ClearAction);
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: messageKey }));
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: messageKey, clear: true }));
+  }
+
+  initCheckForm(messageKey: string) {
+    FormUtils.scrollToForm('form');
+    this.store$.select(fromInsurance.getSelectedInsurance)
+      .subscribe((insurance) => {
+        const insuranceName = insurance._embedded.insurance.insurance_brand || null;
+        if (insuranceName) {
+          this.store$.dispatch(new assistant.AddCannedMessage({
+            key: messageKey,
+            value: insuranceName,
+            clear: true }));
+        }
+      });
   }
 
   initSummaryForm(message: string) {

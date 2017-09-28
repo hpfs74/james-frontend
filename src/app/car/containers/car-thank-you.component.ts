@@ -50,5 +50,8 @@ export class CarThankYouComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.thankyou', clear: true }));
+    if (this.email) {
+      this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.finalEmail', value: this.email}));
+    }
   }
 }

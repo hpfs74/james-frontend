@@ -17,5 +17,23 @@ describe('Class: Assistant', () => {
       expect(config.car.info.coverage.advice({ id: '', badge: '', features: [], header: 'goede' }))
         .toBe(expected);
     });
+
+    it('should map coverage types', () => {
+      expect(config.car.info.CL).toBeDefined();
+      expect(config.car.info.CLC).toBeDefined();
+      expect(config.car.info.CAR).toBeDefined();
+    });
+
+    it('should have a car not found message', () => {
+      expect(config.car.error.carNotFound).toBeDefined();
+    });
+
+    it('should have a car check message with insurer brand', () => {
+      expect(config.car.buy.check('ASR')).toContain('ASR');
+    });
+
+    it('should have a thank you message with an email', () => {
+      expect(config.car.buy.finalEmail('hello@mail.com')).toContain('hello@mail.com');
+    });
   });
 });

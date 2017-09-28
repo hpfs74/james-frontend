@@ -94,7 +94,7 @@ export class CarCheckForm extends BaseForm {
       },
       driver: {
         formControlName: 'driver',
-        label: 'Is jou, de regelmatige bestuurder of kentekenhouder de afgelopen 8 jaar de ' +
+        label: 'Is jou, de regelmatige bestuurder of kentekenhouder, de afgelopen 8 jaar de ' +
         'rijbevoegdheid (geheel of voorwaardelijk) ontzegd?',
         formControl: this.formGroup.get('driver'),
         validationErrors: this.validationErrors,
