@@ -160,7 +160,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         label: 'Aanvragen',
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Verzekering aanvragen',
-        nextButtonClass: 'knx-button knx-button--cta knx-button--arrow',
+        nextButtonClass: 'knx-button knx-button--cta knx-button--extended',
         onShowStep: this.onShowSummary.bind(this),
         onBeforeNext: this.startBuyFlow.bind(this)
       }
