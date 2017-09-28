@@ -1,16 +1,8 @@
-/**
- * @description
- * Class definition for address type used by user profile
- */
-export interface NumberExtended {
-  number_only: number;
-  number_letter: string;
-  number_addition: string;
-  number_extension: string;
-}
+import { NumberExtended } from './number-extended';
 
 export class Address {
-  _id: string;
+  _id?: string;
+  id?: string;
   postcode?: string;
   number: string;
   number_extended?: NumberExtended;

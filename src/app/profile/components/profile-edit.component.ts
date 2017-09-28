@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProfileForm } from './profile.form';
-import { Profile, Address } from '../models';
+import { Profile } from '../models';
+import { Address } from '../../address/models';
 import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({
@@ -56,9 +57,8 @@ import * as FormUtils from '../../utils/base-form.utils';
     <div class="row">
       <div class="col-md-8 col-md-offset-4">
         <knx-address-lookup
-          (addressFound)="updateAddress($event)"
-          [addressFormGroup]="form.addressForm"
-          [validationErrors]="form.validationErrors">
+          [addressForm]="form.addressForm"
+          (addressFound)="updateAddress($event)">
         </knx-address-lookup>
       </div>
     </div>
@@ -81,6 +81,7 @@ import * as FormUtils from '../../utils/base-form.utils';
 
 export class ProfileEditComponent {
   @Input() form: ProfileForm;
+
   @Input() set profile(value: Profile) {
     if (value) {
       const patchObj = {
@@ -98,12 +99,12 @@ export class ProfileEditComponent {
         .filter(key => patchObj[key] !== null));
 
       if (value.number && value.postcode) {
-        this.form.addressForm.patchValue({
+        this.form.addressForm.formGroup.patchValue({
           postalCode: value.postcode,
           houseNumber: value.number,
           houseNumberExtension: value.number_extended ? value.number_extended.number_letter : ''
         }, { emitEvent: false });
-        FormUtils.validateForm(this.form.addressForm);
+        FormUtils.validateForm(this.form.addressForm.formGroup);
       }
     }
   }
@@ -133,7 +134,7 @@ export class ProfileEditComponent {
     if (this.form.formGroup.valid) {
       this.formSaved$.emit(Object.assign({},
         this.form.formGroup.value,
-        this.form.addressForm.value,
+        this.form.addressForm.formGroup.value,
         { address: this.address }));
     }
   }

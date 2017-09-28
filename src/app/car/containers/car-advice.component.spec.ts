@@ -28,6 +28,7 @@ import * as compare from '../../car/actions/compare';
 import * as coverage from '../../car/actions/coverage';
 
 import { SharedModule } from '../../shared.module';
+import { AddressModule } from '../../address/address.module';
 import { ContentService } from '../../content.service';
 import { CarAdviceComponent } from './car-advice.component';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
@@ -38,8 +39,8 @@ import { CarDetailForm } from '../components/advice/car-detail.form';
 })
 export class TestHostComponent {
   @ViewChild(CarAdviceComponent)
-  public targetComponent: CarAdviceComponent;
-  public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
+  targetComponent: CarAdviceComponent;
+  formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
 }
 
 describe('Component: CarAdviceComponent', () => {
@@ -105,7 +106,6 @@ describe('Component: CarAdviceComponent', () => {
     it('should init child component forms', () => {
       expect(comp.targetComponent.carDetailForm).toBeDefined();
       expect(comp.targetComponent.carDetailForm.formGroup).toBeDefined();
-      expect(comp.targetComponent.carDetailForm.addressForm).toBeDefined();
       expect(comp.targetComponent.carExtrasForm).toBeDefined();
     });
 
@@ -135,6 +135,15 @@ describe('Component: CarAdviceComponent', () => {
       expect(carExtraForm.formConfig.roadAssistance).toBeDefined();
       expect(carExtraForm.formConfig.ownRisk).toBeDefined();
       expect(carExtraForm.formConfig.kmPerYear).toBeDefined();
+    });
+
+    it('should bind async validator for car info', () => {
+      comp.targetComponent.ngAfterViewChecked();
+      fixture.detectChanges();
+
+      let licenseInput = comp.targetComponent.carDetailForm.formGroup.get('licensePlate');
+      expect(licenseInput).toBeDefined();
+      expect(licenseInput.validator.length).toBeGreaterThan(0);
     });
   });
 
@@ -179,5 +188,23 @@ describe('Component: CarAdviceComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
   });
+
+  // describe('Car Advice Flow', () => {
+  //   it('should disable next button on invalid form', () => {
+
+  //   });
+
+  //   it('should enable next button on valid form', () => {
+
+  //   });
+
+  //   it('should load car info', () => {
+
+  //   });
+
+  //   it('should show insurance result', () => {
+
+  //   });
+  // });
 
 });

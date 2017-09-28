@@ -9,8 +9,7 @@ import { Car, CarInsurance, CarCoverageRecommendation, CarCompare, Proposal } fr
 
 @Injectable()
 export class CarService {
-  constructor(private authHttp: AuthHttp) {
-  }
+  constructor(private authHttp: AuthHttp) {}
 
   public getByLicense(licensePlate: string): Observable<Car> {
     return this.authHttp.get(`${environment.james.cars}/${licensePlate}`)

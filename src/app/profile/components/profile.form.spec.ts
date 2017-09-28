@@ -16,10 +16,14 @@ describe('Form: Profile', () => {
     expect(form.formGroup.get('birthDate')).toBeDefined();
     expect(form.formGroup.get('pushNotifications')).toBeDefined();
     expect(form.formGroup.get('emailNotifications')).toBeDefined();
+
+    expect(form.addressForm).toBeDefined();
+    expect(form.addressForm.formGroup).toBeDefined();
   });
 
   it('should init the form options', () => {
     expect(form.formConfig).toBeDefined();
+    expect(form.addressForm.formGroup).toBeDefined();
     expect(Object.keys(form.formConfig).length).toBe(7);
   });
 

@@ -50,6 +50,7 @@ export class CoverageEffects {
       .ofType(coverage.CAR_COVERAGE_SET_ACTIVE_LOAN)
       .map((action: coverage.CarCoverageSetActiveLoan) => action.payload)
       .withLatestFrom(this.store$.select(fromCar.getCarLicense))
+      .filter(([payload, license]) => license !== null)
       .switchMap(([payload, license]) => {
         return Observable.of({
           type: coverage.CAR_COVERAGE_REQUEST,

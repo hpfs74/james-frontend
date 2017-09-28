@@ -24,6 +24,7 @@ import { SharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
+import { AddressModule } from './address/address.module';
 
 export function ContentLoader(contentService: ContentService) {
   return () => contentService.loadFiles();
@@ -56,6 +57,8 @@ export function ContentLoader(contentService: ContentService) {
     CoreModule.forRoot(),
 
     InsuranceModule.forRoot(),
+
+    AddressModule.forRoot(),
 
     AppShellModule.runtime(),
   ],

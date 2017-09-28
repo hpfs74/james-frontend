@@ -10,6 +10,7 @@ import * as fromRoot from '../../reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromCar from '../reducers';
+import * as fromAddress from '../../address/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 // Core actions
@@ -30,7 +31,9 @@ import * as profile from '../../profile/actions/profile';
 
 import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
-import { Profile, Address } from '../../profile/models';
+import { Profile } from '../../profile/models';
+import { Address } from '../../address/models';
+import { AddressForm } from '../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
 
@@ -52,14 +55,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   carDetailSubmitted = false;
   currentStep: number;
   coverages: Array<Price>;
-  insurances: Observable<Array<CarInsurance>>;
-  car: Car;
-  address: Address;
+
+  car: Car; // TODO: use ngrx store
+  address: Address; // TODO: use ngrx store
+
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   showStepBlock = false;
 
   // State of the advice forms data
+  address$: Observable<Address>;
   advice$: Observable<any>;
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
@@ -72,6 +77,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   // Forms
   carDetailForm: CarDetailForm;
+  addressForm: AddressForm;
   carExtrasForm: CarExtrasForm;
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
@@ -94,6 +100,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
+    this.address$ = this.store$.select(fromAddress.getAddress);
     this.insurances$ = this.getCompareResultCopy();
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
@@ -104,15 +111,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // initialize forms
     const formBuilder = new FormBuilder();
     this.carDetailForm = new CarDetailForm(formBuilder);
+    this.addressForm = new AddressForm(formBuilder);
     this.carExtrasForm = new CarExtrasForm(formBuilder);
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
         if (currentAdvice && this.address) {
-          this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
-            this.address.postcode = currentProfile.postcode;
-            this.address.number = currentProfile.number;
-          });
+          // do not pre-fill address
+          // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
+          //   this.address.postcode = currentProfile.postcode;
+          //   this.address.number = currentProfile.number;
+          // });
 
         } else if (!currentAdvice) {
           this.store$.dispatch(new advice.AddAction({
@@ -173,7 +182,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   submitDetailForm() {
     const detailForm = this.carDetailForm.formGroup;
-    const addressForm = this.carDetailForm.addressForm;
+    const addressForm = this.addressForm.formGroup;
 
     FormUtils.validateForm(detailForm);
     FormUtils.validateForm(addressForm);
@@ -186,10 +195,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Hide error summary
     this.carDetailSubmitted = false;
 
-    this.store$.dispatch(new profile.UpdateAction({
-      gender: detailForm.value.gender,
-      date_of_birth: detailForm.value.birthDate
-    }));
+    // no implicit updating of profile
+    // this.store$.dispatch(new profile.UpdateAction({
+    //   gender: detailForm.value.gender,
+    //   date_of_birth: detailForm.value.birthDate
+    // }));
 
     const compareObj: CarCompare = {
       active_loan: !!detailForm.value.loan,
@@ -219,7 +229,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     })));
 
     return this.store$.select(fromInsurance.getSelectedAdvice)
-      // .take(1) => prevents carExtras from triggering new compare action
       .map((advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
       });
@@ -257,8 +266,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onAddressChange(address: Address) {
-    this.store$.dispatch(new profile.UpdateAction(address));
-
+    // this.store$.dispatch(new profile.UpdateAction(address));
     // TODO: not in ngrx form should be this.store.select('address') something
     this.address = address;
   }
@@ -354,7 +362,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     let that = this;
     FormUtils.scrollToForm('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
-
 
     this.store$.select(fromInsurance.getSelectedInsurance).take(1)
       .subscribe(selectedInsurance => {
