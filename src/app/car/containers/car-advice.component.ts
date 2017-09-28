@@ -33,6 +33,7 @@ import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { Profile } from '../../profile/models';
 import { Address } from '../../address/models';
+import { AddressForm } from '../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
 
@@ -76,6 +77,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   // Forms
   carDetailForm: CarDetailForm;
+  addressForm: AddressForm;
   carExtrasForm: CarExtrasForm;
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
@@ -109,6 +111,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // initialize forms
     const formBuilder = new FormBuilder();
     this.carDetailForm = new CarDetailForm(formBuilder);
+    this.addressForm = new AddressForm(formBuilder);
     this.carExtrasForm = new CarExtrasForm(formBuilder);
 
     // start new advice only if there is no current one
@@ -179,7 +182,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   submitDetailForm() {
     const detailForm = this.carDetailForm.formGroup;
-    const addressForm = this.carDetailForm.addressForm;
+    const addressForm = this.addressForm.formGroup;
 
     FormUtils.validateForm(detailForm);
     FormUtils.validateForm(addressForm);

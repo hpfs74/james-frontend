@@ -39,8 +39,8 @@ import { CarDetailForm } from '../components/advice/car-detail.form';
 })
 export class TestHostComponent {
   @ViewChild(CarAdviceComponent)
-  public targetComponent: CarAdviceComponent;
-  public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
+  targetComponent: CarAdviceComponent;
+  formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
 }
 
 describe('Component: CarAdviceComponent', () => {
@@ -106,7 +106,6 @@ describe('Component: CarAdviceComponent', () => {
     it('should init child component forms', () => {
       expect(comp.targetComponent.carDetailForm).toBeDefined();
       expect(comp.targetComponent.carDetailForm.formGroup).toBeDefined();
-      expect(comp.targetComponent.carDetailForm.addressForm).toBeDefined();
       expect(comp.targetComponent.carExtrasForm).toBeDefined();
     });
 

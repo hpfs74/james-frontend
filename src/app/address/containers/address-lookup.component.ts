@@ -7,15 +7,15 @@ import * as fromAddress from '../reducers';
 import * as address from '../actions/address';
 
 import { AddressComponent } from '../components/address.component';
-import { postalCodeMask } from '../../utils/base-form.utils';
+import { AddressForm } from '../components/address.form';
 import { AddressLookup, Address } from '../models';
 
 @Component({
   selector: 'knx-address-lookup',
   template: `
     <knx-address
-      [addressFormGroup]="addressFormGroup"
-      [validationErrors]="validationErrors"
+      [addressFormGroup]="addressForm.formGroup"
+      [validationErrors]="addressForm.validationErrors"
       [asyncValidator]="getAddress$"
       [addressPreview]="addressPreview$ | async"
       (runValidation)="validateAddress($event)">
@@ -23,17 +23,13 @@ import { AddressLookup, Address } from '../models';
   `
 })
 export class AddressLookupComponent implements OnInit {
-  @Input() addressFormGroup: FormGroup;
-  @Input() validationErrors: any;
-
+  @Input() addressForm: AddressForm;
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
 
   addressPreview$: Observable<string>;
   getAddress$: Observable<any>;
 
-  mask = postalCodeMask;
-
-  constructor(private store$: Store<fromAddress.State>) { }
+  constructor(private store$: Store<fromAddress.State>) {}
 
   ngOnInit() {
     this.addressPreview$ = this.store$.select(fromAddress.getAddressFullname);
@@ -44,27 +40,6 @@ export class AddressLookupComponent implements OnInit {
       }
       return address ? null : { address: true };
     });
-  }
-
-  public getErrors(): Array<string> {
-    if (this.addressFormGroup.errors) {
-      return Object
-        .keys(this.addressFormGroup.errors)
-        .map(error => this.getErrorMessage(error));
-    }
-    return null;
-  }
-
-  public getErrorMessage(errorCode: string): string {
-    if (this.validationErrors && this.validationErrors[errorCode]) {
-      const errorMessage = this.validationErrors[errorCode];
-
-      if (typeof errorMessage === 'string') {
-        return errorMessage;
-      } else {
-        return errorMessage(this.validationErrors[errorCode]);
-      }
-    }
   }
 
   validateAddress(value: AddressLookup) {

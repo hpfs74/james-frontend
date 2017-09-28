@@ -10,6 +10,7 @@ import * as fromRoot from '../../../reducers';
 import * as car from '../../actions/car';
 
 import { CarDetailForm } from './car-detail.form';
+import { AddressForm } from '../../../address/components/address.form';
 import { Car, CarCoverageRecommendation } from '../../models';
 import { Price } from '../../../shared/models';
 import { Address } from '../../../address/models';
@@ -24,6 +25,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
 })
 export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
+  @Input() addressForm: AddressForm;
   @Input() car: Car;
   @Input() userProfile: any;
   @Input() config: any;
@@ -49,7 +51,7 @@ export class CarDetailComponent implements OnInit {
         value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
       );
 
-      this.form.addressForm.patchValue(Object.assign({}, {
+      this.addressForm.formGroup.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
         houseNumber: value.address ? FormUtils.getNumbers(value.address.number) : null,
         houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null
@@ -58,7 +60,7 @@ export class CarDetailComponent implements OnInit {
       // give address-lookup component time to set AsyncValidators before validate it
       setTimeout(() => {
         FormUtils.updateAndValidateControls(this.form.formGroup, value);
-        FormUtils.updateAndValidateControls(this.form.addressForm, value);
+        FormUtils.updateAndValidateControls(this.addressForm.formGroup, value);
       });
     }
   }

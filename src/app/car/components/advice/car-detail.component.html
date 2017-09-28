@@ -86,8 +86,7 @@
       </div>
 
       <knx-address-lookup
-        [addressFormGroup]="form.addressForm"
-        [validationErrors]="form.validationErrors"
+        [addressForm]="addressForm"
         (addressFound)="onAddressFound($event)">
       </knx-address-lookup>
 

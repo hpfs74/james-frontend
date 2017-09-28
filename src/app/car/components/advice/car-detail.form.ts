@@ -7,19 +7,15 @@ import { LicensePlateValidator } from '../../../components/knx-input-licenseplat
 
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
-  formConfig: any; // TODO: refactor to store options here instead of inside template
-  addressForm: FormGroup;
+  formConfig: any;
 
-  public validationErrors = {
+  validationErrors = {
     required: () => 'Dit veld is verplicht',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
     licensePlate: () => `Vul een geldig kenteken in`,
     licensePlateRDC: () => `Vul een geldig (geregistreerd) kenteken in`,
     birthDate: () => 'Vul een geldige geboortedatum in',
-    postalCode: () => `Vul een geldige postcode in`,
     gender: () => `Selecteer je geslacht`,
-    address: () => `Dit adres bestaat niet. Probeer het nog eens`,
-    houseNumber: () => `Vul een huisnummer in`,
     claimFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
   };
 
@@ -52,8 +48,6 @@ export class CarDetailForm extends BaseForm {
       gender: [null, Validators.required],
       coverage: [null, Validators.required]
     });
-
-    this.addressForm = this.createAddress(this.fb);
 
     this.formConfig = {
       licensePlate: {

@@ -2,23 +2,21 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { CXPostalCodeValidator } from '@cx/form-control';
 
 import { BaseForm } from '../../shared/forms/base-form';
+import { AddressForm } from '../../address/components/address.form';
 import { nameInitialMask } from '../../utils/base-form.utils';
 import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';
 
 export class ProfileForm extends BaseForm {
   formGroup: FormGroup;
+  addressForm: AddressForm;
   formConfig: any;
-  addressForm: FormGroup;
 
   public validationErrors = {
     required: () => 'Dit veld is verplicht',
     firstName: () => 'Vul een voornaam van maximaal 50 karakters in',
     lastName: () => 'Vul een achternaam van maximaal 50 karakters in',
-    birthDate: () => 'Vul een geldige geboortedatum in',
-    postalCode: () => `Vul een geldige postcode in`,
-    address: () => `Vul een geldige postcode en huisnummer combinatie in`,
-    houseNumber: () => `Vul een huisnummer in`,
+    birthDate: () => 'Vul een geldige geboortedatum in'
   };
 
   constructor(private fb: FormBuilder) {
@@ -34,7 +32,7 @@ export class ProfileForm extends BaseForm {
       emailNotifications: [null],
     });
 
-    this.addressForm = this.createAddress(this.fb);
+    this.addressForm = new AddressForm(fb);
 
     this.formConfig = {
       avatar: {

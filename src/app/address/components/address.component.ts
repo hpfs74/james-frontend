@@ -28,52 +28,34 @@ export class AddressComponent implements AfterViewChecked {
     this.addressFormGroup.setAsyncValidators((formControl) => this.validateAddress(formControl));
   }
 
-  public getErrors(): Array<string> {
-    if (this.addressFormGroup.errors) {
-      return Object
-        .keys(this.addressFormGroup.errors)
-        .map(error => this.getErrorMessage(error));
-    }
-    return null;
+  getErrors(): Array<string> {
+    return this.addressFormGroup.errors ?
+      Object.keys(this.addressFormGroup.errors).map(error => this.getErrorMessage(error))
+      : null;
   }
 
-  public getErrorMessage(errorCode: string): string {
+  getErrorMessage(errorCode: string): string {
     if (this.validationErrors && this.validationErrors[errorCode]) {
       const errorMessage = this.validationErrors[errorCode];
 
-      if (typeof errorMessage === 'string') {
-        return errorMessage;
-      } else {
-        return errorMessage(this.validationErrors[errorCode]);
-      }
+      return (typeof errorMessage === 'string') ?
+        errorMessage : errorMessage(errorMessage);
     }
   }
 
   validateAddress(formGroup: AbstractControl): Observable<any> {
-    const postalCode = formGroup.get('postalCode').value;
-    const houseNumber = formGroup.get('houseNumber').value;
-    const houseNumberExtension = formGroup.get('houseNumberExtension').value;
+    const postalCodeControl = formGroup.get('postalCode');
+    const houseNumberControl = formGroup.get('houseNumber');
 
-    if (!formGroup.get('postalCode').valid || !formGroup.get('houseNumber').valid) {
+    if (!postalCodeControl.valid || !houseNumberControl.valid) {
       return Observable.of({ address: true });
     }
 
     this.runValidation.emit({
-      postalCode: postalCode,
-      houseNumber: houseNumber
+      postalCode: postalCodeControl.value,
+      houseNumber: houseNumberControl.value
     });
-    // this.store$.dispatch(new address.GetAddress({
-    //   postalCode: postalCode,
-    //   houseNumber: houseNumber
-    // }));
 
     return this.asyncValidator;
-    // return this.store$.select(fromAddress.getAddress)
-    //   .map((address) => {
-    //     if (address) {
-    //       this.addressFound.emit(address);
-    //     }
-    //     return address ? null : { address: true };
-    //   });
   }
 }
