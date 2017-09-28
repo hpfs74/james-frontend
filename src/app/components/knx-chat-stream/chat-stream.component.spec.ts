@@ -14,7 +14,7 @@ describe('Component: ChatStreamComponent', () => {
 
   const options: ChatStreamOptions = {
     avatar: {
-      name: 'Marjolein',
+      name: 'Lisa',
       title: 'Expert autoverzekeringen'
     }
   };
@@ -40,7 +40,7 @@ describe('Component: ChatStreamComponent', () => {
   it('should show an avatar', () => {
     expect(el).not.toBeNull();
 
-    expect(comp.options.avatar.name).toEqual('Marjolein');
+    expect(comp.options.avatar.name).toEqual('Lisa');
     expect(comp.options.avatar.title).toEqual('Expert autoverzekeringen');
 
     const avatarEl = el.getElementsByTagName('knx-avatar');
