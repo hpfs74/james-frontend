@@ -5,11 +5,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./avatar.component.scss'],
   template: `
   <div class="knx-avatar">
-      <img class="knx-avatar__image" src="/assets/images/avatars/avatar.png">
+    <img class="knx-avatar__image" src="/assets/images/avatars/avatar.png">
   </div>
   `
 })
-export class AvatarComponent {
-  @Input() name: string;
-  @Input() title: string;
-}
+export class AvatarComponent {}
