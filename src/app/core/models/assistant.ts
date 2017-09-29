@@ -43,31 +43,34 @@ export class AssistantConfig {
       coverOccupants: '',
       advice: {
         result: 'Vergelijk de 4 beste deals van alle 42 vergeleken verzekeringen',
-        option: 'Selecteer extra opties voor het beste advies',
+        option: 'Selecteer deze extra opties als je het best passende advies wil ontvangen!',
         next: 'Wat wil je doen?'
       },
       review: {
         unsupported: `Dit zou jouw nieuwe verzekering kunnen zijn! Bekijk alle gegevens even goed om
           een goed beeld te krijgen van de verzekering.`,
-        title: `In 3 minuten doe je een aanvraag:`,
+        title: `In 3 minuten vraag je een verzekering aan:`,
         steps: `
-        1. Check je gegevens <br>
-        2. Vul je autogegevens aan <br>
-        3. Beantwoord slotvragen <br>
+        1. Check je persoonsgegevens <br>
+        2. Vul je autogegevens in <br>
+        3. Beantwoord de slotvragen <br>
         4. Vul je betaalgegevens in <br>
-        5. Aanvraag naar de verzekeraar <br>
-        6. Akkoord? Zeg je oude verzekering op.`
+        5. Aanvraag wordt verstuurd <br>
+        6. Akkoord? Zeg je oude verzekering op!`
       }
     },
     error: {
       carNotFound: 'Ik kan je auto niet vinden. Heb je het juiste kenteken ingevoerd?'
     },
     buy: {
-      fill: 'We hebben nog een paar gegevens van je nodig om je aanvraag te regelen. Kun je dit lijstje aanvullen?',
-      check: 'Je hebt gekozen voor Avéro Achmea. Avéro Achmea heeft nog een paar vragen voor je voordat we je aanvraag kunnen versturen.',
+      fill: 'We hebben nog wat gegevens nodig om je aanvraag te regelen. Kun je dit lijstje invullen?',
+      check: (insurer: string) => `Je hebt gekozen voor ${insurer}. ${insurer} heeft nog enkele vragen voor je,
+        voordat de aanvraag verstuurd kan worden.`,
       payment: 'Nog heel even! Van welk rekeningnummer mag je premie straks worden afgeschreven?',
-      summary: 'Voilà! Een overzicht van de verzekering die we voor je gaan aanvragen. Klopt alles zo?',
-      thankyou: 'Je verzekering is aangevraagd. Nu is het tijd om te relaxen en te genieten!'
+      summary: 'Bijna klaar! Van welk rekeningnummer mag je premie straks afgeschreven worden?',
+      thankyou: `Gefeliciteerd met je nieuwe autoverzekering!  De polis van je autoverzekering is verstuurd
+      en wordt binnen 3 dagen goedgekeurd. We houden je op de hoogte!`,
+      finalEmail: (email: string) => `Een kopie van de polis is verstuurd naar: ${email}`
     }
   };
 }

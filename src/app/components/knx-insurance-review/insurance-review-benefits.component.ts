@@ -18,12 +18,8 @@ import { Component, Input } from '@angular/core';
         <div class="knx-insurance-review-benefits__thumbs-up-guy"></div>
 
         <ul>
-          <li>
-            <i class="knx-icon-check"></i> Met de Knab Verzekeren App altijd de nodige informatie bij de hand.</li>
-          <li>
-            <i class="knx-icon-check"></i> Eén overzicht van al je verzekeringen.</li>
-          <li>
-            <i class="knx-icon-check"></i> Eén overzicht van al je verzekeringen.</li>
+          <li><i class="knx-icon-check"></i> Met de Knab Verzekeren App altijd de nodige informatie bij de hand.</li>
+          <li><i class="knx-icon-check"></i> Eén overzicht voor al je verzekeringen.</li>
         </ul>
       </div>
     </ng-template>
