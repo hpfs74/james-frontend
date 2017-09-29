@@ -29,10 +29,10 @@ import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 
 
-import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { Profile } from '../../profile/models';
 import { Address } from '../../address/models';
+import { DefaultCoverages } from '../models/coverage-items';
 import { AddressForm } from '../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
@@ -82,7 +82,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
 
-  constructor(private store$: Store<fromRoot.State>, private contentService: ContentService) { }
+  constructor(private store$: Store<fromRoot.State>) { }
 
   ngAfterViewChecked() {
     // bind async validator for car info
@@ -147,7 +147,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       });
 
     this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
-    this.coverages = this.contentService.getContentObject().car.coverages;
+    this.coverages = DefaultCoverages;
 
     this.currentStep = 0;
     this.formSteps = [

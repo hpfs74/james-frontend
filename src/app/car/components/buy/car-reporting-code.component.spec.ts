@@ -15,13 +15,7 @@ export class TestHostComponent {
   @ViewChild(CarReportingCodeComponent)
   public targetComponent: CarReportingCodeComponent;
   public formFromHost: CarReportingCodeForm = new CarReportingCodeForm(
-    new FormBuilder(), [
-      {
-        value: 'SCM5',
-        title: 'Test',
-        description: 'This is a description'
-      }
-    ]);
+    new FormBuilder());
   public profileFromHost: any;
 }
 
@@ -80,6 +74,6 @@ describe('Component: CarReportingCodeComponent', () => {
     const ctrl = comp.formFromHost.formGroup.get('securityClass').setValue('SCM5');
     fixture.detectChanges();
     expect(comp.targetComponent.selectedSecurityClass.value).toEqual('SCM5');
-    expect(comp.targetComponent.selectedSecurityClass.title).toEqual('Test');
+    expect(comp.targetComponent.selectedSecurityClass.title).toEqual('Klasse 5');
   });
 });

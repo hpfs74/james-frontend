@@ -16,7 +16,6 @@ import { Feature } from '../../shared/models';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 import { LoginModalComponent } from '../../auth/components/login-modal.component';
-import { ContentService } from '../../content.service';
 import { NavigationService } from '../services';
 
 @Component({

@@ -16,12 +16,12 @@ export class CarReportingCodeForm extends BaseForm {
     reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
   };
 
-  constructor(private fb: FormBuilder, private securityClassContent) {
+  constructor(private fb: FormBuilder) {
     super();
 
     this.infoMessages = {
       reportingCode: `
-        <img class="image-reportingcode" src="/assets/images/reportingcode.png">
+        <img class='image-reportingcode' src='/assets/images/reportingcode.png'>
         Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.
         De verzekeraar geeft dit door aan de RDW (Rijksdienst voor het Wegverkeer). De RDW houdt zo bij of alle
         auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
@@ -31,7 +31,45 @@ export class CarReportingCodeForm extends BaseForm {
         <p>Bij diefstal krijg je de dagwaarde terug van de verzekering.</p>`
     };
 
-    this.securityClasses = securityClassContent;
+    /* tslint:disable */
+    this.securityClasses = [
+      {
+        value: 'SCM_NONE',
+        title: 'Weet ik niet / Geen',
+        description: 'Ik weet niet welke klasse alarmsysteem ik heb. Of ik heb geen alarmsysteem.'
+      },
+      {
+        value: 'SCM1',
+        title: 'Klasse 1',
+        short: 'Standaard alarmsysteem',
+        description: 'Sinds 1998 hebben auto\'s minimaal een klasse 1 beveiliging. Dat betekent dat de auto een startonderbreking heeft die de startmotor en brandstofvoorziening blokkeert.'
+      },
+      {
+        value: 'SCM2',
+        title: 'Klasse 2',
+        short: 'Alarmsysteem met startonderbreker',
+        description: 'Alarmsysteem met startonderbreker. De auto heeft startonderbreking. En wordt er gerommeld aan je auto? Dan gaat je alarm af en je lichten gaan knipperen.'
+      },
+      {
+        value: 'SCM3',
+        title: 'Klasse 3',
+        short: 'Uitgebreid met hellingdetectie',
+        description: 'De auto heeft startonderbreking met alarm. Klasse 3 heeft ook hellingdetectie: het alarm gaat af zodra je auto wordt opgetild.'
+      },
+      {
+        value: 'SCM4',
+        title: 'Klasse 4',
+        short: 'Uitgebreid met voertuigvolgsysteem',
+        description: 'De auto heeft startonderbreking met alarm. Het alarm gaat ook af als je auto wordt opgetild. Klasse 4 heeft een voertuigvolgsysteem dat de positie van je auto doorgeeft als de auto beweegt of als jij diefstal meldt.'
+      },
+      {
+        value: 'SCM5',
+        title: 'Klasse 5',
+        short: 'Uitgebreid met voertuigvolgsysteem dat direct in werking gaat',
+        description: 'Uitgebreid met voertuigvolgsysteem dat direct in werking gaat De auto heeft startonderbreking met alarm. Het alarm gaat ook af als je auto wordt opgetild. Klasse 5 heeft een voertuigvolgsysteem dat direct aangaat als het alarm afgaat.'
+      }
+    ];
+    /* tslint:enable */
 
     this.formGroup = this.fb.group({
       reportingCode: [null,

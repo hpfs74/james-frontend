@@ -1,9 +1,6 @@
 import { CarProposalHelper } from './proposal';
 
 describe('CarProposalHelper', () => {
-  xit('should convert object to proposal request', () => {
-
-  });
 
   it('should convert final questions to request format', () => {
     let helper = new CarProposalHelper();

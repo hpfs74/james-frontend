@@ -47,6 +47,6 @@ export function reducer(state = initialState, action: Action): State {
 }
 
 export const getCoverage = (state: State) => state.coverage;
-export const GetActiveLoan = (state: State) => state.activeLoan;
+export const getActiveLoan = (state: State) => state.activeLoan;
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;

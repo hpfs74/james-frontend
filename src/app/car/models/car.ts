@@ -4,6 +4,7 @@
  * through the knab-vehicle.
  */
 export class Car {
+  _id?: string;
   license: string;
   vin: string;
   reporting_code: string;

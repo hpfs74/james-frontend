@@ -32,10 +32,10 @@ export class ErrorEffects {
     address.GetAddressFailure |
     profile.LoadFailAction |
     profile.SaveFailAction |
-    car.GetInfoFailAction |
-    car.BuyFailAction |
+    car.GetInfoFailureAction |
+    car.BuyFailureAction |
     compare.LoadCarFailAction |
-    coverage.CarCoverageFailAction |
+    coverage.CarCoverageFailureAction |
     insurances.AddInsuranceFailAction |
     insurances.LoadFailAction>(
     auth.REFRESH_FAILURE,

@@ -10,7 +10,7 @@ import { Address } from '../models';
 
 import * as address from '../actions/address';
 
-describe('My Effects', () => {
+describe('AddressEffects', () => {
   let effects: AddressEffects;
   let actions: Observable<any>;
   let addressService: any;
@@ -28,7 +28,6 @@ describe('My Effects', () => {
     });
 
     addressService = TestBed.get(AddressService);
-
     effects = TestBed.get(AddressEffects);
   });
 

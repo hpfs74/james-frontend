@@ -21,7 +21,7 @@ export class GetInfoCompleteAction implements Action {
   constructor(public payload: Car) { }
 }
 
-export class GetInfoFailAction implements Action {
+export class GetInfoFailureAction implements Action {
   readonly type = GET_INFO_FAILURE;
 
   constructor(public payload: any) { }
@@ -39,7 +39,7 @@ export class BuyCompleteAction implements Action {
   constructor(public payload: any) { }
 }
 
-export class BuyFailAction implements Action {
+export class BuyFailureAction implements Action {
   readonly type = BUY_FAILURE;
 
   constructor(public payload: any) { }
@@ -49,7 +49,7 @@ export class BuyFailAction implements Action {
 export type All
   = GetInfoAction
   | GetInfoCompleteAction
-  | GetInfoFailAction
+  | GetInfoFailureAction
   | BuyAction
   | BuyCompleteAction
-  | BuyFailAction;
+  | BuyFailureAction;
