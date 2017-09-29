@@ -3,13 +3,8 @@ import { argv } from 'yargs';
 
 require('dotenv').config();
 
-// Would be passed to script like this:
-// `ts-node set-env.ts --environment=dev`
-// we get it from yargs's argv object
+// get passed argument, for example `ts-node set-env.ts --environment=dev`
 const environment = argv.environment;
-const isProd = environment === 'prod';
-const defaultTarget = './src/environments/environment.ts';
-const targetPath = isProd ? `./src/environments/environment.prod.ts` : defaultTarget;
 const logger = console.log;
 
 function getEnvVar(name) {
@@ -19,49 +14,8 @@ function getEnvVar(name) {
   return process.env[name];
 }
 
-// TODO: provide the correct client id
-const forgetPasswordLink =
-  `${getEnvVar('NICCI_BASE_URL')}/password?client_id=${getEnvVar('PAYLOAD_CLIENT_ID')}` +
-  '&response_type=code' +
-  '&scope=basic+emailaddress+social';
-
-let envConfigFile = `
-export const environment = {
-  production: ${isProd},
-  external: {
-    registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
-    login: '${getEnvVar('LOGIN')}'
-  },
-  james: {
-    forgetPassword: '${forgetPasswordLink}',
-    key: '${getEnvVar('JAMES_API_KEY')}',
-    token: '${getEnvVar('JAMES_API_TOKEN')}',
-    profile: '${getEnvVar('JAMES_API_PROFILE')}',
-    auth: '${getEnvVar('JAMES_API_AUTH')}',
-    address: '${getEnvVar('JAMES_API_ADDRESS')}',
-    cars: '${getEnvVar('JAMES_API_CARS')}',
-    carCompare: '${getEnvVar('JAMES_API_CAR_COMPARE')}',
-    carCoverage: '${getEnvVar('JAMES_API_CAR_COVERAGE')}',
-    carDamageFree: '${getEnvVar('JAMES_API_CAR_DAMAGEFREE')}',
-    carBuy: '${getEnvVar('JAMES_API_CAR_BUY')}',
-    insurer: '${getEnvVar('JAMES_API_INSURER')}',
-    payloadEncryption: {
-      client: {
-        id: '${getEnvVar('PAYLOAD_CLIENT_ID')}',
-        secret: '${getEnvVar('PAYLOAD_CLIENT_SECRET')}',
-      },
-      key: '${getEnvVar('PAYLOAD_KEY_URL')}',
-      profile: '${getEnvVar('PAYLOAD_PROFILE_URL')}',
-      token: '${getEnvVar('PAYLOAD_TOKEN_URL')}',
-      login: '${getEnvVar('PAYLOAD_LOGIN_URL')}'
-    },
-  }
-};
-`;
-
-// Google Analytics
-if (isProd && getEnvVar('GA_ID')) {
-  envConfigFile += `document.write(\`
+function getGoogleAnalytics() {
+  return `document.write(\`
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -72,23 +26,71 @@ if (isProd && getEnvVar('GA_ID')) {
   </script>\`);`;
 }
 
-// Disable linting of environment config
-envConfigFile = '/* tslint:disable */' + envConfigFile;
-envConfigFile += `/* tslint:enable */\n`;
-
-writeFile(targetPath, envConfigFile, function (err) {
-  if (err) {
-    logger(err);
-  }
-  logger(`Output generated at ${targetPath}`);
-});
-
-// Also write production config to environment.ts due to angular-cli bug
-if (isProd) {
-  writeFile(defaultTarget, envConfigFile, function (err) {
+function createEnvFile(targetPath: string, data: any) {
+  writeFile(targetPath, data, function (err) {
     if (err) {
       logger(err);
     }
-    logger(`Output generated at ${defaultTarget}`);
+    logger(`Output generated at ${targetPath}`);
   });
 }
+
+function getContent(environment: string) {
+  const isProd = environment === 'production' || environment === 'prod';
+
+  // TODO: provide the correct client id
+  const forgetPasswordLink =
+  `${getEnvVar('NICCI_BASE_URL')}/password?client_id=${getEnvVar('PAYLOAD_CLIENT_ID')}` +
+  '&response_type=code' +
+  '&scope=basic+emailaddress+social';
+
+  let content = `
+  export const environment = {
+    production: ${isProd},
+    external: {
+      registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
+      login: '${getEnvVar('LOGIN')}'
+    },
+    james: {
+      forgetPassword: '${forgetPasswordLink}',
+      key: '${getEnvVar('JAMES_API_KEY')}',
+      token: '${getEnvVar('JAMES_API_TOKEN')}',
+      profile: '${getEnvVar('JAMES_API_PROFILE')}',
+      auth: '${getEnvVar('JAMES_API_AUTH')}',
+      address: '${getEnvVar('JAMES_API_ADDRESS')}',
+      cars: '${getEnvVar('JAMES_API_CARS')}',
+      carCompare: '${getEnvVar('JAMES_API_CAR_COMPARE')}',
+      carCoverage: '${getEnvVar('JAMES_API_CAR_COVERAGE')}',
+      carDamageFree: '${getEnvVar('JAMES_API_CAR_DAMAGEFREE')}',
+      carBuy: '${getEnvVar('JAMES_API_CAR_BUY')}',
+      insurer: '${getEnvVar('JAMES_API_INSURER')}',
+      payloadEncryption: {
+        client: {
+          id: '${getEnvVar('PAYLOAD_CLIENT_ID')}',
+          secret: '${getEnvVar('PAYLOAD_CLIENT_SECRET')}',
+        },
+        key: '${getEnvVar('PAYLOAD_KEY_URL')}',
+        profile: '${getEnvVar('PAYLOAD_PROFILE_URL')}',
+        token: '${getEnvVar('PAYLOAD_TOKEN_URL')}',
+        login: '${getEnvVar('PAYLOAD_LOGIN_URL')}'
+      },
+    }
+  };
+  `;
+
+  if (isProd && getEnvVar('GA_ID')) {
+    content += getGoogleAnalytics();
+  }
+
+  content = '/* tslint:disable */' + content;
+  content += `/* tslint:enable */\n`;
+
+  return content;
+}
+
+// Production
+createEnvFile('./src/environments/environment.prod.ts', getContent('production'));
+
+// Development
+createEnvFile('./src/environments/environment.ts', getContent(environment));
+
