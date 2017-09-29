@@ -77,6 +77,26 @@ export function futureDateValidator(key: string) {
   };
 }
 
+export function maxDateValidator(key: string, maxYearFromNow: number) {
+  return (c: FormControl): { [key: string]: any } => {
+    let value = c.value;
+    const today = new Date();
+    const limit = today.setFullYear(today.getFullYear() + maxYearFromNow);
+
+    if (value && !(value instanceof Date)) {
+      value = dateDecode(value);
+    }
+
+    if (value && (value > limit)) {
+      value = false;
+    }
+
+    const obj = {};
+    obj[key] = true;
+    return !value ? obj : null;
+  };
+}
+
 export function birthDateValidator(key: string) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;

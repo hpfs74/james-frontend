@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import * as moment from 'moment';
 
 import * as CustomValidators from './base-form.validators';
 
@@ -93,12 +94,45 @@ describe('Custom Validators', () => {
     });
 
     it('should return null on future date value', () => {
-      expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl('22/05/2018')))
+      const currentDate = new Date();
+      const testDate = currentDate.setFullYear(currentDate.getFullYear() + 1);
+      const date = moment(testDate).format('DD/MM/YYYY');
+      expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl(date)))
         .toBeNull();
     });
 
     it('should return error on past date value', () => {
       expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl('22/05/2000')))
+        .toEqual({ 'myCtrl': true });
+    });
+  });
+
+  describe('maxDateValidator', () => {
+    it('should return error on string value', () => {
+      expect(CustomValidators.maxDateValidator('myCtrl', 2)(new FormControl('hello world')))
+        .toEqual({ 'myCtrl': true });
+    });
+
+    it('should return error on number value', () => {
+      expect(CustomValidators.maxDateValidator('myCtrl', 2)(new FormControl('323')))
+        .toEqual({ 'myCtrl': true });
+    });
+
+    it('should return null on date value in max limit', () => {
+      // add one year in the future
+      const currentDate = new Date();
+      const testDate = currentDate.setFullYear(currentDate.getFullYear() + 1);
+      const date = moment(testDate).format('DD/MM/YYYY');
+      expect(CustomValidators.maxDateValidator('myCtrl', 2)(new FormControl(date)))
+        .toBeNull();
+    });
+
+    it('should return error on date value past max limit', () => {
+      // add three years in the future
+      const currentDate = new Date();
+      const testDate = currentDate.setFullYear(currentDate.getFullYear() + 3);
+      const date = moment(testDate).format('DD/MM/YYYY');
+      expect(CustomValidators.maxDateValidator('myCtrl', 2)(new FormControl(date)))
         .toEqual({ 'myCtrl': true });
     });
   });
