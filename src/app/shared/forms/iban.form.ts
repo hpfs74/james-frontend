@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm } from './base-form';
-import { futureDateValidator, ibanValidator } from '../../utils/base-form.validators';
+import { futureDateValidator, maxDateValidator, ibanValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';
 import { carReportingCodeValidator } from '../../utils/base-form.validators';
 
@@ -26,11 +26,15 @@ export class IbanForm extends BaseForm {
         `Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankrekeningafschrift of in je bankieren app.`
     };
 
+    // Startdate can be a maximum of 1 year in the future
+    const maxYear = 1;
+
     this.formGroup = this.fb.group({
       startDate: [null,
         Validators.compose([
           Validators.required,
-          futureDateValidator('startDate')
+          futureDateValidator('startDate'),
+          maxDateValidator('startDate', maxYear)
         ])
       ],
       iban: [null,
