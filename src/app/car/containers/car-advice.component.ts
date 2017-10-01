@@ -178,10 +178,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     FormUtils.validateForm(detailForm);
     FormUtils.validateForm(addressForm);
 
-    // if (!detailForm.valid || !addressForm.valid) {
-    //   this.carDetailSubmitted = true;
-    //   return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
-    // }
+    if (!detailForm.valid || !addressForm.valid) {
+      this.carDetailSubmitted = true;
+      return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
+    }
 
     // Hide error summary
     this.carDetailSubmitted = false;
