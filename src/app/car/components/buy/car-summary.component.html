@@ -48,8 +48,6 @@
             <knx-ir-value>{{ insurance._embedded.car.year }}</knx-ir-value>
           </knx-ir-row>
 
-          <!-- -->
-
           <knx-ir-row>
             <knx-ir-label>Cataloguswaarde</knx-ir-label>
             <knx-ir-value>{{ insurance._embedded.car.price_consumer_incl_vat | currency:'EUR':true}}</knx-ir-value>
@@ -77,7 +75,7 @@
 
           <knx-ir-row>
             <knx-ir-label>Beveiliging</knx-ir-label>
-            <knx-ir-value>{{ insurance._embedded.car.price_consumer_incl_vat | currency:'EUR':true}}</knx-ir-value>
+            <knx-ir-value>{{ getSecurityClassName(advice?.securityClass)}}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
 
