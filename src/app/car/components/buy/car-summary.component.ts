@@ -4,13 +4,14 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { InsuranceAdvice } from '../../../insurance/models';
 import { Profile } from '../../../profile/models';
 import { Car, CarInsurance } from '../../../car/models';
+import { ContentService } from '../../../content.service';
 
 import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   selector: 'knx-car-summary-form',
   templateUrl: 'car-summary.component.html'
 })
-export class CarSummaryComponent {
+export class CarSummaryComponent implements OnInit {
   @Output() confirmChange = new EventEmitter();
 
   @Input()
@@ -28,6 +29,13 @@ export class CarSummaryComponent {
   @Input() advice: any; // user data from form steps
 
   confirmValue: boolean;
+  securityClasses: Array<any>;
+
+  constructor(private contentService: ContentService) { }
+
+  ngOnInit() {
+    this.securityClasses = this.contentService.getContentObject().car.securityClass;
+  }
 
   getCoverage(coverage: string) {
     let value: string;
@@ -48,6 +56,10 @@ export class CarSummaryComponent {
     return value;
   }
 
+  getSecurityClassName (securityClass: string) {
+    return securityClass ? this.securityClasses.filter(item => item.value === securityClass)[0].title : '';
+  }
+
   public isValidInsurance(obj: any) {
     return (obj &&
       !this.isEmpty(obj) &&
@@ -55,7 +67,7 @@ export class CarSummaryComponent {
       !this.isEmpty(obj._embedded.car));
   }
 
-  private isValidAdvice(obj: any) {
+  public isValidAdvice(obj: any) {
     return (obj &&
     !this.isEmpty(obj) &&
     !this.isEmpty(obj.address));
