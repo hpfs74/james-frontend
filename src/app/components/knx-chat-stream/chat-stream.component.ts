@@ -15,7 +15,7 @@ import { ChatMessage } from './chat-message';
   selector: 'knx-chat-stream',
   template: `
     <div class="knx-chat-stream">
-      <knx-avatar [name]="options.avatar.name" [title]="options.avatar.title"></knx-avatar>
+      <knx-avatar [title]="options.avatar.title"></knx-avatar>
 
       <knx-chat-message *ngFor="let message of messages" [data]="message?.data"></knx-chat-message>
 
