@@ -67,7 +67,7 @@ export class CarSummaryComponent implements OnInit {
       !this.isEmpty(obj._embedded.car));
   }
 
-  private isValidAdvice(obj: any) {
+  public isValidAdvice(obj: any) {
     return (obj &&
     !this.isEmpty(obj) &&
     !this.isEmpty(obj.address));

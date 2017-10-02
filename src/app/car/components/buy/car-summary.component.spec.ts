@@ -7,6 +7,7 @@ import { CXFormsModule } from '@cx/forms';
 
 import { SharedModule } from '../../../shared.module';
 import { CarSummaryComponent } from './car-summary.component';
+import { ContentService } from '../../../content.service';
 
 @Component({
   template: `
@@ -34,6 +35,31 @@ describe('Component: CarSummaryComponent', () => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
       declarations: [CarSummaryComponent, TestHostComponent],
+      providers: [
+        {
+          provide: ContentService,
+          useValue: jasmine.createSpyObj('ContentService', {
+            'getContentObject': {
+              car: {
+                securityClass: [
+                  {
+                    'value': 'SCM_NONE',
+                    'title': 'Weet ik niet / Geen',
+                    'description': '...'
+                  },
+                  {
+                    'value': 'SCM3',
+                    'title': 'Klasse 3',
+                    'short': 'Uitgebreid met hellingdetectie',
+                    'description': '...'
+                  }
+                ]
+
+              }
+            }
+          })
+        }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -54,6 +80,12 @@ describe('Component: CarSummaryComponent', () => {
     })).toBeFalsy();
   });
 
+  it('should check if an advice is valid', () => {
+    expect(comp.targetComponent.isValidAdvice({})).toBeFalsy();
+    expect(comp.targetComponent.isValidAdvice({ id: '23434' })).toBeFalsy();
+    expect(comp.targetComponent.isValidAdvice({ address: {zip: '2518CB'}})).toBeTruthy();
+  });
+
   it('should convert coverage values to a label', () => {
     const cl = 'CL';
     const clc = 'CLC';
@@ -62,6 +94,11 @@ describe('Component: CarSummaryComponent', () => {
     expect(comp.targetComponent.getCoverage(cl)).toEqual('Aansprakelijkheid');
     expect(comp.targetComponent.getCoverage(clc)).toEqual('Aansprakelijkheid + Beperkt casco');
     expect(comp.targetComponent.getCoverage(car)).toEqual('Aansprakelijkheid + Volledig casco');
+  });
+
+  it('should get security class title by value', () => {
+    expect(comp.targetComponent.getSecurityClassName('SCM_NONE')).toEqual('Weet ik niet / Geen');
+    expect(comp.targetComponent.getSecurityClassName('SCM3')).toEqual('Klasse 3');
   });
 
 });
