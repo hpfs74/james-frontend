@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { KNXStepOptions, StepError } from '@knx/wizard';
@@ -18,7 +17,6 @@ import * as profile from '../../profile/actions/profile';
 import * as car from '../actions/car';
 import * as advice from '../../insurance/actions/advice';
 
-import { ContentService } from '../../content.service';
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from './../../profile/models';
@@ -44,7 +42,6 @@ import * as FormUtils from '../../utils/base-form.utils';
 })
 export class CarBuyComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
-  formContent: any;
   currentStep: number;
 
   chatConfig$: Observable<AssistantConfig>;
@@ -61,11 +58,7 @@ export class CarBuyComponent implements OnInit {
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
 
-  constructor(
-    private router: Router,
-    private store$: Store<fromRoot.State>,
-    private contentService: ContentService
-  ) { }
+  constructor(private store$: Store<fromRoot.State>) {}
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -82,10 +75,8 @@ export class CarBuyComponent implements OnInit {
     this.car$ = this.store$.select(fromCar.getCarInfo);
 
     const formBuilder = new FormBuilder();
-    this.formContent = this.contentService.getContentObject();
-
     this.contactDetailForm = new ContactDetailForm(formBuilder);
-    this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.formContent.car.securityClass);
+    this.reportingCodeForm = new CarReportingCodeForm(formBuilder);
     this.checkForm = new CarCheckForm(formBuilder);
     this.paymentForm = new IbanForm(formBuilder);
 

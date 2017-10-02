@@ -31,8 +31,6 @@ import * as fromProfile from '../../profile/reducers';
 import { SharedModule } from '../../shared.module';
 import { TextMessageComponent } from '../../components/knx-chat-stream/text-message.component';
 
-import { ContentService } from '../../content.service';
-
 @Component({
   template: `<div><knx-car-buy></knx-car-buy></div>`
 })
@@ -97,17 +95,6 @@ describe('Component: CarBuyComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         CurrencyPipe,
-        ContentService,
-        {
-          provide: ContentService,
-          useValue: jasmine.createSpyObj('ContentService', {
-            'getContentObject': {
-              car: {
-                securityClass: []
-              }
-            }
-          })
-        },
         {
           provide: Router,
           useClass: class {

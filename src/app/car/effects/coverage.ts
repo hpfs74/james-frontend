@@ -27,7 +27,7 @@ export class CoverageEffects {
     .switchMap((payload) =>
       this.carService.getCoverageRecommendation(payload.license, payload.activeLoan)
         .map((res: any) => new coverage.CarCoverageCompleteAction(res))
-        .catch(error => Observable.of(new coverage.CarCoverageFailAction(error))));
+        .catch(error => Observable.of(new coverage.CarCoverageFailureAction(error))));
 
   @Effect()
   carCoverageFromInfo$ = this.action$

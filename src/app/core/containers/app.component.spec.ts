@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './../../components/knx-navigation/navbar.component';
 import { NavigationService } from '../services/navigation.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { ContentService } from '../../content.service';
 
 import * as fromRoot from '../../reducers';
 import * as fromAuth from '../../auth/reducers';
@@ -21,7 +20,7 @@ import * as fromProfile from '../../profile/reducers';
 import * as auth from '../../auth/actions/auth';
 
 @Component({
-  template: `<div><knx-app></knx-app></div>`
+  template: `<knx-app></knx-app>`
 })
 export class TestHostComponent {
   @ViewChild(AppComponent)
@@ -53,16 +52,6 @@ describe('Component: AppComponent', () => {
       providers: [
         NavigationService,
         {
-          provide: ContentService,
-          useValue: jasmine.createSpyObj('ContentService', {
-            'getContentObject': {
-              layout: {
-                footer: []
-              }
-            }
-          })
-        },
-        {
           provide: UserDialogService,
           useValue: {}
         }
@@ -78,6 +67,17 @@ describe('Component: AppComponent', () => {
     comp = fixture.componentInstance;
     comp.targetComponent.topMenu = [];
     fixture.detectChanges();
+  });
+
+  it('should define the login modal name', () => {
+    expect(comp.targetComponent.loginModalName).toEqual('loginModal');
+  });
+
+  it('should init menu items', () => {
+    comp.targetComponent.ngOnInit();
+    expect(comp.targetComponent.topMenu).toBeDefined();
+    expect(comp.targetComponent.topMenu.length).toBeGreaterThan(0);
+    expect(comp.targetComponent.footerItems.length).toBeGreaterThan(0);
   });
 
   it('should logout the user', () => {

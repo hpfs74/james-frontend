@@ -12,7 +12,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
-import { ContentService } from './content.service';
 
 import { reducers, metaReducers } from './reducers';
 
@@ -26,9 +25,9 @@ import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
 
-export function ContentLoader(contentService: ContentService) {
-  return () => contentService.loadFiles();
-}
+// export function ContentLoader(contentService: ContentService) {
+//   return () => contentService.loadFiles();
+// }
 
 @NgModule({
   imports: [
@@ -76,13 +75,13 @@ export function ContentLoader(contentService: ContentService) {
       provide: RouterStateSerializer,
       useClass: CustomRouterStateSerializer
     },
-    ContentService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: ContentLoader,
-      deps: [ContentService],
-      multi: true
-    }
+    // ContentService,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: ContentLoader,
+    //   deps: [ContentService],
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent],
 })

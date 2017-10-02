@@ -19,7 +19,7 @@ export class CarCoverageCompleteAction implements Action {
   constructor(public payload: CarCoverageRecommendation) {}
 }
 
-export class CarCoverageFailAction implements Action {
+export class CarCoverageFailureAction implements Action {
   readonly type = CAR_COVERAGE_FAILURE;
 
   constructor(public payload: any) {}
@@ -34,5 +34,5 @@ export class CarCoverageSetActiveLoan implements Action {
 export type All
   = CarCoverageAction
   | CarCoverageCompleteAction
-  | CarCoverageFailAction
+  | CarCoverageFailureAction
   | CarCoverageSetActiveLoan;

@@ -24,7 +24,7 @@ export class CarEffects {
     .switchMap((license) =>
       this.carService.getByLicense(license)
         .map((res: Car) => new car.GetInfoCompleteAction(res))
-        .catch(error => Observable.of(new car.GetInfoFailAction(error))));
+        .catch(error => Observable.of(new car.GetInfoFailureAction(error))));
 
 
   @Effect()
@@ -34,7 +34,7 @@ export class CarEffects {
     .switchMap((payload) =>
       this.carService.buyStatic(payload)
         .map((res: Response) => new car.BuyCompleteAction(res))
-        .catch(error => Observable.of(new car.BuyFailAction(error))));
+        .catch(error => Observable.of(new car.BuyFailureAction(error))));
 
   constructor(private actions$: Actions, private carService: CarService) { }
 }

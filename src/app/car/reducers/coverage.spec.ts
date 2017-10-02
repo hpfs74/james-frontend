@@ -1,7 +1,7 @@
 import {
   CarCoverageAction,
   CarCoverageCompleteAction,
-  CarCoverageFailAction,
+  CarCoverageFailureAction,
   CarCoverageSetActiveLoan
 } from '../actions/coverage';
 import * as fromCoverage from './coverage';

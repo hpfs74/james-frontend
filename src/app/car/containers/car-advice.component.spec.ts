@@ -29,7 +29,6 @@ import * as coverage from '../../car/actions/coverage';
 
 import { SharedModule } from '../../shared.module';
 import { AddressModule } from '../../address/address.module';
-import { ContentService } from '../../content.service';
 import { CarAdviceComponent } from './car-advice.component';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
 import { CarDetailForm } from '../components/advice/car-detail.form';
@@ -71,16 +70,6 @@ describe('Component: CarAdviceComponent', () => {
       declarations: [
         CarAdviceComponent,
         TestHostComponent
-      ],
-      providers: [
-        {
-          provide: ContentService,
-          useValue: jasmine.createSpyObj('ContentService', {
-            'getContentObject': {
-              car: {}
-            }
-          })
-        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
