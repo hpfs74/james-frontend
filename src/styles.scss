@@ -219,6 +219,22 @@ input::-ms-clear {
   }
 }
 
+.knx-button--extended {
+  color: #fff;
+  background: $knab-primary-red;
+  min-height: 63px;
+  padding-top: 14px;
+  border: 0;
+  border-bottom: 2px solid $knab-secondary-red;
+
+  &:hover,
+  &:focus {
+    background: #aa2e35;
+    border-color: #862026;
+    outline: none;
+  }
+}
+
 @media (min-width: 518px) {
   .knx-wizard__sidebar--sticky {
     position: sticky;
