@@ -4,7 +4,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { InsuranceAdvice } from '../../../insurance/models';
 import { Profile } from '../../../profile/models';
 import { Car, CarInsurance } from '../../../car/models';
-import { ContentService } from '../../../content.service';
+import { SecurityClasses } from '../../models/security-classes';
 
 import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
@@ -31,10 +31,8 @@ export class CarSummaryComponent implements OnInit {
   confirmValue: boolean;
   securityClasses: Array<any>;
 
-  constructor(private contentService: ContentService) { }
-
   ngOnInit() {
-    this.securityClasses = this.contentService.getContentObject().car.securityClass;
+    this.securityClasses = SecurityClasses;
   }
 
   getCoverage(coverage: string) {
