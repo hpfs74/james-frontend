@@ -7,7 +7,7 @@ import { CXFormsModule } from '@cx/forms';
 
 import { SharedModule } from '../../../shared.module';
 import { CarSummaryComponent } from './car-summary.component';
-import { ContentService } from '../../../content.service';
+import { SecurityClasses } from '../../models/security-classes';
 
 @Component({
   template: `
@@ -35,31 +35,6 @@ describe('Component: CarSummaryComponent', () => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
       declarations: [CarSummaryComponent, TestHostComponent],
-      providers: [
-        {
-          provide: ContentService,
-          useValue: jasmine.createSpyObj('ContentService', {
-            'getContentObject': {
-              car: {
-                securityClass: [
-                  {
-                    'value': 'SCM_NONE',
-                    'title': 'Weet ik niet / Geen',
-                    'description': '...'
-                  },
-                  {
-                    'value': 'SCM3',
-                    'title': 'Klasse 3',
-                    'short': 'Uitgebreid met hellingdetectie',
-                    'description': '...'
-                  }
-                ]
-
-              }
-            }
-          })
-        }
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));

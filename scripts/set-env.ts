@@ -6,6 +6,7 @@ require('dotenv').config();
 // get passed argument, for example `ts-node set-env.ts --environment=dev`
 const environment = argv.environment;
 const logger = console.log;
+const enableAnalytics = argv.analytics;
 
 function getEnvVar(name) {
   if (!process.env[name]) {
@@ -25,6 +26,35 @@ function getGoogleAnalytics() {
     ga('send', 'pageview');
   </script>\`);`;
 }
+
+/* tslint:disable */
+function outputGtmSnippet(gtmAuth: string, id: string, gtmVersion: number) {
+  // should be first in head tag
+  return `
+    let gtmScript = document.createElement('script');
+    gtmScript.innerHTML =
+      \`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl+'&gtm_auth=${gtmAuth}&gtm_preview=env-${gtmVersion}&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','${id}');\`
+
+    document.head.insertBefore(gtmScript, document.head.firstChild);
+  `;
+}
+
+function outputGtmNoScript(gtmAuth: string, id: string, gtmVersion: number) {
+  return `
+    let gtmNoScript = document.createElement('noscript');
+    gtmNoScript.innerHTML =
+      \`<iframe src="https://www.googletagmanager.com/ns.html?id=${id}&gtm_auth=${gtmAuth}&gtm_preview=env-${gtmVersion}&gtm_cookies_win=x"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>\`;
+
+      document.body.insertBefore(gtmNoScript, document.body.firstChild);
+  `;
+}
+/* tslint:enable */
+
 
 function createEnvFile(targetPath: string, data: any) {
   writeFile(targetPath, data, function (err) {
@@ -47,6 +77,7 @@ function getContent(environment: string) {
   let content = `
   export const environment = {
     production: ${isProd},
+    enableAnalytics: ${enableAnalytics},
     external: {
       registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
       login: '${getEnvVar('LOGIN')}'
@@ -78,8 +109,14 @@ function getContent(environment: string) {
   };
   `;
 
-  if (isProd && getEnvVar('GA_ID')) {
-    content += getGoogleAnalytics();
+  // Google Tag Manager
+  if (enableAnalytics) {
+    const gtmAuth = getEnvVar('GTM_AUTH');
+    const gtmId = getEnvVar('GTM_ID');
+    const gtmVersion = getEnvVar('GTM_VERSION');
+
+    content += outputGtmSnippet(gtmAuth, gtmId, gtmVersion);
+    content += outputGtmNoScript(gtmAuth, gtmId, gtmVersion);
   }
 
   content = '/* tslint:disable */' + content;
