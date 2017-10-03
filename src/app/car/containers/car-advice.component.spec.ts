@@ -33,18 +33,9 @@ import { CarAdviceComponent } from './car-advice.component';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
 import { CarDetailForm } from '../components/advice/car-detail.form';
 
-@Component({
-  template: `<div><knx-car-advice></knx-car-advice></div>`
-})
-export class TestHostComponent {
-  @ViewChild(CarAdviceComponent)
-  targetComponent: CarAdviceComponent;
-  formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
-}
-
 describe('Component: CarAdviceComponent', () => {
-  let comp: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+  let comp: CarAdviceComponent;
+  let fixture: ComponentFixture<CarAdviceComponent>;
 
   let actions: Observable<any>;
   let store: Store<fromCar.State>;
@@ -68,8 +59,7 @@ describe('Component: CarAdviceComponent', () => {
         })
       ],
       declarations: [
-        CarAdviceComponent,
-        TestHostComponent
+        CarAdviceComponent
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -80,29 +70,30 @@ describe('Component: CarAdviceComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
+    fixture = TestBed.createComponent(CarAdviceComponent);
     comp = fixture.componentInstance;
+    comp.ngOnInit();
     fixture.detectChanges();
   });
 
   describe('Initialization', () => {
     it('should bind a validator for license plate', () => {
-      const ctrl = comp.targetComponent.carDetailForm.formGroup.get('licensePlate');
+      const ctrl = comp.carDetailForm.formGroup.get('licensePlate');
       expect(ctrl).toBeDefined();
       expect(ctrl.asyncValidator).toBeDefined();
     });
 
     it('should init child component forms', () => {
-      expect(comp.targetComponent.carDetailForm).toBeDefined();
-      expect(comp.targetComponent.carDetailForm.formGroup).toBeDefined();
-      expect(comp.targetComponent.carExtrasForm).toBeDefined();
+      expect(comp.carDetailForm).toBeDefined();
+      expect(comp.carDetailForm.formGroup).toBeDefined();
+      expect(comp.carExtrasForm).toBeDefined();
     });
 
     it('should init the wizard steps', () => {
-      expect(comp.targetComponent.formSteps).toBeDefined();
-      expect(comp.targetComponent.formSteps.length).toBeGreaterThan(0);
+      expect(comp.formSteps).toBeDefined();
+      expect(comp.formSteps.length).toBeGreaterThan(0);
 
-      comp.targetComponent.formSteps.forEach(step => {
+      comp.formSteps.forEach(step => {
         expect(step.label).toBeDefined();
         expect(step.onShowStep).toBeDefined();
       });
@@ -111,11 +102,11 @@ describe('Component: CarAdviceComponent', () => {
     it('should init the form template', () => {
       const element = fixture.debugElement.query(By.css('form'));
       expect(element).toBeDefined();
-      expect(comp.targetComponent).toBeDefined();
+      expect(comp).toBeDefined();
     });
 
     it('should have a CarExtraForm init with proper default values', () => {
-      const carExtraForm = comp.targetComponent.carExtrasForm;
+      const carExtraForm = comp.carExtrasForm;
 
       expect(carExtraForm.formConfig.extraOptionsLegal).toBeDefined();
       expect(carExtraForm.formConfig.extraOptionsNoClaim).toBeDefined();
@@ -127,10 +118,10 @@ describe('Component: CarAdviceComponent', () => {
     });
 
     it('should bind async validator for car info', () => {
-      comp.targetComponent.ngAfterViewChecked();
+      comp.ngAfterViewChecked();
       fixture.detectChanges();
 
-      let licenseInput = comp.targetComponent.carDetailForm.formGroup.get('licensePlate');
+      let licenseInput = comp.carDetailForm.formGroup.get('licensePlate');
       expect(licenseInput).toBeDefined();
       expect(licenseInput.validator.length).toBeGreaterThan(0);
     });
@@ -160,40 +151,95 @@ describe('Component: CarAdviceComponent', () => {
         _embedded: null
       };
       const action = new advice.SetInsuranceAction(insurance);
-      comp.targetComponent.onSelectPremium(insurance);
+      comp.onSelectPremium(insurance);
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
 
     it('should change the wizard step', () => {
       const step = 2;
-      comp.targetComponent.onStepChange(step);
-      expect(comp.targetComponent.currentStep).toEqual(step);
+      comp.onStepChange(step);
+      expect(comp.currentStep).toEqual(step);
     });
 
     it('should toggle the side nav bar', () => {
       const open = true;
       const action = new layout.OpenLeftSideNav;
-      comp.targetComponent.toggleSideNavState(open);
+      comp.toggleSideNavState(open);
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
   });
 
-  // describe('Car Advice Flow', () => {
-  //   it('should disable next button on invalid form', () => {
+  describe('Car Advice Flow', () => {
+    it('should not go to next step on invalid details form', () => {
 
-  //   });
+      comp.carDetailForm.formGroup.get('licensePlate').setValue('92HXK9');
+      comp.carDetailForm.formGroup.get('loan').setValue(true);
 
-  //   it('should enable next button on valid form', () => {
+      expect(comp.currentStep).toEqual(0);
+      expect(comp.carDetailForm.formGroup.valid).toBeFalsy();
 
-  //   });
+      const element = fixture.debugElement.query(By.css('.knx-car-advice--step-1 .knx-wizard__buttons .knx-button--primary'));
+      if (element) {
+        const button = element.nativeElement;
+        button.click();
+        fixture.detectChanges();
+        expect(comp.currentStep).toEqual(0);
+      }
+    });
 
-  //   it('should load car info', () => {
+    it('should go to insurance result on valid details form', () => {
+      comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
+        comp.carDetailForm.formGroup.get('birthDate').setValue(new Date(1989, 11, 19));
+        comp.carDetailForm.formGroup.get('claimFreeYears').setValue(1);
+        comp.carDetailForm.formGroup.get('houseHold').setValue('CHM');
+        comp.carDetailForm.formGroup.get('loan').setValue(false);
+        comp.carDetailForm.formGroup.get('gender').setValue('M');
+        comp.carDetailForm.formGroup.get('coverage').setValue('CL');
 
-  //   });
+        comp.addressForm.formGroup.get('houseNumber').setValue('45');
+        comp.addressForm.formGroup.get('postalCode').setValue('2518CB');
 
-  //   it('should show insurance result', () => {
+        comp.carDetailForm.formGroup.updateValueAndValidity();
+        comp.addressForm.formGroup.updateValueAndValidity();
 
-  //   });
-  // });
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          console.warn(comp.carDetailForm.formGroup.get('licensePlate'));
+
+          expect(comp.currentStep).toEqual(0);
+          expect(comp.carDetailForm.formGroup.valid).toBeTruthy();
+          expect(comp.addressForm.formGroup.valid).toBeTruthy();
+          const element = fixture.debugElement.query(By.css('.knx-car-advice--step-1 .knx-wizard__buttons .knx-button--primary'));
+          if (element) {
+            const button = element.nativeElement;
+            button.click();
+            fixture.detectChanges();
+            expect(comp.currentStep).toEqual(1);
+          }
+        });
+      });
+    });
+
+    it('should load car info', async(() => {
+      comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
+      fixture.whenStable().then(() => {
+        const carInfoEl = fixture.debugElement.query(By.css('.knx-car-info-message'));
+        expect(carInfoEl).toBeDefined();
+      });
+    }));
+
+    // it('should load coverages', async(() => {
+    //   comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
+    //   comp.carDetailForm.formGroup.get('loan').setValue(false);
+
+    //   fixture.whenStable().then(() => {
+    //     const carInfoEl = fixture.debugElement.query(By.css('.knx-car-info-message'));
+    //     expect(carInfoEl).toBeDefined();
+    //   });
+    // }));
+  });
 
 });

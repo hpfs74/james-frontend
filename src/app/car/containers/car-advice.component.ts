@@ -45,7 +45,6 @@ import * as FormUtils from '../../utils/base-form.utils';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 
 @Component({
-  selector: 'knx-car-advice',
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
