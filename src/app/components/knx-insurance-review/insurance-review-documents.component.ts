@@ -11,7 +11,8 @@ import { InsuranceDocument } from './../../insurance/models';
           <div class="col-sm-12">
             <span>Hier vind je de voorwaarden van de verzekering die je hebt gekozen:</span><br>
             <span class="knx-collapse-panel__muted">
-              Het is mogelijk dat niet alle documenten relevant zijn voor de geselecteerde verzekering
+              In deze lijst staan ook alle voorwaarden voor extra dekkingen. Heb je deze extra’s niet geselecteerd?
+              Dan kun je deze natuurlijk negeren.
             </span>
             <span>
               <knx-info size="md" isFloating="true" class="knx-info">

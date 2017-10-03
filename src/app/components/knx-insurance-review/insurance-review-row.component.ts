@@ -31,6 +31,7 @@ export class InsuranceReviewRowContentComponent {
 @Component({
   selector: 'knx-ir-row',
   template: `
+    <hr class="knx-ir-row__divider" *ngIf="newSection">
     <div class="row">
       <div class="col" [ngClass]="{'col-md-5': showValue, 'col-md-12': !showValue}">
         <ng-content select="knx-ir-label"></ng-content>
@@ -45,6 +46,9 @@ export class InsuranceReviewRowContentComponent {
 export class InsuranceReviewRowComponent {
   @Input() showTooltip = false;
   @Input() showValue = true;
+
+  // adds divider between rows
+  @Input() newSection = false;
 }
 
 @Component({
