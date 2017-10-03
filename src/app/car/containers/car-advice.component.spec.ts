@@ -231,15 +231,15 @@ describe('Component: CarAdviceComponent', () => {
       });
     }));
 
-    // it('should load coverages', async(() => {
-    //   comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
-    //   comp.carDetailForm.formGroup.get('loan').setValue(false);
+    it('should load the coverage recommendation', async(() => {
+      comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
+      comp.carDetailForm.formGroup.get('loan').setValue(false);
 
-    //   fixture.whenStable().then(() => {
-    //     const carInfoEl = fixture.debugElement.query(By.css('.knx-car-info-message'));
-    //     expect(carInfoEl).toBeDefined();
-    //   });
-    // }));
+      fixture.whenStable().then(() => {
+        const recommendedPriceItem = fixture.debugElement.query(By.css('.knx-price-item__badge'));
+        expect(recommendedPriceItem).toBeDefined();
+      });
+    }));
   });
 
 });
