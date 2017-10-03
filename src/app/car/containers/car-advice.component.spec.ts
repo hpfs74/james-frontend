@@ -231,6 +231,11 @@ describe('Component: CarAdviceComponent', () => {
       });
     }));
 
+    it('should show no coverage recommendation by default', () => {
+      const recommendedPriceItem = fixture.debugElement.query(By.css('.knx-price-item__badge'));
+      expect(recommendedPriceItem).toBeNull();
+    });
+
     it('should load the coverage recommendation', async(() => {
       comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
       comp.carDetailForm.formGroup.get('loan').setValue(false);
@@ -240,6 +245,46 @@ describe('Component: CarAdviceComponent', () => {
         expect(recommendedPriceItem).toBeDefined();
       });
     }));
+
+    // it('should dispatch a car compare action', () => {
+    //   comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
+    //   fixture.detectChanges();
+    //   fixture.whenStable().then(() => {
+    //     comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
+    //     comp.carDetailForm.formGroup.get('birthDate').setValue(new Date(1989, 11, 19));
+    //     comp.carDetailForm.formGroup.get('claimFreeYears').setValue(1);
+    //     comp.carDetailForm.formGroup.get('houseHold').setValue('CHM');
+    //     comp.carDetailForm.formGroup.get('loan').setValue(false);
+    //     comp.carDetailForm.formGroup.get('gender').setValue('M');
+    //     comp.carDetailForm.formGroup.get('coverage').setValue('CL');
+
+    //     comp.addressForm.formGroup.get('houseNumber').setValue('45');
+    //     comp.addressForm.formGroup.get('postalCode').setValue('2518CB');
+
+    //     comp.carDetailForm.formGroup.updateValueAndValidity();
+    //     comp.addressForm.formGroup.updateValueAndValidity();
+
+    //     const action = new advice.UpdateAction({
+    //       active_loan: false,
+    //       coverage: 'CL',
+    //       claim_free_years: 1,
+    //       household_status: 'CHM',
+    //       license: '',
+    //       gender: 'M',
+    //       date_of_birth: '',
+    //       zipcode: '',
+    //       house_number: '',
+    //       country: 'NL',
+    //       kilometers_per_year: 'KMR3',
+    //       own_risk: 0,
+    //       cover_occupants: false,
+    //       legal_aid: 'LAN',
+    //       no_claim_protection: false,
+    //       road_assistance: 'RANO',
+    //       insurance_id: ''
+    //     });
+    //   });
+    // });
   });
 
 });
