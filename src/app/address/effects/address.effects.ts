@@ -21,6 +21,7 @@ export class AddressEffects {
   loadAddressInfo$: Observable<Action> = this.actions$
     .ofType(address.GET_ADDRESS_REQUEST)
     .map((action: address.GetAddress) => action.payload)
+    .debounceTime(500) // prevent lookup on each address input keyup event
     .switchMap((payload: AddressLookup) =>
       this.addressService.lookupAddress(payload.postalCode, payload.houseNumber, payload.houseNumberExtension)
         .map((res: Address) => new address.GetAddressSuccess(res))
