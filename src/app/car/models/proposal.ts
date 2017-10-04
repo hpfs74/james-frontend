@@ -47,7 +47,7 @@ export class CarProposalHelper {
     { key: 'Kenteken', value: 'car.license' },
     { key: 'Merk', value: 'car.make' },
     { key: 'Model', value: 'car.model' },
-    { key: 'Type', value: 'car.type' },
+    { key: 'Type', value: 'car.technical_type' },
     { key: 'Bouwjaar', value: 'car.year' },
     { key: 'Cataloguswaarde', value: 'car.price_consumer_incl_vat' },
     { key: 'Waarde accessoires', value: 'accessoryValue' },
