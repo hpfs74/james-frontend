@@ -27,11 +27,13 @@ import * as advice from '../../insurance/actions/advice';
 import * as compare from '../../car/actions/compare';
 import * as coverage from '../../car/actions/coverage';
 
+import * as FormUtils from '../../utils/base-form.utils';
 import { SharedModule } from '../../shared.module';
 import { AddressModule } from '../../address/address.module';
 import { CarAdviceComponent } from './car-advice.component';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
 import { CarDetailForm } from '../components/advice/car-detail.form';
+import { Car } from '../models/car';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -127,40 +129,15 @@ describe('Component: CarAdviceComponent', () => {
     });
   });
 
-  describe('Car Advice orchestration', () => {
-    it('should dispatch when premium is selected', () => {
-      const insurance = {
-        id: '2516227',
-        insurance_id: 'ohra-autoverzekering-aanvullend',
-        moneyview_id: 'ohra-autoverzekering-aanvullend',
-        type: 'car',
-        car: null,
-        insurance_name: 'Auto',
-        fit: 78.09,
-        price_quality: 10,
-        own_risk: 0,
-        monthly_premium: 121.99,
-        documents: [],
-        details: 'WAVC',
-        price: 121.99,
-        product_id: '2516227',
-        terms_conditions_pdf_url: '',
-        reviews: 2,
-        reviews_amount: 4,
-        supported: true,
-        _embedded: null
-      };
-      const action = new advice.SetInsuranceAction(insurance);
-      comp.onSelectPremium(insurance);
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    });
-
+  describe('Wizard', () => {
     it('should change the wizard step', () => {
       const step = 2;
       comp.onStepChange(step);
       expect(comp.currentStep).toEqual(step);
     });
+  });
 
+  describe('Side bar', () => {
     it('should toggle the side nav bar', () => {
       const open = true;
       const action = new layout.OpenLeftSideNav;
@@ -223,6 +200,117 @@ describe('Component: CarAdviceComponent', () => {
       });
     });
 
+    it('should dispatch a car compare action', async(() => {
+      comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
+
+      const licensePlateValue = 'GK906T';
+      const birthDateValue = new Date(1989, 11, 19);
+      const claimFreeYearsValue = 1;
+      const houseHoldvalue = 'CHM';
+      const activeLoanValue = false;
+      const genderValue = 'M';
+      const titleValue = 'Dhr.';
+      const coverageValue = 'CL';
+      const postalCodeValue = '2518CB';
+      const houseNumberValue = '45';
+      const countryValue = 'NL';
+
+      const address = {
+        number: houseNumberValue,
+        postcode: postalCodeValue,
+        street: '',
+        city: '',
+        county: '',
+        province: '',
+        fullname: '',
+        location: null
+      };
+
+      const action = new advice.UpdateAction(Object.assign({}, {
+        active_loan: activeLoanValue,
+        coverage: coverageValue,
+        claim_free_years: claimFreeYearsValue,
+        household_status: houseHoldvalue,
+        license: licensePlateValue,
+        gender: genderValue,
+        title: titleValue,
+        date_of_birth: '1989-12-19',
+        zipcode: postalCodeValue,
+        house_number: houseNumberValue,
+        country: countryValue,
+        kilometers_per_year: 'KMR3',
+        own_risk: 0,
+        cover_occupants: false,
+        legal_aid: 'LAN',
+        no_claim_protection: false,
+        road_assistance: 'RANO',
+        insurance_id: ''
+      }, { address: address }));
+
+      const car = {
+        _id: 'GK906T',
+        license: 'GK906T',
+        vin: null,
+        reporting_code: null,
+        year: '2012',
+        fuel: 'Benzine',
+        fuel_code: 'B',
+        secondary_fuel: null,
+        color: 'zwart',
+        color_code: null,
+        secondary_color: null,
+        secondary_color_code: null,
+        weight_empty_vehicle: 1125,
+        price_consumer_excl_vat: 29136,
+        price_consumer_incl_vat: 34003,
+        make: 'AUDI',
+        model: 'A1',
+        technical_type: '1.4 TFSI PRO LINE S',
+        wheels: 4,
+        top_speed: 203,
+        engine_capacity: 1390,
+        power_kw: 90,
+        edition: '1.4 TFSI PRO LINE S',
+        doors: 5,
+        current_value: 16326,
+        nicci_cartransmission_automatic_transmission: 'Automaat'
+      } as Car;
+
+      comp.carDetailForm.formGroup.get('licensePlate').setValue(licensePlateValue);
+      comp.carDetailForm.formGroup.get('birthDate').setValue(birthDateValue);
+      comp.carDetailForm.formGroup.get('claimFreeYears').setValue(claimFreeYearsValue);
+      comp.carDetailForm.formGroup.get('houseHold').setValue(houseHoldvalue);
+      comp.carDetailForm.formGroup.get('loan').setValue(activeLoanValue);
+      comp.carDetailForm.formGroup.get('gender').setValue(genderValue);
+      comp.carDetailForm.formGroup.get('coverage').setValue(coverageValue);
+
+      comp.addressForm.formGroup.get('houseNumber').setValue(houseNumberValue);
+      comp.addressForm.formGroup.get('postalCode').setValue(postalCodeValue);
+
+      comp.carDetailForm.formGroup.updateValueAndValidity();
+      comp.addressForm.formGroup.updateValueAndValidity();
+
+      comp.car = car;
+      comp.address = address;
+
+      fixture.detectChanges();
+
+      fixture.whenStable().then(() => {
+
+        expect(comp.carDetailForm.formGroup.valid).toBeTruthy();
+        expect(comp.addressForm.formGroup.valid).toBeTruthy();
+
+        fixture.detectChanges();
+        // Submit detail form
+        let obs$ = comp.submitDetailForm();
+        obs$.subscribe((res) => {
+          expect(store.dispatch).toHaveBeenCalledWith(action);
+        });
+      });
+    }));
+  });
+
+  describe('Car Info', () => {
     it('should load car info', async(() => {
       comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
       fixture.whenStable().then(() => {
@@ -230,7 +318,9 @@ describe('Component: CarAdviceComponent', () => {
         expect(carInfoEl).toBeDefined();
       });
     }));
+  });
 
+  describe('Coverage Recommendation', () => {
     it('should show no coverage recommendation by default', () => {
       const recommendedPriceItem = fixture.debugElement.query(By.css('.knx-price-item__badge'));
       expect(recommendedPriceItem).toBeNull();
@@ -245,46 +335,35 @@ describe('Component: CarAdviceComponent', () => {
         expect(recommendedPriceItem).toBeDefined();
       });
     }));
+  });
 
-    // it('should dispatch a car compare action', () => {
-    //   comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
-    //   fixture.detectChanges();
-    //   fixture.whenStable().then(() => {
-    //     comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
-    //     comp.carDetailForm.formGroup.get('birthDate').setValue(new Date(1989, 11, 19));
-    //     comp.carDetailForm.formGroup.get('claimFreeYears').setValue(1);
-    //     comp.carDetailForm.formGroup.get('houseHold').setValue('CHM');
-    //     comp.carDetailForm.formGroup.get('loan').setValue(false);
-    //     comp.carDetailForm.formGroup.get('gender').setValue('M');
-    //     comp.carDetailForm.formGroup.get('coverage').setValue('CL');
-
-    //     comp.addressForm.formGroup.get('houseNumber').setValue('45');
-    //     comp.addressForm.formGroup.get('postalCode').setValue('2518CB');
-
-    //     comp.carDetailForm.formGroup.updateValueAndValidity();
-    //     comp.addressForm.formGroup.updateValueAndValidity();
-
-    //     const action = new advice.UpdateAction({
-    //       active_loan: false,
-    //       coverage: 'CL',
-    //       claim_free_years: 1,
-    //       household_status: 'CHM',
-    //       license: '',
-    //       gender: 'M',
-    //       date_of_birth: '',
-    //       zipcode: '',
-    //       house_number: '',
-    //       country: 'NL',
-    //       kilometers_per_year: 'KMR3',
-    //       own_risk: 0,
-    //       cover_occupants: false,
-    //       legal_aid: 'LAN',
-    //       no_claim_protection: false,
-    //       road_assistance: 'RANO',
-    //       insurance_id: ''
-    //     });
-    //   });
-    // });
+  describe('Car Result Flow', () => {
+    it('should dispatch when premium is selected', () => {
+      const insurance = {
+        id: '2516227',
+        insurance_id: 'ohra-autoverzekering-aanvullend',
+        moneyview_id: 'ohra-autoverzekering-aanvullend',
+        type: 'car',
+        car: null,
+        insurance_name: 'Auto',
+        fit: 78.09,
+        price_quality: 10,
+        own_risk: 0,
+        monthly_premium: 121.99,
+        documents: [],
+        details: 'WAVC',
+        price: 121.99,
+        product_id: '2516227',
+        terms_conditions_pdf_url: '',
+        reviews: 2,
+        reviews_amount: 4,
+        supported: true,
+        _embedded: null
+      };
+      const action = new advice.SetInsuranceAction(insurance);
+      comp.onSelectPremium(insurance);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
   });
 
 });

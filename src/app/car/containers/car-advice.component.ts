@@ -179,7 +179,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
-  submitDetailForm() {
+  submitDetailForm(): Observable<any> {
     const detailForm = this.carDetailForm.formGroup;
     const addressForm = this.addressForm.formGroup;
 
@@ -187,12 +187,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     FormUtils.validateForm(addressForm);
 
     if (!detailForm.valid || !addressForm.valid) {
-      this.carDetailSubmitted = true;
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
     }
-
-    // Hide error summary
-    this.carDetailSubmitted = false;
 
     // no implicit updating of profile
     // this.store$.dispatch(new profile.UpdateAction({
@@ -358,14 +354,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private onShowSummary() {
-    let that = this;
     FormUtils.scrollToForm('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
 
     this.store$.select(fromInsurance.getSelectedInsurance).take(1)
       .subscribe(selectedInsurance => {
-        that.formSteps[2].hideNextButton = !selectedInsurance.supported;
-        that.showStepBlock = selectedInsurance.supported;
+        this.formSteps[2].hideNextButton = !selectedInsurance.supported;
+        this.showStepBlock = selectedInsurance.supported;
 
         if (selectedInsurance.supported) {
           this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title' }));
