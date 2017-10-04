@@ -20,7 +20,7 @@
           (activeLoanChange)="updateActiveLoan($event)"
           [form]="carDetailForm"
           [addressForm]="addressForm"
-          [car]="car"
+          [car]="car$ | async"
           [advice]="advice$ | async"
           [coverages]="coverages"
           [coverageRecommendation]="coverageRecommendation$ | async"

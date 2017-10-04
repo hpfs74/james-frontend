@@ -64,6 +64,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   // State of the advice forms data
   address$: Observable<Address>;
+  car$: Observable<Car>;
   advice$: Observable<any>;
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
@@ -100,6 +101,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.address$ = this.store$.select(fromAddress.getAddress);
+    this.car$ = this.store$.select(fromCar.getCarInfo);
     this.insurances$ = this.getCompareResultCopy();
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);

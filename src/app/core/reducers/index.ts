@@ -1,6 +1,8 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 
+import { RouterStateUrl } from '../../utils/routersnapshot';
+
 import * as fromRoot from '../../reducers';
 // import * as fromAnalytics from './analytics';
 import * as fromAssistant from './assistant';
@@ -9,7 +11,7 @@ import * as fromLayout from './layout';
 export interface CoreState {
   assistant: fromAssistant.State;
   layout: fromLayout.State;
-  router: fromRouter.RouterReducerState;
+  router: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
 export interface State extends fromRoot.State {
