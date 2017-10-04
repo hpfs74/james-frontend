@@ -243,8 +243,6 @@ describe('ProfileEffects', () => {
 
       const result = profileReducer.reducer(profileReducer.initialState, updateAddressFailAction);
       expect(result).toEqual(expectedResult);
-// UpdateAddressFailAction
     });
   });
-
 });
