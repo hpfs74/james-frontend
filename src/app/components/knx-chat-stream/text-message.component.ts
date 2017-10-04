@@ -5,7 +5,7 @@ import { IChatMessage } from './chat-message.interface';
 @Component({
   selector: 'knx-chat-message',
   template: `
-  <div class='knx-message knx-message--chat knx-message--arrow-top-center ' [@flyInOutAnimation]="'in'">
+  <div class="knx-message knx-message--chat knx-message--arrow-top-center" [@flyInOutAnimation]="'in'">
     <div class="knx-message__content" [innerHTML]="data"></div>
   </div>
   `,
@@ -13,7 +13,6 @@ import { IChatMessage } from './chat-message.interface';
 })
 export class TextMessageComponent implements OnInit, IChatMessage {
   @Input() data: any;
-  @Input() showDate = false;
 
   date: Date;
 
