@@ -14,7 +14,6 @@
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
         <knx-car-detail-form
-          (addressChange)="onAddressChange($event)"
           (coverageSelected)="updateSelectedCoverage($event)"
           (licensePlateChange)="getCarInfo($event)"
           (activeLoanChange)="updateActiveLoan($event)"

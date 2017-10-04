@@ -22,6 +22,7 @@ import * as assistant from '../../core/actions/assistant';
 import * as car from '../actions/car';
 import * as compare from '../actions/compare';
 import * as coverage from '../actions/coverage';
+import * as address from '../../address/actions/address';
 
 // Other actions
 import * as insurance from '../../insurance/actions/insurance';
@@ -54,9 +55,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   carDetailSubmitted = false;
   currentStep: number;
   coverages: Array<Price>;
-
-  car: Car; // TODO: use ngrx store
-  address: Address; // TODO: use ngrx store
 
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
@@ -117,7 +115,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
-        if (currentAdvice && this.address) {
+        if (currentAdvice) {
           // do not pre-fill address
           // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
           //   this.address.postcode = currentProfile.postcode;
@@ -198,32 +196,40 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     //   date_of_birth: detailForm.value.birthDate
     // }));
 
-    const compareObj: CarCompare = {
-      active_loan: !!detailForm.value.loan,
-      coverage: detailForm.value.coverage,
-      claim_free_years: +detailForm.value.claimFreeYears,
-      household_status: detailForm.value.houseHold,
-      license: this.car.license,
-      gender: detailForm.value.gender,
-      title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
-      date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
-        FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
-      zipcode: this.address.postcode,
-      house_number: this.address.number,
-      country: 'NL',
-      kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
-      own_risk: +detailForm.value.ownRisk || 0,
-      cover_occupants: false,
-      legal_aid: 'LAN',
-      no_claim_protection: false,
-      road_assistance: 'RANO',
-      insurance_id: ''
-    };
-
-    // add address in format for profile
-    this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compareObj, {
-      address: this.address
-    })));
+    Observable.combineLatest(this.car$, this.address$, (car, address) => {
+      return {
+        request: {
+          active_loan: !!detailForm.value.loan,
+          coverage: detailForm.value.coverage,
+          claim_free_years: +detailForm.value.claimFreeYears,
+          household_status: detailForm.value.houseHold,
+          license: car.license,
+          gender: detailForm.value.gender,
+          title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
+          date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
+            FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
+          zipcode: address.postcode,
+          house_number: address.number,
+          country: 'NL',
+          kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
+          own_risk: +detailForm.value.ownRisk || 0,
+          cover_occupants: false,
+          legal_aid: 'LAN',
+          no_claim_protection: false,
+          road_assistance: 'RANO',
+          insurance_id: ''
+        } as CarCompare,
+        address: address
+      };
+    })
+    .take(1)
+    .subscribe((compare) => {
+      // add address in format for profile
+      // TODO: is this really needed?
+      this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compare.request, {
+        address: compare.address
+      })));
+    });
 
     return this.store$.select(fromInsurance.getSelectedAdvice)
       .map((advice) => {
@@ -260,12 +266,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   updateActiveLoan(event: boolean) {
     this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(event));
-  }
-
-  onAddressChange(address: Address) {
-    // this.store$.dispatch(new profile.UpdateAction(address));
-    // TODO: not in ngrx form should be this.store.select('address') something
-    this.address = address;
   }
 
   getCarInfo(licensePlate) {
@@ -309,7 +309,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         if (error) {
           this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
           this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
-          this.car = null;
         }
       });
 
@@ -318,7 +317,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       .filter(() => this.currentStep === 0)
       .subscribe((car: Car) => {
         if (car && car.license) {
-          this.car = car;
           this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
           this.store$.dispatch(new assistant.AddCannedMessage({
             key: 'car.info.niceCar',
