@@ -41,10 +41,10 @@ module.exports = function(config) {
             fixWebpackSourcePaths: true,
             thresholds: {
                 global: {
-                    statements: 75,
-                    branches: 54,
-                    functions: 57,
-                    lines: 74
+                    statements: 76,
+                    branches: 55,
+                    functions: 58,
+                    lines: 75
                 },
                 // per file
                 // each: {
