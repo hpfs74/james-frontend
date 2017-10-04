@@ -44,22 +44,18 @@ export class AddressComponent implements AfterViewChecked {
   }
 
   validateAddress(formGroup: AbstractControl): Observable<any> {
-    const debounceTime = 500;
+    const postalCodeControl = formGroup.get('postalCode');
+    const houseNumberControl = formGroup.get('houseNumber');
 
-    return Observable.timer(debounceTime).switchMap(() => {
-      const postalCodeControl = formGroup.get('postalCode');
-      const houseNumberControl = formGroup.get('houseNumber');
+    if (!postalCodeControl.valid || !houseNumberControl.valid) {
+      return Observable.of({ address: true });
+    }
 
-      if (!postalCodeControl.valid || !houseNumberControl.valid) {
-        return Observable.of({ address: true });
-      }
-
-      this.runValidation.emit({
-        postalCode: postalCodeControl.value,
-        houseNumber: houseNumberControl.value
-      });
-
-      return this.asyncValidator;
+    this.runValidation.emit({
+      postalCode: postalCodeControl.value,
+      houseNumber: houseNumberControl.value
     });
+
+    return this.asyncValidator;
   }
 }
