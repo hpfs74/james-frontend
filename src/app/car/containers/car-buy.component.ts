@@ -187,17 +187,18 @@ export class CarBuyComponent implements OnInit {
     })
       .subscribe((value) => {
         const flatData = Object.assign({},
+          value.profileInfo,
           value.adviceInfo,
           value.adviceInfo.address,
           value.insuranceInfo,
-          value.profileInfo,
           value.insuranceInfo._embedded.insurance,
-          { car: value.carInfo });
+          { car: value.carInfo },
+          this.getUpdatedProfile(this.contactDetailForm.formGroup));
 
         const proposalRequest = new CarProposalHelper();
         const proposalData: Proposal = {
           proposal: value.insuranceInfo,
-          items:  proposalRequest.getItems(Object.assign(flatData, this.getUpdatedProfile(this.contactDetailForm.formGroup))).concat(
+          items:  proposalRequest.getItems(flatData).concat(
               proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
             )
         };

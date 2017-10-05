@@ -32,6 +32,7 @@ export interface CarCompare {
   title: string;
   zipcode: string;
   country: string;
+  city: string;
 
   // insurance?: string;
 
