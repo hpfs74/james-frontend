@@ -2,6 +2,7 @@ import * as moment from 'moment';
 import { Insurance } from '../../insurance/models/insurance';
 import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
 import { dateDecode } from '../../utils/base-form.utils';
+import { CarUtils } from '../utils/car-utils';
 
 /**
  * Buy Flow Request
@@ -55,7 +56,7 @@ export class CarProposalHelper {
     { key: 'Gewicht', value: 'car.weight_empty_vehicle' },
     { key: 'Kilometrage', value: 'kilometers_per_year' },
     { key: 'Beveiliging', value: 'securityClass', transform: (value) => 'SCM klasse ' + value.slice(-1) },
-    { key: 'Hoofddekking', value: 'coverage', transform: this.getCoverage },
+    { key: 'Hoofddekking', value: 'coverage', transform: CarUtils.getCoverage },
     { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
     { key: 'Inzittenden meeverzekeren', value: 'cover_occupants', transform: this.getBoolean },
     { key: 'Slotvragen', value: '' },
@@ -158,27 +159,6 @@ export class CarProposalHelper {
     return value ? 'Ja' : 'Nee';
   }
 
-  private getCoverage(coverage: string) {
-    let value: string;
-
-    switch (coverage) {
-      case 'CL':
-        value = 'Aansprakelijkheid';
-        break;
-      case 'CLC':
-        value = 'Aansprakelijkheid + Beperkt casco';
-        break;
-      case 'CAR':
-        value = 'Aansprakelijkheid + Volledig casco';
-        break;
-      default:
-        value = null;
-        break;
-    }
-
-    return value;
-  }
-
   private formatDate(value: Date) {
     return moment(dateDecode(value)).format('DD-MM-YYYY');
   }
@@ -186,7 +166,5 @@ export class CarProposalHelper {
   private removeWhiteSpace(value: string) {
     return value.replace(/[ _]/gim, '');
   }
-
-
 
 }

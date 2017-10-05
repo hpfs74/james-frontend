@@ -13,7 +13,7 @@
 
           <knx-ir-row>
             <knx-ir-label>Gekozen dekking</knx-ir-label>
-            <knx-ir-value>{{ getCoverage(advice?.coverage) }}</knx-ir-value>
+            <knx-ir-value>{{ carUtils.getCoverage(advice?.coverage) }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
@@ -23,12 +23,17 @@
 
           <knx-ir-row newSection="true">
             <knx-ir-label>Rechtsbijstand</knx-ir-label>
-            <knx-ir-value>{{ advice?.legal_aid }}</knx-ir-value>
+            <knx-ir-value>{{ carUtils.getLegalAid(advice?.legal_aid) }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>No-claim beschermer</knx-ir-label>
             <knx-ir-value>{{ advice?.no_claim_protection | boolean }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Pechhulp</knx-ir-label>
+            <knx-ir-value>{{ carUtils.getRoadAssistance(advice?.road_assistance) }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
@@ -85,12 +90,12 @@
 
           <knx-ir-row>
             <knx-ir-label>KM per jaar</knx-ir-label>
-            <knx-ir-value>{{ insurance.kilometers_per_year }}</knx-ir-value>
+            <knx-ir-value>{{ carUtils.getKilometerPerYear(advice?.kilometers_per_year) }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Beveiliging</knx-ir-label>
-            <knx-ir-value>{{ getSecurityClassName(advice?.securityClass)}}</knx-ir-value>
+            <knx-ir-value>{{ carUtils.getSecurityClassName(advice?.securityClass)}}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
 

@@ -1,4 +1,4 @@
-import { CarReportingCodeForm } from './car-reporting-code.form';
+
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
@@ -6,18 +6,16 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '@cx/forms';
 
 import { SharedModule } from '../../../shared.module';
+import { CarReportingCodeForm } from './car-reporting-code.form';
 import { CarSummaryComponent } from './car-summary.component';
-import { SecurityClasses } from '../../models/security-classes';
-
 @Component({
   template: `
-  <div>
     <knx-car-summary-form
       [advice]="adviceFromHost"
       [insurance]="insuranceFromHost"
       [profile]="profileFromHost">
     </knx-car-summary-form>
-  </div>`
+  `
 })
 export class TestHostComponent {
   @ViewChild(CarSummaryComponent)
@@ -60,20 +58,4 @@ describe('Component: CarSummaryComponent', () => {
     expect(comp.targetComponent.isValidAdvice({ id: '23434' })).toBeFalsy();
     expect(comp.targetComponent.isValidAdvice({ address: {zip: '2518CB'}})).toBeTruthy();
   });
-
-  it('should convert coverage values to a label', () => {
-    const cl = 'CL';
-    const clc = 'CLC';
-    const car = 'CAR';
-
-    expect(comp.targetComponent.getCoverage(cl)).toEqual('Aansprakelijkheid');
-    expect(comp.targetComponent.getCoverage(clc)).toEqual('Aansprakelijkheid + Beperkt casco');
-    expect(comp.targetComponent.getCoverage(car)).toEqual('Aansprakelijkheid + Volledig casco');
-  });
-
-  it('should get security class title by value', () => {
-    expect(comp.targetComponent.getSecurityClassName('SCM_NONE')).toEqual('Weet ik niet / Geen');
-    expect(comp.targetComponent.getSecurityClassName('SCM3')).toEqual('Klasse 3');
-  });
-
 });
