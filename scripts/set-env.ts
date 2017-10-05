@@ -6,7 +6,7 @@ require('dotenv').config();
 // get passed argument, for example `ts-node set-env.ts --environment=dev`
 const environment = argv.environment;
 const logger = console.log;
-const enableAnalytics = argv.analytics;
+const enableAnalytics = argv.analytics || false;
 
 function getEnvVar(name) {
   if (!process.env[name]) {
