@@ -69,6 +69,7 @@ describe('Service: Car', () => {
     'house_number': '234',
     'title': 'Dhr.',
     'zipcode': '2512GH',
+    'city': 'Den Haag',
     'country': 'NL',
     'coverage': 'CL',
     'claim_free_years': 7,

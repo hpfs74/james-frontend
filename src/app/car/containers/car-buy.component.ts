@@ -186,25 +186,7 @@ export class CarBuyComponent implements OnInit {
       return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
     })
       .subscribe((value) => {
-        const flatData = Object.assign({},
-          value.profileInfo,
-          value.adviceInfo,
-          value.adviceInfo.address,
-          value.insuranceInfo,
-          value.insuranceInfo._embedded.insurance,
-          { car: value.carInfo },
-          this.getUpdatedProfile(this.contactDetailForm.formGroup));
-
-        const proposalRequest = new CarProposalHelper();
-        const proposalData: Proposal = {
-          proposal: value.insuranceInfo,
-          items:  proposalRequest.getItems(flatData).concat(
-              proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
-            )
-        };
-        proposalData.proposal.car = value.carInfo;
-
-
+        const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
         this.store$.dispatch(new car.BuyAction(proposalData));
       });
 
@@ -232,7 +214,7 @@ export class CarBuyComponent implements OnInit {
     this.currentStep = stepIndex;
   }
 
-  private getUpdatedProfile(form: FormGroup) {
+  getUpdatedProfile(form: FormGroup) {
     return {
       firstName: form.value.firstName,
       infix: form.value.middleName,
@@ -241,5 +223,27 @@ export class CarBuyComponent implements OnInit {
       mobileNumber: form.value.mobileNumber,
       phoneNumber: form.value.phone
     };
+  }
+
+  getProposalData(value: any, contactForm: FormGroup) {
+    const flatData = Object.assign({},
+      value.profileInfo,
+      value.adviceInfo,
+      value.adviceInfo.address,
+      value.insuranceInfo,
+      value.insuranceInfo._embedded.insurance,
+      { car: value.carInfo },
+      this.getUpdatedProfile(contactForm));
+
+    const proposalRequest = new CarProposalHelper();
+    const proposalData: Proposal = {
+      proposal: value.insuranceInfo,
+      items:  proposalRequest.getItems(flatData).concat(
+        proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
+      )
+    };
+    proposalData.proposal.car = value.carInfo;
+
+    return proposalData;
   }
 }
