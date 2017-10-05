@@ -4,14 +4,14 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { InsuranceAdvice } from '../../../insurance/models';
 import { Profile } from '../../../profile/models';
 import { Car, CarInsurance } from '../../../car/models';
-import { SecurityClasses } from '../../models/security-classes';
+import { CarUtils } from '../../utils/car-utils';
 
 import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   selector: 'knx-car-summary-form',
   templateUrl: 'car-summary.component.html'
 })
-export class CarSummaryComponent implements OnInit {
+export class CarSummaryComponent {
   @Output() confirmChange = new EventEmitter();
 
   @Input()
@@ -29,49 +29,23 @@ export class CarSummaryComponent implements OnInit {
   @Input() advice: any; // user data from form steps
 
   confirmValue: boolean;
-  securityClasses: Array<any>;
 
-  ngOnInit() {
-    this.securityClasses = SecurityClasses;
-  }
+  carUtils = CarUtils;
 
-  getCoverage(coverage: string) {
-    let value: string;
-
-    switch (coverage) {
-      case 'CL':
-        value = 'Aansprakelijkheid';
-        break;
-      case 'CLC':
-        value = 'Aansprakelijkheid + Beperkt casco';
-        break;
-      case 'CAR':
-        value = 'Aansprakelijkheid + Volledig casco';
-        break;
-      default:
-        break;
-    }
-    return value;
-  }
-
-  getSecurityClassName (securityClass: string) {
-    return securityClass ? this.securityClasses.filter(item => item.value === securityClass)[0].title : '';
-  }
-
-  public isValidInsurance(obj: any) {
+  isValidInsurance(obj: any) {
     return (obj &&
       !this.isEmpty(obj) &&
       !this.isEmpty(obj._embedded) &&
       !this.isEmpty(obj._embedded.car));
   }
 
-  public isValidAdvice(obj: any) {
+  isValidAdvice(obj: any) {
     return (obj &&
     !this.isEmpty(obj) &&
     !this.isEmpty(obj.address));
   }
 
-  private isEmpty(obj: any) {
+  isEmpty(obj: any) {
     return !obj || Object.keys(obj).length <= 0;
   }
 }
