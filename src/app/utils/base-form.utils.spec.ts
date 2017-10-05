@@ -44,6 +44,12 @@ describe('Base Form Util', () => {
     expect(toDateType('30-04-2020')).toEqual(new Date(2020, 3, 30));
   });
 
+  it('should handle null date', () => {
+    expect(toDateType(null)).toBeNull();
+    expect(toDateFormat(null)).toBeNull();
+    expect(parseNicciDate(null)).toBeNull();
+  });
+
   it('should parse a date in NICCI format', () => {
     const testDate = '2016-04-30';
     expect(parseNicciDate(testDate)).toEqual(new Date(2016, 3, 30));

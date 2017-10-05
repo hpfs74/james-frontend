@@ -276,6 +276,9 @@ describe('Component: CarAdviceComponent', () => {
         nicci_cartransmission_automatic_transmission: 'Automaat'
       } as Car;
 
+      comp.address$ = Observable.of(address);
+      comp.car$ = Observable.of(car);
+
       comp.carDetailForm.formGroup.get('licensePlate').setValue(licensePlateValue);
       comp.carDetailForm.formGroup.get('birthDate').setValue(birthDateValue);
       comp.carDetailForm.formGroup.get('claimFreeYears').setValue(claimFreeYearsValue);
@@ -289,9 +292,6 @@ describe('Component: CarAdviceComponent', () => {
 
       comp.carDetailForm.formGroup.updateValueAndValidity();
       comp.addressForm.formGroup.updateValueAndValidity();
-
-      comp.car = car;
-      comp.address = address;
 
       fixture.detectChanges();
 

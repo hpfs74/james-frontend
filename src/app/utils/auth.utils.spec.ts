@@ -29,6 +29,10 @@ describe('Utils: AuthUtils', () => {
       expect(tokenHelper.isTokenExpired(resToken)).toBeTruthy();
     });
 
+    it('should return false on empty token', () => {
+      expect(tokenHelper.isTokenExpired('')).toBeFalsy();
+    });
+
     it('should say that token is valid when token is not expired', () => {
       const token = ' { "expires_in": "12218018281" }';
       const res = tokenHelper.isTokenExpired(token);

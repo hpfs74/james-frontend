@@ -14,13 +14,12 @@
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
         <knx-car-detail-form
-          (addressChange)="onAddressChange($event)"
           (coverageSelected)="updateSelectedCoverage($event)"
           (licensePlateChange)="getCarInfo($event)"
           (activeLoanChange)="updateActiveLoan($event)"
           [form]="carDetailForm"
           [addressForm]="addressForm"
-          [car]="car"
+          [car]="car$ | async"
           [advice]="advice$ | async"
           [coverages]="coverages"
           [coverageRecommendation]="coverageRecommendation$ | async"
