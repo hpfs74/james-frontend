@@ -132,6 +132,28 @@ export class CarProposalHelper {
     return comment ? yesNo + ', ' + comment : yesNo;
   }
 
+  mergeData(items: Array<Object>, values: Array<Object>) {
+    values.forEach( (el) => {
+      let key = Object.keys(el)[0];
+      let item = this.getItem(items, key);
+      if (item) {
+        item[key] = el[key];
+      } else {
+        items.push(el);
+      }
+    });
+  }
+
+  private getItem(items: Array<Object>, property: string): Object {
+    let ret = null;
+    items.forEach( (el) => {
+      if (el.hasOwnProperty(property)) {
+        ret = el;
+      }
+    });
+    return null;
+  }
+
   private getBoolean(value: boolean) {
     return value ? 'Ja' : 'Nee';
   }
@@ -164,4 +186,7 @@ export class CarProposalHelper {
   private removeWhiteSpace(value: string) {
     return value.replace(/[ _]/gim, '');
   }
+
+
+
 }

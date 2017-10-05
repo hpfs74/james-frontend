@@ -197,11 +197,13 @@ export class CarBuyComponent implements OnInit {
         const proposalRequest = new CarProposalHelper();
         const proposalData: Proposal = {
           proposal: value.insuranceInfo,
-          items:  proposalRequest.getItems(flatData).concat(
+          items:  proposalRequest.getItems(Object.assign(flatData, this.getUpdatedProfile(this.contactDetailForm.formGroup))).concat(
               proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
             )
         };
         proposalData.proposal.car = value.carInfo;
+
+
         this.store$.dispatch(new car.BuyAction(proposalData));
       });
 
@@ -231,10 +233,12 @@ export class CarBuyComponent implements OnInit {
 
   private getUpdatedProfile(form: FormGroup) {
     return {
-      firstname: form.value.firstName,
+      firstName: form.value.firstName,
       infix: form.value.middleName,
-      lastname: form.value.lastName,
-      phone: form.value.mobileNumber || form.value.phone
+      lastName: form.value.lastName,
+      initials: form.value.initials,
+      mobileNumber: form.value.mobileNumber,
+      phoneNumber: form.value.phone
     };
   }
 }
