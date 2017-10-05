@@ -212,6 +212,7 @@ describe('Component: CarAdviceComponent', () => {
       const titleValue = 'Dhr.';
       const coverageValue = 'CL';
       const postalCodeValue = '2518CB';
+      const cityValue = 's-Gravenhage';
       const houseNumberValue = '45';
       const countryValue = 'NL';
 
@@ -219,7 +220,7 @@ describe('Component: CarAdviceComponent', () => {
         number: houseNumberValue,
         postcode: postalCodeValue,
         street: '',
-        city: '',
+        city: cityValue,
         county: '',
         province: '',
         fullname: '',
@@ -236,6 +237,7 @@ describe('Component: CarAdviceComponent', () => {
         title: titleValue,
         date_of_birth: '1989-12-19',
         zipcode: postalCodeValue,
+        city: cityValue,
         house_number: houseNumberValue,
         country: countryValue,
         kilometers_per_year: 'KMR3',

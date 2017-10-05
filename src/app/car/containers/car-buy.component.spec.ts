@@ -136,4 +136,87 @@ describe('Component: CarBuyComponent', () => {
     comp.targetComponent.contactDetailForm.formGroup.get('phoneNumber').setValue('0613822660');
     expect(comp.targetComponent.formSteps[0].onBeforeNext() instanceof Observable).toBeTruthy();
   });
+
+  describe('getUpdatedProfile()', () => {
+    it('should populate profile data properly', () => {
+      comp.targetComponent.contactDetailForm.formGroup.get('initials').setValue('F.L.');
+      comp.targetComponent.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
+      comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('First name');
+      comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('Last name');
+      comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
+      // comp.targetComponent.contactDetailForm.formGroup.get('phone').setValue('070777777');
+
+      let obj = comp.targetComponent.getUpdatedProfile(comp.targetComponent.contactDetailForm.formGroup);
+
+      expect(obj.firstName).toBe('First name');
+      expect(obj.lastName).toBe('Last name');
+      expect(obj.infix).toBe('Middle name');
+      expect(obj.initials).toBe('F.L.');
+      expect(obj.mobileNumber).toBe('0666666666');
+      // expect(obj.phoneNumber).toBe('070777777');
+    });
+  });
+
+  describe('getProposalData()', () => {
+    it('should populate flat data properly', () => {
+      let value = {
+        profileInfo: {
+          name: 'asdasd',
+          firstName: 'first name',
+          lastName: 'last name',
+          gender: 'M',
+          initials: 'R.R',
+          date_of_birth: new Date(12, 11, 1975),
+          iban: 'asdkasd',
+          emailaddress: 'mail@domain.com'
+        },
+        adviceInfo: {
+          startDate: '12-12-2017',
+          address: {
+            street: 'aaaa',
+            house_number: '1234',
+            number_extended: '123',
+            zipcode: '23124',
+            city: 'den haag'
+          },
+          acccessoryValue: 1234,
+          kilometers_per_year: 1234,
+          securityClass: ['asbc'],
+          coverage: 'CL',
+          legal: true,
+          cover_occupants: true
+        },
+        insuranceInfo: {
+          _embedded: {
+            insurance: {
+              moneyview_id: 'abc:abc'
+            }
+          }
+        },
+        carInfo: {
+          car: {
+            license: '123',
+            make: 'AAA',
+            model: 'AAAA',
+            technical_type: 'AAAA',
+            year: 2015,
+            price_consumer_incl_vat: 12345,
+            current_value: 11333,
+            weight_empty_vehicle: 1234
+
+          }
+        }
+      };
+
+      comp.targetComponent.contactDetailForm.formGroup.get('initials').setValue('F.L.');
+      comp.targetComponent.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
+      comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('First name');
+      comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('Last name');
+      comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
+
+      let result = comp.targetComponent.getProposalData(value, comp.targetComponent.contactDetailForm.formGroup);
+
+      expect(result).toBeDefined();
+    });
+  });
 });

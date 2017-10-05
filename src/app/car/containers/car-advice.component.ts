@@ -210,6 +210,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
             FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
           zipcode: address.postcode,
           house_number: address.number,
+          city: address.city,
           country: 'NL',
           kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
           own_risk: +detailForm.value.ownRisk || 0,
