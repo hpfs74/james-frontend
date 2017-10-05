@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
-import { ChatMessage } from './chat-message';
 
 describe('Component: ChatStreamComponent', () => {
   let comp: ChatStreamComponent;

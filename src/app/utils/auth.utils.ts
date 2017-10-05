@@ -1,7 +1,7 @@
 export class TokenHelper {
 
   public getTokenExpirationDate(token: string): Number {
-    return JSON.parse(token).expiration_time;
+    return token ? JSON.parse(token).expiration_time : null;
   }
 
   public isTokenExpired(token: string, offsetSeconds?: number): boolean {

@@ -8,6 +8,12 @@ import {
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../environments/environment';
 
+import * as logoutActions from '../auth/actions/auth';
+
+import * as fromAddress from '../address/reducers';
+import * as fromInsurance from '../insurance/reducers';
+import * as fromCar from '../car/reducers';
+
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -70,22 +76,20 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   };
 }
 
-// export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
-//   return function (state, action) {
-//     return reducer(action.type === LOGOUT ? {
-//       profile: undefined,
-//       settings: state.settings,
-//       layout: state.layout,
-//       insurances: undefined,
-//       assistant: state.assistant,
-//       compare: undefined,
-//       advice: undefined,
-//       car: undefined,
-//       coverage: undefined,
-//       routerReducer: state.routerReducer
-//     } : state, action);
-//   };
-// }
+export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
+  return function (state, action) {
+    if (action.type === logoutActions.LOGOUT) {
+      // reset to initialstate
+      state = {
+        ...state,
+        ...fromAddress.reducers,
+        ...fromInsurance.reducers,
+        ...fromCar.reducers
+      };
+    }
+    return reducer(state, action);
+  };
+}
 
 /**
  * By default, @ngrx/store uses combineReducers with the reducer map to compose
@@ -93,33 +97,5 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
  * that will be composed to form the root meta-reducer.
  */
 export const metaReducers: MetaReducer<State>[] = !environment.production
-? [logger] /* [logger, storeFreeze] */
-: [];
-
-/**
- * A selector function is a map function factory. We pass it parameters and it
- * returns a function that maps from the larger state tree into a smaller
- * piece of state. This selector simply selects the `books` state.
- *
- * Selectors are used with the `select` operator.
- *
- * ```ts
- * class MyComponent {
- * 	constructor(state$: Observable<State>) {
- * 	  this.booksState$ = state$.select(getBooksState);
- * 	}
- * }
- * ```
- */
-
-
-/**
- * Every reducer module exports selector functions, however child reducers
- * have no knowledge of the overall state tree. To make them useable, we
- * need to make new selectors that wrap them.
- *
- * The createSelector function from the reselect library creates
- * very efficient selectors that are memoized and only recompute when arguments change.
- * The created selectors can also be composed together to select different
- * pieces of state.
- */
+? [logger, logout] /* [logger, storeFreeze] */
+: [logout];

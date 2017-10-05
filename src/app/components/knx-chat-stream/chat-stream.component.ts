@@ -1,14 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import {
-  Component, Input, OnChanges, SimpleChanges, OnInit, ViewChild, AfterViewInit,
-  OnDestroy, ComponentFactoryResolver
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { AvatarComponent } from './../knx-avatar/avatar.component';
-import { ChatMessageDirective } from './chat-message.directive';
 import { ChatStreamOptions } from './chat-stream.options';
-import { TextMessageComponent } from './text-message.component';
-import { IChatMessage } from './chat-message.interface';
 import { ChatMessage } from './chat-message';
 
 @Component({
