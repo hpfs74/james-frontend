@@ -4,9 +4,11 @@ import * as fromRouter from '@ngrx/router-store';
 import { RouterStateUrl } from '../../utils/routersnapshot';
 
 import * as fromRoot from '../../reducers';
-// import * as fromAnalytics from './analytics';
+import * as fromAnalytics from './analytics';
 import * as fromAssistant from './assistant';
 import * as fromLayout from './layout';
+
+import { environment } from '../../../environments/environment';
 
 export interface CoreState {
   assistant: fromAssistant.State;
@@ -21,8 +23,7 @@ export interface State extends fromRoot.State {
 export const reducers = {
   assistant: fromAssistant.reducer,
   layout: fromLayout.reducer,
-  router: fromRouter.routerReducer
-  // routerReducer: analyticsMetaReducer(fromRouter.routerReducer)
+  router: environment.enableAnalytics ? fromAnalytics.reducer : fromRouter.routerReducer
 };
 
 
