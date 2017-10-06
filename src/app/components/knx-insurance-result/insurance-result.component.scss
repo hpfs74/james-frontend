@@ -40,7 +40,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
 
 .knx-insurance-result__counter {
   background: $knab-primary-blue;
-  color: #fff;
+  color: $knab-white;
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -76,7 +76,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
 .knx-sticker {
   width: 60px;
   height: 60px;
-  color: #fff;
+  color: $knab-white;
   background: $knab-primary-green;
   font-weight: normal;
   font-size: 25px;
@@ -211,7 +211,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
 .knx-button .knx-button__extra {
   display: block;
   text-align: center;
-  color: #fff;
+  color: $knab-white;
   font-size: $font-size-base - 2;
   font-family: $font-family-base;
   text-transform: none;
@@ -263,7 +263,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
   top: -10px;
   width: 0;
   height: 50px;
-  color: #fff;
+  color: $knab-white;
   font-weight: bold;
   text-indent: -16px;
   line-height: 46px;
