@@ -9,11 +9,12 @@ import { InsuranceDocument } from './../../insurance/models';
       <div class="knx-collapsible-panel__content">
         <div class="row">
           <div class="col-sm-12">
-            <span>Hier vind je de voorwaarden van de verzekering die je hebt gekozen:</span><br>
+            <span>Hier vind je de voorwaarden van de gekozen verzekering.</span><br>
             <span class="knx-collapse-panel__muted">
               In deze lijst staan ook alle voorwaarden voor extra dekkingen. Heb je deze extra’s niet geselecteerd?
               Dan kun je deze natuurlijk negeren.
             </span>
+
             <span>
               <knx-info size="md" isFloating="true" class="knx-info">
                 <div class="knx-info__content">
