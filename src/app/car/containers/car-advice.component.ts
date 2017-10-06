@@ -168,7 +168,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         label: 'Aanvragen',
         backButtonLabel: 'Terug',
         nextButtonLabel: 'Verzekering aanvragen',
-        nextButtonClass: 'knx-button knx-button--cta knx-button--extended',
+        nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--promo',
         onShowStep: this.onShowSummary.bind(this),
         onBeforeNext: this.startBuyFlow.bind(this)
       }
@@ -330,7 +330,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Subscribe to coverage recommendation request
     this.store$.select(fromCar.getCoverage)
       .filter(coverage => coverage !== null)
-      .take(1)
       .subscribe(coverageAdvice => {
         let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
         if (coverageItem) {

@@ -10,7 +10,11 @@ import { CarInsurance } from '../../car/models';
     <div *ngIf="selectedInsurance">
       <h2 class="knx-insurance-review__header">
         Controleer je gegevens
-        <img class="knx-insurance-review__logo" src="{{ selectedInsurance?._embedded?.insurance?.insurance_logo }}">
+        <span>
+          <img class="knx-insurance-review__logo" src="{{ selectedInsurance._embedded.insurance.insurance_logo }}">
+          <br>
+          <span class="knx-insurance-review__name">({{ selectedInsurance._embedded.insurance.insurance_brand }})</span>
+        </span>
       </h2>
     </div>
 

@@ -35,6 +35,11 @@ import { CarInsurance } from '../../car/models/car-insurance';
         <knx-ir-value>{{ carInsurance.monthly_premium | currency:'EUR':true }}</knx-ir-value>
       </knx-ir-row>
 
+      <knx-ir-row>
+        <knx-ir-label>Eenmalige afsluitkosten</knx-ir-label>
+        <knx-ir-value>{{ carInsurance?.one_off_premium | currency:'EUR':true }}</knx-ir-value>
+      </knx-ir-row>
+
     </knx-ir-content>
 
     <knx-ir-content title="Jouw extra's">

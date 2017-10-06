@@ -18,21 +18,20 @@
   transform: rotate(-90deg);
   display: block;
   fill: none;
-  stroke: $knab-medium-gray;
+
+  circle {
+    stroke: $knab-primary-green;
+    opacity: 0.15;
+
+    &:first-child {
+      opacity: 1;
+    }
+  }
 }
 
 .knx-insurance_advice__supported {
-  .knx-insurance-result__buy {
-    background: $knab-primary-green;
-
-    .knx-insurance-result__premium,
-    .knx-insurance-result__premium span {
-      color: $knab-white;
-    }
-
-    .knx-donut__circle {
-      stroke: $knab-primary-green;
-    }
+  .knx-insurance-result__premium {
+    color: $knab-primary-red;
   }
 }
 // .circle_animation {

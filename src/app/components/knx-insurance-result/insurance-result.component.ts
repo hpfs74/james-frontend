@@ -11,7 +11,12 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
         <div class="knx-insurance-result__counter">{{ index + 1 }}</div>
         <div class="row">
           <div class="col-sm-4">
+            <div class="knx-insurance-result__bookmark" *ngIf="insurance.supported">knab</div>
+            <div class="knx-insurance-result__bookmark-tip" *ngIf="insurance.supported"></div>
+
             <img class="knx-insurance-result__logo" src="{{ insurance._embedded.insurance.insurance_logo }}">
+
+            <span class="knx-insurance-result__name">({{ insurance._embedded.insurance.insurance_brand }})</span>
             <!--<div class="knx-sticker knx-sticker--yellow" title="Op basis van jouw wensen raden we deze premie aan">
               <span class="knx-icon-thumbs-o-up"></span>
             </div>
@@ -20,7 +25,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
 
           <div class="col-sm-4">
             <div class="row">
-              <div class="col-sm-6 text-center knx-insurance-result__own-risk knx-insurance-result__price">
+              <div class="col-sm-6 knx-insurance-result__own-risk knx-insurance-result__price">
                 {{ insurance.own_risk | currency:'EUR':true }}<br><span>Eigen risico</span>
               </div>
               <!--div class="col-sm-6 knx-insurance-result__reviews">
@@ -40,6 +45,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
                 </div>
               </div>
             </div>
+
             <div class="row">
               <div class="col-sm-6 knx-insurance-result__profilescore">
                 <div class="knx-insurance-result__label">
@@ -53,24 +59,29 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
                   </knx-info>
                 </div>
               </div>
+
               <div class="col-sm-6 knx-insurance-result__profilescore">
                 <knx-donut *ngIf="insurance.fit" [percentage]="insurance.fit"></knx-donut>
               </div>
             </div>
           </div>
+
           <div class="col-sm-4 knx-insurance-result__buy">
             <div class="knx-insurance-result__premium knx-insurance-result__price">
               {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
             </div>
-            <button role="button" class="knx-button knx-button--fullwidth knx-button--secondary"
-              [ngClass]="{'knx-button--extra-padding': insurance.supported}"
+
+            <button role="button" class="knx-button knx-button--fullwidth knx-button--secondary knx-button--extended knx-button--promo"
+              [ngClass]="{'knx-button--promo': insurance.supported}"
               [disabled]="disableButton"
               (click)="select($event)">
               Bekijk
-              <span *ngIf="insurance.supported" class="knx-button__extra" (click)="select($event)">
-                via Knab
-              </span>
             </button>
+
+            <div class="knx-insurance-result__discount" *ngIf="insurance.discount">
+              Inclusief <br>
+              <strong> {{ insurance.discount | currency:'EUR':true }} Knab korting </strong>
+            </div>
           </div>
         </div>
       </div>
