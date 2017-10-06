@@ -39,7 +39,7 @@ import { AddressModule } from './address/address.module';
 
     HttpModule,
 
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes),
 
     SharedModule,
 
