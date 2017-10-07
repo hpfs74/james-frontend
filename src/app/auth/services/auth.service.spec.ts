@@ -1,6 +1,8 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestModuleMetadata, TestBed, async, inject } from '@angular/core/testing';
 import { Http, Response, ResponseOptions, XHRBackend, BaseRequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+
+import { setUpTestBed } from './../../../test.common.spec';
 import { AuthService } from './auth.service';
 
 describe('Service: AuthService', () => {
@@ -16,26 +18,27 @@ describe('Service: AuthService', () => {
     }
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        BaseRequestOptions,
-        MockBackend,
-        AuthService,
-        { provide: XHRBackend, useClass: MockBackend },
-        {
-          deps: [
-            MockBackend,
-            BaseRequestOptions
-          ],
-          provide: Http,
-          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-          }
+  let moduleDef: TestModuleMetadata = {
+    providers: [
+      BaseRequestOptions,
+      MockBackend,
+      AuthService,
+      { provide: XHRBackend, useClass: MockBackend },
+      {
+        deps: [
+          MockBackend,
+          BaseRequestOptions
+        ],
+        provide: Http,
+        useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+          return new Http(backend, defaultOptions);
         }
-      ]
-    });
+      }
+    ]
+  };
+  setUpTestBed(moduleDef);
 
+  beforeEach(async(() => {
     backend = TestBed.get(MockBackend);
     service = TestBed.get(AuthService);
   }));

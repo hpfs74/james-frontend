@@ -1,12 +1,13 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpModule } from '@angular/http';
 import { SharedModule } from '../../shared.module';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './../../components/knx-navigation/navbar.component';
 import { NavigationService } from '../services/navigation.service';
@@ -33,34 +34,35 @@ describe('Component: AppComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let store: Store<fromRoot.State>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpModule,
-        RouterTestingModule,
-        SharedModule,
-        StoreModule.forRoot({
-        ...fromRoot.reducers,
-        'auth': combineReducers(fromAuth.reducers),
-        'core': combineReducers(fromCore.reducers),
-        'profile': combineReducers(fromProfile.reducers)
-      })],
-      declarations: [AppComponent, TestHostComponent, NavbarComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        NavigationService,
-        {
-          provide: UserDialogService,
-          useValue: {}
-        }
-      ]
-    }).compileComponents();
+  let moduleDef: TestModuleMetadata = {
+    imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      HttpModule,
+      RouterTestingModule,
+      SharedModule,
+      StoreModule.forRoot({
+      ...fromRoot.reducers,
+      'auth': combineReducers(fromAuth.reducers),
+      'core': combineReducers(fromCore.reducers),
+      'profile': combineReducers(fromProfile.reducers)
+    })],
+    declarations: [AppComponent, TestHostComponent, NavbarComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [
+      NavigationService,
+      {
+        provide: UserDialogService,
+        useValue: {}
+      }
+    ]
+  };
+  setUpTestBed(moduleDef);
 
+  beforeAll(() => {
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

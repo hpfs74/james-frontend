@@ -1,10 +1,10 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { Nav, NavItemType } from '../../core/models';
 import { NavbarComponent } from './navbar.component';
 import { NavUserComponent } from './../knx-nav-user/nav-user.component';
@@ -15,13 +15,12 @@ describe('Component: Navbar', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, BrowserAnimationsModule],
-      declarations: [NavbarComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [RouterTestingModule, BrowserAnimationsModule],
+    declarations: [NavbarComponent],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);

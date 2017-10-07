@@ -1,8 +1,9 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
-import { LoaderComponent } from './loader.component';
 
+import { setUpTestBed } from './../../../test.common.spec';
+import { LoaderComponent } from './loader.component';
 
 describe('Component: Loader', () => {
   let comp: LoaderComponent;
@@ -10,11 +11,10 @@ describe('Component: Loader', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoaderComponent]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [LoaderComponent]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoaderComponent);

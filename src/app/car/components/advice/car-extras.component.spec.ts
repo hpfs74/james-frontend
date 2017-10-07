@@ -1,11 +1,11 @@
 import { CarExtrasForm } from './car-extras.form';
 import { ViewChild, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { CarExtrasComponent } from './car-extras.component';
 
@@ -22,13 +22,12 @@ describe('Component: CarExtrasComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
-      providers: [],
-      declarations: [CarExtrasComponent, TestHostComponent],
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [BrowserAnimationsModule, SharedModule],
+    providers: [],
+    declarations: [CarExtrasComponent, TestHostComponent]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

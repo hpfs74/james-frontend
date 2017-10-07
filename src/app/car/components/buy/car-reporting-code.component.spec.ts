@@ -1,10 +1,10 @@
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { CXFormsModule } from '@cx/forms';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { CarReportingCodeComponent } from './car-reporting-code.component';
 
@@ -23,12 +23,11 @@ describe('Component: CarReportingCodeComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
-      declarations: [CarReportingCodeComponent, TestHostComponent]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [SharedModule],
+    declarations: [CarReportingCodeComponent, TestHostComponent]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
