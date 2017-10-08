@@ -4,6 +4,14 @@ import { InsuranceDocument } from './../../insurance/models';
 
 @Component({
   selector: 'knx-insurance-review-documents',
+  styles: [`
+    .knx-insurance-review-documents__list > li {
+      padding-bottom: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  `],
   template: `
     <knx-collapsible-panel [title]="title">
       <div class="knx-collapsible-panel__content">
@@ -38,7 +46,7 @@ import { InsuranceDocument } from './../../insurance/models';
           <div class="col-sm-12">
             <ul class="knx-insurance-review-documents__list">
               <li *ngFor="let doc of documents"><span class="knx-icon-file-o"></span>
-                <a href="{{doc.url}}}" target="_blank" rel="noopener">{{doc.name}}</a>
+                <a href="{{doc.url}}}" target="_blank" rel="noopener" title="{{doc.name}}">{{doc.name}}</a>
               </li>
             </ul>
           </div>
