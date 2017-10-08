@@ -343,17 +343,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         }
       });
 
-    FormUtils.scrollToForm('knx-car-detail-form');
+    FormUtils.scrollToElement('knx-car-detail-form');
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
   }
 
   private onShowResults() {
-    FormUtils.scrollToForm('knx-insurance-toplist');
+    FormUtils.scrollToElement('knx-insurance-toplist');
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
   }
 
   private onShowSummary() {
-    FormUtils.scrollToForm('knx-insurance-review');
+    FormUtils.scrollToElement('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
 
     this.store$.select(fromInsurance.getSelectedInsurance).take(1)

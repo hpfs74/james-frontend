@@ -35,6 +35,14 @@ import { CarInsurance } from '../../car/models/car-insurance';
         <knx-ir-value>{{ carInsurance.monthly_premium | currency:'EUR':true }}</knx-ir-value>
       </knx-ir-row>
 
+      <knx-ir-row showTooltip="true" showValue="true" *ngIf="carInsurance.one_off_premium > 0">
+        <knx-ir-label>One off premium</knx-ir-label>
+        <knx-ir-tooltip>
+          <p>Amount to be payed for first time customers</p>
+        </knx-ir-tooltip>
+        <knx-ir-value>{{ carInsurance.one_off_premium | currency:'EUR':true }}</knx-ir-value>
+      </knx-ir-row>
+
     </knx-ir-content>
 
     <knx-ir-content title="Jouw extra's">

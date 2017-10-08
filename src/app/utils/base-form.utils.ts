@@ -3,7 +3,7 @@ import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrect
 import * as moment from 'moment';
 
 // Scoll back to form; assumes there's only one form of this type on current page
-export function scrollToForm(cssClass: string): void {
+export function scrollToElement(cssClass: string): void {
   const element = <HTMLElement>document.querySelector(cssClass);
   if (element) {
     window.scrollTo(0, element.offsetTop);
