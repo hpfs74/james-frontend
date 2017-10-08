@@ -4,19 +4,22 @@ pipelines:
   default:
     - step:
         name: setup
+        caches:
+          - node
         script:
           - printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
           - npm set registry https://knab-npm.ddns.net
           - npm set strict-ssl false
-    - step:
-        name: install
-        script:
           - npm install
     - step:
         name: build
+        caches:
+          - node
         script:
           - npm run build
     - step:
         name: test
+        caches:
+          - node
         script:
           - npm run test
