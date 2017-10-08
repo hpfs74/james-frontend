@@ -35,7 +35,7 @@ import { CarInsurance } from '../../car/models/car-insurance';
         <knx-ir-value>{{ carInsurance.monthly_premium | currency:'EUR':true }}</knx-ir-value>
       </knx-ir-row>
 
-      <knx-ir-row showTooltip="true" showValue="true" *ngIf="carInsurance.one_off_premium > 0">
+      <knx-ir-row showTooltip="true" showValue="true" *ngIf="showOneOffPremium()">
         <knx-ir-label>One off premium</knx-ir-label>
         <knx-ir-tooltip>
           <p>Amount to be payed for first time customers</p>
@@ -45,7 +45,7 @@ import { CarInsurance } from '../../car/models/car-insurance';
 
     </knx-ir-content>
 
-    <knx-ir-content title="Jouw extra's">
+    <knx-ir-content title="Jouw extra's" *ngIf="carInsurance">
       <knx-ir-row>
         <knx-ir-label>Pechhulp</knx-ir-label>
         <knx-ir-value>{{carInsurance.road_assistance}}</knx-ir-value>
@@ -70,4 +70,8 @@ import { CarInsurance } from '../../car/models/car-insurance';
 })
 export class InsuranceReviewCarComponent {
   @Input() carInsurance: CarInsurance;
+
+  showOneOffPremium(): boolean {
+    return this.carInsurance.one_off_premium > 0;
+  }
 }
