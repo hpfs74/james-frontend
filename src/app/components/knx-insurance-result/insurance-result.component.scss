@@ -3,7 +3,7 @@
 // These styles desperately need refactoring!
 // =======================================================
 
-$knx-insurance-result-border: 1px solid $knab-primary-gray;
+$knx-insurance-result-border: 1px solid $knab-tan-gray;
 
 .knx-insurance-result {
   margin-bottom: 30px;
@@ -40,7 +40,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 
 .knx-insurance-result__counter {
   background: $knab-primary-blue;
-  color: #fff;
+  color: $knab-white;
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -61,10 +61,22 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   max-width: 120px;
 }
 
+.knx-insurance_advice__supported .knx-insurance-result__logo {
+  margin-top: 40px;
+}
+
+.knx-insurance-result__name {
+  display: block;
+  width: 100%;
+  margin: 20px auto;
+  max-width: 120px;
+  text-align: center;
+}
+
 .knx-sticker {
   width: 60px;
   height: 60px;
-  color: #fff;
+  color: $knab-white;
   background: $knab-primary-green;
   font-weight: normal;
   font-size: 25px;
@@ -100,6 +112,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 
   span {
     font-family: $font-family-base;
+    font-size: 14px;
   }
 }
 
@@ -175,6 +188,11 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
   display: flex;
 }
 
+.knx-insurance-result__discount {
+  text-align: center;
+  color: $knab-primary-red;
+}
+
 .knx-insurance-result__details .knx-tabs__tab {
   flex-grow: 1;
 }
@@ -185,7 +203,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 }
 
 .knx-button--extra-padding {
-  padding-top: 16px;
+  padding-top: 23px;
   padding-bottom: 18px;
   min-height: 60px;
 }
@@ -193,7 +211,7 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
 .knx-button .knx-button__extra {
   display: block;
   text-align: center;
-  color: #fff;
+  color: $knab-white;
   font-size: $font-size-base - 2;
   font-family: $font-family-base;
   text-transform: none;
@@ -237,4 +255,31 @@ $knx-insurance-result-border: 1px solid $knab-primary-gray;
     margin-top: 15px;
     border-top: $knx-insurance-result-border;
   }
+}
+
+.knx-insurance-result__bookmark {
+  position: absolute;
+  left: 20px;
+  top: -10px;
+  width: 0;
+  height: 50px;
+  color: $knab-white;
+  font-weight: bold;
+  text-indent: -16px;
+  line-height: 46px;
+  font-family: $font-family-head;
+  border-left: 20px solid $knab-primary-red;
+  border-right: 20px solid $knab-primary-red;
+  border-bottom: 10px solid transparent;
+}
+
+.knx-insurance-result__bookmark-tip {
+  position: absolute;
+  left: 10px;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 10px 10px;
+  border-color: transparent transparent $knab-primary-red transparent;
 }

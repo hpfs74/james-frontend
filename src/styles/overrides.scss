@@ -31,6 +31,12 @@
   padding-top: 10px;
 }
 
+button.knx-button--toggle,
+.knx-button--toggle {
+  border: 1px solid $knab-tan-gray;
+  border-radius: 0;
+}
+
 .knx-message .knx-message__content {
   line-height: 1.4em;
 }
@@ -71,4 +77,8 @@
 
 .ng2-dropdown-button {
   max-width: 250px;
+}
+
+.knx-avatar__image {
+  border: 0;
 }
