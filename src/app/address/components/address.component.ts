@@ -18,6 +18,7 @@ export class AddressComponent implements AfterViewChecked {
   @Input() validationErrors: any;
   @Input() asyncValidator: Observable<any>;
   @Input() addressPreview: string;
+  @Input() isLoading: boolean;
 
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
   @Output() runValidation: EventEmitter<AddressLookup> = new EventEmitter();

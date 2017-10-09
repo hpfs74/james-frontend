@@ -1,7 +1,16 @@
-.car-form__coverages {
-  margin-top: 30px;
+
+.car-detail-form {
+  .car-form__coverages {
+    margin-top: 30px;
+  }
+
+  h4.knx-collapse-message__title {
+    letter-spacing: 0.05em;
+  }
+
+  .knx-loader-message {
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
 }
 
-h4.knx-collapse-message__title {
-  letter-spacing: 0.05em;
-}

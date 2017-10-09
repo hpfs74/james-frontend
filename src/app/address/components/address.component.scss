@@ -14,6 +14,8 @@
   }
 
   .knx-address-lookup__result {
-    margin-top: -30px;
+    .knx-message {
+      margin-top: -30px;
+    }
   }
 }

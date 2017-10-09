@@ -37,9 +37,13 @@
     </div>
   </div>
 
-  <div class="row knx-address-lookup__result" *ngIf="addressPreview">
+  <div class="row knx-address-lookup__result">
     <div class="col-md-12">
-      <div class="knx-message knx-message--hint">
+      <knx-loader [visible]="isLoading">
+        Bezig met ophalen van adres...
+      </knx-loader>
+
+      <div class="knx-message knx-message--hint" *ngIf="addressPreview">
         <span class="knx-icon-map-marker"></span><strong>{{addressPreview}}</strong>
       </div>
     </div>

@@ -18,6 +18,7 @@ import { AddressLookup, Address } from '../models';
       [validationErrors]="addressForm.validationErrors"
       [asyncValidator]="getAddress$"
       [addressPreview]="addressPreview$ | async"
+      [isLoading]="loading$ | async"
       (runValidation)="validateAddress($event)">
     </knx-address>
   `
@@ -28,11 +29,14 @@ export class AddressLookupComponent implements OnInit {
 
   addressPreview$: Observable<string>;
   getAddress$: Observable<any>;
+  loading$: Observable<boolean>;
 
   constructor(private store$: Store<fromAddress.State>) {}
 
   ngOnInit() {
     this.addressPreview$ = this.store$.select(fromAddress.getAddressFullname);
+    this.loading$ = this.store$.select(fromAddress.getAddressLoading);
+
     this.getAddress$ = this.store$.select(fromAddress.getAddress)
     .map((address) => {
       if (address) {
