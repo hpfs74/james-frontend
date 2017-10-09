@@ -1,11 +1,11 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { CurrencyPipe } from '@angular/common';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { PriceItemComponent } from './price-item.component';
 import { Price } from '../../shared/models/price';
-
 
 describe('Component: PriceItem', () => {
   let comp: PriceItemComponent;
@@ -14,11 +14,10 @@ describe('Component: PriceItem', () => {
   let el: HTMLElement;
   let prices: Array<Price>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [PriceItemComponent],
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [PriceItemComponent]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PriceItemComponent);

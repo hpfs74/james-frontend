@@ -1,11 +1,13 @@
 import { AuthService } from '../../auth/services/auth.service';
 import { NO_ERRORS_SCHEMA, Component, ViewChild, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpModule, Response, ResponseOptions } from '@angular/http';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
+
+import { setUpTestBed } from './../../../test.common.spec';
 
 import { Address, AddressLookup } from '../models';
 import { AddressForm } from '../components/address.form';
@@ -75,32 +77,38 @@ describe('Component: AddressLookup', () => {
     }
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpModule,
-        StoreModule.forRoot({
-          ...fromRoot.reducers,
-          'address': combineReducers(fromAddress.reducers)
-        })
-      ],
-      providers: [
-        AuthHttp,
-        AuthService,
-        LocalStorageService,
-        {provide: LoaderService, useValue: {}},
-        {provide: AddressService, useValue: addressServiceStub},
-      ],
-      declarations: [
-        AddressLookupComponent,
-        TestHostComponent
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+  let moduleDef: TestModuleMetadata = {
+    imports: [
+      HttpModule,
+      StoreModule.forRoot({
+        ...fromRoot.reducers,
+        'address': combineReducers(fromAddress.reducers)
+      })
+    ],
+    providers: [
+      AuthHttp,
+      AuthService,
+      LocalStorageService,
+      {provide: LoaderService, useValue: {}},
+      {provide: AddressService, useValue: addressServiceStub},
+    ],
+    declarations: [
+      AddressLookupComponent,
+      TestHostComponent
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
+  beforeAll(() => {
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
-  }));
+  });
+
+  // beforeEach(async(() => {
+  //   store = TestBed.get(Store);
+  //   spyOn(store, 'dispatch').and.callThrough();
+  // }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

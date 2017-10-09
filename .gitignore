@@ -113,6 +113,8 @@ desktop
 gulpfile.js
 gulpfile.js.map
 
+junit.xml
+
 #VSCode Chrome Debugger Extension (launch.json configuration)
 ChromeDebugger-UserData
 

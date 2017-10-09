@@ -1,8 +1,9 @@
 import { NO_ERRORS_SCHEMA, DebugElement, LOCALE_ID } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { CarInfoMessageComponent } from './car-info-message.component';
 import { Car } from '../../car/models';
 
@@ -41,19 +42,18 @@ describe('Component: CarInfoMessageComponent', () => {
     'nicci_cartransmission_manual_transmission': 'Handgeschakeld'
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [CarInfoMessageComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        {
-          provide: LOCALE_ID,
-          useValue: 'nl-NL'
-        },
-        CurrencyPipe
-      ]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [CarInfoMessageComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [
+      {
+        provide: LOCALE_ID,
+        useValue: 'nl-NL'
+      },
+      CurrencyPipe
+    ]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CarInfoMessageComponent);

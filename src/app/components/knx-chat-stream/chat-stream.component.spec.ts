@@ -1,7 +1,8 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { ChatStreamComponent } from './chat-stream.component';
 import { ChatStreamOptions } from './chat-stream.options';
 
@@ -18,12 +19,11 @@ describe('Component: ChatStreamComponent', () => {
     }
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ChatStreamComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [ChatStreamComponent],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChatStreamComponent);

@@ -1,10 +1,10 @@
 import { CarCheckForm } from './car-check.form';
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
-import { CXFormsModule } from '../../../../../node_modules/@cx/forms';
 
+import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { CarCheckComponent } from './car-check.component';
 
@@ -24,13 +24,12 @@ describe('Component: CarCheckComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule, SharedModule],
-      declarations: [CarCheckComponent, TestHostComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [SharedModule],
+    declarations: [CarCheckComponent, TestHostComponent],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

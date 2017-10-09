@@ -1,20 +1,19 @@
-import { OpeningHoursComponent } from './opening-hours.component';
-
 import { NO_ERRORS_SCHEMA, DebugElement, Input, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../test.common.spec';
+import { OpeningHoursComponent } from './opening-hours.component';
 
 describe('Component: CarContactComponent', () => {
   let fixture: ComponentFixture<OpeningHoursComponent>;
   let comp: OpeningHoursComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserModule ],
-      declarations: [OpeningHoursComponent]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [BrowserModule ],
+    declarations: [OpeningHoursComponent]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OpeningHoursComponent);

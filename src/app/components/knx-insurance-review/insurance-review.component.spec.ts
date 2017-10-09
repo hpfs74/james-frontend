@@ -1,12 +1,12 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { InsuranceReviewComponent } from './insurance-review.component';
 import { KNXCollapsiblePanelComponent } from '../../../../node_modules/@knx/collapsible-panel/index';
 import { KNXInfoComponent } from '../../../../node_modules/@knx/info/index';
 import { CurrencyPipe } from '@angular/common';
 
-import { CXFormsModule } from '../../../../node_modules/@cx/forms';
+import { setUpTestBed } from './../../../test.common.spec';
 import { SharedModule } from '../../shared.module';
 import { InsuranceReviewModule } from './insurance-review.module';
 
@@ -27,21 +27,12 @@ describe('Component: InsuranceReviewComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        CXFormsModule,
-        SharedModule,
-        InsuranceReviewModule],
-      declarations: [
-        TestHostComponent
-      ],
-      providers: [
-        CurrencyPipe
-      ]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [SharedModule, InsuranceReviewModule],
+    declarations: [TestHostComponent],
+    providers: [CurrencyPipe]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

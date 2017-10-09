@@ -1,7 +1,8 @@
 import { NO_ERRORS_SCHEMA, DebugElement, LOCALE_ID } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { AppPromoBlockComponent } from './app-promo.component';
 
 describe('Component: AppPromoBlockComponent', () => {
@@ -10,12 +11,11 @@ describe('Component: AppPromoBlockComponent', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AppPromoBlockComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [AppPromoBlockComponent],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppPromoBlockComponent);

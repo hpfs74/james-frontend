@@ -43,8 +43,8 @@ module.exports = function(config) {
                 global: {
                     statements: 77,
                     branches: 58,
-                    functions: 59,
-                    lines: 76
+                    functions: 60,
+                    lines: 77
                 },
                 // per file
                 // each: {

@@ -1,7 +1,8 @@
 import { Component, DebugElement, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { InsuranceTopListComponent } from './insurance-toplist.component';
 
 @Component({
@@ -18,13 +19,12 @@ describe('Component: InsuranceTopList', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [InsuranceTopListComponent, TestHostComponent],
-      imports: [BrowserModule],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [InsuranceTopListComponent, TestHostComponent],
+    imports: [BrowserModule],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
