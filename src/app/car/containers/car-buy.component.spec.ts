@@ -1,14 +1,14 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
-import { CXFormsModule } from '@cx/forms/index';
+
+import { setUpTestBed } from './../../../test.common.spec';
 
 // Components
 import { CarContactComponent } from '../components/buy/car-contact.component';
@@ -63,46 +63,43 @@ describe('Component: CarBuyComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let store: Store<fromAuth.State>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        CXFormsModule,
-        SharedModule,
-        StoreModule.forRoot({
-          ...fromRoot.reducers,
-          'auth': combineReducers(fromAuth.reducers),
-          'core': combineReducers(fromCore.reducers),
-          'car': combineReducers(fromCar.reducers),
-          'insurance': combineReducers(fromInsurance.reducers),
-          'profile': combineReducers(fromProfile.reducers)
-        }, {
-            initialState: getInitialState
-          })
-      ],
-      declarations: [
-        CarBuyComponent,
-        CarSummaryComponent,
-        TestHostComponent,
-        CarPaymentComponent,
-        CarContactComponent,
-        CarReportingCodeComponent,
-        CarCheckComponent
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        CurrencyPipe,
-        {
-          provide: Router,
-          useClass: class {
-            navigate = jasmine.createSpy('navigate');
-          }
-        }]
-    }).compileComponents();
+  let moduleDef: TestModuleMetadata = {
+    imports: [
+      BrowserAnimationsModule,
+      SharedModule,
+      StoreModule.forRoot({
+        ...fromRoot.reducers,
+        'auth': combineReducers(fromAuth.reducers),
+        'core': combineReducers(fromCore.reducers),
+        'car': combineReducers(fromCar.reducers),
+        'insurance': combineReducers(fromInsurance.reducers),
+        'profile': combineReducers(fromProfile.reducers)
+      }, {
+          initialState: getInitialState
+        })
+    ],
+    declarations: [
+      CarBuyComponent,
+      CarSummaryComponent,
+      TestHostComponent,
+      CarPaymentComponent,
+      CarContactComponent,
+      CarReportingCodeComponent,
+      CarCheckComponent
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [
+      CurrencyPipe,
+      {
+        provide: Router,
+        useClass: class {
+          navigate = jasmine.createSpy('navigate');
+        }
+      }]
+  };
+  setUpTestBed(moduleDef);
 
+  beforeEach(async(() => {
     store = TestBed.get(Store);
   }));
 

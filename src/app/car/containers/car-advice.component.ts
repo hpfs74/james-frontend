@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, AfterViewInit,
+          ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, StepError } from '@knx/wizard';
 import { KNXWizardComponent } from '@knx/wizard';
@@ -341,20 +342,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         }
       });
 
-    FormUtils.scrollToForm('form');
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
-
-    FormUtils.scrollToForm('form');
+    FormUtils.scrollToElement('knx-car-detail-form');
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
   }
 
   private onShowResults() {
-    FormUtils.scrollToForm('form');
+    FormUtils.scrollToElement('knx-insurance-toplist');
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
   }
 
   private onShowSummary() {
-    FormUtils.scrollToForm('knx-insurance-review');
+    FormUtils.scrollToElement('knx-insurance-review');
     this.store$.dispatch(new assistant.ClearAction);
 
     this.store$.select(fromInsurance.getSelectedInsurance).take(1)

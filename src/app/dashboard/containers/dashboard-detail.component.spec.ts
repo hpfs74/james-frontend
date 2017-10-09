@@ -1,12 +1,13 @@
 import { getAssistantMessageState } from '../../core/reducers/index';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockBackend } from '@angular/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { DashboardDetailComponent } from './dashboard-detail.component';
 import { AssistantService, LocalStorageService } from '../../core/services/';
 import { ProfileService } from '../../profile/services/profile.service';
@@ -25,47 +26,46 @@ describe('Component: DashboardDetail', () => {
   let comp: DashboardDetailComponent;
   let fixture: ComponentFixture<DashboardDetailComponent>;
   let store: Store<fromCore.State>;
-  let activatedRouteStub: any;
+  let activatedRouteStub = {
+    queryParams: Observable.of( { type: 'car' } ),
+    params: Observable.of( { type: 'car' } )
+  };
 
   describe('with routing to car', () => {
-    beforeEach(async(() => {
-      activatedRouteStub = {
-        queryParams: Observable.of( { type: 'car' } ),
-        params: Observable.of( { type: 'car' } )
-      };
-
-      TestBed.configureTestingModule({
-        providers: [
-          BaseRequestOptions,
-          MockBackend,
-          AuthService,
-          LocalStorageService,
-          AssistantService,
-          ProfileService,
-          { provide: ActivatedRoute, useValue: activatedRouteStub},
-          {
-            deps: [
-              MockBackend,
-              BaseRequestOptions
-            ],
-            provide: AuthHttp,
-            useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-              return new Http(backend, defaultOptions);
-            }
+    let moduleDef: TestModuleMetadata = {
+      providers: [
+        BaseRequestOptions,
+        MockBackend,
+        AuthService,
+        LocalStorageService,
+        AssistantService,
+        ProfileService,
+        { provide: ActivatedRoute, useValue: activatedRouteStub},
+        {
+          deps: [
+            MockBackend,
+            BaseRequestOptions
+          ],
+          provide: AuthHttp,
+          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backend, defaultOptions);
           }
-        ],
-        imports: [
-          StoreModule.forRoot({
-            'core': combineReducers(fromCore.reducers)
-          })
-        ],
-        declarations: [DashboardDetailComponent],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
+        }
+      ],
+      imports: [
+        StoreModule.forRoot({
+          'core': combineReducers(fromCore.reducers)
+        })
+      ],
+      declarations: [DashboardDetailComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    };
+    setUpTestBed(moduleDef);
 
+    beforeAll(() => {
       store = TestBed.get(Store);
       spyOn(store, 'dispatch').and.callThrough();
-    }));
+    });
 
     beforeEach(() => {
       fixture = TestBed.createComponent(DashboardDetailComponent);

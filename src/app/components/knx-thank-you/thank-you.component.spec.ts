@@ -1,7 +1,8 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { ThankYouComponent } from './thank-you.component';
 import { AppPromoBlockComponent } from '../../components/knx-app-promo/app-promo.component';
 
@@ -11,11 +12,10 @@ describe('Component: Thank You', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ThankYouComponent, AppPromoBlockComponent]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [ThankYouComponent, AppPromoBlockComponent]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ThankYouComponent);

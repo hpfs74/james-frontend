@@ -1,9 +1,10 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '@cx/forms';
 import { Observable } from 'rxjs/Rx';
+import { setUpTestBed } from './../../../test.common.spec';
 
 import { SharedModule } from '../../shared.module';
 import { Address } from '..//models';
@@ -30,13 +31,11 @@ describe('Component: CarCheckComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserModule, ReactiveFormsModule, CXFormsModule, SharedModule],
-      declarations: [AddressComponent, TestHostComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [BrowserModule, ReactiveFormsModule, CXFormsModule],
+    declarations: [AddressComponent, TestHostComponent]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

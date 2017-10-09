@@ -1,9 +1,10 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { async, TestBed, inject } from '@angular/core/testing';
+import { TestModuleMetadata, async, TestBed, inject } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { StoreModule, Store } from '@ngrx/store';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { HttpModule } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -85,27 +86,28 @@ describe('Service: Car', () => {
     'insurance_id': ''
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
-      providers: [
-        BaseRequestOptions,
-        MockBackend,
-        LocalStorageService,
-        CarService,
-        {
-          deps: [
-            MockBackend,
-            BaseRequestOptions
-          ],
-          provide: AuthHttp,
-          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-          }
+  let moduleDef: TestModuleMetadata = {
+    imports: [StoreModule.forRoot({})],
+    providers: [
+      BaseRequestOptions,
+      MockBackend,
+      LocalStorageService,
+      CarService,
+      {
+        deps: [
+          MockBackend,
+          BaseRequestOptions
+        ],
+        provide: AuthHttp,
+        useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+          return new Http(backend, defaultOptions);
         }
-      ]
-    });
+      }
+    ]
+  };
+  setUpTestBed(moduleDef);
 
+  beforeEach(async(() => {
     backend = TestBed.get(MockBackend);
     service = TestBed.get(CarService);
   }));

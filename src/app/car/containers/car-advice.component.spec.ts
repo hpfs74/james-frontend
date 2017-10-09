@@ -1,13 +1,13 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
 
-import { CXFormsModule } from '@cx/forms';
+import { setUpTestBed } from './../../../test.common.spec';
 
 import * as fromRoot from '../reducers';
 import * as fromCore from '../../core/reducers';
@@ -45,11 +45,7 @@ describe('Component: CarAdviceComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
         BrowserAnimationsModule,
-        CXFormsModule,
         SharedModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
@@ -64,10 +60,9 @@ describe('Component: CarAdviceComponent', () => {
         CarAdviceComponent
       ],
       schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    });
 
     store = TestBed.get(Store);
-
     spyOn(store, 'dispatch').and.callThrough();
   }));
 
@@ -184,8 +179,6 @@ describe('Component: CarAdviceComponent', () => {
 
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          console.warn(comp.carDetailForm.formGroup.get('licensePlate'));
-
           expect(comp.currentStep).toEqual(0);
           expect(comp.carDetailForm.formGroup.valid).toBeTruthy();
           expect(comp.addressForm.formGroup.valid).toBeTruthy();
@@ -202,6 +195,7 @@ describe('Component: CarAdviceComponent', () => {
 
     it('should dispatch a car compare action', async(() => {
       comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
+      comp.addressForm.formGroup.clearAsyncValidators();
 
       const licensePlateValue = 'GK906T';
       const birthDateValue = new Date(1989, 11, 19);

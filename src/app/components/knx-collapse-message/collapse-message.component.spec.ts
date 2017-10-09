@@ -1,8 +1,9 @@
 import { NO_ERRORS_SCHEMA, Component, DebugElement, ViewChild, LOCALE_ID } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { CollapseMessageComponent } from './collapse-message.component';
 
 @Component({
@@ -24,13 +25,12 @@ describe('Component: CollapseMessage', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule],
-      declarations: [TestHostComponent, CollapseMessageComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    imports: [BrowserAnimationsModule],
+    declarations: [TestHostComponent, CollapseMessageComponent],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

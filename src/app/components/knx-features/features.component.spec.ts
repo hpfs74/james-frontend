@@ -1,6 +1,8 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
+
+import { setUpTestBed } from './../../../test.common.spec';
 import { FeaturesComponent } from './features.component';
 import { Feature } from '../../shared/models/feature';
 
@@ -11,12 +13,11 @@ describe('Component: Features', () => {
   let el: HTMLElement;
   let items: Array<Feature>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [FeaturesComponent],
-      imports: [BrowserModule]
-    }).compileComponents();
-  }));
+  let moduleDef: TestModuleMetadata = {
+    declarations: [FeaturesComponent],
+    imports: [BrowserModule]
+  };
+  setUpTestBed(moduleDef);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FeaturesComponent);

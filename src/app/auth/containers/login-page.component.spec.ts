@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockBackend } from '@angular/http/testing';
@@ -10,6 +10,7 @@ import * as fromAuth from '../reducers';
 import * as auth from '../actions/auth';
 import { FormBuilder } from '@angular/forms';
 
+import { setUpTestBed } from './../../../test.common.spec';
 import { LoginPageComponent } from '../containers/login-page.component';
 import { LoginForm } from '../components/login.form';
 import { AuthService } from '../services/auth.service';
@@ -22,35 +23,36 @@ describe('Component: Login', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        BaseRequestOptions,
-        MockBackend,
-        AuthService,
-        {
-          deps: [
-            MockBackend,
-            BaseRequestOptions
-          ],
-          provide: Http,
-          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-          }
+  let moduleDef: TestModuleMetadata = {
+    providers: [
+      BaseRequestOptions,
+      MockBackend,
+      AuthService,
+      {
+        deps: [
+          MockBackend,
+          BaseRequestOptions
+        ],
+        provide: Http,
+        useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+          return new Http(backend, defaultOptions);
         }
-      ],
-      imports: [
-        RouterTestingModule,
-        StoreModule.forRoot({
-          auth: combineReducers(fromAuth.reducers)
-        })
-      ],
-      declarations: [LoginPageComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+      }
+    ],
+    imports: [
+      RouterTestingModule,
+      StoreModule.forRoot({
+        auth: combineReducers(fromAuth.reducers)
+      })
+    ],
+    declarations: [LoginPageComponent],
+    schemas: [NO_ERRORS_SCHEMA]
+  };
+  setUpTestBed(moduleDef);
 
+  beforeAll(() => {
     store = TestBed.get(Store);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginPageComponent);
