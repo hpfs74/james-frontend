@@ -122,7 +122,7 @@ export class CarBuyComponent implements OnInit {
   }
 
   initFormWithProfile() {
-    FormUtils.scrollToForm('form');
+    FormUtils.scrollToElement('form');
 
     this.profile$ = this.store$.select(fromProfile.getProfile);
 
@@ -131,12 +131,12 @@ export class CarBuyComponent implements OnInit {
   }
 
   initForm(messageKey: string) {
-    FormUtils.scrollToForm('form');
+    FormUtils.scrollToElement('form');
     this.store$.dispatch(new assistant.AddCannedMessage({ key: messageKey, clear: true }));
   }
 
   initCheckForm(messageKey: string) {
-    FormUtils.scrollToForm('form');
+    FormUtils.scrollToElement('form');
     this.store$.select(fromInsurance.getSelectedInsurance)
       .subscribe((insurance) => {
         const insuranceName = insurance._embedded.insurance.insurance_brand || null;
