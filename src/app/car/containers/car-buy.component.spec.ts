@@ -141,7 +141,7 @@ describe('Component: CarBuyComponent', () => {
       comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('First name');
       comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('Last name');
       comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
-      // comp.targetComponent.contactDetailForm.formGroup.get('phone').setValue('070777777');
+      comp.targetComponent.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
 
       let obj = comp.targetComponent.getUpdatedProfile(comp.targetComponent.contactDetailForm.formGroup);
 
@@ -150,7 +150,7 @@ describe('Component: CarBuyComponent', () => {
       expect(obj.infix).toBe('Middle name');
       expect(obj.initials).toBe('F.L.');
       expect(obj.mobileNumber).toBe('0666666666');
-      // expect(obj.phoneNumber).toBe('070777777');
+      expect(obj.phoneNumber).toBe('070777777');
     });
   });
 
@@ -210,6 +210,7 @@ describe('Component: CarBuyComponent', () => {
       comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('First name');
       comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('Last name');
       comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
+      comp.targetComponent.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
 
       let result = comp.targetComponent.getProposalData(value, comp.targetComponent.contactDetailForm.formGroup);
 
