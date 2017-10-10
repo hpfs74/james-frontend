@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 // @cx
 import { CXFormsModule } from '../../node_modules/@cx/forms';
@@ -122,6 +123,7 @@ export const sharedModules = [
     ReactiveFormsModule,
     TextMaskModule,
     AngularSvgIconModule,
+    ClickOutsideModule,
     ...sharedModules
   ],
   declarations: [
@@ -133,6 +135,7 @@ export const sharedModules = [
     ...sharedModules,
     ReactiveFormsModule,
     AngularSvgIconModule,
+    ClickOutsideModule,
     ...sharedComponents,
   ]
 })
