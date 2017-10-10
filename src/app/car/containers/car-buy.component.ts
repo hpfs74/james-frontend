@@ -221,7 +221,7 @@ export class CarBuyComponent implements OnInit {
       lastName: form.value.lastName,
       initials: form.value.initials,
       mobileNumber: form.value.mobileNumber,
-      phoneNumber: form.value.phone
+      phoneNumber: form.value.phoneNumber
     };
   }
 
