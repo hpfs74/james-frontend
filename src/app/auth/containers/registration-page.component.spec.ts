@@ -97,7 +97,7 @@ describe('Component: Registration', () => {
     comp.form.formGroup.updateValueAndValidity();
     fixture.detectChanges();
 
-    de = fixture.debugElement.query(By.css('.knx-login__error'));
+    de = fixture.debugElement.query(By.css('.knx-register__error'));
     el = de.nativeElement;
 
     expect(comp).not.toBeNull();

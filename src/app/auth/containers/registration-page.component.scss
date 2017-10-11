@@ -1,4 +1,4 @@
-.knx-login__welcome {
+.knx-register__welcome {
   margin-top: 40px;
   margin-bottom: 20px;
 
@@ -14,19 +14,19 @@
   }
 }
 
-h1.knx-login__subline,
-h2.knx-login__subline,
-.knx-login__subline {
+h1.knx-register__subline,
+h2.knx-register__subline,
+.knx-register__subline {
   color: #3e4a59;
   margin-top: 5px;
 }
 
-.knx-login__logo {
+.knx-register__logo {
   max-width: 120px;
   display: block;
 }
 
-.knx-login__actions {
+.knx-register__actions {
   margin-top: 20px;
   text-align: center;
 
@@ -54,7 +54,7 @@ h2.knx-login__subline,
   position: relative;
 }
 
-.knx-login__showpassword {
+.knx-register__showpassword {
   position: absolute;
   top: 8px;
   right: 10px;
@@ -78,7 +78,7 @@ h2.knx-login__subline,
   }
 }
 
-.knx-login__error {
+.knx-register__error {
   color: $knab-secondary-red;
   margin-bottom: 20px;
   margin-top: -15px;
