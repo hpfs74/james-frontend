@@ -15,6 +15,7 @@ import { AddressLookup, Address } from '../models';
 })
 export class AddressComponent implements AfterViewChecked {
   @Input() addressFormGroup: FormGroup;
+  @Input() addressFormConfig: any;
   @Input() validationErrors: any;
   @Input() asyncValidator: Observable<any>;
   @Input() addressPreview: string;

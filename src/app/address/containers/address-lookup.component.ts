@@ -15,6 +15,7 @@ import { AddressLookup, Address } from '../models';
   template: `
     <knx-address
       [addressFormGroup]="addressForm.formGroup"
+      [addressFormConfig]="addressForm.formConfig"
       [validationErrors]="addressForm.validationErrors"
       [asyncValidator]="getAddress$"
       [addressPreview]="addressPreview$ | async"
