@@ -18,3 +18,14 @@ export interface Authenticate {
   password: string;
   scope?: string;
 }
+
+export class RegistrationResult {
+
+  _id: string;
+  firstname: string;
+  infix: string;
+  lastname: string;
+  name: string;
+  emailaddress: string;
+  active: boolean;
+}
