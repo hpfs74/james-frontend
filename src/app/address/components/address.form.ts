@@ -25,7 +25,16 @@ export class AddressForm {
           houseNumberValidator('houseNumber')
         ]
       )],
-      houseNumberExtension: [null, Validators.maxLength(15)]
+      houseNumberExtension:
+        [
+          null,
+          Validators.compose(
+            [
+              houseNumberValidator('houseNumber'),
+              Validators.maxLength(6)
+            ]
+          ),
+        ]
     });
 
     this.validationErrors = {
@@ -54,8 +63,14 @@ export class AddressForm {
           type: 'text'
         }
       },
-      // houseNumberExtension: {
-      // }
+      houseNumberExtension: {
+        formControl: this.formGroup.get('houseNumberExtension'),
+        label: 'Toevoeging',
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Optioneel'
+        }
+      }
     };
   }
 }

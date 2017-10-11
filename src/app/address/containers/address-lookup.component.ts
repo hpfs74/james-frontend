@@ -46,7 +46,8 @@ export class AddressLookupComponent implements OnInit {
   validateAddress(value: AddressLookup) {
     this.store$.dispatch(new address.GetAddress({
       postalCode: value.postalCode,
-      houseNumber: value.houseNumber
+      houseNumber: value.houseNumber,
+      houseNumberExtension: value.houseNumberExtension
     }));
   }
 }

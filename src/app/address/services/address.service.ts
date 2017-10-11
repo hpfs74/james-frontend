@@ -17,8 +17,8 @@ export class AddressService {
   public lookupAddress(postalCode: string, houseNumber: string, houseNumberExtension?: string): Observable<Address> {
     const body = {
       zipcode: postalCode,
-      number: + houseNumber + (houseNumberExtension || ''),
-      address: `${postalCode}${+houseNumber + (houseNumberExtension || '')}`
+      number: + houseNumber + (houseNumberExtension ? '-' + houseNumberExtension : ''),
+      address: `${postalCode}${+houseNumber + (houseNumberExtension ? '-' + houseNumberExtension : '')}`
     };
     return this.authHttp.post(this.baseUrl, body)
       .map((res) => res.json());
