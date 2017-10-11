@@ -21,21 +21,23 @@ import { NavigationService } from '../services';
 @Component({
   selector: 'knx-app',
   template: `
-    <header class='header' *ngIf='loggedIn$ | async'>
-      <knx-navbar [menuItems]='topMenu' (onLogOut)='logOut()'>
+    <header class="header">
+      <knx-offline-indicator></knx-offline-indicator>
+
+      <knx-navbar  *ngIf="loggedIn$ | async" [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user [showAccount]='false' (onLogOut)='logOut()' [profile]='profile$ | async'></knx-nav-user>
+        <knx-nav-user [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
     </header>
 
-    <div class='main-container' knxSidePanelState>
+    <div class="main-container" knxSidePanelState>
       <knx-loader *shellRender></knx-loader>
       <router-outlet></router-outlet>
     </div>
 
     <!-- footer is a features block -->
-    <div *ngIf='loggedIn$ | async' class='container-fluid knx-container--fullwidth knx-container--gray'>
-      <knx-features [items]='footerItems'></knx-features>
+    <div *ngIf="loggedIn$ | async" class="container-fluid knx-container--fullwidth knx-container--gray">
+      <knx-features [items]="footerItems"></knx-features>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
