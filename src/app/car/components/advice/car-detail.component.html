@@ -16,11 +16,11 @@
             </knx-input-licenseplate>
           </cx-form-group>
 
-          <knx-car-info-message
-            *ngIf="!carFailed && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')"
+          <knx-async-preview class="knx-car-info-message"
             [loading]="carLoading"
-            [data]="car">
-          </knx-car-info-message>
+            [loaded]="!carFailed && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
+              <knx-car-info-message [data]="car"></knx-car-info-message>
+          </knx-async-preview>
         </div>
       </div>
 

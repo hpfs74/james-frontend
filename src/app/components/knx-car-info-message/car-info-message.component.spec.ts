@@ -74,7 +74,7 @@ describe('Component: CarInfoMessageComponent', () => {
     expect(el.textContent).toContain(testData.make);
     expect(el.textContent).toContain(testData.model);
     expect(el.textContent).toContain(testData.fuel);
-    expect(el.textContent).toContain(pipe.transform(testData.current_value, 'EUR', true));
+    expect(el.textContent).toContain(pipe.transform(testData.current_value, 'EUR', true, '1.0'));
   });
 
 });

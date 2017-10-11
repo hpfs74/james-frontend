@@ -9,10 +9,7 @@ import { SharedModule } from '../../../shared.module';
 import { CarCheckComponent } from './car-check.component';
 
 @Component({
-  template: `
-    <div>
-      <knx-car-check [form]="formFromHost"></knx-car-check>
-    </div>`
+  template: `<knx-car-check [form]="formFromHost"></knx-car-check>`
 })
 export class TestHostComponent {
   @ViewChild(CarCheckComponent)

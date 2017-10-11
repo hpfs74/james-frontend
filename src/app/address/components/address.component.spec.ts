@@ -2,7 +2,6 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
-import { CXFormsModule } from '@cx/forms';
 import { Observable } from 'rxjs/Rx';
 import { setUpTestBed } from './../../../test.common.spec';
 
@@ -12,12 +11,20 @@ import { AddressForm } from '../components/address.form';
 import { AddressComponent } from './address.component';
 
 @Component({
-  template: `<knx-address [addressFormGroup]="form.formGroup" [validationErrors]="validationErrors"></knx-address>`
+  template: `
+    <knx-address
+      [addressFormGroup]="form.formGroup"
+      [validationErrors]="validationErrors"
+      [loading]="loading"
+      [loaded]="loaded">
+    </knx-address>`
 })
 export class TestHostComponent {
   @ViewChild(AddressComponent)
   targetComponent: AddressComponent;
   form = new AddressForm(new FormBuilder());
+  loading = false;
+  loaded = false;
   validationErrors = {
     required: () => 'Dit veld is verplicht',
     address: () => 'Error',
@@ -32,8 +39,9 @@ describe('Component: CarCheckComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [BrowserModule, ReactiveFormsModule, CXFormsModule],
-    declarations: [AddressComponent, TestHostComponent]
+    imports: [BrowserModule, SharedModule],
+    declarations: [AddressComponent, TestHostComponent],
+    schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
 
