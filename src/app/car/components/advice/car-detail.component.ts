@@ -26,8 +26,8 @@ export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
   @Input() addressForm: AddressForm;
   @Input() car: Car;
-  @Input() isCarLoading: boolean;
-  @Input() isCarFailed: boolean;
+  @Input() carLoading: boolean;
+  @Input() carFailed: boolean;
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];

@@ -17,8 +17,8 @@
           </cx-form-group>
 
           <knx-car-info-message
-            *ngIf="!isCarFailed && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')"
-            [loading]="isCarLoading"
+            *ngIf="!carFailed && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')"
+            [loading]="carLoading"
             [data]="car">
           </knx-car-info-message>
         </div>

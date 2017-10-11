@@ -1,14 +1,17 @@
-.knx-car-info-message .row {
-  margin-bottom: 10px;
+.knx-car-info-message {
+  width: 100%;
+
+  .knx-message--pending {
+    width: 100%;
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
+
+  .knx-car-info__item {
+    font-weight: bold;
+    text-align: right;
+  }
 }
 
-.knx-car-info__message {
-  margin-bottom: 15px;
-  height: 130px;
-  font-size: $font-size-base;
-}
-
-.knx-car-info__item {
-  font-weight: bold;
-  text-align: right;
-}
