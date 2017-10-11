@@ -1,0 +1,88 @@
+.knx-login__welcome {
+  margin-top: 40px;
+  margin-bottom: 20px;
+
+  &:after {
+    margin-top: -20px;
+    content: "";
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: url("/assets/images/dumbbell.svg") no-repeat center bottom;
+    background-size: contain;
+  }
+}
+
+h1.knx-login__subline,
+h2.knx-login__subline,
+.knx-login__subline {
+  color: #3e4a59;
+  margin-top: 5px;
+}
+
+.knx-login__logo {
+  max-width: 120px;
+  display: block;
+}
+
+.knx-login__actions {
+  margin-top: 20px;
+  text-align: center;
+
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 5px;
+    }
+  }
+
+  a {
+    color: $knab-primary-blue;
+    font-size: $font-size-base - 2;
+
+    &:hover {
+      text-decoration: none;
+      color: $knab-primary-red;
+    }
+  }
+}
+
+.login-password-wrapper {
+  position: relative;
+}
+
+.knx-login__showpassword {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: $knab-dark-gray;
+  font-size: 20px;
+  border: 0;
+  background: none;
+
+  &:focus,
+  &:hover,
+  &:active,
+  &:visited {
+    cursor: pointer;
+    border: 0;
+    background: none;
+    outline: none;
+  }
+
+  &:active {
+    color: $knab-primary-gray;
+  }
+}
+
+.knx-login__error {
+  color: $knab-secondary-red;
+  margin-bottom: 20px;
+  margin-top: -15px;
+  display: block;
+  font-size: $font-size-base - 2;
+  text-align: center;
+}

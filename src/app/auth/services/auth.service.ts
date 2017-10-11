@@ -8,7 +8,7 @@ import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
 import { environment } from '../../../environments/environment';
-import { AuthKey, AuthToken } from '../models/auth';
+import { AuthKey, AuthToken, RegistrationResult } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
@@ -82,6 +82,23 @@ export class AuthService {
   }
 
   /**
+   * Do register the user
+   * @param {Authenticate} auth
+   * @return {Observable
+   */
+  public register(username, password): Observable<RegistrationResult> {
+    const payload = {
+      'emailaddress': username,
+      'password': password,
+      'scope': 'profile/basic',
+      'redirect_uri': 'com.knab.verzekeren://'
+    };
+
+    return this.play(environment.james.payloadEncryption.profile, payload)
+      .map((res: Response) => res.json());
+  }
+
+  /**
    * Refresh the current token
    * @param {string} refreshToken
    * @return {Observable<AuthToken>}
@@ -91,6 +108,21 @@ export class AuthService {
     const payload = {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
+    };
+
+    return this.play(environment.james.payloadEncryption.token, payload)
+      .map((res: Response) => res.json());
+  }
+
+  /**
+   * Request backend to send activation email
+   *
+   * @param email
+   */
+  public resendActivation(email) {
+    // TODO: check if the profile is active or if the user is logged on there's no need to access here!!!
+    const payload = {
+      emailaddress: email
     };
 
     return this.play(environment.james.payloadEncryption.token, payload)
@@ -129,9 +161,7 @@ export class AuthService {
     return AuthUtils.tokenNotExpired('token');
   }
 
-  public resendActivation(email) {
-    throw new Error('Not implemented yet');
-  }
+
 
   // PAYLOAD - STEP1
   private getPayloadToken(): Observable<PayloadAuth> {
