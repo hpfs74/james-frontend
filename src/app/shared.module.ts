@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
-import { ClickOutsideModule } from '../../node_modules/ng-click-outside';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 // @cx
-import { CXFormsModule } from '../../node_modules/@cx/forms';
-import { TextMaskModule } from '../../node_modules/@cx/input';
+import { CXFormsModule } from '@cx/forms';
+import { TextMaskModule } from '@cx/input';
 
 // @knx
 import { KNXWizardModule } from '@knx/wizard';
@@ -28,7 +27,7 @@ import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe } from './share
 /**
  * Directives
  */
-import { JumpToElementDirective, SidePanelStateDirective } from './shared/directives';
+import { JumpToElementDirective, SidePanelStateDirective, ClickOutsideDirective } from './shared/directives';
 
 
 /**
@@ -74,6 +73,7 @@ export const sharedComponents = [
   LicensePlatePipe,
   SidePanelStateDirective,
   JumpToElementDirective,
+  ClickOutsideDirective,
   ButtonIconComponent,
   CircleProgressComponent,
   CarSummaryComponent,
@@ -123,7 +123,6 @@ export const sharedModules = [
     ReactiveFormsModule,
     TextMaskModule,
     AngularSvgIconModule,
-    ClickOutsideModule,
     ...sharedModules
   ],
   declarations: [
@@ -135,7 +134,6 @@ export const sharedModules = [
     ...sharedModules,
     ReactiveFormsModule,
     AngularSvgIconModule,
-    ClickOutsideModule,
     ...sharedComponents,
   ]
 })

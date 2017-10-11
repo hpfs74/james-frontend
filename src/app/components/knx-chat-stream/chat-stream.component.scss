@@ -33,6 +33,10 @@
 }
 
 @media (max-width: 576px) {
+  .knx-wizard__sidebar {
+    z-index: 1;
+  }
+
   .knx-chat-stream {
     position: fixed;
     top: 35px;

@@ -6,7 +6,7 @@ import { ChatMessage } from './chat-message';
   selector: 'knx-chat-stream',
   template: `
     <div class="knx-chat-stream" [ngClass]="{'knx-chat-stream--expanded': chatExpanded}">
-      <knx-avatar (click)="toggleChat()" (clickOutside)="closeChat()" [title]="options.avatar.title"></knx-avatar>
+      <knx-avatar (click)="toggleChat()" (knxClickOutside)="closeChat()" [title]="options.avatar.title"></knx-avatar>
 
       <div class="knx-avatar__notification" [ngClass]="{'knx-avatar__notification--active': hasNewMessage}"></div>
 
