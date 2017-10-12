@@ -11,7 +11,7 @@ export const REGISTER_REDIRECT = '[Register] Register Redirect';
 export class Register implements Action {
   readonly type = REGISTER;
 
-  constructor(public payload: Authenticate) {}
+  constructor(public emailAddress: string, public password: string) {}
 }
 
 export class RegisterSuccess implements Action {
