@@ -54,6 +54,7 @@ describe('Component: CarCheckComponent', () => {
   it('should get error messages', () => {
     expect(comp.targetComponent.getErrorMessage('address')).toEqual('Error');
     expect(comp.targetComponent.getErrorMessage('stringTest')).toEqual('test');
+    expect(comp.targetComponent.getErrorMessage('xx')).toBeUndefined();
   });
 
   it('should return error on empty form values', () => {
@@ -68,6 +69,10 @@ describe('Component: CarCheckComponent', () => {
     //   fixture.detectChanges();
     //   expect(comp.targetComponent.addressFormGroup.hasError('address')).toBe(true);
     // });
+  });
+
+  it('should get form errors', () => {
+    expect(typeof comp.targetComponent.getErrors).toBe('function');
   });
 
   // it('should return validation error on empty form', (done) => {

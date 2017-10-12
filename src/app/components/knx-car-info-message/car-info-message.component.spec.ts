@@ -78,10 +78,10 @@ describe('Component: CarInfoMessageComponent', () => {
   });
 
   it('should not show anything if no data provided', () => {
-    comp.data = null;
+    comp.data = undefined;
     fixture.detectChanges();
-
-    expect(el).toBeNull();
+    let de = fixture.debugElement.query(By.css('div.knx-car-info-message'));
+    expect(de).toBeNull();
   });
 
   it('should return the transmission', () => {
