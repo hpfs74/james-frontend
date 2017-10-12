@@ -79,6 +79,7 @@ export function reducer(state = initialState, action: Action): State {
 
 export const getInfo = (state: State) => state.info;
 export const getLoaded = (state: State) => state.loaded;
+export const getLoading = (state: State) => state.loading;
 export const getError = (state: State) => state.error;
 export const getCarInfo = (state: State) => state.info;
 export const getLicense = (state: State) => state.license;

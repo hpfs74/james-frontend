@@ -105,11 +105,6 @@ describe('Component: AddressLookup', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  // beforeEach(async(() => {
-  //   store = TestBed.get(Store);
-  //   spyOn(store, 'dispatch').and.callThrough();
-  // }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;

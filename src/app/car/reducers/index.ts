@@ -44,6 +44,7 @@ export const getCompareLoaded = createSelector(getCompareState, fromCompare.getL
 export const getCarState = createSelector(selectCarState, (state: CarState) => state.car);
 export const getCarInfo = createSelector(getCarState, fromCar.getInfo);
 export const getCarInfoLoaded = createSelector(getCarState, fromCar.getLoaded);
+export const getCarInfoLoading = createSelector(getCarState, fromCar.getLoading);
 export const getCarInfoError = createSelector(getCarState, fromCar.getError);
 export const getCarLicense = createSelector(getCarState, fromCar.getLicense);
 export const getCarBuyComplete = createSelector(getCarState, fromCar.getBuyComplete);

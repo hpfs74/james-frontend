@@ -20,6 +20,8 @@
           [form]="carDetailForm"
           [addressForm]="addressForm"
           [car]="car$ | async"
+          [carLoading]="isCarLoading$ | async"
+          [carFailed]="isCarFailed$ | async"
           [advice]="advice$ | async"
           [coverages]="coverages"
           [coverageRecommendation]="coverageRecommendation$ | async"
