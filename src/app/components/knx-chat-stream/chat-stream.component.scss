@@ -33,7 +33,74 @@
 }
 
 @media (max-width: 576px) {
+  .knx-wizard__sidebar {
+    z-index: 1;
+  }
+
   .knx-chat-stream {
-    background: $knab-white;
+    position: fixed;
+    top: 35px;
+    right: 0;
+    background: none;
+
+    &:hover {
+      .knx-avatar__image {
+        width: 89px;
+      }
+
+      .knx-avatar__notification {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    &.knx-chat-stream--expanded {
+      .knx-message {
+        display: block;
+      }
+
+      .knx-avatar__image {
+        width: 89px;
+      }
+    }
+
+    .knx-avatar__notification {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: $knab-primary-green;
+      pointer-events: none;
+      transition: all 0.3s;
+
+      &.knx-avatar__notification--active {
+        display: block;
+      }
+    }
+
+    .knx-message {
+      display: none;
+    }
+
+    .knx-message--arrow-top-center:first-child:before {
+      left: auto;
+      right: 32px;
+    }
+
+    .knx-avatar__image {
+      width: 60px;
+      margin-left: auto;
+      margin-right: -5px;
+      background: $knab-white;
+      border: 3px $knab-primary-gray solid;
+      transition: all 0.3s;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

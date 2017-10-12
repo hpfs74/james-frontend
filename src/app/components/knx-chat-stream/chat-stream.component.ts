@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { ChatStreamOptions } from './chat-stream.options';
 import { ChatMessage } from './chat-message';
-
 @Component({
   selector: 'knx-chat-stream',
   template: `
-    <div class="knx-chat-stream">
-      <knx-avatar [title]="options.avatar.title"></knx-avatar>
+    <div class="knx-chat-stream" [ngClass]="{'knx-chat-stream--expanded': chatExpanded}">
+      <knx-avatar (click)="toggleChat()" (knxClickOutside)="closeChat()" [title]="options.avatar.title"></knx-avatar>
+
+      <div class="knx-avatar__notification" [ngClass]="{'knx-avatar__notification--active': hasNewMessage}"></div>
 
       <knx-chat-message *ngFor="let message of messages" [data]="message?.data"></knx-chat-message>
 
@@ -19,7 +20,25 @@ import { ChatMessage } from './chat-message';
     </div>
 `
 })
-export class ChatStreamComponent {
+export class ChatStreamComponent implements OnChanges {
   @Input() options: ChatStreamOptions;
   @Input() messages: Array<ChatMessage>;
+  // TODO: consider making these Input parameters and handle state inside ngrx store
+  chatExpanded = false;
+  hasNewMessage = true;
+
+  ngOnChanges(changes: any) {
+    if (!this.chatExpanded) {
+      this.hasNewMessage = true;
+    }
+  }
+
+  toggleChat() {
+    this.chatExpanded = !this.chatExpanded;
+    this.hasNewMessage = false;
+  }
+
+  closeChat() {
+    this.chatExpanded = false;
+  }
 }
