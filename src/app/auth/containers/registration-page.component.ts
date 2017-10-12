@@ -18,7 +18,7 @@ import * as profile from '../../profile/actions/profile';
  * @class LoginComponent
  */
 @Component({
-  templateUrl: './login-page.component.html'
+  templateUrl: './registration-page.component.html'
 })
 export class RegistrationPageComponent implements OnInit {
   pending$ = this.store.select(fromAuth.getLoginPagePending);
