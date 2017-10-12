@@ -14,7 +14,7 @@ import { setUpTestBed } from './../../../test.common.spec';
 import { RegistrationPageComponent } from '../containers/registration-page.component';
 import { RegistrationForm } from '../components/registration.form';
 import { AuthService } from '../services/auth.service';
-import { loginError } from '../models/login-error';
+import { registrationError } from '../models/registration-error';
 
 describe('Component: Registration', () => {
   let store: Store<fromAuth.State>;
@@ -86,24 +86,4 @@ describe('Component: Registration', () => {
     const submit = fixture.debugElement.query(By.css('button[type="submit"]'));
     expect(submit.nativeElement.disabled).toBeFalsy();
   });
-
-  it('should display a registration error', () => {
-    const testError = 'De combinatie gebruikersnaam en wachtwoord klopt niet';
-    comp.errorMessage = testError;
-    comp.form.formGroup.patchValue({
-      email: 'test@mail.com',
-      password: 'test'
-    });
-    comp.form.formGroup.updateValueAndValidity();
-    fixture.detectChanges();
-
-    de = fixture.debugElement.query(By.css('.knx-register__error'));
-    el = de.nativeElement;
-
-    expect(comp).not.toBeNull();
-    expect(el).toBeDefined();
-    expect(el.textContent).toContain(testError);
-  });
-
-
 });

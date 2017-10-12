@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Store } from '@ngrx/store';
 
 import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
+import * as registration from '../actions/registration';
 import { environment } from '../../../environments/environment';
 
 import { LoginForm } from '../components/login.form';
@@ -52,9 +52,7 @@ export class RegistrationPageComponent implements OnInit {
       + `&locale=${locale}`;
   }
 
-
-
-  login(event) {
+  register(event) {
     event.preventDefault();
 
     Object.keys(this.form.formGroup.controls).forEach(key => {
@@ -65,7 +63,7 @@ export class RegistrationPageComponent implements OnInit {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
 
-      this.store.dispatch(new auth.Login({ username: email.value, password: password.value }));
+      this.store.dispatch(new registration.Register(email.value, password.value));
     }
     return;
   }
