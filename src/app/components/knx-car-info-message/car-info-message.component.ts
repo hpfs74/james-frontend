@@ -25,7 +25,7 @@ import { CarPreviewComponent } from './car-preview.component';
       </div>
       <div class="row" *ngIf="data">
       <div class="col">Transmissie</div>
-      <div class="col knx-car-info__item">{{ transmission }}
+      <div class="col knx-car-info__item">{{ getTransmission(data) }}
       </div>
     </div>
       <div class="row" *ngIf="data">
@@ -46,9 +46,9 @@ import { CarPreviewComponent } from './car-preview.component';
 export class CarInfoMessageComponent {
   @Input() data: Car;
 
-  get transmission() {
-    return this.data.nicci_cartransmission_manual_transmission ||
-      this.data.nicci_cartransmission_automatic_transmission ||
-      this.data.transmission_nl;
+  getTransmission(data) {
+    return data.nicci_cartransmission_manual_transmission ||
+      data.nicci_cartransmission_automatic_transmission ||
+      data.transmission_nl;
   }
 }
