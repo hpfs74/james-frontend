@@ -54,6 +54,7 @@ import { InsuranceTopListComponent } from './components/knx-insurance-toplist/in
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent } from './components/knx-offline-indicator/offline-indicator.component';
+import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
 import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
@@ -93,7 +94,11 @@ export const sharedComponents = [
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
   OpeningHoursComponent,
+<<<<<<< HEAD
   OfflineIndicatorComponent,
+=======
+  PasswordStrengthComponent,
+>>>>>>> refactor(register): add password-strength to shared module
   PriceTableComponent,
   PriceItemComponent,
   ReviewSummaryComponent,
