@@ -23,6 +23,7 @@ import { ChatMessage } from './chat-message';
 export class ChatStreamComponent implements OnChanges {
   @Input() options: ChatStreamOptions;
   @Input() messages: Array<ChatMessage>;
+  // TODO: consider making these Input parameters and handle state inside ngrx store
   chatExpanded = false;
   hasNewMessage = true;
 
