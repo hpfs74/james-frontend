@@ -36,10 +36,10 @@
               (click)="form.toggleShowPassword($event)"></button>
 
             <knx-password-strength [password]="form.formGroup.get('password').value"></knx-password-strength>
-            <span>{{form.formGroup.get('password').value}}</span>
           </div>
 
-          <div class="registration-check-wrapper">
+
+        <div class="registration-check-wrapper">
             <knx-checkbox [formControlName]="form.formConfig.confirm.formControlName" id="termsAndCondition">
               Ik ga akkoord met de <a href="{{termsAndConditionsUrl}}"  target="_blank">Gebruiksvoorwaarden</a> and <a href="{{privacyStatementUrl}}" target="_blank">privacy statement</a> van Knab
             </knx-checkbox>
@@ -52,7 +52,7 @@
           <button type="submit" class="knx-button knx-button--primary knx-button--fullwidth"
             [class.knx-button--pending]="pending$ | async">Create account</button>
 
-          <i class="knx-icon-lock"></i> Beveiligde verbinding
+          <span class="knx-icon-lock"></span> Beveiligde verbinding
       </div>
     </div>
     </form>

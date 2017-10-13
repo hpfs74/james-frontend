@@ -1,17 +1,6 @@
 .knx-register__welcome {
   margin-top: 40px;
-  //margin-bottom: 5px;
-
-  &:after {
-    margin-top: -20px;
-    content: "";
-    height: 200px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background: url("/assets/images/dumbbell.svg") no-repeat center bottom;
-    background-size: contain;
-  }
+  margin-bottom: 20px;
 }
 
 h1.knx-register__subline,
@@ -60,7 +49,7 @@ h2.knx-register__subline,
 
 .knx-register__showpassword {
   position: absolute;
-  top: 8px;
+  top: 35px;
   right: 10px;
   color: $knab-dark-gray;
   font-size: 20px;
