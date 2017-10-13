@@ -12,7 +12,10 @@ import { AddressForm } from '../components/address.form';
 import { AddressComponent } from './address.component';
 
 @Component({
-  template: `<knx-address [addressFormGroup]="form.formGroup" [validationErrors]="validationErrors"></knx-address>`
+  template: `<knx-address [addressFormConfig]="form.formConfig"
+                          [addressFormGroup]="form.formGroup"
+                          [validationErrors]="validationErrors">
+            </knx-address>`
 })
 export class TestHostComponent {
   @ViewChild(AddressComponent)
