@@ -50,7 +50,11 @@ h2.knx-register__subline,
   }
 }
 
-.login-password-wrapper {
+.registration-email-wrapper {
+  position: relative;
+}
+
+.registration-password-wrapper {
   position: relative;
 }
 
@@ -85,4 +89,8 @@ h2.knx-register__subline,
   display: block;
   font-size: $font-size-base - 2;
   text-align: center;
+}
+
+.knx-password-error {
+  color: $knab-primary-red !important;
 }

@@ -25,6 +25,9 @@ export class RegistrationForm extends BaseForm {
       password: [null, Validators.compose(
         [Validators.required]
       )],
+      confirm: [null, Validators.compose(
+        [Validators.required]
+      )]
     });
 
     this.formConfig = {
@@ -48,6 +51,17 @@ export class RegistrationForm extends BaseForm {
           type: 'password',
           attributes: {
             'aria-label': 'Vul je wachtwoord in'
+          }
+        }
+      },
+      confirm: {
+        formControlName: 'confirm',
+        formControl: this.formGroup.get('confirm'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          type: 'checkbox',
+          attributes: {
+            'aria-label': 'Ik ga akkoord met de Gebruiksvoorwaarden and privacy statement van Knab'
           }
         }
       }

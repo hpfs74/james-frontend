@@ -11,15 +11,15 @@ import * as auth from '../actions/auth';
 import { FormBuilder } from '@angular/forms';
 
 import { setUpTestBed } from './../../../test.common.spec';
-import { RegistrationPageComponent } from '../containers/registration-page.component';
+import { RegistrationComponent } from '../components/registration.component';
 import { RegistrationForm } from '../components/registration.form';
 import { AuthService } from '../services/auth.service';
 import { registrationError } from '../models/registration-error';
 
 describe('Component: Registration', () => {
   let store: Store<fromAuth.State>;
-  let comp: RegistrationPageComponent;
-  let fixture: ComponentFixture<RegistrationPageComponent>;
+  let comp: RegistrationComponent ;
+  let fixture: ComponentFixture<RegistrationComponent>;
   let de: DebugElement;
   let el: HTMLElement;
 
@@ -45,7 +45,7 @@ describe('Component: Registration', () => {
         auth: combineReducers(fromAuth.reducers)
       })
     ],
-    declarations: [RegistrationPageComponent],
+    declarations: [RegistrationComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
@@ -55,7 +55,7 @@ describe('Component: Registration', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationPageComponent);
+    fixture = TestBed.createComponent(RegistrationComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   });
