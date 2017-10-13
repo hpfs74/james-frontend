@@ -52,7 +52,7 @@
     "@knx/collapsible-panel": "0.0.92",
     "@knx/grid": "0.0.278",
     "@knx/info": "0.0.132",
-    "@knx/modal": "0.0.12",
+    "@knx/modal": "0.0.38",
     "@knx/step-navigation": "0.0.12",
     "@knx/wizard": "0.0.152",
     "@ngrx/effects": "^4.0.2",

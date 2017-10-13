@@ -43,7 +43,10 @@ import { NavigationService } from '../services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  loginModalName = 'loginModal';
+  modalNames = {
+    loginModal: 'loginModal',
+    authRedirect: 'authRedirectModal'
+  };
 
   topMenu: Array<Nav>;
   phone: Object;
@@ -84,15 +87,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.loading$ = this.store$.select(fromProfile.getProfileLoading);
 
-    this.store$
-      .select(fromCore.getOpenedModalNameState)
-      .subscribe(modalName => {
-        if (modalName === this.loginModalName) {
-          this.userDialogService.openModal(modalName, 'Sessie verlopen', this.viewContainerRef, LoginModalComponent, {
-            fullwidthButtons: true
-          });
-        }
-      });
+    this.initModals();
 
     // Explicitly load profile if not loaded yet (on page refresh)
     this.store$.select(fromProfile.getProfileLoaded)
@@ -101,6 +96,24 @@ export class AppComponent implements OnInit, AfterViewInit {
           this.store$.dispatch(new profile.LoadAction());
         }
       });
+  }
+
+  initModals() {
+    this.store$
+    .select(fromCore.getOpenedModalNameState)
+    .subscribe(modalName => {
+      if (modalName === this.modalNames.loginModal) {
+        this.userDialogService.openModal(modalName, 'Sessie verlopen', this.viewContainerRef, LoginModalComponent, {
+          fullwidthButtons: true
+        });
+      } else if (modalName === this.modalNames.authRedirect) {
+        this.userDialogService.openModal(modalName, '', this.viewContainerRef, LoginModalComponent, {
+          fullwidthButtons: true,
+          metaHeaderImage: '',
+          header: false
+        });
+      }
+    });
   }
 
   logOut() {
