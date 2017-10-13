@@ -68,7 +68,10 @@ export const COMPONENTS = [
     CoreRoutingModule.forRoot()
   ],
   declarations: COMPONENTS,
-  exports: COMPONENTS
+  exports: COMPONENTS,
+  entryComponents: [
+    AuthRedirectModalComponent
+  ]
 })
 export class CoreModule {
   static forRoot() {
