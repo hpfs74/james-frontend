@@ -106,11 +106,6 @@ describe('Component: AddressLookup', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  // beforeEach(async(() => {
-  //   store = TestBed.get(Store);
-  //   spyOn(store, 'dispatch').and.callThrough();
-  // }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
@@ -122,6 +117,7 @@ describe('Component: AddressLookup', () => {
     fixture.detectChanges();
     expect(comp.targetComponent.addressPreview$).toBeDefined();
     expect(comp.targetComponent.getAddress$).toBeDefined();
+    expect(comp.targetComponent.loading$).toBeDefined();
   });
 
   it('Dispatch address lookup action', () => {

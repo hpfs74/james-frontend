@@ -14,6 +14,13 @@
   }
 
   .knx-address-lookup__result {
-    margin-top: -30px;
+    .knx-message--pending {
+      width: 100%;
+      margin-top: -10px;
+    }
+
+    .knx-message {
+      margin-top: -10px;
+    }
   }
 }

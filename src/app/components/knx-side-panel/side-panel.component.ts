@@ -8,6 +8,8 @@ import { slideInOutAnimation } from '../../shared/animations/slide-in-out.animat
     <div class="knx-side-panel"
          (@slideInOutAnimation.done)="onAnimationEnd()"
          [@slideInOutAnimation]="animationState"
+         (knxClickOutside)="close()"
+         [exclude]="'.knx-button--hamburger'"
          [class.knx-side-panel--fullwidth]="fullwidth">
       <div class="knx-side-panel__toolbar">{{ title }}
         <button *ngIf="showCloseButton && (show || animationInProgress)"

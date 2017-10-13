@@ -21,7 +21,8 @@ export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
     case address.GET_ADDRESS_REQUEST: {
       return Object.assign({}, state, {
-        loading: true
+        loading: true,
+        address: null
       });
     }
 

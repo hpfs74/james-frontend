@@ -39,6 +39,8 @@ export const DEFAULT_OPTIONS: HouseNumberExtensionOptions = {
       [asyncValidator]="getAddress$"
       [addressPreview]="addressPreview$ | async"
       (runSuggestion)="getAddressSuggestions($event)"
+      [loading]="loading$ | async"
+      [loaded]="loaded$ | async"
       (runValidation)="runValidation($event)">
     </knx-address>
   `
@@ -50,12 +52,17 @@ export class AddressLookupComponent implements OnInit {
 
   addressPreview$: Observable<string>;
   getAddress$: Observable<any>;
+  loading$: Observable<boolean>;
+  loaded$: Observable<boolean>;
 
   constructor(private store$: Store<fromAddress.State>) {}
 
   ngOnInit() {
     this.suggestionSubscriptions();
     this.addressPreview$ = this.store$.select(fromAddress.getAddressFullname);
+    this.loading$ = this.store$.select(fromAddress.getAddressLoading);
+    this.loaded$ = this.store$.select(fromAddress.getAddressLoaded);
+
     this.getAddress$ = this.store$.select(fromAddress.getAddress)
     .map((address) => {
       if (address) {
