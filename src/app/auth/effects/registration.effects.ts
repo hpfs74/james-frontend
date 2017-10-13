@@ -29,7 +29,7 @@ export class RegistrationEffects {
   @Effect()
   register$ = this.actions$
     .ofType(registration.REGISTER)
-    .map((action: registration.Register) => action.payload)
+    .map((action: registration.Register) => ({emailAddress: action.emailAddress, password: action.password}))
     .exhaustMap((username, password) =>
       this.authService
         .register(username, password)

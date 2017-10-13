@@ -30,7 +30,7 @@
               (click)="form.toggleShowPassword($event)"></button>
           </div>
 
-          <knx-password-strength password="form.formGroup.get('password')"></knx-password-strength>
+        <knx-password-strength password="form.formGroup.get('password')"></knx-password-strength>
 
           <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
             {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
