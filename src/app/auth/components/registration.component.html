@@ -40,12 +40,9 @@
           </div>
 
           <div class="registration-check-wrapper">
-            <label>
-            <cx-checkbox
-              [formControlName]="form.formConfig.confirm.formControlName"></cx-checkbox>
-
+            <knx-checkbox [formControlName]="form.formConfig.confirm.formControlName" id="termsAndCondition">
               Ik ga akkoord met de <a href="{{termsAndConditionsUrl}}"  target="_blank">Gebruiksvoorwaarden</a> and <a href="{{privacyStatementUrl}}" target="_blank">privacy statement</a> van Knab
-            </label>
+            </knx-checkbox>
           </div>
 
           <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
