@@ -1,12 +1,17 @@
-import { Component, Input, Output, EventEmitter, ComponentRef } from '@angular/core';
+import { Component, ComponentRef } from '@angular/core';
 import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@knx/modal';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
+import * as fromCore from '../reducers';
+import * as router from '../actions/router';
 
 @Component({
   selector: 'knx-auth-redirect',
   template: `
     <img class="knx-auth-redirect__image" src="">
     <div class="knx-auth-redirect__content">
-      <strong>Maak een Knab Verzekeren Account aan</strong>
+      <strong>Maak een Knab Verzekeren account aan</strong>
       <p>En ga direct verder met het aanvragen van je verzekering</p>
     </div>
   `
@@ -14,17 +19,13 @@ import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@kn
 export class AuthRedirectModalComponent implements KNXModalDialog {
   actionButtons: KNXModalDialogButton[];
 
-  @Input() headerImage: string;
-  @Output() loginClicked = new EventEmitter();
-  @Output() registerClicked = new EventEmitter();
-
-  constructor() {
+  constructor(private store$: Store<fromCore.State>) {
     this.actionButtons = [
       {
         text: 'Inloggen',
         buttonClass: 'knx-button knx-button--secondary',
         onAction: () => {
-          this.loginClicked.emit();
+          this.store$.dispatch(new router.Go({ path: ['/login']}));
           return true;
         }
       },
@@ -32,7 +33,7 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
         text: 'Registreren',
         buttonClass: 'knx-button knx-button--primary',
         onAction: () => {
-          this.registerClicked.emit();
+          this.store$.dispatch(new router.Go({ path: ['/register']}));
           return true;
         }
       }

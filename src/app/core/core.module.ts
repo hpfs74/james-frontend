@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './containers/pagenotfound.component';
 
 import { AppLoaderComponent } from '../components/knx-app-loader/loader.component';
 // import { DashboardComponent } from '../dashboard/dashboard.component';
+import { AuthRedirectModalComponent } from './components/auth-redirect-modal.component';
 import { NavbarComponent } from '../components/knx-navigation';
 
 // Services
@@ -45,7 +46,8 @@ export const COMPONENTS = [
   AppComponent,
   PageNotFoundComponent,
   AppLoaderComponent,
-  NavbarComponent
+  NavbarComponent,
+  AuthRedirectModalComponent
 ];
 
 @NgModule({

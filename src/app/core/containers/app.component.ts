@@ -69,20 +69,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
-    this.footerItems = [
-      {
-        'title': 'Objectief',
-        'description': 'We vergelijken meer dan 40 aanbieders'
-      },
-      {
-        'title': 'Bespaar',
-        'description': 'Tot 15% korting op elke verzekering'
-      },
-      {
-        'title': 'Overstaphulp',
-        'description': 'Wij regelen je overstap'
-      }
-    ];
+    this.footerItems = this.getFooterItems();
 
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.loading$ = this.store$.select(fromProfile.getProfileLoading);
@@ -98,12 +85,30 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
   }
 
+  getFooterItems() {
+    return [
+      {
+        'title': 'Objectief',
+        'description': 'We vergelijken meer dan 40 aanbieders'
+      },
+      {
+        'title': 'Bespaar',
+        'description': 'Tot 15% korting op elke verzekering'
+      },
+      {
+        'title': 'Overstaphulp',
+        'description': 'Wij regelen je overstap'
+      }
+    ];
+  }
+
   initModals() {
     this.store$
     .select(fromCore.getOpenedModalNameState)
     .subscribe(modalName => {
       if (modalName === this.modalNames.loginModal) {
-        this.userDialogService.openModal(modalName, 'Sessie verlopen', this.viewContainerRef, LoginModalComponent, {
+        const loginHeader = 'Sessie verlopen';
+        this.userDialogService.openModal(modalName, loginHeader, this.viewContainerRef, LoginModalComponent, {
           fullwidthButtons: true
         });
       } else if (modalName === this.modalNames.authRedirect) {
