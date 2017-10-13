@@ -18,14 +18,15 @@ import { RegistrationEffects } from './effects/registration.effects';
 import { LoginPageComponent } from './containers/login-page.component';
 import { PasswordResetPageComponent } from './containers/password-reset-page.component';
 import { RegistrationPageComponent } from './containers/registration-page.component';
-import { PasswordStrengthComponent } from '../components/knx-password-strength/password-strength.component';
+import { RegistrationComponent } from './components/registration.component';
 
 import { reducers } from './reducers';
 
 export const COMPONENTS = [
   LoginPageComponent,
   PasswordResetPageComponent,
-  RegistrationPageComponent
+  RegistrationPageComponent,
+  RegistrationComponent
 ];
 
 export function authHttpServiceFactory(
