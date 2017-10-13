@@ -15,8 +15,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PasswordStrengthComponent implements OnInit {
   @Input() password: string;
 
-  private dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
   ngOnInit() {
   }
 
