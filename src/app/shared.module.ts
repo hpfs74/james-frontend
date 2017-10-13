@@ -13,6 +13,7 @@ import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXInfoModule } from '@knx/info';
 import { KNXModalDialogModule } from '@knx/modal';
+import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
 
 /**
  * Shared Modules
@@ -103,7 +104,8 @@ export const sharedComponents = [
   TabComponent,
   ThankYouComponent,
   NavUserComponent,
-  UserGreetingComponent
+  UserGreetingComponent,
+  KNXCheckboxComponent
 ];
 
 export const sharedModules = [
