@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../../environments/environment';
 import { AuthHttp } from '../../auth/services';
-import { Address } from '../models/address';
+import { Address } from '../models';
 
 @Injectable()
 export class AddressService {

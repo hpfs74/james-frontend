@@ -7,7 +7,7 @@ import * as fromAddress from '../reducers';
 import * as address from '../actions/address';
 
 import { postalCodeMask } from '../../utils/base-form.utils';
-import { AddressLookup, Address } from '../models';
+import { AddressLookup, Address, AddressSuggestionParams } from '../models';
 
 @Component({
   selector: 'knx-address',
@@ -21,12 +21,13 @@ export class AddressComponent implements AfterViewChecked {
   @Input() addressPreview: string;
 
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
+  @Output() runSuggestion: EventEmitter<AddressSuggestionParams> = new EventEmitter();
   @Output() runValidation: EventEmitter<AddressLookup> = new EventEmitter();
 
   mask = postalCodeMask;
 
   ngAfterViewChecked(): void {
-    this.addressFormGroup.setAsyncValidators((formControl) => this.validateAddress(formControl));
+    this.addressFormGroup.setAsyncValidators((formControl) => this.getSuggestion(formControl));
   }
 
   getErrors(): Array<string> {
@@ -44,21 +45,36 @@ export class AddressComponent implements AfterViewChecked {
     }
   }
 
-  validateAddress(formGroup: AbstractControl): Observable<any> {
+  getSuggestion(formGroup: AbstractControl): Observable<any> {
     const postalCodeControl = formGroup.get('postalCode');
     const houseNumberControl = formGroup.get('houseNumber');
-    const houseNumberExtensionControl = formGroup.get('houseNumberExtension');
-
-    if (!postalCodeControl.valid || !houseNumberControl.valid || !houseNumberExtensionControl.valid) {
+    if (!postalCodeControl.valid || !houseNumberControl.valid) {
       return Observable.of({ address: true });
     }
-
-    this.runValidation.emit({
-      postalCode: postalCodeControl.value,
-      houseNumber: houseNumberControl.value,
-      houseNumberExtension: houseNumberExtensionControl.value
+    this.runSuggestion.emit({
+      zipcode: postalCodeControl.value,
+      house_number: houseNumberControl.value
     });
 
     return this.asyncValidator;
+  }
+
+  validateAddress(address: AddressLookup) {
+    this.runValidation.emit({
+      postalCode: address.postalCode,
+      houseNumber: address.houseNumber,
+      houseNumberExtension: address.houseNumberExtension
+    });
+  }
+
+  onHouseNumberExtensionChange() {
+    const postalCodeControl = this.addressFormGroup.get('postalCode');
+    const houseNumberControl = this.addressFormGroup.get('houseNumber');
+    const houseNumberExtension = this.addressFormGroup.get('houseNumberExtension');
+    this.runValidation.emit({
+      postalCode: postalCodeControl.value,
+      houseNumber: houseNumberControl.value,
+      houseNumberExtension: houseNumberExtension.value
+    });
   }
 }

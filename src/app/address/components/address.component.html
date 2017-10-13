@@ -10,7 +10,7 @@
       <cx-form-group formControlName="houseNumber" [options]="addressFormConfig.houseNumber"></cx-form-group>
     </div>
     <div class="col-md-4">
-      <cx-form-group formControlName="houseNumberExtension" [options]="addressFormConfig.houseNumberExtension"></cx-form-group>
+      <cx-form-group (change)="onHouseNumberExtensionChange($event)" formControlName="houseNumberExtension" [options]="addressFormConfig.houseNumberExtension"></cx-form-group>
     </div>
   </div>
 

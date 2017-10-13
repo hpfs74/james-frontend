@@ -4,6 +4,7 @@ import { CXFormGroupOptions } from '@cx/form-group';
 
 import { houseNumberValidator } from '../../utils/base-form.validators';
 import { postalCodeMask } from '../../utils/base-form.utils';
+import { FormControlOptions } from '@cx/form';
 
 export class AddressForm {
   formGroup: FormGroup;
@@ -25,16 +26,7 @@ export class AddressForm {
           houseNumberValidator('houseNumber')
         ]
       )],
-      houseNumberExtension:
-        [
-          null,
-          Validators.compose(
-            [
-              houseNumberValidator('houseNumber'),
-              Validators.maxLength(6)
-            ]
-          ),
-        ]
+      houseNumberExtension: [null, null]
     });
 
     this.validationErrors = {
@@ -64,13 +56,17 @@ export class AddressForm {
         }
       },
       houseNumberExtension: {
-        formControl: this.formGroup.get('houseNumberExtension'),
+        formControlName: 'houseNumberExtension',
         label: 'Toevoeging',
+        type: 'select',
+        formControl: this.formGroup.get('houseNumberExtension'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: 'Optioneel'
+          events: ['change'],
+          items: [],
+          disabled: true
         }
-      }
+      },
     };
   }
 }
