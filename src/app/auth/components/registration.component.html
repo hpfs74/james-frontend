@@ -15,18 +15,21 @@
           <div class="registration-email-wrapper">
 
             <label>Je email</label>
-            <cx-form-group
-              [formControlName]="form.formConfig.email.formControlName"
-              [options]="form.formConfig.email"></cx-form-group>
+
+
+            <knx-input [formControlName]="form.formConfig.email.formControlName"
+                      [options]="form.formConfig.email"></knx-input>
+
           </div>
 
           <div class="registration-password-wrapper">
 
             <label>Wachtwoord</label>
-            <cx-form-group
+
+            <knx-input
               [formControlName]="form.formConfig.password.formControlName"
               [options]="form.formConfig.password">
-            </cx-form-group>
+            </knx-input>
 
             <button type="button"
               *ngIf="form.formGroup.get('password').value"

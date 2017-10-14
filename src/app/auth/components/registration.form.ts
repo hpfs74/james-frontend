@@ -35,23 +35,23 @@ export class RegistrationForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        inputOptions: {
-          placeholder: 'E-mailadres',
-          attributes: {
-            'aria-label': 'Vul je e-mailadres in'
-          }
+        placeholder: 'E-mailadres',
+        attributes: {
+          'aria-label': 'Vul je e-mailadres in',
+          'addonleft': true,
+          'addonicon': 'knx-icon-envelope'
         }
       },
       password: {
         formControlName: 'password',
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
-        inputOptions: {
-          placeholder: 'Wachtwoord',
-          type: 'password',
-          attributes: {
-            'aria-label': 'Vul je wachtwoord in'
-          }
+        placeholder: 'Wachtwoord',
+        type: 'password',
+        attributes: {
+          'aria-label': 'Vul je wachtwoord in',
+          'addonleft': true,
+          'addonicon': 'knx-icon-lock'
         }
       },
       confirm: {

@@ -47,6 +47,31 @@ h2.knx-register__subline,
   position: relative;
 }
 
+.knx-register__addon_before {
+  position: absolute;
+  top: 35px;
+  padding: 10px;
+  left: 0;
+  color: $knab-dark-gray;
+  font-size: 20px;
+  border: 0;
+  background: none;
+
+  &:focus,
+  &:hover,
+  &:active,
+  &:visited {
+    cursor: pointer;
+    border: 0;
+    background: none;
+    outline: none;
+  }
+
+  &:active {
+    color: $knab-primary-gray;
+  }
+}
+
 .knx-register__showpassword {
   position: absolute;
   top: 35px;
