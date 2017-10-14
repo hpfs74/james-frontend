@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 // @cx
-import { CXFormsModule } from '../../node_modules/@cx/forms';
-import { TextMaskModule } from '../../node_modules/@cx/input';
+import { CXFormsModule } from '@cx/forms/index';
+import { TextMaskModule } from 'angular2-text-mask';
 
 // @knx
 import { KNXWizardModule } from '@knx/wizard';
@@ -14,7 +14,7 @@ import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXInfoModule } from '@knx/info';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
-
+import { KNXInputComponent } from './components/knx-input/input.component';
 /**
  * Shared Modules
  */
@@ -105,7 +105,8 @@ export const sharedComponents = [
   ThankYouComponent,
   NavUserComponent,
   UserGreetingComponent,
-  KNXCheckboxComponent
+  KNXCheckboxComponent,
+  KNXInputComponent
 ];
 
 export const sharedModules = [
