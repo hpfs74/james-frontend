@@ -7,20 +7,20 @@ import { Component, Input } from '@angular/core';
       <span>Minimaal</span>
       <span
         [ngClass]="{
-          'knx-password-error': password && !passwordLength(),
-          'knx-password-good': password && passwordLength() }">8 karakters</span> -
+          'knx-password__error': password && !passwordLength(),
+          'knx-password__good': password && passwordLength() }">8 karakters</span> -
       <span
         [ngClass]="{
-          'knx-password-error': password && !containsAtLeastOneNumber(),
-          'knx-password-good': password && containsAtLeastOneNumber() }">1 cijfer</span> -
+          'knx-password__error': password && !containsAtLeastOneNumber(),
+          'knx-password__good': password && containsAtLeastOneNumber() }">1 cijfer</span> -
       <span
         [ngClass]="{
-            'knx-password-error': password && !containsAtLeastOneCap(),
-            'knx-password-good': password && containsAtLeastOneCap() }">1 hoofletter</span> -
+            'knx-password__error': password && !containsAtLeastOneCap(),
+            'knx-password__good': password && containsAtLeastOneCap() }">1 hoofletter</span> -
       <span
         [ngClass]="{
-            'knx-password-error': password && !containerAtLeastOneLowerCase(),
-            'knx-password-good': password && containerAtLeastOneLowerCase() }">1 kleine letter</span>
+            'knx-password__error': password && !containerAtLeastOneLowerCase(),
+            'knx-password__good': password && containerAtLeastOneLowerCase() }">1 kleine letter</span>
     </div>
   `
 })

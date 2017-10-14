@@ -1,0 +1,25 @@
+JAMES_API_KEY = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/key
+JAMES_API_TOKEN = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/token
+JAMES_API_PROFILE = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/profile
+JAMES_API_AUTH = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/
+JAMES_API_ADDRESS = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/address
+JAMES_API_CARS = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/cars
+JAMES_API_CAR_COMPARE = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/profile/insurances/compare/car
+JAMES_API_CAR_COVERAGE = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/helper/car/coverage
+JAMES_API_CAR_DAMAGEFREE = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/helper/car/damagefree
+JAMES_API_CAR_BUY = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/car/buystatic
+JAMES_API_INSURER = http://aegon-middleware-qa.mobgen.com/api/v1/proxy/insurer
+NICCI_URL = https://profile-james-t.nicci.io
+NICCI_BASE_URL = https://test.middleware.knabverzekeren.nl
+NICCI_KEY = NTZhNmFiMjBiYjAwODkzZjA3MWZhZGRjOmlja0dhTmhNa0thS0s3bEU=
+# Google Analytics ID, please specify before using this env config
+GA_ID=GTM-5RP3C6
+PAYLOAD_KEY_URL=http://aegon-middleware-qa.mobgen.com/api/v1/proxy/key
+PAYLOAD_TOKEN_URL=http://aegon-middleware-qa.mobgen.com/api/v1/proxy/token
+PAYLOAD_LOGIN_URL=http://aegon-middleware-qa.mobgen.com/api/v1/nicci/token
+PAYLOAD_PROFILE_URL=http://aegon-middleware-qa.mobgen.com/api/v1/nicci/createAccount
+WEBSITE_REGISTRATION=https://frontend-static.test.james.sentia-route53.com/register/index.html
+PAYLOAD_CLIENT_ID=FaB632UgN3q353K5QP5B624a
+PAYLOAD_CLIENT_SECRET=bsEVXNmPyGMrbkZxV7ARfmncQzFbufsRftTtUTqbbcEgrdKh
+CI=true
+LOGIN=xx

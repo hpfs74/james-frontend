@@ -1,0 +1,65 @@
+$knxInputPadding: 10px;
+$knxInputFontSize: 18px;
+$knxInputWidth: 100%;
+
+.knx-input {
+  position: relative;
+  display: flex;
+  width: $knxInputWidth;
+}
+
+.knx-input__input {
+  font-family: $baseFontFamily, 'sans-serif';
+  font-weight: $baseFontWeight;
+  font-size: $baseFontSize;
+  border: 1px solid $knab-mercury;
+  border-radius: 3px;
+  background: $knab-primary-gray;
+  padding: $knxInputPadding;
+  min-width: 100px;
+  width: 100%;
+  height: 44px;
+}
+
+.knx-input__error_message {
+  display: none;
+  position: absolute;
+  top: -$baseFontSize - 4px;
+  font-size: 15px;
+  color: $knab-error;
+}
+
+.knx-input--error {
+  margin-top: $baseFontSize + 4px;
+
+  .knx-input__input {
+    border: 1px solid $knab-error;
+  }
+
+  .knx-input__error_message {
+    display: block;
+  }
+}
+
+.knx-input--disabled {
+  > .knx-input__input {
+    color: $knab-muted;
+    background: $knab-disabled-gray;
+  }
+}
+
+.knx-input__addon-left {
+  padding-left: 50px !important;
+}
+
+.knx-input__addon-icon {
+  font-family: $baseFontFamily, 'sans-serif';
+  font-weight: $baseFontWeight;
+  font-size: $baseFontSize;
+  width: 44px;
+  height: 44px;
+  line-height: 33px;
+  position: absolute;
+  left: 0;
+  border-right: 1px solid $knab-mercury;
+}
