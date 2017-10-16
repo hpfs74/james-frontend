@@ -13,6 +13,7 @@ import { AddressComponent } from './address.component';
 @Component({
   template: `
     <knx-address
+      [addressFormConfig]="form.formConfig"
       [addressFormGroup]="form.formGroup"
       [validationErrors]="validationErrors"
       [loading]="loading"

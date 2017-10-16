@@ -4,36 +4,13 @@
 
   <div class="row">
     <div class="col-md-4">
-      <cx-form-group formControlName="postalCode" [options]="{
-        formControl: addressFormGroup.get('postalCode'),
-        label: 'Postcode',
-        validationErrors: validationErrors,
-        inputOptions: {
-          placeholder: '1234 AB',
-          textMask: mask,
-          transform: mask.decode
-        }
-      }"></cx-form-group>
+      <cx-form-group formControlName="postalCode" [options]="addressFormConfig.postalCode"></cx-form-group>
     </div>
     <div class="col-md-4">
-      <cx-form-group formControlName="houseNumber" [options]="{
-        formControl: addressFormGroup.get('houseNumber'),
-        label: 'Huisnummer',
-        validationErrors: validationErrors,
-        inputOptions: {
-          type: 'text'
-        }
-      }"></cx-form-group>
+      <cx-form-group formControlName="houseNumber" [options]="addressFormConfig.houseNumber"></cx-form-group>
     </div>
     <div class="col-md-4">
-      <!-- <cx-form-group formControlName="houseNumberExtension" [options]="{
-        formControl: addressFormGroup.get('houseNumberExtension'),
-        label: 'Toevoeging',
-        validationErrors: validationErrors,
-        inputOptions: {
-          placeholder: 'Optioneel'
-        }
-      }"></cx-form-group> -->
+      <cx-form-group #houseNumberExtension formControlName="houseNumberExtension" [options]="addressFormConfig.houseNumberExtension"></cx-form-group>
     </div>
   </div>
 

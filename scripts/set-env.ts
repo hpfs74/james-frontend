@@ -89,6 +89,7 @@ function getContent(environment: string) {
       profile: '${getEnvVar('JAMES_API_PROFILE')}',
       auth: '${getEnvVar('JAMES_API_AUTH')}',
       address: '${getEnvVar('JAMES_API_ADDRESS')}',
+      suggestion: '${getEnvVar('JAMES_API_SUGGESTION')}',
       cars: '${getEnvVar('JAMES_API_CARS')}',
       carCompare: '${getEnvVar('JAMES_API_CAR_COMPARE')}',
       carCoverage: '${getEnvVar('JAMES_API_CAR_COVERAGE')}',

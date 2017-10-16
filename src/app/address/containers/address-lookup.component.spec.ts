@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { setUpTestBed } from './../../../test.common.spec';
 
-import { Address, AddressLookup } from '../models';
+import { Address, AddressLookup, AddressSuggestionParams } from '../models';
 import { AddressForm } from '../components/address.form';
 import { AuthHttp  } from '../../auth/services';
 import { LocalStorageService } from '../../core/services';
@@ -22,6 +22,7 @@ import * as fromRoot from '../reducers';
 import * as fromAddress from '../reducers';
 
 import * as address from '../actions/address';
+import * as suggestion from '../actions/suggestion';
 
 @Component({
   template: `<knx-address-lookup [addressForm]="form"></knx-address-lookup>`
@@ -116,6 +117,7 @@ describe('Component: AddressLookup', () => {
     fixture.detectChanges();
     expect(comp.targetComponent.addressPreview$).toBeDefined();
     expect(comp.targetComponent.getAddress$).toBeDefined();
+    expect(comp.targetComponent.loading$).toBeDefined();
   });
 
   it('Dispatch address lookup action', () => {
@@ -125,7 +127,18 @@ describe('Component: AddressLookup', () => {
     } as AddressLookup;
 
     const action = new address.GetAddress(payload);
-    comp.targetComponent.validateAddress(payload);
+    comp.targetComponent.runValidation(payload);
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('Dispatch address suggestion action', () => {
+    const payload = {
+      zipcode: '2212CB',
+      house_number: '22'
+    } as AddressSuggestionParams;
+
+    const action = new suggestion.GetAddressSuggestion(payload);
+    comp.targetComponent.getAddressSuggestions(payload);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });
