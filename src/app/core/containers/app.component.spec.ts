@@ -72,6 +72,7 @@ describe('Component: AppComponent', () => {
   });
 
   it('should define the login modal name', () => {
+    expect(comp.targetComponent).toBeDefined();
     expect(comp.targetComponent.modalNames.loginModal).toEqual('loginModal');
     expect(comp.targetComponent.modalNames.authRedirect).toEqual('authRedirectModal');
   });
