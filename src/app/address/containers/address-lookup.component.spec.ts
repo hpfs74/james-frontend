@@ -116,29 +116,35 @@ describe('Component: AddressLookup', () => {
     comp.targetComponent.ngOnInit();
     fixture.detectChanges();
     expect(comp.targetComponent.addressPreview$).toBeDefined();
-    expect(comp.targetComponent.getAddress$).toBeDefined();
+    expect(comp.targetComponent.loaded$).toBeDefined();
     expect(comp.targetComponent.loading$).toBeDefined();
   });
 
   it('Dispatch address lookup action', () => {
     const payload = {
       postalCode: '2212CB',
-      houseNumber: '22'
+      houseNumber: '22',
+      houseNumberExtension: 'A'
     } as AddressLookup;
 
     const action = new address.GetAddress(payload);
-    comp.targetComponent.runValidation(payload);
+    comp.targetComponent.getAddress(payload);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
   it('Dispatch address suggestion action', () => {
+    const value = {
+      postalCode: '2212CB',
+      houseNumber: '22'
+    } as AddressLookup;
+
     const payload = {
       zipcode: '2212CB',
       house_number: '22'
     } as AddressSuggestionParams;
 
     const action = new suggestion.GetAddressSuggestion(payload);
-    comp.targetComponent.getAddressSuggestions(payload);
+    comp.targetComponent.addressChange(value);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });

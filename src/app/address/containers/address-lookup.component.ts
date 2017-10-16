@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -29,6 +29,7 @@ export const DEFAULT_OPTIONS: HouseNumberExtensionOptions = {
   label: 'Toevoeging',
   disabled: true
 };
+
 @Component({
   selector: 'knx-address-lookup',
   template: `
@@ -36,27 +37,31 @@ export const DEFAULT_OPTIONS: HouseNumberExtensionOptions = {
       [addressFormGroup]="addressForm.formGroup"
       [addressFormConfig]="addressForm.formConfig"
       [validationErrors]="addressForm.validationErrors"
-      [asyncValidator]="getAddress$"
       [addressPreview]="addressPreview$ | async"
-      (runSuggestion)="getAddressSuggestions($event)"
       [loading]="loading$ | async"
       [loaded]="loaded$ | async"
-      (runValidation)="runValidation($event)">
+      (onAddressChange)="addressChange($event)"
+      (onHouseNumberExtensionChange)="getAddress($event)">
     </knx-address>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddressLookupComponent implements OnInit {
+export class AddressLookupComponent implements OnInit, AfterViewChecked {
   @Input() addressForm: AddressForm;
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
-  @ViewChild(AddressComponent) addressComponent: AddressComponent;
 
   addressPreview$: Observable<string>;
-  getAddress$: Observable<any>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
 
   constructor(private store$: Store<fromAddress.State>) {}
+
+  ngAfterViewChecked() {
+    // Validator is bound here instead of inside AddressComponent due to an issue with asyncValidator
+    // getting stuck in pending state.
+    // @see https://github.com/angular/angular/issues/13200
+    this.addressForm.formGroup.setAsyncValidators((formControl) => this.validateAddressAsync(formControl));
+  }
 
   ngOnInit() {
     this.suggestionSubscriptions();
@@ -68,14 +73,23 @@ export class AddressLookupComponent implements OnInit {
 
     this.loading$ = Observable.combineLatest(addressLoading$, suggestionLoading$)
       .map((combined) => combined[0] || combined[1]);
+  }
 
-    this.getAddress$ = this.store$.select(fromAddress.getAddress)
-    .map((address) => {
-      if (address) {
-        this.addressFound.emit(address);
-      }
-      return address ? null : { address: true };
-    });
+  addressChange(value: AddressLookup) {
+    this.store$.dispatch(new suggestion.GetAddressSuggestion({
+      zipcode: value.postalCode,
+      house_number: value.houseNumber
+    }));
+  }
+
+  getAddress(value: AddressLookup) {
+    if (value.postalCode && value.houseNumber) {
+      this.store$.dispatch(new address.GetAddress({
+        postalCode: value.postalCode,
+        houseNumber: value.houseNumber,
+        houseNumberExtension: value.houseNumberExtension
+      }));
+    }
   }
 
   suggestionSubscriptions() {
@@ -93,33 +107,46 @@ export class AddressLookupComponent implements OnInit {
           this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = false;
         }
         if (state.suggestion.additions[0] === '') {
-          this.runValidationWithFormValues();
+          this.getAddress({
+            postalCode: this.addressForm.formGroup.get('postalCode').value,
+            houseNumber: this.addressForm.formGroup.get('houseNumber').value,
+            houseNumberExtension: ''
+          });
         }
-      } else if (!state.loading && state.error && !state.suggestion) {
-        this.runValidationWithFormValues();
       }
+      // else if (!state.loading && state.error && !state.suggestion) {
+      // }
     });
   }
 
-  getAddressSuggestions(value: AddressSuggestionParams) {
-    this.store$.dispatch(new suggestion.GetAddressSuggestion({
-      zipcode: value.zipcode,
-      house_number: value.house_number
-    }));
-  }
+  validateAddressAsync(formGroup: AbstractControl): Observable<any> {
+    const debounceTime = 500;
 
-  runValidationWithFormValues() {
-    if (this.addressForm.formGroup) {
-      let address: AddressLookup = {
-        houseNumber: this.addressForm.formGroup.get('houseNumber').value,
-        postalCode: this.addressForm.formGroup.get('postalCode').value,
-        houseNumberExtension: this.addressForm.formGroup.get('houseNumberExtension').value
-      };
-      this.runValidation(address);
-    }
-  }
+    return Observable.timer(debounceTime).switchMap(() => {
+      const postalCodeControl = formGroup.get('postalCode');
+      const houseNumberControl = formGroup.get('houseNumber');
+      const houseNumberExtensionControl = formGroup.get('houseNumberExtension');
+      const error = { address: true };
 
-  runValidation(value: AddressLookup) {
-    this.store$.dispatch(new address.GetAddress(value));
+      if (!postalCodeControl.valid || !houseNumberControl.valid || houseNumberExtensionControl.disabled) {
+        return new Observable(obs => obs.next(error));
+      }
+
+      const address$ = this.store$.select(fromAddress.getAddress);
+      const suggestion$ = this.store$.select(fromAddress.getSuggestion);
+
+      return Observable.combineLatest(address$, suggestion$)
+        .map((combined) => {
+          const address = combined[0];
+          const suggestions = combined[1];
+
+          if (address) {
+            this.addressFound.emit(address);
+            return null;
+          } else {
+            return error;
+          }
+        }, err => error);
+    });
   }
 }

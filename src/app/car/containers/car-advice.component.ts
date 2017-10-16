@@ -194,7 +194,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     const addressForm = this.addressForm.formGroup;
 
     FormUtils.validateForm(detailForm);
-    FormUtils.validateForm(addressForm);
+    // FormUtils.validateForm(addressForm);
 
     if (!detailForm.valid || !addressForm.valid) {
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
@@ -259,14 +259,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   startBuyFlow(): Observable<any> {
     // TOOD: integrate modal to redirect user
-    // this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
+    this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
 
-    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-      id => {
-        this.store$.dispatch(new router.Go({
-          path: ['/car/insurance', { adviceId: id }],
-        }));
-      }));
+    // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+    //   id => {
+    //     this.store$.dispatch(new router.Go({
+    //       path: ['/car/insurance', { adviceId: id }],
+    //     }));
+    //   }));
     return;
   }
 
