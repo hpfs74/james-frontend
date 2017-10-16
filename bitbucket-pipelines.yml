@@ -31,3 +31,9 @@ pipelines:
           - node
         script:
           - npm run test
+    - step:
+        name: vulnerability
+        caches:
+          - node
+        script:
+          - npm run security
