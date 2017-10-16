@@ -4,13 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 // @cx
-<<<<<<< HEAD
 import { CXFormsModule } from '@cx/forms';
 import { TextMaskModule } from '@cx/input';
-=======
-import { CXFormsModule } from '@cx/forms/index';
-import { TextMaskModule } from 'angular2-text-mask';
->>>>>>> refactor(knx-input): add new input component to handle addon
 
 // @knx
 import { KNXWizardModule } from '@knx/wizard';
