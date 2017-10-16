@@ -92,14 +92,11 @@ export class AddressLookupComponent implements OnInit {
         if (this.addressForm.formConfig.houseNumberExtension.inputOptions.items.length > 0) {
           this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = false;
         }
-      } else if (!state.loading && state.error && !state.suggestion) {
-        if (this.addressForm.formGroup) {
-          let address: AddressLookup = {
-            houseNumber: this.addressForm.formGroup.get('houseNumber').value,
-            postalCode: this.addressForm.formGroup.get('postalCode').value
-          };
-          this.addressComponent.validateAddress(address);
+        if (state.suggestion.additions[0] === '') {
+          this.runValidationWithFormValues();
         }
+      } else if (!state.loading && state.error && !state.suggestion) {
+        this.runValidationWithFormValues();
       }
     });
   }
@@ -109,6 +106,17 @@ export class AddressLookupComponent implements OnInit {
       zipcode: value.zipcode,
       house_number: value.house_number
     }));
+  }
+
+  runValidationWithFormValues() {
+    if (this.addressForm.formGroup) {
+      let address: AddressLookup = {
+        houseNumber: this.addressForm.formGroup.get('houseNumber').value,
+        postalCode: this.addressForm.formGroup.get('postalCode').value,
+        houseNumberExtension: this.addressForm.formGroup.get('houseNumberExtension').value
+      };
+      this.runValidation(address);
+    }
   }
 
   runValidation(value: AddressLookup) {
