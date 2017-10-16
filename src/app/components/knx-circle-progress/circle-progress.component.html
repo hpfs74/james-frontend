@@ -16,16 +16,16 @@
   <defs>
     <pattern
       [attr.id]="'image' + uniqueId"
-      [attr.x]="imageConfig.x + '%'"
-      [attr.y]="imageConfig.y + '%'"
+      [attr.x]="imageConfig?.x + '%'"
+      [attr.y]="imageConfig?.y + '%'"
       height="100%"
       width="100%"
       viewBox="0 0 120 120"
       patternUnits="userSpaceOnUse">
         <image x="0%" y="0%"
-          [attr.width]="imageConfig.width || 90"
-          [attr.height]="imageConfig.height || 90"
-          [attr.xlink:href]="imageConfig.url">
+          [attr.width]="imageConfig?.width || 90"
+          [attr.height]="imageConfig?.height || 90"
+          [attr.xlink:href]="imageConfig?.url">
         </image>
     </pattern>
   </defs>
