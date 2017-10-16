@@ -62,7 +62,7 @@ describe('Component: Registration', () => {
 
   it('should initialize the form', () => {
     expect(comp.form.formConfig).toBeDefined();
-    expect(Object.keys(comp.form.formConfig).length).toBe(2);
+    expect(Object.keys(comp.form.formConfig).length).toBe(3);
     expect(comp.form.formGroup.get('email')).toBeDefined();
     expect(comp.form.formGroup.get('password')).toBeDefined();
   });
