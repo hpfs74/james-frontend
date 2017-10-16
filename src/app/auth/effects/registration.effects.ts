@@ -34,7 +34,7 @@ export class RegistrationEffects {
       this.authService
         .register(username, password)
         .mergeMap((result: RegistrationResult) => {
-          return [new registration.RegisterSuccess()];
+          return [new registration.RegisterSuccess({})];
         })
         .catch((error) => {
           let errorText = JSON.parse(error.text()) || error;

@@ -25,6 +25,11 @@ export class RegistrationComponent implements OnInit {
   @Input() privacyStatementUrl: string;
   @Input() termsAndConditionsUrl: string;
 
+
+  pending$ = this.store.select(fromAuth.getLoginPagePending);
+  error$ = this.store.select(fromAuth.getLoginPageError);
+
+
   errorMessage: string;
 
   form: RegistrationForm = new RegistrationForm(new FormBuilder());
