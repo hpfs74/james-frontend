@@ -25,10 +25,8 @@ export class RegistrationComponent implements OnInit {
   @Input() privacyStatementUrl: string;
   @Input() termsAndConditionsUrl: string;
 
-
-  pending$ = this.store.select(fromAuth.getLoginPagePending);
-  error$ = this.store.select(fromAuth.getLoginPageError);
-
+  pending$ = this.store.select(fromAuth.getRegistrationPending);
+  error$ = this.store.select(fromAuth.getRegistrationError);
 
   errorMessage: string;
 
@@ -39,7 +37,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.select(fromAuth.getLoginPageError)
+    this.store.select(fromAuth.getRegistrationError)
       .filter(error => error !== null)
       .subscribe((error) => {
         this.errorMessage = registrationError[error] || registrationError.default;
