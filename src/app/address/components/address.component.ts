@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewChecked, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewChecked, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -13,7 +13,8 @@ import { CXFormGroupComponent } from '@cx/form-group';
 
 @Component({
   selector: 'knx-address',
-  templateUrl: './address.component.html'
+  templateUrl: './address.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressComponent implements AfterViewChecked {
   @Input() addressFormGroup: FormGroup;
@@ -28,16 +29,12 @@ export class AddressComponent implements AfterViewChecked {
   @Output() runSuggestion: EventEmitter<AddressSuggestionParams> = new EventEmitter();
   @Output() runValidation: EventEmitter<AddressLookup> = new EventEmitter();
 
-  @ViewChild('houseNumberExtension') houseNumberExtension: CXFormGroupComponent;
-
   mask = postalCodeMask;
 
   ngAfterViewChecked(): void {
     this.addressFormGroup.setAsyncValidators((formControl) => this.getSuggestion(formControl));
-    this.houseNumberExtension.events.subscribe((event) => {
-      if (event.type === 'change') {
-        this.onHouseNumberExtensionChange();
-      }
+    this.addressFormGroup.get('houseNumberExtension').valueChanges.subscribe(() => {
+      this.onHouseNumberExtensionChange();
     });
   }
 

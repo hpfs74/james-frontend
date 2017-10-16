@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -43,7 +43,8 @@ export const DEFAULT_OPTIONS: HouseNumberExtensionOptions = {
       [loaded]="loaded$ | async"
       (runValidation)="runValidation($event)">
     </knx-address>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressLookupComponent implements OnInit {
   @Input() addressForm: AddressForm;
@@ -60,8 +61,13 @@ export class AddressLookupComponent implements OnInit {
   ngOnInit() {
     this.suggestionSubscriptions();
     this.addressPreview$ = this.store$.select(fromAddress.getAddressFullname);
-    this.loading$ = this.store$.select(fromAddress.getAddressLoading);
     this.loaded$ = this.store$.select(fromAddress.getAddressLoaded);
+
+    const addressLoading$ = this.store$.select(fromAddress.getAddressLoading);
+    const suggestionLoading$ = this.store$.select(fromAddress.getSuggestionLoading);
+
+    this.loading$ = Observable.combineLatest(addressLoading$, suggestionLoading$)
+      .map((combined) => combined[0] || combined[1]);
 
     this.getAddress$ = this.store$.select(fromAddress.getAddress)
     .map((address) => {
@@ -78,17 +84,15 @@ export class AddressLookupComponent implements OnInit {
       this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = true;
       if (!state.error && state.suggestion) {
         state.suggestion.additions.forEach(addition => {
-          if (addition) {
-            this.addressForm.formConfig.houseNumberExtension.inputOptions.items.push(<HouseExtensionItem>{
-              label: addition,
-              value: addition
-            });
-          }
+          this.addressForm.formConfig.houseNumberExtension.inputOptions.items.push(<HouseExtensionItem>{
+            label: addition,
+            value: addition
+          });
         });
         if (this.addressForm.formConfig.houseNumberExtension.inputOptions.items.length > 0) {
           this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = false;
         }
-      }else if (!state.loading && state.error && !state.suggestion) {
+      } else if (!state.loading && state.error && !state.suggestion) {
         if (this.addressForm.formGroup) {
           let address: AddressLookup = {
             houseNumber: this.addressForm.formGroup.get('houseNumber').value,

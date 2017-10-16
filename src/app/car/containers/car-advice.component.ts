@@ -253,12 +253,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   startBuyFlow(): Observable<any> {
-    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-      id => {
-        this.store$.dispatch(new router.Go({
-          path: ['/car/insurance', { adviceId: id }],
-        }));
-      }));
+
+    this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
+
+    // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+    //   id => {
+    //     this.store$.dispatch(new router.Go({
+    //       path: ['/car/insurance', { adviceId: id }],
+    //     }));
+    //   }));
     return;
   }
 
@@ -287,7 +290,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     return Observable.timer(debounceTime).switchMap(() => {
       const validLength = 6;
-
       const license = licenseControl.value;
 
       if (!license || license.length !== validLength) {
@@ -334,6 +336,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Subscribe to coverage recommendation request
     this.store$.select(fromCar.getCoverage)
+      .filter(() => this.currentStep === 0)
       .filter(coverage => coverage !== null)
       .subscribe(coverageAdvice => {
         let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
