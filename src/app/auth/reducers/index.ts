@@ -59,6 +59,11 @@ export const getRegistrationPending = createSelector(
   fromRegistration.getPending
 );
 
+export const getRegistrationError = createSelector(
+  selectRegistrationState,
+  fromRegistration.getError
+);
+
 // export const selectRegistrationStatusState = createSelector(
 //   selectRegistrationState,
 //   (state: AuthState) => state.registration
