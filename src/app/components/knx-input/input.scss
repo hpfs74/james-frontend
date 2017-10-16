@@ -49,17 +49,19 @@ $knxInputWidth: 100%;
 }
 
 .knx-input__addon-left {
-  padding-left: 50px !important;
+  padding-left: 50px;
 }
 
 .knx-input__addon-icon {
   font-family: $baseFontFamily, 'sans-serif';
   font-weight: $baseFontWeight;
-  font-size: $baseFontSize;
+  font-size: $baseFontSize + 10px;
   width: 44px;
   height: 44px;
   line-height: 33px;
   position: absolute;
   left: 0;
   border-right: 1px solid $knab-primary-gray;
+  padding: $knxInputPadding;
+  text-align: center;
 }
