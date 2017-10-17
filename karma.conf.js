@@ -94,11 +94,11 @@ module.exports = function(config) {
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
-        captureTimeout: 2000,
-        browserDisconnectTimeout: 2000,
-        browserDisconnectTolerance: 3,
-        browserNoActivityTimeout: 10000,
-        autoWatch: process.env.CI ? true : false,
+        // captureTimeout: 2000,
+        // browserDisconnectTimeout: 2000,
+        // browserDisconnectTolerance: 3,
+        // browserNoActivityTimeout: 10000,
+        autoWatch: process.env.CI ? false : true,
         browsers: process.env.CI ? ['PhantomJS'] : ['ChromeHeadless'],
         singleRun: process.env.CI ? false : true
     };
