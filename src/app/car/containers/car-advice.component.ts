@@ -258,7 +258,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   startBuyFlow(): Observable<any> {
-    // TOOD: integrate modal to redirect user
+    // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
+    // Instead of going into the buy flow the user clicks on the modal buttons
+    // to be redirected either to /login or /register
     this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
 
     // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
