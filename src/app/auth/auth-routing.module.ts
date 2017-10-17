@@ -6,14 +6,12 @@ import { AuthService } from './services/auth.service';
 import { LoginPageComponent } from './containers/login-page.component';
 import { RegistrationPageComponent } from './containers/registration-page.component';
 
-const loginRoutes: Routes = [
+const authRoutes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
     canActivate: [LoginGuard]
-  }];
-const registrationRoutes: Routes = [
-  {
+  },{
     path: 'register',
     component: RegistrationPageComponent,
   }
@@ -21,8 +19,7 @@ const registrationRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(loginRoutes),
-    RouterModule.forChild(registrationRoutes)
+    RouterModule.forChild(authRoutes),
   ],
   exports: [
     RouterModule
