@@ -111,6 +111,22 @@ $knx-navbar-font: $font-size-base;
   padding-top: 10px;
 }
 
+.navbar-toggleable-md,
+.navbar-toggleable-md .navbar-nav {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.navbar-toggleable-md {
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .knx-navbar .navbar-nav .nav-item {
   margin-right: 20px;
 }

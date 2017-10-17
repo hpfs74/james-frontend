@@ -29,7 +29,14 @@
       </li>
 
       <li class="nav-item hidden-md-down"><ng-content select="knx-opening-hours"></ng-content></li>
-      <li class="nav-item"><ng-content select="knx-nav-user"></ng-content></li>
+      <li class="nav-item" *ngIf="loggedIn$ | async"><ng-content select="knx-nav-user"></ng-content></li>
+
+      <li class="nav-item" *ngIf="anonymous$ | async">
+        <a class="nav-link" (click)="register()">Register</a>
+      </li>
+      <li class="nav-item" *ngIf="anonymous$ | async">
+        <a class="nav-link" (click)="logIn()">Login</a>
+      </li>
     </ul>
   </div>
 </nav>

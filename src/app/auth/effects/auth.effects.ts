@@ -50,6 +50,27 @@ export class AuthEffects {
         })
   );
 
+  @Effect()
+  loginAnonymous$ = this.actions$
+    .ofType(auth.LOGIN_ANON)
+    .map((action: auth.Login) => action.payload)
+    .exhaustMap(isAuthenticated =>
+      this.authService
+        .loginAnonymous()
+        .mergeMap((token: AuthToken) => {
+          if (token) {
+            this.localStorageService.setToken(token);
+          }
+          return [
+            new auth.ScheduleTokenRefresh(token),
+          ];
+        })
+        .catch((error) => {
+          let errorText = JSON.parse(error.text()) || error;
+          return Observable.of(new auth.LoginFailure(errorText.error || errorText));
+        })
+  );
+
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$
     .ofType(auth.LOGIN_SUCCESS)
@@ -119,19 +140,30 @@ export class AuthEffects {
     // see: https://github.com/ngrx/platform/issues/246
     @Effect()
     init$: Observable<Action> = defer(() => {
-      if (this.authService.isLoggedIn()) {
-        // Token is not expired
-        let token: AuthToken = this.localStorageService.getToken();
-        if (token !== null && token.access_token) {
-          this.store$.dispatch(new auth.LoginSuccess({ token: token }));
-          this.store$.dispatch(new auth.ScheduleTokenRefresh(token));
+      let token: AuthToken = this.localStorageService.getToken();
+
+      if (token && !token['anonymous']) {
+        // not Anonymous
+        if (this.authService.isLoggedIn()) {
+          // Token is not expired
+          if (token !== null && token.access_token) {
+            this.store$.dispatch(new auth.LoginSuccess({ token: token }));
+            this.store$.dispatch(new auth.ScheduleTokenRefresh(token));
+          } else {
+            this.store$.dispatch(new auth.LoginRedirect());
+          }
         } else {
+          // Token is expired
+          this.localStorageService.clearToken();
           this.store$.dispatch(new auth.LoginRedirect());
         }
       } else {
-        // Token is expired
-        this.localStorageService.clearToken();
-        this.store$.dispatch(new auth.LoginRedirect());
+        // Anonymous
+        this.store$.dispatch(new auth.StartAnonymous());
+        this.store$.dispatch(new auth.LoginAnonymous({
+          username: 'user@test.com',
+          password: 'supers3cret@'
+        }));
       }
     });
 

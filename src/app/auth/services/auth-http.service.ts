@@ -68,16 +68,17 @@ export class AuthHttp {
   }
 
   public requestWithToken(req: Request): Observable<Response> {
-    if (!AuthUtils.tokenNotExpired('token')) {
+    if (AuthUtils.isTokenPresented('token') && !AuthUtils.tokenNotExpired('token')) {
       return new Observable<Response>((obs: any) => {
-        obs.error(new AuthHttpError('No token present or has expired'));
+        obs.error(new AuthHttpError('Token has expired'));
       });
     } else {
       let token: string = this.localStorageService.getAccessToken();
-      req.headers.set('Content-Type', 'application/json');
       req.headers.set('Authorization', 'Bearer ' + token);
-      req.headers.set('Cache-Control', 'no-cache, no-store, max-age=0');
     }
+
+    req.headers.set('Content-Type', 'application/json');
+    req.headers.set('Cache-Control', 'no-cache, no-store, max-age=0');
     return this.http.request(req);
   }
 
