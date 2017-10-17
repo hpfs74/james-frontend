@@ -113,9 +113,12 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
             houseNumberExtension: ''
           });
         }
+      } else if (!state.loading && state.error && !state.suggestion) {
+        this.getAddress({
+          postalCode: this.addressForm.formGroup.get('postalCode').value,
+          houseNumber: this.addressForm.formGroup.get('houseNumber').value
+        });
       }
-      // else if (!state.loading && state.error && !state.suggestion) {
-      // }
     });
   }
 
