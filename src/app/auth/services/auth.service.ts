@@ -8,7 +8,7 @@ import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
 import { environment } from '../../../environments/environment';
-import { AuthKey, AuthToken, RegistrationResult } from '../models/auth';
+import { AuthKey, AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
@@ -86,15 +86,11 @@ export class AuthService {
    * @param {Authenticate} auth
    * @return {Observable
    */
-  public register(username, password): Observable<RegistrationResult> {
-    const payload = {
-      'emailaddress': username,
-      'password': password,
-      'scope': 'profile/basic',
-      'redirect_uri': 'com.knab.verzekeren://'
-    };
+  public register(registration: RegistrationPayload): Observable<RegistrationResult> {
+    registration.scope = 'profile/basic';
+    registration.redirect_uri = `${environment.external.login}`;
 
-    return this.play(environment.james.payloadEncryption.profile, payload)
+    return this.play(environment.james.payloadEncryption.profile, registration)
       .map((res: Response) => res.json());
   }
 

@@ -1,6 +1,6 @@
 
 import { Action } from '@ngrx/store';
-import { AuthToken, Authenticate } from '../models/auth';
+import { AuthToken, Authenticate, RegistrationPayload } from '../models/auth';
 
 export const REGISTER = '[Register] Create';
 export const REGISTER_SUCCESS = '[Register] Register Success';
@@ -11,7 +11,7 @@ export const REGISTER_REDIRECT = '[Register] Register Redirect';
 export class Register implements Action {
   readonly type = REGISTER;
 
-  constructor(public emailAddress: string, public password: string) {}
+  constructor(public registration: RegistrationPayload) {}
 }
 
 export class RegisterSuccess implements Action {

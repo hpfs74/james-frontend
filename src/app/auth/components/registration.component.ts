@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
 
-      this.store.dispatch(new registration.Register(email.value, password.value));
+      this.store.dispatch(new registration.Register({ emailaddress: email.value, password: password.value}));
     }
     return;
   }

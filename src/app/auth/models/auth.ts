@@ -19,6 +19,13 @@ export interface Authenticate {
   scope?: string;
 }
 
+export interface RegistrationPayload {
+  emailaddress: string;
+  password: string;
+  scope?: string;
+  redirect_uri?: string;
+}
+
 export class RegistrationResult {
 
   _id: string;
