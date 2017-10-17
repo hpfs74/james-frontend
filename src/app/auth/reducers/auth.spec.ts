@@ -23,7 +23,8 @@ describe('Auth reducer', () => {
       const expectedResult = {
         loggedIn: true,
         loginExpired: false,
-        token: token
+        token: token,
+        anonymous: false
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, loginAction);
@@ -39,6 +40,7 @@ describe('Auth reducer', () => {
         loggedIn: false,
         loginExpired: false,
         token: null,
+        anonymous: false
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, logoutAction);
@@ -59,7 +61,8 @@ describe('Auth reducer', () => {
       const expectedResult = {
         loggedIn: true,
         loginExpired: false,
-        token: token
+        token: token,
+        anonymous: false
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, refreshAction);
