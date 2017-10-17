@@ -2,14 +2,14 @@ import * as registration from '../actions/registration';
 
 export interface State {
   error: string | null;
-  pending: boolean;
+  loading: boolean;
   registered: boolean;
 }
 
 export const initialState: State = {
 
   error: null,
-  pending: false,
+  loading: false,
   registered: false
 };
 
@@ -19,7 +19,7 @@ export function reducer(state = initialState, action: registration.Actions): Sta
       return {
         ...state,
         error: null,
-        pending: true,
+        loading: true,
       };
     }
 
@@ -28,7 +28,7 @@ export function reducer(state = initialState, action: registration.Actions): Sta
         ...state,
         registered: true,
         error: null,
-        pending: false,
+        loading: false,
       };
     }
 
@@ -36,7 +36,7 @@ export function reducer(state = initialState, action: registration.Actions): Sta
       return {
         ...state,
         error: action.payload,
-        pending: false,
+        loading: false,
       };
     }
 
@@ -47,4 +47,4 @@ export function reducer(state = initialState, action: registration.Actions): Sta
 }
 
 export const getError = (state: State) => state.error;
-export const getPending = (state: State) => state.pending;
+export const getPending = (state: State) => state.loading;
