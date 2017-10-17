@@ -3,6 +3,8 @@ import { Routes } from '@angular/router';
 
 import { AuthGuard } from './auth/services/auth-guard.service';
 
+// TODO: CoreModule should not be lazy loaded
+
 export const routes: Routes = [
   {
     path: '',

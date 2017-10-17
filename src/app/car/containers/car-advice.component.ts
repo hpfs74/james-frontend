@@ -46,6 +46,12 @@ import * as FormUtils from '../../utils/base-form.utils';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 
+enum carFormSteps {
+  carDetails,
+  compareResults,
+  insuranceSummary
+}
+
 @Component({
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -56,7 +62,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   carDetailSubmitted = false;
   currentStep: number;
   coverages: Array<Price>;
-
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   showStepBlock = false;
@@ -189,7 +194,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     const addressForm = this.addressForm.formGroup;
 
     FormUtils.validateForm(detailForm);
-    FormUtils.validateForm(addressForm);
+    // FormUtils.validateForm(addressForm);
 
     if (!detailForm.valid || !addressForm.valid) {
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
@@ -253,12 +258,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   startBuyFlow(): Observable<any> {
-    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-      id => {
-        this.store$.dispatch(new router.Go({
-          path: ['/car/insurance', { adviceId: id }],
-        }));
-      }));
+    // TOOD: integrate modal to redirect user
+    this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
+
+    // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+    //   id => {
+    //     this.store$.dispatch(new router.Go({
+    //       path: ['/car/insurance', { adviceId: id }],
+    //     }));
+    //   }));
     return;
   }
 
@@ -287,7 +295,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     return Observable.timer(debounceTime).switchMap(() => {
       const validLength = 6;
-
       const license = licenseControl.value;
 
       if (!license || license.length !== validLength) {
@@ -310,7 +317,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   private onShowDetailsForm() {
     // Subscribe to car errors
     this.store$.select(fromCar.getCarInfoError)
-      .filter(() => this.currentStep === 0)
+      .filter(() => this.currentStep === carFormSteps.carDetails)
       .subscribe((error) => {
         if (error) {
           this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
@@ -320,7 +327,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Subscribe to car info
     this.store$.select(fromCar.getCarInfo)
-      .filter(() => this.currentStep === 0)
+      .filter(() => this.currentStep === carFormSteps.carDetails)
       .subscribe((car: Car) => {
         if (car && car.license) {
           this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
@@ -334,6 +341,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Subscribe to coverage recommendation request
     this.store$.select(fromCar.getCoverage)
+      .filter(() => this.currentStep === carFormSteps.carDetails)
       .filter(coverage => coverage !== null)
       .subscribe(coverageAdvice => {
         let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];

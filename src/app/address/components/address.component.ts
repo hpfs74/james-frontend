@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewChecked, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewChecked, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -15,30 +15,40 @@ import { CXFormGroupComponent } from '@cx/form-group';
   selector: 'knx-address',
   templateUrl: './address.component.html'
 })
-export class AddressComponent implements AfterViewChecked {
+export class AddressComponent implements OnInit {
   @Input() addressFormGroup: FormGroup;
   @Input() addressFormConfig: any;
   @Input() validationErrors: any;
-  @Input() asyncValidator: Observable<any>;
   @Input() addressPreview: string;
   @Input() loading: boolean;
   @Input() loaded: boolean;
 
-  @Output() addressFound: EventEmitter<Address> = new EventEmitter();
-  @Output() runSuggestion: EventEmitter<AddressSuggestionParams> = new EventEmitter();
-  @Output() runValidation: EventEmitter<AddressLookup> = new EventEmitter();
-
-  @ViewChild('houseNumberExtension') houseNumberExtension: CXFormGroupComponent;
+  @Output() onAddressChange: EventEmitter<AddressLookup> = new EventEmitter();
+  @Output() onHouseNumberExtensionChange: EventEmitter<AddressLookup> = new EventEmitter();
 
   mask = postalCodeMask;
 
-  ngAfterViewChecked(): void {
-    this.addressFormGroup.setAsyncValidators((formControl) => this.getSuggestion(formControl));
-    this.houseNumberExtension.events.subscribe((event) => {
-      if (event.type === 'change') {
-        this.onHouseNumberExtensionChange();
-      }
+  ngOnInit(): void {
+    const postalCodeChange$ = this.addressFormGroup.get('postalCode').valueChanges;
+    const houseNumberChange$ = this.addressFormGroup.get('houseNumber').valueChanges;
+    const houseNumberExtensionChange$ = this.addressFormGroup.get('houseNumberExtension').valueChanges;
+
+    Observable.combineLatest(postalCodeChange$, houseNumberChange$)
+      .filter(combined => combined[0] && combined[1])
+      .subscribe((combined) => {
+        this.onAddressChange.emit({
+          postalCode: combined[0],
+          houseNumber: combined[1]
+        });
     });
+
+    houseNumberExtensionChange$
+      .subscribe(value =>
+        this.onHouseNumberExtensionChange.emit({
+          postalCode: this.addressFormGroup.value.postalCode,
+          houseNumber: this.addressFormGroup.value.houseNumber,
+          houseNumberExtension: value
+        }));
   }
 
   getErrors(): Array<string> {
@@ -54,38 +64,5 @@ export class AddressComponent implements AfterViewChecked {
       return (typeof errorMessage === 'string') ?
         errorMessage : errorMessage(errorMessage);
     }
-  }
-
-  getSuggestion(formGroup: AbstractControl): Observable<any> {
-    const postalCodeControl = formGroup.get('postalCode');
-    const houseNumberControl = formGroup.get('houseNumber');
-    if (!postalCodeControl.valid || !houseNumberControl.valid) {
-      return Observable.of({ address: true });
-    }
-    this.runSuggestion.emit({
-      zipcode: postalCodeControl.value,
-      house_number: houseNumberControl.value
-    });
-
-    return this.asyncValidator;
-  }
-
-  validateAddress(address: AddressLookup) {
-    this.runValidation.emit({
-      postalCode: address.postalCode,
-      houseNumber: address.houseNumber,
-      houseNumberExtension: address.houseNumberExtension
-    });
-  }
-
-  onHouseNumberExtensionChange() {
-    const postalCodeControl = this.addressFormGroup.get('postalCode');
-    const houseNumberControl = this.addressFormGroup.get('houseNumber');
-    const houseNumberExtension = this.addressFormGroup.get('houseNumberExtension');
-    this.runValidation.emit({
-      postalCode: postalCodeControl.value,
-      houseNumber: houseNumberControl.value,
-      houseNumberExtension: houseNumberExtension.value
-    });
   }
 }
