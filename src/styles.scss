@@ -13,6 +13,7 @@
  */
 @import 'app/auth/containers/login-page.component';
 @import 'app/auth/containers/password-reset-page.component';
+@import 'app/auth/components/registration.component.scss';
 @import 'app/dashboard/containers/dashboard.component';
 @import 'app/car/components/buy/car-summary.component';
 @import 'app/car/components/advice/car-detail.component';
@@ -42,6 +43,7 @@
 @import 'app/components/knx-navigation/navbar.component';
 @import 'app/components/knx-opening-hours/opening-hours.component';
 @import 'app/components/knx-offline-indicator/offline-indicator.component';
+@import 'app/components/knx-password-strength/password-strength.component';
 @import 'app/components/knx-review-summary/review-summary.component';
 @import 'app/components/knx-side-panel/side-panel.component';
 @import 'app/components/knx-star-rating/star-rating.component';
@@ -55,6 +57,8 @@
 @import 'app/components/knx-car-summary/car-summary.component';
 @import 'app/components/knx-app-loader/loader.component';
 @import 'app/components/knx-thank-you/thank-you.component';
+@import 'app/components/knx-checkbox/checkbox.scss';
+@import "app/components/knx-input/input.scss";
 
 /* cx and other external component overrides */
 @import 'styles/overrides';

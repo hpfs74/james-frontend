@@ -71,11 +71,7 @@ export class CircleProgressComponent implements OnInit, OnChanges {
       const time = this.time * 1000 / this.percent;
 
       this.animationLoop(1, time);
-
-    } else {
-      return;
     }
-
   }
 
   private setInputs() {
@@ -176,5 +172,4 @@ export class CircleProgressComponent implements OnInit, OnChanges {
       this.color = this.highColor;
     }
   }
-
 }

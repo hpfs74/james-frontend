@@ -13,7 +13,8 @@ import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXInfoModule } from '@knx/info';
 import { KNXModalDialogModule } from '@knx/modal';
-
+import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
+import { KNXInputComponent } from './components/knx-input/input.component';
 /**
  * Shared Modules
  */
@@ -54,6 +55,7 @@ import { InsuranceTopListComponent } from './components/knx-insurance-toplist/in
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent } from './components/knx-offline-indicator/offline-indicator.component';
+import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
 import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
@@ -94,6 +96,7 @@ export const sharedComponents = [
   InsuranceTopListComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,
+  PasswordStrengthComponent,
   PriceTableComponent,
   PriceItemComponent,
   ReviewSummaryComponent,
@@ -106,7 +109,9 @@ export const sharedComponents = [
   TabComponent,
   ThankYouComponent,
   NavUserComponent,
-  UserGreetingComponent
+  UserGreetingComponent,
+  KNXCheckboxComponent,
+  KNXInputComponent
 ];
 
 export const sharedModules = [
