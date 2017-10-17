@@ -11,7 +11,8 @@ const authRoutes: Routes = [
     path: 'login',
     component: LoginPageComponent,
     canActivate: [LoginGuard]
-  },{
+  },
+  {
     path: 'register',
     component: RegistrationPageComponent,
   }
