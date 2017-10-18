@@ -28,6 +28,11 @@ import * as fromAuth from '../../auth/reducers';
 import * as fromAdvice from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
 
+import * as car from '../actions/car';
+import * as advice from '../../insurance/actions/advice';
+import * as compare from '../actions/compare';
+import * as router from '../../core/actions/router';
+
 import { SharedModule } from '../../shared.module';
 import { TextMessageComponent } from '../../components/knx-chat-stream/text-message.component';
 
@@ -101,6 +106,7 @@ describe('Component: CarBuyComponent', () => {
 
   beforeEach(async(() => {
     store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
   }));
 
   beforeEach(() => {
@@ -215,6 +221,20 @@ describe('Component: CarBuyComponent', () => {
       let result = comp.targetComponent.getProposalData(value, comp.targetComponent.contactDetailForm.formGroup);
 
       expect(result).toBeDefined();
+    });
+  });
+
+  describe('resetFlow()', () => {
+    it('should dispatch reset acitons', () => {
+      let adviceResetAction = new advice.ResetAction();
+      let compareResetAction = new compare.CarCompareResetStateAction();
+      let carResetAction = new car.CarResetStateAction();
+      let routerBackAction = new router.Back();
+      comp.targetComponent.resetFlow();
+      expect(store.dispatch).toHaveBeenCalledWith(adviceResetAction);
+      expect(store.dispatch).toHaveBeenCalledWith(compareResetAction);
+      expect(store.dispatch).toHaveBeenCalledWith(carResetAction);
+      expect(store.dispatch).toHaveBeenCalledWith(routerBackAction);
     });
   });
 });

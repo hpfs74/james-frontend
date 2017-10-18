@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Profile } from './../../../profile/models';
@@ -17,6 +17,8 @@ export class CarContactComponent implements OnChanges {
   @Input() set advice(value: any) {
     FormUtils.updateAndValidateControls(this.form.formGroup, value);
   }
+
+  @Output() onReset: EventEmitter<any> = new EventEmitter<any>();
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.profile) {

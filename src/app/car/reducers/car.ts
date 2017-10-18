@@ -71,6 +71,10 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case CarActions.RESET_CAR_STATE: {
+      return Object.assign({}, state, initialState);
+    }
+
     default: {
       return state;
     }

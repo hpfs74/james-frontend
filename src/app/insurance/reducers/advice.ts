@@ -41,7 +41,6 @@ export function reducer(state = initialState, action: Action): State {
 
     case AdviceActions.UPDATE_ADVICE: {
       const advice = action.payload;
-
       // Do nothing if no advice is selected as active
       if (!state.selectedId || !state.advice) {
         return state;
@@ -88,6 +87,10 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, {
         selectedInsurance: null
       });
+    }
+
+    case AdviceActions.RESET_ADVICE: {
+      return Object.assign({}, state, initialState);
     }
 
     default: {

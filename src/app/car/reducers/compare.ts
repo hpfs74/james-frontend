@@ -43,6 +43,10 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case CompareActions.RESET_STATE: {
+      return Object.assign({}, state, initialState);
+    }
+
     default: {
       return state;
     }
