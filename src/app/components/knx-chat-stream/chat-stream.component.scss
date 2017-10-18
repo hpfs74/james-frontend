@@ -43,6 +43,10 @@
     right: 0;
     background: none;
 
+    .knx-car-extras {
+      display: none;
+    }
+
     &:hover {
       .knx-avatar__image {
         width: 89px;

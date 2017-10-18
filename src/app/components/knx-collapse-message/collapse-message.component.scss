@@ -11,6 +11,13 @@
   }
 }
 
+.knx-side-panel .knx-side-panel-content {
+  .knx-message,
+  .knx-car-extras {
+    display: block;
+  }
+}
+
 .knx-collapse-message.knx-collapse-message--open {
   height: auto;
 }
