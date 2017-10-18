@@ -125,18 +125,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
-      if (currentAdvice) {
-        // do not pre-fill address
-        // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
-        //   this.address.postcode = currentProfile.postcode;
-        //   this.address.number = currentProfile.number;
-        // });
-      } else if (!currentAdvice) {
-        this.store$.dispatch(new advice.AddAction({
-          id: cuid()
-        }));
-      }
-    });
+        if (currentAdvice) {
+          // do not pre-fill address
+          // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
+          //   this.address.postcode = currentProfile.postcode;
+          //   this.address.number = currentProfile.number;
+          // });
+        } else if (!currentAdvice) {
+          this.store$.dispatch(new advice.AddAction({
+            id: cuid()
+          }));
+        }
+      });
 
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
@@ -261,7 +261,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Instead of going into the buy flow the user clicks on the modal buttons
     // to be redirected either to /login or /register
     this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
-    return Observable.throw(new Error());
+
+    // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+    //   id => {
+    //     this.store$.dispatch(new router.Go({
+    //       path: ['/car/insurance', { adviceId: id }],
+    //     }));
+    //   }));
+    return;
   }
 
   updateSelectedCoverage(coverage: Price) {
