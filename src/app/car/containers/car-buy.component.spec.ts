@@ -229,7 +229,7 @@ describe('Component: CarBuyComponent', () => {
       let adviceResetAction = new advice.ResetAction();
       let compareResetAction = new compare.CarCompareResetStateAction();
       let carResetAction = new car.CarResetStateAction();
-      let routerBackAction = new router.Back();
+      let routerBackAction = new router.Go({path: ['car']});
       comp.targetComponent.resetFlow();
       expect(store.dispatch).toHaveBeenCalledWith(adviceResetAction);
       expect(store.dispatch).toHaveBeenCalledWith(compareResetAction);

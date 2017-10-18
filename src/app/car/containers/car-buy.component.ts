@@ -252,6 +252,6 @@ export class CarBuyComponent implements OnInit {
     this.store$.dispatch(new advice.ResetAction());
     this.store$.dispatch(new compare.CarCompareResetStateAction());
     this.store$.dispatch(new car.CarResetStateAction());
-    this.store$.dispatch(new router.Back());
+    this.store$.dispatch(new router.Go({path: ['car']}));
   }
 }
