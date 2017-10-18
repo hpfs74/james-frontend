@@ -261,14 +261,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Instead of going into the buy flow the user clicks on the modal buttons
     // to be redirected either to /login or /register
     this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
-
-    // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-    //   id => {
-    //     this.store$.dispatch(new router.Go({
-    //       path: ['/car/insurance', { adviceId: id }],
-    //     }));
-    //   }));
-    return;
+    return Observable.throw(new Error());
   }
 
   updateSelectedCoverage(coverage: Price) {
