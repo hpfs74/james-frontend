@@ -96,7 +96,7 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
         // captureTimeout: 2000,
         // browserDisconnectTimeout: 2000,
-        // browserDisconnectTolerance: 3,
+        // browserDisconnectTolerance: 2,
         // browserNoActivityTimeout: 10000,
         autoWatch: process.env.CI ? false : true,
         browsers: process.env.CI ? ['PhantomJS'] : ['ChromeHeadless'],
