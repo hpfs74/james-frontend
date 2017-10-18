@@ -42,6 +42,6 @@ export class NavbarComponent implements OnInit {
   }
 
   public register() {
-    this.store$.dispatch(new router.Go({ path: ['/registration'] }));
+    this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }
 }

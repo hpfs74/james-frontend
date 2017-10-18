@@ -26,7 +26,7 @@ import { NavigationService } from '../services';
     <header class="header">
       <knx-offline-indicator></knx-offline-indicator>
 
-      <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
+      <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
         <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
@@ -37,7 +37,7 @@ import { NavigationService } from '../services';
       <router-outlet></router-outlet>
     </div>
 
-    <div *ngIf="isVisible()" class="container-fluid knx-container--fullwidth knx-container--gray">
+    <div class="container-fluid knx-container--fullwidth knx-container--gray">
       <knx-features>
         <knx-feature-item title="Objectief" description="We vergelijken meer dan 40 aanbieders"></knx-feature-item>
         <knx-feature-item title="Bespaar" description="Tot 15% korting op elke verzekering"></knx-feature-item>
@@ -116,18 +116,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.userDialogService.openModal(modalName, '', this.viewContainerRef, AuthRedirectModalComponent, userDialogSettings);
       }
     });
-  }
-
-  isVisible() {
-    if (this.route$) {
-      let shouldShow = true;
-
-      this.route$.take(1)
-        .subscribe(currentRoute => {
-          shouldShow = (currentRoute !== '/login');
-        });
-      return shouldShow;
-    }
   }
 
   logOut() {
