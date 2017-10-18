@@ -52,8 +52,8 @@ export class AuthEffects {
 
   @Effect()
   loginAnonymous$ = this.actions$
-    .ofType(auth.LOGIN_ANON)
-    .map((action: auth.Login) => action.payload)
+    .ofType(auth.LOGIN_ANONYMOUS)
+    .map((action: auth.LoginAnonymous) => action)
     .exhaustMap(isAuthenticated =>
       this.authService
         .loginAnonymous()
