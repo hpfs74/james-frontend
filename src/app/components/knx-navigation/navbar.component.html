@@ -32,10 +32,10 @@
       <li class="nav-item" *ngIf="loggedIn$ | async"><ng-content select="knx-nav-user"></ng-content></li>
 
       <li class="nav-item" *ngIf="anonymous$ | async">
-        <a class="nav-link" (click)="register()">Register</a>
+        <a class="nav-link" (click)="register()">Registreren</a>
       </li>
       <li class="nav-item" *ngIf="anonymous$ | async">
-        <a class="nav-link" (click)="logIn()">Login</a>
+        <a class="nav-link" (click)="logIn()">Inloggen</a>
       </li>
     </ul>
   </div>

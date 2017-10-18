@@ -55,7 +55,7 @@ import { InsuranceResultDetailComponent } from './components/knx-insurance-resul
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
-import { OfflineIndicatorComponent } from './components/knx-offline-indicator/offline-indicator.component';
+import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
 import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
@@ -98,6 +98,7 @@ export const sharedComponents = [
   InsuranceTopListComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,
+  OfflineBarComponent,
   PasswordStrengthComponent,
   PriceTableComponent,
   PriceItemComponent,
