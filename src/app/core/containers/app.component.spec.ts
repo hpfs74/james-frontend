@@ -67,12 +67,12 @@ describe('Component: AppComponent', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
     comp.targetComponent.topMenu = [];
     fixture.detectChanges();
-  });
+  }));
 
   describe('Initialization', () => {
     it('should set the loggedIn observable', () => {
