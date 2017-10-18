@@ -141,8 +141,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
+      .filter(() => this.currentStep === carFormSteps.compareResults)
       .subscribe(data => {
-        let compareObj = {
+        let compareExtraOptions = {
           coverage: data.coverage,
           cover_occupants: data.extraOptionsOccupants || false,
           no_claim_protection: data.extraOptionsNoClaim || false,
@@ -152,7 +153,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
           own_risk: +data.ownRisk || 0,
           insurance_id: ''
         };
-        this.store$.dispatch(new advice.UpdateAction(compareObj));
+        this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
       });
 
     this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
@@ -243,9 +244,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     });
 
     return this.store$.select(fromInsurance.getSelectedAdvice)
-      .map((advice) => {
-        this.store$.dispatch(new compare.LoadCarAction(advice));
-      });
+      .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
+      .map(advice => this.store$.dispatch(new compare.LoadCarAction(advice)));
   }
 
   onSelectPremium(insurance) {
