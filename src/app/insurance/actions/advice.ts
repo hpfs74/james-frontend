@@ -6,6 +6,7 @@ export const ADD_ADVICE =             '[Advice] Add';
 export const UPDATE_ADVICE =          '[Advice] Update';
 export const REMOVE_ADVICE =          '[Advice] Remove';
 export const SELECT_ADVICE =          '[Advice] Select';
+export const RESET_ADVICE =           '[Advice] Reset';
 
 export const SET_INSURANCE = '[Advice] Set Insurance';
 export const REMOVE_INSURANCE = '[Advice] Remove Insurance';
@@ -38,6 +39,10 @@ export class SelectAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class ResetAction implements Action {
+  readonly type = RESET_ADVICE;
+}
+
 export class SetInsuranceAction implements Action {
   readonly type = SET_INSURANCE;
 
@@ -54,5 +59,6 @@ export type All
   | RemoveAction
   | SelectAction
   | SetInsuranceAction
-  | RemoveInsuranceAction;
+  | RemoveInsuranceAction
+  | ResetAction;
 

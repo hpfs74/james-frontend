@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
-import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '@cx/forms';
@@ -74,4 +74,12 @@ describe('Component: CarContactComponent', () => {
     ctrl.setValue('0203031680');
     expect(ctrl.valid).toBeTruthy();
   });
+
+  it('should emit on click', fakeAsync(() => {
+    spyOn(comp.carContactComponent.onReset, 'emit');
+    comp.carContactComponent.resetAdvice();
+    tick(1);
+    expect(comp.carContactComponent.onReset.emit).toHaveBeenCalled();
+    expect(comp.carContactComponent.onReset.emit).toHaveBeenCalledWith('resetAdvice');
+  }));
 });

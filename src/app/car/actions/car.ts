@@ -8,6 +8,7 @@ export const GET_INFO_FAILURE =     '[Car] Info Failure';
 export const BUY_REQUEST =          '[Car] Buy';
 export const BUY_SUCCESS =          '[Car] Buy Success';
 export const BUY_FAILURE =          '[Car] Buy Failure';
+export const RESET_CAR_STATE =      '[Car] Reset State';
 
 export class GetInfoAction implements Action {
   readonly type = GET_INFO_REQUEST;
@@ -45,6 +46,10 @@ export class BuyFailureAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class CarResetStateAction implements Action {
+  readonly type = RESET_CAR_STATE;
+}
+
 
 export type All
   = GetInfoAction
@@ -52,4 +57,5 @@ export type All
   | GetInfoFailureAction
   | BuyAction
   | BuyCompleteAction
-  | BuyFailureAction;
+  | BuyFailureAction
+  | CarResetStateAction;

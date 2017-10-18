@@ -16,6 +16,7 @@ import * as router from '../../core/actions/router';
 import * as profile from '../../profile/actions/profile';
 import * as car from '../actions/car';
 import * as advice from '../../insurance/actions/advice';
+import * as compare from '../actions/compare';
 
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
@@ -86,6 +87,7 @@ export class CarBuyComponent implements OnInit {
         label: 'Contactgegevens',
         nextButtonLabel: 'Naar autogegevens',
         backButtonLabel: 'Terug',
+        hideBackButton: true,
         onShowStep: () => this.initFormWithProfile(),
         onBeforeNext: this.submitForm.bind(this, this.contactDetailForm)
       },
@@ -245,5 +247,12 @@ export class CarBuyComponent implements OnInit {
     proposalData.proposal.car = value.carInfo;
 
     return proposalData;
+  }
+
+  resetFlow() {
+    this.store$.dispatch(new advice.ResetAction());
+    this.store$.dispatch(new compare.CarCompareResetStateAction());
+    this.store$.dispatch(new car.CarResetStateAction());
+    this.store$.dispatch(new router.Go({path: ['car']}));
   }
 }
