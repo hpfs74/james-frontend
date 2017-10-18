@@ -83,7 +83,6 @@ describe('Component: AppComponent', () => {
       comp.targetComponent.ngOnInit();
       expect(comp.targetComponent.topMenu).toBeDefined();
       expect(comp.targetComponent.topMenu.length).toBeGreaterThan(0);
-      expect(comp.targetComponent.footerItems.length).toBeGreaterThan(0);
     });
   });
 

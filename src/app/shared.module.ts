@@ -47,6 +47,7 @@ import { CollapseMessageComponent } from './components/knx-collapse-message/coll
 import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
 import { DonutComponent } from './components/knx-donut/donut.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
+import { FeatureItemComponent } from './components/knx-features/feature-item.component';
 import { FormGroupInfoComponent } from './components/knx-form-group-info/form-group-info.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
@@ -89,6 +90,7 @@ export const sharedComponents = [
   DashboardItemComponent,
   DonutComponent,
   FeaturesComponent,
+  FeatureItemComponent,
   FormGroupInfoComponent,
   LicensePlateComponent,
   InsuranceResultComponent,
