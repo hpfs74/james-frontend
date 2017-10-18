@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularSvgIconModule } from '../../node_modules/angular-svg-icon';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 // @cx
-import { CXFormsModule } from '../../node_modules/@cx/forms';
-import { TextMaskModule } from '../../node_modules/@cx/input';
+import { CXFormsModule } from '@cx/forms';
+import { TextMaskModule } from '@cx/input';
 
 // @knx
 import { KNXWizardModule } from '@knx/wizard';
@@ -13,7 +13,8 @@ import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXInfoModule } from '@knx/info';
 import { KNXModalDialogModule } from '@knx/modal';
-
+import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
+import { KNXInputComponent } from './components/knx-input/input.component';
 /**
  * Shared Modules
  */
@@ -27,7 +28,7 @@ import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe } from './share
 /**
  * Directives
  */
-import { JumpToElementDirective, SidePanelStateDirective } from './shared/directives';
+import { JumpToElementDirective, SidePanelStateDirective, ClickOutsideDirective } from './shared/directives';
 
 
 /**
@@ -35,6 +36,7 @@ import { JumpToElementDirective, SidePanelStateDirective } from './shared/direct
  * import components in alphabetic order: easier to find something!
  */
 import { AppPromoBlockComponent } from './components/knx-app-promo/app-promo.component';
+import { AsyncPreviewComponent } from './components/knx-async-preview/async-preview.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
@@ -52,6 +54,8 @@ import { InsuranceResultDetailComponent } from './components/knx-insurance-resul
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
+import { OfflineIndicatorComponent } from './components/knx-offline-indicator/offline-indicator.component';
+import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
 import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
@@ -70,9 +74,11 @@ export const sharedComponents = [
   RoundPipe,
   BooleanPipe,
   AppPromoBlockComponent,
+  AsyncPreviewComponent,
   LicensePlatePipe,
   SidePanelStateDirective,
   JumpToElementDirective,
+  ClickOutsideDirective,
   ButtonIconComponent,
   CircleProgressComponent,
   CarSummaryComponent,
@@ -89,6 +95,8 @@ export const sharedComponents = [
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
   OpeningHoursComponent,
+  OfflineIndicatorComponent,
+  PasswordStrengthComponent,
   PriceTableComponent,
   PriceItemComponent,
   ReviewSummaryComponent,
@@ -101,7 +109,9 @@ export const sharedComponents = [
   TabComponent,
   ThankYouComponent,
   NavUserComponent,
-  UserGreetingComponent
+  UserGreetingComponent,
+  KNXCheckboxComponent,
+  KNXInputComponent
 ];
 
 export const sharedModules = [

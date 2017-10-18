@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewChecked } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewChecked, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -7,25 +7,48 @@ import * as fromAddress from '../reducers';
 import * as address from '../actions/address';
 
 import { postalCodeMask } from '../../utils/base-form.utils';
-import { AddressLookup, Address } from '../models';
+import { AddressLookup, Address, AddressSuggestionParams } from '../models';
+
+import { CXFormGroupComponent } from '@cx/form-group';
 
 @Component({
   selector: 'knx-address',
   templateUrl: './address.component.html'
 })
-export class AddressComponent implements AfterViewChecked {
+export class AddressComponent implements OnInit {
   @Input() addressFormGroup: FormGroup;
+  @Input() addressFormConfig: any;
   @Input() validationErrors: any;
-  @Input() asyncValidator: Observable<any>;
   @Input() addressPreview: string;
+  @Input() loading: boolean;
+  @Input() loaded: boolean;
 
-  @Output() addressFound: EventEmitter<Address> = new EventEmitter();
-  @Output() runValidation: EventEmitter<AddressLookup> = new EventEmitter();
+  @Output() onAddressChange: EventEmitter<AddressLookup> = new EventEmitter();
+  @Output() onHouseNumberExtensionChange: EventEmitter<AddressLookup> = new EventEmitter();
 
   mask = postalCodeMask;
 
-  ngAfterViewChecked(): void {
-    this.addressFormGroup.setAsyncValidators((formControl) => this.validateAddress(formControl));
+  ngOnInit(): void {
+    const postalCodeChange$ = this.addressFormGroup.get('postalCode').valueChanges;
+    const houseNumberChange$ = this.addressFormGroup.get('houseNumber').valueChanges;
+    const houseNumberExtensionChange$ = this.addressFormGroup.get('houseNumberExtension').valueChanges;
+
+    Observable.combineLatest(postalCodeChange$, houseNumberChange$)
+      .filter(combined => combined[0] && combined[1])
+      .subscribe((combined) => {
+        this.onAddressChange.emit({
+          postalCode: combined[0],
+          houseNumber: combined[1]
+        });
+    });
+
+    houseNumberExtensionChange$
+      .subscribe(value =>
+        this.onHouseNumberExtensionChange.emit({
+          postalCode: this.addressFormGroup.value.postalCode,
+          houseNumber: this.addressFormGroup.value.houseNumber,
+          houseNumberExtension: value
+        }));
   }
 
   getErrors(): Array<string> {
@@ -41,21 +64,5 @@ export class AddressComponent implements AfterViewChecked {
       return (typeof errorMessage === 'string') ?
         errorMessage : errorMessage(errorMessage);
     }
-  }
-
-  validateAddress(formGroup: AbstractControl): Observable<any> {
-    const postalCodeControl = formGroup.get('postalCode');
-    const houseNumberControl = formGroup.get('houseNumber');
-
-    if (!postalCodeControl.valid || !houseNumberControl.valid) {
-      return Observable.of({ address: true });
-    }
-
-    this.runValidation.emit({
-      postalCode: postalCodeControl.value,
-      houseNumber: houseNumberControl.value
-    });
-
-    return this.asyncValidator;
   }
 }

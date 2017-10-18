@@ -3,6 +3,14 @@ image: node:8.4
 pipelines:
   default:
     - step:
+        name: environment
+        caches:
+          - node
+        script:
+          - git --version
+          - node --version
+          - npm --version
+    - step:
         name: setup
         caches:
           - node

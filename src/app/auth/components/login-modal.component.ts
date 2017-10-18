@@ -51,9 +51,7 @@ export class LoginModalComponent implements KNXModalDialog {
     ];
   }
 
-  dialogInit(reference: ComponentRef<KNXModalDialog>, options?: KNXModalDialogOptions) {
-    // no processing needed
-  }
+  dialogInit(reference: ComponentRef<KNXModalDialog>, options?: KNXModalDialogOptions) {}
 
   login(): Observable<boolean> {
     event.preventDefault();

@@ -19,7 +19,6 @@ import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-detail-form',
-  styleUrls: ['car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -27,6 +26,8 @@ export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
   @Input() addressForm: AddressForm;
   @Input() car: Car;
+  @Input() carLoading: boolean;
+  @Input() carFailed: boolean;
   @Input() userProfile: any;
   @Input() config: any;
   @Input() coverages: Price[];

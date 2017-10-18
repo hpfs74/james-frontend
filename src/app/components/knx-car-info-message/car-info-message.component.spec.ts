@@ -74,7 +74,34 @@ describe('Component: CarInfoMessageComponent', () => {
     expect(el.textContent).toContain(testData.make);
     expect(el.textContent).toContain(testData.model);
     expect(el.textContent).toContain(testData.fuel);
-    expect(el.textContent).toContain(pipe.transform(testData.current_value, 'EUR', true));
+    expect(el.textContent).toContain(pipe.transform(testData.current_value, 'EUR', true, '1.0'));
+  });
+
+  it('should not show anything if no data provided', () => {
+    comp.data = undefined;
+    fixture.detectChanges();
+    let de = fixture.debugElement.query(By.css('div.knx-car-info-message'));
+    expect(de).toBeNull();
+  });
+
+  it('should return the transmission', () => {
+    expect(comp.getTransmission({
+      nicci_cartransmission_manual_transmission: 'Manual',
+      nicci_cartransmission_automatic_transmission: null,
+      transmission_nl: null
+    })).toEqual('Manual');
+
+    expect(comp.getTransmission({
+      nicci_cartransmission_manual_transmission: null,
+      nicci_cartransmission_automatic_transmission: 'Automatic',
+      transmission_nl: null
+    })).toEqual('Automatic');
+
+    expect(comp.getTransmission({
+      nicci_cartransmission_manual_transmission: null,
+      nicci_cartransmission_automatic_transmission: null,
+      transmission_nl: 'Handmatig'
+    })).toEqual('Handmatig');
   });
 
 });

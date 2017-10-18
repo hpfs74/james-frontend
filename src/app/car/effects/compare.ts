@@ -20,7 +20,9 @@ export class CompareEffects {
     .ofType(compare.LOAD_CAR_COMPARE)
     .map((action: compare.LoadCarAction) => action.payload)
     .switchMap((payload) => {
-      delete payload.insurance;
+      if (payload.insurance) {
+        delete payload.insurance;
+      }
       return this.carService.getInsurances(payload)
         .map((res) => new compare.LoadCarSuccessAction(res))
         .catch(error => Observable.of(new compare.LoadCarFailAction(error)));

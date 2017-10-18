@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { setUpTestBed } from './../../../test.common.spec';
 
-import { Address, AddressLookup } from '../models';
+import { Address, AddressLookup, AddressSuggestionParams } from '../models';
 import { AddressForm } from '../components/address.form';
 import { AuthHttp  } from '../../auth/services';
 import { LocalStorageService } from '../../core/services';
@@ -22,6 +22,7 @@ import * as fromRoot from '../reducers';
 import * as fromAddress from '../reducers';
 
 import * as address from '../actions/address';
+import * as suggestion from '../actions/suggestion';
 
 @Component({
   template: `<knx-address-lookup [addressForm]="form"></knx-address-lookup>`
@@ -105,11 +106,6 @@ describe('Component: AddressLookup', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  // beforeEach(async(() => {
-  //   store = TestBed.get(Store);
-  //   spyOn(store, 'dispatch').and.callThrough();
-  // }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
@@ -120,17 +116,35 @@ describe('Component: AddressLookup', () => {
     comp.targetComponent.ngOnInit();
     fixture.detectChanges();
     expect(comp.targetComponent.addressPreview$).toBeDefined();
-    expect(comp.targetComponent.getAddress$).toBeDefined();
+    expect(comp.targetComponent.loaded$).toBeDefined();
+    expect(comp.targetComponent.loading$).toBeDefined();
   });
 
   it('Dispatch address lookup action', () => {
     const payload = {
       postalCode: '2212CB',
-      houseNumber: '22'
+      houseNumber: '22',
+      houseNumberExtension: 'A'
     } as AddressLookup;
 
     const action = new address.GetAddress(payload);
-    comp.targetComponent.validateAddress(payload);
+    comp.targetComponent.getAddress(payload);
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('Dispatch address suggestion action', () => {
+    const value = {
+      postalCode: '2212CB',
+      houseNumber: '22'
+    } as AddressLookup;
+
+    const payload = {
+      zipcode: '2212CB',
+      house_number: '22'
+    } as AddressSuggestionParams;
+
+    const action = new suggestion.GetAddressSuggestion(payload);
+    comp.targetComponent.addressChange(value);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });

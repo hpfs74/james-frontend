@@ -80,7 +80,7 @@ export class AuthEffects {
   loginRedirect$ = this.actions$
     .ofType(auth.LOGIN_REDIRECT, auth.LOGOUT)
     .do(authed => {
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
     });
 
   @Effect({ dispatch: false })

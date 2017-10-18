@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -21,6 +22,8 @@ import { NavigationService } from '../services';
   selector: 'knx-app',
   template: `
     <header class="header">
+      <knx-offline-indicator></knx-offline-indicator>
+
       <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
         <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
@@ -40,7 +43,10 @@ import { NavigationService } from '../services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  loginModalName = 'loginModal';
+  modalNames = {
+    loginModal: 'loginModal',
+    authRedirect: 'authRedirectModal'
+  };
 
   topMenu: Array<Nav>;
   phone: Object;
@@ -67,7 +73,24 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
-    this.footerItems = [
+    this.footerItems = this.getFooterItems();
+
+    this.profile$ = this.store$.select(fromProfile.getProfile);
+    this.loading$ = this.store$.select(fromProfile.getProfileLoading);
+
+    this.initModals();
+
+    // Explicitly load profile if not loaded yet (on page refresh)
+    this.store$.select(fromProfile.getProfileLoaded)
+      .subscribe((loaded) => {
+        if (!loaded) {
+          this.store$.dispatch(new profile.LoadAction());
+        }
+      });
+  }
+
+  getFooterItems() {
+    return [
       {
         'title': 'Objectief',
         'description': 'We vergelijken meer dan 40 aanbieders'
@@ -81,27 +104,25 @@ export class AppComponent implements OnInit, AfterViewInit {
         'description': 'Wij regelen je overstap'
       }
     ];
+  }
 
-    this.profile$ = this.store$.select(fromProfile.getProfile);
-    this.loading$ = this.store$.select(fromProfile.getProfileLoading);
-
+  initModals() {
     this.store$
-      .select(fromCore.getOpenedModalNameState)
-      .subscribe(modalName => {
-        if (modalName === this.loginModalName) {
-          this.userDialogService.openModal(modalName, 'Sessie verlopen', this.viewContainerRef, LoginModalComponent, {
-            fullwidthButtons: true
-          });
-        }
-      });
-
-    // Explicitly load profile if not loaded yet (on page refresh)
-    this.store$.select(fromProfile.getProfileLoaded)
-      .subscribe((loaded) => {
-        if (!loaded && ! this.store$.select(fromAuth.getAnonymousState)) {
-          this.store$.dispatch(new profile.LoadAction());
-        }
-      });
+    .select(fromCore.getOpenedModalNameState)
+    .subscribe(modalName => {
+      if (modalName === this.modalNames.loginModal) {
+        const loginHeader = 'Sessie verlopen';
+        this.userDialogService.openModal(modalName, loginHeader, this.viewContainerRef, LoginModalComponent, {
+          fullwidthButtons: true
+        });
+      } else if (modalName === this.modalNames.authRedirect) {
+        this.userDialogService.openModal(modalName, '', this.viewContainerRef, LoginModalComponent, {
+          fullwidthButtons: true,
+          metaHeaderImage: '',
+          header: false
+        });
+      }
+    });
   }
 
   isVisible() {

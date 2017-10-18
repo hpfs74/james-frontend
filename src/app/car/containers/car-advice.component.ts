@@ -46,6 +46,12 @@ import * as FormUtils from '../../utils/base-form.utils';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 
+enum carFormSteps {
+  carDetails,
+  compareResults,
+  insuranceSummary
+}
+
 @Component({
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -56,7 +62,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   carDetailSubmitted = false;
   currentStep: number;
   coverages: Array<Price>;
-
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   showStepBlock = false;
@@ -64,6 +69,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   // State of the advice forms data
   address$: Observable<Address>;
   car$: Observable<Car>;
+  isCarLoading$: Observable<boolean>;
+  isCarFailed$: Observable<boolean>;
   advice$: Observable<any>;
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
@@ -101,6 +108,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.address$ = this.store$.select(fromAddress.getAddress);
     this.car$ = this.store$.select(fromCar.getCarInfo);
+    this.isCarLoading$ = this.store$.select(fromCar.getCarInfoLoading);
+    this.isCarFailed$ = this.store$.select(fromCar.getCarInfoError);
     this.insurances$ = this.getCompareResultCopy();
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
@@ -132,8 +141,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
+      .filter(() => this.currentStep === carFormSteps.compareResults)
       .subscribe(data => {
-        let compareObj = {
+        let compareExtraOptions = {
           coverage: data.coverage,
           cover_occupants: data.extraOptionsOccupants || false,
           no_claim_protection: data.extraOptionsNoClaim || false,
@@ -143,7 +153,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
           own_risk: +data.ownRisk || 0,
           insurance_id: ''
         };
-        this.store$.dispatch(new advice.UpdateAction(compareObj));
+        this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
       });
 
     this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
@@ -185,7 +195,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     const addressForm = this.addressForm.formGroup;
 
     FormUtils.validateForm(detailForm);
-    FormUtils.validateForm(addressForm);
+    // FormUtils.validateForm(addressForm);
 
     if (!detailForm.valid || !addressForm.valid) {
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
@@ -234,9 +244,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     });
 
     return this.store$.select(fromInsurance.getSelectedAdvice)
-      .map((advice) => {
-        this.store$.dispatch(new compare.LoadCarAction(advice));
-      });
+      .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
+      .map(advice => this.store$.dispatch(new compare.LoadCarAction(advice)));
   }
 
   onSelectPremium(insurance) {
@@ -249,12 +258,15 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   startBuyFlow(): Observable<any> {
-    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-      id => {
-        this.store$.dispatch(new router.Go({
-          path: ['/car/insurance', { adviceId: id }],
-        }));
-      }));
+    // TOOD: integrate modal to redirect user
+    this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
+
+    // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+    //   id => {
+    //     this.store$.dispatch(new router.Go({
+    //       path: ['/car/insurance', { adviceId: id }],
+    //     }));
+    //   }));
     return;
   }
 
@@ -283,7 +295,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     return Observable.timer(debounceTime).switchMap(() => {
       const validLength = 6;
-
       const license = licenseControl.value;
 
       if (!license || license.length !== validLength) {
@@ -306,7 +317,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   private onShowDetailsForm() {
     // Subscribe to car errors
     this.store$.select(fromCar.getCarInfoError)
-      .filter(() => this.currentStep === 0)
+      .filter(() => this.currentStep === carFormSteps.carDetails)
       .subscribe((error) => {
         if (error) {
           this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
@@ -316,7 +327,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Subscribe to car info
     this.store$.select(fromCar.getCarInfo)
-      .filter(() => this.currentStep === 0)
+      .filter(() => this.currentStep === carFormSteps.carDetails)
       .subscribe((car: Car) => {
         if (car && car.license) {
           this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
@@ -330,6 +341,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Subscribe to coverage recommendation request
     this.store$.select(fromCar.getCoverage)
+      .filter(() => this.currentStep === carFormSteps.carDetails)
       .filter(coverage => coverage !== null)
       .subscribe(coverageAdvice => {
         let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
