@@ -13,7 +13,7 @@ export const ANONYMOUS_START = '[Auth] Anonymous Start';
 
 export const REFRESH_TOKEN = '[Auth] Refresh Token';
 export const REFRESH_SUCCESS = '[Auth] Refresh Token Success';
-export const REFRESH_FAILURE = '[Auth] Anonymous Start';
+export const REFRESH_FAILURE = '[Auth] Refresh Token Failure';
 
 export const SCHEDULE_TOKEN_REFRESH = '[Auth] Schedule Token Refresh';
 
