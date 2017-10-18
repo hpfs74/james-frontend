@@ -9,9 +9,13 @@ import * as router from '../actions/router';
 @Component({
   selector: 'knx-auth-redirect',
   template: `
-    <img class="knx-auth-redirect__image" src="">
+    <div class="knx-auth-redirect__logo">
+      <img class="knx-auth-redirect__logo" src="/assets/images/knab-logo.svg">
+      <h2 class="knx-auth-redirect__subline">Verzekeren</h2>
+    </div>
+
     <div class="knx-auth-redirect__content">
-      <strong>Maak een Knab Verzekeren account aan</strong>
+      <h3 class="knx-auth-redirect_header">Maak een Knab Verzekeren account aan</h3>
       <p>En ga direct verder met het aanvragen van je verzekering</p>
     </div>
   `
@@ -23,7 +27,7 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
     this.actionButtons = [
       {
         text: 'Inloggen',
-        buttonClass: 'knx-button knx-button--secondary',
+        buttonClass: 'knx-button knx-button--fullwidth knx-button--secondary',
         onAction: () => {
           this.store$.dispatch(new router.Go({ path: ['/login']}));
           return true;
@@ -31,7 +35,7 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
       },
       {
         text: 'Registreren',
-        buttonClass: 'knx-button knx-button--primary',
+        buttonClass: 'knx-button knx-button--fullwidth knx-button--primary',
         onAction: () => {
           this.store$.dispatch(new router.Go({ path: ['/register']}));
           return true;

@@ -19,6 +19,7 @@ import * as fromCore from '../../core/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 import * as auth from '../../auth/actions/auth';
+import * as layout from '../../core/actions/layout';
 
 @Component({
   template: `<knx-app></knx-app>`
@@ -33,6 +34,7 @@ describe('Component: AppComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
   let store: Store<fromRoot.State>;
+  let userDialogService: any;
 
   let moduleDef: TestModuleMetadata = {
     imports: [
@@ -53,7 +55,7 @@ describe('Component: AppComponent', () => {
       NavigationService,
       {
         provide: UserDialogService,
-        useValue: {}
+        useValue: jasmine.createSpyObj('UserDialogService', ['openModal'])
       }
     ]
   };
@@ -61,32 +63,63 @@ describe('Component: AppComponent', () => {
 
   beforeAll(() => {
     store = TestBed.get(Store);
+    userDialogService = TestBed.get(UserDialogService);
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
     comp.targetComponent.topMenu = [];
     fixture.detectChanges();
+  }));
+
+  describe('Initialization', () => {
+    it('should set the loggedIn observable', () => {
+      expect(comp.targetComponent.loggedIn$).toBeDefined();
+    });
+
+    it('should init menu items', () => {
+      comp.targetComponent.ngOnInit();
+      expect(comp.targetComponent.topMenu).toBeDefined();
+      expect(comp.targetComponent.topMenu.length).toBeGreaterThan(0);
+      expect(comp.targetComponent.footerItems.length).toBeGreaterThan(0);
+    });
   });
 
-  it('should define the login modal name', () => {
-    expect(comp.targetComponent).toBeDefined();
-    expect(comp.targetComponent.modalNames.loginModal).toEqual('loginModal');
-    expect(comp.targetComponent.modalNames.authRedirect).toEqual('authRedirectModal');
+  describe('Modals', () => {
+    it('should define the login modal name', () => {
+      expect(comp.targetComponent).toBeDefined();
+      expect(comp.targetComponent.modalNames.loginModal).toEqual('loginModal');
+      expect(comp.targetComponent.modalNames.authRedirect).toEqual('authRedirectModal');
+    });
+
+    it('should open the login modal', () => {
+      comp.targetComponent.ngOnInit();
+      fixture.detectChanges();
+      const modalName = comp.targetComponent.modalNames.loginModal;
+      const action = new layout.OpenModal(modalName);
+      store.dispatch(action);
+      expect(userDialogService.openModal).toHaveBeenCalled();
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
+
+    it('should open the auth redirect modal', () => {
+      comp.targetComponent.ngOnInit();
+      fixture.detectChanges();
+      const modalName = comp.targetComponent.modalNames.authRedirect;
+      const action = new layout.OpenModal(modalName);
+      store.dispatch(action);
+      expect(userDialogService.openModal).toHaveBeenCalled();
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
   });
 
-  it('should init menu items', () => {
-    comp.targetComponent.ngOnInit();
-    expect(comp.targetComponent.topMenu).toBeDefined();
-    expect(comp.targetComponent.topMenu.length).toBeGreaterThan(0);
-    expect(comp.targetComponent.footerItems.length).toBeGreaterThan(0);
-  });
-
-  it('should logout the user', () => {
-    const action = new auth.Logout;
-    comp.targetComponent.logOut();
-    expect(store.dispatch).toHaveBeenCalledWith(action);
+  describe('Navbar', () => {
+    it('should logout the user', () => {
+      const action = new auth.Logout;
+      comp.targetComponent.logOut();
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
   });
 });

@@ -11,13 +11,15 @@
  * page component styles
  * NOTE: containers, e.g. smart components should not have styles!
  */
+@import 'app/address/components/address.component';
 @import 'app/auth/containers/login-page.component';
 @import 'app/auth/containers/password-reset-page.component';
 @import 'app/auth/components/registration.component.scss';
 @import 'app/dashboard/containers/dashboard.component';
 @import 'app/car/components/buy/car-summary.component';
 @import 'app/car/components/advice/car-detail.component';
-@import 'app/address/components/address.component';
+@import 'app/core/components/auth-redirect.modal.component';
+@import 'app/dashboard/containers/dashboard.component';
 
 /* component styles */
 @import 'app/components/knx-app-promo/app-promo.component';

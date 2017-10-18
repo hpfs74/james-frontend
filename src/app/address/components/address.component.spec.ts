@@ -46,11 +46,11 @@ describe('Component: CarCheckComponent', () => {
   };
   setUpTestBed(moduleDef);
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should get error messages', () => {
     expect(comp.targetComponent.getErrorMessage('address')).toEqual('Error');

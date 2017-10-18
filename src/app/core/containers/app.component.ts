@@ -16,6 +16,7 @@ import { Feature } from '../../shared/models';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 import { LoginModalComponent } from '../../auth/components/login-modal.component';
+import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
 import { NavigationService } from '../services';
 
 @Component({
@@ -113,10 +114,14 @@ export class AppComponent implements OnInit, AfterViewInit {
       if (modalName === this.modalNames.loginModal) {
         const loginHeader = 'Sessie verlopen';
         this.userDialogService.openModal(modalName, loginHeader, this.viewContainerRef, LoginModalComponent, {
-          fullwidthButtons: true
+          bodyClass: 'knx-modal-body',
+          fullwidthButtons: true,
+          header: true
         });
       } else if (modalName === this.modalNames.authRedirect) {
-        this.userDialogService.openModal(modalName, '', this.viewContainerRef, LoginModalComponent, {
+        this.userDialogService.openModal(modalName, '', this.viewContainerRef, AuthRedirectModalComponent, {
+          bodyClass: 'knx-modal-body knx-modal-body--blobs',
+          closeButton: true,
           fullwidthButtons: true,
           metaHeaderImage: '',
           header: false
