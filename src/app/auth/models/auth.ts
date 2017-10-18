@@ -5,6 +5,7 @@ export class AuthToken {
   refresh_token: string;
   expiration_time?: number;
   iat?: number;
+  anonymous?: boolean;
 }
 
 export class AuthKey {

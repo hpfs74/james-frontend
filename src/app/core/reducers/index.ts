@@ -30,6 +30,11 @@ export const reducers = {
 export const selectCoreState = createFeatureSelector<CoreState>('core');
 
 /**
+ * Router Reducers
+ */
+export const getRouterUrl = createSelector(selectCoreState, (state: CoreState) => state.router.state.url);
+
+/**
  * Layout Reducers
  */
 export const getLayoutState = createSelector(selectCoreState, (state: CoreState) => state.layout);

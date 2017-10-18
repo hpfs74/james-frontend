@@ -5,12 +5,14 @@ export interface State {
   loggedIn: boolean;
   loginExpired: boolean;
   token: AuthToken | null;
+  anonymous: boolean;
 }
 
 export const initialState: State = {
   loggedIn: false,
   loginExpired: false,
   token: null,
+  anonymous: false
 };
 
 export function reducer(state = initialState, action: auth.Actions): State {
@@ -21,6 +23,7 @@ export function reducer(state = initialState, action: auth.Actions): State {
         loggedIn: true,
         loginExpired: false,
         token: action.payload.token,
+        anonymous: false
       };
     }
 
@@ -29,7 +32,8 @@ export function reducer(state = initialState, action: auth.Actions): State {
         ...state,
         loggedIn: true,
         loginExpired: false,
-        token: action.payload
+        token: action.payload,
+        anonymous: false
       };
     }
 
@@ -45,11 +49,19 @@ export function reducer(state = initialState, action: auth.Actions): State {
       return initialState;
     }
 
+    case auth.ANONYMOUS_START: {
+      return {
+        ...state,
+        anonymous: true
+      };
+    }
+
     default: {
       return state;
     }
   }
 }
+
 
 export const getLoggedIn = (state: State) => state.loggedIn;
 export const getToken = (state: State) => state.token;

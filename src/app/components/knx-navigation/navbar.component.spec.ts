@@ -3,20 +3,38 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { Nav, NavItemType } from '../../core/models';
 import { NavbarComponent } from './navbar.component';
 import { NavUserComponent } from './../knx-nav-user/nav-user.component';
+import * as fromAuth from '../../auth/reducers';
+import * as fromRoot from '../../reducers';
+import * as fromCore from '../../core/reducers';
+import * as fromCar from '../../reducers';
+import * as fromInsurance from '../../insurance/reducers';
+import * as fromProfile from '../../profile/reducers';
 
 describe('Component: Navbar', () => {
   let comp: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let de: DebugElement;
   let el: HTMLElement;
+  let store: Store<fromAuth.State>;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [RouterTestingModule, BrowserAnimationsModule],
+    imports: [
+      RouterTestingModule,
+      BrowserAnimationsModule,
+      StoreModule.forRoot({
+        ...fromRoot.reducers,
+        'auth': combineReducers(fromAuth.reducers),
+        'core': combineReducers(fromCore.reducers),
+        'car': combineReducers(fromCar.reducers),
+        'insurance': combineReducers(fromInsurance.reducers),
+        'profile': combineReducers(fromProfile.reducers)
+      })],
     declarations: [NavbarComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };

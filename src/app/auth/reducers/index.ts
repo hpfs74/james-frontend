@@ -27,11 +27,15 @@ export const selectAuthStatusState = createSelector(
   (state: AuthState) => state.status
 );
 
+export const getAnonymousState = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.status.anonymous
+);
+
 export const getLoggedIn = createSelector(
   selectAuthStatusState,
   fromAuth.getLoggedIn
 );
-// export const getUser = createSelector(selectAuthStatusState, fromAuth.getUser);
 
 export const selectLoginPageState = createSelector(
   selectAuthState,

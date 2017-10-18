@@ -78,7 +78,33 @@ export class AuthService {
     };
 
     return this.play(environment.james.payloadEncryption.login, payload)
-      .map((res: Response) => res.json());
+      .map((res: Response) => {
+        return res.json();
+      });
+  }
+
+  /**
+   * Do login the user
+   * @param {Authenticate} auth
+   * @return {Observable<AuthToken>}
+   */
+  public loginAnonymous(): Observable<AuthToken> {
+
+    return this.playAnonymous()
+      .map((res: AuthToken) => {
+        res['anonymous'] = true;
+        return res;
+      });
+  }
+
+  /**
+   *
+   * @param {string} url
+   * @param body
+   * @return {Observable<any>}
+   */
+  private playAnonymous(): Observable<any> {
+    return this.getPayloadTokenAnonymous();
   }
 
   /**
@@ -174,6 +200,21 @@ export class AuthService {
       .post(this.tokenUrl, body, { headers: headers })
       .map((res: Response) => res.json())
       .map(body => <PayloadAuth>{ access_token: body.access_token });
+  }
+
+  // PAYLOAD ANONYMOUS
+  private getPayloadTokenAnonymous(): Observable<PayloadAuth> {
+    const headers = new Headers();
+    headers.append('Authorization', this.getHttpAuthorizationHeader(this.clientId, this.clientSecret));
+    const body = {
+      grant_type: 'client_credentials',
+      client_id: this.clientId,
+      scope: 'basic'
+    };
+
+    return this.http
+      .post(this.tokenUrl, body, { headers: headers })
+      .map((res: Response) => res.json());
   }
 
   // PAYLOAD - STEP2

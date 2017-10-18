@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -24,9 +24,9 @@ import { NavigationService } from '../services';
     <header class="header">
       <knx-offline-indicator></knx-offline-indicator>
 
-      <knx-navbar  *ngIf="loggedIn$ | async" [menuItems]="topMenu" (onLogOut)="logOut()">
+      <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
+        <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
     </header>
 
@@ -36,7 +36,7 @@ import { NavigationService } from '../services';
     </div>
 
     <!-- footer is a features block -->
-    <div *ngIf="loggedIn$ | async" class="container-fluid knx-container--fullwidth knx-container--gray">
+    <div *ngIf="isVisible()"  class="container-fluid knx-container--fullwidth knx-container--gray">
       <knx-features [items]="footerItems"></knx-features>
     </div>
   `,
@@ -53,8 +53,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   footerItems: Array<Feature>;
 
   loggedIn$: Observable<boolean>;
+  anonymous$: Observable<any>;
   loading$: Observable<boolean>;
   profile$: Observable<Profile>;
+  route$: Observable<string>;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
@@ -65,6 +67,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
+    this.anonymous$ = this.store$.select(fromAuth.getAnonymousState);
+    this.route$ = this.store$.select(fromCore.getRouterUrl);
   }
 
   ngOnInit() {
@@ -119,6 +123,18 @@ export class AppComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  isVisible() {
+    if (this.route$) {
+      let shouldShow = true;
+
+      this.route$.take(1)
+        .subscribe(currentRoute => {
+          shouldShow = (currentRoute !== '/login');
+        });
+      return shouldShow;
+    }
   }
 
   logOut() {

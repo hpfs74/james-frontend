@@ -8,6 +8,8 @@ import * as auth from '../actions/auth';
 import * as router from '../../core/actions/router';
 import { AuthService } from '../services/auth.service';
 
+const anonymousAvailableLinks = ['/car'];
+
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
@@ -16,7 +18,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const url: string = state.url;
-    return this.checkLogin(url);
+    if (anonymousAvailableLinks.indexOf(url) === -1) {
+      return this.checkLogin(url);
+    } else {
+      return true;
+    }
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
