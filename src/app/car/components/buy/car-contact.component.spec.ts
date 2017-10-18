@@ -1,5 +1,5 @@
-import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component, EventEmitter } from '@angular/core';
-import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
+import { TestModuleMetadata, async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '@cx/forms';
@@ -17,7 +17,6 @@ export class TestHostComponent {
   public carContactComponent: CarContactComponent;
   public formFromHost: ContactDetailForm = new ContactDetailForm(new FormBuilder());
   public profileFromHost: any;
-  public onReset: EventEmitter<any> = new EventEmitter<any>();
 }
 
 describe('Component: CarContactComponent', () => {
@@ -76,11 +75,11 @@ describe('Component: CarContactComponent', () => {
     expect(ctrl.valid).toBeTruthy();
   });
 
-  it('should emit on click', (done) => {
-    comp.onReset.subscribe(event => {
-      expect(event).toEqual('resetAdvice');
-      done();
-    });
-    comp.onReset.emit('resetAdvice');
-  });
+  it('should emit on click', fakeAsync(() => {
+    spyOn(comp.carContactComponent.onReset, 'emit');
+    comp.carContactComponent.resetAdvice();
+    tick(1);
+    expect(comp.carContactComponent.onReset.emit).toHaveBeenCalled();
+    expect(comp.carContactComponent.onReset.emit).toHaveBeenCalledWith('resetAdvice');
+  }));
 });
