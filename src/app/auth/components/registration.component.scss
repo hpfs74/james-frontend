@@ -105,6 +105,15 @@ h2.knx-register__subline,
   text-align: center;
 }
 
-.knx-password-error {
-  color: $knab-primary-red;
+.knx-register__documents-link {
+  color: $knab-primary-green;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:focus,
+  &:hover,
+  &:active,
+  &:visited {
+    color: $knab-primary-green;
+  }
 }

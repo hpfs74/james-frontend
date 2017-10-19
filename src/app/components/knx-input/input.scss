@@ -14,7 +14,7 @@ $knxInputWidth: 100%;
   font-size: $baseFontSize;
   border: 1px solid $knab-mercury;
   border-radius: 3px;
-  background: $knab-primary-gray;
+  background: $knab-light-gray;
   padding: $knxInputPadding;
   min-width: 100px;
   width: 100%;
@@ -26,7 +26,7 @@ $knxInputWidth: 100%;
   position: absolute;
   top: -$baseFontSize - 4px;
   font-size: 15px;
-  color: $knab-error;
+  color: $knab-primary-red;
 }
 
 .knx-input--error {
@@ -55,7 +55,7 @@ $knxInputWidth: 100%;
 .knx-input__addon-icon {
   font-family: $baseFontFamily, 'sans-serif';
   font-weight: $baseFontWeight;
-  font-size: $baseFontSize + 10px;
+  font-size: $baseFontSize;
   width: 44px;
   height: 44px;
   line-height: 33px;

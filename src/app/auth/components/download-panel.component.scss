@@ -1,0 +1,16 @@
+.knx-download-panel__content {
+  ul {
+    list-style-type: none;
+  }
+
+  li:before {
+    content: '\F185';
+    color: $knab-primary-green;
+    font-family: "knx-base-icons";
+    margin: 0 5px 0 -15px;
+  }
+
+  li {
+    padding-bottom: 15px;
+  }
+}
