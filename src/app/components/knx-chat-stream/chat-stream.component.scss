@@ -6,6 +6,11 @@
   margin-bottom: 40px;
   z-index: $z-index-chat-stream;
   overflow: visible;
+
+  .knx-side-panel {
+    top: 50px;
+    height: auto;
+  }
 }
 
 .knx-chat-stream > .knx-button {
@@ -16,6 +21,12 @@
   width: 100%;
   background: $knab-light-gray;
   color: $knab-primary-blue;
+}
+
+@media (max-width: 576px) {
+  .knx-chat-stream > .knx-button {
+    margin: 3px 0 0;
+  }
 }
 
 .knx-chat-stream > .knx-button.knx-button--edit {
