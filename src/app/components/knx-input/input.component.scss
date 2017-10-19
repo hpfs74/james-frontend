@@ -1,6 +1,8 @@
-$knxInputPadding: 10px;
-$knxInputFontSize: 18px;
-$knxInputWidth: 100%;
+@import '~styles/base.scss';
+
+$knxInputPadding: 10px !default;
+$knxInputFontSize: 18px !default;
+$knxInputWidth: 100% !default;
 
 .knx-input {
   position: relative;

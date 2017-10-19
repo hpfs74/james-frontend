@@ -4,6 +4,7 @@ import { Rating } from '../../shared/models/rating';
 
 @Component({
   selector: 'knx-star-rating',
+  styleUrls: ['./star-rating.component.scss'],
   template: `
     <div class="knx-star-rating">
       <span *ngFor="let star of innerRating" class="knx-icon-star"></span>

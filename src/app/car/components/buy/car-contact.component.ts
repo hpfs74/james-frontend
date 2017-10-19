@@ -8,6 +8,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-contact-form',
+  styleUrls: ['./car-contact.component.scss'],
   templateUrl: 'car-contact.component.html'
 })
 export class CarContactComponent implements OnChanges {

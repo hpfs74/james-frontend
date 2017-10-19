@@ -1,4 +1,6 @@
-knx-step-block {
+@import '~styles/base.scss';
+
+:host {
   flex: 1 auto;
   height: 100%;
 }

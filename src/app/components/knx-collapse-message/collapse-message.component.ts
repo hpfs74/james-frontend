@@ -3,6 +3,7 @@ import { collapseInOutAnimation } from '../../shared/animations/collapse.animati
 
 @Component({
   selector: 'knx-collapse-message',
+  styleUrls: ['./collapse-message.component.scss'],
   template: `
     <div class="knx-collapse-message knx-message"
       [class.knx-collapse-message--open]="isOpen"

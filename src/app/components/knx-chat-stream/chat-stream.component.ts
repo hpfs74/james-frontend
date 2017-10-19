@@ -4,6 +4,7 @@ import { ChatStreamOptions } from './chat-stream.options';
 import { ChatMessage } from './chat-message';
 @Component({
   selector: 'knx-chat-stream',
+  styleUrls: ['./chat-stream.component.scss'],
   template: `
     <div class="knx-chat-stream" [ngClass]="{'knx-chat-stream--expanded': chatExpanded}">
       <knx-avatar (click)="toggleChat()" (knxClickOutside)="closeChat()" [title]="options.avatar.title"></knx-avatar>

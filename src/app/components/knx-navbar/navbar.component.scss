@@ -1,6 +1,22 @@
+@import '~styles/base.scss';
 @import './bs4/bs4'; // Use some Bootstrap 4 utils
 
 $knx-navbar-font: $font-size-base;
+
+.knx-logo {
+  width: 80px;
+  margin-left: -15px;
+}
+
+.knx-logo-text {
+  color: $knab-white;
+  font-family: $font-family-head;
+  text-transform: uppercase;
+  margin-left: 8px;
+  font-size: $font-size-base;
+  position: absolute;
+  bottom: 14px;
+}
 
 .knx-navbar {
   display: flex;
