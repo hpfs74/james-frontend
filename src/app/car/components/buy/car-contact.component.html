@@ -1,10 +1,8 @@
-<form [formGroup]="form.formGroup" class="knx-fancy-form" role="form">
+<form [formGroup]="form.formGroup" class="knx-fancy-form knx-car-contact-form" role="form">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-2">
 
       <h2>Je contactgegevens</h2>
-
-      <p class="cx-p"><a (click)="resetAdvice()">Redo the advice</a></p>
 
       <div class="row">
         <div class="col-sm-3">
@@ -52,7 +50,12 @@
         [options]="form.formConfig.saveToProfile"
         [formControlName]="form.formConfig.saveToProfile.formControlName">
       </cx-form-group>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="knx-car-contact-form__reset knx-button knx-button--link" (click)="resetAdvice()">Opnieuw beginnen</button>
     </div>
   </div>
 
