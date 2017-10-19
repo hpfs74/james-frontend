@@ -97,7 +97,8 @@ module.exports = function(config) {
         // captureTimeout: 2000,
         // browserDisconnectTimeout: 2000,
         // browserDisconnectTolerance: 2,
-        // browserNoActivityTimeout: 10000,
+        browserNoActivityTimeout: 20000,
+        transports: process.env.CI ? ['polling'] : ['polling', 'websocket'],
         autoWatch: process.env.CI ? false : true,
         browsers: process.env.CI ? ['PhantomJS'] : ['ChromeHeadless'],
         singleRun: process.env.CI ? false : true
