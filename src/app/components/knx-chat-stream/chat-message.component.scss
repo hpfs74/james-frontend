@@ -3,6 +3,7 @@
 .knx-message--chat {
   line-height: 1.4em;
   font-size: $font-size-base;
+  margin-top: 20px;
 }
 
 .knx-message--chat:not(:first-child):before {

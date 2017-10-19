@@ -10,6 +10,10 @@ import { CarExtrasForm } from './car-extras.form';
       padding-bottom: 45px;
     }
 
+    .knx-message {
+      font-size: 14px;
+    }
+
     h4.knx-collapse-message__title {
       font-size: 16px;
     }
