@@ -1,0 +1,29 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="knx-register-thankyou__welcome">
+        <h2 class="knx-register-thankyou__subline">Bedankt voor je registratie!</h2>
+        <p>Een email is verstuurd naar {{email}}.</p>
+      </div>
+
+      <ul>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Geen mail ontvangen?</h3>
+      <p>Kijk in je spam folder of verstuur de e-mail nogmaals</p>
+
+      <button (click)="resendActivationEmail()">Opnieuw versturen</button>
+
+      <p class="knx-message" *ngIf="message">{{message}}</p>
+      <p class="knx-message--error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+    </div>
+  </div>
+
+</div>
