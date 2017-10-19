@@ -9,7 +9,7 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './../../components/knx-navigation/navbar.component';
+import { NavbarComponent } from './../../components/knx-navbar/navbar.component';
 import { NavigationService } from '../services/navigation.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 

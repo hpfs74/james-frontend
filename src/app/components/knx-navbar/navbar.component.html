@@ -31,10 +31,10 @@
       <li class="nav-item hidden-md-down"><ng-content select="knx-opening-hours"></ng-content></li>
       <li class="nav-item" *ngIf="loggedIn$ | async"><ng-content select="knx-nav-user"></ng-content></li>
 
-      <li class="nav-item" *ngIf="anonymous$ | async">
+      <li class="nav-item" *ngIf="!(loggedIn$| async)">
         <a class="nav-link" (click)="register()">Registreren</a>
       </li>
-      <li class="nav-item" *ngIf="anonymous$ | async">
+      <li class="nav-item" *ngIf="!(loggedIn$ | async)">
         <a class="nav-link" (click)="logIn()">Inloggen</a>
       </li>
     </ul>
