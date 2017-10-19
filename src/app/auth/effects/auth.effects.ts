@@ -62,7 +62,7 @@ export class AuthEffects {
             this.localStorageService.setToken(token);
           }
           return [
-            new auth.ScheduleTokenRefresh(token),
+            new auth.ScheduleTokenRefresh(token)
           ];
         })
         .catch((error) => {

@@ -66,7 +66,7 @@ describe('AuthEffects', () => {
         provideMockActions(() => actions),
         {
           provide: AuthService,
-          useValue: jasmine.createSpyObj('AuthService', ['login', 'logout', 'refreshToken', 'isLoggedIn']),
+          useValue: jasmine.createSpyObj('AuthService', ['login', 'loginAnonymous', 'logout', 'refreshToken', 'isLoggedIn']),
         },
         {
           provide: LocalStorageService,
@@ -127,6 +127,31 @@ describe('AuthEffects', () => {
       authService.login.and.returnValue(response);
 
       expect(effects.login$).toBeObservable(expected);
+    });
+  });
+
+
+  describe('loginAnonymous$', () => {
+    it('should login anonymous user', () => {
+      const action = new auth.LoginAnonymous(authPayload);
+      const completion = [
+        new auth.ScheduleTokenRefresh(tokenResponse)
+      ];
+      authService.loginAnonymous.and.returnValue(Observable.of(tokenResponse));
+
+      actions = hot('--a-', { a: action });
+      const expected = cold('--b', { b: completion });
+
+      let performedActions = [];
+      effects.loginAnonymous$.take(3).subscribe(
+        result => performedActions.push(result),
+        error => fail(error),
+        () => {
+          expect(performedActions.length).toBe(3);
+          expect(performedActions).toEqual(completion);
+          expect(authService.login).toHaveBeenCalledWith(authPayload);
+        }
+      );
     });
   });
 
