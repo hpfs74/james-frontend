@@ -72,8 +72,8 @@ export class RegistrationForm extends BaseForm {
     event.preventDefault();
     this.showPassword = !this.showPassword;
 
-    this.formConfig.password.inputOptions.type =
-      (this.formConfig.password.inputOptions.type === 'password')
+    this.formConfig.password.type =
+      (this.formConfig.password.type === 'password')
         ? 'text' : 'password';
   }
 }
