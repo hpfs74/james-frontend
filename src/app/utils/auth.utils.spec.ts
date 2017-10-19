@@ -61,6 +61,19 @@ describe('Utils: AuthUtils', () => {
       expect(res).toBeTruthy();
     });
   });
+
+  describe('tokenExists', () => {
+    it('should return false if token not exist', () => {
+      const res = AuthUtils.isTokenExists('not existing token');
+      expect(res).toBeFalsy();
+    });
+
+    it('should return false if token exist', () => {
+      localStorage.setItem('token', ' { "expires_in": "12218018281" }');
+      const res = AuthUtils.isTokenExists('token');
+      expect(res).toBeTruthy();
+    });
+  });
 });
 
 

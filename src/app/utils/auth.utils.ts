@@ -29,7 +29,7 @@ export function tokenNotExpired(tokenName: string): boolean {
   return token !== null && !tokenHelper.isTokenExpired(token);
 }
 
-export function isTokenPresented(tokenName: string): boolean {
+export function isTokenExists(tokenName: string): boolean {
   const token: string = localStorage.getItem(tokenName);
   return !!token;
 }
