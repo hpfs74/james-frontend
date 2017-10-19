@@ -13,22 +13,10 @@
     <div class="row">
       <div class="col-md-12">
         <div class="registration-email-wrapper">
+          <label>Je email</label>
 
-
-          <cx-form-group>
-            <div class="cx-input knx-icon-envelop">
-              <cx-input [formControlName]="form.formConfig.email.formControlName"></cx-input>
-            </div>
-          </cx-form-group>
-
-
-          <div class="cx-form-group">
-
-            <label>Je email</label>
-
-            <knx-input [formControlName]="form.formConfig.email.formControlName"
-                       [options]="form.formConfig.email"></knx-input>
-          </div>
+          <knx-input [formControlName]="form.formConfig.email.formControlName"
+                     [options]="form.formConfig.email"></knx-input>
         </div>
 
         <div class="registration-password-wrapper">
