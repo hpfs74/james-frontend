@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-async-preview',
+  styleUrls: ['./async-preview.component.scss'],
   template: `
     <div *ngIf="loading" class="knx-message knx-message--hint knx-message--arrow-top knx-message--pending">
       <div class="bounce1"></div>

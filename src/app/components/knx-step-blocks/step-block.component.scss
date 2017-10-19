@@ -1,6 +1,6 @@
 @import '~styles/base.scss';
 
-:host {
+knx-step-block {
   flex: 1 auto;
   height: 100%;
 }
@@ -10,6 +10,7 @@
   background: $knab-white;
   padding: 20px;
   margin-right: 10px;
+  flex-grow: 1;
 
   p {
     margin-bottom: 0;
