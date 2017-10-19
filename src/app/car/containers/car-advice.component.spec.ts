@@ -125,7 +125,7 @@ describe('Component: CarAdviceComponent', () => {
   });
 
   describe('Wizard', () => {
-    xit('should change the wizard step', () => {
+    it('should change the wizard step', () => {
       const step = 2;
       comp.onStepChange(step);
       expect(comp.currentStep).toEqual(step);
