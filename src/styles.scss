@@ -130,6 +130,7 @@ input::-ms-clear {
 .main-container {
   margin-top: 100px;
   margin-bottom: 60px;
+  min-height: calc(100vh - 300px);
 
   h2 {
     margin-top: 0;

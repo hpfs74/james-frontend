@@ -35,7 +35,9 @@ export class LoginForm extends BaseForm {
         inputOptions: {
           placeholder: 'E-mailadres',
           attributes: {
-            'aria-label': 'Vul je e-mailadres in'
+            'aria-label': 'Vul je e-mailadres in',
+            'addonleft': true,
+            'addonicon': 'knx-icon-envelope'
           }
         }
       },
@@ -47,7 +49,9 @@ export class LoginForm extends BaseForm {
           placeholder: 'Wachtwoord',
           type: 'password',
           attributes: {
-            'aria-label': 'Vul je wachtwoord in'
+            'aria-label': 'Vul je wachtwoord in',
+            'addonleft': true,
+            'addonicon': 'knx-icon-lock'
           }
         }
       }
@@ -63,3 +67,4 @@ export class LoginForm extends BaseForm {
         ? 'text' : 'password';
   }
 }
+

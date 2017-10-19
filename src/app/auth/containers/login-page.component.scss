@@ -1,53 +1,30 @@
-.knx-login__welcome {
-  margin-top: 40px;
-  margin-bottom: 20px;
+.knx-login {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: inherit;
 
-  &:after {
-    margin-top: -20px;
-    content: "";
-    height: 200px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background: url("/assets/images/dumbbell.svg") no-repeat center bottom;
-    background-size: contain;
+  .cx-input__input {
+    background: #fff;
   }
 }
 
-h1.knx-login__subline,
-h2.knx-login__subline,
-.knx-login__subline {
-  color: #3e4a59;
-  margin-top: 5px;
+.container .knx-login__header {
+  margin-bottom: 10px;
 }
 
-.knx-login__logo {
-  max-width: 120px;
-  display: block;
+.knx-login__sidebar {
+  padding-top: 30px;
 }
 
-.knx-login__actions {
-  margin-top: 20px;
-  text-align: center;
+.knx-list--login li {
+  margin-bottom: 10px;
+  color: $knab-medium-gray;
+}
 
-  ul {
-    margin-left: 0;
-    padding-left: 0;
-
-    li {
-      margin-bottom: 5px;
-    }
-  }
-
-  a {
-    color: $knab-primary-blue;
-    font-size: $font-size-base - 2;
-
-    &:hover {
-      text-decoration: none;
-      color: $knab-primary-red;
-    }
-  }
+.knx-login__secure {
+  position: absolute;
+  right: 30px;
+  top: 30px;
 }
 
 .login-password-wrapper {
@@ -85,4 +62,31 @@ h2.knx-login__subline,
   display: block;
   font-size: $font-size-base - 2;
   text-align: center;
+}
+
+.girl-section {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+
+  .girl-section__quote {
+    float: left;
+    width: calc(50% - 10px);
+    margin-top: 20px;
+    color: $knab-medium-gray;
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .girl-section__picture {
+    float: right;
+    margin-right: 15px;
+  }
+}
+
+.knx-login__footer {
+  margin-top: 15px;
+  color: $knab-medium-gray;
 }
