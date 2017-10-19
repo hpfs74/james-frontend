@@ -83,7 +83,6 @@ describe('Component: AppComponent', () => {
       comp.targetComponent.ngOnInit();
       expect(comp.targetComponent.topMenu).toBeDefined();
       expect(comp.targetComponent.topMenu.length).toBeGreaterThan(0);
-      expect(comp.targetComponent.footerItems.length).toBeGreaterThan(0);
     });
   });
 
@@ -116,11 +115,6 @@ describe('Component: AppComponent', () => {
   });
 
   describe('Navbar', () => {
-    it('get the footer data', () => {
-      const footerItems = comp.targetComponent.getFooterItems();
-      expect(footerItems.length).toEqual(3);
-    });
-
     it('should logout the user', () => {
       const action = new auth.Logout;
       comp.targetComponent.logOut();

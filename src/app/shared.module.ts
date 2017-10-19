@@ -47,6 +47,7 @@ import { CollapseMessageComponent } from './components/knx-collapse-message/coll
 import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
 import { DonutComponent } from './components/knx-donut/donut.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
+import { FeatureItemComponent } from './components/knx-features/feature-item.component';
 import { FormGroupInfoComponent } from './components/knx-form-group-info/form-group-info.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
@@ -54,7 +55,7 @@ import { InsuranceResultDetailComponent } from './components/knx-insurance-resul
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { NavbarComponent } from './components/knx-navigation';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
-import { OfflineIndicatorComponent } from './components/knx-offline-indicator/offline-indicator.component';
+import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
 import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
@@ -89,6 +90,7 @@ export const sharedComponents = [
   DashboardItemComponent,
   DonutComponent,
   FeaturesComponent,
+  FeatureItemComponent,
   FormGroupInfoComponent,
   LicensePlateComponent,
   InsuranceResultComponent,
@@ -96,6 +98,7 @@ export const sharedComponents = [
   InsuranceTopListComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,
+  OfflineBarComponent,
   PasswordStrengthComponent,
   PriceTableComponent,
   PriceItemComponent,

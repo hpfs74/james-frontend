@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { KNXModalDialogSettings } from '@knx/modal';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../../reducers';
@@ -36,9 +37,12 @@ import { NavigationService } from '../services';
       <router-outlet></router-outlet>
     </div>
 
-    <!-- footer is a features block -->
-    <div *ngIf="isVisible()"  class="container-fluid knx-container--fullwidth knx-container--gray">
-      <knx-features [items]="footerItems"></knx-features>
+    <div *ngIf="isVisible()" class="container-fluid knx-container--fullwidth knx-container--gray">
+      <knx-features>
+        <knx-feature-item title="Objectief" description="We vergelijken meer dan 40 aanbieders"></knx-feature-item>
+        <knx-feature-item title="Bespaar" description="Tot 15% korting op elke verzekering"></knx-feature-item>
+        <knx-feature-item title="Overstaphulp" description="Wij regelen je overstap'"></knx-feature-item>
+      </knx-features>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -51,7 +55,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   topMenu: Array<Nav>;
   phone: Object;
-  footerItems: Array<Feature>;
 
   loggedIn$: Observable<boolean>;
   anonymous$: Observable<any>;
@@ -74,7 +77,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.topMenu = this.navigationService.getMenu();
-    this.footerItems = this.getFooterItems();
 
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.loading$ = this.store$.select(fromProfile.getProfileLoading);
@@ -90,42 +92,28 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
   }
 
-  getFooterItems() {
-    return [
-      {
-        'title': 'Objectief',
-        'description': 'We vergelijken meer dan 40 aanbieders'
-      },
-      {
-        'title': 'Bespaar',
-        'description': 'Tot 15% korting op elke verzekering'
-      },
-      {
-        'title': 'Overstaphulp',
-        'description': 'Wij regelen je overstap'
-      }
-    ];
-  }
-
   initModals() {
     this.store$
     .select(fromCore.getOpenedModalNameState)
     .subscribe(modalName => {
       if (modalName === this.modalNames.loginModal) {
         const loginHeader = 'Sessie verlopen';
-        this.userDialogService.openModal(modalName, loginHeader, this.viewContainerRef, LoginModalComponent, {
+        const loginDialogSettings = {
           bodyClass: 'knx-modal-body',
           fullwidthButtons: true,
           header: true
-        });
+        } as KNXModalDialogSettings;
+
+        this.userDialogService.openModal(modalName, loginHeader, this.viewContainerRef, LoginModalComponent, loginDialogSettings);
       } else if (modalName === this.modalNames.authRedirect) {
-        this.userDialogService.openModal(modalName, '', this.viewContainerRef, AuthRedirectModalComponent, {
+        const userDialogSettings = {
           bodyClass: 'knx-modal-body knx-modal-body--blobs',
-          closeButton: true,
           fullwidthButtons: true,
-          metaHeaderImage: '',
-          header: false
-        });
+          header: true,
+          closeButton: true
+        } as KNXModalDialogSettings;
+
+        this.userDialogService.openModal(modalName, '', this.viewContainerRef, AuthRedirectModalComponent, userDialogSettings);
       }
     });
   }
