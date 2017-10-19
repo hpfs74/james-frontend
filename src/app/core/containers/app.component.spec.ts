@@ -115,11 +115,6 @@ describe('Component: AppComponent', () => {
   });
 
   describe('Navbar', () => {
-    it('get the footer data', () => {
-      const footerItems = comp.targetComponent.getFooterItems();
-      expect(footerItems.length).toEqual(3);
-    });
-
     it('should logout the user', () => {
       const action = new auth.Logout;
       comp.targetComponent.logOut();
