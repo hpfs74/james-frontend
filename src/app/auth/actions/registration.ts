@@ -6,6 +6,10 @@ export const REGISTER = '[Register] Create';
 export const REGISTER_SUCCESS = '[Register] Register Success';
 export const REGISTER_FAILURE = '[Register] Register Failure';
 export const REGISTER_REDIRECT = '[Register] Register Redirect';
+export const REGISTER_RESEND_ACTIVATION_EMAIL = '[Register] Register Resend Activation Email';
+export const REGISTER_RESEND_ACTIVATION_EMAIL_SUCCESS = '[Register] Register Resend Activation Email Success';
+export const REGISTER_RESEND_ACTIVATION_EMAIL_FAILURE = '[Register] Register Resend Activation Email Failure';
+
 
 
 export class Register implements Action {
@@ -30,8 +34,26 @@ export class RegisterRedirect implements Action {
   readonly type = REGISTER_REDIRECT;
 }
 
+export class RegisterResendActivationEmail implements Action {
+  readonly type = REGISTER_RESEND_ACTIVATION_EMAIL;
+
+  constructor(public email: string) {}
+}
+
+export class RegisterResendActivationEmailSuccess implements Action {
+  readonly type = REGISTER_RESEND_ACTIVATION_EMAIL_SUCCESS;
+}
+
+export class RegisterResendActivationEmailFailure implements Action {
+  readonly type = REGISTER_RESEND_ACTIVATION_EMAIL_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type Actions =
   | Register
   | RegisterSuccess
   | RegisterFailure
-  | RegisterRedirect;
+  | RegisterRedirect
+  | RegisterResendActivationEmail
+  | RegisterResendActivationEmailSuccess
+  | RegisterResendActivationEmailFailure;
