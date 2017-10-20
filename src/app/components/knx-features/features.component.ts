@@ -3,6 +3,7 @@ import { Feature } from '../../shared/models/feature';
 
 @Component({
   selector: 'knx-features',
+  styleUrls: ['./features.component.scss'],
   template: `
   <div class="container knx-container--flat">
     <div class="knx-features">

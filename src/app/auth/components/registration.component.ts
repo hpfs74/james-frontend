@@ -19,6 +19,7 @@ import * as profile from '../../profile/actions/profile';
  */
 @Component({
   selector: 'knx-registration',
+  styleUrls: ['./registration.component.scss'],
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent implements OnInit {

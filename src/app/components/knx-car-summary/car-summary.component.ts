@@ -3,6 +3,7 @@ import { Car } from '../../car/models';
 
 @Component({
   selector: 'knx-car-summary',
+  styleUrls: ['./car-summary.component.scss'],
   template: `
   <div class="knx-car-summary knx-well">
     <div class="knx-well__content">

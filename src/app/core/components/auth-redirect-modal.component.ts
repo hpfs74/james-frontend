@@ -8,6 +8,7 @@ import * as router from '../actions/router';
 
 @Component({
   selector: 'knx-auth-redirect',
+  styleUrls: ['./auth-redirect.modal.component.scss'],
   template: `
     <div class="knx-auth-redirect__logo">
       <img class="knx-auth-redirect__logo" src="/assets/images/knab-logo.svg">

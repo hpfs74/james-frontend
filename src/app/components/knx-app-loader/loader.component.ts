@@ -6,6 +6,7 @@ import { LoaderState } from './loader';
 
 @Component({
   selector: 'knx-app-loader',
+  styleUrls: ['./loader.component.scss'],
   template: `
     <div class="container knx-container--fullwidth knx-app-loader">
       <div class="col-md-8 col-offset-4">

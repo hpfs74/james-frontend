@@ -5,34 +5,37 @@ import { CXFormComponent, getCXValueAccessor } from '@cx/form-control';
 @Component({
   selector: 'knx-input',
   providers: [getCXValueAccessor(KNXInputComponent)],
+  styleUrls: ['./input.component.scss'],
   template: `
 <div class="knx-input" [class.knx-input--error]="getErrors()">
-    <div class="knx-input__error_message" *ngIf="getErrors()">
-        <p *ngFor="let error of getErrors()">{{error}}</p>
+    <label *ngIf="options.label">{{ options.label }}</label>
+    <div class="input-elements">
+      <input #inputControl
+          *ngIf="!options.textMask"
+            (blur)="onTouchedCallback()"
+            [(ngModel)]="value"
+            [placeholder]="options.placeholder"
+            [class.knx-input__input--disabled]="options.disabled"
+            [disabled]="options.disabled"
+            [type]="options.type"
+            [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
+
+      <input class="knx-input__input" #inputControl
+              *ngIf="options.textMask"
+            (blur)="onTouchedCallback()"
+            [(ngModel)]="value"
+            [placeholder]="options.placeholder"
+            [class.knx-input__input--disabled]="options.disabled"
+            [disabled]="options.disabled"
+            [type]="options.type"
+            [textMask]="options.textMask"
+            [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
+
+            <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
+            <div class="knx-input__error_message" *ngIf="getErrors()">
+                <p *ngFor="let error of getErrors()">{{error}}</p>
+            </div>
     </div>
-
-    <input #inputControl
-        *ngIf="!options.textMask"
-           (blur)="onTouchedCallback()"
-           [(ngModel)]="value"
-           [placeholder]="options.placeholder"
-           [class.knx-input__input--disabled]="options.disabled"
-           [disabled]="options.disabled"
-           [type]="options.type"
-           [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
-
-    <input class="knx-input__input" #inputControl
-            *ngIf="options.textMask"
-           (blur)="onTouchedCallback()"
-           [(ngModel)]="value"
-           [placeholder]="options.placeholder"
-           [class.knx-input__input--disabled]="options.disabled"
-           [disabled]="options.disabled"
-           [type]="options.type"
-           [textMask]="options.textMask"
-           [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
-
-    <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
 </div>
 `
 })

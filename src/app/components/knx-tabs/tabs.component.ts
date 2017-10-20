@@ -3,6 +3,7 @@ import { TabComponent } from './tab.component';
 
 @Component({
   selector: 'knx-tabs',
+  styleUrls: ['./tabs.component.scss'],
   template: `
     <ul class="knx-tabs">
       <li class="knx-tabs__tab" *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">

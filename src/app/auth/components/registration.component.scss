@@ -1,12 +1,21 @@
+@import '~styles/base.scss';
+
 .knx-register__welcome {
-  margin-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+
+  p {
+    color: #003b5a;
+    margin-bottom: 0;
+  }
+
+  h2.knx-register__subline {
+    margin-bottom: 0;
+  }
 }
 
 h1.knx-register__subline,
 h2.knx-register__subline,
 .knx-register__subline {
-  color: #3e4a59;
   margin-top: 5px;
 }
 

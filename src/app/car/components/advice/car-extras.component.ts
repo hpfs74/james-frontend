@@ -4,24 +4,8 @@ import { CarExtrasForm } from './car-extras.form';
 
 @Component({
   selector: 'knx-car-extras',
+  styleUrls: ['./car-extras.component.scss'],
   templateUrl: 'car-extras.component.html',
-  styles: [`
-    .own-risk {
-      padding-bottom: 45px;
-    }
-
-    h4.knx-collapse-message__title {
-      font-size: 16px;
-    }
-
-    .knx-message__content ul {
-      margin-top: 10px;
-    }
-
-    .knx-message__content ul > li {
-      font-size: 14px;
-    }
-  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

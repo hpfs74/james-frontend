@@ -53,7 +53,7 @@ import { LicensePlateComponent } from './components/knx-input-licenseplate/licen
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
-import { NavbarComponent } from './components/knx-navigation';
+import { NavbarComponent } from './components/knx-navbar';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
 import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';

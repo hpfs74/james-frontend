@@ -36,6 +36,7 @@ export class RegistrationForm extends BaseForm {
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
         placeholder: 'E-mailadres',
+        label: 'Je email',
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
           'addonleft': true,
@@ -47,6 +48,7 @@ export class RegistrationForm extends BaseForm {
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
         placeholder: 'Wachtwoord',
+        label: 'Wachtwoord',
         type: 'password',
         attributes: {
           'aria-label': 'Vul je wachtwoord in',

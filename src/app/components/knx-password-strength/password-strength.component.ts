@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-password-strength',
+  styleUrls: ['./password-strength.component.scss'],
   template: `
     <div class="knx-password-strength">
       <span>Minimaal</span>

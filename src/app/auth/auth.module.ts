@@ -16,7 +16,6 @@ import { LoaderService } from '../components/knx-app-loader/loader.service';
 import { RegistrationEffects } from './effects/registration.effects';
 
 import { LoginPageComponent } from './containers/login-page.component';
-import { PasswordResetPageComponent } from './containers/password-reset-page.component';
 import { RegistrationPageComponent } from './containers/registration-page.component';
 import { RegistrationComponent } from './components/registration.component';
 
@@ -25,7 +24,6 @@ import { RegistrationThankyouComponent } from './components/registration-thankyo
 
 export const COMPONENTS = [
   LoginPageComponent,
-  PasswordResetPageComponent,
   RegistrationPageComponent,
   RegistrationComponent,
   RegistrationThankyouComponent

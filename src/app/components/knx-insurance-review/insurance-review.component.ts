@@ -6,6 +6,7 @@ import { CarInsurance } from '../../car/models';
 
 @Component({
   selector: 'knx-insurance-review',
+  styleUrls: ['./insurance-review.component.scss'],
   template: `
     <div *ngIf="selectedInsurance">
       <h2 class="knx-insurance-review__header">

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-opening-hours',
+  styleUrls: ['./opening-hours.component.scss'],
   template: `
     <div class="knx-opening-hours">
       <span class="knx-opening-hours__icon knx-icon-dot-circle-o"

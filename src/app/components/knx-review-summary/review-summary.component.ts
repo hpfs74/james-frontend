@@ -3,6 +3,7 @@ import { Rating } from '../../shared/models/rating';
 
 @Component({
   selector: 'knx-review-summary',
+  styleUrls: ['./review-summary.component.scss'],
   template: `
     <div class="knx-review-summary">
       <div class="knx-review-summary__title">Gemiddeld een {{total}} uit {{reviewCount}} reviews:</div>

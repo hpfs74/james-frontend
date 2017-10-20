@@ -4,14 +4,7 @@ import { InsuranceDocument } from './../../insurance/models';
 
 @Component({
   selector: 'knx-insurance-review-documents',
-  styles: [`
-    .knx-insurance-review-documents__list > li {
-      padding-bottom: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  `],
+  styleUrls: ['./insurance-review-documents.component.scss'],
   template: `
     <knx-collapsible-panel [title]="title">
       <div class="knx-collapsible-panel__content">

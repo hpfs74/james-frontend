@@ -20,6 +20,7 @@ import { DropdownStateService } from './dropdown-state.service';
 
 @Component({
   selector: 'knx-dropdown-menu',
+  styleUrls: ['./dropdown-menu-item.component.scss'],
   template: `
       <!-- MENU -->
       <div class='ng2-dropdown-menu ng2-dropdown-menu---width--{{ width }}'

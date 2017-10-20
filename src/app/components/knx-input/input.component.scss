@@ -1,43 +1,49 @@
+@import '~styles/base.scss';
 $knxInputPadding: 10px;
 $knxInputFontSize: 18px;
 $knxInputWidth: 100%;
+$knxInputMinHeight: 99px;
+
+.input-elements {
+  width: $knxInputWidth;
+  position: relative;
+}
 
 .knx-input {
   position: relative;
-  display: flex;
   width: $knxInputWidth;
+  min-height: $knxInputMinHeight;
 }
 
 .knx-input__input {
-  font-family: $baseFontFamily, 'sans-serif';
-  font-weight: $baseFontWeight;
-  font-size: $baseFontSize;
-  border: 1px solid $knab-mercury;
-  border-radius: 3px;
-  background: $knab-light-gray;
-  padding: $knxInputPadding;
-  min-width: 100px;
+  border: 1px solid #e8e8e8;
+  background: #f3f3f3;
   width: 100%;
   height: 44px;
+  border-radius: 2px;
 }
 
 .knx-input__error_message {
   display: none;
-  position: absolute;
-  top: -$baseFontSize - 4px;
   font-size: 15px;
-  color: $knab-primary-red;
+
+  p {
+    color: $knab-primary-red;
+  }
 }
 
 .knx-input--error {
-  margin-top: $baseFontSize + 4px;
-
-  .knx-input__input {
-    border: 1px solid $knab-error;
-  }
+  border-left: 2px solid $knab-error;
+  padding-left: 10px;
+  margin-left: -12px;
+  width: calc(100% + 12px);
 
   .knx-input__error_message {
     display: block;
+
+    p {
+      margin: 0;
+    }
   }
 }
 
@@ -53,14 +59,9 @@ $knxInputWidth: 100%;
 }
 
 .knx-input__addon-icon {
-  font-family: $baseFontFamily, 'sans-serif';
-  font-weight: $baseFontWeight;
-  font-size: $baseFontSize;
   width: 44px;
-  height: 44px;
-  line-height: 33px;
   position: absolute;
-  left: 0;
+  top: 0;
   border-right: 1px solid $knab-mercury;
   padding: $knxInputPadding;
   text-align: center;

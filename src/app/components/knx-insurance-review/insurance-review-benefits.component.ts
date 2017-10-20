@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-insurance-review-benefits',
+  styleUrls: ['./insurance-review-benefits.component.scss'],
   template: `
     <div *ngIf="!supported; else supportedBenefits" class="knx-message knx-message--information knx-message--icon-center">
       <div class="knx-message__content">

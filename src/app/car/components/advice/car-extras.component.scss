@@ -1,0 +1,25 @@
+.own-risk {
+  padding-bottom: 45px;
+}
+
+.knx-message {
+  font-size: 14px;
+}
+
+h4.knx-collapse-message__title {
+  font-size: 16px;
+}
+
+.knx-message__content ul {
+  margin-top: 10px;
+}
+
+.knx-message__content ul > li {
+  font-size: 14px;
+}
+
+@media (max-width: 576px) {
+  .knx-car-extras {
+    display: none;
+  }
+}
