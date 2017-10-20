@@ -122,10 +122,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (this.route$) {
       let shouldShow = true;
 
-      this.route$.take(1)
-        .subscribe(currentRoute => {
-          shouldShow = (currentRoute !== '/login');
-        });
+      // It's always visible
+      // this.route$.take(1)
+      //   .subscribe(currentRoute => {
+      //     shouldShow = (currentRoute !== '/login' && currentRoute !== '/register');
+      //   });
       return shouldShow;
     }
   }
