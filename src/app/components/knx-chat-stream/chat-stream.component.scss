@@ -28,6 +28,40 @@
 @media (max-width: 576px) {
   .knx-chat-stream {
     background: none;
+    position: fixed;
+    top: 35px;
+    right: 0;
+
+    &.knx-chat-stream--expanded {
+      knx-chat-message {
+        display: block;
+      }
+
+      knx-avatar.knx-avatar__image {
+        width: 89px;
+      }
+    }
+
+    knx-chat-message {
+      display: none;
+    }
+
+    .knx-chat-stream__notification {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: $knab-primary-green;
+      pointer-events: none;
+      transition: all 0.3s;
+
+      &.knx-chat-stream__notification--active {
+        display: block;
+      }
+    }
   }
 
   .knx-chat-stream > .knx-button {

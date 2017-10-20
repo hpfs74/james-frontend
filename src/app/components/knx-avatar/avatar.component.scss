@@ -1,3 +1,5 @@
+@import '~styles/base.scss';
+
 .knx-avatar__image {
   border: 0;
 }
@@ -53,8 +55,16 @@
 
 @media (max-width: 576px) {
   .knx-avatar {
-    &:hover {
-      .knx-avatar__image {
+    .knx-avatar__image {
+      width: 60px;
+      margin-left: auto;
+      margin-right: -5px;
+      background: $knab-white;
+      border: 3px $knab-primary-gray solid;
+      transition: all 0.3s;
+
+      &:hover {
+        cursor: pointer;
         width: 89px;
       }
     }
