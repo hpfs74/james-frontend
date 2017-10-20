@@ -50,3 +50,13 @@
     display: none;
   }
 }
+
+@media (max-width: 576px) {
+  .knx-avatar {
+    &:hover {
+      .knx-avatar__image {
+        width: 89px;
+      }
+    }
+  }
+}
