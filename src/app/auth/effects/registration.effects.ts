@@ -39,10 +39,27 @@ export class RegistrationEffects {
         })
   );
 
+  @Effect()
+  resendActivationEmail$ = this.actions$
+    .ofType(registration.REGISTER_RESEND_ACTIVATION_EMAIL)
+    .map((action: registration.RegisterResendActivationEmail) => (action))
+    .exhaustMap((payload) =>
+      this.authService
+        .resendActivation(payload)
+        .mergeMap((result: RegistrationResult) => {
+          return [new registration.RegisterResendActivationEmailSuccess()];
+        })
+        .catch((error) => {
+          let errorText = JSON.parse(error.text()) || error;
+          return Observable.of(new registration.RegisterFailure(errorText.error || errorText));
+        })
+    );
+
   @Effect({ dispatch: false })
   registrationSuccess$ = this.actions$
     .ofType(registration.REGISTER_SUCCESS)
-    .do(() => this.router.navigate(['/']));
+    .do(() => this.router.navigate(['/register/thankyou']));
+
 
   constructor(
     private actions$: Actions,

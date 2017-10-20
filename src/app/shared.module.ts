@@ -69,6 +69,7 @@ import { TabComponent } from './components/knx-tabs/tab.component';
 import { ThankYouComponent } from './components/knx-thank-you/thank-you.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
+import { DownloadPanelComponent } from './auth/components/download-panel.component';
 
 export const sharedComponents = [
   TitleCasePipe,
@@ -88,6 +89,7 @@ export const sharedComponents = [
   CollapsePanelComponent,
   CollapseMessageComponent,
   DashboardItemComponent,
+  DownloadPanelComponent,
   DonutComponent,
   FeaturesComponent,
   FeatureItemComponent,

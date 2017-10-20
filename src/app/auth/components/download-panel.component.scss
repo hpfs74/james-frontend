@@ -1,0 +1,20 @@
+.knx-download-panel__container {
+  img {
+    max-height: 251px;
+  }
+
+  ul {
+    padding: 0;
+    margin-left: 0;
+  }
+
+  @media (max-width: 990px) {
+    img {
+      display: none;
+    }
+  }
+
+  .knx-download-panel__content {
+    padding-left: 25px;
+  }
+}

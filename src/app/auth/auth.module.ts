@@ -20,11 +20,13 @@ import { RegistrationPageComponent } from './containers/registration-page.compon
 import { RegistrationComponent } from './components/registration.component';
 
 import { reducers } from './reducers';
+import { RegistrationThankyouComponent } from './components/registration-thankyou.component';
 
 export const COMPONENTS = [
   LoginPageComponent,
   RegistrationPageComponent,
-  RegistrationComponent
+  RegistrationComponent,
+  RegistrationThankyouComponent
 ];
 
 export function authHttpServiceFactory(
