@@ -9,6 +9,7 @@ import { CarUtils } from '../../utils/car-utils';
 import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   selector: 'knx-car-summary-form',
+  styleUrls: ['./car-summary.component.scss'],
   templateUrl: 'car-summary.component.html'
 })
 export class CarSummaryComponent {

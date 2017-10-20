@@ -9,6 +9,7 @@ import {
 /* tslint:disable */
 @Component({
   selector: 'knx-dropdown-button',
+  styleUrls: ['./dropdown-button.component.scss'],
   template: `
   <button class='ng2-dropdown-button' type="button" (click)="toggleMenu()" tabindex="0s">
     <span class="ng2-dropdown-button__label">

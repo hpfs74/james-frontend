@@ -1,3 +1,5 @@
+@import '~styles/base.scss';
+
 .knx-auth-redirect__content {
   text-align: center;
   color: $knab-primary-blue;
@@ -28,11 +30,4 @@ h2.knx-auth-redirect__subline,
   font-family: $font-family-head;
   font-size: $font-size-base + 4;
   color: $knab-primary-blue;
-}
-
-.knx-modal-body--blobs {
-  background-image: url('/assets/images/blob-red@2x.png');
-  background-position: top left;
-  background-repeat: no-repeat;
-  background-size: 30%;
 }

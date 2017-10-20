@@ -1,4 +1,6 @@
-$knx-insurace-result-border: 1px solid $knab-primary-gray;
+@import '~styles/base.scss';
+
+$knx-insurace-result-border: 1px solid $knab-primary-gray !default;
 
 .knx-insurance-result__details .knx-collapse-panel {
   border-left: $knx-insurace-result-border;

@@ -4,6 +4,7 @@ import { slideInOutAnimation } from '../../shared/animations/slide-in-out.animat
 
 @Component({
   selector: 'knx-side-panel',
+  styleUrls: ['./side-panel.component.scss'],
   template: `
     <div class="knx-side-panel"
          (@slideInOutAnimation.done)="onAnimationEnd()"

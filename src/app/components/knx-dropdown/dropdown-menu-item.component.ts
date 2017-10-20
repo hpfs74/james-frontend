@@ -9,6 +9,7 @@ import { DropdownStateService } from './dropdown-state.service';
 
 @Component({
   selector: 'knx-menu-item',
+  styleUrls: ['./dropdown-menu-item.component.scss'],
   template: `
     <div class='ng2-menu-item'
         role="button"

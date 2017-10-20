@@ -5,6 +5,7 @@ import { ImageConfig } from '../knx-circle-progress/circle-progress-image';
 
 @Component({
   selector: 'knx-dashboard-item',
+  styleUrls: ['./dashboard-item.component.scss'],
   template: `
     <div class="knx-dashboard-item" [class.knx-dashboard-item--placeholder]="isPlaceholder">
       <knx-circle-progress #circleProg1

@@ -1,3 +1,7 @@
+.knx-avatar__image {
+  border: 0;
+}
+
 .knx-avatar--editable {
   width: 90px;
   height: 90px;
@@ -44,5 +48,15 @@
 
   .cx-file-upload__input {
     display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .knx-avatar {
+    &:hover {
+      .knx-avatar__image {
+        width: 89px;
+      }
+    }
   }
 }
