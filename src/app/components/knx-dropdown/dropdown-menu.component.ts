@@ -14,27 +14,26 @@ import {
 } from '@angular/core';
 
 import { DROPDOWN_ACTIONS, arrowKeysHandler } from './dropdown-actions';
-
 import { MenuItemComponent } from './dropdown-menu-item.component';
 import { DropdownStateService } from './dropdown-state.service';
 
 @Component({
   selector: 'knx-dropdown-menu',
-  styleUrls: ['./dropdown-menu-item.component.scss'],
+  styleUrls: ['./dropdown-menu.component.scss'],
   template: `
       <!-- MENU -->
-      <div class='ng2-dropdown-menu ng2-dropdown-menu---width--{{ width }}'
-          [class.ng2-dropdown-menu--inside-element]="!appendToBody"
-          [class.ng2-dropdown-menu--open]="state.menuState.isVisible"
-          [@fade]="state.menuState.toString()">
-              <div class="ng2-dropdown-menu__options-container"
-                  [@opacity]="state.menuState.toString()">
-                  <ng-content></ng-content>
-              </div>
+      <div class='knx-dropdown-menu knx-dropdown-menu---width--{{ width }}'
+        [class.knx-dropdown-menu--inside-element]="!appendToBody"
+        [class.knx-dropdown-menu--open]="state.menuState.isVisible"
+        [@fade]="state.menuState.toString()">
+          <div class="knx-dropdown-menu__options-container"
+            [@opacity]="state.menuState.toString()">
+            <ng-content></ng-content>
+          </div>
       </div>
 
       <!-- BACKDROP -->
-      <div class="ng2-dropdown-backdrop" *ngIf="state.menuState.isVisible" (click)="hide()"></div>
+      <div class="knx-dropdown-backdrop" *ngIf="state.menuState.isVisible" (click)="hide()"></div>
     `,
   animations: [
     trigger('fade', [

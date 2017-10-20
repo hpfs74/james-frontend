@@ -2,6 +2,7 @@
 
 .knx-nav-user {
   color: $knab-nav-item-color;
+  margin-top: 10px;
 }
 
 .knx-nav-user a {
@@ -15,7 +16,7 @@
   }
 }
 
-.knx-nav-user .ng2-dropdown-button__label {
+.knx-nav-user .knx-dropdown-button__label {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -33,6 +34,6 @@
   }
 }
 
-.knx-nav-user .ng2-dropdown-container .ng2-dropdown-button__caret svg {
+.knx-nav-user .knx-dropdown-container .knx-dropdown-button__caret svg {
   fill: $knab-nav-item-color;
 }
