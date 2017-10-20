@@ -1,7 +1,7 @@
 $knxInputPadding: 10px;
 $knxInputFontSize: 18px;
 $knxInputWidth: 100%;
-$knxInputMinHeight: 70px;
+$knxInputMinHeight: 99px;
 
 .input-elements {
   width: $knxInputWidth;
@@ -35,6 +35,7 @@ $knxInputMinHeight: 70px;
   border-left: 2px solid $knab-error;
   padding-left: 10px;
   margin-left: -12px;
+  width: calc(100% + 12px);
 
   .knx-input__error_message {
     display: block;
