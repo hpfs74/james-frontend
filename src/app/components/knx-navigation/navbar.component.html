@@ -1,40 +1,47 @@
 <nav class="knx-navbar navbar navbar-toggleable-md bg-faded">
   <div class="container">
     <button (click)="knxToolbarPanel.open()"
-      class="knx-button--hamburger" type="button" aria-label="Toggle navigation">
+            class="knx-button--hamburger hidden-md-up"
+            type="button"
+            aria-label="Toggle navigation">
     </button>
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="navbar-brand hidden-xs-down" routerLink="">
+        <a class="navbar-brand" routerLink="">
           <img class="knx-logo" src="/assets/images/knab-logo-inverse.svg" alt="Logo Knab">
-          <span class="hidden-xs-down knx-logo-text">Verzekeren</span>
+          <span class="knx-logo-text">Verzekeren</span>
         </a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active hidden-md-down"
-        *ngFor="let item of menuItems; let i = index"
-        routerLinkActive="active"
-        [ngClass]="getMenuItemClasses(item)">
+      <li class="nav-item active hidden-sm-down"
+          *ngFor="let item of menuItems; let i = index"
+          routerLinkActive="active"
+          [ngClass]="getMenuItemClasses(item)">
 
-        <a *ngIf="item.routePath" id="{{ item.id }}"
-          routerLink="{{ item.routePath }}"
-          class="nav-link" href="#">{{ item.title }}</a>
+        <a *ngIf="item.routePath" id="{{ item.id }}" routerLink="{{ item.routePath }}" class="nav-link" href="#">
+          {{ item.title }}
+        </a>
 
-        <a *ngIf="!item.routePath" id="{{ item.id }}"
-          href="{{ item.url }}" target="_blank"
-          class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
+        <a *ngIf="!item.routePath" id="{{ item.id }}" href="{{ item.url }}" target="_blank" class="nav-link">
+          <span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span>
+          {{ item.title }}
+        </a>
       </li>
 
-      <li class="nav-item hidden-md-down"><ng-content select="knx-opening-hours"></ng-content></li>
-      <li class="nav-item" *ngIf="loggedIn$ | async"><ng-content select="knx-nav-user"></ng-content></li>
+      <li class="nav-item hidden-sm-down">
+        <ng-content select="knx-opening-hours"></ng-content>
+      </li>
+      <li class="nav-item hidden-sm-down" *ngIf="loggedIn$ | async">
+        <ng-content select="knx-nav-user"></ng-content>
+      </li>
 
-      <li class="nav-item" *ngIf="anonymous$ | async">
+      <li class="nav-item hidden-sm-down" *ngIf="anonymous$ | async">
         <a class="nav-link" (click)="register()">Registreren</a>
       </li>
-      <li class="nav-item" *ngIf="anonymous$ | async">
+      <li class="nav-item hidden-sm-down" *ngIf="anonymous$ | async">
         <a class="nav-link" (click)="logIn()">Inloggen</a>
       </li>
     </ul>
@@ -46,20 +53,46 @@
     <div class="knx-side-panel-content">
       <ul class="navbar-nav">
         <li (click)="knxToolbarPanel.close()"
-          class="nav-item active"
-          *ngFor="let item of menuItems; let i = index"
-          routerLinkActive="active">
-          <a *ngIf="item.routePath"
-            id="{{ item.id }}"
-            routerLink="{{ item.routePath }}"
-            class="nav-link" href="#">{{ item.title }}</a>
+            class="nav-item active"
+            *ngFor="let item of menuItems; let i = index"
+            routerLinkActive="active">
+          <a *ngIf="item.routePath" id="{{ item.id }}" routerLink="{{ item.routePath }}" class="nav-link" href="#">
+            {{ item.title }}
+          </a>
         </li>
-        <li class="nav-item" (click)="knxToolbarPanel.close()"><a class="nav-link" (click)="logOut()">Uitloggen</a></li>
-      </ul>
 
-      <div class="knx-side-panel-content__utils">
-        <a class="knx-button knx-button--secondary knx-button--fullwidth" href="tel:0203031680"><span class="knx-icon-phone"></span>020-3031680</a>
-      </div>
+        <li class="nav-item" *ngIf="loggedIn$ | async" (click)="knxToolbarPanel.close()">
+          <a class="nav-link" (click)="logOut()">Uitloggen</a>
+        </li>
+
+        <li class="nav-item" *ngIf="anonymous$ | async" (click)="knxToolbarPanel.close()">
+          <a class="nav-link" (click)="register()">Registreren</a>
+        </li>
+
+        <li class="nav-item" *ngIf="anonymous$ | async" (click)="knxToolbarPanel.close()">
+          <a class="nav-link" (click)="logIn()">Inloggen</a>
+        </li>
+
+        <li class="nav-item" *ngIf="loggedIn$ | async">
+          <knx-nav-user *ngIf="loggedIn$ | async"
+                        [showAccount]="false"
+                        (onLogOut)="logOut()"
+                        [profile]="profile$ | async">
+          </knx-nav-user>
+        </li>
+
+        <li>
+          <div class="knx-side-panel-content__utils"></div>
+        </li>
+
+        <li class="nav-item">
+          <knx-opening-hours class="nav-link"></knx-opening-hours>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="tel:0203031680"><span class="knx-icon-phone"></span>020-3031680</a>
+        </li>
+      </ul>
     </div>
   </div>
 </knx-side-panel>
