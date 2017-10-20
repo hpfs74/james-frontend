@@ -1,6 +1,6 @@
 @import '~styles/base.scss';
 
-.ng2-dropdown-button {
+.knx-dropdown-button {
   background: inherit;
   //padding: 0.45rem 0.25rem;
   font-size: $font-size-base;
@@ -18,32 +18,31 @@
   max-width: 150px;
 }
 
-.ng2-dropdown-button:hover {
+.knx-dropdown-button:hover {
   color: $knab-primary-red;
 }
 
-.ng2-dropdown-button:active,
-.ng2-dropdown-button:focus {
+.knx-dropdown-button:active,
+.knx-dropdown-button:focus {
   color: $knab-primary-red;
   //border-bottom: 2px solid #2196F3;
 }
 
-.ng2-dropdown-button__label {
+.knx-dropdown-button__label {
   flex: 1 1 95%;
 }
 
-.ng2-dropdown-button__caret {
+.knx-dropdown-button__caret {
   width: 14px;
   height: 14px;
   margin-left: 5px;
   margin-top: 0.2em;
   display: flex;
   flex: 1 1 6%;
-  color: inherit;
-  fill: inherit;
+  fill: $knab-white;
 }
 
-:host-context(.ng2-dropdown-button--icon) .ng2-dropdown-button {
+:host-context(.knx-dropdown-button--icon) .knx-dropdown-button {
   border: none;
   min-width: 40px;
   width: 40px;
@@ -54,6 +53,6 @@
   padding: 0.5em;
 }
 
-:host-context(.ng2-dropdown-button--icon) .ng2-dropdown-button:active {
+:host-context(.knx-dropdown-button--icon) .knx-dropdown-button:active {
   background: rgba(0, 0, 0, 0.2);
 }

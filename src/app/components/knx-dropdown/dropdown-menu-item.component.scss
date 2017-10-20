@@ -1,8 +1,7 @@
 @import '~styles/base.scss';
 
-.ng2-menu-item {
+.knx-menu-item {
   background: #fff;
-  //color: rgba(0, 0, 0, 0.87);
   color: $knab-primary-blue;
   cursor: pointer;
   font-size: 0.9em;
@@ -17,25 +16,25 @@
   transition: background 0.25s;
 }
 
-.ng2-menu-item a:hover {
+.knx-menu-item a:hover {
   color: $knab-primary-blue;
   font-weight: normal;
 }
 
-.ng2-menu-item--selected {
+.knx-menu-item--selected {
   background: $knab-primary-gray;
   outline: 0;
 }
 
-.ng2-menu-item:focus {
+.knx-menu-item:focus {
   outline: 0;
 }
 
-.ng2-menu-item:active {
+.knx-menu-item:active {
   background: $knab-primary-gray;
 }
 
-:host(ng2-menu-item) /deep/ [ng2-menu-item-icon] {
+:host(knx-menu-item) /deep/ [knx-menu-item-icon] {
   vertical-align: middle;
   font-size: 28px;
   width: 1.5em;
