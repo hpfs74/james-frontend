@@ -8,7 +8,8 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
   selector: 'knx-download-panel',
-  templateUrl: './download-panel.component.html'
+  templateUrl: './download-panel.component.html',
+  styleUrls: ['./download-panel.component.scss']
 })
 export class DownloadPanelComponent {
   @Input() iosUrl: string;

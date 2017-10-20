@@ -1,4 +1,4 @@
-import { Login, LoginSuccess, LoginFailure, LoginRedirect, Logout, RefreshTokenSuccess, RequestCredentials } from '../actions/auth';
+import { LoginSuccess, Logout, StartAnonymous, RefreshTokenSuccess } from '../actions/auth';
 import * as fromAuth from './auth';
 
 describe('Auth reducer', () => {
@@ -44,6 +44,22 @@ describe('Auth reducer', () => {
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, logoutAction);
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  describe('ANONYMOUS_START', () => {
+    it('should change the anonymous state', () => {
+      const startAnonymousAction = new StartAnonymous();
+
+      const expectedResult = {
+        loggedIn: false,
+        loginExpired: false,
+        token: null,
+        anonymous: true
+      };
+
+      const result = fromAuth.reducer(fromAuth.initialState, startAnonymousAction);
       expect(result).toEqual(expectedResult);
     });
   });

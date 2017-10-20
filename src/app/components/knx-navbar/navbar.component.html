@@ -14,7 +14,7 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active hidden-md-down"
+      <li class="nav-item active hidden-sm hidden-md-down"
         *ngFor="let item of menuItems; let i = index"
         routerLinkActive="active"
         [ngClass]="getMenuItemClasses(item)">
@@ -28,14 +28,14 @@
           class="nav-link"><span class="nav-link__icon" *ngIf="item.icon" [ngClass]="item.icon"></span> {{ item.title }}</a>
       </li>
 
-      <li class="nav-item hidden-md-down"><ng-content select="knx-opening-hours"></ng-content></li>
+      <li class="nav-item hidden-sm hidden-md-down"><ng-content select="knx-opening-hours"></ng-content></li>
       <li class="nav-item" *ngIf="loggedIn$ | async"><ng-content select="knx-nav-user"></ng-content></li>
 
-      <li class="nav-item" *ngIf="anonymous$ | async">
-        <a class="nav-link" (click)="register()">Register</a>
+      <li class="nav-item" *ngIf="!(loggedIn$| async)">
+        <a class="nav-link" (click)="register()">Registreren</a>
       </li>
-      <li class="nav-item" *ngIf="anonymous$ | async">
-        <a class="nav-link" (click)="logIn()">Login</a>
+      <li class="nav-item" *ngIf="!(loggedIn$ | async)">
+        <a class="nav-link" (click)="logIn()">Inloggen</a>
       </li>
     </ul>
   </div>

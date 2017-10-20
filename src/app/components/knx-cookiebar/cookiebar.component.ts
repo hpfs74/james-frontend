@@ -3,6 +3,7 @@ import { CookieService } from '../../core/services/cookie.service';
 
 @Component({
   selector: 'knx-cookiebar',
+  styleUrls: ['./cookiebar.component.scss'],
   template: `
     <div *ngIf="!visible"class="cookie-bar blocking-popup">
       <div>

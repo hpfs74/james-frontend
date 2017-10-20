@@ -5,6 +5,7 @@ import { Profile } from '../../profile/models';
 
 @Component({
   selector: 'knx-nav-user',
+  styleUrls: ['./nav-user.component.scss'],
   template: `
     <div class="knx-nav-user" *ngIf="profile" >
       <knx-dropdown>

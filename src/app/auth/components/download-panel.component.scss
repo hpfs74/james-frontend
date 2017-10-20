@@ -3,6 +3,11 @@
     max-height: 251px;
   }
 
+  ul {
+    padding: 0;
+    margin-left: 0;
+  }
+
   @media (max-width: 990px) {
     img {
       display: none;

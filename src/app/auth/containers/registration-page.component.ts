@@ -18,7 +18,8 @@ import { CXEmailValidator } from '@cx/form';
         </div>
         </div>
       </div>
-  `
+  `,
+  styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent {
 

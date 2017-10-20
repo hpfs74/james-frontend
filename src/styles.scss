@@ -1,73 +1,14 @@
 /* this file will be extracted to main dist folder and is imported in index.html */
-
-/* keep before @cx and @knx */
-@import 'styles/variables';
-
-/* import shared library styles */
+@import 'styles/base';
 @import '../node_modules/@knx/base/index';
 @import '../node_modules/@knx/grid/index';
-
-/*
- * page component styles
- * NOTE: containers, e.g. smart components should not have styles!
- */
-@import 'app/address/components/address.component';
-@import 'app/auth/containers/login-page.component';
-@import 'app/auth/containers/password-reset-page.component';
-@import 'app/auth/components/registration.component';
-@import 'app/auth/containers/registration-page.component';
-@import 'app/auth/components/download-panel.component';
-@import 'app/dashboard/containers/dashboard.component';
-@import 'app/car/components/buy/car-summary.component';
-@import 'app/car/components/advice/car-detail.component';
-@import 'app/core/components/auth-redirect.modal.component';
-@import 'app/dashboard/containers/dashboard.component';
-
-/* component styles */
-@import 'app/components/knx-app-promo/app-promo.component';
-@import 'app/components/knx-button-icon/button-icon.component';
-@import 'app/components/knx-chat-stream/chat-stream.component';
-@import 'app/components/knx-chat-stream/chat-message.component';
-@import 'app/components/knx-collapse-panel/collapse-panel.component';
-@import 'app/components/knx-collapse-message/collapse-message.component';
-@import 'app/components/knx-cookiebar/cookiebar.component';
-@import 'app/components/knx-dashboard-item/dashboard-item.component';
-@import 'app/components/knx-donut/donut.component';
-@import 'app/components/knx-dropdown/dropdown-button.component';
-@import 'app/components/knx-dropdown/dropdown-menu-item.component';
-@import 'app/components/knx-dropdown/dropdown-menu.component';
-@import 'app/components/knx-features/features.component';
-@import 'app/components/knx-insurance-result/insurance-result.component';
-@import 'app/components/knx-insurance-review/insurance-review.component';
-@import 'app/components/knx-insurance-review/insurance-review-benefits.component';
-@import 'app/components/knx-insurance-review/insurance-review-documents.component';
-@import 'app/components/knx-insurance-result-detail/insurance-result-detail.component';
-@import 'app/components/knx-insurance-toplist/insurance-toplist.component';
-@import 'app/components/knx-nav-user/nav-user.component';
-@import 'app/components/knx-navigation/navbar.component';
-@import 'app/components/knx-opening-hours/opening-hours.component';
-@import 'app/components/knx-offline-indicator/offline-indicator.component';
-@import 'app/components/knx-password-strength/password-strength.component';
-@import 'app/components/knx-review-summary/review-summary.component';
-@import 'app/components/knx-side-panel/side-panel.component';
-@import 'app/components/knx-star-rating/star-rating.component';
-@import 'app/components/knx-step-blocks/step-blocks.component';
-@import 'app/components/knx-step-blocks/step-block.component';
-@import 'app/components/knx-tabs/tabs.component';
-@import 'app/components/knx-user-greeting/user-greeting.component';
-@import 'app/components/knx-car-info-message/car-info.component';
-@import 'app/components/knx-car-info-message/car-info.colors';
-@import 'app/components/knx-car-info-message/car-preview.component';
-@import 'app/components/knx-car-summary/car-summary.component';
-@import 'app/components/knx-app-loader/loader.component';
-@import 'app/components/knx-thank-you/thank-you.component';
-@import 'app/components/knx-checkbox/checkbox.scss';
-@import 'app/components/knx-input/input.scss';
 
 /* cx and other external component overrides */
 @import 'styles/overrides';
 @import 'styles/form-group';
 @import 'styles/form-valid';
+@import 'styles/modals';
+@import 'styles/layout';
 
 html {
   box-sizing: border-box;
@@ -129,76 +70,12 @@ input::-ms-clear {
 }
 */
 
-.main-container {
-  margin-top: 100px;
-  margin-bottom: 60px;
-
-  h2 {
-    margin-top: 0;
-    margin-bottom: 30px;
-  }
-}
-
-.main-container .knx-container-stepnavigation {
-  margin-top: -34px;
-}
-
-@media (max-width: 768px) {
-  .main-container .knx-container-stepnavigation {
-    margin-top: -48px;
-  }
-}
-
-@media (min-width: 576px) {
-  .container,
-  .container-fluid .container {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-.knx-logo {
-  width: 80px;
-  margin-left: -15px;
-}
-
-.knx-logo-text {
-  color: $knab-white;
-  font-family: $font-family-head;
-  text-transform: uppercase;
-  margin-left: 8px;
-  font-size: $font-size-base;
-  position: absolute;
-  bottom: 14px;
-}
-
 .noborder {
   border: 0;
 }
 
-.block-center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.text-center {
-  text-align: center;
-}
-
 .pt-0 {
   padding-top: 0;
-}
-
-.inline-formelement {
-  margin-top: 1.5em;
-  height: 44px;
-  border-radius: 3px;
-  line-height: 1em;
-
-  &:before {
-    padding-left: 5px;
-  }
 }
 
 [class*='knx-icon-'] {
@@ -207,14 +84,6 @@ input::-ms-clear {
   &:before {
     line-height: 1.4em;
   }
-}
-
-.ml-auto {
-  margin-left: auto !important;
-}
-
-.mr-auto {
-  margin-right: auto !important;
 }
 
 .image-reportingcode {
@@ -258,3 +127,4 @@ input::-ms-clear {
     }
   }
 }
+

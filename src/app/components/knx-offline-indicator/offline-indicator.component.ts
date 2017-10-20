@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/Rx';
@@ -6,26 +6,35 @@ import 'rxjs/Rx';
 import { slideUpDownAnimation } from '../../shared/animations/slide-up-down.animation';
 
 @Component({
-  selector: 'knx-offline-indicator',
+  selector: 'knx-offline-bar',
+  styleUrls: ['./offline-indicator.component.scss'],
   template: `
-    <div *ngIf="!(isConnected | async)"
-      [@slideUpDownAnimation]="!(isConnected | async) ? 'in' : 'out'" class="knx-offline-indicator">
-        <div class="knx-offline-indicator__message">Je internet verbinding is verbroken ...</div>
-    </div>
-  `,
+    <div [hidden]="!show" [@slideUpDownAnimation]="getAnimationState()" class="knx-offline-bar">
+      <div class="knx-offline-bar__message">
+        Je internet verbinding is verbroken ...
+      </div>
+    </div>`,
   animations: [slideUpDownAnimation]
 })
-export class OfflineIndicatorComponent implements OnInit {
-  isConnected: Observable<boolean>;
-  animationState: string;
+export class OfflineBarComponent {
+  @Input() show: boolean;
+
+  getAnimationState() {
+    return this.show ? 'in' : 'out';
+  }
+}
+
+@Component({
+  selector: 'knx-offline-indicator',
+  template: `<knx-offline-bar [show]="!(isConnected$ | async)"></knx-offline-bar>`
+})
+export class OfflineIndicatorComponent {
+  isConnected$: Observable<boolean>;
 
   constructor() {
-    this.isConnected = Observable.merge(
+    this.isConnected$ = Observable.merge(
       Observable.of(navigator.onLine),
       Observable.fromEvent(window, 'online').map(() => true),
       Observable.fromEvent(window, 'offline').map(() => false));
-  }
-
-  ngOnInit() {
   }
 }

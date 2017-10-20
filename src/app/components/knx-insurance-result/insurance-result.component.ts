@@ -5,6 +5,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
 
 @Component({
   selector: 'knx-insurance-result',
+  styleUrls: ['./insurance-result.component.scss'],
   template: `
     <div class="knx-insurance-result" *ngFor="let insurance of [insurance]" [@fadeInAnimation]>
       <div class="knx-insurance_advice" [ngClass]="{'knx-insurance_advice__supported': insurance.supported}">

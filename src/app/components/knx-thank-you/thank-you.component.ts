@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-thank-you',
+  styleUrls: ['./thank-you.component.scss'],
   template: `
     <div class="container knx-thank-you">
       <div class="row">

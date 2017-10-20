@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'knx-user-greeting',
+  styleUrls: ['./user-greeting.component.scss'],
   template: `
     <header class="knx-user-greeting">
       <h2 *ngIf="!userName">{{ greeting }}</h2>

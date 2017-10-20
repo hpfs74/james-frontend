@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs/Observable';
 import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import * as fromAuth from '../reducers';
@@ -18,7 +18,8 @@ import * as profile from '../../profile/actions/profile';
  * @class LoginComponent
  */
 @Component({
-  templateUrl: './login-page.component.html'
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
   pending$ = this.store.select(fromAuth.getLoginPagePending);

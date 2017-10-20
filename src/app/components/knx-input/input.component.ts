@@ -5,6 +5,7 @@ import { CXFormComponent, getCXValueAccessor } from '@cx/form-control';
 @Component({
   selector: 'knx-input',
   providers: [getCXValueAccessor(KNXInputComponent)],
+  styleUrls: ['./input.component.scss'],
   template: `
 <div class="knx-input" [class.knx-input--error]="getErrors()">
     <label *ngIf="options.label">{{ options.label }}</label>

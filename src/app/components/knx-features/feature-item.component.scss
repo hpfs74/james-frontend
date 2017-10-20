@@ -1,0 +1,46 @@
+
+@import '~styles/base.scss';
+
+.knx-feature-item {
+  margin-right: 30px;
+  flex: 1 1 0;
+
+  &:before {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-top: 2px;
+    margin-right: 15px;
+    content: map-get($knx-icons, check);
+    font-family: $font-family-icon;
+    line-height: 1.4;
+    font-size: 28px;
+    text-align: center;
+    color: $knab-primary-gray;
+    background: $knab-primary-yellow;
+    border-radius: 50%;
+  }
+}
+
+.knx-feature-item__title {
+  color: $knab-primary-blue;
+  font-size: 16px;
+  font-family: $font-family-base;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.knx-feature-item__description {
+  color: $knab-primary-blue;
+  font-size: 14px;
+  font-family: $font-family-base;
+  font-weight: normal;
+  padding-left: 55px;
+}
+
+@media screen and (max-width: 768px) {
+  .knx-feature-item {
+    flex: 1 1 auto;
+    margin-bottom: 25px;
+  }
+}

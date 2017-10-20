@@ -87,7 +87,6 @@ export class CarBuyComponent implements OnInit {
         label: 'Contactgegevens',
         nextButtonLabel: 'Naar autogegevens',
         backButtonLabel: 'Terug',
-        hideBackButton: true,
         onShowStep: () => this.initFormWithProfile(),
         onBeforeNext: this.submitForm.bind(this, this.contactDetailForm)
       },

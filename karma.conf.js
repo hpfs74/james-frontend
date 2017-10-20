@@ -41,10 +41,10 @@ module.exports = function(config) {
             fixWebpackSourcePaths: true,
             thresholds: {
                 global: {
-                    statements: 77,
-                    branches: 57,
-                    functions: 61,
-                    lines: 76
+                    statements: 78,
+                    branches: 58,
+                    functions: 62,
+                    lines: 77
                 },
                 // per file
                 // each: {
@@ -96,8 +96,9 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
         // captureTimeout: 2000,
         // browserDisconnectTimeout: 2000,
-        // browserDisconnectTolerance: 3,
-        // browserNoActivityTimeout: 10000,
+        // browserDisconnectTolerance: 2,
+        browserNoActivityTimeout: 60000,
+        transports: process.env.CI ? ['polling'] : ['polling', 'websocket'],
         autoWatch: process.env.CI ? false : true,
         browsers: process.env.CI ? ['PhantomJS'] : ['ChromeHeadless'],
         singleRun: process.env.CI ? false : true

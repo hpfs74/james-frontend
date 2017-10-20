@@ -1,13 +1,12 @@
-knx-step-block {
-  flex: 1 auto;
-  height: 100%;
-}
+@import '~styles/base.scss';
 
 .knx-step-block {
   border-radius: $knab-border-radius - 2;
   background: $knab-white;
   padding: 20px;
   margin-right: 10px;
+  flex-grow: 1;
+  height: 100%;
 
   p {
     margin-bottom: 0;

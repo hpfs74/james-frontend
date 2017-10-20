@@ -10,6 +10,7 @@ import * as router from '../../core/actions/router';
 @Component({
   selector: 'knx-navbar',
   templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
   animations: [collapseInOutAnimation]
 })
 export class NavbarComponent implements OnInit {
@@ -42,6 +43,6 @@ export class NavbarComponent implements OnInit {
   }
 
   public register() {
-    this.store$.dispatch(new router.Go({ path: ['/registration'] }));
+    this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }
 }

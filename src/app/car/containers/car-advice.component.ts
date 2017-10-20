@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
 import * as cuid from 'cuid';
 
 import * as fromRoot from '../../reducers';
+import * as fromAuth from '../../auth/reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromCar from '../reducers';
@@ -78,6 +79,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
+  isLoggedIn$: Observable<boolean>;
 
   subscription$: Array<any>;
 
@@ -116,6 +118,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
+    this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
 
     // initialize forms
     const formBuilder = new FormBuilder();
@@ -257,18 +260,23 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   startBuyFlow(): Observable<any> {
-    // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
-    // Instead of going into the buy flow the user clicks on the modal buttons
-    // to be redirected either to /login or /register
-    this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
-
-    // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-    //   id => {
-    //     this.store$.dispatch(new router.Go({
-    //       path: ['/car/insurance', { adviceId: id }],
-    //     }));
-    //   }));
-    return;
+    return this.isLoggedIn$.flatMap((loggedIn) => {
+      if (loggedIn) {
+        this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+          id => {
+            this.store$.dispatch(new router.Go({
+              path: ['/car/insurance', { adviceId: id }],
+            }));
+          }));
+          return;
+      } else {
+        // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
+        // Instead of going into the buy flow the user clicks on the modal buttons
+        // to be redirected either to /login or /register
+        this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
+        return Observable.throw(new Error());
+      }
+    });
   }
 
   updateSelectedCoverage(coverage: Price) {

@@ -3,17 +3,13 @@ import { Feature } from '../../shared/models/feature';
 
 @Component({
   selector: 'knx-features',
+  styleUrls: ['./features.component.scss'],
   template: `
   <div class="container knx-container--flat">
     <div class="knx-features">
-      <div class="knx-features__item" *ngFor="let item of items">
-        <div class="knx-features__title">{{ item.title }}</div>
-        <div class="knx-features__description">{{ item.description }}</div>
-      </div>
+      <ng-content select="knx-feature-item"></ng-content>
     </div>
   </div>
   `
 })
-export class FeaturesComponent {
-  @Input() items: Array<Feature>;
-}
+export class FeaturesComponent {}

@@ -3,6 +3,7 @@ import { collapseInOutAnimation } from '../../shared/animations/collapse.animati
 
 @Component({
   selector: 'knx-collapse-panel',
+  styleUrls: ['./collapse-panel.component.scss'],
   template: `
     <div class="knx-collapse-panel">
       <a role="button" class="knx-button knx-button--link"

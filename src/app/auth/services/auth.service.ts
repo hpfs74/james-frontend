@@ -84,12 +84,10 @@ export class AuthService {
   }
 
   /**
-   * Do login the user
-   * @param {Authenticate} auth
+   * Do login the anonymous user
    * @return {Observable<AuthToken>}
    */
   public loginAnonymous(): Observable<AuthToken> {
-
     return this.playAnonymous()
       .map((res: AuthToken) => {
         res['anonymous'] = true;
@@ -98,9 +96,6 @@ export class AuthService {
   }
 
   /**
-   *
-   * @param {string} url
-   * @param body
    * @return {Observable<any>}
    */
   private playAnonymous(): Observable<any> {

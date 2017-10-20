@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-donut',
+  styleUrls: ['./donut.component.scss'],
   template: `
     <div class="knx-donut" [attr.viewBox]="viewBox">
       <svg class="knx-donut__circle knx-donut--animate">

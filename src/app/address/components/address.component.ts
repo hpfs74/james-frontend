@@ -13,6 +13,7 @@ import { CXFormGroupComponent } from '@cx/form-group';
 
 @Component({
   selector: 'knx-address',
+  styleUrls: ['./address.component.scss'],
   templateUrl: './address.component.html'
 })
 export class AddressComponent implements OnInit {
