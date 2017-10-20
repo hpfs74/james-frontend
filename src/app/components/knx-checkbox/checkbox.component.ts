@@ -6,6 +6,7 @@ import { clone } from '@cx/utils';
 @Component({
   selector: 'knx-checkbox',
   providers: [getCXValueAccessor(KNXCheckboxComponent)],
+  styleUrls: ['./checkbox.component.scss'],
   template: `
 <div class="cx-form-group__wrap {{(options.formGroupModifiers || []).join(' ')}}">
     <label *ngIf="!options.items" class="cx-checkbox" [class.cx-checkbox--disabled]="options.disabled">

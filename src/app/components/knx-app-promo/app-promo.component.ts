@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'knx-app-promo-block',
+  styleUrls: ['app-promo.component.scss'],
   template: `
     <div class="row knx-app-promo-block">
       <div class="col-md-4 col-sm-12">

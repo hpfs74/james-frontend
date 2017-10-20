@@ -4,6 +4,7 @@ import { IChatMessage } from './chat-message.interface';
 
 @Component({
   selector: 'knx-chat-message',
+  styleUrls: ['./chat-message.component.scss'],
   template: `
   <div class="knx-message knx-message--chat knx-message--arrow-top-center" [@flyInOutAnimation]="'in'">
     <div class="knx-message__content" [innerHTML]="data"></div>

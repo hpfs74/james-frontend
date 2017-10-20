@@ -59,7 +59,6 @@ button.knx-button--toggle,
 }
 
 .knx-message.knx-message--hint {
-  margin-top: 15px;
   margin-bottom: 15px;
 }
 
@@ -79,6 +78,6 @@ button.knx-button--toggle,
   max-width: 250px;
 }
 
-.knx-avatar__image {
-  border: 0;
+.knx-message--error {
+  color: $knab-secondary-red;
 }

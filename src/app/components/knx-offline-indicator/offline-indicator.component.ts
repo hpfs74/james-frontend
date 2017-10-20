@@ -7,8 +7,9 @@ import { slideUpDownAnimation } from '../../shared/animations/slide-up-down.anim
 
 @Component({
   selector: 'knx-offline-bar',
+  styleUrls: ['./offline-indicator.component.scss'],
   template: `
-    <div *ngIf="show" [@slideUpDownAnimation]="getAnimationState()" class="knx-offline-bar">
+    <div [hidden]="!show" [@slideUpDownAnimation]="getAnimationState()" class="knx-offline-bar">
       <div class="knx-offline-bar__message">
         Je internet verbinding is verbroken ...
       </div>

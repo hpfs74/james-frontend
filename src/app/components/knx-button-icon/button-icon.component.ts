@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-button-icon',
+  styleUrls: ['./button-icon.component.scss'],
   template: `
    <div class="knx-button-icon" [class.knx-button-icon--placeholder]="isPlaceholder">
     <button class="knx-button-icon__circle" [ngClass]="{ 'knx-button-icon__circle-success': success }">

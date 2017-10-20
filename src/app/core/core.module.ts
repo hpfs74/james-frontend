@@ -23,7 +23,7 @@ import { PageNotFoundComponent } from './containers/pagenotfound.component';
 import { AppLoaderComponent } from '../components/knx-app-loader/loader.component';
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AuthRedirectModalComponent } from './components/auth-redirect-modal.component';
-import { NavbarComponent } from '../components/knx-navigation';
+import { NavbarComponent } from '../components/knx-navbar';
 
 // Services
 import { LoaderService } from '../components/knx-app-loader/loader.service';

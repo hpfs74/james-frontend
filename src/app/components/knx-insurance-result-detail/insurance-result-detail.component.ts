@@ -4,6 +4,7 @@ import { Rating } from '../../shared/models';
 
 @Component({
   selector: 'knx-insurance-result-detail',
+  styleUrls: ['./insurance-result-detail.component.scss'],
   template: `
     <knx-collapse-panel
       class="knx-insurance-result__details"
