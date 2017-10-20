@@ -6,6 +6,12 @@
   .cx-input__input {
     background: #fff;
   }
+
+  .knx-login__header,
+  .knx-login__secure {
+    float: left;
+    width: 50%;
+  }
 }
 
 .container .knx-login__header {
@@ -22,9 +28,7 @@
 }
 
 .knx-login__secure {
-  position: absolute;
-  right: 30px;
-  top: 30px;
+  text-align: right;
 }
 
 .login-password-wrapper {
@@ -65,15 +69,10 @@
 }
 
 .girl-section {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 50%;
-
   .girl-section__quote {
     float: left;
-    width: calc(50% - 10px);
-    margin-top: 20px;
+    width: calc(50% + 10px);
+    margin: 20px -20px -10px -10px;
     color: $knab-medium-gray;
     font-style: italic;
     font-size: 14px;
@@ -82,7 +81,8 @@
 
   .girl-section__picture {
     float: right;
-    margin-right: 15px;
+    margin-right: -15px;
+    margin-bottom: -30px;
   }
 }
 

@@ -22,7 +22,6 @@ import * as profile from '../../profile/actions/profile';
   templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent implements OnInit {
-  store$: any;
   pending$ = this.store.select(fromAuth.getLoginPagePending);
   error$ = this.store.select(fromAuth.getLoginPageError);
   errorMessage: string;
