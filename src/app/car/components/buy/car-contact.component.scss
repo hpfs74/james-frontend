@@ -17,6 +17,13 @@
 
 @media (min-width: 768px) {
   .knx-car-contact-form__reset {
+    top: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .knx-car-contact-form__reset {
     top: 140px;
   }
 }
+
