@@ -38,10 +38,10 @@
         <ng-content select="knx-nav-user"></ng-content>
       </li>
 
-      <li class="nav-item hidden-sm-down" *ngIf="anonymous$ | async">
+      <li class="nav-item hidden-sm-down" *ngIf="loggedIn$ | async">
         <a class="nav-link" (click)="register()">Registreren</a>
       </li>
-      <li class="nav-item hidden-sm-down" *ngIf="anonymous$ | async">
+      <li class="nav-item hidden-sm-down" *ngIf="loggedIn$ | async">
         <a class="nav-link" (click)="logIn()">Inloggen</a>
       </li>
     </ul>
@@ -65,11 +65,11 @@
           <a class="nav-link" (click)="logOut()">Uitloggen</a>
         </li>
 
-        <li class="nav-item" *ngIf="anonymous$ | async" (click)="knxToolbarPanel.close()">
+        <li class="nav-item" *ngIf="loggedIn$ | async" (click)="knxToolbarPanel.close()">
           <a class="nav-link" (click)="register()">Registreren</a>
         </li>
 
-        <li class="nav-item" *ngIf="anonymous$ | async" (click)="knxToolbarPanel.close()">
+        <li class="nav-item" *ngIf="loggedIn$ | async" (click)="knxToolbarPanel.close()">
           <a class="nav-link" (click)="logIn()">Inloggen</a>
         </li>
 
