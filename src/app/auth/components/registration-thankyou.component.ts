@@ -3,8 +3,7 @@ import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } fro
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
+
 import * as registration from '../actions/registration';
 import { environment } from '../../../environments/environment';
 
@@ -12,42 +11,28 @@ import { RegistrationForm } from '../components/registration.form';
 import { registrationError } from '../models/registration-error';
 import * as profile from '../../profile/actions/profile';
 
-/**
- * Registrazione component
- *
- * @export
- * @class RegistrationComponent
- */
 @Component({
   selector: 'knx-registration-thankyou',
   templateUrl: './registration-thankyou.component.html'
 })
-export class RegistrationThankyouComponent implements OnInit {
-  @Input() email: string;
-
-  pending$ = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
-  error$ = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
-
+export class RegistrationThankyouComponent {
   message: string;
   errorMessage: string;
 
-  constructor(private store$: Store<fromAuth.State>) {
-  }
+  @Output() onLogin: EventEmitter<any> = new EventEmitter();
+  @Output() onSendActivation: EventEmitter<string> = new EventEmitter();
 
-  ngOnInit() {
-    this.store$.select(fromAuth.getRegistrationError)
-      .filter(error => error !== null)
-      .subscribe((error) => {
-        this.errorMessage = registrationError[error] || registrationError.default;
-      });
+  @Input() email: string;
+  @Input() pending: boolean;
+  @Input() set error(value: string) {
+    this.errorMessage = registrationError[value] || registrationError.default;
   }
 
   login() {
-    this.store$.dispatch(new auth.LoginRedirect());
+    this.onLogin.emit();
   }
 
   resendActivationEmail() {
-    this.store$.dispatch(new registration.RegisterResendActivationEmail(this.email));
-    return;
+    this.onSendActivation.emit(this.email);
   }
 }

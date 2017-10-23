@@ -1,58 +1,24 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
-import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestModuleMetadata, async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MockBackend } from '@angular/http/testing';
-import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
-import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
-
-import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
 import { FormBuilder } from '@angular/forms';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { RegistrationComponent } from '../components/registration.component';
 import { RegistrationForm } from '../components/registration.form';
-import { AuthService } from '../services/auth.service';
 import { registrationError } from '../models/registration-error';
 
 describe('Component: Registration', () => {
-  let store: Store<fromAuth.State>;
   let comp: RegistrationComponent ;
   let fixture: ComponentFixture<RegistrationComponent>;
   let de: DebugElement;
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
-    providers: [
-      BaseRequestOptions,
-      MockBackend,
-      AuthService,
-      {
-        deps: [
-          MockBackend,
-          BaseRequestOptions
-        ],
-        provide: Http,
-        useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-          return new Http(backend, defaultOptions);
-        }
-      }
-    ],
-    imports: [
-      RouterTestingModule,
-      StoreModule.forRoot({
-        auth: combineReducers(fromAuth.reducers)
-      })
-    ],
     declarations: [RegistrationComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
-
-  beforeAll(() => {
-    store = TestBed.get(Store);
-  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegistrationComponent);
@@ -85,5 +51,31 @@ describe('Component: Registration', () => {
   it('should have submit button enabled by default', () => {
     const submit = fixture.debugElement.query(By.css('button[type="submit"]'));
     expect(submit.nativeElement.disabled).toBeFalsy();
+  });
+
+  it('should emit onRegister on submit', () => {
+    spyOn(comp.onRegister, 'emit');
+
+    const email = comp.form.formGroup.get('email');
+    const password = comp.form.formGroup.get('password');
+    const confirm = comp.form.formGroup.get('confirm');
+
+    const emailValue = 'test@mail.com';
+    const passwordValue = 'Qwerty1234@';
+
+    email.setValue(emailValue);
+    password.setValue(passwordValue);
+    confirm.setValue(true);
+
+    fixture.detectChanges();
+    expect(comp.form.formGroup.valid).toBeTruthy();
+
+    comp.register(new Event('click'));
+    fixture.detectChanges();
+
+    expect(comp.onRegister.emit).toHaveBeenCalledWith({
+      username: emailValue,
+      password: passwordValue
+    });
   });
 });
