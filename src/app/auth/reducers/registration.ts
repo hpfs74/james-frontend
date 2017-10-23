@@ -11,7 +11,6 @@ export interface State {
 }
 
 export const initialState: State = {
-
   error: null,
   loading: false,
   registered: false,
@@ -79,5 +78,6 @@ export function reducer(state = initialState, action: registration.Actions): Sta
 
 export const getError = (state: State) => state.error;
 export const getPending = (state: State) => state.loading;
+export const getSuccess = (state: State) => state.registered;
 export const getResendError = (state: State) => state.resend_error;
 export const getResendPending = (state: State) => state.resend_loading;

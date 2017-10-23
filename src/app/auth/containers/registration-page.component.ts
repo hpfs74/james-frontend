@@ -1,28 +1,58 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router, NavigationExtras } from '@angular/router';
-
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { CXEmailValidator } from '@cx/form';
+import { Observable } from 'rxjs/Rx';
 
+import * as fromAuth from '../reducers';
+import * as auth from '../actions/auth';
+import * as registration from '../actions/registration';
+import { Authenticate } from '../models/auth';
 
 @Component({
-  selector: 'knx-password-reset',
   template: `
-      <div class="container">
-        <div class="row">
+    <div class="container">
+      <div class="row">
         <div class="col-md-6 p-3">
-          <knx-registration></knx-registration>
+          <knx-registration *ngIf="!(registrationSuccess$ | async)"
+            [pending]="registrationPending$ | async"
+            [error]="registrationError$ | async"
+            (onRegister)="register($event)">
+          </knx-registration>
+
+          <knx-registration-thankyou *ngIf="registrationSuccess$ | async"
+            [pending]="activationPending$ | async"
+            [error]="activationError$ | async"
+            (onLogin)="redirectToLogin()"
+            (onSendActivation)="sendActivationEmail($event)">
+          </knx-registration-thankyou>
         </div>
         <div class="col-md-6 p-3">
           <knx-download-panel></knx-download-panel>
         </div>
-        </div>
       </div>
+    </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent {
+  registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
+  registrationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationPending);
+  registrationSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationSuccess);
+  activationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
+  activationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
 
-  constructor() {
+  constructor(private store$: Store<fromAuth.State>) {}
+
+  register(register: Authenticate) {
+    this.store$.dispatch(new registration.Register({ emailaddress: register.username, password: register.password }));
+  }
+
+  redirectToLogin() {
+    this.store$.dispatch(new auth.LoginRedirect());
+  }
+
+  sendActivationEmail(email: string) {
+    this.store$.dispatch(new registration.RegisterResendActivationEmail(email));
   }
 }

@@ -28,7 +28,6 @@ export interface RegistrationPayload {
 }
 
 export class RegistrationResult {
-
   _id: string;
   firstname: string;
   infix: string;

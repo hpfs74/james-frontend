@@ -105,7 +105,7 @@ export class AuthService {
   /**
    * Do register the user
    * @param {Authenticate} auth
-   * @return {Observable
+   * @return {Observable}
    */
   public register(registration: RegistrationPayload): Observable<RegistrationResult> {
     registration.scope = 'profile/basic';

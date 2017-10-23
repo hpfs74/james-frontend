@@ -55,16 +55,5 @@ export class RegistrationEffects {
         })
     );
 
-  @Effect({ dispatch: false })
-  registrationSuccess$ = this.actions$
-    .ofType(registration.REGISTER_SUCCESS)
-    .do(() => this.router.navigate(['/register/thankyou']));
-
-
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router,
-    private store$: Store<fromRoot.State>,
-  ) {}
+  constructor(private actions$: Actions, private authService: AuthService) {}
 }
