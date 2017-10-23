@@ -7,18 +7,7 @@ import { CXEmailValidator } from '@cx/form';
 
 @Component({
   selector: 'knx-password-reset',
-  template: `
-      <div class="container">
-        <div class="row">
-        <div class="col-md-6 p-3">
-          <knx-registration></knx-registration>
-        </div>
-        <div class="col-md-6 p-3">
-          <knx-download-panel></knx-download-panel>
-        </div>
-        </div>
-      </div>
-  `,
+  templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent {

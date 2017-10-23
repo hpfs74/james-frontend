@@ -20,13 +20,24 @@
   margin-bottom: 10px;
 }
 
+.col-md-5 {
+  h2 {
+    margin-top: 17px;
+  }
+}
+
 .knx-login__sidebar {
   padding-top: 30px;
 }
 
-.knx-list--login li {
-  margin-bottom: 10px;
-  color: $knab-medium-gray;
+.knx-list--login {
+  margin-left: 0;
+  padding: 10px 0;
+
+  li {
+    margin-bottom: 10px;
+    color: $knab-medium-gray;
+  }
 }
 
 .knx-login__secure {
@@ -35,6 +46,10 @@
 
 .login-password-wrapper {
   position: relative;
+
+  .knx-login__showpassword {
+    top: 35px;
+  }
 }
 
 .knx-login__showpassword {
@@ -84,11 +99,28 @@
   .girl-section__picture {
     float: right;
     margin-right: -15px;
-    margin-bottom: -30px;
+    margin-bottom: -20px;
   }
 }
 
 .knx-login__footer {
   margin-top: 15px;
   color: $knab-medium-gray;
+}
+
+.cx-form-group {
+  min-height: 99px;
+  margin-bottom: 0;
+}
+
+.knx-well {
+  color: #003b5a;
+  background: #edece4;
+  position: relative;
+  border-width: initial;
+  border-style: none;
+  -o-border-image: initial;
+  border-image: initial;
+  padding: 20px 26px;
+  border-radius: 3px;
 }

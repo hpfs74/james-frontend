@@ -1,78 +1,92 @@
 <div class="container">
-  <form [formGroup]="form.formGroup" (ngSubmit)="login($event)" (keyup.enter)="login($event)" autocomplete="off">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="knx-well knx-login">
-          <div class="clearfix">
-            <h2 class="knx-login__header">
-              Inloggen
-            </h2>
-
-            <div class="knx-login__secure">
-              <span class="knx-icon-lock"></span> Beveiligde verbinding
+  <div class="row">
+    <div class="col-md-6">
+      <div class="container">
+        <form [formGroup]="form.formGroup" (ngSubmit)="login($event)" (keyup.enter)="login($event)" autocomplete="off">
+          <div class="knx-well knx-login">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <h2 class="knx-login__header">
+                    Inloggen
+                  </h2>
+                </div>
+                <div class="col-md-6">
+                  <div class="knx-login__secure">
+                    <span class="knx-icon-lock"></span> Beveiligde verbinding
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <cx-form-group
+                    [formControlName]="form.formConfig.email.formControlName"
+                    [options]="form.formConfig.email"></cx-form-group>
+  
+                  <div class="login-password-wrapper">
+  
+                    <cx-form-group
+                      [formControlName]="form.formConfig.password.formControlName"
+                      [options]="form.formConfig.password">
+                    </cx-form-group>
+  
+                    <button type="button"
+                      *ngIf="form.formGroup.get('password').value"
+                      class="knx-login__showpassword knx-icon-eye"
+                      [class.knx-icon-eye-slash]="form.showPassword"
+                      [class.knx-icon-eye]="!form.showPassword"
+                      (click)="form.toggleShowPassword($event)">
+                    </button>
+                  </div>
+  
+                  <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
+                    {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+                  </div>
+  
+                  <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-6">
+                      <button type="submit" class="knx-button knx-button--3d knx-button--primary"
+                        [class.knx-button--pending]="pending$ | async">
+                        Inloggen
+                      </button>
+                      <br>
+                      <a href="" (click)="goToPasswordReset()">Wachtwoord vergeten?</a>
+                    </div>
+  
+                    <div class="girl-section col-lg-6 col-md-12 col-sm-6">
+                      <span class="girl-section__quote">
+                        "Ik sta elke dag van 8 tot 22 uur voor u klaar"
+                      </span>
+                      <img class="girl-section__picture" src="/assets/images/avatars/woman.png" alt="girl">
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
             </div>
           </div>
-
-          <label>Je email</label>
-
-          <cx-form-group
-            [formControlName]="form.formConfig.email.formControlName"
-            [options]="form.formConfig.email"></cx-form-group>
-
-          <div class="login-password-wrapper">
-            <label>Wachtwoord</label>
-
-            <cx-form-group
-              [formControlName]="form.formConfig.password.formControlName"
-              [options]="form.formConfig.password">
-            </cx-form-group>
-
-            <button type="button"
-              *ngIf="form.formGroup.get('password').value"
-              class="knx-login__showpassword knx-icon-eye"
-              [class.knx-icon-eye-slash]="form.showPassword"
-              [class.knx-icon-eye]="!form.showPassword"
-              (click)="form.toggleShowPassword($event)"></button>
+  
+          <div class="knx-login__footer">
+            Er zijn op dit moment veel <strong>phishingmails</strong> in omloop. Vertrouw je
+            een bericht niet? Laat het ons weten via <a href="mailto:valse-email@knab.nl">valse-email@knab.nl</a>
+            of lees meer over <a href="">phishing</a>.
           </div>
-
-          <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
-            {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
-          </div>
-
-          <div class="row">
-            <div class="col-lg-6 col-md-12 col-sm-6">
-              <button type="submit" class="knx-button knx-button--3d knx-button--primary"
-                      [class.knx-button--pending]="pending$ | async">Inloggen</button>
-              <br>
-              <a href="" (click)="goToPasswordReset()">Wachtwoord vergeten?</a>
-            </div>
-
-            <div class="girl-section col-lg-6 col-md-12 col-sm-6">
-              <span class="girl-section__quote">
-                "Ik sta elke dag van 8 tot 22 uur voor u klaar"
-              </span>
-              <img class="girl-section__picture" src="/assets/images/avatars/woman.png" alt="girl">
-            </div>
-             </div>
-        </div>
-
-        <div class="knx-login__footer">
-          Er zijn op dit moment veel <strong>phishingmails</strong> in omloop. Vertrouw je
-          een bericht niet? Laat het ons weten via <a href="mailto:valse-email@knab.nl">valse-email@knab.nl</a>
-          of lees meer over <a href="">phishing</a>.
-        </div>
+        </form>
       </div>
-
-      <div class="col-md-5 offset-md-1 knx-login__sidebar">
+    </div>
+    <div class="col-md-5 offset-md-1">
+      <div class="container">
         <h2 class="knx-login__header">Of, Maak Nieuw Account Aan</h2>
         <ul class="knx-list--checks knx-list--green knx-list--login">
           <li>Een overzicht met al je verzekeringen</li>
           <li>Krijg 15% korting op je eerste verzekering</li>
           <li>Ontvang meldingen zodra je kunt besparen</li>
         </ul>
-
+        
         <button class="knx-button knx-button--secondary" (click)="goToRegister()">ACCOUNT AANMAKEN</button>
       </div>
     </div>
-  </form>
+  </div>
 </div>

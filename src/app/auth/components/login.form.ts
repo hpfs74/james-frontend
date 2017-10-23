@@ -32,6 +32,7 @@ export class LoginForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
+        label: 'Je email',
         inputOptions: {
           placeholder: 'E-mailadres',
           attributes: {
@@ -45,6 +46,7 @@ export class LoginForm extends BaseForm {
         formControlName: 'password',
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
+        label: 'Wachtwoord',
         inputOptions: {
           placeholder: 'Wachtwoord',
           type: 'password',

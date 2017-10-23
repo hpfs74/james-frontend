@@ -13,12 +13,6 @@
   }
 }
 
-h1.knx-register__subline,
-h2.knx-register__subline,
-.knx-register__subline {
-  margin-top: 5px;
-}
-
 .knx-register__logo {
   max-width: 120px;
   display: block;
@@ -125,4 +119,16 @@ h2.knx-register__subline,
   &:visited {
     color: $knab-primary-green;
   }
+}
+
+.knx-well {
+  color: #003b5a;
+  background: #edece4;
+  position: relative;
+  border-width: initial;
+  border-style: none;
+  -o-border-image: initial;
+  border-image: initial;
+  padding: 20px 26px;
+  border-radius: 3px;
 }

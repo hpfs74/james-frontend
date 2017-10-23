@@ -1,7 +1,6 @@
+@import '~styles/base.scss';
+
 .container {
-  .col-md-6 {
-    &.p-3 {
-      padding: 30px;
-    }
-  }
+  padding-right: 15px;
+  padding-left: 15px;
 }
