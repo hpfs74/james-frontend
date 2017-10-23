@@ -68,6 +68,11 @@ export const getRegistrationError = createSelector(
   fromRegistration.getError
 );
 
+export const getRegistrationSuccess = createSelector(
+  selectRegistrationState,
+  fromRegistration.getSuccess
+);
+
 export const getRegistrationResendActivationEmailPending = createSelector(
   selectRegistrationState,
   fromRegistration.getResendPending
