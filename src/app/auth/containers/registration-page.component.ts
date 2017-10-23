@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CXEmailValidator } from '@cx/form';
 import { Observable } from 'rxjs/Rx';
@@ -32,6 +32,7 @@ import { Authenticate } from '../models/auth';
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent {
