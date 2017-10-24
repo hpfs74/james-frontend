@@ -15,6 +15,7 @@ import { KNXInfoModule } from '@knx/info';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
 import { KNXInputComponent } from './components/knx-input/input.component';
+
 /**
  * Shared Modules
  */
@@ -28,8 +29,12 @@ import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe } from './share
 /**
  * Directives
  */
-import { JumpToElementDirective, SidePanelStateDirective, ClickOutsideDirective } from './shared/directives';
-
+import {
+  JumpToElementDirective,
+  SidePanelStateDirective,
+  ClickOutsideDirective,
+  QaIdentifierDirective
+} from './shared/directives';
 
 /**
  * Shared module for all generic components
@@ -81,6 +86,7 @@ export const sharedComponents = [
   SidePanelStateDirective,
   JumpToElementDirective,
   ClickOutsideDirective,
+  QaIdentifierDirective,
   ButtonIconComponent,
   CircleProgressComponent,
   CarSummaryComponent,

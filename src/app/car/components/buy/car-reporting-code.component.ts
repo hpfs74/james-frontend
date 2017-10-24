@@ -1,5 +1,8 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
+import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { Profile } from '../../../profile/models';
 import { Car } from '../../models/';
@@ -10,6 +13,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
   selector: 'knx-car-reporting-code-form',
   templateUrl: 'car-reporting-code.component.html'
 })
+@QaIdentifier(QaIdentifiers.carReporting)
 export class CarReportingCodeComponent implements OnInit {
   @Input() form: CarReportingCodeForm;
   @Input() profile: Profile;
