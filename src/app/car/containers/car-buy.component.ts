@@ -32,6 +32,9 @@ import { CarCheckComponent } from '../components/buy/car-check.component';
 import { CarCheckForm } from '../components/buy/car-check.form';
 import { CarPaymentComponent } from '../components/buy/car-payment.component';
 
+import { QaIdentifier } from '../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
+
 import { IbanForm } from '../../shared/forms/iban.form';
 import { BaseForm } from '../../shared/forms/base-form';
 import * as FormUtils from '../../utils/base-form.utils';
@@ -41,7 +44,9 @@ import * as FormUtils from '../../utils/base-form.utils';
   templateUrl: 'car-buy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@QaIdentifier(QaIdentifiers.carBuyRoot)
 export class CarBuyComponent implements OnInit {
+  qaRootId: string;
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
 

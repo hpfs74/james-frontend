@@ -1,6 +1,7 @@
 <div class="knx-car-extras hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
   <knx-collapse-message [ngClass]="optionModifierClass" title="Dekking" [isOpen]="true">
     <cx-form-group
+      knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
       [options]="form.formConfig.coverage"
       [formControlName]="form.formConfig.coverage.formControlName">
     </cx-form-group>
@@ -10,6 +11,7 @@
     <div class="knx-form-group--info knx-form-group--no-label-info">
 
       <cx-form-group
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="roadAssistance"
         [options]="form.formConfig.roadAssistance"
         [formControlName]="form.formConfig.roadAssistance.formControlName">
       </cx-form-group>
@@ -38,6 +40,7 @@
     <div class="">
       <!---->
       <cx-checkbox
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="legal"
         [formControlName]="form.formConfig.extraOptionsLegal.formControlName"
         [options]="form.formConfig.extraOptionsLegal.inputOptions"></cx-checkbox>
 
@@ -56,6 +59,7 @@
     <div>
       <!---->
       <cx-checkbox
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="extraOptionsNoClaim"
         [formControlName]="form.formConfig.extraOptionsNoClaim.formControlName"
         [options]="form.formConfig.extraOptionsNoClaim.inputOptions"></cx-checkbox>
 
@@ -75,6 +79,7 @@
     <div>
       <!---->
       <cx-checkbox
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="extraOptionsOccupants"
         [formControlName]="form.formConfig.extraOptionsOccupants.formControlName"
         [options]="form.formConfig.extraOptionsOccupants.inputOptions"></cx-checkbox>
 
@@ -94,6 +99,7 @@
 
   <knx-collapse-message [ngClass]="optionModifierClass" title="Aantal KM per jaar" [isOpen]="true">
     <cx-form-group
+      knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="kmPerYear"
       [options]="form.formConfig.kmPerYear"
       [formControlName]="form.formConfig.kmPerYear.formControlName">
     </cx-form-group>
@@ -101,6 +107,7 @@
 
   <knx-collapse-message [ngClass]="optionModifierClass" title="Eigen risico" [isOpen]="true">
     <cx-form-group class="own-risk"
+      knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="ownRisk"
       [options]="form.formConfig.ownRisk"
       [formControlName]="form.formConfig.ownRisk.formControlName">
     </cx-form-group>

@@ -1,6 +1,10 @@
 import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
 import { CarExtrasForm } from './car-extras.form';
+
+import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
 @Component({
   selector: 'knx-car-extras',
@@ -8,7 +12,7 @@ import { CarExtrasForm } from './car-extras.form';
   templateUrl: 'car-extras.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
+@QaIdentifier(QaIdentifiers.carInsurances)
 export class CarExtrasComponent {
   @Input() form: CarExtrasForm;
   @Input() show: boolean;

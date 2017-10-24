@@ -1,7 +1,7 @@
 import { ClickOutsideDirective } from './click-outside.directive';
 import { ElementRef } from '@angular/core';
 
-describe('Class: ClickOutsideDirective', () => {
+describe('Directive: ClickOutsideDirective', () => {
   class MockElementRef implements ElementRef {
     nativeElement = {
       attachOutsideOnClick: true,

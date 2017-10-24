@@ -1,3 +1,4 @@
+export * from './click-outside.directive';
 export * from './jump-to-el.directive';
 export * from './side-panel-state';
-export * from './click-outside.directive';
+export * from './qa-identifier.directive';

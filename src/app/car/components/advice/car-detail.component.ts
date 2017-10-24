@@ -9,6 +9,9 @@ import 'rxjs/add/observable/combineLatest';
 import * as fromRoot from '../../../reducers';
 import * as car from '../../actions/car';
 
+import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+
 import { CarDetailForm } from './car-detail.form';
 import { AddressForm } from '../../../address/components/address.form';
 import { Car, CarCoverageRecommendation } from '../../models';
@@ -23,6 +26,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
   templateUrl: 'car-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@QaIdentifier(QaIdentifiers.carDetails)
 export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
   @Input() addressForm: AddressForm;
