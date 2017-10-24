@@ -8,8 +8,8 @@
     "prepush": "npm run test && npm run security",
     "config": "ts-node ./scripts/set-env.ts",
     "start": "npm run config && ng serve --open --locale",
-    "build": "npm run config --analytics=true && ng build --aot --locale",
-    "build:prod": "npm run config -- --environment=prod --analytics=true && ng build --prod --environment=prod --locale",
+    "build": "npm run config --analytics=true && ng build --locale",
+    "build:prod": "npm run config -- --environment=prod --analytics=true && ng build --prod --aot=false --environment=prod --locale",
     "serve:prod": "ng serve --open --locale --prod",
     "serve:gtm": "npm run config -- --analytics=true && ng serve --open --locale",
     "test:watch": "ng test --code-coverage --watch --sourcemaps=true",
@@ -77,7 +77,7 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.2.7",
+    "@angular/cli": "1.4.9",
     "@angular/compiler-cli": "^4.4.5",
     "@angular/language-service": "^4.4.5",
     "@angular/service-worker": "^1.0.0-beta.16",
