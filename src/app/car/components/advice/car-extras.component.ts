@@ -2,14 +2,17 @@ import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy } from '@a
 import { FormGroup } from '@angular/forms';
 
 import { CarExtrasForm } from './car-extras.form';
-import { QaIdentifiers } from '../../../qa-identifiers';
+
+import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+
 @Component({
   selector: 'knx-car-extras',
   styleUrls: ['./car-extras.component.scss'],
   templateUrl: 'car-extras.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
+@QaIdentifier(QaIdentifiers.carInsurances)
 export class CarExtrasComponent {
   @Input() form: CarExtrasForm;
   @Input() show: boolean;
@@ -28,12 +31,6 @@ export class CarExtrasComponent {
         kmPerYear: value.kilometers_per_year
       }, { emitEvent: false }); // prevent infinite loop; valueChanges subscription CarAdviceComponent
     }
-  }
-
-  qaRootId: string;
-
-  constructor(private qa: QaIdentifiers) {
-    this.qaRootId = qa.carInsurances;
   }
 }
 

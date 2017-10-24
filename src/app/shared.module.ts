@@ -37,12 +37,6 @@ import {
 } from './shared/directives';
 
 /**
- * e2e test element id's
- */
-import { QaIdentifiers } from './qa-identifiers';
-
-
-/**
  * Shared module for all generic components
  * import components in alphabetic order: easier to find something!
  */
@@ -161,9 +155,6 @@ export const sharedModules = [
     ReactiveFormsModule,
     AngularSvgIconModule,
     ...sharedComponents,
-  ],
-  providers: [
-    QaIdentifiers
   ]
 })
 export class SharedModule { }

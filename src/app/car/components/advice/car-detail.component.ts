@@ -9,7 +9,9 @@ import 'rxjs/add/observable/combineLatest';
 import * as fromRoot from '../../../reducers';
 import * as car from '../../actions/car';
 
-import { QaIdentifiers } from '../../../qa-identifiers';
+import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+
 import { CarDetailForm } from './car-detail.form';
 import { AddressForm } from '../../../address/components/address.form';
 import { Car, CarCoverageRecommendation } from '../../models';
@@ -24,6 +26,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
   templateUrl: 'car-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@QaIdentifier(QaIdentifiers.carDetails)
 export class CarDetailComponent implements OnInit {
   @Input() form: CarDetailForm;
   @Input() addressForm: AddressForm;
@@ -75,12 +78,6 @@ export class CarDetailComponent implements OnInit {
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
   @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
-
-  qaRootId: string;
-
-  constructor(private qa: QaIdentifiers) {
-    this.qaRootId = qa.carDetails;
-  }
 
   ngOnInit() {
     const loan = this.form.formGroup.get('loan');
