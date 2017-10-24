@@ -10,6 +10,7 @@
         <div class="col-md-7 col-sm-12">
           <cx-form-group [options]="form.formConfig.licensePlate">
             <knx-input-licenseplate
+              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="licensePlate"
               (ngModelChange)="onLicensePlateChange($event)"
               [formControlName]="form.formConfig.licensePlate.formControlName"
               [options]="form.formConfig.licensePlate.inputOptions">
@@ -28,7 +29,7 @@
         <div class="col-md-7 col-sm-12">
           <div class="knx-form-group--info">
             <cx-form-group
-              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="claimfreeyears"
+              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="claimFreeYears"
               [formControlName]="form.formConfig.claimFreeYears.formControlName"
               [options]="form.formConfig.claimFreeYears">
             </cx-form-group>
@@ -76,7 +77,7 @@
       <div class="row">
         <div class="col-md-4 col-sm-12">
           <cx-form-group
-            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="birthdate"
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="birthDate"
             [formControlName]="form.formConfig.birthDate.formControlName"
             [options]="form.formConfig.birthDate">
           </cx-form-group>
@@ -94,12 +95,13 @@
       </div>
 
       <knx-address-lookup
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="address"
         [addressForm]="addressForm"
         (addressFound)="onAddressFound($event)">
       </knx-address-lookup>
 
       <cx-form-group
-        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="household"
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="houseHold"
         [formControlName]="form.formConfig.houseHold.formControlName"
         [options]="form.formConfig.houseHold"
         (events)="onFocusHouseHold()">
@@ -113,6 +115,7 @@
         <ng-container>
           <h2>Je dekkingswensen</h2>
           <knx-price-table
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
             [items]="coverages"
             [highlight]="coverageRecommendation?.recommended_value"
             (onSelected)="onSelectCoverage($event)">

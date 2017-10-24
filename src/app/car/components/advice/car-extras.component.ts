@@ -1,7 +1,8 @@
 import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CarExtrasForm } from './car-extras.form';
 
+import { CarExtrasForm } from './car-extras.form';
+import { QaIdentifiers } from '../../../qa-identifiers';
 @Component({
   selector: 'knx-car-extras',
   styleUrls: ['./car-extras.component.scss'],
@@ -27,6 +28,12 @@ export class CarExtrasComponent {
         kmPerYear: value.kilometers_per_year
       }, { emitEvent: false }); // prevent infinite loop; valueChanges subscription CarAdviceComponent
     }
+  }
+
+  qaRootId: string;
+
+  constructor(private qa: QaIdentifiers) {
+    this.qaRootId = qa.carInsurances;
   }
 }
 

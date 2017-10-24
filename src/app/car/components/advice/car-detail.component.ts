@@ -1,4 +1,3 @@
-import { QaIdentifiers } from './../../../qa-identifiers';
 import {
   Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
@@ -10,6 +9,7 @@ import 'rxjs/add/observable/combineLatest';
 import * as fromRoot from '../../../reducers';
 import * as car from '../../actions/car';
 
+import { QaIdentifiers } from '../../../qa-identifiers';
 import { CarDetailForm } from './car-detail.form';
 import { AddressForm } from '../../../address/components/address.form';
 import { Car, CarCoverageRecommendation } from '../../models';
@@ -79,7 +79,7 @@ export class CarDetailComponent implements OnInit {
   qaRootId: string;
 
   constructor(private qa: QaIdentifiers) {
-    this.qaRootId = qa.carAdviceRoot;
+    this.qaRootId = qa.carDetails;
   }
 
   ngOnInit() {

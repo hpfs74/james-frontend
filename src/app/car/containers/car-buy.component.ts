@@ -32,6 +32,7 @@ import { CarCheckComponent } from '../components/buy/car-check.component';
 import { CarCheckForm } from '../components/buy/car-check.form';
 import { CarPaymentComponent } from '../components/buy/car-payment.component';
 
+import { QaIdentifiers } from './../../qa-identifiers';
 import { IbanForm } from '../../shared/forms/iban.form';
 import { BaseForm } from '../../shared/forms/base-form';
 import * as FormUtils from '../../utils/base-form.utils';
@@ -42,6 +43,7 @@ import * as FormUtils from '../../utils/base-form.utils';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarBuyComponent implements OnInit {
+  qaRootId: string;
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
 
@@ -59,7 +61,9 @@ export class CarBuyComponent implements OnInit {
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
 
-  constructor(private store$: Store<fromRoot.State>) {}
+  constructor(private store$: Store<fromRoot.State>, private qa: QaIdentifiers) {
+    this.qaRootId = qa.carAdviceRoot;
+  }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
