@@ -1,3 +1,4 @@
+import { QaIdentifiers } from './../../../qa-identifiers';
 import {
   Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
@@ -74,6 +75,12 @@ export class CarDetailComponent implements OnInit {
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
   @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
+
+  qaRootId: string;
+
+  constructor(private qa: QaIdentifiers) {
+    this.qaRootId = qa.carAdviceRoot;
+  }
 
   ngOnInit() {
     const loan = this.form.formGroup.get('loan');

@@ -1,27 +1,23 @@
-import { Directive, Renderer2, Input, ElementRef, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
+import { Directive, Input, ElementRef, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 
 @Directive({ selector: '[knxQaIdentifier]' })
 export class QaIdentifierDirective implements OnInit {
-  @Input() qaPage: string;
-  @Input() qaElement: string;
+  @Input() qaRoot: string;
+  @Input() qaIdentifier: string;
 
   nativeElement: any;
 
-  constructor(private el: ElementRef, private renderer: Renderer2, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private el: ElementRef, private viewContainerRef: ViewContainerRef, private renderer: Renderer2) {
     this.nativeElement = el.nativeElement;
   }
 
   ngOnInit() {
     const qaAttributeName = 'data-qa-id';
-    const qaAttributeValue = `qa-${this.qaPage}-${this.qaElement}`;
-
-    // console.warn(qaAttributeValue);
+    const qaPrefix = 'knx-qa';
 
     // add "data-qa-id" attribute
-    if (this.qaPage && this.qaElement) {
+    if (this.qaRoot && this.qaIdentifier) {
+      const qaAttributeValue = `${qaPrefix}-${this.qaRoot.replace(/[^\w\s]/gi, '')}-${this.qaIdentifier}`;
       this.renderer.setAttribute(this.el.nativeElement, qaAttributeName, qaAttributeValue);
     }
   }

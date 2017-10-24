@@ -28,6 +28,7 @@
         <div class="col-md-7 col-sm-12">
           <div class="knx-form-group--info">
             <cx-form-group
+              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="claimfreeyears"
               [formControlName]="form.formConfig.claimFreeYears.formControlName"
               [options]="form.formConfig.claimFreeYears">
             </cx-form-group>
@@ -61,6 +62,7 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
           <cx-form-group
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="loan"
             [formControlName]="form.formConfig.loan.formControlName"
             [options]="form.formConfig.loan">
           </cx-form-group>
@@ -74,6 +76,7 @@
       <div class="row">
         <div class="col-md-4 col-sm-12">
           <cx-form-group
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="birthdate"
             [formControlName]="form.formConfig.birthDate.formControlName"
             [options]="form.formConfig.birthDate">
           </cx-form-group>
@@ -83,6 +86,7 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
           <cx-form-group
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="gender"
             [formControlName]="form.formConfig.gender.formControlName"
             [options]="form.formConfig.gender">
           </cx-form-group>
@@ -95,6 +99,7 @@
       </knx-address-lookup>
 
       <cx-form-group
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="household"
         [formControlName]="form.formConfig.houseHold.formControlName"
         [options]="form.formConfig.houseHold"
         (events)="onFocusHouseHold()">

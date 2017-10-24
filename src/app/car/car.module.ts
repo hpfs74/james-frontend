@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { QaIdentifiers } from '../qa-identifiers';
 import { SharedModule } from '../shared.module';
 import { AddressModule } from '../address/address.module';
 import { ChatStreamModule } from './../components/knx-chat-stream/chat-stream.module';
@@ -60,7 +61,8 @@ export const COMPONENTS = [
   ],
   declarations: COMPONENTS,
   providers: [
-    CarService
+    CarService,
+    QaIdentifiers
   ]
 })
 export class CarModule {

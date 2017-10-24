@@ -18,6 +18,9 @@ import { reducers, metaReducers } from './reducers';
 import { AppComponent } from './core/containers/app.component';
 import { environment } from '../environments/environment';
 
+// Qa/e2e testing constants
+import { QaIdentifiers } from './qa-identifiers';
+
 // Feature modules
 import { SharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
@@ -82,6 +85,7 @@ import { AddressModule } from './address/address.module';
     //   deps: [ContentService],
     //   multi: true
     // }
+    QaIdentifiers
   ],
   bootstrap: [AppComponent],
 })
