@@ -1,67 +1,58 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="knx-well">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="knx-register__welcome">
-                <h2 class="knx-register__subline">Maak nieuw account aan</h2>
-                <p>Creëer een persoonlijk overzicht van al je verzekeringen.</p>
-              </div>
-              
-              <form [formGroup]="form.formGroup" (ngSubmit)="register($event)" (keyup.enter)="register($event)" autocomplete="off">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="registration-email-wrapper">
-                      <knx-input [formControlName]="form.formConfig.email.formControlName"
-                                  [options]="form.formConfig.email"></knx-input>
-                                </div>
-                                
-                    <div class="registration-password-wrapper">
-              
-                      <knx-input
-                        [formControlName]="form.formConfig.password.formControlName"
-                        [options]="form.formConfig.password">
-                      </knx-input>
-              
-                      <button type="button"
-                              *ngIf="form.formGroup.get('password').value"
-                              class="knx-register__showpassword knx-icon-eye"
-                              [class.knx-icon-eye-slash]="form.showPassword"
-                              [class.knx-icon-eye]="!form.showPassword"
-                              (click)="form.toggleShowPassword($event)"></button>
-              
-                      <knx-password-strength [hidden]="!form.formGroup.get('password').dirty"
-                                              [password]="form.formGroup.get('password').value"></knx-password-strength>
-                    </div>
-              
-              
-                    <div class="registration-check-wrapper">
-                      <knx-checkbox [formControlName]="form.formConfig.confirm.formControlName" id="termsAndCondition">
-                        Ik ga akkoord met de <a class="knx-register__documents-link" href="{{termsAndConditionsUrl}}"
-                                                target="_blank">Gebruiksvoorwaarden</a> and <a class="knx-register__documents-link"
-                                                                                                href="{{privacyStatementUrl}}"
-                                                                                                target="_blank">privacy statement</a>
-                        van Knab
-                      </knx-checkbox>
-                    </div>
-              
-                    <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
-                      {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
-                    </div>
-              
-                    <button type="submit" class="knx-button knx-button--primary "
-                            [class.knx-button--pending]="pending$ | async">Create account
-                    </button>
-                    <br/>
-                    <span class="knx-icon-lock"></span> Beveiligde verbinding
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+      <div class="container registration-form">
+        <div class="knx-register__welcome">
+          <h2 class="knx-register__subline">Maak nieuw account aan</h2>
+          <p>Creëer een persoonlijk overzicht van al je verzekeringen.</p>
         </div>
+        
+        <form [formGroup]="form.formGroup" (ngSubmit)="register($event)" (keyup.enter)="register($event)" autocomplete="off">
+          <div class="registration-email-wrapper">
+            <knx-input  [formControlName]="form.formConfig.email.formControlName"
+                        [options]="form.formConfig.email">
+            </knx-input>
+          </div>
+                      
+          <div class="registration-password-wrapper">
+    
+            <knx-input
+              [formControlName]="form.formConfig.password.formControlName"
+              [options]="form.formConfig.password">
+            </knx-input>
+  
+            <knx-password-strength  [hidden]="!form.formGroup.get('password').dirty"
+                                    [password]="form.formGroup.get('password').value">
+            </knx-password-strength>
+          </div>
+    
+    
+          <div class="registration-check-wrapper">
+            <knx-checkbox [formControlName]="form.formConfig.confirm.formControlName" id="termsAndCondition">
+              Ik ga akkoord met de 
+                <a  class="knx-register__documents-link" href="{{termsAndConditionsUrl}}"
+                    target="_blank">Gebruiksvoorwaarden
+                </a> 
+                and 
+                <a class="knx-register__documents-link"
+                    href="{{privacyStatementUrl}}"
+                    target="_blank">
+                    privacy statement
+                </a>
+              van Knab
+            </knx-checkbox>
+          </div>
+    
+          <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
+            {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+          </div>
+    
+          <button type="submit" class="knx-button knx-button--primary "
+                  [class.knx-button--pending]="pending | async">Create account
+          </button>
+          <br/>
+          <span class="knx-icon-lock"></span> Beveiligde verbinding
+        </form>
       </div>
     </div>
   </div>

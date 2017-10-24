@@ -13,8 +13,6 @@ export class LoginForm extends BaseForm {
     password: () => 'Vul je wachtwoord in'
   };
 
-  showPassword = false;
-
   constructor(private fb: FormBuilder) {
     super();
 
@@ -24,7 +22,7 @@ export class LoginForm extends BaseForm {
       )],
       password: [null, Validators.compose(
         [Validators.required]
-      )],
+      )]
     });
 
     this.formConfig = {
@@ -34,13 +32,10 @@ export class LoginForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'Je email',
         placeholder: 'E-mailadres',
-        inputOptions: {
-          placeholder: 'E-mailadres',
-          attributes: {
-            'aria-label': 'Vul je e-mailadres in',
-            'addonleft': true,
-            'addonicon': 'knx-icon-envelope'
-          }
+        attributes: {
+          'aria-label': 'Vul je e-mailadres in',
+          'addonleft': true,
+          'addonicon': 'knx-icon-envelope'
         }
       },
       password: {
@@ -49,26 +44,14 @@ export class LoginForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'Wachtwoord',
         placeholder: 'Wachtwoord',
-        inputOptions: {
-          placeholder: 'Wachtwoord',
-          type: 'password',
-          attributes: {
-            'aria-label': 'Vul je wachtwoord in',
-            'addonleft': true,
-            'addonicon': 'knx-icon-lock'
-          }
+        type: 'password',
+        attributes: {
+          'aria-label': 'Vul je wachtwoord in',
+          'addonleft': true,
+          'addonicon': 'knx-icon-lock',
+          'data-type': 'password'
         }
       }
     };
   }
-
-  toggleShowPassword() {
-    event.preventDefault();
-    this.showPassword = !this.showPassword;
-
-    this.formConfig.password.inputOptions.type =
-      (this.formConfig.password.inputOptions.type === 'password')
-        ? 'text' : 'password';
-  }
 }
-

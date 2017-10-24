@@ -9,8 +9,7 @@ import { RegistrationPageComponent } from './containers/registration-page.compon
 const authRoutes: Routes = [
   {
     path: 'login',
-    component: LoginPageComponent,
-    canActivate: [LoginGuard]
+    component: LoginPageComponent
   },
   {
     path: 'register',

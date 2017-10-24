@@ -1,0 +1,26 @@
+@import '~styles/base.scss';
+$knxRegisterBlue: #13345c;
+$knxDocumentLinkBlue: #00a8ab;
+
+.container {
+  &.login-form {
+    background: #edece4;
+    padding: 20px;
+    border-radius: 5px;
+    color: $knxRegisterBlue;
+
+    .knx-register__welcome {
+      h2 {
+        margin-bottom: 0;
+      }
+
+      p {
+        color: $knxRegisterBlue;
+      }
+    }
+
+    .knx-register__documents-link {
+      color: $knxDocumentLinkBlue;
+    }
+  }
+}

@@ -9,7 +9,7 @@ import { Inject, Component, Output, EventEmitter } from '@angular/core';
   templateUrl: './login-activate.component.html',
   styleUrls: ['./login-activate.component.scss']
 })
-export class LoginActivateComponent{
+export class LoginActivateComponent {
   @Output() onGoToRegister: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
 

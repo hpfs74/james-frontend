@@ -13,8 +13,6 @@ export class RegistrationForm extends BaseForm {
     password: () => 'Vul je wachtwoord in'
   };
 
-  showPassword = false;
-
   constructor(private fb: FormBuilder) {
     super();
 
@@ -53,7 +51,8 @@ export class RegistrationForm extends BaseForm {
         attributes: {
           'aria-label': 'Vul je wachtwoord in',
           'addonleft': true,
-          'addonicon': 'knx-icon-lock'
+          'addonicon': 'knx-icon-lock',
+          'data-type': 'password'
         }
       },
       confirm: {
@@ -68,14 +67,5 @@ export class RegistrationForm extends BaseForm {
         }
       }
     };
-  }
-
-  toggleShowPassword() {
-    event.preventDefault();
-    this.showPassword = !this.showPassword;
-
-    this.formConfig.password.type =
-      (this.formConfig.password.type === 'password')
-        ? 'text' : 'password';
   }
 }

@@ -1,134 +1,27 @@
 @import '~styles/base.scss';
 
-.knx-register__welcome {
-  margin-bottom: 10px;
+$knxRegisterBlue: #13345c;
+$knxDocumentLinkBlue: #00a8ab;
 
-  p {
-    color: #003b5a;
-    margin-bottom: 0;
-  }
+.container {
+  &.registration-form {
+    background: #edece4;
+    padding: 20px;
+    border-radius: 5px;
+    color: $knxRegisterBlue;
 
-  h2.knx-register__subline {
-    margin-bottom: 0;
-  }
-}
+    .knx-register__welcome {
+      h2 {
+        margin-bottom: 0;
+      }
 
-.knx-register__logo {
-  max-width: 120px;
-  display: block;
-}
+      p {
+        color: $knxRegisterBlue;
+      }
+    }
 
-.knx-register__actions {
-  margin-top: 20px;
-  text-align: center;
-
-  ul {
-    margin-left: 0;
-    padding-left: 0;
-
-    li {
-      margin-bottom: 5px;
+    .knx-register__documents-link {
+      color: $knxDocumentLinkBlue;
     }
   }
-
-  a {
-    color: $knab-primary-blue;
-    font-size: $font-size-base - 2;
-
-    &:hover {
-      text-decoration: none;
-      color: $knab-primary-red;
-    }
-  }
-}
-
-.registration-email-wrapper {
-  position: relative;
-}
-
-.registration-password-wrapper {
-  position: relative;
-}
-
-.knx-register__addon_before {
-  position: absolute;
-  top: 35px;
-  padding: 10px;
-  left: 0;
-  color: $knab-dark-gray;
-  font-size: 20px;
-  border: 0;
-  background: none;
-
-  &:focus,
-  &:hover,
-  &:active,
-  &:visited {
-    cursor: pointer;
-    border: 0;
-    background: none;
-    outline: none;
-  }
-
-  &:active {
-    color: $knab-primary-gray;
-  }
-}
-
-.knx-register__showpassword {
-  position: absolute;
-  top: 35px;
-  right: 10px;
-  color: $knab-dark-gray;
-  font-size: 20px;
-  border: 0;
-  background: none;
-
-  &:focus,
-  &:hover,
-  &:active,
-  &:visited {
-    cursor: pointer;
-    border: 0;
-    background: none;
-    outline: none;
-  }
-
-  &:active {
-    color: $knab-primary-gray;
-  }
-}
-
-.knx-register__error {
-  color: $knab-secondary-red;
-  margin-bottom: 20px;
-  margin-top: -15px;
-  display: block;
-  font-size: $font-size-base - 2;
-  text-align: center;
-}
-
-.knx-register__documents-link {
-  color: $knab-primary-green;
-  text-decoration: none;
-  font-weight: bold;
-
-  &:focus,
-  &:hover,
-  &:active,
-  &:visited {
-    color: $knab-primary-green;
-  }
-}
-
-.knx-well {
-  color: #003b5a;
-  background: #edece4;
-  position: relative;
-  border-width: initial;
-  border-style: none;
-  -o-border-image: initial;
-  border-image: initial;
-  padding: 20px 26px;
-  border-radius: 3px;
 }

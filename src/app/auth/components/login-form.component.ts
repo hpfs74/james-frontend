@@ -14,17 +14,17 @@ import { Store } from '@ngrx/store';
 })
 export class LoginFormComponent {
   @Input() form: LoginForm;
-  @Input() pending$: Store<boolean>;
+  @Input() pending: Store<boolean>;
   @Input() errorMessage: string;
   @Output() onPasswordReset: EventEmitter<any> = new EventEmitter<any>();
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
 
-  goToPasswordReset(): void {
+  goToPasswordReset() {
     this.onPasswordReset.emit('passwordReset');
   }
 
-  login(event: any): void {
+  login(event: any) {
     this.onLogin.emit(event);
   }
 }

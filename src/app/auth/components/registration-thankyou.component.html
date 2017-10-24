@@ -1,24 +1,30 @@
 <div class="container">
-
   <div class="row">
     <div class="col-md-12">
-      <div class="knx-register-thankyou__welcome">
-        <h2 class="knx-register-thankyou__subline">Bedankt voor je registratie!</h2>
-        <p>Een email is verstuurd naar {{email}}.</p>
+      <div class="container thank-you">
+        <div class="knx-register-thankyou__welcome">
+          <h2 class="knx-register-thankyou__subline">Bedankt voor je registratie!</h2>
+          <p>Een email is verstuurd naar {{email}}.</p>
+        </div>
+  
+        <ol>
+          <li>Klik op "<span>activeer account</span>" in de e-mail om je account in gebruik te nemen</li>
+          <li>Heb je step 1 gadaan?<br>
+              Klik dan hieronder op "<span>NAAR INLOGGEN</span>"<br>
+              om verder te gaan.
+          </li>
+        </ol>
+        <button class="knx-button" (click)="resendActivationEmail()">Naar inloggen</button>
       </div>
-
-      <ul>
-        <li></li>
-      </ul>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <h3>Geen mail ontvangen?</h3>
+    <div class="col-md-12 knx-register-thankyou__bottom">
+      <h4>Geen mail ontvangen?</h4>
       <p>Kijk in je spam folder of verstuur de e-mail nogmaals</p>
 
-      <button (click)="resendActivationEmail()">Opnieuw versturen</button>
+      <button class="knx-button knx-button--secondary" (click)="resendActivationEmail()">Opnieuw versturen</button>
 
       <p class="knx-message" *ngIf="message">{{message}}</p>
       <p class="knx-message--error" *ngIf="error">{{errorMessage}}</p>

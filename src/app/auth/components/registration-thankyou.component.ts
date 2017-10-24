@@ -13,7 +13,8 @@ import * as profile from '../../profile/actions/profile';
 
 @Component({
   selector: 'knx-registration-thankyou',
-  templateUrl: './registration-thankyou.component.html'
+  templateUrl: './registration-thankyou.component.html',
+  styleUrls: ['./registration-thankyou.component.scss']
 })
 export class RegistrationThankyouComponent {
   message: string;
