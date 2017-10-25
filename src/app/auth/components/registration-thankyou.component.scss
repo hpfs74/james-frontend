@@ -1,0 +1,70 @@
+@import '~styles/base.scss';
+
+$knxRegisterBlue: #13345c;
+$knxDocumentLinkBlue: #00a8ab;
+
+.container {
+  &.thank-you {
+    background: #edece4;
+    padding: 20px;
+    border-radius: 5px;
+    color: $knxRegisterBlue;
+
+    ol {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        counter-increment: item;
+        margin-bottom: 5px;
+        margin-left: 45px;
+
+        &:before {
+          content: counter(item);
+          background: #fff;
+          border-radius: 100%;
+          color: #13345c;
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          border: 2px solid #13345c;
+          font-weight: bold;
+          line-height: 25px;
+          position: absolute;
+          left: 20px;
+        }
+
+        span {
+          font-weight: bold;
+          color: $knxRegisterBlue;
+        }
+      }
+    }
+
+    .knx-register-thankyou__welcome {
+      h2 {
+        margin-bottom: 0;
+      }
+
+      p {
+        color: $knxRegisterBlue;
+      }
+    }
+
+    .knx-register__-thankyoudocuments-link {
+      color: $knxDocumentLinkBlue;
+    }
+
+    button {
+      margin-left: 45px;
+    }
+  }
+}
+
+.knx-register-thankyou__bottom {
+  margin-top: 20px;
+
+  h4 {
+    margin-bottom: 0;
+  }
+}

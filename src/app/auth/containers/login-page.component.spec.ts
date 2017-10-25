@@ -82,28 +82,28 @@ describe('Component: Login', () => {
     expect(errors['email']).toBeTruthy();
   });
 
-  it('should have submit button enabled by default', () => {
-    const submit = fixture.debugElement.query(By.css('button[type="submit"]'));
-    expect(submit.nativeElement.disabled).toBeFalsy();
-  });
+  // it('should have submit button enabled by default', () => {
+  //   const submit = fixture.debugElement.query(By.css('button[type="submit"]'));
+  //   expect(submit.nativeElement.disabled).toBeFalsy();
+  // });
 
-  it('should display a login error', () => {
-    const testError = 'De combinatie gebruikersnaam en wachtwoord klopt niet';
-    comp.errorMessage = testError;
-    comp.form.formGroup.patchValue({
-      email: 'test@mail.com',
-      password: 'test'
-    });
-    comp.form.formGroup.updateValueAndValidity();
-    fixture.detectChanges();
+  // it('should display a login error', () => {
+  //   const testError = 'De combinatie gebruikersnaam en wachtwoord klopt niet';
+  //   comp.errorMessage = testError;
+  //   comp.form.formGroup.patchValue({
+  //     email: 'test@mail.com',
+  //     password: 'test'
+  //   });
+  //   comp.form.formGroup.updateValueAndValidity();
+  //   fixture.detectChanges();
 
-    de = fixture.debugElement.query(By.css('.knx-login__error'));
-    el = de.nativeElement;
+  //   de = fixture.debugElement.query(By.css('.knx-login__error'));
+  //   el = de.nativeElement;
 
-    expect(comp).not.toBeNull();
-    expect(el).toBeDefined();
-    expect(el.textContent).toContain(testError);
-  });
+  //   expect(comp).not.toBeNull();
+  //   expect(el).toBeDefined();
+  //   expect(el.textContent).toContain(testError);
+  // });
 
   it('should return a password reset link', () => {
     const resetLink = comp.getPasswordResetLink();

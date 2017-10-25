@@ -9,30 +9,8 @@ import * as registration from '../actions/registration';
 import { Authenticate } from '../models/auth';
 
 @Component({
-  template: `
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 p-3">
-          <knx-registration *ngIf="!(registrationSuccess$ | async)"
-            [pending]="registrationPending$ | async"
-            [error]="registrationError$ | async"
-            (onRegister)="register($event)">
-          </knx-registration>
-
-          <knx-registration-thankyou *ngIf="registrationSuccess$ | async"
-            [pending]="activationPending$ | async"
-            [error]="activationError$ | async"
-            (onLogin)="redirectToLogin()"
-            (onSendActivation)="sendActivationEmail($event)">
-          </knx-registration-thankyou>
-        </div>
-        <div class="col-md-6 p-3">
-          <knx-download-panel></knx-download-panel>
-        </div>
-      </div>
-    </div>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'knx-password-reset',
+  templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent {

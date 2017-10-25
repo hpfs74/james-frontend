@@ -6,14 +6,10 @@ import { AuthService } from './services/auth.service';
 import { LoginPageComponent } from './containers/login-page.component';
 import { RegistrationPageComponent } from './containers/registration-page.component';
 
-import { RegistrationThankyouComponent } from './components/registration-thankyou.component';
-import { RegistrationComponent } from './components/registration.component';
-
 const authRoutes: Routes = [
   {
     path: 'login',
-    component: LoginPageComponent,
-    canActivate: [LoginGuard]
+    component: LoginPageComponent
   },
   {
     path: 'register',

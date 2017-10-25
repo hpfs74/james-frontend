@@ -32,6 +32,16 @@ import { CXFormComponent, getCXValueAccessor } from '@cx/form-control';
             [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
 
             <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
+            <span *ngIf="!getErrors() && options.attributes['data-type'] != 'password'"
+                  [ngClass]="['knx-input__valid', 'knx-icon-check']">
+            </span>
+            <button type="button"
+                    *ngIf="options.attributes['data-type'] != undefined && options.attributes['data-type'] == 'password'"
+                    class="knx-input__show-password knx-icon-eye"
+                    [class.knx-icon-eye-slash]="showPassword"
+                    [class.knx-icon-eye]="!showPassword"
+                    (click)="toggleShowPassword($event)">
+            </button>
             <div class="knx-input__error_message" *ngIf="getErrors()">
                 <p *ngFor="let error of getErrors()">{{error}}</p>
             </div>
@@ -43,6 +53,7 @@ export class KNXInputComponent extends CXFormComponent implements OnInit {
 
   @Input() options: KNXInputOptions;
 
+  showPassword = false;
 
   constructor(public elementRef: ElementRef) {
     super(elementRef, KNX_INPUT_DEFAULT_OPTIONS);
@@ -65,5 +76,13 @@ export class KNXInputComponent extends CXFormComponent implements OnInit {
       return this.options.attributes['addonicon'];
     }
     return '';
+  }
+
+  toggleShowPassword(event) {
+    event.preventDefault();
+    this.showPassword = !this.showPassword;
+    this.options.type =
+      (this.options.type === 'password')
+        ? 'text' : 'password';
   }
 }

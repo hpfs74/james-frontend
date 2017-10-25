@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+        <knx-registration *ngIf="!(registrationSuccess$ | async)"
+            [pending]="registrationPending$ | async"
+            [error]="registrationError$ | async"
+            (onRegister)="register($event)">
+        </knx-registration>
+
+        <knx-registration-thankyou *ngIf="registrationSuccess$ | async"
+            [pending]="activationPending$ | async"
+            [error]="activationError$ | async"
+            (onLogin)="redirectToLogin()"
+            (onSendActivation)="sendActivationEmail($event)">
+        </knx-registration-thankyou>
+        </div>
+        <div class="col-md-6">
+        <knx-download-panel></knx-download-panel>
+        </div>
+    </div>
+</div>
