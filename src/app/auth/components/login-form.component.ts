@@ -2,6 +2,7 @@ import { Inject, Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LoginForm } from './login.form';
 import { Store } from '@ngrx/store';
+import { CustomError } from '../models/login-error';
 
 /**
  * @export
@@ -15,7 +16,7 @@ import { Store } from '@ngrx/store';
 export class LoginFormComponent {
   @Input() form: LoginForm;
   @Input() pending: Store<boolean>;
-  @Input() errorMessage: string;
+  @Input() errorMessage: CustomError;
   @Output() onPasswordReset: EventEmitter<any> = new EventEmitter<any>();
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}

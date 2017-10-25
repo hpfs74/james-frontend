@@ -5,6 +5,11 @@ export const loginError = {
   invalid_username: defaultError,
   invalid_password: defaultError,
   too_many_login_attempts: 'Teveel foutieve inlogpogingen',
-  default: defaultError
+  default: defaultError,
+  'profile inactive': 'Je account is nog niet geactiveerd :( Klik in de email op \'activeer\'.\n Geen email gehad?'
 };
 
+export interface CustomError {
+  errorText: string;
+  hasLink?: boolean;
+}

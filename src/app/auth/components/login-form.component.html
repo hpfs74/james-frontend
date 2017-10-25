@@ -33,7 +33,8 @@
                   </div>
           
                   <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
-                    {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+                    <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }} <a *ngIf="errorMessage.hasLink" click="goToPasswordReset()">Stuur opnieuw</a></p>
+                    <p *ngIf="!errorMessage.errorText">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</p>
                   </div>
           
                   <div class="row">
