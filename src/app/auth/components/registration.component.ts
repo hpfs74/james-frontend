@@ -15,14 +15,14 @@ export class RegistrationComponent implements OnInit {
   errorMessage: string;
   form: RegistrationForm;
 
-  @Output() onRegister: EventEmitter<Authenticate> = new EventEmitter();
-
   @Input() privacyStatementUrl: string;
   @Input() termsAndConditionsUrl: string;
   @Input() pending: boolean;
   @Input() set error(value: string) {
     this.errorMessage = registrationError[value] || registrationError.default;
   }
+
+  @Output() onRegister: EventEmitter<Authenticate> = new EventEmitter();
 
   ngOnInit() {
     this.form = new RegistrationForm(new FormBuilder());

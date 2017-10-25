@@ -1,4 +1,5 @@
 @import '~styles/base.scss';
+
 $knxInputPadding: 10px;
 $knxInputFontSize: 18px;
 $knxInputWidth: 100%;
@@ -26,11 +27,11 @@ $knxIconColorGreen: #00dd81;
 }
 
 .knx-input__error_message {
-  display: none;
-  font-size: 15px;
+  position: absolute;
 
   p {
-    color: $knab-primary-red;
+    color: $knab-error;
+    font-size: $font-size-base - 2;
   }
 }
 
@@ -39,14 +40,6 @@ $knxIconColorGreen: #00dd81;
   padding-left: 10px;
   margin-left: -12px;
   width: calc(100% + 12px);
-
-  .knx-input__error_message {
-    display: block;
-
-    p {
-      margin: 0;
-    }
-  }
 }
 
 .knx-input--disabled {

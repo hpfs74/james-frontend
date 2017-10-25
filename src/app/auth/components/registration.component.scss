@@ -1,27 +1,52 @@
 @import '~styles/base.scss';
 
-$knxRegisterBlue: #13345c;
-$knxDocumentLinkBlue: #00a8ab;
+.registration-form {
+  background: #edece4;
+  padding: 20px;
+  border-radius: 5px;
+  color: $knab-primary-blue;
+}
 
-.container {
-  &.registration-form {
-    background: #edece4;
-    padding: 20px;
-    border-radius: 5px;
-    color: $knxRegisterBlue;
+knx-password-strength {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  display: block;
+}
 
-    .knx-register__welcome {
-      h2 {
-        margin-bottom: 0;
-      }
+.cx-form-group {
+  margin-bottom: 0;
+}
 
-      p {
-        color: $knxRegisterBlue;
-      }
-    }
+h2 {
+  margin-bottom: 0;
+}
 
-    .knx-register__documents-link {
-      color: $knxDocumentLinkBlue;
-    }
+p {
+  color: $knab-primary-blue;
+}
+
+.register-document-link {
+  color: $knab-primary-green;
+  font-weight: bold;
+
+  &:hover {
+    color: $knab-primary-red;
+    text-decoration: none;
   }
+}
+
+.actions {
+  margin-top: 25px;
+  display: block;
+}
+
+.meta-security {
+  font-size: $font-size-base - 2;
+  color: $knab-primary-blue;
+  margin-bottom: 0;
+}
+
+.knx-register__error {
+  color: $knab-error;
+  font-size: $font-size-base - 2;
 }
