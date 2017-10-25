@@ -1,6 +1,6 @@
 .main-container {
   min-height: calc(100vh - 300px);
-  margin-top: 100px;
+  margin-top: 88px;
   margin-bottom: 60px;
 
   h2 {
@@ -15,7 +15,7 @@
 
 @media (max-width: 768px) {
   .main-container .knx-container-stepnavigation {
-    margin-top: -48px;
+    margin-top: -38px;
   }
 }
 

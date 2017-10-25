@@ -1,8 +1,7 @@
 @import '~styles/base.scss';
 
 .knx-nav-user {
-  color: $knab-nav-item-color;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 .knx-nav-user a {
@@ -24,7 +23,6 @@
 }
 
 .knx-nav-user__icon {
-  color: $knab-primary-green;
   font-weight: bold;
 }
 

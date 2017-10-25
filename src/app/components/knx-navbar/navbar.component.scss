@@ -5,24 +5,24 @@ $knx-navbar-font: $font-size-base;
 
 .knx-logo {
   width: 80px;
-  margin-left: -15px;
+  margin-left: -30px;
 }
 
 .knx-logo-text {
-  color: $knab-white;
+  color: #3e4a59;
   font-family: $font-family-head;
   text-transform: uppercase;
   margin-left: 8px;
   font-size: $font-size-base;
   position: absolute;
-  bottom: 10px;
+  bottom: 9px;
 }
 
 .knx-navbar {
   display: flex;
-  background: $knab-primary-blue;
-  color: $knab-nav-item-color;
-  height: 64px;
+  background: $knab-white;
+  color: $knab-primary-blue;
+  height: 54px;
   box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -35,7 +35,7 @@ $knx-navbar-font: $font-size-base;
 .knx-navbar .knx-button--hamburger {
   background: none;
   border: 0;
-  color: $knab-nav-item-color;
+  color: $knab-primary-blue;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,11 +67,10 @@ $knx-navbar-font: $font-size-base;
 }
 
 .knx-navbar .nav-link {
-  color: $knab-nav-item-color;
+  color: $knab-primary-blue;
   font-size: $knx-navbar-font;
 
   .nav-link__icon {
-    color: $knab-primary-green;
     font-weight: bold;
   }
 
@@ -120,7 +119,7 @@ $knx-navbar-font: $font-size-base;
 .navbar > .container-fluid .navbar-brand,
 .knx-navbar.navbar-toggleable-md .navbar-nav .nav-item .navbar-brand {
   margin-left: 15px;
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 .navbar-toggleable-md,
