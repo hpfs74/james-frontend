@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 import * as router from '../../core/actions/router';
 
 import { LoginForm } from '../components/login.form';
-import { loginError } from '../models/login-error';
+import { loginError, CustomError } from '../models/login-error';
 import * as profile from '../../profile/actions/profile';
 
 /**
@@ -25,7 +25,7 @@ import * as profile from '../../profile/actions/profile';
 export class LoginPageComponent implements OnInit {
   pending$ = this.store.select(fromAuth.getLoginPagePending);
   error$ = this.store.select(fromAuth.getLoginPageError);
-  errorMessage: string;
+  errorMessage: CustomError;
 
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
@@ -37,7 +37,10 @@ export class LoginPageComponent implements OnInit {
     this.store.select(fromAuth.getLoginPageError)
       .filter(error => error !== null)
       .subscribe((error) => {
-        this.errorMessage = loginError[error] || loginError.default;
+        this.errorMessage = { errorText: loginError[error] } || { errorText: loginError.default};
+        if (error === 'profile inactive') {
+          this.errorMessage = { errorText: loginError[error], hasLink: true };
+        }
       });
   }
 
