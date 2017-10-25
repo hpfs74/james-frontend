@@ -1,24 +1,24 @@
-.knx-download-panel__container {
+@import '~styles/base';
+
+img {
+  max-height: 250px;
+}
+
+@media (max-width: 990px) {
   img {
-    max-height: 251px;
+    display: none;
   }
+}
 
-  ul {
-    padding: 0;
-    margin-left: 0;
-  }
+h2 {
+  margin-top: 0;
+}
 
-  h2 {
-    margin-top: 17px;
-  }
+ul {
+  padding: 0;
+  margin-left: 0;
+}
 
-  @media (max-width: 990px) {
-    img {
-      display: none;
-    }
-  }
-
-  .knx-download-panel__content {
-    padding-left: 25px;
-  }
+ul > li {
+  color: $knab-medium-gray;
 }
