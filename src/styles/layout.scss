@@ -68,3 +68,16 @@
     }
   }
 }
+
+@media (max-width: 576px) {
+  .knx-car-extras {
+    display: none;
+  }
+
+  .knx-chat-stream {
+    .knx-side-panel .knx-car-extras,
+    .knx-side-panel .knx-message {
+      display: block;
+    }
+  }
+}
