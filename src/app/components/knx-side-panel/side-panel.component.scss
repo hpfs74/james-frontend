@@ -21,6 +21,8 @@
 }
 
 .knx-side-panel__toolbar {
+  position: relative;
+  margin-top: 50px;
   text-align: center;
   padding: 15px;
   margin-bottom: 20px;
@@ -42,4 +44,14 @@
 
 .knx-side-panel-content > *:last-child {
   margin-top: 20px;
+}
+
+@media (max-width: 576px) {
+  .knx-car-extras {
+    display: none;
+  }
+
+  .knx-side-panel .knx-car-extras {
+    display: block;
+  }
 }

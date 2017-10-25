@@ -4,7 +4,7 @@
   margin-bottom: 30px;
   display: inline-block;
   position: relative;
-  top: 100px;
+  top: 140px;
   left: -10px;
   font-size: $base-font-size;
 
@@ -12,11 +12,5 @@
     content: map-get($knx-icons, rotate-left);
     font-family: $font-family-icon;
     margin-right: 8px;
-  }
-}
-
-@media (min-width: 768px) {
-  .knx-car-contact-form__reset {
-    top: 140px;
   }
 }

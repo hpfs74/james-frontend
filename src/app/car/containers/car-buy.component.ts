@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-import { KNXStepOptions, StepError } from '@knx/wizard';
+import { KNXStepOptions } from '@knx/wizard';
 
 import * as fromRoot from '../../reducers';
 import * as fromInsurance from '../../insurance/reducers';
@@ -13,7 +13,6 @@ import * as fromProfile from '../../profile/reducers';
 import * as assistant from '../../core/actions/assistant';
 import * as router from '../../core/actions/router';
 
-import * as profile from '../../profile/actions/profile';
 import * as car from '../actions/car';
 import * as advice from '../../insurance/actions/advice';
 import * as compare from '../actions/compare';
@@ -22,15 +21,11 @@ import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from './../../profile/models';
 
-import { CarContactComponent } from '../components/buy/car-contact.component';
 import { ContactDetailForm } from '../../shared/forms/contact-detail.form';
 import { Proposal, CarProposalHelper } from '../models/proposal';
 
-import { CarReportingCodeComponent } from '../components/buy/car-reporting-code.component';
 import { CarReportingCodeForm } from '../components/buy/car-reporting-code.form';
-import { CarCheckComponent } from '../components/buy/car-check.component';
 import { CarCheckForm } from '../components/buy/car-check.form';
-import { CarPaymentComponent } from '../components/buy/car-payment.component';
 
 import { IbanForm } from '../../shared/forms/iban.form';
 import { BaseForm } from '../../shared/forms/base-form';
@@ -44,6 +39,7 @@ import * as FormUtils from '../../utils/base-form.utils';
 export class CarBuyComponent implements OnInit {
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
+  isBlurred = false;
 
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
@@ -224,6 +220,10 @@ export class CarBuyComponent implements OnInit {
       mobileNumber: form.value.mobileNumber,
       phoneNumber: form.value.phoneNumber
     };
+  }
+
+  blurWizard(chatIsOpened) {
+    this.isBlurred = chatIsOpened;
   }
 
   getProposalData(value: any, contactForm: FormGroup) {

@@ -1,4 +1,4 @@
-<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation">
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" [ngClass]="{'backdrop-blur': isBlurred}">
   <div class="container">
     <knx-step-navigation
       [steps]="formSteps"
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="container knx-car-buy">
+<div class="container knx-car-buy" [ngClass]="{'backdrop-blur': isBlurred}">
   <knx-wizard #knxWizard (stepChange)="onStepChange($event)">
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
@@ -54,32 +54,33 @@
     </div>
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream
+        (onChatExpand)="blurWizard($event)"
         [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async">
       </knx-chat-stream>
     </div>
   </knx-wizard>
-</div>
 
-<div class="container" *ngIf="currentStep === 4">
-  <div class="row">
-    <div class="col-sm-8">
-      <knx-step-blocks title="Hoe gaat het nu verder?">
-        <knx-step-block>
-          <h3>1. Bevestiging</h3>
-          <p>Je ontvangt een bevestiging van ons per e-mail.</p>
-        </knx-step-block>
+  <div class="container" *ngIf="currentStep === 4">
+    <div class="row knx-buy__footer">
+      <div class="col-sm-8">
+        <knx-step-blocks title="Hoe gaat het nu verder?">
+          <knx-step-block>
+            <h3>1. Bevestiging</h3>
+            <p>Je ontvangt een bevestiging van ons per e-mail.</p>
+          </knx-step-block>
 
-        <knx-step-block>
-          <h3>2. In behandeling</h3>
-          <p>Binnen 3 werkdagen hoor je of je in aanmerking komt.</p>
-        </knx-step-block>
+          <knx-step-block>
+            <h3>2. In behandeling</h3>
+            <p>Binnen 3 werkdagen hoor je of je in aanmerking komt.</p>
+          </knx-step-block>
 
-        <knx-step-block>
-          <h3>3. Overgestapt</h3>
-          <p>Gefeliciteerd! Je hebt een hoop geld bespaard op je autoverzekering!</p>
-        </knx-step-block>
-      </knx-step-blocks>
+          <knx-step-block>
+            <h3>3. Overgestapt</h3>
+            <p>Gefeliciteerd! Je hebt een hoop geld bespaard op je autoverzekering!</p>
+          </knx-step-block>
+        </knx-step-blocks>
+      </div>
     </div>
   </div>
 </div>
