@@ -6,52 +6,46 @@
           <h2 class="knx-register__subline">Maak nieuw account aan</h2>
           <p>Creëer een persoonlijk overzicht van al je verzekeringen.</p>
         </div>
-        
+
         <form [formGroup]="form.formGroup" (ngSubmit)="register($event)" (keyup.enter)="register($event)" autocomplete="off">
-          <div class="registration-email-wrapper">
-            <knx-input  [formControlName]="form.formConfig.email.formControlName"
-                        [options]="form.formConfig.email">
+          <div class="cx-form-group">
+            <knx-input
+              [formControlName]="form.formConfig.email.formControlName"
+              [options]="form.formConfig.email">
             </knx-input>
           </div>
-                      
-          <div class="registration-password-wrapper">
-    
+
+          <div class="cx-form-group">
             <knx-input
               [formControlName]="form.formConfig.password.formControlName"
               [options]="form.formConfig.password">
             </knx-input>
-  
-            <knx-password-strength  [hidden]="!form.formGroup.get('password').dirty"
-                                    [password]="form.formGroup.get('password').value">
+
+            <knx-password-strength
+              [hidden]="!form.formGroup.get('password').dirty || !form.formGroup.get('password').value"
+              [password]="form.formGroup.get('password').value">
             </knx-password-strength>
           </div>
-    
-    
-          <div class="registration-check-wrapper">
+
+          <div class="cx-form-group">
             <knx-checkbox [formControlName]="form.formConfig.confirm.formControlName" id="termsAndCondition">
-              Ik ga akkoord met de 
-                <a  class="knx-register__documents-link" href="{{termsAndConditionsUrl}}"
-                    target="_blank">Gebruiksvoorwaarden
-                </a> 
-                and 
-                <a class="knx-register__documents-link"
-                    href="{{privacyStatementUrl}}"
-                    target="_blank">
-                    privacy statement
-                </a>
+              Ik ga akkoord met de
+                <a class="register-document-link" href="{{ termsAndConditionsUrl }}" target="_blank" rel="noopener">Gebruiksvoorwaarden</a>
+                &amp;
+                <a class="register-document-link" href="{{ privacyStatementUrl }}" target="_blank" rel="noopener">privacy statement</a>
               van Knab
             </knx-checkbox>
           </div>
-    
+
           <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
             {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
           </div>
-    
-          <button type="submit" class="knx-button knx-button--primary "
-                  [class.knx-button--pending]="pending">Account aanmaken
-          </button>
-          <br/>
-          <span class="knx-icon-lock"></span> Beveiligde verbinding
+
+          <div class="actions">
+            <button type="submit" class="knx-button knx-button--primary" [class.knx-button--pending]="pending">Account aanmaken</button>
+            <p class="meta-security"><span class="knx-icon-lock"></span> Beveiligde verbinding</p>
+          </div>
+
         </form>
       </div>
     </div>

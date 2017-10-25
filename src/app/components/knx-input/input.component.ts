@@ -11,40 +11,42 @@ import { CXFormComponent, getCXValueAccessor } from '@cx/form-control';
     <label *ngIf="options.label">{{ options.label }}</label>
     <div class="input-elements">
       <input #inputControl
-          *ngIf="!options.textMask"
-            (blur)="onTouchedCallback()"
-            [(ngModel)]="value"
-            [placeholder]="options.placeholder"
-            [class.knx-input__input--disabled]="options.disabled"
-            [disabled]="options.disabled"
-            [type]="options.type"
-            [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
+        *ngIf="!options.textMask"
+          (blur)="onTouchedCallback()"
+          [(ngModel)]="value"
+          [placeholder]="options.placeholder"
+          [class.knx-input__input--disabled]="options.disabled"
+          [disabled]="options.disabled"
+          [type]="options.type"
+          [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
 
       <input class="knx-input__input" #inputControl
-              *ngIf="options.textMask"
-            (blur)="onTouchedCallback()"
-            [(ngModel)]="value"
-            [placeholder]="options.placeholder"
-            [class.knx-input__input--disabled]="options.disabled"
-            [disabled]="options.disabled"
-            [type]="options.type"
-            [textMask]="options.textMask"
-            [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
+        *ngIf="options.textMask"
+        (blur)="onTouchedCallback()"
+        [(ngModel)]="value"
+        [placeholder]="options.placeholder"
+        [class.knx-input__input--disabled]="options.disabled"
+        [disabled]="options.disabled"
+        [type]="options.type"
+        [textMask]="options.textMask"
+        [ngClass]="{'knx-input__input': true, 'knx-input__addon-left': hasAddonLeft() }">
 
-            <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
-            <span *ngIf="!getErrors() && options.attributes['data-type'] != 'password'"
-                  [ngClass]="['knx-input__valid', 'knx-icon-check']">
-            </span>
-            <button type="button"
-                    *ngIf="options.attributes['data-type'] != undefined && options.attributes['data-type'] == 'password'"
-                    class="knx-input__show-password knx-icon-eye"
-                    [class.knx-icon-eye-slash]="showPassword"
-                    [class.knx-icon-eye]="!showPassword"
-                    (click)="toggleShowPassword($event)">
-            </button>
-            <div class="knx-input__error_message" *ngIf="getErrors()">
-                <p *ngFor="let error of getErrors()">{{error}}</p>
-            </div>
+        <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
+        <span *ngIf="!getErrors() && options.attributes['data-type'] != 'password'"
+            [ngClass]="['knx-input__valid', 'knx-icon-check']">
+        </span>
+
+        <button type="button"
+          *ngIf="options.attributes['data-type'] != undefined && options.attributes['data-type'] == 'password'"
+          class="knx-input__show-password knx-icon-eye"
+          [class.knx-icon-eye-slash]="showPassword"
+          [class.knx-icon-eye]="!showPassword"
+          (click)="toggleShowPassword($event)">
+        </button>
+
+        <div class="knx-input__error_message" *ngIf="getErrors()">
+            <p *ngFor="let error of getErrors()">{{error}}</p>
+        </div>
     </div>
 </div>
 `
