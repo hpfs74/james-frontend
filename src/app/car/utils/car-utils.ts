@@ -24,6 +24,24 @@ export class CarUtils {
     return value;
   }
 
+  static getCoverageExtended(coverage: string) {
+    let value = '';
+    switch (coverage) {
+      case 'CL':
+        value = 'WA';
+        break;
+      case 'CLC':
+        value = 'WA + Beperkt Casco';
+        break;
+      case 'CAR':
+        value = 'WA + Volledig Casco (All Risk)';
+        break;
+      default:
+        break;
+    }
+    return value;
+  }
+
   static getSecurityClassName(securityClass: string) {
     return securityClass ? this.securityClasses.filter(item => item.value === securityClass)[0].title : '';
   }

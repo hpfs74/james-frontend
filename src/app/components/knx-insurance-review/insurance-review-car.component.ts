@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CarInsurance } from '../../car/models/car-insurance';
+import { CarUtils } from '../../car/utils/car-utils';
 
 @Component({
   selector: 'knx-insurance-review-car',
@@ -7,7 +8,7 @@ import { CarInsurance } from '../../car/models/car-insurance';
     <knx-ir-content title="Je verzekering" *ngIf="carInsurance">
       <knx-ir-row showTooltip="false" showValue="true">
         <knx-ir-label>Dekking</knx-ir-label>
-        <knx-ir-value>{{ carInsurance.details }}</knx-ir-value>
+        <knx-ir-value>{{ carUtils.getCoverageExtended(carInsurance.main_coverage) }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row showTooltip="true" showValue="true">
@@ -36,9 +37,9 @@ import { CarInsurance } from '../../car/models/car-insurance';
       </knx-ir-row>
 
       <knx-ir-row showTooltip="true" showValue="true" *ngIf="showOneOffPremium()">
-        <knx-ir-label>One off premium</knx-ir-label>
+        <knx-ir-label>Eenmalige afsluitkosten</knx-ir-label>
         <knx-ir-tooltip>
-          <p>Amount to be payed for first time customers</p>
+          <p>Eenmalige afsluitkosten voor nieuwe klanten van deze verzekering</p>
         </knx-ir-tooltip>
         <knx-ir-value>{{ carInsurance.one_off_premium | currency:'EUR':true }}</knx-ir-value>
       </knx-ir-row>
@@ -48,28 +49,30 @@ import { CarInsurance } from '../../car/models/car-insurance';
     <knx-ir-content title="Jouw extra's" *ngIf="carInsurance">
       <knx-ir-row>
         <knx-ir-label>Pechhulp</knx-ir-label>
-        <knx-ir-value>{{carInsurance.road_assistance}}</knx-ir-value>
+        <knx-ir-value>{{ carUtils.getRoadAssistance(carInsurance.road_assistance) }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
         <knx-ir-label>Rechtsbijstand</knx-ir-label>
-        <knx-ir-value>{{carInsurance.legal_aid}}</knx-ir-value>
+        <knx-ir-value>{{ carUtils.getLegalAid(carInsurance.legal_aid) }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
         <knx-ir-label>No-claim beschermer</knx-ir-label>
-        <knx-ir-value>{{carInsurance.no_claim_protection ? 'Ja' : 'Nee'}}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.no_claim_protection | boolean }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
         <knx-ir-label>Inzittenden verzekering</knx-ir-label>
-        <knx-ir-value>{{carInsurance.cover_occupants ? 'Ja' : 'Nee'}}</knx-ir-value>
+        <knx-ir-value>{{carInsurance.cover_occupants  | boolean }}</knx-ir-value>
       </knx-ir-row>
     </knx-ir-content>
   `
 })
 export class InsuranceReviewCarComponent {
   @Input() carInsurance: CarInsurance;
+
+  carUtils = CarUtils;
 
   showOneOffPremium(): boolean {
     return this.carInsurance.one_off_premium > 0;

@@ -18,6 +18,22 @@ describe('Car Utils', () => {
       expect(CarUtils.getCoverage('CLC')).toEqual('Aansprakelijkheid + Beperkt casco');
       expect(CarUtils.getCoverage('CAR')).toEqual('Aansprakelijkheid + Volledig casco');
     });
+
+    it('should return empty value on unknown value', () => {
+      expect(CarUtils.getCoverage('')).toEqual('');
+    });
+  });
+
+  describe('Coverage Extended', () => {
+    it('should convert coverage values to car extra type label', () => {
+      expect(CarUtils.getCoverageExtended('CL')).toEqual('WA');
+      expect(CarUtils.getCoverageExtended('CLC')).toEqual('WA + Beperkt Casco');
+      expect(CarUtils.getCoverageExtended('CAR')).toEqual('WA + Volledig Casco (All Risk)');
+    });
+
+    it('should return empty value on unknown value', () => {
+      expect(CarUtils.getCoverageExtended('')).toEqual('');
+    });
   });
 
   describe('Kilometers per year', () => {

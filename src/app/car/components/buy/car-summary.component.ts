@@ -34,7 +34,6 @@ export class CarSummaryComponent {
   @Input() advice: any; // user data from form steps
 
   confirmValue: boolean;
-
   carUtils = CarUtils;
 
   isValidInsurance(obj: any) {
