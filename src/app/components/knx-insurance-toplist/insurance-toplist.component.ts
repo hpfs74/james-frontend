@@ -10,6 +10,7 @@ interface OrderItem {
 
 @Component({
   selector: 'knx-insurance-toplist',
+  styleUrls: ['./insurance-toplist.component.scss'],
   template: `
   <div class="knx-insurance-toplist">
 
