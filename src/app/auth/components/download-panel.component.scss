@@ -1,0 +1,24 @@
+@import '~styles/base';
+
+img {
+  max-height: 250px;
+}
+
+@media (max-width: 990px) {
+  img {
+    display: none;
+  }
+}
+
+h2 {
+  margin-top: 0;
+}
+
+ul {
+  padding: 0;
+  margin-left: 0;
+}
+
+ul > li {
+  color: $knab-medium-gray;
+}

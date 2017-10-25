@@ -1,46 +1,45 @@
 @import '~styles/base.scss';
 
-$knxInputPadding: 10px !default;
-$knxInputFontSize: 18px !default;
-$knxInputWidth: 100% !default;
+$knxInputPadding: 10px;
+$knxInputFontSize: 18px;
+$knxInputWidth: 100%;
+$knxInputMinHeight: 99px;
+$knxIconColorGreen: #00dd81;
+
+.input-elements {
+  width: $knxInputWidth;
+  position: relative;
+}
 
 .knx-input {
   position: relative;
-  display: flex;
   width: $knxInputWidth;
+  min-height: $knxInputMinHeight;
 }
 
 .knx-input__input {
-  font-family: $baseFontFamily, 'sans-serif';
-  font-weight: $baseFontWeight;
-  font-size: $baseFontSize;
-  border: 1px solid $knab-mercury;
-  border-radius: 3px;
-  background: $knab-primary-gray;
-  padding: $knxInputPadding;
-  min-width: 100px;
+  border: 1px solid #e8e8e8;
+  background: #f3f3f3;
   width: 100%;
   height: 44px;
+  border-radius: 2px;
+  padding-right: 40px;
 }
 
 .knx-input__error_message {
-  display: none;
   position: absolute;
-  top: -$baseFontSize - 4px;
-  font-size: 15px;
-  color: $knab-error;
+
+  p {
+    color: $knab-error;
+    font-size: $font-size-base - 2;
+  }
 }
 
 .knx-input--error {
-  margin-top: $baseFontSize + 4px;
-
-  .knx-input__input {
-    border: 1px solid $knab-error;
-  }
-
-  .knx-input__error_message {
-    display: block;
-  }
+  border-left: 2px solid $knab-error;
+  padding-left: 10px;
+  margin-left: -12px;
+  width: calc(100% + 12px);
 }
 
 .knx-input--disabled {
@@ -55,15 +54,39 @@ $knxInputWidth: 100% !default;
 }
 
 .knx-input__addon-icon {
-  font-family: $baseFontFamily, 'sans-serif';
-  font-weight: $baseFontWeight;
-  font-size: $baseFontSize + 10px;
   width: 44px;
-  height: 44px;
-  line-height: 33px;
   position: absolute;
-  left: 0;
+  top: 0;
   border-right: 1px solid $knab-mercury;
   padding: $knxInputPadding;
   text-align: center;
+}
+
+.knx-input__valid {
+  position: absolute;
+  right: 15px;
+  top: 25%;
+  color: $knxIconColorGreen;
+}
+
+.knx-input__show-password {
+  position: absolute;
+  top: 25%;
+  right: 10px;
+  background: transparent;
+  border: 0;
+  color: $knab-dark-gray;
+
+  &:focus,
+  &:hover,
+  &:active,
+  &:visited {
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+  }
+
+  &.knx-icon-eye-slash {
+    color: #c3bbaa;
+  }
 }

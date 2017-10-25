@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="container login-form">
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="knx-login__header">
+              Inloggen
+            </h2>
+          </div>
+          <div class="col-md-6">
+            <div class="knx-login__secure">
+              <span class="knx-icon-lock"></span> Beveiligde verbinding
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container">
+            <form [formGroup]="form.formGroup" (ngSubmit)="login($event)" (keyup.enter)="login($event)" autocomplete="off">
+              <div class="row">
+                <div class="col-md-12">
+                  <knx-input
+                    [formControlName]="form.formConfig.email.formControlName"
+                    [options]="form.formConfig.email">
+                  </knx-input>
+          
+                  <div class="login-password-wrapper">
+          
+                    <knx-input
+                      [formControlName]="form.formConfig.password.formControlName"
+                      [options]="form.formConfig.password">
+                    </knx-input>
+                  </div>
+          
+                  <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
+                    {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+                  </div>
+          
+                  <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-6">
+                      <button type="submit" class="knx-button knx-button--3d knx-button--primary"
+                        [class.knx-button--pending]="pending">
+                        Inloggen
+                      </button>
+                      <br>
+                      <a href="" (click)="goToPasswordReset()">Wachtwoord vergeten?</a>
+                    </div>
+          
+                    <div class="girl-section col-lg-6 col-md-12 col-sm-6">
+                      <span class="girl-section__quote">
+                        "Ik sta elke dag van 8 tot 22 uur voor u klaar"
+                      </span>
+                      <img class="girl-section__picture" src="/assets/images/avatars/woman.png" alt="girl">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="knx-login__footer">
+        Er zijn op dit moment veel <strong>phishingmails</strong> in omloop. Vertrouw je
+        een bericht niet? Laat het ons weten via <a href="mailto:valse-email@knab.nl">valse-email@knab.nl</a>
+        of lees meer over <a href="">phishing</a>.
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromAuth from '../reducers';
 import * as auth from '../actions/auth';
 import { environment } from '../../../environments/environment';
+import * as router from '../../core/actions/router';
 
 import { LoginForm } from '../components/login.form';
 import { loginError } from '../models/login-error';
@@ -54,9 +55,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   goToRegister() {
-    if (this.registrationLink) {
-      window.location.href = this.registrationLink;
-    }
+    this.store.dispatch(new router.Go({ path: ['/register'] }));
   }
 
   login(event) {

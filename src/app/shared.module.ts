@@ -15,6 +15,7 @@ import { KNXInfoModule } from '@knx/info';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
 import { KNXInputComponent } from './components/knx-input/input.component';
+
 /**
  * Shared Modules
  */
@@ -28,8 +29,12 @@ import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe } from './share
 /**
  * Directives
  */
-import { JumpToElementDirective, SidePanelStateDirective, ClickOutsideDirective } from './shared/directives';
-
+import {
+  JumpToElementDirective,
+  SidePanelStateDirective,
+  ClickOutsideDirective,
+  QaIdentifierDirective
+} from './shared/directives';
 
 /**
  * Shared module for all generic components
@@ -69,6 +74,7 @@ import { TabComponent } from './components/knx-tabs/tab.component';
 import { ThankYouComponent } from './components/knx-thank-you/thank-you.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
+import { DownloadPanelComponent } from './auth/components/download-panel.component';
 
 export const sharedComponents = [
   TitleCasePipe,
@@ -80,6 +86,7 @@ export const sharedComponents = [
   SidePanelStateDirective,
   JumpToElementDirective,
   ClickOutsideDirective,
+  QaIdentifierDirective,
   ButtonIconComponent,
   CircleProgressComponent,
   CarSummaryComponent,
@@ -88,6 +95,7 @@ export const sharedComponents = [
   CollapsePanelComponent,
   CollapseMessageComponent,
   DashboardItemComponent,
+  DownloadPanelComponent,
   DonutComponent,
   FeaturesComponent,
   FeatureItemComponent,

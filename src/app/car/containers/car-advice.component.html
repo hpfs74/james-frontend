@@ -14,6 +14,7 @@
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
         <knx-car-detail-form
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="details"
           (coverageSelected)="updateSelectedCoverage($event)"
           (licensePlateChange)="getCarInfo($event)"
           (activeLoanChange)="updateActiveLoan($event)"
@@ -31,6 +32,7 @@
 
       <knx-step [options]="formSteps[1]">
         <knx-insurance-toplist
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="insurances"
           (insuranceSelected$)="onSelectPremium($event)"
           [totalTitle]="(insurances$ | async)?.length"
           [initialAmount]="4"
@@ -40,7 +42,9 @@
       </knx-step>
 
       <knx-step [options]="formSteps[2]">
-        <knx-insurance-review [selectedInsurance]="selectedInsurance$ | async"></knx-insurance-review>
+        <knx-insurance-review
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="summary"
+          [selectedInsurance]="selectedInsurance$ | async"></knx-insurance-review>
       </knx-step>
     </div>
 

@@ -1,5 +1,9 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
+import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+
 import { IbanForm } from '../../../shared/forms/iban.form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
@@ -7,6 +11,7 @@ import * as FormUtils from '../../../utils/base-form.utils';
   selector: 'knx-car-payment-form',
   templateUrl: 'car-payment.component.html'
 })
+@QaIdentifier(QaIdentifiers.carPayment)
 export class CarPaymentComponent implements OnInit {
   @Input() form: IbanForm;
   @Input() set advice(value: any) {

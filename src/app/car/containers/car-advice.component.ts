@@ -25,6 +25,10 @@ import * as coverage from '../actions/coverage';
 
 // Other actions
 import * as advice from '../../insurance/actions/advice';
+import * as profile from '../../profile/actions/profile';
+
+import { QaIdentifier } from '../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { AssistantConfig } from '../../core/models/assistant';
 import { Address } from '../../address/models';
@@ -48,6 +52,7 @@ enum carFormSteps {
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@QaIdentifier(QaIdentifiers.carAdviceRoot)
 export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
@@ -81,7 +86,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
 
-  constructor(private store$: Store<fromRoot.State>) { }
+  constructor(private store$: Store<fromRoot.State>) {}
 
   ngAfterViewChecked() {
     // bind async validator for car info

@@ -1,112 +1,52 @@
 @import '~styles/base.scss';
 
-.knx-register__welcome {
-  margin-top: 40px;
+.registration-form {
+  background: #edece4;
+  padding: 20px;
+  border-radius: 5px;
+  color: $knab-primary-blue;
+}
+
+knx-password-strength {
+  margin-top: -20px;
   margin-bottom: 20px;
-}
-
-h1.knx-register__subline,
-h2.knx-register__subline,
-.knx-register__subline {
-  color: #3e4a59;
-  margin-top: 5px;
-}
-
-.knx-register__logo {
-  max-width: 120px;
   display: block;
 }
 
-.knx-register__actions {
-  margin-top: 20px;
-  text-align: center;
+.cx-form-group {
+  margin-bottom: 0;
+}
 
-  ul {
-    margin-left: 0;
-    padding-left: 0;
+h2 {
+  margin-bottom: 0;
+}
 
-    li {
-      margin-bottom: 5px;
-    }
-  }
+p {
+  color: $knab-primary-blue;
+}
 
-  a {
-    color: $knab-primary-blue;
-    font-size: $font-size-base - 2;
+.register-document-link {
+  color: $knab-primary-green;
+  font-weight: bold;
 
-    &:hover {
-      text-decoration: none;
-      color: $knab-primary-red;
-    }
+  &:hover {
+    color: $knab-primary-red;
+    text-decoration: none;
   }
 }
 
-.registration-email-wrapper {
-  position: relative;
+.actions {
+  margin-top: 25px;
+  display: block;
 }
 
-.registration-password-wrapper {
-  position: relative;
-}
-
-.knx-register__addon_before {
-  position: absolute;
-  top: 35px;
-  padding: 10px;
-  left: 0;
-  color: $knab-dark-gray;
-  font-size: 20px;
-  border: 0;
-  background: none;
-
-  &:focus,
-  &:hover,
-  &:active,
-  &:visited {
-    cursor: pointer;
-    border: 0;
-    background: none;
-    outline: none;
-  }
-
-  &:active {
-    color: $knab-primary-gray;
-  }
-}
-
-.knx-register__showpassword {
-  position: absolute;
-  top: 35px;
-  right: 10px;
-  color: $knab-dark-gray;
-  font-size: 20px;
-  border: 0;
-  background: none;
-
-  &:focus,
-  &:hover,
-  &:active,
-  &:visited {
-    cursor: pointer;
-    border: 0;
-    background: none;
-    outline: none;
-  }
-
-  &:active {
-    color: $knab-primary-gray;
-  }
+.meta-security {
+  font-size: $font-size-base - 2;
+  color: $knab-primary-blue;
+  margin-bottom: 0;
 }
 
 .knx-register__error {
-  color: $knab-secondary-red;
-  margin-bottom: 20px;
-  margin-top: -15px;
-  display: block;
+  color: $knab-error;
   font-size: $font-size-base - 2;
-  text-align: center;
-}
-
-.knx-password-error {
-  color: $knab-primary-red;
 }

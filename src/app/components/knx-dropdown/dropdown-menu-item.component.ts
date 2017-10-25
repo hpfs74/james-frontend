@@ -11,10 +11,10 @@ import { DropdownStateService } from './dropdown-state.service';
   selector: 'knx-menu-item',
   styleUrls: ['./dropdown-menu-item.component.scss'],
   template: `
-    <div class='ng2-menu-item'
+    <div class='knx-menu-item'
         role="button"
         tabindex="0"
-        [class.ng2-menu-item--selected]="isSelected"
+        [class.knx-menu-item--selected]="isSelected"
         (keydown.enter)="click()"
         (click)="click()"
         (mouseover)="select()">

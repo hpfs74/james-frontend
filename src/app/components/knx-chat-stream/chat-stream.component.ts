@@ -9,7 +9,7 @@ import { ChatMessage } from './chat-message';
     <div class="knx-chat-stream" [ngClass]="{'knx-chat-stream--expanded': chatExpanded}">
       <knx-avatar (click)="toggleChat()" (knxClickOutside)="closeChat()" [title]="options.avatar.title"></knx-avatar>
 
-      <div class="knx-avatar__notification" [ngClass]="{'knx-avatar__notification--active': hasNewMessage}"></div>
+      <div class="knx-chat-stream__notification" [ngClass]="{'knx-chat-stream__notification--active': hasNewMessage}"></div>
 
       <knx-chat-message *ngFor="let message of messages" [data]="message?.data"></knx-chat-message>
 
@@ -25,7 +25,6 @@ export class ChatStreamComponent implements OnChanges {
   @Input() options: ChatStreamOptions;
   @Input() messages: Array<ChatMessage>;
   @Output() public onChatExpand: EventEmitter<boolean> = new EventEmitter<boolean>();
-// TODO: consider making these Input parameters and handle state inside ngrx store
   chatExpanded = false;
   hasNewMessage = true;
 

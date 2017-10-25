@@ -5,7 +5,8 @@ import {
     Output,
     EventEmitter,
     Input,
-    OnInit
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { DropdownButtonComponent } from './dropdown-button.component';
@@ -15,9 +16,9 @@ import { DropdownStateService } from './dropdown-state.service';
 @Component({
   selector: 'knx-dropdown',
   template: `
-    <div class="ng2-dropdown-container">
-        <ng-content select="knx-dropdown-button"></ng-content>
-        <ng-content select="knx-dropdown-menu"></ng-content>
+    <div class="knx-dropdown-container">
+      <ng-content select="knx-dropdown-button"></ng-content>
+      <ng-content select="knx-dropdown-menu"></ng-content>
     </div>
   `,
   providers: [ DropdownStateService ]
