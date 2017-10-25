@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 
 import { ChatStreamOptions } from './chat-stream.options';
 import { ChatMessage } from './chat-message';
@@ -24,7 +24,7 @@ import { ChatMessage } from './chat-message';
 export class ChatStreamComponent implements OnChanges {
   @Input() options: ChatStreamOptions;
   @Input() messages: Array<ChatMessage>;
-
+  @Output() public onChatExpand: EventEmitter<boolean> = new EventEmitter<boolean>();
   chatExpanded = false;
   hasNewMessage = true;
 
@@ -37,9 +37,11 @@ export class ChatStreamComponent implements OnChanges {
   toggleChat() {
     this.chatExpanded = !this.chatExpanded;
     this.hasNewMessage = false;
+    this.onChatExpand.emit(this.chatExpanded);
   }
 
   closeChat() {
     this.chatExpanded = false;
+    this.onChatExpand.emit(this.chatExpanded);
   }
 }

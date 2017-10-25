@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, AfterViewInit,
-          ViewChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
-import { KNXStepOptions, StepError } from '@knx/wizard';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, AbstractControl } from '@angular/forms';
+import { KNXStepOptions } from '@knx/wizard';
 import { KNXWizardComponent } from '@knx/wizard';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -13,7 +12,6 @@ import * as fromCore from '../../core/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromCar from '../reducers';
 import * as fromAddress from '../../address/reducers';
-import * as fromProfile from '../../profile/reducers';
 
 // Core actions
 import * as router from '../../core/actions/router';
@@ -24,10 +22,8 @@ import * as assistant from '../../core/actions/assistant';
 import * as car from '../actions/car';
 import * as compare from '../actions/compare';
 import * as coverage from '../actions/coverage';
-import * as address from '../../address/actions/address';
 
 // Other actions
-import * as insurance from '../../insurance/actions/insurance';
 import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 
@@ -35,14 +31,12 @@ import { QaIdentifier } from '../../shared/decorators/qa-identifier.decorator';
 import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { AssistantConfig } from '../../core/models/assistant';
-import { Profile } from '../../profile/models';
 import { Address } from '../../address/models';
 import { DefaultCoverages } from '../models/coverage-items';
 import { AddressForm } from '../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
 
-import { CarDetailComponent } from '../components/advice/car-detail.component';
 import { CarDetailForm } from '../components/advice/car-detail.form';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
 import * as FormUtils from '../../utils/base-form.utils';
@@ -51,8 +45,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 
 enum carFormSteps {
   carDetails,
-  compareResults,
-  insuranceSummary
+  compareResults
 }
 
 @Component({
@@ -63,8 +56,8 @@ enum carFormSteps {
 export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
-  carDetailSubmitted = false;
   currentStep: number;
+  isBlurred = false;
   coverages: Array<Price>;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
@@ -300,6 +293,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   toggleSideNavState(event) {
     event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
+  }
+
+  blurWizard(chatIsOpened) {
+    this.isBlurred = chatIsOpened;
+  }
+
+  setClasses() {
+    return {
+      'backdrop-blur': this.isBlurred,
+      ['knx-car-advice--step-' + (this.currentStep + 1)]: true
+    };
   }
 
   validateLicenseAsync(licenseControl: AbstractControl): Observable<any> {

@@ -1,4 +1,4 @@
-<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation">
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" [ngClass]="{'backdrop-blur': isBlurred}">
   <div class="container">
     <knx-step-navigation
       [steps]="formSteps"
@@ -9,8 +9,8 @@
   </div>
 </div>
 
-<div class="container knx-car-advice" [ngClass]="'knx-car-advice--step-' + (currentStep + 1)">
-  <knx-wizard #knxWizard (stepChange)="onStepChange($event)">
+<div class="container knx-car-advice" [ngClass]="setClasses()">
+  <knx-wizard #knxWizard (stepChange)="onStepChange($event)" >
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
         <knx-car-detail-form
@@ -50,6 +50,7 @@
 
     <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>
       <knx-chat-stream
+        (onChatExpand)="blurWizard($event)"
         [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async"
         [formGroup]="carExtrasForm.formGroup">
@@ -83,7 +84,7 @@
     </div>
   </knx-wizard>
 
-  <div class="row">
+  <div class="row knx-car-advice__footer">
     <div class="col-sm-8" *ngIf="showStepBlock">
       <knx-step-blocks title="Hoe gaat het nu verder?">
         <knx-step-block>

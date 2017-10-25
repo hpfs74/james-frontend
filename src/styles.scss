@@ -128,3 +128,24 @@ input::-ms-clear {
   }
 }
 
+@mixin selectors {
+  .knx-wizard__steps,
+  .knx-wizard--controls,
+  .knx-car-advice__footer,
+  .knx-buy__footer,
+  .knx-thank-you,
+  &.knx-container-stepnavigation {
+    @content;
+  }
+}
+
+@include selectors {
+  filter: blur(0);
+  transition: 0.1s filter linear;
+}
+
+.backdrop-blur {
+  @include selectors {
+    filter: blur(3px);
+  }
+}
