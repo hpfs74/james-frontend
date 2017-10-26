@@ -61,8 +61,6 @@ export class CarDetailComponent implements OnInit {
 
       this.addressForm.formGroup.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
-        // houseNumber: value.address ? FormUtils.getNumbers(value.address.number) : null,
-        // houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null,
         houseNumber: this.normalizeAddressHouseNumber(value),
         houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
       }));
