@@ -34,4 +34,9 @@ export class InsuranceService {
     })
     .map(res => res.json());
   }
+
+  public getPurchasedCarInsurances(): Observable<any> {
+    return this.authHttp.get('https://middleware.test.knabverzekeren.nl/api/v1/proxy/userCarInsurance')
+      .map(res => res.json());
+  }
 }

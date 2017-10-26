@@ -8,12 +8,14 @@ export interface State {
   loading: boolean;
   loaded: boolean;
   insurances: Insurance[];
+  purchasedInsurances: any;
 }
 
 export const initialState: State = {
   loading: false,
   loaded: false,
-  insurances: []
+  insurances: [],
+  purchasedInsurances: []
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -36,6 +38,14 @@ export function reducer(state = initialState, action: Action): State {
 
     }
 
+    case InsuranceActions.GET_PURCHASED_CAR_INSURANCES: {
+      const insurances = action.payload;
+
+      return Object.assign({}, state, {
+        purchasedInsurances: insurances
+      });
+    }
+
     default: {
       return state;
     }
@@ -45,3 +55,4 @@ export function reducer(state = initialState, action: Action): State {
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getInsurances = (state: State) => state.insurances;
+export const getPurchasedInsurances = (state: State) => state.purchasedInsurances;
