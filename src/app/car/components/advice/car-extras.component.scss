@@ -1,9 +1,7 @@
+@import '~styles/base';
+
 .own-risk {
   padding-bottom: 45px;
-}
-
-.knx-message {
-  font-size: 14px;
 }
 
 h4.knx-collapse-message__title {
@@ -12,8 +10,4 @@ h4.knx-collapse-message__title {
 
 .knx-message__content ul {
   margin-top: 10px;
-}
-
-.knx-message__content ul > li {
-  font-size: 14px;
 }

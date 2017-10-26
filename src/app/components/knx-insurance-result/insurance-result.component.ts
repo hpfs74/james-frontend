@@ -17,7 +17,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
 
             <img class="knx-insurance-result__logo" src="{{ insurance._embedded.insurance.insurance_logo }}">
 
-            <span class="knx-insurance-result__name">({{ insurance._embedded.insurance.insurance_brand }})</span>
+            <span class="knx-insurance-result__name">{{ insurance._embedded.insurance.insurance_brand }}</span>
             <!--<div class="knx-sticker knx-sticker--yellow" title="Op basis van jouw wensen raden we deze premie aan">
               <span class="knx-icon-thumbs-o-up"></span>
             </div>
