@@ -142,7 +142,7 @@ export class AuthService {
       emailaddress: email
     };
 
-    return this.play(environment.james.payloadEncryption.token, payload)
+    return this.play(environment.james.payloadEncryption.activation, payload)
       .map((res: Response) => res.json());
   }
 
