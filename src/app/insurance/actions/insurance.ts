@@ -1,14 +1,16 @@
 import { Action } from '@ngrx/store';
 import { Insurance } from '../models/insurance';
 
-export const ADD_INSURANCE =                '[Insurances] Add Insurance';
-export const ADD_INSURANCE_SUCCESS =        '[Insurances] Add Insurance Success';
-export const ADD_INSURANCE_FAILURE =         '[Insurances] Add Insurance Failure';
+export const ADD_INSURANCE =                        '[Insurances] Add Insurance';
+export const ADD_INSURANCE_SUCCESS =                '[Insurances] Add Insurance Success';
+export const ADD_INSURANCE_FAILURE =                 '[Insurances] Add Insurance Failure';
 
-export const LOAD =                         '[Insurances] Load';
-export const LOAD_SUCCESS =                 '[Insurances] Load Success';
-export const LOAD_FAILURE =                 '[Insurances] Load Failure';
-export const GET_PURCHASED_CAR_INSURANCES = '[Insurances] Get ff Insurances';
+export const LOAD =                                 '[Insurances] Load';
+export const LOAD_SUCCESS =                         '[Insurances] Load Success';
+export const LOAD_FAILURE =                         '[Insurances] Load Failure';
+
+export const GET_PURCHASED_CAR_INSURANCES =         '[Insurances] Get Insurances';
+export const GET_PURCHASED_CAR_INSURANCES_SUCCESS = '[Insurances] Get Insurances Success';
 
 /**
  * Add Insurance Actions
@@ -53,6 +55,12 @@ export class GetPurchasedCarInsurancesAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetPurchasedCarInsurancesSuccessAction implements Action {
+  readonly type = GET_PURCHASED_CAR_INSURANCES_SUCCESS;
+
+  constructor(public payload: any) {}
+}
+
 export type All
   = AddInsuranceAction
   | AddInsuranceSuccessAction
@@ -60,5 +68,6 @@ export type All
   | LoadAction
   | LoadSuccessAction
   | LoadFailAction
-  | GetPurchasedCarInsurancesAction;
+  | GetPurchasedCarInsurancesAction
+  | GetPurchasedCarInsurancesSuccessAction;
 

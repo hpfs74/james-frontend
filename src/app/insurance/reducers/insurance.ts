@@ -39,9 +39,20 @@ export function reducer(state = initialState, action: Action): State {
     }
 
     case InsuranceActions.GET_PURCHASED_CAR_INSURANCES: {
+      return Object.assign({}, state, {
+        ...state,
+        loaded: false,
+        loading: true
+      });
+    }
+
+    case InsuranceActions.GET_PURCHASED_CAR_INSURANCES_SUCCESS: {
       const insurances = action.payload;
 
       return Object.assign({}, state, {
+        ...state,
+        loaded: true,
+        loading: false,
         purchasedInsurances: insurances
       });
     }
