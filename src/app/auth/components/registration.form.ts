@@ -10,7 +10,8 @@ export class RegistrationForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit veld is verplicht',
     email: () => 'Vul een geldig e-mailadres in',
-    password: () => 'Vul je wachtwoord in'
+    password: () => 'Vul je wachtwoord in',
+    pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?'
   };
 
   constructor(private fb: FormBuilder) {
@@ -24,7 +25,7 @@ export class RegistrationForm extends BaseForm {
         [Validators.required]
       )],
       confirm: [null, Validators.compose(
-        [Validators.required]
+        [Validators.required, Validators.pattern('true')]
       )]
     });
 

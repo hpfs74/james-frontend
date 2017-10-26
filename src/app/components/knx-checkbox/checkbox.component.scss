@@ -37,6 +37,23 @@
   }
 }
 
+.knx-checkbox--error {
+  border-left: 2px solid $knab-error;
+  padding-left: 10px;
+  margin-left: -12px;
+  width: calc(100% + 12px);
+}
+
+.knx-checkbox__error_message {
+  position: absolute;
+  margin-top: -5px;
+
+  p {
+    color: $knab-error;
+    font-size: $font-size-base - 2;
+  }
+}
+
 .knx-checkbox__label {
   padding-left: $font-size-base;
   font-weight: 300;

@@ -4,7 +4,7 @@ $knxInputPadding: 10px;
 $knxInputFontSize: 18px;
 $knxInputWidth: 100%;
 $knxInputMinHeight: 99px;
-$knxIconColorGreen: #00dd81;
+$knxIconColorGreen: $knab-secondary-green;
 
 .input-elements {
   width: $knxInputWidth;
@@ -18,8 +18,8 @@ $knxIconColorGreen: #00dd81;
 }
 
 .knx-input__input {
-  border: 1px solid #e8e8e8;
-  background: #f3f3f3;
+  border: 1px solid $knab-mercury;
+  background: $knab-light-gray;
   width: 100%;
   height: 44px;
   border-radius: 2px;
@@ -40,6 +40,10 @@ $knxIconColorGreen: #00dd81;
   padding-left: 10px;
   margin-left: -12px;
   width: calc(100% + 12px);
+}
+
+.knx-input--valid input {
+  border: 2px solid $knab-secondary-green;
 }
 
 .knx-input--disabled {

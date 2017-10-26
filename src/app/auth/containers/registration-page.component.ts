@@ -10,8 +10,7 @@ import { Authenticate } from '../models/auth';
 
 @Component({
   selector: 'knx-password-reset',
-  templateUrl: './registration-page.component.html',
-  styleUrls: ['./registration-page.component.scss']
+  templateUrl: './registration-page.component.html'
 })
 export class RegistrationPageComponent {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
@@ -20,6 +19,7 @@ export class RegistrationPageComponent {
   activationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
   activationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
   registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
+
   constructor(private store$: Store<fromAuth.State>) {}
 
   register(register: Authenticate) {

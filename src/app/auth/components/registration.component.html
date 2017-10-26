@@ -28,7 +28,10 @@
           </div>
 
           <div class="cx-form-group">
-            <knx-checkbox [formControlName]="form.formConfig.confirm.formControlName" id="termsAndCondition">
+            <knx-checkbox
+              [formControlName]="form.formConfig.confirm.formControlName"
+              [options]="form.formConfig.confirm"
+              id="termsAndCondition">
               Ik ga akkoord met de
                 <a class="register-document-link" href="{{ termsAndConditionsUrl }}" target="_blank" rel="noopener">Gebruiksvoorwaarden</a>
                 &amp;
@@ -37,15 +40,15 @@
             </knx-checkbox>
           </div>
 
-          <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
-            {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
-          </div>
-
           <div class="actions">
             <button type="submit" class="knx-button knx-button--primary" [class.knx-button--pending]="pending">Account aanmaken</button>
+
+            <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
+                {{ errorMessage || 'Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+              </div>
+
             <p class="meta-security"><span class="knx-icon-lock"></span> Beveiligde verbinding</p>
           </div>
-
         </form>
       </div>
     </div>

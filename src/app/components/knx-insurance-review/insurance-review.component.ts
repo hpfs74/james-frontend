@@ -52,7 +52,7 @@ import { CarInsurance } from '../../car/models';
     </div>
 
     <div *ngIf="!selectedInsurance?.supported" class="knx-insurance-review__unsupported-button">
-      <a [attr.href]="selectedInsurance?._embedded.insurance.url"
+      <a [attr.href]="selectedInsurance?._embedded.insurance.url" target="_blank" rel="noopener"
         class="knx-button knx-button--secondary pull-right">Ga naar website</a>
     </div>
   `
