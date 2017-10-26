@@ -42,6 +42,15 @@ export class CarDetailComponent implements OnInit {
 
   @Input()
   set advice(value: any) {
+
+    if (value.address) {
+      this.addressForm.formGroup.patchValue(Object.assign({}, {
+        postalCode: value.address ? value.address.postcode : null,
+        houseNumber: this.normalizeAddressHouseNumber(value),
+        houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
+      }));
+    }
+
     if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold ||
       value.coverage || value.gender || value.active_loan) {
       this.form.formGroup.patchValue(Object.assign({}, {
@@ -53,17 +62,12 @@ export class CarDetailComponent implements OnInit {
         coverage: value.coverage || null,
       }));
 
-      let dob = new Date(value.date_of_birth);
-      this.form.formGroup.get('birthDate').setValue(
-        value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
-      );
-
-
-      this.addressForm.formGroup.patchValue(Object.assign({}, {
-        postalCode: value.address ? value.address.postcode : null,
-        houseNumber: this.normalizeAddressHouseNumber(value),
-        houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
-      }));
+      if (value.date_of_birth) {
+        let dob = new Date(value.date_of_birth);
+        this.form.formGroup.get('birthDate').setValue(
+          value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
+        );
+      }
 
       // give address-lookup component time to set AsyncValidators before validate it
       setTimeout(() => {
