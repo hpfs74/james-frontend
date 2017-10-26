@@ -8,6 +8,7 @@ export interface State {
   resend: boolean;
   resend_loading: boolean;
   resend_error: string | null;
+  registration_email: string;
 }
 
 export const initialState: State = {
@@ -16,7 +17,8 @@ export const initialState: State = {
   registered: false,
   resend: false,
   resend_error: null,
-  resend_loading: false
+  resend_loading: false,
+  registration_email: null
 };
 
 export function reducer(state = initialState, action: registration.Actions): State {
@@ -26,6 +28,7 @@ export function reducer(state = initialState, action: registration.Actions): Sta
         ...state,
         error: null,
         loading: true,
+        registration_email: action.registration.emailaddress
       };
     }
 
@@ -81,3 +84,4 @@ export const getPending = (state: State) => state.loading;
 export const getSuccess = (state: State) => state.registered;
 export const getResendError = (state: State) => state.resend_error;
 export const getResendPending = (state: State) => state.resend_loading;
+export const getRegistrationEmail = (state: State) => state.registration_email;

@@ -83,6 +83,11 @@ export const getRegistrationResendActivationEmailError = createSelector(
   fromRegistration.getResendError
 );
 
+export const getRegistrationEmail = createSelector(
+  selectRegistrationState,
+  fromRegistration.getRegistrationEmail
+);
+
 
 
 // export const selectRegistrationStatusState = createSelector(

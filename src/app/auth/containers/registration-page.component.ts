@@ -19,7 +19,7 @@ export class RegistrationPageComponent {
   registrationSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationSuccess);
   activationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
   activationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
-
+  registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
   constructor(private store$: Store<fromAuth.State>) {}
 
   register(register: Authenticate) {
