@@ -36,7 +36,7 @@ p {
 }
 
 .actions {
-  margin-top: 25px;
+  margin-top: 50px;
   display: block;
 }
 
@@ -49,4 +49,5 @@ p {
 .knx-register__error {
   color: $knab-error;
   font-size: $font-size-base - 2;
+  margin-bottom: 10px;
 }

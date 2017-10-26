@@ -8,13 +8,19 @@ import { clone } from '@cx/utils';
   providers: [getCXValueAccessor(KNXCheckboxComponent)],
   styleUrls: ['./checkbox.component.scss'],
   template: `
-<div class="cx-form-group__wrap {{(options.formGroupModifiers || []).join(' ')}}">
-    <label *ngIf="!options.items" class="cx-checkbox" [class.cx-checkbox--disabled]="options.disabled">
-        <input [disabled]="options.disabled"  type="checkbox" [(ngModel)]="innerValue" (change)="onChange()"/>
-        <span class="cx-checkbox__control"></span>
-        <span class="cx-checkbox__label" *ngIf="options.label">{{options.label}}</span>
-        <span class="cx-checkbox__label" *ngIf="!options.label"><ng-content></ng-content></span>
-    </label>
+<div class="cx-form-group__wrap {{(options.formGroupModifiers || []).join(' ')}}" [class.knx-checkbox--error]="getErrors()">
+  <label *ngIf="!options.items" class="cx-checkbox" [class.cx-checkbox--disabled]="options.disabled">
+    <input [disabled]="options.disabled"  type="checkbox" [(ngModel)]="innerValue" (change)="onChange()"/>
+    <span class="cx-checkbox__control"></span>
+    <span class="cx-checkbox__label" *ngIf="options.label">{{options.label}}</span>
+    <span class="cx-checkbox__label" *ngIf="!options.label">
+      <ng-content></ng-content>
+    </span>
+  </label>
+
+  <div class="knx-checkbox__error_message" *ngIf="getErrors()">
+    <p *ngFor="let error of getErrors()">{{error}}</p>
+  </div>
 </div>
 `
 })
