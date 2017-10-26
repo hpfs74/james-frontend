@@ -82,11 +82,13 @@ button.knx-button--toggle,
   color: $knab-secondary-red;
 }
 
-.registration-form .cx-checkbox .cx-checkbox__control {
+.registration-form .cx-checkbox .cx-checkbox__control,
+.login-form .cx-checkbox .cx-checkbox__control {
   background: $knab-white;
 }
 
-.registration-form .knx-input .knx-input__input {
+.registration-form .knx-input .knx-input__input,
+.login-form .knx-input .knx-input__input {
   background: $knab-white;
 }
 
