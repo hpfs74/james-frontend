@@ -40,7 +40,8 @@ export class CarDetailComponent implements OnInit {
   @Input() isCoverageLoading: boolean;
   @Input() isCoverageError: boolean;
 
-  @Input() set advice(value: any) {
+  @Input()
+  set advice(value: any) {
     if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold ||
       value.coverage || value.gender || value.active_loan) {
       this.form.formGroup.patchValue(Object.assign({}, {
@@ -57,10 +58,13 @@ export class CarDetailComponent implements OnInit {
         value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
       );
 
+
       this.addressForm.formGroup.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
-        houseNumber: value.address ? FormUtils.getNumbers(value.address.number) : null,
-        houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null
+        // houseNumber: value.address ? FormUtils.getNumbers(value.address.number) : null,
+        // houseNumberExtension: value.number_extended ? value.number_extended.number_addition : null,
+        houseNumber: this.normalizeAddressHouseNumber(value),
+        houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
       }));
 
       // give address-lookup component time to set AsyncValidators before validate it
@@ -114,4 +118,40 @@ export class CarDetailComponent implements OnInit {
   onAddressFound(event: Address) {
     this.addressChange.emit(event);
   }
+
+  private normalizeAddressHouseNumber(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+
+    let number = payload.address.number;
+    if (number !== null && number !== '') {
+      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
+        return number.split(',')[0];
+      }
+
+      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
+        return number.split('-')[0];
+      }
+    }
+    return FormUtils.getNumbers(number);
+  }
+
+  private normalizeAddressHouseNumberAddition(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+    let number = payload.address.number;
+    if (number !== null && number !== '') {
+      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
+        return '-' + number.split(',')[1];
+      }
+
+      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
+        return '-' + number.split('-')[1];
+      }
+    }
+    return payload.number_extended ? payload.number_extended.number_addition : null;
+  }
+
 }
