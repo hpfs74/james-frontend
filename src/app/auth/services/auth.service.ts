@@ -12,7 +12,7 @@ import { AuthKey, AuthToken, RegistrationPayload, RegistrationResult } from '../
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
-
+import { RegisterResendActivationEmail } from '../actions/registration';
 export interface PayloadAuth {
   access_token: string;
   id: string;
@@ -136,12 +136,11 @@ export class AuthService {
    *
    * @param email
    */
-  public resendActivation(email) {
+  public resendActivation(action: RegisterResendActivationEmail) {
     // TODO: check if the profile is active or if the user is logged on there's no need to access here!!!
     const payload = {
-      emailaddress: email
+      emailaddress: action.email
     };
-
     return this.play(environment.james.payloadEncryption.activation, payload)
       .map((res: Response) => res.json());
   }
