@@ -97,8 +97,7 @@ describe('AuthEffects', () => {
       const completion = [
         new auth.LoginSuccess({ token: tokenResponse }),
         new auth.ScheduleTokenRefresh(tokenResponse),
-        new profile.LoadAction(),
-        new insurance.GetPurchasedCarInsurancesSuccessAction(tokenResponse)
+        new profile.LoadAction()
       ];
       authService.login.and.returnValue(Observable.of(tokenResponse));
 
