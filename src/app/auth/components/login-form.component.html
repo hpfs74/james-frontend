@@ -31,9 +31,8 @@
                       [options]="form.formConfig.password">
                     </knx-input>
                   </div>
-          
                   <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
-                    <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }} <a *ngIf="errorMessage.hasLink" click="goToPasswordReset()">Stuur opnieuw</a></p>
+                    <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }} <a *ngIf="errorMessage.hasLink" (click)="resendActivationMail()">Stuur opnieuw</a></p>
                     <p *ngIf="!errorMessage.errorText">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</p>
                   </div>
           
