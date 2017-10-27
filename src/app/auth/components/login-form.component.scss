@@ -28,5 +28,15 @@ $knxDocumentLinkBlue: #00a8ab;
       margin-bottom: -20px;
       margin-right: -15px;
     }
+
+    .knx-login__error {
+      p {
+        color: $knab-primary-red;
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
