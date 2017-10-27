@@ -8,6 +8,7 @@ export const LOGIN_SUCCESS = '[Auth] Login Success';
 export const LOGIN_FAILURE = '[Auth] Login Failure';
 export const LOGIN_REDIRECT = '[Auth] Login Redirect';
 export const LOGIN_EXPIRED = '[Auth] Login Expired';
+export const LOGIN_RESET_STATE = '[Auth] Login Reset State';
 export const ANONYMOUS_START = '[Auth] Anonymous Start';
 
 export const REFRESH_TOKEN = '[Auth] Refresh Token';
@@ -49,6 +50,10 @@ export class LoginRedirect implements Action {
 
 export class LoginExpired implements Action {
   readonly type = LOGIN_EXPIRED;
+}
+
+export class LoginResetState implements Action {
+  readonly type = LOGIN_RESET_STATE;
 }
 
 export class Logout implements Action {
@@ -93,6 +98,7 @@ export type Actions =
   | LoginSuccess
   | LoginFailure
   | LoginRedirect
+  | LoginResetState
   | Logout
   | RefreshToken
   | RefreshTokenFailure

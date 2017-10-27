@@ -41,10 +41,12 @@ export const selectLoginPageState = createSelector(
   selectAuthState,
   (state: AuthState) => state.loginPage
 );
+
 export const getLoginPageError = createSelector(
   selectLoginPageState,
   fromLoginPage.getError
 );
+
 export const getLoginPagePending = createSelector(
   selectLoginPageState,
   fromLoginPage.getPending
@@ -78,6 +80,11 @@ export const getRegistrationResendActivationEmailPending = createSelector(
   fromRegistration.getResendPending
 );
 
+export const getRegistrationResendActivationEmailSuccess = createSelector(
+  selectRegistrationState,
+  fromRegistration.getResendSuccess
+);
+
 export const getRegistrationResendActivationEmailError = createSelector(
   selectRegistrationState,
   fromRegistration.getResendError
@@ -88,10 +95,7 @@ export const getRegistrationEmail = createSelector(
   fromRegistration.getRegistrationEmail
 );
 
-
-
-// export const selectRegistrationStatusState = createSelector(
-//   selectRegistrationState,
-//   (state: AuthState) => state.registration
-// );
-
+export const setRegistrationInitialState = createSelector(
+  selectRegistrationState,
+  fromRegistration.getRegistrationEmail
+);

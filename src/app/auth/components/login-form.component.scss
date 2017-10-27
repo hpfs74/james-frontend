@@ -38,5 +38,11 @@ $knxDocumentLinkBlue: #00a8ab;
         }
       }
     }
+
+    .knx-login__success {
+      p {
+        color: $knxRegisterBlue;
+      }
+    }
   }
 }
