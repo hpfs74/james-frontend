@@ -1,6 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BaseForm } from './../../shared/forms/base-form';
 
+import { BaseForm } from './../../shared/forms/base-form';
+import { KNXInputOptions } from '../../components/knx-input/input.options';
 import { EmailValidator } from '../../utils/email-validator';
 
 export class RegistrationForm extends BaseForm {
@@ -10,7 +11,6 @@ export class RegistrationForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit veld is verplicht',
     email: () => 'Vul een geldig e-mailadres in',
-    password: () => 'Vul je wachtwoord in',
     pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?'
   };
 
@@ -19,13 +19,22 @@ export class RegistrationForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       email: [null, Validators.compose(
-        [Validators.required, EmailValidator]
+        [
+          Validators.required,
+          EmailValidator
+        ]
       )],
       password: [null, Validators.compose(
-        [Validators.required]
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)]
       )],
       confirm: [null, Validators.compose(
-        [Validators.required, Validators.pattern('true')]
+        [
+          Validators.required,
+          Validators.pattern('true')
+        ]
       )]
     });
 
@@ -45,8 +54,8 @@ export class RegistrationForm extends BaseForm {
       password: {
         formControlName: 'password',
         formControl: this.formGroup.get('password'),
-        validationErrors: this.validationErrors,
         placeholder: 'Wachtwoord',
+        hideErrors: true,
         label: 'Wachtwoord',
         type: 'password',
         attributes: {

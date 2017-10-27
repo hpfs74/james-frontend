@@ -5,6 +5,7 @@ export interface KNXInputOptions extends FormControlOptions {
   placeholder?: string;
   type?: 'text' | 'number' | 'password' | 'email';
   label?: string;
+  hideErrors?: boolean;
   formControl?: FormControl; // when present formControl errors will be displayed
   textMask?: {
     mask: (string | RegExp)[];

@@ -1,6 +1,6 @@
 @import '~styles/base.scss';
 
-.registration-form {
+.knx-registration {
   background: #edece4;
   padding: 20px;
   border-radius: 5px;
@@ -25,7 +25,7 @@ p {
   color: $knab-primary-blue;
 }
 
-.register-document-link {
+.knx-registration__document-link {
   color: $knab-primary-green;
   font-weight: bold;
 
@@ -35,18 +35,18 @@ p {
   }
 }
 
-.actions {
+.knx-registration__actions {
   margin-top: 50px;
   display: block;
 }
 
-.meta-security {
+.knx-registration__meta-security {
   font-size: $font-size-base - 2;
   color: $knab-primary-blue;
   margin-bottom: 0;
 }
 
-.knx-register__error {
+.knx-registration__error {
   color: $knab-error;
   font-size: $font-size-base - 2;
   margin-bottom: 10px;
