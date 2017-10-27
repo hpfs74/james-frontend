@@ -29,7 +29,7 @@
               [ngClass]="{ 'knx-button--pending': resendPending }"
               [disabled]="resendSuccess">
               <span *ngIf="!resendSuccess">Opnieuw versturen</span>
-              <span *ngIf="resendSuccess">Sent</span>
+              <span *ngIf="resendSuccess">Verstuurd</span>
       </button>
 
       <p class="knx-message" *ngIf="message">{{message}}</p>

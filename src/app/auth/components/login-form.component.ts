@@ -16,6 +16,7 @@ import { CustomError } from '../models/login-error';
 export class LoginFormComponent {
   @Input() form: LoginForm;
   @Input() pending: Store<boolean>;
+  @Input() resendSuccess: Store<boolean>;
   @Input() errorMessage: CustomError;
   @Output() onResendActivationMail: EventEmitter<string> = new EventEmitter<string>();
   @Output() onPasswordReset: EventEmitter<string> = new EventEmitter<string>();

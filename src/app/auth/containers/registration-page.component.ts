@@ -21,7 +21,10 @@ export class RegistrationPageComponent {
   resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
   registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
 
-  constructor(private store$: Store<fromAuth.State>) {}
+  constructor(private store$: Store<fromAuth.State>) {
+    this.store$.dispatch( new registration.RegisterResetState() );
+    this.store$.dispatch( new registration.RegisterResendResetState() );
+  }
 
   register(register: Authenticate) {
     this.store$.dispatch(new registration.Register({ emailaddress: register.username, password: register.password }));

@@ -49,6 +49,10 @@ export function reducer(state = initialState, action: registration.Actions): Sta
       };
     }
 
+    case registration.REGISTER_RESET_STATE: {
+      return Object.assign({}, state, initialState);
+    }
+
     case registration.REGISTER_RESEND_ACTIVATION_EMAIL: {
       return {
         ...state,
@@ -71,6 +75,10 @@ export function reducer(state = initialState, action: registration.Actions): Sta
         ...state,
         resend_error: action.payload,
       };
+    }
+
+    case registration.REGISTER_RESEND_RESET_STATE: {
+      return Object.assign({}, state, initialState);
     }
 
     default: {

@@ -31,6 +31,7 @@ export class LoginPageComponent implements OnInit {
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
   registrationLink = environment.external.registration;
+  resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
 
   constructor(@Inject(LOCALE_ID) private locale: string, private store$: Store<fromAuth.State>) {}
 
@@ -43,6 +44,13 @@ export class LoginPageComponent implements OnInit {
           this.errorMessage = { errorText: loginError[error], hasLink: true };
         }
       });
+
+    /**
+     * reset register states each time you get on login page,
+     * to prevent undesired messages in the ui
+     */
+    this.store$.dispatch( new registration.RegisterResetState());
+    this.store$.dispatch( new registration.RegisterResendResetState());
   }
 
   goToPasswordReset() {
