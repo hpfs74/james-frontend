@@ -36,6 +36,10 @@ export function reducer(state = initialState, action: auth.Actions): State {
       };
     }
 
+    case auth.LOGIN_RESET_STATE: {
+      return Object.assign({}, state, initialState);
+    }
+
     default: {
       return state;
     }

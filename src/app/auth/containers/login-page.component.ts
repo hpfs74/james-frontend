@@ -37,20 +37,26 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     this.store$.select(fromAuth.getLoginPageError)
-      .filter(error => error !== null)
-      .subscribe((error) => {
-        this.errorMessage = { errorText: loginError[error] } || { errorText: loginError.default};
-        if (error === 'profile inactive') {
-          this.errorMessage = { errorText: loginError[error], hasLink: true };
-        }
-      });
-
+    .filter(error => error !== null)
+    .subscribe((error) => {
+      this.errorMessage = { errorText: loginError[error] } || { errorText: loginError.default};
+      if (error === 'profile inactive') {
+        this.errorMessage = { errorText: loginError[error], hasLink: true };
+      }
+    });
+    this.resetRegistrationStates();
+  }
     /**
      * reset register states each time you get on login page,
      * to prevent undesired messages in the ui
      */
-    this.store$.dispatch( new registration.RegisterResetState());
-    this.store$.dispatch( new registration.RegisterResendResetState());
+  resetRegistrationStates(): void {
+    this.store$.dispatch( new registration.RegisterResetState() );
+    this.store$.dispatch( new registration.RegisterResendResetState() );
+  }
+
+  resetLoginState(): void {
+    this.store$.dispatch( new auth.LoginResetState() );
   }
 
   goToPasswordReset() {
@@ -72,7 +78,9 @@ export class LoginPageComponent implements OnInit {
 
   login(event) {
     event.preventDefault();
-
+    this.resetRegistrationStates();
+    this.resetLoginState();
+    this.errorMessage = undefined;
     Object.keys(this.form.formGroup.controls).forEach(key => {
       this.form.formGroup.get(key).markAsTouched();
     });
@@ -80,7 +88,6 @@ export class LoginPageComponent implements OnInit {
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
-
       this.store$.dispatch(new auth.Login({ username: email.value, password: password.value }));
     }
     return;
