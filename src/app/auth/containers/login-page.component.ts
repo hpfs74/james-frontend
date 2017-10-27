@@ -11,6 +11,7 @@ import * as router from '../../core/actions/router';
 import { LoginForm } from '../components/login.form';
 import { loginError, CustomError } from '../models/login-error';
 import * as profile from '../../profile/actions/profile';
+import * as registration from '../actions/registration';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -23,18 +24,18 @@ import * as profile from '../../profile/actions/profile';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  pending$ = this.store.select(fromAuth.getLoginPagePending);
-  error$ = this.store.select(fromAuth.getLoginPageError);
+  pending$ = this.store$.select(fromAuth.getLoginPagePending);
+  error$ = this.store$.select(fromAuth.getLoginPageError);
   errorMessage: CustomError;
 
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
   registrationLink = environment.external.registration;
 
-  constructor(@Inject(LOCALE_ID) private locale: string, private store: Store<fromAuth.State>) {}
+  constructor(@Inject(LOCALE_ID) private locale: string, private store$: Store<fromAuth.State>) {}
 
   ngOnInit() {
-    this.store.select(fromAuth.getLoginPageError)
+    this.store$.select(fromAuth.getLoginPageError)
       .filter(error => error !== null)
       .subscribe((error) => {
         this.errorMessage = { errorText: loginError[error] } || { errorText: loginError.default};
@@ -45,7 +46,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   goToPasswordReset() {
-    window.location.href  = this.passwordResetUrl;
+    window.open(this.passwordResetUrl, '_blank');
   }
 
   getPasswordResetLink(): string {
@@ -58,7 +59,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   goToRegister() {
-    this.store.dispatch(new router.Go({ path: ['/register'] }));
+    this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }
 
   login(event) {
@@ -72,8 +73,12 @@ export class LoginPageComponent implements OnInit {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
 
-      this.store.dispatch(new auth.Login({ username: email.value, password: password.value }));
+      this.store$.dispatch(new auth.Login({ username: email.value, password: password.value }));
     }
     return;
+  }
+
+  resendActivationMail(email: string) {
+    this.store$.dispatch(new registration.RegisterResendActivationEmail(email));
   }
 }

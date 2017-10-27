@@ -4,6 +4,7 @@
       <knx-login-form [form]="form"
                       [pending]="pending$ | async"
                       [errorMessage]="errorMessage"
+                      (onResendActivationMail)="resendActivationMail($event)"
                       (onPasswordReset)="goToPasswordReset()"
                       (onLogin)="login($event)">
       </knx-login-form>

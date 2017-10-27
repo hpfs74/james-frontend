@@ -17,9 +17,15 @@ export class LoginFormComponent {
   @Input() form: LoginForm;
   @Input() pending: Store<boolean>;
   @Input() errorMessage: CustomError;
-  @Output() onPasswordReset: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onResendActivationMail: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onPasswordReset: EventEmitter<string> = new EventEmitter<string>();
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
+
+  resendActivationMail() {
+    let notActivatedEmail = this.form.formGroup.get('email').value;
+    this.onResendActivationMail.emit(notActivatedEmail);
+  }
 
   goToPasswordReset() {
     this.onPasswordReset.emit('passwordReset');
