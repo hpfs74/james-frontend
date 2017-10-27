@@ -16,6 +16,7 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
 import * as profile from '../../profile/actions/profile';
+import * as insurance from '../../insurance/actions/insurance';
 import { Authenticate } from '../models/auth';
 
 describe('AuthEffects', () => {
@@ -96,7 +97,8 @@ describe('AuthEffects', () => {
       const completion = [
         new auth.LoginSuccess({ token: tokenResponse }),
         new auth.ScheduleTokenRefresh(tokenResponse),
-        new profile.LoadAction()
+        new profile.LoadAction(),
+        new insurance.GetPurchasedCarInsurancesSuccessAction(tokenResponse)
       ];
       authService.login.and.returnValue(Observable.of(tokenResponse));
 

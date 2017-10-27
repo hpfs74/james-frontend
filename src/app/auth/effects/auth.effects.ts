@@ -42,7 +42,8 @@ export class AuthEffects {
           return [
             new auth.LoginSuccess({ token: token }),
             new auth.ScheduleTokenRefresh(token),
-            new profile.LoadAction()
+            new profile.LoadAction(),
+            new insurance.GetPurchasedCarInsurancesAction(token)
           ];
         })
         .catch((error) => {

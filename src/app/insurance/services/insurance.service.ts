@@ -36,7 +36,7 @@ export class InsuranceService {
   }
 
   public getPurchasedCarInsurances(): Observable<any> {
-    return this.authHttp.get('https://middleware.test.knabverzekeren.nl/api/v1/proxy/userCarInsurance')
+    return this.authHttp.get('https://middleware.uat.knabverzekeren.nl/api/v1/proxy/profile/insurances')
       .map(res => res.json());
   }
 }

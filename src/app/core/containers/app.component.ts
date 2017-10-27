@@ -20,11 +20,13 @@ import { LoginModalComponent } from '../../auth/components/login-modal.component
 import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
 import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';
+import * as fromInsurance from '../../insurance/reducers';
 
 @Component({
   selector: 'knx-app',
   template: `
     <header class="header">
+      {{purchasedInsurances$ | async}}
       <knx-offline-indicator></knx-offline-indicator>
 
       <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
@@ -61,6 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   anonymous$: Observable<any>;
   loading$: Observable<boolean>;
   profile$: Observable<Profile>;
+  purchasedInsurances$: Observable<string>;
   route$: Observable<string>;
 
   constructor(
@@ -80,6 +83,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.topMenu = this.navigationService.getMenu();
 
     this.profile$ = this.store$.select(fromProfile.getProfile);
+    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
     this.loading$ = this.store$.select(fromProfile.getProfileLoading);
 
     this.initModals();
