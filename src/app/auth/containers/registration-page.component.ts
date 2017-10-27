@@ -16,8 +16,9 @@ export class RegistrationPageComponent {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
   registrationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationPending);
   registrationSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationSuccess);
-  activationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
-  activationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
+  resendError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
+  resendPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
+  resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
   registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
 
   constructor(private store$: Store<fromAuth.State>) {}

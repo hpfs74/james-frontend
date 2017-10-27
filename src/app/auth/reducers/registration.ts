@@ -5,7 +5,7 @@ export interface State {
   error: string | null;
   loading: boolean;
   registered: boolean;
-  resend: boolean;
+  resend_success: boolean;
   resend_loading: boolean;
   resend_error: string | null;
   registration_email: string;
@@ -15,7 +15,7 @@ export const initialState: State = {
   error: null,
   loading: false,
   registered: false,
-  resend: false,
+  resend_success: false,
   resend_error: null,
   resend_loading: false,
   registration_email: null
@@ -61,8 +61,8 @@ export function reducer(state = initialState, action: registration.Actions): Sta
       return {
         ...state,
         error: null,
-        loading: false,
-        resend: true,
+        resend_loading: false,
+        resend_success: true,
       };
     }
 
@@ -84,4 +84,5 @@ export const getPending = (state: State) => state.loading;
 export const getSuccess = (state: State) => state.registered;
 export const getResendError = (state: State) => state.resend_error;
 export const getResendPending = (state: State) => state.resend_loading;
+export const getResendSuccess = (state: State) => state.resend_success;
 export const getRegistrationEmail = (state: State) => state.registration_email;

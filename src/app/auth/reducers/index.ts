@@ -78,6 +78,11 @@ export const getRegistrationResendActivationEmailPending = createSelector(
   fromRegistration.getResendPending
 );
 
+export const getRegistrationResendActivationEmailSuccess = createSelector(
+  selectRegistrationState,
+  fromRegistration.getResendSuccess
+);
+
 export const getRegistrationResendActivationEmailError = createSelector(
   selectRegistrationState,
   fromRegistration.getResendError
