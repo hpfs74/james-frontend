@@ -11,6 +11,7 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as profile from '../../profile/actions/profile';
 import * as auth from '../../auth/actions/auth';
+import * as router from '../../core/actions/router';
 
 import { Nav } from '../models/nav';
 import { Feature } from '../../shared/models';
@@ -26,7 +27,7 @@ import * as fromInsurance from '../../insurance/reducers';
   selector: 'knx-app',
   template: `
     <header class="header">
-      {{purchasedInsurances$ | async}}
+      <!--<a href="" (click)="test($event)">test</a>-->
       <knx-offline-indicator></knx-offline-indicator>
 
       <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
@@ -98,6 +99,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     //
     this.store$.dispatch(new insurance.GetPurchasedCarInsurancesAction(''));
 
+    this.purchasedInsurances$.subscribe(getPurchasedInsurances => {
+        if (getPurchasedInsurances.length) {
+          this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+        }
+      });
   }
 
   initModals() {
@@ -141,5 +147,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   logOut() {
     this.store$.dispatch(new auth.Logout);
+  }
+
+  test($event) {
+    $event.preventDefault();
+    this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
   }
 }

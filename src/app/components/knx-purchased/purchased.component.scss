@@ -1,0 +1,45 @@
+@import '~styles/base.scss';
+
+.knx-purchased__title {
+  font-size: $font-size-base + 2;
+}
+
+.knx-purchased {
+  hr {
+    margin: 50px 0 60px;
+  }
+
+  p {
+    color: $knab-primary-blue;
+  }
+
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .knx-purchased {
+    hr {
+      margin: 60px 0 30px;
+    }
+  }
+}
+
+.knx-button--ghost-inverted {
+  color: $knab-primary-blue;
+  border-color: $knab-primary-blue;
+}
+
+.knx-purchased__icon {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  margin-top: -5px;
+  text-align: center;
+  font-size: 40px;
+  color: $knab-primary-green;
+  border: 3px $knab-primary-green solid;
+  border-radius: 50%;
+}
