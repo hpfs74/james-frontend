@@ -244,6 +244,7 @@ export class CarBuyComponent implements OnInit {
 
     const proposalRequest = new CarProposalHelper();
     const proposalData: Proposal = {
+      advice_item_id: value.insuranceInfo.advice_item_id,
       proposal: value.insuranceInfo,
       items:  proposalRequest.getItems(flatData).concat(
         proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))

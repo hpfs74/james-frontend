@@ -256,7 +256,7 @@ describe('CarProposalHelper', () => {
       {'Straat': 'Piet Heinstraat'},
       {'Huisnummer': '45'},
       // should be modified after additional number will be implemented
-      {'Huisnummer toevoeging': '[object Object]'},
+      {'Huisnummer toevoeging': 'A'},
       {'Postcode': '2518CB'},
       {'Woonplaats': 's-Gravenhage'},
       {'Geboortedatum': '1989-11-11'},
