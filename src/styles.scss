@@ -128,12 +128,14 @@ input::-ms-clear {
   }
 }
 
+// Mobile view background blur on focus
 @mixin selectors {
   .knx-wizard__steps,
   .knx-wizard--controls,
   .knx-car-advice__footer,
   .knx-buy__footer,
   .knx-thank-you,
+  .knx-purchased,
   &.knx-container-stepnavigation {
     @content;
   }

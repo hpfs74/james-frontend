@@ -23,7 +23,7 @@ export class InsuranceEffects {
     .switchMap((payload) =>
       this.insuranceService.getPurchasedCarInsurances()
         .map((res: Response) => new insurance.GetPurchasedCarInsurancesSuccessAction(res))
-        .catch(error => Observable.of(new insurance.LoadFailAction(error))));
+        .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailureAction(error))));
 
   constructor(private actions$: Actions, private insuranceService: InsuranceService) { }
 }

@@ -1,12 +1,10 @@
 @import '~styles/base.scss';
 
-.knx-purchased__title {
-  font-size: $font-size-base + 2;
-}
-
 .knx-purchased {
+  margin-top: 30px;
+
   hr {
-    margin: 50px 0 60px;
+    margin: 35px 0 60px;
   }
 
   p {
@@ -17,6 +15,11 @@
     margin-left: 0;
     padding-left: 0;
   }
+}
+
+.knx-purchased__title {
+  font-size: $font-size-base + 2;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
@@ -38,8 +41,14 @@
   margin-right: 10px;
   margin-top: -5px;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
+  line-height: 56px;
   color: $knab-primary-green;
   border: 3px $knab-primary-green solid;
   border-radius: 50%;
+
+  + p {
+    padding-top: 5px;
+    line-height: 1.3;
+  }
 }

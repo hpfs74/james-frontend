@@ -9,8 +9,6 @@ import { Component, Input } from '@angular/core';
         <div class="col">
           <p class="knx-purchased__title">{{ title }}</p>
 
-<!--<div class="row">-->
-  <!--<div class="col-md-6">-->
           <ul class="knx-list--unstyled">
             <li *ngFor="let insurance of insurances">
               <div class="knx-purchased__icon knx-icon-automobile pull-left"></div>
@@ -22,12 +20,6 @@ import { Component, Input } from '@angular/core';
               </p>
             </li>
           </ul>
-  <!--</div>-->
-
-  <!--<div class="col-md-6">-->
-    <!--<button class="knx-button knx-button&#45;&#45;ghost knx-button&#45;&#45;ghost-inverted pull-right">Nieuw Advies</button>-->
-  <!--</div>-->
-<!--</div>-->
         </div>
       </div>
 

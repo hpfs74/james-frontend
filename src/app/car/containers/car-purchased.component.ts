@@ -10,11 +10,12 @@ import * as fromRoot from '../../reducers';
 import * as fromCore from '../../core/reducers';
 import * as assistant from '../../core/actions/assistant';
 import * as fromInsurance from '../../insurance/reducers';
+import * as fromProfile from '../../profile/reducers';
 
 @Component({
   selector: 'knx-car-purchased',
   template: `
-    <div class="container knx-container-purchased">
+    <div class="container">
       <div class="row">
         <div class="col-sm-4 push-sm-8">
           <div class="knx-wizard__sidebar--sticky">
@@ -36,13 +37,15 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   purchasedInsurances$: Observable<string>;
-
+  profile$: Observable<any>;
   email: string;
+  firstName: string;
   isBlurred = false;
 
   constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
+    this.profile$ = this.store$.select(fromProfile.getProfile);
   }
 
   ngOnInit() {
@@ -51,14 +54,14 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
     });
 
     this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
-
+    this.profile$.subscribe( profile => {
+      this.firstName = profile.firstname || '';
+      }
+    );
   }
 
   ngAfterViewInit() {
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.thankyou', clear: true }));
-    if (this.email) {
-      this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.finalEmail', value: this.email}));
-    }
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.purchased', clear: true, value: ' ' + this.firstName }));
   }
 
   blurWizard(chatIsOpened) {

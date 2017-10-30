@@ -1,21 +1,11 @@
 .main-container {
-  min-height: calc(100vh - 300px);
-  margin-top: 88px;
+  min-height: calc(100vh - 252px);
+  margin-top: 54px;
   margin-bottom: 60px;
 
   h2 {
     margin-top: 0;
     margin-bottom: 30px;
-  }
-}
-
-.main-container .knx-container-stepnavigation {
-  margin-top: -34px;
-}
-
-@media (max-width: 768px) {
-  .main-container .knx-container-stepnavigation {
-    margin-top: -38px;
   }
 }
 

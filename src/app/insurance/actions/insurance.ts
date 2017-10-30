@@ -11,6 +11,7 @@ export const LOAD_FAILURE =                         '[Insurances] Load Failure';
 
 export const GET_PURCHASED_CAR_INSURANCES =         '[Insurances] Get Insurances';
 export const GET_PURCHASED_CAR_INSURANCES_SUCCESS = '[Insurances] Get Insurances Success';
+export const GET_PURCHASED_CAR_INSURANCES_FAILURE = '[Insurances] Get Insurances Failure';
 
 /**
  * Add Insurance Actions
@@ -61,6 +62,12 @@ export class GetPurchasedCarInsurancesSuccessAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetPurchasedCarInsurancesFailureAction implements Action {
+  readonly type = GET_PURCHASED_CAR_INSURANCES_FAILURE;
+
+  constructor(public payload: any) {}
+}
+
 export type All
   = AddInsuranceAction
   | AddInsuranceSuccessAction
@@ -69,5 +76,6 @@ export type All
   | LoadSuccessAction
   | LoadFailAction
   | GetPurchasedCarInsurancesAction
-  | GetPurchasedCarInsurancesSuccessAction;
+  | GetPurchasedCarInsurancesSuccessAction
+  | GetPurchasedCarInsurancesFailureAction;
 

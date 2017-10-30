@@ -76,6 +76,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
   isLoggedIn$: Observable<boolean>;
+  purchasedInsurancesLoading$: Observable<any>;
 
   subscription$: Array<any>;
 
@@ -115,6 +116,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
+    this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
 
     // initialize forms
     const formBuilder = new FormBuilder();

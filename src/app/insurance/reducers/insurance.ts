@@ -1,4 +1,3 @@
-import { createSelector } from '@ngrx/store';
 import { Insurance } from '../models/insurance';
 import * as InsuranceActions from '../actions/insurance';
 
@@ -57,6 +56,14 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case InsuranceActions.GET_PURCHASED_CAR_INSURANCES_FAILURE: {
+      return Object.assign({}, state, {
+        ...state,
+        loaded: false,
+        loading: false
+      });
+    }
+
     default: {
       return state;
     }
@@ -67,3 +74,5 @@ export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getInsurances = (state: State) => state.insurances;
 export const getPurchasedInsurances = (state: State) => state.purchasedInsurances;
+export const getPurchasedInsurancesLoading = (state: State) => state.loading;
+export const getPurchasedInsurancesLoaded = (state: State) => state.loaded;
