@@ -366,6 +366,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       .filter(() => this.currentStep === carFormSteps.carDetails)
       .filter(coverage => coverage !== null)
       .subscribe(coverageAdvice => {
+        this.coverages.forEach( item => { item.selected = false; });
         let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
         if (coverageItem) {
           this.store$.dispatch(new assistant.AddCannedMessage({
@@ -373,6 +374,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
             value: coverageItem,
             clear: true
           }));
+
+          coverageItem.selected = true;
+          this.updateSelectedCoverage(coverageItem);
         }
       });
 
