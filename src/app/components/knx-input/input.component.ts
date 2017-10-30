@@ -45,7 +45,7 @@ import { Observable } from 'rxjs/Rx';
           (click)="toggleShowPassword($event)">
         </button>
 
-        <div class="knx-input__error_message" *ngIf="getErrors() && !options.hideErrors">
+        <div class="knx-input__error_message" *ngIf="getVisibleErrors()">
           <p *ngFor="let error of getErrors()">{{error}}</p>
         </div>
     </div>
@@ -74,6 +74,17 @@ export class KNXInputComponent extends CXFormComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  getVisibleErrors() {
+    if (this.hasErrors() && this.options.hideErrors) {
+      let errorMessages = Object
+      .keys(this.options.formControl.errors)
+      .filter(error => this.options.hideErrors.indexOf(error) === -1)
+      .map(error => this.getErrorMessage(error));
+      return errorMessages.length === 0 ? null : errorMessages;
+    }
+    return this.getErrors();
   }
 
   getAddonIcon(): string {
