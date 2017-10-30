@@ -15,7 +15,8 @@ import * as fromProfile from '../../profile/reducers';
 @Component({
   selector: 'knx-car-purchased',
   template: `
-    <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container--status">
+    <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container--status"
+         [ngClass]="{'backdrop-blur': isBlurred}">
       <div class="container">
         <div class="col-md-12">
           <b>Welkom<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>

@@ -136,6 +136,7 @@ input::-ms-clear {
   .knx-buy__footer,
   .knx-thank-you,
   .knx-purchased,
+  &.knx-container--status,
   &.knx-container-stepnavigation {
     @content;
   }
