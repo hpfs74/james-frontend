@@ -28,5 +28,39 @@ $knxDocumentLinkBlue: #00a8ab;
       margin-bottom: -20px;
       margin-right: -15px;
     }
+
+    .knx-login__error {
+      p {
+        color: $knab-primary-red;
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .knx-login__success {
+      p {
+        color: $knxRegisterBlue;
+      }
+    }
+
+    .girl-section__quote {
+      width: 110px;
+      display: inline-block;
+      text-align: center;
+      margin-left: -20px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    &.login-form {
+      .girl-section__quote {
+        margin-left: 0;
+        padding-top: 20px;
+      }
+    }
   }
 }

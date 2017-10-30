@@ -24,7 +24,9 @@ export class RegistrationThankyouComponent {
   @Output() onSendActivation: EventEmitter<string> = new EventEmitter();
 
   @Input() email: string;
-  @Input() pending: boolean;
+  @Input() resendPending: boolean;
+  @Input() resendSuccess: boolean;
+  @Input() resendError: string;
   @Input() set error(value: string) {
     this.errorMessage = registrationError[value] || registrationError.default;
   }

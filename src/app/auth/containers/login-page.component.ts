@@ -9,8 +9,9 @@ import { environment } from '../../../environments/environment';
 import * as router from '../../core/actions/router';
 
 import { LoginForm } from '../components/login.form';
-import { loginError } from '../models/login-error';
+import { loginError, CustomError } from '../models/login-error';
 import * as profile from '../../profile/actions/profile';
+import * as registration from '../actions/registration';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -19,30 +20,46 @@ import * as profile from '../../profile/actions/profile';
  * @class LoginComponent
  */
 @Component({
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent implements OnInit {
-  pending$ = this.store.select(fromAuth.getLoginPagePending);
-  error$ = this.store.select(fromAuth.getLoginPageError);
-  errorMessage: string;
+  pending$ = this.store$.select(fromAuth.getLoginPagePending);
+  error$ = this.store$.select(fromAuth.getLoginPageError);
+  errorMessage: CustomError;
 
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
   registrationLink = environment.external.registration;
+  resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
 
-  constructor(@Inject(LOCALE_ID) private locale: string, private store: Store<fromAuth.State>) {}
+  constructor(@Inject(LOCALE_ID) private locale: string, private store$: Store<fromAuth.State>) {}
 
   ngOnInit() {
-    this.store.select(fromAuth.getLoginPageError)
-      .filter(error => error !== null)
-      .subscribe((error) => {
-        this.errorMessage = loginError[error] || loginError.default;
-      });
+    this.store$.select(fromAuth.getLoginPageError)
+    .filter(error => error !== null)
+    .subscribe((error) => {
+      this.errorMessage = { errorText: loginError[error] } || { errorText: loginError.default};
+      if (error === 'profile inactive') {
+        this.errorMessage = { errorText: loginError[error], hasLink: true };
+      }
+    });
+    this.resetRegistrationStates();
+  }
+    /**
+     * reset register states each time you get on login page,
+     * to prevent undesired messages in the ui
+     */
+  resetRegistrationStates(): void {
+    this.store$.dispatch( new registration.RegisterResetState() );
+    this.store$.dispatch( new registration.RegisterResendResetState() );
+  }
+
+  resetLoginState(): void {
+    this.store$.dispatch( new auth.LoginResetState() );
   }
 
   goToPasswordReset() {
-    window.location.href  = this.passwordResetUrl;
+    window.open(this.passwordResetUrl, '_blank');
   }
 
   getPasswordResetLink(): string {
@@ -55,12 +72,14 @@ export class LoginPageComponent implements OnInit {
   }
 
   goToRegister() {
-    this.store.dispatch(new router.Go({ path: ['/register'] }));
+    this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }
 
   login(event) {
     event.preventDefault();
-
+    this.resetRegistrationStates();
+    this.resetLoginState();
+    this.errorMessage = undefined;
     Object.keys(this.form.formGroup.controls).forEach(key => {
       this.form.formGroup.get(key).markAsTouched();
     });
@@ -68,9 +87,12 @@ export class LoginPageComponent implements OnInit {
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
-
-      this.store.dispatch(new auth.Login({ username: email.value, password: password.value }));
+      this.store$.dispatch(new auth.Login({ username: email.value, password: password.value }));
     }
     return;
+  }
+
+  resendActivationMail(email: string) {
+    this.store$.dispatch(new registration.RegisterResendActivationEmail(email));
   }
 }

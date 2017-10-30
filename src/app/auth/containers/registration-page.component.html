@@ -10,8 +10,10 @@
       </knx-registration>
 
       <knx-registration-thankyou *ngIf="registrationSuccess$ | async"
-          [pending]="activationPending$ | async"
-          [error]="activationError$ | async"
+          [resendPending]="resendPending$ | async"
+          [resendSuccess]="resendSuccess$ | async"
+          [resendError]="resendError$ | async"
+          [email]="registrationEmail$ | async"
           (onLogin)="redirectToLogin()"
           (onSendActivation)="sendActivationEmail($event)">
       </knx-registration-thankyou>

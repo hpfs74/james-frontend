@@ -76,4 +76,21 @@ describe('Component: LoginFormComponent', () => {
       password: passwordValue
     });
   });
+
+  it('should emit resend activation mail with entered email', () => {
+    spyOn(comp.onResendActivationMail, 'emit');
+    const testEmail = comp.form.formGroup.get('email');
+    testEmail.setValue('testemail@gmail.com');
+    fixture.detectChanges();
+    comp.resendActivationMail();
+    fixture.detectChanges();
+    expect(comp.onResendActivationMail.emit).toHaveBeenCalledWith(testEmail.value);
+  });
+
+  it('should emit passwordReset', () => {
+    spyOn(comp.onPasswordReset, 'emit');
+    comp.goToPasswordReset();
+    fixture.detectChanges();
+    expect(comp.onPasswordReset.emit).toHaveBeenCalledWith('passwordReset');
+  });
 });

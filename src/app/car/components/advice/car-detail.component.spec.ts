@@ -14,15 +14,19 @@ import { CarService } from '../../services/car.service';
 import { AuthHttp, AuthService } from '../../../auth/services';
 import { LocalStorageService } from '../../../core/services/localstorage.service';
 import { LoaderService } from '../../../components/knx-app-loader/loader.service';
+import { AddressForm } from '../../../address/components/address.form';
 
 @Component({
   template: `
-    <div><knx-car-detail-form [form]="formFromHost"></knx-car-detail-form></div>`
+    <div>
+      <knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>
+    </div>`
 })
 export class TestHostComponent {
   @ViewChild(CarDetailComponent)
   public targetComponent: CarDetailComponent;
   public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
+  public addressFormFromHost: AddressForm = new AddressForm(new FormBuilder());
 }
 
 describe('Component: CarCheckComponent', () => {
@@ -127,4 +131,30 @@ describe('Component: CarCheckComponent', () => {
     expect(comp.targetComponent.addressChange.emit).toHaveBeenCalledWith(address);
   });
 
+
+  describe('bugs', () => {
+    it('should handle bugs from INS-928', () => {
+
+      let value = {
+        address: {
+          postcode: '1016LC',
+          number: '30,2'
+        },
+        number_extended: {
+          number_addition: null
+        }
+      };
+
+      comp.targetComponent.advice = value;
+      fixture.detectChanges();
+
+      const postalCodeCtrl = comp.targetComponent.addressForm.formGroup.get('postalCode');
+      const houseNumberCtrl = comp.targetComponent.addressForm.formGroup.get('houseNumber');
+      const houseNumberExtensionCtrl = comp.targetComponent.addressForm.formGroup.get('houseNumberExtension');
+
+      expect(postalCodeCtrl.value).toBe('1016LC');
+      expect(houseNumberCtrl.value).toBe('30');
+      expect(houseNumberExtensionCtrl.value).toBe('-2');
+    });
+  });
 });

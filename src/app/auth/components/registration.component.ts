@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { RegistrationForm } from '../components/registration.form';
 import { registrationError } from '../models/registration-error';
 import { Authenticate } from '../models/auth';
+import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-registration',
@@ -19,7 +20,10 @@ export class RegistrationComponent implements OnInit {
   @Input() termsAndConditionsUrl: string;
   @Input() pending: boolean;
   @Input() set error(value: string) {
-    this.errorMessage = registrationError[value] || registrationError.default;
+    this.errorMessage = '';
+    if (value) {
+      this.errorMessage = registrationError[value] || registrationError.default;
+    }
   }
 
   @Output() onRegister: EventEmitter<Authenticate> = new EventEmitter();
@@ -31,9 +35,7 @@ export class RegistrationComponent implements OnInit {
   register(event) {
     event.preventDefault();
 
-    Object.keys(this.form.formGroup.controls).forEach(key => {
-      this.form.formGroup.get(key).markAsTouched();
-    });
+    FormUtils.validateForm(this.form.formGroup);
 
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');

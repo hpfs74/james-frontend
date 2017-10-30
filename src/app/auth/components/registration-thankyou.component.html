@@ -24,7 +24,13 @@
       <h4>Geen mail ontvangen?</h4>
       <p>Kijk in je spam folder of verstuur de e-mail nogmaals</p>
 
-      <button class="knx-button knx-button--secondary" (click)="resendActivationEmail()">Opnieuw versturen</button>
+      <button class="knx-button knx-button--secondary"
+              (click)="resendActivationEmail()"
+              [ngClass]="{ 'knx-button--pending': resendPending }"
+              [disabled]="resendSuccess">
+              <span *ngIf="!resendSuccess">Opnieuw versturen</span>
+              <span *ngIf="resendSuccess">Verstuurd</span>
+      </button>
 
       <p class="knx-message" *ngIf="message">{{message}}</p>
       <p class="knx-message--error" *ngIf="error">{{errorMessage}}</p>

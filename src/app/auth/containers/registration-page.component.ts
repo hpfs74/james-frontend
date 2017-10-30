@@ -10,17 +10,21 @@ import { Authenticate } from '../models/auth';
 
 @Component({
   selector: 'knx-password-reset',
-  templateUrl: './registration-page.component.html',
-  styleUrls: ['./registration-page.component.scss']
+  templateUrl: './registration-page.component.html'
 })
 export class RegistrationPageComponent {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
   registrationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationPending);
   registrationSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationSuccess);
-  activationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
-  activationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
+  resendError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
+  resendPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
+  resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
+  registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
 
-  constructor(private store$: Store<fromAuth.State>) {}
+  constructor(private store$: Store<fromAuth.State>) {
+    this.store$.dispatch( new registration.RegisterResetState() );
+    this.store$.dispatch( new registration.RegisterResendResetState() );
+  }
 
   register(register: Authenticate) {
     this.store$.dispatch(new registration.Register({ emailaddress: register.username, password: register.password }));

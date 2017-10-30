@@ -31,9 +31,12 @@
                       [options]="form.formConfig.password">
                     </knx-input>
                   </div>
-          
-                  <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
-                    {{ errorMessage || 'Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+                  <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage && !resendSuccess">
+                    <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }} <a *ngIf="errorMessage.hasLink" (click)="resendActivationMail()">Stuur opnieuw</a></p>
+                    <p *ngIf="!errorMessage.errorText">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</p>
+                  </div>
+                  <div *ngIf="resendSuccess" class="knx-login__success">
+                    <p>Succesvol verstuurd</p>
                   </div>
           
                   <div class="row">
@@ -43,7 +46,7 @@
                         Inloggen
                       </button>
                       <br>
-                      <a href="" (click)="goToPasswordReset()">Wachtwoord vergeten?</a>
+                      <a (click)="goToPasswordReset()" target="_blank">Wachtwoord vergeten?</a>
                     </div>
           
                     <div class="girl-section col-lg-6 col-md-12 col-sm-6">
