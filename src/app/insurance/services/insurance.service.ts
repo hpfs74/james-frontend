@@ -35,8 +35,8 @@ export class InsuranceService {
     .map(res => res.json());
   }
 
-  public getPurchasedCarInsurances(): Observable<any> {
-    return this.authHttp.get('https://middleware.uat.knabverzekeren.nl/api/v1/proxy/profile/insurances')
+  public getProfileInsurances(): Observable<any> {
+    return this.authHttp.get(environment.james.profileInsurances)
       .map(res => res.json());
   }
 }

@@ -21,7 +21,7 @@ export class InsuranceEffects {
     .ofType(insurance.GET_PURCHASED_CAR_INSURANCES)
     .map((action: insurance.GetPurchasedCarInsurances) => action)
     .switchMap(() =>
-      this.insuranceService.getPurchasedCarInsurances()
+      this.insuranceService.getProfileInsurances()
         .map((res: Response) => new insurance.GetPurchasedCarInsurancesSuccess(res))
         .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailure(error))));
 
