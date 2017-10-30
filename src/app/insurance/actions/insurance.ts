@@ -52,8 +52,6 @@ export class LoadFailAction implements Action {
 
 export class GetPurchasedCarInsurancesAction implements Action {
   readonly type = GET_PURCHASED_CAR_INSURANCES;
-
-  constructor(public payload: any) {}
 }
 
 export class GetPurchasedCarInsurancesSuccessAction implements Action {
