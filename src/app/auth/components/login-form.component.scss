@@ -44,5 +44,23 @@ $knxDocumentLinkBlue: #00a8ab;
         color: $knxRegisterBlue;
       }
     }
+
+    .girl-section__quote {
+      width: 110px;
+      display: inline-block;
+      text-align: center;
+      margin-left: -20px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    &.login-form {
+      .girl-section__quote {
+        margin-left: 0;
+        padding-top: 20px;
+      }
+    }
   }
 }

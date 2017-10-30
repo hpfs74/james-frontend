@@ -20,8 +20,7 @@ import * as registration from '../actions/registration';
  * @class LoginComponent
  */
 @Component({
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent implements OnInit {
   pending$ = this.store$.select(fromAuth.getLoginPagePending);
