@@ -28,12 +28,12 @@ export class RegistrationForm extends BaseForm {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)]
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+        ]
       )],
       confirm: [null, Validators.compose(
         [
-          Validators.required,
-          Validators.pattern('true')
+          Validators.requiredTrue
         ]
       )]
     });
@@ -43,6 +43,7 @@ export class RegistrationForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
+        hideErrors: true,
         placeholder: 'E-mailadres',
         label: 'Je email',
         attributes: {
@@ -69,6 +70,7 @@ export class RegistrationForm extends BaseForm {
         formControlName: 'confirm',
         formControl: this.formGroup.get('confirm'),
         validationErrors: this.validationErrors,
+        hideErrors: true,
         inputOptions: {
           type: 'checkbox',
           attributes: {

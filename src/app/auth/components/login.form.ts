@@ -32,6 +32,7 @@ export class LoginForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'Je email',
         placeholder: 'E-mailadres',
+        hideErrors: true,
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
           'addonleft': true,
@@ -44,6 +45,7 @@ export class LoginForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'Wachtwoord',
         placeholder: 'Wachtwoord',
+        hideErrors: true,
         type: 'password',
         attributes: {
           'aria-label': 'Vul je wachtwoord in',

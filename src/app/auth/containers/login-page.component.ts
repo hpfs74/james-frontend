@@ -12,6 +12,7 @@ import { LoginForm } from '../components/login.form';
 import { loginError, CustomError } from '../models/login-error';
 import * as profile from '../../profile/actions/profile';
 import * as registration from '../actions/registration';
+import * as FormUtils from '../../utils/base-form.utils';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -80,9 +81,8 @@ export class LoginPageComponent implements OnInit {
     this.resetRegistrationStates();
     this.resetLoginState();
     this.errorMessage = undefined;
-    Object.keys(this.form.formGroup.controls).forEach(key => {
-      this.form.formGroup.get(key).markAsTouched();
-    });
+    FormUtils.validateForm(this.form.formGroup);
+    FormUtils.showFormErrors(this.form);
 
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');

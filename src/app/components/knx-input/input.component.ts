@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
   providers: [getCXValueAccessor(KNXInputComponent)],
   styleUrls: ['./input.component.scss'],
   template: `
-<div class="knx-input" [class.knx-input--error]="getErrors()" [class.knx-input--valid]="(isValid$ | async)">
+<div class="knx-input" [class.knx-input--error]="getErrors() && !options.hideErrors" [class.knx-input--valid]="(isValid$ | async)">
     <label *ngIf="options.label">{{ options.label }}</label>
     <div class="input-elements">
       <input #inputControl
@@ -45,7 +45,7 @@ import { Observable } from 'rxjs/Rx';
           (click)="toggleShowPassword($event)">
         </button>
 
-        <div class="knx-input__error_message" *ngIf="getErrors() && !options.hideErrors">
+        <div class="knx-input__error_message" *ngIf="getErrors() && !options.hideErrors && options.validationErrors != undefined">
           <p *ngFor="let error of getErrors()">{{error}}</p>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 import * as moment from 'moment';
+import { BaseForm } from './../shared/forms/base-form';
 
 // Scoll back to form; assumes there's only one form of this type on current page
 export function scrollToElement(cssClass: string): void {
@@ -153,6 +154,14 @@ export const validateForm = function (form: FormGroup) {
     form.get(key).markAsDirty();
   });
   form.updateValueAndValidity();
+};
+
+export const showFormErrors = function (form: BaseForm) {
+  Object.keys(form.formConfig).forEach(key => {
+    if (form.formConfig[key].hasOwnProperty('hideErrors')) {
+      form.formConfig[key].hideErrors = false;
+    }
+  });
 };
 
 export const isMobileNumber = function (phone: string) {
