@@ -25,12 +25,6 @@ $knx-navbar-font: $font-size-base;
   box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
-@media (max-width: 768px) {
-  .knx-navbar {
-    height: 32px;
-  }
-}
-
 .knx-navbar .knx-button--hamburger {
   background: none;
   border: 0;
