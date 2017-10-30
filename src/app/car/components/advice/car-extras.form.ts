@@ -13,7 +13,7 @@ export class CarExtrasForm {
       extraOptionsNoClaim: [{}],
       extraOptionsOccupants: [{}],
       roadAssistance: [null, Validators.required],
-      ownRisk: [0, Validators.required],
+      ownRisk: [135, Validators.required],
       kmPerYear: [null, Validators.required]
     });
 
