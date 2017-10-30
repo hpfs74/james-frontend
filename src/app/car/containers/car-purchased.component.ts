@@ -15,6 +15,14 @@ import * as fromProfile from '../../profile/reducers';
 @Component({
   selector: 'knx-car-purchased',
   template: `
+    <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container--status">
+      <div class="container">
+        <div class="col-md-12">
+          <b>Welkom<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-sm-4 push-sm-8">
@@ -49,13 +57,10 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-       this.email = params['email'];
-    });
-
     this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
     this.profile$.subscribe( profile => {
-      this.firstName = profile.firstname || '';
+        this.firstName = profile.firstname || '';
+        this.email = profile.emailaddress || '';
       }
     );
   }

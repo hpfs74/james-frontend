@@ -46,6 +46,12 @@
   margin-right: auto !important;
 }
 
+.knx-container--status {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 50px;
+}
+
 @media (max-width: 576px) {
   .knx-wizard__sidebar {
     z-index: 1;
