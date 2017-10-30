@@ -45,7 +45,7 @@ import { Observable } from 'rxjs/Rx';
           (click)="toggleShowPassword($event)">
         </button>
 
-        <div class="knx-input__error_message" *ngIf="getErrors()">
+        <div class="knx-input__error_message" *ngIf="getErrors() && !options.hideErrors">
           <p *ngFor="let error of getErrors()">{{error}}</p>
         </div>
     </div>

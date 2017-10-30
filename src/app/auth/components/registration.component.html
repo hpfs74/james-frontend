@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="container registration-form">
-        <div class="knx-register__welcome">
-          <h2 class="knx-register__subline">Maak nieuw account aan</h2>
+      <div class="container knx-registration">
+        <div class="knx-registration__welcome">
+          <h2 class="knx-registration__subline">Maak nieuw account aan</h2>
           <p>Creëer een persoonlijk overzicht van al je verzekeringen.</p>
         </div>
 
@@ -33,21 +33,21 @@
               [options]="form.formConfig.confirm"
               id="termsAndCondition">
               Ik ga akkoord met de
-                <a class="register-document-link" href="{{ termsAndConditionsUrl }}" target="_blank" rel="noopener">Gebruiksvoorwaarden</a>
+                <a class="knx-registration__document-link" href="{{ termsAndConditionsUrl }}" target="_blank" rel="noopener">Gebruiksvoorwaarden</a>
                 &amp;
-                <a class="register-document-link" href="{{ privacyStatementUrl }}" target="_blank" rel="noopener">privacy statement</a>
+                <a class="knx-registration__document-link" href="{{ privacyStatementUrl }}" target="_blank" rel="noopener">privacy statement</a>
               van Knab
             </knx-checkbox>
           </div>
 
-          <div class="actions">
+          <div class="knx-registration__actions">
             <button type="submit" class="knx-button knx-button--primary" [class.knx-button--pending]="pending">Account aanmaken</button>
 
-            <div class="knx-register__error" *ngIf="form.formGroup.valid && errorMessage">
+            <div class="knx-registration__error" *ngIf="form.formGroup.valid && errorMessage">
                 {{ errorMessage || 'Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
               </div>
 
-            <p class="meta-security"><span class="knx-icon-lock"></span> Beveiligde verbinding</p>
+            <p class="knx-registration__meta-security"><span class="knx-icon-lock"></span> Beveiligde verbinding</p>
           </div>
         </form>
       </div>
