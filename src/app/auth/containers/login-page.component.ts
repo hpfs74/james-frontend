@@ -82,7 +82,6 @@ export class LoginPageComponent implements OnInit {
     this.resetLoginState();
     this.errorMessage = undefined;
     FormUtils.validateForm(this.form.formGroup);
-    FormUtils.showFormErrors(this.form);
 
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');

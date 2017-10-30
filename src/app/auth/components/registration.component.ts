@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
   register(event) {
     event.preventDefault();
     FormUtils.validateForm(this.form.formGroup);
-    FormUtils.showFormErrors(this.form);
+    // FormUtils.showFormErrors(this.form);
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');

@@ -22,7 +22,7 @@
             </knx-input>
 
             <knx-password-strength
-              [hidden]="form.formConfig.password.hideErrors"
+              [hidden]="!form.formGroup.get('password').dirty || !form.formGroup.get('password').value"
               [password]="form.formGroup.get('password').value">
             </knx-password-strength>
           </div>

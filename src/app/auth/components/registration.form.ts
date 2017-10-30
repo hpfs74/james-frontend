@@ -10,7 +10,7 @@ export class RegistrationForm extends BaseForm {
 
   validationErrors = {
     required: () => 'Dit veld is verplicht',
-    email: () => 'Vul een geldig e-mailadres in',
+    email: () => 'Vul een geldig e-mailadres in alsjeblieft',
     pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?'
   };
 
@@ -43,7 +43,6 @@ export class RegistrationForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        hideErrors: true,
         placeholder: 'E-mailadres',
         label: 'Je email',
         attributes: {
@@ -55,8 +54,9 @@ export class RegistrationForm extends BaseForm {
       password: {
         formControlName: 'password',
         formControl: this.formGroup.get('password'),
+        validationErrors: this.validationErrors,
         placeholder: 'Wachtwoord',
-        hideErrors: true,
+        hideErrors: ['pattern', 'minlength'],
         label: 'Wachtwoord',
         type: 'password',
         attributes: {
@@ -70,7 +70,6 @@ export class RegistrationForm extends BaseForm {
         formControlName: 'confirm',
         formControl: this.formGroup.get('confirm'),
         validationErrors: this.validationErrors,
-        hideErrors: true,
         inputOptions: {
           type: 'checkbox',
           attributes: {

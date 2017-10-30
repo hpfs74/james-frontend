@@ -9,8 +9,7 @@ export class LoginForm extends BaseForm {
 
   validationErrors = {
     required: () => 'Dit veld is verplicht',
-    email: () => 'Vul een geldig e-mailadres in',
-    password: () => 'Vul je wachtwoord in'
+    email: () => 'Vul een geldig e-mailadres in alsjeblieft'
   };
 
   constructor(private fb: FormBuilder) {

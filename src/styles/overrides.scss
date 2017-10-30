@@ -88,7 +88,11 @@ button.knx-button--toggle,
 }
 
 .knx-registration .knx-input .knx-input__input,
-.login-form .knx-input .knx-input__input {
+.login-form .knx-input .knx-input__input,
+.knx-input__wrapper .knx-input__addon-icon {
   background: $knab-white;
 }
 
+.knx-message--dropdown-shim {
+  top: -25px !important;
+}
