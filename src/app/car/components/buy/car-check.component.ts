@@ -4,15 +4,16 @@ import { FormControl, Validators } from '@angular/forms';
 import { CarCheckForm } from './car-check.form';
 import * as FormUtils from '../../../utils/base-form.utils';
 
-import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifier } from './../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
 @Component({
   selector: 'knx-car-check',
   templateUrl: 'car-check.component.html'
 })
-@QaIdentifier(QaIdentifiers.carCheck)
-export class CarCheckComponent implements OnInit {
+export class CarCheckComponent implements OnInit, QaIdentifier {
+  qaRootId = QaIdentifiers.carCheck;
+
   @Input() form: CarCheckForm;
   @Input() set advice(value: any) {
     if (value) {

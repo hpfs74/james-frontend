@@ -50,6 +50,10 @@ button.knx-button--toggle,
   color: $knab-white;
 }
 
+.knx-info.knx-info--floating {
+  z-index: $z-index-tooltip;
+}
+
 .knx-info__content > .knx-message p {
   margin-bottom: 10px;
 }
