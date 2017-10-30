@@ -1,4 +1,4 @@
-@import '~styles/base.scss';
+@import '../../../styles/base.scss';
 
 .knx-insurance-review__panels {
   counter-reset: ir-collapse-counter;
@@ -34,11 +34,7 @@
   }
 }
 
-.knx-insurance-review__unsupported-button {
-  margin-top: 30px;
-}
-
-knx-collapsible-panel {
+.knx-collapsible-panel {
   counter-reset: collapsible;
 }
 
