@@ -27,7 +27,6 @@ import * as fromInsurance from '../../insurance/reducers';
   selector: 'knx-app',
   template: `
     <header class="header">
-      <!--<a href="" (click)="test($event)">test</a>-->
       <knx-offline-indicator></knx-offline-indicator>
 
       <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
@@ -139,10 +138,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   logOut() {
     this.store$.dispatch(new auth.Logout);
-  }
-
-  test($event) {
-    $event.preventDefault();
-    this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
   }
 }
