@@ -76,6 +76,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
   isLoggedIn$: Observable<boolean>;
+  purchasedInsurances$: Observable<string>;
+  purchasedInsurancesLoading$: Observable<any>;
 
   subscription$: Array<any>;
 
@@ -116,6 +118,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
+    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
+    this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
 
     // initialize forms
     const formBuilder = new FormBuilder();
@@ -135,6 +139,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.store$.dispatch(new advice.AddAction({
           id: cuid()
         }));
+      }
+    });
+
+    this.purchasedInsurances$.subscribe(getPurchasedInsurances => {
+      if (getPurchasedInsurances.length) {
+        this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
       }
     });
 

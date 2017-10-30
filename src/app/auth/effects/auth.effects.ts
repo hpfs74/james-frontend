@@ -22,6 +22,7 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
 import * as profile from '../../profile/actions/profile';
+import * as insurance from '../../insurance/actions/insurance';
 import * as layout from '../../core/actions/layout';
 
 @Injectable()
@@ -41,7 +42,8 @@ export class AuthEffects {
           return [
             new auth.LoginSuccess({ token: token }),
             new auth.ScheduleTokenRefresh(token),
-            new profile.LoadAction()
+            new profile.LoadAction(),
+            new insurance.GetPurchasedCarInsurances()
           ];
         })
         .catch((error) => {
@@ -152,6 +154,8 @@ export class AuthEffects {
           } else {
             this.store$.dispatch(new auth.LoginRedirect());
           }
+
+          this.store$.dispatch(new insurance.GetPurchasedCarInsurances());
         } else {
           // Token is expired
           this.localStorageService.clearToken();

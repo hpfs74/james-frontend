@@ -1,10 +1,10 @@
 import {
   AddInsuranceAction,
-  AddInsuranceSuccessAction,
-  AddInsuranceFailAction,
-  LoadAction,
-  LoadSuccessAction,
-  LoadFailAction
+  AddInsuranceSuccess,
+  AddInsuranceFail,
+  Load,
+  LoadSuccess,
+  LoadFail
 } from '../actions/insurance';
 
 import * as fromInsurance from './insurance';

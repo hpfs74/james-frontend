@@ -14,6 +14,7 @@ import { CarService } from './services/car.service';
 import { CarAdviceComponent } from './containers/car-advice.component';
 import { CarBuyComponent } from './containers/car-buy.component';
 import { CarThankYouComponent } from './containers/car-thank-you.component';
+import { CarPurchasedComponent } from './containers/car-purchased.component';
 
 // Dumb components
 import { CarDetailComponent } from './components/advice/car-detail.component';
@@ -35,6 +36,7 @@ export const COMPONENTS = [
   CarAdviceComponent,
   CarBuyComponent,
   CarThankYouComponent,
+  CarPurchasedComponent,
   CarDetailComponent,
   CarExtrasComponent,
   CarContactComponent,

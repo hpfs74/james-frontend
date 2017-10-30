@@ -11,6 +11,7 @@ import { CarUtils } from '../utils/car-utils';
  * @interface Proposal
  */
 export interface Proposal {
+  advice_item_id: string;
   proposal: InsuranceAdvice;
   items: Array<Object>;
 }
@@ -31,7 +32,7 @@ export class CarProposalHelper {
     { key: 'Achternaam', value: 'lastName' },
     { key: 'Straat', value: 'street' },
     { key: 'Huisnummer', value: 'house_number' },
-    { key: 'Huisnummer toevoeging', value: 'number_extended' },
+    { key: 'Huisnummer toevoeging', value: 'number_extended', transform: this.getHouseNumberAddition },
     { key: 'Postcode', value: 'zipcode' },
     { key: 'Woonplaats', value: 'city' },
     { key: 'Geboortedatum', value: 'date_of_birth' },
@@ -161,6 +162,10 @@ export class CarProposalHelper {
 
   private formatDate(value: Date) {
     return moment(dateDecode(value)).format('DD-MM-YYYY');
+  }
+
+  private getHouseNumberAddition(value) {
+    return value.number_letter;
   }
 
   private removeWhiteSpace(value: string) {

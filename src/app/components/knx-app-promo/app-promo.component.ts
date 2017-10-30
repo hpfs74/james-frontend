@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
     <div class="row knx-app-promo-block">
       <div class="col-md-4 col-sm-12">
         <div class="hidden-sm-up">
-          <p class="knx-app-promo-block__subtitle">Al je verzekeringen bij elkaar?</p>
-          <h3 class="knx-app-promo-block__title">De Knab Verzekeren App</h3>
+          <!--<p class="knx-app-promo-block__subtitle">Al je verzekeringen bij elkaar?</p>-->
+          <!--<h3 class="knx-app-promo-block__title">De Knab Verzekeren App</h3>-->
         </div>
 
         <img src="/assets/images/devices_iphone-x2.png" class="knx-app-promo-block__iphone">

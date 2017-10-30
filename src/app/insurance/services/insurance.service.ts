@@ -34,4 +34,9 @@ export class InsuranceService {
     })
     .map(res => res.json());
   }
+
+  public getProfileInsurances(): Observable<any> {
+    return this.authHttp.get(environment.james.profileInsurances)
+      .map(res => res.json());
+  }
 }

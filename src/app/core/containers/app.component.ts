@@ -11,6 +11,7 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as profile from '../../profile/actions/profile';
 import * as auth from '../../auth/actions/auth';
+import * as router from '../../core/actions/router';
 
 import { Nav } from '../models/nav';
 import { Feature } from '../../shared/models';
@@ -19,6 +20,8 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 import { LoginModalComponent } from '../../auth/components/login-modal.component';
 import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
 import { NavigationService } from '../services';
+import * as insurance from '../../insurance/actions/insurance';
+import * as fromInsurance from '../../insurance/reducers';
 
 @Component({
   selector: 'knx-app',
@@ -90,6 +93,8 @@ export class AppComponent implements OnInit, AfterViewInit {
           this.store$.dispatch(new profile.LoadAction());
         }
       });
+
+    this.store$.dispatch(new insurance.GetPurchasedCarInsurances());
   }
 
   initModals() {
