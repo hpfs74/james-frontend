@@ -43,7 +43,7 @@ export class AuthEffects {
             new auth.LoginSuccess({ token: token }),
             new auth.ScheduleTokenRefresh(token),
             new profile.LoadAction(),
-            new insurance.GetPurchasedCarInsurancesAction()
+            new insurance.GetPurchasedCarInsurances()
           ];
         })
         .catch((error) => {
@@ -155,7 +155,7 @@ export class AuthEffects {
             this.store$.dispatch(new auth.LoginRedirect());
           }
 
-          this.store$.dispatch(new insurance.GetPurchasedCarInsurancesAction());
+          this.store$.dispatch(new insurance.GetPurchasedCarInsurances());
         } else {
           // Token is expired
           this.localStorageService.clearToken();

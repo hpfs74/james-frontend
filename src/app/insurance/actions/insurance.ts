@@ -22,45 +22,45 @@ export class AddInsuranceAction implements Action {
   constructor(public payload: Insurance) { }
 }
 
-export class AddInsuranceSuccessAction implements Action {
+export class AddInsuranceSuccess implements Action {
   readonly type = ADD_INSURANCE_SUCCESS;
 
   constructor(public payload: Insurance) { }
 }
 
-export class AddInsuranceFailAction implements Action {
+export class AddInsuranceFail implements Action {
   readonly type = ADD_INSURANCE_FAILURE;
 
   constructor(public payload: Insurance) { }
 }
 
-export class LoadAction implements Action {
+export class Load implements Action {
   readonly type = LOAD;
 }
 
-export class LoadSuccessAction implements Action {
+export class LoadSuccess implements Action {
   readonly type = LOAD_SUCCESS;
 
   constructor(public payload: Insurance[]) { }
 }
 
-export class LoadFailAction implements Action {
+export class LoadFail implements Action {
   readonly type = LOAD_FAILURE;
 
   constructor(public payload: any) { }
 }
 
-export class GetPurchasedCarInsurancesAction implements Action {
+export class GetPurchasedCarInsurances implements Action {
   readonly type = GET_PURCHASED_CAR_INSURANCES;
 }
 
-export class GetPurchasedCarInsurancesSuccessAction implements Action {
+export class GetPurchasedCarInsurancesSuccess implements Action {
   readonly type = GET_PURCHASED_CAR_INSURANCES_SUCCESS;
 
   constructor(public payload: any) {}
 }
 
-export class GetPurchasedCarInsurancesFailureAction implements Action {
+export class GetPurchasedCarInsurancesFailure implements Action {
   readonly type = GET_PURCHASED_CAR_INSURANCES_FAILURE;
 
   constructor(public payload: any) {}
@@ -68,12 +68,12 @@ export class GetPurchasedCarInsurancesFailureAction implements Action {
 
 export type All
   = AddInsuranceAction
-  | AddInsuranceSuccessAction
-  | AddInsuranceFailAction
-  | LoadAction
-  | LoadSuccessAction
-  | LoadFailAction
-  | GetPurchasedCarInsurancesAction
-  | GetPurchasedCarInsurancesSuccessAction
-  | GetPurchasedCarInsurancesFailureAction;
+  | AddInsuranceSuccess
+  | AddInsuranceFail
+  | Load
+  | LoadSuccess
+  | LoadFail
+  | GetPurchasedCarInsurances
+  | GetPurchasedCarInsurancesSuccess
+  | GetPurchasedCarInsurancesFailure;
 

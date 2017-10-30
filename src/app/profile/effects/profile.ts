@@ -29,7 +29,7 @@ export class ProfileEffects {
           return [
             new profile.LoadSuccessAction(p),
             // TODO: change to insurances[] according to MW spec
-            // new insurances.LoadSuccessAction(p._embedded.insurance.documents)
+            // new insurances.LoadSuccess(p._embedded.insurance.documents)
           ];
         })
         .catch(error => Observable.of(new profile.LoadFailAction(error))));

@@ -19,11 +19,11 @@ export class InsuranceEffects {
   @Effect()
   getPurchasedCarInsurances$: Observable<Action> = this.actions$
     .ofType(insurance.GET_PURCHASED_CAR_INSURANCES)
-    .map((action: insurance.GetPurchasedCarInsurancesAction) => action)
+    .map((action: insurance.GetPurchasedCarInsurances) => action)
     .switchMap(() =>
       this.insuranceService.getPurchasedCarInsurances()
-        .map((res: Response) => new insurance.GetPurchasedCarInsurancesSuccessAction(res))
-        .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailureAction(error))));
+        .map((res: Response) => new insurance.GetPurchasedCarInsurancesSuccess(res))
+        .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailure(error))));
 
   constructor(private actions$: Actions, private insuranceService: InsuranceService) { }
 }
