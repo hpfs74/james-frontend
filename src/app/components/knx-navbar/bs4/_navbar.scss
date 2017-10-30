@@ -54,6 +54,10 @@
   margin-bottom: 0;
   list-style: none;
 
+  .nav-item:last-child {
+    margin-right: 0;
+  }
+
   .nav-link {
     padding-right: 0;
     padding-left: 0;

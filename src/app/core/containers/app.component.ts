@@ -64,7 +64,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   anonymous$: Observable<any>;
   loading$: Observable<boolean>;
   profile$: Observable<Profile>;
-  purchasedInsurances$: Observable<string>;
   route$: Observable<string>;
 
   constructor(
@@ -84,7 +83,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.topMenu = this.navigationService.getMenu();
 
     this.profile$ = this.store$.select(fromProfile.getProfile);
-    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
     this.loading$ = this.store$.select(fromProfile.getProfileLoading);
 
     this.initModals();
@@ -98,12 +96,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
 
     this.store$.dispatch(new insurance.GetPurchasedCarInsurancesAction(''));
-
-    this.purchasedInsurances$.subscribe(getPurchasedInsurances => {
-        if (getPurchasedInsurances.length) {
-          this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-        }
-      });
   }
 
   initModals() {
