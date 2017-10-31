@@ -23,11 +23,6 @@
               [formControlName]="form.formConfig.password.formControlName"
               [options]="form.formConfig.password">
             </knx-input>
-
-            <knx-password-strength
-              [hidden]="!form.formGroup.get('password').dirty || !form.formGroup.get('password').value"
-              [password]="form.formGroup.get('password').value">
-            </knx-password-strength>
           </div>
 
           <div class="cx-form-group">
