@@ -19,7 +19,7 @@ import { clone } from '@cx/utils';
     </span>
   </label>
 
-  <div class="knx-checkbox__error_message" *ngIf="showErrors || getErrors()">
+  <div class="knx-checkbox__error_message" *ngIf="getErrorList()">
     <p *ngFor="let error of getErrorList()">{{error}}</p>
   </div>
 </div>
