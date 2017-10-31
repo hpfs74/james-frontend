@@ -35,9 +35,72 @@ import * as router from '../../core/actions/router';
 
 import { SharedModule } from '../../shared.module';
 import { TextMessageComponent } from '../../components/knx-chat-stream/text-message.component';
+import { HttpModule, ResponseOptions, XHRBackend } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+import { inject } from '@angular/core/testing';
+import { AuthHttp } from '../../auth/services/auth-http.service';
+import { AuthService } from '../../auth/services/auth.service';
+import { LocalStorageService } from '../../core/services/localstorage.service';
+import { LoaderService } from '../../components/knx-app-loader/loader.service';
+
+
+let getMockedInsuranceProposal = () => {
+  let value = {
+    profileInfo: {
+      name: 'asdasd',
+      firstName: 'first name',
+      lastName: 'last name',
+      gender: 'M',
+      initials: 'R.R',
+      date_of_birth: new Date(12, 11, 1975),
+      iban: 'asdkasd',
+      emailaddress: 'mail@domain.com'
+    },
+    adviceInfo: {
+      startDate: '12-12-2017',
+      address: {
+        street: 'aaaa',
+        house_number: '1234',
+        number_extended: '123',
+        zipcode: '23124',
+        city: 'den haag'
+      },
+      acccessoryValue: 1234,
+      kilometers_per_year: 1234,
+      securityClass: ['asbc'],
+      coverage: 'CL',
+      legal: true,
+      cover_occupants: true
+    },
+    insuranceInfo: {
+      _embedded: {
+        insurance: {
+          moneyview_id: 'abc:abc'
+        }
+      }
+    },
+    carInfo: {
+      car: {
+        license: '123',
+        make: 'AAA',
+        model: 'AAAA',
+        technical_type: 'AAAA',
+        year: 2015,
+        price_consumer_incl_vat: 12345,
+        current_value: 11333,
+        weight_empty_vehicle: 1234
+      }
+    }
+  };
+
+  return value;
+};
 
 @Component({
-  template: `<div><knx-car-buy></knx-car-buy></div>`
+  template: `
+    <div>
+      <knx-car-buy></knx-car-buy>
+    </div>`
 })
 export class TestHostComponent {
   @ViewChild(CarBuyComponent)
@@ -72,6 +135,7 @@ describe('Component: CarBuyComponent', () => {
     imports: [
       BrowserAnimationsModule,
       SharedModule,
+      HttpModule,
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),
@@ -80,8 +144,8 @@ describe('Component: CarBuyComponent', () => {
         'insurance': combineReducers(fromInsurance.reducers),
         'profile': combineReducers(fromProfile.reducers)
       }, {
-          initialState: getInitialState
-        })
+        initialState: getInitialState
+      })
     ],
     declarations: [
       CarBuyComponent,
@@ -100,7 +164,13 @@ describe('Component: CarBuyComponent', () => {
         useClass: class {
           navigate = jasmine.createSpy('navigate');
         }
-      }]
+      },
+      AuthHttp,
+      AuthService,
+      LocalStorageService,
+      LoaderService,
+      CarService,
+      {provide: XHRBackend, useClass: MockBackend}]
   };
   setUpTestBed(moduleDef);
 
@@ -162,54 +232,7 @@ describe('Component: CarBuyComponent', () => {
 
   describe('getProposalData()', () => {
     it('should populate flat data properly', () => {
-      let value = {
-        profileInfo: {
-          name: 'asdasd',
-          firstName: 'first name',
-          lastName: 'last name',
-          gender: 'M',
-          initials: 'R.R',
-          date_of_birth: new Date(12, 11, 1975),
-          iban: 'asdkasd',
-          emailaddress: 'mail@domain.com'
-        },
-        adviceInfo: {
-          startDate: '12-12-2017',
-          address: {
-            street: 'aaaa',
-            house_number: '1234',
-            number_extended: '123',
-            zipcode: '23124',
-            city: 'den haag'
-          },
-          acccessoryValue: 1234,
-          kilometers_per_year: 1234,
-          securityClass: ['asbc'],
-          coverage: 'CL',
-          legal: true,
-          cover_occupants: true
-        },
-        insuranceInfo: {
-          _embedded: {
-            insurance: {
-              moneyview_id: 'abc:abc'
-            }
-          }
-        },
-        carInfo: {
-          car: {
-            license: '123',
-            make: 'AAA',
-            model: 'AAAA',
-            technical_type: 'AAAA',
-            year: 2015,
-            price_consumer_incl_vat: 12345,
-            current_value: 11333,
-            weight_empty_vehicle: 1234
-
-          }
-        }
-      };
+      let value = getMockedInsuranceProposal();
 
       comp.targetComponent.contactDetailForm.formGroup.get('initials').setValue('F.L.');
       comp.targetComponent.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
@@ -236,5 +259,49 @@ describe('Component: CarBuyComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(carResetAction);
       expect(store.dispatch).toHaveBeenCalledWith(routerBackAction);
     });
+  });
+
+  describe('submitInsurace()', () => {
+
+    it('should return an error if conditions are not accepted', async(() => {
+      comp.targetComponent.acceptFinalTerms = false;
+      fixture.detectChanges();
+
+      let res = comp.targetComponent
+        .submitInsurance()
+        .subscribe(
+          data => {
+          },
+          err => {
+            expect(err).toBeDefined();
+            expect(err.message).toBe('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd');
+          }
+        );
+    }));
+
+    it('should return an error if backend is not available', inject([CarService, AuthHttp, XHRBackend], (carService, mockBackend) => {
+
+      let value = getMockedInsuranceProposal();
+
+      comp.targetComponent.acceptFinalTerms = true;
+
+      mockBackend.connections.subscribe((connection) => {
+        connection.mockError(new Error('some error'));
+      });
+
+      fixture.detectChanges();
+
+      let res = comp.targetComponent
+        .submitInsurance()
+        .subscribe(
+          data => {
+            expect(false).toBeTruthy('Should not pass here');
+          },
+          err => {
+            expect(err).toBeDefined();
+            expect(err.message).toBe('some error');
+          }
+        );
+    }));
   });
 });

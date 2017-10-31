@@ -60,7 +60,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
 
-  constructor(private store$: Store<fromRoot.State>) {}
+  constructor(private store$: Store<fromRoot.State>) {
+  }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -130,12 +131,12 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     this.profile$ = this.store$.select(fromProfile.getProfile);
 
     this.store$.dispatch(new assistant.ClearAction);
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.fill' }));
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.fill'}));
   }
 
   initForm(messageKey: string) {
     FormUtils.scrollToElement('form');
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: messageKey, clear: true }));
+    this.store$.dispatch(new assistant.AddCannedMessage({key: messageKey, clear: true}));
   }
 
   initCheckForm(messageKey: string) {
@@ -147,7 +148,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
           this.store$.dispatch(new assistant.AddCannedMessage({
             key: messageKey,
             value: insuranceName,
-            clear: true }));
+            clear: true
+          }));
         }
       });
   }
@@ -171,46 +173,50 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   }
 
   submitInsurance(): Observable<any> {
+    // TODO: remove this there's no use for it
     // Final insurance request submit
-    const formData = Object.assign({},
-      this.contactDetailForm.formGroup.value,
-      this.reportingCodeForm.formGroup.value,
-      this.checkForm.formGroup.value,
-      this.paymentForm.formGroup.value,
-      this.acceptFinalTerms
-    );
+    // const formData = Object.assign({},
+    //   this.contactDetailForm.formGroup.value,
+    //   this.reportingCodeForm.formGroup.value,
+    //   this.checkForm.formGroup.value,
+    //   this.paymentForm.formGroup.value,
+    //   this.acceptFinalTerms
+    // );
 
     if (!this.acceptFinalTerms) {
       return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd'));
     }
 
-    Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
-      (profile, advice, insurance, car) => {
-      return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
-    })
-      .subscribe((value) => {
-        const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
-        this.store$.dispatch(new car.BuyAction(proposalData));
-      });
+    // Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
+    //   (profile, advice, insurance, car) => {
+    //     return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
+    //   })
+    //   .subscribe((value) => {
+    //       const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
+    //       this.store$.dispatch(new car.BuyAction(proposalData));
+    //     },
+    //     err => {
+    //       return Observable.throw(new Error());
+    //     });
 
     return this.store$.combineLatest(
       this.store$.select(fromCar.getCarBuyComplete),
       this.store$.select(fromCar.getCarBuyError),
-      (complete, error) => ({ complete: complete, error: error })
+      (complete, error) => ({complete: complete, error: error})
     )
-    .take(1)
-    .map(combined => {
-      if (combined.error) {
-        return Observable.throw(new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.'));
-      } else {
-        // Navigate to thank you page
-        return this.store$.select(fromProfile.getProfile)
-          .filter(profile => !!profile.emailaddress)
-          .subscribe((profile) => {
-            this.store$.dispatch(new router.Go({ path: ['/car/thank-you', profile.emailaddress ] }));
-          });
-      }
-    });
+      .take(1)
+      .map(combined => {
+        if (combined.error) {
+          return Observable.throw(new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.'));
+        } else {
+          // Navigate to thank you page
+          return this.store$.select(fromProfile.getProfile)
+            .filter(profile => !!profile.emailaddress)
+            .subscribe((profile) => {
+              this.store$.dispatch(new router.Go({path: ['/car/thank-you', profile.emailaddress]}));
+            });
+        }
+      });
   }
 
   onStepChange(stepIndex) {
@@ -239,14 +245,14 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       value.adviceInfo.address,
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
-      { car: value.carInfo },
+      {car: value.carInfo},
       this.getUpdatedProfile(contactForm));
 
     const proposalRequest = new CarProposalHelper();
     const proposalData: Proposal = {
       advice_item_id: value.insuranceInfo.advice_item_id,
       proposal: value.insuranceInfo,
-      items:  proposalRequest.getItems(flatData).concat(
+      items: proposalRequest.getItems(flatData).concat(
         proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
       )
     };
