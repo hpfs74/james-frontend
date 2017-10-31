@@ -89,6 +89,11 @@ input::-ms-clear {
   margin-right: auto;
 }
 
+.knx-car-advice-loader .knx-loader-message {
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
 .knx-button--mobile-edit {
   &:before {
     content: map-get($knx-icons, pencil);
