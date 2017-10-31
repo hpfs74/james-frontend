@@ -1,0 +1,7 @@
+@import '~styles/base';
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  border-bottom: 2px $knab-primary-gray solid;
+}

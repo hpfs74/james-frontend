@@ -30,6 +30,7 @@ export class InsuranceReviewRowContentComponent {
 
 @Component({
   selector: 'knx-ir-row',
+  styleUrls: ['./insurance-review-row.component.scss'],
   template: `
     <hr class="knx-ir-row__divider" *ngIf="newSection">
     <div class="row">
