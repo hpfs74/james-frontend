@@ -1,3 +1,5 @@
+// Sass file for layout styles (whitespace, position, alignment, padding, margin)
+
 .main-container {
   min-height: calc(100vh - 252px);
   margin-top: 54px;
@@ -50,6 +52,24 @@
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 50px;
+}
+
+.knx-step-block {
+  p {
+    margin-bottom: 0;
+    line-height: 1.4em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: $font-size-base;
+    font-family: $font-family-base;
+    margin-bottom: 10px;
+    text-transform: none;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 576px) {
