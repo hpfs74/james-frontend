@@ -14,7 +14,6 @@ export class LoginForm extends BaseForm {
 
   constructor(private fb: FormBuilder) {
     super();
-
     this.formGroup = this.fb.group({
       email: [null, Validators.compose(
         [Validators.required, EmailValidator]
@@ -31,7 +30,7 @@ export class LoginForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'Je email',
         placeholder: 'E-mailadres',
-        hideErrors: true,
+        showErrorMessages: false,
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
           'addonleft': true,
@@ -44,7 +43,7 @@ export class LoginForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'Wachtwoord',
         placeholder: 'Wachtwoord',
-        hideErrors: true,
+        showErrorMessages: false,
         type: 'password',
         attributes: {
           'aria-label': 'Vul je wachtwoord in',

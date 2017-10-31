@@ -9,7 +9,7 @@ import { clone } from '@cx/utils';
   styleUrls: ['./checkbox.component.scss'],
   template: `
 <div class="cx-form-group__wrap {{(options.formGroupModifiers || []).join(' ')}}"
-            [class.knx-checkbox--error]="getErrors() && !options.hideErrors">
+            [class.knx-checkbox--error]="getErrorList()">
   <label *ngIf="!options.items" class="cx-checkbox" [class.cx-checkbox--disabled]="options.disabled">
     <input [disabled]="options.disabled"  type="checkbox" [(ngModel)]="innerValue" (change)="onChange()"/>
     <span class="cx-checkbox__control"></span>
@@ -19,15 +19,14 @@ import { clone } from '@cx/utils';
     </span>
   </label>
 
-  <div class="knx-checkbox__error_message" *ngIf="getErrors() && !options.hideErrors">
-    <p *ngFor="let error of getErrors()">{{error}}</p>
+  <div class="knx-checkbox__error_message" *ngIf="showErrors || getErrors()">
+    <p *ngFor="let error of getErrorList()">{{error}}</p>
   </div>
 </div>
 `
 })
 export class KNXCheckboxComponent extends CXFormComponent {
   @Input() options: KNXCheckboxOptions;
-
   constructor (public elementRef: ElementRef) {
     super(elementRef, KNX_CHECKBOX_DEFAULT_OPTIONS);
   }
@@ -35,5 +34,26 @@ export class KNXCheckboxComponent extends CXFormComponent {
   onChange() {
     this.onChangeCallback(clone(this.innerValue));
     this.onTouchedCallback();
+  }
+
+  getErrorList() {
+    if (this.options.showErrorMessages !== undefined) {
+      if (this.options.showErrorMessages) {
+        return this.getVisibleErrors();
+      }
+      return null;
+    }
+    return this.getVisibleErrors();
+  }
+
+  getVisibleErrors() {
+    if (this.hasErrors() && this.options.hideErrors) {
+      let errorMessages = Object
+      .keys(this.options.formControl.errors)
+      .filter(error => this.options.hideErrors.indexOf(error) === -1)
+      .map(error => this.getErrorMessage(error));
+      return errorMessages.length === 0 ? null : errorMessages;
+    }
+    return this.getErrors();
   }
 }

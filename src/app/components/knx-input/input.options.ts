@@ -7,6 +7,7 @@ export interface KNXInputOptions extends FormControlOptions {
   label?: string;
   hideErrors?: Array<string>;
   formControl?: FormControl; // when present formControl errors will be displayed
+  showErrorMessages?: boolean;
   textMask?: {
     mask: (string | RegExp)[];
     guide?: boolean;

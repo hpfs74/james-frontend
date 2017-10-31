@@ -158,8 +158,8 @@ export const validateForm = function (form: FormGroup) {
 
 export const showFormErrors = function (form: BaseForm) {
   Object.keys(form.formConfig).forEach(key => {
-    if (form.formConfig[key].hasOwnProperty('hideErrors')) {
-      form.formConfig[key].hideErrors = false;
+    if (form.formConfig[key].hasOwnProperty('showErrorMessages')) {
+      form.formConfig[key].showErrorMessages = true;
     }
   });
 };

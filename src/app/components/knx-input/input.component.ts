@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
   providers: [getCXValueAccessor(KNXInputComponent)],
   styleUrls: ['./input.component.scss'],
   template: `
-<div class="knx-input" [class.knx-input--error]="getVisibleErrors()" [class.knx-input--valid]="(isValid$ | async)">
+<div class="knx-input" [class.knx-input--error]="getErrorList()" [class.knx-input--valid]="(isValid$ | async)">
     <label *ngIf="options.label">{{ options.label }}</label>
     <div class="knx-input__wrapper">
       <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
@@ -49,8 +49,8 @@ import { Observable } from 'rxjs/Rx';
         (click)="toggleShowPassword($event)">
       </button>
 
-      <div class="knx-input__error_message" *ngIf="getVisibleErrors()">
-        <p *ngFor="let error of getErrors()">{{error}}</p>
+      <div class="knx-input__error_message" *ngIf="getErrorList()">
+        <p *ngFor="let error of getErrorList()">{{error}}</p>
       </div>
     </div>
 </div>
@@ -61,7 +61,6 @@ export class KNXInputComponent extends CXFormComponent implements OnInit {
 
   showPassword = false;
   isValid$: Observable<boolean>;
-
   constructor(public elementRef: ElementRef) {
     super(elementRef, KNX_INPUT_DEFAULT_OPTIONS);
   }
@@ -78,6 +77,16 @@ export class KNXInputComponent extends CXFormComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  getErrorList() {
+    if (this.options.showErrorMessages !== undefined) {
+      if (this.options.showErrorMessages) {
+        return this.getVisibleErrors();
+      }
+      return null;
+    }
+    return this.getVisibleErrors();
   }
 
   getVisibleErrors() {

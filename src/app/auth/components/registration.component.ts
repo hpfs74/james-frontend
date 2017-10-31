@@ -43,4 +43,9 @@ export class RegistrationComponent implements OnInit {
       this.onRegister.emit({ username: email.value, password: password.value});
     }
   }
+
+  registerAndShowErrors(event) {
+    this.register(event);
+    FormUtils.showFormErrors(this.form);
+  }
 }

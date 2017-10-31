@@ -7,7 +7,10 @@
           <p>Creëer een persoonlijk overzicht van al je verzekeringen.</p>
         </div>
 
-        <form [formGroup]="form.formGroup" (ngSubmit)="register($event)" (keyup.enter)="register($event)" autocomplete="off">
+        <form [formGroup]="form.formGroup"
+              (ngSubmit)="registerAndShowErrors($event);"
+              (keyup.enter)="register($event)"
+              autocomplete="off">
           <div class="cx-form-group">
             <knx-input
               [formControlName]="form.formConfig.email.formControlName"

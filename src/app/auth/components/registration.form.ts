@@ -16,7 +16,6 @@ export class RegistrationForm extends BaseForm {
 
   constructor(private fb: FormBuilder) {
     super();
-
     this.formGroup = this.fb.group({
       email: [null, Validators.compose(
         [
@@ -44,6 +43,7 @@ export class RegistrationForm extends BaseForm {
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
         placeholder: 'E-mailadres',
+        showErrorMessages: false,
         label: 'Je email',
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
@@ -56,6 +56,7 @@ export class RegistrationForm extends BaseForm {
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
         placeholder: 'Wachtwoord',
+        showErrorMessages: false,
         hideErrors: ['pattern', 'minlength'],
         label: 'Wachtwoord',
         type: 'password',
@@ -70,6 +71,7 @@ export class RegistrationForm extends BaseForm {
         formControlName: 'confirm',
         formControl: this.formGroup.get('confirm'),
         validationErrors: this.validationErrors,
+        showErrorMessages: false,
         inputOptions: {
           type: 'checkbox',
           attributes: {

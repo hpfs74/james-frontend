@@ -17,6 +17,8 @@ export interface KNXCheckboxOptions extends FormControlOptions {
     value: string
   }>;
   label?: string;
+  hideErrors?: Array<string>;
+  showErrorMessages?: boolean;
 }
 
 export const KNX_CHECKBOX_DEFAULT_OPTIONS: KNXCheckboxOptions = {
