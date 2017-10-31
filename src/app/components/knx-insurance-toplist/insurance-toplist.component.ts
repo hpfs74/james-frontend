@@ -55,7 +55,7 @@ interface OrderItem {
                   <div class="knx-message__content">
                     <p>
                       Op basis van de informatie die jij over jezelf gaf, gaat onze slimme technologie voor je werken.
-                      We zoeken bij meer dan 30 aanbieders en stellen een overzicht samen.
+                      We zoeken bij meer dan 20 aanbieders en stellen een overzicht samen.
                       Daarbij kijken we niet alleen naar prijs. Want geode polisvoorwaarden en een dekking die past bij
                       jouw persoonlijke situatie zijn ook belangrijk.
                     </p>
