@@ -36,8 +36,8 @@ export class ErrorEffects {
     car.BuyFailureAction |
     compare.LoadCarFailAction |
     coverage.CarCoverageFailureAction |
-    insurances.AddInsuranceFailAction |
-    insurances.LoadFailAction>(
+    insurances.AddInsuranceFail |
+    insurances.LoadFail>(
     auth.REFRESH_FAILURE,
     address.GET_ADDRESS_FAILURE,
     profile.LOAD_PROFILE_FAILURE,

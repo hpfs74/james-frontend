@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { CarExtrasForm } from './car-extras.form';
 
-import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifier } from './../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
 @Component({
@@ -12,8 +12,9 @@ import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
   templateUrl: 'car-extras.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-@QaIdentifier(QaIdentifiers.carInsurances)
-export class CarExtrasComponent {
+export class CarExtrasComponent implements QaIdentifier {
+  qaRootId = QaIdentifiers.carInsurances;
+
   @Input() form: CarExtrasForm;
   @Input() show: boolean;
   @Input() optionModifierClass: string;

@@ -16,6 +16,7 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 import * as fromRoot from '../../reducers';
 import * as fromAuth from '../../auth/reducers';
 import * as fromCore from '../../core/reducers';
+import * as fromInsurance from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 import * as auth from '../../auth/actions/auth';
@@ -47,6 +48,7 @@ describe('Component: AppComponent', () => {
       ...fromRoot.reducers,
       'auth': combineReducers(fromAuth.reducers),
       'core': combineReducers(fromCore.reducers),
+      'insurance': combineReducers(fromInsurance.reducers),
       'profile': combineReducers(fromProfile.reducers)
     })],
     declarations: [AppComponent, TestHostComponent, NavbarComponent],

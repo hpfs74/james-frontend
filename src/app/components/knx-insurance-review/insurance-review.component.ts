@@ -23,7 +23,7 @@ import { CarInsurance } from '../../car/models';
       Slim verzekerd via Knab
 
       <knx-ir-tooltip>
-        <strong>Verzekeren via Knab is een goed idee want:</strong><br>
+        <strong>Verzekeren via Knab is een goed idee want:</strong><br />
 
         <p>Scherpe prijs: bij Knab betaal je namelijk maar 10% provisie. Bij andere aanbieders is dat tot wel 25% per maand.
         We zijn er voor je: we helpen je bij schade, of als je er niet uitkomt met je verzekeraar.</p>
@@ -49,11 +49,6 @@ import { CarInsurance } from '../../car/models';
       <knx-insurance-review-benefits
         [supported]="selectedInsurance?.supported">
       </knx-insurance-review-benefits>
-    </div>
-
-    <div *ngIf="!selectedInsurance?.supported" class="knx-insurance-review__unsupported-button">
-      <a [attr.href]="selectedInsurance?._embedded.insurance.url" target="_blank" rel="noopener"
-        class="knx-button knx-button--secondary pull-right">Ga naar website</a>
     </div>
   `
 })

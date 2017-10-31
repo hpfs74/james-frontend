@@ -1,4 +1,10 @@
-<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" [ngClass]="{'backdrop-blur': isBlurred}">
+<knx-loader [visible]="purchasedInsurancesLoading$ | async">
+  Loading...
+</knx-loader>
+
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
+     [ngClass]="{'backdrop-blur': isBlurred}"
+     [hidden]="purchasedInsurancesLoading$ | async">
   <div class="container">
     <knx-step-navigation
       [steps]="formSteps"
@@ -9,7 +15,7 @@
   </div>
 </div>
 
-<div class="container knx-car-advice" [ngClass]="setClasses()">
+<div class="container knx-car-advice" [ngClass]="setClasses()" [hidden]="purchasedInsurancesLoading$ | async">
   <knx-wizard #knxWizard (stepChange)="onStepChange($event)" >
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">

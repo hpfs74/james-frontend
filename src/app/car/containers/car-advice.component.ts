@@ -27,7 +27,7 @@ import * as coverage from '../actions/coverage';
 import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 
-import { QaIdentifier } from '../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { AssistantConfig } from '../../core/models/assistant';
@@ -52,8 +52,9 @@ enum carFormSteps {
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-@QaIdentifier(QaIdentifiers.carAdviceRoot)
-export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, QaIdentifier {
+  qaRootId = QaIdentifiers.carAdviceRoot;
+
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   currentStep: number;
@@ -76,6 +77,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
   isLoggedIn$: Observable<boolean>;
+  purchasedInsurances$: Observable<string>;
+  purchasedInsurancesLoading$: Observable<any>;
 
   subscription$: Array<any>;
 
@@ -86,7 +89,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
 
-  constructor(private store$: Store<fromRoot.State>) {}
+  constructor(private store$: Store<fromRoot.State>) {
+  }
 
   ngAfterViewChecked() {
     // bind async validator for car info
@@ -115,6 +119,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
+    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
+    this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
 
     // initialize forms
     const formBuilder = new FormBuilder();
@@ -124,18 +130,24 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
-        if (currentAdvice) {
-          // do not pre-fill address
-          // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
-          //   this.address.postcode = currentProfile.postcode;
-          //   this.address.number = currentProfile.number;
-          // });
-        } else if (!currentAdvice) {
-          this.store$.dispatch(new advice.AddAction({
-            id: cuid()
-          }));
-        }
-      });
+      if (currentAdvice) {
+        // do not pre-fill address
+        // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
+        //   this.address.postcode = currentProfile.postcode;
+        //   this.address.number = currentProfile.number;
+        // });
+      } else if (!currentAdvice) {
+        this.store$.dispatch(new advice.AddAction({
+          id: cuid()
+        }));
+      }
+    });
+
+    this.purchasedInsurances$.subscribe(getPurchasedInsurances => {
+      if (getPurchasedInsurances.length) {
+        this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+      }
+    });
 
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
@@ -148,7 +160,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
           legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
           road_assistance: data.roadAssistance || 'RANO',
           kilometers_per_year: data.kmPerYear || 'KMR3',
-          own_risk: +data.ownRisk || 0,
+          own_risk: +data.ownRisk || 135,
           insurance_id: ''
         };
         this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
@@ -222,7 +234,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
           city: address.city,
           country: 'NL',
           kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
-          own_risk: +detailForm.value.ownRisk || 0,
+          own_risk: +detailForm.value.ownRisk || 135,
           cover_occupants: false,
           legal_aid: 'LAN',
           no_claim_protection: false,
@@ -232,14 +244,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         address: address
       };
     })
-    .take(1)
-    .subscribe((compare) => {
-      // add address in format for profile
-      // TODO: is this really needed?
-      this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compare.request, {
-        address: compare.address
-      })));
-    });
+      .take(1)
+      .subscribe((compare) => {
+        // add address in format for profile
+        // TODO: is this really needed?
+        this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compare.request, {
+          address: compare.address
+        })));
+      });
 
     return this.store$.select(fromInsurance.getSelectedAdvice)
       .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
@@ -255,16 +267,21 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.currentStep = stepIndex;
   }
 
+  openUnsupportedWebSite(insuranceUrl): Observable<any> {
+    window.open(insuranceUrl, '_blank');
+    return Observable.empty();
+  }
+
   startBuyFlow(): Observable<any> {
     return this.isLoggedIn$.flatMap((loggedIn) => {
       if (loggedIn) {
         this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
           id => {
             this.store$.dispatch(new router.Go({
-              path: ['/car/insurance', { adviceId: id }],
+              path: ['/car/insurance', {adviceId: id}],
             }));
           }));
-          return;
+        return;
       } else {
         // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
         // Instead of going into the buy flow the user clicks on the modal buttons
@@ -317,16 +334,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
         return new Observable(obs => obs.next(null));
       }
 
-      const error = { licensePlateRDC: true };
+      const error = {licensePlateRDC: true};
       return this.store$.select(fromCar.getCarInfo)
         .map((car) => {
-          if (car && car.license) {
-            return null;
-          } else {
-            return error;
-          }
-        }, err => error
-      );
+            if (car && car.license) {
+              return null;
+            } else {
+              return error;
+            }
+          }, err => error
+        );
     });
   }
 
@@ -337,7 +354,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       .subscribe((error) => {
         if (error) {
           this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.error.carNotFound', clear: true }));
+          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
         }
       });
 
@@ -360,6 +377,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
       .filter(() => this.currentStep === carFormSteps.carDetails)
       .filter(coverage => coverage !== null)
       .subscribe(coverageAdvice => {
+        this.coverages.forEach( item => { item.selected = false; });
         let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
         if (coverageItem) {
           this.store$.dispatch(new assistant.AddCannedMessage({
@@ -367,16 +385,19 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
             value: coverageItem,
             clear: true
           }));
+
+          coverageItem.selected = true;
+          this.updateSelectedCoverage(coverageItem);
         }
       });
 
     FormUtils.scrollToElement('knx-car-detail-form');
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.welcome', clear: true }));
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.welcome', clear: true}));
   }
 
   private onShowResults() {
     FormUtils.scrollToElement('knx-insurance-toplist');
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
   }
 
   private onShowSummary() {
@@ -385,14 +406,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.store$.select(fromInsurance.getSelectedInsurance).take(1)
       .subscribe(selectedInsurance => {
-        this.formSteps[2].hideNextButton = !selectedInsurance.supported;
         this.showStepBlock = selectedInsurance.supported;
-
         if (selectedInsurance.supported) {
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.title' }));
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.steps' }));
+          this.formSteps[2].nextButtonLabel = 'Verzekering aanvragen';
+          this.formSteps[2].nextButtonClass = 'knx-button knx-button--cta knx-button--extended knx-button--3d';
+          this.formSteps[2].onBeforeNext = this.startBuyFlow.bind(this);
+          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.title'}));
+          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.steps'}));
         } else {
-          this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.review.unsupported', clear: true }));
+          this.formSteps[2].nextButtonLabel = 'Ga naar website';
+          this.formSteps[2].nextButtonClass = 'knx-button knx-button--secondary';
+          this.formSteps[2].onBeforeNext = this.openUnsupportedWebSite.bind(this, selectedInsurance._embedded.insurance.url);
+          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.unsupported', clear: true}));
         }
       });
   }

@@ -87,6 +87,7 @@ function getContent(environment: string) {
       key: '${getEnvVar('JAMES_API_KEY')}',
       token: '${getEnvVar('JAMES_API_TOKEN')}',
       profile: '${getEnvVar('JAMES_API_PROFILE')}',
+      profileInsurances: '${getEnvVar('JAMES_API_PROFILE_INSURANCES')}',
       auth: '${getEnvVar('JAMES_API_AUTH')}',
       address: '${getEnvVar('JAMES_API_ADDRESS')}',
       suggestion: '${getEnvVar('JAMES_API_SUGGESTION')}',

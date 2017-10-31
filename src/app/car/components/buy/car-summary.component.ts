@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
-import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifier } from './../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
 import { InsuranceAdvice } from '../../../insurance/models';
@@ -15,8 +15,9 @@ import * as FormUtils from '../../../utils/base-form.utils';
   styleUrls: ['./car-summary.component.scss'],
   templateUrl: 'car-summary.component.html'
 })
-@QaIdentifier(QaIdentifiers.carSummary)
-export class CarSummaryComponent {
+export class CarSummaryComponent implements QaIdentifier {
+  qaRootId = QaIdentifiers.carSummary;
+
   @Output() confirmChange = new EventEmitter();
 
   @Input()

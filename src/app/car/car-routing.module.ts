@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CarAdviceComponent } from './containers/car-advice.component';
 import { CarBuyComponent } from './containers/car-buy.component';
 import { CarThankYouComponent } from './containers/car-thank-you.component';
+import { CarPurchasedComponent } from './containers/car-purchased.component';
 
 import { CanActivateBuyFlowGuard } from '../core/services/buy-guard.service';
 
@@ -26,6 +27,10 @@ export const carRoutes: Routes = [
   {
     path: 'thank-you/:email',
     component: CarThankYouComponent
+  },
+  {
+    path: 'purchased',
+    component: CarPurchasedComponent
   }
 ];
 @NgModule({

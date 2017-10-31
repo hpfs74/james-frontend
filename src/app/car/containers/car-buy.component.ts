@@ -27,7 +27,7 @@ import { Proposal, CarProposalHelper } from '../models/proposal';
 import { CarReportingCodeForm } from '../components/buy/car-reporting-code.form';
 import { CarCheckForm } from '../components/buy/car-check.form';
 
-import { QaIdentifier } from '../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { IbanForm } from '../../shared/forms/iban.form';
@@ -39,9 +39,9 @@ import * as FormUtils from '../../utils/base-form.utils';
   templateUrl: 'car-buy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-@QaIdentifier(QaIdentifiers.carBuyRoot)
-export class CarBuyComponent implements OnInit {
-  qaRootId: string;
+
+export class CarBuyComponent implements OnInit, QaIdentifier {
+  qaRootId = QaIdentifiers.carBuyRoot;
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
   isBlurred = false;
@@ -244,6 +244,7 @@ export class CarBuyComponent implements OnInit {
 
     const proposalRequest = new CarProposalHelper();
     const proposalData: Proposal = {
+      advice_item_id: value.insuranceInfo.advice_item_id,
       proposal: value.insuranceInfo,
       items:  proposalRequest.getItems(flatData).concat(
         proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))

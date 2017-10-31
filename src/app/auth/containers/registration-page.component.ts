@@ -10,7 +10,8 @@ import { Authenticate } from '../models/auth';
 
 @Component({
   selector: 'knx-password-reset',
-  templateUrl: './registration-page.component.html'
+  templateUrl: './registration-page.component.html',
+  styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
