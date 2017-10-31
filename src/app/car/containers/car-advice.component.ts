@@ -27,7 +27,7 @@ import * as coverage from '../actions/coverage';
 import * as advice from '../../insurance/actions/advice';
 import * as profile from '../../profile/actions/profile';
 
-import { QaIdentifier } from '../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { AssistantConfig } from '../../core/models/assistant';
@@ -52,8 +52,9 @@ enum carFormSteps {
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-@QaIdentifier(QaIdentifiers.carAdviceRoot)
-export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, QaIdentifier {
+  qaRootId = QaIdentifiers.carAdviceRoot;
+
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   currentStep: number;

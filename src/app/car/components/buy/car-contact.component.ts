@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { QaIdentifier } from '../../../shared/decorators/qa-identifier.decorator';
+import { QaIdentifier } from './../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
 import { Profile } from './../../../profile/models';
@@ -14,8 +14,9 @@ import * as FormUtils from '../../../utils/base-form.utils';
   styleUrls: ['./car-contact.component.scss'],
   templateUrl: 'car-contact.component.html'
 })
-@QaIdentifier(QaIdentifiers.carContact)
-export class CarContactComponent implements OnChanges {
+export class CarContactComponent implements OnChanges, QaIdentifier {
+  qaRootId = QaIdentifiers.carContact;
+
   @Input() form: ContactDetailForm;
   @Input() profile: Profile;
 
