@@ -7,19 +7,6 @@
   margin-right: 10px;
   flex-grow: 1;
   height: 100%;
-
-  p {
-    margin-bottom: 0;
-    font-size: $font-size-base - 2;
-    line-height: 1.4em;
-  }
-
-  h3 {
-    font-size: $font-size-base;
-    font-family: $font-family-base;
-    margin-bottom: 10px;
-    text-transform: none;
-  }
 }
 
 @media (max-width: 768px) {
