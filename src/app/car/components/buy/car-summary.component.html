@@ -172,33 +172,39 @@
 
       </div>
 
-      <h3>Betaling</h3>
-
-      <div class="row knx-car-summary__payment" *ngIf="insurance?.monthly_premium ">
-        <div class="col-md-5">Je betaalt per maand</div>
-        <div class="col-md-5"><strong>{{ insurance?.monthly_premium | currency:'EUR':true }}</strong>
-          <span class="premium-note">Incl. 10% provisie aan Knab</span></div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-5">Eenmalige afsluitkosten</div>
-        <div class="col-md-5">{{ insurance?.one_off_premium | currency:'EUR':true }}</div>
-      </div>
-
-      <div class="row" *ngIf="advice?.iban">
-        <div class="col-md-5">Rekeningnummer</div>
-        <div class="col-md-5">{{ advice.iban }}</div>
-      </div>
-
-      <div class="row knx-car-summary__terms">
-        <div class="col col-sm-12 align-self-end">
-          <hr>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Betaling</h3>
+          </div>
         </div>
-        <div class="col col-sm-12">
-          <cx-checkbox class="knx-car-summary__checkbox"
-            [(ngModel)]="confirm"
-            [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
-          </cx-checkbox>
+
+        <div class="row knx-car-summary__payment" *ngIf="insurance?.monthly_premium ">
+          <div class="col-md-5">Je betaalt per maand</div>
+          <div class="col-md-5"><strong>{{ insurance?.monthly_premium | currency:'EUR':true }}</strong>
+            <span class="premium-note">Incl. 10% provisie aan Knab</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">Eenmalige afsluitkosten</div>
+          <div class="col-md-5">{{ insurance?.one_off_premium | currency:'EUR':true }}</div>
+        </div>
+
+        <div class="row" *ngIf="advice?.iban">
+          <div class="col-md-5">Rekeningnummer</div>
+          <div class="col-md-5">{{ advice.iban }}</div>
+        </div>
+
+        <div class="row knx-car-summary__terms">
+          <div class="col col-sm-12 align-self-end">
+            <hr>
+          </div>
+          <div class="col col-sm-12">
+            <cx-checkbox class="knx-car-summary__checkbox"
+              [(ngModel)]="confirm"
+              [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
+            </cx-checkbox>
+          </div>
         </div>
       </div>
 

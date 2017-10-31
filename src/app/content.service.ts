@@ -2,53 +2,25 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { CarSecurityClass } from './core/models/content';
-
-export interface AppContent {
-  car?: {
-    securityClass: any;
-    coverages: any;
-  };
-  layout?: {
-    footer: any;
-  };
-}
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class ContentService {
-  // TODO: build based on directory read
-  private jsonFiles: AppContent = {
-    car: {
-      securityClass: '../content/car/security-class.json',
-      coverages: '../content/car/coverage.json'
-    },
-    layout: {
-      footer: '../content/layout/footer.json'
-    }
-  };
-
-  private content: AppContent;
+  private response: any;
 
   constructor(private http: Http) {}
 
-  public getContentObject(): AppContent {
-    return this.content || {};
+  /**
+   * Load data and store locally
+   * @param url URL of the http request
+   */
+  public getData(url: string) {
+    this.getDataFromEndPoint(url)
+      .subscribe((data) => this.response = data);
   }
 
-  public loadFiles() {
-    const obj = this.jsonFiles;
-    this.content = {};
-    Object.keys(obj).forEach((key) => {
-      this.content[key] = {};
-
-      Object.keys(obj[key]).forEach((fileGroup) => {
-         this.loadContent(obj[key][fileGroup]).subscribe(content => this.content[key][fileGroup] = content);
-      });
-    });
-  }
-
-  private loadContent(file: string): Observable<Array<any>> {
-    return this.http.request(file)
+  public getDataFromEndPoint(url: string): any {
+    return this.http.request(url)
       .map(res => res.json());
   }
 }

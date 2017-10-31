@@ -3,6 +3,10 @@
 
 $knx-navbar-font: $font-size-base;
 
+ul {
+  list-style-type: none;
+}
+
 .knx-logo {
   width: 80px;
 }
@@ -78,6 +82,7 @@ $knx-navbar-font: $font-size-base;
   margin-left: 15px;
   margin-bottom: 20px;
   width: 90%;
+  list-style-type: none;
 
   .nav-item {
     .nav-link {

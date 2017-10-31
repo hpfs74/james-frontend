@@ -1,6 +1,8 @@
-<knx-loader [visible]="purchasedInsurancesLoading$ | async">
-  Loading...
-</knx-loader>
+<div class="container knx-car-advice-loader">
+  <knx-loader [visible]="purchasedInsurancesLoading$ | async">
+    Loading...
+  </knx-loader>
+</div>
 
 <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
      [ngClass]="{'backdrop-blur': isBlurred}"
