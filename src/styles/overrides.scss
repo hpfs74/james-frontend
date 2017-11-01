@@ -100,3 +100,12 @@ button.knx-button--toggle,
 .knx-message--dropdown-shim {
   top: -25px !important;
 }
+
+.knx-step-navigation {
+  margin-bottom: 40px;
+  padding: 10px 0;
+
+  & > li {
+    font-weight: normal;
+  }
+}
