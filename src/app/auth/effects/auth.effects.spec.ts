@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { StoreModule, Store, combineReducers } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { hot, cold } from 'jasmine-marbles';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthEffects } from './auth.effects';
@@ -97,7 +96,8 @@ describe('AuthEffects', () => {
       const completion = [
         new auth.LoginSuccess({ token: tokenResponse }),
         new auth.ScheduleTokenRefresh(tokenResponse),
-        new profile.LoadAction()
+        new profile.LoadAction(),
+        new insurance.GetPurchasedCarInsurances()
       ];
       authService.login.and.returnValue(Observable.of(tokenResponse));
 
@@ -105,11 +105,11 @@ describe('AuthEffects', () => {
       const expected = cold('--b', { b: completion });
 
       let performedActions = [];
-      effects.login$.take(3).subscribe(
+      effects.login$.take(4).subscribe(
         result => performedActions.push(result),
         error => fail(error),
         () => {
-          expect(performedActions.length).toBe(3);
+          expect(performedActions.length).toBe(4);
           expect(performedActions).toEqual(completion);
           expect(authService.login).toHaveBeenCalledWith(authPayload);
         }

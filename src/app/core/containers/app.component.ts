@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { KNXModalDialogSettings } from '@knx/modal';
 import { Observable } from 'rxjs/Observable';
@@ -11,17 +10,14 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as profile from '../../profile/actions/profile';
 import * as auth from '../../auth/actions/auth';
-import * as router from '../../core/actions/router';
 
 import { Nav } from '../models/nav';
-import { Feature } from '../../shared/models';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
 import { LoginModalComponent } from '../../auth/components/login-modal.component';
 import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
 import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';
-import * as fromInsurance from '../../insurance/reducers';
 
 @Component({
   selector: 'knx-app',

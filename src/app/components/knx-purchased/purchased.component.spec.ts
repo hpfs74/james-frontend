@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -23,5 +23,37 @@ describe('Component: Purchased', () => {
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('.knx-purchased'));
     el = de.nativeElement;
+  });
+
+  it('should show insurances and greetings', () => {
+    comp.title = 'Hello World';
+    comp.insurances = [
+      {
+        license: '01XLXL',
+        make: 'Honda',
+        model: 'Civic',
+        insurance_name: 'auto',
+        price: '1234'
+      },
+      {
+        license: '01XLX1',
+        make: 'BMW',
+        model: '3',
+        insurance_name: 'auto',
+        price: '4321'
+      }
+    ];
+
+    fixture.detectChanges();
+
+    let title = de.query(By.css('.knx-purchased__title')).nativeElement;
+    expect(title.textContent).toEqual('Hello World');
+
+    let parElements = de.queryAll(By.css('.knx-list--unstyled li'));
+    expect(parElements).toBeDefined();
+    expect(parElements.length).toEqual(2);
+
+    const first = parElements[0].nativeElement;
+    expect(first.textContent).toContain('01XLXL');
   });
 });

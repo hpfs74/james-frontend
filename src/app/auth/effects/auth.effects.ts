@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
@@ -50,7 +49,7 @@ export class AuthEffects {
           let errorText = JSON.parse(error.text()) || error;
           return Observable.of(new auth.LoginFailure(errorText.error || errorText));
         })
-  );
+    );
 
   @Effect()
   loginAnonymous$ = this.actions$
@@ -71,7 +70,7 @@ export class AuthEffects {
           let errorText = JSON.parse(error.text()) || error;
           return Observable.of(new auth.LoginFailure(errorText.error || errorText));
         })
-  );
+    );
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$
@@ -90,7 +89,7 @@ export class AuthEffects {
     .ofType(auth.LOGOUT)
     .exhaustMap(auth =>
       this.authService.logout()
-  );
+    );
 
   @Effect()
   scheduleRefresh$ = this.actions$
@@ -114,7 +113,7 @@ export class AuthEffects {
           let delay = (exp.setUTCSeconds(tokenExp) - iat.setUTCSeconds(tokenIat)) / 1000;
           return Observable.of(new auth.RefreshToken(token.refresh_token)).delay(delay);
         })
-  );
+    );
 
   @Effect()
   requestCredentials$ = this.actions$
@@ -138,38 +137,38 @@ export class AuthEffects {
       }))
     .catch(error => Observable.of(new auth.RefreshTokenFailure(error)));
 
-    // NOTE: the order of the init effect needs to be preserved as last
-    // see: https://github.com/ngrx/platform/issues/246
-    @Effect()
-    init$: Observable<Action> = defer(() => {
-      let token: AuthToken = this.localStorageService.getToken();
+  // NOTE: the order of the init effect needs to be preserved as last
+  // see: https://github.com/ngrx/platform/issues/246
+  @Effect()
+  init$: Observable<Action> = defer(() => {
+    let token: AuthToken = this.localStorageService.getToken();
 
-      if (token && !token['anonymous']) {
-        // not Anonymous
-        if (this.authService.isLoggedIn()) {
-          // Token is not expired
-          if (token !== null && token.access_token) {
-            this.store$.dispatch(new auth.LoginSuccess({ token: token }));
-            this.store$.dispatch(new auth.ScheduleTokenRefresh(token));
-          } else {
-            this.store$.dispatch(new auth.LoginRedirect());
-          }
-
-          this.store$.dispatch(new insurance.GetPurchasedCarInsurances());
+    if (token && !token['anonymous']) {
+      // not Anonymous
+      if (this.authService.isLoggedIn()) {
+        // Token is not expired
+        if (token !== null && token.access_token) {
+          this.store$.dispatch(new auth.LoginSuccess({ token: token }));
+          this.store$.dispatch(new auth.ScheduleTokenRefresh(token));
         } else {
-          // Token is expired
-          this.localStorageService.clearToken();
           this.store$.dispatch(new auth.LoginRedirect());
         }
+
+        this.store$.dispatch(new insurance.GetPurchasedCarInsurances());
       } else {
-        // Anonymous
-        this.store$.dispatch(new auth.StartAnonymous());
-        this.store$.dispatch(new auth.LoginAnonymous({
-          username: 'user@test.com',
-          password: 'supers3cret@'
-        }));
+        // Token is expired
+        this.localStorageService.clearToken();
+        this.store$.dispatch(new auth.LoginRedirect());
       }
-    });
+    } else {
+      // Anonymous
+      this.store$.dispatch(new auth.StartAnonymous());
+      this.store$.dispatch(new auth.LoginAnonymous({
+        username: 'user@test.com',
+        password: 'supers3cret@'
+      }));
+    }
+  });
 
   constructor(
     private actions$: Actions,
