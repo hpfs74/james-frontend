@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -51,7 +50,7 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
   firstName: string;
   isBlurred = false;
 
-  constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute) {
+  constructor(private store$: Store<fromRoot.State>) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);

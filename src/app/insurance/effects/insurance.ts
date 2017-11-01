@@ -11,8 +11,6 @@ import 'rxjs/add/operator/toArray';
 
 import { InsuranceService } from '../services/insurance.service';
 import * as insurance from '../actions/insurance';
-import * as car from '../../car/actions/car';
-
 
 @Injectable()
 export class InsuranceEffects {

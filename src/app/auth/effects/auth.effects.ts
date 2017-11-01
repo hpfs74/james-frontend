@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
@@ -140,7 +139,7 @@ export class AuthEffects {
 
     // NOTE: the order of the init effect needs to be preserved as last
     // see: https://github.com/ngrx/platform/issues/246
-    @Effect()
+  @Effect()
     init$: Observable<Action> = defer(() => {
       let token: AuthToken = this.localStorageService.getToken();
 
