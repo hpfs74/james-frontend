@@ -169,7 +169,12 @@ describe('Component: CarBuyComponent', () => {
       AuthService,
       LocalStorageService,
       LoaderService,
-      CarService,
+      {
+        provide: CarService,
+        useClass: class {
+
+        }
+      },
       {provide: XHRBackend, useClass: MockBackend}]
   };
   setUpTestBed(moduleDef);
@@ -279,7 +284,7 @@ describe('Component: CarBuyComponent', () => {
         );
     }));
 
-    it('should return an error if backend is not available', inject([CarService, AuthHttp, XHRBackend], (carService, mockBackend) => {
+    it('should return an error if backend is not available', inject([XHRBackend], (mockBackend) => {
 
       let value = getMockedInsuranceProposal();
 

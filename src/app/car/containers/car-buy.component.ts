@@ -173,15 +173,6 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   }
 
   submitInsurance(): Observable<any> {
-    // TODO: remove this there's no use for it
-    // Final insurance request submit
-    // const formData = Object.assign({},
-    //   this.contactDetailForm.formGroup.value,
-    //   this.reportingCodeForm.formGroup.value,
-    //   this.checkForm.formGroup.value,
-    //   this.paymentForm.formGroup.value,
-    //   this.acceptFinalTerms
-    // );
 
     if (!this.acceptFinalTerms) {
       return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd'));
