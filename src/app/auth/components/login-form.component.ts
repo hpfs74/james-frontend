@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { LoginForm } from './login.form';
 import { Store } from '@ngrx/store';
 import { CustomError } from '../models/login-error';
+import * as FormUtils from '../../utils/base-form.utils';
 
 /**
  * @export
@@ -34,5 +35,10 @@ export class LoginFormComponent {
 
   login(event: any) {
     this.onLogin.emit(event);
+  }
+
+  loginAndShowErrors(event) {
+    this.login(event);
+    FormUtils.showFormErrors(this.form);
   }
 }

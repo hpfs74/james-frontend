@@ -8,20 +8,20 @@ import { Component, Input } from '@angular/core';
       <span>Minimaal</span>
       <span
         [ngClass]="{
-          'knx-password__error': password && !passwordLength(),
-          'knx-password__good': password && passwordLength() }">8 karakters</span> -
+          'knx-password__error': !passwordLength(),
+          'knx-password__good': passwordLength() }">8 karakters</span> -
       <span
         [ngClass]="{
-          'knx-password__error': password && !containsAtLeastOneNumber(),
-          'knx-password__good': password && containsAtLeastOneNumber() }">1 cijfer</span> -
+          'knx-password__error': !containsAtLeastOneNumber(),
+          'knx-password__good': containsAtLeastOneNumber() }">1 cijfer</span> -
       <span
         [ngClass]="{
-            'knx-password__error': password && !containsAtLeastOneCap(),
-            'knx-password__good': password && containsAtLeastOneCap() }">1 hoofletter</span> -
+            'knx-password__error': !containsAtLeastOneCap(),
+            'knx-password__good': containsAtLeastOneCap() }">1 hoofletter</span> -
       <span
         [ngClass]="{
-            'knx-password__error': password && !containerAtLeastOneLowerCase(),
-            'knx-password__good': password && containerAtLeastOneLowerCase() }">1 kleine letter</span>
+            'knx-password__error': !containerAtLeastOneLowerCase(),
+            'knx-password__good': containerAtLeastOneLowerCase() }">1 kleine letter</span>
     </div>
   `
 })
@@ -29,18 +29,30 @@ export class PasswordStrengthComponent  {
   @Input() password: string;
 
   passwordLength(): boolean {
-    return this.password.length >= 8;
+    if (this.password) {
+      return this.password.length >= 8;
+    }
+    return false;
   }
 
   containsAtLeastOneNumber(): boolean {
-    return /[0-9]/.test(this.password);
+    if (this.password) {
+      return /[0-9]/.test(this.password);
+    }
+    return false;
   }
 
   containsAtLeastOneCap(): boolean {
-    return /[A-Z]/.test(this.password);
+    if (this.password) {
+      return /[A-Z]/.test(this.password);
+    }
+    return false;
   }
 
   containerAtLeastOneLowerCase(): boolean {
-    return /[a-z]/.test(this.password);
+    if (this.password) {
+      return /[a-z]/.test(this.password);
+    }
+    return false;
   }
 }

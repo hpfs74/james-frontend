@@ -16,7 +16,6 @@ export class RegistrationForm extends BaseForm {
 
   constructor(private fb: FormBuilder) {
     super();
-
     this.formGroup = this.fb.group({
       email: [null, Validators.compose(
         [
@@ -28,12 +27,12 @@ export class RegistrationForm extends BaseForm {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)]
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+        ]
       )],
       confirm: [null, Validators.compose(
         [
-          Validators.required,
-          Validators.pattern('true')
+          Validators.requiredTrue
         ]
       )]
     });
@@ -44,6 +43,7 @@ export class RegistrationForm extends BaseForm {
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
         placeholder: 'E-mailadres',
+        showErrorMessages: false,
         label: 'Je email',
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
@@ -56,20 +56,22 @@ export class RegistrationForm extends BaseForm {
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
         placeholder: 'Wachtwoord',
+        showErrorMessages: false,
         hideErrors: ['pattern', 'minlength'],
         label: 'Wachtwoord',
         type: 'password',
+        showPasswordStrenght: true,
         attributes: {
           'aria-label': 'Vul je wachtwoord in',
           'addonleft': true,
-          'addonicon': 'knx-icon-lock',
-          'data-type': 'password'
+          'addonicon': 'knx-icon-lock'
         }
       },
       confirm: {
         formControlName: 'confirm',
         formControl: this.formGroup.get('confirm'),
         validationErrors: this.validationErrors,
+        showErrorMessages: false,
         inputOptions: {
           type: 'checkbox',
           attributes: {

@@ -7,61 +7,13 @@ import { Observable } from 'rxjs/Rx';
   selector: 'knx-input',
   providers: [getCXValueAccessor(KNXInputComponent)],
   styleUrls: ['./input.component.scss'],
-  template: `
-<div class="knx-input" [class.knx-input--error]="getErrors()" [class.knx-input--valid]="(isValid$ | async)">
-    <label *ngIf="options.label">{{ options.label }}</label>
-    <div class="knx-input__wrapper">
-      <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
-      <span *ngIf="(isValid$ | async) && options.attributes['data-type'] != 'password'"
-        [ngClass]="['knx-input__valid', 'knx-icon-check']">
-      </span>
-
-      <input class="knx-input__input" #inputControl
-        *ngIf="!options.textMask"
-          (blur)="onTouchedCallback()"
-          [(ngModel)]="value"
-          [placeholder]="options.placeholder"
-          [disabled]="options.disabled"
-          [type]="options.type"
-          [ngClass]="{
-            'knx-input__addon-left': hasAddonLeft(),
-            'knx-input__input--disabled': options.disabled
-          }">
-
-      <input class="knx-input__input" #inputControl
-        *ngIf="options.textMask"
-        (blur)="onTouchedCallback()"
-        [(ngModel)]="value"
-        [placeholder]="options.placeholder"
-        [disabled]="options.disabled"
-        [type]="options.type"
-        [textMask]="options.textMask"
-        [ngClass]="{
-          'knx-input__addon-left': hasAddonLeft(),
-          'knx-input__input--disabled': options.disabled
-        }">
-
-      <button type="button"
-        *ngIf="options.attributes['data-type'] != undefined && options.attributes['data-type'] == 'password' && options.formControl.value"
-        class="knx-input__show-password knx-icon-eye"
-        [class.knx-icon-eye-slash]="showPassword"
-        [class.knx-icon-eye]="!showPassword"
-        (click)="toggleShowPassword($event)">
-      </button>
-
-      <div class="knx-input__error_message" *ngIf="getVisibleErrors()">
-        <p *ngFor="let error of getErrors()">{{error}}</p>
-      </div>
-    </div>
-</div>
-`
+  templateUrl: './input.component.html'
 })
 export class KNXInputComponent extends CXFormComponent implements OnInit {
   @Input() options: KNXInputOptions;
 
   showPassword = false;
   isValid$: Observable<boolean>;
-
   constructor(public elementRef: ElementRef) {
     super(elementRef, KNX_INPUT_DEFAULT_OPTIONS);
   }
@@ -78,6 +30,16 @@ export class KNXInputComponent extends CXFormComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  getErrorList() {
+    if (this.options.showErrorMessages !== undefined) {
+      if (this.options.showErrorMessages) {
+        return this.getVisibleErrors();
+      }
+      return null;
+    }
+    return this.getVisibleErrors();
   }
 
   getVisibleErrors() {
