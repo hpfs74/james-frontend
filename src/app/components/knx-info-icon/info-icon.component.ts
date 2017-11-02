@@ -40,7 +40,7 @@ export class InfoIconComponent implements OnInit {
   ngOnInit() {
     if (!this._options) {
       this._options = {
-        delay: 300,
+        delay: 200,
         hideCloseButton: false,
         position: 'bottom',
         showOn: 'click',

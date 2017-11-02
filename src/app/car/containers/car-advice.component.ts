@@ -3,7 +3,7 @@ import { FormBuilder, AbstractControl } from '@angular/forms';
 import { KNXStepOptions } from '@knx/wizard';
 import { KNXWizardComponent } from '@knx/wizard';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import * as cuid from 'cuid';
 
 import * as fromRoot from '../../reducers';

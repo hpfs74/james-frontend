@@ -17,3 +17,9 @@ hr {
   border-bottom: 2px $knab-primary-gray solid;
 }
 
+@media (min-width: 768px) {
+  .car-form__coverages h2 {
+    margin-bottom: 0x;
+  }
+}
+

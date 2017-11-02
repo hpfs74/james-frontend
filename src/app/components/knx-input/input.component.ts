@@ -1,7 +1,7 @@
 import { Component, Input, ElementRef, OnInit } from '@angular/core';
 import { KNXInputOptions, KNX_INPUT_DEFAULT_OPTIONS } from './input.options';
 import { CXFormComponent, getCXValueAccessor } from '@cx/form-control';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'knx-input',
