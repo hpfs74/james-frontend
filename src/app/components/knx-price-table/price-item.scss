@@ -1,0 +1,13 @@
+@import '~styles/base.scss';
+
+.knx-price-item {
+  .knx-list--checks {
+    padding: 20px;
+  }
+
+  .knx-list--white {
+    li {
+      color: #fff;
+    }
+  }
+}
