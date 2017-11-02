@@ -116,15 +116,14 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="car-form__coverages">
-        <ng-container>
-          <h2>Je dekkingswensen</h2>
-          <knx-price-table
-            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
-            [items]="coverages"
-            [highlight]="coverageRecommendation?.recommended_value"
-            (onSelected)="onSelectCoverage($event)">
-          </knx-price-table>
-        </ng-container>
+        <h2>Je dekkingswensen</h2>
+
+        <knx-price-table
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
+          [items]="coverages"
+          [highlight]="coverageRecommendation?.recommended_value"
+          (onSelected)="onSelectCoverage($event)">
+        </knx-price-table>
 
         <div class="knx-message knx-message--error" *ngIf="isCoverageError">
           Er is een fout opgetreden bij het ophalen van het dekkingsadvies.
