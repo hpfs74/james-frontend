@@ -27,7 +27,7 @@ export class TestHostComponent {
   loading = false;
   loaded = false;
   validationErrors = {
-    required: () => 'Dit veld is verplicht',
+    required: () => 'Dit is een verplicht veld',
     address: () => 'Error',
     postalCode: () => `Vul een geldige postcode`,
     houseNumber: () => `Vul een huisnummer in`,

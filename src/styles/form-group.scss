@@ -1,3 +1,4 @@
+/// KNX-INFO
 .knx-form-group--info {
   .cx-form-group {
     padding-right: 25px;
@@ -52,6 +53,25 @@ cx-checkbox + .knx-info {
 
     .knx-message--chat:first-child:before {
       top: -9px;
+    }
+  }
+}
+
+/// KNX-TOOLTIP
+.knx-form-group--info {
+  .knx-info-icon {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+  }
+}
+
+@media (min-width: 768px) {
+  .knx-form-group--info {
+    .knx-tooltip-wrapper--visible {
+      margin-left: -42px;
+      margin-top: 15px;
+      min-width: 300px;
     }
   }
 }

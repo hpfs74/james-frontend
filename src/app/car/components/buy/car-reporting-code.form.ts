@@ -13,7 +13,7 @@ export class CarReportingCodeForm extends BaseForm {
   securityClasses: Array<any>;
 
   public validationErrors = {
-    required: () => 'Dit veld is verplicht',
+    required: () => 'Dit is een verplicht veld',
     reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
   };
 

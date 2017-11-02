@@ -11,11 +11,11 @@ export class ContactDetailForm extends BaseForm {
   initialMask = nameInitialMask;
 
   public validationErrors = {
-    required: () => 'Dit veld is verplicht',
-    minlength: () => 'Ongeldig telefoonnummer',
-    mobileNumber: () => 'Ongeldig telefoonnummer',
-    phoneNumber: () => 'Ongeldig telefoonnummer',
-    maxlength: (err) => `Je kunt maximaal ${err.requiredLength} tekens invullen`
+    required: () => 'Dit is een verplicht veld',
+    minlength: () => 'Het ingevulde telefoonnummer is niet geldig',
+    mobileNumber: () => 'Het ingevulde mobiele nummer is niet geldig',
+    phoneNumber: () => 'Het ingevulde telefoonnummer is niet geldig',
+    maxlength: (err) => `Vul maximaal ${err.requiredLength} tekens in`
   };
 
   constructor(private fb: FormBuilder) {

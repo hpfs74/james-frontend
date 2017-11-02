@@ -2,6 +2,7 @@
 @import 'styles/base';
 @import '../node_modules/@knx/base/index';
 @import '../node_modules/@knx/grid/index';
+@import '../node_modules/@knx/tooltip/index';
 
 /* cx and other external component overrides */
 @import 'styles/overrides';
@@ -142,7 +143,7 @@ input::-ms-clear {
 }
 
 @include selectors {
-  filter: blur(0);
+  filter: none;
   transition: 0.1s filter linear;
 }
 

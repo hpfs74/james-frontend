@@ -12,6 +12,7 @@ import { KNXWizardModule } from '@knx/wizard';
 import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXInfoModule } from '@knx/info';
+import { KNXTooltipModule } from '@knx/tooltip';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
 import { KNXInputComponent } from './components/knx-input/input.component';
@@ -58,6 +59,7 @@ import { LicensePlateComponent } from './components/knx-input-licenseplate/licen
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
+import { InfoIconComponent } from './components/knx-info-icon/info-icon.component';
 import { NavbarComponent } from './components/knx-navbar';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
@@ -106,6 +108,7 @@ export const sharedComponents = [
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
+  InfoIconComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,
   OfflineBarComponent,
@@ -135,6 +138,7 @@ export const sharedModules = [
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
   KNXInfoModule,
+  KNXTooltipModule,
   KNXModalDialogModule,
   DropdownModule
 ];

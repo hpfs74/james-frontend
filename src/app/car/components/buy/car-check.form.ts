@@ -8,7 +8,7 @@ export class CarCheckForm extends BaseForm {
   formConfig: any;
 
   public validationErrors = {
-    required: () => 'Dit veld is verplicht'
+    required: () => 'Dit is een verplicht veld'
   };
 
   constructor( private fb: FormBuilder ) {
