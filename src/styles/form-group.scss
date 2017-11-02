@@ -8,25 +8,25 @@
     width: 98%;
   }
 
-  .knx-info {
-    position: absolute;
-    top: 36px;
-    right: 10px;
-    display: block;
-  }
+  // .knx-info {
+  //   position: absolute;
+  //   top: 36px;
+  //   right: 10px;
+  //   display: block;
+  // }
 
-  &.knx-form-group--no-label-info .knx-info {
-    top: 60px;
-  }
+  // &.knx-form-group--no-label-info .knx-info {
+  //   top: 60px;
+  // }
 
-  .knx-info--description {
-    top: 64px;
-  }
+  // .knx-info--description {
+  //   top: 64px;
+  // }
 
-  .knx-info--floating {
-    position: absolute;
-    top: 40px;
-  }
+  // .knx-info--floating {
+  //   position: absolute;
+  //   top: 40px;
+  // }
 }
 
 cx-checkbox + .knx-info {
@@ -58,12 +58,23 @@ cx-checkbox + .knx-info {
 }
 
 /// KNX-TOOLTIP
-.knx-form-group--info {
-  .knx-info-icon {
-    position: absolute;
-    top: 36px;
-    right: 10px;
-    display: block;
+.car-detail-form {
+  .knx-form-group--info {
+    .knx-info-icon {
+      position: absolute;
+      top: 36px;
+      right: 10px;
+      display: block;
+    }
+  }
+}
+
+.knx-car-extras {
+  .knx-form-group--info {
+    .knx-info-icon {
+      float: right;
+      margin-top: -35px;
+    }
   }
 }
 
