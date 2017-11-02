@@ -33,6 +33,7 @@ import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 import { IbanForm } from '../../shared/forms/iban.form';
 import { BaseForm } from '../../shared/forms/base-form';
 import * as FormUtils from '../../utils/base-form.utils';
+import { getInitialState } from './car-buy.component.spec';
 
 @Component({
   selector: 'knx-car-buy',
@@ -178,35 +179,31 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd'));
     }
 
-    // Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
-    //   (profile, advice, insurance, car) => {
-    //     return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
-    //   })
-    //   .subscribe((value) => {
-    //       const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
-    //       this.store$.dispatch(new car.BuyAction(proposalData));
-    //     },
-    //     err => {
-    //       return Observable.throw(new Error());
-    //     });
+    Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
+      (profile, advice, insurance, car) => {
+        return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
+      })
+      .subscribe((value) => {
+        const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
+        this.store$.dispatch(new car.BuyAction(proposalData));
+      });
 
-    return this.store$.combineLatest(
+    return Observable.combineLatest(
       this.store$.select(fromCar.getCarBuyComplete),
       this.store$.select(fromCar.getCarBuyError),
-      (complete, error) => ({complete: complete, error: error})
-    )
+      (complete, error) => ({complete: complete, error: error}))
       .take(1)
       .map(combined => {
         if (combined.error) {
-          return Observable.throw(new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.'));
-        } else {
-          // Navigate to thank you page
-          return this.store$.select(fromProfile.getProfile)
-            .filter(profile => !!profile.emailaddress)
-            .subscribe((profile) => {
-              this.store$.dispatch(new router.Go({path: ['/car/thank-you', profile.emailaddress]}));
-            });
+          throw new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.');
         }
+
+        // Navigate to thank you page
+        return this.store$.select(fromProfile.getProfile)
+          .filter(profile => !!profile.emailaddress)
+          .subscribe((profile) => {
+            return this.store$.dispatch(new router.Go({path: ['/car/thank-you', profile.emailaddress]}));
+          });
       });
   }
 

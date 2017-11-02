@@ -42,6 +42,9 @@ import { AuthHttp } from '../../auth/services/auth-http.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { LocalStorageService } from '../../core/services/localstorage.service';
 import { LoaderService } from '../../components/knx-app-loader/loader.service';
+import { BuyCompleteAction, BuyFailureAction } from '../actions/car';
+import { observable } from 'rxjs/symbol/observable';
+import { Profile } from '../../profile/models/profile';
 
 
 let getMockedInsuranceProposal = () => {
@@ -284,28 +287,48 @@ describe('Component: CarBuyComponent', () => {
         );
     }));
 
-    it('should return an error if backend is not available', inject([XHRBackend], (mockBackend) => {
-
-      let value = getMockedInsuranceProposal();
-
+    it('should return an error on buyErrorAction', async(() => {
+      let data = getMockedInsuranceProposal();
+      comp.targetComponent.car$ = Observable.of(data.carInfo);
+      comp.targetComponent.insurance$ = Observable.of(data.insuranceInfo);
+      comp.targetComponent.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
+      comp.targetComponent.advice$ = Observable.of(data.adviceInfo);
       comp.targetComponent.acceptFinalTerms = true;
-
-      mockBackend.connections.subscribe((connection) => {
-        connection.mockError(new Error('some error'));
-      });
+      store.dispatch(new BuyFailureAction(new Error()));
 
       fixture.detectChanges();
 
       let res = comp.targetComponent
         .submitInsurance()
-        .subscribe(
-          data => {
+        .subscribe(data => {
+
             expect(false).toBeTruthy('Should not pass here');
           },
           err => {
             expect(err).toBeDefined();
-            expect(err.message).toBe('some error');
+            expect(err.message).toBe('Er is helaas iets mis gegaan. Probeer het later opnieuw.');
           }
+        );
+    }));
+
+    it('should route to thankYouPage on success', async(() => {
+      let data = getMockedInsuranceProposal();
+      comp.targetComponent.car$ = Observable.of(data.carInfo);
+      comp.targetComponent.insurance$ = Observable.of(data.insuranceInfo);
+      comp.targetComponent.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
+      comp.targetComponent.advice$ = Observable.of(data.adviceInfo);
+      comp.targetComponent.acceptFinalTerms = true;
+      store.dispatch(new BuyCompleteAction({}));
+
+      let expectedAction = new router.Go({path: ['/car/thank-you', data.profileInfo.emailaddress]});
+      fixture.detectChanges();
+
+      let res = comp.targetComponent
+        .submitInsurance()
+        .subscribe(
+          () => expect(true).toBeTruthy(),
+          () => expect(false).toBeTruthy('Should not pass here'),
+          // () => expect(store.dispatch).toHaveBeenCalledWith(expectedAction)
         );
     }));
   });
