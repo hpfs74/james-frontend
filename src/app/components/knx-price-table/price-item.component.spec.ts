@@ -48,21 +48,21 @@ describe('Component: PriceItem', () => {
   });
 
   it('should display list of features', () => {
-    const inputDe = fixture.debugElement.query(By.css('ul.knx-price-item__features'));
+    const inputDe = fixture.debugElement.query(By.css('ul.knx-list--checks'));
     const el = inputDe.nativeElement;
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-price-item__features > li').length).toBe(4);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-list--checks > li').length).toBe(4);
   });
 
   it('should display list of features change adding one more', () => {
-    const inputDe = fixture.debugElement.query(By.css('ul.knx-price-item__features'));
+    const inputDe = fixture.debugElement.query(By.css('ul.knx-list--checks'));
     const el = inputDe.nativeElement;
 
     comp.features.push('Feat5');
     fixture.detectChanges();
 
     expect(el).not.toBeNull();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-price-item__features > li').length).toBe(5);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('ul.knx-list--checks > li').length).toBe(5);
   });
 
   it('should display a not highlighted header by default', () => {
