@@ -28,8 +28,8 @@ export class CarReportingCodeForm extends BaseForm {
         auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
         Het zijn de laatste 4 cijfers van het chassisnummer.`,
       accessory: `
-        <p>Accessoires zijn bijvoorbeeld een alarminstallatie, een trekhaak, lichtmetalen velgen of een ingebouwde autoradio.</p>
-        <p>Bij diefstal krijg je de dagwaarde terug van de verzekering.</p>`
+        <p>Accessoires zijn bijvoorbeeld een losse alarminstallatie, de trekhaak, lichtmetalen velgen of een ingebouwde autoradio.</p>
+        <p>Bij diefstal krijg je de dagwaarde van de accessoires terug van je verzekering.</p>`
     };
 
     this.securityClasses = SecurityClasses;

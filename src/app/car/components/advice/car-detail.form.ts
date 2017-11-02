@@ -114,19 +114,19 @@ export class CarDetailForm extends BaseForm {
           events: ['focus'],
           items: [
             {
-              label: 'Alleen ikzelf',
+              label: 'Alleen ik',
               value: 'CHM'
             },
             {
-              label: 'Ik en mijn partner',
+              label: 'Mijn partner en ik',
               value: 'CHMP'
             },
             {
-              label: 'Ik, mijn partner en de kind(eren)',
+              label: 'Mijn partner, kinderen en ik',
               value: 'CHMPK'
             },
             {
-              label: 'Ik en mijn kind(eren)',
+              label: 'Mijn kinderen en ik',
               value: 'CHMK'
             }
           ]

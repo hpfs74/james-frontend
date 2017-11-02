@@ -59,7 +59,7 @@ export class CarProposalHelper {
     { key: 'Beveiliging', value: 'securityClass', transform: (value) => 'SCM klasse ' + value.slice(-1) },
     { key: 'Hoofddekking', value: 'coverage', transform: CarUtils.getCoverage },
     { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
-    { key: 'Inzittenden meeverzekeren', value: 'cover_occupants', transform: this.getBoolean },
+    { key: 'Inzittendenverzekering', value: 'cover_occupants', transform: this.getBoolean },
     { key: 'Slotvragen', value: '' },
     // FirstName is a mandatory field to buy an insurance
     { key: 'Voornaam', value: 'name'}

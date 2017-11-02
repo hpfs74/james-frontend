@@ -1,5 +1,4 @@
 import { Price } from '../../shared/models';
-import { Address } from '../../address/models/address';
 import { Car } from '../../car/models';
 
 export class AssistantConfig {
@@ -29,13 +28,15 @@ export class AssistantConfig {
       Ben je er klaar voor? Let\'s do this!`,
     info: {
       houseHold: `Je premie kan veranderen afhankelijk van je huishoudelijke status`,
-      niceCar: (car: Car) => `Molto bello! Mooie auto die <strong>${car.make} ${car.model}`,
+      niceCar: (car: Car) => `Gaaf! Je hebt een <strong>${car.make} ${car.model}`,
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
       },
-      CL: `<strong>WA - Wettelijke Aansprakelijkheid:</strong> alleen schade die jij toebrengt aan anderen is gedekt.`,
-      CLC: `<strong>Beperkt casco:</strong> naast schade aan anderen is ook brand- ruit- en diefstalschade van je eigen auto gedekt.`,
-      CAR: `<strong>All risk:</strong> Schade aan anderen en vrijwel alle eigen schade is gedekt.`,
+      CL: `<strong>WA (Wettelijke Aansprakelijkheid):</strong> Met een WA beperkt casco dekking ben je naast de gewone
+        WA ook verzekerd voor schade door brand of storm, ruitschade, diefstal en schade door aanrijding met dieren.`,
+      CLC: `<strong>WA + Casco:</strong> naast schade aan anderen is ook brand- ruit- en diefstalschade van je eigen auto gedekt.`,
+      CAR: `<strong>Allrisk:</strong> Met een Allrisk dekking ben je het meest gedekt. Met deze verzekering krijg je
+        bijna alle schades vergoed – ook door eigen schuld – en heb je recht op vervangend vervoer bij onherstelbare schade.`,
       noClaimProtection: '',
       legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
         Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
@@ -47,8 +48,8 @@ export class AssistantConfig {
         next: 'Wat wil je doen?'
       },
       review: {
-        unsupported: `Dit zou jouw nieuwe verzekering kunnen zijn! Bekijk alle gegevens even goed om
-          een goed beeld te krijgen van de verzekering.`,
+        unsupported: `Dit kan jouw nieuwe verzekering zijn! Lees de gegevens zorgvuldig door, zodat je een goed beeld
+         krijgt van de verzekering.`,
         title: `In 3 minuten vraag je een verzekering aan:`,
         steps: `
         1. Check je persoonsgegevens <br>
@@ -67,7 +68,8 @@ export class AssistantConfig {
       check: (insurer: string) => `Je hebt gekozen voor ${insurer}. ${insurer} heeft nog enkele vragen voor je,
         voordat de aanvraag verstuurd kan worden.`,
       payment: 'Nog heel even! Van welk rekeningnummer mag je premie straks worden afgeschreven?',
-      summary: 'Bijna klaar! Van welk rekeningnummer mag je premie straks afgeschreven worden?',
+      summary: 'We zijn er bijna! Kun je nog een keer de ingevulde gegevens controleren? Zo weet je zeker dat' +
+        ' de verzekeraar de juiste informatie krijgt.',
       thankyou: `Gefeliciteerd met je nieuwe autoverzekering!  De polis van je autoverzekering is verstuurd
       en wordt binnen 3 dagen goedgekeurd. We houden je op de hoogte!`,
       finalEmail: (email: string) => `Een kopie van de polis is verstuurd naar: ${email}`

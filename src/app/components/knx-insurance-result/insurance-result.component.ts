@@ -27,7 +27,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
           <div class="col-sm-4">
             <div class="row">
               <div class="col-sm-6 knx-insurance-result__own-risk knx-insurance-result__price">
-                {{ insurance.own_risk | currency:'EUR':true }}<br><span>Eigen risico</span>
+                {{ insurance.own_risk | currency:'EUR':true }}<br><span>Maximaal eigen risico</span>
               </div>
               <!--div class="col-sm-6 knx-insurance-result__reviews">
                 9.3<br><span>{{ insurance.reviews_amount }} reviews</span>
@@ -105,15 +105,11 @@ export class InsuranceResultComponent {
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
 
   public infoMessages = {
-    profileScore: `De profielscore geeft aan hoe goed de verzekering past bij jouw profiel: hoe hoger, hoe beter.
-      Een score van 75% betekent dat de verzekering goed aansluit bij jouw wensen en situatie.<br>Wij berekenen de
-      score op basis van het profiel dat jij instelt. We toetsen de verzekering op meer dan 100 criteria om te bepalen
-      wat jij belangrijk vindt ook goed scoort binnen de verzekering. Zo betaal je voor wat jij
-      belangrijk vindt en voorkom je verassingen.`,
-    priceQuality: `In het overzicht zie je een profielscore en prijs\-kwaliteitscore. De verzekering met de hoogste prijs\-kwaliteitscore
-      staat bovenaan. Verzekeringen die je via Knab afsluit, regel je direct tegen een vaste lage vergoeding van 10%. Verzekeringen die je
-      niet via ons kunt afsluiten, laten we toch zien. We verwijzen je dan naar de website van de verzekeraar. Zo heb je altijd een compleet
-      beeld van wat er te koop is. Wel zo eerlijk natuurlijk.`
+    profileScore: `De profielscore geeft aan hoe goed de verzekering past bij jou profiel. Hoe hoger de score, hoe bevter.
+      Een score van minstens 75% betekent dat de verzekering goed aansluit bij jouw wensen en je situatie.`,
+    priceQuality: `We berekenen de score op basis van het profiel dat jij instelt. We toetsen de verzekering op meer
+      dan 100 criteria om te bepalen of wat jij belangrijk vindt, ook goed scoort binnen de verzekering.
+      Zo betaal je voor wat jij belangrijk vindt en voorkom je verrassingen. `
   };
 
   select(event) {

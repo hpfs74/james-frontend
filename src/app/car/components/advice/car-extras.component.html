@@ -20,15 +20,16 @@
         <div class="knx-info__content">
           <div class="knx-message knx-message--arrow-top knx-message--dropdown-shim">
             <div class="knx-message__content">
-              Pechhulp : Deze extra dekking sluit je af vanaf  € 3 per maand. <br/>
-              Fijn als je bij pech kunt rekenen op pechhulp en snel weer de weg op kunt.
-              Heb je een reisverzekering? Check dan even of pechhulp in het buitenland daar al in zit.
-              En heb je een nieuwe auto? Dan heb je vaak het eerste jaar gratis pechhulp van de dealer.
+              <strong>Pechhulp</strong>: Deze extra dekking sluit je af vanaf € 3 per maand.
+              Met deze dekking weet je dat je bij pech onderweg kunt rekenen op hulp en snel weer verder kan.
 
               <ul>
-                <li>Binnen Nederland : Pechhulp in heel Nederland is gedekt.</li>
-                <li>Binnen Europa : Pechhulp in heel Europa is gedekt</li>
+                <li>Binnen Nederland: Pechhulp in heel Nederland is gedekt.</li>
+                <li>Binnen Europa: Pechhulp in heel Europa is gedekt.</li>
               </ul>
+
+              Heb je een reisverzekering? Check dan even of pechhulp in het buitenland daar al in zit. Heb je een nieuwe auto?
+              Dan heb je vaak het eerste jaar gratig pechhulp van de dealer. Door dit te checken voorkom je een dubbele verzekering.
             </div>
           </div>
         </div>
@@ -37,8 +38,7 @@
   </knx-collapse-message>
 
   <knx-collapse-message [ngClass]="optionModifierClass" title="Aanvullende dekkingen" [isOpen]="true">
-    <div class="">
-      <!---->
+    <div>
       <cx-checkbox
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="legal"
         [formControlName]="form.formConfig.extraOptionsLegal.formControlName"
@@ -57,7 +57,6 @@
     </div>
 
     <div>
-      <!---->
       <cx-checkbox
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="extraOptionsNoClaim"
         [formControlName]="form.formConfig.extraOptionsNoClaim.formControlName"
@@ -67,7 +66,7 @@
         <div class="knx-info__content">
           <div class="knx-message knx-message--arrow-top">
             <div class="knx-message__content">
-              <strong>No-claim beschermer</strong>: Deze extra dekking sluit je af vanaf  € 4 per maand. <br/>
+              <strong>No-claimbeschermer</strong>: Deze extra dekking sluit je af vanaf  € 4 per maand. <br/>
               Hiermee kun je elk jaar een keer schade door je eigen schuld claimen zonder dat de premie van je lopende verzekering omhoog gaat. <br/>
               Nadeel is dat de registratie van je schadevrije jaren wel wordt aangepast. Dat is vervelend als je wilt veranderen van verzekeraar, want dan betaal je plots een hogere premie vanwege je schadevrije jaren.
             </div>
@@ -77,7 +76,6 @@
     </div>
 
     <div>
-      <!---->
       <cx-checkbox
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="extraOptionsOccupants"
         [formControlName]="form.formConfig.extraOptionsOccupants.formControlName"
@@ -87,8 +85,9 @@
         <div class="knx-info__content">
           <div class="knx-message knx-message--arrow-top">
             <div class="knx-message__content">
-              <strong>Inzittenden verzekering</strong> : Deze extra dekking sluit je af vanaf  € 4 per maand. <br/>
-              Hiermee dek je de materiele schade die jij als bestuurder, je passagiers of bagage oplopen bij een aanrijding. Zeker handig om af te sluiten als je bijvoorbeeld regelmatig met je hele gezin in de auto zit.
+              <strong>Inzittendenverzekering</strong>: Je sluit deze dekking af vanaf €  4 per maand. <br/>
+              Je dekt hiermee de materiële schade af die jij als bestuurder, je passagiers en/of de bagage kunnen
+              oplopen bij een aanrijding. Dit dekking is handig als je bijvoorbeeld vaak met het hele gezin in de auto zit.
             </div>
           </div>
         </div>
@@ -97,7 +96,7 @@
 
   </knx-collapse-message>
 
-  <knx-collapse-message [ngClass]="optionModifierClass" title="Aantal KM per jaar" [isOpen]="true">
+  <knx-collapse-message [ngClass]="optionModifierClass" title="Aantal km per jaar" [isOpen]="true">
     <cx-form-group
       knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="kmPerYear"
       [options]="form.formConfig.kmPerYear"
@@ -105,7 +104,7 @@
     </cx-form-group>
   </knx-collapse-message>
 
-  <knx-collapse-message [ngClass]="optionModifierClass" title="Eigen risico" [isOpen]="true">
+  <knx-collapse-message [ngClass]="optionModifierClass" title="Maximaal eigen risico" [isOpen]="true">
     <cx-form-group class="own-risk"
       knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="ownRisk"
       [options]="form.formConfig.ownRisk"
