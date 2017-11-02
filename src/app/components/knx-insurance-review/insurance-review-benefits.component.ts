@@ -6,9 +6,8 @@ import { Component, Input } from '@angular/core';
   template: `
     <div *ngIf="!supported; else supportedBenefits" class="knx-message knx-message--information knx-message--icon-center">
       <div class="knx-message__content">
-        Deze verzekering is nog niet aangesloten bij Knab Verzekeren. Hij staat er
-        wel tussen, omdat we je graag een passend en compleet advies en vergelijking
-        geven.
+        Deze verzekering is (nog) niet aangesloten bij Knab Verzekeren.
+        Hij staat er wel tussen, omdat we je graag een compleet en passend advies willen geven.
       </div>
     </div>
 

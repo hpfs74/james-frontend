@@ -282,7 +282,7 @@ describe('CarProposalHelper', () => {
       {'Beveiliging': 'SCM klasse 3'},
       {'Hoofddekking': 'Aansprakelijkheid + Volledig casco'},
       {'Rechtsbijstand meeverzekeren': 'Nee'},
-      {'Inzittenden meeverzekeren': 'Nee'},
+      {'Inzittendenverzekering': 'Nee'},
       {'Slotvragen': ''},
       {'Voornaam': 'Test User Name'}
     ];

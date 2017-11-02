@@ -4,8 +4,7 @@ export const DefaultCoverages = [
     header: 'WA',
     badge: 'ons advies',
     features: [
-      'Schade door vandalisme',
-      'Schade door eigen schuld'
+      'Schade die jij aan anderen toebrengt'
     ],
     highlight: false
   },
@@ -16,8 +15,8 @@ export const DefaultCoverages = [
     features: [
       'Brand en storm',
       'Ruitschade',
-      'Schade door vandalisme',
-      'Schade door eigen schuld'
+      'Diefstal',
+      'Schade door aanrijding met dieren'
     ],
     highlight: false
   },

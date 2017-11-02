@@ -6,14 +6,12 @@
           <h2 class="knx-register-thankyou__subline">Bedankt voor je registratie!</h2>
           <p>Een email is verstuurd naar {{email}}.</p>
         </div>
-  
+
         <ol>
-          <li>Klik op "<span>activeer account</span>" in de e-mail om je account in gebruik te nemen</li>
-          <li>Heb je step 1 gadaan?<br>
-              Klik dan hieronder op "<span>NAAR INLOGGEN</span>"<br>
-              om verder te gaan.
-          </li>
+          <li>Klik op <strong>"bevestig account"</strong> in de e-mail om je account in gebruik te nemen.</li>
+          <li>Stap 1 gedaan? Klik dan hieronder op <strong>"naar inloggen"</strong> om verder te gaan.</li>
         </ol>
+
         <button class="knx-button knx-button--primary" (click)="login()">Naar inloggen</button>
       </div>
     </div>
@@ -22,7 +20,8 @@
   <div class="row">
     <div class="col-md-12 knx-register-thankyou__bottom">
       <h4>Geen mail ontvangen?</h4>
-      <p>Kijk in je spam folder of verstuur de e-mail nogmaals</p>
+
+      <p>Kijk bij de ongewenste e-mail of verstuur de e-mail nogmaals.</p>
 
       <button class="knx-button knx-button--secondary"
               (click)="resendActivationEmail()"
@@ -34,8 +33,6 @@
 
       <p class="knx-message" *ngIf="message">{{message}}</p>
       <p class="knx-message--error" *ngIf="error">{{errorMessage}}</p>
-
     </div>
   </div>
-
 </div>

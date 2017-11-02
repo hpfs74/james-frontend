@@ -21,10 +21,10 @@ export class NavigationService {
       {
         id: 'menu-phone',
         icon: 'knx-icon-phone',
-        title: '020-303 1680',
+        title: '020-3031600',
         routePath: '',
         menuType: NavItemType.RIGHT,
-        url: 'tel:0203031680'
+        url: 'tel:0203031600'
       }
     ];
   }

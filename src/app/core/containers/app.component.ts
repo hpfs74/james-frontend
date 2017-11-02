@@ -39,8 +39,8 @@ import * as insurance from '../../insurance/actions/insurance';
     <div *ngIf="isVisible()" class="container-fluid knx-container--fullwidth knx-container--gray">
       <knx-features>
         <knx-feature-item title="Objectief" description="We vergelijken meer dan 20 verzekeraars"></knx-feature-item>
-        <knx-feature-item title="Bespaar" description="Tot 15% korting op elke verzekering"></knx-feature-item>
-        <knx-feature-item title="Overstaphulp" description="Wij regelen je overstap'"></knx-feature-item>
+        <knx-feature-item title="Bespaar" description="Krijg tot 15% korting op je autoverzekering"></knx-feature-item>
+        <knx-feature-item title="Overstaphulp" description="Wij regelen je overstap."></knx-feature-item>
       </knx-features>
     </div>
   `,

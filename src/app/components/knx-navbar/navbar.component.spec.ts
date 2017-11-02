@@ -48,7 +48,7 @@ describe('Component: Navbar', () => {
       { id: 'menu-account', title: 'Mijn account', routePath: 'profile', menuType: NavItemType.RIGHT },
       { id: 'menu-faq', title: 'FAQ', routePath: 'faq', menuType: NavItemType.RIGHT },
       { id: 'menu-about', title: 'Over ons', routePath: 'about', menuType: NavItemType.RIGHT },
-      { id: 'menu-phone', icon: 'knx-icon-phone', title: '020-303 1680', routePath: '', menuType: NavItemType.RIGHT, url: 'tel:0203031680' }
+      { id: 'menu-phone', icon: 'knx-icon-phone', title: '020-3031600', routePath: '', menuType: NavItemType.RIGHT, url: 'tel:0203031600' }
     ];
     fixture.detectChanges();
   });

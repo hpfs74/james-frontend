@@ -71,7 +71,7 @@ describe('Component: CarContactComponent', () => {
     ctrl.setValue('0612345678');
     expect(ctrl.valid).toBeTruthy();
 
-    ctrl.setValue('0203031680');
+    ctrl.setValue('0203031600');
     expect(ctrl.valid).toBeTruthy();
   });
 

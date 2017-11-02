@@ -51,7 +51,7 @@ export class CarExtrasForm {
         formControlName: 'extraOptionsNoClaim',
         type: 'checkbox',
         formControl: this.formGroup.get('extraOptionsNoClaim'),
-        inputOptions: { label: 'No-claim beschermer',
+        inputOptions: { label: 'No-claimbeschermer',
           value: 'noclaim'}
       },
       extraOptionsOccupants: {
@@ -59,7 +59,7 @@ export class CarExtrasForm {
         type: 'checkbox',
         formControl: this.formGroup.get('extraOptionsOccupants'),
         inputOptions: {
-          label: 'Inzittenden verzekering',
+          label: 'Inzittendenverzekering',
           value: 'occupants'
         }
       },
@@ -70,7 +70,7 @@ export class CarExtrasForm {
         inputOptions: {
           items: [
             {
-              label: 'Geen Pechhulp',
+              label: 'Geen pechhulp',
               value: 'RANO'
             },
             {

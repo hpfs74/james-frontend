@@ -23,16 +23,18 @@ import { CarInsurance } from '../../car/models';
       Slim verzekerd via Knab
 
       <knx-ir-tooltip>
-        <strong>Verzekeren via Knab is een goed idee want:</strong><br />
+        <strong>Verzekeren via Knab is een goed idee, want:</strong>
 
-        <p>Scherpe prijs: bij Knab betaal je namelijk maar 10% provisie. Bij andere aanbieders is dat tot wel 25% per maand.
-        We zijn er voor je: we helpen je bij schade, of als je er niet uitkomt met je verzekeraar.</p>
+        <br/>
 
-        <p>Gemak: je regelt alles voor je verzekeringen heel eenvoudig in de app. Zoals je gegevens aanpassen, of je
-        vraag aap’en aan de Knab Servicedesk.</p>
+        <p>Scherpe prijs: bij Knab betaal je maar 10% provisie per maand. Bij andere aanbieders kan dat oplopen tot wel 25%.</p>
 
-        <p>Slim: loopt je verzekering bijna af en kun je kijken voor een betere deal? Dan krijg je een seintje van ons.
-        Zodat je altijd slim en voordelig verzekerd bent.</p>
+        <p>Gemak: je regelt alles voor je verzekeringen heel eenvoudig in de app. Je gegevens aanpassen of een vraag
+          stellen aan de Knab Servicedesk bijvoorbeeld. Wij staan altijd voor je klaar: of je nou hulp nodig hebt bij
+          het melden van schade of als je er niet uitkomt met je verzekeraar.</p>
+
+        <p>Slim: loopt je verzekering bijna af en kun je ergens een betere deal krijgen? Dan krijg je van ons een seintje.
+          Zo ben je via ons altijd slim en voordelig verzekerd..</p>
       </knx-ir-tooltip>
     </p>
 

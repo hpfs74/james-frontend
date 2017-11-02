@@ -28,7 +28,7 @@ export class LoginForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        label: 'Je email',
+        label: 'Je e-mailadres',
         placeholder: 'E-mailadres',
         showErrorMessages: false,
         attributes: {

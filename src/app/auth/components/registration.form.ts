@@ -44,7 +44,7 @@ export class RegistrationForm extends BaseForm {
         validationErrors: this.validationErrors,
         placeholder: 'E-mailadres',
         showErrorMessages: false,
-        label: 'Je email',
+        label: 'Je e-mailadres',
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
           'addonleft': true,
@@ -75,7 +75,7 @@ export class RegistrationForm extends BaseForm {
         inputOptions: {
           type: 'checkbox',
           attributes: {
-            'aria-label': 'Ik ga akkoord met de Gebruiksvoorwaarden and privacy statement van Knab'
+            'aria-label': 'Ik ga akkoord met de gebruiksvoorwaarden en het privacybeleid van Knab.'
           }
         }
       }

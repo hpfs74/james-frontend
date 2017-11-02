@@ -62,11 +62,25 @@
 
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
-          <cx-form-group
-            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="loan"
-            [formControlName]="form.formConfig.loan.formControlName"
-            [options]="form.formConfig.loan">
-          </cx-form-group>
+          <div class="knx-form-group--info">
+            <cx-form-group
+              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="loan"
+              [formControlName]="form.formConfig.loan.formControlName"
+              [options]="form.formConfig.loan">
+            </cx-form-group>
+            <knx-info size="md" isFloating="true" class="knx-info">
+              <div class="knx-info__content">
+                <div class="knx-message knx-message--arrow-top">
+                  <div class="knx-message__content">
+                    <p>We willen graag van je weten of je een lening hebt afgesloten voor je auto.
+                      In dat geval raden we je namelijk altijd een Allrisk verzekering aan.
+                      Raakt je auto vervolgens onherstelbaar beschadigd? Dan krijg je een vergoeding van je verzekeraar om een nieuwe te kopen.
+                      Bij een andere dekking krijg je die vergoeding niet en blijf je met een lening achter, terwijl je geen auto meer hebt.</p>
+                  </div>
+                </div>
+              </div>
+            </knx-info>
+          </div>
         </div>
       </div>
 
@@ -127,7 +141,7 @@
         </div>
 
         <knx-loader [visible]="isCoverageLoading">
-          Bezig met ophalen van dekkingsadvies...
+          Een momentje! We vergelijken meer dan 20 verschillende aanbieders voor je om de beste match te vinden.
         </knx-loader>
       </div>
     </div>
