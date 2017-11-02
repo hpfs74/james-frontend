@@ -26,7 +26,7 @@ import { CarUtils } from '../../car/utils/car-utils';
           <p>Vraag je een verzekering via Knab aan, dan ontvangen wij een percentage van wat jij per maand aan premie
             betaalt. Dat heet ‘provisie’. We krijgen een doorlopende vaste, lage vergoeding van 10 % van de premie,
             zolang de verzekering loopt. Knab Verzekeren kan de provisie zo laag houden, omdat de dienst 100% online is.
-            Bij andere aanbieders van verzekeringen kun je tot wel 27,5% van de premie kwijt zijn aan provisie.<p>
+            Bij andere aanbieders van verzekeringen kun je tot wel 15% van de premie kwijt zijn aan provisie.<p>
 
           <p><strong>Dus welk bedrag krijgen we dan?</strong><br>
           Als jij 30 euro per maand betaalt voor je autoverzekering bij bijvoorbeeld Nationale Nederlanden,
