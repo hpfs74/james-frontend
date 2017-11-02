@@ -32,7 +32,12 @@ import { Component, Input } from '@angular/core';
             [attr.stroke-dashoffset]="0"/>
         </g>
         <g *ngIf="percentage">
-          <text class="knx-donut__text" text-anchor="middle" [attr.x]="this.radius + this.width" [attr.y]="-22" stroke-width="0">
+          <text class="knx-donut__text"
+                transform="rotate(90)"
+                text-anchor="middle"
+                [attr.x]="this.radius + this.width"
+                [attr.y]="-22"
+                stroke-width="0">
             {{ percentage | round }}%
           </text>
         </g>
