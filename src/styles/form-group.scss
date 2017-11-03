@@ -8,25 +8,25 @@
     width: 98%;
   }
 
-  // .knx-info {
-  //   position: absolute;
-  //   top: 36px;
-  //   right: 10px;
-  //   display: block;
-  // }
+  .knx-info {
+    position: absolute;
+    top: 36px;
+    right: 10px;
+    display: block;
+  }
 
-  // &.knx-form-group--no-label-info .knx-info {
-  //   top: 60px;
-  // }
+  &.knx-form-group--no-label-info .knx-info {
+    top: 60px;
+  }
 
-  // .knx-info--description {
-  //   top: 64px;
-  // }
+  .knx-info--description {
+    top: 64px;
+  }
 
-  // .knx-info--floating {
-  //   position: absolute;
-  //   top: 40px;
-  // }
+  .knx-info--floating {
+    position: absolute;
+    top: 40px;
+  }
 }
 
 cx-checkbox + .knx-info {
@@ -58,18 +58,30 @@ cx-checkbox + .knx-info {
 }
 
 /// KNX-TOOLTIP
-.car-detail-form {
-  .knx-form-group--info {
+// Negative margin positionining is a hackisch/workaround,
+// preferred would be to have a knx-form-group that supports
+// adding knx-info-icon or knx-tooltip components as content
+.car-detail-form,
+.knx-car-extras {
+  .knx-form-group--info.knx-form-group--info-input {
     .knx-info-icon {
       float: right;
-      // Negative margin positionining is a bit hackisch/workaround,
-      // preferred would be to have a knx-form-group that supports
-      // adding knx-info-icon or knx-tooltip components as content
       margin-top: -55px;
     }
 
     .knx-tooltip-wrapper--visible {
       min-width: 300px;
+    }
+  }
+
+  .knx-form-group--info.knx-form-group--info-checkbox {
+    .cx-checkbox {
+      width: 90%;
+    }
+
+    .knx-info-icon {
+      float: right;
+      margin-top: -35px;
     }
   }
 }
