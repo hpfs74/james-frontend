@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 
 import { AuthHttp } from '../../auth/services/auth-http.service';
 import { Profile } from '../../profile/models';

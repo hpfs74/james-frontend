@@ -61,29 +61,34 @@ cx-checkbox + .knx-info {
 .car-detail-form {
   .knx-form-group--info {
     .knx-info-icon {
-      position: absolute;
-      top: 36px;
-      right: 10px;
-      display: block;
-    }
-  }
-}
-
-.knx-car-extras {
-  .knx-form-group--info {
-    .knx-info-icon {
       float: right;
-      margin-top: -35px;
+      // Negative margin positionining is a bit hackisch/workaround,
+      // preferred would be to have a knx-form-group that supports
+      // adding knx-info-icon or knx-tooltip components as content
+      margin-top: -55px;
     }
-  }
-}
 
-@media (min-width: 768px) {
-  .knx-form-group--info {
     .knx-tooltip-wrapper--visible {
-      margin-left: -42px;
-      margin-top: 15px;
       min-width: 300px;
     }
   }
 }
+
+// .knx-car-extras {
+//   .knx-form-group--info {
+//     .knx-info-icon {
+//       float: right;
+//       margin-top: -35px;
+//     }
+//   }
+// }
+
+// @media (min-width: 768px) {
+//   .knx-form-group--info {
+//     .knx-tooltip-wrapper--visible {
+//       margin-left: -42px;
+//       margin-top: 15px;
+//       min-width: 300px;
+//     }
+//   }
+// }

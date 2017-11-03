@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/merge';
 
 import { slideUpDownAnimation } from '../../shared/animations/slide-up-down.animation';
 

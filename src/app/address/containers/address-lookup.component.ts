@@ -2,6 +2,7 @@ import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, Chang
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
 
 import * as fromAddress from '../reducers';
 import * as address from '../actions/address';

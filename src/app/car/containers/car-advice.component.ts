@@ -4,6 +4,11 @@ import { KNXStepOptions } from '@knx/wizard';
 import { KNXWizardComponent } from '@knx/wizard';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/filter';
 import * as cuid from 'cuid';
 
 import * as fromRoot from '../../reducers';

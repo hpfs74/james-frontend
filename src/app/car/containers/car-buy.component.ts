@@ -2,6 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/filter';
 import { KNXStepOptions } from '@knx/wizard';
 
 import * as fromRoot from '../../reducers';
@@ -193,7 +197,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
         this.store$.dispatch(new car.BuyAction(proposalData));
       });
 
-    return this.store$.combineLatest(
+    return Observable.combineLatest(
       this.store$.select(fromCar.getCarBuyComplete),
       this.store$.select(fromCar.getCarBuyError),
       (complete, error) => ({ complete: complete, error: error })
