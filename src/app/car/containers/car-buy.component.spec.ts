@@ -18,14 +18,12 @@ import { CarCheckComponent } from '../components/buy/car-check.component';
 import { CarCheckForm } from '../components/buy/car-check.form';
 import { CarPaymentComponent } from '../components/buy/car-payment.component';
 import { CarBuyComponent } from './car-buy.component';
-import { CarService } from '../services/car.service';
 
 import * as fromRoot from '../reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromCar from '../reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromAuth from '../../auth/reducers';
-import * as fromAdvice from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 import * as car from '../actions/car';
@@ -34,99 +32,17 @@ import * as compare from '../actions/compare';
 import * as router from '../../core/actions/router';
 
 import { SharedModule } from '../../shared.module';
-import { TextMessageComponent } from '../../components/knx-chat-stream/text-message.component';
-import { HttpModule, ResponseOptions, XHRBackend } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
-import { inject } from '@angular/core/testing';
-import { AuthHttp } from '../../auth/services/auth-http.service';
-import { AuthService } from '../../auth/services/auth.service';
-import { LocalStorageService } from '../../core/services/localstorage.service';
-import { LoaderService } from '../../components/knx-app-loader/loader.service';
+
 import { BuyCompleteAction, BuyFailureAction } from '../actions/car';
-import { observable } from 'rxjs/symbol/observable';
 import { Profile } from '../../profile/models/profile';
 
-
-let getMockedInsuranceProposal = () => {
-  let value = {
-    profileInfo: {
-      name: 'asdasd',
-      firstName: 'first name',
-      lastName: 'last name',
-      gender: 'M',
-      initials: 'R.R',
-      date_of_birth: new Date(12, 11, 1975),
-      iban: 'asdkasd',
-      emailaddress: 'mail@domain.com'
-    },
-    adviceInfo: {
-      startDate: '12-12-2017',
-      address: {
-        street: 'aaaa',
-        house_number: '1234',
-        number_extended: '123',
-        zipcode: '23124',
-        city: 'den haag'
-      },
-      acccessoryValue: 1234,
-      kilometers_per_year: 1234,
-      securityClass: ['asbc'],
-      coverage: 'CL',
-      legal: true,
-      cover_occupants: true
-    },
-    insuranceInfo: {
-      _embedded: {
-        insurance: {
-          moneyview_id: 'abc:abc'
-        }
-      }
-    },
-    carInfo: {
-      car: {
-        license: '123',
-        make: 'AAA',
-        model: 'AAAA',
-        technical_type: 'AAAA',
-        year: 2015,
-        price_consumer_incl_vat: 12345,
-        current_value: 11333,
-        weight_empty_vehicle: 1234
-      }
-    }
-  };
-
-  return value;
-};
-
 @Component({
-  template: `
-    <div>
-      <knx-car-buy></knx-car-buy>
-    </div>`
+  template: `<div><knx-car-buy></knx-car-buy></div>`
 })
 export class TestHostComponent {
   @ViewChild(CarBuyComponent)
   public targetComponent: CarBuyComponent;
   public formFromHost: CarCheckForm = new CarCheckForm(new FormBuilder());
-}
-
-export function getInitialState() {
-  return {
-    'core': {
-      assistant: {
-        config: {
-          avatar: {
-            name: 'Test',
-            title: 'Expert'
-          },
-          dashboard: null,
-          profile: null,
-          car: null,
-        }
-      }
-    }
-  };
 }
 
 describe('Component: CarBuyComponent', () => {
@@ -138,7 +54,6 @@ describe('Component: CarBuyComponent', () => {
     imports: [
       BrowserAnimationsModule,
       SharedModule,
-      HttpModule,
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),
@@ -167,18 +82,7 @@ describe('Component: CarBuyComponent', () => {
         useClass: class {
           navigate = jasmine.createSpy('navigate');
         }
-      },
-      AuthHttp,
-      AuthService,
-      LocalStorageService,
-      LoaderService,
-      {
-        provide: CarService,
-        useClass: class {
-
-        }
-      },
-      {provide: XHRBackend, useClass: MockBackend}]
+      }]
   };
   setUpTestBed(moduleDef);
 
@@ -333,3 +237,71 @@ describe('Component: CarBuyComponent', () => {
     }));
   });
 });
+
+export function getInitialState() {
+  return {
+    'core': {
+      assistant: {
+        config: {
+          avatar: {
+            name: 'Test',
+            title: 'Expert'
+          },
+          dashboard: null,
+          profile: null,
+          car: null,
+        }
+      }
+    }
+  };
+}
+
+export function getMockedInsuranceProposal() {
+  return {
+    profileInfo: {
+      name: 'asdasd',
+      firstName: 'first name',
+      lastName: 'last name',
+      gender: 'M',
+      initials: 'R.R',
+      date_of_birth: new Date(12, 11, 1975),
+      iban: 'asdkasd',
+      emailaddress: 'mail@domain.com'
+    },
+    adviceInfo: {
+      startDate: '12-12-2017',
+      address: {
+        street: 'aaaa',
+        house_number: '1234',
+        number_extended: '123',
+        zipcode: '23124',
+        city: 'den haag'
+      },
+      acccessoryValue: 1234,
+      kilometers_per_year: 1234,
+      securityClass: ['asbc'],
+      coverage: 'CL',
+      legal: true,
+      cover_occupants: true
+    },
+    insuranceInfo: {
+      _embedded: {
+        insurance: {
+          moneyview_id: 'abc:abc'
+        }
+      }
+    },
+    carInfo: {
+      car: {
+        license: '123',
+        make: 'AAA',
+        model: 'AAAA',
+        technical_type: 'AAAA',
+        year: 2015,
+        price_consumer_incl_vat: 12345,
+        current_value: 11333,
+        weight_empty_vehicle: 1234
+      }
+    }
+  };
+}
