@@ -16,6 +16,7 @@ import { ProfileService } from '../services/profile.service';
 import { Profile } from '../models/profile';
 import * as profile from '../actions/profile';
 import * as insurances from '../../insurance/actions/insurance';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable()
 export class ProfileEffects {
@@ -23,8 +24,11 @@ export class ProfileEffects {
   @Effect()
   loadProfile$: Observable<Action> = this.action$
     .ofType(profile.LOAD_PROFILE_REQUEST)
-    .switchMap(() =>
-      this.profileService.getUserProfile()
+    .switchMap(() => {
+      if (this.authService.isAnonymous()) {
+        return Observable.of(new profile.LoadSuccessAction(new Profile()));
+      }
+      return this.profileService.getUserProfile()
         .mergeMap((p: Profile) => {
           return [
             new profile.LoadSuccessAction(p),
@@ -32,7 +36,8 @@ export class ProfileEffects {
             // new insurances.LoadSuccess(p._embedded.insurance.documents)
           ];
         })
-        .catch(error => Observable.of(new profile.LoadFailAction(error))));
+        .catch(error => Observable.of(new profile.LoadFailAction(error)));
+    });
 
   @Effect()
   saveProfile$: Observable<Action> = this.action$
@@ -54,5 +59,6 @@ export class ProfileEffects {
         .catch(error => Observable.of(new profile.UpdateAddressFailAction(error)));
     });
 
-  constructor(private action$: Actions, private profileService: ProfileService) { }
+  constructor(private action$: Actions, private profileService: ProfileService, private authService: AuthService) {
+  }
 }

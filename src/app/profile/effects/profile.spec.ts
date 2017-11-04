@@ -9,6 +9,11 @@ import { Profile } from '../models';
 
 import * as profile from '../actions/profile';
 import * as profileReducer from '../reducers/profile';
+import { AuthService } from '../../auth/services/auth.service';
+import { BaseRequestOptions, Http } from '@angular/http';
+import { LocalStorageService } from '../../core/services/localstorage.service';
+import { MockBackend } from '@angular/http/testing';
+import { AuthHttp } from '../../auth/services/auth-http.service';
 
 describe('ProfileEffects', () => {
   let effects: ProfileEffects;
@@ -19,6 +24,14 @@ describe('ProfileEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
+        {
+          provide: AuthService,
+          useValue: jasmine.createSpyObj('AuthService', ['login', 'loginAnonymous', 'logout', 'refreshToken', 'isLoggedIn']),
+        },
+        {
+          provide: LocalStorageService,
+          useValue: jasmine.createSpyObj('LocalStorageService', ['setToken', 'getToken']),
+        },
         ProfileEffects,
         provideMockActions(() => actions),
         {

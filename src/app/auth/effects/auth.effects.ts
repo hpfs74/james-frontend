@@ -39,7 +39,7 @@ export class AuthEffects {
             this.localStorageService.setToken(token);
           }
           return [
-            new auth.LoginSuccess({ token: token }),
+            new auth.LoginSuccess({token: token}),
             new auth.ScheduleTokenRefresh(token),
             new profile.LoadAction(),
             new insurance.GetPurchasedCarInsurances()
@@ -72,19 +72,19 @@ export class AuthEffects {
         })
     );
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   loginSuccess$ = this.actions$
     .ofType(auth.LOGIN_SUCCESS)
     .do(() => this.router.navigate(['/']));
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   loginRedirect$ = this.actions$
     .ofType(auth.LOGIN_REDIRECT, auth.LOGOUT)
     .do(authed => {
       this.router.navigate(['/login']);
     });
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   logout$ = this.actions$
     .ofType(auth.LOGOUT)
     .exhaustMap(auth =>
@@ -126,15 +126,29 @@ export class AuthEffects {
     .ofType(auth.REFRESH_TOKEN)
     .map((action: auth.RefreshToken) => action.payload)
     // .throttleTime(3000)
-    .switchMap((refreshToken) => this.authService.refreshToken(refreshToken)
-      .map((token) => {
-        if (token && token.access_token) {
-          this.localStorageService.setToken(token);
-          return new auth.RefreshTokenSuccess(token);
-        } else {
+    .switchMap((refreshToken) => {
+
+      if (this.authService.isAnonymous()) {
+        this.store$.dispatch(new auth.StartAnonymous());
+        this.store$.dispatch(new auth.LoginAnonymous({
+          // TODO: remove
+          username: 'user@test.com',
+          password: 'supers3cret@'
+        }));
+        const token = this.localStorageService.getToken();
+        return Observable.of(new auth.RefreshTokenSuccess(token));
+      }
+
+      return this.authService.refreshToken(refreshToken)
+        .map((token) => {
+          if (token && token.access_token) {
+            this.localStorageService.setToken(token);
+            return new auth.RefreshTokenSuccess(token);
+          }
+
           return new auth.RefreshTokenFailure(token);
-        }
-      }))
+        });
+    })
     .catch(error => Observable.of(new auth.RefreshTokenFailure(error)));
 
   // NOTE: the order of the init effect needs to be preserved as last
@@ -148,7 +162,7 @@ export class AuthEffects {
       if (this.authService.isLoggedIn()) {
         // Token is not expired
         if (token !== null && token.access_token) {
-          this.store$.dispatch(new auth.LoginSuccess({ token: token }));
+          this.store$.dispatch(new auth.LoginSuccess({token: token}));
           this.store$.dispatch(new auth.ScheduleTokenRefresh(token));
         } else {
           this.store$.dispatch(new auth.LoginRedirect());
@@ -164,18 +178,18 @@ export class AuthEffects {
       // Anonymous
       this.store$.dispatch(new auth.StartAnonymous());
       this.store$.dispatch(new auth.LoginAnonymous({
+        // TODO: remove
         username: 'user@test.com',
         password: 'supers3cret@'
       }));
     }
   });
 
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router,
-    private localStorageService: LocalStorageService,
-    private store$: Store<fromRoot.State>,
-    private dialogService: UserDialogService
-  ) {}
+  constructor(private actions$: Actions,
+              private authService: AuthService,
+              private router: Router,
+              private localStorageService: LocalStorageService,
+              private store$: Store<fromRoot.State>,
+              private dialogService: UserDialogService) {
+  }
 }

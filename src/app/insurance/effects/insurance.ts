@@ -11,6 +11,7 @@ import 'rxjs/add/operator/toArray';
 
 import { InsuranceService } from '../services/insurance.service';
 import * as insurance from '../actions/insurance';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable()
 export class InsuranceEffects {
@@ -18,10 +19,15 @@ export class InsuranceEffects {
   getPurchasedCarInsurances$: Observable<Action> = this.actions$
     .ofType(insurance.GET_PURCHASED_CAR_INSURANCES)
     .map((action: insurance.GetPurchasedCarInsurances) => action)
-    .switchMap(() =>
-      this.insuranceService.getProfileInsurances()
+    .switchMap(() => {
+      if (this.authService.isAnonymous()) {
+        return Observable.of(new insurance.GetPurchasedCarInsurancesSuccess({}));
+      }
+      return this.insuranceService.getProfileInsurances()
         .map((res: Response) => new insurance.GetPurchasedCarInsurancesSuccess(res))
-        .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailure(error))));
+        .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailure(error)));
+    });
 
-  constructor(private actions$: Actions, private insuranceService: InsuranceService) { }
+  constructor(private actions$: Actions, private insuranceService: InsuranceService, private authService: AuthService) {
+  }
 }
