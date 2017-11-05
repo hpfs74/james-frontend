@@ -45,6 +45,7 @@ export class RegistrationForm extends BaseForm {
         placeholder: 'E-mailadres',
         showErrorMessages: false,
         label: 'Je e-mailadres',
+        type: 'text',
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
           'addonleft': true,
