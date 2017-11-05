@@ -39,7 +39,7 @@ export class AuthEffects {
             this.localStorageService.setToken(token);
           }
           return [
-            new auth.LoginSuccess({token: token}),
+            new auth.LoginSuccess({ token: token }),
             new auth.ScheduleTokenRefresh(token),
             new profile.LoadAction(),
             new insurance.GetPurchasedCarInsurances()
@@ -72,19 +72,19 @@ export class AuthEffects {
         })
     );
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   loginSuccess$ = this.actions$
     .ofType(auth.LOGIN_SUCCESS)
     .do(() => this.router.navigate(['/']));
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   loginRedirect$ = this.actions$
     .ofType(auth.LOGIN_REDIRECT, auth.LOGOUT)
     .do(authed => {
       this.router.navigate(['/login']);
     });
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   logout$ = this.actions$
     .ofType(auth.LOGOUT)
     .exhaustMap(auth =>
@@ -162,7 +162,7 @@ export class AuthEffects {
       if (this.authService.isLoggedIn()) {
         // Token is not expired
         if (token !== null && token.access_token) {
-          this.store$.dispatch(new auth.LoginSuccess({token: token}));
+          this.store$.dispatch(new auth.LoginSuccess({ token: token }));
           this.store$.dispatch(new auth.ScheduleTokenRefresh(token));
         } else {
           this.store$.dispatch(new auth.LoginRedirect());
