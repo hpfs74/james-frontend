@@ -130,11 +130,7 @@ export class AuthEffects {
 
       if (this.authService.isAnonymous()) {
         this.store$.dispatch(new auth.StartAnonymous());
-        this.store$.dispatch(new auth.LoginAnonymous({
-          // TODO: remove
-          username: 'user@test.com',
-          password: 'supers3cret@'
-        }));
+        this.store$.dispatch(new auth.LoginAnonymous({}));
         const token = this.localStorageService.getToken();
         return Observable.of(new auth.RefreshTokenSuccess(token));
       }
@@ -177,11 +173,7 @@ export class AuthEffects {
     } else {
       // Anonymous
       this.store$.dispatch(new auth.StartAnonymous());
-      this.store$.dispatch(new auth.LoginAnonymous({
-        // TODO: remove
-        username: 'user@test.com',
-        password: 'supers3cret@'
-      }));
+      this.store$.dispatch(new auth.LoginAnonymous({}));
     }
   });
 
