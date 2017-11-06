@@ -146,7 +146,7 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
           if (address) {
             this.addressFound.emit(address);
             return null;
-          } else {
+          } else if ( !address && !suggestions.suggestion) {
             return error;
           }
         }, err => error);
