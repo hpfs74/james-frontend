@@ -130,7 +130,7 @@ export class AuthEffects {
 
       if (this.authService.isAnonymous()) {
         this.store$.dispatch(new auth.StartAnonymous());
-        this.store$.dispatch(new auth.LoginAnonymous({}));
+        this.store$.dispatch(new auth.LoginAnonymous());
         const token = this.localStorageService.getToken();
         return Observable.of(new auth.RefreshTokenSuccess(token));
       }
@@ -173,7 +173,7 @@ export class AuthEffects {
     } else {
       // Anonymous
       this.store$.dispatch(new auth.StartAnonymous());
-      this.store$.dispatch(new auth.LoginAnonymous({}));
+      this.store$.dispatch(new auth.LoginAnonymous());
     }
   });
 

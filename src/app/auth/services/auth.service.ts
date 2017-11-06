@@ -88,7 +88,7 @@ export class AuthService {
    * Do login the anonymous user
    * @return {Observable<AuthToken>}
    */
-  public loginAnonymous(): Observable<AuthToken> {˚
+  public loginAnonymous(): Observable<AuthToken> {
     return this.playAnonymous()
       .map((res: AuthToken) => {
         res['anonymous'] = true;
