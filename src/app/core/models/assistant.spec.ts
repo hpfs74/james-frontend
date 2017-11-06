@@ -13,7 +13,7 @@ describe('Class: Assistant', () => {
     });
 
     it('should create a coverage message', () => {
-      const expected = 'Op basis van je situatie adviseer ik een <strong>goede dekking</strong>';
+      const expected = 'Op basis van je situatie adviseer ik een <strong>goede-dekking</strong>';
       expect(config.car.info.coverage.advice({ id: '', badge: '', features: [], header: 'goede' }))
         .toBe(expected);
     });
