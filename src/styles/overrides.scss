@@ -109,3 +109,7 @@ button.knx-button--toggle,
     font-weight: normal;
   }
 }
+
+.knx-modal .knx-modal-body {
+  -ms-flex: 0 0 auto;
+}
