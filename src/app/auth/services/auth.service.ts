@@ -13,6 +13,7 @@ import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
 import { RegisterResendActivationEmail } from '../actions/registration';
+
 export interface PayloadAuth {
   access_token: string;
   id: string;
@@ -57,7 +58,7 @@ export class AuthService {
     headers.set('Authorization', 'Bearer ' + accessToken);
     headers.set('Cache-Control', 'no-cache');
 
-    return this.http.delete(this.tokenUrl, { headers: headers})
+    return this.http.delete(this.tokenUrl, { headers: headers })
       .map(x => {
         this.localStorageService.clearToken();
         return x.json();
@@ -129,6 +130,10 @@ export class AuthService {
 
     return this.play(environment.james.payloadEncryption.token, payload)
       .map((res: Response) => res.json());
+
+    // Request without payload encryption
+    // return this.http.post(environment.james.payloadEncryption.token, payload)
+    //   .map( (res: Response) => res.json());
   }
 
   /**
@@ -177,7 +182,10 @@ export class AuthService {
     return AuthUtils.tokenNotExpired('token');
   }
 
-
+  public isAnonymous(): boolean {
+    let token: AuthToken = this.localStorageService.getToken();
+    return (token && token.anonymous);
+  }
 
   // PAYLOAD - STEP1
   private getPayloadToken(): Observable<PayloadAuth> {
@@ -193,7 +201,7 @@ export class AuthService {
     return this.http
       .post(this.tokenUrl, body, { headers: headers })
       .map((res: Response) => res.json())
-      .map(body => <PayloadAuth>{ access_token: body.access_token });
+      .map(body => <PayloadAuth>{access_token: body.access_token});
   }
 
   // PAYLOAD ANONYMOUS
@@ -243,7 +251,7 @@ export class AuthService {
 
     let encrypted = new Buffer(forge.util.encode64(encBuffer), 'base64');
 
-    return Observable.of(Object.assign(payload, { nicci_key: encrypted.toString('base64'), aes_key: key }));
+    return Observable.of(Object.assign(payload, {nicci_key: encrypted.toString('base64'), aes_key: key}));
   }
 
   // STEP 4 - PAYLOAD ENCRYPTION
@@ -263,6 +271,7 @@ export class AuthService {
       headers: headers,
     });
   }
+
   /**
    * Get the content for the authorization header
    *

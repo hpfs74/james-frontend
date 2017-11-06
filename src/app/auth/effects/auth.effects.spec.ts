@@ -134,25 +134,14 @@ describe('AuthEffects', () => {
 
   describe('loginAnonymous$', () => {
     it('should login anonymous user', () => {
-      const action = new auth.LoginAnonymous(authPayload);
-      const completion = [
-        new auth.ScheduleTokenRefresh(tokenResponse)
-      ];
+      const action = new auth.LoginAnonymous();
+      const completion = new auth.ScheduleTokenRefresh(tokenResponse);
+
       authService.loginAnonymous.and.returnValue(Observable.of(tokenResponse));
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
-
-      let performedActions = [];
-      effects.loginAnonymous$.take(3).subscribe(
-        result => performedActions.push(result),
-        error => fail(error),
-        () => {
-          expect(performedActions.length).toBe(3);
-          expect(performedActions).toEqual(completion);
-          expect(authService.login).toHaveBeenCalledWith(authPayload);
-        }
-      );
+      expect(effects.loginAnonymous$).toBeObservable(expected);
     });
   });
 

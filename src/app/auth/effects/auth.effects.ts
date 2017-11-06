@@ -126,15 +126,25 @@ export class AuthEffects {
     .ofType(auth.REFRESH_TOKEN)
     .map((action: auth.RefreshToken) => action.payload)
     // .throttleTime(3000)
-    .switchMap((refreshToken) => this.authService.refreshToken(refreshToken)
-      .map((token) => {
-        if (token && token.access_token) {
-          this.localStorageService.setToken(token);
-          return new auth.RefreshTokenSuccess(token);
-        } else {
+    .switchMap((refreshToken) => {
+
+      if (this.authService.isAnonymous()) {
+        this.store$.dispatch(new auth.StartAnonymous());
+        this.store$.dispatch(new auth.LoginAnonymous());
+        const token = this.localStorageService.getToken();
+        return Observable.of(new auth.RefreshTokenSuccess(token));
+      }
+
+      return this.authService.refreshToken(refreshToken)
+        .map((token) => {
+          if (token && token.access_token) {
+            this.localStorageService.setToken(token);
+            return new auth.RefreshTokenSuccess(token);
+          }
+
           return new auth.RefreshTokenFailure(token);
-        }
-      }))
+        });
+    })
     .catch(error => Observable.of(new auth.RefreshTokenFailure(error)));
 
   // NOTE: the order of the init effect needs to be preserved as last
@@ -163,19 +173,15 @@ export class AuthEffects {
     } else {
       // Anonymous
       this.store$.dispatch(new auth.StartAnonymous());
-      this.store$.dispatch(new auth.LoginAnonymous({
-        username: 'user@test.com',
-        password: 'supers3cret@'
-      }));
+      this.store$.dispatch(new auth.LoginAnonymous());
     }
   });
 
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router,
-    private localStorageService: LocalStorageService,
-    private store$: Store<fromRoot.State>,
-    private dialogService: UserDialogService
-  ) {}
+  constructor(private actions$: Actions,
+              private authService: AuthService,
+              private router: Router,
+              private localStorageService: LocalStorageService,
+              private store$: Store<fromRoot.State>,
+              private dialogService: UserDialogService) {
+  }
 }

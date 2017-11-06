@@ -12,6 +12,7 @@ export const LOAD_FAILURE =                         '[Insurances] Load Failure';
 export const GET_PURCHASED_CAR_INSURANCES =         '[Insurances] Get Insurances';
 export const GET_PURCHASED_CAR_INSURANCES_SUCCESS = '[Insurances] Get Insurances Success';
 export const GET_PURCHASED_CAR_INSURANCES_FAILURE = '[Insurances] Get Insurances Failure';
+export const GET_PURCHASED_CAR_INSURANCES_ANONYMOUS = '[Insurances] Get Insurances Anonymous';
 
 /**
  * Add Insurance Actions
