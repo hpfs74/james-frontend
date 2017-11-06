@@ -31,6 +31,7 @@ export class LoginForm extends BaseForm {
         label: 'Je e-mailadres',
         placeholder: 'E-mailadres',
         showErrorMessages: false,
+        type: 'text',
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
           'addonleft': true,
