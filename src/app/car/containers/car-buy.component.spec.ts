@@ -36,18 +36,9 @@ import { SharedModule } from '../../shared.module';
 import { BuyCompleteAction, BuyFailureAction } from '../actions/car';
 import { Profile } from '../../profile/models/profile';
 
-@Component({
-  template: `<div><knx-car-buy></knx-car-buy></div>`
-})
-export class TestHostComponent {
-  @ViewChild(CarBuyComponent)
-  public targetComponent: CarBuyComponent;
-  public formFromHost: CarCheckForm = new CarCheckForm(new FormBuilder());
-}
-
 describe('Component: CarBuyComponent', () => {
-  let comp: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
+  let comp: CarBuyComponent;
+  let fixture: ComponentFixture<CarBuyComponent>;
   let store: Store<fromAuth.State>;
 
   let moduleDef: TestModuleMetadata = {
@@ -68,7 +59,6 @@ describe('Component: CarBuyComponent', () => {
     declarations: [
       CarBuyComponent,
       CarSummaryComponent,
-      TestHostComponent,
       CarPaymentComponent,
       CarContactComponent,
       CarReportingCodeComponent,
@@ -92,7 +82,7 @@ describe('Component: CarBuyComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
+    fixture = TestBed.createComponent(CarBuyComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -100,38 +90,38 @@ describe('Component: CarBuyComponent', () => {
   it('should init all the forms', () => {
     const element = fixture.debugElement.query(By.css('form'));
     expect(element).toBeDefined();
-    expect(comp.targetComponent).toBeDefined();
-    expect(comp.targetComponent.contactDetailForm).toBeDefined();
-    expect(comp.targetComponent.reportingCodeForm).toBeDefined();
-    expect(comp.targetComponent.checkForm).toBeDefined();
-    expect(comp.targetComponent.paymentForm).toBeDefined();
+    expect(comp).toBeDefined();
+    expect(comp.contactDetailForm).toBeDefined();
+    expect(comp.reportingCodeForm).toBeDefined();
+    expect(comp.checkForm).toBeDefined();
+    expect(comp.paymentForm).toBeDefined();
   });
 
   it('should update the step counter', () => {
-    comp.targetComponent.onStepChange(4);
-    expect(comp.targetComponent.currentStep).toEqual(4);
+    comp.onStepChange(4);
+    expect(comp.currentStep).toEqual(4);
   });
 
   it('should validate the form before next step', () => {
-    comp.targetComponent.contactDetailForm.formGroup.get('initials').setValue('A');
-    comp.targetComponent.contactDetailForm.formGroup.get('middleName').setValue('A');
-    comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('A');
-    comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('A');
-    comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0612345678');
-    comp.targetComponent.contactDetailForm.formGroup.get('phoneNumber').setValue('0613822660');
-    expect(comp.targetComponent.formSteps[0].onBeforeNext() instanceof Observable).toBeTruthy();
+    comp.contactDetailForm.formGroup.get('initials').setValue('A');
+    comp.contactDetailForm.formGroup.get('middleName').setValue('A');
+    comp.contactDetailForm.formGroup.get('firstName').setValue('A');
+    comp.contactDetailForm.formGroup.get('lastName').setValue('A');
+    comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0612345678');
+    comp.contactDetailForm.formGroup.get('phoneNumber').setValue('0613822660');
+    expect(comp.formSteps[0].onBeforeNext() instanceof Observable).toBeTruthy();
   });
 
   describe('getUpdatedProfile()', () => {
     it('should populate profile data properly', () => {
-      comp.targetComponent.contactDetailForm.formGroup.get('initials').setValue('F.L.');
-      comp.targetComponent.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
-      comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('First name');
-      comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('Last name');
-      comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
-      comp.targetComponent.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
+      comp.contactDetailForm.formGroup.get('initials').setValue('F.L.');
+      comp.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
+      comp.contactDetailForm.formGroup.get('firstName').setValue('First name');
+      comp.contactDetailForm.formGroup.get('lastName').setValue('Last name');
+      comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
+      comp.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
 
-      let obj = comp.targetComponent.getUpdatedProfile(comp.targetComponent.contactDetailForm.formGroup);
+      let obj = comp.getUpdatedProfile(comp.contactDetailForm.formGroup);
 
       expect(obj.firstName).toBe('First name');
       expect(obj.lastName).toBe('Last name');
@@ -146,14 +136,14 @@ describe('Component: CarBuyComponent', () => {
     it('should populate flat data properly', () => {
       let value = getMockedInsuranceProposal();
 
-      comp.targetComponent.contactDetailForm.formGroup.get('initials').setValue('F.L.');
-      comp.targetComponent.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
-      comp.targetComponent.contactDetailForm.formGroup.get('firstName').setValue('First name');
-      comp.targetComponent.contactDetailForm.formGroup.get('lastName').setValue('Last name');
-      comp.targetComponent.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
-      comp.targetComponent.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
+      comp.contactDetailForm.formGroup.get('initials').setValue('F.L.');
+      comp.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
+      comp.contactDetailForm.formGroup.get('firstName').setValue('First name');
+      comp.contactDetailForm.formGroup.get('lastName').setValue('Last name');
+      comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
+      comp.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
 
-      let result = comp.targetComponent.getProposalData(value, comp.targetComponent.contactDetailForm.formGroup);
+      let result = comp.getProposalData(value, comp.contactDetailForm.formGroup);
 
       expect(result).toBeDefined();
     });
@@ -165,7 +155,7 @@ describe('Component: CarBuyComponent', () => {
       let compareResetAction = new compare.CarCompareResetStateAction();
       let carResetAction = new car.CarResetStateAction();
       let routerBackAction = new router.Go({path: ['car']});
-      comp.targetComponent.resetFlow();
+      comp.resetFlow();
       expect(store.dispatch).toHaveBeenCalledWith(adviceResetAction);
       expect(store.dispatch).toHaveBeenCalledWith(compareResetAction);
       expect(store.dispatch).toHaveBeenCalledWith(carResetAction);
@@ -176,10 +166,10 @@ describe('Component: CarBuyComponent', () => {
   describe('submitInsurace()', () => {
 
     it('should return an error if conditions are not accepted', async(() => {
-      comp.targetComponent.acceptFinalTerms = false;
+      comp.acceptFinalTerms = false;
       fixture.detectChanges();
 
-      let res = comp.targetComponent
+      let res = comp
         .submitInsurance()
         .subscribe(
           data => {
@@ -193,16 +183,16 @@ describe('Component: CarBuyComponent', () => {
 
     it('should return an error on buyErrorAction', async(() => {
       let data = getMockedInsuranceProposal();
-      comp.targetComponent.car$ = Observable.of(data.carInfo);
-      comp.targetComponent.insurance$ = Observable.of(data.insuranceInfo);
-      comp.targetComponent.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
-      comp.targetComponent.advice$ = Observable.of(data.adviceInfo);
-      comp.targetComponent.acceptFinalTerms = true;
+      comp.car$ = Observable.of(data.carInfo);
+      comp.insurance$ = Observable.of(data.insuranceInfo);
+      comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
+      comp.advice$ = Observable.of(data.adviceInfo);
+      comp.acceptFinalTerms = true;
       store.dispatch(new BuyFailureAction(new Error()));
 
       fixture.detectChanges();
 
-      let res = comp.targetComponent
+      let res = comp
         .submitInsurance()
         .subscribe(data => {
 
@@ -217,17 +207,17 @@ describe('Component: CarBuyComponent', () => {
 
     it('should route to thankYouPage on success', async(() => {
       let data = getMockedInsuranceProposal();
-      comp.targetComponent.car$ = Observable.of(data.carInfo);
-      comp.targetComponent.insurance$ = Observable.of(data.insuranceInfo);
-      comp.targetComponent.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
-      comp.targetComponent.advice$ = Observable.of(data.adviceInfo);
-      comp.targetComponent.acceptFinalTerms = true;
+      comp.car$ = Observable.of(data.carInfo);
+      comp.insurance$ = Observable.of(data.insuranceInfo);
+      comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
+      comp.advice$ = Observable.of(data.adviceInfo);
+      comp.acceptFinalTerms = true;
       store.dispatch(new BuyCompleteAction({}));
 
       let expectedAction = new router.Go({path: ['/car/thank-you', data.profileInfo.emailaddress]});
       fixture.detectChanges();
 
-      let res = comp.targetComponent
+      let res = comp
         .submitInsurance()
         .subscribe(
           () => expect(true).toBeTruthy(),
