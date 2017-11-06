@@ -10,13 +10,13 @@ export class CarDetailForm extends BaseForm {
   formConfig: any;
 
   validationErrors = {
-    required: () => 'Dit veld is verplicht',
+    required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    licensePlate: () => `Vul een geldig kenteken in`,
-    licensePlateRDC: () => `Vul een geldig (geregistreerd) kenteken in`,
-    birthDate: () => 'Vul een geldige geboortedatum in',
-    gender: () => `Selecteer je geslacht`,
-    claimFreeYears: () => `Vul schadevrije jaren in tussen 0 en 50`
+    licensePlate: () => `Het ingevulde kenteken is niet geldig`,
+    licensePlateRDC: () => `Het ingevulde kenteken is niet geregistreerd`,
+    birthDate: () => 'De ingevulde geboortedatum is niet geldig',
+    gender: () => `Dit is een verplicht veld`,
+    claimFreeYears: () => `De ingevulde waarde ligt niet tussen 0 en 50`
   };
 
   constructor(private fb: FormBuilder) {

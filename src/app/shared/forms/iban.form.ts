@@ -10,9 +10,9 @@ export class IbanForm extends BaseForm {
   formConfig: any;
 
   public validationErrors = {
-    required: () => 'Dit veld is verplicht',
-    startDate: () => 'Vul een geldige startdatum in',
-    iban: () => 'Vul een geldig bankrekeningnummer (IBAN) in'
+    required: () => 'Dit is een verplicht veld',
+    startDate: () => 'De ingevulde startdatum is niet geldig',
+    iban: () => 'Het ingevulde bankrekeningnummer (IBAN) is niet geldig'
   };
 
   constructor(private fb: FormBuilder) {

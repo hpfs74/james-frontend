@@ -8,8 +8,8 @@ export class LoginForm extends BaseForm {
   formConfig: any;
 
   validationErrors = {
-    required: () => 'Dit veld is verplicht',
-    email: () => 'Vul een geldig e-mailadres in alsjeblieft'
+    required: () => 'Dit is een verplicht veld',
+    email: () => 'Het ingevulde e-mailadres is niet geldig'
   };
 
   constructor(private fb: FormBuilder) {

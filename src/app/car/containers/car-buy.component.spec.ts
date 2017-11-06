@@ -5,7 +5,7 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { By } from '@angular/platform-browser';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 
 import { setUpTestBed } from './../../../test.common.spec';

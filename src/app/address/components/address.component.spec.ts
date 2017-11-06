@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { setUpTestBed } from './../../../test.common.spec';
 
 import { SharedModule } from '../../shared.module';
@@ -27,7 +27,7 @@ export class TestHostComponent {
   loading = false;
   loaded = false;
   validationErrors = {
-    required: () => 'Dit veld is verplicht',
+    required: () => 'Dit is een verplicht veld',
     address: () => 'Error',
     postalCode: () => `Vul een geldige postcode`,
     houseNumber: () => `Vul een huisnummer in`,
