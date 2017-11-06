@@ -48,7 +48,9 @@
           [insurances]="insurances$ | async">
         </knx-insurance-toplist>
 
-        <knx-service-guide *ngIf="insurances$ | async">
+        <knx-service-guide
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="service-guide"
+          [visible]="!(isInsuranceLoading$| async)">
         </knx-service-guide>
       </knx-step>
 
