@@ -9,6 +9,5 @@ pipelines:
           - npm set registry https://knab-npm.ddns.net
           - npm set strict-ssl false
           - npm install
-          - npm update
           - npm run test:ci
           - npm run build
