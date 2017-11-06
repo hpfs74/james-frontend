@@ -51,7 +51,7 @@ interface OrderItem {
           <div class="knx-insurance-toplist__info">
             <knx-info infoLabel="Hoe komen we tot deze resultaten?" class="knx-info">
               <div class="knx-info__content">
-                <div class="knx-message knx-message--arrow-top">
+                <div class="knx-message knx-message--arrow-top knx-message--arrow-top-center">
                   <div class="knx-message__content">
                     <p>
                       Onze slimme technologie gaat op basis van de door jou opgegeven informatie aan de slag.
