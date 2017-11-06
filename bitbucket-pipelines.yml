@@ -3,31 +3,11 @@ image: node:8.4
 pipelines:
   default:
     - step:
-        name: environment
-        caches:
-          - node
-        script:
-          - git --version
-          - node --version
-          - npm --version
-    - step:
-        name: setup
-        caches:
-          - node
+        name: Test and build
         script:
           - printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
           - npm set registry https://knab-npm.ddns.net
           - npm set strict-ssl false
           - npm install
-    - step:
-        name: build
-        caches:
-          - node
-        script:
-          - npm run build
-    - step:
-        name: test
-        caches:
-          - node
-        script:
           - npm run test:ci
+          - npm run build
