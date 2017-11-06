@@ -72,6 +72,7 @@ import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
 import { ThankYouComponent } from './components/knx-thank-you/thank-you.component';
+import { ServiceGuideComponent } from './components/knx-service-guide/service-guide';
 import { PurchasedComponent } from './components/knx-purchased/purchased.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
@@ -120,6 +121,7 @@ export const sharedComponents = [
   TabsComponent,
   TabComponent,
   ThankYouComponent,
+  ServiceGuideComponent,
   PurchasedComponent,
   NavUserComponent,
   UserGreetingComponent,

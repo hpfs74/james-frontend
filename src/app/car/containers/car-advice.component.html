@@ -47,6 +47,9 @@
           [isLoading]="isInsuranceLoading$ | async"
           [insurances]="insurances$ | async">
         </knx-insurance-toplist>
+
+        <knx-service-guide *ngIf="insurances$ | async">
+        </knx-service-guide>
       </knx-step>
 
       <knx-step [options]="formSteps[2]">
