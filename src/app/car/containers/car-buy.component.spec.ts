@@ -106,195 +106,195 @@ export function getMockedInsuranceProposal() {
   };
 }
 
-//
-// describe('Component: CarBuyComponent', () => {
-//   let comp: CarBuyComponent;
-//   let fixture: ComponentFixture<CarBuyComponent>;
-//   let store: Store<fromAuth.State>;
-//
-//   let moduleDef: TestModuleMetadata = {
-//     imports: [
-//       BrowserAnimationsModule,
-//       SharedModule,
-//       StoreModule.forRoot({
-//         ...fromRoot.reducers,
-//         'auth': combineReducers(fromAuth.reducers),
-//         'core': combineReducers(fromCore.reducers),
-//         'car': combineReducers(fromCar.reducers),
-//         'insurance': combineReducers(fromInsurance.reducers),
-//         'profile': combineReducers(fromProfile.reducers)
-//       }, {
-//         initialState: getInitialState
-//       })
-//     ],
-//     declarations: [
-//       CarBuyComponent,
-//       CarSummaryComponent,
-//       CarPaymentComponent,
-//       CarContactComponent,
-//       CarReportingCodeComponent,
-//       CarCheckComponent
-//     ],
-//     schemas: [NO_ERRORS_SCHEMA],
-//     providers: [
-//       CurrencyPipe,
-//       {
-//         provide: Router,
-//         useClass: class {
-//           navigate = jasmine.createSpy('navigate');
-//         }
-//       }]
-//   };
-//   setUpTestBed(moduleDef);
-//
-//   beforeEach(async(() => {
-//     store = TestBed.get(Store);
-//     spyOn(store, 'dispatch').and.callThrough();
-//   }));
-//
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(CarBuyComponent);
-//     comp = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-//
-//   it('should init all the forms', () => {
-//     const element = fixture.debugElement.query(By.css('form'));
-//     expect(element).toBeDefined();
-//     expect(comp).toBeDefined();
-//     expect(comp.contactDetailForm).toBeDefined();
-//     expect(comp.reportingCodeForm).toBeDefined();
-//     expect(comp.checkForm).toBeDefined();
-//     expect(comp.paymentForm).toBeDefined();
-//   });
-//
-//   it('should update the step counter', () => {
-//     comp.onStepChange(4);
-//     expect(comp.currentStep).toEqual(4);
-//   });
-//
-//   it('should validate the form before next step', () => {
-//     comp.contactDetailForm.formGroup.get('initials').setValue('A');
-//     comp.contactDetailForm.formGroup.get('middleName').setValue('A');
-//     comp.contactDetailForm.formGroup.get('firstName').setValue('A');
-//     comp.contactDetailForm.formGroup.get('lastName').setValue('A');
-//     comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0612345678');
-//     comp.contactDetailForm.formGroup.get('phoneNumber').setValue('0613822660');
-//     expect(comp.formSteps[0].onBeforeNext() instanceof Observable).toBeTruthy();
-//   });
-//
-//   describe('getUpdatedProfile()', () => {
-//     it('should populate profile data properly', () => {
-//       comp.contactDetailForm.formGroup.get('initials').setValue('F.L.');
-//       comp.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
-//       comp.contactDetailForm.formGroup.get('firstName').setValue('First name');
-//       comp.contactDetailForm.formGroup.get('lastName').setValue('Last name');
-//       comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
-//       comp.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
-//
-//       let obj = comp.getUpdatedProfile(comp.contactDetailForm.formGroup);
-//
-//       expect(obj.firstName).toBe('First name');
-//       expect(obj.lastName).toBe('Last name');
-//       expect(obj.infix).toBe('Middle name');
-//       expect(obj.initials).toBe('F.L.');
-//       expect(obj.mobileNumber).toBe('0666666666');
-//       expect(obj.phoneNumber).toBe('070777777');
-//     });
-//   });
-//
-//   describe('getProposalData()', () => {
-//     it('should populate flat data properly', () => {
-//       let value = getMockedInsuranceProposal();
-//
-//       comp.contactDetailForm.formGroup.get('initials').setValue('F.L.');
-//       comp.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
-//       comp.contactDetailForm.formGroup.get('firstName').setValue('First name');
-//       comp.contactDetailForm.formGroup.get('lastName').setValue('Last name');
-//       comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
-//       comp.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
-//
-//       let result = comp.getProposalData(value, comp.contactDetailForm.formGroup);
-//
-//       expect(result).toBeDefined();
-//     });
-//   });
-//
-//   describe('resetFlow()', () => {
-//     it('should dispatch reset acitons', () => {
-//       let adviceResetAction = new advice.ResetAction();
-//       let compareResetAction = new compare.CarCompareResetStateAction();
-//       let carResetAction = new car.CarResetStateAction();
-//       let routerBackAction = new router.Go({path: ['car']});
-//       comp.resetFlow();
-//       expect(store.dispatch).toHaveBeenCalledWith(adviceResetAction);
-//       expect(store.dispatch).toHaveBeenCalledWith(compareResetAction);
-//       expect(store.dispatch).toHaveBeenCalledWith(carResetAction);
-//       expect(store.dispatch).toHaveBeenCalledWith(routerBackAction);
-//     });
-//   });
-//
-//   describe('submitInsurace()', () => {
-//
-//     it('should return an error if conditions are not accepted', async(() => {
-//       comp.acceptFinalTerms = false;
-//       fixture.detectChanges();
-//
-//       let res = comp
-//         .submitInsurance()
-//         .subscribe(
-//           data => {
-//           },
-//           err => {
-//             expect(err).toBeDefined();
-//             expect(err.message).toBe('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd');
-//           }
-//         );
-//     }));
-//
-//     it('should return an error on buyErrorAction', async(() => {
-//       let data = getMockedInsuranceProposal();
-//       comp.car$ = Observable.of(data.carInfo);
-//       comp.insurance$ = Observable.of(data.insuranceInfo);
-//       comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
-//       comp.advice$ = Observable.of(data.adviceInfo);
-//       comp.acceptFinalTerms = true;
-//       store.dispatch(new BuyFailureAction(new Error()));
-//
-//       fixture.detectChanges();
-//
-//       let res = comp
-//         .submitInsurance()
-//         .subscribe(data => {
-//
-//             expect(false).toBeTruthy('Should not pass here');
-//           },
-//           err => {
-//             expect(err).toBeDefined();
-//             expect(err.message).toBe('Er is helaas iets mis gegaan. Probeer het later opnieuw.');
-//           }
-//         );
-//     }));
-//
-//     it('should route to thankYouPage on success', async(() => {
-//       let data = getMockedInsuranceProposal();
-//       comp.car$ = Observable.of(data.carInfo);
-//       comp.insurance$ = Observable.of(data.insuranceInfo);
-//       comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
-//       comp.advice$ = Observable.of(data.adviceInfo);
-//       comp.acceptFinalTerms = true;
-//       store.dispatch(new BuyCompleteAction({}));
-//
-//       let expectedAction = new router.Go({path: ['/car/thank-you', data.profileInfo.emailaddress]});
-//       fixture.detectChanges();
-//
-//       let res = comp
-//         .submitInsurance()
-//         .subscribe(
-//           () => expect(true).toBeTruthy(),
-//           () => expect(false).toBeTruthy('Should not pass here'),
-//           // () => expect(store.dispatch).toHaveBeenCalledWith(expectedAction)
-//         );
-//     }));
-//   });
-// });
+
+describe('Component: CarBuyComponent', () => {
+  let comp: CarBuyComponent;
+  let fixture: ComponentFixture<CarBuyComponent>;
+  let store: Store<fromAuth.State>;
+
+  let moduleDef: TestModuleMetadata = {
+    imports: [
+      BrowserAnimationsModule,
+      SharedModule,
+      StoreModule.forRoot({
+        ...fromRoot.reducers,
+        'auth': combineReducers(fromAuth.reducers),
+        'core': combineReducers(fromCore.reducers),
+        'car': combineReducers(fromCar.reducers),
+        'insurance': combineReducers(fromInsurance.reducers),
+        'profile': combineReducers(fromProfile.reducers)
+      }, {
+        initialState: getInitialState
+      })
+    ],
+    declarations: [
+      CarBuyComponent,
+      CarSummaryComponent,
+      CarPaymentComponent,
+      CarContactComponent,
+      CarReportingCodeComponent,
+      CarCheckComponent
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [
+      CurrencyPipe,
+      {
+        provide: Router,
+        useClass: class {
+          navigate = jasmine.createSpy('navigate');
+        }
+      }]
+  };
+  setUpTestBed(moduleDef);
+
+  beforeEach(async(() => {
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CarBuyComponent);
+    comp = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should init all the forms', () => {
+    const element = fixture.debugElement.query(By.css('form'));
+    expect(element).toBeDefined();
+    expect(comp).toBeDefined();
+    expect(comp.contactDetailForm).toBeDefined();
+    expect(comp.reportingCodeForm).toBeDefined();
+    expect(comp.checkForm).toBeDefined();
+    expect(comp.paymentForm).toBeDefined();
+  });
+
+  it('should update the step counter', () => {
+    comp.onStepChange(4);
+    expect(comp.currentStep).toEqual(4);
+  });
+
+  it('should validate the form before next step', () => {
+    comp.contactDetailForm.formGroup.get('initials').setValue('A');
+    comp.contactDetailForm.formGroup.get('middleName').setValue('A');
+    comp.contactDetailForm.formGroup.get('firstName').setValue('A');
+    comp.contactDetailForm.formGroup.get('lastName').setValue('A');
+    comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0612345678');
+    comp.contactDetailForm.formGroup.get('phoneNumber').setValue('0613822660');
+    expect(comp.formSteps[0].onBeforeNext() instanceof Observable).toBeTruthy();
+  });
+
+  describe('getUpdatedProfile()', () => {
+    it('should populate profile data properly', () => {
+      comp.contactDetailForm.formGroup.get('initials').setValue('F.L.');
+      comp.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
+      comp.contactDetailForm.formGroup.get('firstName').setValue('First name');
+      comp.contactDetailForm.formGroup.get('lastName').setValue('Last name');
+      comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
+      comp.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
+
+      let obj = comp.getUpdatedProfile(comp.contactDetailForm.formGroup);
+
+      expect(obj.firstName).toBe('First name');
+      expect(obj.lastName).toBe('Last name');
+      expect(obj.infix).toBe('Middle name');
+      expect(obj.initials).toBe('F.L.');
+      expect(obj.mobileNumber).toBe('0666666666');
+      expect(obj.phoneNumber).toBe('070777777');
+    });
+  });
+
+  describe('getProposalData()', () => {
+    it('should populate flat data properly', () => {
+      let value = getMockedInsuranceProposal();
+
+      comp.contactDetailForm.formGroup.get('initials').setValue('F.L.');
+      comp.contactDetailForm.formGroup.get('middleName').setValue('Middle name');
+      comp.contactDetailForm.formGroup.get('firstName').setValue('First name');
+      comp.contactDetailForm.formGroup.get('lastName').setValue('Last name');
+      comp.contactDetailForm.formGroup.get('mobileNumber').setValue('0666666666');
+      comp.contactDetailForm.formGroup.get('phoneNumber').setValue('070777777');
+
+      let result = comp.getProposalData(value, comp.contactDetailForm.formGroup);
+
+      expect(result).toBeDefined();
+    });
+  });
+
+  describe('resetFlow()', () => {
+    it('should dispatch reset acitons', () => {
+      let adviceResetAction = new advice.ResetAction();
+      let compareResetAction = new compare.CarCompareResetStateAction();
+      let carResetAction = new car.CarResetStateAction();
+      let routerBackAction = new router.Go({path: ['car']});
+      comp.resetFlow();
+      expect(store.dispatch).toHaveBeenCalledWith(adviceResetAction);
+      expect(store.dispatch).toHaveBeenCalledWith(compareResetAction);
+      expect(store.dispatch).toHaveBeenCalledWith(carResetAction);
+      expect(store.dispatch).toHaveBeenCalledWith(routerBackAction);
+    });
+  });
+
+  describe('submitInsurace()', () => {
+
+    it('should return an error if conditions are not accepted', async(() => {
+      comp.acceptFinalTerms = false;
+      fixture.detectChanges();
+
+      let res = comp
+        .submitInsurance()
+        .subscribe(
+          data => {
+          },
+          err => {
+            expect(err).toBeDefined();
+            expect(err.message).toBe('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd');
+          }
+        );
+    }));
+
+    it('should return an error on buyErrorAction', async(() => {
+      let data = getMockedInsuranceProposal();
+      comp.car$ = Observable.of(data.carInfo);
+      comp.insurance$ = Observable.of(data.insuranceInfo);
+      comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
+      comp.advice$ = Observable.of(data.adviceInfo);
+      comp.acceptFinalTerms = true;
+      store.dispatch(new BuyFailureAction(new Error()));
+
+      fixture.detectChanges();
+
+      let res = comp
+        .submitInsurance()
+        .subscribe(data => {
+
+            expect(false).toBeTruthy('Should not pass here');
+          },
+          err => {
+            expect(err).toBeDefined();
+            expect(err.message).toBe('Er is helaas iets mis gegaan. Probeer het later opnieuw.');
+          }
+        );
+    }));
+
+    it('should route to thankYouPage on success', async(() => {
+      let data = getMockedInsuranceProposal();
+      comp.car$ = Observable.of(data.carInfo);
+      comp.insurance$ = Observable.of(data.insuranceInfo);
+      comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
+      comp.advice$ = Observable.of(data.adviceInfo);
+      comp.acceptFinalTerms = true;
+      store.dispatch(new BuyCompleteAction({}));
+
+      let expectedAction = new router.Go({path: ['/car/thank-you', data.profileInfo.emailaddress]});
+      fixture.detectChanges();
+
+      let res = comp
+        .submitInsurance()
+        .subscribe(
+          () => expect(true).toBeTruthy(),
+          () => expect(false).toBeTruthy('Should not pass here'),
+          // () => expect(store.dispatch).toHaveBeenCalledWith(expectedAction)
+        );
+    }));
+  });
+});
