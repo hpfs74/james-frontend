@@ -1,6 +1,6 @@
 <div class="container knx-car-advice-loader">
   <knx-loader [visible]="purchasedInsurancesLoading$ | async">
-    Loading...
+    Laden...
   </knx-loader>
 </div>
 
@@ -47,6 +47,11 @@
           [isLoading]="isInsuranceLoading$ | async"
           [insurances]="insurances$ | async">
         </knx-insurance-toplist>
+
+        <knx-service-guide
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="service-guide"
+          [visible]="!(isInsuranceLoading$| async)">
+        </knx-service-guide>
       </knx-step>
 
       <knx-step [options]="formSteps[2]">

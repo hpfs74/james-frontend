@@ -105,8 +105,8 @@ export class InsuranceResultComponent {
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
 
   public infoMessages = {
-    profileScore: `De profielscore geeft aan hoe goed de verzekering past bij jou profiel. Hoe hoger de score, hoe bevter.
-      Een score van minstens 75% betekent dat de verzekering goed aansluit bij jouw wensen en je situatie.`,
+    profileScore: `De profielscore geeft aan hoe goed de verzekering bij jouw profiel past. Hoe hoger de score, hoe beter.
+      Een score van minstens 75% betekent dat de verzekering goed aansluit bij jouw wensen en situatie.`,
     priceQuality: `We berekenen de score op basis van het profiel dat jij instelt. We toetsen de verzekering op meer
       dan 100 criteria om te bepalen of wat jij belangrijk vindt, ook goed scoort binnen de verzekering.
       Zo betaal je voor wat jij belangrijk vindt en voorkom je verrassingen. `

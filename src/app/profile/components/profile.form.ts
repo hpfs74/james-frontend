@@ -13,7 +13,7 @@ export class ProfileForm extends BaseForm {
   formConfig: any;
 
   public validationErrors = {
-    required: () => 'Dit veld is verplicht',
+    required: () => 'Dit is een verplicht veld',
     firstName: () => 'Vul een voornaam van maximaal 50 karakters in',
     lastName: () => 'Vul een achternaam van maximaal 50 karakters in',
     birthDate: () => 'Vul een geldige geboortedatum in'

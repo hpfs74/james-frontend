@@ -34,7 +34,7 @@ import { CarInsurance } from '../../car/models';
           het melden van schade of als je er niet uitkomt met je verzekeraar.</p>
 
         <p>Slim: loopt je verzekering bijna af en kun je ergens een betere deal krijgen? Dan krijg je van ons een seintje.
-          Zo ben je via ons altijd slim en voordelig verzekerd..</p>
+          Zo ben je via ons altijd slim en voordelig verzekerd.</p>
       </knx-ir-tooltip>
     </p>
 

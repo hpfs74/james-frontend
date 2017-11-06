@@ -12,6 +12,7 @@ import { KNXWizardModule } from '@knx/wizard';
 import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXInfoModule } from '@knx/info';
+import { KNXTooltipModule } from '@knx/tooltip';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
 import { KNXInputComponent } from './components/knx-input/input.component';
@@ -47,7 +48,6 @@ import { ButtonIconComponent } from './components/knx-button-icon/button-icon.co
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
 import { ChatInputComponent } from './components/knx-chat-input/chat-input.component';
-import { CookiebarComponent } from './components/knx-cookiebar/cookiebar.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
 import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
@@ -59,6 +59,7 @@ import { LicensePlateComponent } from './components/knx-input-licenseplate/licen
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
+import { InfoIconComponent } from './components/knx-info-icon/info-icon.component';
 import { NavbarComponent } from './components/knx-navbar';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
@@ -73,6 +74,7 @@ import { LoaderComponent } from './components/knx-loader/loader.component';
 import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
 import { ThankYouComponent } from './components/knx-thank-you/thank-you.component';
+import { ServiceGuideComponent } from './components/knx-service-guide/service-guide';
 import { PurchasedComponent } from './components/knx-purchased/purchased.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
@@ -94,7 +96,6 @@ export const sharedComponents = [
   CircleProgressComponent,
   CarSummaryComponent,
   ChatInputComponent,
-  CookiebarComponent,
   CollapsePanelComponent,
   CollapseMessageComponent,
   DashboardItemComponent,
@@ -107,6 +108,7 @@ export const sharedComponents = [
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
+  InfoIconComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,
   OfflineBarComponent,
@@ -122,6 +124,7 @@ export const sharedComponents = [
   TabsComponent,
   TabComponent,
   ThankYouComponent,
+  ServiceGuideComponent,
   PurchasedComponent,
   NavUserComponent,
   UserGreetingComponent,
@@ -135,6 +138,7 @@ export const sharedModules = [
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
   KNXInfoModule,
+  KNXTooltipModule,
   KNXModalDialogModule,
   DropdownModule
 ];

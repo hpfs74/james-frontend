@@ -55,3 +55,9 @@
     display: block;
   }
 }
+
+@media (min-width: 768px) {
+  .knx-side-panel {
+    display: none;
+  }
+}

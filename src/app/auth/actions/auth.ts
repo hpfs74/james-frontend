@@ -28,8 +28,6 @@ export class Login implements Action {
 
 export class LoginAnonymous implements Action {
   readonly type = LOGIN_ANONYMOUS;
-
-  constructor(public payload: Authenticate) {}
 }
 
 export class LoginSuccess implements Action {

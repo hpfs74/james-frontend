@@ -34,7 +34,7 @@ export class CarUtils {
         value = 'WA + Beperkt Casco';
         break;
       case 'CAR':
-        value = 'WA + Volledig Casco (All Risk)';
+        value = 'WA + Volledig Casco (Allrisk)';
         break;
       default:
         break;

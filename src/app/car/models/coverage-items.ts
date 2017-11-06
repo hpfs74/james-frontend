@@ -22,7 +22,7 @@ export const DefaultCoverages = [
   },
   {
     id: 'CAR',
-    header: 'All risk',
+    header: 'Allrisk',
     badge: 'ons advies',
     features: [
       'Schade door anderen',

@@ -9,7 +9,7 @@ export class RegistrationForm extends BaseForm {
   formConfig: any;
 
   validationErrors = {
-    required: () => 'Dit veld is verplicht',
+    required: () => 'Dit is een verplicht veld',
     email: () => 'Vul een geldig e-mailadres in alsjeblieft',
     pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?'
   };
@@ -45,6 +45,7 @@ export class RegistrationForm extends BaseForm {
         placeholder: 'E-mailadres',
         showErrorMessages: false,
         label: 'Je e-mailadres',
+        type: 'text',
         attributes: {
           'aria-label': 'Vul je e-mailadres in',
           'addonleft': true,

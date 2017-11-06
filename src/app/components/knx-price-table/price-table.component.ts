@@ -17,6 +17,13 @@ import { Price } from '../../shared/models/price';
         (click)="selectItem(i)">
       </knx-price-item>
     </div>`,
+  styles: [`
+    @media (min-width: 768px) {
+      knx-price-item {
+        flex: 1;
+      }
+    }
+  `]
 })
 export class PriceTableComponent implements OnDestroy {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();

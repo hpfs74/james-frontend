@@ -35,7 +35,7 @@ export class CarExtrasForm {
               value: 'CLC'
             },
             {
-              label: 'WA + Volledig Casco (All Risk)',
+              label: 'WA + Volledig Casco (Allrisk)',
               value: 'CAR'
             }
           ]

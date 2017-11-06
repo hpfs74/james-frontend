@@ -1,7 +1,8 @@
 import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
 
 import * as fromAddress from '../reducers';
 import * as address from '../actions/address';
