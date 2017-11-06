@@ -23,7 +23,7 @@ export class IbanForm extends BaseForm {
         `Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
         Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.`,
       iban:
-        `Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankrekeningafschrift of in je bankieren app.`
+        `Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankafschrift of in de app van je bank.`
     };
 
     // Startdate can be a maximum of 1 year in the future

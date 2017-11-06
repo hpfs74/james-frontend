@@ -28,7 +28,7 @@ describe('Car Utils', () => {
     it('should convert coverage values to car extra type label', () => {
       expect(CarUtils.getCoverageExtended('CL')).toEqual('WA');
       expect(CarUtils.getCoverageExtended('CLC')).toEqual('WA + Beperkt Casco');
-      expect(CarUtils.getCoverageExtended('CAR')).toEqual('WA + Volledig Casco (All Risk)');
+      expect(CarUtils.getCoverageExtended('CAR')).toEqual('WA + Volledig Casco (Allrisk)');
     });
 
     it('should return empty value on unknown value', () => {

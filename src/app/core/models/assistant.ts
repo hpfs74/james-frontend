@@ -30,7 +30,7 @@ export class AssistantConfig {
       houseHold: `Je premie kan veranderen afhankelijk van je huishoudelijke status`,
       niceCar: (car: Car) => `Gaaf! Je hebt een <strong>${car.make} ${car.model}`,
       coverage: {
-        advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header} dekking</strong>`
+        advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header}-dekking</strong>`
       },
       CL: `<strong>WA (Wettelijke Aansprakelijkheid):</strong> Met een WA beperkt casco dekking ben je naast de gewone
         WA ook verzekerd voor schade door brand of storm, ruitschade, diefstal en schade door aanrijding met dieren.`,
@@ -74,7 +74,7 @@ export class AssistantConfig {
       en wordt binnen 3 dagen goedgekeurd. We houden je op de hoogte!`,
       finalEmail: (email: string) => `Een kopie van de polis is verstuurd naar: ${email}`
     },
-    purchased: (firstName: string) => `Hoi<strong>${firstName}</strong> :) Currently you can only get advice via the website.` +
-    ` If you want to manage your insurance just download the Knab Verzekeren app.`
+    purchased: (firstName: string) => `Via de website krijg je op dit moment enkel advies. Wil je de verzekering beheren?
+      Download dan de Knab Verzekeren app.`
   };
 }
