@@ -6,8 +6,6 @@ import {
   AfterViewInit,
   OnDestroy
 } from '@angular/core';
-// declare var Stickyfills: any;
-import * as Stickyfill from 'stickyfilljs';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 const DEFAULT_OPTIONS: StickyOptions = {
