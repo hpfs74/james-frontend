@@ -61,7 +61,7 @@
       </knx-step>
     </div>
 
-    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>
+    <div class="knx-wizard__sidebar" [knxSticky]="currentStep !== 1" #knxWizardSidebar>
       <knx-chat-stream
         (onChatExpand)="blurWizard($event)"
         [options]="chatConfig$ | async"

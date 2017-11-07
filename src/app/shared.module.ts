@@ -34,7 +34,8 @@ import {
   JumpToElementDirective,
   SidePanelStateDirective,
   ClickOutsideDirective,
-  QaIdentifierDirective
+  QaIdentifierDirective,
+  StickyDirective
 } from './shared/directives';
 
 /**
@@ -90,6 +91,7 @@ export const sharedComponents = [
   JumpToElementDirective,
   ClickOutsideDirective,
   QaIdentifierDirective,
+  StickyDirective,
   ButtonIconComponent,
   CircleProgressComponent,
   CarSummaryComponent,

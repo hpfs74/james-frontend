@@ -105,13 +105,6 @@ input::-ms-clear {
   }
 }
 
-@media (min-width: 518px) {
-  .knx-wizard__sidebar--sticky {
-    position: sticky;
-    top: 90px;
-  }
-}
-
 // Car advice summary
 // Hide back button on small screens
 @media (max-width: 768px) {
