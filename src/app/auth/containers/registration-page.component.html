@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <knx-registration *ngIf="!(registrationSuccess$ | async)"
           privacyStatementUrl="[PLACEHOLDER]"
-          termsAndConditionsUrl="[PLACEHOLDER]"
+          termsAndConditionsUrl="https://www.knab.nl/~/media/files/overeenkomsten-en-voorwaarden/gebruiksvoorwaarden_knab_verzekeren.pdf"
           [pending]="registrationPending$ | async"
           [error]="registrationError$ | async"
           (onRegister)="register($event)">
