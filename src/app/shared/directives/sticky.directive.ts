@@ -13,17 +13,11 @@ const DEFAULT_CSS_OPTIONS: StickyCssOptions = {
   top: '90px',
   width: '326.6px'
 };
-
 interface StickyCssOptions {
-  position?: string;
-  top?: string;
-  bottom?: string;
-  left?: string;
-  right?: string;
-  width?: string;
+  [key: string]: any;
 }
-
 const DEFAULT_OFFSET = 90;
+
 @Directive({ selector: '[knxSticky]' })
 export class StickyDirective implements AfterViewInit, OnDestroy {
   nativeElement: any;
@@ -31,8 +25,8 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
   innerStickValue: boolean;
   innerCssOptions: StickyCssOptions;
   innerOffset: number;
-  @Input() cssOptions?: StickyCssOptions;
-  @Input() offset?: number;
+  @Input() stickyCssOptions: StickyCssOptions;
+  @Input() stickyOffset: number;
   @Input('knxSticky') set knxSticky(stick: boolean) {
     this.innerStickValue = stick;
     this.setStickySubscription(stick);
@@ -44,19 +38,19 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
     this.nativeElement = this.el.nativeElement;
-    if (!this.cssOptions) {
-      this.innerCssOptions = DEFAULT_CSS_OPTIONS;
-    } else {
-      this.innerCssOptions = this.cssOptions;
-    }
-    if (!this.offset) {
-      this.innerOffset = DEFAULT_OFFSET;
-    } else {
-      this.innerOffset = this.offset;
-    }
   }
 
   ngAfterViewInit() {
+    if (!this.stickyCssOptions) {
+      this.innerCssOptions = DEFAULT_CSS_OPTIONS;
+    } else {
+      this.innerCssOptions = this.stickyCssOptions;
+    }
+    if (!this.stickyOffset) {
+      this.innerOffset = DEFAULT_OFFSET;
+    } else {
+      this.innerOffset = this.stickyOffset;
+    }
     this.setStickySubscription(this.knxSticky);
   }
 
