@@ -24,7 +24,6 @@ interface StickyCssOptions {
 }
 
 const DEFAULT_OFFSET = 90;
-
 @Directive({ selector: '[knxSticky]' })
 export class StickyDirective implements AfterViewInit, OnDestroy {
   nativeElement: any;
@@ -76,13 +75,19 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
       this.scrollSubscription$ = Observable.fromEvent(window, 'scroll')
       .subscribe(e => {
         if (window.pageYOffset > this.innerOffset) {
-          Object.keys(this.innerCssOptions).forEach(key => {
-            this.renderer.setStyle(this.nativeElement, key, this.innerCssOptions[key]);
-          });
+          if (this.nativeElement.getAttribute('class').indexOf('knx-sticky') < 0) {
+            Object.keys(this.innerCssOptions).forEach(key => {
+              this.renderer.setStyle(this.nativeElement, key, this.innerCssOptions[key]);
+            });
+            this.renderer.addClass(this.nativeElement, 'knx-sticky');
+          }
         } else {
-          Object.keys(this.innerCssOptions).forEach(key => {
-            this.renderer.removeStyle(this.nativeElement, key);
-          });
+          if (this.nativeElement.getAttribute('class').indexOf('knx-sticky') > -1) {
+            Object.keys(this.innerCssOptions).forEach(key => {
+              this.renderer.removeStyle(this.nativeElement, key);
+            });
+            this.renderer.removeClass(this.nativeElement, 'knx-sticky');
+          }
         }
       });
     } else {
