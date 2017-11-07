@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, Route, CanActivate, CanActivateChild, CanLoad, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../reducers';
-import * as auth from '../actions/auth';
-import * as router from '../../core/actions/router';
 import { AuthService } from '../services/auth.service';
 
 const anonymousAvailableLinks = ['/car'];

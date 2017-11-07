@@ -1,18 +1,14 @@
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { TestModuleMetadata, async, TestBed, inject } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions, XHRBackend } from '@angular/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { StoreModule, Store } from '@ngrx/store';
+import { MockBackend } from '@angular/http/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { setUpTestBed } from './../../../test.common.spec';
-import { HttpModule } from '@angular/http';
-import { By } from '@angular/platform-browser';
-import { Observable } from 'rxjs/Observable';
 
 import { CarService } from './car.service';
 import { LocalStorageService } from '../../core/services';
 import { AuthHttp } from '../../auth/services';
-import { Car, CarCompare } from '../../car/models';
+import { CarCompare } from '../../car/models';
 
 describe('Service: Car', () => {
   let backend, service;
@@ -175,5 +171,4 @@ describe('Service: Car', () => {
       });
     });
   });
-
 });

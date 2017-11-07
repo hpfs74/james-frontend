@@ -39,8 +39,7 @@ export class AssistantEffects {
       let message: any;
       let prop = key.split('.').reduce((o, i) => o[i], combined.config);
       if (typeof prop === 'function') {
-        let fnCall = value ? prop(value) : prop();
-        message = fnCall;
+        message = value ? prop(value) : prop();
       } else {
         message = prop;
       }

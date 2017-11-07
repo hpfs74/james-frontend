@@ -17,7 +17,6 @@ import { CXInputOptions } from '@cx/input';
   `
 })
 export class ChatInputComponent implements OnInit {
-  @Input() buttonLabel: string;
   @Output() sendMessage: EventEmitter<string> = new EventEmitter();
 
   value: string;

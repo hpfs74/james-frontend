@@ -43,7 +43,7 @@ export class PriceTableComponent implements OnDestroy {
 
   selectItem(index: number) {
     this.items.map((item, i) => {
-      item.selected = index === i ? true : false;
+      item.selected = index === i;
     });
     this.onSelected.emit(this.items[index]);
   }

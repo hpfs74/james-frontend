@@ -1,5 +1,5 @@
-import { Component, OnChanges, Input, OnInit, SimpleChanges } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 
 import { CarCheckForm } from './car-check.form';
 import * as FormUtils from '../../../utils/base-form.utils';

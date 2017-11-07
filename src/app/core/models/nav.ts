@@ -5,8 +5,7 @@
 
 
 /**
- * @name
- * Section
+ * @name Section
  * @description
  * Describe a section for navigation purpose
  *
@@ -18,8 +17,7 @@ export class Section {
 }
 
 /**
- * @name
- * Nav
+ * @name Nav
  * @description
  * Describe a navigation link /// <reference path="knx-footer" />
  * and also /// <reference path="knx-navbar" />
