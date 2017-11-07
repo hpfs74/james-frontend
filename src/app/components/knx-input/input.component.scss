@@ -33,6 +33,7 @@ $knxIconColorGreen: $knab-secondary-green;
 .knx-input__error_message {
   position: absolute;
   top: $knxInputHeight + 1px;
+  left: 0;
 
   p {
     color: $knab-error;
