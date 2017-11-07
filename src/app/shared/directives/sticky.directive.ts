@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 
-const DEFAULT_OPTIONS: StickyOptions = {
+const DEFAULT_CSS_OPTIONS: StickyCssOptions = {
   position: 'fixed',
   top: '90px',
   width: '326.6px'
 };
 
-interface StickyOptions {
+interface StickyCssOptions {
   position?: string;
   top?: string;
   bottom?: string;
@@ -23,12 +23,17 @@ interface StickyOptions {
   width?: string;
 }
 
+const DEFAULT_OFFSET = 90;
+
 @Directive({ selector: '[knxSticky]' })
 export class StickyDirective implements AfterViewInit, OnDestroy {
   nativeElement: any;
   scrollSubscription$: Subscription;
   innerStickValue: boolean;
-  @Input() options?: StickyOptions;
+  innerCssOptions: StickyCssOptions;
+  innerOffset: number;
+  @Input() cssOptions?: StickyCssOptions;
+  @Input() offset?: number;
   @Input('knxSticky') set knxSticky(stick: boolean) {
     this.innerStickValue = stick;
     this.setStickySubscription(stick);
@@ -40,8 +45,15 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
     this.nativeElement = this.el.nativeElement;
-    if (!this.options) {
-      this.options = DEFAULT_OPTIONS;
+    if (!this.cssOptions) {
+      this.innerCssOptions = DEFAULT_CSS_OPTIONS;
+    } else {
+      this.innerCssOptions = this.cssOptions;
+    }
+    if (!this.offset) {
+      this.innerOffset = DEFAULT_OFFSET;
+    } else {
+      this.innerOffset = this.offset;
     }
   }
 
@@ -62,14 +74,13 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
   setStickySubscription(stick: boolean) {
     if (stick) {
       this.scrollSubscription$ = Observable.fromEvent(window, 'scroll')
-      .throttleTime(100)
       .subscribe(e => {
-        if (window.pageYOffset > 90) {
-          Object.keys(this.options).forEach(key => {
-            this.renderer.setStyle(this.nativeElement, key, this.options[key]);
+        if (window.pageYOffset > this.innerOffset) {
+          Object.keys(this.innerCssOptions).forEach(key => {
+            this.renderer.setStyle(this.nativeElement, key, this.innerCssOptions[key]);
           });
         } else {
-          Object.keys(this.options).forEach(key => {
+          Object.keys(this.innerCssOptions).forEach(key => {
             this.renderer.removeStyle(this.nativeElement, key);
           });
         }
