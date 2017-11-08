@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AppShellModule } from '@angular/app-shell';
+// import { AppShellModule } from '@angular/app-shell';
 import { RouterModule, Router } from '@angular/router';
 import { StoreModule, Action } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -61,7 +61,7 @@ export function ContentLoader(contentService: ContentConfig) {
 
     AddressModule.forRoot(),
 
-    AppShellModule.runtime(),
+    // AppShellModule.runtime(),
   ],
   providers: [
     {
