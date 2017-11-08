@@ -3,6 +3,8 @@ import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/tes
 import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../test.common.spec';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 import { ServiceGuideComponent } from './service-guide';
 
 describe('Component: Service Guide', () => {
@@ -12,7 +14,13 @@ describe('Component: Service Guide', () => {
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
-    declarations: [ServiceGuideComponent]
+    declarations: [ServiceGuideComponent],
+    providers: [
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      }
+    ]
   };
   setUpTestBed(moduleDef);
 

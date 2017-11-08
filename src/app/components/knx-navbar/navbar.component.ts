@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import { ContentConfig, Content } from '../../content.config';
 import { collapseInOutAnimation } from '../../shared/animations';
 import { Nav, NavItemType } from '../../core/models/nav';
 import * as fromAuth from '../../auth/reducers';
@@ -20,8 +21,11 @@ export class NavbarComponent implements OnInit {
   isCollapsed = true;
   loggedIn$: Observable<boolean>;
   anonymous$: Observable<any>;
+  content: Content;
 
-  constructor(private store$: Store<fromRoot.State>) { }
+  constructor(private store$: Store<fromRoot.State>, private contentConfig: ContentConfig) {
+    this.content = contentConfig.getContent();
+  }
 
   ngOnInit() {
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);

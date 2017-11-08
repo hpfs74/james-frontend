@@ -32,7 +32,7 @@ import * as insurance from '../../insurance/actions/insurance';
     </header>
 
     <div class="main-container" knxSidePanelState>
-      <knx-loader *shellRender></knx-loader>
+      <knx-loader></knx-loader>
       <router-outlet></router-outlet>
     </div>
 

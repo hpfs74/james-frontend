@@ -6,7 +6,8 @@ import {
   AfterViewInit,
   OnDestroy
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 const DEFAULT_CSS_OPTIONS: StickyCssOptions = {
   position: 'fixed',
@@ -22,18 +23,12 @@ const DEFAULT_OFFSET = 90;
 export class StickyDirective implements AfterViewInit, OnDestroy {
   nativeElement: any;
   scrollSubscription$: Subscription;
-  innerStickValue: boolean;
   innerCssOptions: StickyCssOptions;
   innerOffset: number;
   @Input() stickyCssOptions: StickyCssOptions;
   @Input() stickyOffset: number;
   @Input('knxSticky') set knxSticky(stick: boolean) {
-    this.innerStickValue = stick;
     this.setStickySubscription(stick);
-  }
-
-  get knxSticky(): boolean {
-    return this.innerStickValue;
   }
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
@@ -51,7 +46,6 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
     } else {
       this.innerOffset = this.stickyOffset;
     }
-    this.setStickySubscription(this.knxSticky);
   }
 
   ngOnDestroy() {
@@ -61,31 +55,40 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
   unsetStickySubscription() {
     if (this.scrollSubscription$) {
       this.scrollSubscription$.unsubscribe();
+      this.unsetCssProperties();
     }
   }
 
   setStickySubscription(stick: boolean) {
     if (stick) {
-      this.scrollSubscription$ = Observable.fromEvent(window, 'scroll')
-      .subscribe(e => {
+      let observable = Observable.fromEvent(window, 'scroll');
+      this.scrollSubscription$ = observable.subscribe(e => {
         if (window.pageYOffset > this.innerOffset) {
-          if (this.nativeElement.getAttribute('class').indexOf('knx-sticky') < 0) {
-            Object.keys(this.innerCssOptions).forEach(key => {
-              this.renderer.setStyle(this.nativeElement, key, this.innerCssOptions[key]);
-            });
-            this.renderer.addClass(this.nativeElement, 'knx-sticky');
-          }
+          this.setCssProperties();
         } else {
-          if (this.nativeElement.getAttribute('class').indexOf('knx-sticky') > -1) {
-            Object.keys(this.innerCssOptions).forEach(key => {
-              this.renderer.removeStyle(this.nativeElement, key);
-            });
-            this.renderer.removeClass(this.nativeElement, 'knx-sticky');
-          }
+          this.unsetCssProperties();
         }
       });
     } else {
       this.unsetStickySubscription();
+    }
+  }
+
+  setCssProperties() {
+    if (this.nativeElement.getAttribute('class').indexOf('knx-sticky') < 0) {
+      Object.keys(this.innerCssOptions).forEach(key => {
+        this.renderer.setStyle(this.nativeElement, key, this.innerCssOptions[key]);
+      });
+      this.renderer.addClass(this.nativeElement, 'knx-sticky');
+    }
+  }
+
+  unsetCssProperties() {
+    if (this.nativeElement.getAttribute('class').indexOf('knx-sticky') > -1) {
+      Object.keys(this.innerCssOptions).forEach(key => {
+        this.renderer.removeStyle(this.nativeElement, key);
+      });
+      this.renderer.removeClass(this.nativeElement, 'knx-sticky');
     }
   }
 }

@@ -34,6 +34,8 @@ import { CarAdviceComponent } from './car-advice.component';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
 import { CarDetailForm } from '../components/advice/car-detail.form';
 import { Car } from '../models/car';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -58,6 +60,12 @@ describe('Component: CarAdviceComponent', () => {
       ],
       declarations: [
         CarAdviceComponent
+      ],
+      providers: [
+        {
+          provide: ContentConfig,
+          useValue: ContentConfigMock
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
