@@ -1,15 +1,11 @@
-import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { QaIdentifier } from './../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
-import { InsuranceAdvice } from '../../../insurance/models';
 import { Profile } from '../../../profile/models';
 import { Car, CarInsurance } from '../../../car/models';
-import { CarUtils } from '../../utils/car-utils';
 
-import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   selector: 'knx-car-summary-form',
   styleUrls: ['./car-summary.component.scss'],
@@ -35,7 +31,6 @@ export class CarSummaryComponent implements QaIdentifier {
   @Input() advice: any; // user data from form steps
 
   confirmValue: boolean;
-  carUtils = CarUtils;
 
   isValidInsurance(obj: any) {
     return (obj &&

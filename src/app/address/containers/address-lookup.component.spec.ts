@@ -4,7 +4,6 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed, inject, fakeAsync
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpModule, Response, ResponseOptions } from '@angular/http';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
-import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { setUpTestBed } from './../../../test.common.spec';
@@ -16,7 +15,6 @@ import { LocalStorageService } from '../../core/services';
 import { LoaderService } from '../../components/knx-app-loader/loader.service';
 import { AddressLookupComponent } from './address-lookup.component';
 import { AddressService } from '../services/address.service';
-import { AuthModule } from '../../auth/auth.module';
 
 import * as fromRoot from '../reducers';
 import * as fromAddress from '../reducers';
