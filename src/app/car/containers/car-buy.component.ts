@@ -33,7 +33,6 @@ import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 import { IbanForm } from '../../shared/forms/iban.form';
 import { BaseForm } from '../../shared/forms/base-form';
 import * as FormUtils from '../../utils/base-form.utils';
-import { getInitialState } from './car-buy.component.spec';
 
 @Component({
   selector: 'knx-car-buy',
