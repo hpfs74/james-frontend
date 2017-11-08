@@ -1,23 +1,23 @@
+
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm } from '../../../shared/forms/base-form';
 import { nameInitialMask } from '../../../utils/base-form.utils';
 import { numberValidator } from '../../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../../utils/base-form.validators';
-import { SecurityClasses } from '../../models/security-classes';
+
+import { Pair } from '../../../core/models/pair';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
-
-  securityClasses: Array<any>;
 
   public validationErrors = {
     required: () => 'Dit is een verplicht veld',
     reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private securityClasses: Array<Pair>) {
     super();
 
     this.infoMessages = {
@@ -31,8 +31,6 @@ export class CarReportingCodeForm extends BaseForm {
         <p>Accessoires zijn bijvoorbeeld een losse alarminstallatie, de trekhaak, lichtmetalen velgen of een ingebouwde autoradio.</p>
         <p>Bij diefstal krijg je de dagwaarde van de accessoires terug van je verzekering.</p>`
     };
-
-    this.securityClasses = SecurityClasses;
 
     this.formGroup = this.fb.group({
       reportingCode: [null,
@@ -53,10 +51,10 @@ export class CarReportingCodeForm extends BaseForm {
     this.formConfig = {
       reportingCode: {
         formControlName: 'reportingCode',
-        label: 'Meldcode',
         formControl: this.formGroup.get('reportingCode'),
         validationErrors: this.validationErrors,
         inputOptions: {
+          label: 'Meldcode',
           type: 'number'
         }
       },
@@ -74,13 +72,7 @@ export class CarReportingCodeForm extends BaseForm {
         formControl: this.formGroup.get('securityClass'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          items: this.securityClasses
-            .map((i) => {
-              return {
-                label: i.short ? `${i.title} - ${i.short}` : i.title,
-                value: i.value
-              };
-            })
+          items: securityClasses
         }
       },
       saveToProfile: {

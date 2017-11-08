@@ -1,8 +1,8 @@
-import { SecurityClasses } from '../models/security-classes';
+// import { SecurityClasses } from '../models/security-classes';
 import { KilometersPerYear } from '../models/kilometers';
 
 export class CarUtils {
-  static securityClasses = SecurityClasses;
+  // static securityClasses = SecurityClasses;
   static kilometersPerYear = KilometersPerYear;
 
   static getCoverage(coverage: string) {
@@ -42,9 +42,9 @@ export class CarUtils {
     return value;
   }
 
-  static getSecurityClassName(securityClass: string) {
-    return securityClass ? this.securityClasses.filter(item => item.value === securityClass)[0].title : '';
-  }
+  // static getSecurityClassName(securityClass: string) {
+  //   return securityClass ? this.securityClasses.filter(item => item.value === securityClass)[0].title : '';
+  // }
 
   static getKilometerPerYear(kmrClass: string) {
     let item = this.kilometersPerYear.filter(item => item.value === kmrClass)[0];

@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -35,12 +35,17 @@ import {
   GeolocationService,
   LocalStorageService,
   LoggingService,
-  NavigationService
+  NavigationService,
+  TagsService
 } from './services';
 import { GlobalErrorHandler } from './services/error-handler';
 
 // Feature module reducer
 import { reducers } from './reducers';
+
+export function TagsLoader(tagsService: TagsService) {
+  return () => tagsService.load();
+}
 
 export const COMPONENTS = [
   AppComponent,
@@ -85,12 +90,19 @@ export class CoreModule {
         LocalStorageService,
         NavigationService,
         LoggingService,
+        TagsService,
         requestOptionsProvider,
         CurrencyPipe,
         DatePipe,
         {
           provide: ErrorHandler,
           useClass: GlobalErrorHandler
+        },
+        {
+          provide: APP_INITIALIZER,
+          useFactory: TagsLoader,
+          deps: [TagsService],
+          multi: true
         }
       ],
     };

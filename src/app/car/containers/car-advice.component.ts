@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
-import { KNXStepOptions } from '@knx/wizard';
-import { KNXWizardComponent } from '@knx/wizard';
+import { KNXStepOptions, KNXWizardComponent } from '@knx/wizard';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -36,6 +35,7 @@ import { QaIdentifier } from './../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { AssistantConfig } from '../../core/models/assistant';
+import { TagsService } from '../../core/services/tags.service';
 import { Address } from '../../address/models';
 import { DefaultCoverages } from '../models/coverage-items';
 import { AddressForm } from '../../address/components/address.form';
@@ -94,8 +94,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
 
-  constructor(private store$: Store<fromRoot.State>) {
-  }
+  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
 
   ngAfterViewChecked() {
     // bind async validator for car info
@@ -129,7 +128,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     // initialize forms
     const formBuilder = new FormBuilder();
-    this.carDetailForm = new CarDetailForm(formBuilder);
+    this.carDetailForm = new CarDetailForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'));
     this.addressForm = new AddressForm(formBuilder);
     this.carExtrasForm = new CarExtrasForm(formBuilder);
 
@@ -170,6 +169,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         };
         this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
       });
+
+    // this.tagsService.
 
     this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
     this.coverages = DefaultCoverages;
@@ -215,12 +216,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     if (!detailForm.valid || !addressForm.valid) {
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
     }
-
-    // no implicit updating of profile
-    // this.store$.dispatch(new profile.UpdateAction({
-    //   gender: detailForm.value.gender,
-    //   date_of_birth: detailForm.value.birthDate
-    // }));
 
     Observable.combineLatest(this.car$, this.address$, (car, address) => {
       return {

@@ -42,9 +42,9 @@
           </cx-form-group>
 
           <div *ngIf="form.formGroup.get('securityClass').value && selectedSecurityClass" class="knx-message knx-message--hint knx-message--arrow-top">
-            <div class="knx-message__header">{{ selectedSecurityClass.title }}: {{ selectedSecurityClass.short }}</div>
+            <div class="knx-message__header">{{ selectedSecurityClass.translation_text }}: {{ selectedSecurityClass.translation_label }}</div>
             <div class="knx-message__content">
-              {{ selectedSecurityClass.description }}
+              {{ selectedSecurityClass.translation_description }}
             </div>
           </div>
         </div>
