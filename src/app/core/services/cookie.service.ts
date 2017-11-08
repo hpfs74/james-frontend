@@ -11,7 +11,7 @@ export class CookieService {
   /**
    * Checks if cookie exist
    *
-   * @param  {string} name cookie
+   * @param  {string} cookie name
    * @returns true if cookie exist
    */
   public check(name: string): boolean {

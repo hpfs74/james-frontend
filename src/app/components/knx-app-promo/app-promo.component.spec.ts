@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA, DebugElement, LOCALE_ID } from '@angular/core';
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { AppPromoBlockComponent } from './app-promo.component';

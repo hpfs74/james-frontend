@@ -30,7 +30,7 @@ export function numberValidator(key: string) {
     let valid = false;
 
     if (value) {
-      const hasDot: boolean = value.indexOf('.') >= 0;
+      const hasDot: boolean = value.indexOf('.') >= 0 ? true : false;
       // convert string to number
       const number: number = Math.floor(value);
       // get result of isInteger()

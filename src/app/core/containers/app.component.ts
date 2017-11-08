@@ -25,7 +25,7 @@ import * as insurance from '../../insurance/actions/insurance';
     <header class="header">
       <knx-offline-indicator></knx-offline-indicator>
 
-      <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()">
+      <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
         <knx-opening-hours></knx-opening-hours>
         <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
       </knx-navbar>
@@ -36,7 +36,7 @@ import * as insurance from '../../insurance/actions/insurance';
       <router-outlet></router-outlet>
     </div>
 
-    <div class="container-fluid knx-container--fullwidth knx-container--gray">
+    <div *ngIf="isVisible()" class="container-fluid knx-container--fullwidth knx-container--gray">
       <knx-features>
         <knx-feature-item title="Objectief" description="We vergelijken meer dan 20 verzekeraars"></knx-feature-item>
         <knx-feature-item title="Bespaar" description="Krijg tot 15% korting op je autoverzekering"></knx-feature-item>
@@ -117,6 +117,19 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.userDialogService.openModal(modalName, '', this.viewContainerRef, AuthRedirectModalComponent, userDialogSettings);
       }
     });
+  }
+
+  isVisible() {
+    if (this.route$) {
+      let shouldShow = true;
+
+      // It's always visible
+      // this.route$.take(1)
+      //   .subscribe(currentRoute => {
+      //     shouldShow = (currentRoute !== '/login' && currentRoute !== '/register');
+      //   });
+      return shouldShow;
+    }
   }
 
   logOut() {

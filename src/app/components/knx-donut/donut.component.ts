@@ -13,7 +13,7 @@ import { Component, Input } from '@angular/core';
             [attr.cx]="center"
             [attr.stroke-width]="width"
             [attr.stroke-dasharray]="circumference"
-            [attr.stroke-dashoffset]="getOffset(percentage)"></circle>
+            [attr.stroke-dashoffset]="getOffset(percentage)"/>
 
           <circle class="knx-donut__percentage circle_animation"
             [attr.r]="outlineFirstRadius"
@@ -21,7 +21,7 @@ import { Component, Input } from '@angular/core';
             [attr.cx]="center"
             [attr.stroke-width]="outline"
             [attr.stroke-dasharray]="180"
-            [attr.stroke-dashoffset]="0"></circle>
+            [attr.stroke-dashoffset]="0"/>
 
           <circle class="knx-donut__percentage circle_animation"
             [attr.r]="outlineSecondRadius"
@@ -29,7 +29,7 @@ import { Component, Input } from '@angular/core';
             [attr.cx]="center"
             [attr.stroke-width]="outline"
             [attr.stroke-dasharray]="180"
-            [attr.stroke-dashoffset]="0"></circle>
+            [attr.stroke-dashoffset]="0"/>
         </g>
         <g *ngIf="percentage">
           <text class="knx-donut__text"
