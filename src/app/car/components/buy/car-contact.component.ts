@@ -1,10 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { QaIdentifier } from './../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
 import { Profile } from './../../../profile/models';
 import { ContactDetailForm } from './../../../shared/forms/contact-detail.form';
+import { isMobileNumber } from '../../../utils/base-form.utils';
 import * as FormUtils from '../../../utils/base-form.utils';
 
 @Component({

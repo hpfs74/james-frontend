@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/merge';
 
 import { slideUpDownAnimation } from '../../shared/animations/slide-up-down.animation';
@@ -25,9 +26,7 @@ export class OfflineBarComponent {
 
 @Component({
   selector: 'knx-offline-indicator',
-  template: `
-    <knx-offline-bar [show]="!(isConnected$ | async)"></knx-offline-bar>
-  `
+  template: `<knx-offline-bar [show]="!(isConnected$ | async)"></knx-offline-bar>`
 })
 export class OfflineIndicatorComponent {
   isConnected$: Observable<boolean>;

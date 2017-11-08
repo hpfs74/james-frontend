@@ -105,7 +105,7 @@ export class AuthService {
 
   /**
    * Do register the user
-   * @param {RegistrationPayload} registration
+   * @param {Authenticate} auth
    * @return {Observable}
    */
   public register(registration: RegistrationPayload): Observable<RegistrationResult> {
@@ -139,7 +139,7 @@ export class AuthService {
   /**
    * Request backend to send activation email
    *
-   * @param {RegisterResendActivationEmail} action email
+   * @param email
    */
   public resendActivation(action: RegisterResendActivationEmail) {
     // TODO: check if the profile is active or if the user is logged on there's no need to access here!!!

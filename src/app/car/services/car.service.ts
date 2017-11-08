@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Headers, Response } from '@angular/http';
+import { Http, Headers, Response, URLSearchParams, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 
 import { AuthHttp } from '../../auth/services/auth-http.service';
+import { Profile } from '../../profile/models';
 import { environment } from '../../../environments/environment';
 import { Car, CarInsurance, CarCoverageRecommendation, CarCompare, Proposal } from '../models';
 
@@ -41,7 +42,9 @@ export class CarService {
         );
       }).map((insuranceDetails) => {
         const insurance = insuranceDetails[0];
-        insurance._embedded.insurance.insurer = insuranceDetails[1];
+        const insurer = insuranceDetails[1];
+
+        insurance._embedded.insurance.insurer = insurer;
         return insurance;
       });
   }

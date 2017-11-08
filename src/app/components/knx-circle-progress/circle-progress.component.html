@@ -5,13 +5,13 @@
     [attr.cy] = "cy"
     [attr.r] = "radius"
     [attr.fill]="backgroundColor"
-    [attr.stroke]="backgroundColor"></circle>
+    [attr.stroke]="backgroundColor"/>
 
   <path
     class="circle-progress__start"
     [attr.d] = "circleM+ circleL+ circleA+ '0 ' + arcSweep + circleEnd + 'Z'"
     [attr.stroke]="'#eeebe5'"
-    [attr.fill]="color"></path>
+    [attr.fill]="color"/>
 
   <defs>
     <pattern
@@ -36,7 +36,7 @@
     [attr.cy] = "cy"
     [attr.fill] = "'#fff'"
     [attr.r] = "innerRadius"
-    [attr.stroke]="backgroundColor" ></circle>
+    [attr.stroke]="backgroundColor" />
     <!--     [attr.fill]="innerFill" -->
 
   <circle
@@ -45,5 +45,5 @@
     [attr.cy] = "cy"
     [attr.fill]="'url(#image' + uniqueId + ')'"
     [attr.r] = "innerRadius"
-    [attr.stroke]="backgroundColor" ></circle>
+    [attr.stroke]="backgroundColor" />
 </svg>

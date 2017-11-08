@@ -33,7 +33,6 @@ import { Component, Input, OnInit } from '@angular/core';
             title="Download Android App">Android</a>
       </div>
     </div>
-  </div>
   `
 })
 export class AppPromoBlockComponent implements OnInit {
