@@ -13,6 +13,8 @@ import * as fromProfile from '../../profile/reducers';
 
 import { SharedModule } from '../../shared.module';
 import { CarPurchasedComponent } from './car-purchased.component';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 
 describe('Component: CarPurchasedComponent', () => {
   let comp: CarPurchasedComponent;
@@ -35,6 +37,12 @@ describe('Component: CarPurchasedComponent', () => {
       ],
       declarations: [
         CarPurchasedComponent
+      ],
+      providers: [
+        {
+          provide: ContentConfig,
+          useValue: ContentConfigMock
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });

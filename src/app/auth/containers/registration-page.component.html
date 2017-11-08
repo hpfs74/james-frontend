@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-6">
       <knx-registration *ngIf="!(registrationSuccess$ | async)"
-          privacyStatementUrl="https://www.knab.nl/privacybeleid/verzekeren"
-          termsAndConditionsUrl="https://www.knab.nl/~/media/files/overeenkomsten-en-voorwaarden/gebruiksvoorwaarden_knab_verzekeren.pdf"
+          [privacyStatementUrl]="content.externalLinks.privacyStatement"
+          [termsAndConditionsUrl]="content.externalLinks.termsAndConditions"
           [pending]="registrationPending$ | async"
           [error]="registrationError$ | async"
           (onRegister)="register($event)">
@@ -19,7 +19,7 @@
       </knx-registration-thankyou>
     </div>
     <div class="col-md-6">
-      <knx-download-panel></knx-download-panel>
+      <knx-download-panel [iosUrl]="content.appStore.iOS" [androidUrl]="content.appStore.android"></knx-download-panel>
     </div>
   </div>
 </div>

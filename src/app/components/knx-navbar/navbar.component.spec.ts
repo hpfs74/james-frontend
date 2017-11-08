@@ -5,6 +5,8 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
+import { ContentConfig, Content } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 import { setUpTestBed } from './../../../test.common.spec';
 import { Nav, NavItemType } from '../../core/models';
 import { NavbarComponent } from './navbar.component';
@@ -34,8 +36,15 @@ describe('Component: Navbar', () => {
         'car': combineReducers(fromCar.reducers),
         'insurance': combineReducers(fromInsurance.reducers),
         'profile': combineReducers(fromProfile.reducers)
-      })],
+      })
+    ],
     declarations: [NavbarComponent],
+    providers: [
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      }
+    ],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

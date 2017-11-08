@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { ContentConfig } from '../../content.config';
+
 @Component({
   selector: 'knx-app-promo-block',
   styleUrls: ['app-promo.component.scss'],
@@ -39,9 +41,11 @@ export class AppPromoBlockComponent implements OnInit {
   @Input() iOSLink: string;
   @Input() androidLink: string;
 
-  ngOnInit() {
-    this.iOSLink = 'https://itunes.apple.com/nl/app/knab-verzekeren/id1240300470?l=en&mt=8';
-    this.androidLink = 'https://play.google.com/store/apps/details?id=com.knab.verzekeren';
+  constructor(private contentConfig: ContentConfig) {}
 
+  ngOnInit() {
+    const appStoreLinks = this.contentConfig.getKey('appStore');
+    this.iOSLink = appStoreLinks.iOS;
+    this.androidLink = appStoreLinks.android;
   }
 }

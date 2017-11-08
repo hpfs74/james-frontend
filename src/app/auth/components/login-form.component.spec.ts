@@ -1,10 +1,13 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+
 import { setUpTestBed } from './../../../test.common.spec';
 import { LoginFormComponent } from '../components/login-form.component';
 import { LoginForm } from './login.form';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 
 describe('Component: LoginFormComponent', () => {
   let comp: LoginFormComponent ;
@@ -12,6 +15,12 @@ describe('Component: LoginFormComponent', () => {
 
   let moduleDef: TestModuleMetadata = {
     declarations: [LoginFormComponent],
+    providers: [
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      }
+    ],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

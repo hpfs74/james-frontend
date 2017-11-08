@@ -1,0 +1,21 @@
+{
+  "appStore": {
+    "iOS": "https://itunes.apple.com/nl/app/knab-verzekeren/id1240300470?l=en&mt=8",
+    "android": "https://play.google.com/store/apps/details?id=com.knab.verzekeren"
+  },
+  "externalLinks": {
+    "privacyStatement": "https://www.knab.nl/privacybeleid/verzekeren",
+    "termsAndConditions": "https://www.knab.nl/~/media/files/overeenkomsten-en-voorwaarden/gebruiksvoorwaarden_knab_verzekeren.pdf",
+    "serviceGuide": "https://www.knab.nl/~/media/files/overeenkomsten-en-voorwaarden/dienstenwijzer.pdf"
+  },
+  "email": {
+    "phishing": {
+      "label": "valse-email@knab.nl",
+      "link": "mailto:valse-email@knab.nl"
+    }
+  },
+  "phone": {
+    "label": "020-3031600",
+    "link": "tel:0203031600"
+  }
+}
