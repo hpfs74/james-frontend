@@ -5,14 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { Http, RequestOptions } from '@angular/http';
-// import { CXFormsModule } from '@cx/forms';
-import { SharedModule } from '../shared.module';
 
+import { SharedModule } from '../shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './effects/auth.effects';
 import { AuthService, AuthHttp, AuthGuard, LoginGuard } from './services';
 import { LocalStorageService } from '../core/services';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
+import { ContentConfig } from '../content.config';
 import { RegistrationEffects } from './effects/registration.effects';
 
 import { LoginPageComponent } from './containers/login-page.component';
@@ -58,6 +58,7 @@ export class AuthModule {
         LoginGuard,
         LocalStorageService,
         LoaderService,
+        ContentConfig,
         {
           provide: AuthHttp,
           useFactory: authHttpServiceFactory,

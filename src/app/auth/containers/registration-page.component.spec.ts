@@ -15,6 +15,8 @@ import { setUpTestBed } from './../../../test.common.spec';
 import { RegistrationPageComponent } from '../containers/registration-page.component';
 import { LoginForm } from '../components/login.form';
 import { AuthService } from '../services/auth.service';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 import { loginError } from '../models/login-error';
 
 describe('Component: RegistrationPageComponent', () => {
@@ -29,6 +31,10 @@ describe('Component: RegistrationPageComponent', () => {
       BaseRequestOptions,
       MockBackend,
       AuthService,
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      },
       {
         deps: [
           MockBackend,

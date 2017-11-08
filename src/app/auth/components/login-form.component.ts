@@ -1,7 +1,9 @@
 import { Inject, Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { LoginForm } from './login.form';
 import { Store } from '@ngrx/store';
+
+import { LoginForm } from './login.form';
+import { ContentConfig, Content } from '../../content.config';
 import { CustomError } from '../models/login-error';
 import * as FormUtils from '../../utils/base-form.utils';
 
@@ -22,7 +24,12 @@ export class LoginFormComponent {
   @Output() onResendActivationMail: EventEmitter<string> = new EventEmitter<string>();
   @Output() onPasswordReset: EventEmitter<string> = new EventEmitter<string>();
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
-  constructor() {}
+
+  emailContent: any;
+
+  constructor(private contentConfig: ContentConfig) {
+    this.emailContent = contentConfig.getKey('email');
+  }
 
   resendActivationMail() {
     let notActivatedEmail = this.form.formGroup.get('email').value;

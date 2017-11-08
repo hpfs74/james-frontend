@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
+import { ContentConfig } from './content.config';
 
 import { reducers, metaReducers } from './reducers';
 
@@ -25,9 +26,10 @@ import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
 
-// export function ContentLoader(contentService: ContentService) {
-//   return () => contentService.loadFiles();
-// }
+// Load config files before app bootstrap
+export function ContentLoader(contentService: ContentConfig) {
+  return () => contentService.load();
+}
 
 @NgModule({
   imports: [
@@ -66,6 +68,13 @@ import { AddressModule } from './address/address.module';
       provide: LOCALE_ID,
       useValue: 'nl-NL'
     },
+    ContentConfig,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ContentLoader,
+      deps: [ContentConfig],
+      multi: true
+    },
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
      * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
@@ -74,18 +83,10 @@ import { AddressModule } from './address/address.module';
     {
       provide: RouterStateSerializer,
       useClass: CustomRouterStateSerializer
-    },
-    // ContentService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: ContentLoader,
-    //   deps: [ContentService],
-    //   multi: true
-    // }
+    }
   ],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {
   // Diagnostic only: inspect router configuration
   constructor(router: Router) {

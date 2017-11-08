@@ -3,6 +3,8 @@ import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/tes
 import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from '../../../test.common.spec';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 import { PurchasedComponent } from './purchased.component';
 import { AppPromoBlockComponent } from '../knx-app-promo/app-promo.component';
 
@@ -13,7 +15,13 @@ describe('Component: Purchased', () => {
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
-    declarations: [PurchasedComponent, AppPromoBlockComponent]
+    declarations: [PurchasedComponent, AppPromoBlockComponent],
+    providers: [
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      },
+    ],
   };
   setUpTestBed(moduleDef);
 

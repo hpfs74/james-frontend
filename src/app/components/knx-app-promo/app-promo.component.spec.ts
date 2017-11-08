@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { AppPromoBlockComponent } from './app-promo.component';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock';
 
 describe('Component: AppPromoBlockComponent', () => {
   let comp: AppPromoBlockComponent;
@@ -13,6 +15,12 @@ describe('Component: AppPromoBlockComponent', () => {
 
   let moduleDef: TestModuleMetadata = {
     declarations: [AppPromoBlockComponent],
+    providers: [
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      }
+    ],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

@@ -7,6 +7,7 @@ import * as fromAuth from '../reducers';
 import * as auth from '../actions/auth';
 import * as registration from '../actions/registration';
 import { Authenticate } from '../models/auth';
+import { ContentConfig, Content } from '../../content.config';
 
 @Component({
   selector: 'knx-password-reset',
@@ -22,9 +23,12 @@ export class RegistrationPageComponent {
   resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
   registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
 
-  constructor(private store$: Store<fromAuth.State>) {
-    this.store$.dispatch( new registration.RegisterResetState() );
-    this.store$.dispatch( new registration.RegisterResendResetState() );
+  content: Content;
+
+  constructor(private store$: Store<fromAuth.State>, private contentConfig: ContentConfig) {
+    this.store$.dispatch(new registration.RegisterResetState());
+    this.store$.dispatch(new registration.RegisterResendResetState());
+    this.content = this.contentConfig.getContent();
   }
 
   register(register: Authenticate) {
