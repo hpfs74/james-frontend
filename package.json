@@ -137,6 +137,7 @@
   },
   "browserslist": [
     "> 5%",
-    "last 4 versions"
+    "last 4 versions",
+    "ie 11"
   ]
 }
