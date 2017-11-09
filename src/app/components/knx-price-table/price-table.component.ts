@@ -23,6 +23,13 @@ import { Price } from '../../shared/models/price';
         flex: 1;
       }
     }
+
+    @media (max-width: 768px) {
+      knx-price-item {
+         -ms-flex-positive: 9999;
+        flex-grow: 9999;
+      }
+    }
   `]
 })
 export class PriceTableComponent implements OnDestroy {
