@@ -1,5 +1,5 @@
 <div class="knx-address-lookup" [formGroup]="addressFormGroup"
-     [class.cx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched && loaded"
+     [class.cx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched && !loading"
      [attr.data-error]="getErrors()">
 
   <div class="row">
