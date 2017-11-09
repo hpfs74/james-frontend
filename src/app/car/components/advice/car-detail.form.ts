@@ -4,7 +4,7 @@ import { BaseForm } from '../../../shared/forms/base-form';
 import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../utils/base-form.validators';
 import { birthDateMask } from '../../../utils/base-form.utils';
 import { LicensePlateValidator } from '../../../components/knx-input-licenseplate/licenseplate.validator';
-import { Pair } from '../../../core/models/pair';
+import { UIPair } from '../../../core/models/pair';
 
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
@@ -20,7 +20,7 @@ export class CarDetailForm extends BaseForm {
     claimFreeYears: () => `De ingevulde waarde ligt niet tussen 0 en 50`
   };
 
-  constructor(private fb: FormBuilder, houseHold: Array<Pair>) {
+  constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
     super();
 
     this.formGroup = this.fb.group({

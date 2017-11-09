@@ -1,16 +1,16 @@
 import { CarUtils } from './car-utils';
 
 describe('Car Utils', () => {
-  describe('Security Classes', () => {
-    it('should get security class title by value', () => {
-      expect(CarUtils.getSecurityClassName('SCM_NONE')).toEqual('Weet ik niet / Geen');
-      expect(CarUtils.getSecurityClassName('SCM1')).toEqual('Klasse 1');
-      expect(CarUtils.getSecurityClassName('SCM2')).toEqual('Klasse 2');
-      expect(CarUtils.getSecurityClassName('SCM3')).toEqual('Klasse 3');
-      expect(CarUtils.getSecurityClassName('SCM4')).toEqual('Klasse 4');
-      expect(CarUtils.getSecurityClassName('SCM5')).toEqual('Klasse 5');
-    });
-  });
+  // describe('Security Classes', () => {
+  //   it('should get security class title by value', () => {
+  //     expect(CarUtils.getSecurityClassName('SCM_NONE')).toEqual('Weet ik niet / Geen');
+  //     expect(CarUtils.getSecurityClassName('SCM1')).toEqual('Klasse 1');
+  //     expect(CarUtils.getSecurityClassName('SCM2')).toEqual('Klasse 2');
+  //     expect(CarUtils.getSecurityClassName('SCM3')).toEqual('Klasse 3');
+  //     expect(CarUtils.getSecurityClassName('SCM4')).toEqual('Klasse 4');
+  //     expect(CarUtils.getSecurityClassName('SCM5')).toEqual('Klasse 5');
+  //   });
+  // });
 
   describe('Coverage', () => {
     it('should convert coverage values to a label', () => {

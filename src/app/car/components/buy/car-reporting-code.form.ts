@@ -5,8 +5,7 @@ import { BaseForm } from '../../../shared/forms/base-form';
 import { nameInitialMask } from '../../../utils/base-form.utils';
 import { numberValidator } from '../../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../../utils/base-form.validators';
-
-import { Pair } from '../../../core/models/pair';
+import { UIPair } from '../../../core/models/pair';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
@@ -17,7 +16,7 @@ export class CarReportingCodeForm extends BaseForm {
     reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
   };
 
-  constructor(private fb: FormBuilder, private securityClasses: Array<Pair>) {
+  constructor(private fb: FormBuilder, private securityClasses: Array<UIPair>) {
     super();
 
     this.infoMessages = {

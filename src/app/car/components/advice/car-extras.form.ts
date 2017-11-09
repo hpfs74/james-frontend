@@ -1,11 +1,21 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { KilometersPerYear } from '../../models/kilometers';
+
+import { UIPair } from '../../../core/models/pair';
 
 export class CarExtrasForm {
   formGroup: FormGroup;
   formConfig: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    coverages: Array<UIPair>,
+    kmPerYear: Array<UIPair>,
+    legalAid: Array<UIPair>,
+    roadAssistance: Array<UIPair>,
+    ownRisk: Array<UIPair>
+  ) {
+
+    const defaultOwnRisk = 135;
 
     this.formGroup = this.fb.group({
       coverage: ['', Validators.required],
@@ -13,7 +23,7 @@ export class CarExtrasForm {
       extraOptionsNoClaim: [{}],
       extraOptionsOccupants: [{}],
       roadAssistance: [null, Validators.required],
-      ownRisk: [135, Validators.required],
+      ownRisk: [defaultOwnRisk, Validators.required],
       kmPerYear: [null, Validators.required]
     });
 
@@ -25,20 +35,21 @@ export class CarExtrasForm {
         type: 'radio',
         formControl: this.formGroup.get('coverage'),
         inputOptions: {
-          items: [
-            {
-              label: 'WA',
-              value: 'CL'
-            },
-            {
-              label: 'WA + Beperkt Casco',
-              value: 'CLC'
-            },
-            {
-              label: 'WA + Volledig Casco (Allrisk)',
-              value: 'CAR'
-            }
-          ]
+          items: coverages
+          // [
+          //   {
+          //     label: 'WA',
+          //     value: 'CL'
+          //   },
+          //   {
+          //     label: 'WA + Beperkt Casco',
+          //     value: 'CLC'
+          //   },
+          //   {
+          //     label: 'WA + Volledig Casco (Allrisk)',
+          //     value: 'CAR'
+          //   }
+          // ]
         }
       },
       extraOptionsLegal: {
@@ -68,20 +79,21 @@ export class CarExtrasForm {
         type: 'select',
         formControl: this.formGroup.get('roadAssistance'),
         inputOptions: {
-          items: [
-            {
-              label: 'Geen pechhulp',
-              value: 'RANO'
-            },
-            {
-              label: 'Binnen Nederland',
-              value: 'RACO'
-            },
-            {
-              label: 'Binnen Europa',
-              value: 'RAE'
-            }
-          ]
+          items: roadAssistance
+          // [
+          //   {
+          //     label: 'Geen pechhulp',
+          //     value: 'RANO'
+          //   },
+          //   {
+          //     label: 'Binnen Nederland',
+          //     value: 'RACO'
+          //   },
+          //   {
+          //     label: 'Binnen Europa',
+          //     value: 'RAE'
+          //   }
+          // ]
         }
       },
       ownRisk: {
@@ -89,12 +101,13 @@ export class CarExtrasForm {
         type: 'select',
         formControl: this.formGroup.get('ownRisk'),
         inputOptions: {
-          items: ownRiskRanges.map((v) => {
-            return {
-              label: '€ ' + v,
-              value: v
-            };
-          })
+          items: ownRisk
+          // ownRiskRanges.map((v) => {
+          //   return {
+          //     label: '€ ' + v,
+          //     value: v
+          //   };
+          // })
         }
       },
 
@@ -103,7 +116,7 @@ export class CarExtrasForm {
         type: 'select',
         formControl: this.formGroup.get('kmPerYear'),
         inputOptions: {
-          items: KilometersPerYear
+          items: kmPerYear
         }
       }
     };

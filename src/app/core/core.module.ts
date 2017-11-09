@@ -28,6 +28,7 @@ import { NavbarComponent } from '../components/knx-navbar';
 // Services
 import { LoaderService } from '../components/knx-app-loader/loader.service';
 import { requestOptionsProvider } from './services/default-request-opts.service';
+import { TagsLoader } from '../utils/tagsloader';
 import {
   AssistantService,
   CanActivateBuyFlowGuard,
@@ -42,10 +43,6 @@ import { GlobalErrorHandler } from './services/error-handler';
 
 // Feature module reducer
 import { reducers } from './reducers';
-
-export function TagsLoader(tagsService: TagsService) {
-  return () => tagsService.load();
-}
 
 export const COMPONENTS = [
   AppComponent,

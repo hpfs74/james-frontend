@@ -1,4 +1,4 @@
-export interface Pair {
+export interface UIPair {
   label: string;
   value: string;
 }

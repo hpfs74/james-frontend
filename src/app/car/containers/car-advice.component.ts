@@ -128,9 +128,20 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     // initialize forms
     const formBuilder = new FormBuilder();
-    this.carDetailForm = new CarDetailForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'));
     this.addressForm = new AddressForm(formBuilder);
-    this.carExtrasForm = new CarExtrasForm(formBuilder);
+
+    console.log('CAR ADVICE');
+    console.log(this.tagsService.tags);
+
+    this.carDetailForm = new CarDetailForm(formBuilder,
+      this.tagsService.getAsLabelValue('insurance_flow_household'));
+
+    this.carExtrasForm = new CarExtrasForm(formBuilder,
+      this.tagsService.getAsLabelValue('car_flow_coverage'),
+      this.tagsService.getAsLabelValue('car_flow_km_per_year'),
+      this.tagsService.getAsLabelValue('car_flow_legal_aid'),
+      this.tagsService.getAsLabelValue('car_flow_road_assistance'),
+      this.tagsService.getAsLabelValue('car_own_risk'));
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
@@ -225,7 +236,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           claim_free_years: +detailForm.value.claimFreeYears,
           household_status: detailForm.value.houseHold,
           license: car.license,
-          gender: detailForm.value.gender,
+          gender: detailForm.value.gender.toUpperCase(),
           title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
           date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
             FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),

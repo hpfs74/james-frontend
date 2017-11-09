@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Tag } from '../models/tag';
-import { Pair } from '../models/pair';
+import { UIPair } from '../models/pair';
 
 // TODO: coupled with middleware spec, should be refactored if using
 // backend tags API directly
@@ -51,7 +51,7 @@ export class TagsService {
    * with form controls like a checkbox or select
    * @param key The section key, e.g. 'car_flow_km_per_year'
    */
-  getAsLabelValue(key: string): Array<Pair> {
+  getAsLabelValue(key: string): Array<UIPair> {
     const section = this.tags[key];
     return section.map(tag => {
       return {
