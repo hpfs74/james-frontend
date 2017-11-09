@@ -1,11 +1,10 @@
 <nav class="knx-navbar navbar navbar-toggleable-md bg-faded">
   <div class="container">
-    <button (click)="knxToolbarPanel.open()"
+    <!-- <button (click)="knxToolbarPanel.open()"
             class="knx-button--hamburger hidden-md-up"
             type="button"
             aria-label="Toggle navigation">
-    </button>
-
+    </button> -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
         <a class="navbar-brand" routerLink="/">
@@ -45,53 +44,5 @@
       </li>
     </ul>
   </div>
+  <knx-hamburger (onHamburgerClick)="knxToggleMenu()" class="hidden-md-up"></knx-hamburger>
 </nav>
-
-<knx-side-panel #knxToolbarPanel title="Wijzig" [fullwidth]="false" title="Menu">
-  <div class="container-fluid">
-    <div class="knx-side-panel-content">
-      <ul class="navbar-nav">
-        <li (click)="knxToolbarPanel.close()"
-            class="nav-item active"
-            *ngFor="let item of menuItems; let i = index"
-            routerLinkActive="active">
-          <a *ngIf="item.routePath" id="{{ item.id }}" routerLink="{{ item.routePath }}" class="nav-link" href="#">
-            {{ item.title }}
-          </a>
-        </li>
-
-        <li class="nav-item" *ngIf="loggedIn$ | async" (click)="knxToolbarPanel.close()">
-          <a class="nav-link" (click)="logOut()">Uitloggen</a>
-        </li>
-
-        <li class="nav-item" *ngIf="!(loggedIn$ | async)" (click)="knxToolbarPanel.close()">
-          <a class="nav-link" (click)="register()">Registreren</a>
-        </li>
-
-        <li class="nav-item" *ngIf="!(loggedIn$ | async)" (click)="knxToolbarPanel.close()">
-          <a class="nav-link" (click)="logIn()">Inloggen</a>
-        </li>
-
-        <li class="nav-item" *ngIf="loggedIn$ | async">
-          <knx-nav-user *ngIf="loggedIn$ | async"
-                        [showAccount]="false"
-                        (onLogOut)="logOut()"
-                        [profile]="profile$ | async">
-          </knx-nav-user>
-        </li>
-
-        <li>
-          <div class="knx-side-panel-content__utils"></div>
-        </li>
-
-        <li class="nav-item">
-          <knx-opening-hours class="nav-link"></knx-opening-hours>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{ content.phone.link }}"><span class="knx-icon-phone"></span>{{ content.phone.label }}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</knx-side-panel>
