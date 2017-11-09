@@ -165,7 +165,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
           road_assistance: data.roadAssistance || 'RANO',
           kilometers_per_year: data.kmPerYear || 'KMR3',
-          own_risk: +data.ownRisk || 135,
+          own_risk: data.ownRisk === null || data.ownRisk === undefined ? 135 : +data.ownRisk,
           insurance_id: ''
         };
         this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
@@ -239,7 +239,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           city: address.city,
           country: 'NL',
           kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
-          own_risk: +detailForm.value.ownRisk || 135,
+          own_risk: detailForm.value.ownRisk === null || detailForm.value.ownRisk === undefined ? 135 : +detailForm.value.ownRisk,
           cover_occupants: false,
           legal_aid: 'LAN',
           no_claim_protection: false,
