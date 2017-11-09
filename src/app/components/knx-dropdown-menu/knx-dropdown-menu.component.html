@@ -1,0 +1,9 @@
+<div class="knx-dropdown-menu-container"
+  [@slideUpDownHeightAnimation]="animationState"
+  (@slideUpDownHeightAnimation.done)="onAnimationDone.emit(true)"
+  (@slideUpDownHeightAnimation.start)="onAnimationDone.emit(false)">
+
+  <div class="knx-dropdown-menu">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { ContentConfig, Content } from '../../content.config';
 import { collapseInOutAnimation } from '../../shared/animations';
 import { Nav, NavItemType } from '../../core/models/nav';
 import * as fromAuth from '../../auth/reducers';
@@ -17,15 +16,11 @@ import * as router from '../../core/actions/router';
 export class NavbarComponent implements OnInit {
   @Input() menuItems: Array<Nav>;
   @Output() onLogOut = new EventEmitter();
-
+  @Output() onHamburgerClick: EventEmitter<any> = new EventEmitter<any>();
   isCollapsed = true;
   loggedIn$: Observable<boolean>;
   anonymous$: Observable<any>;
-  content: Content;
-
-  constructor(private store$: Store<fromRoot.State>, private contentConfig: ContentConfig) {
-    this.content = contentConfig.getContent();
-  }
+  constructor(private store$: Store<fromRoot.State>) {}
 
   ngOnInit() {
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -48,5 +43,9 @@ export class NavbarComponent implements OnInit {
 
   public register() {
     this.store$.dispatch(new router.Go({ path: ['/register'] }));
+  }
+
+  knxToggleMenu() {
+    this.onHamburgerClick.emit();
   }
 }

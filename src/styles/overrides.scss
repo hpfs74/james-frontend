@@ -115,3 +115,27 @@ button.knx-button--toggle,
 .knx-modal .knx-modal-body {
   -ms-flex: 0 0 auto;
 }
+
+.knx-dropdown-menu-container {
+  .navbar-nav {
+    &.knx-list--unstyled {
+      margin: 0;
+      padding: 25px;
+      font-size: 22px;
+
+      .nav-link {
+        color: $knab-primary-blue;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    margin-top: 54px;
+  }
+
+  .knx-dropdown-menu-container {
+    display: none;
+  }
+}
