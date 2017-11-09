@@ -25,7 +25,10 @@ import { AddressForm } from '../../../address/components/address.form';
 export class TestHostComponent {
   @ViewChild(CarDetailComponent)
   public targetComponent: CarDetailComponent;
-  public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
+  private mockHouseHold = [
+    { label: 'Alleen ikzelf', value: 'CHM' }
+  ];
+  public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder(), this.mockHouseHold);
   public addressFormFromHost: AddressForm = new AddressForm(new FormBuilder());
 }
 

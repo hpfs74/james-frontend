@@ -36,6 +36,7 @@ import { CarDetailForm } from '../components/advice/car-detail.form';
 import { Car } from '../models/car';
 import { ContentConfig } from '../../content.config';
 import { ContentConfigMock } from '../../content.mock';
+import { TagsService } from '../../core/services/tags.service';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -62,6 +63,7 @@ describe('Component: CarAdviceComponent', () => {
         CarAdviceComponent
       ],
       providers: [
+        TagsService,
         {
           provide: ContentConfig,
           useValue: ContentConfigMock

@@ -4,8 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { stripHTML } from '../../utils/text.utils';
 import { Tag } from '../models/tag';
-import { UIPair } from '../models/pair';
+import { UIPair } from '../models/ui-pair';
 
 // TODO: coupled with middleware spec, should be refactored if using
 // backend tags API directly
@@ -41,7 +42,7 @@ export class TagsService {
     const section = this.tags[key];
     const el = section.filter(el => el.tag === tag && !el.blocked)[0];
     if (el) {
-      return el.translation_text;
+      return this.sanitizeText(el.translation_text);
     }
     return null;
   }
@@ -55,9 +56,14 @@ export class TagsService {
     const section = this.tags[key];
     return section.map(tag => {
       return {
-        label: tag.translation_text,
+        label: this.sanitizeText(tag.translation_text),
         value: tag.tag
       };
     });
+  }
+
+  private sanitizeText(value: string) {
+    const icon = '(ii)';
+    return stripHTML(value).replace(icon, '');
   }
 }

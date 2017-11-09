@@ -168,6 +168,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       .debounceTime(200)
       .filter(() => this.currentStep === carFormSteps.compareResults)
       .subscribe(data => {
+        console.log(data);
+
         let compareExtraOptions = {
           coverage: data.coverage,
           cover_occupants: data.extraOptionsOccupants || false,

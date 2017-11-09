@@ -32,10 +32,10 @@ import * as compare from '../actions/compare';
 import * as router from '../../core/actions/router';
 
 import { SharedModule } from '../../shared.module';
+import { TagsService } from '../../core/services/tags.service';
 
 import { BuyCompleteAction, BuyFailureAction } from '../actions/car';
 import { Profile } from '../../profile/models/profile';
-
 
 
 export function getInitialState() {
@@ -137,6 +137,7 @@ describe('Component: CarBuyComponent', () => {
     ],
     schemas: [NO_ERRORS_SCHEMA],
     providers: [
+      TagsService,
       CurrencyPipe,
       {
         provide: Router,

@@ -6,16 +6,21 @@ import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
+import { TagsService } from '../../../core/services/tags.service';
 import { CarReportingCodeComponent } from './car-reporting-code.component';
 
+const securityClassMock = [
+  { label: 'Security 1', value: 'class1' },
+  { label: 'Security 2', value: 'class2' }
+];
+
 @Component({
-  template: `<div><knx-car-reporting-code-form [form]="formFromHost" [profile]="profileFromHost"></knx-car-reporting-code-form></div>`
+  template: `<knx-car-reporting-code-form [form]="formFromHost" [profile]="profileFromHost"></knx-car-reporting-code-form>`
 })
 export class TestHostComponent {
   @ViewChild(CarReportingCodeComponent)
   public targetComponent: CarReportingCodeComponent;
-  public formFromHost: CarReportingCodeForm = new CarReportingCodeForm(
-    new FormBuilder());
+  public formFromHost: CarReportingCodeForm = new CarReportingCodeForm(new FormBuilder(), securityClassMock);
   public profileFromHost: any;
 }
 
@@ -25,7 +30,8 @@ describe('Component: CarReportingCodeComponent', () => {
 
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
-    declarations: [CarReportingCodeComponent, TestHostComponent]
+    declarations: [CarReportingCodeComponent, TestHostComponent],
+    providers: [TagsService]
   };
   setUpTestBed(moduleDef);
 
@@ -70,9 +76,8 @@ describe('Component: CarReportingCodeComponent', () => {
 
   it('should toggle the security class explanation', () => {
     expect(comp.targetComponent.selectedSecurityClass).toBeUndefined();
-    const ctrl = comp.formFromHost.formGroup.get('securityClass').setValue('SCM5');
+    const ctrl = comp.formFromHost.formGroup.get('securityClass').setValue('class1');
     fixture.detectChanges();
-    expect(comp.targetComponent.selectedSecurityClass.value).toEqual('SCM5');
-    expect(comp.targetComponent.selectedSecurityClass.title).toEqual('Klasse 5');
+    expect(comp.targetComponent.selectedSecurityClass.tag).toEqual('class1');
   });
 });

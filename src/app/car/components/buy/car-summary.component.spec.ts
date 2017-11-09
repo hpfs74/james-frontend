@@ -8,6 +8,7 @@ import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { CarSummaryComponent } from './car-summary.component';
+
 @Component({
   template: `
     <knx-car-summary-form

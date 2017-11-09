@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { UIPair } from '../../../core/models/pair';
+import { UIPair } from '../../../core/models/ui-pair';
 
 export class CarExtrasForm {
   formGroup: FormGroup;
@@ -8,11 +8,11 @@ export class CarExtrasForm {
 
   constructor(
     private fb: FormBuilder,
-    coverages: Array<UIPair>,
-    kmPerYear: Array<UIPair>,
-    legalAid: Array<UIPair>,
-    roadAssistance: Array<UIPair>,
-    ownRisk: Array<UIPair>
+    coverages?: Array<UIPair>,
+    kmPerYear?: Array<UIPair>,
+    legalAid?: Array<UIPair>,
+    roadAssistance?: Array<UIPair>,
+    ownRisk?: Array<UIPair>
   ) {
 
     const defaultOwnRisk = 135;
@@ -27,8 +27,6 @@ export class CarExtrasForm {
       kmPerYear: [null, Validators.required]
     });
 
-    const ownRiskRanges: Array<number> = [0, 135, 245, 375, 500, 675, 950];
-
     this.formConfig = {
       coverage: {
         formControlName: 'coverage',
@@ -36,34 +34,25 @@ export class CarExtrasForm {
         formControl: this.formGroup.get('coverage'),
         inputOptions: {
           items: coverages
-          // [
-          //   {
-          //     label: 'WA',
-          //     value: 'CL'
-          //   },
-          //   {
-          //     label: 'WA + Beperkt Casco',
-          //     value: 'CLC'
-          //   },
-          //   {
-          //     label: 'WA + Volledig Casco (Allrisk)',
-          //     value: 'CAR'
-          //   }
-          // ]
         }
       },
       extraOptionsLegal: {
         formControlName: 'extraOptionsLegal',
         type: 'checkbox',
         formControl: this.formGroup.get('extraOptionsLegal'),
-        inputOptions: { label: 'Rechtsbijstand', value: 'legal'}
+        inputOptions: {
+          label: 'Rechtsbijstand',
+          value: 'legal'
+        } as UIPair
       },
       extraOptionsNoClaim: {
         formControlName: 'extraOptionsNoClaim',
         type: 'checkbox',
         formControl: this.formGroup.get('extraOptionsNoClaim'),
-        inputOptions: { label: 'No-claimbeschermer',
-          value: 'noclaim'}
+        inputOptions: {
+          label: 'No-claimbeschermer',
+          value: 'noclaim'
+        } as UIPair
       },
       extraOptionsOccupants: {
         formControlName: 'extraOptionsOccupants',
@@ -72,7 +61,7 @@ export class CarExtrasForm {
         inputOptions: {
           label: 'Inzittendenverzekering',
           value: 'occupants'
-        }
+        } as UIPair
       },
       roadAssistance: {
         formControlName: 'roadAssistance',
@@ -80,20 +69,6 @@ export class CarExtrasForm {
         formControl: this.formGroup.get('roadAssistance'),
         inputOptions: {
           items: roadAssistance
-          // [
-          //   {
-          //     label: 'Geen pechhulp',
-          //     value: 'RANO'
-          //   },
-          //   {
-          //     label: 'Binnen Nederland',
-          //     value: 'RACO'
-          //   },
-          //   {
-          //     label: 'Binnen Europa',
-          //     value: 'RAE'
-          //   }
-          // ]
         }
       },
       ownRisk: {
@@ -102,12 +77,6 @@ export class CarExtrasForm {
         formControl: this.formGroup.get('ownRisk'),
         inputOptions: {
           items: ownRisk
-          // ownRiskRanges.map((v) => {
-          //   return {
-          //     label: '€ ' + v,
-          //     value: v
-          //   };
-          // })
         }
       },
 
