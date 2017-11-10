@@ -37,7 +37,7 @@ import { Car } from '../models/car';
 import { ContentConfig } from '../../content.config';
 import { ContentConfigMock } from '../../content.mock.spec';
 import { TagsService } from '../../core/services/tags.service';
-import { TagsServiceMock } from '../../core/services/tags.service.mock';
+import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;

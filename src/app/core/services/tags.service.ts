@@ -20,7 +20,6 @@ export class TagsService {
     const path = '/content/tags.json';
     return this.http.request(path)
     .map(res => res.json())
-    .do((data) => console.log(data))
     .toPromise()
     .then((data) => this.tags = data)
     .catch(error => Promise.resolve());
@@ -39,6 +38,10 @@ export class TagsService {
    * @param tag The tag value, e.g. 'KMR1'
    */
   getTranslationText(key: string, tag: string): string {
+    if (!this.tags) {
+      return null;
+    }
+
     const section = this.tags[key];
     const el = section.filter(el => el.tag === tag && !el.blocked)[0];
     if (el) {
@@ -53,6 +56,10 @@ export class TagsService {
    * @param key The section key, e.g. 'car_flow_km_per_year'
    */
   getAsLabelValue(key: string): Array<UIPair> {
+    if (!this.tags) {
+      return null;
+    }
+
     const section = this.tags[key];
     return section.map(tag => {
       return {

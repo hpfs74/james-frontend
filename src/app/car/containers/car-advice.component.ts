@@ -130,9 +130,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     const formBuilder = new FormBuilder();
     this.addressForm = new AddressForm(formBuilder);
 
-    console.log('CAR ADVICE');
-    console.log(this.tagsService.tags);
-
     this.carDetailForm = new CarDetailForm(formBuilder,
       this.tagsService.getAsLabelValue('insurance_flow_household'));
 
@@ -168,8 +165,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       .debounceTime(200)
       .filter(() => this.currentStep === carFormSteps.compareResults)
       .subscribe(data => {
-        console.log(data);
-
         let compareExtraOptions = {
           coverage: data.coverage,
           cover_occupants: data.extraOptionsOccupants || false,
@@ -182,8 +177,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         };
         this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
       });
-
-    // this.tagsService.
 
     this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
     this.coverages = DefaultCoverages;

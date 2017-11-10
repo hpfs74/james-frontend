@@ -7,6 +7,7 @@ import { By } from '@angular/platform-browser';
 import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { TagsService } from '../../../core/services/tags.service';
+import { TagsServiceMock } from '../../../core/services/tags.service.mock.spec';
 import { CarReportingCodeComponent } from './car-reporting-code.component';
 
 const securityClassMock = [
@@ -31,7 +32,12 @@ describe('Component: CarReportingCodeComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
     declarations: [CarReportingCodeComponent, TestHostComponent],
-    providers: [TagsService]
+    providers: [
+      {
+        provide: TagsService,
+        useValue: TagsServiceMock
+      }
+    ]
   };
   setUpTestBed(moduleDef);
 
