@@ -8,7 +8,7 @@ import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
 import { environment } from '../../../environments/environment';
-import { AuthKey, AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
+import { RegistrationAdvice, AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
@@ -105,7 +105,7 @@ export class AuthService {
 
   /**
    * Do register the user
-   * @param {Authenticate} auth
+   * @param {RegistrationPayload} registration
    * @return {Observable}
    */
   public register(registration: RegistrationPayload): Observable<RegistrationResult> {
@@ -113,6 +113,20 @@ export class AuthService {
     registration.redirect_uri = `${environment.external.login}`;
 
     return this.play(environment.james.payloadEncryption.profile, registration)
+      .map((res: Response) => res.json());
+  }
+
+  /**
+   * Do register the anonymous user with advice
+   * @param {RegistrationPayload} registration
+   * @param {any} advice
+   * @return {Observable}
+   */
+  public registerWithAdvice(registration: RegistrationPayload, advice: any): Observable<RegistrationResult> {
+    registration.scope = 'profile/basic';
+    registration.redirect_uri = `${environment.external.login}`;
+
+    return this.playWithAdvice(environment.james.payloadEncryption.profileWithAdvice, registration, advice)
       .map((res: Response) => res.json());
   }
 
@@ -139,7 +153,7 @@ export class AuthService {
   /**
    * Request backend to send activation email
    *
-   * @param email
+   * @param {RegisterResendActivationEmail} action
    */
   public resendActivation(action: RegisterResendActivationEmail) {
     // TODO: check if the profile is active or if the user is logged on there's no need to access here!!!
@@ -162,6 +176,20 @@ export class AuthService {
       .flatMap((payload) => this.getPayloadKey(payload))
       .flatMap((payload) => this.getEncryptedNicciKey(payload))
       .flatMap((payload) => this.doPayloadEncryption(url, payload, body));
+  }
+
+  /**
+   *
+   * @param {string} url
+   * @param {any} body
+   * @param {any} advice
+   * @return {Observable<any>}
+   */
+  private playWithAdvice(url: string, body: any, advice: any): Observable<any> {
+    return this.getPayloadToken()
+      .flatMap((payload) => this.getPayloadKey(payload))
+      .flatMap((payload) => this.getEncryptedNicciKey(payload))
+      .flatMap((payload) => this.doPayloadEncryptionWithAdvice(url, payload, body, advice));
   }
 
   // /**
@@ -226,6 +254,7 @@ export class AuthService {
 
     headers.append('Authorization', `Bearer ${payloadauth.access_token}`);
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('ha', 'ha');
 
     return this.http
       .post(environment.james.payloadEncryption.key, `uuid=${session}`, { headers: headers })
@@ -268,6 +297,50 @@ export class AuthService {
     const arrayBuffer = encryptedPayload.buffer
       .slice(encryptedPayload.byteOffset, encryptedPayload.byteOffset + encryptedPayload.byteLength);
     return this.http.post(url, arrayBuffer, {
+      headers: headers,
+    });
+  }
+
+  // STEP 4 - PAYLOAD ENCRYPTION WITH ADVICE
+  private doPayloadEncryptionWithAdvice(url: string, payloadAuth: PayloadAuth, payload: any, advice: any): Observable<any> {
+    const headers = this.getHeaderWithBearer(payloadAuth);
+    const encryptedPayload = this.getAesGcmEncryptedBuffer(payload, payloadAuth.aes_key);
+    const arrayBuffer = encryptedPayload.buffer.slice(encryptedPayload.byteOffset,
+      encryptedPayload.byteOffset + encryptedPayload.byteLength);
+
+    const selectedAdvice = advice.advice[advice.ids[0]];
+    const selectedInsurance = advice.selectedInsurance;
+
+    // TODO: backend is about to change the request body, check INS-777 for updates if something will get broken
+    let carData = {
+      'coverage': selectedAdvice.coverage,
+      'insurance': selectedInsurance.id,
+      'country': selectedAdvice.country,
+      'gender': selectedAdvice.gender,
+      'own_risk': selectedAdvice.own_risk,
+      'date_of_birth': selectedAdvice.date_of_birth,
+      'lastname': '',
+      'legal_aid': selectedAdvice.legal_aid,
+      'road_assistance': selectedAdvice.road_assistance,
+      'house_number': selectedAdvice.house_number,
+      'title': selectedAdvice.title,
+      'cover_occupants': selectedAdvice.cover_occupants,
+      'no_claim_protection': selectedAdvice.no_claim_protection,
+      'zipcode': selectedAdvice.zipcode,
+      'license': selectedAdvice.license,
+      'kilometers_per_year': selectedAdvice.kilometers_per_year,
+      'household_status': selectedAdvice.household_status,
+      'claim_free_years': selectedAdvice.claim_free_years,
+      'active_loan': selectedAdvice.active_loan,
+      'firstname': '',
+      'selected_moneyview_id': selectedInsurance.moneyview_id,
+      'advice_item_id': selectedAdvice.id
+    };
+
+    return this.http.post(url, {
+      'registration_data': new Buffer(arrayBuffer).toString('base64'),
+      'car_data': carData
+    }, {
       headers: headers,
     });
   }
@@ -322,12 +395,15 @@ export class AuthService {
    *
    * @return {Headers}
    */
-  private getHeaderWithBearer(): Headers {
+  private getHeaderWithBearer(payloadAuth: PayloadAuth): Headers {
     const headers = new Headers();
     const accessToken = this.localStorageService.getAccessToken();
+
     headers.append('Content-Type', 'application/json');
     headers.set('Authorization', 'Bearer ' + accessToken);
     headers.set('Cache-Control', 'no-cache');
+    headers.append('NICCI-Key-ID', payloadAuth.id);
+    headers.append('NICCI-Key', payloadAuth.nicci_key);
 
     return headers;
   }

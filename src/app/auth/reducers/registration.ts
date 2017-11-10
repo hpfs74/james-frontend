@@ -81,6 +81,32 @@ export function reducer(state = initialState, action: registration.Actions): Sta
       return Object.assign({}, state, initialState);
     }
 
+    case registration.REGISTER_WITH_ADVICE: {
+      return {
+        ...state,
+        error: null,
+        loading: true,
+        registration_email: action.registration.emailaddress
+      };
+    }
+
+    case registration.REGISTER_WITH_ADVICE_SUCCESS: {
+      return {
+        ...state,
+        registered: true,
+        error: null,
+        loading: false,
+      };
+    }
+
+    case registration.REGISTER_WITH_ADVICE_FAILURE: {
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    }
+
     default: {
       return state;
     }

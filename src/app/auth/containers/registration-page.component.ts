@@ -31,6 +31,10 @@ export class RegistrationPageComponent {
     this.store$.dispatch(new registration.Register({ emailaddress: register.username, password: register.password }));
   }
 
+  registerWithAdvice(register: Authenticate) {
+    this.store$.dispatch(new registration.RegisterWithAdvice({ emailaddress: register.username, password: register.password }));
+  }
+
   redirectToLogin() {
     this.store$.dispatch(new auth.LoginRedirect());
   }

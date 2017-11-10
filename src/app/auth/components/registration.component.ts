@@ -1,12 +1,16 @@
 import { Observable } from 'rxjs/Observable';
 import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { KNXInputOptions } from '../../components/knx-input/input.options';
 
 import { RegistrationForm } from '../components/registration.form';
 import { registrationError } from '../models/registration-error';
 import { Authenticate } from '../models/auth';
 import * as FormUtils from '../../utils/base-form.utils';
-import { KNXInputOptions } from '../../components/knx-input/input.options';
+import * as fromInsurance from '../../insurance/reducers';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'knx-registration',
@@ -16,6 +20,8 @@ import { KNXInputOptions } from '../../components/knx-input/input.options';
 export class RegistrationComponent implements OnInit {
   errorMessage: string;
   form: RegistrationForm;
+
+  constructor(private store$: Store<fromRoot.State>) { }
 
   @Input() privacyStatementUrl: string;
   @Input() termsAndConditionsUrl: string;
@@ -28,6 +34,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   @Output() onRegister: EventEmitter<Authenticate> = new EventEmitter();
+  @Output() onRegisterWithAdvice: EventEmitter<Authenticate> = new EventEmitter();
 
   ngOnInit() {
     this.form = new RegistrationForm(new FormBuilder());
@@ -40,7 +47,15 @@ export class RegistrationComponent implements OnInit {
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
-      this.onRegister.emit({ username: email.value, password: password.value});
+
+      this.store$.select(fromInsurance.getSelectedAdviceId).take(1).subscribe(
+        id => {
+          if (id) {
+            this.onRegisterWithAdvice.emit({ username: email.value, password: password.value});
+          } else {
+            this.onRegister.emit({ username: email.value, password: password.value});
+          }
+        });
     }
   }
 

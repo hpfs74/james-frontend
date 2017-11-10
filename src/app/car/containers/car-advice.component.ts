@@ -222,6 +222,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     //   date_of_birth: detailForm.value.birthDate
     // }));
 
+    // TODO: move the logic of forming the request body to service
     Observable.combineLatest(this.car$, this.address$, (car, address) => {
       return {
         request: {
