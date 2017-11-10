@@ -1,6 +1,15 @@
 @import '~styles/base.scss';
 
+.container {
+  padding-top: 15px;
+}
+
 ul {
   padding-left: 0;
   margin-left: 0;
 }
+
+ul > li {
+  color: $knab-medium-gray;
+}
+

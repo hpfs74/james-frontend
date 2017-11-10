@@ -55,7 +55,7 @@
     "@knx/info": "0.0.162",
     "@knx/modal": "0.0.62",
     "@knx/step-navigation": "0.0.12",
-    "@knx/tooltip": "1.0.11",
+    "@knx/tooltip": "1.0.22",
     "@knx/wizard": "0.0.175",
     "@ngrx/effects": "^4.0.2",
     "@ngrx/router-store": "^4.0.2",

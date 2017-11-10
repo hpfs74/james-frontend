@@ -46,6 +46,7 @@ export class LoginModalComponent implements KNXModalDialog {
     this.actionButtons = [
       {
         text: 'Inloggen',
+        buttonClass: 'knx-button knx-button--fullwidth knx-button--secondary',
         onAction: this.login.bind(this)
       }
     ];

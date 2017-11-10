@@ -83,6 +83,10 @@ cx-checkbox + .knx-info {
       float: right;
       margin-top: -35px;
     }
+
+    .knx-tooltip-wrapper--visible {
+      min-width: 300px;
+    }
   }
 }
 
