@@ -49,7 +49,8 @@ export class LoginForm extends BaseForm {
         attributes: {
           'aria-label': 'Vul je wachtwoord in',
           'addonleft': true,
-          'addonicon': 'knx-icon-lock'
+          'addonicon': 'knx-icon-lock',
+          password: true
         }
       }
     };

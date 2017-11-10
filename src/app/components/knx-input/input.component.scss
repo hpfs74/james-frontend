@@ -19,6 +19,10 @@ $knxIconColorGreen: $knab-secondary-green;
   position: relative;
   width: $knxInputWidth;
   min-height: $knxInputMinHeight;
+
+  ::-ms-reveal {
+    display: none;
+  }
 }
 
 .knx-input__input {
@@ -87,6 +91,7 @@ $knxIconColorGreen: $knab-secondary-green;
   right: 15px;
   top: 25%;
   color: $knxIconColorGreen;
+  z-index: 1;
 }
 
 .knx-input__show-password {
