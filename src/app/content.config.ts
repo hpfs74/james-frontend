@@ -25,6 +25,30 @@ export interface Content {
     phishing: Link;
   };
   phone: Link;
+  footer: {
+    about: {
+      title: string;
+      [links: string]: string;
+    },
+    packgages: {
+      title: string;
+      [links: string]: string;
+    },
+    policies: {
+      links: {title: string, url: string, delimiter: string}[];
+    },
+    service_contant: {
+      title: string;
+      [links: string]: string;
+    },
+    solical: {
+      links: {title: string, url: string, icon: string}[];
+    },
+    solutions: {
+      title: string;
+      [links: string]: string;
+    }
+  };
 }
 
 @Injectable()
