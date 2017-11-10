@@ -50,8 +50,19 @@ $knxDocumentLinkBlue: #00a8ab;
       display: inline-block;
       text-align: center;
       margin-left: -20px;
+      color: $knab-medium-gray;
     }
   }
+}
+
+.knx-login__secure {
+  text-align: right;
+  font-size: $font-size-base - 2;
+}
+
+.knx-login__footer {
+  color: $knab-medium-gray;
+  margin-top: 10px;
 }
 
 @media (max-width: 991px) {
