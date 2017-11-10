@@ -2,6 +2,14 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/c
 import { TestModuleMetadata, async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormBuilder } from '@angular/forms';
+import { StoreModule, Store, combineReducers } from '@ngrx/store';
+
+import * as fromRoot from '../reducers';
+import * as fromCore from '../../core/reducers';
+import * as fromCar from '../reducers';
+import * as fromAuth from '../../auth/reducers';
+import * as fromInsurance from '../../insurance/reducers';
+import * as fromProfile from '../../profile/reducers';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { RegistrationComponent } from '../components/registration.component';
@@ -13,8 +21,17 @@ describe('Component: Registration', () => {
   let fixture: ComponentFixture<RegistrationComponent>;
   let de: DebugElement;
   let el: HTMLElement;
+  let store: Store<fromInsurance.State>;
 
   let moduleDef: TestModuleMetadata = {
+    imports: [StoreModule.forRoot({
+      ...fromRoot.reducers,
+      'auth': combineReducers(fromAuth.reducers),
+      'core': combineReducers(fromCore.reducers),
+      'car': combineReducers(fromCar.reducers),
+      'insurance': combineReducers(fromInsurance.reducers),
+      'profile': combineReducers(fromProfile.reducers)
+    })],
     declarations: [RegistrationComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
@@ -24,6 +41,9 @@ describe('Component: Registration', () => {
     fixture = TestBed.createComponent(RegistrationComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
+
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
   });
 
   it('should initialize the form', () => {
