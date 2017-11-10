@@ -30,18 +30,18 @@ export interface Content {
       title: string;
       [links: string]: string;
     },
-    packgages: {
+    packages: {
       title: string;
       [links: string]: string;
     },
     policies: {
       links: {title: string, url: string, delimiter: string}[];
     },
-    service_contant: {
+    service_contact: {
       title: string;
       [links: string]: string;
     },
-    solical: {
+    social: {
       links: {title: string, url: string, icon: string}[];
     },
     solutions: {
