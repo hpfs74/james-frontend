@@ -1,33 +1,3 @@
-.cx-form-group {
-  font-size: $font-size-base;
-}
-
-.cx-form-group__label + .cx-form-group__description {
-  font-size: $base-font-size - 2;
-  margin-top: -5px;
-}
-
-.cx-slider .noUi-pips {
-  font-size: 12px;
-}
-
-.cx-slider .noUi-marker-horizontal.noUi-marker-large {
-  height: 8px;
-  background: $knab-light-gray;
-}
-
-.cx-slider .noUi-origin {
-  background: $knab-light-gray;
-}
-
-.cx-slider .noUi-value:before {
-  content: '€';
-}
-
-.cx-slider .noUi-value-horizontal {
-  padding-top: 10px;
-}
-
 a.knx-button {
   padding-top: 10px;
 }
@@ -126,6 +96,21 @@ button.knx-button--toggle,
       .nav-link {
         color: $knab-primary-blue;
       }
+    }
+  }
+}
+
+.knx-insurance-review__panels {
+  counter-reset: ir-collapse-counter;
+
+  .knx-collapsible-panel {
+    counter-increment: ir-collapse-counter;
+  }
+
+  // Override inner collapse-panel container because we use components inside of knx-insurance-review
+  .knx-collapsible-container__content.knx-collapsible-container__content--step .knx-collapsible-panel__title {
+    &:before {
+      content: counter(ir-collapse-counter) !important;
     }
   }
 }
