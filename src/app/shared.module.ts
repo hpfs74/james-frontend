@@ -50,7 +50,6 @@ import { AsyncPreviewComponent } from './components/knx-async-preview/async-prev
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CarSummaryComponent } from './components/knx-car-summary/car-summary.component';
-import { ChatInputComponent } from './components/knx-chat-input/chat-input.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
 import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
@@ -98,7 +97,6 @@ export const sharedComponents = [
   ButtonIconComponent,
   CircleProgressComponent,
   CarSummaryComponent,
-  ChatInputComponent,
   CollapsePanelComponent,
   CollapseMessageComponent,
   DashboardItemComponent,
