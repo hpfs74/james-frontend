@@ -35,8 +35,9 @@ import { CarExtrasForm } from '../components/advice/car-extras.form';
 import { CarDetailForm } from '../components/advice/car-detail.form';
 import { Car } from '../models/car';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { TagsService } from '../../core/services/tags.service';
+import { TagsServiceMock } from '../../core/services/tags.service.mock';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -44,6 +45,7 @@ describe('Component: CarAdviceComponent', () => {
 
   let actions: Observable<any>;
   let store: Store<fromCar.State>;
+  let tagsService: TagsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -63,7 +65,10 @@ describe('Component: CarAdviceComponent', () => {
         CarAdviceComponent
       ],
       providers: [
-        TagsService,
+        {
+          provide: TagsService,
+          useValue: TagsServiceMock
+        },
         {
           provide: ContentConfig,
           useValue: ContentConfigMock
@@ -73,10 +78,9 @@ describe('Component: CarAdviceComponent', () => {
     });
 
     store = TestBed.get(Store);
+    tagsService = TestBed.get(TagsService);
     spyOn(store, 'dispatch').and.callThrough();
-  }));
 
-  beforeEach(async(() => {
     fixture = TestBed.createComponent(CarAdviceComponent);
     comp = fixture.componentInstance;
     comp.ngOnInit();

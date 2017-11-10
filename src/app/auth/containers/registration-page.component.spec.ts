@@ -16,7 +16,7 @@ import { RegistrationPageComponent } from '../containers/registration-page.compo
 import { LoginForm } from '../components/login.form';
 import { AuthService } from '../services/auth.service';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { loginError } from '../models/login-error';
 
 describe('Component: RegistrationPageComponent', () => {

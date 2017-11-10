@@ -111,6 +111,7 @@ describe('Component: CarBuyComponent', () => {
   let comp: CarBuyComponent;
   let fixture: ComponentFixture<CarBuyComponent>;
   let store: Store<fromAuth.State>;
+  let tagsService: TagsService;
 
   let moduleDef: TestModuleMetadata = {
     imports: [
@@ -147,6 +148,11 @@ describe('Component: CarBuyComponent', () => {
       }]
   };
   setUpTestBed(moduleDef);
+
+  beforeAll(() => {
+    tagsService = TestBed.get(TagsService);
+    tagsService.load();
+  });
 
   beforeEach(async(() => {
     store = TestBed.get(Store);

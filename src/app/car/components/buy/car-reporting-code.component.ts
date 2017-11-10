@@ -33,8 +33,10 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier {
   }
 
   ngOnInit() {
-    this.form.formGroup.get('securityClass').valueChanges.subscribe((value) => {
-      this.selectedSecurityClass = this.securityClasses.filter(i => i.tag === value)[0];
-    });
+    if (this.securityClasses) {
+      this.form.formGroup.get('securityClass').valueChanges.subscribe((value) => {
+        this.selectedSecurityClass = this.securityClasses.filter(i => i.tag === value)[0];
+      });
+    }
   }
 }
