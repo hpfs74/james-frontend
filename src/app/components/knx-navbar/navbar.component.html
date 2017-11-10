@@ -20,7 +20,7 @@
           routerLinkActive="active"
           [ngClass]="getMenuItemClasses(item)">
 
-        <a *ngIf="item.routePath" id="{{ item.id }}" routerLink="{{ item.routePath }}" class="nav-link" href="#">
+        <a *ngIf="item.routePath" id="{{ item.id }}" routerLink="{{ item.routePath }}" class="nav-link" href="#" [attr.rel]="item.rel">
           {{ item.title }}
         </a>
 
