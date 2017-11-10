@@ -24,15 +24,15 @@ export class AssistantConfig {
 
   public car = {
     welcome: `Hallo! Ik ben ${this.avatar.name}.
-      Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
-      Ben je er klaar voor? Let\'s do this!`,
+      Ik ga je helpen met de <strong>voordeligste</strong> autoverzekering die bij jou past. Klaar voor?
+      Let’s do this!`,
     info: {
       houseHold: `Je premie kan veranderen afhankelijk van je huishoudelijke status`,
       niceCar: (car: Car) => `Gaaf! Je hebt een <strong>${car.make} ${car.model}`,
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header}-dekking</strong>`
       },
-      CL: `Met een WA dekking, is enkel de schade die jij toebrengt aan anderen gedekt. Schade aan je eigenauto moet je
+      CL: `Met een WA dekking, is enkel de schade die jij toebrengt aan anderen gedekt. Schade aan je eigen auto moet je
            dus zelf betalen.`,
       CLC: `Met een WA beperkt casco dekking ben je naast de gewone WA dekking ook verzekerd voor schade door brand of
             storm, ruitschade, diefstal en schade door aanrijding met dieren.`,
