@@ -73,7 +73,7 @@ export class AssistantConfig {
       payment: 'Nog heel even! Van welk rekeningnummer mag je premie straks worden afgeschreven?',
       summary: 'We zijn er bijna! Kun je nog een keer de ingevulde gegevens controleren? Zo weet je zeker dat' +
         ' de verzekeraar de juiste informatie krijgt.',
-      thankyou: `Gefeliciteerd met je nieuwe autoverzekering!  De polis van je autoverzekering is verstuurd
+      thankyou: `Goed nieuws! De polis van je autoverzekering is verstuurd
       en wordt binnen 3 dagen goedgekeurd. We houden je op de hoogte!`,
       finalEmail: (email: string) => `Een kopie van de polis is verstuurd naar: ${email}`
     },
