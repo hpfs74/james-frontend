@@ -32,11 +32,14 @@ export class AssistantConfig {
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header}-dekking</strong>`
       },
-      CL: `<strong>WA (Wettelijke Aansprakelijkheid):</strong> Met een WA beperkt casco dekking ben je naast de gewone
-        WA ook verzekerd voor schade door brand of storm, ruitschade, diefstal en schade door aanrijding met dieren.`,
-      CLC: `<strong>WA + Casco:</strong> naast schade aan anderen is ook brand- ruit- en diefstalschade van je eigen auto gedekt.`,
-      CAR: `<strong>Allrisk:</strong> Met een Allrisk dekking ben je het meest gedekt. Met deze verzekering krijg je
-        bijna alle schades vergoed – ook door eigen schuld – en heb je recht op vervangend vervoer bij onherstelbare schade.`,
+      CL: `<strong>WA (Wettelijke Aansprakelijkheid):</strong> Met een WA dekking, is enkel de schade die jij toebrengt
+          aan anderen gedekt. Schade aan je eigenauto moet je dus zelf betalen.`,
+      CLC: `<strong>WA + Casco:</strong> Met een WA beperkt casco dekking ben je naast de gewone WA dekking ook
+            verzekerd voor schade door brand of storm, ruitschade, diefstal en schade door aanrijding met dieren.`,
+      CAR: `<strong>Allrisk:</strong> Je geeft aan dat je een lening hebt voor je auto. Ik raad je daarom een Allrisk
+            dekking aan. Als je auto dan onherstelbaar beschadigd raakt, krijg je een vergoeding om een nieuwe te kopen.
+            Bij een andere dekking krijg je die vergoeding niet en blijf je met een lening achter,
+            terwijl je geen auto meer hebt. `,
       noClaimProtection: '',
       legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
         Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
