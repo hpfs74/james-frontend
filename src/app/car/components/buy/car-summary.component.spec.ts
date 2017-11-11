@@ -67,9 +67,4 @@ describe('Component: CarSummaryComponent', () => {
     expect(comp.targetComponent.isValidAdvice({ id: '23434' })).toBeFalsy();
     expect(comp.targetComponent.isValidAdvice({ address: {zip: '2518CB'}})).toBeTruthy();
   });
-
-  it('should return a label using the TagsService', () => {
-    expect(comp.targetComponent.getLabel('mock_key', null)).toBeNull();
-    expect(comp.targetComponent.getLabel('mock_key', 'mockValue')).toEqual('myTest');
-  });
 });

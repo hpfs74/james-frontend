@@ -8,9 +8,6 @@ import { InsuranceAdvice } from '../../../insurance/models';
 import { Profile } from '../../../profile/models';
 import { Car, CarInsurance } from '../../../car/models';
 
-import { Tag } from '../../../core/models/tag';
-import { TagsService } from '../../../core/services/tags.service';
-
 import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   selector: 'knx-car-summary-form',
@@ -37,12 +34,6 @@ export class CarSummaryComponent implements QaIdentifier {
   @Input() advice: any;
 
   confirmValue: boolean;
-
-  constructor(private tagsService: TagsService) {}
-
-  getLabel(key: string, value: string) {
-    return value ? this.tagsService.getTranslationText(key, value) : value;
-  }
 
   isValidInsurance(obj: any) {
     return (obj &&

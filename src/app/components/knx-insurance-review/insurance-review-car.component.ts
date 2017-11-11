@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { CarInsurance } from '../../car/models/car-insurance';
-import { Tag } from '../../core/models/tag';
-import { TagsService } from '../../core/services/tags.service';
 
 @Component({
   selector: 'knx-insurance-review-car',
@@ -10,7 +8,7 @@ import { TagsService } from '../../core/services/tags.service';
     <knx-ir-content title="Je verzekering" *ngIf="carInsurance">
       <knx-ir-row showTooltip="false" showValue="true">
         <knx-ir-label>Dekking</knx-ir-label>
-        <knx-ir-value>{{ getLabel('car_flow_coverage', carInsurance.main_coverage) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.main_coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row showTooltip="true" showValue="true">
@@ -46,12 +44,12 @@ import { TagsService } from '../../core/services/tags.service';
     <knx-ir-content title="Jouw extra's" *ngIf="carInsurance">
       <knx-ir-row>
         <knx-ir-label>Pechhulp</knx-ir-label>
-        <knx-ir-value>{{ getLabel('car_flow_road_assistance', carInsurance.road_assistance) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.road_assistance | jamesTag: 'car_flow_road_assistance' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
         <knx-ir-label>Rechtsbijstand</knx-ir-label>
-        <knx-ir-value>{{ getLabel('car_flow_legal_aid', carInsurance.legal_aid) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.legal_aid | jamesTag: 'car_flow_legal_aid' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
@@ -68,12 +66,6 @@ import { TagsService } from '../../core/services/tags.service';
 })
 export class InsuranceReviewCarComponent {
   @Input() carInsurance: CarInsurance;
-
-  constructor(private tagsService: TagsService) {}
-
-  getLabel(key: string, value: string) {
-    return this.tagsService.getTranslationText(key, value);
-  }
 
   showOneOffPremium(): boolean {
     return this.carInsurance.one_off_premium > 0;

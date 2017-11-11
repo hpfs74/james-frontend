@@ -28,7 +28,7 @@ import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 /**
  * Pipes
  */
-import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe } from './shared/pipes/';
+import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe, JamesTagPipe } from './shared/pipes/';
 
 /**
  * Directives
@@ -86,6 +86,7 @@ export const sharedComponents = [
   TitleCasePipe,
   RoundPipe,
   BooleanPipe,
+  JamesTagPipe,
   AppPromoBlockComponent,
   AsyncPreviewComponent,
   LicensePlatePipe,
@@ -146,7 +147,6 @@ export const sharedModules = [
   KNXModalDialogModule,
   DropdownModule
 ];
-
 
 @NgModule({
   imports: [
