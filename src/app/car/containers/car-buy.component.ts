@@ -237,6 +237,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
       {car: value.carInfo},
+      {dekking: this.tagsService.getTranslationText('car_flow_coverage', value.coverage)},
       this.getUpdatedProfile(contactForm));
 
     const proposalRequest = new CarProposalHelper();

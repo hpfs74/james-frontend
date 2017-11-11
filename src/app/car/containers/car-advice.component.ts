@@ -37,14 +37,15 @@ import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 import { AssistantConfig } from '../../core/models/assistant';
 import { TagsService } from '../../core/services/tags.service';
 import { Address } from '../../address/models';
-import { DefaultCoverages } from '../models/coverage-items';
 import { AddressForm } from '../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
 
 import { CarDetailForm } from '../components/advice/car-detail.form';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
+
 import * as FormUtils from '../../utils/base-form.utils';
+import { createCarCoverages } from '../utils/coverage.utils';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 
@@ -120,6 +121,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -139,6 +141,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       this.tagsService.getAsLabelValue('car_flow_legal_aid'),
       this.tagsService.getAsLabelValue('car_flow_road_assistance'),
       this.tagsService.getAsLabelValue('car_own_risk'));
+
+    this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
@@ -178,34 +182,32 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
       });
 
-    this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
-    this.coverages = DefaultCoverages;
-
-    this.currentStep = 0;
-    this.formSteps = [
-      {
-        label: 'Je gegevens',
-        nextButtonLabel: 'Naar resultaten',
-        hideBackButton: true,
-        onShowStep: this.onShowDetailsForm.bind(this),
-        onBeforeNext: this.submitDetailForm.bind(this)
-      },
-      {
-        label: 'Premies vergelijken',
-        backButtonLabel: 'Terug',
-        onBeforeShow: this.onShowResults.bind(this),
-        onShowStep: this.onShowResults.bind(this),
-        hideNextButton: true
-      },
-      {
-        label: 'Aanvragen',
-        backButtonLabel: 'Terug',
-        nextButtonLabel: 'Verzekering aanvragen',
-        nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
-        onShowStep: this.onShowSummary.bind(this),
-        onBeforeNext: this.startBuyFlow.bind(this)
-      }
-    ];
+      // init wizard config
+      this.currentStep = 0;
+      this.formSteps = [
+        {
+          label: 'Je gegevens',
+          nextButtonLabel: 'Naar resultaten',
+          hideBackButton: true,
+          onShowStep: this.onShowDetailsForm.bind(this),
+          onBeforeNext: this.submitDetailForm.bind(this)
+        },
+        {
+          label: 'Premies vergelijken',
+          backButtonLabel: 'Terug',
+          onBeforeShow: this.onShowResults.bind(this),
+          onShowStep: this.onShowResults.bind(this),
+          hideNextButton: true
+        },
+        {
+          label: 'Aanvragen',
+          backButtonLabel: 'Terug',
+          nextButtonLabel: 'Verzekering aanvragen',
+          nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
+          onShowStep: this.onShowSummary.bind(this),
+          onBeforeNext: this.startBuyFlow.bind(this)
+        }
+      ];
   }
 
   ngOnDestroy() {

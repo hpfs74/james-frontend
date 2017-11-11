@@ -9,6 +9,9 @@ import { SharedModule } from '../../../shared.module';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { CarSummaryComponent } from './car-summary.component';
 
+import { TagsService } from '../../../core/services/tags.service';
+import { TagsServiceMock } from '../../../core/services/tags.service.mock.spec';
+
 @Component({
   template: `
     <knx-car-summary-form
@@ -33,6 +36,12 @@ describe('Component: CarSummaryComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
     declarations: [CarSummaryComponent, TestHostComponent],
+    providers: [
+      {
+        provide: TagsService,
+        useValue: TagsServiceMock
+      }
+    ],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
@@ -57,5 +66,10 @@ describe('Component: CarSummaryComponent', () => {
     expect(comp.targetComponent.isValidAdvice({})).toBeFalsy();
     expect(comp.targetComponent.isValidAdvice({ id: '23434' })).toBeFalsy();
     expect(comp.targetComponent.isValidAdvice({ address: {zip: '2518CB'}})).toBeTruthy();
+  });
+
+  it('should return a label using the TagsService', () => {
+    expect(comp.targetComponent.getLabel('mock_key', null)).toBeNull();
+    expect(comp.targetComponent.getLabel('mock_key', 'mockValue')).toEqual('myTest');
   });
 });

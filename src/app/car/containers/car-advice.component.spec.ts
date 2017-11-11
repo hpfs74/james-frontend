@@ -139,6 +139,10 @@ describe('Component: CarAdviceComponent', () => {
   });
 
   describe('Wizard', () => {
+    it('should initialize the wizard', () => {
+
+    });
+
     xit('should change the wizard step', () => {
       const step = 2;
       comp.onStepChange(step);

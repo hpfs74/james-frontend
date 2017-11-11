@@ -1,9 +1,5 @@
-import { Inject, Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
-/**
- * @export
- * @class LoginActivateComponent
- */
 @Component({
   selector: 'knx-login-activate',
   templateUrl: './login-activate.component.html',
@@ -11,6 +7,7 @@ import { Inject, Component, Output, EventEmitter } from '@angular/core';
 })
 export class LoginActivateComponent {
   @Output() onGoToRegister: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() {}
 
   goToRegister() {

@@ -38,7 +38,6 @@ import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 import { BuyCompleteAction, BuyFailureAction } from '../actions/car';
 import { Profile } from '../../profile/models/profile';
 
-
 export function getInitialState() {
   return {
     'core': {

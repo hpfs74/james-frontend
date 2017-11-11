@@ -43,6 +43,10 @@ export class TagsService {
     }
 
     const section = this.tags[key];
+    if (!section) {
+      return null;
+    }
+
     const el = section.filter(el => el.tag === tag && !el.blocked)[0];
     if (el) {
       return this.sanitizeText(el.translation_text);
@@ -69,8 +73,8 @@ export class TagsService {
     });
   }
 
-  private sanitizeText(value: string) {
+  sanitizeText(value: string) {
     const icon = '(ii)';
-    return stripHTML(value).replace(icon, '');
+    return stripHTML(value).replace(icon, '').trim();
   }
 }

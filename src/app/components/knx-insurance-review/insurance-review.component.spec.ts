@@ -10,11 +10,11 @@ import { setUpTestBed } from './../../../test.common.spec';
 import { SharedModule } from '../../shared.module';
 import { InsuranceReviewModule } from './insurance-review.module';
 
+import { TagsService } from '../../core/services/tags.service';
+import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
+
 @Component({
-  template: `
-    <div>
-      <knx-insurance-review [selectedInsurance]="selectedInsuranceFromHost"></knx-insurance-review>
-    </div>`
+  template: `<knx-insurance-review [selectedInsurance]="selectedInsuranceFromHost"></knx-insurance-review>`
 })
 export class TestHostComponent {
   @ViewChild(InsuranceReviewComponent)
@@ -30,7 +30,13 @@ describe('Component: InsuranceReviewComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule, InsuranceReviewModule],
     declarations: [TestHostComponent],
-    providers: [CurrencyPipe]
+    providers: [
+      CurrencyPipe,
+      {
+        provide: TagsService,
+        useValue: TagsServiceMock
+      }
+    ]
   };
   setUpTestBed(moduleDef);
 

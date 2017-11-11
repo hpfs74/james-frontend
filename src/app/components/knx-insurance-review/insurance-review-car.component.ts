@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { CarInsurance } from '../../car/models/car-insurance';
-import { CarUtils } from '../../car/utils/car-utils';
+import { Tag } from '../../core/models/tag';
+import { TagsService } from '../../core/services/tags.service';
 
 @Component({
   selector: 'knx-insurance-review-car',
@@ -8,7 +10,7 @@ import { CarUtils } from '../../car/utils/car-utils';
     <knx-ir-content title="Je verzekering" *ngIf="carInsurance">
       <knx-ir-row showTooltip="false" showValue="true">
         <knx-ir-label>Dekking</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getCoverageExtended(carInsurance.main_coverage) }}</knx-ir-value>
+        <knx-ir-value>{{ getLabel('car_flow_coverage', carInsurance.main_coverage) }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row showTooltip="true" showValue="true">
@@ -44,12 +46,12 @@ import { CarUtils } from '../../car/utils/car-utils';
     <knx-ir-content title="Jouw extra's" *ngIf="carInsurance">
       <knx-ir-row>
         <knx-ir-label>Pechhulp</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getRoadAssistance(carInsurance.road_assistance) }}</knx-ir-value>
+        <knx-ir-value>{{ getLabel('car_flow_road_assistance', carInsurance.road_assistance) }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
         <knx-ir-label>Rechtsbijstand</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getLegalAid(carInsurance.legal_aid) }}</knx-ir-value>
+        <knx-ir-value>{{ getLabel('car_flow_legal_aid', carInsurance.legal_aid) }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
@@ -67,7 +69,11 @@ import { CarUtils } from '../../car/utils/car-utils';
 export class InsuranceReviewCarComponent {
   @Input() carInsurance: CarInsurance;
 
-  carUtils = CarUtils;
+  constructor(private tagsService: TagsService) {}
+
+  getLabel(key: string, value: string) {
+    return this.tagsService.getTranslationText(key, value);
+  }
 
   showOneOffPremium(): boolean {
     return this.carInsurance.one_off_premium > 0;

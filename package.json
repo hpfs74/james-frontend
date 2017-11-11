@@ -13,7 +13,7 @@
     "serve:prod": "ng serve --open --locale --prod",
     "serve:gtm": "npm run config -- --analytics=true && ng serve --open --locale",
     "test:watch": "ng test --code-coverage --watch --sourcemaps=true",
-    "test": "npm run config && ng test --code-coverage --single-run --sourcemaps=true",
+    "test": "npm run config && ng test --code-coverage --single-run --sourcemaps=false",
     "test:ci": "npm run config && ng test --code-coverage --watch=false",
     "security": "retire -npv --exitwith 0 --proxy http://edc-proxy.ds.global:9090",
     "lint": "ng lint --type-check",
