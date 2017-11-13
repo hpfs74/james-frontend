@@ -10,6 +10,9 @@ import { Car, CarInsurance } from '../../../car/models';
 import { TagsService } from '../../../core/services/tags.service';
 import { Tag } from '../../../core/models/tag';
 
+const DEFAULT_FORM_VALUES = {
+  accessoryValue: 0
+};
 @Component({
   selector: 'knx-car-reporting-code-form',
   templateUrl: 'car-reporting-code.component.html'
@@ -43,5 +46,15 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier {
         }
       });
     }
+    this.setDefaultValues();
+  }
+
+  /**
+   * set default values to car-reporting-code.form fields
+   */
+  setDefaultValues() {
+    Object.keys(DEFAULT_FORM_VALUES).forEach((key, value) => {
+      this.form.formGroup.controls[key].setValue(value);
+    });
   }
 }
