@@ -140,7 +140,9 @@ describe('Component: CarAdviceComponent', () => {
 
   describe('Wizard', () => {
     it('should initialize the wizard', () => {
-
+      expect(comp.currentStep).toBe(0);
+      expect(comp.formSteps).toBeDefined();
+      expect(comp.formSteps.length).toBeGreaterThan(0);
     });
 
     xit('should change the wizard step', () => {
