@@ -8,7 +8,7 @@ import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { Address } from '../../../address/models';
 import { CarDetailForm } from './car-detail.form';
-import { CarInfoMessageComponent } from '../../../components/knx-car-info-message/car-info-message.component';
+import { CarInfoComponent } from '../../../components/knx-car-info/car-info.component';
 import { CarDetailComponent } from './car-detail.component';
 import { CarService } from '../../services/car.service';
 import { AuthHttp, AuthService } from '../../../auth/services';
@@ -39,7 +39,7 @@ describe('Component: CarCheckComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
     providers: [AuthHttp, AuthService, LocalStorageService, LoaderService, CarService],
-    declarations: [CarDetailComponent, CarInfoMessageComponent, TestHostComponent],
+    declarations: [CarDetailComponent, CarInfoComponent, TestHostComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

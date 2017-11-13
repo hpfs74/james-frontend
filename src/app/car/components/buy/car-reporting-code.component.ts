@@ -6,7 +6,7 @@ import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 import * as FormUtils from '../../../utils/base-form.utils';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { Profile } from '../../../profile/models';
-import { Car } from '../../models/';
+import { Car, CarInsurance } from '../../../car/models';
 import { TagsService } from '../../../core/services/tags.service';
 import { Tag } from '../../../core/models/tag';
 
@@ -19,7 +19,10 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier {
 
   @Input() form: CarReportingCodeForm;
   @Input() profile: Profile;
-  @Input() set advice(value: any) {
+  @Input() insurance: CarInsurance;
+
+  @Input()
+  set advice(value: any) {
     if (value) {
       FormUtils.updateAndValidateControls(this.form.formGroup, value);
     }

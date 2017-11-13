@@ -4,10 +4,10 @@ import { Car } from '../../car/models';
 import { CarPreviewComponent } from './car-preview.component';
 
 @Component({
-  selector: 'knx-car-info-message',
-  styleUrls: ['./car-info-message.component.scss'],
+  selector: 'knx-car-info',
+  styleUrls: ['./car-info.component.scss'],
   template: `
-    <div class="knx-car-info-message container knx-container--fullwidth" *ngIf="data">
+    <div class="knx-car-info container knx-container--fullwidth" *ngIf="data">
       <div class="row" *ngIf="data">
         <div class="col">Merk</div>
         <div class="col knx-car-info__item">{{ data.make | uppercase  }}</div>
@@ -44,7 +44,7 @@ import { CarPreviewComponent } from './car-preview.component';
     </div>
   `
 })
-export class CarInfoMessageComponent {
+export class CarInfoComponent {
   @Input() data: Car;
 
   getTransmission(data) {

@@ -19,18 +19,6 @@ export class CarReportingCodeForm extends BaseForm {
   constructor(private fb: FormBuilder, private securityClasses: Array<UIPair>) {
     super();
 
-    this.infoMessages = {
-      reportingCode: `
-        <img class='image-reportingcode' src='/assets/images/reportingcode.png'>
-        Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.
-        De verzekeraar geeft dit door aan de RDW (Rijksdienst voor het Wegverkeer). De RDW houdt zo bij of alle
-        auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
-        Het zijn de laatste 4 cijfers van het chassisnummer.`,
-      accessory: `
-        <p>Accessoires zijn bijvoorbeeld een losse alarminstallatie, de trekhaak, lichtmetalen velgen of een ingebouwde autoradio.</p>
-        <p>Bij diefstal krijg je de dagwaarde van de accessoires terug van je verzekering.</p>`
-    };
-
     this.formGroup = this.fb.group({
       reportingCode: [null,
         Validators.compose([
@@ -43,7 +31,7 @@ export class CarReportingCodeForm extends BaseForm {
           Validators.required
         ])
       ],
-      securityClass: [null, Validators.required],
+      securityClass: ['unsure', Validators.required],
       saveToProfile: [{}]
     });
 
@@ -52,8 +40,8 @@ export class CarReportingCodeForm extends BaseForm {
         formControlName: 'reportingCode',
         formControl: this.formGroup.get('reportingCode'),
         validationErrors: this.validationErrors,
+        label: 'Meldcode',
         inputOptions: {
-          label: 'Meldcode',
           type: 'number'
         }
       },

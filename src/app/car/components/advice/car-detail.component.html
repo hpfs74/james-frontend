@@ -16,10 +16,10 @@
             </knx-input-licenseplate>
           </cx-form-group>
 
-          <knx-async-preview class="knx-car-info-message"
+          <knx-async-preview
             [loading]="carLoading"
             [loaded]="!carFailed && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
-              <knx-car-info-message [data]="car"></knx-car-info-message>
+              <knx-car-info [data]="car"></knx-car-info>
           </knx-async-preview>
         </div>
       </div>
