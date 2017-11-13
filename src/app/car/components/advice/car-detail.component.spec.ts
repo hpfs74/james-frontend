@@ -8,7 +8,6 @@ import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { Address } from '../../../address/models';
 import { CarDetailForm } from './car-detail.form';
-import { CarInfoMessageComponent } from '../../../components/knx-car-info-message/car-info-message.component';
 import { CarDetailComponent } from './car-detail.component';
 import { CarService } from '../../services/car.service';
 import { AuthHttp, AuthService } from '../../../auth/services';
@@ -17,15 +16,15 @@ import { LoaderService } from '../../../components/knx-app-loader/loader.service
 import { AddressForm } from '../../../address/components/address.form';
 
 @Component({
-  template: `
-    <div>
-      <knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>
-    </div>`
+  template: `<knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>`
 })
 export class TestHostComponent {
   @ViewChild(CarDetailComponent)
   public targetComponent: CarDetailComponent;
-  public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder());
+  private mockHouseHold = [
+    { label: 'Alleen ikzelf', value: 'CHM' }
+  ];
+  public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder(), this.mockHouseHold);
   public addressFormFromHost: AddressForm = new AddressForm(new FormBuilder());
 }
 
@@ -36,7 +35,7 @@ describe('Component: CarCheckComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
     providers: [AuthHttp, AuthService, LocalStorageService, LoaderService, CarService],
-    declarations: [CarDetailComponent, CarInfoMessageComponent, TestHostComponent],
+    declarations: [CarDetailComponent, TestHostComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

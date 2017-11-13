@@ -5,7 +5,10 @@ describe('Car Detail Form', () => {
   let form: CarDetailForm;
 
   beforeEach(() => {
-    form = new CarDetailForm(new FormBuilder());
+    const mockHouseHold = [
+      { label: 'Alleen ikzelf', value: 'CHM' }
+    ];
+    form = new CarDetailForm(new FormBuilder(), mockHouseHold);
   });
 
   it('should have validation errors defined', () => {
@@ -34,35 +37,4 @@ describe('Car Detail Form', () => {
     expect(form.formGroup.get('gender')).toBeDefined();
     expect(form.formGroup.get('coverage')).toBeDefined();
   });
-
-  // describe('FormControl: licensePlate', () => {
-  //   it('should be maximum of 8 characters', () => {
-  //     const ctrl = form.formGroup.get('lisencePlate');
-  //     ctrl.setValue('XX');
-  //     expect(ctrl.valid).toBeTruthy();
-  //     ctrl.setValue('XX-XX-XX-XX');
-  //     expect(ctrl.valid).toBeFalsy();
-  //   });
-  // });
-
-  // describe('FormControl: birthDate', () => {
-
-  // });
-
-  // describe('FormControl: claimFreeYears', () => {
-  //   it('should be greater than 0', () => {
-  //     const ctrl = form.formGroup.get('claimFreeYears');
-  //     ctrl.setValue(-2);
-  //     expect(ctrl.valid).toBeFalsy();
-  //   });
-
-  //   it('should be less than or equal to 50', () => {
-  //     const ctrl = form.formGroup.get('claimFreeYears');
-  //     ctrl.setValue(50);
-  //     expect(ctrl.valid).toBeTruthy();
-  //     ctrl.setValue(51);
-  //     expect(ctrl.valid).toBeFalsy();
-  //   });
-  // });
-
 });

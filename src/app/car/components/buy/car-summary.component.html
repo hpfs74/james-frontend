@@ -13,7 +13,7 @@
 
           <knx-ir-row>
             <knx-ir-label>Gekozen dekking</knx-ir-label>
-            <knx-ir-value>{{ carUtils.getCoverage(advice?.coverage) }}</knx-ir-value>
+            <knx-ir-value>{{ advice?.coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
@@ -23,7 +23,7 @@
 
           <knx-ir-row newSection="true">
             <knx-ir-label>Rechtsbijstand</knx-ir-label>
-            <knx-ir-value>{{ carUtils.getLegalAid(advice?.legal_aid) }}</knx-ir-value>
+            <knx-ir-value>{{ advice?.legal_aid | jamesTag: 'car_flow_legal_aid' }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
@@ -33,7 +33,7 @@
 
           <knx-ir-row>
             <knx-ir-label>Pechhulp</knx-ir-label>
-            <knx-ir-value>{{ carUtils.getRoadAssistance(advice?.road_assistance) }}</knx-ir-value>
+            <knx-ir-value>{{ advice?.road_assistance | jamesTag: 'car_flow_road_assistance' }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
@@ -75,12 +75,12 @@
 
           <knx-ir-row>
             <knx-ir-label>Waarde accessoires</knx-ir-label>
-            <knx-ir-value>{{ advice?.accessoryValue| currency:'EUR':true}}</knx-ir-value>
+            <knx-ir-value>{{ advice?.accessoryValue | currency:'EUR':true}}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Dagwaarde</knx-ir-label>
-            <knx-ir-value>{{ insurance._embedded.car.current_value| currency:'EUR':true}}</knx-ir-value>
+            <knx-ir-value>{{ insurance._embedded.car.current_value | currency:'EUR':true}}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
@@ -90,12 +90,12 @@
 
           <knx-ir-row>
             <knx-ir-label>KM per jaar</knx-ir-label>
-            <knx-ir-value>{{ carUtils.getKilometerPerYear(advice?.kilometers_per_year) }}</knx-ir-value>
+            <knx-ir-value>{{ advice?.kilometers_per_year | jamesTag: 'car_flow_km_per_year' }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Beveiliging</knx-ir-label>
-            <knx-ir-value>{{ carUtils.getSecurityClassName(advice?.securityClass)}}</knx-ir-value>
+            <knx-ir-value>{{ advice?.securityClass | jamesTag: 'buyflow_carsecurity' }}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
 

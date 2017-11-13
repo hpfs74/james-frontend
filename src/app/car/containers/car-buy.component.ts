@@ -30,6 +30,7 @@ import { Proposal, CarProposalHelper } from '../models/proposal';
 
 import { CarReportingCodeForm } from '../components/buy/car-reporting-code.form';
 import { CarCheckForm } from '../components/buy/car-check.form';
+import { TagsService } from '../../core/services/tags.service';
 
 import { QaIdentifier } from './../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../shared/models/qa-identifiers';
@@ -64,8 +65,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
 
-  constructor(private store$: Store<fromRoot.State>) {
-  }
+  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -83,7 +83,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
 
     const formBuilder = new FormBuilder();
     this.contactDetailForm = new ContactDetailForm(formBuilder);
-    this.reportingCodeForm = new CarReportingCodeForm(formBuilder);
+    this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.tagsService.getAsLabelValue('buyflow_carsecurity'));
     this.checkForm = new CarCheckForm(formBuilder);
     this.paymentForm = new IbanForm(formBuilder);
 
@@ -237,6 +237,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
       {car: value.carInfo},
+      {dekking: this.tagsService.getTranslationText('car_flow_coverage', value.coverage)},
       this.getUpdatedProfile(contactForm));
 
     const proposalRequest = new CarProposalHelper();

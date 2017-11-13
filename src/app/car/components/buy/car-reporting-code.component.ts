@@ -3,11 +3,12 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { QaIdentifier } from './../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 
+import * as FormUtils from '../../../utils/base-form.utils';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { Profile } from '../../../profile/models';
-import { Car } from '../../models/';
-import { CarSecurityClass } from '../../../core/models/content';
-import * as FormUtils from '../../../utils/base-form.utils';
+import { Car, CarInsurance } from '../../../car/models';
+import { TagsService } from '../../../core/services/tags.service';
+import { Tag } from '../../../core/models/tag';
 
 @Component({
   selector: 'knx-car-reporting-code-form',
@@ -18,17 +19,29 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier {
 
   @Input() form: CarReportingCodeForm;
   @Input() profile: Profile;
-  @Input() set advice(value: any) {
+  @Input() insurance: CarInsurance;
+
+  @Input()
+  set advice(value: any) {
     if (value) {
       FormUtils.updateAndValidateControls(this.form.formGroup, value);
     }
   }
 
-  selectedSecurityClass: CarSecurityClass;
+  selectedSecurityClass: Tag;
+  securityClasses: Array<Tag>;
+
+  constructor(private tagsService: TagsService) {
+    this.securityClasses = this.tagsService.getByKey('buyflow_carsecurity');
+  }
 
   ngOnInit() {
-    this.form.formGroup.get('securityClass').valueChanges.subscribe((value) => {
-      this.selectedSecurityClass = this.form.securityClasses.filter(i => i.value === value)[0];
-    });
+    if (this.securityClasses) {
+      this.form.formGroup.get('securityClass').valueChanges.subscribe((value) => {
+        if (this.securityClasses instanceof Array) {
+          this.selectedSecurityClass = this.securityClasses.filter(i => i.tag === value)[0];
+        }
+      });
+    }
   }
 }

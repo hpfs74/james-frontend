@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -28,6 +28,7 @@ import { NavbarComponent } from '../components/knx-navbar';
 // Services
 import { LoaderService } from '../components/knx-app-loader/loader.service';
 import { requestOptionsProvider } from './services/default-request-opts.service';
+import { TagsLoader } from '../utils/tagsloader';
 import {
   AssistantService,
   CanActivateBuyFlowGuard,
@@ -35,7 +36,8 @@ import {
   GeolocationService,
   LocalStorageService,
   LoggingService,
-  NavigationService
+  NavigationService,
+  TagsService
 } from './services';
 import { GlobalErrorHandler } from './services/error-handler';
 
@@ -85,12 +87,19 @@ export class CoreModule {
         LocalStorageService,
         NavigationService,
         LoggingService,
+        TagsService,
         requestOptionsProvider,
         CurrencyPipe,
         DatePipe,
         {
           provide: ErrorHandler,
           useClass: GlobalErrorHandler
+        },
+        {
+          provide: APP_INITIALIZER,
+          useFactory: TagsLoader,
+          deps: [TagsService],
+          multi: true
         }
       ],
     };

@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import { ContentConfig, Content } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { setUpTestBed } from './../../../test.common.spec';
 import { Nav, NavItemType } from '../../core/models';
 import { NavbarComponent } from './navbar.component';

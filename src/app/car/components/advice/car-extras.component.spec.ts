@@ -16,6 +16,7 @@ export class TestHostComponent {
   @ViewChild(CarExtrasComponent)
   public targetComponent: CarExtrasComponent;
   public formFromHost: CarExtrasForm = new CarExtrasForm(new FormBuilder());
+  private mockFormValues = { label: 'test', value: 'VALUE '};
 }
 
 describe('Component: CarExtrasComponent', () => {

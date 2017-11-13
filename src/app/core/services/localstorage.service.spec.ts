@@ -1,71 +1,57 @@
 
-// import { LocalStorageService } from './localstorage.service';
-// import { AuthToken } from '../models/auth';
+import { LocalStorageService, TOKEN_NAME, TOKEN_OBJECT_NAME, NICCI_KEY, NICCI_ID } from './localstorage.service';
+import { AuthKey, AuthToken } from '../../auth/models/auth';
 
-// describe('Service: LocalStorageService', function () {
-//   let service: LocalStorageService;
-//   let testToken: AuthToken = {
-//     access_token: '',
-//     token_type: 'bearer',
-//     expires_in: 1200,
-//     refresh_token: '',
-//     expiration_time: 1503914460734
-//   };
+describe('Service: LocalStorageService', function () {
+  let service: LocalStorageService;
+  let testToken: AuthToken = {
+    access_token: 'abCDE',
+    token_type: 'bearer',
+    expires_in: 1200,
+    refresh_token: 'zzAABB',
+    expiration_time: 1503914460734
+  };
 
-//   beforeEach( () => {
-//     service = new LocalStorageService();
-//     localStorage.clear();
-//   });
+  beforeAll(() => {
+    service = new LocalStorageService();
+  });
 
-//   // setToken(token: AuthToken) {
-//   //   let convertToken = JSON.parse(AuthUtils.setTokenExpirationDate(token));
-//   //   localStorage.setItem(TOKEN_NAME, convertToken.access_token);
-//   //   localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(convertToken));
-//   // }
+  beforeEach( () => {
+    localStorage.clear();
+  });
 
-//   // getToken(): AuthToken {
-//   //   let token = localStorage.getItem(TOKEN_OBJECT_NAME);
-//   //   return JSON.parse(token) || null;
-//   // }
+  afterAll(() => {
+    localStorage.clear();
+  });
 
-//   // getRefreshToken(): string {
-//   //   let token = this.getToken();
-//   //   return token ? token.refresh_token : null;
-//   // }
+  it('should set a token', () => {
+    service.setToken(testToken);
+    expect(localStorage.getItem(TOKEN_NAME)).toEqual(testToken.access_token);
+  });
 
-//   // getAccessToken(): string {
-//   //   return localStorage.getItem(TOKEN_NAME) || null;
-//   // }
-
-//   // clearToken() {
-//   //   localStorage.removeItem('access_token');
-//   //   localStorage.removeItem('token');
-//   //   localStorage.removeItem('nicci_key');
-//   //   localStorage.removeItem('nicci_id');
-//   // }
+  it('should return a stored token', () => {
+    service.setToken(testToken);
+    expect(service.getToken()).toBeDefined();
+  });
 
 
-//   it('should save a token', function() {
+  it('should return the refresh token', () => {
+    service.setToken(testToken);
+    expect(service.getRefreshToken()).toEqual(testToken.refresh_token);
+  });
 
-//   });
+  it('should return the access token', () => {
+    service.setToken(testToken);
+    expect(service.getAccessToken()).toEqual(testToken.access_token);
+  });
 
-//   it('should return a stored token', function() {
-
-//   });
-
-
-//   it('should return the refresh token', function() {
-
-//   });
-
-//   it('should return the access token', function() {
-
-//   });
-
-//   it('should clear stored tokens and keys', function() {
-//   //   localStorage.removeItem('access_token');
-//   //   localStorage.removeItem('token');
-//   //   localStorage.removeItem('nicci_key');
-//   //   localStorage.removeItem('nicci_id');
-//   });
-// });
+  it('should clear stored tokens and keys', () => {
+    service.setToken(testToken);
+    expect(service.getToken()).toBeDefined();
+    service.clearToken();
+    expect(localStorage.getItem(TOKEN_NAME)).toBeNull();
+    expect(localStorage.getItem(TOKEN_OBJECT_NAME)).toBeNull();
+    expect(localStorage.getItem(NICCI_KEY)).toBeNull();
+    expect(localStorage.getItem(NICCI_ID)).toBeNull();
+  });
+});

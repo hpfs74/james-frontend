@@ -4,12 +4,12 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../test.common.spec';
-import { CarInfoMessageComponent } from './car-info-message.component';
+import { CarInfoComponent } from './car-info.component';
 import { Car } from '../../car/models';
 
-describe('Component: CarInfoMessageComponent', () => {
-  let comp: CarInfoMessageComponent;
-  let fixture: ComponentFixture<CarInfoMessageComponent>;
+describe('Component: CarInfoComponent', () => {
+  let comp: CarInfoComponent;
+  let fixture: ComponentFixture<CarInfoComponent>;
   let de: DebugElement;
   let el: HTMLElement;
 
@@ -43,7 +43,7 @@ describe('Component: CarInfoMessageComponent', () => {
   };
 
   let moduleDef: TestModuleMetadata = {
-    declarations: [CarInfoMessageComponent],
+    declarations: [CarInfoComponent],
     schemas: [NO_ERRORS_SCHEMA],
     providers: [
       {
@@ -56,13 +56,13 @@ describe('Component: CarInfoMessageComponent', () => {
   setUpTestBed(moduleDef);
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarInfoMessageComponent);
+    fixture = TestBed.createComponent(CarInfoComponent);
     comp = fixture.componentInstance;
 
     comp.data = testData;
 
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('div.knx-car-info-message'));
+    de = fixture.debugElement.query(By.css('div.knx-car-info'));
     el = de.nativeElement;
   });
 
@@ -80,7 +80,7 @@ describe('Component: CarInfoMessageComponent', () => {
   it('should not show anything if no data provided', () => {
     comp.data = undefined;
     fixture.detectChanges();
-    let de = fixture.debugElement.query(By.css('div.knx-car-info-message'));
+    let de = fixture.debugElement.query(By.css('div.knx-car-info'));
     expect(de).toBeNull();
   });
 

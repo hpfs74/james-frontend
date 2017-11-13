@@ -22,7 +22,6 @@ describe('Component: CarCheckComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [SharedModule],
     declarations: [CarCheckComponent, TestHostComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };

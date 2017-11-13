@@ -62,7 +62,8 @@ cx-checkbox + .knx-info {
 // preferred would be to have a knx-form-group that supports
 // adding knx-info-icon or knx-tooltip components as content
 .car-detail-form,
-.knx-car-extras {
+.knx-car-extras,
+.knx-car-reporting-form {
   .knx-form-group--info.knx-form-group--info-input {
     .knx-info-icon {
       float: right;
@@ -89,22 +90,3 @@ cx-checkbox + .knx-info {
     }
   }
 }
-
-// .knx-car-extras {
-//   .knx-form-group--info {
-//     .knx-info-icon {
-//       float: right;
-//       margin-top: -35px;
-//     }
-//   }
-// }
-
-// @media (min-width: 768px) {
-//   .knx-form-group--info {
-//     .knx-tooltip-wrapper--visible {
-//       margin-left: -42px;
-//       margin-top: 15px;
-//       min-width: 300px;
-//     }
-//   }
-// }

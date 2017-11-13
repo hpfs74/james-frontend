@@ -1,8 +1,9 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, APP_INITIALIZER, ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth/services/auth-guard.service';
 import { AppComponent } from './containers/app.component';
+import { TagsService } from '../core/services/tags.service';
 
 const coreRoutes: Routes = [
   {
@@ -21,6 +22,9 @@ const coreRoutes: Routes = [
     path: 'account',
     canActivateChild: [AuthGuard],
     loadChildren: '../profile/profile.module#ProfileModule'
+    // resolve: {
+    //   'tags': APP_INITIALIZER
+    // }
   }
 ];
 @NgModule({
@@ -35,7 +39,7 @@ export class CoreRoutingModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreRoutingModule,
-      providers: [AuthGuard]
+      providers: [AuthGuard, TagsService]
     };
   }
 }

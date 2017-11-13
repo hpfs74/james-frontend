@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
-import { KNXStepOptions } from '@knx/wizard';
-import { KNXWizardComponent } from '@knx/wizard';
+import { KNXStepOptions, KNXWizardComponent } from '@knx/wizard';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -36,15 +35,17 @@ import { QaIdentifier } from './../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { AssistantConfig } from '../../core/models/assistant';
+import { TagsService } from '../../core/services/tags.service';
 import { Address } from '../../address/models';
-import { DefaultCoverages } from '../models/coverage-items';
 import { AddressForm } from '../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
 
 import { CarDetailForm } from '../components/advice/car-detail.form';
 import { CarExtrasForm } from '../components/advice/car-extras.form';
+
 import * as FormUtils from '../../utils/base-form.utils';
+import { createCarCoverages } from '../utils/coverage.utils';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 
@@ -94,8 +95,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
 
-  constructor(private store$: Store<fromRoot.State>) {
-  }
+  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
 
   ngAfterViewChecked() {
     // bind async validator for car info
@@ -121,6 +121,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -129,9 +130,19 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     // initialize forms
     const formBuilder = new FormBuilder();
-    this.carDetailForm = new CarDetailForm(formBuilder);
     this.addressForm = new AddressForm(formBuilder);
-    this.carExtrasForm = new CarExtrasForm(formBuilder);
+
+    this.carDetailForm = new CarDetailForm(formBuilder,
+      this.tagsService.getAsLabelValue('insurance_flow_household'));
+
+    this.carExtrasForm = new CarExtrasForm(formBuilder,
+      this.tagsService.getAsLabelValue('car_flow_coverage'),
+      this.tagsService.getAsLabelValue('car_flow_km_per_year'),
+      this.tagsService.getAsLabelValue('car_flow_legal_aid'),
+      this.tagsService.getAsLabelValue('car_flow_road_assistance'),
+      this.tagsService.getAsLabelValue('car_own_risk'));
+
+    this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
 
     // start new advice only if there is no current one
     this.advice$.subscribe(currentAdvice => {
@@ -171,34 +182,32 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
       });
 
-    this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
-    this.coverages = DefaultCoverages;
-
-    this.currentStep = 0;
-    this.formSteps = [
-      {
-        label: 'Je gegevens',
-        nextButtonLabel: 'Naar resultaten',
-        hideBackButton: true,
-        onShowStep: this.onShowDetailsForm.bind(this),
-        onBeforeNext: this.submitDetailForm.bind(this)
-      },
-      {
-        label: 'Premies vergelijken',
-        backButtonLabel: 'Terug',
-        onBeforeShow: this.onShowResults.bind(this),
-        onShowStep: this.onShowResults.bind(this),
-        hideNextButton: true
-      },
-      {
-        label: 'Aanvragen',
-        backButtonLabel: 'Terug',
-        nextButtonLabel: 'Verzekering aanvragen',
-        nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
-        onShowStep: this.onShowSummary.bind(this),
-        onBeforeNext: this.startBuyFlow.bind(this)
-      }
-    ];
+      // init wizard config
+      this.currentStep = 0;
+      this.formSteps = [
+        {
+          label: 'Je gegevens',
+          nextButtonLabel: 'Naar resultaten',
+          hideBackButton: true,
+          onShowStep: this.onShowDetailsForm.bind(this),
+          onBeforeNext: this.submitDetailForm.bind(this)
+        },
+        {
+          label: 'Premies vergelijken',
+          backButtonLabel: 'Terug',
+          onBeforeShow: this.onShowResults.bind(this),
+          onShowStep: this.onShowResults.bind(this),
+          hideNextButton: true
+        },
+        {
+          label: 'Aanvragen',
+          backButtonLabel: 'Terug',
+          nextButtonLabel: 'Verzekering aanvragen',
+          nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
+          onShowStep: this.onShowSummary.bind(this),
+          onBeforeNext: this.startBuyFlow.bind(this)
+        }
+      ];
   }
 
   ngOnDestroy() {
@@ -216,12 +225,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
     }
 
-    // no implicit updating of profile
-    // this.store$.dispatch(new profile.UpdateAction({
-    //   gender: detailForm.value.gender,
-    //   date_of_birth: detailForm.value.birthDate
-    // }));
-
     Observable.combineLatest(this.car$, this.address$, (car, address) => {
       return {
         request: {
@@ -230,7 +233,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           claim_free_years: +detailForm.value.claimFreeYears,
           household_status: detailForm.value.houseHold,
           license: car.license,
-          gender: detailForm.value.gender,
+          gender: detailForm.value.gender.toUpperCase(),
           title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
           date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
             FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),

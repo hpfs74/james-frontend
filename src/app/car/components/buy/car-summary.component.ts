@@ -7,7 +7,6 @@ import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
 import { InsuranceAdvice } from '../../../insurance/models';
 import { Profile } from '../../../profile/models';
 import { Car, CarInsurance } from '../../../car/models';
-import { CarUtils } from '../../utils/car-utils';
 
 import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
@@ -32,10 +31,9 @@ export class CarSummaryComponent implements QaIdentifier {
 
   @Input() profile: Profile;
   @Input() insurance: CarInsurance;
-  @Input() advice: any; // user data from form steps
+  @Input() advice: any;
 
   confirmValue: boolean;
-  carUtils = CarUtils;
 
   isValidInsurance(obj: any) {
     return (obj &&
@@ -50,7 +48,7 @@ export class CarSummaryComponent implements QaIdentifier {
     !this.isEmpty(obj.address));
   }
 
-  isEmpty(obj: any) {
+  private isEmpty(obj: any) {
     return !obj || Object.keys(obj).length <= 0;
   }
 }

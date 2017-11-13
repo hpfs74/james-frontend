@@ -1,38 +1,23 @@
+
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm } from '../../../shared/forms/base-form';
 import { nameInitialMask } from '../../../utils/base-form.utils';
 import { numberValidator } from '../../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../../utils/base-form.validators';
-import { SecurityClasses } from '../../models/security-classes';
+import { UIPair } from '../../../core/models/ui-pair';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
-
-  securityClasses: Array<any>;
 
   public validationErrors = {
     required: () => 'Dit is een verplicht veld',
     reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private securityClasses: Array<UIPair>) {
     super();
-
-    this.infoMessages = {
-      reportingCode: `
-        <img class='image-reportingcode' src='/assets/images/reportingcode.png'>
-        Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.
-        De verzekeraar geeft dit door aan de RDW (Rijksdienst voor het Wegverkeer). De RDW houdt zo bij of alle
-        auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
-        Het zijn de laatste 4 cijfers van het chassisnummer.`,
-      accessory: `
-        <p>Accessoires zijn bijvoorbeeld een losse alarminstallatie, de trekhaak, lichtmetalen velgen of een ingebouwde autoradio.</p>
-        <p>Bij diefstal krijg je de dagwaarde van de accessoires terug van je verzekering.</p>`
-    };
-
-    this.securityClasses = SecurityClasses;
 
     this.formGroup = this.fb.group({
       reportingCode: [null,
@@ -46,16 +31,16 @@ export class CarReportingCodeForm extends BaseForm {
           Validators.required
         ])
       ],
-      securityClass: [null, Validators.required],
+      securityClass: ['unsure', Validators.required],
       saveToProfile: [{}]
     });
 
     this.formConfig = {
       reportingCode: {
         formControlName: 'reportingCode',
-        label: 'Meldcode',
         formControl: this.formGroup.get('reportingCode'),
         validationErrors: this.validationErrors,
+        label: 'Meldcode',
         inputOptions: {
           type: 'number'
         }
@@ -74,13 +59,7 @@ export class CarReportingCodeForm extends BaseForm {
         formControl: this.formGroup.get('securityClass'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          items: this.securityClasses
-            .map((i) => {
-              return {
-                label: i.short ? `${i.title} - ${i.short}` : i.title,
-                value: i.value
-              };
-            })
+          items: securityClasses
         }
       },
       saveToProfile: {
@@ -92,7 +71,7 @@ export class CarReportingCodeForm extends BaseForm {
             {
               label: 'Gegevens opslaan in mijn Knab Verzekeren profiel',
               value: 'true'
-            }
+            } as UIPair
           ]
         }
       }

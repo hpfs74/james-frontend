@@ -18,6 +18,7 @@ import { reducers, metaReducers } from './reducers';
 
 import { AppComponent } from './core/containers/app.component';
 import { environment } from '../environments/environment';
+import { ContentLoader } from './utils/contentloader';
 
 // Feature modules
 import { SharedModule } from './shared.module';
@@ -25,11 +26,6 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
-
-// Load config files before app bootstrap
-export function ContentLoader(contentService: ContentConfig) {
-  return () => contentService.load();
-}
 
 @NgModule({
   imports: [

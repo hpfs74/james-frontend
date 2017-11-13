@@ -7,7 +7,7 @@ import { setUpTestBed } from './../../../test.common.spec';
 import { LoginFormComponent } from '../components/login-form.component';
 import { LoginForm } from './login.form';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 
 describe('Component: LoginFormComponent', () => {
   let comp: LoginFormComponent ;

@@ -5,7 +5,7 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { setUpTestBed } from './../../../test.common.spec';
 import { KNXFooterComponent } from './knx-footer.component';
 import { ContentConfig, Content } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 
 describe('Component: KNXFooterComponent', () => {
   let comp: KNXFooterComponent;

@@ -32,11 +32,11 @@ import * as compare from '../actions/compare';
 import * as router from '../../core/actions/router';
 
 import { SharedModule } from '../../shared.module';
+import { TagsService } from '../../core/services/tags.service';
+import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 
 import { BuyCompleteAction, BuyFailureAction } from '../actions/car';
 import { Profile } from '../../profile/models/profile';
-
-
 
 export function getInitialState() {
   return {
@@ -111,6 +111,7 @@ describe('Component: CarBuyComponent', () => {
   let comp: CarBuyComponent;
   let fixture: ComponentFixture<CarBuyComponent>;
   let store: Store<fromAuth.State>;
+  let tagsService: TagsService;
 
   let moduleDef: TestModuleMetadata = {
     imports: [
@@ -139,6 +140,10 @@ describe('Component: CarBuyComponent', () => {
     providers: [
       CurrencyPipe,
       {
+        provide: TagsService,
+        useValue: TagsServiceMock
+      },
+      {
         provide: Router,
         useClass: class {
           navigate = jasmine.createSpy('navigate');
@@ -146,6 +151,11 @@ describe('Component: CarBuyComponent', () => {
       }]
   };
   setUpTestBed(moduleDef);
+
+  beforeAll(() => {
+    tagsService = TestBed.get(TagsService);
+    tagsService.load();
+  });
 
   beforeEach(async(() => {
     store = TestBed.get(Store);

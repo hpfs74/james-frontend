@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { ThankYouComponent } from './thank-you.component';
 import { AppPromoBlockComponent } from '../../components/knx-app-promo/app-promo.component';
 

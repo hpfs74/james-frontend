@@ -9,7 +9,7 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './../../components/knx-navbar/navbar.component';
 import { NavigationService } from '../services/navigation.service';

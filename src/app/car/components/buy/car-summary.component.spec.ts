@@ -8,6 +8,10 @@ import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { CarReportingCodeForm } from './car-reporting-code.form';
 import { CarSummaryComponent } from './car-summary.component';
+
+import { TagsService } from '../../../core/services/tags.service';
+import { TagsServiceMock } from '../../../core/services/tags.service.mock.spec';
+
 @Component({
   template: `
     <knx-car-summary-form
@@ -32,6 +36,12 @@ describe('Component: CarSummaryComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
     declarations: [CarSummaryComponent, TestHostComponent],
+    providers: [
+      {
+        provide: TagsService,
+        useValue: TagsServiceMock
+      }
+    ],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
