@@ -1,4 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TestModuleMetadata, async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
@@ -24,8 +25,9 @@ describe('Component: CarContactComponent', () => {
   let comp: TestHostComponent;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [BrowserModule, FormsModule, ReactiveFormsModule, CXFormsModule],
-    declarations: [CarContactComponent, TestHostComponent]
+    imports: [CommonModule, ReactiveFormsModule, CXFormsModule],
+    declarations: [CarContactComponent, TestHostComponent],
+    schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
 

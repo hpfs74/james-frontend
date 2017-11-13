@@ -48,8 +48,6 @@ import {
 import { AppPromoBlockComponent } from './components/knx-app-promo/app-promo.component';
 import { AsyncPreviewComponent } from './components/knx-async-preview/async-preview.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
-import { CarInfoComponent } from './components/knx-car-info/car-info.component';
-import { CarPreviewComponent } from './components/knx-car-info/car-preview.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
@@ -97,8 +95,6 @@ export const sharedComponents = [
   QaIdentifierDirective,
   StickyDirective,
   ButtonIconComponent,
-  CarInfoComponent,
-  CarPreviewComponent,
   CircleProgressComponent,
   CollapsePanelComponent,
   CollapseMessageComponent,

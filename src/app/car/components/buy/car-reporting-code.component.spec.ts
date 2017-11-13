@@ -37,7 +37,8 @@ describe('Component: CarReportingCodeComponent', () => {
         provide: TagsService,
         useValue: TagsServiceMock
       }
-    ]
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
 
