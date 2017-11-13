@@ -3,14 +3,6 @@ import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrect
 import * as moment from 'moment';
 import { BaseForm } from './../shared/forms/base-form';
 
-// Scoll back to form; assumes there's only one form of this type on current page
-export function scrollToElement(cssClass: string): void {
-  const element = <HTMLElement>document.querySelector(cssClass);
-  if (element) {
-    window.scrollTo(0, element.offsetTop);
-  }
-}
-
 export const birthDateMask = {
   mask: [/[0-9]/, /[0-9]/, ' ', '/', ' ', /[0-9]/, /[0-9]/, ' ', '/', ' ', /[1-2]/, /[0-9]/, /[0-9]/, /[0-9]/],
   guide: true,

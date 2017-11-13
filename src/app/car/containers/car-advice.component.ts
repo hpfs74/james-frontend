@@ -47,6 +47,7 @@ import { CarExtrasForm } from '../components/advice/car-extras.form';
 import * as FormUtils from '../../utils/base-form.utils';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
+import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 enum carFormSteps {
   carDetails,
@@ -208,7 +209,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   submitDetailForm(): Observable<any> {
     const detailForm = this.carDetailForm.formGroup;
     const addressForm = this.addressForm.formGroup;
-
+    scrollToY();
     FormUtils.validateForm(detailForm);
     // FormUtils.validateForm(addressForm);
 
@@ -264,6 +265,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   }
 
   onSelectPremium(insurance) {
+    scrollToY();
     this.store$.dispatch(new advice.SetInsuranceAction(insurance));
     this.knxWizard.goToNextStep();
   }
@@ -396,17 +398,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         }
       });
 
-    FormUtils.scrollToElement('knx-car-detail-form');
+    scrollToY();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.welcome', clear: true}));
   }
 
   private onShowResults() {
-    FormUtils.scrollToElement('knx-insurance-toplist');
+    scrollToY();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
   }
 
   private onShowSummary() {
-    FormUtils.scrollToElement('knx-insurance-review');
+    scrollToY();
     this.store$.dispatch(new assistant.ClearAction);
 
     this.store$.select(fromInsurance.getSelectedInsurance).take(1)

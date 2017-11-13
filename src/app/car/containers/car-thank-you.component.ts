@@ -9,6 +9,7 @@ import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import * as fromRoot from '../../reducers';
 import * as fromCore from '../../core/reducers';
 import * as assistant from '../../core/actions/assistant';
+import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 @Component({
   selector: 'knx-car-thank-you',
@@ -46,6 +47,7 @@ export class CarThankYouComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    scrollToY();
     this.route.params.subscribe(params => {
        this.email = params['email'];
     });

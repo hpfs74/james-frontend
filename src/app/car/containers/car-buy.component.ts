@@ -37,6 +37,7 @@ import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 import { IbanForm } from '../../shared/forms/iban.form';
 import { BaseForm } from '../../shared/forms/base-form';
 import * as FormUtils from '../../utils/base-form.utils';
+import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 @Component({
   selector: 'knx-car-buy',
@@ -73,6 +74,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
         title: 'Expert autoverzekeringen'
       }
     }));
+    scrollToY();
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
@@ -130,7 +132,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   }
 
   initFormWithProfile() {
-    FormUtils.scrollToElement('form');
+    scrollToY();
 
     this.profile$ = this.store$.select(fromProfile.getProfile);
 
@@ -139,12 +141,12 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   }
 
   initForm(messageKey: string) {
-    FormUtils.scrollToElement('form');
+    scrollToY();
     this.store$.dispatch(new assistant.AddCannedMessage({key: messageKey, clear: true}));
   }
 
   initCheckForm(messageKey: string) {
-    FormUtils.scrollToElement('form');
+    scrollToY();
     this.store$.select(fromInsurance.getSelectedInsurance)
       .subscribe((insurance) => {
         const insuranceName = insurance._embedded.insurance.insurance_brand || null;
