@@ -21,7 +21,6 @@ import { environment } from '../environments/environment';
 import { ContentLoader } from './utils/contentloader';
 
 // Feature modules
-import { SharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
@@ -38,8 +37,6 @@ import { AddressModule } from './address/address.module';
     HttpModule,
 
     RouterModule.forRoot(routes),
-
-    SharedModule,
 
     StoreModule.forRoot(reducers, { metaReducers }),
 
