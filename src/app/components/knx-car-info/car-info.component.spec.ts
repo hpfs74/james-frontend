@@ -7,7 +7,7 @@ import { setUpTestBed } from './../../../test.common.spec';
 import { CarInfoComponent } from './car-info.component';
 import { Car } from '../../car/models';
 
-describe('Component: CarInfoMessageComponent', () => {
+describe('Component: CarInfoComponent', () => {
   let comp: CarInfoComponent;
   let fixture: ComponentFixture<CarInfoComponent>;
   let de: DebugElement;
@@ -62,7 +62,7 @@ describe('Component: CarInfoMessageComponent', () => {
     comp.data = testData;
 
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('div.knx-car-info-message'));
+    de = fixture.debugElement.query(By.css('div.knx-car-info'));
     el = de.nativeElement;
   });
 
@@ -80,7 +80,7 @@ describe('Component: CarInfoMessageComponent', () => {
   it('should not show anything if no data provided', () => {
     comp.data = undefined;
     fixture.detectChanges();
-    let de = fixture.debugElement.query(By.css('div.knx-car-info-message'));
+    let de = fixture.debugElement.query(By.css('div.knx-car-info'));
     expect(de).toBeNull();
   });
 

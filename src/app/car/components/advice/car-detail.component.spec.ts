@@ -8,7 +8,6 @@ import { setUpTestBed } from './../../../../test.common.spec';
 import { SharedModule } from '../../../shared.module';
 import { Address } from '../../../address/models';
 import { CarDetailForm } from './car-detail.form';
-import { CarInfoComponent } from '../../../components/knx-car-info/car-info.component';
 import { CarDetailComponent } from './car-detail.component';
 import { CarService } from '../../services/car.service';
 import { AuthHttp, AuthService } from '../../../auth/services';
@@ -17,10 +16,7 @@ import { LoaderService } from '../../../components/knx-app-loader/loader.service
 import { AddressForm } from '../../../address/components/address.form';
 
 @Component({
-  template: `
-    <div>
-      <knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>
-    </div>`
+  template: `<knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>`
 })
 export class TestHostComponent {
   @ViewChild(CarDetailComponent)
@@ -39,7 +35,7 @@ describe('Component: CarCheckComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
     providers: [AuthHttp, AuthService, LocalStorageService, LoaderService, CarService],
-    declarations: [CarDetailComponent, CarInfoComponent, TestHostComponent],
+    declarations: [CarDetailComponent, TestHostComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
