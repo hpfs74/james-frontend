@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { UIPair } from '../../../core/models/ui-pair';
+import { UIPair } from '../../core/models/ui-pair';
 
 export class CarExtrasForm {
   formGroup: FormGroup;

@@ -5,10 +5,10 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angul
 import { BrowserModule, By } from '@angular/platform-browser';
 import { CXFormsModule } from '@cx/forms';
 
-import { setUpTestBed } from './../../../../test.common.spec';
+import { setUpTestBed } from './../../../test.common.spec';
 import { CarContactComponent } from './car-contact.component';
-import { ContactDetailForm } from '../../../shared/forms/contact-detail.form';
-import { nameInitialMask } from '../../../utils/base-form.utils';
+import { ContactDetailForm } from '../../shared/forms/contact-detail.form';
+import { nameInitialMask } from '../../utils/base-form.utils';
 
 @Component({
   template: `<div><knx-car-contact-form [form]="formFromHost" [profile]="profileFromHost"></knx-car-contact-form></div>`

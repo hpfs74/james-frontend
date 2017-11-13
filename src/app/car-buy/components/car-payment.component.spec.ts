@@ -5,10 +5,10 @@ import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { CXFormsModule } from '@cx/forms';
 
-import { setUpTestBed } from './../../../../test.common.spec';
-import { SharedModule } from '../../../shared.module';
+import { setUpTestBed } from './../../../test.common.spec';
+import { SharedModule } from '../../shared.module';
 import { CarPaymentComponent } from './car-payment.component';
-import { IbanForm } from '../../../shared/forms/iban.form';
+import { IbanForm } from '../../shared/forms/iban.form';
 
 @Component({
   template: `<div><knx-car-payment-form [form]="formFromHost"></knx-car-payment-form></div>`

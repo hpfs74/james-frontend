@@ -4,10 +4,10 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { setUpTestBed } from './../../../../test.common.spec';
-import { SharedModule } from '../../../shared.module';
-import { TagsService } from '../../../core/services/tags.service';
-import { TagsServiceMock } from '../../../core/services/tags.service.mock.spec';
+import { setUpTestBed } from './../../../test.common.spec';
+import { SharedModule } from '../../shared.module';
+import { TagsService } from '../../core/services/tags.service';
+import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 import { CarReportingCodeComponent } from './car-reporting-code.component';
 
 const securityClassMock = [

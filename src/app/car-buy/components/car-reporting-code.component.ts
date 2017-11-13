@@ -1,14 +1,14 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
-import { QaIdentifier } from './../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
-import * as FormUtils from '../../../utils/base-form.utils';
+import * as FormUtils from '../../utils/base-form.utils';
 import { CarReportingCodeForm } from './car-reporting-code.form';
-import { Profile } from '../../../profile/models';
-import { Car, CarInsurance } from '../../../car/models';
-import { TagsService } from '../../../core/services/tags.service';
-import { Tag } from '../../../core/models/tag';
+import { Profile } from '../../profile/models';
+import { Car, CarInsurance } from '../../car/models';
+import { TagsService } from '../../core/services/tags.service';
+import { Tag } from '../../core/models/tag';
 
 const DEFAULT_FORM_VALUES = {
   accessoryValue: 0

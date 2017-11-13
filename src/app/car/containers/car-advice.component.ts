@@ -41,8 +41,8 @@ import { AddressForm } from '../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../models';
 import { Price } from '../../shared/models/price';
 
-import { CarDetailForm } from '../components/advice/car-detail.form';
-import { CarExtrasForm } from '../components/advice/car-extras.form';
+import { CarDetailForm } from '../components/car-detail.form';
+import { CarExtrasForm } from '../components/car-extras.form';
 
 import * as FormUtils from '../../utils/base-form.utils';
 import { createCarCoverages } from '../utils/coverage.utils';
@@ -291,7 +291,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
               path: ['/car/insurance', {adviceId: id}],
             }));
           }));
-        return;
+        return Observable.empty();
       } else {
         // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
         // Instead of going into the buy flow the user clicks on the modal buttons

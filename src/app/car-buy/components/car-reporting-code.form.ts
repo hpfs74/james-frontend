@@ -1,11 +1,11 @@
 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { BaseForm } from '../../../shared/forms/base-form';
-import { nameInitialMask } from '../../../utils/base-form.utils';
-import { numberValidator } from '../../../utils/base-form.validators';
-import { carReportingCodeValidator } from '../../../utils/base-form.validators';
-import { UIPair } from '../../../core/models/ui-pair';
+import { BaseForm } from '../../shared/forms/base-form';
+import { nameInitialMask } from '../../utils/base-form.utils';
+import { numberValidator } from '../../utils/base-form.validators';
+import { carReportingCodeValidator } from '../../utils/base-form.validators';
+import { UIPair } from '../../core/models/ui-pair';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;

@@ -11,31 +11,31 @@ import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx
 import { setUpTestBed } from './../../../test.common.spec';
 
 // Components
-import { CarContactComponent } from '../components/buy/car-contact.component';
-import { CarSummaryComponent } from '../components/buy/car-summary.component';
-import { CarReportingCodeComponent } from '../components/buy/car-reporting-code.component';
-import { CarCheckComponent } from '../components/buy/car-check.component';
-import { CarCheckForm } from '../components/buy/car-check.form';
-import { CarPaymentComponent } from '../components/buy/car-payment.component';
+import { CarContactComponent } from '../components/car-contact.component';
+import { CarSummaryComponent } from '../components/car-summary.component';
+import { CarReportingCodeComponent } from '../components/car-reporting-code.component';
+import { CarCheckComponent } from '../components/car-check.component';
+import { CarCheckForm } from '../components/car-check.form';
+import { CarPaymentComponent } from '../components/car-payment.component';
 import { CarBuyComponent } from './car-buy.component';
 
-import * as fromRoot from '../reducers';
+import * as fromRoot from '../../car/reducers';
 import * as fromCore from '../../core/reducers';
-import * as fromCar from '../reducers';
+import * as fromCar from '../../car/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromAuth from '../../auth/reducers';
 import * as fromProfile from '../../profile/reducers';
 
-import * as car from '../actions/car';
+import * as car from '../../car/actions/car';
 import * as advice from '../../insurance/actions/advice';
-import * as compare from '../actions/compare';
+import * as compare from '../../car/actions/compare';
 import * as router from '../../core/actions/router';
 
 import { SharedModule } from '../../shared.module';
 import { TagsService } from '../../core/services/tags.service';
 import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 
-import { BuyCompleteAction, BuyFailureAction } from '../actions/car';
+import { BuyCompleteAction, BuyFailureAction } from '../../car/actions/car';
 import { Profile } from '../../profile/models/profile';
 
 export function getInitialState() {
