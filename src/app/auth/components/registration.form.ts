@@ -66,7 +66,7 @@ export class RegistrationForm extends BaseForm {
           'aria-label': 'Vul je wachtwoord in',
           'addonleft': true,
           'addonicon': 'knx-icon-lock',
-          password: true
+          'password': true
         }
       },
       confirm: {

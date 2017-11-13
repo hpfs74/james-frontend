@@ -91,7 +91,7 @@ $knxIconColorGreen: $knab-secondary-green;
   right: 15px;
   top: 25%;
   color: $knxIconColorGreen;
-  z-index: 1;
+  z-index: $z-index-knx-input;
 }
 
 .knx-input__show-password {
