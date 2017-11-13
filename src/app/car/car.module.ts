@@ -21,12 +21,15 @@ import { CarPurchasedComponent } from './containers/car-purchased.component';
 // Dumb components
 import { CarDetailComponent } from './components/advice/car-detail.component';
 import { CarExtrasComponent } from './components/advice/car-extras.component';
+import { CarInfoComponent } from './components/knx-car-info/car-info.component';
+import { CarPreviewComponent } from './components/knx-car-info/car-preview.component';
 
 import { CarContactComponent } from './components/buy/car-contact.component';
 import { CarReportingCodeComponent } from './components/buy/car-reporting-code.component';
 import { CarCheckComponent } from './components/buy/car-check.component';
 import { CarPaymentComponent } from './components/buy/car-payment.component';
 import { CarSummaryComponent } from './components/buy/car-summary.component';
+
 
 import { CarEffects } from './effects/car';
 import { CompareEffects } from './effects/compare';
@@ -44,6 +47,8 @@ export const COMPONENTS = [
   CarContactComponent,
   CarReportingCodeComponent,
   CarCheckComponent,
+  CarInfoComponent,
+  CarPreviewComponent,
   CarPaymentComponent,
   CarSummaryComponent
 ];
