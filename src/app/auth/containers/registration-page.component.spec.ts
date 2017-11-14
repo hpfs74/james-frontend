@@ -83,7 +83,7 @@ describe('Component: RegistrationPageComponent', () => {
 
   it('should dispatch a resend activation action', () => {
     const payload = 'test@mail.com';
-    const action = new register.RegisterResendActivationEmail(payload);
+    const action = new register.ResendActivationEmail(payload);
     comp.sendActivationEmail(payload);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });

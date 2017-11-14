@@ -27,8 +27,8 @@ export class RegistrationPageComponent implements OnInit {
   content: Content;
 
   constructor(private store$: Store<fromAuth.State>, private contentConfig: ContentConfig) {
-    this.store$.dispatch(new registration.RegisterResetState());
-    this.store$.dispatch(new registration.RegisterResendResetState());
+    this.store$.dispatch(new registration.ResetState());
+    this.store$.dispatch(new registration.ResendResetState());
     this.content = this.contentConfig.getContent();
   }
 
@@ -45,6 +45,6 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   sendActivationEmail(email: string) {
-    this.store$.dispatch(new registration.RegisterResendActivationEmail(email));
+    this.store$.dispatch(new registration.ResendActivationEmail(email));
   }
 }

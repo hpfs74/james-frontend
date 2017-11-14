@@ -8,21 +8,17 @@ import * as auth from '../actions/auth';
 import * as router from '../../core/actions/router';
 import { AuthService } from '../services/auth.service';
 
-const anonymousAvailableLinks = ['/car'];
+// TODO: refactor to more maintainable solution
+const anonymousAvailableLinks = ['/register', '/login', '/car'];
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private router: Router, private store: Store<fromRoot.State>, private authService: AuthService) {
-  }
+  constructor(private store$: Store<fromRoot.State>, private authService: AuthService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const url: string = state.url;
-    if (anonymousAvailableLinks.indexOf(url) === -1) {
-      return this.checkLogin(url);
-    } else {
-      return true;
-    }
+    return this.checkLogin(url);
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -35,11 +31,17 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    this.store.select(fromRoot.selectAuthState).subscribe(auth => {
-      if (!auth.status.loggedIn || !this.authService.isLoggedIn()) {
-        this.router.navigate(['/login']);
-      }
-    });
+    if (!this.isPublicRoute(url)) {
+      this.store$.select(fromRoot.selectAuthState).take(1).subscribe(authenticated => {
+        if (!authenticated.status.loggedIn || !this.authService.isLoggedIn()) {
+          this.store$.dispatch(new auth.LoginRedirect());
+        }
+      });
+    }
     return true;
+  }
+
+  private isPublicRoute(url: string) {
+    return anonymousAvailableLinks.indexOf(url) !== -1;
   }
 }
