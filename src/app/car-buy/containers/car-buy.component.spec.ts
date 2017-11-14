@@ -257,7 +257,7 @@ describe('Component: CarBuyComponent', () => {
           },
           err => {
             expect(err).toBeDefined();
-            expect(err.message).toBe('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd');
+            expect(err.message).toBe('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.');
           }
         );
     }));
