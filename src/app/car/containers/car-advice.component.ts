@@ -84,7 +84,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
   isLoggedIn$: Observable<boolean>;
-  purchasedInsurances$: Observable<string>;
+  purchasedInsurances$: Observable<any>;
   purchasedInsurancesLoading$: Observable<any>;
 
   subscription$: Array<any>;
@@ -161,7 +161,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     });
 
     this.purchasedInsurances$.subscribe(getPurchasedInsurances => {
-      if (getPurchasedInsurances.length) {
+      if (getPurchasedInsurances.filter( insurance => !insurance.manually_added ).length) {
         this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
       }
     });
