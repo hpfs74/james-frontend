@@ -50,7 +50,6 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   qaRootId = QaIdentifiers.carBuyRoot;
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
-  isBlurred = false;
 
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
@@ -224,10 +223,6 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       mobileNumber: form.value.mobileNumber,
       phoneNumber: form.value.phoneNumber
     };
-  }
-
-  blurWizard(chatIsOpened) {
-    this.isBlurred = chatIsOpened;
   }
 
   getProposalData(value: any, contactForm: FormGroup) {

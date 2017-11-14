@@ -21,3 +21,10 @@ h2 {
 ul > li {
   color: $knab-medium-gray;
 }
+
+.knx-button {
+  &:before {
+    margin-right: 10px;
+    line-height: 0;
+  }
+}

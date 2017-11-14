@@ -65,7 +65,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   formSteps: Array<KNXStepOptions>;
   formControlOptions: any;
   currentStep: number;
-  isBlurred = false;
   coverages: Array<Price>;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
@@ -294,7 +293,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
               path: ['/car/insurance', {adviceId: id}],
             }));
           }));
-        return Observable.empty();
+        return;
       } else {
         // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
         // Instead of going into the buy flow the user clicks on the modal buttons
@@ -325,13 +324,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
   }
 
-  blurWizard(chatIsOpened) {
-    this.isBlurred = chatIsOpened;
-  }
-
-  setClasses() {
+  getStepClass() {
     return {
-      'backdrop-blur': this.isBlurred,
       ['knx-car-advice--step-' + (this.currentStep + 1)]: true
     };
   }
