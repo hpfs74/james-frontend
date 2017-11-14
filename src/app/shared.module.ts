@@ -71,6 +71,7 @@ import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
 import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
 import { DonutComponent } from './components/knx-donut/donut.component';
+import { DownloadPanelComponent } from './components/knx-download-panel/download-panel.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { FeatureItemComponent } from './components/knx-features/feature-item.component';
 import { FormGroupInfoComponent } from './components/knx-form-group-info/form-group-info.component';
@@ -94,9 +95,9 @@ import { TabComponent } from './components/knx-tabs/tab.component';
 import { ThankYouComponent } from './components/knx-thank-you/thank-you.component';
 import { ServiceGuideComponent } from './components/knx-service-guide/service-guide';
 import { PurchasedComponent } from './components/knx-purchased/purchased.component';
+import { RegisterPanelComponent } from './components/knx-register-panel/register-panel.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
-import { DownloadPanelComponent } from './auth/components/download-panel.component';
 
 export const sharedComponents = [
   TitleCasePipe,
@@ -119,8 +120,8 @@ export const sharedComponents = [
   CollapsePanelComponent,
   CollapseMessageComponent,
   DashboardItemComponent,
-  DownloadPanelComponent,
   DonutComponent,
+  DownloadPanelComponent,
   FeaturesComponent,
   FeatureItemComponent,
   FormGroupInfoComponent,
@@ -146,6 +147,7 @@ export const sharedComponents = [
   ThankYouComponent,
   ServiceGuideComponent,
   PurchasedComponent,
+  RegisterPanelComponent,
   NavUserComponent,
   UserGreetingComponent,
   KNXCheckboxComponent,

@@ -15,7 +15,7 @@ import * as router from '../../core/actions/router';
 import { Nav } from '../models/nav';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { LoginModalComponent } from '../../auth/components/login-modal.component';
+import { LoginModalComponent } from '../../auth-login/components/login-modal.component';
 import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
 import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';

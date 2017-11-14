@@ -3,24 +3,19 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
+import * as fromAuth from '../../auth/reducers';
+import * as auth from '../../auth/actions/auth';
+import * as registration from '../../auth/actions/registration';
 import { environment } from '../../../environments/environment';
 import * as router from '../../core/actions/router';
 
 import { LoginForm } from '../components/login.form';
 import { loginError, CustomError } from '../models/login-error';
 import * as profile from '../../profile/actions/profile';
-import * as registration from '../actions/registration';
+
 import * as FormUtils from '../../utils/base-form.utils';
 import { scrollToY } from '../../utils/scroll-to-element.utils';
 
-/**
- * Login page that's rendered in router-outlet of 'AppComponent if not logged in
- *
- * @export
- * @class LoginComponent
- */
 @Component({
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']

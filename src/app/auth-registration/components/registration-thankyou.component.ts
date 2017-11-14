@@ -3,11 +3,9 @@ import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } fro
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-
-import * as registration from '../actions/registration';
 import { environment } from '../../../environments/environment';
 
-import { RegistrationForm } from '../components/registration.form';
+import { RegistrationForm } from './registration.form';
 import { registrationError } from '../models/registration-error';
 import * as profile from '../../profile/actions/profile';
 

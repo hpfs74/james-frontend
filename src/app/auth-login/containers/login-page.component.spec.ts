@@ -6,14 +6,14 @@ import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 
-import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
+import * as fromAuth from '../../auth/reducers';
+import * as auth from '../../auth/actions/auth';
 import { FormBuilder } from '@angular/forms';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { LoginPageComponent } from '../containers/login-page.component';
 import { LoginForm } from '../components/login.form';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { loginError } from '../models/login-error';
 
 describe('Component: Login', () => {

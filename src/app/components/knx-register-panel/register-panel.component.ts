@@ -1,11 +1,11 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'knx-login-activate',
-  templateUrl: './login-activate.component.html',
-  styleUrls: ['./login-activate.component.scss']
+  selector: 'knx-register-panel',
+  templateUrl: './register-panel.component.html',
+  styleUrls: ['./register-panel.component.scss']
 })
-export class LoginActivateComponent {
+export class RegisterPanelComponent {
   @Output() onGoToRegister: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {}

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
 import { RegistrationForm } from '../components/registration.form';
 import { registrationError } from '../models/registration-error';
-import { Authenticate } from '../models/auth';
+import { Authenticate } from '../../auth/models/auth';
 import * as FormUtils from '../../utils/base-form.utils';
 import { KNXInputOptions } from '../../components/knx-input/input.options';
 
@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
   register(event) {
     event.preventDefault();
     FormUtils.validateForm(this.form.formGroup);
-    // FormUtils.showFormErrors(this.form);
+
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');

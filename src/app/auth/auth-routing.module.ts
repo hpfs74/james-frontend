@@ -3,17 +3,15 @@ import { ActivatedRouteSnapshot, CanActivate, RouterModule, RouterStateSnapshot,
 
 import { AuthGuard, LoginGuard } from './services';
 import { AuthService } from './services/auth.service';
-import { LoginPageComponent } from './containers/login-page.component';
-import { RegistrationPageComponent } from './containers/registration-page.component';
 
 const authRoutes: Routes = [
   {
     path: 'login',
-    component: LoginPageComponent
+    loadChildren: '../auth-login/login.module#LoginModule'
   },
   {
     path: 'register',
-    component: RegistrationPageComponent
+    loadChildren: '../auth-registration/registration.module#RegistrationModule'
   }
 ];
 
