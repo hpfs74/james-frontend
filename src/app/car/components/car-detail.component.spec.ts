@@ -3,17 +3,17 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@a
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { setUpTestBed } from './../../../../test.common.spec';
+import { setUpTestBed } from './../../../test.common.spec';
 
-import { SharedModule } from '../../../shared.module';
-import { Address } from '../../../address/models';
+import { SharedModule } from '../../shared.module';
+import { Address } from '../../address/models';
 import { CarDetailForm } from './car-detail.form';
 import { CarDetailComponent } from './car-detail.component';
-import { CarService } from '../../services/car.service';
-import { AuthHttp, AuthService } from '../../../auth/services';
-import { LocalStorageService } from '../../../core/services/localstorage.service';
-import { LoaderService } from '../../../components/knx-app-loader/loader.service';
-import { AddressForm } from '../../../address/components/address.form';
+import { CarService } from '../services/car.service';
+import { AuthHttp, AuthService } from '../../auth/services';
+import { LocalStorageService } from '../../core/services/localstorage.service';
+import { LoaderService } from '../../components/knx-app-loader/loader.service';
+import { AddressForm } from '../../address/components/address.form';
 
 @Component({
   template: `<knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>`

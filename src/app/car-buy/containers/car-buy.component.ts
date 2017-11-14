@@ -10,26 +10,26 @@ import { KNXStepOptions } from '@knx/wizard';
 
 import * as fromRoot from '../../reducers';
 import * as fromInsurance from '../../insurance/reducers';
-import * as fromCar from '../reducers';
+import * as fromCar from '../../car/reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 import * as assistant from '../../core/actions/assistant';
 import * as router from '../../core/actions/router';
 
-import * as car from '../actions/car';
+import * as car from '../../car/actions/car';
 import * as advice from '../../insurance/actions/advice';
-import * as compare from '../actions/compare';
+import * as compare from '../../car/actions/compare';
 
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Profile } from './../../profile/models';
 
 import { ContactDetailForm } from '../../shared/forms/contact-detail.form';
-import { Proposal, CarProposalHelper } from '../models/proposal';
+import { Proposal, CarProposalHelper } from '../../car/models/proposal';
 
-import { CarReportingCodeForm } from '../components/buy/car-reporting-code.form';
-import { CarCheckForm } from '../components/buy/car-check.form';
+import { CarReportingCodeForm } from '../components/car-reporting-code.form';
+import { CarCheckForm } from '../components/car-check.form';
 import { TagsService } from '../../core/services/tags.service';
 
 import { QaIdentifier } from './../../shared/models/qa-identifier';
@@ -179,9 +179,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   }
 
   submitInsurance(): Observable<any> {
-
     if (!this.acceptFinalTerms) {
-      return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd'));
+      return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'));
     }
 
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
@@ -255,6 +254,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     return proposalData;
   }
 
+  // TODO: group in an effect
   resetFlow() {
     this.store$.dispatch(new advice.ResetAction());
     this.store$.dispatch(new compare.CarCompareResetStateAction());

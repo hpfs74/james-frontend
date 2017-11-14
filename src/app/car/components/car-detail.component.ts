@@ -6,19 +6,19 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 
-import * as fromRoot from '../../../reducers';
-import * as car from '../../actions/car';
+import * as fromRoot from '../../reducers';
+import * as car from '../actions/car';
 
-import { QaIdentifier } from './../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 import { CarDetailForm } from './car-detail.form';
-import { AddressForm } from '../../../address/components/address.form';
-import { Car, CarCoverageRecommendation } from '../../models';
-import { Price } from '../../../shared/models';
-import { Address } from '../../../address/models';
-import { CarService } from '../../services/car.service';
-import * as FormUtils from '../../../utils/base-form.utils';
+import { AddressForm } from '../../address/components/address.form';
+import { Car, CarCoverageRecommendation } from '../models';
+import { Price } from '../../shared/models';
+import { Address } from '../../address/models';
+import { CarService } from '../services/car.service';
+import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-detail-form',

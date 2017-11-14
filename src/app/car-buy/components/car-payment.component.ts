@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { QaIdentifier } from './../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
-import { IbanForm } from '../../../shared/forms/iban.form';
-import * as FormUtils from '../../../utils/base-form.utils';
+import { IbanForm } from '../../shared/forms/iban.form';
+import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-car-payment-form',

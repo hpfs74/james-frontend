@@ -2,10 +2,10 @@ import { Component, OnChanges, Input, OnInit, SimpleChanges } from '@angular/cor
 import { FormControl, Validators } from '@angular/forms';
 
 import { CarCheckForm } from './car-check.form';
-import * as FormUtils from '../../../utils/base-form.utils';
+import * as FormUtils from '../../utils/base-form.utils';
 
-import { QaIdentifier } from './../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 @Component({
   selector: 'knx-car-check',

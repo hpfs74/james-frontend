@@ -1,3 +1,18 @@
+/**
+ * The SharedModule contains the components, directives, and pipes that you use everywhere in your app.
+ * This module should consist entirely of declarations, most of them exported.
+ *
+ * The SharedModule may re-export other widget modules, such as CommonModule, FormsModule, and modules
+ * with the UI controls that you use most widely.
+ *
+ * The SharedModule should not have providers for reasons explained previously. Nor should any of its
+ * imported or re-exported modules have providers.
+ *
+ * If you deviate from this guideline, know what you're doing and why.
+ * Import the SharedModule in your feature modules, both those loaded when the app starts and those
+ * you lazy load later.
+ *
+ */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -48,6 +63,8 @@ import {
 import { AppPromoBlockComponent } from './components/knx-app-promo/app-promo.component';
 import { AsyncPreviewComponent } from './components/knx-async-preview/async-preview.component';
 import { ButtonIconComponent } from './components/knx-button-icon/button-icon.component';
+import { CarInfoComponent } from './components/knx-car-info/car-info.component';
+import { CarPreviewComponent } from './components/knx-car-info/car-preview.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
 import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
@@ -61,7 +78,6 @@ import { InsuranceResultComponent } from './components/knx-insurance-result/insu
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { InfoIconComponent } from './components/knx-info-icon/info-icon.component';
-import { NavbarComponent } from './components/knx-navbar';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
 import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';
@@ -95,6 +111,8 @@ export const sharedComponents = [
   QaIdentifierDirective,
   StickyDirective,
   ButtonIconComponent,
+  CarInfoComponent,
+  CarPreviewComponent,
   CircleProgressComponent,
   CollapsePanelComponent,
   CollapseMessageComponent,

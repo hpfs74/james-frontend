@@ -14,22 +14,12 @@ import { TagsLoader } from '../utils/tagsloader';
 
 // Smart components / page containers
 import { CarAdviceComponent } from './containers/car-advice.component';
-import { CarBuyComponent } from './containers/car-buy.component';
-import { CarThankYouComponent } from './containers/car-thank-you.component';
 import { CarPurchasedComponent } from './containers/car-purchased.component';
+import { CarThankYouComponent } from './containers/car-thank-you.component';
 
 // Dumb components
-import { CarDetailComponent } from './components/advice/car-detail.component';
-import { CarExtrasComponent } from './components/advice/car-extras.component';
-import { CarInfoComponent } from './components/knx-car-info/car-info.component';
-import { CarPreviewComponent } from './components/knx-car-info/car-preview.component';
-
-import { CarContactComponent } from './components/buy/car-contact.component';
-import { CarReportingCodeComponent } from './components/buy/car-reporting-code.component';
-import { CarCheckComponent } from './components/buy/car-check.component';
-import { CarPaymentComponent } from './components/buy/car-payment.component';
-import { CarSummaryComponent } from './components/buy/car-summary.component';
-
+import { CarDetailComponent } from './components/car-detail.component';
+import { CarExtrasComponent } from './components/car-extras.component';
 
 import { CarEffects } from './effects/car';
 import { CompareEffects } from './effects/compare';
@@ -39,18 +29,10 @@ import { reducers } from './reducers';
 
 export const COMPONENTS = [
   CarAdviceComponent,
-  CarBuyComponent,
-  CarThankYouComponent,
   CarPurchasedComponent,
   CarDetailComponent,
   CarExtrasComponent,
-  CarContactComponent,
-  CarReportingCodeComponent,
-  CarCheckComponent,
-  CarInfoComponent,
-  CarPreviewComponent,
-  CarPaymentComponent,
-  CarSummaryComponent
+  CarThankYouComponent
 ];
 
 @NgModule({
@@ -72,5 +54,4 @@ export const COMPONENTS = [
     CarService
   ]
 })
-export class CarModule {
-}
+export class CarModule {}

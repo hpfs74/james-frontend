@@ -4,8 +4,8 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 
-import { setUpTestBed } from './../../../../test.common.spec';
-import { SharedModule } from '../../../shared.module';
+import { setUpTestBed } from './../../../test.common.spec';
+import { SharedModule } from '../../shared.module';
 import { CarCheckComponent } from './car-check.component';
 
 @Component({

@@ -2,6 +2,7 @@ import { NgModule, APP_INITIALIZER, ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth/services/auth-guard.service';
+import { CanActivateBuyFlowGuard } from '../core/services/buy-guard.service';
 import { AppComponent } from './containers/app.component';
 import { TagsService } from '../core/services/tags.service';
 
@@ -18,13 +19,15 @@ const coreRoutes: Routes = [
     canActivateChild: [AuthGuard],
     loadChildren: '../car/car.module#CarModule'
   },
+  // {
+  //   path: 'car-insurance',
+  //   canActivateChild: [CanActivateBuyFlowGuard],
+  //   loadChildren: '../car-buy/car-buy.module#CarBuyModule'
+  // },
   {
     path: 'account',
     canActivateChild: [AuthGuard],
     loadChildren: '../profile/profile.module#ProfileModule'
-    // resolve: {
-    //   'tags': APP_INITIALIZER
-    // }
   }
 ];
 @NgModule({

@@ -3,9 +3,9 @@ import { CurrencyPipe } from '@angular/common';
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { setUpTestBed } from './../../../../test.common.spec';
+import { setUpTestBed } from './../../../test.common.spec';
 import { CarInfoComponent } from './car-info.component';
-import { Car } from '../../models/car';
+import { Car } from '../../car/models';
 
 describe('Component: CarInfoComponent', () => {
   let comp: CarInfoComponent;

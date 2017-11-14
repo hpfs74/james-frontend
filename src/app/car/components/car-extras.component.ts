@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 
 import { CarExtrasForm } from './car-extras.form';
 
-import { QaIdentifier } from './../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
 @Component({
   selector: 'knx-car-extras',

@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
-import { QaIdentifier } from './../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../shared/models/qa-identifiers';
+import { QaIdentifier } from './../../shared/models/qa-identifier';
+import { QaIdentifiers } from './../../shared/models/qa-identifiers';
 
-import { InsuranceAdvice } from '../../../insurance/models';
-import { Profile } from '../../../profile/models';
-import { Car, CarInsurance } from '../../../car/models';
+import { InsuranceAdvice } from '../../insurance/models';
+import { Profile } from '../../profile/models';
+import { Car, CarInsurance } from '../../car/models';
+import * as FormUtils from '../../utils/base-form.utils';
 
-import * as FormUtils from '../../../utils/base-form.utils';
 @Component({
   selector: 'knx-car-summary-form',
   styleUrls: ['./car-summary.component.scss'],
