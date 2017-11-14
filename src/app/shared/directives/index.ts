@@ -1,3 +1,4 @@
+export * from './backdrop-blur.directive';
 export * from './click-outside.directive';
 export * from './jump-to-el.directive';
 export * from './side-panel-state';

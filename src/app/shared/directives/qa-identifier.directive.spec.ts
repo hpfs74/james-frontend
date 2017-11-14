@@ -16,15 +16,6 @@ describe('Directive: QaIdentifierDirective', () => {
   let de: DebugElement;
   let el: HTMLElement;
 
-  // let moduleDef: TestModuleMetadata = {
-  //   declarations: [
-  //     QaIdentifierDirective,
-  //     TestHostComponent
-  //   ],
-  //   schemas: [NO_ERRORS_SCHEMA]
-  // };
-  // setUpTestBed(moduleDef);
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
     declarations: [

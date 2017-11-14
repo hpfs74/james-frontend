@@ -18,14 +18,13 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
       <div class="row">
         <div class="col-sm-4 push-sm-8">
           <div class="knx-wizard__sidebar--sticky">
-            <knx-chat-stream
+            <knx-chat-stream #knxChatStream
               [options]="chatConfig$ | async"
-              [messages]="chatMessages$ | async"
-              (onChatExpand)="blurWizard($event)">
+              [messages]="chatMessages$ | async">
             </knx-chat-stream>
           </div>
         </div>
-        <div class="col-sm-8 pull-sm-4" [ngClass]="{'backdrop-blur': isBlurred}">
+        <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
           <knx-thank-you title="Autoverzekering aangevraagd!"
             insuranceType="autoverzekering"
             [email]="email"></knx-thank-you>
@@ -39,7 +38,6 @@ export class CarThankYouComponent implements AfterViewInit, OnInit {
   chatMessages$: Observable<Array<ChatMessage>>;
 
   email: string;
-  isBlurred = false;
 
   constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
@@ -58,9 +56,5 @@ export class CarThankYouComponent implements AfterViewInit, OnInit {
     if (this.email) {
       this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.finalEmail', value: this.email}));
     }
-  }
-
-  blurWizard(chatIsOpened) {
-    this.isBlurred = chatIsOpened;
   }
 }

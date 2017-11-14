@@ -1,4 +1,4 @@
-<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" [ngClass]="{'backdrop-blur': isBlurred}">
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" >
   <div class="container">
     <knx-step-navigation
       [steps]="formSteps"
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="container knx-car-buy" [ngClass]="{'backdrop-blur': isBlurred}">
+<div class="container knx-car-buy" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
   <knx-wizard #knxWizard (stepChange)="onStepChange($event)">
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
@@ -54,8 +54,7 @@
       </knx-step>
     </div>
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
-      <knx-chat-stream
-        (onChatExpand)="blurWizard($event)"
+      <knx-chat-stream #knxChatStream
         [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async">
       </knx-chat-stream>

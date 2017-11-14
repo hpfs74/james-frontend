@@ -49,6 +49,7 @@ import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe, JamesTagPipe }
  * Directives
  */
 import {
+  BackdropBlurDirective,
   JumpToElementDirective,
   SidePanelStateDirective,
   ClickOutsideDirective,
@@ -105,6 +106,7 @@ export const sharedComponents = [
   AppPromoBlockComponent,
   AsyncPreviewComponent,
   LicensePlatePipe,
+  BackdropBlurDirective,
   SidePanelStateDirective,
   JumpToElementDirective,
   ClickOutsideDirective,

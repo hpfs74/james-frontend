@@ -15,7 +15,7 @@ import * as fromProfile from '../../profile/reducers';
   selector: 'knx-car-purchased',
   template: `
     <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container--status"
-         [ngClass]="{'backdrop-blur': isBlurred}">
+      knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
       <div class="container">
         <div class="col-md-12">
           <b>Welkom<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>
@@ -27,14 +27,13 @@ import * as fromProfile from '../../profile/reducers';
       <div class="row">
         <div class="col-sm-4 push-sm-8">
           <div class="knx-wizard__sidebar--sticky">
-            <knx-chat-stream
+            <knx-chat-stream #knxChatStream
               [options]="chatConfig$ | async"
-              [messages]="chatMessages$ | async"
-              (onChatExpand)="blurWizard($event)">
+              [messages]="chatMessages$ | async">
             </knx-chat-stream>
           </div>
         </div>
-        <div class="col-sm-8 pull-sm-4" [ngClass]="{'backdrop-blur': isBlurred}">
+        <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
           <knx-purchased title="Uw autoverzekering" [insurances]="purchasedInsurances$ | async"></knx-purchased>
         </div>
       </div>
@@ -48,7 +47,6 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
   profile$: Observable<any>;
   email: string;
   firstName: string;
-  isBlurred = false;
 
   constructor(private store$: Store<fromRoot.State>) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
@@ -67,9 +65,5 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.purchased', clear: true, value: ' ' + this.firstName }));
-  }
-
-  blurWizard(chatIsOpened) {
-    this.isBlurred = chatIsOpened;
   }
 }
