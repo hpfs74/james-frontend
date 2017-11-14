@@ -6,20 +6,20 @@
     <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
   </knx-navbar>
 </header>
-<knx-dropdown-menu-s
+<knx-navbar-menu
   [animationState]="animationState"
   (onAnimationDone)="setMenuAnimationStatus($event)"
   class="hidden-md-up">
   <ul class="navbar-nav knx-list--unstyled">
-    <li class="nav-item" *ngIf="loggedIn$ | async" (click)="menuClose()">
+    <li class="nav-item" *ngIf="loggedIn$ | async">
       <a class="nav-link" (click)="logOut()">Uitloggen</a>
     </li>
 
-    <li class="nav-item" *ngIf="!(loggedIn$ | async)" (click)="menuClose()">
+    <li class="nav-item" *ngIf="!(loggedIn$ | async)">
       <a class="nav-link" (click)="register()">Registreren</a>
     </li>
 
-    <li class="nav-item" *ngIf="!(loggedIn$ | async)" (click)="menuClose()">
+    <li class="nav-item" *ngIf="!(loggedIn$ | async)">
       <a class="nav-link" (click)="logIn()">Inloggen</a>
     </li>
 
@@ -31,7 +31,7 @@
       <a class="nav-link" href="{{ content.phone.link }}" rel="noopener"><span class="knx-icon-phone"></span>{{ content.phone.label }}</a>
     </li>
   </ul>
-</knx-dropdown-menu-s>
+</knx-navbar-menu>
 <div class="main-container" knxSidePanelState>
   <knx-loader></knx-loader>
   <router-outlet></router-outlet>
