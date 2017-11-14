@@ -15,6 +15,7 @@ import { TagsLoader } from '../utils/tagsloader';
 // Smart components / page containers
 import { CarAdviceComponent } from './containers/car-advice.component';
 import { CarPurchasedComponent } from './containers/car-purchased.component';
+import { CarThankYouComponent } from './containers/car-thank-you.component';
 
 // Dumb components
 import { CarDetailComponent } from './components/car-detail.component';
@@ -31,6 +32,7 @@ export const COMPONENTS = [
   CarPurchasedComponent,
   CarDetailComponent,
   CarExtrasComponent,
+  CarThankYouComponent
 ];
 
 @NgModule({

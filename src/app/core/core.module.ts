@@ -76,12 +76,13 @@ export const COMPONENTS = [
   ]
 })
 export class CoreModule {
-  constructor (@Optional() @SkipSelf() parentModule: CoreModule) {
-    if (parentModule) {
-      throw new Error(
-        'CoreModule is already loaded. Import it in the AppModule only');
-    }
-  }
+  // TODO: fix bug where CoreModule is lazy loaded, should be MainModule or something as root routing module
+  // constructor (@Optional() @SkipSelf() parentModule: CoreModule) {
+  //   if (parentModule) {
+  //     throw new Error(
+  //       'CoreModule is already loaded. Import it in the AppModule only');
+  //   }
+  // }
 
   static forRoot() {
     return {

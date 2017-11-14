@@ -179,9 +179,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   }
 
   submitInsurance(): Observable<any> {
-
     if (!this.acceptFinalTerms) {
-      return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd'));
+      return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'));
     }
 
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
@@ -207,7 +206,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
         return this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
-            return this.store$.dispatch(new router.Go({path: ['thank-you', profile.emailaddress]}));
+            return this.store$.dispatch(new router.Go({path: ['/car/thank-you', profile.emailaddress]}));
           });
       });
   }
