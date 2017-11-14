@@ -160,10 +160,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       }
     });
 
-    this.purchasedInsurances$.subscribe(getPurchasedInsurances => {
-      if (getPurchasedInsurances.filter( insurance => !insurance.manually_added ).length) {
-        this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-      }
+    this.purchasedInsurances$
+      .filter(purchasedInsurances => purchasedInsurances !== null)
+      .subscribe(purchasedInsurances => {
+        // redirect to purchased overview if there are any manually added insurances
+        if (purchasedInsurances && purchasedInsurances.filter(insurance => !insurance.manually_added ).length) {
+          this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+        }
     });
 
     this.carExtrasForm.formGroup.valueChanges

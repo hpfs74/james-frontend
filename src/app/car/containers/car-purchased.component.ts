@@ -44,7 +44,7 @@ import * as fromProfile from '../../profile/reducers';
 export class CarPurchasedComponent implements AfterViewInit, OnInit {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
-  purchasedInsurances$: Observable<string>;
+  purchasedInsurances$: Observable<any>;
   profile$: Observable<any>;
   email: string;
   firstName: string;
@@ -58,7 +58,7 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
-    this.profile$.subscribe( profile => {
+    this.profile$.subscribe(profile => {
         this.firstName = profile.firstname || '';
         this.email = profile.emailaddress || '';
       }
