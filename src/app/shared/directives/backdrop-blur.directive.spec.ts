@@ -1,5 +1,5 @@
-import { NO_ERRORS_SCHEMA, Component, DebugElement, ElementRef } from '@angular/core';
-import { TestModuleMetadata, async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
+import { TestModuleMetadata, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../test.common.spec';
