@@ -10,6 +10,7 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as profile from '../../profile/actions/profile';
 import * as auth from '../../auth/actions/auth';
+import * as router from '../../core/actions/router';
 
 import { Nav } from '../models/nav';
 import { Profile } from '../../profile/models';
@@ -115,15 +116,26 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  logOut() {
-    this.store$.dispatch(new auth.Logout);
-  }
-
   toggleMenuOpen() {
     this.animationState = this.animationState === 'closed' ? 'open' : 'closed';
   }
 
   setMenuAnimationStatus(event: boolean) {
     this.animationDone = event;
+  }
+
+  logIn() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new router.Go({ path: ['/login'] }));
+  }
+
+  logOut() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new auth.Logout);
+  }
+
+  register() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }
 }

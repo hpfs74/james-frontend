@@ -17,7 +17,7 @@ import { KNXModalDialogModule } from '@knx/modal';
 import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
 import { KNXInputComponent } from './components/knx-input/input.component';
 import { KNXHamburgerComponent } from './components/knx-hamburger/knx-hamburger.component';
-import { KNXDropdownMenuComponent } from './components/knx-dropdown-menu/knx-dropdown-menu.component';
+import { KNXNavbarMenuComponent } from './components/knx-navbar-menu/knx-navbar-menu.component';
 import { KNXFooterComponent } from './components/knx-footer/knx-footer.component';
 
 /**
@@ -131,7 +131,7 @@ export const sharedComponents = [
   KNXCheckboxComponent,
   KNXInputComponent,
   KNXHamburgerComponent,
-  KNXDropdownMenuComponent,
+  KNXNavbarMenuComponent,
   KNXFooterComponent
 ];
 
