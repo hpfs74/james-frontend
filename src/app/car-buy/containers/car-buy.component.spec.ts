@@ -40,7 +40,7 @@ import { Profile } from '../../profile/models/profile';
 
 export function getInitialState() {
   return {
-    'core': {
+    'app': {
       assistant: {
         config: {
           avatar: {
@@ -120,7 +120,7 @@ describe('Component: CarBuyComponent', () => {
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),
-        'core': combineReducers(fromCore.reducers),
+        'app': combineReducers(fromCore.reducers),
         'car': combineReducers(fromCar.reducers),
         'insurance': combineReducers(fromInsurance.reducers),
         'profile': combineReducers(fromProfile.reducers)

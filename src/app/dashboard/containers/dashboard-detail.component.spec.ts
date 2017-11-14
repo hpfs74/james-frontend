@@ -54,7 +54,7 @@ describe('Component: DashboardDetail', () => {
       ],
       imports: [
         StoreModule.forRoot({
-          'core': combineReducers(fromCore.reducers)
+          'app': combineReducers(fromCore.reducers)
         })
       ],
       declarations: [DashboardDetailComponent],

@@ -46,9 +46,9 @@ import { AddressModule } from './address/address.module';
 
     EffectsModule.forRoot([]),
 
-    AuthModule.forRoot(),
-
     CoreModule.forRoot(),
+
+    AuthModule.forRoot(),
 
     InsuranceModule.forRoot(),
 

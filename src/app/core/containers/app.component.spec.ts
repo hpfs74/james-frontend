@@ -49,7 +49,7 @@ describe('Component: AppComponent', () => {
       StoreModule.forRoot({
       ...fromRoot.reducers,
       'auth': combineReducers(fromAuth.reducers),
-      'core': combineReducers(fromCore.reducers),
+      'app': combineReducers(fromCore.reducers),
       'insurance': combineReducers(fromInsurance.reducers),
       'profile': combineReducers(fromProfile.reducers)
     })],
