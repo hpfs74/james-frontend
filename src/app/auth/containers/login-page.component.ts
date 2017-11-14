@@ -54,8 +54,8 @@ export class LoginPageComponent implements OnInit {
      * to prevent undesired messages in the ui
      */
   resetRegistrationStates(): void {
-    this.store$.dispatch( new registration.RegisterResetState() );
-    this.store$.dispatch( new registration.RegisterResendResetState() );
+    this.store$.dispatch( new registration.ResetState() );
+    this.store$.dispatch( new registration.ResendResetState() );
   }
 
   resetLoginState(): void {
@@ -95,6 +95,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   resendActivationMail(email: string) {
-    this.store$.dispatch(new registration.RegisterResendActivationEmail(email));
+    this.store$.dispatch(new registration.ResendActivationEmail(email));
   }
 }

@@ -43,6 +43,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   animationState = 'closed';
   animationDone = false;
   content: Content;
+
   constructor(
     private viewContainerRef: ViewContainerRef,
     private store$: Store<fromRoot.State>,
@@ -103,19 +104,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  isVisible() {
-    if (this.route$) {
-      let shouldShow = true;
-
-      // It's always visible
-      // this.route$.take(1)
-      //   .subscribe(currentRoute => {
-      //     shouldShow = (currentRoute !== '/login' && currentRoute !== '/register');
-      //   });
-      return shouldShow;
-    }
-  }
-
   toggleMenuOpen() {
     this.animationState = this.animationState === 'closed' ? 'open' : 'closed';
   }
@@ -124,7 +112,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.animationDone = event;
   }
 
-  logIn() {
+  goToLogin() {
     this.toggleMenuOpen();
     this.store$.dispatch(new router.Go({ path: ['/login'] }));
   }
@@ -134,7 +122,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.store$.dispatch(new auth.Logout);
   }
 
-  register() {
+  goToRegister() {
     this.toggleMenuOpen();
     this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }

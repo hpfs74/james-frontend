@@ -5,12 +5,12 @@ import { AuthToken, Authenticate, RegistrationPayload } from '../models/auth';
 export const REGISTER = '[Register] Create';
 export const REGISTER_SUCCESS = '[Register] Register Success';
 export const REGISTER_FAILURE = '[Register] Register Failure';
-export const REGISTER_REDIRECT = '[Register] Register Redirect';
-export const REGISTER_RESET_STATE = '[Register] Register Reset State';
-export const REGISTER_RESEND_ACTIVATION_EMAIL = '[Register] Register Resend Activation Email';
-export const REGISTER_RESEND_ACTIVATION_EMAIL_SUCCESS = '[Register] Register Resend Activation Email Success';
-export const REGISTER_RESEND_ACTIVATION_EMAIL_FAILURE = '[Register] Register Resend Activation Email Failure';
-export const REGISTER_RESEND_RESET_STATE = '[Register] Register Resend Reset State';
+export const REDIRECT = '[Register] Redirect';
+export const RESET_STATE = '[Register] Reset State';
+export const RESEND_ACTIVATION_EMAIL = '[Register] Resend Activation Email';
+export const RESEND_ACTIVATION_EMAIL_SUCCESS = '[Register] Resend Activation Email Success';
+export const RESEND_ACTIVATION_EMAIL_FAILURE = '[Register] Resend Activation Email Failure';
+export const RESEND_RESET_STATE = '[Register] Resend Reset State';
 
 export class Register implements Action {
   readonly type = REGISTER;
@@ -30,40 +30,40 @@ export class RegisterFailure implements Action {
   constructor(public payload: any) {}
 }
 
-export class RegisterRedirect implements Action {
-  readonly type = REGISTER_REDIRECT;
+export class Redirect implements Action {
+  readonly type = REDIRECT;
 }
 
-export class RegisterResetState implements Action {
-  readonly type = REGISTER_RESET_STATE;
+export class ResetState implements Action {
+  readonly type = RESET_STATE;
 }
 
-export class RegisterResendActivationEmail implements Action {
-  readonly type = REGISTER_RESEND_ACTIVATION_EMAIL;
+export class ResendActivationEmail implements Action {
+  readonly type = RESEND_ACTIVATION_EMAIL;
 
   constructor(public email: string) {}
 }
 
-export class RegisterResendActivationEmailSuccess implements Action {
-  readonly type = REGISTER_RESEND_ACTIVATION_EMAIL_SUCCESS;
+export class ResendActivationEmailSuccess implements Action {
+  readonly type = RESEND_ACTIVATION_EMAIL_SUCCESS;
 }
 
-export class RegisterResendActivationEmailFailure implements Action {
-  readonly type = REGISTER_RESEND_ACTIVATION_EMAIL_FAILURE;
+export class ResendActivationEmailFailure implements Action {
+  readonly type = RESEND_ACTIVATION_EMAIL_FAILURE;
   constructor(public payload: any) {}
 }
 
-export class RegisterResendResetState implements Action {
-  readonly type = REGISTER_RESEND_RESET_STATE;
+export class ResendResetState implements Action {
+  readonly type = RESEND_RESET_STATE;
 }
 
 export type Actions =
   | Register
   | RegisterSuccess
   | RegisterFailure
-  | RegisterRedirect
-  | RegisterResetState
-  | RegisterResendActivationEmail
-  | RegisterResendActivationEmailSuccess
-  | RegisterResendActivationEmailFailure
-  | RegisterResendResetState;
+  | Redirect
+  | ResetState
+  | ResendActivationEmail
+  | ResendActivationEmailSuccess
+  | ResendActivationEmailFailure
+  | ResendResetState;

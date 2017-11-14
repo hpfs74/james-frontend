@@ -283,7 +283,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   }
 
   startBuyFlow(): Observable<any> {
-    return this.isLoggedIn$.flatMap((loggedIn) => {
+    return this.isLoggedIn$.take(1).flatMap((loggedIn) => {
       if (loggedIn) {
         this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
           id => {
