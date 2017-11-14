@@ -46,11 +46,13 @@ export class AssistantEffects {
       }
       if (message !== combined.prev) {
         // Only emit add message action if it's different than previous
+        const messagePayload = { message: message, lookupKey: key };
+
         return combined.payload.clear ?
         Observable.of(
           { payload: null, type: assistant.CLEAR_MESSAGES },
-          { payload: message, type: assistant.ADD_MESSAGE })
-        : Observable.of({ payload: message, type: assistant.ADD_MESSAGE });
+          { payload: messagePayload, type: assistant.ADD_MESSAGE })
+        : Observable.of({ payload: messagePayload, type: assistant.ADD_MESSAGE });
       }
       return Observable.of({ type: 'NO_ACTION' });
     });
