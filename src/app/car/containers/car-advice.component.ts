@@ -313,8 +313,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     }));
   }
 
-  updateActiveLoan(event: boolean) {
-    this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(event));
+  updateActiveLoan(activeLoan: boolean) {
+    this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(activeLoan));
   }
 
   getCarInfo(licensePlate) {
