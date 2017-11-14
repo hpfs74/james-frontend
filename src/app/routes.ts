@@ -3,13 +3,23 @@ import { Routes } from '@angular/router';
 
 import { AuthGuard } from './auth/services/auth-guard.service';
 
-// TODO: CoreModule should not be lazy loaded
-
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: './core/core.module#CoreModule',
-    canLoad: [AuthGuard]
+    redirectTo: 'car',
+    pathMatch: 'full',
+    canActivateChild: [AuthGuard]
+    // loadChildren: './dashboard/dashboard.module#DashboardModule',
+  },
+  {
+    path: 'car',
+    canActivateChild: [AuthGuard],
+    loadChildren: './car/car.module#CarModule'
+  },
+  {
+    path: 'account',
+    canActivateChild: [AuthGuard],
+    loadChildren: './profile/profile.module#ProfileModule'
   },
   {
     // 404: redirect unkown paths to home

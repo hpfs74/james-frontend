@@ -4,8 +4,6 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { CoreRoutingModule } from './core.routing.module';
-
 import { SharedModule } from '../shared.module';
 import { ChatStreamModule } from '../components/knx-chat-stream/chat-stream.module';
 import { UserDialogModule } from '../components/knx-modal/user-dialog.module';
@@ -60,14 +58,13 @@ export const COMPONENTS = [
     ChatStreamModule,
     UserDialogModule,
     ProfileModule,
-    StoreModule.forFeature('core', reducers),
+    StoreModule.forFeature('app', reducers),
     EffectsModule.forFeature([
       AssistantEffects,
       RouterEffects,
       ErrorEffects,
       AssistantEffects,
-    ]),
-    CoreRoutingModule.forRoot()
+    ])
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
@@ -76,13 +73,13 @@ export const COMPONENTS = [
   ]
 })
 export class CoreModule {
-  // TODO: fix bug where CoreModule is lazy loaded, should be MainModule or something as root routing module
-  // constructor (@Optional() @SkipSelf() parentModule: CoreModule) {
-  //   if (parentModule) {
-  //     throw new Error(
-  //       'CoreModule is already loaded. Import it in the AppModule only');
-  //   }
-  // }
+  constructor (@Optional() @SkipSelf() parentModule: CoreModule) {
+    if (parentModule) {
+      const error = 'CoreModule is already loaded. Import it in the AppModule only';
+      console.warn(error);
+      throw new Error(error);
+    }
+  }
 
   static forRoot() {
     return {
