@@ -147,6 +147,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   initCheckForm(messageKey: string) {
     scrollToY();
     this.store$.select(fromInsurance.getSelectedInsurance)
+      .filter(insurance => insurance != null)
       .subscribe((insurance) => {
         const insuranceName = insurance._embedded.insurance.insurance_brand || null;
         if (insuranceName) {
