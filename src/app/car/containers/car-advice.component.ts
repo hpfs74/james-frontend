@@ -293,7 +293,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
               path: ['/car/insurance', {adviceId: id}],
             }));
           }));
-        return;
+        return Observable.empty();
       } else {
         // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
         // Instead of going into the buy flow the user clicks on the modal buttons
