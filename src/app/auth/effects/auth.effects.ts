@@ -80,9 +80,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   loginRedirect$ = this.actions$
     .ofType(auth.LOGIN_REDIRECT, auth.LOGOUT)
-    .do(authed => {
-      this.router.navigate(['/login']);
-    });
+    .do(() => this.router.navigate(['/login']));
 
   @Effect({ dispatch: false })
   logout$ = this.actions$
@@ -177,11 +175,11 @@ export class AuthEffects {
     }
   });
 
-  constructor(private actions$: Actions,
-              private authService: AuthService,
-              private router: Router,
-              private localStorageService: LocalStorageService,
-              private store$: Store<fromRoot.State>,
-              private dialogService: UserDialogService) {
-  }
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router,
+    private localStorageService: LocalStorageService,
+    private store$: Store<fromRoot.State>,
+    private dialogService: UserDialogService) {}
 }

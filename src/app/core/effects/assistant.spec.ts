@@ -12,7 +12,7 @@ import { AssistantService } from '../services/assistant.service';
 import * as assistant from '../actions/assistant';
 
 import * as fromRoot from '../../reducers';
-import * as fromCore from '../reducers';
+import * as fromApp from '../reducers';
 import * as fromAssistant from '../reducers';
 
 describe('AssistantEffects', () => {
@@ -30,10 +30,10 @@ describe('AssistantEffects', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({
-          'core': combineReducers(fromCore.reducers),
+          'app': combineReducers(fromApp.reducers),
         }, {
             initialState: {
-              'core': {
+              'app': {
                 assistant: {
                   config: config,
                   messages: []

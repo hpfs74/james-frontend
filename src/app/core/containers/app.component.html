@@ -1,26 +1,26 @@
 <header class="header">
   <knx-offline-indicator></knx-offline-indicator>
-
-  <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()" (onHamburgerClick)="toggleMenuOpen()">
+  <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()" (onHamburgerClick)="toggleMenuOpen()">
     <knx-opening-hours></knx-opening-hours>
     <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
   </knx-navbar>
 </header>
-<knx-dropdown-menu-s
+
+<knx-navbar-menu
   [animationState]="animationState"
   (onAnimationDone)="setMenuAnimationStatus($event)"
   class="hidden-md-up">
   <ul class="navbar-nav knx-list--unstyled">
-    <li class="nav-item" *ngIf="loggedIn$ | async" (click)="menuClose()">
+    <li class="nav-item" *ngIf="loggedIn$ | async">
       <a class="nav-link" (click)="logOut()">Uitloggen</a>
     </li>
 
-    <li class="nav-item" *ngIf="!(loggedIn$ | async)" (click)="menuClose()">
-      <a class="nav-link" (click)="register()">Registreren</a>
+    <li class="nav-item" *ngIf="!(loggedIn$ | async)">
+      <a class="nav-link" (click)="goToRegister()">Registreren</a>
     </li>
 
-    <li class="nav-item" *ngIf="!(loggedIn$ | async)" (click)="menuClose()">
-      <a class="nav-link" (click)="logIn()">Inloggen</a>
+    <li class="nav-item" *ngIf="!(loggedIn$ | async)">
+      <a class="nav-link" (click)="goToLogin()">Inloggen</a>
     </li>
 
     <li class="nav-item">
@@ -31,18 +31,11 @@
       <a class="nav-link" href="{{ content.phone.link }}" rel="noopener"><span class="knx-icon-phone"></span>{{ content.phone.label }}</a>
     </li>
   </ul>
-</knx-dropdown-menu-s>
+</knx-navbar-menu>
+
 <div class="main-container" knxSidePanelState>
   <knx-loader></knx-loader>
   <router-outlet></router-outlet>
 </div>
 
-<!-- <div *ngIf="isVisible()" class="container-fluid knx-container--fullwidth knx-container--gray">
-  <knx-features>
-    <knx-feature-item title="Objectief" description="We vergelijken meer dan 20 verzekeraars"></knx-feature-item>
-    <knx-feature-item title="Bespaar" description="Krijg tot 15% korting op je autoverzekering"></knx-feature-item>
-    <knx-feature-item title="Overstaphulp" description="Wij regelen je overstap"></knx-feature-item>
-  </knx-features>
-</div> -->
-
-<knx-footer *ngIf="isVisible()"></knx-footer>
+<knx-footer></knx-footer>

@@ -13,6 +13,10 @@ export class CanActivateBuyFlowGuard implements CanActivate {
 
   constructor(private router: Router, private store$: Store<fromRoot.State>) {}
 
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.canActivate(route, state);
+  }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // only allow buy flow when an advice is in the store
 

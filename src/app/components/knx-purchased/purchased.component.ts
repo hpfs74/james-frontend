@@ -11,13 +11,15 @@ import { Component, Input } from '@angular/core';
 
           <ul class="knx-list--unstyled">
             <li *ngFor="let insurance of insurances">
-              <div class="knx-purchased__icon knx-icon-automobile pull-left"></div>
+              <div *ngIf="!insurance.manually_added">
+                <div class="knx-purchased__icon knx-icon-automobile pull-left"></div>
 
-              <p>
-                {{insurance.license}} | {{insurance.make}} {{insurance.model}}
-                <br>
-                <strong>{{insurance.insurance_name}} &bull; {{insurance.price}} &euro; p/m</strong>
-              </p>
+                <p>
+                  {{insurance.license}} | {{insurance.make}} {{insurance.model}}
+                  <br>
+                  <strong>{{insurance.insurance_name}} &bull; {{insurance.price}} &euro; p/m</strong>
+                </p>
+              </div>
             </li>
           </ul>
         </div>

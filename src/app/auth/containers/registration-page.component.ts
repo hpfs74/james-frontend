@@ -8,13 +8,14 @@ import * as auth from '../actions/auth';
 import * as registration from '../actions/registration';
 import { Authenticate } from '../models/auth';
 import { ContentConfig, Content } from '../../content.config';
+import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 @Component({
   selector: 'knx-password-reset',
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss']
 })
-export class RegistrationPageComponent {
+export class RegistrationPageComponent implements OnInit {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
   registrationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationPending);
   registrationSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationSuccess);
@@ -26,9 +27,13 @@ export class RegistrationPageComponent {
   content: Content;
 
   constructor(private store$: Store<fromAuth.State>, private contentConfig: ContentConfig) {
-    this.store$.dispatch(new registration.RegisterResetState());
-    this.store$.dispatch(new registration.RegisterResendResetState());
+    this.store$.dispatch(new registration.ResetState());
+    this.store$.dispatch(new registration.ResendResetState());
     this.content = this.contentConfig.getContent();
+  }
+
+  ngOnInit() {
+    scrollToY();
   }
 
   register(register: Authenticate) {
@@ -40,6 +45,6 @@ export class RegistrationPageComponent {
   }
 
   sendActivationEmail(email: string) {
-    this.store$.dispatch(new registration.RegisterResendActivationEmail(email));
+    this.store$.dispatch(new registration.ResendActivationEmail(email));
   }
 }

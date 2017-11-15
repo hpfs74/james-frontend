@@ -24,21 +24,24 @@ export class AssistantConfig {
 
   public car = {
     welcome: `Hallo! Ik ben ${this.avatar.name}.
-      Ik ga je vandaag helpen <strong>besparen</strong> op je autoverzekering.
-      Ben je er klaar voor? Let\'s do this!`,
+      Ik ga je helpen met de voordeligste autoverzekering die bij jou past.`,
     info: {
       houseHold: `Je premie kan veranderen afhankelijk van je huishoudelijke status`,
       niceCar: (car: Car) => `Gaaf! Je hebt een <strong>${car.make} ${car.model}`,
       coverage: {
         advice: (coverage: Price) => `Op basis van je situatie adviseer ik een <strong>${coverage.header}-dekking</strong>`
       },
-      CL: `Met een WA dekking, is enkel de schade die jij toebrengt aan anderen gedekt. Schade aan je eigenauto moet je
-           dus zelf betalen.`,
+      loan: `Je geeft aan dat je een lening hebt, daarom raad ik je een Allrisk dekking aan. Als je auto dan onherstelbaar
+            beschadigd raakt, krijg je een vergoeding om een nieuwe te kopen. Bij een andere dekking krijg je die vergoeding
+            niet en blijf je met een lening achter, terwijl je geen auto meer hebt.`,
+      CL: `Met een WA dekking is alleen de schade die jij toebrengt aan anderen gedekt. Schade aan je eigen auto moet je dus
+            zelf betalen. Dit is verstandig bij een auto die ouder is dan 10 jaar.`,
       CLC: `Met een WA beperkt casco dekking ben je naast de gewone WA dekking ook verzekerd voor schade door brand of
             storm, ruitschade, diefstal en schade door aanrijding met dieren.`,
-      CAR: `Je geeft aan dat je een lening hebt voor je auto. Ik raad je daarom een Allrisk dekking aan. Als je auto
-            dan onherstelbaar beschadigd raakt, krijg je een vergoeding om een nieuwe te kopen. Bij een andere dekking
-            krijg je die vergoeding niet en blijf je met een lening achter, terwijl je geen auto meer hebt. `,
+      CAR: `Je hebt een vrij nieuwe auto of een lening, daarom raad ik je Allrisk dekking aan.
+            Als je auto dan onherstelbaar beschadigd raakt, krijg je een vergoeding om een nieuwe te kopen.
+            Bij een andere dekking krijg je die vergoeding niet en blijf je met een lening achter, terwijl je geen
+            auto meer hebt. `,
       noClaimProtection: '',
       legalAid: `Deze extra dekking sluit je af vanaf &euro;3 per maand.<br>
         Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
@@ -46,7 +49,7 @@ export class AssistantConfig {
       coverOccupants: '',
       advice: {
         result: 'Vergelijk de 4 beste deals van alle 42 vergeleken verzekeringen',
-        option: 'Selecteer deze extra opties als je het best passende advies wil ontvangen!',
+        option: 'Maak hieronder de keuzes die passen bij jouw situatie. Zo krijg je een nog persoonlijker advies.',
         next: 'Wat wil je doen?'
       },
       review: {
@@ -72,7 +75,7 @@ export class AssistantConfig {
       payment: 'Nog heel even! Van welk rekeningnummer mag je premie straks worden afgeschreven?',
       summary: 'We zijn er bijna! Kun je nog een keer de ingevulde gegevens controleren? Zo weet je zeker dat' +
         ' de verzekeraar de juiste informatie krijgt.',
-      thankyou: `Gefeliciteerd met je nieuwe autoverzekering!  De polis van je autoverzekering is verstuurd
+      thankyou: `Goed nieuws! De polis van je autoverzekering is verstuurd
       en wordt binnen 3 dagen goedgekeurd. We houden je op de hoogte!`,
       finalEmail: (email: string) => `Een kopie van de polis is verstuurd naar: ${email}`
     },

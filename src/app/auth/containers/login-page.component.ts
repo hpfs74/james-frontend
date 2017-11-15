@@ -13,6 +13,7 @@ import { loginError, CustomError } from '../models/login-error';
 import * as profile from '../../profile/actions/profile';
 import * as registration from '../actions/registration';
 import * as FormUtils from '../../utils/base-form.utils';
+import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 /**
  * Login page that's rendered in router-outlet of 'AppComponent if not logged in
@@ -37,6 +38,7 @@ export class LoginPageComponent implements OnInit {
   constructor(@Inject(LOCALE_ID) private locale: string, private store$: Store<fromAuth.State>) {}
 
   ngOnInit() {
+    scrollToY();
     this.store$.select(fromAuth.getLoginPageError)
     .filter(error => error !== null)
     .subscribe((error) => {
@@ -52,8 +54,8 @@ export class LoginPageComponent implements OnInit {
      * to prevent undesired messages in the ui
      */
   resetRegistrationStates(): void {
-    this.store$.dispatch( new registration.RegisterResetState() );
-    this.store$.dispatch( new registration.RegisterResendResetState() );
+    this.store$.dispatch( new registration.ResetState() );
+    this.store$.dispatch( new registration.ResendResetState() );
   }
 
   resetLoginState(): void {
@@ -93,6 +95,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   resendActivationMail(email: string) {
-    this.store$.dispatch(new registration.RegisterResendActivationEmail(email));
+    this.store$.dispatch(new registration.ResendActivationEmail(email));
   }
 }

@@ -1,3 +1,7 @@
+const DEFAULT_SCROLL_TARGET_Y = 0;
+const DEFAULT_SCROLL_SPEED = 3000;
+const DEFAULT_SCROLL_EASING = 'easeOutSine';
+
 // first add raf shim
 // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
 declare var window: any;
@@ -10,17 +14,29 @@ let requestAnimFrame = (function(){
           };
 })();
 
-// main function
-export function scrollToY(scrollTargetY, speed, easing) {
-    // scrollTargetY: the target scrollY property of the window
-    // speed: time in pixels per second
-    // easing: easing equation to use
+// Scoll back to form; assumes there's only one form of this type on current page
+export function scrollToElement(cssClass: string): void {
+    const element = <HTMLElement>document.querySelector(cssClass);
+    if (element) {
+        scrollToY(element.offsetTop);
+    }
+}
+
+/**
+ * should be updated to scroll to element
+ * main function
+ * default scroll to top of window object
+ * @param scrollTargetY scroll to window.scrollY position
+ * @param speed time in pixels per second -> increase to speed up
+ * @param easing easing equation to use
+ */
+export function scrollToY(
+    scrollTargetY: number = DEFAULT_SCROLL_TARGET_Y,
+    speed: number = DEFAULT_SCROLL_SPEED,
+    easing: string = DEFAULT_SCROLL_EASING) {
 
     let scrollY = window.scrollY || document.documentElement.scrollTop;
     let currentTime = 0;
-        scrollTargetY = scrollTargetY || 0;
-        speed = speed || 2000;
-        easing = easing || 'easeOutSine';
 
     // min time .1, max time .8 seconds
     let time = Math.max(.1, Math.min(Math.abs(scrollY - scrollTargetY) / speed, .8));
@@ -60,6 +76,3 @@ export function scrollToY(scrollTargetY, speed, easing) {
     // call it once to get started
     tick();
 }
-
-// scroll it!
-// scrollToY(0, 1500, 'easeInOutQuint');

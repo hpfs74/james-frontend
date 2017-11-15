@@ -2,19 +2,18 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { CurrencyPipe } from '@angular/common';
-import { KNXCollapsiblePanelComponent } from '../../../../node_modules/@knx/collapsible-panel/index';
-import { KNXInfoComponent } from '../../../../node_modules/@knx/info/index';
+import { KNXCollapsiblePanelComponent } from '@knx/collapsible-panel/index';
+import { KNXInfoComponent } from '@knx/info/index';
+import { CXFormsModule } from '@cx/forms';
 
-import { CXFormsModule } from '../../../../node_modules/@cx/forms';
 import { SharedModule } from '../../shared.module';
 import { InsuranceReviewCarComponent } from './insurance-review-car.component';
 import { InsuranceReviewModule } from './insurance-review.module';
+import { TagsService } from '../../core/services/tags.service';
+import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 
 @Component({
-  template: `
-    <div>
-      <knx-insurance-review-car [carInsurance]="carInsuranceFromHost"></knx-insurance-review-car>
-  </div>`
+  template: `<knx-insurance-review-car [carInsurance]="carInsuranceFromHost"></knx-insurance-review-car>`
 })
 export class TestHostComponent {
   @ViewChild(InsuranceReviewCarComponent)
@@ -37,7 +36,11 @@ describe('Component: InsuranceReviewCarComponent', () => {
         TestHostComponent
       ],
       providers: [
-        CurrencyPipe
+        CurrencyPipe,
+        {
+          provide: TagsService,
+          useValue: TagsServiceMock
+        }
       ]
     }).compileComponents();
   }));

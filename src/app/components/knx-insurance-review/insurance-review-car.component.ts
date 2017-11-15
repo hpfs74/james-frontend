@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { CarInsurance } from '../../car/models/car-insurance';
-import { CarUtils } from '../../car/utils/car-utils';
 
 @Component({
   selector: 'knx-insurance-review-car',
@@ -8,7 +8,7 @@ import { CarUtils } from '../../car/utils/car-utils';
     <knx-ir-content title="Je verzekering" *ngIf="carInsurance">
       <knx-ir-row showTooltip="false" showValue="true">
         <knx-ir-label>Dekking</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getCoverageExtended(carInsurance.main_coverage) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.main_coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row showTooltip="true" showValue="true">
@@ -44,12 +44,12 @@ import { CarUtils } from '../../car/utils/car-utils';
     <knx-ir-content title="Jouw extra's" *ngIf="carInsurance">
       <knx-ir-row>
         <knx-ir-label>Pechhulp</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getRoadAssistance(carInsurance.road_assistance) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.road_assistance | jamesTag: 'car_flow_road_assistance' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
         <knx-ir-label>Rechtsbijstand</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getLegalAid(carInsurance.legal_aid) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.legal_aid | jamesTag: 'car_flow_legal_aid' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
@@ -66,8 +66,6 @@ import { CarUtils } from '../../car/utils/car-utils';
 })
 export class InsuranceReviewCarComponent {
   @Input() carInsurance: CarInsurance;
-
-  carUtils = CarUtils;
 
   showOneOffPremium(): boolean {
     return this.carInsurance.one_off_premium > 0;

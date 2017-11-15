@@ -10,6 +10,7 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as profile from '../../profile/actions/profile';
 import * as auth from '../../auth/actions/auth';
+import * as router from '../../core/actions/router';
 
 import { Nav } from '../models/nav';
 import { Profile } from '../../profile/models';
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   animationState = 'closed';
   animationDone = false;
   content: Content;
+
   constructor(
     private viewContainerRef: ViewContainerRef,
     private store$: Store<fromRoot.State>,
@@ -102,28 +104,26 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  isVisible() {
-    if (this.route$) {
-      let shouldShow = true;
-
-      // It's always visible
-      // this.route$.take(1)
-      //   .subscribe(currentRoute => {
-      //     shouldShow = (currentRoute !== '/login' && currentRoute !== '/register');
-      //   });
-      return shouldShow;
-    }
-  }
-
-  logOut() {
-    this.store$.dispatch(new auth.Logout);
-  }
-
   toggleMenuOpen() {
     this.animationState = this.animationState === 'closed' ? 'open' : 'closed';
   }
 
   setMenuAnimationStatus(event: boolean) {
     this.animationDone = event;
+  }
+
+  goToLogin() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new router.Go({ path: ['/login'] }));
+  }
+
+  logOut() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new auth.Logout);
+  }
+
+  goToRegister() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }
 }

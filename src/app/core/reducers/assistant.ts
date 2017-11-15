@@ -23,7 +23,7 @@ export function reducer(state = initialState, action: Action): State {
 
     case AssistantActions.ADD_MESSAGE: {
       return Object.assign({}, state, {
-        messages: [ ...state.messages, new ChatMessage(null, action.payload) ]
+        messages: [ ...state.messages, new ChatMessage(null, action.payload.message, action.payload.lookupKey) ]
       });
     }
 

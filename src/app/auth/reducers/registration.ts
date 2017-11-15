@@ -5,20 +5,20 @@ export interface State {
   error: string | null;
   loading: boolean;
   registered: boolean;
-  resend_success: boolean;
-  resend_loading: boolean;
-  resend_error: string | null;
-  registration_email: string;
+  resendSuccess: boolean;
+  resendLoading: boolean;
+  resendError: string | null;
+  registrationEmail: string;
 }
 
 export const initialState: State = {
   error: null,
   loading: false,
   registered: false,
-  resend_success: false,
-  resend_error: null,
-  resend_loading: false,
-  registration_email: null
+  resendSuccess: false,
+  resendError: null,
+  resendLoading: false,
+  registrationEmail: null
 };
 
 export function reducer(state = initialState, action: registration.Actions): State {
@@ -28,7 +28,7 @@ export function reducer(state = initialState, action: registration.Actions): Sta
         ...state,
         error: null,
         loading: true,
-        registration_email: action.registration.emailaddress
+        registrationEmail: action.registration.emailaddress
       };
     }
 
@@ -49,35 +49,35 @@ export function reducer(state = initialState, action: registration.Actions): Sta
       };
     }
 
-    case registration.REGISTER_RESET_STATE: {
+    case registration.RESET_STATE: {
       return Object.assign({}, state, initialState);
     }
 
-    case registration.REGISTER_RESEND_ACTIVATION_EMAIL: {
+    case registration.RESEND_ACTIVATION_EMAIL: {
       return {
         ...state,
-        resend_loading: true,
+        resendLoading: true,
         error: null
       };
     }
 
-    case registration.REGISTER_RESEND_ACTIVATION_EMAIL_SUCCESS: {
+    case registration.RESEND_ACTIVATION_EMAIL_SUCCESS: {
       return {
         ...state,
         error: null,
-        resend_loading: false,
-        resend_success: true,
+        resendLoading: false,
+        resendSuccess: true,
       };
     }
 
-    case registration.REGISTER_RESEND_ACTIVATION_EMAIL_FAILURE: {
+    case registration.RESEND_ACTIVATION_EMAIL_FAILURE: {
       return {
         ...state,
-        resend_error: action.payload,
+        resendError: action.payload,
       };
     }
 
-    case registration.REGISTER_RESEND_RESET_STATE: {
+    case registration.RESEND_RESET_STATE: {
       return Object.assign({}, state, initialState);
     }
 
@@ -90,7 +90,7 @@ export function reducer(state = initialState, action: registration.Actions): Sta
 export const getError = (state: State) => state.error;
 export const getPending = (state: State) => state.loading;
 export const getSuccess = (state: State) => state.registered;
-export const getResendError = (state: State) => state.resend_error;
-export const getResendPending = (state: State) => state.resend_loading;
-export const getResendSuccess = (state: State) => state.resend_success;
-export const getRegistrationEmail = (state: State) => state.registration_email;
+export const getResendError = (state: State) => state.resendError;
+export const getResendPending = (state: State) => state.resendLoading;
+export const getResendSuccess = (state: State) => state.resendSuccess;
+export const getRegistrationEmail = (state: State) => state.registrationEmail;

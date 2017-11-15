@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { ServiceGuideComponent } from './service-guide';
 
 describe('Component: Service Guide', () => {

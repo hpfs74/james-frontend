@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { setUpTestBed } from './../../../test.common.spec';
 import { AppPromoBlockComponent } from './app-promo.component';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 
 describe('Component: AppPromoBlockComponent', () => {
   let comp: AppPromoBlockComponent;

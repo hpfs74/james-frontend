@@ -1,7 +1,6 @@
 import { CarProposalHelper } from './proposal';
 
 describe('CarProposalHelper', () => {
-
   it('should convert final questions to request format', () => {
     let helper = new CarProposalHelper();
     const data = {
@@ -64,6 +63,7 @@ describe('CarProposalHelper', () => {
       id: 22,
       active_loan: true,
       coverage: 'CAR',
+      dekking: 'Aansprakelijkheid + Volledig casco',
       claim_free_years: 1,
       household_status: 'CHM',
       license: '01XLXL',

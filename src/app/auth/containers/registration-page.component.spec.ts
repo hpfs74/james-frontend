@@ -16,7 +16,7 @@ import { RegistrationPageComponent } from '../containers/registration-page.compo
 import { LoginForm } from '../components/login.form';
 import { AuthService } from '../services/auth.service';
 import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { loginError } from '../models/login-error';
 
 describe('Component: RegistrationPageComponent', () => {
@@ -83,7 +83,7 @@ describe('Component: RegistrationPageComponent', () => {
 
   it('should dispatch a resend activation action', () => {
     const payload = 'test@mail.com';
-    const action = new register.RegisterResendActivationEmail(payload);
+    const action = new register.ResendActivationEmail(payload);
     comp.sendActivationEmail(payload);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });

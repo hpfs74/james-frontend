@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/withLatestFrom';
 
-import * as fromCore from '../reducers';
+import * as fromApp from '../reducers';
 import * as assistant from '../actions/assistant';
 import { AssistantService } from '../services/assistant.service';
 import { AssistantConfig, CannedMessageType } from './../models';
@@ -23,12 +23,12 @@ export class AssistantEffects {
     .ofType(assistant.ADD_CANNED_MESSAGE)
     .map((action: assistant.AddCannedMessage) => action.payload)
     .withLatestFrom(this.store$, (action, state) => {
-      let prev = state.core.assistant.messages[state.core.assistant.messages.length - 1];
+      let prev = state.app.assistant.messages[state.app.assistant.messages.length - 1];
       let previousMessage = prev ? prev.data : null;
 
       return {
         payload: action,
-        config: state.core.assistant.config,
+        config: state.app.assistant.config,
         prev: previousMessage
       };
     })
@@ -46,11 +46,13 @@ export class AssistantEffects {
       }
       if (message !== combined.prev) {
         // Only emit add message action if it's different than previous
+        const messagePayload = { message: message, lookupKey: key };
+
         return combined.payload.clear ?
         Observable.of(
           { payload: null, type: assistant.CLEAR_MESSAGES },
-          { payload: message, type: assistant.ADD_MESSAGE })
-        : Observable.of({ payload: message, type: assistant.ADD_MESSAGE });
+          { payload: messagePayload, type: assistant.ADD_MESSAGE })
+        : Observable.of({ payload: messagePayload, type: assistant.ADD_MESSAGE });
       }
       return Observable.of({ type: 'NO_ACTION' });
     });
@@ -63,5 +65,5 @@ export class AssistantEffects {
       }
     });
 
-  constructor(private actions$: Actions, private store$: Store<fromCore.State>, private assistantService: AssistantService) { }
+  constructor(private actions$: Actions, private store$: Store<fromApp.State>, private assistantService: AssistantService) { }
 }

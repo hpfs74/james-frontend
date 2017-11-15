@@ -14,7 +14,7 @@ export const initialState: State = {
   loading: false,
   loaded: false,
   insurances: [],
-  purchasedInsurances: []
+  purchasedInsurances: null
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -46,7 +46,11 @@ export function reducer(state = initialState, action: Action): State {
     }
 
     case InsuranceActions.GET_PURCHASED_CAR_INSURANCES_SUCCESS: {
-      const insurances = action.payload;
+      let insurances = action.payload;
+
+      if (insurances && Object.keys(insurances).length === 0) {
+        insurances = null;
+      }
 
       return Object.assign({}, state, {
         ...state,
