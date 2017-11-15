@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@knx/modal';
 
-import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
+import * as fromAuth from '../../auth/reducers';
+import * as auth from '../../auth/actions/auth';
 
 import { LoginForm } from './login.form';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { loginError } from '../models/login-error';
 
 @Component({

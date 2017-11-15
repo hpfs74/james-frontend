@@ -3,10 +3,10 @@ import { Store } from '@ngrx/store';
 import { CXEmailValidator } from '@cx/form';
 import { Observable } from 'rxjs/Observable';
 
-import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
-import * as registration from '../actions/registration';
-import { Authenticate } from '../models/auth';
+import * as fromAuth from '../../auth/reducers';
+import * as auth from '../../auth/actions/auth';
+import * as registration from '../../auth/actions/registration';
+import { Authenticate } from '../../auth/models/auth';
 import { ContentConfig, Content } from '../../content.config';
 import { scrollToY } from '../../utils/scroll-to-element.utils';
 
