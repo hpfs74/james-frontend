@@ -1,4 +1,4 @@
-import { Component, ComponentRef } from '@angular/core';
+import { Component, Input, ComponentRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -8,34 +8,38 @@ import * as fromAuth from '../../auth/reducers';
 import * as auth from '../../auth/actions/auth';
 
 import { LoginForm } from './login.form';
+import { CustomError } from '../models/login-error';
 import { AuthService } from '../../auth/services/auth.service';
 import { loginError } from '../models/login-error';
 
 @Component({
   selector: 'knx-login-modal',
+  styleUrls: ['./login-modal.component.scss'],
   template: `
     <div class="knx-login-modal" [formGroup]="form.formGroup">
-      <cx-form-group
-      [formControlName]="form.formConfig.email.formControlName"
-      [options]="form.formConfig.email"></cx-form-group>
+      <div class="login-password-wrapper">
+        <knx-input
+          [formControlName]="form.formConfig.email.formControlName"
+          [options]="form.formConfig.email">
+        </knx-input>
+      </div>
 
       <div class="login-password-wrapper">
-        <cx-form-group
+        <knx-input
           [formControlName]="form.formConfig.password.formControlName"
           [options]="form.formConfig.password">
-        </cx-form-group>
+        </knx-input>
+      </div>
 
-        <button type="button"
-          *ngIf="form.formGroup.get('password').value"
-          class="knx-login__showpassword knx-icon-eye"
-          [class.knx-icon-eye-slash]="form.showPassword"
-          [class.knx-icon-eye]="!form.showPassword"
-          (click)="form.toggleShowPassword($event)"></button>
+      <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
+        <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }}</p>
+        <p *ngIf="!errorMessage.errorText">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</p>
       </div>
     </div>
   `
 })
-export class LoginModalComponent implements KNXModalDialog {
+export class LoginModalComponent implements KNXModalDialog, OnInit {
+  errorMessage: CustomError;
   form: LoginForm  = new LoginForm(new FormBuilder());
   actionButtons: KNXModalDialogButton[];
   showPassword = false;
@@ -50,6 +54,17 @@ export class LoginModalComponent implements KNXModalDialog {
         onAction: this.login.bind(this)
       }
     ];
+  }
+
+  ngOnInit() {
+    this.store$.select(fromAuth.getLoginPageError)
+      .filter(error => error !== null)
+      .subscribe((error) => {
+        this.errorMessage = { errorText: loginError[error] } || { errorText: loginError.default};
+        if (error === 'invalid_username') {
+          this.errorMessage = { errorText: loginError[error], hasLink: true };
+        }
+      });
   }
 
   dialogInit(reference: ComponentRef<KNXModalDialog>, options?: KNXModalDialogOptions) {}

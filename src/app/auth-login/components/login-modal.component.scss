@@ -1,0 +1,11 @@
+@import '~styles/base.scss';
+
+.knx-login__error {
+  p {
+    color: $knab-primary-red;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
