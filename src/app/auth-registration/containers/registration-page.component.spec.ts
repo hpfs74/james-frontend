@@ -1,23 +1,21 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 
-import * as fromAuth from '../reducers';
-import * as auth from '../actions/auth';
-import * as register from '../actions/registration';
-import { FormBuilder } from '@angular/forms';
+import * as fromAuth from '../../auth/reducers';
+import * as auth from '../../auth/actions/auth';
+import * as register from '../../auth/actions/registration';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { RegistrationPageComponent } from '../containers/registration-page.component';
-import { LoginForm } from '../components/login.form';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { ContentConfig } from '../../content.config';
 import { ContentConfigMock } from '../../content.mock.spec';
-import { loginError } from '../models/login-error';
 
 describe('Component: RegistrationPageComponent', () => {
   let store: Store<fromAuth.State>;

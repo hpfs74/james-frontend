@@ -1,20 +1,20 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { setUpTestBed } from './../../../test.common.spec';
-import { LoginActivateComponent } from '../components/login-activate.component';
+import { RegisterPanelComponent } from './register-panel.component';
 
-describe('Component: LoginActivateComponent', () => {
-  let comp: LoginActivateComponent ;
-  let fixture: ComponentFixture<LoginActivateComponent>;
+describe('Component: RegisterPanelComponent', () => {
+  let comp: RegisterPanelComponent ;
+  let fixture: ComponentFixture<RegisterPanelComponent>;
 
   let moduleDef: TestModuleMetadata = {
-    declarations: [LoginActivateComponent],
+    declarations: [RegisterPanelComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginActivateComponent);
+    fixture = TestBed.createComponent(RegisterPanelComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   });
