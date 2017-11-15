@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { environment } from '../../../environments/environment';
 @Injectable()
 export class LoggingService {
 
@@ -7,6 +7,8 @@ export class LoggingService {
 
   log(payload: any) {
     // TODO: implement logging to API
-    // console.warn('LOG: ' + payload);
+    if (!environment.production) {
+      console.warn('LOG: ', payload);
+    }
   }
 }
