@@ -186,7 +186,11 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
         return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
-      })
+      }).filter( value =>
+            value.adviceInfo != null
+            && value.carInfo != null
+            && value.insuranceInfo != null
+            && value.profileInfo != null)
       .subscribe((value) => {
         const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
         this.store$.dispatch(new car.BuyAction(proposalData));
