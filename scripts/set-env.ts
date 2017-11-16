@@ -1,4 +1,4 @@
-import { writeFile } from 'fs';
+import { writeFile, existsSync } from 'fs';
 import { argv } from 'yargs';
 
 require('dotenv').config();
@@ -7,6 +7,9 @@ require('dotenv').config();
 const environment = argv.environment;
 const logger = console.log;
 const enableAnalytics = argv.analytics || false;
+const isWatchMode = argv['no-regenerate'] || false;
+const prodEnvFilePath = './src/environments/environment.prod.ts';
+const devEnvFilePath = './src/environments/environment.ts';
 
 function getEnvVar(name) {
   if (!process.env[name]) {
@@ -128,9 +131,22 @@ function getContent(environment: string) {
   return content;
 }
 
-// Production
-createEnvFile('./src/environments/environment.prod.ts', getContent('production'));
+function createEnvironmentFiles() {
+  // Production
+  createEnvFile(prodEnvFilePath, getContent('production'));
 
-// Development
-createEnvFile('./src/environments/environment.ts', getContent(environment));
+  // Development
+  createEnvFile(devEnvFilePath, getContent(environment));
+}
+
+// main
+if (isWatchMode && !existsSync(prodEnvFilePath) && !existsSync(devEnvFilePath)) {
+  createEnvironmentFiles();
+}
+
+if (!isWatchMode) {
+  createEnvironmentFiles();
+}
+
+
 
