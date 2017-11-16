@@ -82,7 +82,7 @@ export class CarProposalHelper {
         value = data[el.value];
       }
 
-      itemArr.push({[el.key]: el['transform'] ? el['transform'](value) : (value ? value.toString() : '')});
+      itemArr.push({[el.key]: el['transform'] ? el['transform'](value) : (this.isPresented(value) ? value.toString() : '')});
     });
     return itemArr;
   }
@@ -148,6 +148,11 @@ export class CarProposalHelper {
     });
   }
 
+  getCarInfo(carInfo: any, adviceInfo: any) {
+    carInfo.reporting_code = adviceInfo.reportingCode;
+    return carInfo;
+  }
+
   private getItem(items: Array<Object>, property: string): Object {
     let ret = null;
     items.forEach( (el) => {
@@ -160,6 +165,10 @@ export class CarProposalHelper {
 
   private getBoolean(value: boolean) {
     return value ? 'Ja' : 'Nee';
+  }
+
+  private isPresented(value: any) {
+    return value !== undefined && value !== null;
   }
 
   private formatDate(value: Date) {
