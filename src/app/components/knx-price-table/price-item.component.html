@@ -1,4 +1,4 @@
-<div class="knx-price-item" [ngClass]="{'knx-price-item--highlight': highlight, 'knx-price-item--selected': selected }">
+<div class="knx-price-item" [ngClass]="{'knx-price-item--highlight': highlight, 'knx-price-item--selected': selected }" role="button" tabindex="0">
   <div class="knx-price-item__header" >
     {{ header }}
     <div *ngIf="highlight" class="knx-price-item__badge">{{ badge }}</div>
@@ -9,5 +9,5 @@
   <div *ngIf="price" class="knx-price-item__price">
     vanaf <span>{{ price | currency:'EUR':true:'1.2-2' }}</span>
   </div>
-  <button class="knx-button knx-button--ghost">{{ selected ? ' Gekozen' : 'Kies deze' }}</button>
+  <div class="knx-button knx-button--ghost">{{ selected ? ' Gekozen' : 'Kies deze' }}</div>
 </div>
