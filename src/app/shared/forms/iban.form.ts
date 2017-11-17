@@ -18,6 +18,8 @@ export class IbanForm extends BaseForm {
   constructor(private fb: FormBuilder) {
     super();
 
+
+
     this.infoMessages = {
       startDate:
         `Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
