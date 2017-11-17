@@ -21,14 +21,6 @@ import { CoverageEffects } from './effects/coverage';
 
 import { reducers } from './reducers';
 
-// export const COMPONENTS = [
-//   CarAdviceComponent,
-//   CarPurchasedComponent,
-//   CarDetailComponent,
-//   CarExtrasComponent,
-//   CarThankYouComponent
-// ];
-
 @NgModule({
   imports: [
     SharedModule,

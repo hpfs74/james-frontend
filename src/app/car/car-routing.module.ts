@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CanActivateBuyFlowGuard } from '../core/services/buy-guard.service';
-import { CarPurchasedComponent } from './submodules/car-advice/containers/car-purchased/car-purchased.component';
-import { CarThankYouComponent } from './submodules/car-advice/components/car-thank-you/car-thank-you.component';
 
 export const carRoutes: Routes = [
   {
@@ -14,14 +12,6 @@ export const carRoutes: Routes = [
     path: 'insurance',
     canActivateChild: [CanActivateBuyFlowGuard],
     loadChildren: './submodules/car-buy/car-buy.module#CarBuyModule'
-  },
-  {
-    path: 'thank-you/:email',
-    component: CarThankYouComponent
-  },
-  {
-    path: 'purchased',
-    component: CarPurchasedComponent
   }
 ];
 @NgModule({

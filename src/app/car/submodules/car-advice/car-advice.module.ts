@@ -18,7 +18,6 @@ import { CarPurchasedComponent } from './containers/car-purchased/car-purchased.
 // Dumb components
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarExtrasComponent } from './components/car-extras/car-extras.component';
-import { CarThankYouComponent } from './components/car-thank-you/car-thank-you.component';
 
 import { CarEffects } from '../../../car/effects/car';
 
@@ -28,8 +27,7 @@ export const COMPONENTS = [
   CarAdviceComponent,
   CarPurchasedComponent,
   CarDetailComponent,
-  CarExtrasComponent,
-  CarThankYouComponent
+  CarExtrasComponent
 ];
 
 @NgModule({
