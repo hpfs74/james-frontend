@@ -7,11 +7,11 @@ import { AuthService } from './services/auth.service';
 const authRoutes: Routes = [
   {
     path: 'login',
-    loadChildren: '../auth-login/login.module#LoginModule'
+    loadChildren: '../login/login.module#LoginModule'
   },
   {
     path: 'register',
-    loadChildren: '../auth-registration/registration.module#RegistrationModule'
+    loadChildren: '../registration/registration.module#RegistrationModule'
   }
 ];
 
