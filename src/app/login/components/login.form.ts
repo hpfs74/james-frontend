@@ -29,13 +29,15 @@ export class LoginForm extends BaseForm {
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
         label: 'Je e-mailadres',
-        placeholder: 'E-mailadres',
-        showErrorMessages: false,
-        type: 'text',
-        attributes: {
-          'aria-label': 'Vul je e-mailadres in',
-          'addonleft': true,
-          'addonicon': 'knx-icon-envelope'
+        inputOptions: {
+          placeholder: 'E-mailadres',
+          showErrorMessages: false,
+          type: 'text',
+          attributes: {
+            'aria-label': 'Vul je e-mailadres in',
+            'addonleft': true,
+            'addonicon': 'knx-icon-envelope'
+          }
         }
       },
       password: {
@@ -43,14 +45,17 @@ export class LoginForm extends BaseForm {
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
         label: 'Wachtwoord',
-        placeholder: 'Wachtwoord',
-        showErrorMessages: false,
-        type: 'password',
-        attributes: {
-          'aria-label': 'Vul je wachtwoord in',
-          'addonleft': true,
-          'addonicon': 'knx-icon-lock',
-          'password': true
+        inputOptions: {
+          placeholder: 'Wachtwoord',
+          showPasswordStrength: true,
+          showErrorMessages: false,
+          type: 'password',
+          attributes: {
+            'aria-label': 'Vul je wachtwoord in',
+            'addonleft': true,
+            'addonicon': 'knx-icon-lock',
+            'password': true
+          }
         }
       }
     };

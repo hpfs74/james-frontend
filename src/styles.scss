@@ -1,12 +1,28 @@
 /* this file will be extracted to main dist folder and is imported in index.html */
+
 @import 'styles/base';
 @import '~@knx/base/index';
-@import '~@knx/grid/index';
+// @import '~@knx/grid/index';
+@import '~@knx/avatar/index';
+@import '~@knx/checkbox/index';
+@import '~@knx/collapsible-panel/index';
+@import '~@knx/dropdown/index';
+@import '~@knx/form-group/index';
+@import '~@knx/input/index';
+@import '~@knx/loader/index';
+@import '~@knx/message/index';
+@import '~@knx/password-input/index';
+@import '~@knx/password-strength/index';
+@import '~@knx/radio/index';
+@import '~@knx/select/index';
+@import '~@knx/step-navigation/index';
+@import '~@knx/textarea/index';
 @import '~@knx/tooltip/index';
 
-/* cx and other external component overrides */
+/* shared library and other external component overrides */
+
 @import 'styles/overrides';
-@import 'styles/overrides-cx';
+@import 'styles/overrides-knx';
 @import 'styles/form-group';
 @import 'styles/form-valid';
 @import 'styles/modals';
@@ -54,17 +70,6 @@ input::-webkit-inner-spin-button {
 input::-ms-clear {
   display: none;
 }
-
-/*
-  Styles to validate keyboard accessibility
-
-*:focus {
-  opacity: 1 !important;
-  outline-width: 10px !important;
-  outline-style: dashed !important;
-  outline-color: red !important;
-}
-*/
 
 .noborder {
   border: 0;

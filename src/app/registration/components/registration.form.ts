@@ -1,7 +1,6 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { BaseForm } from './../../shared/forms/base-form';
-import { KNXInputOptions } from '../../components/knx-input/input.options';
 import { EmailValidator } from '../../utils/email-validator';
 
 export class RegistrationForm extends BaseForm {
@@ -42,38 +41,42 @@ export class RegistrationForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        placeholder: 'E-mailadres',
-        showErrorMessages: false,
-        label: 'Je e-mailadres',
-        type: 'text',
-        attributes: {
-          'aria-label': 'Vul je e-mailadres in',
-          'addonleft': true,
-          'addonicon': 'knx-icon-envelope'
+        inputOptions: {
+          placeholder: 'E-mailadres',
+          showErrorMessages: false,
+          label: 'Je e-mailadres',
+          type: 'text',
+          attributes: {
+            'aria-label': 'Vul je e-mailadres in',
+            'addonleft': true,
+            'addonicon': 'knx-icon-envelope'
+          }
         }
       },
       password: {
         formControlName: 'password',
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
-        placeholder: 'Wachtwoord',
-        showErrorMessages: false,
-        hideErrors: ['pattern', 'minlength'],
-        label: 'Wachtwoord',
-        type: 'password',
-        showPasswordStrenght: true,
-        attributes: {
-          'aria-label': 'Vul je wachtwoord in',
-          'addonleft': true,
-          'addonicon': 'knx-icon-lock',
-          'password': true
+        inputOptions: {
+          placeholder: 'Wachtwoord',
+          showErrorMessages: false,
+          hideErrors: ['pattern', 'minlength'],
+          label: 'Wachtwoord',
+          type: 'password',
+          showPasswordStrength: true,
+          attributes: {
+            'aria-label': 'Vul je wachtwoord in',
+            'addonleft': true,
+            'addonicon': 'knx-icon-lock',
+            'password': true
+          }
         }
+
       },
       confirm: {
         formControlName: 'confirm',
         formControl: this.formGroup.get('confirm'),
         validationErrors: this.validationErrors,
-        showErrorMessages: false,
         inputOptions: {
           type: 'checkbox',
           attributes: {

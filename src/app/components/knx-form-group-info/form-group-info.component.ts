@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'knx-form-group-info',
   template: `
   <div class="knx-form-group--info">
-    <ng-content select="cx-form-group"></ng-content>
+    <ng-content select="knx-form-group"></ng-content>
 
     <knx-info *ngIf="infoMessage" size="md" isFloating="true" class="knx-info" [class.knx-info--description]="hasDescription">
       <div class="knx-info__content">

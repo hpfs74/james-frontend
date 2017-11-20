@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { CXPostalCodeValidator } from '@cx/form-control';
+import { KNXPostalCodeValidator } from '@knx/form-control';
 
 import { BaseForm } from '../../shared/forms/base-form';
 import { AddressForm } from '../../address/components/address.form';
@@ -53,7 +53,7 @@ export class ProfileForm extends BaseForm {
         label: 'Geslacht',
         type: 'radio',
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: [
             {
               label: 'Man',

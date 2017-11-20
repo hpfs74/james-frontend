@@ -90,7 +90,7 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('loan'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: '',
           items: [
             {
@@ -123,7 +123,7 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('gender'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: 'Selecteer je geslacht',
           items: [
             {

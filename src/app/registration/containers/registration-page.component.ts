@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CXEmailValidator } from '@cx/form';
+import { KNXEmailValidator } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromAuth from '../../auth/reducers';
