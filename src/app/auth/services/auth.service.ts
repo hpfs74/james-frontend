@@ -8,7 +8,7 @@ import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
 import { environment } from '../../../environments/environment';
-import { RegistrationAdvice, AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
+import { AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
@@ -254,7 +254,6 @@ export class AuthService {
 
     headers.append('Authorization', `Bearer ${payloadauth.access_token}`);
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('ha', 'ha');
 
     return this.http
       .post(environment.james.payloadEncryption.key, `uuid=${session}`, { headers: headers })

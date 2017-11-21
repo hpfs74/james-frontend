@@ -47,8 +47,6 @@ export class RegistrationEffects {
   registerWithAdvice$ = this.actions$
     .ofType(registration.REGISTER_WITH_ADVICE)
     .map((action: registration.RegisterWithAdvice) => (action.registration))
-    // .withLatestFrom(this.store$.select(fromAdvice.getState))
-    // .withLatestFrom(this.store$.select(fromAdvice.getSelectedInsurance))
     .withLatestFrom(this.store$, (payload, state: any) => {
       return {
         advice: state.insurance.advice,
