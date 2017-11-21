@@ -82,7 +82,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
   isLoggedIn$: Observable<boolean>;
-  purchasedInsurances$: Observable<string>;
+  purchasedInsurances$: Observable<any>;
   purchasedInsurancesLoading$: Observable<any>;
 
   subscription$: Array<any>;
@@ -148,9 +148,27 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       }
     });
 
-    this.purchasedInsurances$.subscribe(getPurchasedInsurances => {
-      if (getPurchasedInsurances.length) {
+    this.purchasedInsurances$.subscribe(purchasedInsurances => {
+      if (purchasedInsurances.length && purchasedInsurances.filter(ins => ins.status !== 'draft').length) {
         this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+      }
+
+      if (purchasedInsurances.length && purchasedInsurances.filter(ins => ins.status === 'draft').length) {
+        let savedAdvice = purchasedInsurances[0].draft;
+        savedAdvice._embedded = {
+          car: null,
+          insurance: null
+        };
+
+
+        // TODO: Anonymous part 2
+        // this.store$.dispatch(new advice.SetInsuranceAction(savedAdvice));
+        // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+        //   id => {
+        //     this.store$.dispatch(new router.Go({
+        //       path: ['/car/insurance', {adviceId: id}],
+        //     }));
+        //   }));
       }
     });
 
