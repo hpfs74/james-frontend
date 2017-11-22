@@ -2,9 +2,7 @@
   <div class="row">
     <div class="col-sm-10 col-sm-offset-2">
       <h2>Je gegevens</h2>
-
       <h3>Over je auto</h3>
-
       <div class="row">
         <div class="col-md-7 col-sm-12">
           <cx-form-group [options]="form.formConfig.licensePlate">
@@ -15,15 +13,13 @@
               [options]="form.formConfig.licensePlate.inputOptions">
             </knx-input-licenseplate>
           </cx-form-group>
-
           <knx-async-preview
-            [loading]="carLoading"
-            [loaded]="!carFailed && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
-              <knx-car-info [data]="car"></knx-car-info>
+            [loading]="isCarLoading$ | async"
+            [loaded]="!(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
+              <knx-car-info [data]="car$ | async"></knx-car-info>
           </knx-async-preview>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-7 col-sm-12">
           <div class="knx-form-group--info knx-form-group--info-input">
@@ -32,7 +28,6 @@
               [formControlName]="form.formConfig.claimFreeYears.formControlName"
               [options]="form.formConfig.claimFreeYears">
             </cx-form-group>
-
             <knx-info size="md" isFloating="true" class="knx-info">
               <div class="knx-info__content">
                 <div class="knx-message knx-message--arrow-top">
@@ -59,7 +54,6 @@
           -->
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
           <div class="knx-form-group--info knx-form-group--info-input">
@@ -84,11 +78,8 @@
           </div>
         </div>
       </div>
-
       <hr>
-
       <h3>Over jou</h3>
-
       <div class="row">
         <div class="col-md-4 col-sm-12">
           <cx-form-group
@@ -98,7 +89,6 @@
           </cx-form-group>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
           <cx-form-group
@@ -108,13 +98,11 @@
           </cx-form-group>
         </div>
       </div>
-
       <knx-address-lookup
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="address"
         [addressForm]="addressForm"
         (addressFound)="onAddressFound($event)">
       </knx-address-lookup>
-
       <cx-form-group
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="houseHold"
         [formControlName]="form.formConfig.houseHold.formControlName"
@@ -123,28 +111,23 @@
       </cx-form-group>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm-12">
       <div class="car-form__coverages">
         <h2>Je dekkingswensen</h2>
-
         <knx-price-table
           knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
           [items]="coverages"
-          [highlight]="coverageRecommendation?.recommended_value"
+          [highlight]="(coverageRecommendation$ | async)?.recommended_value"
           (onSelected)="onSelectCoverage($event)">
         </knx-price-table>
-
-        <div class="knx-message knx-message--error" *ngIf="isCoverageError">
+        <div class="knx-message knx-message--error" *ngIf="isCoverageError$ | async">
           Er is een fout opgetreden bij het ophalen van het dekkingsadvies.
         </div>
-
-        <knx-loader [visible]="isCoverageLoading">
+        <knx-loader [visible]="isCoverageLoading$ | async">
           Een momentje! We vergelijken meer dan 20 verschillende aanbieders voor je om de beste match te vinden.
         </knx-loader>
       </div>
     </div>
   </div>
-
 </form>

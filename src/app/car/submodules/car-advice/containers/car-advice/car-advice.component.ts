@@ -1,8 +1,11 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { KNXStepOptions, KNXWizardComponent } from '@knx/wizard';
+import { KNXWizardStepRxOptions } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.options';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { CarDetailComponent } from './../../components/car-detail/car-detail.component';
+
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
@@ -49,6 +52,7 @@ import { createCarCoverages } from '../../../../utils/coverage.utils';
 
 import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
 import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
+import { InsuranceTopListComponent } from '../../components/knx-insurance-toplist/insurance-toplist.component';
 
 enum carFormSteps {
   carDetails,
@@ -59,10 +63,10 @@ declare var window: any;
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, QaIdentifier {
+export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   qaRootId = QaIdentifiers.carAdviceRoot;
 
-  formSteps: Array<KNXStepOptions>;
+  formSteps: Array<KNXWizardStepRxOptions>;
   formControlOptions: any;
   currentStep: number;
   coverages: Array<Price>;
@@ -97,11 +101,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
 
-  ngAfterViewChecked() {
-    // bind async validator for car info
-    let licenseControl = this.carDetailForm.formGroup.get('licensePlate');
-    licenseControl.setAsyncValidators((formControl) => this.validateLicenseAsync(formControl));
-  }
 
   ngOnInit() {
     window.routes = this;
@@ -145,21 +144,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
 
-    // start new advice only if there is no current one
-    this.advice$.subscribe(currentAdvice => {
-      if (currentAdvice) {
-        // do not pre-fill address
-        // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
-        //   this.address.postcode = currentProfile.postcode;
-        //   this.address.number = currentProfile.number;
-        // });
-      } else if (!currentAdvice) {
-        this.store$.dispatch(new advice.AddAction({
-          id: cuid()
-        }));
-      }
-    });
-
     this.purchasedInsurances$
       .filter(purchasedInsurances => purchasedInsurances !== null)
       .subscribe(purchasedInsurances => {
@@ -193,15 +177,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           label: 'Je gegevens',
           nextButtonLabel: 'Naar resultaten',
           hideBackButton: true,
-          onShowStep: this.onShowDetailsForm.bind(this),
-          onBeforeNext: this.submitDetailForm.bind(this)
+          routeConfig: { path: '/car/detail/1', component: CarDetailComponent}
         },
         {
           label: 'Premies vergelijken',
           backButtonLabel: 'Terug',
-          onBeforeShow: this.onShowResults.bind(this),
-          onShowStep: this.onShowResults.bind(this),
-          hideNextButton: true
+          hideNextButton: true,
+          hideBackButton: false,
+          routeConfig: { path: '/car/extras/2', component: InsuranceTopListComponent}
         },
         {
           label: 'Aanvragen',
@@ -209,65 +192,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           nextButtonLabel: 'Verzekering aanvragen',
           nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
           onShowStep: this.onShowSummary.bind(this),
-          onBeforeNext: this.startBuyFlow.bind(this)
+          onBeforeNext: this.startBuyFlow.bind(this),
+          routeConfig: { path: '/car/car-detail', component: CarDetailComponent}
         }
       ];
   }
 
   ngOnDestroy() {
     this.subscription$.forEach(sub => sub.unsubscribe());
-  }
-
-  submitDetailForm(): Observable<any> {
-    const detailForm = this.carDetailForm.formGroup;
-    const addressForm = this.addressForm.formGroup;
-    scrollToY();
-    FormUtils.validateForm(detailForm);
-    // FormUtils.validateForm(addressForm);
-
-    if (!detailForm.valid || !addressForm.valid) {
-      return Observable.throw(new Error(this.carDetailForm.validationSummaryError));
-    }
-
-    Observable.combineLatest(this.car$, this.address$, (car, address) => {
-      return {
-        request: {
-          active_loan: !!detailForm.value.loan,
-          coverage: detailForm.value.coverage,
-          claim_free_years: +detailForm.value.claimFreeYears,
-          household_status: detailForm.value.houseHold,
-          license: car.license,
-          gender: detailForm.value.gender.toUpperCase(),
-          title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
-          date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
-            FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
-          zipcode: address.postcode,
-          house_number: address.number,
-          city: address.city,
-          country: 'NL',
-          kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
-          own_risk: detailForm.value.ownRisk === null || detailForm.value.ownRisk === undefined ? 135 : +detailForm.value.ownRisk,
-          cover_occupants: false,
-          legal_aid: 'LAN',
-          no_claim_protection: false,
-          road_assistance: 'RANO',
-          insurance_id: ''
-        } as CarCompare,
-        address: address
-      };
-    })
-      .take(1)
-      .subscribe((compare) => {
-        // add address in format for profile
-        // TODO: is this really needed?
-        this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compare.request, {
-          address: compare.address
-        })));
-      });
-
-    return this.store$.select(fromInsurance.getSelectedAdvice)
-      .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
-      .map(advice => this.store$.dispatch(new compare.LoadCarAction(advice)));
   }
 
   onSelectPremium(insurance) {
@@ -305,20 +237,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     });
   }
 
-  updateSelectedCoverage(coverage: Price) {
-    this.carDetailForm.formGroup.get('coverage').patchValue(coverage.id);
-    this.store$.dispatch(new assistant.AddCannedMessage({
-      key: 'car.info.' + coverage.id,
-      clear: true
-    }));
-  }
-
   updateActiveLoan(activeLoan: boolean) {
     this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(activeLoan));
-  }
-
-  getCarInfo(licensePlate) {
-    this.store$.dispatch(new car.GetInfoAction(licensePlate));
   }
 
   toggleSideNavState(event) {
@@ -329,78 +249,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     return {
       ['knx-car-advice--step-' + (this.currentStep + 1)]: true
     };
-  }
-
-  validateLicenseAsync(licenseControl: AbstractControl): Observable<any> {
-    const debounceTime = 500;
-
-    return Observable.timer(debounceTime).switchMap(() => {
-      const validLength = 6;
-      const license = licenseControl.value;
-
-      if (!license || license.length !== validLength) {
-        return new Observable(obs => obs.next(null));
-      }
-
-      const error = {licensePlateRDC: true};
-      return this.store$.select(fromCar.getCarInfo)
-        .map((car) => {
-            if (car && car.license) {
-              return null;
-            } else {
-              return error;
-            }
-          }, err => error
-        );
-    });
-  }
-
-  private onShowDetailsForm() {
-    // Subscribe to car errors
-    this.store$.select(fromCar.getCarInfoError)
-      .filter(() => this.currentStep === carFormSteps.carDetails)
-      .subscribe((error) => {
-        if (error) {
-          this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
-          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
-        }
-      });
-
-    // Subscribe to car info
-    this.store$.select(fromCar.getCarInfo)
-      .filter(() => this.currentStep === carFormSteps.carDetails)
-      .subscribe((car: Car) => {
-        if (car && car.license) {
-          this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.niceCar',
-            value: car,
-            clear: true
-          }));
-        }
-      });
-
-    // Subscribe to coverage recommendation request
-    this.store$.select(fromCar.getCoverage)
-      .filter(() => this.currentStep === carFormSteps.carDetails)
-      .filter(coverage => coverage !== null)
-      .subscribe(coverageAdvice => {
-        this.coverages.forEach( item => { item.selected = false; });
-        let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
-        if (coverageItem) {
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.coverage.advice',
-            value: coverageItem,
-            clear: true
-          }));
-
-          coverageItem.selected = true;
-          this.updateSelectedCoverage(coverageItem);
-        }
-      });
-
-    scrollToY();
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.welcome', clear: true}));
   }
 
   private onShowResults() {

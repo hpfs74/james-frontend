@@ -78,7 +78,6 @@ import { FormGroupInfoComponent } from './components/knx-form-group-info/form-gr
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
-import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { InfoIconComponent } from './components/knx-info-icon/info-icon.component';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
@@ -128,7 +127,6 @@ export const sharedComponents = [
   LicensePlateComponent,
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
-  InsuranceTopListComponent,
   InfoIconComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,

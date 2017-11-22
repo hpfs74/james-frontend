@@ -18,16 +18,19 @@ import { CarPurchasedComponent } from './containers/car-purchased/car-purchased.
 // Dumb components
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarExtrasComponent } from './components/car-extras/car-extras.component';
+import { KNXWizardRxComponent } from '../../../components/knx-wizard-rx/knx-wizard-rx.component';
 
 import { CarEffects } from '../../../car/effects/car';
-
 import { reducers } from '../../../car/reducers';
+import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 
 export const COMPONENTS = [
   CarAdviceComponent,
   CarPurchasedComponent,
   CarDetailComponent,
-  CarExtrasComponent
+  CarExtrasComponent,
+  KNXWizardRxComponent,
+  InsuranceTopListComponent
 ];
 
 @NgModule({

@@ -9,7 +9,7 @@ import * as router from '../../core/actions/router';
 import { AuthService } from '../services/auth.service';
 
 // TODO: refactor to more maintainable solution
-const anonymousAvailableLinks = ['/register', '/login', '/car'];
+const anonymousAvailableLinks = ['/register', '/login', '/car', '/car/detail', '/car/detail/1', '/car/extras/2'];
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
