@@ -310,7 +310,6 @@ export class AuthService {
     const selectedAdvice = advice.advice[advice.ids[0]];
     const selectedInsurance = advice.selectedInsurance;
 
-    // TODO: backend is about to change the request body, check INS-777 for updates if something will get broken
     let carData = {
       'coverage': selectedAdvice.coverage,
       'insurance': selectedInsurance.id,
