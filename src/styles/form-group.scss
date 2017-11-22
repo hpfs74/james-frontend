@@ -1,28 +1,3 @@
-/// KNX-INFO
-// .knx-form-group--info {
-//     .knx-form-group {
-//         padding-right: 25px;
-//     }
-//     .knx-form-group.knx-form-group--error {
-//         width: 98%;
-//     }
-//     .knx-info {
-//         position: absolute;
-//         top: 36px;
-//         right: 10px;
-//         display: block;
-//     }
-//     &.knx-form-group--no-label-info .knx-info {
-//         top: 60px;
-//     }
-//     .knx-info--description {
-//         top: 64px;
-//     }
-//     .knx-info--floating {
-//         position: absolute;
-//         top: 40px;
-//     }
-// }
 knx-checkbox + .knx-info {
   position: absolute;
   right: 10px;
@@ -57,7 +32,6 @@ knx-checkbox + .knx-info {
 // adding knx-info-icon or knx-tooltip components as content
 //.car-detail-form,
 .knx-car-extras {
-  //.knx-car-reporting-form {
   .knx-form-group--info.knx-form-group--info-input {
     .knx-info-icon {
       float: right;

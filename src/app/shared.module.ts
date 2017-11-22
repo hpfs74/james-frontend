@@ -74,7 +74,6 @@ import { DonutComponent } from './components/knx-donut/donut.component';
 import { DownloadPanelComponent } from './components/knx-download-panel/download-panel.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { FeatureItemComponent } from './components/knx-features/feature-item.component';
-import { FormGroupInfoComponent } from './components/knx-form-group-info/form-group-info.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
@@ -122,7 +121,6 @@ export const sharedComponents = [
   DownloadPanelComponent,
   FeaturesComponent,
   FeatureItemComponent,
-  FormGroupInfoComponent,
   LicensePlateComponent,
   InsuranceResultComponent,
   InsuranceResultDetailComponent,

@@ -83,11 +83,9 @@ export class ProfileForm extends BaseForm {
         formControl: this.formGroup.get('birthDate'),
         validationErrors: this.validationErrors,
         label: 'Geboortedatum',
-        type: 'date-input',
+        type: 'date',
         inputOptions: {
-          placeholder: 'DD / MM / JJJJ',
-          transform: birthDateMask.decode,
-          textMask: birthDateMask
+          decode: true
         }
       },
       pushNotifications: {

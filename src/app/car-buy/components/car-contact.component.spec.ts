@@ -4,6 +4,7 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed, tick, fakeAsync }
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { KNXFormsModule } from '@knx/forms';
+import { KNXLocale } from '@knx/locale';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { CarContactComponent } from './car-contact.component';
@@ -27,6 +28,7 @@ describe('Component: CarContactComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [CommonModule, ReactiveFormsModule, KNXFormsModule],
     declarations: [CarContactComponent, TestHostComponent],
+    providers: [KNXLocale],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

@@ -4,6 +4,7 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { KNXFormsModule } from '@knx/forms';
+import { KNXLocale } from '@knx/locale';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { SharedModule } from '../../shared.module';
@@ -26,6 +27,7 @@ describe('Component: CarPaymentComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [CommonModule, ReactiveFormsModule, KNXFormsModule],
     declarations: [CarPaymentComponent, TestHostComponent],
+    providers: [KNXLocale],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
@@ -48,11 +50,6 @@ describe('Component: CarPaymentComponent', () => {
 
   it('should have invalid form controls on init', () => {
     expect(comp.carPaymentComponent.form.formGroup.valid).toBeFalsy();
-  });
-
-  it('should provide info icon messages', () => {
-    expect(comp.carPaymentComponent.form.infoMessages.startDate).toBeDefined();
-    expect(comp.carPaymentComponent.form.infoMessages.iban).toBeDefined();
   });
 
 });

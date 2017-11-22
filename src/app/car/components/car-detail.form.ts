@@ -1,6 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { KNXFormGroupOptions } from '@knx/forms';
 
-import { BaseForm } from '../../shared/forms/base-form';
+import { BaseForm, KNXCustomFormGroupOptions } from '../../shared/forms/base-form';
 import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';
 import { LicensePlateValidator } from '../../components/knx-input-licenseplate/licenseplate.validator';
@@ -8,7 +9,7 @@ import { UIPair } from '../../core/models/ui-pair';
 
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
-  formConfig: any;
+  formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
 
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
@@ -56,7 +57,7 @@ export class CarDetailForm extends BaseForm {
         type: 'custom',
         label: 'Wat is je kenteken?',
         validationErrors: this.validationErrors,
-        formControl: this.formGroup.get('licensePlate'),
+        formControl: this.formGroup.get('licensePlate') ,
         inputOptions: {
           placeholder: 'AF-19-65'
         }
@@ -64,20 +65,19 @@ export class CarDetailForm extends BaseForm {
       birthDate: {
         formControlName: 'birthDate',
         label: 'Geboortedatum',
-        type: 'date-input',
-        formControl: this.formGroup.get('birthDate'),
+        type: 'date',
+        formControl: this.formGroup.get('birthDate') ,
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: 'DD / MM / JJJJ',
-          transform: birthDateMask.decode,
-          textMask: birthDateMask
+          decode: true
         }
       },
       claimFreeYears: {
         formControlName: 'claimFreeYears',
         label: 'Aantal schadevrije jaren',
-        formControl: this.formGroup.get('claimFreeYears'),
+        formControl: this.formGroup.get('claimFreeYears') ,
         validationErrors: this.validationErrors,
+        help: true,
         inputOptions: {
           type: 'number',
           events: ['focus']
@@ -87,8 +87,9 @@ export class CarDetailForm extends BaseForm {
         formControlName: 'loan',
         label: 'Heb je een lening?',
         type: 'radio',
-        formControl: this.formGroup.get('loan'),
+        formControl: this.formGroup.get('loan') ,
         validationErrors: this.validationErrors,
+        help: true,
         inputOptions: {
           formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: '',
@@ -108,7 +109,7 @@ export class CarDetailForm extends BaseForm {
         formControlName: 'houseHold',
         label: 'Wat is je gezinssituatie?',
         type: 'select',
-        formControl: this.formGroup.get('houseHold'),
+        formControl: this.formGroup.get('houseHold') ,
         validationErrors: this.validationErrors,
         inputOptions: {
           placeholder: '',
@@ -120,7 +121,7 @@ export class CarDetailForm extends BaseForm {
         formControlName: 'gender',
         label: 'Geslacht',
         type: 'radio',
-        formControl: this.formGroup.get('gender'),
+        formControl: this.formGroup.get('gender') ,
         validationErrors: this.validationErrors,
         inputOptions: {
           formGroupModifiers: ['knx-form-group__wrap--spread'],
