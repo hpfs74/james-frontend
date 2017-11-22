@@ -1,5 +1,3 @@
-declare var window: any;
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
