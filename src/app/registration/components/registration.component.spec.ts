@@ -4,12 +4,12 @@ import { By } from '@angular/platform-browser';
 import { FormBuilder } from '@angular/forms';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
-import * as fromRoot from '../reducers';
 import * as fromCore from '../../core/reducers';
-import * as fromCar from '../reducers';
 import * as fromAuth from '../../auth/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
+import * as advice from '../../insurance/actions/advice';
+import * as insurance from '../../insurance/actions/insurance';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { RegistrationComponent } from '../components/registration.component';
@@ -25,10 +25,8 @@ describe('Component: Registration', () => {
 
   let moduleDef: TestModuleMetadata = {
     imports: [StoreModule.forRoot({
-      ...fromRoot.reducers,
       'auth': combineReducers(fromAuth.reducers),
       'core': combineReducers(fromCore.reducers),
-      'car': combineReducers(fromCar.reducers),
       'insurance': combineReducers(fromInsurance.reducers),
       'profile': combineReducers(fromProfile.reducers)
     })],
