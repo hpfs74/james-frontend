@@ -249,7 +249,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
         proposalRequest.getFinalQuestionsItems(proposalRequest.getFinalQuestions(flatData))
       )
     };
-    proposalData.proposal.car = value.carInfo;
+    proposalData.proposal.car = proposalRequest.getCarInfo(value.carInfo, value.adviceInfo);
 
     return proposalData;
   }

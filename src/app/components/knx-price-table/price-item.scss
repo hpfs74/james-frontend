@@ -11,3 +11,9 @@
     }
   }
 }
+
+div.knx-button {
+  // remove focus for button class because outer div has a tabindex
+  // to support focus/outline on the whole price-item
+  outline: none;
+}

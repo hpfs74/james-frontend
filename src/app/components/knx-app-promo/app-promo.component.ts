@@ -7,7 +7,7 @@ import { ContentConfig } from '../../content.config';
   styleUrls: ['app-promo.component.scss'],
   template: `
     <div class="row knx-app-promo-block">
-      <div class="col-md-4 col-sm-12">
+      <div class="col-md-6 col-lg-4 col-sm-12">
         <div class="hidden-sm-up">
           <!--<p class="knx-app-promo-block__subtitle">Al je verzekeringen bij elkaar?</p>-->
           <!--<h3 class="knx-app-promo-block__title">De Knab Verzekeren App</h3>-->
@@ -16,7 +16,7 @@ import { ContentConfig } from '../../content.config';
         <img src="/assets/images/devices_iphone-x2.png" class="knx-app-promo-block__iphone">
       </div>
 
-      <div class="col-md-8 col-sm-12">
+      <div class="col-md-6 col-lg-8 col-sm-12">
         <div class="hidden-sm-down">
           <p class="knx-app-promo-block__subtitle">Al je verzekeringen bij elkaar?</p>
           <h3 class="knx-app-promo-block__title">De Knab Verzekeren App</h3>
@@ -33,6 +33,7 @@ import { ContentConfig } from '../../content.config';
             title="Download iOS App" rel="noopener">iOS</a>
           <a class="knx-button knx-button--primary knx-icon-apple" href="{{androidLink}}" rel="noopener"
             title="Download Android App">Android</a>
+        </div>
       </div>
     </div>
   `

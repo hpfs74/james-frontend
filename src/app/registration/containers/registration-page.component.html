@@ -6,6 +6,7 @@
           [termsAndConditionsUrl]="content.externalLinks.termsAndConditions"
           [pending]="registrationPending$ | async"
           [error]="registrationError$ | async"
+          (onRegisterWithAdvice)="registerWithAdvice($event)"
           (onRegister)="register($event)">
       </knx-registration>
 
