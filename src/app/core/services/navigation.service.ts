@@ -24,7 +24,8 @@ export class NavigationService {
         title: '020-3031600',
         routePath: '',
         menuType: NavItemType.RIGHT,
-        url: 'tel:0203031600'
+        url: 'tel:0203031600',
+        rel: 'noopener'
       }
     ];
   }

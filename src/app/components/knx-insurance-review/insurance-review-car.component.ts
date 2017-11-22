@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { CarInsurance } from '../../car/models/car-insurance';
-import { CarUtils } from '../../car/utils/car-utils';
 
 @Component({
   selector: 'knx-insurance-review-car',
@@ -8,13 +8,13 @@ import { CarUtils } from '../../car/utils/car-utils';
     <knx-ir-content title="Je verzekering" *ngIf="carInsurance">
       <knx-ir-row showTooltip="false" showValue="true">
         <knx-ir-label>Dekking</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getCoverageExtended(carInsurance.main_coverage) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.main_coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row showTooltip="true" showValue="true">
         <knx-ir-label>Maximaal eigen risico</knx-ir-label>
         <knx-ir-tooltip>
-          Dit eigen risico is het bedrag dat voor jouw rekening komt als je de auto laat maken bij een door de verzekeraar
+          Dit maximale eigen risico is het bedrag dat voor jouw rekening komt als je de auto laat maken bij een door de verzekeraar
           gekozen schadehersteller. Wil je jouw auto door iemand anders laten maken? Dan geldt een hoger eigen risico.
         </knx-ir-tooltip>
         <knx-ir-value>{{ carInsurance.own_risk | currency:'EUR':true }}</knx-ir-value>
@@ -27,10 +27,6 @@ import { CarUtils } from '../../car/utils/car-utils';
             betaalt. Dat heet ‘provisie’. We krijgen een doorlopende vaste, lage vergoeding van 10 % van de premie,
             zolang de verzekering loopt. Knab Verzekeren kan de provisie zo laag houden, omdat de dienst 100% online is.
             Bij andere aanbieders van verzekeringen kun je tot wel 15% van de premie kwijt zijn aan provisie.<p>
-
-          <p><strong>Dus welk bedrag krijgen we dan?</strong><br>
-          Als jij 30 euro per maand betaalt voor je autoverzekering bij bijvoorbeeld Nationale Nederlanden,
-          dan ontvangen wij € 2,37 ex. btw per maand van de verzekeraar.</p>
         </knx-ir-tooltip>
         <knx-ir-value>{{ carInsurance.monthly_premium | currency:'EUR':true }}</knx-ir-value>
       </knx-ir-row>
@@ -48,12 +44,12 @@ import { CarUtils } from '../../car/utils/car-utils';
     <knx-ir-content title="Jouw extra's" *ngIf="carInsurance">
       <knx-ir-row>
         <knx-ir-label>Pechhulp</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getRoadAssistance(carInsurance.road_assistance) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.road_assistance | jamesTag: 'car_flow_road_assistance' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
         <knx-ir-label>Rechtsbijstand</knx-ir-label>
-        <knx-ir-value>{{ carUtils.getLegalAid(carInsurance.legal_aid) }}</knx-ir-value>
+        <knx-ir-value>{{ carInsurance.legal_aid | jamesTag: 'car_flow_legal_aid' }}</knx-ir-value>
       </knx-ir-row>
 
       <knx-ir-row>
@@ -70,8 +66,6 @@ import { CarUtils } from '../../car/utils/car-utils';
 })
 export class InsuranceReviewCarComponent {
   @Input() carInsurance: CarInsurance;
-
-  carUtils = CarUtils;
 
   showOneOffPremium(): boolean {
     return this.carInsurance.one_off_premium > 0;

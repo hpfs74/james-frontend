@@ -1,0 +1,2501 @@
+{
+  "": [
+      {
+          "_id": "4257474b1a02c5a",
+          "tag": "",
+          "blocked": false,
+          "alert": false,
+          "description": "Auto tag creation",
+          "translation_description": "__description",
+          "translation_label": "__label",
+          "translation_text": "__text"
+      },
+      {
+          "_id": "4257474b1ab1298",
+          "tag": "",
+          "blocked": false,
+          "alert": false,
+          "description": "Auto tag creation",
+          "translation_description": "__description",
+          "translation_label": "__label",
+          "translation_text": "__text"
+      }
+  ],
+  "travel_flow_valuables_electronics": [
+      {
+          "_id": "42587de00f98c57",
+          "tag": "TVER0",
+          "blocked": true,
+          "alert": true,
+          "order": 0,
+          "description": "Automatically added",
+          "translation_text": "€0",
+          "translation_description": "De waarde van mijn elektronica zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c87d588",
+          "tag": "TVER1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "< € 500",
+          "translation_description": "De waarde van mijn elektronica zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c8cde0c",
+          "tag": "TVER2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 500 - € 1.750",
+          "translation_description": "De waarde van mijn elektronica zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c9386c3",
+          "tag": "TVER3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "€ 1.751 - € 3.500",
+          "translation_description": "De waarde van mijn elektronica zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c99576d",
+          "tag": "TVER4",
+          "blocked": true,
+          "alert": true,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "> € 3.500",
+          "translation_description": "Verzekeraars dekken standaard tot maximaal € 3.000. Wil je een hogere dekking? Google dan even naar een kostbaarheden verzekering bij een andere aanbieder."
+      }
+  ],
+  "content_flow_income": [
+      {
+          "_id": "425721ecff146f4",
+          "tag": "CIR1",
+          "blocked": false,
+          "alert": false,
+          "order": 0,
+          "description": "content flow income 0-1000",
+          "translation_text": "0 - € 1.000"
+      },
+      {
+          "_id": "42570fc3d919370",
+          "tag": "CIR2",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "€ 1.001 - € 2.000"
+      },
+      {
+          "_id": "42570fc3d9be3f1",
+          "tag": "CIR3",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 2.001 - € 3.000"
+      },
+      {
+          "_id": "42570fc3da27411",
+          "tag": "CIR4",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "€ 3.001 - € 4.850"
+      },
+      {
+          "_id": "42570fc3dabc7b1",
+          "tag": "CIR5",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Automatically added",
+          "translation_text": "> € 4.850"
+      }
+  ],
+  "travel_flow_valuables_phone": [
+      {
+          "_id": "42587de89a808e9",
+          "tag": "TVPR0",
+          "blocked": true,
+          "alert": true,
+          "order": 0,
+          "description": "Manually added",
+          "translation_text": "€0",
+          "translation_description": "De waarde van mijn telefoon zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c23d0b0",
+          "tag": "TVPR1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "< € 100",
+          "translation_description": "De waarde van mijn telefoon zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c2903a9",
+          "tag": "TVPR2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 100 - € 300",
+          "translation_description": "De waarde van mijn telefoon zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c2e0f73",
+          "tag": "TVPR3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "€ 301 - € 500",
+          "translation_description": "De waarde van mijn telefoon zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3c3355cd",
+          "tag": "TVPR4",
+          "blocked": true,
+          "alert": true,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "> € 500",
+          "translation_description": "Verzekeraars dekken standaard tot maximaal € 500 voor een telefoon en tablet. Je kunt het beste een aparte telefoonverzekering afsluiten. Je regelt dat bijvoorbeeld met je telefoonprovider."
+      }
+  ],
+  "travel_flow_valuables_special": [
+      {
+          "_id": "42587de8a1271ba",
+          "tag": "TVSR0",
+          "blocked": true,
+          "alert": true,
+          "order": 0,
+          "description": "Manually added",
+          "translation_text": "€0",
+          "translation_description": "De waarde van mijn kostbare zaken zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3d61100b",
+          "tag": "TVSR1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "< € 350",
+          "translation_description": "De waarde van mijn kostbare zaken zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3d6a0b21",
+          "tag": "TVSR2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 350 - € 500",
+          "translation_description": "De waarde van mijn kostbare zaken zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3d713c68",
+          "tag": "TVSR3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "€ 501 - € 1.000",
+          "translation_description": "De waarde van mijn kostbare zaken zit ergens hier tussen in."
+      },
+      {
+          "_id": "42570fc3d7666db",
+          "tag": "TVSR4",
+          "blocked": true,
+          "alert": true,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "> € 1.000",
+          "translation_description": "Verzekeraars dekken standaard tot maximaal € 1.000. Wil je een hogere dekking? Google dan even naar een kostbaarheden verzekering bij een andere aanbieder. "
+      }
+  ],
+  "car_flow_road_assistance": [
+      {
+          "_id": "42570fc3cab0626",
+          "tag": "RACO",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Binnen Nederland <a href='aegon-info:///caradvice_extra_roadassistancecountryinfotext'>(ii)</a>"
+      },
+      {
+          "_id": "42570fc3cb203d1",
+          "tag": "RAE",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Binnen Europa <a href='aegon-info:///caradvice_extra_roadassistanceeuropeinfotext'>(ii)</a>"
+      },
+      {
+          "_id": "4257d939820ad5a",
+          "tag": "RANO",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Road assistance - none",
+          "translation_text": "Nee"
+      }
+  ],
+  "insurance_flow_household": [
+      {
+          "_id": "42570fc3dca5df7",
+          "tag": "CHM",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Alleen ikzelf"
+      },
+      {
+          "_id": "42570fc3dd13744",
+          "tag": "CHMP",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Ik en mijn partner"
+      },
+      {
+          "_id": "42570fc3dde9016",
+          "tag": "CHMPK",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Ik, mijn partner en de kind(eren)"
+      },
+      {
+          "_id": "42570fc3de69490",
+          "tag": "CHMK",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "Ik en mijn kind(eren)"
+      }
+  ],
+  "travel_flow_coverage": [
+      {
+          "_id": "42570fc3e6aa101",
+          "tag": "TCB",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Tot € 1.000",
+          "translation_description": "Bagage gedekt tot € 1.000 per persoon."
+      },
+      {
+          "_id": "42570fc3e711bd0",
+          "tag": "TCC",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Tot € 3.000",
+          "translation_description": "Bagage gedekt tot € 3.000 per persoon."
+      },
+      {
+          "_id": "42570fc3e781dae",
+          "tag": "TCP",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Tot € 5.000",
+          "translation_description": "Bagage gedekt tot € 5.000 per persoon."
+      }
+  ],
+  "feedback_options": [
+      {
+          "_id": "42570fc3c0e3077",
+          "tag": "FOQ",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Ik heb een vraag"
+      },
+      {
+          "_id": "42570fc3c1949a3",
+          "tag": "FOI",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Ik heb een verbetering"
+      },
+      {
+          "_id": "42570fc3c1e33c7",
+          "tag": "FOG",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Anders"
+      }
+  ],
+  "content_flow_content_value": [
+      {
+          "_id": "42572ca1e78baa2",
+          "tag": "CCVR1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "€ 0 - € 1.000"
+      },
+      {
+          "_id": "42572ca1e7efca6",
+          "tag": "CCVR2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 1.000 - € 2.000"
+      },
+      {
+          "_id": "42572ca1e7a753a",
+          "tag": "CCVR3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "€ 2.001 - € 3.000"
+      },
+      {
+          "_id": "42572ca1e7019f5",
+          "tag": "CCVR4",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "€ 3.001 - € 4.000"
+      },
+      {
+          "_id": "42572ca1e792116",
+          "tag": "CCVR5",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Automatically added",
+          "translation_text": "€ 4.001 - € 5.000"
+      },
+      {
+          "_id": "42572ca1e7ecbb6",
+          "tag": "CCVR6",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Automatically added",
+          "translation_text": "€ 5.001 - € 6.000"
+      },
+      {
+          "_id": "42572ca1e80b55d",
+          "tag": "CCVR7",
+          "blocked": false,
+          "alert": false,
+          "order": 7,
+          "description": "Automatically added",
+          "translation_text": "€ 6.001 - € 7.000"
+      },
+      {
+          "_id": "42572ca1e80794e",
+          "tag": "CCVR8",
+          "blocked": false,
+          "alert": false,
+          "order": 8,
+          "description": "Automatically added",
+          "translation_text": "€ 7.001 - € 8.000"
+      },
+      {
+          "_id": "42572ca1e8ae398",
+          "tag": "CCVR9",
+          "blocked": false,
+          "alert": false,
+          "order": 9,
+          "description": "Automatically added",
+          "translation_text": "€ 8.001 - € 9.000"
+      },
+      {
+          "_id": "42572ca1e80387a",
+          "tag": "CCVR10",
+          "blocked": false,
+          "alert": false,
+          "order": 10,
+          "description": "Automatically added",
+          "translation_text": "€ 9.001 - € 10.000"
+      },
+      {
+          "_id": "42572ca1e812186",
+          "tag": "CCVR11",
+          "blocked": false,
+          "alert": false,
+          "order": 11,
+          "description": "Automatically added",
+          "translation_text": "€ 10.001 - € 12.000"
+      },
+      {
+          "_id": "42572ca1e80ed61",
+          "tag": "CCVR12",
+          "blocked": false,
+          "alert": false,
+          "order": 12,
+          "description": "Automatically added",
+          "translation_text": "€ 12.001 - € 14.000"
+      },
+      {
+          "_id": "42572ca1e8cbdf3",
+          "tag": "CCVR13",
+          "blocked": false,
+          "alert": false,
+          "order": 13,
+          "description": "Automatically added",
+          "translation_text": "€ 14.001 - € 16.000"
+      },
+      {
+          "_id": "42572ca1e8d270e",
+          "tag": "CCVR14",
+          "blocked": false,
+          "alert": false,
+          "order": 14,
+          "description": "Automatically added",
+          "translation_text": "€ 16.001 - € 18.000"
+      },
+      {
+          "_id": "42572ca1e8d0b19",
+          "tag": "CCVR15",
+          "blocked": false,
+          "alert": false,
+          "order": 15,
+          "description": "Automatically added",
+          "translation_text": "€ 18.001 - € 20.000"
+      },
+      {
+          "_id": "42572ca1e8dc154",
+          "tag": "CCVR16",
+          "blocked": false,
+          "alert": false,
+          "order": 16,
+          "description": "Automatically added",
+          "translation_text": "€ 20.001 - € 25.000"
+      },
+      {
+          "_id": "42572ca1e79ceaf",
+          "tag": "CCVR17",
+          "blocked": false,
+          "alert": false,
+          "order": 17,
+          "description": "Automatically added",
+          "translation_text": "€ 25.001 - € 30.000"
+      },
+      {
+          "_id": "42572ca1e8d8c97",
+          "tag": "CCVR18",
+          "blocked": false,
+          "alert": false,
+          "order": 18,
+          "description": "Automatically added",
+          "translation_text": "€ 30.001 - € 35.000"
+      },
+      {
+          "_id": "42572ca1e86f9b3",
+          "tag": "CCVR19",
+          "blocked": false,
+          "alert": false,
+          "order": 19,
+          "description": "Automatically added",
+          "translation_text": "€ 35.001 - € 40.000"
+      },
+      {
+          "_id": "42572ca1e7f3bbe",
+          "tag": "CCVR20",
+          "blocked": false,
+          "alert": false,
+          "order": 20,
+          "description": "Automatically added",
+          "translation_text": "€ 40.001 - € 45.000"
+      },
+      {
+          "_id": "42572ca1e7e93a4",
+          "tag": "CCVR21",
+          "blocked": false,
+          "alert": false,
+          "order": 21,
+          "description": "Automatically added",
+          "translation_text": "€ 45.001 - € 50.000"
+      },
+      {
+          "_id": "42572ca1e8df410",
+          "tag": "CCVR22",
+          "blocked": false,
+          "alert": false,
+          "order": 22,
+          "description": "Automatically added",
+          "translation_text": "€ 50.001 - € 55.000"
+      },
+      {
+          "_id": "42572ca1e7b5a57",
+          "tag": "CCVR23",
+          "blocked": false,
+          "alert": false,
+          "order": 23,
+          "description": "Automatically added",
+          "translation_text": "€ 55.001 - € 60.000"
+      },
+      {
+          "_id": "42572ca1e70481e",
+          "tag": "CCVR24",
+          "blocked": false,
+          "alert": false,
+          "order": 24,
+          "description": "Automatically added",
+          "translation_text": "€ 60.001 - € 65.000"
+      },
+      {
+          "_id": "42572ca1e7af0bb",
+          "tag": "CCVR25",
+          "blocked": false,
+          "alert": false,
+          "order": 25,
+          "description": "Automatically added",
+          "translation_text": "€ 65.001 - € 70.000"
+      },
+      {
+          "_id": "42572ca1e7b163b",
+          "tag": "CCVR26",
+          "blocked": false,
+          "alert": false,
+          "order": 26,
+          "description": "Automatically added",
+          "translation_text": "€ 70.001 - € 75.000"
+      },
+      {
+          "_id": "42572ca1e7a24d0",
+          "tag": "CCVR27",
+          "blocked": false,
+          "alert": false,
+          "order": 27,
+          "description": "Automatically added",
+          "translation_text": "€ 75.001 - € 80.000"
+      },
+      {
+          "_id": "42572ca1e81aa90",
+          "tag": "CCVR28",
+          "blocked": false,
+          "alert": false,
+          "order": 28,
+          "description": "Automatically added",
+          "translation_text": "€ 80.001 - € 85.000"
+      },
+      {
+          "_id": "42572ca1e7b86d5",
+          "tag": "CCVR29",
+          "blocked": false,
+          "alert": false,
+          "order": 29,
+          "description": "Automatically added",
+          "translation_text": "€ 85.001 - € 90.000"
+      },
+      {
+          "_id": "42572ca1e798521",
+          "tag": "CCVR30",
+          "blocked": false,
+          "alert": false,
+          "order": 30,
+          "description": "Automatically added",
+          "translation_text": "€ 90.001 - € 95.000"
+      },
+      {
+          "_id": "42572ca1e7a9ffc",
+          "tag": "CCVR31",
+          "blocked": false,
+          "alert": false,
+          "order": 31,
+          "description": "Automatically added",
+          "translation_text": "€ 95.001 - € 100.000"
+      }
+  ],
+  "car_own_risk": [
+      {
+          "_id": "42583da6cdcf68d",
+          "tag": "0",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "Je wilt helemaal geen eigen risico betalen bij schade. Je betaalt hierdoor een wat hogere premie.",
+          "translation_label": "€ 0",
+          "translation_text": "€ 0"
+      },
+      {
+          "_id": "42583da6e291ffd",
+          "tag": "135",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "Kleine schades tot 135 betaal je zelf. Je betaalt hierdoor een iets minder hoge premie.",
+          "translation_label": "€ 135",
+          "translation_text": "€ 135"
+      },
+      {
+          "_id": "42583da6e8328be",
+          "tag": "245",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Auto tag creation",
+          "translation_description": "Kleine schades tot € 245 betaal je zelf. Je betaalt hierdoor een wat minder hoge premie.",
+          "translation_label": "€ 245",
+          "translation_text": "€ 245"
+      },
+      {
+          "_id": "42583da6ef3728e",
+          "tag": "375",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Auto tag creation",
+          "translation_description": "Je wilt je verzekeren voor schade boven de € 375. Je betaalt hierdoor wat minder premie.",
+          "translation_label": "€ 375",
+          "translation_text": "€ 375"
+      },
+      {
+          "_id": "42583da6f59e116",
+          "tag": "500",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Auto tag creation",
+          "translation_description": "Je verzekert je voor schade boven de € 500. Je betaalt hierdoor minder premie.",
+          "translation_label": "€ 500",
+          "translation_text": "€ 500"
+      },
+      {
+          "_id": "42583da6ff5becc",
+          "tag": "675",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Auto tag creation",
+          "translation_description": "Je verzekert je voor schade boven de € 675. Je betaalt hierdoor een lage premie.",
+          "translation_label": "€ 675",
+          "translation_text": "€ 675"
+      },
+      {
+          "_id": "42583da705776eb",
+          "tag": "950",
+          "blocked": false,
+          "alert": false,
+          "order": 7,
+          "description": "Auto tag creation",
+          "translation_description": "Je verzekert je voor grote schades vanaf € 950. Je betaalt hierdoor een zo laag mogelijke premie.",
+          "translation_label": "€ 950",
+          "translation_text": "€ 950"
+      }
+  ],
+  "content_flow_house_structure": [
+      {
+          "_id": "42570fc3d1e597d",
+          "tag": "CHSC",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Steen"
+      },
+      {
+          "_id": "42570fc3d2aac7f",
+          "tag": "CHSW",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Hout"
+      }
+  ],
+  "payment_terms": [
+      {
+          "_id": "42570fc3c38d906",
+          "tag": "PMM",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Per maand"
+      },
+      {
+          "_id": "42570fc3c3dc1a3",
+          "tag": "PMY",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Per jaar"
+      }
+  ],
+  "travel_flow_extreme_sports": [
+      {
+          "_id": "42570fc3be7275c",
+          "tag": "TESO",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Andere bijzondere sporten <a href='aegon-info:///travel_flow_extreme_sports_teso_text_info'>(ii)</a>"
+      },
+      {
+          "_id": "42570fc3be09bf9",
+          "tag": "TESS",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Skiën/snowboarden <a href='aegon-info:///travel_flow_extreme_sports_tess_text_info'>(ii)</a>"
+      }
+  ],
+  "car_flow_risk_taking": [
+      {
+          "_id": "42570fc3d07f38e",
+          "tag": "RTUD",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Alleen schade aan anderen is gedekt, schade aan mijn auto betaal ik zelf. <a href='aegon-info:///car_flow_risk_taking_rtud_description'>(ii)</a>"
+      },
+      {
+          "_id": "42570fc3d0ef0b5",
+          "tag": "RTTL",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Schade aan anderen, en brand- diefstal- en ruitschade aan mijn auto is gedekt. <a href='aegon-info:///car_flow_risk_taking_rttl_description'>(ii)</a>"
+      },
+      {
+          "_id": "42570fc3d15d94b",
+          "tag": "RTNR",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Zo veel mogelijk is gedekt, ook vrijwel alle schade aan mijn auto.<a href='aegon-info:///car_flow_risk_taking_rtnr_description'>(ii)</a>"
+      }
+  ],
+  "payment_methods": [
+      {
+          "_id": "42570fc3e118925",
+          "tag": "PMA",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Incasso"
+      },
+      {
+          "_id": "42570fc3e16de9a",
+          "tag": "PMI",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Factuur"
+      }
+  ],
+  "buyflow_housesecurity": [
+      {
+          "_id": "42577e0bfff1734",
+          "tag": "borg",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "Borg beveiliging beschrijving",
+          "translation_label": "Borg beveiliging",
+          "translation_text": "Borg beveiliging"
+      },
+      {
+          "_id": "42577e0c0034305",
+          "tag": "certificate_safeliving",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "Certificaat veilig wonen beschrijving",
+          "translation_label": "Certificaat veilig wonen",
+          "translation_text": "Certificaat veilig wonen"
+      },
+      {
+          "_id": "42577e0c006c56a",
+          "tag": "none",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Auto tag creation",
+          "translation_description": "Geen beveiliging beschrijving",
+          "translation_label": "Geen beveiliging",
+          "translation_text": "Geen beveiliging"
+      }
+  ],
+  "car_flow_coverage": [
+      {
+          "_id": "42570fc3cb94dbd",
+          "tag": "CL",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "WA",
+          "translation_description": "Wettelijk Aansprakelijk: alleen schade die jij toebrengt aan anderen is gedekt. ",
+          "translation_label": "car_flow_coverage_cl_label"
+      },
+      {
+          "_id": "42570fc3cc02983",
+          "tag": "CLC",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Beperkt casco",
+          "translation_description": "Naast schade aan anderen is ook brand- ruit- & diefstalschade van je eigen auto gedekt.",
+          "translation_label": "car_flow_coverage_clc_label"
+      },
+      {
+          "_id": "42570fc3ccbc843",
+          "tag": "CAR",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "All risk",
+          "translation_description": "Schade aan anderen en vrijwel alle eigen schade is gedekt.",
+          "translation_label": "car_flow_coverage_car_label"
+      }
+  ],
+  "additional_insurer_relation_type": [
+      {
+          "_id": "42570fc3c00cef5",
+          "tag": "AIP",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Partner"
+      },
+      {
+          "_id": "42570fc3c064855",
+          "tag": "AIC",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Kind"
+      }
+  ],
+  "content_flow_home_security": [
+      {
+          "_id": "42570fc3c43330e",
+          "tag": "CHSN",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Nee"
+      },
+      {
+          "_id": "42570fc3c484411",
+          "tag": "CHSYB",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Ja, een BORG certificaat"
+      },
+      {
+          "_id": "42570fc3c530c9c",
+          "tag": "CHSYL",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Ja, een Politiekeurmerk Veilig Wonen"
+      }
+  ],
+  "travel_general_coverage": [
+      {
+          "_id": "42579f02a03b03d",
+          "tag": "CTN",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "Geen dekking",
+          "translation_label": "Geen dekking",
+          "translation_text": "Geen dekking"
+      },
+      {
+          "_id": "42579f02a0b33f5",
+          "tag": "CTB",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "Basis dekking",
+          "translation_label": "Basis dekking",
+          "translation_text": "Basis dekking"
+      },
+      {
+          "_id": "42579f02a0ecb1c",
+          "tag": "CTA",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Auto tag creation",
+          "translation_description": "Dekking: %s",
+          "translation_label": "Dekking: %s",
+          "translation_text": "Dekking: %s"
+      },
+      {
+          "_id": "42579f02a14e0b0",
+          "tag": "CTE",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Auto tag creation",
+          "translation_description": "Extra dekking",
+          "translation_label": "Extra dekking",
+          "translation_text": "Extra dekking"
+      },
+      {
+          "_id": "42579f02a197bc2",
+          "tag": "CTU",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Auto tag creation",
+          "translation_description": "Uitgesloten",
+          "translation_label": "Uitgesloten",
+          "translation_text": "Uitgesloten"
+      }
+  ],
+  "content_own_risk": [
+      {
+          "_id": "4257474b1b0d41f",
+          "tag": "0",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "Je betaalt liever een hoge premie, je wilt helemaal geen eigen risico betalen bij schade.",
+          "translation_label": "€ 0",
+          "translation_text": "€ 0"
+      },
+      {
+          "_id": "4257474b1b5fa4c",
+          "tag": "100",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "Je betaalt liever een hogere premie, je wilt kleine schade tot € 100 gedekt hebben.",
+          "translation_label": "€ 100",
+          "translation_text": "€ 100"
+      },
+      {
+          "_id": "4257474b1baade3",
+          "tag": "150",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Auto tag creation",
+          "translation_description": "Je betaalt liever een wat hogere premie, je wilt schade tot € 150 gedekt hebben.",
+          "translation_label": "€ 150",
+          "translation_text": "€ 150"
+      },
+      {
+          "_id": "4257474b1c07c17",
+          "tag": "250",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Auto tag creation",
+          "translation_description": "Je wilt verzekeren voor wat grotere schade. Schade tot € 250 betaal je zelf.",
+          "translation_label": "€ 250",
+          "translation_text": "€ 250"
+      },
+      {
+          "_id": "4257474b1c64f5a",
+          "tag": "500",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Auto tag creation",
+          "translation_description": "Je wilt verzekeren voor als er echt iets aan de hand is. Schade tot € 500 betaal je zelf.",
+          "translation_label": "€ 500",
+          "translation_text": "€ 500"
+      }
+  ],
+  "profiling_gender": [
+      {
+          "_id": "42570fc3d7af80d",
+          "tag": "F",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Ik ben een vrouw"
+      },
+      {
+          "_id": "42570fc3d81321e",
+          "tag": "M",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Ik ben een man"
+      },
+      {
+          "_id": "42570fc3d8b3cc6",
+          "tag": "N",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Dat laat ik in het midden"
+      }
+  ],
+  "feedback_features": [
+      {
+          "_id": "42570fc3e38b430",
+          "tag": "FFI",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Verzekering"
+      },
+      {
+          "_id": "42570fc3e438aa4",
+          "tag": "FFGA",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Advies"
+      },
+      {
+          "_id": "42570fc3e4d724f",
+          "tag": "FFC",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Vergelijken"
+      },
+      {
+          "_id": "42570fc3e544e2e",
+          "tag": "FFB",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "Verzekering afsluiten"
+      },
+      {
+          "_id": "42570fc3e611e2f",
+          "tag": "FFG",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Automatically added",
+          "translation_text": "Algemeen"
+      },
+      {
+          "_id": "42570fc3e5a68aa",
+          "tag": "FFA",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Automatically added2",
+          "translation_text": "Aanvraag"
+      }
+  ],
+  "travel_flow_cancellation": [
+      {
+          "_id": "42587de8a614501",
+          "tag": "TCO0",
+          "blocked": false,
+          "alert": true,
+          "order": 1,
+          "description": "Manually added",
+          "translation_text": "travel_flow_cancellation_tco0_text"
+      },
+      {
+          "_id": "42570fc3c5bbd59",
+          "tag": "TCO1",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "reissom verzekerd tot € 1.500 <a href='aegon-info:///travel_flow_cancellation_tco1_text_info'>(ii)</a>"
+      },
+      {
+          "_id": "42570fc3c629c82",
+          "tag": "TCO2",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "reissom verzekerd tot € 2.500 <a href='aegon-info:///travel_flow_cancellation_tco2_text_info'>(ii)</a>"
+      }
+  ],
+  "travel_flow_long_term": [
+      {
+          "_id": "42583dac6b7e5eb",
+          "tag": "TWLT1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "45 days",
+          "translation_text": "45 dagen"
+      },
+      {
+          "_id": "42583d3525458ef",
+          "tag": "TWLT2",
+          "blocked": false,
+          "alert": true,
+          "order": 2,
+          "description": "60 days",
+          "translation_text": "60 dagen"
+      },
+      {
+          "_id": "42583d357f01fde",
+          "tag": "TWLT3",
+          "blocked": false,
+          "alert": true,
+          "order": 3,
+          "description": "90 days",
+          "translation_text": "90 dagen"
+      },
+      {
+          "_id": "42583d358566fd4",
+          "tag": "TWLT4",
+          "blocked": false,
+          "alert": true,
+          "order": 4,
+          "description": "120 days",
+          "translation_text": "120 dagen"
+      },
+      {
+          "_id": "42583d358b6d2b2",
+          "tag": "TWLT5",
+          "blocked": false,
+          "alert": true,
+          "order": 5,
+          "description": "180 days",
+          "translation_text": "180 dagen"
+      },
+      {
+          "_id": "42583d359356049",
+          "tag": "TWLT6",
+          "blocked": false,
+          "alert": true,
+          "order": 6,
+          "description": "365 days",
+          "translation_text": "365 dagen"
+      }
+  ],
+  "travel_flow_composite_trip": [
+      {
+          "_id": "42587de8ac5ed43",
+          "tag": "TCT0",
+          "blocked": false,
+          "alert": true,
+          "order": 1,
+          "description": "0",
+          "translation_text": "travel_flow_composite_trip_option0_text"
+      },
+      {
+          "_id": "4257c56cf74cdc8",
+          "tag": "TCT1",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "1750",
+          "translation_text": "reissom verzekerd tot € 1500 <a href='aegon-info:///travel_flow_composite_trip_option1_text_info'>(ii)</a>"
+      },
+      {
+          "_id": "4257c56d0ff16e1",
+          "tag": "TCT2",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "3500",
+          "translation_text": "reissom verzekerd tot € 2500 <a href='aegon-info:///travel_flow_composite_trip_option2_text_info'>(ii)</a>"
+      }
+  ],
+  "content_flow_valuables_jewelry": [
+      {
+          "_id": "42572ca2fa723ef",
+          "tag": "CVJR1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "€ 6.001 - € 6.500"
+      },
+      {
+          "_id": "42572ca2faec310",
+          "tag": "CVJR2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 6.501 - € 7.000"
+      },
+      {
+          "_id": "42572ca2fb17987",
+          "tag": "CVJR3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "€ 7.001 - € 7.500"
+      },
+      {
+          "_id": "42572ca2fb12b9e",
+          "tag": "CVJR4",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "€ 7.501 - € 8.000"
+      },
+      {
+          "_id": "42572ca2fb99b24",
+          "tag": "CVJR5",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Automatically added",
+          "translation_text": "€ 8.001 - € 8.500"
+      },
+      {
+          "_id": "42572ca2fa7e4e5",
+          "tag": "CVJR6",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Automatically added",
+          "translation_text": "€ 8.501 - € 9.000"
+      },
+      {
+          "_id": "42572ca2fb9a3e2",
+          "tag": "CVJR7",
+          "blocked": false,
+          "alert": false,
+          "order": 7,
+          "description": "Automatically added",
+          "translation_text": "€ 9.001 - € 9.500"
+      },
+      {
+          "_id": "42572ca2fb0808e",
+          "tag": "CVJR8",
+          "blocked": false,
+          "alert": false,
+          "order": 8,
+          "description": "Automatically added",
+          "translation_text": "€ 9.501 - € 10.000"
+      },
+      {
+          "_id": "42572ca2fb0c055",
+          "tag": "CVJR9",
+          "blocked": false,
+          "alert": false,
+          "order": 9,
+          "description": "Automatically added",
+          "translation_text": "€ 10.001 - € 10.500"
+      },
+      {
+          "_id": "42572ca2fb0dad0",
+          "tag": "CVJR10",
+          "blocked": false,
+          "alert": false,
+          "order": 10,
+          "description": "Automatically added",
+          "translation_text": "€ 10.501 - € 11.000"
+      },
+      {
+          "_id": "42572ca2fc33bd6",
+          "tag": "CVJR11",
+          "blocked": false,
+          "alert": false,
+          "order": 11,
+          "description": "Automatically added",
+          "translation_text": "€ 11.001 - € 11.500"
+      },
+      {
+          "_id": "42572ca2fc2f542",
+          "tag": "CVJR12",
+          "blocked": false,
+          "alert": false,
+          "order": 12,
+          "description": "Automatically added",
+          "translation_text": "€ 11.501 - € 12.000"
+      },
+      {
+          "_id": "42572ca2fb04363",
+          "tag": "CVJR13",
+          "blocked": false,
+          "alert": false,
+          "order": 13,
+          "description": "Automatically added",
+          "translation_text": "€ 12.001 - € 12.500"
+      },
+      {
+          "_id": "42572ca2fc23b7d",
+          "tag": "CVJR14",
+          "blocked": false,
+          "alert": false,
+          "order": 14,
+          "description": "Automatically added",
+          "translation_text": "€ 12.501 - € 13.000"
+      },
+      {
+          "_id": "42572ca2fb2f7d8",
+          "tag": "CVJR15",
+          "blocked": false,
+          "alert": false,
+          "order": 15,
+          "description": "Automatically added",
+          "translation_text": "€ 13.001 - € 13.500"
+      },
+      {
+          "_id": "42572ca2fc373c4",
+          "tag": "CVJR16",
+          "blocked": false,
+          "alert": false,
+          "order": 16,
+          "description": "Automatically added",
+          "translation_text": "€ 13.501 - € 14.000"
+      },
+      {
+          "_id": "42572ca2fb6169d",
+          "tag": "CVJR17",
+          "blocked": false,
+          "alert": false,
+          "order": 17,
+          "description": "Automatically added",
+          "translation_text": "€ 14.001 - € 14.500"
+      },
+      {
+          "_id": "42572ca2fb64d04",
+          "tag": "CVJR18",
+          "blocked": false,
+          "alert": false,
+          "order": 18,
+          "description": "Automatically added",
+          "translation_text": "€ 14.501 - € 15.000"
+      },
+      {
+          "_id": "42572ca2fb26e53",
+          "tag": "CVJR19",
+          "blocked": false,
+          "alert": false,
+          "order": 19,
+          "description": "Automatically added",
+          "translation_text": "€ 15.001 - € 15.500"
+      },
+      {
+          "_id": "42572ca2fb297b9",
+          "tag": "CVJR20",
+          "blocked": false,
+          "alert": false,
+          "order": 20,
+          "description": "Automatically added",
+          "translation_text": "€ 15.501 - € 16.000"
+      },
+      {
+          "_id": "42572ca2faf38d7",
+          "tag": "CVJR21",
+          "blocked": false,
+          "alert": false,
+          "order": 21,
+          "description": "Automatically added",
+          "translation_text": "€ 16.001 - € 16.500"
+      },
+      {
+          "_id": "42572ca2fb69541",
+          "tag": "CVJR22",
+          "blocked": false,
+          "alert": false,
+          "order": 22,
+          "description": "Automatically added",
+          "translation_text": "€ 16.501 - € 17.000"
+      },
+      {
+          "_id": "42572ca2fb2064e",
+          "tag": "CVJR23",
+          "blocked": false,
+          "alert": false,
+          "order": 23,
+          "description": "Automatically added",
+          "translation_text": "€ 17.001 - € 17.500"
+      },
+      {
+          "_id": "42572ca2fb6cf8c",
+          "tag": "CVJR24",
+          "blocked": false,
+          "alert": false,
+          "order": 24,
+          "description": "Automatically added",
+          "translation_text": "€ 17.501 - € 18.000"
+      },
+      {
+          "_id": "42572ca2fa7f20f",
+          "tag": "CVJR25",
+          "blocked": false,
+          "alert": false,
+          "order": 25,
+          "description": "Automatically added",
+          "translation_text": "€ 18.001 - € 18.500"
+      },
+      {
+          "_id": "42572ca2fb1c424",
+          "tag": "CVJR26",
+          "blocked": false,
+          "alert": false,
+          "order": 26,
+          "description": "Automatically added",
+          "translation_text": "€ 18.501 - € 19.000"
+      },
+      {
+          "_id": "42572ca2fba21e5",
+          "tag": "CVJR27",
+          "blocked": false,
+          "alert": true,
+          "order": 27,
+          "description": "Automatically added",
+          "translation_text": "> € 19.000"
+      }
+  ],
+  "content_flow_valuables_electronics": [
+      {
+          "_id": "42572ca5a449064",
+          "tag": "CVER1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "€ 12.001 - € 12.500"
+      },
+      {
+          "_id": "42572ca5a4502a4",
+          "tag": "CVER2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 12.501 - € 13.000"
+      },
+      {
+          "_id": "42572ca5a453602",
+          "tag": "CVER3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "€ 13.001 - € 13.500"
+      },
+      {
+          "_id": "42572ca5a4b3c13",
+          "tag": "CVER4",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "€ 13.501 - € 14.000"
+      },
+      {
+          "_id": "42572ca5a45737c",
+          "tag": "CVER5",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Automatically added",
+          "translation_text": "€ 14.001 - € 14.500"
+      },
+      {
+          "_id": "42572ca5a45f157",
+          "tag": "CVER6",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Automatically added",
+          "translation_text": "€ 14.501 - € 15.000"
+      },
+      {
+          "_id": "42572ca5a45be08",
+          "tag": "CVER7",
+          "blocked": false,
+          "alert": false,
+          "order": 7,
+          "description": "Automatically added",
+          "translation_text": "€ 15.001 - € 15.500"
+      },
+      {
+          "_id": "42572ca5a4bfc3b",
+          "tag": "CVER8",
+          "blocked": false,
+          "alert": false,
+          "order": 8,
+          "description": "Automatically added",
+          "translation_text": "€ 15.501 - € 16.000"
+      },
+      {
+          "_id": "42572ca5a4c4297",
+          "tag": "CVER9",
+          "blocked": false,
+          "alert": false,
+          "order": 9,
+          "description": "Automatically added",
+          "translation_text": "€ 16.001 - € 16.500"
+      },
+      {
+          "_id": "42572ca5a462463",
+          "tag": "CVER10",
+          "blocked": false,
+          "alert": false,
+          "order": 10,
+          "description": "Automatically added",
+          "translation_text": "€ 16.501 - € 17.000"
+      },
+      {
+          "_id": "42572ca5a4afb88",
+          "tag": "CVER11",
+          "blocked": false,
+          "alert": false,
+          "order": 11,
+          "description": "Automatically added",
+          "translation_text": "€ 17.001 - € 17.500"
+      },
+      {
+          "_id": "42572ca5a4bb217",
+          "tag": "CVER12",
+          "blocked": false,
+          "alert": false,
+          "order": 12,
+          "description": "Automatically added",
+          "translation_text": "€ 17.501 - € 18.000"
+      },
+      {
+          "_id": "42572ca5a4b7bee",
+          "tag": "CVER13",
+          "blocked": false,
+          "alert": true,
+          "order": 13,
+          "description": "Automatically added",
+          "translation_text": "> € 18.000"
+      }
+  ],
+  "car_flow_legal_aid": [
+      {
+          "_id": "42570fc3bed6590",
+          "tag": "LAN",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Nee"
+      },
+      {
+          "_id": "42570fc3bf4bc09",
+          "tag": "LAY",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Ja"
+      },
+      {
+          "_id": "42570fc3bfafefb",
+          "tag": "LAE",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Heb ik al"
+      }
+  ],
+  "buyflow_houseroof": [
+      {
+          "_id": "42577e0bff48691",
+          "tag": "asphalt",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "asphalt description",
+          "translation_label": "Asfalt",
+          "translation_text": "Asfalt"
+      },
+      {
+          "_id": "42577e0bff7fc8a",
+          "tag": "tiles",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "tiles description",
+          "translation_label": "Pannen",
+          "translation_text": "Pannen"
+      },
+      {
+          "_id": "42577e0bffbb654",
+          "tag": "reed",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Auto tag creation",
+          "translation_description": "reed description",
+          "translation_label": "Grotendeels riet",
+          "translation_text": "Grotendeels riet"
+      }
+  ],
+  "buyflow_carsecurity": [
+      {
+          "_id": "42579f02a279c70",
+          "tag": "unsure",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "Ik weet niet welke klasse alarmsysteem ik heb. Of ik heb geen alarmsysteem.",
+          "translation_label": "...",
+          "translation_text": "Weet ik niet"
+      },
+      {
+          "_id": "42579f02a2b6939",
+          "tag": "class1",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "Sinds 1998 hebben auto's minimaal een klasse 1-beveiliging. Dat betekent dat de auto een startonderbreking heeft die de startmotor en brandstofvoorziening blokkeert.",
+          "translation_label": "Standaard alarmsysteem",
+          "translation_text": "Klasse 1"
+      },
+      {
+          "_id": "42579f02a30b000",
+          "tag": "class2",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Auto tag creation",
+          "translation_description": "De auto heeft startonderbreking. En wordt er gerommeld aan je auto? Dan gaat je alarm af en je lichten gaan knipperen.",
+          "translation_label": "Alarmsysteem met startonderbreker",
+          "translation_text": "Klasse 2"
+      },
+      {
+          "_id": "42579f02a349324",
+          "tag": "class3",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Auto tag creation",
+          "translation_description": "De auto heeft startonderbreking met alarm. <br/>\nKlasse 3 heeft ook hellingdetectie: het alarm gaat af zodra je auto wordt opgetild.",
+          "translation_label": "Uitgebreid met hellingdetectie",
+          "translation_text": "Klasse 3"
+      },
+      {
+          "_id": "42579f02a3a3d8d",
+          "tag": "class4",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Auto tag creation",
+          "translation_description": "De auto heeft startonderbreking met alarm. Het alarm gaat ook af als je auto wordt opgetild. <br/>\nKlasse 4 heeft een voertuigvolgsysteem dat de positie van je auto doorgeeft als de auto beweegt of als jij diefstal meldt. ",
+          "translation_label": "Uitgebreid met voertuigvolgsysteem",
+          "translation_text": "Klasse 4"
+      },
+      {
+          "_id": "42579f02a42e10f",
+          "tag": "class5",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Auto tag creation",
+          "translation_description": "De auto heeft startonderbreking met alarm. Het alarm gaat ook af als je auto wordt opgetild. <br/>\nKlasse 5 heeft een voertuigvolgsysteem dat direct aangaat als het alarm afgaat.",
+          "translation_label": "Uitgebreid met voertuigvolgsysteem dat direct in werking gaat",
+          "translation_text": "Klasse 5"
+      }
+  ],
+  "buyflow_housesize": [
+      {
+          "_id": "42577e0bfdbc061",
+          "tag": "0-50",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "0-50 description",
+          "translation_label": "0-50",
+          "translation_text": "0-50"
+      },
+      {
+          "_id": "42577e0bfe4ba34",
+          "tag": "51-100",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "51-100 description",
+          "translation_label": "51-100",
+          "translation_text": "51-100"
+      },
+      {
+          "_id": "42577e0bfe8931d",
+          "tag": "101-150",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Auto tag creation",
+          "translation_description": "101-150 description",
+          "translation_label": "101-150",
+          "translation_text": "101-150"
+      },
+      {
+          "_id": "42577e0bfec7b68",
+          "tag": "151-200",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Auto tag creation",
+          "translation_description": "151-200 description",
+          "translation_label": "151-200",
+          "translation_text": "151-200"
+      },
+      {
+          "_id": "42577e0bff0d1d3",
+          "tag": ">200",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Auto tag creation",
+          "translation_description": ">200 description",
+          "translation_label": ">200",
+          "translation_text": ">200"
+      }
+  ],
+  "buyflow_homebuystatus": [
+      {
+          "_id": "42579f02a1d6e40",
+          "tag": "bought",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Auto tag creation",
+          "translation_description": "Bought description",
+          "translation_label": "Gekocht",
+          "translation_text": "Gekocht"
+      },
+      {
+          "_id": "42579f02a2350d5",
+          "tag": "rented",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Auto tag creation",
+          "translation_description": "Rented description",
+          "translation_label": "Gehuurd",
+          "translation_text": "Gehuurd"
+      }
+  ],
+  "travel_flow_days_per_year": [
+      {
+          "_id": "42570fc3e0a635a",
+          "tag": "?",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Dit is inclusief alle geboekte overnachtingen binnen Nederland in bijvoorbeeld een hotel, vakantiehuisje of via Airbnb.",
+          "translation_description": "travel_flow_days_per_year_?_description"
+      }
+  ],
+  "profiling_household": [
+      {
+          "_id": "42570fc3e1c1153",
+          "tag": "ME",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Ik woon alleen"
+      },
+      {
+          "_id": "42570fc3e21d722",
+          "tag": "MEP",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Ik woon met mijn partner"
+      },
+      {
+          "_id": "42570fc3e28fd52",
+          "tag": "MEPK",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Ik woon met partner en kind(eren)"
+      },
+      {
+          "_id": "42570fc3e2ead53",
+          "tag": "MEK",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "Ik woon met mijn kind(eren)"
+      }
+  ],
+  "car_flow_km_per_year": [
+      {
+          "_id": "42572ca71225240",
+          "tag": "KMR1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "7.500 of minder",
+          "translation_label": "7.500 of minder",
+          "translation_description": "Ik stap alleen in de auto voor de wekelijkse boodschappen."
+      },
+      {
+          "_id": "42572ca7112932c",
+          "tag": "KMR2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "7.500 - 10.000",
+          "translation_label": "7.500 - 10.000",
+          "translation_description": "De wekelijkse boodschappen en de kinderen naar school brengen."
+      },
+      {
+          "_id": "42572ca71125f3a",
+          "tag": "KMR3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "10.001 - 12.000",
+          "translation_label": "10.000 - 12.000",
+          "translation_description": "De wekelijkse boodschappen en een vakantie."
+      },
+      {
+          "_id": "42572ca7112049a",
+          "tag": "KMR4",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "12.001 - 15.000",
+          "translation_label": "12.000 - 15.000",
+          "translation_description": "De wekelijkse boodschappen, vakantie en wat uitstapjes binnen Nederland."
+      },
+      {
+          "_id": "42572ca7122c36a",
+          "tag": "KMR5",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Automatically added",
+          "translation_text": "15.001 - 20.000",
+          "translation_label": "15.000 - 20.000",
+          "translation_description": "Gemiddeld: de boodschappen, werk en wat uitstapjes. Dit is wat de meeste mensen per jaar rijden."
+      },
+      {
+          "_id": "42572ca71238c29",
+          "tag": "KMR6",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Automatically added",
+          "translation_text": "20.001 - 25.000",
+          "translation_label": "20.000 - 25.000",
+          "translation_description": "Naar mijn werk en een paar vakanties per jaar."
+      },
+      {
+          "_id": "42572ca71237697",
+          "tag": "KMR7",
+          "blocked": false,
+          "alert": false,
+          "order": 7,
+          "description": "Automatically added",
+          "translation_text": "25.001 - 30.000",
+          "translation_label": "25.000 - 30.000",
+          "translation_description": "Voor mijn werk ben ik veel op de weg en een paar vakanties per jaar."
+      },
+      {
+          "_id": "42572ca7123598c",
+          "tag": "KMR8",
+          "blocked": false,
+          "alert": false,
+          "order": 8,
+          "description": "Automatically added",
+          "translation_text": "30.000 of meer",
+          "translation_label": "30.000 of meer",
+          "translation_description": "Ik leef in mijn auto. Voor mijn werk ben ik veel op de weg en een paar verre vakanties per jaar."
+      }
+  ],
+  "profiling_my_needs": [
+      {
+          "_id": "42570fc3ce7e910",
+          "tag": "PTM",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "Ja, en laat mij weten of ik kan besparen."
+      },
+      {
+          "_id": "42570fc3cf3973d",
+          "tag": "DK",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "Ja, en laat mij weten of ze ook bij mij passen."
+      },
+      {
+          "_id": "42570fc3cfceab2",
+          "tag": "WAOP",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "Nu niet, naar het dashboard"
+      }
+  ],
+  "content_flow_valuables_special": [
+      {
+          "_id": "42572ca4dd35b95",
+          "tag": "CVSR1",
+          "blocked": false,
+          "alert": false,
+          "order": 1,
+          "description": "Automatically added",
+          "translation_text": "€ 15.001 - € 15.500"
+      },
+      {
+          "_id": "42572ca4de5af13",
+          "tag": "CVSR2",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "Automatically added",
+          "translation_text": "€ 15.501 - € 16.000"
+      },
+      {
+          "_id": "42572ca4dd27a8c",
+          "tag": "CVSR3",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "Automatically added",
+          "translation_text": "€ 16.001 - € 16.500"
+      },
+      {
+          "_id": "42572ca4dd1bb08",
+          "tag": "CVSR4",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "Automatically added",
+          "translation_text": "€ 16.501 - € 17.000"
+      },
+      {
+          "_id": "42572ca4dcb4182",
+          "tag": "CVSR5",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Automatically added",
+          "translation_text": "€ 17.001 - € 17.500"
+      },
+      {
+          "_id": "42572ca4dd2d417",
+          "tag": "CVSR6",
+          "blocked": false,
+          "alert": false,
+          "order": 6,
+          "description": "Automatically added",
+          "translation_text": "€ 17.501 - € 18.000"
+      },
+      {
+          "_id": "42572ca4dbb1769",
+          "tag": "CVSR7",
+          "blocked": false,
+          "alert": false,
+          "order": 7,
+          "description": "Automatically added",
+          "translation_text": "€ 18.001 - € 18.500"
+      },
+      {
+          "_id": "42572ca4de195c0",
+          "tag": "CVSR8",
+          "blocked": false,
+          "alert": false,
+          "order": 8,
+          "description": "Automatically added",
+          "translation_text": "€ 18.501 - € 19.000"
+      },
+      {
+          "_id": "42572ca4de23217",
+          "tag": "CVSR9",
+          "blocked": false,
+          "alert": false,
+          "order": 9,
+          "description": "Automatically added",
+          "translation_text": "€ 19.001 - € 19.500"
+      },
+      {
+          "_id": "42572ca4dae45d9",
+          "tag": "CVSR10",
+          "blocked": false,
+          "alert": false,
+          "order": 10,
+          "description": "Automatically added",
+          "translation_text": "€ 19.501 - € 20.000"
+      },
+      {
+          "_id": "42572ca4dcbbed4",
+          "tag": "CVSR11",
+          "blocked": false,
+          "alert": false,
+          "order": 11,
+          "description": "Automatically added",
+          "translation_text": "€ 20.001 - € 20.500"
+      },
+      {
+          "_id": "42572ca4ddd95bf",
+          "tag": "CVSR12",
+          "blocked": false,
+          "alert": false,
+          "order": 12,
+          "description": "Automatically added",
+          "translation_text": "€ 20.501 - € 21.000"
+      },
+      {
+          "_id": "42572ca4dd23aea",
+          "tag": "CVSR13",
+          "blocked": false,
+          "alert": false,
+          "order": 13,
+          "description": "Automatically added",
+          "translation_text": "€ 21.001 - € 21.500"
+      },
+      {
+          "_id": "42572ca4dd39fac",
+          "tag": "CVSR14",
+          "blocked": false,
+          "alert": false,
+          "order": 14,
+          "description": "Automatically added",
+          "translation_text": "€ 21.501 - € 22.000"
+      },
+      {
+          "_id": "42572ca4de1d9bb",
+          "tag": "CVSR15",
+          "blocked": false,
+          "alert": false,
+          "order": 15,
+          "description": "Automatically added",
+          "translation_text": "€ 22.001 - € 22.500"
+      },
+      {
+          "_id": "425733201246ab3",
+          "tag": "CVSR16",
+          "blocked": false,
+          "alert": false,
+          "order": 16,
+          "description": "Automatically added",
+          "translation_text": "€ 22.501 - € 23.000"
+      },
+      {
+          "_id": "42572ca4dc16a84",
+          "tag": "CVSR17",
+          "blocked": false,
+          "alert": false,
+          "order": 17,
+          "description": "Automatically added",
+          "translation_text": "€ 23.001 - € 23.500"
+      },
+      {
+          "_id": "42572ca4dd1288e",
+          "tag": "CVSR18",
+          "blocked": false,
+          "alert": false,
+          "order": 18,
+          "description": "Automatically added",
+          "translation_text": "€ 23.501 - € 24.000"
+      },
+      {
+          "_id": "42572ca4de249a3",
+          "tag": "CVSR19",
+          "blocked": false,
+          "alert": false,
+          "order": 19,
+          "description": "Automatically added",
+          "translation_text": "€ 24.001 - € 24.500"
+      },
+      {
+          "_id": "42572ca4de2a11e",
+          "tag": "CVSR20",
+          "blocked": false,
+          "alert": false,
+          "order": 20,
+          "description": "Automatically added",
+          "translation_text": "€ 24.501 - € 25.000"
+      },
+      {
+          "_id": "42572ca4dcc9583",
+          "tag": "CVSR21",
+          "blocked": false,
+          "alert": false,
+          "order": 21,
+          "description": "Automatically added",
+          "translation_text": "€ 25.001 - € 25.500"
+      },
+      {
+          "_id": "42572ca4de3a0d4",
+          "tag": "CVSR22",
+          "blocked": false,
+          "alert": false,
+          "order": 22,
+          "description": "Automatically added",
+          "translation_text": "€ 25.501 - € 26.000"
+      },
+      {
+          "_id": "42572ca4de2e5c2",
+          "tag": "CVSR23",
+          "blocked": false,
+          "alert": false,
+          "order": 23,
+          "description": "Automatically added",
+          "translation_text": "€ 26.001 - € 26.500"
+      },
+      {
+          "_id": "42572ca4de33e55",
+          "tag": "CVSR24",
+          "blocked": false,
+          "alert": false,
+          "order": 24,
+          "description": "Automatically added",
+          "translation_text": "€ 26.501 - € 27.000"
+      },
+      {
+          "_id": "42572ca4de66cce",
+          "tag": "CVSR25",
+          "blocked": false,
+          "alert": false,
+          "order": 25,
+          "description": "Automatically added",
+          "translation_text": "€ 27.001 - € 27.500"
+      },
+      {
+          "_id": "42572ca4dd1700b",
+          "tag": "CVSR26",
+          "blocked": false,
+          "alert": false,
+          "order": 26,
+          "description": "Automatically added",
+          "translation_text": "€ 27.501 - € 28.000"
+      },
+      {
+          "_id": "42572ca4de32469",
+          "tag": "CVSR27",
+          "blocked": false,
+          "alert": false,
+          "order": 27,
+          "description": "Automatically added",
+          "translation_text": "€ 28.001 - € 28.500"
+      },
+      {
+          "_id": "42572ca4de4dcd6",
+          "tag": "CVSR28",
+          "blocked": false,
+          "alert": false,
+          "order": 28,
+          "description": "Automatically added",
+          "translation_text": "€ 28.501 - € 29.000"
+      },
+      {
+          "_id": "42572ca4de483e0",
+          "tag": "CVSR29",
+          "blocked": false,
+          "alert": false,
+          "order": 29,
+          "description": "Automatically added",
+          "translation_text": "€ 29.001 - € 29.500"
+      },
+      {
+          "_id": "42572ca4de461cb",
+          "tag": "CVSR30",
+          "blocked": false,
+          "alert": false,
+          "order": 30,
+          "description": "Automatically added",
+          "translation_text": "€ 29.501 - € 30.000"
+      },
+      {
+          "_id": "42572ca4dc7ead1",
+          "tag": "CVSR31",
+          "blocked": false,
+          "alert": false,
+          "order": 31,
+          "description": "Automatically added",
+          "translation_text": "€ 30.001 - € 30.500"
+      },
+      {
+          "_id": "42572ca4dc1f213",
+          "tag": "CVSR32",
+          "blocked": false,
+          "alert": false,
+          "order": 32,
+          "description": "Automatically added",
+          "translation_text": "€ 30.501 - € 31.000"
+      },
+      {
+          "_id": "42572ca4dc1200d",
+          "tag": "CVSR33",
+          "blocked": false,
+          "alert": false,
+          "order": 33,
+          "description": "Automatically added",
+          "translation_text": "€ 31.001 - € 31.500"
+      },
+      {
+          "_id": "42572ca4dcaf10f",
+          "tag": "CVSR34",
+          "blocked": false,
+          "alert": false,
+          "order": 34,
+          "description": "Automatically added",
+          "translation_text": "€ 31.501 - € 32.000"
+      },
+      {
+          "_id": "42572ca4dcac47b",
+          "tag": "CVSR35",
+          "blocked": false,
+          "alert": false,
+          "order": 35,
+          "description": "Automatically added",
+          "translation_text": "€ 32.001 - € 32.500"
+      },
+      {
+          "_id": "42572ca4dd31d6e",
+          "tag": "CVSR36",
+          "blocked": false,
+          "alert": false,
+          "order": 36,
+          "description": "Automatically added",
+          "translation_text": "€ 32.501 - € 33.000"
+      },
+      {
+          "_id": "42572ca4dca3d22",
+          "tag": "CVSR37",
+          "blocked": false,
+          "alert": false,
+          "order": 37,
+          "description": "Automatically added",
+          "translation_text": "€ 33.001 - € 33.500"
+      },
+      {
+          "_id": "42572ca4dae7f70",
+          "tag": "CVSR38",
+          "blocked": false,
+          "alert": false,
+          "order": 38,
+          "description": "Automatically added",
+          "translation_text": "€ 33.501 - € 34.000"
+      },
+      {
+          "_id": "42572ca4dbac913",
+          "tag": "CVSR39",
+          "blocked": false,
+          "alert": false,
+          "order": 39,
+          "description": "Automatically added",
+          "translation_text": "€ 34.001 - € 34.500"
+      },
+      {
+          "_id": "42572ca4dba8ddc",
+          "tag": "CVSR40",
+          "blocked": false,
+          "alert": false,
+          "order": 40,
+          "description": "Automatically added",
+          "translation_text": "€ 34.501 - € 35.000"
+      },
+      {
+          "_id": "42572ca4daea7a9",
+          "tag": "CVSR41",
+          "blocked": false,
+          "alert": false,
+          "order": 41,
+          "description": "Automatically added",
+          "translation_text": "€ 35.001 - € 35.500"
+      },
+      {
+          "_id": "42572ca4daef2e6",
+          "tag": "CVSR42",
+          "blocked": false,
+          "alert": false,
+          "order": 42,
+          "description": "Automatically added",
+          "translation_text": "€ 35.501 - € 36.000"
+      },
+      {
+          "_id": "42572ca4dca8672",
+          "tag": "CVSR43",
+          "blocked": false,
+          "alert": false,
+          "order": 43,
+          "description": "Automatically added",
+          "translation_text": "€ 36.001 - € 36.500"
+      },
+      {
+          "_id": "42572ca4dbb5016",
+          "tag": "CVSR44",
+          "blocked": false,
+          "alert": false,
+          "order": 44,
+          "description": "Automatically added",
+          "translation_text": "€ 36.501 - € 37.000"
+      },
+      {
+          "_id": "42572ca4dbbc6b1",
+          "tag": "CVSR45",
+          "blocked": false,
+          "alert": false,
+          "order": 45,
+          "description": "Automatically added",
+          "translation_text": "€ 37.001 - € 37.500"
+      },
+      {
+          "_id": "42572ca4dbb83fd",
+          "tag": "CVSR46",
+          "blocked": false,
+          "alert": false,
+          "order": 46,
+          "description": "Automatically added",
+          "translation_text": "€ 37.501 - € 38.000"
+      },
+      {
+          "_id": "42572ca4de69b25",
+          "tag": "CVSR47",
+          "blocked": false,
+          "alert": false,
+          "order": 47,
+          "description": "Automatically added",
+          "translation_text": "€ 38.001 - € 38.500"
+      },
+      {
+          "_id": "42572ca4dc22702",
+          "tag": "CVSR48",
+          "blocked": false,
+          "alert": false,
+          "order": 48,
+          "description": "Automatically added",
+          "translation_text": "€ 38.501 - € 39.000"
+      },
+      {
+          "_id": "42572ca4dc23c76",
+          "tag": "CVSR49",
+          "blocked": false,
+          "alert": false,
+          "order": 49,
+          "description": "Automatically added",
+          "translation_text": "€ 39.001 - € 39.500"
+      },
+      {
+          "_id": "42572ca4daf2187",
+          "tag": "CVSR50",
+          "blocked": false,
+          "alert": false,
+          "order": 50,
+          "description": "Automatically added",
+          "translation_text": "€ 39.501 - € 40.000"
+      },
+      {
+          "_id": "42572ca4dbc2a9b",
+          "tag": "CVSR51",
+          "blocked": false,
+          "alert": true,
+          "order": 51,
+          "description": "Automatically added",
+          "translation_text": "> € 40.000"
+      }
+  ],
+  "travel_flow_additional_coverage": [
+      {
+          "_id": "4257da652c3c332",
+          "tag": "CTB",
+          "blocked": false,
+          "alert": false,
+          "order": 2,
+          "description": "none",
+          "translation_text": "travel_flow_additional_coverage_basic_coverage_text"
+      },
+      {
+          "_id": "4257da65396f911",
+          "tag": "CTA",
+          "blocked": false,
+          "alert": false,
+          "order": 3,
+          "description": "none",
+          "translation_text": "travel_flow_additional_coverage_amount_coverage_text"
+      },
+      {
+          "_id": "4257da654b7962e",
+          "tag": "CTE",
+          "blocked": false,
+          "alert": false,
+          "order": 4,
+          "description": "none",
+          "translation_text": "travel_flow_additional_coverage_extra_coverage_text"
+      },
+      {
+          "_id": "4257da655e7e632",
+          "tag": "CTU",
+          "blocked": false,
+          "alert": false,
+          "order": 5,
+          "description": "Excluded coverage",
+          "translation_text": "travel_flow_additional_coverage_excluded_coverage_text"
+      }
+  ]
+}

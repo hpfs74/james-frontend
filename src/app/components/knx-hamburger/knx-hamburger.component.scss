@@ -1,0 +1,51 @@
+@import '~styles/base.scss';
+
+.knx-menu {
+  cursor: pointer;
+  margin: 17px auto;
+  padding-left: 1.25em;
+  width: 22px;
+  height: 16px;
+  position: absolute;
+  right: 15px;
+  top: 0;
+}
+
+.knx-menu-global {
+  backface-visibility: hidden;
+  position: absolute;
+  left: 0;
+  border-top: 3px solid $knab-primary-blue;
+  width: 100%;
+  transition: 0.2s;
+}
+
+.knx-menu-top {
+  top: 0;
+}
+
+.knx-menu-middle {
+  top: 6px;
+}
+
+.knx-menu-bottom {
+  top: 12px;
+}
+
+.knx-menu-animate {
+  .knx-menu-top {
+    backface-visibility: hidden;
+    transform: rotate(50deg) translate3d(6px, 1px, 0);
+    transition: 0.2s 0.3s;
+  }
+
+  .knx-menu-middle {
+    opacity: 0;
+  }
+
+  .knx-menu-bottom {
+    backface-visibility: hidden;
+    transform: rotate(-410deg) translate3d(7px, -2px, 0);
+    transition: 0.2s 0.3s;
+  }
+}

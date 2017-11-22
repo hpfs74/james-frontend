@@ -12,7 +12,7 @@ import { AuthToken, RegistrationPayload, RegistrationResult } from '../models/au
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
-import { RegisterResendActivationEmail } from '../actions/registration';
+import { ResendActivationEmail } from '../actions/registration';
 
 export interface PayloadAuth {
   access_token: string;
@@ -155,7 +155,7 @@ export class AuthService {
    *
    * @param {RegisterResendActivationEmail} action
    */
-  public resendActivation(action: RegisterResendActivationEmail) {
+  public resendActivation(action: ResendActivationEmail) {
     // TODO: check if the profile is active or if the user is logged on there's no need to access here!!!
     const payload = {
       emailaddress: action.email

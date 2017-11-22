@@ -9,23 +9,19 @@ import { ChatMessage } from './chat-message';
 
 // Types of messages
 import { TextMessageComponent } from './text-message.component';
-import { CarInfoMessageComponent } from '../knx-car-info-message/car-info-message.component';
-import { CarPreviewComponent } from '../knx-car-info-message';
 
 const exportableDeclarations = [
   AvatarComponent,
   ChatMessageDirective,
   ChatStreamComponent,
   TextMessageComponent,
-  CarInfoMessageComponent,
-  CarPreviewComponent,
 ];
 
 @NgModule({
   imports: [ CommonModule, SharedModule ],
   exports: exportableDeclarations,
   declarations: exportableDeclarations,
-  entryComponents: [ TextMessageComponent, CarInfoMessageComponent ]
+  entryComponents: [ TextMessageComponent ]
 })
 export class ChatStreamModule { }
 

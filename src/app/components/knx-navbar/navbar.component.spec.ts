@@ -5,6 +5,8 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
+import { ContentConfig, Content } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { setUpTestBed } from './../../../test.common.spec';
 import { Nav, NavItemType } from '../../core/models';
 import { NavbarComponent } from './navbar.component';
@@ -30,12 +32,19 @@ describe('Component: Navbar', () => {
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),
-        'core': combineReducers(fromCore.reducers),
+        'app': combineReducers(fromCore.reducers),
         'car': combineReducers(fromCar.reducers),
         'insurance': combineReducers(fromInsurance.reducers),
         'profile': combineReducers(fromProfile.reducers)
-      })],
+      })
+    ],
     declarations: [NavbarComponent],
+    providers: [
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      }
+    ],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

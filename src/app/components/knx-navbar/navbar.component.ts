@@ -16,12 +16,11 @@ import * as router from '../../core/actions/router';
 export class NavbarComponent implements OnInit {
   @Input() menuItems: Array<Nav>;
   @Output() onLogOut = new EventEmitter();
-
+  @Output() onHamburgerClick: EventEmitter<any> = new EventEmitter<any>();
   isCollapsed = true;
   loggedIn$: Observable<boolean>;
   anonymous$: Observable<any>;
-
-  constructor(private store$: Store<fromRoot.State>) { }
+  constructor(private store$: Store<fromRoot.State>) {}
 
   ngOnInit() {
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -44,5 +43,9 @@ export class NavbarComponent implements OnInit {
 
   public register() {
     this.store$.dispatch(new router.Go({ path: ['/register'] }));
+  }
+
+  knxToggleMenu() {
+    this.onHamburgerClick.emit();
   }
 }

@@ -1,0 +1,41 @@
+<header class="header">
+  <knx-offline-indicator></knx-offline-indicator>
+  <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()" (onHamburgerClick)="toggleMenuOpen()">
+    <knx-opening-hours></knx-opening-hours>
+    <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
+  </knx-navbar>
+</header>
+
+<knx-navbar-menu
+  [animationState]="animationState"
+  (onAnimationDone)="setMenuAnimationStatus($event)"
+  class="hidden-md-up">
+  <ul class="navbar-nav knx-list--unstyled">
+    <li class="nav-item" *ngIf="loggedIn$ | async">
+      <a class="nav-link" (click)="logOut()">Uitloggen</a>
+    </li>
+
+    <li class="nav-item" *ngIf="!(loggedIn$ | async)">
+      <a class="nav-link" (click)="goToRegister()">Registreren</a>
+    </li>
+
+    <li class="nav-item" *ngIf="!(loggedIn$ | async)">
+      <a class="nav-link" (click)="goToLogin()">Inloggen</a>
+    </li>
+
+    <li class="nav-item">
+      <knx-opening-hours class="nav-link"></knx-opening-hours>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ content.phone.link }}" rel="noopener"><span class="knx-icon-phone"></span>{{ content.phone.label }}</a>
+    </li>
+  </ul>
+</knx-navbar-menu>
+
+<div class="main-container" knxSidePanelState>
+  <knx-loader></knx-loader>
+  <router-outlet></router-outlet>
+</div>
+
+<knx-footer></knx-footer>

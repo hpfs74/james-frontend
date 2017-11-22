@@ -13,6 +13,8 @@ import * as fromProfile from '../../profile/reducers';
 
 import { SharedModule } from '../../shared.module';
 import { CarPurchasedComponent } from './car-purchased.component';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock.spec';
 
 describe('Component: CarPurchasedComponent', () => {
   let comp: CarPurchasedComponent;
@@ -27,7 +29,7 @@ describe('Component: CarPurchasedComponent', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'core': combineReducers(fromCore.reducers),
+          'app': combineReducers(fromCore.reducers),
           'car': combineReducers(fromCar.reducers),
           'insurance': combineReducers(fromInsurance.reducers),
           'profile': combineReducers(fromProfile.reducers)
@@ -35,6 +37,12 @@ describe('Component: CarPurchasedComponent', () => {
       ],
       declarations: [
         CarPurchasedComponent
+      ],
+      providers: [
+        {
+          provide: ContentConfig,
+          useValue: ContentConfigMock
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });

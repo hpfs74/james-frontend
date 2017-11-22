@@ -1,0 +1,58 @@
+<footer>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-6">
+              <ul class="nav nav-pills nav-stacked">
+                  <li>
+                      <h2>{{ content.footer.solutions.title }}</h2>
+                  </li>
+                  <li *ngFor="let link of content.footer.solutions.links">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="col-md-3 col-sm-6 col-6">
+              <ul class="nav nav-pills nav-stacked">
+                  <li>
+                      <h2>{{ content.footer.packages.title }}</h2>
+                  </li>
+                  <li *ngFor="let link of content.footer.packages.links">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="clearfix visible-xs-block visible-sm-block"></div>
+          <div class="col-md-3 col-sm-6 col-6">
+              <ul class="nav nav-pills nav-stacked">
+                  <li>
+                      <h2>{{ content.footer.about.title }}</h2>
+                  </li>
+                  <li *ngFor="let link of content.footer.about.links">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="col-md-3 col-sm-6 col-6">
+              <ul class="nav nav-pills nav-stacked bg-knab">
+                  <li>
+                      <h2>{{ content.footer.service_contact.title }}</h2>
+                  </li>
+                  <li *ngFor="let link of content.footer.service_contact.links">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="row colophon">
+          <div class="col-md-12 col-sm-12 col-12">
+              <ul class="nav nav-pills">
+                  <li><a href="#">© Knab</a></li>
+                  <li>|</li>
+                  <li *ngFor="let link of content.footer.policies.links">
+                    <a href="{{ link.url }}">{{ link.title }} <span *ngIf="link.delimiter">{{ link.delimiter }}</span></a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</footer>

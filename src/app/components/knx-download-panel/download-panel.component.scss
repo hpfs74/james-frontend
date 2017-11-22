@@ -1,0 +1,30 @@
+@import '~styles/base';
+
+.container {
+  padding-top: 15px;
+}
+
+img {
+  max-height: 250px;
+}
+
+@media (max-width: 990px) {
+  img {
+    display: none;
+  }
+}
+
+h2 {
+  margin-top: 0;
+}
+
+ul > li {
+  color: $knab-medium-gray;
+}
+
+.knx-button {
+  &:before {
+    margin-right: 10px;
+    line-height: 0;
+  }
+}

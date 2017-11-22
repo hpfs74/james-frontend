@@ -1,8 +1,8 @@
 import * as moment from 'moment';
 import { Insurance } from '../../insurance/models/insurance';
 import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
+import { TagsService } from '../../core/services/tags.service';
 import { dateDecode } from '../../utils/base-form.utils';
-import { CarUtils } from '../utils/car-utils';
 
 /**
  * Buy Flow Request
@@ -16,11 +16,13 @@ export interface Proposal {
   items: Array<Object>;
 }
 
-
 /**
- * Buy Flow Request Helper
+ * Buy Flow Request Data Transformer
  */
 export class CarProposalHelper {
+
+  constructor() {}
+
   /* tslint:disable:max-line-length */
   propMapping = [
     { key: 'Verzekeraar', value: 'moneyview_id', transform: (val) => val.split(':')[0] },
@@ -57,7 +59,7 @@ export class CarProposalHelper {
     { key: 'Gewicht', value: 'car.weight_empty_vehicle' },
     { key: 'Kilometrage', value: 'kilometers_per_year' },
     { key: 'Beveiliging', value: 'securityClass', transform: (value) => 'SCM klasse ' + value.slice(-1) },
-    { key: 'Hoofddekking', value: 'coverage', transform: CarUtils.getCoverage },
+    { key: 'Hoofddekking', value: 'dekking' },
     { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
     { key: 'Inzittendenverzekering', value: 'cover_occupants', transform: this.getBoolean },
     { key: 'Slotvragen', value: '' },
@@ -80,7 +82,7 @@ export class CarProposalHelper {
         value = data[el.value];
       }
 
-      itemArr.push({[el.key]: el['transform'] ? el['transform'](value) : (value ? value.toString() : '')});
+      itemArr.push({[el.key]: el['transform'] ? el['transform'](value) : (this.isPresented(value) ? value.toString() : '')});
     });
     return itemArr;
   }
@@ -146,6 +148,11 @@ export class CarProposalHelper {
     });
   }
 
+  getCarInfo(carInfo: any, adviceInfo: any) {
+    carInfo.reporting_code = adviceInfo.reportingCode;
+    return carInfo;
+  }
+
   private getItem(items: Array<Object>, property: string): Object {
     let ret = null;
     items.forEach( (el) => {
@@ -158,6 +165,10 @@ export class CarProposalHelper {
 
   private getBoolean(value: boolean) {
     return value ? 'Ja' : 'Nee';
+  }
+
+  private isPresented(value: any) {
+    return value !== undefined && value !== null;
   }
 
   private formatDate(value: Date) {

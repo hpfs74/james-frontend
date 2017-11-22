@@ -31,9 +31,13 @@ import * as FormUtils from '../../utils/base-form.utils';
 import { SharedModule } from '../../shared.module';
 import { AddressModule } from '../../address/address.module';
 import { CarAdviceComponent } from './car-advice.component';
-import { CarExtrasForm } from '../components/advice/car-extras.form';
-import { CarDetailForm } from '../components/advice/car-detail.form';
+import { CarExtrasForm } from '../components/car-extras.form';
+import { CarDetailForm } from '../components/car-detail.form';
 import { Car } from '../models/car';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock.spec';
+import { TagsService } from '../../core/services/tags.service';
+import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -41,6 +45,7 @@ describe('Component: CarAdviceComponent', () => {
 
   let actions: Observable<any>;
   let store: Store<fromCar.State>;
+  let tagsService: TagsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -50,7 +55,7 @@ describe('Component: CarAdviceComponent', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'core': combineReducers(fromCore.reducers),
+          'app': combineReducers(fromCore.reducers),
           'car': combineReducers(fromCar.reducers),
           'insurance': combineReducers(fromInsurance.reducers),
           'profile': combineReducers(fromProfile.reducers)
@@ -59,14 +64,23 @@ describe('Component: CarAdviceComponent', () => {
       declarations: [
         CarAdviceComponent
       ],
+      providers: [
+        {
+          provide: TagsService,
+          useValue: TagsServiceMock
+        },
+        {
+          provide: ContentConfig,
+          useValue: ContentConfigMock
+        }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
 
     store = TestBed.get(Store);
+    tagsService = TestBed.get(TagsService);
     spyOn(store, 'dispatch').and.callThrough();
-  }));
 
-  beforeEach(async(() => {
     fixture = TestBed.createComponent(CarAdviceComponent);
     comp = fixture.componentInstance;
     comp.ngOnInit();
@@ -125,6 +139,12 @@ describe('Component: CarAdviceComponent', () => {
   });
 
   describe('Wizard', () => {
+    it('should initialize the wizard', () => {
+      expect(comp.currentStep).toBe(0);
+      expect(comp.formSteps).toBeDefined();
+      expect(comp.formSteps.length).toBeGreaterThan(0);
+    });
+
     xit('should change the wizard step', () => {
       const step = 2;
       comp.onStepChange(step);

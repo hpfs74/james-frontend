@@ -5,7 +5,7 @@
 </div>
 
 <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
-     [ngClass]="{'backdrop-blur': isBlurred}"
+    knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded"
      [hidden]="purchasedInsurancesLoading$ | async">
   <div class="container">
     <knx-step-navigation
@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="container knx-car-advice" [ngClass]="setClasses()" [hidden]="purchasedInsurancesLoading$ | async">
+<div class="container knx-car-advice" [ngClass]="getStepClass()" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" [hidden]="purchasedInsurancesLoading$ | async">
   <knx-wizard #knxWizard (stepChange)="onStepChange($event)" >
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
@@ -61,9 +61,8 @@
       </knx-step>
     </div>
 
-    <div class="knx-wizard__sidebar" [knxSticky]="currentStep !== 1" #knxWizardSidebar>
-      <knx-chat-stream
-        (onChatExpand)="blurWizard($event)"
+    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>
+      <knx-chat-stream #knxChatStream
         [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async"
         [formGroup]="carExtrasForm.formGroup">

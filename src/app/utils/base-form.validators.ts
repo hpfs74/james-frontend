@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { dateDecode } from '../utils/base-form.utils';
-import { isValidIban } from './iban-validator';
+import { isValidIBAN } from './iban-tools';
 
 export function maxNumberValidator(key: string, max: Number) {
   return (c: FormControl): { [key: string]: any } => {
@@ -122,13 +122,12 @@ export function birthDateValidator(key: string) {
  * @see {@link  https://github.com/jquery-validation/jquery-validation/blob/master/src/additional/iban.js|GitHub}
  * @param {string} key
  */
-export function ibanValidator(key: string) {
+export function ibanValidator(key: string, countryCode?: string) {
   return (c: FormControl) => {
     const value = c.value;
     const obj = {};
     obj[key] = true;
-    const onlyDutch = true;
-    return isValidIban(value, onlyDutch) ? null : obj;
+    return isValidIBAN(value) ? null : obj;
   };
 }
 

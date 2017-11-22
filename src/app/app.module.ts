@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AppShellModule } from '@angular/app-shell';
+// import { AppShellModule } from '@angular/app-shell';
 import { RouterModule, Router } from '@angular/router';
 import { StoreModule, Action } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -12,22 +12,19 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
+import { ContentConfig } from './content.config';
 
 import { reducers, metaReducers } from './reducers';
 
 import { AppComponent } from './core/containers/app.component';
 import { environment } from '../environments/environment';
+import { ContentLoader } from './utils/contentloader';
 
 // Feature modules
-import { SharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
-
-// export function ContentLoader(contentService: ContentService) {
-//   return () => contentService.loadFiles();
-// }
 
 @NgModule({
   imports: [
@@ -41,8 +38,6 @@ import { AddressModule } from './address/address.module';
 
     RouterModule.forRoot(routes),
 
-    SharedModule,
-
     StoreModule.forRoot(reducers, { metaReducers }),
 
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
@@ -51,20 +46,27 @@ import { AddressModule } from './address/address.module';
 
     EffectsModule.forRoot([]),
 
-    AuthModule.forRoot(),
-
     CoreModule.forRoot(),
+
+    AuthModule.forRoot(),
 
     InsuranceModule.forRoot(),
 
     AddressModule.forRoot(),
 
-    AppShellModule.runtime(),
+    // AppShellModule.runtime(),
   ],
   providers: [
     {
       provide: LOCALE_ID,
       useValue: 'nl-NL'
+    },
+    ContentConfig,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ContentLoader,
+      deps: [ContentConfig],
+      multi: true
     },
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
@@ -74,18 +76,10 @@ import { AddressModule } from './address/address.module';
     {
       provide: RouterStateSerializer,
       useClass: CustomRouterStateSerializer
-    },
-    // ContentService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: ContentLoader,
-    //   deps: [ContentService],
-    //   multi: true
-    // }
+    }
   ],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {
   // Diagnostic only: inspect router configuration
   constructor(router: Router) {

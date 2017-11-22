@@ -5,33 +5,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { Http, RequestOptions } from '@angular/http';
-// import { CXFormsModule } from '@cx/forms';
-import { SharedModule } from '../shared.module';
 
+// import { SharedModule } from '../shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './effects/auth.effects';
 import { AuthService, AuthHttp, AuthGuard, LoginGuard } from './services';
 import { LocalStorageService } from '../core/services';
 import { LoaderService } from '../components/knx-app-loader/loader.service';
+import { ContentConfig } from '../content.config';
 import { RegistrationEffects } from './effects/registration.effects';
 
-import { LoginPageComponent } from './containers/login-page.component';
-import { RegistrationPageComponent } from './containers/registration-page.component';
-import { RegistrationComponent } from './components/registration.component';
-
 import { reducers } from './reducers';
-import { RegistrationThankyouComponent } from './components/registration-thankyou.component';
-import { LoginFormComponent } from './components/login-form.component';
-import { LoginActivateComponent } from './components/login-activate.component';
-
-export const COMPONENTS = [
-  LoginPageComponent,
-  RegistrationPageComponent,
-  RegistrationComponent,
-  RegistrationThankyouComponent,
-  LoginFormComponent,
-  LoginActivateComponent
-];
 
 export function authHttpServiceFactory(
   http: Http,
@@ -44,9 +28,7 @@ export function authHttpServiceFactory(
 
 /* tslint:disable:no-use-before-declare */
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, SharedModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS,
+  imports: [CommonModule]
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {
@@ -58,6 +40,7 @@ export class AuthModule {
         LoginGuard,
         LocalStorageService,
         LoaderService,
+        ContentConfig,
         {
           provide: AuthHttp,
           useFactory: authHttpServiceFactory,

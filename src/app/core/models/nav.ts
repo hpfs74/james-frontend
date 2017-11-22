@@ -36,6 +36,7 @@ export class Nav {
   image?: string;
   cssClass?: string;
   menuType: NavItemType;
+  rel?: string;
 }
 
 export enum NavItemType {

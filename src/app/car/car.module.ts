@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -9,22 +9,17 @@ import { InsuranceReviewModule } from './../components/knx-insurance-review/insu
 import { CarRoutingModule } from './car-routing.module';
 
 import { CarService } from './services/car.service';
+import { TagsService } from '../core/services/tags.service';
+import { TagsLoader } from '../utils/tagsloader';
 
 // Smart components / page containers
 import { CarAdviceComponent } from './containers/car-advice.component';
-import { CarBuyComponent } from './containers/car-buy.component';
-import { CarThankYouComponent } from './containers/car-thank-you.component';
 import { CarPurchasedComponent } from './containers/car-purchased.component';
+import { CarThankYouComponent } from './containers/car-thank-you.component';
 
 // Dumb components
-import { CarDetailComponent } from './components/advice/car-detail.component';
-import { CarExtrasComponent } from './components/advice/car-extras.component';
-
-import { CarContactComponent } from './components/buy/car-contact.component';
-import { CarReportingCodeComponent } from './components/buy/car-reporting-code.component';
-import { CarCheckComponent } from './components/buy/car-check.component';
-import { CarPaymentComponent } from './components/buy/car-payment.component';
-import { CarSummaryComponent } from './components/buy/car-summary.component';
+import { CarDetailComponent } from './components/car-detail.component';
+import { CarExtrasComponent } from './components/car-extras.component';
 
 import { CarEffects } from './effects/car';
 import { CompareEffects } from './effects/compare';
@@ -34,16 +29,10 @@ import { reducers } from './reducers';
 
 export const COMPONENTS = [
   CarAdviceComponent,
-  CarBuyComponent,
-  CarThankYouComponent,
   CarPurchasedComponent,
   CarDetailComponent,
   CarExtrasComponent,
-  CarContactComponent,
-  CarReportingCodeComponent,
-  CarCheckComponent,
-  CarPaymentComponent,
-  CarSummaryComponent
+  CarThankYouComponent
 ];
 
 @NgModule({
@@ -65,5 +54,4 @@ export const COMPONENTS = [
     CarService
   ]
 })
-export class CarModule {
-}
+export class CarModule {}

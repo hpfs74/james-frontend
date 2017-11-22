@@ -25,6 +25,7 @@ export class ChatStreamComponent implements OnChanges {
   @Input() options: ChatStreamOptions;
   @Input() messages: Array<ChatMessage>;
   @Output() public onChatExpand: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   chatExpanded = false;
   hasNewMessage = true;
 

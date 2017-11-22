@@ -1,0 +1,97 @@
+@import '~styles/base.scss';
+
+footer {
+  background: $knab-primary-gray;
+  color: $knab-primary-blue;
+  overflow: hidden;
+
+  .clearfix.visible-xs-block.visible-sm-block {
+    margin-bottom: 15px;
+  }
+
+  .bg-knab:after {
+    background: url("/assets/images/dumbbell-footer.svg") 0 0 no-repeat;
+    height: 175px;
+    width: 300px;
+    margin-left: -60px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .nav-pills > li > a,
+  footer .nav-pills > li > a:hover,
+  footer .nav-pills > li > a:focus,
+  footer .nav-pills > li > a:active {
+    background: none;
+    padding: 2px 0;
+    color: $knab-primary-blue;
+  }
+
+  .nav-pills > li > a:hover {
+    background: none;
+    color: #ec5f7d;
+  }
+
+  .nav-pills > li > h2 {
+    color: $knab-primary-blue;
+    font-size: 16.8px;
+    font-weight: 700;
+    font-family: $font-family-base;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+
+  .colophon {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 12px;
+
+    .nav-pills li {
+      line-height: 2;
+    }
+
+    .social {
+      margin-right: 15px;
+
+      a {
+        margin-left: 7px;
+        font-size: 14px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        .fa {
+          color: $knab-primary-blue;
+          font-size: 28px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  footer .bg-knab:after {
+    margin-left: -165px;
+    position: relative;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  footer .bg-knab:after {
+    margin-left: 50px;
+  }
+}
+
+@media (min-width: 768px) {
+  footer .colophon > div {
+    padding-left: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  footer .colophon .nav-pills li {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}

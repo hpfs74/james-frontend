@@ -67,13 +67,13 @@ export class RegistrationEffects {
 
   @Effect()
   resendActivationEmail$ = this.actions$
-    .ofType(registration.REGISTER_RESEND_ACTIVATION_EMAIL)
-    .map((action: registration.RegisterResendActivationEmail) => (action))
+    .ofType(registration.RESEND_ACTIVATION_EMAIL)
+    .map((action: registration.ResendActivationEmail) => (action))
     .exhaustMap((payload) =>
       this.authService
         .resendActivation(payload)
         .mergeMap((result: RegistrationResult) => {
-          return [new registration.RegisterResendActivationEmailSuccess()];
+          return [new registration.ResendActivationEmailSuccess()];
         })
         .catch((error) => {
           let errorText = JSON.parse(error.text()) || error;

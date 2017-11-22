@@ -2,7 +2,7 @@
     <label *ngIf="options.label">{{ options.label }}</label>
     <div class="knx-input__wrapper">
       <span *ngIf="hasAddonLeft()" [ngClass]="['knx-input__addon-icon', getAddonIcon()]"></span>
-      <span *ngIf="(isValid$ | async) && options.attributes['data-type'] != 'password'"
+      <span *ngIf="(isValid$ | async) && !options.attributes['password']"
         [ngClass]="['knx-input__valid', 'knx-icon-check']">
       </span>
 
@@ -32,7 +32,7 @@
         }">
 
       <button type="button"
-        *ngIf="options.showPasswordStrenght && options.formControl.value"
+        *ngIf="options.attributes['password']"
         class="knx-input__show-password knx-icon-eye"
         [class.knx-icon-eye-slash]="showPassword"
         [class.knx-icon-eye]="!showPassword"

@@ -10,40 +10,20 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as profile from '../../profile/actions/profile';
 import * as auth from '../../auth/actions/auth';
+import * as router from '../../core/actions/router';
 
 import { Nav } from '../models/nav';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { LoginModalComponent } from '../../auth/components/login-modal.component';
+import { LoginModalComponent } from '../../login/components/login-modal.component';
 import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
 import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';
+import { ContentConfig, Content } from '../../content.config';
 
 @Component({
   selector: 'knx-app',
-  template: `
-    <header class="header">
-      <knx-offline-indicator></knx-offline-indicator>
-
-      <knx-navbar *ngIf="isVisible()" [menuItems]="topMenu" (onLogOut)="logOut()">
-        <knx-opening-hours></knx-opening-hours>
-        <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
-      </knx-navbar>
-    </header>
-
-    <div class="main-container" knxSidePanelState>
-      <knx-loader *shellRender></knx-loader>
-      <router-outlet></router-outlet>
-    </div>
-
-    <div *ngIf="isVisible()" class="container-fluid knx-container--fullwidth knx-container--gray">
-      <knx-features>
-        <knx-feature-item title="Objectief" description="We vergelijken meer dan 20 verzekeraars"></knx-feature-item>
-        <knx-feature-item title="Bespaar" description="Krijg tot 15% korting op je autoverzekering"></knx-feature-item>
-        <knx-feature-item title="Overstaphulp" description="Wij regelen je overstap"></knx-feature-item>
-      </knx-features>
-    </div>
-  `,
+  templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, AfterViewInit {
@@ -60,13 +40,18 @@ export class AppComponent implements OnInit, AfterViewInit {
   loading$: Observable<boolean>;
   profile$: Observable<Profile>;
   route$: Observable<string>;
+  animationState = 'closed';
+  animationDone = false;
+  content: Content;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
     private store$: Store<fromRoot.State>,
     private navigationService: NavigationService,
-    private userDialogService: UserDialogService) {
-  }
+    private userDialogService: UserDialogService,
+    private contentConfig: ContentConfig) {
+      this.content = contentConfig.getContent();
+    }
 
   ngAfterViewInit() {
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -119,20 +104,26 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  isVisible() {
-    if (this.route$) {
-      let shouldShow = true;
+  toggleMenuOpen() {
+    this.animationState = this.animationState === 'closed' ? 'open' : 'closed';
+  }
 
-      // It's always visible
-      // this.route$.take(1)
-      //   .subscribe(currentRoute => {
-      //     shouldShow = (currentRoute !== '/login' && currentRoute !== '/register');
-      //   });
-      return shouldShow;
-    }
+  setMenuAnimationStatus(event: boolean) {
+    this.animationDone = event;
+  }
+
+  goToLogin() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new router.Go({ path: ['/login'] }));
   }
 
   logOut() {
+    this.toggleMenuOpen();
     this.store$.dispatch(new auth.Logout);
+  }
+
+  goToRegister() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new router.Go({ path: ['/register'] }));
   }
 }

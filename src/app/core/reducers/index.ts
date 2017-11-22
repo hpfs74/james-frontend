@@ -10,14 +10,14 @@ import * as fromLayout from './layout';
 
 import { environment } from '../../../environments/environment';
 
-export interface CoreState {
+export interface AppState {
   assistant: fromAssistant.State;
   layout: fromLayout.State;
   router: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
 export interface State extends fromRoot.State {
-  'core': CoreState;
+  'app': AppState;
 }
 
 export const reducers = {
@@ -27,17 +27,17 @@ export const reducers = {
 };
 
 
-export const selectCoreState = createFeatureSelector<CoreState>('core');
+export const selectAppState = createFeatureSelector<AppState>('app');
 
 /**
  * Router Reducers
  */
-export const getRouterUrl = createSelector(selectCoreState, (state: CoreState) => state.router.state.url);
+export const getRouterUrl = createSelector(selectAppState, (state: AppState) => state.router.state.url);
 
 /**
  * Layout Reducers
  */
-export const getLayoutState = createSelector(selectCoreState, (state: CoreState) => state.layout);
+export const getLayoutState = createSelector(selectAppState, (state: AppState) => state.layout);
 export const getLeftSidenavState = createSelector(getLayoutState, fromLayout.getLeftSidenavState);
 export const getRightSidenavState = createSelector(getLayoutState, fromLayout.getRightSidenavState);
 export const getOpenedModalNameState = createSelector(getLayoutState, fromLayout.getOpenedModalName);
@@ -45,7 +45,7 @@ export const getOpenedModalNameState = createSelector(getLayoutState, fromLayout
 /**
  * Chat Assistant Reducers
  */
-export const getAsisstantState = createSelector(selectCoreState, (state: CoreState) => state.assistant);
+export const getAsisstantState = createSelector(selectAppState, (state: AppState) => state.assistant);
 export const getAssistantMessageState = createSelector(getAsisstantState, fromAssistant.getMessages);
 export const getAssistantConfig = createSelector(getAsisstantState, fromAssistant.getConfig);
 

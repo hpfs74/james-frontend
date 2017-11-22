@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { KNXTooltipComponent, KNXTooltipOptions } from '@knx/tooltip';
 
 @Component({
@@ -18,7 +18,7 @@ import { KNXTooltipComponent, KNXTooltipOptions } from '@knx/tooltip';
     }
   `]
 })
-export class InfoIconComponent implements OnInit {
+export class InfoIconComponent {
   @ViewChild('container') container: ElementRef;
   @ViewChild(KNXTooltipComponent) knxTooltip: KNXTooltipComponent;
 
@@ -35,9 +35,5 @@ export class InfoIconComponent implements OnInit {
     if (!this.container.nativeElement.contains($event.target)) {
       this.knxTooltip.hide($event);
     }
-  }
-
-  ngOnInit() {
-
   }
 }

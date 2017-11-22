@@ -8,6 +8,8 @@ import { SharedModule } from '../../shared.module';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import { setUpTestBed } from './../../../test.common.spec';
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock.spec';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './../../components/knx-navbar/navbar.component';
 import { NavigationService } from '../services/navigation.service';
@@ -47,7 +49,7 @@ describe('Component: AppComponent', () => {
       StoreModule.forRoot({
       ...fromRoot.reducers,
       'auth': combineReducers(fromAuth.reducers),
-      'core': combineReducers(fromCore.reducers),
+      'app': combineReducers(fromCore.reducers),
       'insurance': combineReducers(fromInsurance.reducers),
       'profile': combineReducers(fromProfile.reducers)
     })],
@@ -58,6 +60,10 @@ describe('Component: AppComponent', () => {
       {
         provide: UserDialogService,
         useValue: jasmine.createSpyObj('UserDialogService', ['openModal'])
+      },
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
       }
     ]
   };
