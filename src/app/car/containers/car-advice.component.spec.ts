@@ -87,56 +87,28 @@ describe('Component: CarAdviceComponent', () => {
     fixture.detectChanges();
   }));
 
-  describe('Initialization', () => {
-    it('should bind a validator for license plate', () => {
-      const ctrl = comp.carDetailForm.formGroup.get('licensePlate');
-      expect(ctrl).toBeDefined();
-      expect(ctrl.asyncValidator).toBeDefined();
-    });
+  // describe('Initialization', () => {
+  //   it('should have a CarExtraForm init with proper default values', () => {
+  //     const carExtraForm = comp.carExtrasForm;
 
-    it('should init child component forms', () => {
-      expect(comp.carDetailForm).toBeDefined();
-      expect(comp.carDetailForm.formGroup).toBeDefined();
-      expect(comp.carExtrasForm).toBeDefined();
-    });
+  //     expect(carExtraForm.formConfig.extraOptionsLegal).toBeDefined();
+  //     expect(carExtraForm.formConfig.extraOptionsNoClaim).toBeDefined();
+  //     expect(carExtraForm.formConfig.extraOptionsOccupants).toBeDefined();
 
-    it('should init the wizard steps', () => {
-      expect(comp.formSteps).toBeDefined();
-      expect(comp.formSteps.length).toBeGreaterThan(0);
+  //     expect(carExtraForm.formConfig.roadAssistance).toBeDefined();
+  //     expect(carExtraForm.formConfig.ownRisk).toBeDefined();
+  //     expect(carExtraForm.formConfig.kmPerYear).toBeDefined();
+  //   });
 
-      comp.formSteps.forEach(step => {
-        expect(step.label).toBeDefined();
-        expect(step.onShowStep).toBeDefined();
-      });
-    });
+  //   it('should bind async validator for car info', () => {
+  //     comp.ngAfterViewChecked();
+  //     fixture.detectChanges();
 
-    it('should init the form template', () => {
-      const element = fixture.debugElement.query(By.css('form'));
-      expect(element).toBeDefined();
-      expect(comp).toBeDefined();
-    });
-
-    it('should have a CarExtraForm init with proper default values', () => {
-      const carExtraForm = comp.carExtrasForm;
-
-      expect(carExtraForm.formConfig.extraOptionsLegal).toBeDefined();
-      expect(carExtraForm.formConfig.extraOptionsNoClaim).toBeDefined();
-      expect(carExtraForm.formConfig.extraOptionsOccupants).toBeDefined();
-
-      expect(carExtraForm.formConfig.roadAssistance).toBeDefined();
-      expect(carExtraForm.formConfig.ownRisk).toBeDefined();
-      expect(carExtraForm.formConfig.kmPerYear).toBeDefined();
-    });
-
-    it('should bind async validator for car info', () => {
-      comp.ngAfterViewChecked();
-      fixture.detectChanges();
-
-      let licenseInput = comp.carDetailForm.formGroup.get('licensePlate');
-      expect(licenseInput).toBeDefined();
-      expect(licenseInput.validator.length).toBeGreaterThan(0);
-    });
-  });
+  //     let licenseInput = comp.carDetailForm.formGroup.get('licensePlate');
+  //     expect(licenseInput).toBeDefined();
+  //     expect(licenseInput.validator.length).toBeGreaterThan(0);
+  //   });
+  // });
 
   describe('Wizard', () => {
     it('should initialize the wizard', () => {
