@@ -79,7 +79,6 @@ export class RegistrationEffects {
         })
     );
 
-  constructor(private actions$: Actions, private authService: AuthService, private store$: Store<fromAdvice.State>) {
-    window.store = this.store$;
+  constructor(private actions$: Actions, private authService: AuthService) {
   }
 }
