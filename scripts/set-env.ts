@@ -139,6 +139,7 @@ function getContent(environment: string) {
         },
         key: '${getEnvVar('PAYLOAD_KEY_URL')}',
         profile: '${getEnvVar('PAYLOAD_PROFILE_URL')}',
+        profileWithAdvice: '${getEnvVar('PAYLOAD_PROFILE_WITH_ADVICE_URL')}',
         token: '${getEnvVar('PAYLOAD_TOKEN_URL')}',
         login: '${getEnvVar('PAYLOAD_LOGIN_URL')}',
         activation: '${getEnvVar('PAYLOAD_ACTIVATION_URL')}'
