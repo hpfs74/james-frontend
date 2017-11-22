@@ -165,17 +165,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         // redirect to purchased overview if there are any manually added insurances
         if (purchasedInsurances && purchasedInsurances.filter(insurance => !insurance.manually_added ).length) {
           this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-
-          return; //????
-        }
-
-        if (purchasedInsurances.length && purchasedInsurances.filter(ins => ins.status === 'draft').length) {
+        } else if (purchasedInsurances.length && purchasedInsurances.filter(ins => ins.status === 'draft').length) {
           let savedAdvice = purchasedInsurances[0].draft;
           savedAdvice._embedded = {
             car: null,
             insurance: null
           };
-
 
           // TODO: Anonymous part 2
           // this.store$.dispatch(new advice.SetInsuranceAction(savedAdvice));
