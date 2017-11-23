@@ -57,7 +57,7 @@ export class CarDetailForm extends BaseForm {
         type: 'custom',
         label: 'Wat is je kenteken?',
         validationErrors: this.validationErrors,
-        formControl: this.formGroup.get('licensePlate') ,
+        formControl: this.formGroup.get('licensePlate'),
         inputOptions: {
           placeholder: 'AF-19-65'
         }
@@ -66,7 +66,7 @@ export class CarDetailForm extends BaseForm {
         formControlName: 'birthDate',
         label: 'Geboortedatum',
         type: 'date',
-        formControl: this.formGroup.get('birthDate') ,
+        formControl: this.formGroup.get('birthDate'),
         validationErrors: this.validationErrors,
         inputOptions: {
           decode: true
@@ -75,7 +75,7 @@ export class CarDetailForm extends BaseForm {
       claimFreeYears: {
         formControlName: 'claimFreeYears',
         label: 'Aantal schadevrije jaren',
-        formControl: this.formGroup.get('claimFreeYears') ,
+        formControl: this.formGroup.get('claimFreeYears'),
         validationErrors: this.validationErrors,
         help: true,
         inputOptions: {
@@ -87,7 +87,7 @@ export class CarDetailForm extends BaseForm {
         formControlName: 'loan',
         label: 'Heb je een lening?',
         type: 'radio',
-        formControl: this.formGroup.get('loan') ,
+        formControl: this.formGroup.get('loan'),
         validationErrors: this.validationErrors,
         help: true,
         inputOptions: {
@@ -109,7 +109,7 @@ export class CarDetailForm extends BaseForm {
         formControlName: 'houseHold',
         label: 'Wat is je gezinssituatie?',
         type: 'select',
-        formControl: this.formGroup.get('houseHold') ,
+        formControl: this.formGroup.get('houseHold'),
         validationErrors: this.validationErrors,
         inputOptions: {
           placeholder: '',
@@ -121,7 +121,7 @@ export class CarDetailForm extends BaseForm {
         formControlName: 'gender',
         label: 'Geslacht',
         type: 'radio',
-        formControl: this.formGroup.get('gender') ,
+        formControl: this.formGroup.get('gender'),
         validationErrors: this.validationErrors,
         inputOptions: {
           formGroupModifiers: ['knx-form-group__wrap--spread'],
