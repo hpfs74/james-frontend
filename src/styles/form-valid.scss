@@ -10,15 +10,15 @@
 
   .ng-valid.ng-pristine.ng-touched {
     input {
-      border: 1px solid #e0e0e0; /* color only in knx-lib */
+      border: 1px solid #e0e0e0; /* color only in cx-lib */
     }
 
-    .knx-input:after {
+    .cx-input:after {
       content: none;
     }
   }
 
-  knx-select.ng-valid.ng-dirty select {
+  cx-select.ng-valid.ng-dirty select {
     border: 2px solid $knab-secondary-green;
   }
 }

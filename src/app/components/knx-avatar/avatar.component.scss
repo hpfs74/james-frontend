@@ -1,0 +1,72 @@
+@import '~styles/base.scss';
+
+.knx-avatar__image {
+  border: 0;
+}
+
+.knx-avatar--editable {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.knx-avatar__profile-image {
+  position: relative;
+  margin-bottom: 20px;
+
+  cx-form-group {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &:before {
+      position: absolute;
+      z-index: 1;
+      right: 0;
+      top: 64px;
+      background: #123;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      border: 1px #fff solid;
+      text-indent: 7px;
+      line-height: 23px;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .cx-file-upload__upload {
+      position: relative;
+      z-index: 2;
+      width: 90px;
+      height: 90px;
+      cursor: pointer;
+    }
+  }
+
+  .cx-list {
+    display: none;
+  }
+
+  .cx-file-upload__input {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .knx-avatar {
+    .knx-avatar__image {
+      width: 60px;
+      margin-left: auto;
+      margin-right: -5px;
+      background: $knab-white;
+      border: 3px $knab-primary-gray solid;
+      transition: all 0.3s;
+
+      &:hover {
+        cursor: pointer;
+        width: 89px;
+      }
+    }
+  }
+}

@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
-import { KNXLocale } from '@knx/locale';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { SharedModule } from '../../shared.module';
@@ -24,7 +23,6 @@ describe('Component: CarCheckComponent', () => {
 
   let moduleDef: TestModuleMetadata = {
     declarations: [CarCheckComponent, TestHostComponent],
-    providers: [KNXLocale],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
@@ -32,6 +30,9 @@ describe('Component: CarCheckComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     comp = fixture.componentInstance;
+    comp.formFromHost.infoMessages = {
+      reportingCode: 'Example explanation icon text'
+    };
     fixture.detectChanges();
   });
 

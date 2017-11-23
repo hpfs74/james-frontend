@@ -3,7 +3,6 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@a
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
-import { KNXLocale } from '@knx/locale';
 import { setUpTestBed } from './../../../test.common.spec';
 
 import { SharedModule } from '../../shared.module';
@@ -43,7 +42,6 @@ describe('Component: CarCheckComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [BrowserModule, SharedModule],
     declarations: [AddressComponent, TestHostComponent],
-    providers: [KNXLocale],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);

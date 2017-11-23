@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { KNXPostalCodeValidator } from '@knx/form-control';
+import { CXPostalCodeValidator } from '@cx/form-control';
 
 import { BaseForm } from '../../shared/forms/base-form';
 import { AddressForm } from '../../address/components/address.form';
@@ -53,7 +53,7 @@ export class ProfileForm extends BaseForm {
         label: 'Geslacht',
         type: 'radio',
         inputOptions: {
-          formGroupModifiers: ['knx-form-group__wrap--spread'],
+          formGroupModifiers: ['cx-form-group__wrap--spread'],
           items: [
             {
               label: 'Man',
@@ -83,9 +83,11 @@ export class ProfileForm extends BaseForm {
         formControl: this.formGroup.get('birthDate'),
         validationErrors: this.validationErrors,
         label: 'Geboortedatum',
-        type: 'date',
+        type: 'date-input',
         inputOptions: {
-          decode: true
+          placeholder: 'DD / MM / JJJJ',
+          transform: birthDateMask.decode,
+          textMask: birthDateMask
         }
       },
       pushNotifications: {

@@ -1,0 +1,123 @@
+@import '~styles/base.scss';
+
+$knxInputBorderRadius: 3px;
+$knxInputHeight: 44px;
+$knxInputPadding: 10px;
+$knxInputFontSize: 18px;
+$knxInputWidth: 100%;
+$knxInputMinHeight: 99px;
+$knxIconColorGreen: $knab-secondary-green;
+
+.knx-input__wrapper {
+  width: $knxInputWidth;
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.knx-input {
+  position: relative;
+  width: $knxInputWidth;
+  min-height: $knxInputMinHeight;
+
+  ::-ms-reveal {
+    display: none;
+  }
+}
+
+.knx-input__input {
+  border: 1px solid $knab-mercury;
+  background: $knab-light-gray;
+  width: 100%;
+  height: $knxInputHeight;
+  border-radius: $knxInputBorderRadius;
+  padding-right: 40px;
+}
+
+.knx-input__error_message {
+  position: absolute;
+  top: $knxInputHeight + 1px;
+  left: 0;
+
+  p {
+    color: $knab-error;
+    font-size: $font-size-base - 2;
+  }
+}
+
+.knx-input--error {
+  border-left: 2px solid $knab-error;
+  padding-left: 10px;
+  margin-left: -12px;
+  width: calc(100% + 12px);
+}
+
+.knx-input--valid input {
+  border: 2px solid $knab-secondary-green;
+}
+
+.knx-input--disabled {
+  > .knx-input__input {
+    color: $knab-muted;
+    background: $knab-disabled-gray;
+  }
+}
+
+.knx-input__addon-left {
+  padding-left: $knxInputPadding;
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  height: $knxInputHeight;
+}
+
+.knx-input__input.knx-input__addon-left {
+  margin-left: -1px; // undo flex item space between
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.knx-input__addon-icon {
+  width: 44px;
+  padding: $knxInputPadding;
+  text-align: center;
+  border: 1px solid $knab-mercury;
+  border-top-left-radius: $knxInputBorderRadius;
+  border-bottom-left-radius: $knxInputBorderRadius;
+}
+
+.knx-input__valid {
+  position: absolute;
+  right: 15px;
+  top: 25%;
+  color: $knxIconColorGreen;
+  z-index: $z-index-knx-input;
+}
+
+.knx-input__show-password {
+  position: absolute;
+  top: 25%;
+  right: 10px;
+  background: transparent;
+  border: 0;
+  color: $knab-dark-gray;
+
+  &:focus,
+  &:hover,
+  &:active,
+  &:visited {
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+  }
+
+  &.knx-icon-eye-slash {
+    color: #c3bbaa;
+  }
+}
+
+// HACK: icon position should be fixed from icon font
+.knx-icon-lock:before {
+  transform: scale(1.3);
+  padding-left: 5px;
+}
