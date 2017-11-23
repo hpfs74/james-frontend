@@ -11,32 +11,28 @@
               (ngSubmit)="registerAndShowErrors($event)"
               (keyup.enter)="register($event)"
               autocomplete="off">
-          <div class="cx-form-group">
-            <knx-input
-              [formControlName]="form.formConfig.email.formControlName"
-              [options]="form.formConfig.email">
-            </knx-input>
-          </div>
+          <knx-form-group
+            [formControlName]="form.formConfig.email.formControlName"
+            [options]="form.formConfig.email">
+          </knx-form-group>
 
-          <div class="cx-form-group">
-            <knx-input
-              [formControlName]="form.formConfig.password.formControlName"
-              [options]="form.formConfig.password">
-            </knx-input>
-          </div>
+          <knx-form-group
+            [formControlName]="form.formConfig.password.formControlName"
+            [options]="form.formConfig.password">
+          </knx-form-group>
 
-          <div class="cx-form-group">
-            <knx-checkbox
-              [formControlName]="form.formConfig.confirm.formControlName"
-              [options]="form.formConfig.confirm"
-              id="termsAndCondition">
+          <knx-form-group
+            [formControlName]="form.formConfig.confirm.formControlName"
+            [options]="form.formConfig.confirm">
+
+            <knx-checkbox [formControl]="form.formConfig.confirm.formControl" [options]="form.formConfig.confirm">
               Ik ga akkoord met de
               <a class="knx-registration__document-link" href="{{ termsAndConditionsUrl }}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
               en het
               <a class="knx-registration__document-link" href="{{ privacyStatementUrl }}" target="_blank" rel="noopener">privacybeleid</a>
               van Knab.
             </knx-checkbox>
-          </div>
+          </knx-form-group>
 
           <div class="knx-registration__actions">
             <button type="submit" class="knx-button knx-button--primary" [class.knx-button--pending]="pending">Account aanmaken</button>

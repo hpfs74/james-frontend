@@ -1,0 +1,8 @@
+.knx-form-group {
+  font-size: $font-size-base;
+}
+
+.knx-form-group__label + .knx-form-group__description {
+  font-size: $base-font-size - 2;
+  margin-top: -5px;
+}

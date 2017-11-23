@@ -3,8 +3,6 @@ import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } fro
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { KNXInputOptions } from '../../components/knx-input/input.options';
-
 import { RegistrationForm } from '../components/registration.form';
 import { registrationError } from '../models/registration-error';
 import { Authenticate } from '../../auth/models/auth';

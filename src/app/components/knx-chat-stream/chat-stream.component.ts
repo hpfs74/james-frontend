@@ -7,7 +7,12 @@ import { ChatMessage } from './chat-message';
   styleUrls: ['./chat-stream.component.scss'],
   template: `
     <div class="knx-chat-stream" [ngClass]="{'knx-chat-stream--expanded': chatExpanded}">
-      <knx-avatar (click)="toggleChat()" (knxClickOutside)="closeChat()" [title]="options.avatar.title"></knx-avatar>
+      <knx-avatar
+        (click)="toggleChat()"
+        (knxClickOutside)="closeChat()"
+        [title]="options.avatar.title"
+        image="/assets/images/avatars/avatar.png">
+      </knx-avatar>
 
       <div class="knx-chat-stream__notification" [ngClass]="{'knx-chat-stream__notification--active': hasNewMessage}"></div>
 

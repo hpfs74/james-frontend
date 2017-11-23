@@ -18,19 +18,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
-// @cx
-import { CXFormsModule } from '@cx/forms';
-import { TextMaskModule } from '@cx/input';
-
 // @knx
+import { KNXFormsModule } from '@knx/forms';
+import { TextMaskModule } from '@knx/input';
 import { KNXWizardModule } from '@knx/wizard';
 import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
-import { KNXInfoModule } from '@knx/info';
+import { KNXInfoModule } from '@knx/info'; // deprecate in favor of tooltip
 import { KNXTooltipModule } from '@knx/tooltip';
 import { KNXModalDialogModule } from '@knx/modal';
-import { KNXCheckboxComponent } from './components/knx-checkbox/checkbox.component';
-import { KNXInputComponent } from './components/knx-input/input.component';
+import { KNXAvatarComponent } from '@knx/avatar';
+import { KNXInfoIconComponent } from '@knx/info-icon';
+
+// TODO: consider moving to shared library
 import { KNXHamburgerComponent } from './components/knx-hamburger/knx-hamburger.component';
 import { KNXNavbarMenuComponent } from './components/knx-navbar-menu/knx-navbar-menu.component';
 import { KNXFooterComponent } from './components/knx-footer/knx-footer.component';
@@ -74,15 +74,12 @@ import { DonutComponent } from './components/knx-donut/donut.component';
 import { DownloadPanelComponent } from './components/knx-download-panel/download-panel.component';
 import { FeaturesComponent } from './components/knx-features/features.component';
 import { FeatureItemComponent } from './components/knx-features/feature-item.component';
-import { FormGroupInfoComponent } from './components/knx-form-group-info/form-group-info.component';
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
 import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
-import { InfoIconComponent } from './components/knx-info-icon/info-icon.component';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
-import { PasswordStrengthComponent } from './components/knx-password-strength/password-strength.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
 import { ReviewSummaryComponent } from './components/knx-review-summary/review-summary.component';
 import { StarRatingComponent } from './components/knx-star-rating/star-rating.component';
@@ -124,16 +121,13 @@ export const sharedComponents = [
   DownloadPanelComponent,
   FeaturesComponent,
   FeatureItemComponent,
-  FormGroupInfoComponent,
   LicensePlateComponent,
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
   InsuranceTopListComponent,
-  InfoIconComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,
   OfflineBarComponent,
-  PasswordStrengthComponent,
   PriceTableComponent,
   PriceItemComponent,
   ReviewSummaryComponent,
@@ -150,15 +144,15 @@ export const sharedComponents = [
   RegisterPanelComponent,
   NavUserComponent,
   UserGreetingComponent,
-  KNXCheckboxComponent,
-  KNXInputComponent,
+  KNXAvatarComponent,
+  KNXInfoIconComponent,
   KNXHamburgerComponent,
   KNXNavbarMenuComponent,
   KNXFooterComponent
 ];
 
 export const sharedModules = [
-  CXFormsModule,
+  KNXFormsModule,
   KNXWizardModule,
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
