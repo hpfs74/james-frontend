@@ -1,7 +1,7 @@
 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { BaseForm, KNXCustomFormGroupOptions } from '../../shared/forms/base-form';
+import { BaseForm } from '../../shared/forms/base-form';
 import { nameInitialMask } from '../../utils/base-form.utils';
 import { numberValidator } from '../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../utils/base-form.validators';
@@ -9,7 +9,7 @@ import { UIPair } from '../../core/models/ui-pair';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
-  formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
+  formConfig: any;
 
   public validationErrors = {
     required: () => 'Dit is een verplicht veld',

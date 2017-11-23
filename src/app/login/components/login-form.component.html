@@ -19,21 +19,22 @@
             <form [formGroup]="form.formGroup" (ngSubmit)="loginAndShowErrors($event);" (keyup.enter)="login($event)" autocomplete="off">
               <div class="row">
                 <div class="col-md-12">
-                  <knx-form-group
+                  <knx-input
                     [formControlName]="form.formConfig.email.formControlName"
                     [options]="form.formConfig.email">
-                  </knx-form-group>
+                  </knx-input>
 
-                  <knx-form-group
-                    [formControlName]="form.formConfig.password.formControlName"
-                    [options]="form.formConfig.password">
-                  </knx-form-group>
+                  <div class="login-password-wrapper">
 
+                    <knx-input
+                      [formControlName]="form.formConfig.password.formControlName"
+                      [options]="form.formConfig.password">
+                    </knx-input>
+                  </div>
                   <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage && !resendSuccess">
                     <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }} <a *ngIf="errorMessage.hasLink" (click)="resendActivationMail()">Stuur opnieuw</a></p>
                     <p *ngIf="!errorMessage.errorText">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</p>
                   </div>
-
                   <div *ngIf="resendSuccess" class="knx-login__success">
                     <p>Succesvol verstuurd</p>
                   </div>

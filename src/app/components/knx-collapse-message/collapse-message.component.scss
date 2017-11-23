@@ -63,28 +63,28 @@ h4.knx-collapse-message__title,
 
 .knx-collapse-message__content {
   label,
-  .knx-select select,
-  .knx-radio__label,
-  .knx-checkbox__label {
+  .cx-select select,
+  .cx-radio__label,
+  .cx-checkbox__label {
     font-size: $font-size-base - 2;
   }
 
-  .knx-form-group {
+  .cx-form-group {
     margin-bottom: 0;
   }
 
-  .knx-select:after {
+  .cx-select:after {
     line-height: 0.8em;
   }
 
-  .knx-radio__control,
-  .knx-checkbox__control {
+  .cx-radio__control,
+  .cx-checkbox__control {
     width: 25px;
     height: 25px;
     min-width: 25px;
   }
 
-  .knx-slider {
+  .cx-slider {
     padding-bottom: 40px;
   }
 }

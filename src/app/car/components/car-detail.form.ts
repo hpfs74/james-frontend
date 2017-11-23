@@ -1,7 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { KNXFormGroupOptions } from '@knx/forms';
 
-import { BaseForm, KNXCustomFormGroupOptions } from '../../shared/forms/base-form';
+import { BaseForm } from '../../shared/forms/base-form';
 import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';
 import { LicensePlateValidator } from '../../components/knx-input-licenseplate/licenseplate.validator';
@@ -9,7 +8,7 @@ import { UIPair } from '../../core/models/ui-pair';
 
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
-  formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
+  formConfig: any;
 
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
@@ -65,11 +64,13 @@ export class CarDetailForm extends BaseForm {
       birthDate: {
         formControlName: 'birthDate',
         label: 'Geboortedatum',
-        type: 'date',
+        type: 'date-input',
         formControl: this.formGroup.get('birthDate'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          decode: true
+          placeholder: 'DD / MM / JJJJ',
+          transform: birthDateMask.decode,
+          textMask: birthDateMask
         }
       },
       claimFreeYears: {
@@ -77,7 +78,6 @@ export class CarDetailForm extends BaseForm {
         label: 'Aantal schadevrije jaren',
         formControl: this.formGroup.get('claimFreeYears'),
         validationErrors: this.validationErrors,
-        help: true,
         inputOptions: {
           type: 'number',
           events: ['focus']
@@ -89,9 +89,8 @@ export class CarDetailForm extends BaseForm {
         type: 'radio',
         formControl: this.formGroup.get('loan'),
         validationErrors: this.validationErrors,
-        help: true,
         inputOptions: {
-          formGroupModifiers: ['knx-form-group__wrap--spread'],
+          formGroupModifiers: ['cx-form-group__wrap--spread'],
           placeholder: '',
           items: [
             {
@@ -124,7 +123,7 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('gender'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          formGroupModifiers: ['knx-form-group__wrap--spread'],
+          formGroupModifiers: ['cx-form-group__wrap--spread'],
           placeholder: 'Selecteer je geslacht',
           items: [
             {

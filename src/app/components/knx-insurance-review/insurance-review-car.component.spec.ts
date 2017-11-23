@@ -4,7 +4,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { CurrencyPipe } from '@angular/common';
 import { KNXCollapsiblePanelComponent } from '@knx/collapsible-panel/index';
 import { KNXInfoComponent } from '@knx/info/index';
-import { KNXFormsModule } from '@knx/forms';
+import { CXFormsModule } from '@cx/forms';
 
 import { SharedModule } from '../../shared.module';
 import { InsuranceReviewCarComponent } from './insurance-review-car.component';
@@ -29,7 +29,7 @@ describe('Component: InsuranceReviewCarComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
-        KNXFormsModule,
+        CXFormsModule,
         SharedModule,
         InsuranceReviewModule],
       declarations: [
