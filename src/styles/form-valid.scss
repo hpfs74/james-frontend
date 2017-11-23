@@ -3,13 +3,13 @@
 
 .knx-fancy-form {
   .ng-valid.ng-touched:not(form) {
-    input {
+    input:not(:focus) {
       border: 2px solid $knab-secondary-green;
     }
   }
 
   .ng-valid.ng-pristine.ng-touched {
-    input {
+    input:not(:focus) {
       border: 1px solid #e0e0e0; /* color only in knx-lib */
     }
 
@@ -18,7 +18,7 @@
     }
   }
 
-  knx-select.ng-valid.ng-dirty select {
+  knx-select.ng-valid.ng-dirty select:not(:focus) {
     border: 2px solid $knab-secondary-green;
   }
 }

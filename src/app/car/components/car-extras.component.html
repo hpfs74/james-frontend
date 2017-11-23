@@ -15,7 +15,7 @@
         [options]="form.formConfig.roadAssistance"
         [formControlName]="form.formConfig.roadAssistance.formControlName">
 
-        <knx-info-icon [options]="{ position: 'left' }">
+        <knx-tooltip [options]="{ position: 'left' }">
           Deze extra dekking sluit je af vanaf € 3 per maand.
           Met deze dekking weet je dat je bij pech onderweg kunt rekenen op hulp en snel weer verder kan.
 
@@ -26,7 +26,7 @@
 
           Heb je een reisverzekering? Check dan even of pechhulp in het buitenland daar al in zit. Heb je een nieuwe auto?
           Dan heb je vaak het eerste jaar gratig pechhulp van de dealer. Door dit te checken voorkom je een dubbele verzekering.
-        </knx-info-icon>
+        </knx-tooltip>
       </knx-form-group>
     </div>
   </knx-collapse-message>
@@ -38,11 +38,11 @@
         [formControlName]="form.formConfig.extraOptionsLegal.formControlName"
         [options]="form.formConfig.extraOptionsLegal.inputOptions"></knx-checkbox>
 
-        <knx-info-icon [options]="{ position: 'left' }">
+        <knx-tooltip [options]="{ position: 'left' }">
           Je sluit deze dekking af vanaf € 3 per maand.
           Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat
           ervaren juristen je bijstaan. Dit geldt alleen voor verkeer rechtsbijstand en alleen voor deze auto.
-        </knx-info-icon>
+        </knx-tooltip>
     </div>
 
     <div class="knx-form-group--info knx-form-group--info-checkbox">
@@ -51,12 +51,12 @@
         [formControlName]="form.formConfig.extraOptionsNoClaim.formControlName"
         [options]="form.formConfig.extraOptionsNoClaim.inputOptions"></knx-checkbox>
 
-      <knx-info-icon [options]="{ position: 'left' }">
+      <knx-tooltip [options]="{ position: 'left' }">
         Je sluit deze dekking af vanaf € 4 per maand.
         Hiermee kun je elk jaar een keer schade door je eigen schuld claimen zonder dat de premie van je lopende verzekering omhoog gaat.
         Nadeel is dat de registratie van je schadevrije jaren wel wordt aangepast. Dat is vervelend als je wilt veranderen van verzekeraar,
         want dan betaal je plots een hogere premie vanwege je schadevrije jaren.
-      </knx-info-icon>
+      </knx-tooltip>
     </div>
 
     <div class="knx-form-group--info knx-form-group--info-checkbox">
@@ -65,11 +65,11 @@
         [formControlName]="form.formConfig.extraOptionsOccupants.formControlName"
         [options]="form.formConfig.extraOptionsOccupants.inputOptions"></knx-checkbox>
 
-      <knx-info-icon [options]="{ position: 'left' }">
+      <knx-tooltip [options]="{ position: 'left' }">
         Je sluit deze dekking af vanaf € 4 per maand.
         Je dekt hiermee de materiële schade af die jij als bestuurder, je passagiers en/of de bagage kunnen
         oplopen bij een aanrijding. Deze dekking is handig als je bijvoorbeeld vaak met het hele gezin in de auto zit.
-      </knx-info-icon>
+      </knx-tooltip>
     </div>
 
   </knx-collapse-message>

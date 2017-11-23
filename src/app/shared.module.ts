@@ -28,7 +28,6 @@ import { KNXInfoModule } from '@knx/info'; // deprecate in favor of tooltip
 import { KNXTooltipModule } from '@knx/tooltip';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXAvatarComponent } from '@knx/avatar';
-import { KNXInfoIconComponent } from '@knx/info-icon';
 
 // TODO: consider moving to shared library
 import { KNXHamburgerComponent } from './components/knx-hamburger/knx-hamburger.component';
@@ -145,7 +144,6 @@ export const sharedComponents = [
   NavUserComponent,
   UserGreetingComponent,
   KNXAvatarComponent,
-  KNXInfoIconComponent,
   KNXHamburgerComponent,
   KNXNavbarMenuComponent,
   KNXFooterComponent

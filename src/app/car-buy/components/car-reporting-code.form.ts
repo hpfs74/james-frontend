@@ -50,7 +50,10 @@ export class CarReportingCodeForm extends BaseForm {
         label: 'Waarde accessoires',
         type: 'currency',
         formControl: this.formGroup.get('accessoryValue'),
-        validationErrors: this.validationErrors
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          prefix: 'knx-icon-eur'
+        }
       },
       securityClass: {
         formControlName: 'securityClass',

@@ -54,7 +54,9 @@ export class IbanForm extends BaseForm {
         description: 'De premie wordt maandelijks automatisch afgeschreven',
         formControl: this.formGroup.get('iban'),
         validationErrors: this.validationErrors,
-        type: 'text'
+        inputOptions: {
+          type: 'text'
+        }
       }
     };
   }
