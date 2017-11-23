@@ -5,6 +5,7 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { By } from '@angular/platform-browser';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { KNXLocale } from '@knx/locale';
 import { Observable } from 'rxjs/Observable';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
 
@@ -138,6 +139,7 @@ describe('Component: CarBuyComponent', () => {
     ],
     schemas: [NO_ERRORS_SCHEMA],
     providers: [
+      KNXLocale,
       CurrencyPipe,
       {
         provide: TagsService,

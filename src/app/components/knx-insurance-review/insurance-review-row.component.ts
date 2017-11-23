@@ -70,15 +70,6 @@ export class InsuranceReviewRowValueComponent { }
     <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
       <knx-tooltip><ng-content></ng-content></knx-tooltip>
     </span>
-   <!-- <knx-info size="md" isFloating="true" class="knx-info">
-    <div class="knx-info__content">
-      <div class="knx-message knx-message--arrow-top">
-        <div class="knx-message__content">
-          <ng-content></ng-content>
-        </div>
-      </div>
-    </div>
-  </knx-info>-->
   `
 })
 export class InsuranceReviewRowInfoComponent { }

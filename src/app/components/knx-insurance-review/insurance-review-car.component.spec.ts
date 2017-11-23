@@ -28,6 +28,7 @@ describe('Component: InsuranceReviewCarComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
+        KNXFormsModule,
         SharedModule,
         InsuranceReviewModule],
       declarations: [

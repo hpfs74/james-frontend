@@ -3,6 +3,11 @@
 
 $knx-navbar-font: $font-size-base;
 
+a:hover {
+  text-decoration: none;
+  font-weight: normal;
+}
+
 ul {
   list-style-type: none;
 }
