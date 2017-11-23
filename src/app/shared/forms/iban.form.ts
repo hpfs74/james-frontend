@@ -42,6 +42,7 @@ export class IbanForm extends BaseForm {
         formControlName: 'startDate',
         label: 'Ingangsdatum',
         type: 'date',
+        help: true,
         formControl: this.formGroup.get('startDate'),
         validationErrors: this.validationErrors,
         inputOptions: {
@@ -51,6 +52,7 @@ export class IbanForm extends BaseForm {
       iban: {
         formControlName: 'iban',
         label: 'Bankrekening (IBAN)',
+        help: true,
         description: 'De premie wordt maandelijks automatisch afgeschreven',
         formControl: this.formGroup.get('iban'),
         validationErrors: this.validationErrors,

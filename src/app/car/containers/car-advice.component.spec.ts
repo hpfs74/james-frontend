@@ -88,7 +88,7 @@ describe('Component: CarAdviceComponent', () => {
   }));
 
   describe('Initialization', () => {
-    xit('should bind a validator for license plate', () => {
+    it('should bind a validator for license plate', () => {
       const ctrl = comp.carDetailForm.formGroup.get('licensePlate');
       expect(ctrl).toBeDefined();
       expect(ctrl.asyncValidator).toBeDefined();

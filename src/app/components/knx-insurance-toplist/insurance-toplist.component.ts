@@ -49,6 +49,23 @@ interface OrderItem {
           </button>
 
           <div class="knx-insurance-toplist__info">
+            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+              <knx-tooltip>
+                <p>Onze slimme technologie gaat op basis van de door jou opgegeven informatie aan de slag. We vergelijken
+                meer dan 20 aanbieders en stellen hier een overzicht uit samen. Daarbij kijken we niet alleen naar de prijs.
+                Goede polisvoorwaarden en een dekking die past bij jouw persoonlijke situatie, zijn ook belangrijk.</p>
+
+                <p>In het overzicht staan de profielscore en de prijs-kwaliteitverhouding. De verzekering met de hoogste
+                  score – en dus het best bij je past – staat bovenaan. Verzekeringen die je via Knab afsluit, krijg je
+                  voor een vast laag percentage.</p>
+
+                <p>Verzekeringen die je niet via ons kunt afsluiten, laten we ook zien. We willen voor jou namelijk de
+                  best passende verzekering en daarom is het belangrijk dat jij een zo compleet mogelijk beeld krijgt.
+                  We verwijzen je in dat geval door naar de website van de verzekeraar. Wel zo eerlijk.</p>
+              </knx-tooltip>
+            </span>
+
+            <!--
             <knx-info infoLabel="Hoe komen we tot deze resultaten?" class="knx-info">
               <div class="knx-info__content">
                 <div class="knx-message knx-message--arrow-top knx-message--arrow-top-center">
@@ -74,6 +91,7 @@ interface OrderItem {
                 </div>
               </div>
             </knx-info>
+            -->
           </div>
         </ng-template>
       </div>

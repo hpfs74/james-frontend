@@ -16,7 +16,17 @@ import { InsuranceDocument } from './../../insurance/models';
               Dan kun je deze natuurlijk negeren.
             </span>
 
-            <span>
+            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+              <knx-tooltip>
+                <p>In de documenten staan de polisvoorwaarden. Daarin lees je bijvoorbeeld waar je precies voor gedekt bent,
+                welke vergoeding je ontvangt bij een schade en of je een vrije keuze hebt voor het bedrijf dat je schade
+                gaat herstellen.</p>
+                <p>In de documentlijst staan ook de voorwaarden voor extra dekkingen. Heb je die niet geselecteerd?
+                Dan kun je die natuurlijk negeren.</p>
+              </knx-tooltip>
+            </span>
+
+            <!--<span>
               <knx-info size="md" isFloating="true" class="knx-info">
                 <div class="knx-info__content">
                   <div class="knx-message knx-message--arrow-top">
@@ -30,7 +40,7 @@ import { InsuranceDocument } from './../../insurance/models';
                   </div>
                 </div>
               </knx-info>
-            </span>
+            </span>-->
           </div>
         </div>
 

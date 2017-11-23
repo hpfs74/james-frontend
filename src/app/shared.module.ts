@@ -24,7 +24,6 @@ import { TextMaskModule } from '@knx/input';
 import { KNXWizardModule } from '@knx/wizard';
 import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
-import { KNXInfoModule } from '@knx/info'; // deprecate in favor of tooltip
 import { KNXTooltipModule } from '@knx/tooltip';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXAvatarComponent } from '@knx/avatar';
@@ -154,7 +153,6 @@ export const sharedModules = [
   KNXWizardModule,
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
-  KNXInfoModule,
   KNXTooltipModule,
   KNXModalDialogModule,
   DropdownModule

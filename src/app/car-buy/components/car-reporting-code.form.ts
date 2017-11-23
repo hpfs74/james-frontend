@@ -41,6 +41,7 @@ export class CarReportingCodeForm extends BaseForm {
         formControl: this.formGroup.get('reportingCode'),
         validationErrors: this.validationErrors,
         label: 'Meldcode',
+        help: true,
         inputOptions: {
           type: 'number'
         }
@@ -49,6 +50,7 @@ export class CarReportingCodeForm extends BaseForm {
         formControlName: 'accessoryValue',
         label: 'Waarde accessoires',
         type: 'currency',
+        help: true,
         formControl: this.formGroup.get('accessoryValue'),
         validationErrors: this.validationErrors,
         inputOptions: {

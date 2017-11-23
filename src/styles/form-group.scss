@@ -1,60 +1,32 @@
-// knx-checkbox + .knx-info {
-//   position: absolute;
-//   right: 10px;
-//   margin-top: -30px;
-// }
+// Custom tooltip positioning
+.knx-car-extras {
+  .knx-form-group--info.knx-form-group--info-input {
+    .knx-info-icon {
+      float: right;
+      margin-top: -55px;
+    }
 
-// @media (max-width: 768px) {
-//   .knx-form-group--info {
-//     .knx-form-group {
-//       width: 95%;
-//     }
+    .knx-select {
+      width: 90%;
+    }
 
-//     .knx-form-group.knx-form-group--error {
-//       width: 98%;
-//     }
-//   }
+    .knx-tooltip-wrapper--visible {
+      min-width: 300px;
+    }
+  }
 
-//   .knx-info {
-//     .knx-info--floating.knx-info--md {
-//       width: 300px;
-//     }
+  .knx-form-group--info.knx-form-group--info-checkbox {
+    .knx-checkbox {
+      width: 90%;
+    }
 
-//     .knx-message--chat:first-child:before {
-//       top: -9px;
-//     }
-//   }
-// }
+    .knx-info-icon {
+      float: right;
+      margin-top: -35px;
+    }
 
-/// KNX-TOOLTIP
-// Negative margin positionining is a hackisch/workaround,
-// preferred would be to have a knx-form-group that supports
-// adding knx-info-icon or knx-tooltip components as content
-//.car-detail-form,
-// .knx-car-extras {
-//   .knx-form-group--info.knx-form-group--info-input {
-//     .knx-info-icon {
-//       float: right;
-//       margin-top: -55px;
-//     }
-
-//     .knx-tooltip-wrapper--visible {
-//       min-width: 300px;
-//     }
-//   }
-
-//   .knx-form-group--info.knx-form-group--info-checkbox {
-//     .knx-checkbox {
-//       width: 90%;
-//     }
-
-//     .knx-info-icon {
-//       float: right;
-//       margin-top: -35px;
-//     }
-
-//     .knx-tooltip-wrapper--visible {
-//       min-width: 300px;
-//     }
-//   }
-// }
+    .knx-tooltip-wrapper--visible {
+      min-width: 300px;
+    }
+  }
+}

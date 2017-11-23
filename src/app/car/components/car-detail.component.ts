@@ -24,7 +24,7 @@ import * as FormUtils from '../../utils/base-form.utils';
   selector: 'knx-car-detail-form',
   styleUrls: ['./car-detail.component.scss'],
   templateUrl: 'car-detail.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailComponent implements OnInit, QaIdentifier {
   qaRootId = QaIdentifiers.carDetails;

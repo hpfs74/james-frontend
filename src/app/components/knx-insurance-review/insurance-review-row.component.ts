@@ -67,7 +67,10 @@ export class InsuranceReviewRowValueComponent { }
 @Component({
   selector: 'knx-ir-tooltip',
   template: `
-    <knx-info size="md" isFloating="true" class="knx-info">
+    <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+      <knx-tooltip><ng-content></ng-content></knx-tooltip>
+    </span>
+   <!-- <knx-info size="md" isFloating="true" class="knx-info">
     <div class="knx-info__content">
       <div class="knx-message knx-message--arrow-top">
         <div class="knx-message__content">
@@ -75,7 +78,7 @@ export class InsuranceReviewRowValueComponent { }
         </div>
       </div>
     </div>
-  </knx-info>
+  </knx-info>-->
   `
 })
 export class InsuranceReviewRowInfoComponent { }
