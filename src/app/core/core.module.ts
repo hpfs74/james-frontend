@@ -1,7 +1,6 @@
 import { NgModule, ErrorHandler, APP_INITIALIZER, Optional, SkipSelf } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { KNXLocale } from '@knx/locale';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -86,7 +85,6 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        KNXLocale,
         AssistantService,
         CanActivateBuyFlowGuard,
         CookieService,

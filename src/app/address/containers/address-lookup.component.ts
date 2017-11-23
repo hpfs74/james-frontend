@@ -1,7 +1,6 @@
 import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { FormControlOptions } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 
@@ -12,6 +11,7 @@ import * as suggestion from '../actions/suggestion';
 import { AddressComponent } from '../components/address.component';
 import { AddressForm } from '../components/address.form';
 import { AddressLookup, Address, AddressSuggestionParams } from '../models';
+import { FormControlOptions } from '@cx/form';
 
 export interface HouseExtensionItem {
   label: string;

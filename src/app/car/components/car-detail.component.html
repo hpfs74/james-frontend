@@ -7,14 +7,14 @@
 
       <div class="row">
         <div class="col-md-7 col-sm-12">
-          <knx-form-group [options]="form.formConfig.licensePlate">
+          <cx-form-group [options]="form.formConfig.licensePlate">
             <knx-input-licenseplate
               knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="licensePlate"
               (ngModelChange)="onLicensePlateChange($event)"
               [formControlName]="form.formConfig.licensePlate.formControlName"
               [options]="form.formConfig.licensePlate.inputOptions">
             </knx-input-licenseplate>
-          </knx-form-group>
+          </cx-form-group>
 
           <knx-async-preview
             [loading]="carLoading"
@@ -27,25 +27,31 @@
       <div class="row">
         <div class="col-md-7 col-sm-12">
           <div class="knx-form-group--info knx-form-group--info-input">
-            <knx-form-group
+            <cx-form-group
               knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="claimFreeYears"
               [formControlName]="form.formConfig.claimFreeYears.formControlName"
               [options]="form.formConfig.claimFreeYears">
+            </cx-form-group>
 
-              <knx-tooltip>
-                De <strong>schadevrije jaren</strong> vind je op je meest recente polis.
-                Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
-                korting op de premie.<br>
+            <knx-info size="md" isFloating="true" class="knx-info">
+              <div class="knx-info__content">
+                <div class="knx-message knx-message--arrow-top">
+                  <div class="knx-message__content">
+                    <p>De <strong>schadevrije jaren</strong> vind je op je meest recente polis.
+                      Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
+                      korting op de premie.</p>
 
-                Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
-                dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.
-              </knx-tooltip>
-            </knx-form-group>
+                    <p>Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
+                      dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.</p>
+                  </div>
+                </div>
+              </div>
+            </knx-info>
           </div>
         </div>
         <div class="col-md-4">
           <!--
-          <div class="knx-form-group">
+          <div class="cx-form-group">
             <button class="knx-button knx-button--util inline-formelement">
               Help me bepalen
             </button>
@@ -57,18 +63,24 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
           <div class="knx-form-group--info knx-form-group--info-input">
-            <knx-form-group
+            <cx-form-group
               knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="loan"
               [formControlName]="form.formConfig.loan.formControlName"
               [options]="form.formConfig.loan">
+            </cx-form-group>
 
-              <knx-tooltip>
-                We willen graag van je weten of je een lening hebt afgesloten voor je auto.
-                In dat geval raden we je namelijk altijd een Allrisk verzekering aan.
-                Raakt je auto vervolgens onherstelbaar beschadigd? Dan krijg je een vergoeding van je verzekeraar om een nieuwe te kopen.
-                Bij een andere dekking krijg je die vergoeding niet en blijf je met een lening achter, terwijl je geen auto meer hebt.
-              </knx-tooltip>
-            </knx-form-group>
+            <knx-info size="md" isFloating="true" class="knx-info">
+              <div class="knx-info__content">
+                <div class="knx-message knx-message--arrow-top">
+                  <div class="knx-message__content">
+                    <p>We willen graag van je weten of je een lening hebt afgesloten voor je auto.
+                      In dat geval raden we je namelijk altijd een Allrisk verzekering aan.
+                      Raakt je auto vervolgens onherstelbaar beschadigd? Dan krijg je een vergoeding van je verzekeraar om een nieuwe te kopen.
+                      Bij een andere dekking krijg je die vergoeding niet en blijf je met een lening achter, terwijl je geen auto meer hebt.</p>
+                  </div>
+                </div>
+              </div>
+            </knx-info>
           </div>
         </div>
       </div>
@@ -79,21 +91,21 @@
 
       <div class="row">
         <div class="col-md-4 col-sm-12">
-          <knx-form-group
+          <cx-form-group
             knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="birthDate"
             [formControlName]="form.formConfig.birthDate.formControlName"
             [options]="form.formConfig.birthDate">
-          </knx-form-group>
+          </cx-form-group>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 col-md-offset-6">
-          <knx-form-group
+          <cx-form-group
             knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="gender"
             [formControlName]="form.formConfig.gender.formControlName"
             [options]="form.formConfig.gender">
-          </knx-form-group>
+          </cx-form-group>
         </div>
       </div>
 
@@ -103,12 +115,12 @@
         (addressFound)="onAddressFound($event)">
       </knx-address-lookup>
 
-      <knx-form-group
+      <cx-form-group
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="houseHold"
         [formControlName]="form.formConfig.houseHold.formControlName"
         [options]="form.formConfig.houseHold"
         (events)="onFocusHouseHold()">
-      </knx-form-group>
+      </cx-form-group>
     </div>
   </div>
 

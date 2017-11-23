@@ -11,46 +11,46 @@ import * as FormUtils from '../../utils/base-form.utils';
     <div class="knx-avatar knx-avatar--editable">
       <img class="knx-avatar__profile-image" src="{{ avatarUrl }}">
 
-      <knx-form-group class="knx-styleguide-icon__icon knx-icon-pencil"
+      <cx-form-group class="cx-styleguide-icon__icon knx-icon-pencil"
         [formControlName]="form.formConfig.avatar.formControlName"
         (events)="loadAvatar($event)"
         [options]="form.formConfig.avatar">
-      </knx-form-group>
+      </cx-form-group>
     </div>
 
     <div class="row">
       <div class="col-md-4">
-        <knx-form-group
+        <cx-form-group
           [options]="form.formConfig.gender"
           [formControlName]="form.formConfig.gender.formControlName">
-        </knx-form-group>
+        </cx-form-group>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <knx-form-group
+        <cx-form-group
           [options]="form.formConfig.firstName"
           [formControlName]="form.formConfig.firstName.formControlName">
-        </knx-form-group>
+        </cx-form-group>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <knx-form-group
+        <cx-form-group
           [options]="form.formConfig.lastName"
           [formControlName]="form.formConfig.lastName.formControlName">
-        </knx-form-group>
+        </cx-form-group>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <knx-form-group
+        <cx-form-group
           [options]="form.formConfig.birthDate"
           [formControlName]="form.formConfig.birthDate.formControlName">
-        </knx-form-group>
+        </cx-form-group>
       </div>
     </div>
 
@@ -63,15 +63,15 @@ import * as FormUtils from '../../utils/base-form.utils';
       </div>
     </div>
 
-    <knx-form-group
+    <cx-form-group
       [options]="form.formConfig.pushNotifications"
       [formControlName]="form.formConfig.pushNotifications.formControlName">
-    </knx-form-group>
+    </cx-form-group>
 
-    <knx-form-group
+    <cx-form-group
       [options]="form.formConfig.emailNotifications"
       [formControlName]="form.formConfig.emailNotifications.formControlName">
-    </knx-form-group>
+    </cx-form-group>
   </form>
 
   <button class="knx-button knx-button--link knx-button--back" (click)="goBack$.emit()">Terug</button>

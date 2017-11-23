@@ -2,7 +2,6 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { KNXLocale } from '@knx/locale';
 
 import { setUpTestBed } from './../../../test.common.spec';
 
@@ -35,7 +34,7 @@ describe('Component: CarCheckComponent', () => {
 
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
-    providers: [KNXLocale, AuthHttp, AuthService, LocalStorageService, LoaderService, CarService],
+    providers: [AuthHttp, AuthService, LocalStorageService, LoaderService, CarService],
     declarations: [CarDetailComponent, TestHostComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };

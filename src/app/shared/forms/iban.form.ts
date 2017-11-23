@@ -18,6 +18,16 @@ export class IbanForm extends BaseForm {
   constructor(private fb: FormBuilder) {
     super();
 
+
+
+    this.infoMessages = {
+      startDate:
+        `Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
+        Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.`,
+      iban:
+        `Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankafschrift of in de app van je bank.`
+    };
+
     // Startdate can be a maximum of 1 year in the future
     const maxYear = 1;
 
@@ -41,12 +51,18 @@ export class IbanForm extends BaseForm {
       startDate: {
         formControlName: 'startDate',
         label: 'Ingangsdatum',
+<<<<<<< HEAD
         type: 'date',
         help: true,
+=======
+        type: 'date-input',
+>>>>>>> master
         formControl: this.formGroup.get('startDate'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          decode: true
+          placeholder: 'DD / MM / JJJJ',
+          transform: birthDateMask.decode,
+          textMask: birthDateMask
         }
       },
       iban: {

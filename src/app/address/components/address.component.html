@@ -1,16 +1,16 @@
 <div class="knx-address-lookup" [formGroup]="addressFormGroup"
-     [class.knx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched && !loading"
+     [class.cx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched && !loading"
      [attr.data-error]="getErrors()">
 
   <div class="row">
     <div class="col-md-4">
-      <knx-form-group formControlName="postalCode" [options]="addressFormConfig.postalCode"></knx-form-group>
+      <cx-form-group formControlName="postalCode" [options]="addressFormConfig.postalCode"></cx-form-group>
     </div>
     <div class="col-md-4">
-      <knx-form-group formControlName="houseNumber" [options]="addressFormConfig.houseNumber"></knx-form-group>
+      <cx-form-group formControlName="houseNumber" [options]="addressFormConfig.houseNumber"></cx-form-group>
     </div>
     <div class="col-md-4">
-      <knx-form-group #houseNumberExtension formControlName="houseNumberExtension" [options]="addressFormConfig.houseNumberExtension"></knx-form-group>
+      <cx-form-group #houseNumberExtension formControlName="houseNumberExtension" [options]="addressFormConfig.houseNumberExtension"></cx-form-group>
     </div>
   </div>
 

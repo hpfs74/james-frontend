@@ -7,7 +7,6 @@ import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
-import { KNXLocale } from '@knx/locale';
 
 import { setUpTestBed } from './../../../test.common.spec';
 
@@ -139,7 +138,6 @@ describe('Component: CarBuyComponent', () => {
     ],
     schemas: [NO_ERRORS_SCHEMA],
     providers: [
-      KNXLocale,
       CurrencyPipe,
       {
         provide: TagsService,
