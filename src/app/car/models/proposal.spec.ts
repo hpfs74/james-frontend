@@ -148,7 +148,7 @@ describe('CarProposalHelper', () => {
       last_login: null,
       phone: null,
       pin_set: false,
-      number_extended: {number_only: 45, number_letter: '', number_addition: '', number_extension: ''},
+      number_extended: {number_only: 45, number_letter: '', number_addition: 'R4', number_extension: '-R4'},
       built: 1900,
       size: 58,
       age: 20,
@@ -255,8 +255,7 @@ describe('CarProposalHelper', () => {
       {'Achternaam': 'Test Name'},
       {'Straat': 'Piet Heinstraat'},
       {'Huisnummer': '45'},
-      // should be modified after additional number will be implemented
-      {'Huisnummer toevoeging': ''},
+      {'Huisnummer toevoeging': 'R4'},
       {'Postcode': '2518CB'},
       {'Woonplaats': 's-Gravenhage'},
       {'Geboortedatum': '1989-11-11'},
