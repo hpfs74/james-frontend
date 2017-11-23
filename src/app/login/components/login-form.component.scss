@@ -1,13 +1,18 @@
 @import '~styles/base.scss';
-$knxRegisterBlue: #13345c;
+
 $knxDocumentLinkBlue: #00a8ab;
+
+a:hover {
+  font-weight: normal;
+  text-decoration: underline;
+}
 
 .container {
   &.login-form {
     background: #edece4;
     padding: 20px;
     border-radius: 5px;
-    color: $knxRegisterBlue;
+    color: $knab-primary-blue;
 
     .knx-register__welcome {
       h2 {
@@ -15,7 +20,7 @@ $knxDocumentLinkBlue: #00a8ab;
       }
 
       p {
-        color: $knxRegisterBlue;
+        color: $knab-primary-blue;
       }
     }
 
@@ -31,7 +36,8 @@ $knxDocumentLinkBlue: #00a8ab;
 
     .knx-login__error {
       p {
-        color: $knab-primary-red;
+        color: $knab-error;
+        font-size: $font-size-base - 2;
 
         a {
           text-decoration: underline;
@@ -41,7 +47,7 @@ $knxDocumentLinkBlue: #00a8ab;
 
     .knx-login__success {
       p {
-        color: $knxRegisterBlue;
+        color: $knab-primary-blue;
       }
     }
 
