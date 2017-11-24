@@ -4,7 +4,9 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared.module';
 import { InsuranceService } from './services/insurance.service';
+import { AdviceService } from './services/advice.service';
 import { InsuranceEffects } from './effects/insurance';
+import { AdviceEffects } from './effects/advice';
 
 import { reducers } from './reducers';
 
@@ -13,7 +15,8 @@ import { reducers } from './reducers';
     SharedModule,
     StoreModule.forFeature('insurance', reducers),
     EffectsModule.forFeature([
-      InsuranceEffects
+      InsuranceEffects,
+      AdviceEffects
     ])
   ]
 })
@@ -22,7 +25,8 @@ export class InsuranceModule {
     return {
       ngModule: InsuranceModule,
       providers: [
-        InsuranceService
+        InsuranceService,
+        AdviceService
       ],
     };
   }

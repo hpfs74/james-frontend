@@ -180,7 +180,7 @@ describe('Component: CarAdviceComponent', () => {
         location: null
       };
 
-      const action = new advice.UpdateAction(Object.assign({}, {
+      const action = new advice.Update(Object.assign({}, {
         active_loan: activeLoanValue,
         coverage: coverageValue,
         claim_free_years: claimFreeYearsValue,
@@ -315,7 +315,7 @@ describe('Component: CarAdviceComponent', () => {
         supported: true,
         _embedded: null
       };
-      const action = new advice.SetInsuranceAction(insurance);
+      const action = new advice.SetInsurance(insurance);
       comp.onSelectPremium(insurance);
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });

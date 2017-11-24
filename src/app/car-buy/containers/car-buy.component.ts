@@ -170,7 +170,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       return Observable.throw(new Error(form.validationSummaryError));
     }
 
-    this.store$.dispatch(new advice.UpdateAction(form.formGroup.value));
+    this.store$.dispatch(new advice.Update(form.formGroup.value));
 
     return new Observable(obs => {
       obs.next();
@@ -256,7 +256,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
 
   // TODO: group in an effect
   resetFlow() {
-    this.store$.dispatch(new advice.ResetAction());
+    this.store$.dispatch(new advice.Reset());
     this.store$.dispatch(new compare.CarCompareResetStateAction());
     this.store$.dispatch(new car.CarResetStateAction());
     this.store$.dispatch(new router.Go({path: ['car']}));

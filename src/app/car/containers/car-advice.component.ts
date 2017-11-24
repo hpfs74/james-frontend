@@ -153,7 +153,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         //   this.address.number = currentProfile.number;
         // });
       } else if (!currentAdvice) {
-        this.store$.dispatch(new advice.AddAction({
+        this.store$.dispatch(new advice.Add({
           id: cuid()
         }));
       }
@@ -163,8 +163,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       .filter(purchasedInsurances => purchasedInsurances !== null)
       .subscribe(purchasedInsurances => {
         // redirect to purchased overview if there are any manually added insurances
-        if (purchasedInsurances && purchasedInsurances.filter(insurance =>
-        (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+        if (purchasedInsurances.car.insurance.length && purchasedInsurances.car.insurance.filter(insurance =>
+            (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
           this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
         }
     });
@@ -183,7 +183,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           own_risk: data.ownRisk === null || data.ownRisk === undefined ? 135 : +data.ownRisk,
           insurance_id: ''
         };
-        this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
+        this.store$.dispatch(new advice.Update(compareExtraOptions));
       });
 
       // init wizard config
@@ -260,7 +260,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       .subscribe((compare) => {
         // add address in format for profile
         // TODO: is this really needed?
-        this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compare.request, {
+        this.store$.dispatch(new advice.Update(Object.assign({}, compare.request, {
           address: compare.address
         })));
       });
@@ -272,7 +272,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   onSelectPremium(insurance) {
     scrollToY();
-    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
+    this.store$.dispatch(new advice.SetInsurance(insurance));
     this.knxWizard.goToNextStep();
   }
 

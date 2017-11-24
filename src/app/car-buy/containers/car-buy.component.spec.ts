@@ -234,7 +234,7 @@ describe('Component: CarBuyComponent', () => {
 
   describe('resetFlow()', () => {
     it('should dispatch reset acitons', () => {
-      let adviceResetAction = new advice.ResetAction();
+      let adviceResetAction = new advice.Reset();
       let compareResetAction = new compare.CarCompareResetStateAction();
       let carResetAction = new car.CarResetStateAction();
       let routerBackAction = new router.Go({path: ['car']});

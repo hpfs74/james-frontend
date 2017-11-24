@@ -3,6 +3,7 @@ import { InsuranceAdvice } from '../models/insurance-advice';
 import { CarInsurance } from '../../car/models/car-insurance';
 
 export const ADD_ADVICE =             '[Advice] Add';
+export const GET_ADVICE =             '[Advice] Get';
 export const UPDATE_ADVICE =          '[Advice] Update';
 export const REMOVE_ADVICE =          '[Advice] Remove';
 export const SELECT_ADVICE =          '[Advice] Select';
@@ -15,50 +16,57 @@ export const REMOVE_INSURANCE = '[Advice] Remove Insurance';
 /**
  * Advice Actions
  */
-export class AddAction implements Action {
+export class Add implements Action {
   readonly type = ADD_ADVICE;
 
   constructor(public payload: any) {}
 }
 
-export class UpdateAction implements Action {
+export class Get implements Action {
+  readonly type = GET_ADVICE;
+
+  constructor(public payload: any) {}
+}
+
+export class Update implements Action {
   readonly type = UPDATE_ADVICE;
 
   constructor(public payload: any) {}
 }
 
-export class RemoveAction implements Action {
+export class Remove implements Action {
   readonly type = REMOVE_ADVICE;
 
   constructor(public payload: any) {}
 }
 
-export class SelectAction implements Action {
+export class Select implements Action {
   readonly type = SELECT_ADVICE;
 
   constructor(public payload: any) {}
 }
 
-export class ResetAction implements Action {
+export class Reset implements Action {
   readonly type = RESET_ADVICE;
 }
 
-export class SetInsuranceAction implements Action {
+export class SetInsurance implements Action {
   readonly type = SET_INSURANCE;
 
   constructor(public payload: InsuranceAdvice | CarInsurance) {}
 }
 
-export class RemoveInsuranceAction implements Action {
+export class RemoveInsurance implements Action {
   readonly type = REMOVE_INSURANCE;
 }
 
 export type All
-  = AddAction
-  | UpdateAction
-  | RemoveAction
-  | SelectAction
-  | SetInsuranceAction
-  | RemoveInsuranceAction
-  | ResetAction;
+  = Add
+  | Get
+  | Update
+  | Remove
+  | Select
+  | SetInsurance
+  | RemoveInsurance
+  | Reset;
 
