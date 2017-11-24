@@ -1,7 +1,3 @@
-// a.knx-button {
-//   padding-top: 10px;
-// }
-
 button.knx-button--toggle,
 .knx-button--toggle {
   border: 1px solid $knab-tan-gray;
@@ -15,23 +11,6 @@ button.knx-button--toggle,
 
 .knx-message .knx-message__header {
   font-size: $font-size-base;
-}
-
-.knx-info__content > .knx-message,
-.knx-info__content > .knx-message p {
-  color: $knab-white;
-}
-
-.knx-info.knx-info--floating {
-  z-index: $z-index-tooltip;
-}
-
-.knx-info__content > .knx-message p {
-  margin-bottom: 10px;
-}
-
-.knx-info__content > .knx-message p:last-child {
-  margin-bottom: 0;
 }
 
 .knx-message.knx-message--hint {

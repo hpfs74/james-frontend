@@ -1,11 +1,11 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BaseForm } from './../../shared/forms/base-form';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
+import { BaseForm, KNXCustomFormGroupOptions } from './../../shared/forms/base-form';
 import { EmailValidator } from '../../utils/email-validator';
 
 export class LoginForm extends BaseForm {
   formGroup: FormGroup;
-  formConfig: any;
+  formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
 
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
@@ -14,6 +14,7 @@ export class LoginForm extends BaseForm {
 
   constructor(private fb: FormBuilder) {
     super();
+
     this.formGroup = this.fb.group({
       email: [null, Validators.compose(
         [Validators.required, EmailValidator]
@@ -28,14 +29,15 @@ export class LoginForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        label: 'Je e-mailadres',
-        placeholder: 'E-mailadres',
         showErrorMessages: false,
-        type: 'text',
-        attributes: {
-          'aria-label': 'Vul je e-mailadres in',
-          'addonleft': true,
-          'addonicon': 'knx-icon-envelope'
+        label: 'Je e-mailadres',
+        inputOptions: {
+          type: 'email',
+          placeholder: 'E-mailadres',
+          prefix: 'knx-icon-envelope',
+          attributes: {
+            'aria-label': 'Vul je e-mailadres in'
+          }
         }
       },
       password: {
@@ -43,16 +45,19 @@ export class LoginForm extends BaseForm {
         formControl: this.formGroup.get('password'),
         validationErrors: this.validationErrors,
         label: 'Wachtwoord',
-        placeholder: 'Wachtwoord',
-        showErrorMessages: false,
         type: 'password',
-        attributes: {
-          'aria-label': 'Vul je wachtwoord in',
-          'addonleft': true,
-          'addonicon': 'knx-icon-lock',
-          'password': true
+        showErrorMessages: false,
+        inputOptions: {
+          type: 'password',
+          placeholder: 'Wachtwoord',
+          hideErrors: ['pattern', 'minlength'],
+          prefix: 'knx-icon-lock',
+          attributes: {
+            'password': true,
+            'aria-label': 'Vul je wachtwoord in'
+          }
         }
-      }
+      },
     };
   }
 }

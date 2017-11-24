@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CXEmailValidator } from '@cx/form';
+import { KNXEmailValidator } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromAuth from '../../auth/reducers';
@@ -13,7 +13,8 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
 @Component({
   selector: 'knx-password-reset',
   templateUrl: './registration-page.component.html',
-  styleUrls: ['./registration-page.component.scss']
+  styleUrls: ['./registration-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationPageComponent implements OnInit {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);

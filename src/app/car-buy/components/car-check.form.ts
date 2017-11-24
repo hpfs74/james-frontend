@@ -1,11 +1,11 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { BaseForm } from '../../shared/forms/base-form';
+import { BaseForm, KNXCustomFormGroupOptions } from '../../shared/forms/base-form';
 import { nameInitialMask } from '../../utils/base-form.utils';
 
 export class CarCheckForm extends BaseForm {
   formGroup: FormGroup;
-  formConfig: any;
+  formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
 
   public validationErrors = {
     required: () => 'Dit is een verplicht veld'
@@ -37,7 +37,7 @@ export class CarCheckForm extends BaseForm {
         formControl: this.formGroup.get('crime'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: this.getBooleanItems()
         }
       },
@@ -58,7 +58,7 @@ export class CarCheckForm extends BaseForm {
         formControl: this.formGroup.get('refuse'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: this.getBooleanItems()
         }
       },
@@ -79,7 +79,7 @@ export class CarCheckForm extends BaseForm {
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: this.getBooleanItems()
         }
       },
@@ -100,7 +100,7 @@ export class CarCheckForm extends BaseForm {
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: this.getBooleanItems()
         }
       },
@@ -121,7 +121,7 @@ export class CarCheckForm extends BaseForm {
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: this.getBooleanItems()
         }
       },
@@ -141,7 +141,7 @@ export class CarCheckForm extends BaseForm {
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {
-          formGroupModifiers: ['cx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: this.getBooleanItems()
         }
       },

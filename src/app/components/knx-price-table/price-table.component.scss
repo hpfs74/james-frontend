@@ -1,0 +1,16 @@
+knx-price-table {
+  flex: 1 auto 1;
+}
+
+@media (min-width: 768px) {
+  knx-price-item {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  knx-price-item {
+    -ms-flex-positive: 9999;
+    flex-grow: 9999;
+  }
+}

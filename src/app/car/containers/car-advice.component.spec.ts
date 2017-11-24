@@ -2,6 +2,7 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestModuleMetadata, async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { KNXLocale } from '@knx/locale';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -65,6 +66,7 @@ describe('Component: CarAdviceComponent', () => {
         CarAdviceComponent
       ],
       providers: [
+        KNXLocale,
         {
           provide: TagsService,
           useValue: TagsServiceMock
@@ -87,6 +89,10 @@ describe('Component: CarAdviceComponent', () => {
     fixture.detectChanges();
   }));
 
+  beforeEach(() => {
+    fixture.detectChanges();
+  });
+
   describe('Initialization', () => {
     it('should bind a validator for license plate', () => {
       const ctrl = comp.carDetailForm.formGroup.get('licensePlate');
@@ -98,16 +104,6 @@ describe('Component: CarAdviceComponent', () => {
       expect(comp.carDetailForm).toBeDefined();
       expect(comp.carDetailForm.formGroup).toBeDefined();
       expect(comp.carExtrasForm).toBeDefined();
-    });
-
-    it('should init the wizard steps', () => {
-      expect(comp.formSteps).toBeDefined();
-      expect(comp.formSteps.length).toBeGreaterThan(0);
-
-      comp.formSteps.forEach(step => {
-        expect(step.label).toBeDefined();
-        expect(step.onShowStep).toBeDefined();
-      });
     });
 
     it('should init the form template', () => {
@@ -138,29 +134,6 @@ describe('Component: CarAdviceComponent', () => {
     });
   });
 
-  describe('Wizard', () => {
-    it('should initialize the wizard', () => {
-      expect(comp.currentStep).toBe(0);
-      expect(comp.formSteps).toBeDefined();
-      expect(comp.formSteps.length).toBeGreaterThan(0);
-    });
-
-    xit('should change the wizard step', () => {
-      const step = 2;
-      comp.onStepChange(step);
-      expect(comp.currentStep).toEqual(step);
-    });
-  });
-
-  describe('Side bar', () => {
-    it('should toggle the side nav bar', () => {
-      const open = true;
-      const action = new layout.OpenLeftSideNav;
-      comp.toggleSideNavState(open);
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    });
-  });
-
   describe('Car Advice Flow', () => {
     it('should not go to next step on invalid details form', () => {
 
@@ -178,40 +151,6 @@ describe('Component: CarAdviceComponent', () => {
         expect(comp.currentStep).toEqual(0);
       }
     });
-
-    // it('should go to insurance result on valid details form', () => {
-    //   comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
-    //   fixture.detectChanges();
-    //   fixture.whenStable().then(() => {
-    //     comp.carDetailForm.formGroup.get('licensePlate').setValue('01XLXL');
-    //     comp.carDetailForm.formGroup.get('birthDate').setValue(new Date(1989, 11, 19));
-    //     comp.carDetailForm.formGroup.get('claimFreeYears').setValue(1);
-    //     comp.carDetailForm.formGroup.get('houseHold').setValue('CHM');
-    //     comp.carDetailForm.formGroup.get('loan').setValue(false);
-    //     comp.carDetailForm.formGroup.get('gender').setValue('M');
-    //     comp.carDetailForm.formGroup.get('coverage').setValue('CL');
-
-    //     comp.addressForm.formGroup.get('houseNumber').setValue('45');
-    //     comp.addressForm.formGroup.get('postalCode').setValue('2518CB');
-
-    //     comp.carDetailForm.formGroup.updateValueAndValidity();
-    //     comp.addressForm.formGroup.updateValueAndValidity();
-
-    //     fixture.detectChanges();
-    //     fixture.whenStable().then(() => {
-    //       expect(comp.currentStep).toEqual(0);
-    //       expect(comp.carDetailForm.formGroup.valid).toBeTruthy();
-    //       expect(comp.addressForm.formGroup.valid).toBeTruthy();
-    //       const element = fixture.debugElement.query(By.css('.knx-car-advice--step-1 .knx-wizard__buttons .knx-button--primary'));
-    //       if (element) {
-    //         const button = element.nativeElement;
-    //         button.click();
-    //         fixture.detectChanges();
-    //         expect(comp.currentStep).toEqual(1);
-    //       }
-    //     });
-    //   });
-    // });
 
     it('should dispatch a car compare action', async(() => {
       comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
