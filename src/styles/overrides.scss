@@ -17,18 +17,6 @@ button.knx-button--toggle,
   margin-bottom: 15px;
 }
 
-.knx-wizard--controls {
-  .knx-message {
-    margin-bottom: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .knx-wizard-step-content .knx-wizard--controls {
-    margin: 15px 0 !important;
-  }
-}
-
 .knx-dropdown-button {
   max-width: 250px;
 }
@@ -37,8 +25,8 @@ button.knx-button--toggle,
   color: $knab-secondary-red;
 }
 
-.knx-registration .cx-checkbox .cx-checkbox__control,
-.login-form .cx-checkbox .cx-checkbox__control {
+.knx-registration .knx-checkbox .knx-checkbox__control,
+.login-form .knx-checkbox .knx-checkbox__control {
   background: $knab-white;
 }
 
