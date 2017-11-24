@@ -148,7 +148,12 @@ describe('CarProposalHelper', () => {
       last_login: null,
       phone: null,
       pin_set: false,
-      number_extended: {number_only: 45, number_letter: '', number_addition: '', number_extension: ''},
+      number_extended: {
+        number_only: 134,
+        number_letter: 'A',
+        number_addition: '01',
+        number_extension: 'A-01'
+      },
       built: 1900,
       size: 58,
       age: 20,
@@ -254,9 +259,8 @@ describe('CarProposalHelper', () => {
       {'Voorvoegsels': 'Test voor'},
       {'Achternaam': 'Test Name'},
       {'Straat': 'Piet Heinstraat'},
-      {'Huisnummer': '45'},
-      // should be modified after additional number will be implemented
-      {'Huisnummer toevoeging': ''},
+      {'Huisnummer': '134A'},
+      {'Huisnummer toevoeging': '01'},
       {'Postcode': '2518CB'},
       {'Woonplaats': 's-Gravenhage'},
       {'Geboortedatum': '1989-11-11'},

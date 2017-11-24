@@ -33,7 +33,7 @@ export class CarProposalHelper {
     { key: 'Voorvoegsels', value: 'infix' },
     { key: 'Achternaam', value: 'lastName' },
     { key: 'Straat', value: 'street' },
-    { key: 'Huisnummer', value: 'house_number' },
+    { key: 'Huisnummer', value: 'number_extended', transform: this.getHouseNumber },
     { key: 'Huisnummer toevoeging', value: 'number_extended', transform: this.getHouseNumberAddition },
     { key: 'Postcode', value: 'zipcode' },
     { key: 'Woonplaats', value: 'city' },
@@ -175,8 +175,12 @@ export class CarProposalHelper {
     return moment(dateDecode(value)).format('DD-MM-YYYY');
   }
 
-  private getHouseNumberAddition(value) {
-    return value.number_letter;
+  private getHouseNumber(numberExtended) {
+    return '' + numberExtended.number_only + numberExtended.number_letter;
+  }
+
+  private getHouseNumberAddition(numberExtended) {
+    return numberExtended.number_addition;
   }
 
   private removeWhiteSpace(value: string) {
