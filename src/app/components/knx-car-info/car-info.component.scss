@@ -1,11 +1,15 @@
+@import '~styles/base.scss';
+
 .knx-car-info {
   width: 100%;
+  color: $knab-primary-blue;
 
   .row {
     margin-bottom: 10px;
   }
 
   .knx-car-info__item {
+    color: $knab-medium-gray;
     font-weight: bold;
     text-align: right;
   }
