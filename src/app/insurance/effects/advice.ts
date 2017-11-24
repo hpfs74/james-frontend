@@ -16,8 +16,6 @@ import * as advice from '../actions/advice';
 @Injectable()
 export class AdviceEffects {
   @Effect()
-
-  @Effect()
   getAdvice$: Observable<Action> = this.actions$
     .ofType(advice.GET_ADVICE)
     .map((action: advice.Get) => action.payload)
