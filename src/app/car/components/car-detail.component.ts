@@ -93,6 +93,9 @@ export class CarDetailComponent implements OnInit, QaIdentifier {
         this.activeLoanChange.emit(value);
       }
     });
+
+    loan.setValue(false);
+    FormUtils.validateControls(this.form.formGroup, ['loan']);
   }
 
   onFocus(controlKey) {

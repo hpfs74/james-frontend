@@ -59,6 +59,10 @@ describe('Component: CarCheckComponent', () => {
     expect(comp.targetComponent.form.formGroup.valid).toBeFalsy();
   });
 
+  it('should have default value for loan', () => {
+    expect(comp.targetComponent.form.formGroup.get('loan').valid).toBeTruthy();
+  });
+
   it('should contain carinfo licenseplate component', () => {
     const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
     expect(element).toBeDefined();
