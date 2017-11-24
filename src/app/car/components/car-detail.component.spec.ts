@@ -2,6 +2,7 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { TestModuleMetadata, async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { KNXLocale } from '@knx/locale';
 
 import { setUpTestBed } from './../../../test.common.spec';
 
@@ -34,7 +35,7 @@ describe('Component: CarCheckComponent', () => {
 
   let moduleDef: TestModuleMetadata = {
     imports: [SharedModule],
-    providers: [AuthHttp, AuthService, LocalStorageService, LoaderService, CarService],
+    providers: [KNXLocale, AuthHttp, AuthService, LocalStorageService, LoaderService, CarService],
     declarations: [CarDetailComponent, TestHostComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };
@@ -56,6 +57,10 @@ describe('Component: CarCheckComponent', () => {
 
   it('should have invalid form controls on init', () => {
     expect(comp.targetComponent.form.formGroup.valid).toBeFalsy();
+  });
+
+  it('should have default value for loan', () => {
+    expect(comp.targetComponent.form.formGroup.get('loan').valid).toBeTruthy();
   });
 
   it('should contain carinfo licenseplate component', () => {

@@ -1,7 +1,3 @@
-// a.knx-button {
-//   padding-top: 10px;
-// }
-
 button.knx-button--toggle,
 .knx-button--toggle {
   border: 1px solid $knab-tan-gray;
@@ -17,37 +13,8 @@ button.knx-button--toggle,
   font-size: $font-size-base;
 }
 
-.knx-info__content > .knx-message,
-.knx-info__content > .knx-message p {
-  color: $knab-white;
-}
-
-.knx-info.knx-info--floating {
-  z-index: $z-index-tooltip;
-}
-
-.knx-info__content > .knx-message p {
-  margin-bottom: 10px;
-}
-
-.knx-info__content > .knx-message p:last-child {
-  margin-bottom: 0;
-}
-
 .knx-message.knx-message--hint {
   margin-bottom: 15px;
-}
-
-.knx-wizard--controls {
-  .knx-message {
-    margin-bottom: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .knx-wizard-step-content .knx-wizard--controls {
-    margin: 15px 0 !important;
-  }
 }
 
 .knx-dropdown-button {
@@ -58,8 +25,8 @@ button.knx-button--toggle,
   color: $knab-secondary-red;
 }
 
-.knx-registration .cx-checkbox .cx-checkbox__control,
-.login-form .cx-checkbox .cx-checkbox__control {
+.knx-registration .knx-checkbox .knx-checkbox__control,
+.login-form .knx-checkbox .knx-checkbox__control {
   background: $knab-white;
 }
 

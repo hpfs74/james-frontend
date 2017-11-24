@@ -20,7 +20,7 @@ export const carRoutes: Routes = [
     loadChildren: '../car-buy/car-buy.module#CarBuyModule'
   },
   {
-    path: 'thank-you/:email',
+    path: 'thank-you',
     component: CarThankYouComponent
   },
   {

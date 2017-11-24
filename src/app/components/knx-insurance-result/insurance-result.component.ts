@@ -36,13 +36,12 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
                 <div class="knx-insurance-result__amount">{{ insurance.price_quality }}<span>/10</span></div>
                 <div class="knx-insurance-result__label">
                   Prijs <br> kwaliteit
-                  <knx-info size="md" isFloating="true" class="knx-info">
-                    <div class="knx-info__content">
-                      <div class="knx-message knx-message--arrow-top">
-                        <div class="knx-message__content" [innerHTML]="infoMessages.priceQuality"></div>
-                      </div>
-                    </div>
-                  </knx-info>
+
+                  <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+                    <knx-tooltip>We berekenen de score op basis van het profiel dat jij instelt. We toetsen de verzekering op meer
+                    dan 100 criteria om te bepalen of wat jij belangrijk vindt, ook goed scoort binnen de verzekering.
+                    Zo betaal je voor wat jij belangrijk vindt en voorkom je verrassingen.</knx-tooltip>
+                  </span>
                 </div>
               </div>
             </div>
@@ -51,13 +50,11 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
               <div class="col-sm-6 knx-insurance-result__profilescore">
                 <div class="knx-insurance-result__label">
                   Profielscore
-                  <knx-info size="md" isFloating="true" class="knx-info">
-                    <div class="knx-info__content">
-                      <div class="knx-message knx-message--arrow-top">
-                        <div class="knx-message__content" [innerHTML]="infoMessages.profileScore"></div>
-                      </div>
-                    </div>
-                  </knx-info>
+
+                  <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+                    <knx-tooltip>De profielscore geeft aan hoe goed de verzekering bij jouw profiel past. Hoe hoger de score, hoe beter.
+                    Een score van minstens 75% betekent dat de verzekering goed aansluit bij jouw wensen en situatie.</knx-tooltip>
+                  </span>
                 </div>
               </div>
 
@@ -103,14 +100,6 @@ export class InsuranceResultComponent {
   @Input() disableButton: boolean;
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
-
-  public infoMessages = {
-    profileScore: `De profielscore geeft aan hoe goed de verzekering bij jouw profiel past. Hoe hoger de score, hoe beter.
-      Een score van minstens 75% betekent dat de verzekering goed aansluit bij jouw wensen en situatie.`,
-    priceQuality: `We berekenen de score op basis van het profiel dat jij instelt. We toetsen de verzekering op meer
-      dan 100 criteria om te bepalen of wat jij belangrijk vindt, ook goed scoort binnen de verzekering.
-      Zo betaal je voor wat jij belangrijk vindt en voorkom je verrassingen. `
-  };
 
   select(event) {
     event.stopPropagation(); // prevent click event bubbling up and triggering twice

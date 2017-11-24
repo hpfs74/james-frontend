@@ -3,6 +3,7 @@ import { Price } from '../../shared/models/price';
 
 @Component({
   selector: 'knx-price-table',
+  styleUrls: ['./price-table.component.scss'],
   template: `
     <div class="knx-price-table">
       <knx-price-item
@@ -16,21 +17,7 @@ import { Price } from '../../shared/models/price';
         [features]="item.features"
         (click)="selectItem(i)">
       </knx-price-item>
-    </div>`,
-  styles: [`
-    @media (min-width: 768px) {
-      knx-price-item {
-        flex: 1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      knx-price-item {
-         -ms-flex-positive: 9999;
-        flex-grow: 9999;
-      }
-    }
-  `]
+    </div>`
 })
 export class PriceTableComponent implements OnDestroy {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();

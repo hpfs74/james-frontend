@@ -3,6 +3,11 @@
 
 $knx-navbar-font: $font-size-base;
 
+a:hover {
+  text-decoration: none;
+  font-weight: normal;
+}
+
 ul {
   list-style-type: none;
 }
@@ -13,7 +18,7 @@ ul {
 
 .knx-logo-text {
   color: #3e4a59;
-  font-family: $font-family-head;
+  font-family: "Intro Regular", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   margin-left: 8px;
   font-size: $font-size-base;
@@ -27,6 +32,12 @@ ul {
   color: $knab-primary-blue;
   height: 54px;
   border-bottom: 1px solid $knab-primary-gray;
+}
+
+.navbar-brand {
+  &:hover {
+    font-weight: normal;
+  }
 }
 
 .knx-navbar .knx-button--hamburger {

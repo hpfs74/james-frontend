@@ -9,7 +9,7 @@ import * as address from '../actions/address';
 import { postalCodeMask } from '../../utils/base-form.utils';
 import { AddressLookup, Address, AddressSuggestionParams } from '../models';
 
-import { CXFormGroupComponent } from '@cx/form-group';
+import { KNXFormGroupComponent } from '@knx/form-group';
 
 @Component({
   selector: 'knx-address',

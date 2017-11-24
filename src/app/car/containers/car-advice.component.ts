@@ -162,26 +162,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.purchasedInsurances$
       .filter(purchasedInsurances => purchasedInsurances !== null)
       .subscribe(purchasedInsurances => {
-        const carInsurances = purchasedInsurances.car.insurance;
         // redirect to purchased overview if there are any manually added insurances
-        // TODO: use filter directly on stream | but we are using them already!
-        if (carInsurances && carInsurances.filter(insurance => !insurance.manually_added ).length) {
+        if (purchasedInsurances && purchasedInsurances.filter(insurance =>
+        (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
           this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-        } else if (carInsurances.length && carInsurances.filter(ins => ins.status === 'draft').length) {
-          // let savedAdvice = purchasedInsurances.car.insurance[0].draft;
-          // savedAdvice._embedded = {
-          //   car: null,
-          //   insurance: null
-          // };
-
-          // TODO: Anonymous part 2
-          // this.store$.dispatch(new advice.SetInsuranceAction(savedAdvice));
-          // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-          //   id => {
-          //     this.store$.dispatch(new router.Go({
-          //       path: ['/car/insurance', {adviceId: id}],
-          //     }));
-          //   }));
         }
     });
 

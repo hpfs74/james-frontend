@@ -210,7 +210,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
         return this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
-            return this.store$.dispatch(new router.Go({path: ['/car/thank-you', profile.emailaddress]}));
+            return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
       });
   }
