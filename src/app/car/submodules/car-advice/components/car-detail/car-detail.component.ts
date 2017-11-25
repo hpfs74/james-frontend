@@ -1,17 +1,15 @@
-import {
-  Component, OnInit, OnChanges, ChangeDetectionStrategy, ElementRef, Input, Output, EventEmitter
-} from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { Component, Output, OnDestroy, AfterViewInit } from '@angular/core';
+import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { TagsService } from '../../../../../core/services/tags.service';
 import 'rxjs/add/observable/combineLatest';
-import * as cuid from 'cuid';
 
+import * as cuid from 'cuid';
 import * as car from '../../../../actions/car';
-import * as fromRoot from '../../../../reducers';
+import * as fromRoot from '../../../../../reducers';
 import * as fromAuth from '../../../../../auth/reducers';
-import * as fromCore from '../../../../../core/reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromCar from '../../../../reducers';
 import * as fromAddress from '../../../../../address/reducers';
@@ -20,28 +18,23 @@ import * as advice from '../../../../../insurance/actions/advice';
 import * as coverage from '../../../../actions/coverage';
 import * as compare from '../../../../actions/compare';
 import * as router from '../../../../../core/actions/router';
+import * as FormUtils from '../../../../../utils/base-form.utils';
 
-import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
-
 import { CarDetailForm } from './car-detail.form';
 import { AddressForm } from '../../../../../address/components/address.form';
 import { Car, CarCoverageRecommendation, CarInsurance, CarCompare } from '../../../../models';
 import { Price } from '../../../../../shared/models';
 import { Address } from '../../../../../address/models';
-import { CarService } from '../../../../services/car.service';
-import * as FormUtils from '../../../../../utils/base-form.utils';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
 import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
-import { AfterContentChecked } from '@angular/core/src/metadata/lifecycle_hooks';
-declare var window: any;
+
 @Component({
   selector: 'knx-car-detail-form',
   styleUrls: ['./car-detail.component.scss'],
-  templateUrl: 'car-detail.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'car-detail.component.html'
 })
-export class CarDetailComponent implements OnInit, QaIdentifier, KNXStepRxComponent, AfterContentChecked {
+export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, OnDestroy {
   qaRootId = QaIdentifiers.carDetails;
   form: CarDetailForm;
   addressForm: AddressForm;
@@ -51,70 +44,71 @@ export class CarDetailComponent implements OnInit, QaIdentifier, KNXStepRxCompon
   isCarLoading$: Observable<boolean>;
   isCarFailed$: Observable<boolean>;
   advice$: Observable<any>;
-  insurances$: Observable<Array<CarInsurance>>;
-  isInsuranceLoading$: Observable<boolean>;
-  selectedInsurance$: Observable<CarInsurance>;
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
-  isLoggedIn$: Observable<boolean>;
-  purchasedInsurances$: Observable<any>;
-  purchasedInsurancesLoading$: Observable<any>;
 
-  @Output() licensePlateInvalid: EventEmitter<string> = new EventEmitter();
-  @Output() licensePlateChange: EventEmitter<string> = new EventEmitter();
-  @Output() activeLoanChange: EventEmitter<boolean> = new EventEmitter();
-
-  @Output() addressChange: EventEmitter<Address> = new EventEmitter();
-  @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
-  @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
+  subscriptions$: Subscription[] = [];
 
   constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {
+    this.selectInitalStates();
+    this.initializeForms();
+    this.setInitialSubscriptions();
+  }
+
+  selectInitalStates(): void {
     this.address$ = this.store$.select(fromAddress.getAddress);
     this.car$ = this.store$.select(fromCar.getCarInfo);
     this.isCarLoading$ = this.store$.select(fromCar.getCarInfoLoading);
     this.isCarFailed$ = this.store$.select(fromCar.getCarInfoError);
-    // this.insurances$ = this.getCompareResultCopy();
-    this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
-    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
-    this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
-    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
-    this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
+    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+  }
+
+  initializeForms(): void {
     const formBuilder = new FormBuilder();
     this.addressForm = new AddressForm(formBuilder);
-    window.details = this;
-    this.form = new CarDetailForm(formBuilder,
-      this.tagsService.getAsLabelValue('insurance_flow_household'));
+    this.form = new CarDetailForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'));
     this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
   }
 
-  ngAfterContentChecked() {
-    let licenseControl = this.form.formGroup.get('licensePlate');
-    licenseControl.setAsyncValidators((formControl) => this.validateLicenseAsync(formControl));
-  }
+  /**
+   * put all subscriptions in an array, so we can unsubscribe to them later on
+   */
+  setInitialSubscriptions(): void {
+    this.subscriptions$ = [
+      this.store$.select(fromInsurance.getSelectedAdvice)
+          .filter(advice => advice)
+          .subscribe(advice => this.setAdvice(advice)),
+      this.advice$.subscribe(currentAdvice => {
+        // start new advice only if there is no current one
+        if (currentAdvice) {
+          // do not pre-fill address
+          // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
+          //   this.address.postcode = currentProfile.postcode;
+          //   this.address.number = currentProfile.number;
+          // });
+        } else if (!currentAdvice) {
+          this.store$.dispatch(new advice.AddAction({
+            id: cuid()
+          }));
+        }
+      }),
 
-  ngOnInit() {
-    const loan = this.form.formGroup.get('loan');
-    loan.valueChanges.subscribe((value) => {
-      if (value !== null && loan.valid) {
-        this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(value));
-      }
-    });
-    // Subscribe to car errors
-    this.store$.select(fromCar.getCarInfoError)
-    .subscribe((error) => {
-      if (error) {
-        this.form.formGroup.get('licensePlate').updateValueAndValidity();
-        this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
-      }
-    });
+      this.store$.select(fromCar.getCarInfoError)
+      .subscribe((error) => {
+        // Subscribe to car errors
+        if (error) {
+          this.form.formGroup.get('licensePlate').updateValueAndValidity();
+          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
+        }
+      }),
 
-    // Subscribe to car info
-    this.store$.select(fromCar.getCarInfo)
+      this.store$.select(fromCar.getCarInfo)
       .subscribe((car: Car) => {
+        // Subscribe to car info
         if (car && car.license) {
           this.form.formGroup.get('licensePlate').updateValueAndValidity();
           this.store$.dispatch(new assistant.AddCannedMessage({
@@ -123,12 +117,12 @@ export class CarDetailComponent implements OnInit, QaIdentifier, KNXStepRxCompon
             clear: true
           }));
         }
-      });
+      }),
 
-    // Subscribe to coverage recommendation request
-    this.store$.select(fromCar.getCoverage)
+      this.store$.select(fromCar.getCoverage)
       .filter(coverage => coverage !== null)
       .subscribe(coverageAdvice => {
+        // Subscribe to coverage recommendation request
         this.coverages.forEach( item => { item.selected = false; });
         let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
         if (coverageItem) {
@@ -137,79 +131,35 @@ export class CarDetailComponent implements OnInit, QaIdentifier, KNXStepRxCompon
             value: coverageItem,
             clear: true
           }));
-
           coverageItem.selected = true;
           this.updateSelectedCoverage(coverageItem);
         }
-      });
+      })
+
+    ];
+  }
+
+  ngAfterViewInit(): void {
+    // set form validators after the view has been fully loaded, otherwise it is getting an error
+    this.setFormAsyncValidators();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.welcome', clear: true}));
   }
 
-  onFocus(controlKey) {
-    this.formControlFocus.emit(controlKey);
-  }
-
-  onFocusHouseHold() {
-    this.formControlFocus.emit('houseHold');
-  }
-
-  onSelectCoverage(coverage: Price) {
-    if (coverage.id) {
-      this.coverageSelected.emit(coverage);
-    }
-  }
-
-  onLicensePlateChange(licensePlate: string) {
-    const validLength = 6;
-    // control valid state is changed externally based on RDC request result,
-    // so we use length here to determine when to proceed
-    if (licensePlate && licensePlate.length === validLength) {
-      this.store$.dispatch(new car.GetInfoAction(licensePlate));
-    }
-  }
-
-  onAddressFound(event: Address) {
-    this.addressChange.emit(event);
-  }
-
-  private normalizeAddressHouseNumber(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-
-    let number = payload.address.number;
-    if (number !== null && number !== '') {
-      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
-        return number.split(',')[0];
-      }
-
-      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
-        return number.split('-')[0];
-      }
-    }
-    return FormUtils.getNumbers(number);
-  }
-
-  private normalizeAddressHouseNumberAddition(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-    let number = payload.address.number;
-    if (number !== null && number !== '') {
-      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
-        return '-' + number.split(',')[1];
-      }
-
-      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
-        return '-' + number.split('-')[1];
-      }
-    }
-    return payload.number_extended ? payload.number_extended.number_addition : null;
+  setFormAsyncValidators(): void {
+    let licenseControl = this.form.formGroup.get('licensePlate');
+    licenseControl.setAsyncValidators((formControl) => this.validateLicenseAsync(formControl));
+    const loan = this.form.formGroup.get('loan');
+    this.subscriptions$.push(
+      loan.valueChanges.subscribe((value) => {
+        if (value !== null && loan.valid) {
+          this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(value));
+        }
+      })
+    );
   }
 
   validateLicenseAsync(licenseControl: AbstractControl): Observable<any> {
     const debounceTime = 500;
-
     return Observable.timer(debounceTime).switchMap(() => {
       const validLength = 6;
       const license = licenseControl.value;
@@ -231,7 +181,59 @@ export class CarDetailComponent implements OnInit, QaIdentifier, KNXStepRxCompon
     });
   }
 
-  updateSelectedCoverage(coverage: Price) {
+  /**
+   * close all subscriptions
+   */
+  ngOnDestroy(): void {
+    this.subscriptions$.forEach(subsription => subsription.unsubscribe());
+  }
+
+  onLicensePlateChange(licensePlate: string): void {
+    const validLength = 6;
+    // control valid state is changed externally based on RDC request result,
+    // so we use length here to determine when to proceed
+    if (licensePlate && licensePlate.length === validLength) {
+      this.store$.dispatch(new car.GetInfoAction(licensePlate));
+    }
+  }
+
+  private normalizeAddressHouseNumber(payload: any): RegExpMatchArray | string {
+    if (!payload.address) {
+      return null;
+    }
+
+    let number = payload.address.number;
+    if (number !== null && number !== '') {
+      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
+        return number.split(',')[0];
+      }
+
+      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
+        return number.split('-')[0];
+      }
+    }
+    return FormUtils.getNumbers(number);
+  }
+
+  private normalizeAddressHouseNumberAddition(payload: any): string {
+    if (!payload.address) {
+      return null;
+    }
+    let number = payload.address.number;
+    if (number !== null && number !== '') {
+      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
+        return '-' + number.split(',')[1];
+      }
+
+      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
+        return '-' + number.split('-')[1];
+      }
+    }
+    return payload.number_extended ? payload.number_extended.number_addition : null;
+  }
+
+
+  updateSelectedCoverage(coverage: Price): void {
     this.form.formGroup.get('coverage').patchValue(coverage.id);
     this.store$.dispatch(new assistant.AddCannedMessage({
       key: 'car.info.' + coverage.id,
@@ -239,8 +241,7 @@ export class CarDetailComponent implements OnInit, QaIdentifier, KNXStepRxCompon
     }));
   }
 
-  setAdvice(value: any) {
-
+  setAdvice(value: any): void {
     if (value.address) {
       this.addressForm.formGroup.patchValue(Object.assign({}, {
         postalCode: value.address ? value.address.postcode : null,
@@ -278,56 +279,55 @@ export class CarDetailComponent implements OnInit, QaIdentifier, KNXStepRxCompon
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
     FormUtils.validateForm(detailForm);
-    // FormUtils.validateForm(addressForm);
 
     if (!detailForm.valid || !addressForm.valid) {
       return Observable.throw(new Error(this.form.validationSummaryError));
     }
-
-    Observable.combineLatest(this.car$, this.address$, (car, address) => {
-      return {
-        request: {
-          active_loan: !!detailForm.value.loan,
-          coverage: detailForm.value.coverage,
-          claim_free_years: +detailForm.value.claimFreeYears,
-          household_status: detailForm.value.houseHold,
-          license: car.license,
-          gender: detailForm.value.gender.toUpperCase(),
-          title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
-          date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
+    this.subscriptions$.push(
+      Observable.combineLatest(this.car$, this.address$, (car, address) => {
+        return {
+          request: {
+            active_loan: !!detailForm.value.loan,
+            coverage: detailForm.value.coverage,
+            claim_free_years: +detailForm.value.claimFreeYears,
+            household_status: detailForm.value.houseHold,
+            license: car.license,
+            gender: detailForm.value.gender.toUpperCase(),
+            title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
+            date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
             FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
-          zipcode: address.postcode,
-          house_number: address.number,
-          city: address.city,
-          country: 'NL',
-          kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
-          own_risk: detailForm.value.ownRisk === null || detailForm.value.ownRisk === undefined ? 135 : +detailForm.value.ownRisk,
-          cover_occupants: false,
-          legal_aid: 'LAN',
-          no_claim_protection: false,
-          road_assistance: 'RANO',
-          insurance_id: ''
-        } as CarCompare,
-        address: address
-      };
-    })
-      .take(1)
+            zipcode: address.postcode,
+            house_number: address.number,
+            city: address.city,
+            country: 'NL',
+            kilometers_per_year: detailForm.value.kmPerYear || 'KMR3',
+            own_risk: detailForm.value.ownRisk === null || detailForm.value.ownRisk === undefined ? 135 : +detailForm.value.ownRisk,
+            cover_occupants: false,
+            legal_aid: 'LAN',
+            no_claim_protection: false,
+            road_assistance: 'RANO',
+            insurance_id: ''
+          } as CarCompare,
+          address: address
+        };
+      }).take(1)
       .subscribe((compare) => {
         // add address in format for profile
         // TODO: is this really needed?
+        this.subscriptions$[0].unsubscribe();
         this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compare.request, {
           address: compare.address
-        })));
-      });
-    this.store$.select(fromInsurance.getSelectedAdvice)
+          })));
+        })
+    );
+    return this.store$.select(fromInsurance.getSelectedAdvice)
       .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
       .map(advice => this.store$.dispatch(new compare.LoadCarAction(advice)))
       .catch(error => Observable.throw(error));
-    return Observable.of(true); // for now return true, used to navigate to next step
   }
 
   onBack(): Observable<any> {
-    return Observable.of(this.store$.dispatch(new router.Back()));
+    return Observable.of(false);
   }
 
   onNext(): Observable<any> {

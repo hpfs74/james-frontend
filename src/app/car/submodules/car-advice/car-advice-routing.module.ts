@@ -6,7 +6,7 @@ import { CarPurchasedComponent } from './containers/car-purchased/car-purchased.
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarExtrasComponent } from './components/car-extras/car-extras.component';
 import { KNXWizardRxComponent } from '../../../components/knx-wizard-rx/knx-wizard-rx.component';
-import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
+import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
 
 export const carAdviceRoutes: Routes = [
   {

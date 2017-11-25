@@ -18,7 +18,6 @@ import * as fromAuth from '../../../../../auth/reducers';
 import * as fromCore from '../../../../../core/reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromCar from '../../../../reducers';
-import * as fromAddress from '../../../../../address/reducers';
 
 // Core actions
 import * as router from '../../../../../core/actions/router';
@@ -39,8 +38,6 @@ import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
 
 import { AssistantConfig } from '../../../../../core/models/assistant';
 import { TagsService } from '../../../../../core/services/tags.service';
-import { Address } from '../../../../../address/models';
-import { AddressForm } from '../../../../../address/components/address.form';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../../../../models';
 import { Price } from '../../../../../shared/models/price';
 
@@ -52,7 +49,7 @@ import { createCarCoverages } from '../../../../utils/coverage.utils';
 
 import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
 import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
-import { InsuranceTopListComponent } from '../../components/knx-insurance-toplist/insurance-toplist.component';
+import { InsuranceTopListComponent } from '../../components/insurance-toplist/insurance-toplist.component';
 
 enum carFormSteps {
   carDetails,
@@ -69,23 +66,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   formSteps: Array<KNXWizardStepRxOptions>;
   formControlOptions: any;
   currentStep: number;
-  coverages: Array<Price>;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   showStepBlock = false;
 
   // State of the advice forms data
-  address$: Observable<Address>;
-  car$: Observable<Car>;
-  isCarLoading$: Observable<boolean>;
-  isCarFailed$: Observable<boolean>;
-  advice$: Observable<any>;
-  insurances$: Observable<Array<CarInsurance>>;
-  isInsuranceLoading$: Observable<boolean>;
-  selectedInsurance$: Observable<CarInsurance>;
-  isCoverageLoading$: Observable<boolean>;
-  isCoverageError$: Observable<boolean>;
-  coverageRecommendation$: Observable<CarCoverageRecommendation>;
   isLoggedIn$: Observable<boolean>;
   purchasedInsurances$: Observable<any>;
   purchasedInsurancesLoading$: Observable<any>;
@@ -93,8 +78,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   subscription$: Array<any>;
 
   // Forms
-  carDetailForm: CarDetailForm;
-  addressForm: AddressForm;
   carExtrasForm: CarExtrasForm;
 
   @ViewChild(KNXWizardComponent) knxWizard: KNXWizardComponent;
@@ -113,27 +96,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
-    this.address$ = this.store$.select(fromAddress.getAddress);
-    this.car$ = this.store$.select(fromCar.getCarInfo);
-    this.isCarLoading$ = this.store$.select(fromCar.getCarInfoLoading);
-    this.isCarFailed$ = this.store$.select(fromCar.getCarInfoError);
-    this.insurances$ = this.getCompareResultCopy();
-    this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
-    this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
-    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
-    this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
-    this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
-    this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
     this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
 
     // initialize forms
     const formBuilder = new FormBuilder();
-    this.addressForm = new AddressForm(formBuilder);
-
-    this.carDetailForm = new CarDetailForm(formBuilder,
-      this.tagsService.getAsLabelValue('insurance_flow_household'));
 
     this.carExtrasForm = new CarExtrasForm(formBuilder,
       this.tagsService.getAsLabelValue('car_flow_coverage'),
@@ -142,7 +110,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       this.tagsService.getAsLabelValue('car_flow_road_assistance'),
       this.tagsService.getAsLabelValue('car_own_risk'));
 
-    this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
 
     this.purchasedInsurances$
       .filter(purchasedInsurances => purchasedInsurances !== null)
@@ -167,7 +134,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           //   }));
         }
     });
-
     this.carExtrasForm.formGroup.valueChanges
       .debounceTime(200)
       .filter(() => this.currentStep === carFormSteps.compareResults)
@@ -215,12 +181,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
 
   ngOnDestroy() {
     this.subscription$.forEach(sub => sub.unsubscribe());
-  }
-
-  onSelectPremium(insurance) {
-    scrollToY();
-    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
-    this.knxWizard.goToNextStep();
   }
 
   onStepChange(stepIndex) {
@@ -293,12 +253,4 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       });
   }
 
-  private getCompareResultCopy(): Observable<CarInsurance[]> {
-    // This is needed because the ngrx-datatable modifies the result to add an $$index to each
-    // result item and modifies the source array order when sorting
-    return this.store$.select(fromCar.getCompareResult)
-      .map(obs => {
-        return obs.map(v => JSON.parse(JSON.stringify(v)));
-      });
-  }
 }

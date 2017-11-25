@@ -8,16 +8,17 @@
     knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded"
      [hidden]="purchasedInsurancesLoading$ | async">
   <div class="container">
-    <!-- <knx-step-navigation
+    <knx-step-navigation
       [steps]="formSteps"
       [currentStep]="currentStep"
       [clickable]="true"
       (stepChange)="knxWizard.goToPreviousStep($event);">
-    </knx-step-navigation> -->
+    </knx-step-navigation>
   </div>
 </div>
 <div class="container knx-car-advice" [ngClass]="getStepClass()" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" [hidden]="purchasedInsurancesLoading$ | async">
-  <knx-wizard-rx [stepOptions]="formSteps" >
+  <knx-wizard-rx [stepOptions]="formSteps"
+                  (onStepChange)="currentStep = $event">
       <!-- <div class="knx-wizard__steps">
           <knx-step [options]="formSteps[0]">
             <knx-car-detail-form

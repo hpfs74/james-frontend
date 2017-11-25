@@ -27,11 +27,10 @@ export class KNXWizardRxComponent implements OnInit {
   currentStep: KNXWizardStepRxOptions;
   currentStepIdx: number = null;
   currentComponent: any | KNXStepRxComponent;
-
+  @Output() onStepChange: EventEmitter<number> = new EventEmitter<number>();
   error: KNXStepError;
 
   private routes: Route[];
-
   constructor(private changeDetector: ChangeDetectorRef,
               private router: Router,
               public route: ActivatedRoute) {}
@@ -40,8 +39,8 @@ export class KNXWizardRxComponent implements OnInit {
     window.wizard = this;
     if (this.stepOptions) {
       this.routes = this.stepOptions.map(step => step.routeConfig);
+      this.setCurrentStepOptions();
     }
-    this.setCurrentStepOptions();
   }
 
   setCurrentStepOptions() {
@@ -54,6 +53,7 @@ export class KNXWizardRxComponent implements OnInit {
         this.currentStepIdx = param['step-index'] - 1;
         this.currentStep = this.stepOptions[this.currentStepIdx];
       }
+      this.onStepChange.emit(this.currentStepIdx);
     });
   }
 

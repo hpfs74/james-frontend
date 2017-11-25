@@ -22,7 +22,7 @@ import { KNXWizardRxComponent } from '../../../components/knx-wizard-rx/knx-wiza
 
 import { CarEffects } from '../../../car/effects/car';
 import { reducers } from '../../../car/reducers';
-import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
+import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
 
 export const COMPONENTS = [
   CarAdviceComponent,
