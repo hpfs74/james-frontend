@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, Route, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';

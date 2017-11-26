@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { KNXLocale } from '@knx/locale';
 import { Observable } from 'rxjs/Observable';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
+import 'rxjs/add/observable/of';
 
 import { setUpTestBed } from './../../../test.common.spec';
 

@@ -6,6 +6,7 @@ import { HttpModule, Response, ResponseOptions } from '@angular/http';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { setUpTestBed } from './../../../test.common.spec';
 

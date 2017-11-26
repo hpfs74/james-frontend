@@ -5,12 +5,7 @@ import {
 } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/finally';
 
 import * as fromRoot from '../reducers';
 import * as Auth from '../actions/auth';

@@ -5,6 +5,8 @@ import { StoreModule, Store } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { hot, cold } from 'jasmine-marbles';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/take';
 
 import { AuthEffects } from './auth.effects';
 import { AuthToken } from './../models/auth';
