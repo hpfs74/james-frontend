@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';

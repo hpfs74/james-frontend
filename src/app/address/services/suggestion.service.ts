@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { AuthHttp } from '../../auth/services';
 import { AddressSuggestion } from '../models';
 

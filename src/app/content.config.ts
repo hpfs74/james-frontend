@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { environment } from '../environments/environment';
+import { environment } from '@env/environment';
 
 export interface Link {
   label: string;

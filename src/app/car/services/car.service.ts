@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 import { AuthHttp } from '../../auth/services/auth-http.service';
 import { Profile } from '../../profile/models';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { Car, CarInsurance, CarCoverageRecommendation, CarCompare, Proposal } from '../models';
 
 @Injectable()
