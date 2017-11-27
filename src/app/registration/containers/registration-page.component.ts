@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KNXEmailValidator } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 
@@ -22,11 +21,11 @@ export class RegistrationPageComponent implements OnInit {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
   registrationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationPending);
   registrationSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationSuccess);
-  selectedAdviceId$: Observable<string> = this.store$.select(fromInsurance.getSelectedAdviceId);
   resendError$: Observable<string> = this.store$.select(fromAuth.getRegistrationResendActivationEmailError);
   resendPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
   resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
   registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
+  selectedAdviceId$: Observable<string> = this.store$.select(fromInsurance.getSelectedAdviceId);
 
   content: Content;
 

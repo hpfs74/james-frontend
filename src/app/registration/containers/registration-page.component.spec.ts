@@ -1,14 +1,12 @@
-import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
-import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
-import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
+import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 import * as fromAuth from '../../auth/reducers';
-import * as auth from '../../auth/actions/auth';
+import * as fromInsurance from '../../insurance/reducers';
 import * as register from '../../auth/actions/registration';
 
 import { setUpTestBed } from './../../../test.common.spec';
@@ -47,8 +45,9 @@ describe('Component: RegistrationPageComponent', () => {
     imports: [
       RouterTestingModule,
       StoreModule.forRoot({
-        auth: combineReducers(fromAuth.reducers)
-      })
+        auth: combineReducers(fromAuth.reducers),
+        insurance: combineReducers(fromInsurance.reducers)
+})
     ],
     declarations: [RegistrationPageComponent],
     schemas: [NO_ERRORS_SCHEMA]
