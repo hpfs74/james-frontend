@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Headers } from '@angular/http';
 
+import { environment } from '../../../environments/environment';
 import { AuthHttp } from '../../auth/services/auth-http.service';
 
 @Injectable()
@@ -10,7 +11,7 @@ export class AdviceService {
   private headers: Headers;
 
   constructor(private authHttp: AuthHttp) {
-    this.baseUrl = 'https://middleware.test.knabverzekeren.nl/api/v1/proxy/advice_item/';
+    this.baseUrl = environment.james.advice;
     this.headers = new Headers();
 
     this.headers.append('version', 'v2');
