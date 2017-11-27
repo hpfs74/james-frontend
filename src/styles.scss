@@ -2,8 +2,8 @@
 
 @import 'styles/base';
 @import '~@knx/base/index';
-// @import '~@knx/grid/index';
 @import '~@knx/avatar/index';
+@import '~@knx/card/index';
 @import '~@knx/checkbox/index';
 @import '~@knx/collapsible-panel/index';
 @import '~@knx/dropdown/index';
@@ -33,6 +33,7 @@ html {
 
 body {
   width: 100%;
+  background: $knab-primary-gray;
 }
 
 *,

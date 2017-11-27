@@ -21,6 +21,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 // @knx
 import { KNXFormsModule } from '@knx/forms';
 import { TextMaskModule } from '@knx/input';
+import { KNXCardModule } from '@knx/card';
 import { KNXWizardModule } from '@knx/wizard';
 import { KNXStepNavigationModule } from '@knx/step-navigation';
 import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
@@ -150,6 +151,7 @@ export const sharedComponents = [
 
 export const sharedModules = [
   KNXFormsModule,
+  KNXCardModule,
   KNXWizardModule,
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
