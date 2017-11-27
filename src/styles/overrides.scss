@@ -41,13 +41,17 @@ button.knx-button--toggle,
 }
 
 .knx-step-navigation {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   padding: 10px 0;
 
   & > li {
     font-weight: normal;
   }
+}
+
+@media (min-width: 768px) {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .knx-modal .knx-modal-body {
