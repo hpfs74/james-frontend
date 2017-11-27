@@ -35,22 +35,26 @@ describe('Component: Purchased', () => {
 
   it('should show insurances and greetings', () => {
     comp.title = 'Hello World';
-    comp.insurances = [
-      {
-        license: '01XLXL',
-        make: 'Honda',
-        model: 'Civic',
-        insurance_name: 'auto',
-        price: '1234'
-      },
-      {
-        license: '01XLX1',
-        make: 'BMW',
-        model: '3',
-        insurance_name: 'auto',
-        price: '4321'
+    comp.insurances = {
+      car: {
+        insurance: [
+          {
+            license: '01XLXL',
+            make: 'Honda',
+            model: 'Civic',
+            insurance_name: 'auto',
+            price: '1234'
+          },
+          {
+            license: '01XLX1',
+            make: 'BMW',
+            model: '3',
+            insurance_name: 'auto',
+            price: '4321'
+          }
+        ]
       }
-    ];
+    };
 
     fixture.detectChanges();
 

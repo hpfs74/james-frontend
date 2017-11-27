@@ -1,4 +1,4 @@
-import { AddAction, UpdateAction, RemoveAction, SelectAction, SetInsuranceAction, RemoveInsuranceAction } from '../actions/advice';
+import { Add, Update, Remove, Select, SetInsurance, RemoveInsurance } from '../actions/advice';
 import * as fromAdvice from './advice';
 
 describe('Advice reducer', () => {
@@ -12,7 +12,7 @@ describe('Advice reducer', () => {
 
   describe('ADD_ADVICE', () => {
     it('should add an advice', () => {
-      const addAction = new AddAction({
+      const addAction = new Add({
         id: '20304',
         test: 'value'
       });
@@ -59,7 +59,7 @@ describe('Advice reducer', () => {
 
       const expectedResult = fromAdvice.initialState;
 
-      const updateAction = new UpdateAction(payload);
+      const updateAction = new Update(payload);
       const result = fromAdvice.reducer(fromAdvice.initialState, updateAction);
       expect(result).toEqual(expectedResult);
     });
@@ -82,7 +82,7 @@ describe('Advice reducer', () => {
         selectedInsurance: null
       };
 
-      const selectAction = new SelectAction('22');
+      const selectAction = new Select('22');
 
       const expectedResult = {
         selectedId: '22',
@@ -121,7 +121,7 @@ describe('Advice reducer', () => {
         selectedInsurance: null
       };
 
-      const removeAction = new RemoveAction({
+      const removeAction = new Remove({
         id: '22'
       });
 
@@ -156,7 +156,7 @@ describe('Advice reducer', () => {
         selectedInsurance: null
       };
 
-      const removeAction = new RemoveAction({
+      const removeAction = new Remove({
         id: '22'
       });
 
@@ -207,7 +207,7 @@ describe('Advice reducer', () => {
         selectedInsurance: payload
       };
 
-      const selectAction = new SetInsuranceAction(payload);
+      const selectAction = new SetInsurance(payload);
       const result = fromAdvice.reducer(fromAdvice.initialState, selectAction);
       expect(result).toEqual(expectedResult);
     });
@@ -242,7 +242,7 @@ describe('Advice reducer', () => {
         }
       };
 
-      const removeAction = new RemoveInsuranceAction();
+      const removeAction = new RemoveInsurance();
       const result = fromAdvice.reducer(testInitialState, removeAction);
       expect(result).toEqual(fromAdvice.initialState);
     });

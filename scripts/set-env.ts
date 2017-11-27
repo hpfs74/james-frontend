@@ -127,6 +127,7 @@ function getContent(environment: string) {
       address: '${getEnvVar('JAMES_API_ADDRESS')}',
       suggestion: '${getEnvVar('JAMES_API_SUGGESTION')}',
       cars: '${getEnvVar('JAMES_API_CARS')}',
+      advice: '${getEnvVar('JAMES_API_ADVICE')}',
       carCompare: '${getEnvVar('JAMES_API_CAR_COMPARE')}',
       carCoverage: '${getEnvVar('JAMES_API_CAR_COVERAGE')}',
       carDamageFree: '${getEnvVar('JAMES_API_CAR_DAMAGEFREE')}',
