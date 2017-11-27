@@ -85,7 +85,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
         </div>
       </div>
 
-      <knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurer]="insurer"></knx-insurance-result-detail>
+      <!--<knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurer]="insurer"></knx-insurance-result-detail>-->
     </div>
   `,
   animations: [ fadeInAnimation ]

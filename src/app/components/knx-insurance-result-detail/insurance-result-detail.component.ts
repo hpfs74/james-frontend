@@ -6,7 +6,8 @@ import { Rating } from '../../shared/models';
   selector: 'knx-insurance-result-detail',
   styleUrls: ['./insurance-result-detail.component.scss'],
   template: `
-    <knx-collapse-panel
+    <!-- TODO: migrate to knx-collapsible-panel from @knx package -->
+    <!--<knx-collapse-panel
       class="knx-insurance-result__details"
       contentHeight="200px"
       openLabel="bekijk details"
@@ -32,7 +33,7 @@ import { Rating } from '../../shared/models';
           </knx-tab>
         </knx-tabs>
       </div>
-    </knx-collapse-panel>
+    </knx-collapse-panel>-->
   `
 })
 export class InsuranceResultDetailComponent implements OnInit {
