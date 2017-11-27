@@ -4,6 +4,7 @@
         <knx-registration *ngIf="!(registrationSuccess$ | async)"
             [privacyStatementUrl]="content.externalLinks.privacyStatement"
             [termsAndConditionsUrl]="content.externalLinks.termsAndConditions"
+            [selectedAdviceId]="selectedAdviceId$ | async"
             [pending]="registrationPending$ | async"
             [error]="registrationError$ | async"
             (onRegisterWithAdvice)="registerWithAdvice($event)"
@@ -19,6 +20,7 @@
             (onSendActivation)="sendActivationEmail($event)">
         </knx-registration-thankyou>
     </div>
+
     <div class="col-md-6">
       <knx-download-panel [iosUrl]="content.appStore.iOS" [androidUrl]="content.appStore.android"></knx-download-panel>
     </div>
