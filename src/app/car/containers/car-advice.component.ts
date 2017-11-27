@@ -76,6 +76,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   isCarLoading$: Observable<boolean>;
   isCarFailed$: Observable<boolean>;
   advice$: Observable<any>;
+  insurance$: Observable<any>;
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
   selectedInsurance$: Observable<CarInsurance>;
@@ -121,6 +122,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
@@ -161,11 +163,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     this.purchasedInsurances$
       .filter(purchasedInsurances => purchasedInsurances !== null)
+      .take(1)
       .subscribe(purchasedInsurances => {
-        // redirect to purchased overview if there are any manually added insurances
-        if (purchasedInsurances.car.insurance.length && purchasedInsurances.car.insurance.filter(insurance =>
-            (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+        const insurances = purchasedInsurances.car.insurance;
+        const advices = purchasedInsurances.car.insurance_advice;
+
+        if (insurances.length && insurances.filter(insurance =>
+          (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+          // redirect to purchased overview if there are any manually added insurances
           this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+        } else if (insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
+          // Proceed to the buy flow for anonymous with advice
+          this.proceedAnonymous(advices, insurances);
         }
     });
 
@@ -437,5 +446,21 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       .map(obs => {
         return obs.map(v => JSON.parse(JSON.stringify(v)));
       });
+  }
+
+  private proceedAnonymous(advices, insurances) {
+    this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
+    this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
+
+    this.insurance$.subscribe(insurance => {
+      if (insurance) {
+        this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+          id => {
+            this.store$.dispatch(new router.Go({
+              path: ['/car/insurance', {adviceId: id}],
+            }));
+          }));
+      }
+    });
   }
 }

@@ -39,6 +39,19 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case AdviceActions.GET_SUCCESS: {
+      let advice = action.payload;
+
+      if (advice && Object.keys(advice).length === 0) {
+        advice = null;
+      }
+
+      return Object.assign({}, state, {
+        ...state,
+        selectedInsurance: advice.advice_item
+      });
+    }
+
     case AdviceActions.UPDATE_ADVICE: {
       const advice = action.payload;
       // Do nothing if no advice is selected as active
