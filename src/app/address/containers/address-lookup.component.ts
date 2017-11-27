@@ -4,6 +4,9 @@ import { Store } from '@ngrx/store';
 import { FormControlOptions } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 import * as fromAddress from '../reducers';
 import * as address from '../actions/address';

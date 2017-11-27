@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 import { environment } from '../../../environments/environment';
 import { AuthHttp } from '../../auth/services/auth-http.service';

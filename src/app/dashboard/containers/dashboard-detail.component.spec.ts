@@ -6,6 +6,7 @@ import { MockBackend } from '@angular/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx/store';
+import 'rxjs/add/observable/of';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { DashboardDetailComponent } from './dashboard-detail.component';

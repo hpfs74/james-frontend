@@ -4,6 +4,7 @@ import { StoreModule, Store, combineReducers, Action } from '@ngrx/store';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import { hot, cold } from 'jasmine-marbles';
+import 'rxjs/add/operator/take';
 
 import { AssistantEffects } from './assistant';
 import { AssistantConfig } from '../models/assistant';

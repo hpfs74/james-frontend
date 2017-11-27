@@ -7,6 +7,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { setUpTestBed } from './../../../test.common.spec';
 

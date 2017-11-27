@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { AuthHttp } from '../../auth/services/auth-http.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { Profile } from '../models/profile';
 import { Insurance } from '../../insurance/models';
 import { Settings } from '../models/settings';

@@ -3,6 +3,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import { hot, cold } from 'jasmine-marbles';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
 
 import { CompareEffects } from './compare';
 import { CarService } from '../services/car.service';

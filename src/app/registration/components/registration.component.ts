@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import 'rxjs/add/operator/take';
 
 import { RegistrationForm } from '../components/registration.form';
 import { registrationError } from '../models/registration-error';

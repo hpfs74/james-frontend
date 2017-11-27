@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from
 import { Store } from '@ngrx/store';
 import { KNXEmailValidator } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/filter';
 
 import * as fromAuth from '../../auth/reducers';
 import * as auth from '../../auth/actions/auth';

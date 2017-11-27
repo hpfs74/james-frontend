@@ -4,7 +4,6 @@ import {
 import { FormBuilder, Validators, FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/combineLatest';
 
 import * as fromRoot from '../../reducers';
 import * as car from '../actions/car';

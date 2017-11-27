@@ -4,6 +4,8 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import { hot, cold } from 'jasmine-marbles';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
 
 import { CoverageEffects } from './coverage';
 import { CarService } from '../services/car.service';
