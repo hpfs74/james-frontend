@@ -28,7 +28,7 @@ a:hover {
     .girl-section__picture {
       float: right;
       margin-bottom: -20px;
-      margin-right: -15px;
+      margin-right: -25px;
     }
 
     .knx-login__error {
@@ -49,11 +49,12 @@ a:hover {
     }
 
     .girl-section__quote {
-      width: 110px;
+      width: 80px;
       display: inline-block;
       text-align: center;
       margin-left: -20px;
       color: $knab-medium-gray;
+      font-size: $font-size-base - 2;
     }
   }
 }
