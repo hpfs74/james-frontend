@@ -1,66 +1,68 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="container login-form">
-        <div class="row">
-          <div class="col-md-6">
-            <h2 class="knx-login__header">
-              Inloggen
-            </h2>
-          </div>
-          <div class="col-md-6">
-            <div class="knx-login__secure">
-              <span class="knx-icon-lock"></span> Beveiligde verbinding
+      <knx-card>
+        <div class="container login-form">
+          <div class="row">
+            <div class="col-md-6">
+              <h2 class="knx-login__header">
+                Inloggen
+              </h2>
+            </div>
+            <div class="col-md-6">
+              <div class="knx-login__secure">
+                <span class="knx-icon-lock"></span> Beveiligde verbinding
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="container">
-            <form [formGroup]="form.formGroup" (ngSubmit)="loginAndShowErrors($event);" (keyup.enter)="login($event)" autocomplete="off">
-              <div class="row">
-                <div class="col-md-12">
-                  <knx-form-group
-                    [formControlName]="form.formConfig.email.formControlName"
-                    [options]="form.formConfig.email">
-                  </knx-form-group>
+          <div class="row">
+            <div class="container">
+              <form [formGroup]="form.formGroup" (ngSubmit)="loginAndShowErrors($event);" (keyup.enter)="login($event)" autocomplete="off">
+                <div class="row">
+                  <div class="col-md-12">
+                    <knx-form-group
+                      [formControlName]="form.formConfig.email.formControlName"
+                      [options]="form.formConfig.email">
+                    </knx-form-group>
 
-                  <knx-form-group
-                    [formControlName]="form.formConfig.password.formControlName"
-                    [options]="form.formConfig.password">
-                  </knx-form-group>
+                    <knx-form-group
+                      [formControlName]="form.formConfig.password.formControlName"
+                      [options]="form.formConfig.password">
+                    </knx-form-group>
 
-                  <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage && !resendSuccess">
-                    <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }} <a *ngIf="errorMessage.hasLink" (click)="resendActivationMail()">Stuur opnieuw</a></p>
-                    <p *ngIf="!errorMessage.errorText">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</p>
-                  </div>
-
-                  <div *ngIf="resendSuccess" class="knx-login__success">
-                    <p>Succesvol verstuurd</p>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-6">
-                      <button type="submit" class="knx-button knx-button--3d knx-button--primary"
-                        [class.knx-button--pending]="pending">
-                        Inloggen
-                      </button>
-                      <br>
-                      <a (click)="goToPasswordReset()" target="_blank">Wachtwoord vergeten?</a>
+                    <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage && !resendSuccess">
+                      <p *ngIf="errorMessage.errorText">{{ errorMessage.errorText }} <a *ngIf="errorMessage.hasLink" (click)="resendActivationMail()">Stuur opnieuw</a></p>
+                      <p *ngIf="!errorMessage.errorText">Het inloggen is helaas niet gelukt, probeer het alsjeblieft opnieuw.</p>
                     </div>
 
-                    <div class="girl-section col-lg-6 col-md-12 col-sm-6">
-                      <span class="girl-section__quote">
-                        "We zijn elke dag van 8 tot 22 uur bereikbaar."
-                      </span>
-                      <img class="girl-section__picture" src="/assets/images/avatars/woman.png" alt="girl">
+                    <div *ngIf="resendSuccess" class="knx-login__success">
+                      <p>Succesvol verstuurd</p>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-6 col-md-12 col-sm-6">
+                        <button type="submit" class="knx-button knx-button--3d knx-button--primary"
+                          [class.knx-button--pending]="pending">
+                          Inloggen
+                        </button>
+                        <br>
+                        <a (click)="goToPasswordReset()" target="_blank">Wachtwoord vergeten?</a>
+                      </div>
+
+                      <div class="girl-section col-lg-6 col-md-12 col-sm-6">
+                        <span class="girl-section__quote">
+                          "We zijn elke dag van 8 tot 22 uur bereikbaar."
+                        </span>
+                        <img class="girl-section__picture" src="/assets/images/avatars/woman.png" alt="girl">
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </knx-card>
     </div>
   </div>
   <div class="row">
