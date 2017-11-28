@@ -19,8 +19,8 @@ export class AdviceEffects {
     .map((action: advice.Get) => action.payload)
     .switchMap((adviceId) => {
       return this.adviceService.getAdvice(adviceId)
-        .map((res: Response) => new insurance.GetPurchasedCarInsurancesSuccess(res))
-        .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailure(error)));
+        .map((res: Response) => new advice.GetSuccess(res))
+        .catch(error => Observable.of(new advice.GetFailure(error)));
     });
 
   constructor(private actions$: Actions, private adviceService: AdviceService) {

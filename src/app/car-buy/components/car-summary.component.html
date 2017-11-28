@@ -133,22 +133,22 @@
 
           <knx-ir-row newSection="true">
             <knx-ir-label>Street</knx-ir-label>
-            <knx-ir-value>{{ advice.address.street }}</knx-ir-value>
+            <knx-ir-value>{{ advice.address?.street || advice.location_info.street }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Huisnummer</knx-ir-label>
-            <knx-ir-value>{{ advice.address.number }}</knx-ir-value>
+            <knx-ir-value>{{ advice.address?.number || advice.location_info.number }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Postcode</knx-ir-label>
-            <knx-ir-value>{{ advice.address.postcode }}</knx-ir-value>
+            <knx-ir-value>{{ advice.address?.postcode || advice.location_info.postcode }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>City</knx-ir-label>
-            <knx-ir-value>{{ advice.address.city }}</knx-ir-value>
+            <knx-ir-value>{{ advice.address?.city || advice.location_info.city }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>

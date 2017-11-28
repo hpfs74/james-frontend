@@ -20,7 +20,7 @@ export class AdviceService {
 
   public getAdvice(adviceId: string): Observable<any> {
     const headers = this.headers;
-    return this.authHttp.get(this.baseUrl + adviceId, { headers })
+    return this.authHttp.get(`${this.baseUrl}/${adviceId}`, { headers })
       .map(res => res.json());
   }
 }

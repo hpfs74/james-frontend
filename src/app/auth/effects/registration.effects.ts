@@ -35,7 +35,7 @@ export class RegistrationEffects {
           return [new registration.RegisterSuccess({})];
         })
         .catch((error) => {
-          let errorText = JSON.parse(error.text()) || error;
+          let errorText = typeof(error.text) === 'function' ? JSON.parse(error.text()) : error;
           return Observable.of(new registration.RegisterFailure(errorText.error || errorText));
         })
   );
@@ -57,7 +57,7 @@ export class RegistrationEffects {
           return [new registration.RegisterWithAdviceSuccess({})];
         })
         .catch((error) => {
-          let errorText = JSON.parse(error.text()) || error;
+          let errorText = typeof(error.text) === 'function' ? JSON.parse(error.text()) : error;
           return Observable.of(new registration.RegisterWithAdviceFailure(errorText.error || errorText));
         })
     );
@@ -73,7 +73,7 @@ export class RegistrationEffects {
           return [new registration.ResendActivationEmailSuccess()];
         })
         .catch((error) => {
-          let errorText = JSON.parse(error.text()) || error;
+          let errorText = typeof(error.text) === 'function' ? JSON.parse(error.text()) : error;
           return Observable.of(new registration.RegisterFailure(errorText.error || errorText));
         })
     );
