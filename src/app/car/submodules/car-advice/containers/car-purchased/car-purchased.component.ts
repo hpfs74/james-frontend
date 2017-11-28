@@ -10,7 +10,7 @@ import * as fromCore from '../../../../../core/reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromProfile from '../../../../../profile/reducers';
-
+import * as router from '../../../../../core/actions/router';
 @Component({
   selector: 'knx-car-purchased',
   templateUrl: './car-purchased.component.html'
@@ -36,6 +36,10 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
         this.email = profile.emailaddress || '';
       }
     );
+  }
+
+  test() {
+    this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
   }
 
   ngAfterViewInit() {

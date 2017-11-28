@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler, APP_INITIALIZER, Optional, SkipSelf } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { KNXLocale } from '@knx/locale';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -41,6 +42,7 @@ import { GlobalErrorHandler } from './services/error-handler';
 
 // Feature module reducer
 import { reducers } from './reducers';
+import { KNXWizardRxService } from '../components/knx-wizard-rx/knx-wizard-rx.service';
 
 export const COMPONENTS = [
   AppComponent,
@@ -85,6 +87,7 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
+        KNXLocale,
         AssistantService,
         CanActivateBuyFlowGuard,
         CookieService,
@@ -96,6 +99,7 @@ export class CoreModule {
         requestOptionsProvider,
         CurrencyPipe,
         DatePipe,
+        KNXWizardRxService,
         {
           provide: ErrorHandler,
           useClass: GlobalErrorHandler

@@ -51,19 +51,19 @@ describe('Component: CarSummaryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should check if an insurance is valid', () => {
-    expect(comp.targetComponent.isValidInsurance({})).toBeFalsy();
-    expect(comp.targetComponent.isValidInsurance({ id: '23434' })).toBeFalsy();
-    expect(comp.targetComponent.isValidInsurance({ _embedded: {} })).toBeFalsy();
-    expect(comp.targetComponent.isValidInsurance({ _embedded: {
-        car: null
-      }
-    })).toBeFalsy();
-  });
+  // it('should check if an insurance is valid', () => {
+  //   expect(comp.targetComponent.isValidInsurance({})).toBeFalsy();
+  //   expect(comp.targetComponent.isValidInsurance({ id: '23434' })).toBeFalsy();
+  //   expect(comp.targetComponent.isValidInsurance({ _embedded: {} })).toBeFalsy();
+  //   expect(comp.targetComponent.isValidInsurance({ _embedded: {
+  //       car: null
+  //     }
+  //   })).toBeFalsy();
+  // });
 
-  it('should check if an advice is valid', () => {
-    expect(comp.targetComponent.isValidAdvice({})).toBeFalsy();
-    expect(comp.targetComponent.isValidAdvice({ id: '23434' })).toBeFalsy();
-    expect(comp.targetComponent.isValidAdvice({ address: {zip: '2518CB'}})).toBeTruthy();
-  });
+  // it('should check if an advice is valid', () => {
+  //   expect(comp.targetComponent.isValidAdvice({})).toBeFalsy();
+  //   expect(comp.targetComponent.isValidAdvice({ id: '23434' })).toBeFalsy();
+  //   expect(comp.targetComponent.isValidAdvice({ address: {zip: '2518CB'}})).toBeTruthy();
+  // });
 });

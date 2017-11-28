@@ -1,41 +1,89 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
+import { Component } from '@angular/core';
 import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
 
 import { Profile } from './../../../../../profile/models';
 import { ContactDetailForm } from './../../../../../shared/forms/contact-detail.form';
-import { isMobileNumber } from '../../../../../utils/base-form.utils';
 import * as FormUtils from '../../../../../utils/base-form.utils';
+import { FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../reducers';
+import * as fromInsurance from '../../../../../insurance/reducers';
+import * as assistant from '../../../../../core/actions/assistant';
+import * as router from '../../../../../core/actions/router';
+import * as car from '../../../../../car/actions/car';
+import * as advice from '../../../../../insurance/actions/advice';
+import * as compare from '../../../../../car/actions/compare';
+import { AfterContentInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'knx-car-contact-form',
   styleUrls: ['./car-contact.component.scss'],
   templateUrl: 'car-contact.component.html'
 })
-export class CarContactComponent implements OnChanges, QaIdentifier {
+export class CarContactComponent implements QaIdentifier, AfterContentInit, KNXStepRxComponent, OnDestroy {
   qaRootId = QaIdentifiers.carContact;
+  advice$: Observable<any>;
+  form: ContactDetailForm;
+  subscription$: Subscription[] = [];
 
-  @Input() form: ContactDetailForm;
-  @Input() profile: Profile;
+  constructor(private store$: Store<fromRoot.State>) {
+    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    const formBuilder = new FormBuilder();
+    this.form = new ContactDetailForm(formBuilder);
+  }
 
-  @Input() set advice(value: any) {
+  setAdvice(value: any) {
     FormUtils.updateAndValidateControls(this.form.formGroup, value);
   }
 
-  @Output() onReset: EventEmitter<any> = new EventEmitter<any>();
+  ngAfterContentInit() {
+    this.subscription$.push(
+      this.advice$.subscribe(advice => this.setAdvice(advice))
+    );
+  }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.profile) {
-      // Update validation state of known pre-filled profile fields
-      // Note: only seems to get triggered if touched/dirty state is
-      // updated on each individual control
-      FormUtils.updateAndValidateControls(this.form.formGroup, this.profile);
+  ngOnDestroy() {
+    this.subscription$.forEach(subscription => subscription.unsubscribe);
+  }
+
+  initFormWithProfile() {
+    this.store$.dispatch(new assistant.ClearAction);
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.fill'}));
+  }
+
+  submitForm(): Observable<any> {
+    FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
+    if (!this.form.formGroup.valid) {
+      return Observable.throw(new Error(this.form.validationSummaryError));
     }
+
+    this.store$.dispatch(new advice.UpdateAction(this.form.formGroup.value));
+
+    return new Observable(obs => {
+      obs.next();
+      obs.complete();
+    });
   }
 
   resetAdvice() {
-    this.onReset.emit('resetAdvice');
+    this.store$.dispatch(new advice.ResetAction());
+    this.store$.dispatch(new compare.CarCompareResetStateAction());
+    this.store$.dispatch(new car.CarResetStateAction());
+    this.store$.dispatch(new router.Go({path: ['car']}));
+  }
+
+  onBack() {
+    return Observable.empty();
+  }
+  onNext(): Observable<any> {
+    return this.submitForm();
+  }
+  onShow() {
+    this.initFormWithProfile();
+    return Observable.empty();
   }
 }

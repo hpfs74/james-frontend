@@ -12,54 +12,13 @@
       [steps]="formSteps"
       [currentStep]="currentStep"
       [clickable]="true"
-      (stepChange)="knxWizard.goToPreviousStep($event);">
+      (stepChange)="knxWizardRx.goToPreviousStep($event);">
     </knx-step-navigation>
   </div>
 </div>
 <div class="container knx-car-advice" [ngClass]="getStepClass()" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" [hidden]="purchasedInsurancesLoading$ | async">
-  <knx-wizard-rx [stepOptions]="formSteps"
+  <knx-wizard-rx #knxWizardRx [stepOptions]="formSteps"
                   (onStepChange)="currentStep = $event">
-      <!-- <div class="knx-wizard__steps">
-          <knx-step [options]="formSteps[0]">
-            <knx-car-detail-form
-              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="details"
-              (coverageSelected)="updateSelectedCoverage($event)"
-              (licensePlateChange)="getCarInfo($event)"
-              (activeLoanChange)="updateActiveLoan($event)"
-              [form]="carDetailForm"
-              [addressForm]="addressForm"
-              [car]="car$ | async"
-              [carLoading]="isCarLoading$ | async"
-              [carFailed]="isCarFailed$ | async"
-              [advice]="advice$ | async"
-              [coverages]="coverages"
-              [coverageRecommendation]="coverageRecommendation$ | async"
-              [isCoverageLoading]="isCoverageLoading$ | async">
-            </knx-car-detail-form>
-          </knx-step>
-    
-          <knx-step [options]="formSteps[1]">
-            <knx-insurance-toplist
-              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="insurances"
-              (insuranceSelected$)="onSelectPremium($event)"
-              [totalTitle]="(insurances$ | async)?.length"
-              [initialAmount]="4"
-              [isLoading]="isInsuranceLoading$ | async"
-              [insurances]="insurances$ | async">
-            </knx-insurance-toplist>
-    
-            <knx-service-guide
-              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="service-guide"
-              [visible]="!(isInsuranceLoading$| async)">
-            </knx-service-guide>
-          </knx-step>
-    
-          <knx-step [options]="formSteps[2]">
-            <knx-insurance-review
-              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="summary"
-              [selectedInsurance]="selectedInsurance$ | async"></knx-insurance-review>
-          </knx-step>
-        </div> -->
     
     <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="currentStep !== 1" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream

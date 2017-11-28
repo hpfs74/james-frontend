@@ -3,7 +3,6 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { By } from '@angular/platform-browser';
 import { InsuranceReviewComponent } from './insurance-review.component';
 import { KNXCollapsiblePanelComponent } from '../../../../node_modules/@knx/collapsible-panel/index';
-import { KNXInfoComponent } from '../../../../node_modules/@knx/info/index';
 import { CurrencyPipe } from '@angular/common';
 
 import { setUpTestBed } from './../../../test.common.spec';

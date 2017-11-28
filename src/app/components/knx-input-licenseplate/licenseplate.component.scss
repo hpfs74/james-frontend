@@ -1,0 +1,27 @@
+.knx-input--licenseplate.knx-input:before,
+.knx-input--licenseplate > .knx-input:before {
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding: 5px 10px;
+  line-height: 30px;
+  background: #007ac7;
+  border: 1px solid #007ac7;
+  color: #fff;
+  font-weight: bold;
+  content: 'NL';
+  height: 44px;
+  display: inline-block; /* fix height in Safari */
+}
+
+.knx-input--licenseplate .knx-input__input,
+.knx-input--licenseplate > .knx-input__input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+  background: #ffd640;
+  border: 1px solid #ffd640;
+  width: 180px;
+}

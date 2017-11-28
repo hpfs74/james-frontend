@@ -4,62 +4,22 @@
       [steps]="formSteps"
       [currentStep]="currentStep"
       [clickable]="true"
-      (stepChange)="knxWizard.goToPreviousStep($event);">
+      (stepChange)="knxWizardRx.goToPreviousStep($event);">
     </knx-step-navigation>
   </div>
 </div>
 
 <div class="container knx-car-buy" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
-  <knx-wizard #knxWizard (stepChange)="onStepChange($event)">
-    <div class="knx-wizard__steps">
-      <knx-step [options]="formSteps[0]">
-        <knx-car-contact-form
-          [form]="contactDetailForm"
-          [advice]="advice$ | async"
-          [profile]="profile$ | async"
-          (onReset)="resetFlow()">
-        </knx-car-contact-form>
-      </knx-step>
-
-      <knx-step [options]="formSteps[1]">
-        <knx-car-reporting-code-form
-          [form]="reportingCodeForm"
-          [advice]="advice$ | async"
-          [insurance]="insurance$ | async"
-          [profile]="profile$ | async">
-        </knx-car-reporting-code-form>
-      </knx-step>
-
-      <knx-step [options]="formSteps[2]">
-        <knx-car-check
-          [form]="checkForm"
-          [advice]="advice$ | async">
-        </knx-car-check>
-      </knx-step>
-
-      <knx-step [options]="formSteps[3]">
-        <knx-car-payment-form
-          [form]="paymentForm"
-          [advice]="advice$ | async">
-        </knx-car-payment-form>
-      </knx-step>
-
-      <knx-step [options]="formSteps[4]">
-        <knx-car-summary-form
-          [(confirm)]="acceptFinalTerms"
-          [advice]="advice$ | async"
-          [insurance]="insurance$ | async"
-          [profile]="profile$ | async">
-        </knx-car-summary-form>
-      </knx-step>
-    </div>
+  <knx-wizard-rx #knxWizardRx
+                [stepOptions]="formSteps"
+                (onStepChange)="onStepChange($event)">
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
         [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async">
       </knx-chat-stream>
     </div>
-  </knx-wizard>
+  </knx-wizard-rx>
 
   <div class="container" *ngIf="currentStep === 4">
     <div class="row knx-buy__footer">

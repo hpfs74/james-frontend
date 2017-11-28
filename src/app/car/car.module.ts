@@ -20,7 +20,6 @@ import { CompareEffects } from './effects/compare';
 import { CoverageEffects } from './effects/coverage';
 
 import { reducers } from './reducers';
-
 @NgModule({
   imports: [
     SharedModule,

@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { InsuranceAdvice } from '../../../../../insurance/models';
+import { Component, OnInit } from '@angular/core';
 import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -7,11 +6,12 @@ import * as fromRoot from '../../../../reducers';
 import * as router from '../../../../../core/actions/router';
 import * as fromCar from '../../../../reducers';
 import * as assistant from '../../../../../core/actions/assistant';
+import * as advice from '../../../../../insurance/actions/advice';
 
 import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
 import { CarInsurance } from '../../../../models/index';
 import { AsyncPipe } from '@angular/common';
-declare var window: any;
+import { KNXWizardRxService } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.service';
 interface OrderItem {
   id: string;
   label: string;
@@ -32,20 +32,20 @@ export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
   initialAmount = 4;
   disableInsuranceBuy: boolean;
   isInsuranceLoading$: Observable<boolean>;
-  @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter();
-
   total: number;
   orderBy: Array<OrderItem>;
   qaRootId = QaIdentifiers.carAdviceRoot;
 
-  constructor(private store$: Store<fromRoot.State>, private asyncPipe: AsyncPipe) {
+  constructor(private store$: Store<fromRoot.State>,
+              private asyncPipe: AsyncPipe,
+              public knxWizardRxService: KNXWizardRxService) {
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.insurances$ = this.getCompareResultCopy();
-    window.toplist = this;
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
   }
 
   ngOnInit(): void {
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.total = this.initialAmount;
     this.orderBy = [
       { id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true },
@@ -93,7 +93,8 @@ export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
   }
 
   selectInsurance(insurance): void {
-    // this.store$.dispatch(new advice.SetInsuranceAction(insurance));
+    this.knxWizardRxService.nextStep();
+    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
   }
 
   noResult(): boolean {

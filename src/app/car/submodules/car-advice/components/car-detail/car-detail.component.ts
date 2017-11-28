@@ -1,4 +1,4 @@
-import { Component, Output, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit,  } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +9,6 @@ import 'rxjs/add/observable/combineLatest';
 import * as cuid from 'cuid';
 import * as car from '../../../../actions/car';
 import * as fromRoot from '../../../../../reducers';
-import * as fromAuth from '../../../../../auth/reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromCar from '../../../../reducers';
 import * as fromAddress from '../../../../../address/reducers';
@@ -17,18 +16,16 @@ import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
 import * as coverage from '../../../../actions/coverage';
 import * as compare from '../../../../actions/compare';
-import * as router from '../../../../../core/actions/router';
 import * as FormUtils from '../../../../../utils/base-form.utils';
 
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
 import { CarDetailForm } from './car-detail.form';
 import { AddressForm } from '../../../../../address/components/address.form';
-import { Car, CarCoverageRecommendation, CarInsurance, CarCompare } from '../../../../models';
+import { Car, CarCoverageRecommendation, CarCompare } from '../../../../models';
 import { Price } from '../../../../../shared/models';
 import { Address } from '../../../../../address/models';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
 import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
-
 @Component({
   selector: 'knx-car-detail-form',
   styleUrls: ['./car-detail.component.scss'],
@@ -49,8 +46,8 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
 
   subscriptions$: Subscription[] = [];
-
-  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {
+  constructor(private store$: Store<fromRoot.State>,
+              private tagsService: TagsService) {
     this.selectInitalStates();
     this.initializeForms();
     this.setInitialSubscriptions();

@@ -1,10 +1,9 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CXPostalCodeValidator } from '@cx/form-control';
-import { CXFormGroupOptions } from '@cx/form-group';
+import { KNXPostalCodeValidator, FormControlOptions } from '@knx/form-control';
+import { KNXFormGroupOptions } from '@knx/form-group';
 
 import { houseNumberValidator } from '../../utils/base-form.validators';
 import { postalCodeMask } from '../../utils/base-form.utils';
-import { FormControlOptions } from '@cx/form';
 
 export class AddressForm {
   formGroup: FormGroup;
@@ -16,7 +15,7 @@ export class AddressForm {
       postalCode: [null, Validators.compose(
         [
           Validators.required,
-          CXPostalCodeValidator
+          KNXPostalCodeValidator
         ]
       )],
       houseNumber: [null, Validators.compose(

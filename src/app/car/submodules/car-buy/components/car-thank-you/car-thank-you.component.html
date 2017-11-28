@@ -11,7 +11,7 @@
         <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
         <knx-thank-you title="Autoverzekering aangevraagd!"
             insuranceType="autoverzekering"
-            [email]="email"></knx-thank-you>
+            [email]="profileEmail$ | async"></knx-thank-you>
         </div>
     </div>
 </div>

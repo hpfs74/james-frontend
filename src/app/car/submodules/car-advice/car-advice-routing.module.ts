@@ -5,8 +5,9 @@ import { CarPurchasedComponent } from './containers/car-purchased/car-purchased.
 
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarExtrasComponent } from './components/car-extras/car-extras.component';
-import { KNXWizardRxComponent } from '../../../components/knx-wizard-rx/knx-wizard-rx.component';
 import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
+import { CarReviewComponent } from './components/car-review/car-review.component';
+import { CarThankYouComponent } from '../car-buy/components/car-thank-you/car-thank-you.component';
 
 export const carAdviceRoutes: Routes = [
   {
@@ -19,11 +20,16 @@ export const carAdviceRoutes: Routes = [
       { path: '', redirectTo: 'detail/1', pathMatch: 'full' },
       { path: 'detail/:step-index', component: CarDetailComponent },
       { path: 'extras/:step-index', component: InsuranceTopListComponent },
+      { path: 'review/:step-index', component: CarReviewComponent },
     ]
   },
   {
     path: 'purchased',
     component: CarPurchasedComponent
+  },
+  {
+    path: 'thank-you',
+    component: CarThankYouComponent
   }
 ];
 @NgModule({
