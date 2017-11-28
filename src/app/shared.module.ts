@@ -53,7 +53,8 @@ import {
   SidePanelStateDirective,
   ClickOutsideDirective,
   QaIdentifierDirective,
-  StickyDirective
+  StickyDirective,
+  TouchCapableDirective
 } from './shared/directives';
 
 /**
@@ -95,19 +96,23 @@ import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
 
 export const sharedComponents = [
+  // Pipes
   TitleCasePipe,
   RoundPipe,
   BooleanPipe,
   JamesTagPipe,
-  AppPromoBlockComponent,
-  AsyncPreviewComponent,
   LicensePlatePipe,
+  // Directives
   BackdropBlurDirective,
   SidePanelStateDirective,
   JumpToElementDirective,
   ClickOutsideDirective,
   QaIdentifierDirective,
   StickyDirective,
+  TouchCapableDirective,
+  // Components
+  AppPromoBlockComponent,
+  AsyncPreviewComponent,
   ButtonIconComponent,
   CarInfoComponent,
   CarPreviewComponent,
