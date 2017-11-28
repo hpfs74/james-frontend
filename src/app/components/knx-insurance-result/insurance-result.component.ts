@@ -69,12 +69,12 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
               {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
             </div>
 
-            <button role="button" class="knx-button knx-button--fullwidth knx-button--3d knx-button--extended"
-              [ngClass]="{'knx-button--cta': insurance.supported,
-              'knx-button--secondary': !insurance.supported}"
+            <button role="button" class="knx-button knx-button--fullwidth"
+              [ngClass]="{'knx-button--primary knx-button--3d': insurance.supported,
+              'knx-button--secondary knx-button--ghost': !insurance.supported}"
               [disabled]="disableButton"
               (click)="select($event)">
-              Bekijk
+              Bekijk1
             </button>
 
             <div class="knx-insurance-result__discount" *ngIf="insurance.discount">
