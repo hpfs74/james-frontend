@@ -14,7 +14,9 @@
   margin-top: 35px;
   text-align: center;
 
-  a {
+  span {
+    font-size: $font-size-base - 2;
     color: $knab-primary-blue;
+    border-bottom: 1px dotted $knab-primary-blue;
   }
 }

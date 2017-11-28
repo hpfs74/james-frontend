@@ -49,8 +49,9 @@ interface OrderItem {
           </button>
 
           <div class="knx-insurance-toplist__info">
-            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
-              <knx-tooltip>
+            <span style="cursor: pointer;">
+              Hoe komen we tot deze resultaten?
+              <knx-tooltip [options]="{ position: 'bottom' }">
                 <p>Onze slimme technologie gaat op basis van de door jou opgegeven informatie aan de slag. We vergelijken
                 meer dan 20 aanbieders en stellen hier een overzicht uit samen. Daarbij kijken we niet alleen naar de prijs.
                 Goede polisvoorwaarden en een dekking die past bij jouw persoonlijke situatie, zijn ook belangrijk.</p>

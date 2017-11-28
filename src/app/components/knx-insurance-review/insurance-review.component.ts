@@ -10,22 +10,18 @@ import { CarInsurance } from '../../car/models';
   template: `
     <div *ngIf="selectedInsurance">
       <h2 class="knx-insurance-review__header">
-        Controleer je gegevens
+        Details {{ selectedInsurance._embedded.insurance.insurance_brand }} verzekering
         <span>
           <img class="knx-insurance-review__logo" src="{{ selectedInsurance._embedded.insurance.insurance_logo }}">
-          <br>
-          <span class="knx-insurance-review__name">({{ selectedInsurance._embedded.insurance.insurance_brand }})</span>
         </span>
       </h2>
     </div>
 
-    <p class="knx-collapsible-panel__title" *ngIf="selectedInsurance?.supported">
+    <p class="knx-insurance-review__supported-info" *ngIf="selectedInsurance?.supported">
       Slim verzekerd via Knab
 
       <knx-ir-tooltip>
-        <strong>Verzekeren via Knab is een goed idee, want:</strong>
-
-        <br/>
+        <p><strong>Verzekeren via Knab is een goed idee, want:</strong></p>
 
         <p>Scherpe prijs: bij Knab betaal je maar 10% provisie per maand. Bij andere aanbieders kan dat oplopen tot wel 25%.</p>
 

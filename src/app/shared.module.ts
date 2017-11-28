@@ -66,7 +66,6 @@ import { ButtonIconComponent } from './components/knx-button-icon/button-icon.co
 import { CarInfoComponent } from './components/knx-car-info/car-info.component';
 import { CarPreviewComponent } from './components/knx-car-info/car-preview.component';
 import { CircleProgressComponent } from './components/knx-circle-progress/circle-progress.component';
-import { CollapsePanelComponent } from './components/knx-collapse-panel/collapse-panel.component';
 import { CollapseMessageComponent } from './components/knx-collapse-message/collapse-message.component';
 import { DashboardItemComponent } from './components/knx-dashboard-item/dashboard-item.component';
 import { DonutComponent } from './components/knx-donut/donut.component';
@@ -113,7 +112,6 @@ export const sharedComponents = [
   CarInfoComponent,
   CarPreviewComponent,
   CircleProgressComponent,
-  CollapsePanelComponent,
   CollapseMessageComponent,
   DashboardItemComponent,
   DonutComponent,
