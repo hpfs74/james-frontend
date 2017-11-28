@@ -1,15 +1,10 @@
-import { Observable } from 'rxjs/Observable';
-import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import 'rxjs/add/operator/take';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 import { RegistrationForm } from '../components/registration.form';
 import { registrationError } from '../models/registration-error';
 import { Authenticate } from '../../auth/models/auth';
 import * as FormUtils from '../../utils/base-form.utils';
-import * as fromInsurance from '../../insurance/reducers';
-import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'knx-registration',
@@ -20,10 +15,9 @@ export class RegistrationComponent implements OnInit {
   errorMessage: string;
   form: RegistrationForm;
 
-  constructor(private store$: Store<fromRoot.State>) { }
-
   @Input() privacyStatementUrl: string;
   @Input() termsAndConditionsUrl: string;
+  @Input() selectedAdviceId: string;
   @Input() pending: boolean;
   @Input() set error(value: string) {
     this.errorMessage = '';
@@ -47,14 +41,11 @@ export class RegistrationComponent implements OnInit {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
 
-      this.store$.select(fromInsurance.getSelectedAdviceId).take(1).subscribe(
-        id => {
-          if (id) {
-            this.onRegisterWithAdvice.emit({ username: email.value, password: password.value});
-          } else {
-            this.onRegister.emit({ username: email.value, password: password.value});
-          }
-        });
+      if (this.selectedAdviceId) {
+        this.onRegisterWithAdvice.emit({ username: email.value, password: password.value});
+      } else {
+        this.onRegister.emit({ username: email.value, password: password.value});
+      }
     }
   }
 
