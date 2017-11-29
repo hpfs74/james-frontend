@@ -91,7 +91,7 @@ export class CarDetailForm extends BaseForm {
         validationErrors: this.validationErrors,
         help: true,
         inputOptions: {
-          formGroupModifiers: ['knx-form-group--space-between'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: '',
           items: [
             {
@@ -124,7 +124,7 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('gender'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          formGroupModifiers: ['knx-form-group--space-between'],
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: 'Selecteer je geslacht',
           items: [
             {

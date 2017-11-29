@@ -79,3 +79,9 @@ a:hover {
     }
   }
 }
+
+@media (max-width: 576px) {
+  button[type="submit"] {
+    width: 100%;
+  }
+}

@@ -29,7 +29,7 @@
   .knx-chat-stream {
     background: none;
     position: fixed;
-    top: 35px;
+    top: 50px;
     right: 0;
 
     &.knx-chat-stream--expanded {
@@ -49,14 +49,42 @@
     .knx-chat-stream__notification {
       position: absolute;
       right: 20px;
-      top: 20px;
+      top: 25px;
       display: none;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
       background: $knab-primary-green;
       pointer-events: none;
-      transition: all 0.3s;
+      //transition: all 0.3s;
+      transition: height 0.25s ease, width 0.25s ease;
+      transform: translate(-50%, -50%);
+
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 50%;
+        border: 1px solid $knab-primary-green;
+      }
+
+      &:before {
+        animation: knx-anim-ripple 2s linear infinite;
+      }
+
+      &:after {
+        animation: knx-anim-ripple 2s linear 1s infinite;
+      }
+
+      &:hover:before,
+      &:hover:after {
+        animation: none;
+      }
 
       &.knx-chat-stream__notification--active {
         display: block;
@@ -81,4 +109,20 @@
 .knx-chat-stream .knx-message--chat {
   z-index: $z-index-chat-stream-message;
   margin-top: 15px;
+}
+
+@keyframes knx-anim-ripple {
+  0% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.75);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
