@@ -150,21 +150,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
 
-    // start new advice only if there is no current one
-    this.advice$.subscribe(currentAdvice => {
-      if (currentAdvice) {
-        // do not pre-fill address
-        // this.store$.select(fromProfile.getProfile).subscribe(currentProfile => {
-        //   this.address.postcode = currentProfile.postcode;
-        //   this.address.number = currentProfile.number;
-        // });
-      } else if (!currentAdvice) {
-        this.store$.dispatch(new advice.Add({
-          id: cuid()
-        }));
-      }
-    });
-
+    // Do actions if user has insurance saved in profile
     this.purchasedInsurances$
       .filter(purchasedInsurances => purchasedInsurances !== null)
       .take(1)
@@ -180,6 +166,19 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           // Proceed to the buy flow for anonymous with advice
           this.proceedAnonymous(advices, insurances);
         }
+    });
+
+    // Go to buy if user has advice in store (logged in after anonymous advice without registration)
+    this.proceedToBuy();
+
+    // start new advice only if there is no current one
+    this.advice$.subscribe(currentAdvice => {
+      if (currentAdvice) {
+      } else if (!currentAdvice) {
+        this.store$.dispatch(new advice.Add({
+          id: cuid()
+        }));
+      }
     });
 
     this.carExtrasForm.formGroup.valueChanges
@@ -301,12 +300,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   startBuyFlow(): Observable<any> {
     return this.isLoggedIn$.take(1).flatMap((loggedIn) => {
       if (loggedIn) {
-        this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-          id => {
-            this.store$.dispatch(new router.Go({
-              path: ['/car/insurance', {adviceId: id}],
-            }));
-          }));
+        this.proceedToBuy();
         return Observable.empty();
       } else {
         // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
@@ -458,13 +452,19 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     this.insurance$.subscribe(insurance => {
       if (insurance) {
-        this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-          id => {
-            this.store$.dispatch(new router.Go({
-              path: ['/car/insurance', {adviceId: id}],
-            }));
-          }));
+        this.proceedToBuy();
       }
     });
+  }
+
+  private proceedToBuy() {
+    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).take(1).subscribe(
+      id => {
+        if (id) {
+          this.store$.dispatch(new router.Go({
+            path: ['/car/insurance', {adviceId: id}],
+          }));
+        }
+      }));
   }
 }
