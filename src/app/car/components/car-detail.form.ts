@@ -91,7 +91,7 @@ export class CarDetailForm extends BaseForm {
         validationErrors: this.validationErrors,
         help: true,
         inputOptions: {
-          formGroupModifiers: ['knx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group--space-between'],
           placeholder: '',
           items: [
             {
@@ -112,7 +112,7 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('houseHold'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: '',
+          placeholder: 'Maak een keuze',
           events: ['focus'],
           items: houseHold
         }
@@ -124,7 +124,7 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('gender'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          formGroupModifiers: ['knx-form-group__wrap--spread'],
+          formGroupModifiers: ['knx-form-group--space-between'],
           placeholder: 'Selecteer je geslacht',
           items: [
             {

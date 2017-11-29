@@ -93,7 +93,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     this.formSteps = [
       {
         label: 'Contactgegevens',
-        nextButtonLabel: 'Naar autogegevens',
+        nextButtonLabel: 'Volgende',
         backButtonLabel: 'Terug',
         hideBackButton: true,
         onShowStep: () => this.initFormWithProfile(),
@@ -101,14 +101,14 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       },
       {
         label: 'Autogegevens',
-        nextButtonLabel: 'Naar check',
+        nextButtonLabel: 'Volgende',
         backButtonLabel: 'Terug',
         onShowStep: () => this.initFormWithProfile(),
         onBeforeNext: this.submitForm.bind(this, this.reportingCodeForm)
       },
       {
         label: 'Check',
-        nextButtonLabel: 'Naar betalingsgegevens',
+        nextButtonLabel: 'Volgende',
         backButtonLabel: 'Terug',
         onShowStep: () => this.initCheckForm('car.buy.check'),
         onBeforeNext: this.submitForm.bind(this, this.checkForm)
