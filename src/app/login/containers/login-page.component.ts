@@ -2,11 +2,12 @@ import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID } from '@ang
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import 'rxjs/add/operator/filter';
 
 import * as fromAuth from '../../auth/reducers';
 import * as auth from '../../auth/actions/auth';
 import * as registration from '../../auth/actions/registration';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import * as router from '../../core/actions/router';
 
 import { LoginForm } from '../components/login.form';

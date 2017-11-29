@@ -1,50 +1,52 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="container knx-registration">
-        <div class="knx-registration__welcome">
-          <h2 class="knx-registration__subline">Maak nieuw account aan</h2>
-          <p>Creëer een persoonlijk overzicht van al je verzekeringen.</p>
-        </div>
-
-        <form [formGroup]="form.formGroup"
-              (ngSubmit)="registerAndShowErrors($event)"
-              (keyup.enter)="register($event)"
-              autocomplete="off">
-          <knx-form-group
-            [formControlName]="form.formConfig.email.formControlName"
-            [options]="form.formConfig.email">
-          </knx-form-group>
-
-          <knx-form-group
-            [formControlName]="form.formConfig.password.formControlName"
-            [options]="form.formConfig.password">
-          </knx-form-group>
-
-          <knx-form-group
-            [formControlName]="form.formConfig.confirm.formControlName"
-            [options]="form.formConfig.confirm">
-
-            <knx-checkbox [formControl]="form.formConfig.confirm.formControl" [options]="form.formConfig.confirm">
-              Ik ga akkoord met de
-              <a class="knx-registration__document-link" href="{{ termsAndConditionsUrl }}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
-              en het
-              <a class="knx-registration__document-link" href="{{ privacyStatementUrl }}" target="_blank" rel="noopener">privacybeleid</a>
-              van Knab.
-            </knx-checkbox>
-          </knx-form-group>
-
-          <div class="knx-registration__actions">
-            <button type="submit" class="knx-button knx-button--primary" [class.knx-button--pending]="pending">Account aanmaken</button>
-
-            <div class="knx-registration__error" *ngIf="form.formGroup.valid && errorMessage">
-                {{ errorMessage || 'Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
-              </div>
-
-            <p class="knx-registration__meta-security"><span class="knx-icon-lock"></span> Beveiligde verbinding</p>
+      <knx-card>
+        <div class="container knx-registration">
+          <div class="knx-registration__welcome">
+            <h2 class="knx-registration__subline">Maak nieuw account aan</h2>
+            <p>Creëer een persoonlijk overzicht van al je verzekeringen.</p>
           </div>
-        </form>
-      </div>
+
+          <form [formGroup]="form.formGroup"
+                (ngSubmit)="registerAndShowErrors($event)"
+                (keyup.enter)="register($event)"
+                autocomplete="off">
+            <knx-form-group
+              [formControlName]="form.formConfig.email.formControlName"
+              [options]="form.formConfig.email">
+            </knx-form-group>
+
+            <knx-form-group
+              [formControlName]="form.formConfig.password.formControlName"
+              [options]="form.formConfig.password">
+            </knx-form-group>
+
+            <knx-form-group
+              [formControlName]="form.formConfig.confirm.formControlName"
+              [options]="form.formConfig.confirm">
+
+              <knx-checkbox [formControl]="form.formConfig.confirm.formControl" [options]="form.formConfig.confirm">
+                Ik ga akkoord met de
+                <a class="knx-registration__document-link" href="{{ termsAndConditionsUrl }}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
+                en het
+                <a class="knx-registration__document-link" href="{{ privacyStatementUrl }}" target="_blank" rel="noopener">privacybeleid</a>
+                van Knab.
+              </knx-checkbox>
+            </knx-form-group>
+
+            <div class="knx-registration__actions">
+              <button type="submit" class="knx-button knx-button--primary" [class.knx-button--pending]="pending">Account aanmaken</button>
+
+              <div class="knx-registration__error" *ngIf="form.formGroup.valid && errorMessage">
+                  {{ errorMessage || 'Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+                </div>
+
+              <p class="knx-registration__meta-security"><span class="knx-icon-lock"></span> Beveiligde verbinding</p>
+            </div>
+          </form>
+        </div>
+      </knx-card>
     </div>
   </div>
 </div>

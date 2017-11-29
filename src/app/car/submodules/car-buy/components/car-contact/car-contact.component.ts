@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
-
 import { Profile } from './../../../../../profile/models';
 import { ContactDetailForm } from './../../../../../shared/forms/contact-detail.form';
-import * as FormUtils from '../../../../../utils/base-form.utils';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { AfterContentInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
+import { Subscription } from 'rxjs/Subscription';
+
+import * as FormUtils from '../../../../../utils/base-form.utils';
 import * as fromRoot from '../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as assistant from '../../../../../core/actions/assistant';
@@ -15,9 +18,9 @@ import * as router from '../../../../../core/actions/router';
 import * as car from '../../../../../car/actions/car';
 import * as advice from '../../../../../insurance/actions/advice';
 import * as compare from '../../../../../car/actions/compare';
-import { AfterContentInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
-import { Subscription } from 'rxjs/Subscription';
+
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/empty';
 
 @Component({
   selector: 'knx-car-contact-form',
@@ -61,7 +64,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, KNXS
       return Observable.throw(new Error(this.form.validationSummaryError));
     }
 
-    this.store$.dispatch(new advice.UpdateAction(this.form.formGroup.value));
+    this.store$.dispatch(new advice.Update(this.form.formGroup.value));
 
     return new Observable(obs => {
       obs.next();
@@ -70,7 +73,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, KNXS
   }
 
   resetAdvice() {
-    this.store$.dispatch(new advice.ResetAction());
+    this.store$.dispatch(new advice.Reset());
     this.store$.dispatch(new compare.CarCompareResetStateAction());
     this.store$.dispatch(new car.CarResetStateAction());
     this.store$.dispatch(new router.Go({path: ['car']}));

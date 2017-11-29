@@ -3,7 +3,6 @@ import { Http } from '@angular/http';
 import { stripHTML } from '@knx/utils';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 
 import { Tag } from '../models/tag';
 import { UIPair } from '../models/ui-pair';

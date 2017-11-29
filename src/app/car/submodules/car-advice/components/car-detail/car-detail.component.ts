@@ -5,6 +5,14 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { TagsService } from '../../../../../core/services/tags.service';
 import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 
 import * as cuid from 'cuid';
 import * as car from '../../../../actions/car';
@@ -88,7 +96,7 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
           //   this.address.number = currentProfile.number;
           // });
         } else if (!currentAdvice) {
-          this.store$.dispatch(new advice.AddAction({
+          this.store$.dispatch(new advice.Add({
             id: cuid()
           }));
         }
@@ -312,7 +320,7 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
         // add address in format for profile
         // TODO: is this really needed?
         this.subscriptions$[0].unsubscribe();
-        this.store$.dispatch(new advice.UpdateAction(Object.assign({}, compare.request, {
+        this.store$.dispatch(new advice.Update(Object.assign({}, compare.request, {
           address: compare.address
           })));
         })
@@ -324,7 +332,7 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
   }
 
   onBack(): Observable<any> {
-    return Observable.of(false);
+    return Observable.empty();
   }
 
   onNext(): Observable<any> {

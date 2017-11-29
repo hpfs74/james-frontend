@@ -1,8 +1,11 @@
 import { Component, Input, ComponentRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@knx/modal';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/filter';
 
 import * as fromAuth from '../../auth/reducers';
 import * as auth from '../../auth/actions/auth';

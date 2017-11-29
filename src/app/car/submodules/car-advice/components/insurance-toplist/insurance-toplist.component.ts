@@ -2,16 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
+import { CarInsurance } from '../../../../models/index';
+import { AsyncPipe } from '@angular/common';
+import { KNXWizardRxService } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.service';
+
 import * as fromRoot from '../../../../reducers';
 import * as router from '../../../../../core/actions/router';
 import * as fromCar from '../../../../reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
 
-import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
-import { CarInsurance } from '../../../../models/index';
-import { AsyncPipe } from '@angular/common';
-import { KNXWizardRxService } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.service';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+
 interface OrderItem {
   id: string;
   label: string;
@@ -94,7 +98,7 @@ export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
 
   selectInsurance(insurance): void {
     this.knxWizardRxService.nextStep();
-    this.store$.dispatch(new advice.SetInsuranceAction(insurance));
+    this.store$.dispatch(new advice.SetInsurance(insurance));
   }
 
   noResult(): boolean {

@@ -2,21 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/filter';
-
-import * as fromRoot from '../../../reducers';
-import * as fromInsurance from '../../../../insurance/reducers';
-import * as fromCar from '../../../../car/reducers';
-import * as fromCore from '../../../../core/reducers';
-import * as assistant from '../../../../core/actions/assistant';
-import * as router from '../../../../core/actions/router';
-import * as car from '../../../../car/actions/car';
-import * as advice from '../../../../insurance/actions/advice';
-import * as compare from '../../../../car/actions/compare';
-
 import { AssistantConfig } from '../../../../core/models/assistant';
 import { ChatMessage } from '../../../../components/knx-chat-stream/chat-message';
 import { ContactDetailForm } from '../../../../shared/forms/contact-detail.form';
@@ -33,6 +18,16 @@ import { CarCheckComponent } from '../components/car-check/car-check.component';
 import { CarPaymentComponent } from '../components/car-payment/car-payment.component';
 import { CarSummaryComponent } from '../components/car-summary/car-summary.component';
 import { AsyncPipe } from '@angular/common';
+
+import * as fromRoot from '../../../reducers';
+import * as fromInsurance from '../../../../insurance/reducers';
+import * as fromCar from '../../../../car/reducers';
+import * as fromCore from '../../../../core/reducers';
+import * as assistant from '../../../../core/actions/assistant';
+import * as router from '../../../../core/actions/router';
+import * as car from '../../../../car/actions/car';
+import * as advice from '../../../../insurance/actions/advice';
+import * as compare from '../../../../car/actions/compare';
 
 @Component({
   providers: [ AsyncPipe ],
@@ -123,7 +118,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
 
   // TODO: group in an effect
   resetFlow() {
-    this.store$.dispatch(new advice.ResetAction());
+    this.store$.dispatch(new advice.Reset());
     this.store$.dispatch(new compare.CarCompareResetStateAction());
     this.store$.dispatch(new car.CarResetStateAction());
     this.store$.dispatch(new router.Go({path: ['car']}));

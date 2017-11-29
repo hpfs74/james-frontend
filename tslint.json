@@ -2,6 +2,9 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
+  "extends": [
+    "rxjs-tslint-rules"
+  ],
   "rules": {
     "arrow-return-shorthand": true,
     "space-before-function-paren": [false, "always"],
@@ -153,6 +156,9 @@
     "no-access-missing-member": true,
     "templates-use-public": true,
     "invoke-injectable": true,
-    "import-destructuring-spacing": true
+    "import-destructuring-spacing": true,
+    "rxjs-add": { "severity": "error" },
+    "rxjs-no-unused-add": { "severity": "error" },
+    "rxjs-no-wholesale": { "severity": "error" }
   }
 }

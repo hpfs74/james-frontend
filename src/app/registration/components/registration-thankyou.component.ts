@@ -3,7 +3,7 @@ import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } fro
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 
 import { RegistrationForm } from './registration.form';
 import { registrationError } from '../models/registration-error';

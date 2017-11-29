@@ -7,7 +7,7 @@ import { GoogleAnalytics, PageView, Event, UserTiming, SocialInteraction, Except
 import { GoogleTagManager } from 'redux-beacon/targets/google-tag-manager';
 import { logger } from 'redux-beacon/extensions/logger';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { AnalyticsAction } from '../actions/analytics';
 
 export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): PageView {

@@ -12,11 +12,15 @@ import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { InsuranceAdvice } from '../../../../../insurance/models/index';
+
 import * as FormUtils from '../../../../../utils/base-form.utils';
 import * as fromRoot from '../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
+
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/throw';
 
 const DEFAULT_FORM_VALUES = {
   accessoryValue: 0
@@ -88,7 +92,7 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, KNXStepR
       return Observable.throw(new Error(this.form.validationSummaryError));
     }
 
-    this.store$.dispatch(new advice.UpdateAction(this.form.formGroup.value));
+    this.store$.dispatch(new advice.Update(this.form.formGroup.value));
 
     return new Observable(obs => {
       obs.next();

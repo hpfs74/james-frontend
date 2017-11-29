@@ -8,7 +8,7 @@ import * as fromAnalytics from './analytics';
 import * as fromAssistant from './assistant';
 import * as fromLayout from './layout';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 
 export interface AppState {
   assistant: fromAssistant.State;

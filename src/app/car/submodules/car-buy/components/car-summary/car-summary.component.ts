@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 import { InsuranceAdvice } from '../../../../../insurance/models/index';
 import { ContactDetailForm } from '../../../../../shared/forms/contact-detail.form';
+
 import * as router from '../../../../../core/actions/router';
 import * as fromRoot from '../../../../reducers';
 import * as fromProfile from '../../../../../profile/reducers';
@@ -18,6 +19,13 @@ import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
 import * as fromCar from '../../../../../car/reducers';
 import * as car from '../../../../../car/actions/car';
+
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'knx-car-summary-form',

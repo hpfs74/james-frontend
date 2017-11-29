@@ -2,16 +2,18 @@ import { Component, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-
 import { Profile } from '../../../../../profile/models/profile';
 import { AssistantConfig } from '../../../../../core/models/assistant';
 import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
+import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
 
 import * as fromRoot from '../../../../reducers';
 import * as fromCore from '../../../../../core/reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as fromProfile from '../../../../../profile/reducers';
-import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'knx-car-thank-you',

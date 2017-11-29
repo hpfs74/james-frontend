@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';

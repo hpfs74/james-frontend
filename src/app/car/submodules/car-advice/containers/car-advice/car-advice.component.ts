@@ -5,14 +5,23 @@ import { KNXWizardStepRxOptions } from '../../../../../components/knx-wizard-rx/
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { CarDetailComponent } from './../../components/car-detail/car-detail.component';
+import { QaIdentifier } from '../../../../../shared/models/qa-identifier';
+import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
+import { AssistantConfig } from '../../../../../core/models/assistant';
+import { TagsService } from '../../../../../core/services/tags.service';
+import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../../../../models';
+import { Price } from '../../../../../shared/models/price';
+import { CarDetailForm } from '../../components/car-detail/car-detail.form';
+import { CarExtrasForm } from '../../components/car-extras/car-extras.form';
+import { createCarCoverages } from '../../../../utils/coverage.utils';
+import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
+import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
+import { InsuranceTopListComponent } from '../../components/insurance-toplist/insurance-toplist.component';
+import { KNXWizardRxComponent } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.component';
+import { CarReviewComponent } from '../../components/car-review/car-review.component';
 
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/empty';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/filter';
+import * as FormUtils from '../../../../../utils/base-form.utils';
 import * as cuid from 'cuid';
-
 import * as fromRoot from '../../../../reducers';
 import * as fromAuth from '../../../../../auth/reducers';
 import * as fromCore from '../../../../../core/reducers';
@@ -33,25 +42,12 @@ import * as coverage from '../../../../actions/coverage';
 import * as advice from '../../../../../insurance/actions/advice';
 import * as profile from '../../../../../profile/actions/profile';
 
-import { QaIdentifier } from '../../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
-
-import { AssistantConfig } from '../../../../../core/models/assistant';
-import { TagsService } from '../../../../../core/services/tags.service';
-import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../../../../models';
-import { Price } from '../../../../../shared/models/price';
-
-import { CarDetailForm } from '../../components/car-detail/car-detail.form';
-import { CarExtrasForm } from '../../components/car-extras/car-extras.form';
-
-import * as FormUtils from '../../../../../utils/base-form.utils';
-import { createCarCoverages } from '../../../../utils/coverage.utils';
-
-import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
-import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
-import { InsuranceTopListComponent } from '../../components/insurance-toplist/insurance-toplist.component';
-import { KNXWizardRxComponent } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.component';
-import { CarReviewComponent } from '../../components/car-review/car-review.component';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 enum carFormSteps {
   carDetails,
@@ -112,25 +108,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.subscription$.push(
       this.purchasedInsurances$
         .filter(purchasedInsurances => purchasedInsurances !== null)
+        .take(1)
         .subscribe(purchasedInsurances => {
-          // redirect to purchased overview if there are any manually added insurances
-          if (purchasedInsurances && purchasedInsurances.filter(insurance => !insurance.manually_added ).length) {
-            this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-          } else if (purchasedInsurances.length && purchasedInsurances.filter(ins => ins.status === 'draft').length) {
-            let savedAdvice = purchasedInsurances[0].draft;
-            savedAdvice._embedded = {
-              car: null,
-              insurance: null
-            };
+          const insurances = purchasedInsurances.car.insurance;
+          const advices = purchasedInsurances.car.insurance_advice;
 
-            // TODO: Anonymous part 2
-            // this.store$.dispatch(new advice.SetInsuranceAction(savedAdvice));
-            // this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-            //   id => {
-            //     this.store$.dispatch(new router.Go({
-            //       path: ['/car/insurance', {adviceId: id}],
-            //     }));
-            //   }));
+          if (insurances.length && insurances.filter(insurance =>
+            (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+            // redirect to purchased overview if there are any manually added insurances
+            this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+          } else if (insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
+            // Proceed to the buy flow for anonymous with advice
+            this.proceedAnonymous(advices, insurances);
           }
       })
     );
@@ -149,7 +138,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             own_risk: data.ownRisk === null || data.ownRisk === undefined ? 135 : +data.ownRisk,
             insurance_id: ''
           };
-          this.store$.dispatch(new advice.UpdateAction(compareExtraOptions));
+          this.store$.dispatch(new advice.Update(compareExtraOptions));
         })
     );
 
@@ -250,4 +239,23 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     );
   }
 
+  private proceedAnonymous(advices, insurances) {
+    this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
+    this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
+
+    this.store$.select(fromCar.getCompareResult)
+      .map(obs => {
+        return obs.map(v => JSON.parse(JSON.stringify(v)));
+      })
+      .subscribe(insurance => {
+        if (insurance) {
+          this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
+            id => {
+              this.store$.dispatch(new router.Go({
+                path: ['/car/insurance', {adviceId: id}],
+              }));
+            }));
+        }
+    });
+  }
 }

@@ -17,7 +17,7 @@ import { ContentConfig } from './content.config';
 import { reducers, metaReducers } from './reducers';
 
 import { AppComponent } from './core/containers/app.component';
-import { environment } from '../environments/environment';
+import { environment } from '@env/environment';
 import { ContentLoader } from './utils/contentloader';
 
 // Feature modules

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { AuthHttp } from '../../auth/services/auth-http.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { Profile } from '../models/profile';
 import { Insurance } from '../../insurance/models';
 import { Settings } from '../models/settings';
@@ -12,10 +13,14 @@ import { Settings } from '../models/settings';
 export class ProfileService {
   private baseUrl: string;
   private insurancesUrl: string;
+  private headers: Headers;
 
   constructor(private http: AuthHttp) {
     this.baseUrl = environment.james.profile;
     this.insurancesUrl = this.baseUrl + '/insurances';
+    this.headers = new Headers();
+
+    this.headers.append('version', 'v2');
   }
 
   /**
@@ -24,7 +29,9 @@ export class ProfileService {
    * @return {Observable<R>}
    */
   public getUserProfile(): Observable<Profile> {
-    return this.http.get(this.baseUrl)
+    const headers = this.headers;
+
+    return this.http.get(this.baseUrl, { headers })
       .map((p) => p.json())
       .map((p) => <Profile>p);
   }
@@ -35,7 +42,9 @@ export class ProfileService {
    * @return {Observable<R>}
    */
   public updateUserProfile(profile: any): Observable<Profile> {
-    return this.http.patch(this.baseUrl, JSON.stringify(profile))
+    const headers = this.headers;
+
+    return this.http.patch(this.baseUrl, JSON.stringify(profile), { headers })
       .map((p) => p.json())
       .map((p) => <Profile>p);
   }
