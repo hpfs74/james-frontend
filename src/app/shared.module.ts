@@ -53,7 +53,8 @@ import {
   SidePanelStateDirective,
   ClickOutsideDirective,
   QaIdentifierDirective,
-  StickyDirective
+  StickyDirective,
+  TouchCapableDirective
 } from './shared/directives';
 
 /**
@@ -95,19 +96,23 @@ import { UserGreetingComponent } from './components/knx-user-greeting/user-greet
 import { KnxWizardRxModule } from './components/knx-wizard-rx/knx-wizard-rx.module';
 
 export const sharedComponents = [
+  // Pipes
   TitleCasePipe,
   RoundPipe,
   BooleanPipe,
   JamesTagPipe,
-  AppPromoBlockComponent,
-  AsyncPreviewComponent,
   LicensePlatePipe,
+  // Directives
   BackdropBlurDirective,
   SidePanelStateDirective,
   JumpToElementDirective,
   ClickOutsideDirective,
   QaIdentifierDirective,
   StickyDirective,
+  TouchCapableDirective,
+  // Components
+  AppPromoBlockComponent,
+  AsyncPreviewComponent,
   ButtonIconComponent,
   CarInfoComponent,
   CarPreviewComponent,
