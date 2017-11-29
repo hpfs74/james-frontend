@@ -44,8 +44,10 @@ interface OrderItem {
             [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)" [disableButton]="disableInsuranceBuy">
           </knx-insurance-result>
 
-          <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--primary block-center" (click)="showAll()">
-            Toon alle verzekeringen
+          <button *ngIf="insurances && total < insurances.length"
+                  class="knx-button knx-button--secondary knx-button--ghost block-center"
+                  (click)="showAll()">
+            Toon alle
           </button>
 
           <div class="knx-insurance-toplist__info">
