@@ -112,7 +112,7 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('houseHold'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: '',
+          placeholder: 'Maak een keuze',
           events: ['focus'],
           items: houseHold
         }

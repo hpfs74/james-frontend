@@ -42,6 +42,29 @@
   }
 }
 
+.knx-wizard__buttons {
+  .knx-button--link,
+  .knx-button--back {
+    display: none;
+  }
+
+  button:last-child {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .knx-wizard__buttons {
+    .knx-button--back {
+      display: block;
+    }
+
+    button:last-child {
+      width: auto;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .knx-wizard-step-content .knx-wizard--controls {
     margin: 15px 0 !important;
