@@ -7,6 +7,10 @@
 
 $knx-insurance-result-border: 1px solid $knab-tan-gray;
 
+span.knx-info-icon.knx-icon-info-circle {
+  font-size: $font-size-base;
+}
+
 .knx-insurance-result {
   margin-bottom: 30px;
   opacity: 1;
@@ -38,6 +42,12 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
       padding-right: 15px;
     }
   }
+}
+
+span.small {
+  font-family: $font-family-base;
+  font-size: $font-size-base - 2;
+  color: $knab-primary-blue;
 }
 
 .knx-insurance-result__counter {
@@ -112,11 +122,6 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
   font-size: 18px;
   margin-top: 3px;
   padding: 5px 10px;
-
-  span {
-    font-family: $font-family-base;
-    font-size: 14px;
-  }
 }
 
 [class*="col-"].knx-insurance-result__reviews,
@@ -124,11 +129,6 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
   font-family: $font-family-head;
   font-size: 18px;
   padding: 5px 10px;
-
-  span {
-    font-family: $font-family-base;
-    font-size: $font-size-base - 2;
-  }
 }
 
 .knx-insurance-result__profilescore {
@@ -157,7 +157,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
     font-family: $font-family-head;
     font-size: 18px;
 
-    span {
+    span.small {
       vertical-align: super;
       font-family: $font-family-base;
       font-size: $font-size-base - 2;
@@ -178,7 +178,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
   margin-bottom: 35px;
   text-align: center;
 
-  span {
+  span.small {
     color: $knab-medium-gray;
     font-family: $font-family-base;
     font-size: 16px;
