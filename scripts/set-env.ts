@@ -154,7 +154,7 @@ function getContent(environment: string) {
   if (enableAnalytics) {
     const gtmAuth = ''; // getEnvVar('GTM_AUTH');
     const gtmId = getEnvVar('GTM_ID');
-    const gtmVersion = ''; // getEnvVar('GTM_VERSION');
+    const gtmVersion = 0; // getEnvVar('GTM_VERSION');
 
     content += outputGtmSnippet(gtmAuth, gtmId, gtmVersion, environment);
     content += outputGtmNoScript(gtmAuth, gtmId, gtmVersion, environment);
