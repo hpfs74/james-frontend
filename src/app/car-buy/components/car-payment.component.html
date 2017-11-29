@@ -1,32 +1,34 @@
 <form [formGroup]="form.formGroup" class="knx-fancy-form" role="form">
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-2">
-      <h2>Betaling</h2>
+    <div class="col-sm-12">
+      <knx-card>
+        <h2>Betaling</h2>
 
-      <div class="row">
-        <div class="col-sm-6">
-          <knx-form-group
-            [options]="form.formConfig.startDate"
-            [formControlName]="form.formConfig.startDate.formControlName">
+        <div class="row">
+          <div class="col-sm-6">
+            <knx-form-group
+              [options]="form.formConfig.startDate"
+              [formControlName]="form.formConfig.startDate.formControlName">
 
-            <knx-tooltip>
-              Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
-              Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.
-            </knx-tooltip>
-          </knx-form-group>
+              <knx-tooltip>
+                Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
+                Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.
+              </knx-tooltip>
+            </knx-form-group>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-sm-9">
-          <knx-form-group
-            [options]="form.formConfig.iban"
-            [formControlName]="form.formConfig.iban.formControlName">
+        <div class="row">
+          <div class="col-sm-9">
+            <knx-form-group
+              [options]="form.formConfig.iban"
+              [formControlName]="form.formConfig.iban.formControlName">
 
-            <knx-tooltip>Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankafschrift of in de app van je bank.</knx-tooltip>
-          </knx-form-group>
+              <knx-tooltip>Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankafschrift of in de app van je bank.</knx-tooltip>
+            </knx-form-group>
+          </div>
         </div>
-      </div>
+      </knx-card>
     </div>
   </div>
 </form>
