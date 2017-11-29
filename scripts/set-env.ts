@@ -36,8 +36,8 @@ function getGoogleAnalytics() {
 
 /* tslint:disable */
 function outputGtmSnippet(gtmAuth: string, id: string, gtmVersion: number, environment: string) {
-
-  if (isProduction(environment)) {
+  // TODO: Fay asked to put same script for test and production
+  //if (isProduction(environment)) {
     // should be first in head tag
     return `
     let gtmScript = document.createElement('script');
@@ -50,24 +50,25 @@ function outputGtmSnippet(gtmAuth: string, id: string, gtmVersion: number, envir
 
     document.head.insertBefore(gtmScript, document.head.firstChild);
   `;
-  }
-
-  // should be first in head tag
-  return `
-    let gtmScript = document.createElement('script');
-    gtmScript.innerHTML =
-      \`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl+'&gtm_auth=${gtmAuth}&gtm_preview=env-${gtmVersion}&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','${id}');\`
-
-    document.head.insertBefore(gtmScript, document.head.firstChild);
-  `;
+  // }
+  //
+  // // should be first in head tag
+  // return `
+  //   let gtmScript = document.createElement('script');
+  //   gtmScript.innerHTML =
+  //     \`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  //     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  //     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  //     'https://www.googletagmanager.com/gtm.js?id='+i+dl+'&gtm_auth=${gtmAuth}&gtm_preview=env-${gtmVersion}&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
+  //     })(window,document,'script','dataLayer','${id}');\`
+  //
+  //   document.head.insertBefore(gtmScript, document.head.firstChild);
+  // `;
 }
 
 function outputGtmNoScript(gtmAuth: string, id: string, gtmVersion: number, environment: string) {
-  if (isProduction(environment)) {
+  // TODO: Fay asked to put same script for test and production
+  //if (isProduction(environment)) {
     return `
     let gtmNoScript = document.createElement('noscript');
     gtmNoScript.innerHTML =
@@ -76,16 +77,16 @@ function outputGtmNoScript(gtmAuth: string, id: string, gtmVersion: number, envi
 
       document.body.insertBefore(gtmNoScript, document.body.firstChild);
   `;
-  }
-
-  return `
-    let gtmNoScript = document.createElement('noscript');
-    gtmNoScript.innerHTML =
-      \`<iframe src="https://www.googletagmanager.com/ns.html?id=${id}&gtm_auth=${gtmAuth}&gtm_preview=env-${gtmVersion}&gtm_cookies_win=x"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>\`;
-
-      document.body.insertBefore(gtmNoScript, document.body.firstChild);
-  `;
+  // }
+  //
+  // return `
+  //   let gtmNoScript = document.createElement('noscript');
+  //   gtmNoScript.innerHTML =
+  //     \`<iframe src="https://www.googletagmanager.com/ns.html?id=${id}&gtm_auth=${gtmAuth}&gtm_preview=env-${gtmVersion}&gtm_cookies_win=x"
+  //     height="0" width="0" style="display:none;visibility:hidden"></iframe>\`;
+  //
+  //     document.body.insertBefore(gtmNoScript, document.body.firstChild);
+  // `;
 }
 
 /* tslint:enable */
@@ -151,9 +152,9 @@ function getContent(environment: string) {
 
   // Google Tag Manager
   if (enableAnalytics) {
-    const gtmAuth = getEnvVar('GTM_AUTH');
+    const gtmAuth = ''; // getEnvVar('GTM_AUTH');
     const gtmId = getEnvVar('GTM_ID');
-    const gtmVersion = getEnvVar('GTM_VERSION');
+    const gtmVersion = ''; // getEnvVar('GTM_VERSION');
 
     content += outputGtmSnippet(gtmAuth, gtmId, gtmVersion, environment);
     content += outputGtmNoScript(gtmAuth, gtmId, gtmVersion, environment);
