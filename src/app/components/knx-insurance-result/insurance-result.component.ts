@@ -74,7 +74,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
               'knx-button--secondary knx-button--ghost': !insurance.supported}"
               [disabled]="disableButton"
               (click)="select($event)">
-              Bekijk1
+              Bekijk
             </button>
 
             <div class="knx-insurance-result__discount" *ngIf="insurance.discount">
