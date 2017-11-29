@@ -17,8 +17,11 @@ export class CarPaymentComponent implements OnInit, QaIdentifier {
   @Input() form: IbanForm;
   @Input() set advice(value: any) {
     if (value && value.startDate || value && value.iban) {
+      let startDateFormatted = FormUtils.toDateFormat(FormUtils.toDateType(value.startDate));
+
+      value.startDate = startDateFormatted;
       this.form.formGroup.patchValue({
-        startDate: FormUtils.toDateFormat(FormUtils.toDateType(value.startDate)),
+        startDate: startDateFormatted,
         iban: value.iban
       });
       FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
