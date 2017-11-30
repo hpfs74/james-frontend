@@ -90,8 +90,8 @@ export class InsuranceTopListComponent implements OnInit {
   ngOnInit() {
     this.total = this.initialAmount;
     this.orderBy = [
-      { id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true },
-      { id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false }
+      { id: 'priceQuality', label: 'Prijs / Kwaliteit', key: 'price_quality', active: true },
+      { id: 'price', label: 'Beste Prijs', key: 'monthly_premium', active: false }
     ];
   }
 

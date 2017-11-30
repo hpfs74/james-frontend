@@ -1,9 +1,21 @@
 @import '~styles/base.scss';
 
-// TODO:
-// =======================================================
-// These styles desperately need refactoring!
-// =======================================================
+@mixin knx-results-containers() {
+  .knx-insurance-result__insurance,
+  .knx-insurance-result__data,
+  .knx-insurance-result__buy {
+    @content;
+  }
+}
+
+@mixin knx-data-items() {
+  .knx-insurance-result__own-risk,
+  .knx-insurance-result__profilescore,
+  .knx-insurance-result__dekking,
+  .knx-insurance-result__price-quality {
+    @content;
+  }
+}
 
 $knx-insurance-result-border: 1px solid $knab-tan-gray;
 
@@ -13,175 +25,129 @@ span.knx-info-icon.knx-icon-info-circle {
 
 .knx-insurance-result {
   margin-bottom: 30px;
+  padding: 0;
   opacity: 1;
 }
 
 .knx-insurance_advice {
-  border: $knx-insurance-result-border;
   margin: 20px 0 0;
+  padding: 30px 0;
 
-  [class*="col-"] {
+  @include knx-results-containers {
     border-right: $knx-insurance-result-border;
     font-size: $font-size-base - 2;
-    padding: 20px 25px 10px;
+    padding: 0 15px;
 
     &:last-child {
       border-right: 0;
     }
 
-    & > .row > [class*="col-"] {
-      border: 0 !important;
+    @include knx-data-items {
+      font-family: $font-family-head;
+      font-size: $font-size-base + 2;
+      border: 0;
+
+      &:first-child {
+        padding-right: 12px;
+      }
+
+      &:last-child {
+        padding-left: 12px;
+      }
+
+      span {
+        font-family: $font-family-base;
+      }
     }
   }
 
   & > .row {
-    // counter height
-    margin: -40px 0 0 0;
-
-    > [class*="col-"]:first-child {
-      padding-right: 15px;
-    }
+    margin: 0;
   }
 }
 
-span.small {
-  font-family: $font-family-base;
-  font-size: $font-size-base - 2;
-  color: $knab-primary-blue;
-}
-
 .knx-insurance-result__counter {
-  background: $knab-primary-blue;
-  color: $knab-white;
-  border-radius: 50%;
-  display: inline-block;
-  position: relative;
-  left: 50%;
+  position: absolute;
+  left: 15px;
   top: -20px;
   width: 40px;
   height: 40px;
+  display: inline-block;
   font-weight: bold;
-  font-size: 20px;
+  font-size: $font-size-base + 4;
   text-align: center;
   line-height: 40px;
+  background: $knab-white;
+  color: $knab-primary-blue;
+  border-radius: 50%;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .knx-insurance-result__logo {
+  position: relative;
+  top: 50%;
   display: block;
   width: 100%;
-  margin: 20px auto;
-  max-width: 120px;
-}
-
-.knx-insurance_advice__supported .knx-insurance-result__logo {
-  margin-top: 40px;
-}
-
-.knx-insurance-result__name {
-  display: block;
-  width: 100%;
-  margin: 20px auto;
-  max-width: 120px;
-  text-align: center;
-  color: $knab-medium-gray;
-}
-
-.knx-sticker {
-  width: 60px;
-  height: 60px;
-  color: $knab-white;
-  background: $knab-primary-green;
-  font-weight: normal;
-  font-size: 25px;
-  text-transform: lowercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  transform: translateY(-50%);
 }
 
 .knx-insurance-result__price {
   display: inline-block;
-
-  &:first-letter {
-    padding-right: 0.3em;
-  }
 }
 
-.knx-insurance-result__own-risk {
-  background: $knab-primary-gray;
-}
-
-[class*="col-"].knx-insurance-result__own-risk,
-[class*="col-"].knx-insurance-result__price-quality,
-.knx-insurance-result__own-risk,
 .knx-insurance-result__price-quality {
-  font-family: $font-family-head;
-  font-size: 18px;
-  margin-top: 3px;
-  padding: 5px 10px;
-}
-
-[class*="col-"].knx-insurance-result__reviews,
-.knx-insurance-result__reviews {
-  font-family: $font-family-head;
-  font-size: 18px;
-  padding: 5px 10px;
-}
-
-.knx-insurance-result__profilescore {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  padding-top: 5px !important;
-  text-align: center;
-
-  .knx-donut {
-    margin-bottom: 0;
-  }
-
-  .knx-info {
-    text-align: left;
-  }
-
-  .knx-insurance-result__label {
-    line-height: 65px;
-  }
+  margin-bottom: 20px;
 }
 
 .knx-insurance-result__price-quality {
   text-align: left;
 
-  .knx-insurance-result__amount {
-    font-family: $font-family-head;
-    font-size: 18px;
+  .knx-insurance-result__value__sup {
+    position: relative;
+    top: -5px;
+    font-family: $font-family-base;
+    font-size: $font-size-base - 4;
+    vertical-align: super;
+  }
+}
 
-    span.small {
-      vertical-align: super;
-      font-family: $font-family-base;
-      font-size: $font-size-base - 2;
+.knx-insurance-result__label {
+  font-family: $font-family-base;
+  font-size: $font-size-base - 2;
+
+  .knx-insurance-result__label--no-break {
+    display: inline-block;
+    white-space: nowrap;
+
+    knx-tooltip {
+      white-space: normal;
     }
   }
+}
 
-  .knx-insurance-result__label {
-    font-family: $font-family-base;
-    font-size: $font-size-base - 2;
-  }
+.knx-insurance-result__value {
+  font-family: $font-family-head;
+  font-size: $font-size-base + 2;
 }
 
 .knx-insurance-result__premium {
   display: block;
   color: $knab-primary-blue;
-  font-size: 22px;
+  font-size: $font-size-base + 6;
   font-family: $font-family-head;
-  margin-bottom: 35px;
+  margin: 15px 0;
   text-align: center;
+  line-height: 1;
 
-  span.small {
+  .knx-button {
+    margin-bottom: 0;
+  }
+
+  span {
     color: $knab-medium-gray;
     font-family: $font-family-base;
-    font-size: 16px;
+    font-size: $font-size-base;
     display: block;
   }
 }
@@ -192,8 +158,18 @@ span.small {
 }
 
 .knx-insurance-result__discount {
-  text-align: center;
-  color: $knab-primary-red;
+  margin-top: -10px;
+  padding: 21px 10px 8px;
+  font-size: $font-size-base - 2;
+  color: $knab-white;
+  background: $knab-primary-red;
+  border-radius: 0 0 3px 3px;
+
+  img {
+    float: left;
+    margin-top: -5px;
+    margin-right: 5px;
+  }
 }
 
 .knx-insurance-result__details .knx-tabs__tab {
@@ -221,24 +197,82 @@ span.small {
   margin-top: -2px;
 }
 
+.knx-insurance-result__bookmark {
+  position: absolute;
+  right: 15px;
+  top: -10px;
+  width: 0;
+  height: 48px;
+  color: $knab-white;
+  font-size: $font-size-base - 3;
+  font-weight: bold;
+  text-indent: -14.5px;
+  line-height: 46px;
+  font-family: $font-family-head;
+  border-left: 18px solid $knab-primary-red;
+  border-right: 18px solid $knab-primary-red;
+  border-bottom: 10px solid transparent;
+}
+
+.knx-insurance-result__bookmark-tip {
+  position: absolute;
+  right: 51px;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 10px 10px;
+  border-color: transparent transparent $knab-secondary-red transparent;
+}
+
 @media screen and (max-width: 768px) {
   .knx-insurance-result__logo {
+    position: static;
     width: 50%;
-    margin: 40px auto 30px;
+    margin: 10px auto 30px;
     display: block;
+    transform: none;
   }
 
   .knx-insurance_advice {
-    [class*="col-"] {
-      border-right: $knx-insurance-result-border;
+    padding: 30px 0 5px;
+
+    @include knx-results-containers {
+      border: 0;
+      border-bottom: $knx-insurance-result-border;
       font-size: $font-size-base - 2;
-      padding: 0 40px;
+      margin: 0 20px;
     }
 
-    &:last-child > [class*="col-"]:last-child {
-      padding-left: 0;
-      padding-right: 0;
+    .knx-insurance-result__buy {
+      margin: 0;
     }
+
+    .knx-insurance-result__data {
+      .row {
+        &:first-child {
+          padding: 10px 0;
+        }
+
+        &:last-child {
+          padding-bottom: 10px;
+        }
+      }
+
+      @include knx-data-items {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .knx-insurance-result__buy,
+    .knx-insurance-result__premium {
+      border: 0;
+    }
+  }
+
+  .knx-insurance-result__premium span {
+    display: inline;
   }
 
   .knx-insurance-result__own-risk {
@@ -246,10 +280,7 @@ span.small {
     padding-bottom: 5px;
   }
 
-  .knx-insurance-result__own-risk,
-  .knx-insurance-result__reviews,
-  .knx-insurance-result__profilescore,
-  .knx-insurance-result__price-quality {
+  @include knx-data-items {
     width: 50%;
   }
 
@@ -258,31 +289,4 @@ span.small {
     margin-top: 15px;
     border-top: $knx-insurance-result-border;
   }
-}
-
-.knx-insurance-result__bookmark {
-  position: absolute;
-  left: 20px;
-  top: -10px;
-  width: 0;
-  height: 50px;
-  color: $knab-white;
-  font-weight: bold;
-  text-indent: -16px;
-  line-height: 46px;
-  font-family: $font-family-head;
-  border-left: 20px solid $knab-primary-red;
-  border-right: 20px solid $knab-primary-red;
-  border-bottom: 10px solid transparent;
-}
-
-.knx-insurance-result__bookmark-tip {
-  position: absolute;
-  left: 10px;
-  top: -10px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 10px 10px;
-  border-color: transparent transparent $knab-primary-red transparent;
 }
