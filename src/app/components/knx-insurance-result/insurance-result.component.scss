@@ -1,9 +1,21 @@
 @import '~styles/base.scss';
 
-// TODO:
-// =======================================================
-// These styles desperately need refactoring!
-// =======================================================
+@mixin knx-results-containers() {
+  .knx-insurance-result__insurance,
+  .knx-insurance-result__data,
+  .knx-insurance-result__buy {
+    @content;
+  }
+}
+
+@mixin knx-data-items() {
+  .knx-insurance-result__own-risk,
+  .knx-insurance-result__profilescore,
+  .knx-insurance-result__dekking,
+  .knx-insurance-result__price-quality {
+    @content;
+  }
+}
 
 $knx-insurance-result-border: 1px solid $knab-tan-gray;
 
@@ -17,7 +29,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
   margin: 20px 0 0;
   padding: 30px 0;
 
-  [class*="col-"] {
+  @include knx-results-containers {
     border-right: $knx-insurance-result-border;
     font-size: $font-size-base - 2;
     padding: 0 15px;
@@ -26,12 +38,12 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
       border-right: 0;
     }
 
-    & > .row > [class*="col-"] {
+    @include knx-data-items {
       border: 0;
     }
   }
 
-  .col-md-6 {
+  @include knx-data-items {
     &:first-child {
       padding-right: 12px;
     }
@@ -76,12 +88,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
   display: inline-block;
 }
 
-[class*="col-"].knx-insurance-result__own-risk,
-[class*="col-"].knx-insurance-result__profilescore,
-[class*="col-"].knx-insurance-result__price-quality,
-.knx-insurance-result__own-risk,
-.knx-insurance-result__profilescore,
-.knx-insurance-result__price-quality {
+@include knx-data-items {
   font-family: $font-family-head;
   font-size: $font-size-base + 2;
 
@@ -152,15 +159,16 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
 }
 
 .knx-insurance-result__discount {
-  height: 55px;
   margin-top: -10px;
-  padding: 17px 10px 10px;
+  padding: 21px 10px 8px;
   font-size: $font-size-base - 2;
   color: $knab-white;
   background: $knab-primary-red;
   border-radius: 0 0 3px 3px;
 
   img {
+    float: left;
+    margin-top: -5px;
     margin-right: 5px;
   }
 }
@@ -230,16 +238,11 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
   .knx-insurance_advice {
     padding: 30px 0 5px;
 
-    [class*="col-md"] {
+    @include knx-results-containers {
       border: 0;
       border-bottom: $knx-insurance-result-border;
       font-size: $font-size-base - 2;
       margin: 0 20px;
-    }
-
-    &:last-child > [class*="col-"]:last-child {
-      padding-left: 0;
-      padding-right: 0;
     }
 
     .knx-insurance-result__buy {
@@ -257,7 +260,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
         }
       }
 
-      [class*="col-"] {
+      @include knx-data-items {
         margin: 0;
         padding: 0;
       }
@@ -278,10 +281,7 @@ $knx-insurance-result-border: 1px solid $knab-tan-gray;
     padding-bottom: 5px;
   }
 
-  .knx-insurance-result__own-risk,
-  .knx-insurance-result__reviews,
-  .knx-insurance-result__profilescore,
-  .knx-insurance-result__price-quality {
+  @include knx-data-items {
     width: 50%;
   }
 

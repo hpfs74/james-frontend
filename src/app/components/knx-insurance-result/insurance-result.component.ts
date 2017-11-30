@@ -14,13 +14,13 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
           <div class="knx-insurance-result__bookmark" *ngIf="insurance.supported">knab</div>
           <div class="knx-insurance-result__bookmark-tip" *ngIf="insurance.supported"></div>
 
-          <div class="col-md-3">
+          <div class="col-md-3 knx-insurance-result__insurance">
             <img class="knx-insurance-result__logo" src="{{ insurance._embedded.insurance.insurance_logo }}" alt="logo">
           </div>
 
           <div class="col-md-5 knx-insurance-result__data">
             <div class="row">
-              <div class="col-md-6 col-6">
+              <div class="col-md-6 col-6 knx-insurance-result__profilescore">
                 <div class="knx-insurance-result__value">{{insurance.fit}}%</div>
                 <div class="knx-insurance-result__label">
                   <span class="knx-insurance-result__label--no-break">Profielscore
@@ -52,19 +52,15 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
             </div>
 
             <div class="row">
-              <div class="col-md-6 col-6 knx-insurance-result__value">
+              <div class="col-md-6 col-6 knx-insurance-result__own-risk">
                 <div class="knx-insurance-result__value">{{ insurance.own_risk | currency:'EUR':true }}</div>
                 <div class="knx-insurance-result__label">Maximaal eigen risico</div>
               </div>
 
-              <div class="col-md-6 col-6 knx-insurance-result__value">
+              <div class="col-md-6 col-6 knx-insurance-result__dekking">
                 <div class="knx-insurance-result__value">{{ insurance.main_coverage | jamesTag: 'car_flow_coverage' }}</div>
                 <div class="knx-insurance-result__label">Dekking</div>
               </div>
-
-              <!--<div class="col-md-6 knx-insurance-result__profilescore">-->
-                <!--<knx-donut *ngIf="insurance.fit" [percentage]="insurance.fit"></knx-donut>-->
-              <!--</div>-->
             </div>
           </div>
 
@@ -84,7 +80,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
         </div>
       </div>
 
-      <div class="knx-insurance-result__discount" *ngIf="insurance.discount">
+      <div class="knx-insurance-result__discount clearfix" *ngIf="insurance.discount">
         <img src="/assets/icon/present_icon.png" alt="present">
         Inc. {{ insurance.discount | currency:'EUR':true }} Knab korting & Gratis overstapservice
       </div>
