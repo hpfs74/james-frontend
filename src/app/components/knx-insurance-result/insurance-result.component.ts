@@ -27,13 +27,13 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
           <div class="col-sm-4">
             <div class="row">
               <div class="col-sm-6 knx-insurance-result__own-risk knx-insurance-result__price">
-                {{ insurance.own_risk | currency:'EUR':true }}<br><span>Maximaal eigen risico</span>
+                {{ insurance.own_risk | currency:'EUR':true }}<br><span class="small">Maximaal eigen risico</span>
               </div>
               <!--div class="col-sm-6 knx-insurance-result__reviews">
                 9.3<br><span>{{ insurance.reviews_amount }} reviews</span>
               </div-->
               <div class="col-sm-6 knx-insurance-result__price-quality">
-                <div class="knx-insurance-result__amount">{{ insurance.price_quality }}<span>/10</span></div>
+                <div class="knx-insurance-result__amount">{{ insurance.price_quality }}<span class="small">/10</span></div>
                 <div class="knx-insurance-result__label">
                   Prijs <br> kwaliteit
 
@@ -66,7 +66,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
 
           <div class="col-sm-4 knx-insurance-result__buy">
             <div class="knx-insurance-result__premium knx-insurance-result__price">
-              {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
+              {{ insurance.monthly_premium | currency:'EUR':true }} <span class="small">per maand</span>
             </div>
 
             <button role="button" class="knx-button knx-button--fullwidth"

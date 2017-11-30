@@ -26,6 +26,7 @@
 @import 'styles/form-valid';
 @import 'styles/modals';
 @import 'styles/layout';
+@import 'styles/vendor';
 
 html {
   box-sizing: border-box;
@@ -55,20 +56,6 @@ h3 {
 
 p {
   font-size: $font-size-base;
-}
-
-//remove the browser-specific styles that overlapped by the validation indicators
-input[type='number'] {
-  appearance: textfield;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  appearance: none;
-}
-
-input::-ms-clear {
-  display: none;
 }
 
 .noborder {
@@ -108,22 +95,6 @@ input::-ms-clear {
     color: $knab-primary-blue;
     margin-right: 10px;
     font-size: $base-font-size;
-  }
-}
-
-// Car advice summary
-// Hide back button on small screens
-@media (max-width: 768px) {
-  .knx-car-advice--step-3 {
-    .knx-wizard__buttons {
-      .knx-button--back {
-        display: none;
-      }
-
-      .knx-button--cta {
-        width: 100%;
-      }
-    }
   }
 }
 
