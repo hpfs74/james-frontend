@@ -43,7 +43,7 @@ export class CoverageEffects {
           activeLoan: activeLoan
         }
       });
-    });
+    }).catch(error => Observable.of(new coverage.CarCoverageFailureAction(error)));
 
     @Effect()
     carCoverageFromLoan$ = this.action$
@@ -59,7 +59,7 @@ export class CoverageEffects {
             activeLoan: payload
           }
         });
-      });
+    }).catch(error => Observable.of(new coverage.CarCoverageFailureAction(error)));
 
   constructor(private store$: Store<fromCar.State>, private action$: Actions, private carService: CarService) { }
 }

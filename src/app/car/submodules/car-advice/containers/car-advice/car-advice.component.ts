@@ -48,7 +48,8 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
-
+import { Router } from '@angular/router';
+declare var window: any;
 enum carFormSteps {
   carDetails,
   compareResults
@@ -78,7 +79,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
 
   @ViewChild(KNXWizardRxComponent) knxWizardRx: KNXWizardRxComponent;
 
-  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
+  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService, public router: Router) {
+    window.advice = this;
+    window.router = router;
+    // this.store$.dispatch(new router.Forward);
+  }
 
 
   ngOnInit() {
