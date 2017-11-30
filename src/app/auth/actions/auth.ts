@@ -14,6 +14,7 @@ export const ANONYMOUS_START = '[Auth] Anonymous Start';
 export const REFRESH_TOKEN = '[Auth] Refresh Token';
 export const REFRESH_SUCCESS = '[Auth] Refresh Token Success';
 export const REFRESH_FAILURE = '[Auth] Refresh Token Failure';
+export const RESET_STATES = '[Auth] Reset States';
 
 export const SCHEDULE_TOKEN_REFRESH = '[Auth] Schedule Token Refresh';
 
@@ -90,6 +91,10 @@ export class StartAnonymous implements Action {
   readonly type = ANONYMOUS_START;
 }
 
+export class ResetStates implements Action {
+  readonly type = RESET_STATES;
+}
+
 export type Actions =
   | Login
   | LoginAnonymous
@@ -104,4 +109,5 @@ export type Actions =
   | ScheduleTokenRefresh
   | LoginExpired
   | RequestCredentials
-  | StartAnonymous;
+  | StartAnonymous
+  | ResetStates;

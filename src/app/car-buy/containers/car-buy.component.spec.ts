@@ -28,6 +28,7 @@ import * as fromInsurance from '../../insurance/reducers';
 import * as fromAuth from '../../auth/reducers';
 import * as fromProfile from '../../profile/reducers';
 
+import * as auth from '../../auth/actions/auth';
 import * as car from '../../car/actions/car';
 import * as advice from '../../insurance/actions/advice';
 import * as compare from '../../car/actions/compare';
@@ -235,15 +236,9 @@ describe('Component: CarBuyComponent', () => {
 
   describe('resetFlow()', () => {
     it('should dispatch reset acitons', () => {
-      let adviceResetAction = new advice.Reset();
-      let compareResetAction = new compare.CarCompareResetStateAction();
-      let carResetAction = new car.CarResetStateAction();
-      let routerBackAction = new router.Go({path: ['car']});
+      let resetAllStates = new auth.ResetStates();
       comp.resetFlow();
-      expect(store.dispatch).toHaveBeenCalledWith(adviceResetAction);
-      expect(store.dispatch).toHaveBeenCalledWith(compareResetAction);
-      expect(store.dispatch).toHaveBeenCalledWith(carResetAction);
-      expect(store.dispatch).toHaveBeenCalledWith(routerBackAction);
+      expect(store.dispatch).toHaveBeenCalledWith(resetAllStates);
     });
   });
 
