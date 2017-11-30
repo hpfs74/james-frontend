@@ -16,3 +16,9 @@ ul > li {
 .knx-button {
   margin-top: 15px;
 }
+
+@media (max-width: 576px) {
+  .knx-button {
+    width: 100%;
+  }
+}

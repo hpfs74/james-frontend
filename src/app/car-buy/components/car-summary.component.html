@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <h2>Controleer je gegevens</h2>
 
-      <div class="container knx-insurance-review__panels">
+      <div class="knx-insurance-review__panels">
 
         <knx-ir-content title="Je autoverzekering" *ngIf="isValidInsurance(insurance)">
           <knx-ir-row>
@@ -99,7 +99,6 @@
           </knx-ir-row>
         </knx-ir-content>
 
-
         <knx-ir-content title="Persoonlijke gegevens" *ngIf="insurance">
           <knx-ir-row>
             <knx-ir-label>Geslacht</knx-ir-label>
@@ -170,35 +169,26 @@
         <knx-insurance-review-documents *ngIf="insurance?.documents"
           title="Documenten" [documents]="insurance?.documents"></knx-insurance-review-documents>
 
+        <knx-ir-content title="Betaling" *ngIf="insurance">
+          <knx-ir-row>
+            <knx-ir-label>Je betaalt per maand</knx-ir-label>
+            <knx-ir-value>{{ insurance?.monthly_premium | currency:'EUR':true }}<br><span class="premium-note">Incl. 10% provisie aan Knab</span></knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Eenmalige afsluitkosten</knx-ir-label>
+            <knx-ir-value>{{ insurance?.one_off_premium | currency:'EUR':true }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Rekeningnummer</knx-ir-label>
+            <knx-ir-value>{{ advice.iban }}</knx-ir-value>
+          </knx-ir-row>
+        </knx-ir-content>
       </div>
 
       <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h3>Betaling</h3>
-          </div>
-        </div>
-
-        <div class="row knx-car-summary__payment" *ngIf="insurance?.monthly_premium ">
-          <div class="col-md-5">Je betaalt per maand</div>
-          <div class="col-md-5"><strong>{{ insurance?.monthly_premium | currency:'EUR':true }}</strong>
-            <span class="premium-note">Incl. 10% provisie aan Knab</span></div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-5">Eenmalige afsluitkosten</div>
-          <div class="col-md-5">{{ insurance?.one_off_premium | currency:'EUR':true }}</div>
-        </div>
-
-        <div class="row" *ngIf="advice?.iban">
-          <div class="col-md-5">Rekeningnummer</div>
-          <div class="col-md-5">{{ advice.iban }}</div>
-        </div>
-
         <div class="row knx-car-summary__terms">
-          <div class="col col-sm-12 align-self-end">
-            <hr>
-          </div>
           <div class="col col-sm-12">
             <knx-checkbox class="knx-car-summary__checkbox"
               [(ngModel)]="confirm"

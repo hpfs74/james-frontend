@@ -10,8 +10,8 @@
     "prepush": "npm run test && npm run security",
     "config": "ts-node ./scripts/set-env.ts",
     "start": "npm run config -- --no-regenerate=true && ng serve --open --locale --aot",
-    "build": "npm run config -- --analytics=true && ng build --locale --aot --build-optimizer",
-    "build:prod": "npm run config -- --environment=prod --analytics=true && ng build --prod --environment=prod --locale --build-optimizer",
+    "build": "npm run config -- --analytics=true && ng build --locale --aot --build-optimizer --stats-json",
+    "build:prod": "npm run config -- --environment=prod --analytics=true && ng build --prod --environment=prod --locale --build-optimizer --stats-json",
     "serve:prod": "ng serve --open --locale --prod",
     "serve:gtm": "npm run config -- --analytics=true && ng serve --open --locale",
     "test:watch": "ng test --code-coverage --watch --sourcemaps=true",
@@ -21,8 +21,10 @@
     "security": "retire -npv --exitwith 0 --proxy http://edc-proxy.ds.global:9090",
     "lint": "ng lint --type-check",
     "lint:styles": "stylelint 'src/**/*.scss' --syntax scss --config stylelint.conf.js",
+    "release": "standard-version && git push --follow-tags origin master",
     "e2e": "ng e2e",
-    "clean": "rimraf -- node_modules dist"
+    "clean": "rimraf -- node_modules dist",
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -45,7 +47,7 @@
     "@knx/date-input": "1.0.59",
     "@knx/dropdown": "0.0.218",
     "@knx/form-control": "1.0.61",
-    "@knx/form-group": "1.0.61",
+    "@knx/form-group": "1.0.88",
     "@knx/forms": "1.0.61",
     "@knx/grid": "0.0.374",
     "@knx/input": "0.0.71",
@@ -59,7 +61,7 @@
     "@knx/select": "1.0.67",
     "@knx/step-navigation": "0.0.180",
     "@knx/textarea": "1.0.58",
-    "@knx/tooltip": "1.0.99",
+    "@knx/tooltip": "1.0.115",
     "@knx/utils": "1.0.27",
     "@knx/wizard": "0.0.216",
     "@ngrx/effects": "^4.0.2",
@@ -125,11 +127,13 @@
     "retire": "^1.4.0",
     "rimraf": "^2.6.2",
     "rxjs-tslint-rules": "^3.1.2",
+    "standard-version": "^4.2.0",
     "stylelint": "^8.1.1",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "webpack-bundle-analyzer": "^2.9.1"
   },
   "jest": {
     "preset": "jest-preset-angular",

@@ -1,0 +1,29 @@
+// Firefox: Remove dotted outline on buttons and inputs
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"],
+input[type="file"] > input[type="button"] {
+  &::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+// Force flexbox for modal
+.knx-modal .knx-modal-body {
+  -ms-flex: 0 0 auto;
+}
+
+// Remove the browser-specific styles that overlapped by the validation indicators
+input[type='number'] {
+  appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+input::-ms-clear {
+  display: none;
+}
