@@ -17,6 +17,7 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as assistant from '../../core/actions/assistant';
 import * as router from '../../core/actions/router';
+import * as auth from '../../auth/actions/auth';
 
 import * as car from '../../car/actions/car';
 import * as advice from '../../insurance/actions/advice';
@@ -257,9 +258,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
 
   // TODO: group in an effect
   resetFlow() {
-    this.store$.dispatch(new advice.Reset());
-    this.store$.dispatch(new compare.CarCompareResetStateAction());
-    this.store$.dispatch(new car.CarResetStateAction());
+    this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new router.Go({path: ['car']}));
   }
 }

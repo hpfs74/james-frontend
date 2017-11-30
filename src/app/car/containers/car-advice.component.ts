@@ -53,6 +53,7 @@ import { createCarCoverages } from '../utils/coverage.utils';
 
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { scrollToY } from '../../utils/scroll-to-element.utils';
+import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
 
 enum carFormSteps {
   carDetails,
@@ -83,7 +84,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   insurance$: Observable<any>;
   insurances$: Observable<Array<CarInsurance>>;
   isInsuranceLoading$: Observable<boolean>;
-  selectedInsurance$: Observable<CarInsurance>;
+  selectedInsurance$: Observable<CarInsurance | InsuranceAdvice>;
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
@@ -151,28 +152,30 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
 
     // Do actions if user has insurance saved in profile
-    this.purchasedInsurances$
-      .filter(purchasedInsurances => purchasedInsurances !== null)
-      .take(1)
-      .subscribe(purchasedInsurances => {
-        const insurances = purchasedInsurances.car.insurance;
-        const advices = purchasedInsurances.car.insurance_advice;
+    this.subscription$.push(
+      this.purchasedInsurances$
+        .filter(purchasedInsurances => purchasedInsurances !== null)
+        .take(1)
+        .subscribe(purchasedInsurances => {
+          const insurances = purchasedInsurances.car.insurance;
+          const advices = purchasedInsurances.car.insurance_advice;
 
-        if (insurances.length && insurances.filter(insurance =>
-          (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
-          // redirect to purchased overview if there are any manually added insurances
-          this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-        } else if (insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
-          // Proceed to the buy flow for anonymous with advice
-          this.proceedAnonymous(advices, insurances);
-        }
-    });
+          if (insurances.length && insurances.filter(insurance =>
+            (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+            // redirect to purchased overview if there are any manually added insurances
+            this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+          } else if (insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
+            // Proceed to the buy flow for anonymous with advice
+            this.proceedAnonymous(advices, insurances);
+          }
+      })
+    );
 
     // Go to buy if user has advice in store (logged in after anonymous advice without registration)
     this.proceedToBuy();
 
     // start new advice only if there is no current one
-    this.advice$.subscribe(currentAdvice => {
+    this.advice$.take(1).subscribe(currentAdvice => {
       if (currentAdvice) {
       } else if (!currentAdvice) {
         this.store$.dispatch(new advice.Add({
@@ -181,22 +184,24 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       }
     });
 
-    this.carExtrasForm.formGroup.valueChanges
-      .debounceTime(200)
-      .filter(() => this.currentStep === carFormSteps.compareResults)
-      .subscribe(data => {
-        let compareExtraOptions = {
-          coverage: data.coverage,
-          cover_occupants: data.extraOptionsOccupants || false,
-          no_claim_protection: data.extraOptionsNoClaim || false,
-          legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
-          road_assistance: data.roadAssistance || 'RANO',
-          kilometers_per_year: data.kmPerYear || 'KMR3',
-          own_risk: data.ownRisk === null || data.ownRisk === undefined ? 135 : +data.ownRisk,
-          insurance_id: ''
-        };
-        this.store$.dispatch(new advice.Update(compareExtraOptions));
-      });
+    this.subscription$.push(
+      this.carExtrasForm.formGroup.valueChanges
+        .debounceTime(200)
+        .filter(() => this.currentStep === carFormSteps.compareResults)
+        .subscribe(data => {
+          let compareExtraOptions = {
+            coverage: data.coverage,
+            cover_occupants: data.extraOptionsOccupants || false,
+            no_claim_protection: data.extraOptionsNoClaim || false,
+            legal_aid: data.extraOptionsLegal ? 'LAY' : 'LAN',
+            road_assistance: data.roadAssistance || 'RANO',
+            kilometers_per_year: data.kmPerYear || 'KMR3',
+            own_risk: data.ownRisk === null || data.ownRisk === undefined ? 135 : +data.ownRisk,
+            insurance_id: ''
+          };
+          this.store$.dispatch(new advice.Update(compareExtraOptions));
+        })
+    );
 
       // init wizard config
       this.currentStep = 0;
@@ -364,47 +369,53 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   private onShowDetailsForm() {
     // Subscribe to car errors
-    this.store$.select(fromCar.getCarInfoError)
-      .filter(() => this.currentStep === carFormSteps.carDetails)
-      .subscribe((error) => {
-        if (error) {
-          this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
-          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
-        }
-      });
+    this.subscription$.push(
+      this.store$.select(fromCar.getCarInfoError)
+        .filter(() => this.currentStep === carFormSteps.carDetails)
+        .subscribe((error) => {
+          if (error) {
+            this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
+            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
+          }
+        })
+    );
 
     // Subscribe to car info
-    this.store$.select(fromCar.getCarInfo)
-      .filter(() => this.currentStep === carFormSteps.carDetails)
-      .subscribe((car: Car) => {
-        if (car && car.license) {
-          this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.niceCar',
-            value: car,
-            clear: true
-          }));
-        }
-      });
+    this.subscription$.push(
+      this.store$.select(fromCar.getCarInfo)
+        .filter(() => this.currentStep === carFormSteps.carDetails)
+        .subscribe((car: Car) => {
+          if (car && car.license) {
+            this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: 'car.info.niceCar',
+              value: car,
+              clear: true
+            }));
+          }
+        })
+    );
 
     // Subscribe to coverage recommendation request
-    this.store$.select(fromCar.getCoverage)
-      .filter(() => this.currentStep === carFormSteps.carDetails)
-      .filter(coverage => coverage !== null)
-      .subscribe(coverageAdvice => {
-        this.coverages.forEach( item => { item.selected = false; });
-        let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
-        if (coverageItem) {
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.coverage.advice',
-            value: coverageItem,
-            clear: true
-          }));
+    this.subscription$.push(
+      this.store$.select(fromCar.getCoverage)
+        .filter(() => this.currentStep === carFormSteps.carDetails)
+        .filter(coverage => coverage !== null)
+        .subscribe(coverageAdvice => {
+          this.coverages.forEach( item => { item.selected = false; });
+          let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
+          if (coverageItem) {
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: 'car.info.coverage.advice',
+              value: coverageItem,
+              clear: true
+            }));
 
-          coverageItem.selected = true;
-          this.updateSelectedCoverage(coverageItem);
-        }
-      });
+            coverageItem.selected = true;
+            this.updateSelectedCoverage(coverageItem);
+          }
+        })
+    );
 
     scrollToY();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.welcome', clear: true}));
@@ -449,12 +460,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   private proceedAnonymous(advices, insurances) {
     this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
     this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
-
-    this.insurance$.subscribe(insurance => {
-      if (insurance) {
-        this.proceedToBuy();
-      }
-    });
+    this.subscription$.push(
+      this.insurance$.subscribe(insurance => {
+        if (insurance) {
+          this.proceedToBuy();
+        }
+      })
+    );
   }
 
   private proceedToBuy() {
