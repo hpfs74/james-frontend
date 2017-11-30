@@ -43,17 +43,21 @@ span.knx-info-icon.knx-icon-info-circle {
     }
 
     @include knx-data-items {
+      font-family: $font-family-head;
+      font-size: $font-size-base + 2;
       border: 0;
-    }
-  }
 
-  @include knx-data-items {
-    &:first-child {
-      padding-right: 12px;
-    }
+      &:first-child {
+        padding-right: 12px;
+      }
 
-    &:last-child {
-      padding-left: 12px;
+      &:last-child {
+        padding-left: 12px;
+      }
+
+      span {
+        font-family: $font-family-base;
+      }
     }
   }
 
@@ -90,15 +94,6 @@ span.knx-info-icon.knx-icon-info-circle {
 
 .knx-insurance-result__price {
   display: inline-block;
-}
-
-@include knx-data-items {
-  font-family: $font-family-head;
-  font-size: $font-size-base + 2;
-
-  span {
-    font-family: $font-family-base;
-  }
 }
 
 .knx-insurance-result__price-quality {
