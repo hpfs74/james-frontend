@@ -158,8 +158,9 @@ span.knx-info-icon.knx-icon-info-circle {
 }
 
 .knx-insurance-result__discount {
-  margin-top: -10px;
-  padding: 21px 10px 8px;
+  margin-top: 30px;
+  margin-bottom: -30px;
+  padding: 15px 10px 8px;
   font-size: $font-size-base - 2;
   color: $knab-white;
   background: $knab-primary-red;
@@ -288,5 +289,9 @@ span.knx-info-icon.knx-icon-info-circle {
     padding-top: 15px;
     margin-top: 15px;
     border-top: $knx-insurance-result-border;
+  }
+
+  .knx-insurance-result__discount {
+    margin-bottom: -5px;
   }
 }

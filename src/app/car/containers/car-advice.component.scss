@@ -1,5 +1,9 @@
 @import '~styles/base.scss';
 
+.knx-side-panel__action {
+  font-size: $font-size-base - 1;
+}
+
 @media screen and (max-width: 576px) {
   /deep/ .knx-car-advice.knx-car-advice--step-2 .knx-chat-stream {
     top: auto;
@@ -31,10 +35,9 @@
       top: 10px;
     }
 
-    .knx-icon-filter {
+    .knx-side-panel__action {
       float: right;
       width: calc(100% - 67px);
-      font-size: 15px;
 
       &:before {
         margin-right: 10px;
