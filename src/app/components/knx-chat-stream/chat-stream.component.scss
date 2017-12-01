@@ -13,6 +13,10 @@
     top: 50px;
     height: auto;
   }
+
+  .knx-chat-stream__avatar-filter {
+    display: none;
+  }
 }
 
 .knx-chat-stream > .knx-button {
@@ -23,6 +27,10 @@
   width: 100%;
   background: $knab-light-gray;
   color: $knab-primary-blue;
+}
+
+knx-avatar .knx-avatar__image {
+  background: $knab-white;
 }
 
 @media (max-width: 576px) {
