@@ -28,7 +28,7 @@ interface OrderItem {
         </div>
 
         <ng-template #insuranceResults>
-          <h2>We hebben 23 resultaten gevonden</h2>
+          <h2 *ngIf="insurances && insurances.length > 0">We hebben {{ insurances.length }} resultaten gevonden</h2>
 
           <div class="knx-button-group" role="group">
             <button
