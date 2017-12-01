@@ -62,6 +62,7 @@ enum carFormSteps {
 
 @Component({
   templateUrl: 'car-advice.component.html',
+  styleUrls: ['./car-advice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, QaIdentifier {
@@ -115,6 +116,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         title: 'Expert autoverzekeringen'
       }
     }));
+
     // bind observables
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);

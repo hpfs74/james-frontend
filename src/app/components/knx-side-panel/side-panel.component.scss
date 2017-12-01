@@ -47,6 +47,10 @@
 }
 
 @media (max-width: 576px) {
+  .knx-side-panel__toolbar {
+    margin-top: 0;
+  }
+
   .knx-car-extras {
     display: none;
   }

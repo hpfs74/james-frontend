@@ -54,6 +54,13 @@ h3 {
   width: 100%;
 }
 
+@media screen and (max-width: 576px) {
+  .header {
+    position: static;
+    margin-bottom: -54px;
+  }
+}
+
 p {
   font-size: $font-size-base;
 }

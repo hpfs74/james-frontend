@@ -78,12 +78,13 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
             </button>
           </div>
         </div>
+
+        <div class="knx-insurance-result__discount clearfix" *ngIf="insurance.discount">
+          <img src="/assets/icon/present_icon.png" alt="present">
+          Inc. {{ insurance.discount | currency:'EUR':true }} Knab korting & Gratis overstapservice
+        </div>
       </div>
 
-      <div class="knx-insurance-result__discount clearfix" *ngIf="insurance.discount">
-        <img src="/assets/icon/present_icon.png" alt="present">
-        Inc. {{ insurance.discount | currency:'EUR':true }} Knab korting & Gratis overstapservice
-      </div>
       <!--<knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurer]="insurer"></knx-insurance-result-detail>-->
     </div>
   `,
