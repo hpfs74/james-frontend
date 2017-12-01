@@ -297,9 +297,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.currentStep = stepIndex;
   }
 
-  openUnsupportedWebSite(insuranceUrl): Observable<any> {
+  openUnsupportedWebSite(insuranceUrl) {
     window.open(insuranceUrl, '_blank');
-    return Observable.empty();
+    this.knxWizard.isPendingNext = false; // force state to keep button enabled
   }
 
   startBuyFlow(): Observable<any> {
