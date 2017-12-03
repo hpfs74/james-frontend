@@ -58,7 +58,7 @@
     "@knx/password-strength": "0.0.50",
     "@knx/postal-code-input": "3.0.52",
     "@knx/radio": "1.0.58",
-    "@knx/select": "1.0.67",
+    "@knx/select": "1.0.97",
     "@knx/step-navigation": "0.0.180",
     "@knx/textarea": "1.0.58",
     "@knx/tooltip": "1.0.119",
