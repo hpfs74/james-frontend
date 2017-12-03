@@ -61,7 +61,7 @@
     "@knx/select": "1.0.67",
     "@knx/step-navigation": "0.0.180",
     "@knx/textarea": "1.0.58",
-    "@knx/tooltip": "1.0.119",
+    "@knx/tooltip": "1.0.121",
     "@knx/utils": "1.0.27",
     "@knx/wizard": "0.0.216",
     "@ngrx/effects": "^4.0.2",
