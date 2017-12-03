@@ -9,7 +9,6 @@ import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
@@ -327,8 +326,7 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
     );
     return this.store$.select(fromInsurance.getSelectedAdvice)
       .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
-      .map(advice => this.store$.dispatch(new compare.LoadCarAction(advice)))
-      .catch(error => Observable.throw(error));
+      .map(advice => this.store$.dispatch(new compare.LoadCarAction(advice)));
   }
 
   onBack(): Observable<any> {

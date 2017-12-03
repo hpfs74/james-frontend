@@ -17,11 +17,31 @@ export const carBuyRoutes: Routes = [
       title: 'Nieuwe autoverzekering aanvragen'
     },
     children: [
-      { path: ':adviceId/contact-detail/:step-index', component: CarContactComponent},
-      { path: ':adviceId/reporting/:step-index', component: CarReportingCodeComponent},
-      { path: ':adviceId/check/:step-index', component: CarCheckComponent},
-      { path: ':adviceId/payment/:step-index', component: CarPaymentComponent},
-      { path: ':adviceId/summary/:step-index', component: CarSummaryComponent},
+      {
+        path: ':adviceId/contact-detail',
+        component: CarContactComponent,
+        data: { stepIndex: 0}
+      },
+      {
+        path: ':adviceId/reporting',
+        component: CarReportingCodeComponent,
+        data: { stepIndex: 1}
+      },
+      {
+        path: ':adviceId/check',
+        component: CarCheckComponent,
+        data: { stepIndex: 2}
+      },
+      {
+        path: ':adviceId/payment',
+        component: CarPaymentComponent,
+        data: { stepIndex: 3}
+      },
+      {
+        path: ':adviceId/summary',
+        component: CarSummaryComponent,
+        data: { stepIndex: 4}
+      },
     ]
   }
 ];

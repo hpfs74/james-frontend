@@ -9,21 +9,20 @@ import * as WizardActions from './knx-wizard-rx.actions';
 
 @Injectable()
 export class WizardEffects {
-  @Effect()
+  @Effect({dispatch: false})
   navigate$ = this.actions$.ofType(WizardActions.GO)
     .do((action: WizardActions.Go) => this.knxWizardRxService.goToStep(action.payload.stepIndex));
 
-  @Effect()
+  @Effect({dispatch: false})
   navigateBack$ = this.actions$.ofType(WizardActions.BACK)
-    .do(() => this.knxWizardRxService.prevStep());
+    .do(() => this.knxWizardRxService.goToPrevStep());
 
-  @Effect()
+  @Effect({dispatch: false})
   navigateForward$ = this.actions$.ofType(WizardActions.FORWARD)
-    .do(() => this.knxWizardRxService.nextStep());
+    .do(() => this.knxWizardRxService.goToNextStep());
 
   constructor(
     private actions$: Actions,
-    private router: Router,
     private knxWizardRxService: KNXWizardRxService
   ) {}
 }

@@ -15,9 +15,9 @@ const anonymousAvailableLinks = [
   '/login',
   '/car',
   '/car/detail',
-  '/car/detail/1',
-  '/car/extras/2',
-  '/car/review/3'
+  '/car/detail',
+  '/car/extras',
+  '/car/review'
 ];
 
 @Injectable()

@@ -2,7 +2,7 @@ import {
   OnInit, EventEmitter, Component, ViewChild,
   ElementRef, Input, Output, ContentChild
 } from '@angular/core';
-import { Router, Route, ActivatedRoute } from '@angular/router';
+import { Router, Route, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { KNXStepRxComponent } from './knx-step-rx.component';
 import { KNXWizardStepRxOptions, KNXStepError } from './knx-wizard-rx.options';
 import { KNXWizardRxService } from './knx-wizard-rx.service';
@@ -26,123 +26,76 @@ export class KNXWizardRxComponent implements OnInit {
   @ViewChild('nextButton') nextButton: ElementRef;
   @Input() stepOptions: KNXWizardStepRxOptions[];
   @Output() onStepChange: EventEmitter<number> = new EventEmitter<number>();
-
-  currentStep: KNXWizardStepRxOptions;
-  currentStepIdx: number = null;
   currentComponent: any | KNXStepRxComponent;
-  error: KNXStepError;
+  currentStepOptions: KNXWizardStepRxOptions;
   subscription$: Subscription[] = [];
-  private routes: Route[];
-  constructor(private router: Router,
-              public route: ActivatedRoute,
-              public knxWizardRxService: KNXWizardRxService,
-              private store$: Store<fromRoot.State>) {
-    this.setStepSupscriptions();
+  error: KNXStepError;
+  constructor(private store$: Store<fromRoot.State>,
+              public knxWizardRxService: KNXWizardRxService) {
     window.wizard = this;
     window.fromWizard = fromWizard;
   }
 
-  setStepSupscriptions(): void {
-    // this.subscription$.push(
-    //   this.knxWizardRxService.onNext.subscribe(() => this.goToNextStep())
-    // );
-    // this.subscription$.push(
-    //   this.knxWizardRxService.onBack.subscribe(() => this.goToNextStep())
-    // );
-  }
-
-  // setCurrentStepToFirst(): void {
-  //   if (!this.currentStep) {
-  //     this.currentStep = this.stepOptions[0];
-  //     this.currentStepIdx = 0;
-  //     this.router.navigate([this.routes[0].path]);
-  //   }
-  // }
-
   ngOnInit() {
     if (this.stepOptions) {
-      this.routes = this.stepOptions.map(step => step.routeConfig);
-      // this.setCurrentStepToFirst();
+      this.currentStepOptions = this.stepOptions[this.knxWizardRxService.currentStepIndex];
     }
+    this.knxWizardRxService.routeObservable.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentStepOptions = this.stepOptions[this.knxWizardRxService.currentStepIndex];
+        this.onStepChange.emit(this.knxWizardRxService.currentStepIndex);
+      }
+    });
   }
-
-  // setCurrentStepOptions() {
-  //   this.subscription$.push(
-  //     this.route.firstChild.params.subscribe(param => {
-  //       if (!param['step-index']) {
-  //         this.setCurrentStepToFirst();
-  //       } else {
-  //         this.currentStepIdx = param['step-index'] - 1;
-  //         this.currentStep = this.stepOptions[this.currentStepIdx];
-  //       }
-  //       this.onStepChange.emit(this.currentStepIdx);
-  //     })
-  //   );
-  // }
-
-  // onDeactivate(event): void {
-  //   this.closeSubscriptions();
-  // }
-
-  // closeSubscriptions(): void {
-  //   this.subscription$.forEach(subscription => subscription.unsubscribe);
-  //   this.subscription$ = [];
-  // }
 
   onActivate(componentRef: any): void {
     scrollToY();
-    // this.currentComponent = componentRef;
-    // if (this.stepOptions) {
-    //   this.setCurrentStepOptions();
-    //   this.onShowStep();
-    // }
-    // this.blurButtons();
-    // this.clearErrors();
+    this.currentComponent = componentRef;
+    if (this.stepOptions) {
+      this.onShowStep();
+    }
+    this.blurButtons();
+    this.clearErrors();
   }
 
-  // goToStep(stepIndex: number): void {
-  //   if (this.routes[stepIndex]) {
-  //     this.router.navigate([this.routes[stepIndex].path]);
-  //   }
-  // }
+  onDeactivate() {
+    this.subscription$.forEach(subscription => subscription.unsubscribe);
+    this.subscription$ = [];
+  }
 
-  // goToNextStep(): void {
-  //   let step = this.currentStepIdx + 1;
-  //   if (this.currentStep.onBeforeNext) {
-  //     this.subscription$.push(
-  //       this.currentStep.onBeforeNext().subscribe((res) => {
-  //         this.goToStep(step);
-  //       }, error => this.handleError(error))
-  //     );
-  //   } else {
-  //     this.onNext();
-  //   }
-  // }
+  goToNextStep(): void {
+    if (this.currentStepOptions.onBeforeNext) {
+      this.subscription$.push(
+        this.currentStepOptions.onBeforeNext().subscribe((res) => {
+          this.store$.dispatch(new fromWizard.Forward());
+        }, error => this.handleError(error))
+      );
+    } else {
+      this.onNext();
+    }
+  }
 
-  // onNext(): void {
-  //   let step = this.currentStepIdx + 1;
-  //   if (this.currentComponent.onNext) {
-  //     this.subscription$.push(
-  //       this.currentComponent.onNext().subscribe(() => {
-  //         this.goToStep(step);
-  //       }, error => this.handleError(error))
-  //     );
-  //   }
-  // }
+  onNext(): void {
+    if (this.currentComponent.onNext) {
+      this.currentComponent.onNext().subscribe(() => {
+        this.store$.dispatch(new fromWizard.Forward());
+      }, error => this.handleError(error));
+    }
+  }
 
   onShowStep(): void {
-    let onShowStep = this.currentStep.onShowStep;
+    let onShowStep = this.currentStepOptions.onShowStep;
     if (onShowStep) {
       onShowStep();
     }
   }
 
-  // goToPreviousStep(step): void {
-  //   this.router.navigate([this.routes[step].path]);
-  // }
+  goToPreviousStep(stepIndex): void {
+    this.store$.dispatch(new fromWizard.Go({stepIndex: stepIndex}));
+  }
 
-  handleError(err: KNXStepError): void {
-    // console.error('cannot move to step');
+  handleError(err: any): void {
+    // console.error('cannot move to step',err);
     this.error = err;
   }
 

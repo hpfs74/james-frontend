@@ -14,13 +14,26 @@ export const carAdviceRoutes: Routes = [
     path: '',
     component: CarAdviceComponent,
     data: {
-      title: 'Je autoverzekering vergelijken'
+      title: 'Je autoverzekering vergelijken',
+      wizard: true
     },
     children: [
-      { path: '', redirectTo: 'detail/1', pathMatch: 'full' },
-      { path: 'detail/:step-index', component: CarDetailComponent },
-      { path: 'extras/:step-index', component: InsuranceTopListComponent },
-      { path: 'review/:step-index', component: CarReviewComponent },
+      { path: '', redirectTo: 'detail', pathMatch: 'full' },
+      {
+        path: 'detail',
+        component: CarDetailComponent,
+        data: { stepIndex: 0}
+      },
+      {
+        path: 'extras',
+        component: InsuranceTopListComponent,
+        data: { stepIndex: 1}
+      },
+      {
+        path: 'review',
+        component: CarReviewComponent,
+        data: { stepIndex: 2}
+      },
     ]
   },
   {

@@ -154,14 +154,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           label: 'Je gegevens',
           nextButtonLabel: 'Naar resultaten',
           hideBackButton: true,
-          routeConfig: { path: '/car/detail/1', component: CarDetailComponent}
         },
         {
           label: 'Premies vergelijken',
           backButtonLabel: 'Terug',
           hideNextButton: true,
           hideBackButton: false,
-          routeConfig: { path: '/car/extras/2', component: InsuranceTopListComponent}
         },
         {
           label: 'Aanvragen',
@@ -170,7 +168,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
           onShowStep: this.onShowSummary.bind(this),
           onBeforeNext: this.startBuyFlow.bind(this),
-          routeConfig: { path: '/car/review/3', component: CarReviewComponent}
         }
       ];
   }

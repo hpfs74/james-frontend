@@ -3,7 +3,7 @@ import { Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 export interface KNXWizardStepRxOptions {
-  routeConfig: Route;
+  routeConfig?: Route;
   label?: string;
   nextButtonLabel?: string;
   backButtonLabel?: string;

@@ -97,7 +97,7 @@ export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
   }
 
   selectInsurance(insurance): void {
-    this.knxWizardRxService.nextStep();
+    this.knxWizardRxService.goToNextStep();
     this.store$.dispatch(new advice.SetInsurance(insurance));
   }
 

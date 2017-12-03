@@ -13,31 +13,31 @@
           {{error ? error.message : ''}}
         </div>
 
-        <div class="knx-wizard__buttons" [class.knx-wizard__buttons--first]="currentStep.hideBackButton">
+        <div class="knx-wizard__buttons" [class.knx-wizard__buttons--first]="currentStepOptions.hideBackButton">
           <button #prevButton
               [ngClass]="[
-                currentStep.backButtonClass ?
-                currentStep.backButtonClass : 'knx-button knx-button--link knx-button--back'
+                currentStepOptions.backButtonClass ?
+                currentStepOptions.backButtonClass : 'knx-button knx-button--link knx-button--back'
               ]"
-              *ngIf="!currentStep.hideBackButton"
-              [disabled]="currentStep.disableBackButton"
-              (click)="goToPreviousStep(currentStepIdx - 1);">
-            {{currentStep.backButtonLabel || options.backButtonLabel}}
+              *ngIf="!currentStepOptions.hideBackButton"
+              [disabled]="currentStepOptions.disableBackButton"
+              (click)="goToPreviousStep(knxWizardRxService.currentStepIndex - 1);">
+            {{currentStepOptions.backButtonLabel || options.backButtonLabel}}
           </button>
 
           <button #nextButton
             [ngClass]="[
-              currentStep.nextButtonClass ?
-              currentStep.nextButtonClass : 'knx-button knx-button--primary knx-button--arrow'
+              currentStepOptions.nextButtonClass ?
+              currentStepOptions.nextButtonClass : 'knx-button knx-button--primary knx-button--arrow'
             ]"
             [ngClass]="{
                 'knx-button--pending' : isPendingNext,
                 'knx-button--arrow' : !isPendingNext
               }"
-              [disabled]="isPendingNext || currentStep.disableNextButton"
-            *ngIf="!currentStep.hideNextButton"
+              [disabled]="isPendingNext || currentStepOptions.disableNextButton"
+            *ngIf="!currentStepOptions.hideNextButton"
             (click)="goToNextStep();">
-            {{currentStep.nextButtonLabel || options.nextButtonLabel}}
+            {{currentStepOptions.nextButtonLabel || options.nextButtonLabel}}
           </button>
         </div>
       </div>

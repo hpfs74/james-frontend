@@ -9,7 +9,7 @@ export const ERROR = '[Wizard] Error';
 export class Go implements Action {
   readonly type = GO;
 
-  // constructor(public payload: {stepIndex: number;}) {}
+  constructor(public payload: { stepIndex: number; }) { }
 }
 
 export class Back implements Action {

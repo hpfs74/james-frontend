@@ -20,9 +20,6 @@ const COMPONENTS = [
     ])
   ],
   declarations: COMPONENTS,
-  exports: COMPONENTS,
-  providers: [
-    KNXWizardRxService
-  ]
+  exports: COMPONENTS
 })
 export class KnxWizardRxModule { }
