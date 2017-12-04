@@ -14,6 +14,14 @@
   }
 }
 
+.knx-price-item.knx-card {
+  padding: 20px 10px 8px;
+}
+
+// .knx-button--ghost {
+//   border-color: $knab-primary-blue;
+// }
+
 div.knx-button {
   // remove focus for button class because outer div has a tabindex
   // to support focus/outline on the whole price-item

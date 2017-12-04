@@ -13,10 +13,10 @@ const coverageFeaturesMap = {
   ],
   CAR: [
     'Schade door anderen',
+    'Ruitschade',
     'Diefstal',
     'Inbraak',
     'Brand en storm',
-    'Ruitschade',
     'Schade door vandalisme',
     'Schade door eigen schuld'
   ]
@@ -30,7 +30,7 @@ export const createCarCoverages = (tags: Array<Tag>): Array<Price> => {
       return {
         id: tag.tag,
         header: tag.translation_text,
-        badge: 'ons advies',
+        badge: 'Wij bevelen dit aan:',
         features: coverageFeaturesMap[tag.tag],
         highlight: false
       };
