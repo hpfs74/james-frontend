@@ -104,8 +104,7 @@ span.knx-info-icon.knx-icon-info-circle {
   text-align: left;
 
   .knx-insurance-result__value__sup {
-    position: relative;
-    top: -5px;
+    line-height: 0;
     font-family: $font-family-base;
     font-size: $font-size-base - 4;
     vertical-align: super;
