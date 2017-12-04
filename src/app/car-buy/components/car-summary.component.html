@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <h2 class="knx-car-summary__header">
         Controleer je gegevens
-        <span>
+        <span *ngIf="insurance">
           <img class="knx-car-summary__logo" src="{{ insurance._embedded.insurance.insurance_logo }}">
         </span>
       </h2>
@@ -11,7 +11,7 @@
 
         <knx-ir-content title="Je autoverzekering" *ngIf="isValidInsurance(insurance)">
 
-          <knx-ir-row>
+          <knx-ir-row *ngIf="insurance">
             <knx-ir-label>Verzekeringsmaatschappij</knx-ir-label>
             <knx-ir-value>{{ insurance._embedded.insurance.insurance_brand }}</knx-ir-value>
           </knx-ir-row>
