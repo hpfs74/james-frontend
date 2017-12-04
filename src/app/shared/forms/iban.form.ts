@@ -4,6 +4,7 @@ import { BaseForm } from './base-form';
 import { futureDateValidator, maxDateValidator, ibanValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';
 import { carReportingCodeValidator } from '../../utils/base-form.validators';
+import { IBANMask } from '@app/utils/iban-tools';
 
 export class IbanForm extends BaseForm {
   formGroup: FormGroup;
@@ -57,7 +58,8 @@ export class IbanForm extends BaseForm {
         formControl: this.formGroup.get('iban'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          type: 'text'
+          type: 'text',
+          textMask: IBANMask
         }
       }
     };
