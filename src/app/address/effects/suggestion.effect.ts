@@ -18,10 +18,16 @@ export class SuggestionEffects {
   loadAddressSuggestion$: Observable<Action> = this.actions$
     .ofType(suggestion.GET_ADDRESS_SUGGESTION_REQUEST)
     .map((action: suggestion.GetAddressSuggestion) => action.payload)
-    .switchMap((payload: AddressSuggestionParams) =>
-      this.suggestionService.lookupSuggestions(payload.zipcode, payload.house_number)
-        .map((res: AddressSuggestion) => new suggestion.GetAddressSuggestionSuccess(res))
-        .catch(error => Observable.of(new suggestion.GetAddressSuggestionFailure(error))));
+    .switchMap((payload: AddressSuggestionParams) => {
+      if (typeof(payload.house_number) !== 'string') {
+        payload.house_number = payload.house_number[0];
+      }
 
-  constructor(private actions$: Actions, private suggestionService: SuggestionService) {}
+      return this.suggestionService.lookupSuggestions(payload.zipcode, payload.house_number)
+        .map((res: AddressSuggestion) => new suggestion.GetAddressSuggestionSuccess(res))
+        .catch(error => Observable.of(new suggestion.GetAddressSuggestionFailure(error)));
+    });
+
+  constructor(private actions$: Actions, private suggestionService: SuggestionService) {
+  }
 }
