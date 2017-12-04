@@ -50,7 +50,7 @@ describe('Utils: Car Coverage', () => {
     createCarCoverages(testTags).forEach(price => {
       expect(price.id).toBeDefined();
       expect(price.highlight).toBeFalsy();
-      expect(price.badge).toEqual('ons advies');
+      expect(price.badge).toEqual('Wij bevelen dit aan:');
       expect(price.features instanceof Array).toBeTruthy();
     });
   });
