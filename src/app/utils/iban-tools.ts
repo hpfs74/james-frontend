@@ -4,6 +4,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+
 /**
  * @file Validation, extraction and creation of IBAN, BBAN, BIC/SWIFT numbers plus some other helpful stuff
  * @author Saša Jovanić
@@ -404,3 +405,23 @@ countrySpecs['UA'] = {chars: 29, bban_regexp: '^[0-9]{6}[A-Z0-9]{19}$', name: 'U
 countrySpecs['AE'] = {chars: 23, bban_regexp: '^[0-9]{3}[0-9]{16}$', name: 'United Arab Emirates'};
 countrySpecs['GB'] = {chars: 22, bban_regexp: '^[A-Z]{4}[0-9]{14}$', name: 'United Kingdom'};
 countrySpecs['VG'] = {chars: 24, bban_regexp: '^[A-Z0-9]{4}[0-9]{16}$', name: 'British Virgin Islands'};
+
+export const IBANMask = {
+  mask: (rawValue: string) => getIBANMask(),
+  pipe: function (conformedValue) {
+    return conformedValue.replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase();
+  }
+};
+
+export function getIBANMask(): any[] {
+  let longestIBAN = getMaxOfArray(Object['values'](countrySpecs).map(countrySpec => countrySpec.chars));
+  let ibanMask = [];
+  for (let i = 0; i < longestIBAN; i++ ) {
+    ibanMask.push(/[a-zA-Z0-9 ]/);
+  }
+  return ibanMask;
+}
+
+function getMaxOfArray(numArray) {
+  return Math.max.apply(null, numArray);
+}

@@ -78,7 +78,6 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     scrollToY();
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
-    this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
