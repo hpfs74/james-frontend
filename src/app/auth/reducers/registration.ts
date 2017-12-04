@@ -86,7 +86,7 @@ export function reducer(state = initialState, action: registration.Actions): Sta
         ...state,
         error: null,
         loading: true,
-        registration_email: action.registration.emailaddress
+        registrationEmail: action.registration.emailaddress
       };
     }
 
