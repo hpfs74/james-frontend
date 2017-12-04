@@ -41,7 +41,7 @@
     "@knx/avatar": "0.13.1",
     "@knx/base": "2.42.106",
     "@knx/card": "1.0.4",
-    "@knx/checkbox": "1.0.62",
+    "@knx/checkbox": "1.0.102",
     "@knx/collapsible-panel": "0.0.261",
     "@knx/currency-input": "2.0.86",
     "@knx/date-input": "1.0.59",
