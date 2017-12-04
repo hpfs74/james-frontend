@@ -137,12 +137,11 @@ describe('Component: CarCheckComponent', () => {
 
 
   describe('bugs', () => {
-    it('should handle bugs from INS-928', () => {
-
+    it('should handle simple number', () => {
       let value = {
         address: {
           postcode: '1016LC',
-          number: '30,2'
+          number: '30'
         },
         number_extended: {
           number_addition: null
@@ -157,8 +156,32 @@ describe('Component: CarCheckComponent', () => {
       const houseNumberExtensionCtrl = comp.targetComponent.addressForm.formGroup.get('houseNumberExtension');
 
       expect(postalCodeCtrl.value).toBe('1016LC');
-      expect(houseNumberCtrl.value).toBe('30');
-      expect(houseNumberExtensionCtrl.value).toBe('-2');
+      expect(houseNumberCtrl.value).toContain('30');
+      expect(houseNumberExtensionCtrl.value).toBe('');
+    });
+
+    it('should handle spinozalaan bug :)', () => {
+
+      let value = {
+        address: {
+          postcode: '2273XA',
+          number: '1A-1'
+        },
+        number_extended: {
+          number_addition: null
+        }
+      };
+
+      comp.targetComponent.advice = value;
+      fixture.detectChanges();
+
+      const postalCodeCtrl = comp.targetComponent.addressForm.formGroup.get('postalCode');
+      const houseNumberCtrl = comp.targetComponent.addressForm.formGroup.get('houseNumber');
+      const houseNumberExtensionCtrl = comp.targetComponent.addressForm.formGroup.get('houseNumberExtension');
+
+      expect(postalCodeCtrl.value).toBe('2273XA');
+      expect(houseNumberCtrl.value).toContain('1');
+      expect(houseNumberExtensionCtrl.value).toBe('A-1');
     });
   });
 });
