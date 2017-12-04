@@ -42,7 +42,15 @@ import { DropdownModule } from './components/knx-dropdown/dropdown.module';
 /**
  * Pipes
  */
-import { TitleCasePipe, RoundPipe, LicensePlatePipe, BooleanPipe, JamesTagPipe } from './shared/pipes/';
+import {
+  TitleCasePipe,
+  RoundPipe,
+  LicensePlatePipe,
+  BooleanPipe,
+  JamesTagPipe,
+  CapitalizePipe
+
+} from './shared/pipes/';
 
 /**
  * Directives
@@ -102,6 +110,7 @@ export const sharedComponents = [
   BooleanPipe,
   JamesTagPipe,
   LicensePlatePipe,
+  CapitalizePipe,
   // Directives
   BackdropBlurDirective,
   SidePanelStateDirective,
