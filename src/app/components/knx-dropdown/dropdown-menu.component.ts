@@ -31,9 +31,6 @@ import { DropdownStateService } from './dropdown-state.service';
             <ng-content></ng-content>
           </div>
       </div>
-
-      <!-- BACKDROP -->
-      <div class="knx-dropdown-backdrop" *ngIf="state.menuState.isVisible" (click)="hide()"></div>
     `,
   animations: [
     trigger('fade', [
