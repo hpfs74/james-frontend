@@ -129,34 +129,13 @@ export class CarDetailComponent implements OnInit, QaIdentifier {
       return null;
     }
 
-    let number = payload.address.number;
-    if (number !== null && number !== '') {
-      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
-        return number.split(',')[0];
-      }
-
-      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
-        return number.split('-')[0];
-      }
-    }
-    return FormUtils.getNumbers(number);
+    return FormUtils.getNumbers(payload.address.number);
   }
 
   private normalizeAddressHouseNumberAddition(payload: any) {
     if (!payload.address) {
       return null;
     }
-    let number = payload.address.number;
-    if (number !== null && number !== '') {
-      if (typeof(number) === 'string' && number.indexOf(',') !== -1) {
-        return '-' + number.split(',')[1];
-      }
-
-      if (typeof(number) === 'string' && number.indexOf('-') !== -1) {
-        return '-' + number.split('-')[1];
-      }
-    }
-    return payload.number_extended ? payload.number_extended.number_addition : null;
+    return /\d+(.*)/.exec(payload.address.number)[1] || '';
   }
-
 }
