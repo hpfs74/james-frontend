@@ -12,6 +12,7 @@ interface PriceTableLabelOptions {
   template: `
     <div class="knx-price-table">
       <knx-price-item
+        [ngClass]="{ 'knx-price-item--highlight': item.highlight }"
         *ngFor="let item of items; let i = index"
         [id]="item.id"
         [header]="item.header"
@@ -28,6 +29,7 @@ interface PriceTableLabelOptions {
 })
 export class PriceTableComponent implements OnDestroy {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();
+  @Output() onSubmit = new EventEmitter();
 
   @Input() labels: PriceTableLabelOptions;
   @Input() items: Array<Price>;
@@ -44,10 +46,17 @@ export class PriceTableComponent implements OnDestroy {
   }
 
   selectItem(index: number) {
-    this.items.map((item, i) => {
-      item.selected = index === i ? true : false;
-    });
-    this.onSelected.emit(this.items[index]);
+    let selected = this.items[index].selected;
+
+    if (selected) {
+      // second click
+      this.onSubmit.emit();
+    } else {
+      this.items.map((item, i) => {
+        item.selected = index === i ? true : false;
+      });
+      this.onSelected.emit(this.items[index]);
+    }
   }
 
   ngOnDestroy() {

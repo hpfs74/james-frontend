@@ -121,7 +121,8 @@
           knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
           [items]="coverages"
           [highlight]="coverageRecommendation?.recommended_value"
-          [labels]="{ selected: 'Gekozen', unselected: 'Kies deze' }"
+          [labels]="{ selected: 'Toon advies', unselected: 'Kies deze' }"
+          (onSubmit)="coverageConfirmed.emit()"
           (onSelected)="onSelectCoverage($event)">
         </knx-price-table>
 

@@ -212,6 +212,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           label: 'Je gegevens',
           nextButtonLabel: 'Naar resultaten',
           hideBackButton: true,
+          hideNextButton: true,
           onShowStep: this.onShowDetailsForm.bind(this),
           onBeforeNext: this.submitDetailForm.bind(this)
         },

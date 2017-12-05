@@ -6,23 +6,11 @@
   .knx-list--checks {
     padding: 20px 20px 0;
   }
-
-  .knx-list--white {
-    li {
-      color: #fff;
-    }
-  }
 }
 
 .knx-price-item--highlight {
-  margin-top: 45px;
+  margin-top: 0;
   margin-bottom: 10px;
-}
-
-@media (min-width: 768px) {
-  .knx-price-item--highlight {
-    margin-top: 5px;
-  }
 }
 
 .knx-price-item.knx-card {

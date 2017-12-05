@@ -83,6 +83,7 @@ export class CarDetailComponent implements OnInit, QaIdentifier {
 
   @Output() addressChange: EventEmitter<Address> = new EventEmitter();
   @Output() coverageSelected: EventEmitter<Price> = new EventEmitter();
+  @Output() coverageConfirmed = new EventEmitter();
   @Output() formControlFocus: EventEmitter<string> = new EventEmitter();
 
   ngOnInit() {
