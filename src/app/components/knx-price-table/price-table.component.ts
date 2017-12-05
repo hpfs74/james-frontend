@@ -1,6 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Price } from '../../shared/models/price';
 
+interface PriceTableLabelOptions {
+  selected: string;
+  unselected: string;
+}
+
 @Component({
   selector: 'knx-price-table',
   styleUrls: ['./price-table.component.scss'],
@@ -15,6 +20,8 @@ import { Price } from '../../shared/models/price';
         [highlight]="item.highlight"
         [selected]="item.selected"
         [features]="item.features"
+        [selectedLabel]="labels.selected"
+        [unselectedLabel]="labels.unselected"
         (click)="selectItem(i)">
       </knx-price-item>
     </div>`
@@ -22,6 +29,7 @@ import { Price } from '../../shared/models/price';
 export class PriceTableComponent implements OnDestroy {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();
 
+  @Input() labels: PriceTableLabelOptions;
   @Input() items: Array<Price>;
   @Input() selectable: boolean;
   @Input() set highlight(value: string) {
