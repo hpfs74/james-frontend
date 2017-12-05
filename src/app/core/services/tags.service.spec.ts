@@ -66,6 +66,13 @@ describe('Service: Tags', () => {
     });
   });
 
+  describe('getTranslationDescription', () => {
+    it('should return a translation description', () => {
+      expect(service.getTranslationDescription('car_flow_km_per_year', 'KMR1'))
+        .toEqual('Ik stap alleen in de auto voor de wekelijkse boodschappen.');
+    });
+  });
+
   describe('getAsLabelValue', () => {
     it('should return a label, value array', () => {
       const result = service.getAsLabelValue('car_flow_km_per_year');
