@@ -50,7 +50,7 @@
     "@knx/form-group": "1.0.88",
     "@knx/forms": "1.0.61",
     "@knx/grid": "0.0.374",
-    "@knx/input": "0.0.71",
+    "@knx/input": "0.0.112",
     "@knx/loader": "1.0.58",
     "@knx/locale": "1.0.58",
     "@knx/message": "1.0.58",

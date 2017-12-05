@@ -67,7 +67,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
 
-  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
+  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {
+  }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -187,11 +188,11 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
         return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
-      }).filter( value =>
-            value.adviceInfo != null
-            && value.carInfo != null
-            && value.insuranceInfo != null
-            && value.profileInfo != null)
+      }).filter(value =>
+      value.adviceInfo != null
+      && value.carInfo != null
+      && value.insuranceInfo != null
+      && value.profileInfo != null)
       .subscribe((value) => {
         const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
         this.store$.dispatch(new car.BuyAction(proposalData));
@@ -231,7 +232,14 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     };
   }
 
+  getDekkingText(coverage) {
+    return this.tagsService.getTranslationText('car_flow_coverage', coverage)
+      + '. '
+      + this.tagsService.getTranslationDescription('car_flow_coverage', coverage);
+  }
+
   getProposalData(value: any, contactForm: FormGroup) {
+
     const flatData = Object.assign({},
       value.profileInfo,
       value.adviceInfo,
@@ -239,7 +247,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
       {car: value.carInfo},
-      {dekking: this.tagsService.getTranslationText('car_flow_coverage', value.coverage)},
+      {dekking: this.getDekkingText(value.adviceInfo.coverage)},
       this.getUpdatedProfile(contactForm));
 
     const proposalRequest = new CarProposalHelper();
