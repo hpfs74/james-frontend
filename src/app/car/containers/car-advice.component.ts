@@ -389,11 +389,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
         .subscribe((car: Car) => {
           if (car && car.license) {
             this.carDetailForm.formGroup.get('licensePlate').updateValueAndValidity();
-            this.store$.dispatch(new assistant.AddCannedMessage({
-              key: 'car.info.niceCar',
-              value: car,
-              clear: true
-            }));
           }
         })
     );
