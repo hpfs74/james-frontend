@@ -114,6 +114,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   goToLogin() {
     this.toggleMenuOpen();
+    this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new router.Go({ path: ['/login'] }));
   }
 
