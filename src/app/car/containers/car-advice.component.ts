@@ -169,12 +169,12 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
           } else if (insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
             // Proceed to the buy flow for anonymous with advice
             this.proceedAnonymous(advices, insurances);
-          } else {
-            // Go to buy if user has advice in store (logged in after anonymous advice without registration)
-            this.proceedToBuy();
           }
       })
     );
+
+    // Go to buy if user has advice in store (logged in after anonymous advice without registration)
+    this.proceedToBuy();
 
     // start new advice only if there is no current one
     this.advice$.take(1).subscribe(currentAdvice => {
