@@ -7,7 +7,7 @@
   }
 
   h2 {
-    margin-bottom: 45px;
+    margin-bottom: 0;
   }
 
   h4.knx-collapse-message__title {
@@ -19,4 +19,12 @@ hr {
   margin: -8px 0 16px;
   border: 0;
   border-bottom: 2px $knab-primary-gray solid;
+}
+
+@media (min-width: 768px) {
+  .car-form__coverages {
+    h2 {
+      margin-bottom: 45px;
+    }
+  }
 }

@@ -14,13 +14,20 @@
   }
 }
 
+.knx-price-item--highlight {
+  margin-top: 45px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .knx-price-item--highlight {
+    margin-top: 5px;
+  }
+}
+
 .knx-price-item.knx-card {
   padding: 20px 10px 8px;
 }
-
-// .knx-button--ghost {
-//   border-color: $knab-primary-blue;
-// }
 
 div.knx-button {
   // remove focus for button class because outer div has a tabindex
