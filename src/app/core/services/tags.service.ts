@@ -13,15 +13,16 @@ import { UIPair } from '../models/ui-pair';
 export class TagsService {
   tags: { [key: string]: Array<Tag> };
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   load(): Promise<any> {
     const path = '/content/tags.json';
     return this.http.request(path)
-    .map(res => res.json())
-    .toPromise()
-    .then((data) => this.tags = data)
-    .catch(error => Promise.resolve());
+      .map(res => res.json())
+      .toPromise()
+      .then((data) => this.tags = data)
+      .catch(error => Promise.resolve());
   }
 
   getByKey(key: string): Array<Tag> {
@@ -49,6 +50,24 @@ export class TagsService {
     const el = section.filter(el => el.tag === tag && !el.blocked)[0];
     if (el) {
       return this.sanitizeText(el.translation_text);
+    }
+    return null;
+  }
+
+
+  getTranslationDescription(key: string, tag: string): string {
+    if (!this.tags) {
+      return null;
+    }
+
+    const section = this.tags[key];
+    if (!section) {
+      return null;
+    }
+
+    const el = section.filter(el => el.tag === tag && !el.blocked)[0];
+    if (el) {
+      return this.sanitizeText(el.translation_description);
     }
     return null;
   }
