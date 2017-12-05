@@ -22,6 +22,11 @@ describe('Component: PriceTable', () => {
     fixture = TestBed.createComponent(PriceTableComponent);
     comp = fixture.componentInstance;
 
+    comp.labels = {
+      selected: 'Gekozen',
+      unselected: 'Kies deze'
+    };
+
     comp.items = [
       { id: 'a', header: 'Title1', badge: 'Test1', highlight: false, price: 10.00, features: [] },
       { id: 'b', header: 'Title2', badge: 'Test2', highlight: false, price: 20.00, features: [] },
