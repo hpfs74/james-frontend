@@ -6,6 +6,10 @@ import { CarInsurance } from '../../car/models/car-insurance';
   selector: 'knx-insurance-review-car',
   template: `
     <knx-ir-content title="Je verzekering" *ngIf="carInsurance">
+      <knx-ir-row>
+        <knx-ir-label>Verzekeringsmaatschappij</knx-ir-label>
+        <knx-ir-value>{{ carInsurance._embedded.insurance.insurance_brand }}</knx-ir-value>
+      </knx-ir-row>
       <knx-ir-row showTooltip="false" showValue="true">
         <knx-ir-label>Dekking</knx-ir-label>
         <knx-ir-value>{{ carInsurance.main_coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
