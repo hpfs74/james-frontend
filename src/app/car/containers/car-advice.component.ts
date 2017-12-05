@@ -467,11 +467,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   }
 
   private proceedToBuy() {
-    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).take(1).subscribe(
-      id => {
-        if (id) {
+    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
+      advice => {
+        if (advice && advice.id) {
           this.store$.dispatch(new router.Go({
-            path: ['/car/insurance', {adviceId: id}],
+            path: ['/car/insurance', {adviceId: advice.id}],
           }));
         }
       }));

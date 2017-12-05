@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -48,11 +48,12 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CarBuyComponent implements OnInit, QaIdentifier {
+export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   qaRootId = QaIdentifiers.carBuyRoot;
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
 
+  subscription$: Array<any>;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   profile$: Observable<Profile>;
@@ -77,6 +78,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       }
     }));
     scrollToY();
+    this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
@@ -132,6 +134,10 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     ];
   }
 
+  ngOnDestroy() {
+    this.subscription$.forEach(sub => sub.unsubscribe());
+  }
+
   initFormWithProfile() {
     scrollToY();
 
@@ -148,18 +154,20 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
 
   initCheckForm(messageKey: string) {
     scrollToY();
-    this.store$.select(fromInsurance.getSelectedInsurance)
-      .filter(insurance => insurance != null)
-      .subscribe((insurance) => {
-        const insuranceName = insurance._embedded.insurance.insurance_brand || null;
-        if (insuranceName) {
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: messageKey,
-            value: insuranceName,
-            clear: true
-          }));
-        }
-      });
+    this.subscription$.push(
+      this.store$.select(fromInsurance.getSelectedInsurance)
+        .filter(insurance => insurance != null)
+        .subscribe((insurance) => {
+          const insuranceName = insurance._embedded.insurance.insurance_brand || null;
+          if (insuranceName) {
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: messageKey,
+              value: insuranceName,
+              clear: true
+            }));
+          }
+        })
+    );
   }
 
   initSummaryForm(message: string) {
@@ -185,7 +193,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'));
     }
 
-    Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
+    this.subscription$.push(
+      Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
         return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
       }).filter(value =>
@@ -196,7 +205,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
       .subscribe((value) => {
         const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
         this.store$.dispatch(new car.BuyAction(proposalData));
-      });
+      })
+    );
 
     return Observable.combineLatest(
       this.store$.select(fromCar.getCarBuyComplete),
@@ -208,12 +218,15 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
           throw new Error('Er is helaas iets mis gegaan. Probeer het later opnieuw.');
         }
 
-        // Navigate to thank you page
-        return this.store$.select(fromProfile.getProfile)
+        let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
             return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
+
+        this.subscription$.push(subscription);
+        // Navigate to thank you page
+        return subscription;
       });
   }
 
