@@ -4,7 +4,7 @@
         <knx-registration *ngIf="!(registrationSuccess$ | async)"
             [privacyStatementUrl]="content.externalLinks.privacyStatement"
             [termsAndConditionsUrl]="content.externalLinks.termsAndConditions"
-            [selectedAdviceId]="selectedAdviceId$ | async"
+            [selectedInsurance]="selectedInsurance$ | async"
             [pending]="registrationPending$ | async"
             [error]="registrationError$ | async"
             (onRegisterWithAdvice)="registerWithAdvice($event)"

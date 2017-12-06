@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit {
 
   @Input() privacyStatementUrl: string;
   @Input() termsAndConditionsUrl: string;
-  @Input() selectedAdviceId: string;
+  @Input() selectedInsurance: any;
   @Input() pending: boolean;
   @Input() set error(value: string) {
     this.errorMessage = '';
@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
       const email = this.form.formGroup.get('email');
       const password = this.form.formGroup.get('password');
 
-      if (this.selectedAdviceId) {
+      if (this.selectedInsurance) {
         this.onRegisterWithAdvice.emit({ username: email.value, password: password.value});
       } else {
         this.onRegister.emit({ username: email.value, password: password.value});
