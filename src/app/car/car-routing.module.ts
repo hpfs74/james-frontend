@@ -36,4 +36,4 @@ export const carRoutes: Routes = [
     RouterModule
   ]
 })
-export class CarRoutingModule { }
+export class CarRoutingModule {}

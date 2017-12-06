@@ -4,12 +4,16 @@ import { Store, Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
 
 import { CarService } from '../services/car.service';
+import { BuyService } from '../../insurance/services/buy.service';
 import { Car, CarCoverageRecommendation } from '../models';
+
+import * as fromAuth from '../../auth/reducers';
 
 import * as auth from '../../auth/actions/auth';
 import * as car from '../actions/car';
@@ -27,13 +31,26 @@ export class CarEffects {
         .catch(error => Observable.of(new car.GetInfoFailure(error))));
 
   @Effect()
-  buyCarInsurance$: Observable<Action> = this.actions$
+  buyCarInsurance$ = this.actions$
     .ofType(car.BUY_REQUEST)
     .map((action: car.Buy) => action.payload)
-    .switchMap((payload) =>
-      this.carService.buyStatic(payload)
+    .withLatestFrom(this.store$.select(fromAuth.getLoggedIn))
+    .switchMap(([payload, isLoggedIn]) => {
+      if (isLoggedIn) {
+        return this.carService.buyStatic(payload)
         .map((res: Response) => new car.BuyComplete(res))
-        .catch(error => Observable.of(new car.BuyFailure(error))));
+        .catch(error => Observable.of(new car.BuyFailure(error)));
+      } else {
+        // Manual processing of buy request without an account
+        return this.buyService.buyInsuranceAnonymous(payload)
+        .map((res: Response) => new car.BuyComplete(res))
+        .catch(error => Observable.of(new car.BuyFailure(error)));
+      }
+    });
 
-  constructor(private actions$: Actions, private carService: CarService) { }
+  constructor(
+    private actions$: Actions,
+    private store$: Store<fromAuth.State>,
+    private carService: CarService,
+    private buyService: BuyService) { }
 }

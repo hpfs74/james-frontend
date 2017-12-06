@@ -10,6 +10,7 @@ import 'rxjs/add/operator/filter';
 import { KNXStepOptions } from '@knx/wizard';
 
 import * as fromRoot from '../../reducers';
+import * as fromAuth from '../../auth/reducers';
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromCar from '../../car/reducers';
 import * as fromCore from '../../core/reducers';
@@ -61,6 +62,7 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   advice$: Observable<any>;
   insurance$: Observable<any>;
   car$: Observable<any>;
+  isLoggedIn$: Observable<boolean>;
 
   // Forms
   contactDetailForm: ContactDetailForm;
@@ -69,8 +71,7 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   paymentForm: IbanForm;
   acceptFinalTerms: boolean;
 
-  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {
-  }
+  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -81,6 +82,7 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
     scrollToY();
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
+    this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
@@ -197,12 +199,12 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
     this.subscription$.push(
       Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
-        return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
+        return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
       }).filter(value =>
       value.adviceInfo != null
       && value.carInfo != null
-      && value.insuranceInfo != null
-      && value.profileInfo != null)
+      && value.insuranceInfo != null)
+      // && value.profileInfo != null)
       .subscribe((value) => {
         const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
         this.store$.dispatch(new car.Buy(proposalData));
