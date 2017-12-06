@@ -177,14 +177,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.proceedToBuy();
 
     // start new advice only if there is no current one
-    this.advice$.take(1).subscribe(currentAdvice => {
-      if (currentAdvice) {
-      } else if (!currentAdvice) {
-        this.store$.dispatch(new advice.Add({
-          id: cuid()
-        }));
-      }
-    });
+    this.subscription$.push(
+      this.advice$.take(1).subscribe(currentAdvice => {
+        if (currentAdvice) {
+        } else if (!currentAdvice) {
+          this.store$.dispatch(new advice.Add({
+            id: cuid()
+          }));
+        }
+      })
+    );
 
     this.subscription$.push(
       this.carExtrasForm.formGroup.valueChanges
@@ -427,22 +429,24 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     scrollToY();
     this.store$.dispatch(new assistant.ClearAction);
 
-    this.store$.select(fromInsurance.getSelectedInsurance).take(1)
-      .subscribe(selectedInsurance => {
-        this.showStepBlock = selectedInsurance.supported;
-        if (selectedInsurance.supported) {
-          this.formSteps[2].nextButtonLabel = 'Verzekering aanvragen';
-          this.formSteps[2].nextButtonClass = 'knx-button knx-button--cta knx-button--extended knx-button--3d';
-          this.formSteps[2].onBeforeNext = this.startBuyFlow.bind(this);
-          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.title'}));
-          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.steps'}));
-        } else {
-          this.formSteps[2].nextButtonLabel = 'Ga naar website';
-          this.formSteps[2].nextButtonClass = 'knx-button knx-button--secondary';
-          this.formSteps[2].onBeforeNext = this.openUnsupportedWebSite.bind(this, selectedInsurance._embedded.insurance.url);
-          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.unsupported', clear: true}));
-        }
-      });
+    this.subscription$.push(
+      this.store$.select(fromInsurance.getSelectedInsurance).take(1)
+        .subscribe(selectedInsurance => {
+          this.showStepBlock = selectedInsurance.supported;
+          if (selectedInsurance.supported) {
+            this.formSteps[2].nextButtonLabel = 'Verzekering aanvragen';
+            this.formSteps[2].nextButtonClass = 'knx-button knx-button--cta knx-button--extended knx-button--3d';
+            this.formSteps[2].onBeforeNext = this.startBuyFlow.bind(this);
+            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.title'}));
+            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.steps'}));
+          } else {
+            this.formSteps[2].nextButtonLabel = 'Ga naar website';
+            this.formSteps[2].nextButtonClass = 'knx-button knx-button--secondary';
+            this.formSteps[2].onBeforeNext = this.openUnsupportedWebSite.bind(this, selectedInsurance._embedded.insurance.url);
+            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.unsupported', clear: true}));
+          }
+        })
+    );
   }
 
   private getCompareResultCopy(): Observable<CarInsurance[]> {
