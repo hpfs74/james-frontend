@@ -335,7 +335,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   }
 
   getCarInfo(licensePlate) {
-    this.store$.dispatch(new car.GetInfoAction(licensePlate));
+    this.store$.dispatch(new car.GetInfo(licensePlate));
   }
 
   toggleSideNavState(event) {

@@ -8,7 +8,8 @@ import 'rxjs/add/operator/map';
 import { AuthHttp } from '../../auth/services/auth-http.service';
 import { Profile } from '../../profile/models';
 import { environment } from '@env/environment';
-import { Car, CarInsurance, CarCoverageRecommendation, CarCompare, Proposal } from '../models';
+import { Proposal } from '@insurance/models/proposal';
+import { Car, CarInsurance, CarCoverageRecommendation, CarCompare } from '../models';
 
 @Injectable()
 export class CarService {

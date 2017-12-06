@@ -3,10 +3,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared.module';
-import { InsuranceService } from './services/insurance.service';
-import { AdviceService } from './services/advice.service';
 import { InsuranceEffects } from './effects/insurance';
 import { AdviceEffects } from './effects/advice';
+import { AdviceService, BuyService, InsuranceService } from './services';
 
 import { reducers } from './reducers';
 
@@ -25,8 +24,9 @@ export class InsuranceModule {
     return {
       ngModule: InsuranceModule,
       providers: [
-        InsuranceService,
-        AdviceService
+        AdviceService,
+        BuyService,
+        InsuranceService
       ],
     };
   }

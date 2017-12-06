@@ -65,8 +65,8 @@ describe('CarEffects', () => {
       } as Car;
 
       const licensePlate = 'AABB22';
-      const action = new car.GetInfoAction(licensePlate);
-      const completion = new car.GetInfoCompleteAction(response);
+      const action = new car.GetInfo(licensePlate);
+      const completion = new car.GetInfoComplete(response);
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
@@ -77,8 +77,8 @@ describe('CarEffects', () => {
 
     it('should return car failure action', () => {
       const licensePlate = 'AABB22';
-      const action = new car.GetInfoAction(licensePlate);
-      const completion = new car.GetInfoFailureAction('Error');
+      const action = new car.GetInfo(licensePlate);
+      const completion = new car.GetInfoFailure('Error');
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
@@ -90,8 +90,8 @@ describe('CarEffects', () => {
 
   describe('buyCarInsurance$', () => {
     it('should return a buy success action', () => {
-      const action = new car.BuyAction({ a: 'someValue '});
-      const completion = new car.BuyCompleteAction({ b: 'returnValue' });
+      const action = new car.Buy({ a: 'someValue '});
+      const completion = new car.BuyComplete({ b: 'returnValue' });
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
@@ -101,8 +101,8 @@ describe('CarEffects', () => {
     });
 
     it('should return a buy failure action', () => {
-      const action = new car.BuyAction({ a: 'someValue '});
-      const completion = new car.BuyFailureAction({ b: 'failed' });
+      const action = new car.Buy({ a: 'someValue '});
+      const completion = new car.BuyFailure({ b: 'failed' });
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });

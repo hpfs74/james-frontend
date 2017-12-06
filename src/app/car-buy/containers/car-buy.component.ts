@@ -25,10 +25,11 @@ import * as compare from '../../car/actions/compare';
 
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
+import { Proposal } from '../../insurance/models/proposal';
 import { Profile } from './../../profile/models';
 
 import { ContactDetailForm } from '../../shared/forms/contact-detail.form';
-import { Proposal, CarProposalHelper } from '../../car/models/proposal';
+import { CarProposalHelper } from '../../car/models/proposal';
 
 import { CarReportingCodeForm } from '../components/car-reporting-code.form';
 import { CarCheckForm } from '../components/car-check.form';
@@ -204,7 +205,7 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
       && value.profileInfo != null)
       .subscribe((value) => {
         const proposalData = this.getProposalData(value, this.contactDetailForm.formGroup);
-        this.store$.dispatch(new car.BuyAction(proposalData));
+        this.store$.dispatch(new car.Buy(proposalData));
       })
     );
 
@@ -276,7 +277,6 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
     return proposalData;
   }
 
-  // TODO: group in an effect
   resetFlow() {
     this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new router.Go({path: ['car']}));

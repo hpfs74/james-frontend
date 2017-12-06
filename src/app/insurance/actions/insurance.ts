@@ -14,9 +14,7 @@ export const GET_PURCHASED_CAR_INSURANCES_SUCCESS = '[Insurances] Get Insurances
 export const GET_PURCHASED_CAR_INSURANCES_FAILURE = '[Insurances] Get Insurances Failure';
 export const GET_PURCHASED_CAR_INSURANCES_ANONYMOUS = '[Insurances] Get Insurances Anonymous';
 
-/**
- * Add Insurance Actions
- */
+
 export class AddInsuranceAction implements Action {
   readonly type = ADD_INSURANCE;
 

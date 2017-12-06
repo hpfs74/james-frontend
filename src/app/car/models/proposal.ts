@@ -1,20 +1,7 @@
 import * as moment from 'moment';
-import { Insurance } from '../../insurance/models/insurance';
-import { InsuranceAdvice } from '../../insurance/models/insurance-advice';
+
 import { TagsService } from '../../core/services/tags.service';
 import { dateDecode } from '../../utils/base-form.utils';
-
-/**
- * Buy Flow Request
- *
- * @export
- * @interface Proposal
- */
-export interface Proposal {
-  advice_item_id: string;
-  proposal: InsuranceAdvice;
-  items: Array<Object>;
-}
 
 /**
  * Buy Flow Request Data Transformer
