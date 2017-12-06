@@ -24,6 +24,7 @@
         <knx-car-detail-form
           knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="details"
           (coverageSelected)="updateSelectedCoverage($event)"
+          (coverageConfirmed)="knxWizard.goToNextStep()"
           (licensePlateChange)="getCarInfo($event)"
           (activeLoanChange)="updateActiveLoan($event)"
           [form]="carDetailForm"
