@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { BaseForm } from '../../shared/forms/base-form';
 import { nameInitialMask } from '../../utils/base-form.utils';
 import { phoneNumberValidator } from '../../utils/base-form.validators';
+import { EmailValidator } from '../../utils/email-validator';
 
 export class ContactDetailForm extends BaseForm {
   formGroup: FormGroup;
@@ -29,6 +30,11 @@ export class ContactDetailForm extends BaseForm {
       ],
       firstName: [null, Validators.required],
       middleName: [null],
+      email: [null, Validators.compose([
+          Validators.required,
+          EmailValidator
+        ])
+      ],
       lastName: [null, Validators.required],
       mobileNumber: [null,
         Validators.compose([
@@ -106,6 +112,21 @@ export class ContactDetailForm extends BaseForm {
         inputOptions: {
           placeholder: 'Optioneel',
           type: 'text'
+        }
+      },
+      email: {
+        formControlName: 'email',
+        formControl: this.formGroup.get('email'),
+        validationErrors: this.validationErrors,
+        showErrorMessages: false,
+        label: 'E-mailadres',
+        inputOptions: {
+          type: 'email',
+          placeholder: 'E-mailadres',
+          prefix: 'knx-icon-envelope',
+          attributes: {
+            'aria-label': 'E-mailadres'
+          }
         }
       },
       saveToProfile: {

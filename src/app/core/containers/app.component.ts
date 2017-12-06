@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { KNXModalDialogSettings } from '@knx/modal';
 import { Observable } from 'rxjs/Observable';
 
+import { environment } from '@env/environment';
+
 import * as fromRoot from '../../reducers';
 import * as fromCore from '../reducers';
 import * as fromAuth from '../../auth/reducers';
@@ -34,6 +36,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   topMenu: Array<Nav>;
   phone: Object;
+  featureToggleConfig: any;
 
   loggedIn$: Observable<boolean>;
   anonymous$: Observable<any>;
@@ -49,8 +52,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     private store$: Store<fromRoot.State>,
     private navigationService: NavigationService,
     private userDialogService: UserDialogService,
-    private contentConfig: ContentConfig) {
+    private contentConfig: ContentConfig
+  ) {
       this.content = contentConfig.getContent();
+      this.featureToggleConfig = environment.featureToggles;
     }
 
   ngAfterViewInit() {
