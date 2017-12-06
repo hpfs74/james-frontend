@@ -5,6 +5,7 @@ import 'rxjs/add/operator/filter';
 
 import * as fromInsurance from '../../insurance/reducers';
 import * as fromAuth from '../../auth/reducers';
+import * as fromAdvice from '../../insurance/reducers/advice';
 import * as auth from '../../auth/actions/auth';
 import * as registration from '../../auth/actions/registration';
 import { Authenticate } from '../../auth/models/auth';
@@ -25,7 +26,7 @@ export class RegistrationPageComponent implements OnInit {
   resendPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailPending);
   resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
   registrationEmail$: Observable<string> = this.store$.select(fromAuth.getRegistrationEmail);
-  selectedAdviceId$: Observable<string> = this.store$.select(fromInsurance.getSelectedAdviceId);
+  selectedInsurance$: Observable<any> = this.store$.select(fromInsurance.getSelectedInsurance);
 
   content: Content;
 

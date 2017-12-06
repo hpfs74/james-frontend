@@ -16,13 +16,13 @@ export class OpeningHoursComponent implements OnInit {
 
   public isOpen: boolean;
   public defaultSchedule = {
-    Sun: { 'start': 8, 'end': 20 },
-    Mon: { 'start': 8, 'end': 20 },
-    Tue: { 'start': 8, 'end': 20 },
-    Wed: { 'start': 8, 'end': 20 },
-    Thu: { 'start': 8, 'end': 20 },
-    Fri: { 'start': 8, 'end': 20 },
-    Sat: { 'start': 8, 'end': 20 },
+    Sun: { 'start': 8, 'end': 22 },
+    Mon: { 'start': 8, 'end': 22 },
+    Tue: { 'start': 8, 'end': 22 },
+    Wed: { 'start': 8, 'end': 22 },
+    Thu: { 'start': 8, 'end': 22 },
+    Fri: { 'start': 8, 'end': 22 },
+    Sat: { 'start': 8, 'end': 22 },
     holidays: null
   };
   public message: string;
