@@ -42,38 +42,40 @@ export class CarDetailComponent implements OnInit, QaIdentifier {
 
   @Input()
   set advice(value: any) {
-
-    if (value.address) {
-      this.addressForm.formGroup.patchValue(Object.assign({}, {
-        postalCode: value.address ? value.address.postcode : null,
-        houseNumber: this.normalizeAddressHouseNumber(value),
-        houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
-      }));
-    }
-
-    if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold ||
-      value.coverage || value.gender || value.active_loan) {
-      this.form.formGroup.patchValue(Object.assign({}, {
-        licensePlate: value.license || null,
-        claimFreeYears: value.claim_free_years || null,
-        houseHold: value.household_status || null,
-        loan: !!value.active_loan,
-        gender: value.gender ? value.gender : null,
-        coverage: value.coverage || null,
-      }));
-
-      if (value.date_of_birth) {
-        let dob = new Date(value.date_of_birth);
-        this.form.formGroup.get('birthDate').setValue(
-          value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
-        );
+  // TODO: check why here sometime comes string as value and sometime its an object
+    if (value) {
+      if (value.address) {
+        this.addressForm.formGroup.patchValue(Object.assign({}, {
+          postalCode: value.address ? value.address.postcode : null,
+          houseNumber: this.normalizeAddressHouseNumber(value),
+          houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
+        }));
       }
 
-      // give address-lookup component time to set AsyncValidators before validate it
-      setTimeout(() => {
-        FormUtils.updateAndValidateControls(this.form.formGroup, value);
-        FormUtils.updateAndValidateControls(this.addressForm.formGroup, value);
-      });
+      if (value.licensePlate || value.birthDate || value.claimFreeYears || value.houseHold ||
+        value.coverage || value.gender || value.active_loan) {
+        this.form.formGroup.patchValue(Object.assign({}, {
+          licensePlate: value.license || null,
+          claimFreeYears: value.claim_free_years || null,
+          houseHold: value.household_status || null,
+          loan: !!value.active_loan,
+          gender: value.gender ? value.gender : null,
+          coverage: value.coverage || null,
+        }));
+
+        if (value.date_of_birth) {
+          let dob = new Date(value.date_of_birth);
+          this.form.formGroup.get('birthDate').setValue(
+            value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
+          );
+        }
+
+        // give address-lookup component time to set AsyncValidators before validate it
+        setTimeout(() => {
+          FormUtils.updateAndValidateControls(this.form.formGroup, value);
+          FormUtils.updateAndValidateControls(this.addressForm.formGroup, value);
+        });
+      }
     }
   }
 
