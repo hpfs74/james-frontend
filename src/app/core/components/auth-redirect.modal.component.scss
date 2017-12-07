@@ -6,6 +6,10 @@
 
   p {
     color: $knab-primary-blue;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -28,7 +28,8 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
     this.actionButtons = [
       {
         text: 'Inloggen',
-        buttonClass: 'knx-button knx-button--fullwidth knx-button--secondary',
+        position: 'left',
+        buttonClass: 'knx-button knx-button--fullwidth knx-button--primary',
         onAction: () => {
           this.store$.dispatch(new router.Go({ path: ['/login']}));
           return true;
@@ -36,6 +37,7 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
       },
       {
         text: 'Registreren',
+        position: 'left',
         buttonClass: 'knx-button knx-button--fullwidth knx-button--primary',
         onAction: () => {
           this.store$.dispatch(new router.Go({ path: ['/register']}));

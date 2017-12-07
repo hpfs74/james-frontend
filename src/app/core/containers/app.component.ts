@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KNXModalDialogSettings } from '@knx/modal';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from '@env/environment';
@@ -17,8 +16,8 @@ import * as router from '../../core/actions/router';
 import { Nav } from '../models/nav';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { LoginModalComponent } from '../../login/components/login-modal.component';
-import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
+import { LoginModalConfig, AuthRedirectModalConfig } from '../../core/models/modals';
+
 import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';
 import { ContentConfig, Content } from '../../content.config';
@@ -87,24 +86,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.store$
     .select(fromCore.getOpenedModalNameState)
     .subscribe(modalName => {
+      let modal = null;
+
+      // init the right type
       if (modalName === this.modalNames.loginModal) {
-        const loginHeader = 'Sessie verlopen';
-        const loginDialogSettings = {
-          bodyClass: 'knx-modal-body',
-          fullwidthButtons: true,
-          header: true
-        } as KNXModalDialogSettings;
-
-        this.userDialogService.openModal(modalName, loginHeader, this.viewContainerRef, LoginModalComponent, loginDialogSettings);
+        modal = new LoginModalConfig(modalName, this.userDialogService, this.viewContainerRef);
       } else if (modalName === this.modalNames.authRedirect) {
-        const userDialogSettings = {
-          bodyClass: 'knx-modal-body knx-modal-body--blobs',
-          fullwidthButtons: true,
-          header: true,
-          closeButton: true
-        } as KNXModalDialogSettings;
+        modal = new AuthRedirectModalConfig(modalName, this.userDialogService, this.viewContainerRef);
+      }
 
-        this.userDialogService.openModal(modalName, '', this.viewContainerRef, AuthRedirectModalComponent, userDialogSettings);
+      // internally use userDialogService to show the modal
+      if (modal !== null) {
+        modal.open();
       }
     });
   }
