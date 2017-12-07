@@ -18,7 +18,13 @@ export class CarSummaryComponent implements QaIdentifier {
   qaRootId = QaIdentifiers.carSummary;
 
   @Output() confirmChange = new EventEmitter();
+  @Output() confirmTermsChange = new EventEmitter();
 
+  @Input() showKnabTerms: boolean;
+  @Input() termsAndConditionsUrl: string;
+  @Input() privacyStatementUrl: string;
+
+  // TODO: total ugly code duplication, refactor later (probably won't happen ¯\_(ツ)_/¯)
   @Input()
   get confirm() {
     return this.confirmValue;
@@ -29,11 +35,22 @@ export class CarSummaryComponent implements QaIdentifier {
     this.confirmChange.emit(this.confirmValue);
   }
 
+  @Input()
+  get confirmTerms() {
+    return this.confirmTermsValue;
+  }
+
+  set confirmTerms(val) {
+    this.confirmTermsValue = val;
+    this.confirmTermsChange.emit(this.confirmTermsValue);
+  }
+
   @Input() profile: Profile;
   @Input() insurance: CarInsurance;
   @Input() advice: any;
 
   confirmValue: boolean;
+  confirmTermsValue: boolean;
 
   isValidInsurance(obj: any) {
     return (obj &&

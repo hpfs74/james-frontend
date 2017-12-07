@@ -141,7 +141,7 @@
           </knx-ir-row>
 
           <knx-ir-row newSection="true">
-            <knx-ir-label>Street</knx-ir-label>
+            <knx-ir-label>Straat</knx-ir-label>
             <knx-ir-value>{{ advice.address?.street || advice.location_info.street }}</knx-ir-value>
           </knx-ir-row>
 
@@ -156,7 +156,7 @@
           </knx-ir-row>
 
           <knx-ir-row>
-            <knx-ir-label>City</knx-ir-label>
+            <knx-ir-label>Stad</knx-ir-label>
             <knx-ir-value>{{ advice.address?.city || advice.location_info.city }}</knx-ir-value>
           </knx-ir-row>
 
@@ -206,8 +206,19 @@
             </knx-checkbox>
           </div>
         </div>
-      </div>
 
+        <div *ngIf="showKnabTerms" class="row knx-car-summary__terms">
+          <div class="col col-sm-12">
+            <knx-checkbox class="knx-car-summary__checkbox" [(ngModel)]="confirmTerms">
+              Ik ga akkoord met de
+              <a class="knx-registration__document-link" href="{{termsAndConditionsUrl}}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
+              en het
+              <a class="knx-registration__document-link" href="{{privacyStatementUrl}}" target="_blank" rel="noopener">privacybeleid</a>
+              van Knab.
+            </knx-checkbox>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 
