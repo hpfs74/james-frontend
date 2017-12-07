@@ -133,7 +133,7 @@ function getContent(environment: string) {
       carCoverage: '${getEnvVar('JAMES_API_CAR_COVERAGE')}',
       carDamageFree: '${getEnvVar('JAMES_API_CAR_DAMAGEFREE')}',
       carBuy: '${getEnvVar('JAMES_API_CAR_BUY')}',
-      sdBuy: '${getEnvVar('JAMES_API_SD_BUY')}',
+      sdBuy: '', /* '${getEnvVar('JAMES_API_SD_BUY')}', */
       insurer: '${getEnvVar('JAMES_API_INSURER')}',
       payloadEncryption: {
         client: {
