@@ -21,51 +21,53 @@ export interface Proposal {
  */
 export class CarProposalHelper {
 
-  constructor() {}
+  constructor() {
+  }
 
   /* tslint:disable:max-line-length */
   propMapping = [
-    { key: 'Verzekeraar', value: 'moneyview_id', transform: (val) => val.split(':')[0] },
-    { key: 'Product', value: 'moneyview_id', transform: (val) => val.split(':')[1] },
-    { key: 'Geslacht', value: 'gender', transform: (val) => val === 'M' ? 'Man' : 'Vrouw' },
-    { key: 'Voorletters', value: 'initials' },
-    { key: 'Voornaam', value: 'firstName' },
-    { key: 'Voorvoegsels', value: 'infix' },
-    { key: 'Achternaam', value: 'lastName' },
-    { key: 'Straat', value: 'street' },
-    { key: 'Huisnummer', value: 'number_extended', transform: this.getHouseNumber },
-    { key: 'Huisnummer toevoeging', value: 'number_extended', transform: this.getHouseNumberAddition },
-    { key: 'Postcode', value: 'zipcode' },
-    { key: 'Woonplaats', value: 'city' },
-    { key: 'Geboortedatum', value: 'date_of_birth' },
-    { key: 'Mobiel telefoonnummer', value: 'mobileNumber' },
-    { key: 'Vast telefoonnummer', value: 'phoneNumber' },
-    { key: 'Rekeningnummer', value: 'iban', transform: this.removeWhiteSpace },
-    { key: 'Betalingstermijn', value: '' },
-    { key: 'Emailadres', value: 'emailaddress' },
-    { key: 'Facebook account', value: '' },
-    { key: 'Twitter account', value: '' },
-    { key: 'Startdatum', value: 'startDate', transform: this.formatDate },
-    { key: 'Ingangsdatum', value: 'startDate', transform: this.formatDate },
+    {key: 'Verzekeraar', value: 'moneyview_id', transform: (val) => val.split(':')[0]},
+    {key: 'Product', value: 'moneyview_id', transform: (val) => val.split(':')[1]},
+    {key: 'Geslacht', value: 'gender', transform: (val) => val === 'M' ? 'Man' : 'Vrouw'},
+    {key: 'Voorletters', value: 'initials'},
+    {key: 'Voornaam', value: 'firstName'},
+    {key: 'Voorvoegsels', value: 'infix'},
+    {key: 'Achternaam', value: 'lastName'},
+    {key: 'Straat', value: 'street'},
+    {key: 'Huisnummer', value: 'number_extended', transform: this.getHouseNumber},
+    {key: 'Huisnummer toevoeging', value: 'number_extended', transform: this.getHouseNumberAddition},
+    {key: 'Postcode', value: 'zipcode'},
+    {key: 'Woonplaats', value: 'city'},
+    {key: 'Geboortedatum', value: 'date_of_birth'},
+    {key: 'Mobiel telefoonnummer', value: 'mobileNumber'},
+    {key: 'Vast telefoonnummer', value: 'phoneNumber'},
+    {key: 'Rekeningnummer', value: 'iban', transform: this.removeWhiteSpace},
+    {key: 'Betalingstermijn', value: ''},
+    {key: 'Emailadres', value: 'emailaddress'},
+    {key: 'Facebook account', value: ''},
+    {key: 'Twitter account', value: ''},
+    {key: 'Startdatum', value: 'startDate', transform: this.formatDate},
+    {key: 'Ingangsdatum', value: 'startDate', transform: this.formatDate},
     // Car
-    { key: 'Kenteken', value: 'car.license' },
-    { key: 'Merk', value: 'car.make' },
-    { key: 'Model', value: 'car.model' },
-    { key: 'Type', value: 'car.technical_type' },
-    { key: 'Bouwjaar', value: 'car.year' },
-    { key: 'Cataloguswaarde', value: 'car.price_consumer_incl_vat' },
-    { key: 'Waarde accessoires', value: 'accessoryValue' },
-    { key: 'Dagwaarde', value: 'car.current_value' },
-    { key: 'Gewicht', value: 'car.weight_empty_vehicle' },
-    { key: 'Kilometrage', value: 'kilometers_per_year' },
-    { key: 'Beveiliging', value: 'securityClass', transform: (value) => 'SCM klasse ' + value.slice(-1) },
-    { key: 'Hoofddekking', value: 'dekking' },
-    { key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean },
-    { key: 'Inzittendenverzekering', value: 'cover_occupants', transform: this.getBoolean },
-    { key: 'Slotvragen', value: '' },
+    {key: 'Kenteken', value: 'car.license'},
+    {key: 'Merk', value: 'car.make'},
+    {key: 'Model', value: 'car.model'},
+    {key: 'Type', value: 'car.technical_type'},
+    {key: 'Bouwjaar', value: 'car.year'},
+    {key: 'Cataloguswaarde', value: 'car.price_consumer_incl_vat'},
+    {key: 'Waarde accessoires', value: 'accessoryValue'},
+    {key: 'Dagwaarde', value: 'car.current_value'},
+    {key: 'Gewicht', value: 'car.weight_empty_vehicle'},
+    {key: 'Kilometrage', value: 'kilometers_per_year'},
+    {key: 'Beveiliging', value: 'securityClass', transform: (value) => 'SCM klasse ' + value.slice(-1)},
+    {key: 'Hoofddekking', value: 'dekking'},
+    {key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean},
+    {key: 'Inzittendenverzekering', value: 'cover_occupants', transform: this.getBoolean},
+    {key: 'Slotvragen', value: ''},
     // FirstName is a mandatory field to buy an insurance
-    { key: 'Voornaam', value: 'name'}
+    {key: 'Voornaam', value: 'name'}
   ];
+
   /* tslint:enable */
 
   getItems(data: any): Array<Object> {
@@ -118,7 +120,7 @@ export class CarProposalHelper {
     /* tslint:enable */
   }
 
-  getFinalQuestionsItems(data: Array<{key: string, value: string}>): Array<Object> {
+  getFinalQuestionsItems(data: Array<{ key: string, value: string }>): Array<Object> {
     if (!data) {
       return;
     }
@@ -137,7 +139,7 @@ export class CarProposalHelper {
   }
 
   mergeData(items: Array<Object>, values: Array<Object>) {
-    values.forEach( (el) => {
+    values.forEach((el) => {
       let key = Object.keys(el)[0];
       let item = this.getItem(items, key);
       if (item) {
@@ -155,7 +157,7 @@ export class CarProposalHelper {
 
   private getItem(items: Array<Object>, property: string): Object {
     let ret = null;
-    items.forEach( (el) => {
+    items.forEach((el) => {
       if (el.hasOwnProperty(property)) {
         ret = el;
       }
@@ -176,11 +178,14 @@ export class CarProposalHelper {
   }
 
   private getHouseNumber(numberExtended) {
-    return '' + numberExtended.number_only + numberExtended.number_letter;
+    return `${numberExtended.number_only}${numberExtended.number_letter || ''}`;
   }
 
   private getHouseNumberAddition(numberExtended) {
-    return numberExtended.number_addition;
+    if (numberExtended.nullable.length > 0) {
+      return '-' + numberExtended.number_addition;
+    }
+    return '';
   }
 
   private removeWhiteSpace(value: string) {
