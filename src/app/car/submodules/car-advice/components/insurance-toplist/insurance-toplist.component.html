@@ -57,3 +57,8 @@
   knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="service-guide"
   [visible]="!(isInsuranceLoading$| async)">
 </knx-service-guide>
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep($event)"
+                     (onBack)="goToPreviousStep($event)">
+</knx-wizard-controls>

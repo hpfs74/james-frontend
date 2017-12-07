@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Effect, Actions } from '@ngrx/effects';
-import { KNXWizardRxService } from '@app/components/knx-wizard-rx/knx-wizard-rx.service';
+import { KNXWizardRxService } from '../services/wizard.service';
 import { Observable } from 'rxjs/Observable';
-import * as WizardActions from './knx-wizard-rx.actions';
+import * as WizardActions from '../actions/wizard';
 
 @Injectable()
 export class WizardEffects {

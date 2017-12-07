@@ -6,12 +6,12 @@ import { Profile } from '../../../../../profile/models';
 import { CarInsurance } from '../../../../../car/models';
 import { TagsService } from '../../../../../core/services/tags.service';
 import { Tag } from '../../../../../core/models/tag';
-import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { InsuranceAdvice } from '../../../../../insurance/models/index';
+import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
 import * as FormUtils from '../../../../../utils/base-form.utils';
 import * as fromRoot from '../../../../reducers';
@@ -19,8 +19,8 @@ import * as fromInsurance from '../../../../../insurance/reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
 
-import 'rxjs/add/observable/empty';
-import 'rxjs/add/observable/throw';
+import * as fromCore from '@app/core/reducers';
+import * as wizardActions from '@app/core/actions/wizard';
 
 const DEFAULT_FORM_VALUES = {
   accessoryValue: 0
@@ -29,7 +29,7 @@ const DEFAULT_FORM_VALUES = {
   selector: 'knx-car-reporting-code-form',
   templateUrl: 'car-reporting-code.component.html'
 })
-export class CarReportingCodeComponent implements OnInit, QaIdentifier, KNXStepRxComponent, OnDestroy {
+export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestroy {
   qaRootId = QaIdentifiers.carReporting;
 
   form: CarReportingCodeForm;
@@ -38,6 +38,8 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, KNXStepR
   selectedSecurityClass: Tag;
   securityClasses: Array<Tag>;
   subscription$: Subscription[] = [];
+  currentStepOptions: KNXWizardStepRxOptions;
+  error$: Observable<KNXStepError>;
   constructor(private tagsService: TagsService,
               private store$: Store<fromRoot.State>) {
 
@@ -46,6 +48,13 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, KNXStepR
       this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
       const formBuilder = new FormBuilder();
       this.form = new CarReportingCodeForm(formBuilder, this.tagsService.getAsLabelValue('buyflow_carsecurity'));
+      this.error$ = this.store$.select(fromCore.getWizardError);
+      this.currentStepOptions = {
+        label: 'Contactgegevens',
+        nextButtonLabel: 'Naar autogegevens',
+        backButtonLabel: 'Terug',
+        hideBackButton: true,
+      };
     }
 
     ngOnInit() {
@@ -60,6 +69,7 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, KNXStepR
       this.subscription$.push(
         this.advice$.subscribe(advice => this.setAdvice(advice))
       );
+      this.initFormWithProfile();
     }
 
     ngOnDestroy() {
@@ -86,28 +96,16 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, KNXStepR
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.fill'}));
   }
 
-  submitForm(): Observable<any> {
+  goToPreviousStep() {
+    this.store$.dispatch(new wizardActions.Back());
+  }
+
+  goToNextStep() {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {
-      return Observable.throw(new Error(this.form.validationSummaryError));
+      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
-
     this.store$.dispatch(new advice.Update(this.form.formGroup.value));
-
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-  }
-
-  onBack() {
-    return Observable.empty();
-  }
-  onNext(): Observable<any> {
-    return this.submitForm();
-  }
-  onShow() {
-    this.initFormWithProfile();
-    return Observable.empty();
+    this.store$.dispatch(new wizardActions.Forward());
   }
 }

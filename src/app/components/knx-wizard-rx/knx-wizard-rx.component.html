@@ -5,41 +5,7 @@
 
     <div class="knx-wizard-step-content col-sm-{{sidebar ? 8 : 12}} pull-sm-4">
       <div>
-        <router-outlet (deactivate)="onDeactivate($event)" (activate)="onActivate($event)" ></router-outlet>
-      </div>
-
-      <div class="knx-wizard--controls">
-        <div class="knx-message knx-message--error" *ngIf="error?.message">
-          {{error ? error.message : ''}}
-        </div>
-
-        <div class="knx-wizard__buttons" [class.knx-wizard__buttons--first]="currentStepOptions.hideBackButton">
-          <button #prevButton
-              [ngClass]="[
-                currentStepOptions.backButtonClass ?
-                currentStepOptions.backButtonClass : 'knx-button knx-button--link knx-button--back'
-              ]"
-              *ngIf="!currentStepOptions.hideBackButton"
-              [disabled]="currentStepOptions.disableBackButton"
-              (click)="goToPreviousStep(knxWizardRxService.currentStepIndex - 1);">
-            {{currentStepOptions.backButtonLabel || options.backButtonLabel}}
-          </button>
-
-          <button #nextButton
-            [ngClass]="[
-              currentStepOptions.nextButtonClass ?
-              currentStepOptions.nextButtonClass : 'knx-button knx-button--primary knx-button--arrow'
-            ]"
-            [ngClass]="{
-                'knx-button--pending' : isPendingNext,
-                'knx-button--arrow' : !isPendingNext
-              }"
-              [disabled]="isPendingNext || currentStepOptions.disableNextButton"
-            *ngIf="!currentStepOptions.hideNextButton"
-            (click)="goToNextStep();">
-            {{currentStepOptions.nextButtonLabel || options.nextButtonLabel}}
-          </button>
-        </div>
+        <router-outlet (activate)="onActivate($event)" ></router-outlet>
       </div>
     </div>
 </div>

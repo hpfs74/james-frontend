@@ -7,7 +7,7 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarExtrasComponent } from './components/car-extras/car-extras.component';
 import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
 import { CarReviewComponent } from './components/car-review/car-review.component';
-import { CarThankYouComponent } from '../car-buy/components/car-thank-you/car-thank-you.component';
+import { CarThankYouComponent } from '../car-advice/components/car-thank-you/car-thank-you.component';
 
 export const carAdviceRoutes: Routes = [
   {

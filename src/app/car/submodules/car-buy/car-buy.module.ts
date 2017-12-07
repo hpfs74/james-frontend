@@ -20,8 +20,6 @@ import { CarReportingCodeComponent } from './components/car-reporting/car-report
 import { CarCheckComponent } from './components/car-check/car-check.component';
 import { CarPaymentComponent } from './components/car-payment/car-payment.component';
 import { CarSummaryComponent } from './components/car-summary/car-summary.component';
-import { CarThankYouComponent } from './components/car-thank-you/car-thank-you.component';
-
 import { CarEffects } from '../../../car/effects/car';
 
 import { reducers } from '../../../car/reducers';
@@ -32,8 +30,7 @@ export const COMPONENTS = [
   CarReportingCodeComponent,
   CarCheckComponent,
   CarPaymentComponent,
-  CarSummaryComponent,
-  CarThankYouComponent
+  CarSummaryComponent
 ];
 
 @NgModule({

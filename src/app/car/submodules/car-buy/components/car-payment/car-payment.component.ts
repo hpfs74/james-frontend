@@ -2,35 +2,43 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
 import { IbanForm } from '../../../../../shared/forms/iban.form';
-import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
 import * as FormUtils from '../../../../../utils/base-form.utils';
 import * as fromRoot from '../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
+import * as fromCore from '@app/core/reducers';
+import * as wizardActions from '@app/core/actions/wizard';
 
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/empty';
 
 @Component({
   selector: 'knx-car-payment-form',
   templateUrl: 'car-payment.component.html'
 })
-export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy, KNXStepRxComponent {
+export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy {
   qaRootId = QaIdentifiers.carPayment;
   form: IbanForm;
   advice$: Observable<any>;
   subscription$: Subscription[] = [];
+  currentStepOptions: KNXWizardStepRxOptions;
+  error$: Observable<KNXStepError>;
   constructor(private store$: Store<fromRoot.State>) {
 
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     const formBuilder = new FormBuilder();
     this.form = new IbanForm(formBuilder);
+    this.error$ = this.store$.select(fromCore.getWizardError);
+    this.currentStepOptions = {
+      label: 'Betaling',
+      nextButtonLabel: 'Naar overzicht',
+      backButtonLabel: 'Terug',
+    };
   }
 
   ngOnInit() {
@@ -48,20 +56,6 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy, KNX
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  submitForm(): Observable<any> {
-    FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
-    if (!this.form.formGroup.valid) {
-      return Observable.throw(new Error(this.form.validationSummaryError));
-    }
-
-    this.store$.dispatch(new advice.Update(this.form.formGroup.value));
-
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-  }
-
   setAdvice(value: any) {
     if (value && value.startDate || value && value.iban) {
       this.form.formGroup.patchValue({
@@ -71,13 +65,17 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy, KNX
       FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     }
   }
-  onShow() {
-    return Observable.empty();
+
+  goToPreviousStep() {
+    this.store$.dispatch(new wizardActions.Back());
   }
-  onBack() {
-    return Observable.empty();
-  }
-  onNext() {
-    return this.submitForm();
+
+  goToNextStep() {
+    FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
+    if (!this.form.formGroup.valid) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
+    }
+    this.store$.dispatch(new advice.Update(this.form.formGroup.value));
+    this.store$.dispatch(new wizardActions.Forward());
   }
 }

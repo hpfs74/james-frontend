@@ -5,15 +5,19 @@ import { Store } from '@ngrx/store';
 import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
 import { CarInsurance } from '../../../../models/index';
 import { AsyncPipe } from '@angular/common';
-import { KNXWizardRxService } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.service';
+import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
 import * as fromRoot from '../../../../reducers';
 import * as router from '../../../../../core/actions/router';
 import * as fromCar from '../../../../reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
+import * as fromAuth from '../../../../../auth/reducers';
+import * as fromInsurance from '../../../../../insurance/reducers';
+import * as layout from '../../../../../core/actions/layout';
+import * as fromCore from '@app/core/reducers';
+import * as wizardActions from '@app/core/actions/wizard';
 
-import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 
 interface OrderItem {
@@ -29,7 +33,7 @@ interface OrderItem {
   templateUrl: './insurance-toplist.component.html',
   styleUrls: ['./insurance-toplist.component.scss']
 })
-export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
+export class InsuranceTopListComponent implements OnInit {
   insurances$: Observable<Array<CarInsurance>>;
   title: string;
   totalTitle: number;
@@ -39,13 +43,24 @@ export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
   total: number;
   orderBy: Array<OrderItem>;
   qaRootId = QaIdentifiers.carAdviceRoot;
+  isLoggedIn$: Observable<boolean>;
+  subscription$: Array<any>;
+  currentStepOptions: KNXWizardStepRxOptions;
+  error$: Observable<KNXStepError>;
 
   constructor(private store$: Store<fromRoot.State>,
-              private asyncPipe: AsyncPipe,
-              public knxWizardRxService: KNXWizardRxService) {
+              private asyncPipe: AsyncPipe) {
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.insurances$ = this.getCompareResultCopy();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
+    this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
+    this.error$ = this.store$.select(fromCore.getWizardError);
+    this.currentStepOptions = {
+      label: 'Premies vergelijken',
+      backButtonLabel: 'Terug',
+      hideNextButton: true,
+      hideBackButton: false,
+    };
   }
 
   ngOnInit(): void {
@@ -97,24 +112,20 @@ export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
   }
 
   selectInsurance(insurance): void {
-    this.knxWizardRxService.goToNextStep();
     this.store$.dispatch(new advice.SetInsurance(insurance));
+    this.goToNextStep();
   }
 
   noResult(): boolean {
     return this.asyncPipe.transform(this.insurances$).length <= 0 && !this.asyncPipe.transform(this.isInsuranceLoading$);
   }
 
-  onShow(): Observable<any> {
-    return Observable.of(true);
+  goToPreviousStep() {
+    this.store$.dispatch(new wizardActions.Back());
   }
 
-  onBack(): Observable<any> {
-    return Observable.of(this.store$.dispatch(new router.Back()));
-  }
-
-  onNext(): Observable<any> {
-    return Observable.of(true);
+  goToNextStep() {
+    this.store$.dispatch(new wizardActions.Forward());
   }
 
   private getCompareResultCopy(): Observable<CarInsurance[]> {
@@ -125,6 +136,5 @@ export class InsuranceTopListComponent implements OnInit, KNXStepRxComponent {
         return obs.map(v => JSON.parse(JSON.stringify(v)));
       });
   }
-
 }
 

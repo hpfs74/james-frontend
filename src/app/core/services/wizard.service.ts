@@ -21,12 +21,12 @@ export class KNXWizardRxService {
         // Traverse the active route tree
         let snapshot = route.snapshot;
         let activated = route.firstChild;
-        this.activatedRoute = activated;
         if (activated != null) {
           while (activated != null) {
             // console.log('----------------------------',activated);
             if (activated.routeConfig) {
               if (activated.routeConfig.children) {
+                this.activatedRoute = activated;
                 this.currentStepRoutes = activated.routeConfig.children.filter(route => route.path !== '' && route.data);
               }
             }

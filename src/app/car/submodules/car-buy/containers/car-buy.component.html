@@ -2,17 +2,15 @@
   <div class="container">
     <knx-step-navigation
       [steps]="formSteps"
-      [currentStep]="currentStep"
+      [currentStep]="wizardCurrentStep$ | async"
       [clickable]="true"
-      (stepChange)="knxWizardRx.goToPreviousStep($event);">
+      (stepChange)="goToStep($event);">
     </knx-step-navigation>
   </div>
 </div>
 
 <div class="container knx-car-buy" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
-  <knx-wizard-rx #knxWizardRx
-                [stepOptions]="formSteps"
-                (onStepChange)="onStepChange($event)">
+  <knx-wizard-rx>
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
         [options]="chatConfig$ | async"
@@ -20,27 +18,4 @@
       </knx-chat-stream>
     </div>
   </knx-wizard-rx>
-
-  <div class="container" *ngIf="currentStep === 4">
-    <div class="row knx-buy__footer">
-      <div class="col-sm-8">
-        <knx-step-blocks title="Hoe gaat het nu verder?">
-          <knx-step-block>
-            <h3>1. Bevestiging</h3>
-            <p>Je ontvangt een bevestiging van ons per e-mail.</p>
-          </knx-step-block>
-
-          <knx-step-block>
-            <h3>2. In behandeling</h3>
-            <p>Binnen 3 werkdagen hoor je of je in aanmerking komt.</p>
-          </knx-step-block>
-
-          <knx-step-block>
-            <h3>3. Overgestapt</h3>
-            <p>Gefeliciteerd! Je hebt een hoop geld bespaard op je autoverzekering!</p>
-          </knx-step-block>
-        </knx-step-blocks>
-      </div>
-    </div>
-  </div>
 </div>

@@ -28,6 +28,7 @@ import * as router from '../../../../core/actions/router';
 import * as car from '../../../../car/actions/car';
 import * as advice from '../../../../insurance/actions/advice';
 import * as compare from '../../../../car/actions/compare';
+import * as wizardActions from '@app/core/actions/wizard';
 
 @Component({
   providers: [ AsyncPipe ],
@@ -44,10 +45,13 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   advice$: Observable<any>;
+  wizardCurrentStep$: Observable<any>;
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
-              public asyncPipe: AsyncPipe) {}
+              public asyncPipe: AsyncPipe) {
+    this.wizardCurrentStep$ = this.store$.select(fromCore.getWizardCurrentStep);
+  }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -64,56 +68,20 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     this.formSteps = [
       {
         label: 'Contactgegevens',
-        nextButtonLabel: 'Naar autogegevens',
-        backButtonLabel: 'Terug',
-        hideBackButton: true,
-        routeConfig: {
-          path: '/car/insurance/' + this.asyncPipe.transform(this.advice$).id + '/contact-detail/1',
-          component: CarContactComponent
-        }
       },
       {
         label: 'Autogegevens',
-        nextButtonLabel: 'Naar check',
-        backButtonLabel: 'Terug',
-        routeConfig: {
-          path: '/car/insurance/' + this.asyncPipe.transform(this.advice$).id + '/reporting/2',
-          component: CarReportingCodeComponent
-        }
       },
       {
         label: 'Check',
-        nextButtonLabel: 'Naar betalingsgegevens',
-        backButtonLabel: 'Terug',
-        routeConfig: {
-          path: '/car/insurance/' + this.asyncPipe.transform(this.advice$).id + '/check/3',
-          component: CarCheckComponent
-        }
       },
       {
         label: 'Betaling',
-        nextButtonLabel: 'Naar overzicht',
-        backButtonLabel: 'Terug',
-        routeConfig: {
-          path: '/car/insurance/' + this.asyncPipe.transform(this.advice$).id + '/payment/4',
-          component: CarPaymentComponent
-        }
       },
       {
         label: 'Overzicht',
-        nextButtonLabel: 'Verzekering aanvragen',
-        backButtonLabel: 'Terug',
-        nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
-        routeConfig: {
-          path: '/car/insurance/' + this.asyncPipe.transform(this.advice$).id + '/summary/5',
-          component: CarSummaryComponent
-        }
       }
     ];
-  }
-
-  onStepChange(stepIndex) {
-    this.currentStep = stepIndex;
   }
 
   // TODO: group in an effect
@@ -122,5 +90,9 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
     this.store$.dispatch(new compare.CarCompareResetStateAction());
     this.store$.dispatch(new car.CarResetStateAction());
     this.store$.dispatch(new router.Go({path: ['car']}));
+  }
+
+  goToStep(stepIndex: number) {
+    this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
   }
 }

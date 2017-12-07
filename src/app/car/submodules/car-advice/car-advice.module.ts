@@ -23,6 +23,7 @@ import { CarReviewComponent } from './components/car-review/car-review.component
 import { CarEffects } from '../../../car/effects/car';
 import { reducers } from '../../../car/reducers';
 import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
+import { CarThankYouComponent } from '@app/car/submodules/car-advice/components/car-thank-you/car-thank-you.component';
 
 export const COMPONENTS = [
   CarAdviceComponent,
@@ -30,7 +31,8 @@ export const COMPONENTS = [
   CarDetailComponent,
   CarExtrasComponent,
   InsuranceTopListComponent,
-  CarReviewComponent
+  CarReviewComponent,
+  CarThankYouComponent
 ];
 
 @NgModule({

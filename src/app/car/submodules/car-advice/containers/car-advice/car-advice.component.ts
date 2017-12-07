@@ -41,11 +41,10 @@ import * as coverage from '../../../../actions/coverage';
 // Other actions
 import * as advice from '../../../../../insurance/actions/advice';
 import * as profile from '../../../../../profile/actions/profile';
+import * as wizardActions from '@app/core/actions/wizard';
 
-import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
-import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
@@ -66,11 +65,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   currentStep: number;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
-  showStepBlock = false;
   // State of the advice forms data
   isLoggedIn$: Observable<boolean>;
   purchasedInsurances$: Observable<any>;
   purchasedInsurancesLoading$: Observable<any>;
+  wizardCurrentStep$: Observable<any>;
 
   subscription$: Array<any>;
 
@@ -83,6 +82,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     window.advice = this;
     window.router = router;
     // this.store$.dispatch(new router.Forward);
+    this.formSteps = [
+      {
+        label: 'Je gegevens',
+      },
+      {
+        label: 'Premies vergelijken',
+      },
+      {
+        label: 'Aanvragen',
+      }
+    ];
   }
 
 
@@ -100,6 +110,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
     this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
+    this.wizardCurrentStep$ = this.store$.select(fromCore.getWizardCurrentStep);
     // initialize forms
     const formBuilder = new FormBuilder();
 
@@ -146,59 +157,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           this.store$.dispatch(new advice.Update(compareExtraOptions));
         })
     );
-
-      // init wizard config
-      this.currentStep = 0;
-      this.formSteps = [
-        {
-          label: 'Je gegevens',
-          nextButtonLabel: 'Naar resultaten',
-          hideBackButton: true,
-        },
-        {
-          label: 'Premies vergelijken',
-          backButtonLabel: 'Terug',
-          hideNextButton: true,
-          hideBackButton: false,
-        },
-        {
-          label: 'Aanvragen',
-          backButtonLabel: 'Terug',
-          nextButtonLabel: 'Verzekering aanvragen',
-          nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
-          onShowStep: this.onShowSummary.bind(this),
-          onBeforeNext: this.startBuyFlow.bind(this),
-        }
-      ];
   }
 
   ngOnDestroy() {
     this.subscription$.forEach(sub => sub.unsubscribe());
-  }
-
-  openUnsupportedWebSite(insuranceUrl): Observable<any> {
-    window.open(insuranceUrl, '_blank');
-    return Observable.empty();
-  }
-
-  startBuyFlow(): Observable<any> {
-    return this.isLoggedIn$.take(1).flatMap((loggedIn) => {
-      if (loggedIn) {
-        this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-          id => {
-            this.store$.dispatch(new router.Go({
-              path: ['/car/insurance', {adviceId: id}],
-            }));
-          }));
-        return Observable.empty();
-      } else {
-        // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
-        // Instead of going into the buy flow the user clicks on the modal buttons
-        // to be redirected either to /login or /register
-        this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
-        return Observable.throw(new Error());
-      }
-    });
   }
 
   updateActiveLoan(activeLoan: boolean) {
@@ -209,36 +171,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
   }
 
-  getStepClass() {
+  getStepClass(step) {
     return {
-      ['knx-car-advice--step-' + (this.currentStep + 1)]: true
+      ['knx-car-advice--step-' + (step + 1)]: true
     };
   }
 
   private onShowResults() {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
-  }
-
-  private onShowSummary() {
-    this.store$.dispatch(new assistant.ClearAction);
-    this.subscription$.push(
-      this.store$.select(fromInsurance.getSelectedInsurance).take(1)
-        .subscribe(selectedInsurance => {
-          this.showStepBlock = selectedInsurance.supported;
-          if (selectedInsurance.supported) {
-            this.formSteps[2].nextButtonLabel = 'Verzekering aanvragen';
-            this.formSteps[2].nextButtonClass = 'knx-button knx-button--cta knx-button--extended knx-button--3d';
-            this.formSteps[2].onBeforeNext = this.startBuyFlow.bind(this);
-            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.title'}));
-            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.steps'}));
-          } else {
-            this.formSteps[2].nextButtonLabel = 'Ga naar website';
-            this.formSteps[2].nextButtonClass = 'knx-button knx-button--secondary';
-            this.formSteps[2].onBeforeNext = this.openUnsupportedWebSite.bind(this, selectedInsurance._embedded.insurance.url);
-            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.unsupported', clear: true}));
-          }
-        })
-    );
   }
 
   private proceedAnonymous(advices, insurances) {
@@ -254,10 +194,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
             id => {
               this.store$.dispatch(new router.Go({
-                path: ['/car/insurance', {adviceId: id}],
+                path: ['/car/insurance/contact-detail'],
               }));
             }));
         }
     });
+  }
+
+  goToStep(stepIndex: number) {
+    this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
   }
 }

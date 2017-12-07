@@ -6,8 +6,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { TagsService } from '../../../../../core/services/tags.service';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/timer';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
@@ -24,6 +22,8 @@ import * as advice from '../../../../../insurance/actions/advice';
 import * as coverage from '../../../../actions/coverage';
 import * as compare from '../../../../actions/compare';
 import * as FormUtils from '../../../../../utils/base-form.utils';
+import * as wizardActions from '@app/core/actions/wizard';
+import * as fromCore from '@app/core/reducers';
 
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
 import { CarDetailForm } from './car-detail.form';
@@ -32,13 +32,13 @@ import { Car, CarCoverageRecommendation, CarCompare } from '../../../../models';
 import { Price } from '../../../../../shared/models';
 import { Address } from '../../../../../address/models';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
-import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
+import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 @Component({
   selector: 'knx-car-detail-form',
   styleUrls: ['./car-detail.component.scss'],
   templateUrl: 'car-detail.component.html'
 })
-export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, OnDestroy {
+export class CarDetailComponent implements AfterViewInit, OnDestroy {
   qaRootId = QaIdentifiers.carDetails;
   form: CarDetailForm;
   addressForm: AddressForm;
@@ -51,13 +51,19 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
-
   subscriptions$: Subscription[] = [];
+  currentStepOptions: KNXWizardStepRxOptions;
+  error$: Observable<KNXStepError>;
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
     this.selectInitalStates();
     this.initializeForms();
     this.setInitialSubscriptions();
+    this.currentStepOptions = {
+      label: 'Je gegevens',
+      nextButtonLabel: 'Naar resultaten',
+      hideBackButton: true,
+    };
   }
 
   selectInitalStates(): void {
@@ -69,6 +75,7 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.error$ = this.store$.select(fromCore.getWizardError);
   }
 
   initializeForms(): void {
@@ -279,13 +286,13 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
     }
   }
 
-  nextStep(): Observable<any> {
+  goToNextStep(event) {
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
     FormUtils.validateForm(detailForm);
 
     if (!detailForm.valid || !addressForm.valid) {
-      return Observable.throw(new Error(this.form.validationSummaryError));
+      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
     this.subscriptions$.push(
       Observable.combineLatest(this.car$, this.address$, (car, address) => {
@@ -324,22 +331,12 @@ export class CarDetailComponent implements KNXStepRxComponent, AfterViewInit, On
           })));
         })
     );
-    return this.store$.select(fromInsurance.getSelectedAdvice)
+    this.store$.select(fromInsurance.getSelectedAdvice)
       .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
-      .map(advice => this.store$.dispatch(new compare.LoadCarAction(advice)));
+      .take(1)
+      .subscribe(advice => {
+        this.store$.dispatch(new compare.LoadCarAction(advice));
+        this.store$.dispatch(new wizardActions.Forward());
+      });
   }
-
-  onBack(): Observable<any> {
-    return Observable.empty();
-  }
-
-  onNext(): Observable<any> {
-    return this.nextStep();
-  }
-
-  onShow(): Observable<any> {
-    // console.log('show');
-    return;
-  }
-
 }

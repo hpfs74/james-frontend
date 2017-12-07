@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CarBuyComponent } from './containers/car-buy.component';
-import { CarThankYouComponent } from './components/car-thank-you/car-thank-you.component';
 import { CarContactComponent } from './components/car-contact/car-contact.component';
 import { CarReportingCodeComponent } from './components/car-reporting/car-reporting-code.component';
 import { CarCheckComponent } from './components/car-check/car-check.component';
@@ -11,34 +10,36 @@ import { CarSummaryComponent } from './components/car-summary/car-summary.compon
 
 export const carBuyRoutes: Routes = [
   {
-    path: ':adviceId',
+    path: '',
     component: CarBuyComponent,
     data: {
-      title: 'Nieuwe autoverzekering aanvragen'
+      title: 'Nieuwe autoverzekering aanvragen',
+      wizard: true
     },
     children: [
+      { path: '', redirectTo: 'contact-detail', pathMatch: 'full' },
       {
-        path: ':adviceId/contact-detail',
+        path: 'contact-detail',
         component: CarContactComponent,
         data: { stepIndex: 0}
       },
       {
-        path: ':adviceId/reporting',
+        path: 'reporting',
         component: CarReportingCodeComponent,
         data: { stepIndex: 1}
       },
       {
-        path: ':adviceId/check',
+        path: 'check',
         component: CarCheckComponent,
         data: { stepIndex: 2}
       },
       {
-        path: ':adviceId/payment',
+        path: 'payment',
         component: CarPaymentComponent,
         data: { stepIndex: 3}
       },
       {
-        path: ':adviceId/summary',
+        path: 'summary',
         component: CarSummaryComponent,
         data: { stepIndex: 4}
       },

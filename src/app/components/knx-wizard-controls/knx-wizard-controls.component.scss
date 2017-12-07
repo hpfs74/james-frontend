@@ -1,0 +1,23 @@
+@import '~styles/base';
+
+.knx-wizard--controls {
+  margin: 30px 0;
+}
+
+.knx-message--error {
+  font-size: 16px;
+}
+
+.knx-wizard__buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.knx-wizard__buttons--first {
+  justify-content: flex-end;
+}
+
+.knx-form__error {
+  margin-bottom: 15px;
+}

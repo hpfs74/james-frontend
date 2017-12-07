@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { CarCheckForm } from './car-check.form';
 import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
-import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
+import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -15,25 +15,33 @@ import * as fromRoot from '../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
+import * as fromCore from '@app/core/reducers';
+import * as wizardActions from '@app/core/actions/wizard';
 
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-car-check',
   templateUrl: 'car-check.component.html'
 })
-export class CarCheckComponent implements OnInit, QaIdentifier, KNXStepRxComponent, OnDestroy {
+export class CarCheckComponent implements OnInit, QaIdentifier, OnDestroy {
   qaRootId = QaIdentifiers.carCheck;
   form: CarCheckForm;
   advice$: Observable<any>;
   subscription$: Subscription[] = [];
+  currentStepOptions: KNXWizardStepRxOptions;
+  error$: Observable<KNXStepError>;
   constructor(private store$: Store<fromRoot.State>) {
 
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.error$ = this.store$.select(fromCore.getWizardError);
     const formBuilder = new FormBuilder();
     this.form = new CarCheckForm(formBuilder);
+    this.currentStepOptions = {
+      label: 'Check',
+      nextButtonLabel: 'Naar betalingsgegevens',
+      backButtonLabel: 'Terug',
+    };
   }
 
   ngOnInit() {
@@ -87,27 +95,16 @@ export class CarCheckComponent implements OnInit, QaIdentifier, KNXStepRxCompone
       });
   }
 
-  submitForm(): Observable<any> {
+  goToPreviousStep() {
+    this.store$.dispatch(new wizardActions.Back());
+  }
+
+  goToNextStep() {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {
-      return Observable.throw(new Error(this.form.validationSummaryError));
+      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
-
     this.store$.dispatch(new advice.Update(this.form.formGroup.value));
-
-    return new Observable(obs => {
-      obs.next();
-      obs.complete();
-    });
-  }
-
-  onShow() {
-    return Observable.empty();
-  }
-  onBack() {
-    return Observable.empty();
-  }
-  onNext() {
-    return this.submitForm();
+    this.store$.dispatch(new wizardActions.Forward());
   }
 }

@@ -130,3 +130,8 @@
     </div>
   </div>
 </form>
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep($event)"
+                     (onBack)="goToPreviousStep($event)">
+</knx-wizard-controls>

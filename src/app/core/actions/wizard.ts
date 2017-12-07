@@ -28,4 +28,5 @@ export class Error implements Action {
 export type All
   = Go
   | Back
-  | Forward;
+  | Forward
+  | Error;
