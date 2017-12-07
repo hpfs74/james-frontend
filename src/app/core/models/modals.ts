@@ -35,9 +35,11 @@ export class LoginModalConfig implements ModalConfig {
 export class AuthRedirectModalConfig implements ModalConfig {
   title = '';
   settings = {
-    bodyClass: 'knx-modal-body knx-modal-body--blobs',
+    bodyClass: 'knx-modal-body',
     fullwidthButtons: true,
     header: true,
+    headerLogo: '/assets/images/knab-logo.svg',
+    headerSubline: 'Verzekeren',
     closeButton: true,
     twoColFooter: true,
     dividerText: 'of'

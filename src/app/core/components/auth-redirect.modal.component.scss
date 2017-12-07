@@ -3,6 +3,7 @@
 .knx-auth-redirect__content {
   text-align: center;
   color: $knab-primary-blue;
+  margin-top: 10px;
 
   p {
     color: $knab-primary-blue;
@@ -11,23 +12,6 @@
       margin-bottom: 0;
     }
   }
-}
-
-.knx-auth-redirect__logo {
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  display: block;
-  margin-top: 20px;
-}
-
-h2.knx-auth-redirect__subline,
-.knx-auth-redirect__subline {
-  font-family: $font-family-head;
-  color: #3e4a59;
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 50px;
 }
 
 .knx-auth-redirect_header {
