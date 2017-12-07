@@ -178,14 +178,15 @@ export class CarProposalHelper {
   }
 
   private getHouseNumber(numberExtended) {
-    return `${numberExtended.number_only}${numberExtended.number_letter || ''}`;
+    return '' + numberExtended.number_only;
   }
 
   private getHouseNumberAddition(numberExtended) {
+    let ret = numberExtended.number_letter || '';
     if (numberExtended.number_addition.length > 0) {
-      return '-' + numberExtended.number_addition;
+      ret += '-' + numberExtended.number_addition;
     }
-    return '';
+    return ret;
   }
 
   private removeWhiteSpace(value: string) {
