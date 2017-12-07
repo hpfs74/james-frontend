@@ -16,7 +16,7 @@ export class ContactDetailForm extends BaseForm {
     minlength: () => 'Het ingevulde telefoonnummer is niet geldig',
     mobileNumber: () => 'Het ingevulde mobiele nummer is niet geldig',
     phoneNumber: () => 'Het ingevulde telefoonnummer is niet geldig',
-    emailaddress: () => 'Het ingevulde e-mailadres is niet geldig',
+    email: () => 'Het ingevulde e-mailadres is niet geldig',
     maxlength: (err) => `Vul maximaal ${err.requiredLength} tekens in`
   };
 
@@ -31,7 +31,7 @@ export class ContactDetailForm extends BaseForm {
       ],
       firstName: [null, Validators.required],
       middleName: [null],
-      emailaddress: [null, Validators.compose([
+      email: [null, Validators.compose([
           Validators.required,
           EmailValidator
         ])
@@ -115,7 +115,7 @@ export class ContactDetailForm extends BaseForm {
           type: 'text'
         }
       },
-      emailaddress: {
+      email: {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,

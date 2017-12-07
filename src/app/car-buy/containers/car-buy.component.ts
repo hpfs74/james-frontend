@@ -255,6 +255,10 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   getProposalData(value: any, contactForm: FormGroup) {
+    // convert anonymous flow email property to expected property
+    if (value.adviceInfo.email) {
+      value.adviceInfo.emailaddress = value.adviceInfo.email;
+    }
 
     const flatData = Object.assign({},
       value.profileInfo,
