@@ -335,7 +335,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   }
 
   getCarInfo(licensePlate) {
-    this.store$.dispatch(new car.GetInfoAction(licensePlate));
+    this.store$.dispatch(new car.GetInfo(licensePlate));
   }
 
   toggleSideNavState(event) {
@@ -476,7 +476,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
       advice => {
         if (advice && advice.id) {
           this.store$.dispatch(new router.Go({
-            path: ['/car/insurance', {adviceId: advice.id}],
+            path: ['/car/insurance', { adviceId: advice.id }],
           }));
         }
       }));

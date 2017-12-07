@@ -10,7 +10,7 @@ import * as router from '../../core/actions/router';
 import { AuthService } from '../services/auth.service';
 
 // TODO: refactor to more maintainable solution
-const anonymousAvailableLinks = ['/register', '/login', '/car'];
+const anonymousAvailableLinks = ['/register', '/login', '/car', '/car/insurance'];
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
@@ -32,7 +32,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    if (!this.isPublicRoute(url)) {
+    // remove router parameters to match with allowed routes
+    const baseUrl = url.split(';')[0];
+
+    if (!this.isPublicRoute(baseUrl)) {
       this.store$.select(fromRoot.selectAuthState).take(1).subscribe(authenticated => {
         if (!authenticated.status.loggedIn || !this.authService.isLoggedIn()) {
           this.store$.dispatch(new auth.LoginRedirect());

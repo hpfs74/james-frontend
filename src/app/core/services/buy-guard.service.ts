@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, Route, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, Route, CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
@@ -9,7 +9,7 @@ import * as fromRoot from '../reducers';
 import * as fromInsurance from '../../insurance/reducers';
 
 @Injectable()
-export class CanActivateBuyFlowGuard implements CanActivate {
+export class CanActivateBuyFlowGuard implements CanActivate, CanActivateChild {
 
   constructor(private router: Router, private store$: Store<fromRoot.State>) {}
 

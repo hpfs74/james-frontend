@@ -38,7 +38,7 @@ import { SharedModule } from '../../shared.module';
 import { TagsService } from '../../core/services/tags.service';
 import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 
-import { BuyCompleteAction, BuyFailureAction } from '../../car/actions/car';
+import { BuyComplete, BuyFailure } from '../../car/actions/car';
 import { Profile } from '../../profile/models/profile';
 
 export function getInitialState() {
@@ -267,7 +267,7 @@ describe('Component: CarBuyComponent', () => {
       comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
       comp.advice$ = Observable.of(data.adviceInfo);
       comp.acceptFinalTerms = true;
-      store.dispatch(new BuyFailureAction(new Error()));
+      store.dispatch(new BuyFailure(new Error()));
 
       fixture.detectChanges();
 
@@ -291,7 +291,7 @@ describe('Component: CarBuyComponent', () => {
       comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
       comp.advice$ = Observable.of(data.adviceInfo);
       comp.acceptFinalTerms = true;
-      store.dispatch(new BuyCompleteAction({}));
+      store.dispatch(new BuyComplete({}));
 
       let expectedAction = new router.Go({path: ['/car/thank-you', data.profileInfo.emailaddress]});
       fixture.detectChanges();

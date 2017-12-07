@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { Store, StoreModule, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
@@ -8,17 +9,26 @@ import 'rxjs/add/observable/throw';
 
 import { CarEffects } from './car';
 import { CarService } from '../services/car.service';
+import { BuyService } from '../../insurance/services/buy.service';
 import { Car } from '../models';
 
+import * as fromAuth from '../../auth/reducers';
 import * as car from '../actions/car';
 
 describe('CarEffects', () => {
   let effects: CarEffects;
   let actions: Observable<any>;
   let carService: any;
+  let buyService: any;
+  let store: Store<fromAuth.State>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        StoreModule.forRoot({
+          'auth': combineReducers(fromAuth.reducers)
+        })
+      ],
       providers: [
         CarEffects,
         provideMockActions(() => actions),
@@ -26,10 +36,15 @@ describe('CarEffects', () => {
           provide: CarService,
           useValue: jasmine.createSpyObj('CarService', ['getByLicense', 'buyStatic']),
         },
+        {
+          provide: BuyService,
+          useValue: jasmine.createSpyObj('BuyService', ['buyInsuranceAnonymous'])
+        }
       ],
     });
 
     carService = TestBed.get(CarService);
+    buyService = TestBed.get(BuyService);
     effects = TestBed.get(CarEffects);
   });
 
@@ -65,8 +80,8 @@ describe('CarEffects', () => {
       } as Car;
 
       const licensePlate = 'AABB22';
-      const action = new car.GetInfoAction(licensePlate);
-      const completion = new car.GetInfoCompleteAction(response);
+      const action = new car.GetInfo(licensePlate);
+      const completion = new car.GetInfoComplete(response);
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
@@ -77,8 +92,8 @@ describe('CarEffects', () => {
 
     it('should return car failure action', () => {
       const licensePlate = 'AABB22';
-      const action = new car.GetInfoAction(licensePlate);
-      const completion = new car.GetInfoFailureAction('Error');
+      const action = new car.GetInfo(licensePlate);
+      const completion = new car.GetInfoFailure('Error');
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
@@ -90,24 +105,24 @@ describe('CarEffects', () => {
 
   describe('buyCarInsurance$', () => {
     it('should return a buy success action', () => {
-      const action = new car.BuyAction({ a: 'someValue '});
-      const completion = new car.BuyCompleteAction({ b: 'returnValue' });
+      const action = new car.Buy({ a: 'someValue '});
+      const completion = new car.BuyComplete({ b: 'returnValue' });
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
 
-      carService.buyStatic.and.returnValue(Observable.of({ b: 'returnValue' }));
+      buyService.buyInsuranceAnonymous.and.returnValue(Observable.of({ b: 'returnValue' }));
       expect(effects.buyCarInsurance$).toBeObservable(expected);
     });
 
     it('should return a buy failure action', () => {
-      const action = new car.BuyAction({ a: 'someValue '});
-      const completion = new car.BuyFailureAction({ b: 'failed' });
+      const action = new car.Buy({ a: 'someValue '});
+      const completion = new car.BuyFailure({ b: 'failed' });
 
       actions = hot('--a-', { a: action });
       const expected = cold('--b', { b: completion });
 
-      carService.buyStatic.and.returnValue(Observable.throw({ b: 'failed' }));
+      buyService.buyInsuranceAnonymous.and.returnValue(Observable.throw({ b: 'failed' }));
       expect(effects.buyCarInsurance$).toBeObservable(expected);
     });
   });
