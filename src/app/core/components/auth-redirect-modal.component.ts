@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromCore from '../reducers';
 import * as router from '../actions/router';
+import * as fromInsurance from '../../insurance/reducers';
 
 @Component({
   selector: 'knx-auth-redirect',
@@ -41,7 +42,23 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
           this.store$.dispatch(new router.Go({ path: ['/register']}));
           return true;
         }
-      }
+      },
+      // {
+      //   // TODO: change when modal button task is done
+      //   text: 'Verder zonder account',
+      //   buttonClass: 'knx-button knx-button--secondary knx-button--ghost',
+      //   onAction: () => {
+      //     this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
+      //       advice => {
+      //         if (advice && advice.id) {
+      //           this.store$.dispatch(new router.Go({
+      //             path: ['/car/insurance', {adviceId: advice.id}],
+      //           }));
+      //         }
+      //       });
+      //     return true;
+      //   }
+      // }
     ];
   }
 

@@ -1,10 +1,10 @@
 import {
-  GetInfoAction,
-  GetInfoCompleteAction,
-  GetInfoFailureAction,
-  BuyAction,
-  BuyCompleteAction,
-  BuyFailureAction
+  GetInfo,
+  GetInfoComplete,
+  GetInfoFailure,
+  Buy,
+  BuyComplete,
+  BuyFailure
 } from '../actions/car';
 import * as fromCar from './car';
 import { Car } from '../models';
@@ -20,7 +20,7 @@ describe('Car reducer', () => {
 
   describe('BUY_REQUEST', () => {
     it('should set loading to true', () => {
-      const action = new BuyAction({ a: 'value' });
+      const action = new Buy({ a: 'value' });
       const expectedResult = {
         loading: true,
         loaded: false,
@@ -37,7 +37,7 @@ describe('Car reducer', () => {
 
   describe('GET_INFO_REQUEST', () => {
     it('should set loading to true', () => {
-      const action = new GetInfoAction('value');
+      const action = new GetInfo('value');
       const expectedResult = {
         loading: true,
         loaded: false,
@@ -83,7 +83,7 @@ describe('Car reducer', () => {
         'nicci_cartransmission_automatic_transmission': 'Automaat'
       } as Car;
 
-      const action = new GetInfoCompleteAction(car);
+      const action = new GetInfoComplete(car);
       const expectedResult = {
         loading: false,
         loaded: true,
@@ -100,7 +100,7 @@ describe('Car reducer', () => {
 
   describe('GET_INFO_FAILURE', () => {
     it('should reset info and set error', () => {
-      const action = new GetInfoFailureAction('value');
+      const action = new GetInfoFailure('value');
       const expectedResult = {
         loading: false,
         loaded: false,
@@ -117,7 +117,7 @@ describe('Car reducer', () => {
 
   describe('BUY_SUCCESS', () => {
     it('should set buyComplete to true', () => {
-      const action = new BuyCompleteAction('value');
+      const action = new BuyComplete('value');
       const expectedResult = {
         loading: false,
         loaded: false,
@@ -134,7 +134,7 @@ describe('Car reducer', () => {
 
   describe('BUY_FAILURE', () => {
     it('should set buyError to true', () => {
-      const action = new BuyFailureAction('value');
+      const action = new BuyFailure('value');
       const expectedResult = {
         loading: false,
         loaded: false,

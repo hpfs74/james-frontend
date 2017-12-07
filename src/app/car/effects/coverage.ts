@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Store, Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
@@ -19,20 +18,23 @@ import * as car from '../actions/car';
 
 @Injectable()
 export class CoverageEffects {
-
   @Effect()
   carCoverage$: Observable<Action> = this.action$
     .ofType(coverage.CAR_COVERAGE_REQUEST)
     .map((action: coverage.CarCoverageAction) => action.payload)
-    .switchMap((payload) =>
-      this.carService.getCoverageRecommendation(payload.license, payload.activeLoan)
+    .switchMap(payload =>
+      this.carService
+        .getCoverageRecommendation(payload.license, payload.activeLoan)
         .map((res: any) => new coverage.CarCoverageCompleteAction(res))
-        .catch(error => Observable.of(new coverage.CarCoverageFailureAction(error))));
+        .catch(error =>
+          Observable.of(new coverage.CarCoverageFailureAction(error))
+        )
+    );
 
   @Effect()
   carCoverageFromInfo$ = this.action$
     .ofType(car.GET_INFO_SUCCESS)
-    .map((action: car.GetInfoCompleteAction) => action.payload)
+    .map((action: car.GetInfoComplete) => action.payload)
     .withLatestFrom(this.store$.select(fromCar.GetCoverageActiveLoan))
     .filter(([payload, activeLoan]) => activeLoan !== null)
     .switchMap(([payload, activeLoan]) => {
@@ -45,21 +47,25 @@ export class CoverageEffects {
       });
     });
 
-    @Effect()
-    carCoverageFromLoan$ = this.action$
-      .ofType(coverage.CAR_COVERAGE_SET_ACTIVE_LOAN)
-      .map((action: coverage.CarCoverageSetActiveLoan) => action.payload)
-      .withLatestFrom(this.store$.select(fromCar.getCarLicense))
-      .filter(([payload, license]) => license !== null)
-      .switchMap(([payload, license]) => {
-        return Observable.of({
-          type: coverage.CAR_COVERAGE_REQUEST,
-          payload: {
-            license: license,
-            activeLoan: payload
-          }
-        });
+  @Effect()
+  carCoverageFromLoan$ = this.action$
+    .ofType(coverage.CAR_COVERAGE_SET_ACTIVE_LOAN)
+    .map((action: coverage.CarCoverageSetActiveLoan) => action.payload)
+    .withLatestFrom(this.store$.select(fromCar.getCarLicense))
+    .filter(([payload, license]) => license !== null)
+    .switchMap(([payload, license]) => {
+      return Observable.of({
+        type: coverage.CAR_COVERAGE_REQUEST,
+        payload: {
+          license: license,
+          activeLoan: payload
+        }
       });
+    });
 
-  constructor(private store$: Store<fromCar.State>, private action$: Actions, private carService: CarService) { }
+  constructor(
+    private store$: Store<fromCar.State>,
+    private action$: Actions,
+    private carService: CarService
+  ) {}
 }

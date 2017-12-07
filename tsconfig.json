@@ -19,6 +19,11 @@
     "paths": {
       "@app/*": ["app/*"],
       "@env/*": ["environments/*"],
+      "@auth/*": ["app/auth/*"],
+      "@car/*": ["app/car/*"],
+      "@car-buy/*": ["app/car-buy/*"],
+      "@core/*": ["app/core/*"],
+      "@insurance/*": ["app/insurance/*"],
       "@utils/*": ["app/utils/*"]
     }
   }
