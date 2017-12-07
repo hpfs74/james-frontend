@@ -42,13 +42,15 @@ export class CarDetailComponent implements OnInit, QaIdentifier {
 
   @Input()
   set advice(value: any) {
-  // TODO: check why here sometime comes string as value and sometime its an object
+    // TODO: check why here sometime comes string as value and sometime its an object
     if (value) {
       if (value.address) {
+        const numberExtended = value.address.number_extended;
+
         this.addressForm.formGroup.patchValue(Object.assign({}, {
           postalCode: value.address ? value.address.postcode : null,
-          houseNumber: this.normalizeAddressHouseNumber(value),
-          houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
+          houseNumber: '' + numberExtended.number_only,
+          houseNumberExtension: numberExtended.number_letter + numberExtended.number_extension
         }));
       }
 
@@ -127,18 +129,4 @@ export class CarDetailComponent implements OnInit, QaIdentifier {
     this.addressChange.emit(event);
   }
 
-  private normalizeAddressHouseNumber(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-
-    return FormUtils.getNumbers(payload.address.number);
-  }
-
-  private normalizeAddressHouseNumberAddition(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-    return /\d+(.*)/.exec(payload.address.number)[1] || '';
-  }
 }

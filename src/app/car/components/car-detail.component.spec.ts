@@ -17,13 +17,14 @@ import { LoaderService } from '../../components/knx-app-loader/loader.service';
 import { AddressForm } from '../../address/components/address.form';
 
 @Component({
-  template: `<knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>`
+  template: `
+    <knx-car-detail-form [form]="formFromHost" [addressForm]="addressFormFromHost"></knx-car-detail-form>`
 })
 export class TestHostComponent {
   @ViewChild(CarDetailComponent)
   public targetComponent: CarDetailComponent;
   private mockHouseHold = [
-    { label: 'Alleen ikzelf', value: 'CHM' }
+    {label: 'Alleen ikzelf', value: 'CHM'}
   ];
   public formFromHost: CarDetailForm = new CarDetailForm(new FormBuilder(), this.mockHouseHold);
   public addressFormFromHost: AddressForm = new AddressForm(new FormBuilder());
@@ -141,10 +142,13 @@ describe('Component: CarCheckComponent', () => {
       let value = {
         address: {
           postcode: '1016LC',
-          number: '30'
-        },
-        number_extended: {
-          number_addition: null
+          number: '30',
+          number_extended: {
+            number_only: 30,
+            number_addition: '',
+            number_letter: '',
+            number_extension: ''
+          }
         }
       };
 
@@ -165,10 +169,13 @@ describe('Component: CarCheckComponent', () => {
       let value = {
         address: {
           postcode: '2273XA',
-          number: '1A-1'
-        },
-        number_extended: {
-          number_addition: null
+          number: '1A-1',
+          number_extended: {
+            number_only: 1,
+            number_letter: 'A',
+            number_extension: '-1',
+            number_addition: '1'
+          }
         }
       };
 
@@ -182,6 +189,33 @@ describe('Component: CarCheckComponent', () => {
       expect(postalCodeCtrl.value).toBe('2273XA');
       expect(houseNumberCtrl.value).toContain('1');
       expect(houseNumberExtensionCtrl.value).toBe('A-1');
+    });
+
+    it('should handle ANUPA in Da House bug :)', () => {
+
+      let value = {
+        address: {
+          postcode: '7707PK',
+          number: '4-R3',
+          number_extended: {
+            number_addition: '3',
+            number_only: 4,
+            number_letter: '',
+            number_extension: '-R3'
+          }
+        }
+      };
+
+      comp.targetComponent.advice = value;
+      fixture.detectChanges();
+
+      const postalCodeCtrl = comp.targetComponent.addressForm.formGroup.get('postalCode');
+      const houseNumberCtrl = comp.targetComponent.addressForm.formGroup.get('houseNumber');
+      const houseNumberExtensionCtrl = comp.targetComponent.addressForm.formGroup.get('houseNumberExtension');
+
+      expect(postalCodeCtrl.value).toBe('7707PK');
+      expect(houseNumberCtrl.value).toContain('4');
+      expect(houseNumberExtensionCtrl.value).toBe('-R3');
     });
   });
 });
