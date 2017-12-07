@@ -183,7 +183,7 @@ export class CarProposalHelper {
 
   private getHouseNumberAddition(numberExtended) {
     let ret = numberExtended.number_letter || '';
-    if (numberExtended.number_addition.length > 0) {
+    if (numberExtended.number_addition &&  numberExtended.number_addition.length > 0) {
       ret += '-' + numberExtended.number_addition;
     }
     return ret;
