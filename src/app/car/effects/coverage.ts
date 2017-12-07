@@ -45,7 +45,7 @@ export class CoverageEffects {
           activeLoan: activeLoan
         }
       });
-    });
+    }).catch(error => Observable.of(new coverage.CarCoverageFailureAction(error)));
 
   @Effect()
   carCoverageFromLoan$ = this.action$

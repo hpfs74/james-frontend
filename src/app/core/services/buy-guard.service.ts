@@ -25,13 +25,13 @@ export class CanActivateBuyFlowGuard implements CanActivate, CanActivateChild {
 
     let adviceExists = false;
 
-    if (route.params) {
-      const requestedAdvice = route.params.adviceId;
+    // if (route.params) {
+    //   const requestedAdvice = route.params.adviceId;
 
-      this.store$.select(fromInsurance.getAdvice).subscribe(advice => {
-        adviceExists = Object.keys(advice).filter(id => id === requestedAdvice).length > 0;
-      });
-    }
+    // }
+    this.store$.select(fromInsurance.getSelectedAdvice).subscribe(advice => {
+      adviceExists = !!advice;
+    });
 
     // go to previous route if no active advice found
     if (!adviceExists) {

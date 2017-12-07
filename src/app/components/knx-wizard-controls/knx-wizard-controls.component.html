@@ -1,0 +1,33 @@
+<div class="knx-wizard--controls">
+  <div class="knx-message knx-message--error" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="knx-wizard__buttons" [class.knx-wizard__buttons--first]="currentStepOptions.hideBackButton">
+    <button
+        [ngClass]="[
+          currentStepOptions.backButtonClass ?
+          currentStepOptions.backButtonClass : 'knx-button knx-button--link knx-button--back'
+        ]"
+        *ngIf="!currentStepOptions.hideBackButton"
+        [disabled]="currentStepOptions.disableBackButton"
+        (click)="back();">
+      {{ currentStepOptions.backButtonLabel }}
+    </button>
+
+    <button
+      [ngClass]="[
+        currentStepOptions.nextButtonClass ?
+        currentStepOptions.nextButtonClass : 'knx-button knx-button--primary knx-button--arrow'
+      ]"
+      [ngClass]="{
+          'knx-button--pending' : isPendingNext,
+          'knx-button--arrow' : !isPendingNext
+        }"
+        [disabled]="isPendingNext || currentStepOptions.disableNextButton"
+      *ngIf="!currentStepOptions.hideNextButton"
+      (click)="next();">
+      {{ currentStepOptions.nextButtonLabel }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<form [formGroup]="form.formGroup" class="knx-fancy-form" role="form">
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <h2>Betaling</h2>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <knx-form-group
+              [options]="form.formConfig.startDate"
+              [formControlName]="form.formConfig.startDate.formControlName">
+
+              <knx-tooltip>
+                Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
+                Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.
+              </knx-tooltip>
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-9">
+            <knx-form-group
+              [options]="form.formConfig.iban"
+              [formControlName]="form.formConfig.iban.formControlName">
+
+              <knx-tooltip>Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankafschrift of in de app van je bank.</knx-tooltip>
+            </knx-form-group>
+          </div>
+        </div>
+      </knx-card>
+    </div>
+  </div>
+</form>
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+[error]="error$ | async"
+(onNext)="goToNextStep($event)"
+(onBack)="goToPreviousStep($event)">
+</knx-wizard-controls>
+
+<div class="container">
+  <div class="row knx-buy__footer">
+    <div class="col-sm-8">
+      <knx-step-blocks title="Hoe gaat het nu verder?">
+        <knx-step-block>
+          <h3>1. Bevestiging</h3>
+          <p>Je ontvangt een bevestiging van ons per e-mail.</p>
+        </knx-step-block>
+
+        <knx-step-block>
+          <h3>2. In behandeling</h3>
+          <p>Binnen 3 werkdagen hoor je of je in aanmerking komt.</p>
+        </knx-step-block>
+
+        <knx-step-block>
+          <h3>3. Overgestapt</h3>
+          <p>Gefeliciteerd! Je hebt een hoop geld bespaard op je autoverzekering!</p>
+        </knx-step-block>
+      </knx-step-blocks>
+    </div>
+  </div>
+</div>

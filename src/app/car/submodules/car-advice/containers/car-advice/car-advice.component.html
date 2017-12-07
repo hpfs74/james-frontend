@@ -1,0 +1,54 @@
+<div class="container knx-car-advice-loader">
+  <knx-loader [visible]="purchasedInsurancesLoading$ | async">
+    Laden...
+  </knx-loader>
+</div>
+
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
+  knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded"
+  [hidden]="purchasedInsurancesLoading$ | async">
+  <div class="container">
+    <knx-step-navigation
+      [steps]="formSteps"
+      [currentStep]="knxWizardService.currentStepIndex"
+      [clickable]="true"
+      (stepChange)="goToStep($event);">
+    </knx-step-navigation>
+  </div>
+</div>
+<div class="container knx-car-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" [hidden]="purchasedInsurancesLoading$ | async">
+  <knx-wizard-rx>
+    
+    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="knxWizardService.currentStepIndex !== 1" #knxWizardSidebar>
+      <knx-chat-stream #knxChatStream
+        [options]="chatConfig$ | async"
+        [messages]="chatMessages$ | async"
+        [formGroup]="carExtrasForm.formGroup">
+
+        <knx-car-extras
+          [form]="carExtrasForm"
+          [advice]="advice$ | async"
+          [show]="knxWizardService.currentStepIndex === 1">
+        </knx-car-extras>
+
+        <ng-container *ngIf="knxWizardService.currentStepIndex === 1" [formGroup]="carExtrasForm.formGroup">
+          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true" (onChangeVisibile)="toggleSideNavState($event)">
+            <div class="container-fluid">
+              <div class="knx-side-panel-content">
+                <knx-car-extras
+                  [form]="carExtrasForm"
+                  [advice]="advice$ | async"
+                  [show]="knxWizardService.currentStepIndex === 1">
+                </knx-car-extras>
+
+                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow" (click)="knxSidePanel.close()">Verder</button>
+              </div>
+            </div>
+          </knx-side-panel>
+
+          <button class="knx-button--mobile-edit hidden-md hidden-lg hidden-md-up knx-button knx-button--pill" (click)="knxSidePanel.open()">Extra opties selecteren</button>
+        </ng-container>
+      </knx-chat-stream>
+    </div>
+  </knx-wizard-rx>
+</div>

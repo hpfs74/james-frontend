@@ -9,7 +9,7 @@
     "postmerge": "./hooks/post-merge $GIT_PARAMS",
     "prepush": "npm run test && npm run security",
     "config": "ts-node ./scripts/set-env.ts",
-    "start": "npm run config -- --no-regenerate=true && ng serve --open --locale --aot",
+    "start": "npm run config -- --no-regenerate=true && ng serve --open --locale",
     "build": "npm run config -- --analytics=true && ng build --locale --aot --build-optimizer --stats-json",
     "build:prod": "npm run config -- --environment=prod --analytics=true && ng build --prod --environment=prod --locale --build-optimizer --stats-json",
     "serve:prod": "ng serve --open --locale --prod",

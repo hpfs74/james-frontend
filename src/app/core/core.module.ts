@@ -14,6 +14,7 @@ import { ProfileModule } from '../profile/profile.module';
 import { AssistantEffects } from './effects/assistant';
 import { RouterEffects } from './effects/router';
 import { ErrorEffects } from './effects/error';
+import { WizardEffects } from './effects/wizard';
 
 // Layout components
 import { AppComponent } from './containers/app.component';
@@ -42,6 +43,7 @@ import { GlobalErrorHandler } from './services/error-handler';
 
 // Feature module reducer
 import { reducers } from './reducers';
+import { KNXWizardRxService } from '@app/core/services/wizard.service';
 
 export const COMPONENTS = [
   AppComponent,
@@ -65,6 +67,7 @@ export const COMPONENTS = [
       RouterEffects,
       ErrorEffects,
       AssistantEffects,
+      WizardEffects
     ])
   ],
   declarations: COMPONENTS,
@@ -98,6 +101,7 @@ export class CoreModule {
         requestOptionsProvider,
         CurrencyPipe,
         DatePipe,
+        KNXWizardRxService,
         {
           provide: ErrorHandler,
           useClass: GlobalErrorHandler
