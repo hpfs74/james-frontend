@@ -26,7 +26,6 @@ export class AdviceService {
 
   public removeAdvice(adviceId: string): Observable<any> {
     const headers = this.headers;
-    // TODO: remove hardcode
     return this.authHttp.delete(`${this.baseUrl}/${adviceId}`, { headers })
       .map(res => res.json());
   }
