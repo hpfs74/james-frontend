@@ -38,7 +38,7 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
   styleUrls: ['./car-detail.component.scss'],
   templateUrl: 'car-detail.component.html'
 })
-export class CarDetailComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CarDetailComponent implements AfterViewInit, OnDestroy {
   qaRootId = QaIdentifiers.carDetails;
   form: CarDetailForm;
   addressForm: AddressForm;
@@ -55,7 +55,8 @@ export class CarDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService) {
+    private tagsService: TagsService) {
+    this.initializeForms();
     this.selectInitalStates();
     this.setInitialSubscriptions();
     this.currentStepOptions = {
@@ -64,10 +65,6 @@ export class CarDetailComponent implements OnInit, AfterViewInit, OnDestroy {
       hideBackButton: true,
       hideNextButton: true
     };
-  }
-
-  ngOnInit() {
-    this.initializeForms();
   }
 
   selectInitalStates(): void {
