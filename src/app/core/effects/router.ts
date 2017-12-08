@@ -1,15 +1,19 @@
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Effect, Actions } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+
 import * as RouterActions from '../actions/router';
+import * as fromAuth from '../../auth/reducers';
 
 @Injectable()
 export class RouterEffects {
   @Effect({ dispatch: false })
-  navigate$ = this.actions$.ofType(RouterActions.GO)
+  navigate$ = this.actions$
+    .ofType(RouterActions.GO)
     .map((action: RouterActions.Go) => action.payload)
     .do(({ path, query: queryParams, extras }) =>
       this.router.navigate(path, { queryParams, ...extras }));
@@ -25,6 +29,7 @@ export class RouterEffects {
   constructor(
     private actions$: Actions,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private store$: Store<fromAuth.State>
   ) {}
 }
