@@ -46,10 +46,14 @@
 
       <knx-step [options]="formSteps[4]">
         <knx-car-summary-form
-          [(confirm)]="acceptFinalTerms"
+          [(confirm)]="acceptInsuranceTerms"
+          [(confirmTerms)]="acceptKnabTerms"
           [advice]="advice$ | async"
           [insurance]="insurance$ | async"
-          [profile]="profile$ | async">
+          [profile]="profile$ | async"
+          [showKnabTerms]="isAnonymous() | async"
+          [privacyStatementUrl]="content.externalLinks.privacyStatement"
+          [termsAndConditionsUrl]="content.externalLinks.termsAndConditions">
         </knx-car-summary-form>
       </knx-step>
     </div>

@@ -25,6 +25,7 @@ import * as advice from '../../insurance/actions/advice';
 import * as compare from '../../car/actions/compare';
 
 import { AssistantConfig } from '../../core/models/assistant';
+import { ContentConfig, Content } from '../../content.config';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { Proposal } from '../../insurance/models/proposal';
 import { Profile } from './../../profile/models';
@@ -52,6 +53,8 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   qaRootId = QaIdentifiers.carBuyRoot;
+  content: Content;
+
   formSteps: Array<KNXStepOptions>;
   currentStep: number;
 
@@ -69,9 +72,12 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   reportingCodeForm: CarReportingCodeForm;
   checkForm: CarCheckForm;
   paymentForm: IbanForm;
-  acceptFinalTerms: boolean;
+  acceptInsuranceTerms: boolean;
+  acceptKnabTerms: boolean;
 
-  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService) {}
+  constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService, private contentConfig: ContentConfig) {
+    this.content = this.contentConfig.getContent();
+  }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -192,7 +198,7 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   submitInsurance(): Observable<any> {
-    if (!this.acceptFinalTerms) {
+    if (!this.acceptInsuranceTerms || !this.acceptKnabTerms) {
       return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'));
     }
 
@@ -255,6 +261,10 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   getProposalData(value: any, contactForm: FormGroup) {
+    // convert anonymous flow email property to expected property
+    if (value.adviceInfo.email) {
+      value.adviceInfo.emailaddress = value.adviceInfo.email;
+    }
 
     const flatData = Object.assign({},
       value.profileInfo,
@@ -277,6 +287,10 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
     proposalData.proposal.car = proposalRequest.getCarInfo(value.carInfo, value.adviceInfo);
 
     return proposalData;
+  }
+
+  isAnonymous(): Observable<boolean> {
+    return this.store$.select(fromAuth.getLoggedIn).map(isLoggedIn => !isLoggedIn);
   }
 
   resetFlow() {

@@ -25,8 +25,6 @@ export class CustomRouterStateSerializer
   implements RouterStateSerializer<RouterStateUrl> {
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
     let loggedIn = false;
-
-    // WORKS!!
     this.store$.select(fromAuth.getLoggedIn).subscribe((isLoggedIn) => {
       loggedIn = isLoggedIn;
     });

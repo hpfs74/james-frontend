@@ -21,7 +21,7 @@ describe('Form: ContactDetail', () => {
 
   it('should init the form options', () => {
     expect(form.formConfig).toBeDefined();
-    expect(Object.keys(form.formConfig).length).toBe(7);
+    expect(Object.keys(form.formConfig).length).toBe(8);
   });
 
   it('should init validation errors', () => {
