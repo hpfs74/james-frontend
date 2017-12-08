@@ -51,10 +51,10 @@ describe('Component: Thank You', () => {
     const first = parElements[0].nativeElement;
     expect(first.textContent).toContain('Gefeliciteerd met je nieuwe autoverzekering');
     expect(first.textContent.replace(/\s+/g, ' '))
-      .toContain('De autoverzekeringpolis is verstuurd en zal binnen 3 dagen goedgekeurd worden');
+      .toContain('We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.');
 
     const second = parElements[1].nativeElement;
-    const expectedEmailPar = 'Een kopie van de polis is verstuurd naar test@mail.com';
+    const expectedEmailPar = 'Zodra je polis goedgekeurd is, sturen wij deze naar test@mail.com';
 
     expect(second.textContent).toEqual(expectedEmailPar);
   });

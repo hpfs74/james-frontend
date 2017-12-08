@@ -7,13 +7,12 @@ import { Component, Input } from '@angular/core';
     <div class="container knx-thank-you">
       <div class="row">
         <div class="col">
-          <h2 class="knx-thank-you__title">{{ title }}</h2>
+          <h2 class="knx-thank-you__title">{{title}}</h2>
 
           <p>Gefeliciteerd met je nieuwe {{insuranceType}}.<br>
-          De {{insuranceType}}polis is verstuurd en zal binnen 3 dagen
-          goedgekeurd worden. <br>We houden je op de hoogte!</p>
+          We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed. We houden je hier uiteraard van op de hoogte.</p>
 
-          <p>Een kopie van de polis is verstuurd naar <strong>{{email}}</strong></p>
+          <p>Zodra je polis goedgekeurd is, sturen wij deze naar <strong>{{email}}</strong></p>
           <hr>
         </div>
       </div>
