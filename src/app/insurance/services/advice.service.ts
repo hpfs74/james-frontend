@@ -12,7 +12,7 @@ export class AdviceService {
   private headers: Headers;
 
   constructor(private authHttp: AuthHttp) {
-    this.baseUrl = environment.james.advice;
+    this.baseUrl = environment.james.insuranceAdvice;
     this.headers = new Headers();
 
     this.headers.append('version', 'v2');
@@ -27,7 +27,7 @@ export class AdviceService {
   public removeAdvice(adviceId: string): Observable<any> {
     const headers = this.headers;
     // TODO: remove hardcode
-    return this.authHttp.delete(`https://middleware.test.knabverzekeren.nl/api/v1/proxy/profile/insurance_advice/${adviceId}`, { headers })
+    return this.authHttp.delete(`${this.baseUrl}/${adviceId}`, { headers })
       .map(res => res.json());
   }
 }

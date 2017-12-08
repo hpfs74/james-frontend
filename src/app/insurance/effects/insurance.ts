@@ -14,16 +14,16 @@ import { AuthService } from '../../auth/services/auth.service';
 @Injectable()
 export class InsuranceEffects {
   @Effect()
-  getPurchasedCarInsurances$: Observable<Action> = this.actions$
-    .ofType(insurance.GET_PURCHASED_CAR_INSURANCES)
-    .map((action: insurance.GetPurchasedCarInsurances) => action)
+  getSavedCarInsurances$: Observable<Action> = this.actions$
+    .ofType(insurance.GET_SAVED_CAR_INSURANCES)
+    .map((action: insurance.GetSavedCarInsurances) => action)
     .switchMap(() => {
       if (this.authService.isAnonymous()) {
-        return Observable.of(new insurance.GetPurchasedCarInsurancesSuccess({}));
+        return Observable.of(new insurance.GetSavedCarInsurancesSuccess({}));
       }
       return this.insuranceService.getProfileInsurances()
-        .map((res: Response) => new insurance.GetPurchasedCarInsurancesSuccess(res))
-        .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailure(error)));
+        .map((res: Response) => new insurance.GetSavedCarInsurancesSuccess(res))
+        .catch(error => Observable.of(new insurance.GetSavedCarInsurancesFailure(error)));
     });
 
   constructor(private actions$: Actions, private insuranceService: InsuranceService, private authService: AuthService) {

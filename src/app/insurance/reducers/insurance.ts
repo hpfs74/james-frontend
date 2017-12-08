@@ -7,14 +7,14 @@ export interface State {
   loading: boolean;
   loaded: boolean;
   insurances: Insurance[];
-  purchasedInsurances: any;
+  savedInsurances: any;
 }
 
 export const initialState: State = {
   loading: false,
   loaded: false,
   insurances: [],
-  purchasedInsurances: null
+  savedInsurances: null
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -37,7 +37,7 @@ export function reducer(state = initialState, action: Action): State {
 
     }
 
-    case InsuranceActions.GET_PURCHASED_CAR_INSURANCES: {
+    case InsuranceActions.GET_SAVED_CAR_INSURANCES: {
       return Object.assign({}, state, {
         ...state,
         loaded: false,
@@ -45,7 +45,7 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case InsuranceActions.GET_PURCHASED_CAR_INSURANCES_SUCCESS: {
+    case InsuranceActions.GET_SAVED_CAR_INSURANCES_SUCCESS: {
       let insurances = action.payload;
 
       if (insurances && Object.keys(insurances).length === 0) {
@@ -56,11 +56,11 @@ export function reducer(state = initialState, action: Action): State {
         ...state,
         loaded: true,
         loading: false,
-        purchasedInsurances: insurances
+        savedInsurances: insurances
       });
     }
 
-    case InsuranceActions.GET_PURCHASED_CAR_INSURANCES_FAILURE: {
+    case InsuranceActions.GET_SAVED_CAR_INSURANCES_FAILURE: {
       return Object.assign({}, state, {
         ...state,
         loaded: false,
@@ -77,8 +77,8 @@ export function reducer(state = initialState, action: Action): State {
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getInsurances = (state: State) => state.insurances;
-export const getPurchasedInsurances = (state: State) => state.purchasedInsurances;
+export const getSavedInsurances = (state: State) => state.savedInsurances;
 // TODO: rename
-export const getSavedCarAdvices = (state: State) => state.purchasedInsurances.car.insurance_advice;
-export const getPurchasedInsurancesLoading = (state: State) => state.loading;
-export const getPurchasedInsurancesLoaded = (state: State) => state.loaded;
+export const getSavedCarAdvices = (state: State) => state.savedInsurances.car.insurance_advice;
+export const getSavedInsuranceLoading = (state: State) => state.loading;
+export const getSavedInsuranceLoaded = (state: State) => state.loaded;

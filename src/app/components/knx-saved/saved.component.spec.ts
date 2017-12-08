@@ -5,17 +5,17 @@ import { By } from '@angular/platform-browser';
 import { setUpTestBed } from '../../../test.common.spec';
 import { ContentConfig } from '../../content.config';
 import { ContentConfigMock } from '../../content.mock.spec';
-import { PurchasedComponent } from './purchased.component';
+import { SavedComponent } from './saved.component';
 import { AppPromoBlockComponent } from '../knx-app-promo/app-promo.component';
 
-describe('Component: Purchased', () => {
-  let comp: PurchasedComponent;
-  let fixture: ComponentFixture<PurchasedComponent>;
+describe('Component: Saved', () => {
+  let comp: SavedComponent;
+  let fixture: ComponentFixture<SavedComponent>;
   let de: DebugElement;
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
-    declarations: [PurchasedComponent, AppPromoBlockComponent],
+    declarations: [SavedComponent, AppPromoBlockComponent],
     providers: [
       {
         provide: ContentConfig,
@@ -26,10 +26,10 @@ describe('Component: Purchased', () => {
   setUpTestBed(moduleDef);
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PurchasedComponent);
+    fixture = TestBed.createComponent(SavedComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
-    de = fixture.debugElement.query(By.css('.knx-purchased'));
+    de = fixture.debugElement.query(By.css('.knx-saved'));
     el = de.nativeElement;
   });
 
@@ -58,7 +58,7 @@ describe('Component: Purchased', () => {
 
     fixture.detectChanges();
 
-    let title = de.query(By.css('.knx-purchased__title')).nativeElement;
+    let title = de.query(By.css('.knx-saved__title')).nativeElement;
     expect(title.textContent).toEqual('Hello World');
 
     let parElements = de.queryAll(By.css('.knx-list--unstyled li'));

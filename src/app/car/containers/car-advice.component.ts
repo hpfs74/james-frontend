@@ -90,8 +90,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
   isCoverageError$: Observable<boolean>;
   coverageRecommendation$: Observable<CarCoverageRecommendation>;
   isLoggedIn$: Observable<boolean>;
-  purchasedInsurances$: Observable<any>;
-  purchasedInsurancesLoading$: Observable<any>;
+  savedInsurances$: Observable<any>;
+  savedInsurancesLoading$: Observable<any>;
 
   subscription$: Array<any>;
 
@@ -134,8 +134,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
-    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
-    this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
+    this.savedInsurancesLoading$ = this.store$.select(fromInsurance.getSavedInsuranceLoading);
 
     // initialize forms
     const formBuilder = new FormBuilder();
@@ -155,16 +155,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     // Do actions if user has insurance saved in profile
     this.subscription$.push(
-      this.purchasedInsurances$
-        .filter(purchasedInsurances => purchasedInsurances !== null)
+      this.savedInsurances$
+        .filter(savedInsurances => savedInsurances !== null)
         .take(1)
-        .subscribe(purchasedInsurances => {
-          const insurances = purchasedInsurances.car.insurance;
-          const advices = purchasedInsurances.car.insurance_advice;
+        .subscribe(savedInsurances => {
+          const insurances = savedInsurances.car.insurance;
+          const advices = savedInsurances.car.insurance_advice;
 
           if (insurances.length && insurances.filter(insurance =>
             (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
-            // redirect to purchased overview if there are any manually added insurances
+            // redirect to saved overview if there are any manually added insurances
             this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
           } else if (insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
             // Proceed to the buy flow for anonymous with advice

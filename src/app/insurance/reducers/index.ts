@@ -40,8 +40,8 @@ export const getSelectedAdviceId = createSelector(getAdviceState, fromAdvice.get
 export const getSelectedAdvice = createSelector(getAdviceState, fromAdvice.getSelected);
 export const getSelectedInsurance = createSelector(getAdviceState, fromAdvice.getSelectedInsurance);
 
-export const getPurchasedInsurance = createSelector(getInsurancesState, fromInsurances.getPurchasedInsurances);
+export const getSavedInsurance = createSelector(getInsurancesState, fromInsurances.getSavedInsurances);
 // TODO: rename
 export const getSavedCarAdvices = createSelector(getInsurancesState, fromInsurances.getSavedCarAdvices);
-export const getPurchasedInsuranceLoading = createSelector(getInsurancesState, fromInsurances.getPurchasedInsurancesLoading);
-export const getPurchasedInsuranceLoaded = createSelector(getInsurancesState, fromInsurances.getPurchasedInsurancesLoaded);
+export const getSavedInsuranceLoading = createSelector(getInsurancesState, fromInsurances.getSavedInsuranceLoading);
+export const getSavedInsuranceLoaded = createSelector(getInsurancesState, fromInsurances.getSavedInsuranceLoaded);

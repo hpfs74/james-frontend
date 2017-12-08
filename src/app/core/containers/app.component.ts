@@ -75,7 +75,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         }
       });
 
-    this.store$.dispatch(new insurance.GetPurchasedCarInsurances());
+    this.store$.dispatch(new insurance.GetSavedCarInsurances());
   }
 
   initModals() {
