@@ -23,4 +23,11 @@ export class AdviceService {
     return this.authHttp.get(`${this.baseUrl}/${adviceId}`, { headers })
       .map(res => res.json());
   }
+
+  public removeAdvice(adviceId: string): Observable<any> {
+    const headers = this.headers;
+    // TODO: remove hardcode
+    return this.authHttp.delete(`https://middleware.test.knabverzekeren.nl/api/v1/proxy/profile/insurance_advice/${adviceId}`, { headers })
+      .map(res => res.json());
+  }
 }

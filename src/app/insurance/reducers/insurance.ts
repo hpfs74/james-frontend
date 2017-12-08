@@ -78,5 +78,7 @@ export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getInsurances = (state: State) => state.insurances;
 export const getPurchasedInsurances = (state: State) => state.purchasedInsurances;
+// TODO: rename
+export const getSavedCarAdvices = (state: State) => state.purchasedInsurances.car.insurance_advice;
 export const getPurchasedInsurancesLoading = (state: State) => state.loading;
 export const getPurchasedInsurancesLoaded = (state: State) => state.loaded;
