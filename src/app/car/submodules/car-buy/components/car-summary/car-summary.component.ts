@@ -29,13 +29,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
 import { ContentConfig, Content } from '@app/content.config';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'knx-car-summary-form',
   styleUrls: ['./car-summary.component.scss'],
   templateUrl: 'car-summary.component.html'
 })
-export class CarSummaryComponent implements QaIdentifier, OnInit {
+export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   qaRootId = QaIdentifiers.carSummary;
   profile$: Observable<Profile>;
   insurance$: Observable<CarInsurance | InsuranceAdvice>;
@@ -48,6 +49,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit {
   error$: Observable<KNXStepError>;
   content: Content;
   isAnonymous$: Observable<any>;
+  subscription$: Subscription[] = [];
   constructor(private tagsService: TagsService,
               private store$: Store<fromRoot.State>,
               public asyncPipe: AsyncPipe,
@@ -69,6 +71,10 @@ export class CarSummaryComponent implements QaIdentifier, OnInit {
 
   ngOnInit() {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.summary', clear: true}));
+  }
+
+  ngOnDestroy() {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   isValidInsurance(obj: any) {
@@ -158,12 +164,18 @@ export class CarSummaryComponent implements QaIdentifier, OnInit {
           }));
         }
 
-        // Navigate to thank you page
-        return this.store$.select(fromProfile.getProfile)
+        let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
+            this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
+              .subscribe(SavedCarAdvices => {
+                this.store$.dispatch(new advice.Remove(SavedCarAdvices[0]._id));
+              });
             return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
+
+        this.subscription$.push(subscription);
+        // Navigate to thank you page
       });
   }
 

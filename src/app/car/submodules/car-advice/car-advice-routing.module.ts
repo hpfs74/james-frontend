@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarAdviceComponent } from './containers/car-advice/car-advice.component';
-import { CarPurchasedComponent } from './containers/car-purchased/car-purchased.component';
+import { CarSavedComponent } from './containers/car-saved/car-saved.component';
 
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarExtrasComponent } from './components/car-extras/car-extras.component';
@@ -38,7 +38,7 @@ export const carAdviceRoutes: Routes = [
   },
   {
     path: 'purchased',
-    component: CarPurchasedComponent
+    component: CarSavedComponent
   },
   {
     path: 'thank-you',

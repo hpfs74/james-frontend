@@ -14,7 +14,7 @@ import { TagsLoader } from '../../../utils/tagsloader';
 
 // Smart components
 import { CarAdviceComponent } from './containers/car-advice/car-advice.component';
-import { CarPurchasedComponent } from './containers/car-purchased/car-purchased.component';
+import { CarSavedComponent } from './containers/car-saved/car-saved.component';
 // Dumb components
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarExtrasComponent } from './components/car-extras/car-extras.component';
@@ -27,7 +27,7 @@ import { CarThankYouComponent } from '@app/car/submodules/car-advice/components/
 
 export const COMPONENTS = [
   CarAdviceComponent,
-  CarPurchasedComponent,
+  CarSavedComponent,
   CarDetailComponent,
   CarExtrasComponent,
   InsuranceTopListComponent,

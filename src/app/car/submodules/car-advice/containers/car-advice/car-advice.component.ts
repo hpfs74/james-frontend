@@ -65,8 +65,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   chatMessages$: Observable<Array<ChatMessage>>;
   // State of the advice forms data
   isLoggedIn$: Observable<boolean>;
-  purchasedInsurances$: Observable<any>;
-  purchasedInsurancesLoading$: Observable<any>;
+  savedInsurances$: Observable<any>;
+  savedInsurancesLoading$: Observable<any>;
   subscription$: Array<any>;
 
   // Forms
@@ -100,8 +100,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
-    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
-    this.purchasedInsurancesLoading$ = this.store$.select(fromInsurance.getPurchasedInsuranceLoading);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
+    this.savedInsurancesLoading$ = this.store$.select(fromInsurance.getSavedInsuranceLoading);
     // initialize forms
     const formBuilder = new FormBuilder();
 
@@ -113,7 +113,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       this.tagsService.getAsLabelValue('car_own_risk'));
 
     this.subscription$.push(
-      this.purchasedInsurances$
+      this.savedInsurances$
         .filter(purchasedInsurances => purchasedInsurances !== null)
         .take(1)
         .subscribe(purchasedInsurances => {

@@ -12,13 +12,13 @@ import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromProfile from '../../../../../profile/reducers';
 import * as router from '../../../../../core/actions/router';
 @Component({
-  selector: 'knx-car-purchased',
-  templateUrl: './car-purchased.component.html'
+  selector: 'knx-car-saved',
+  templateUrl: './car-saved.component.html'
 })
-export class CarPurchasedComponent implements AfterViewInit, OnInit {
+export class CarSavedComponent implements AfterViewInit, OnInit {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
-  purchasedInsurances$: Observable<any>;
+  savedInsurances$: Observable<any>;
   profile$: Observable<any>;
   email: string;
   firstName: string;
@@ -30,7 +30,7 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.profile$.subscribe(profile => {
         this.firstName = profile.firstname || '';
         this.email = profile.emailaddress || '';
