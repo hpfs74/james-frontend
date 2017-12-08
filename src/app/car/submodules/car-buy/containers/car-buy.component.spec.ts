@@ -36,7 +36,7 @@ import { SharedModule } from '../../../../shared.module';
 import { TagsService } from '../../../../core/services/tags.service';
 import { TagsServiceMock } from '../../../../core/services/tags.service.mock.spec';
 
-import { BuyCompleteAction, BuyFailureAction } from '../../../../car/actions/car';
+import { BuyComplete, BuyFailure } from '../../../../car/actions/car';
 import { Profile } from '../../../../profile/models/profile';
 
 export function getInitialState() {

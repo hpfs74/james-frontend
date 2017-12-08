@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit,  } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -38,7 +38,7 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
   styleUrls: ['./car-detail.component.scss'],
   templateUrl: 'car-detail.component.html'
 })
-export class CarDetailComponent implements AfterViewInit, OnDestroy {
+export class CarDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   qaRootId = QaIdentifiers.carDetails;
   form: CarDetailForm;
   addressForm: AddressForm;
@@ -57,7 +57,6 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
     this.selectInitalStates();
-    this.initializeForms();
     this.setInitialSubscriptions();
     this.currentStepOptions = {
       label: 'Je gegevens',
@@ -65,6 +64,10 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       hideBackButton: true,
       hideNextButton: true
     };
+  }
+
+  ngOnInit() {
+    this.initializeForms();
   }
 
   selectInitalStates(): void {
@@ -270,7 +273,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  goToNextStep(event) {
+  goToNextStep(event?: any) {
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
     FormUtils.validateForm(detailForm);

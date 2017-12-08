@@ -53,7 +53,6 @@ enum carFormSteps {
   carDetails,
   compareResults
 }
-declare var window: any;
 @Component({
   templateUrl: 'car-advice.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -91,7 +90,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   ngOnInit() {
-    window.routes = this;
     this.store$.dispatch(new assistant.UpdateConfigAction({
       avatar: {
         title: 'Expert autoverzekeringen'

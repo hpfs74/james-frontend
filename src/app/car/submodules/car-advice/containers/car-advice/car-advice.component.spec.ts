@@ -39,6 +39,10 @@ import { ContentConfig } from '../../../../../content.config';
 import { ContentConfigMock } from '../../../../../content.mock.spec';
 import { TagsService } from '../../../../../core/services/tags.service';
 import { TagsServiceMock } from '../../../../../core/services/tags.service.mock.spec';
+import { Router, RouterModule } from '@angular/router';
+import { KNXWizardRxService } from '@app/core/services/wizard.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -52,6 +56,7 @@ describe('Component: CarAdviceComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        RouterTestingModule,
         SharedModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
@@ -74,6 +79,10 @@ describe('Component: CarAdviceComponent', () => {
         {
           provide: ContentConfig,
           useValue: ContentConfigMock
+        },
+        {
+          provide: KNXWizardRxService,
+          useValue: KNXWizardServiceMock
         }
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -93,177 +102,46 @@ describe('Component: CarAdviceComponent', () => {
     fixture.detectChanges();
   });
 
-  // describe('Initialization', () => {
-  //   it('should bind a validator for license plate', () => {
-  //     const ctrl = comp.carDetailForm.formGroup.get('licensePlate');
-  //     expect(ctrl).toBeDefined();
-  //     expect(ctrl.asyncValidator).toBeDefined();
-  //   });
+  describe('Initialization', () => {
+    // it('should bind a validator for license plate', () => {
+    //   const ctrl = comp.carDetailForm.formGroup.get('licensePlate');
+    //   expect(ctrl).toBeDefined();
+    //   expect(ctrl.asyncValidator).toBeDefined();
+    // });
 
-  //   it('should init child component forms', () => {
-  //     expect(comp.carDetailForm).toBeDefined();
-  //     expect(comp.carDetailForm.formGroup).toBeDefined();
-  //     expect(comp.carExtrasForm).toBeDefined();
-  //   });
+    // it('should init child component forms', () => {
+    //   expect(comp.carDetailForm).toBeDefined();
+    //   expect(comp.carDetailForm.formGroup).toBeDefined();
+    //   expect(comp.carExtrasForm).toBeDefined();
+    // });
 
-  //   it('should init the form template', () => {
-  //     const element = fixture.debugElement.query(By.css('form'));
-  //     expect(element).toBeDefined();
-  //     expect(comp).toBeDefined();
-  //   });
+    it('should init the form template', () => {
+      const element = fixture.debugElement.query(By.css('form'));
+      expect(element).toBeDefined();
+      expect(comp).toBeDefined();
+    });
 
-  //   it('should have a CarExtraForm init with proper default values', () => {
-  //     const carExtraForm = comp.carExtrasForm;
+    it('should have a CarExtraForm init with proper default values', () => {
+      const carExtraForm = comp.carExtrasForm;
 
-  //     expect(carExtraForm.formConfig.extraOptionsLegal).toBeDefined();
-  //     expect(carExtraForm.formConfig.extraOptionsNoClaim).toBeDefined();
-  //     expect(carExtraForm.formConfig.extraOptionsOccupants).toBeDefined();
+      expect(carExtraForm.formConfig.extraOptionsLegal).toBeDefined();
+      expect(carExtraForm.formConfig.extraOptionsNoClaim).toBeDefined();
+      expect(carExtraForm.formConfig.extraOptionsOccupants).toBeDefined();
 
-  //     expect(carExtraForm.formConfig.roadAssistance).toBeDefined();
-  //     expect(carExtraForm.formConfig.ownRisk).toBeDefined();
-  //     expect(carExtraForm.formConfig.kmPerYear).toBeDefined();
-  //   });
+      expect(carExtraForm.formConfig.roadAssistance).toBeDefined();
+      expect(carExtraForm.formConfig.ownRisk).toBeDefined();
+      expect(carExtraForm.formConfig.kmPerYear).toBeDefined();
+    });
 
-  //   it('should bind async validator for car info', () => {
-  //     comp.ngAfterViewChecked();
-  //     fixture.detectChanges();
+    // it('should bind async validator for car info', () => {
+    //   comp.ngAfterViewChecked();
+    //   fixture.detectChanges();
 
-  //     let licenseInput = comp.carDetailForm.formGroup.get('licensePlate');
-  //     expect(licenseInput).toBeDefined();
-  //     expect(licenseInput.validator.length).toBeGreaterThan(0);
-  //   });
-  // });
-
-  // describe('Car Advice Flow', () => {
-  //   it('should not go to next step on invalid details form', () => {
-
-  //     comp.carDetailForm.formGroup.get('licensePlate').setValue('92HXK9');
-  //     comp.carDetailForm.formGroup.get('loan').setValue(true);
-
-  //     expect(comp.currentStep).toEqual(0);
-  //     expect(comp.carDetailForm.formGroup.valid).toBeFalsy();
-
-  //     const element = fixture.debugElement.query(By.css('.knx-car-advice--step-1 .knx-wizard__buttons .knx-button--primary'));
-  //     if (element) {
-  //       const button = element.nativeElement;
-  //       button.click();
-  //       fixture.detectChanges();
-  //       expect(comp.currentStep).toEqual(0);
-  //     }
-  //   });
-
-  //   it('should dispatch a car compare action', async(() => {
-  //     comp.carDetailForm.formGroup.get('licensePlate').clearAsyncValidators();
-  //     comp.addressForm.formGroup.clearAsyncValidators();
-
-  //     const licensePlateValue = 'GK906T';
-  //     const birthDateValue = new Date(1989, 11, 19);
-  //     const claimFreeYearsValue = 1;
-  //     const houseHoldvalue = 'CHM';
-  //     const activeLoanValue = false;
-  //     const genderValue = 'M';
-  //     const titleValue = 'Dhr.';
-  //     const coverageValue = 'CL';
-  //     const postalCodeValue = '2518CB';
-  //     const cityValue = 's-Gravenhage';
-  //     const houseNumberValue = '45';
-  //     const countryValue = 'NL';
-
-  //     const address = {
-  //       number: houseNumberValue,
-  //       postcode: postalCodeValue,
-  //       street: '',
-  //       city: cityValue,
-  //       county: '',
-  //       province: '',
-  //       fullname: '',
-  //       location: null
-  //     };
-
-  //     const action = new advice.UpdateAction(Object.assign({}, {
-  //       active_loan: activeLoanValue,
-  //       coverage: coverageValue,
-  //       claim_free_years: claimFreeYearsValue,
-  //       household_status: houseHoldvalue,
-  //       license: licensePlateValue,
-  //       gender: genderValue,
-  //       title: titleValue,
-  //       date_of_birth: '1989-12-19',
-  //       zipcode: postalCodeValue,
-  //       city: cityValue,
-  //       house_number: houseNumberValue,
-  //       country: countryValue,
-  //       kilometers_per_year: 'KMR3',
-  //       own_risk: 135,
-  //       cover_occupants: false,
-  //       legal_aid: 'LAN',
-  //       no_claim_protection: false,
-  //       road_assistance: 'RANO',
-  //       insurance_id: ''
-  //     }, { address: address }));
-
-  //     const car = {
-  //       _id: 'GK906T',
-  //       license: 'GK906T',
-  //       vin: null,
-  //       reporting_code: null,
-  //       year: '2012',
-  //       fuel: 'Benzine',
-  //       fuel_code: 'B',
-  //       secondary_fuel: null,
-  //       color: 'zwart',
-  //       color_code: null,
-  //       secondary_color: null,
-  //       secondary_color_code: null,
-  //       weight_empty_vehicle: 1125,
-  //       price_consumer_excl_vat: 29136,
-  //       price_consumer_incl_vat: 34003,
-  //       make: 'AUDI',
-  //       model: 'A1',
-  //       technical_type: '1.4 TFSI PRO LINE S',
-  //       wheels: 4,
-  //       top_speed: 203,
-  //       engine_capacity: 1390,
-  //       power_kw: 90,
-  //       edition: '1.4 TFSI PRO LINE S',
-  //       doors: 5,
-  //       current_value: 16326,
-  //       nicci_cartransmission_automatic_transmission: 'Automaat'
-  //     } as Car;
-
-  //     comp.address$ = Observable.of(address);
-  //     comp.car$ = Observable.of(car);
-
-  //     comp.carDetailForm.formGroup.get('licensePlate').setValue(licensePlateValue);
-  //     comp.carDetailForm.formGroup.get('birthDate').setValue(birthDateValue);
-  //     comp.carDetailForm.formGroup.get('claimFreeYears').setValue(claimFreeYearsValue);
-  //     comp.carDetailForm.formGroup.get('houseHold').setValue(houseHoldvalue);
-  //     comp.carDetailForm.formGroup.get('loan').setValue(activeLoanValue);
-  //     comp.carDetailForm.formGroup.get('gender').setValue(genderValue);
-  //     comp.carDetailForm.formGroup.get('coverage').setValue(coverageValue);
-
-  //     comp.addressForm.formGroup.get('houseNumber').setValue(houseNumberValue);
-  //     comp.addressForm.formGroup.get('postalCode').setValue(postalCodeValue);
-
-  //     comp.carDetailForm.formGroup.updateValueAndValidity();
-  //     comp.addressForm.formGroup.updateValueAndValidity();
-
-  //     fixture.detectChanges();
-
-  //     fixture.whenStable().then(() => {
-
-  //       expect(comp.carDetailForm.formGroup.valid).toBeTruthy();
-  //       expect(comp.addressForm.formGroup.valid).toBeTruthy();
-
-  //       fixture.detectChanges();
-  //       // Submit detail form
-  //       let obs$ = comp.submitDetailForm();
-  //       obs$.subscribe((res) => {
-  //         expect(store.dispatch).toHaveBeenCalledWith(action);
-  //       });
-  //     });
-  //   }));
-  // });
+    //   let licenseInput = comp.carDetailForm.formGroup.get('licensePlate');
+    //   expect(licenseInput).toBeDefined();
+    //   expect(licenseInput.validator.length).toBeGreaterThan(0);
+    // });
+  });
 
   // describe('Car Info', () => {
   //   it('should load car info', async(() => {

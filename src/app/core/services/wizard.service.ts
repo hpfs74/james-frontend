@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-declare var window: any;
 @Injectable()
 export class KNXWizardRxService {
 
@@ -12,12 +11,10 @@ export class KNXWizardRxService {
   public routeObservable: Observable<any>;
   constructor(public router: Router, route: ActivatedRoute) {
     // console.log('welcome to wizard service');
-    window.activeState = this;
     this.routeObservable = router.events;
     this.routeObservable.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // console.log(route);
-        window.activeStateRoute = route;
         // Traverse the active route tree
         let snapshot = route.snapshot;
         let activated = route.firstChild;
