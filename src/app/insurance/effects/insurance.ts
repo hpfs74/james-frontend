@@ -26,6 +26,5 @@ export class InsuranceEffects {
         .catch(error => Observable.of(new insurance.GetPurchasedCarInsurancesFailure(error)));
     });
 
-  constructor(private actions$: Actions, private insuranceService: InsuranceService, private authService: AuthService) {
-  }
+  constructor(private actions$: Actions, private insuranceService: InsuranceService, private authService: AuthService) {}
 }

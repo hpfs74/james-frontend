@@ -1,5 +1,10 @@
+import { Inject } from '@angular/core';
 import { RouterStateSerializer } from '@ngrx/router-store';
 import { RouterStateSnapshot, Params } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import * as fromRoot from '../reducers';
+import * as fromAuth from '../auth/reducers';
 
 /**
  * The RouterStateSerializer takes the current RouterStateSnapshot
@@ -13,14 +18,22 @@ import { RouterStateSnapshot, Params } from '@angular/router';
 export interface RouterStateUrl {
   url: string;
   queryParams: Params;
+  data: any;
 }
 
 export class CustomRouterStateSerializer
   implements RouterStateSerializer<RouterStateUrl> {
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
+    let loggedIn = false;
+    this.store$.select(fromAuth.getLoggedIn).subscribe((isLoggedIn) => {
+      loggedIn = isLoggedIn;
+    });
+
     const { url } = routerState;
     const queryParams = routerState.root.queryParams;
 
-    return { url, queryParams };
+    return { url, queryParams, data: { isLoggedIn: loggedIn } };
   }
+
+  constructor(@Inject(Store) private store$: Store<fromRoot.State>) {}
 }

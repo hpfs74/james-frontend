@@ -17,6 +17,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { environment } from '@env/environment';
 
 // @knx
 import { KNXFormsModule } from '@knx/forms';
@@ -28,6 +29,7 @@ import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXTooltipModule } from '@knx/tooltip';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXAvatarComponent } from '@knx/avatar';
+import { KNXFeatureToggleModule } from '@knx/feature-toggle';
 
 // TODO: consider moving to shared library
 import { KNXHamburgerComponent } from './components/knx-hamburger/knx-hamburger.component';
@@ -181,6 +183,7 @@ export const sharedModules = [
     ReactiveFormsModule,
     TextMaskModule,
     AngularSvgIconModule,
+    KNXFeatureToggleModule.forRoot(environment.featureToggles),
     ...sharedModules
   ],
   declarations: [
@@ -192,6 +195,7 @@ export const sharedModules = [
     ...sharedModules,
     ReactiveFormsModule,
     AngularSvgIconModule,
+    KNXFeatureToggleModule,
     ...sharedComponents,
   ]
 })

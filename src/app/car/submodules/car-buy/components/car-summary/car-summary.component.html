@@ -172,7 +172,7 @@
 
           <knx-ir-row>
             <knx-ir-label>E-mailadres</knx-ir-label>
-            <knx-ir-value>{{ (profile$ | async).emailaddress }}</knx-ir-value>
+            <knx-ir-value>{{ (profile$ | async).emailaddress || (advice$ | async).emailaddress }}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
 
@@ -206,8 +206,19 @@
             </knx-checkbox>
           </div>
         </div>
-      </div>
 
+        <div *ngIf="isAnonymous$ | async" class="row knx-car-summary__terms">
+          <div class="col col-sm-12">
+            <knx-checkbox class="knx-car-summary__checkbox" [(ngModel)]="confirmTerms">
+              Ik ga akkoord met de
+              <a class="knx-registration__document-link" href="{{ content.externalLinks.termsAndConditions }}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
+              en het
+              <a class="knx-registration__document-link" href="{{ content.externalLinks.privacyStatement }}" target="_blank" rel="noopener">privacybeleid</a>
+              van Knab.
+            </knx-checkbox>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"

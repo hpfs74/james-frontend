@@ -114,6 +114,9 @@ function getContent(environment: string) {
   export const environment = {
     production: ${isProd},
     enableAnalytics: ${enableAnalytics},
+    featureToggles: {
+      enableBuyFlowEmail: true
+    },
     external: {
       registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
       login: '${getEnvVar('LOGIN')}'

@@ -22,10 +22,13 @@ import * as fromCar from '../../../../../car/reducers';
 import * as car from '../../../../../car/actions/car';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
+import * as fromAuth from '@app/auth/reducers';
 
 import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
+import { ContentConfig, Content } from '@app/content.config';
 
 @Component({
   selector: 'knx-car-summary-form',
@@ -39,12 +42,18 @@ export class CarSummaryComponent implements QaIdentifier, OnInit {
   advice$: Observable<any>;
   car$: Observable<any>;
   acceptFinalTerms: boolean;
+  confirmTerms: boolean;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
+  content: Content;
+  isAnonymous$: Observable<any>;
   constructor(private tagsService: TagsService,
               private store$: Store<fromRoot.State>,
-              public asyncPipe: AsyncPipe) {
+              public asyncPipe: AsyncPipe,
+              public contentConfig: ContentConfig) {
+    this.isAnonymous$ = this.store$.select(fromAuth.getLoggedIn).map(isLoggedIn => !isLoggedIn);
+    this.content = contentConfig.getContent();
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.profile$ = this.store$.select(fromProfile.getProfile);
@@ -120,7 +129,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit {
   }
 
   goToNextStep() {
-    if (!this.acceptFinalTerms) {
+    if (!this.acceptFinalTerms || !this.confirmTerms) {
       return this.store$.dispatch(new wizardActions.Error({message: 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'}));
     }
 
