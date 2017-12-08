@@ -12,13 +12,13 @@ import * as fromInsurance from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 import { SharedModule } from '../../shared.module';
-import { CarPurchasedComponent } from './car-purchased.component';
+import { CarSavedComponent } from './car-saved.component';
 import { ContentConfig } from '../../content.config';
 import { ContentConfigMock } from '../../content.mock.spec';
 
-describe('Component: CarPurchasedComponent', () => {
-  let comp: CarPurchasedComponent;
-  let fixture: ComponentFixture<CarPurchasedComponent>;
+describe('Component: CarSavedComponent', () => {
+  let comp: CarSavedComponent;
+  let fixture: ComponentFixture<CarSavedComponent>;
   let store: Store<fromCar.State>;
 
   beforeEach(async(() => {
@@ -36,7 +36,7 @@ describe('Component: CarPurchasedComponent', () => {
         })
       ],
       declarations: [
-        CarPurchasedComponent
+        CarSavedComponent
       ],
       providers: [
         {
@@ -52,14 +52,14 @@ describe('Component: CarPurchasedComponent', () => {
   }));
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(CarPurchasedComponent);
+    fixture = TestBed.createComponent(CarSavedComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   }));
 
   describe('Initialization', () => {
     it('should init the component', () => {
-      const element = fixture.debugElement.query(By.css('.knx-car-purchased'));
+      const element = fixture.debugElement.query(By.css('.knx-car-saved'));
       expect(element).toBeDefined();
       expect(comp).toBeDefined();
     });

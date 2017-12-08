@@ -1,18 +1,18 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'knx-purchased',
-  styleUrls: ['./purchased.component.scss'],
+  selector: 'knx-saved',
+  styleUrls: ['./saved.component.scss'],
   template: `
-    <div class="container knx-purchased">
+    <div class="container knx-saved">
       <div class="row">
         <div class="col">
-          <p class="knx-purchased__title">{{ title }}</p>
+          <p class="knx-saved__title">{{ title }}</p>
 
           <ul class="knx-list--unstyled">
             <li *ngFor="let insurance of insurances?.car?.insurance">
               <div *ngIf="!insurance.manually_added">
-                <div class="knx-purchased__icon knx-icon-automobile pull-left"></div>
+                <div class="knx-saved__icon knx-icon-automobile pull-left"></div>
 
                 <p>
                   {{insurance.license}} | {{insurance.make}} {{insurance.model}}
@@ -33,7 +33,7 @@ import { Component, Input } from '@angular/core';
     </div>
   `
 })
-export class PurchasedComponent {
+export class SavedComponent {
   @Input() title: string;
   @Input() insurances: any;
 }

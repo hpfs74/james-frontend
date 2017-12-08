@@ -22,6 +22,7 @@ import * as auth from '../../auth/actions/auth';
 
 import * as car from '../../car/actions/car';
 import * as advice from '../../insurance/actions/advice';
+import * as insurance from '../../insurance/actions/insurance';
 import * as compare from '../../car/actions/compare';
 
 import { AssistantConfig } from '../../core/models/assistant';
@@ -230,6 +231,10 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
         let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
+            this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
+              .subscribe(SavedCarAdvices => {
+                this.store$.dispatch(new advice.Remove(SavedCarAdvices[0]._id));
+              });
             return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
 

@@ -14,7 +14,7 @@ import { TagsLoader } from '../utils/tagsloader';
 
 // Smart components / page containers
 import { CarAdviceComponent } from './containers/car-advice.component';
-import { CarPurchasedComponent } from './containers/car-purchased.component';
+import { CarSavedComponent } from './containers/car-saved.component';
 import { CarThankYouComponent } from './containers/car-thank-you.component';
 
 // Dumb components
@@ -29,7 +29,7 @@ import { reducers } from './reducers';
 
 export const COMPONENTS = [
   CarAdviceComponent,
-  CarPurchasedComponent,
+  CarSavedComponent,
   CarDetailComponent,
   CarExtrasComponent,
   CarThankYouComponent

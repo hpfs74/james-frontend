@@ -23,6 +23,16 @@ export class AdviceEffects {
         .catch(error => Observable.of(new advice.GetFailure(error)));
     });
 
+  @Effect()
+  removeAdvice$: Observable<Action> = this.actions$
+    .ofType(advice.REMOVE_ADVICE)
+    .map((action: advice.Remove) => action.payload)
+    .switchMap((adviceId) => {
+      return this.adviceService.removeAdvice(adviceId)
+        .map((res: Response) => new advice.RemoveSuccess(res))
+        .catch(error => Observable.of(new advice.RemoveFailure(error)));
+    });
+
   constructor(private actions$: Actions, private adviceService: AdviceService) {
   }
 }
