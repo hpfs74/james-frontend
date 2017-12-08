@@ -10,10 +10,22 @@ import { logger } from 'redux-beacon/extensions/logger';
 import { environment } from '@env/environment';
 import { AnalyticsAction } from '../actions/analytics';
 
-export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): PageView {
+interface KnabPageView {
+    hitType: 'pageview';
+    page?: string;
+    title?: string;
+    location?: string;
+    'loggedin verzekeren'?: string;
+}
+
+export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): KnabPageView /* PageView */ {
+  // Custom value included in routersnapshot
+  const loggedIn = action.payload.event.state['data'].isLoggedIn || false;
+
   return {
     hitType: 'pageview',
-    page: action.payload.routerState.url
+    page: action.payload.routerState.url,
+    'loggedin verzekeren': loggedIn ? 'y' : 'n'
   };
 }
 

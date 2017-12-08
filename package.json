@@ -13,7 +13,7 @@
     "build": "npm run config -- --analytics=true && ng build --locale --aot --build-optimizer --stats-json",
     "build:prod": "npm run config -- --environment=prod --analytics=true && ng build --prod --environment=prod --locale --build-optimizer --stats-json",
     "serve:prod": "ng serve --open --locale --prod",
-    "serve:gtm": "npm run config -- --analytics=true && ng serve --open --locale",
+    "serve:gtm": "npm run config -- --analytics=true && ng serve --open --locale --aot",
     "test:watch": "ng test --code-coverage --watch --sourcemaps=true",
     "test": "npm run config && ng test --code-coverage --single-run --sourcemaps=false",
     "test:phantomjs": "npm run config && ng test --code-coverage --single-run --sourcemaps=false --browsers 'PhantomJS'",
