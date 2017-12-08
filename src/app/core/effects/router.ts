@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Effect, Actions } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
 import * as RouterActions from '../actions/router';
-import * as fromAuth from '../../auth/reducers';
 
 @Injectable()
 export class RouterEffects {
@@ -29,7 +27,6 @@ export class RouterEffects {
   constructor(
     private actions$: Actions,
     private router: Router,
-    private location: Location,
-    private store$: Store<fromAuth.State>
+    private location: Location
   ) {}
 }
