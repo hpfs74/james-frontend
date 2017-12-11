@@ -172,11 +172,7 @@
 
           <knx-ir-row>
             <knx-ir-label>E-mailadres</knx-ir-label>
-<<<<<<< HEAD:src/app/car/submodules/car-buy/components/car-summary/car-summary.component.html
-            <knx-ir-value>{{ (profile$ | async).emailaddress || (advice$ | async).emailaddress }}</knx-ir-value>
-=======
-            <knx-ir-value>{{ profile.emailaddress || advice.email || advice.emailaddress }}</knx-ir-value>
->>>>>>> origin/master:src/app/car-buy/components/car-summary.component.html
+            <knx-ir-value>{{ (profile$ | async).emailaddress || (advice$ | async).emailaddress || (advice$ | async).email }}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
 
@@ -201,7 +197,6 @@
         </knx-ir-content>
       </div>
 
-<<<<<<< HEAD:src/app/car/submodules/car-buy/components/car-summary/car-summary.component.html
       <div class="container">
         <div class="row knx-car-summary__terms">
           <div class="col col-sm-12">
@@ -223,21 +218,6 @@
             </knx-checkbox>
           </div>
         </div>
-=======
-      <div class="knx-car-summary__terms">
-        <knx-checkbox class="knx-car-summary__checkbox"
-          [(ngModel)]="confirm"
-          [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
-        </knx-checkbox>
-
-        <knx-checkbox *ngIf="showKnabTerms" class="knx-car-summary__checkbox" [(ngModel)]="confirmTerms">
-          Ik ga akkoord met de
-          <a class="knx-registration__document-link" href="{{termsAndConditionsUrl}}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
-          en het
-          <a class="knx-registration__document-link" href="{{privacyStatementUrl}}" target="_blank" rel="noopener">privacybeleid</a>
-          van Knab.
-        </knx-checkbox>
->>>>>>> origin/master:src/app/car-buy/components/car-summary.component.html
       </div>
   </div>
 </div>

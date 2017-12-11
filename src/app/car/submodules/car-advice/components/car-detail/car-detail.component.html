@@ -17,7 +17,7 @@
 
             <knx-async-preview
             [loading]="isCarLoading$ | async"
-            [loaded]="!(isCarFailed | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
+            [loaded]="!(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
               <knx-car-info [data]="car$ | async"></knx-car-info>
           </knx-async-preview>
           </div>
@@ -124,11 +124,11 @@
           (onSelected)="updateSelectedCoverage($event)">
         </knx-price-table>
 
-        <div class="knx-message knx-message--error" *ngIf="isCoverageError">
+        <div class="knx-message knx-message--error" *ngIf="isCoverageError$ | async">
           Er is een fout opgetreden bij het ophalen van het dekkingsadvies.
         </div>
 
-        <knx-loader [visible]="isCoverageLoading">
+        <knx-loader [visible]="isCoverageLoading$ | async">
           Een momentje! We vergelijken meer dan 20 verschillende aanbieders voor je om de beste match te vinden.
         </knx-loader>
       </div>
@@ -139,6 +139,5 @@
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
-                     (onNext)="goToNextStep($event)"
-                     (onBack)="goToPreviousStep($event)">
+                     (onNext)="goToNextStep($event)">
 </knx-wizard-controls>

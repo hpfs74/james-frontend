@@ -63,7 +63,7 @@ export class CarReviewComponent implements OnInit, OnDestroy {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  goToNextStep() {
+  goToNextStep(event: any) {
     if (!this.showStepBlock) {
       window.open(this.asyncPipe.transform(this.selectedInsurance$)._embedded.insurance.url, '_blank');
     } else {
@@ -84,7 +84,7 @@ export class CarReviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  goToPreviousStep() {
+  goToPreviousStep(event: any) {
     this.store$.dispatch(new wizardActions.Back());
   }
 }

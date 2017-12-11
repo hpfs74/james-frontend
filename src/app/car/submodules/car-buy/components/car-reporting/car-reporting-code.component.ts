@@ -95,11 +95,11 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.fill'}));
   }
 
-  goToPreviousStep() {
+  goToPreviousStep(event: any) {
     this.store$.dispatch(new wizardActions.Back());
   }
 
-  goToNextStep() {
+  goToNextStep(event: any) {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));

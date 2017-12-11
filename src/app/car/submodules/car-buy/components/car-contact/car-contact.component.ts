@@ -20,6 +20,7 @@ import * as compare from '../../../../../car/actions/compare';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as auth from '@app/auth/actions/auth';
+import * as fromProfile from '../../../../../profile/reducers';
 
 @Component({
   selector: 'knx-car-contact-form',
@@ -33,12 +34,14 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
   subscription$: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
+  profile$: Observable<any>;
 
   constructor(private store$: Store<fromRoot.State>) {
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     const formBuilder = new FormBuilder();
     this.form = new ContactDetailForm(formBuilder);
     this.error$ = this.store$.select(fromCore.getWizardError);
+    this.profile$ = this.store$.select(fromProfile.getProfile);
     this.currentStepOptions = {
       label: 'Contactgegevens',
       nextButtonLabel: 'Naar autogegevens',
@@ -72,11 +75,11 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     this.store$.dispatch(new router.Go({path: ['car']}));
   }
 
-  goToPreviousStep() {
+  goToPreviousStep(event: any) {
     this.store$.dispatch(new wizardActions.Back());
   }
 
-  goToNextStep() {
+  goToNextStep(event: any) {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));

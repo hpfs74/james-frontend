@@ -66,11 +66,11 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy {
     }
   }
 
-  goToPreviousStep() {
+  goToPreviousStep(event: any) {
     this.store$.dispatch(new wizardActions.Back());
   }
 
-  goToNextStep() {
+  goToNextStep(event: any) {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
