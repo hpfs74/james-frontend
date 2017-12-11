@@ -18,8 +18,8 @@ export class BuyService {
   }
 
   public buyInsuranceAnonymous(payload: Proposal): Observable<any> {
-    const headers = this.headers;
-    return this.authHttp.post(environment.james.sdBuy, JSON.stringify(payload), { headers })
+    // const headers = this.headers;
+    return this.authHttp.post(environment.james.sdBuy, JSON.stringify(payload))
     .map((res: Response) => res.json());
   }
 }
