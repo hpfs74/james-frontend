@@ -94,6 +94,12 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     return !obj || Object.keys(obj).length <= 0;
   }
 
+  getDekkingText(coverage) {
+    return this.tagsService.getTranslationText('car_flow_coverage', coverage)
+      + '. '
+      + this.tagsService.getTranslationDescription('car_flow_coverage', coverage);
+  }
+
   getProposalData(value: any) {
     const flatData = Object.assign({},
       value.profileInfo,
@@ -102,7 +108,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
       {car: value.carInfo},
-      {dekking: this.tagsService.getTranslationText('car_flow_coverage', value.coverage)},
+      {dekking: this.getDekkingText(value.adviceInfo.coverage)},
       this.getUpdatedProfile());
 
     const proposalRequest = new CarProposalHelper();

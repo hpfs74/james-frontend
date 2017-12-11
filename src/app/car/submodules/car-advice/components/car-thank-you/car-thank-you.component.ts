@@ -14,18 +14,21 @@ import * as fromProfile from '../../../../../profile/reducers';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
+import { Content, ContentConfig } from '@app/content.config';
 
 @Component({
   selector: 'knx-car-thank-you',
   templateUrl: './car-thank-you.component.html'
 })
 export class CarThankYouComponent implements AfterViewInit {
+  content: Content;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
   profileEmail$: Observable<string>;
 
-  constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute) {
+  constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute, private contentConfig: ContentConfig) {
+    this.content = contentConfig.getContent();
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profileEmail$ = this.store$.select(fromProfile.getProfile)

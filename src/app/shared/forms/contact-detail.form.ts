@@ -20,7 +20,7 @@ export class ContactDetailForm extends BaseForm {
     maxlength: (err) => `Vul maximaal ${err.requiredLength} tekens in`
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, emailRequired = false) {
     super();
 
     this.formGroup = this.fb.group({
@@ -31,11 +31,7 @@ export class ContactDetailForm extends BaseForm {
       ],
       firstName: [null, Validators.required],
       middleName: [null],
-      email: [null, Validators.compose([
-          Validators.required,
-          EmailValidator
-        ])
-      ],
+      email: [null],
       lastName: [null, Validators.required],
       mobileNumber: [null,
         Validators.compose([
@@ -54,6 +50,13 @@ export class ContactDetailForm extends BaseForm {
       ],
       saveToProfile: [{}]
     });
+
+    if (emailRequired) {
+      this.formGroup.get('email').setValidators([
+        Validators.required,
+        EmailValidator
+      ]);
+    }
 
     this.formConfig = {
       initials: {
