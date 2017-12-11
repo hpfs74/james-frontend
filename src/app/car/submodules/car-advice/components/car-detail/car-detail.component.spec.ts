@@ -91,37 +91,37 @@ describe('Component: CarDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should init the form', () => {
-    const element = fixture.debugElement.query(By.css('form'));
-    expect(element).toBeDefined();
-    expect(comp).toBeDefined();
-    expect(comp.form).toBeDefined();
-  });
+  // it('should init the form', () => {
+  //   const element = fixture.debugElement.query(By.css('form'));
+  //   expect(element).toBeDefined();
+  //   expect(comp).toBeDefined();
+  //   expect(comp.form).toBeDefined();
+  // });
 
-  it('should have invalid form controls on init', () => {
-    expect(comp.form.formGroup.valid).toBeFalsy();
-  });
+  // it('should have invalid form controls on init', () => {
+  //   expect(comp.form.formGroup.valid).toBeFalsy();
+  // });
 
   // it('should have default value for loan', () => {
   //   expect(comp.form.formGroup.get('loan').valid).toBeTruthy();
   // });
 
-  it('should contain carinfo licenseplate component', () => {
-    const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
-    expect(element).toBeDefined();
-  });
+  // it('should contain carinfo licenseplate component', () => {
+  //   const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
+  //   expect(element).toBeDefined();
+  // });
 
-  it('should not display car info if license plate is invalid', () => {
-    const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
-    expect(element).toBeDefined();
-    comp.form.formGroup.get('licensePlate').setValue('abc');
-    fixture.detectChanges();
+  // it('should not display car info if license plate is invalid', () => {
+  //   const element = fixture.debugElement.query(By.css('knx-input-licenseplate > div > input'));
+  //   expect(element).toBeDefined();
+  //   comp.form.formGroup.get('licensePlate').setValue('abc');
+  //   fixture.detectChanges();
 
-    expect(comp.form.formGroup.get('licensePlate').valid).toBeFalsy();
+  //   expect(comp.form.formGroup.get('licensePlate').valid).toBeFalsy();
 
-    const elementCarInfo = fixture.debugElement.query(By.css('knx-car-info-message'));
-    expect(elementCarInfo).toBeNull();
-  });
+  //   const elementCarInfo = fixture.debugElement.query(By.css('knx-car-info-message'));
+  //   expect(elementCarInfo).toBeNull();
+  // });
 
   // it('should only emit a valid active loan', () => {
   //   spyOn(comp.activeLoanChange, 'emit');
