@@ -231,10 +231,7 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
         let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
-            this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
-              .subscribe(SavedCarAdvices => {
-                this.store$.dispatch(new advice.Remove(SavedCarAdvices[0]._id));
-              });
+            this.deleteAdvice();
             return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
 
@@ -299,11 +296,15 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   resetFlow() {
+    this.deleteAdvice();
+    this.store$.dispatch(new auth.ResetStates());
+    this.store$.dispatch(new router.Go({path: ['car']}));
+  }
+
+  private deleteAdvice() {
     this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
       .subscribe(SavedCarAdvices => {
         this.store$.dispatch(new advice.Remove(SavedCarAdvices[0]._id));
       });
-    this.store$.dispatch(new auth.ResetStates());
-    this.store$.dispatch(new router.Go({path: ['car']}));
   }
 }
