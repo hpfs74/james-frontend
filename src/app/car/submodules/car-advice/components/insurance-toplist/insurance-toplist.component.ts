@@ -127,7 +127,7 @@ export class InsuranceTopListComponent implements OnInit {
     this.store$.dispatch(new wizardActions.Back());
   }
 
-  goToNextStep() {
+  goToNextStep(event: any) {
     this.store$.dispatch(new wizardActions.Forward());
   }
 
