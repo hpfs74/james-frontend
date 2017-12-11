@@ -19,10 +19,10 @@ export class KNXWizardControlsComponent implements OnInit {
   }
 
   next() {
-    this.onNext.emit('goingNext');
+    this.onNext.emit();
   }
 
   back() {
-    this.onBack.emit('goingBack');
+    this.onBack.emit();
   }
 }

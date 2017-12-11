@@ -62,6 +62,6 @@
 </knx-service-guide>
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
-                     (onNext)="goToNextStep($event)"
-                     (onBack)="goToPreviousStep($event)">
+                     (onNext)="goToNextStep()"
+                     (onBack)="goToPreviousStep()">
 </knx-wizard-controls>

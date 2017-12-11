@@ -75,11 +75,11 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     this.store$.dispatch(new router.Go({path: ['car']}));
   }
 
-  goToPreviousStep(event: any) {
+  goToPreviousStep() {
     this.store$.dispatch(new wizardActions.Back());
   }
 
-  goToNextStep(event: any) {
+  goToNextStep() {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));

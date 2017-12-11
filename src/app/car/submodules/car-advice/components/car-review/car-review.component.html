@@ -4,8 +4,8 @@
 </knx-insurance-review>
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
-                     (onNext)="goToNextStep($event)"
-                     (onBack)="goToPreviousStep($event)">
+                     (onNext)="goToNextStep()"
+                     (onBack)="goToPreviousStep()">
 </knx-wizard-controls>
 <div class="row knx-car-advice__footer">
   <div class="col-sm-8" *ngIf="showStepBlock">

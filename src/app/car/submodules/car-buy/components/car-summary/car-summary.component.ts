@@ -136,11 +136,11 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     };
   }
 
-  goToPreviousStep(event: any) {
+  goToPreviousStep() {
     this.store$.dispatch(new wizardActions.Back());
   }
 
-  goToNextStep(event: any) {
+  goToNextStep() {
     if (!this.acceptFinalTerms || !this.confirmTerms) {
       return this.store$.dispatch(new wizardActions.Error({message: 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'}));
     }

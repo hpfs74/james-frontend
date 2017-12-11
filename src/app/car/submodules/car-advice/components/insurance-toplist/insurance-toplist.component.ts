@@ -123,11 +123,11 @@ export class InsuranceTopListComponent implements OnInit {
     return this.insurances.length <= 0 && !this.asyncPipe.transform(this.isInsuranceLoading$);
   }
 
-  goToPreviousStep(event: any) {
+  goToPreviousStep() {
     this.store$.dispatch(new wizardActions.Back());
   }
 
-  goToNextStep(event: any) {
+  goToNextStep() {
     this.store$.dispatch(new wizardActions.Forward());
   }
 
