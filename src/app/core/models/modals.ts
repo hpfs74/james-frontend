@@ -32,7 +32,7 @@ export class LoginModalConfig implements ModalConfig {
   }
 }
 
-export class AuthRedirectModalConfig implements ModalConfig {
+export class AuthRedirectModalAnonymousConfig implements ModalConfig {
   title = '';
   settings = {
     bodyClass: 'knx-modal-body',
@@ -43,6 +43,31 @@ export class AuthRedirectModalConfig implements ModalConfig {
     closeButton: true,
     twoColFooter: true,
     dividerText: 'of'
+  } as KNXModalDialogSettings;
+
+  constructor(private modalName: string, private userDialogService: UserDialogService, private viewContainerRef: ViewContainerRef) {}
+
+  open() {
+    this.userDialogService.openModal(
+      this.modalName,
+      this.title,
+      this.viewContainerRef,
+      AuthRedirectModalComponent,
+      this.settings
+    );
+  }
+}
+
+export class AuthRedirectModalConfig implements ModalConfig {
+  title = '';
+  settings = {
+    bodyClass: 'knx-modal-body',
+    fullwidthButtons: true,
+    header: true,
+    headerLogo: '/assets/images/knab-logo.svg',
+    headerSubline: 'Verzekeren',
+    closeButton: true,
+    twoColFooter: false
   } as KNXModalDialogSettings;
 
   constructor(private modalName: string, private userDialogService: UserDialogService, private viewContainerRef: ViewContainerRef) {}
