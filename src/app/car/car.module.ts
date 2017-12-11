@@ -9,6 +9,7 @@ import { InsuranceReviewModule } from './../components/knx-insurance-review/insu
 import { CarRoutingModule } from './car-routing.module';
 
 import { CarService } from './services/car.service';
+import { BuyService } from '../insurance/services/buy.service';
 import { TagsService } from '../core/services/tags.service';
 import { TagsLoader } from '../utils/tagsloader';
 
@@ -51,7 +52,8 @@ export const COMPONENTS = [
   ],
   declarations: COMPONENTS,
   providers: [
-    CarService
+    CarService,
+    BuyService
   ]
 })
 export class CarModule {}
