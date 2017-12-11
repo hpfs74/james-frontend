@@ -34,6 +34,7 @@ import * as fromProfile from '../../profile/reducers';
 import * as auth from '../../auth/actions/auth';
 import * as car from '../../car/actions/car';
 import * as advice from '../../insurance/actions/advice';
+import * as insurance from '../../insurance/actions/insurance';
 import * as compare from '../../car/actions/compare';
 import * as router from '../../core/actions/router';
 
@@ -243,6 +244,10 @@ describe('Component: CarBuyComponent', () => {
 
   describe('resetFlow()', () => {
     it('should dispatch reset acitons', () => {
+      store.dispatch(new insurance.GetSavedCarInsurancesSuccess({
+        car: {insurance_advice: [{_id: 1231321}]}
+      }));
+
       let resetAllStates = new auth.ResetStates();
       comp.resetFlow();
       expect(store.dispatch).toHaveBeenCalledWith(resetAllStates);
