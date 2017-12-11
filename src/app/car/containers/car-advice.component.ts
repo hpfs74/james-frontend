@@ -166,7 +166,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
             (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
             // redirect to saved overview if there are any manually added insurances
             this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-          } else if (insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
+          } else if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
             // Proceed to the buy flow for anonymous with advice
             this.proceedAnonymous(advices, insurances);
           }

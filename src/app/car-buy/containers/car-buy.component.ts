@@ -299,6 +299,10 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   resetFlow() {
+    this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
+      .subscribe(SavedCarAdvices => {
+        this.store$.dispatch(new advice.Remove(SavedCarAdvices[0]._id));
+      });
     this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new router.Go({path: ['car']}));
   }

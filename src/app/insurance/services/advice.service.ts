@@ -8,11 +8,13 @@ import { AuthHttp } from '../../auth/services/auth-http.service';
 
 @Injectable()
 export class AdviceService {
-  private baseUrl: string;
+  private insuranceAdvice: string;
+  private advice: string;
   private headers: Headers;
 
   constructor(private authHttp: AuthHttp) {
-    this.baseUrl = environment.james.insuranceAdvice;
+    this.insuranceAdvice = environment.james.insuranceAdvice;
+    this.advice = environment.james.advice;
     this.headers = new Headers();
 
     this.headers.append('version', 'v2');
@@ -20,13 +22,13 @@ export class AdviceService {
 
   public getAdvice(adviceId: string): Observable<any> {
     const headers = this.headers;
-    return this.authHttp.get(`${this.baseUrl}/${adviceId}`, { headers })
+    return this.authHttp.get(`${this.advice}/${adviceId}`, { headers })
       .map(res => res.json());
   }
 
   public removeAdvice(adviceId: string): Observable<any> {
     const headers = this.headers;
-    return this.authHttp.delete(`${this.baseUrl}/${adviceId}`, { headers })
+    return this.authHttp.delete(`${this.insuranceAdvice}/${adviceId}`, { headers })
       .map(res => res.json());
   }
 }
