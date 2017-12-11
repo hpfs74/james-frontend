@@ -197,27 +197,19 @@
         </knx-ir-content>
       </div>
 
-      <div class="container">
-        <div class="row knx-car-summary__terms">
-          <div class="col col-sm-12">
-            <knx-checkbox class="knx-car-summary__checkbox"
-              [(ngModel)]="confirm"
-              [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
-            </knx-checkbox>
-          </div>
-        </div>
+      <div class="knx-car-summary__terms">
+        <knx-checkbox class="knx-car-summary__checkbox"
+          [(ngModel)]="confirm"
+          [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
+        </knx-checkbox>
 
-        <div *ngIf="showKnabTerms" class="row knx-car-summary__terms">
-          <div class="col col-sm-12">
-            <knx-checkbox class="knx-car-summary__checkbox" [(ngModel)]="confirmTerms">
-              Ik ga akkoord met de
-              <a class="knx-registration__document-link" href="{{termsAndConditionsUrl}}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
-              en het
-              <a class="knx-registration__document-link" href="{{privacyStatementUrl}}" target="_blank" rel="noopener">privacybeleid</a>
-              van Knab.
-            </knx-checkbox>
-          </div>
-        </div>
+        <knx-checkbox *ngIf="showKnabTerms" class="knx-car-summary__checkbox" [(ngModel)]="confirmTerms">
+          Ik ga akkoord met de
+          <a class="knx-registration__document-link" href="{{termsAndConditionsUrl}}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
+          en het
+          <a class="knx-registration__document-link" href="{{privacyStatementUrl}}" target="_blank" rel="noopener">privacybeleid</a>
+          van Knab.
+        </knx-checkbox>
       </div>
   </div>
 </div>

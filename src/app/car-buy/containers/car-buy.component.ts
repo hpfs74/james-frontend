@@ -50,7 +50,6 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
   templateUrl: 'car-buy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   qaRootId = QaIdentifiers.carBuyRoot;
   content: Content;
@@ -66,6 +65,7 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   insurance$: Observable<any>;
   car$: Observable<any>;
   isLoggedIn$: Observable<boolean>;
+  isLoggedIn: boolean;
 
   // Forms
   contactDetailForm: ContactDetailForm;
@@ -74,6 +74,8 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   paymentForm: IbanForm;
   acceptInsuranceTerms: boolean;
   acceptKnabTerms: boolean;
+
+  formSummaryError = 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.';
 
   constructor(private store$: Store<fromRoot.State>, private tagsService: TagsService, private contentConfig: ContentConfig) {
     this.content = this.contentConfig.getContent();
@@ -85,6 +87,9 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
         title: 'Expert autoverzekeringen'
       }
     }));
+
+    this.isAnonymous().take(1).subscribe(isAnonymous => this.isLoggedIn = !isAnonymous);
+
     scrollToY();
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
@@ -96,7 +101,8 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
     this.car$ = this.store$.select(fromCar.getCarInfo);
 
     const formBuilder = new FormBuilder();
-    this.contactDetailForm = new ContactDetailForm(formBuilder);
+    const emailRequired = !this.isLoggedIn;
+    this.contactDetailForm = new ContactDetailForm(formBuilder, emailRequired);
     this.reportingCodeForm = new CarReportingCodeForm(formBuilder, this.tagsService.getAsLabelValue('buyflow_carsecurity'));
     this.checkForm = new CarCheckForm(formBuilder);
     this.paymentForm = new IbanForm(formBuilder);
@@ -198,8 +204,8 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   submitInsurance(): Observable<any> {
-    if (!this.acceptInsuranceTerms || !this.acceptKnabTerms) {
-      return Observable.throw(new Error('Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'));
+    if (!this.summaryValid()) {
+      return Observable.throw(new Error(this.formSummaryError));
     }
 
     this.subscription$.push(
@@ -296,5 +302,9 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   resetFlow() {
     this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new router.Go({path: ['car']}));
+  }
+
+  private summaryValid() {
+    return this.isLoggedIn ? this.acceptInsuranceTerms : this.acceptInsuranceTerms && this.acceptKnabTerms;
   }
 }
