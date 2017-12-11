@@ -16,7 +16,7 @@ import * as router from '../../core/actions/router';
 import { Nav } from '../models/nav';
 import { Profile } from '../../profile/models';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { LoginModalConfig, AuthRedirectModalConfig } from '../../core/models/modals';
+import { LoginModalConfig, AuthRedirectModalAnonymousConfig, AuthRedirectModalConfig } from '../../core/models/modals';
 
 import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';
@@ -91,6 +91,8 @@ export class AppComponent implements OnInit, AfterViewInit {
       // init the right type
       if (modalName === this.modalNames.loginModal) {
         modal = new LoginModalConfig(modalName, this.userDialogService, this.viewContainerRef);
+      } else if (modalName === this.modalNames.authRedirect && this.featureToggleConfig['enableBuyFlowEmail']) {
+        modal = new AuthRedirectModalAnonymousConfig(modalName, this.userDialogService, this.viewContainerRef);
       } else if (modalName === this.modalNames.authRedirect) {
         modal = new AuthRedirectModalConfig(modalName, this.userDialogService, this.viewContainerRef);
       }
