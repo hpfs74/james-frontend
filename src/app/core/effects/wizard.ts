@@ -6,6 +6,7 @@ import { Effect, Actions } from '@ngrx/effects';
 import { KNXWizardRxService } from '../services/wizard.service';
 import { Observable } from 'rxjs/Observable';
 import * as WizardActions from '../actions/wizard';
+import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 @Injectable()
 export class WizardEffects {
@@ -20,6 +21,10 @@ export class WizardEffects {
   @Effect({dispatch: false})
   navigateForward$ = this.actions$.ofType(WizardActions.FORWARD)
     .do(() => this.knxWizardRxService.goToNextStep());
+
+  @Effect({dispatch: false})
+  onError$ = this.actions$.ofType(WizardActions.ERROR)
+    .do(() => scrollToY());
 
   constructor(
     private actions$: Actions,

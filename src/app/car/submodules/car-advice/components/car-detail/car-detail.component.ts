@@ -168,6 +168,8 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
         }
       })
     );
+    loan.setValue(false);
+    FormUtils.validateControls(this.form.formGroup, ['loan']);
   }
 
   validateLicenseAsync(licenseControl: AbstractControl): Observable<any> {

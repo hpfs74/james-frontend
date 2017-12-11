@@ -17,8 +17,11 @@ import * as fromInsurance from '../../../../../insurance/reducers';
 import * as layout from '../../../../../core/actions/layout';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
+import * as compare from '../../../../actions/compare';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 interface OrderItem {
   id: string;
@@ -50,10 +53,10 @@ export class InsuranceTopListComponent implements OnInit {
 
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe) {
-    this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.getCompareResultCopy();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
+    this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
     this.error$ = this.store$.select(fromCore.getWizardError);
     this.currentStepOptions = {
       label: 'Premies vergelijken',
@@ -136,6 +139,13 @@ export class InsuranceTopListComponent implements OnInit {
         return obs.map(v => JSON.parse(JSON.stringify(v)));
       }).subscribe(insurances => {
         this.insurances = insurances;
+      });
+
+      this.store$.select(fromInsurance.getSelectedAdvice)
+      .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
+      .subscribe(advice => {
+        scrollToY();
+        this.store$.dispatch(new compare.LoadCarAction(advice));
       });
   }
 }

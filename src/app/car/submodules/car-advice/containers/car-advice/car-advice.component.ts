@@ -68,7 +68,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   savedInsurances$: Observable<any>;
   savedInsurancesLoading$: Observable<any>;
   subscription$: Array<any>;
-
+  advice$: Observable<any>;
   // Forms
   carExtrasForm: CarExtrasForm;
 
@@ -97,6 +97,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     }));
     // bind observables
     this.subscription$ = [];
+    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);

@@ -24,8 +24,8 @@ export class CarSavedComponent implements AfterViewInit, OnInit {
   firstName: string;
 
   constructor(private store$: Store<fromRoot.State>) {
-    this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
-    this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
+    this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
+    this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
   }
 

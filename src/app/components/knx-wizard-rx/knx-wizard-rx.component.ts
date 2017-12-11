@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef } from '@angular/core';
+import { Component, ContentChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 @Component({
@@ -8,7 +8,9 @@ import { scrollToY } from '@app/utils/scroll-to-element.utils';
 })
 export class KNXWizardRxComponent {
   @ContentChild('knxWizardSidebar') sidebar: ElementRef;
+  constructor(private changeDetector: ChangeDetectorRef) {}
   onActivate(componentRef: any): void {
+    this.changeDetector.detectChanges();
     scrollToY();
   }
 }
