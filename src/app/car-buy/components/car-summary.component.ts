@@ -49,8 +49,8 @@ export class CarSummaryComponent implements QaIdentifier {
   @Input() insurance: CarInsurance;
   @Input() advice: any;
 
-  confirmValue: boolean;
-  confirmTermsValue: boolean;
+  confirmValue = false;
+  confirmTermsValue = false;
 
   isValidInsurance(obj: any) {
     return (obj &&
