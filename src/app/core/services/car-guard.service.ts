@@ -5,11 +5,12 @@ import { Effect, Actions } from '@ngrx/effects';
 
 import * as RouterActions from '../../core/actions/router';
 import * as fromRoot from '../reducers';
+import * as router from '../../core/actions/router';
 
 import * as fromInsurance from '../../insurance/reducers';
 
 @Injectable()
-export class CanActivateBuyFlowGuard implements CanActivate, CanActivateChild {
+export class CanActivateCarFlowGuard implements CanActivate, CanActivateChild {
 
   constructor(private router: Router, private store$: Store<fromRoot.State>) {}
 
@@ -35,7 +36,7 @@ export class CanActivateBuyFlowGuard implements CanActivate, CanActivateChild {
 
     // go to previous route if no active advice found
     if (!adviceExists) {
-      this.store$.dispatch(new RouterActions.Back());
+      this.store$.dispatch(new router.Go({ path: ['/car'] }));
     }
     return adviceExists;
   }

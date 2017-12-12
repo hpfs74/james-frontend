@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CanActivateBuyFlowGuard } from '../core/services/buy-guard.service';
+import { CanActivateCarFlowGuard } from '../core/services/car-guard.service';
 
 export const carRoutes: Routes = [
   {
@@ -10,7 +10,7 @@ export const carRoutes: Routes = [
   },
   {
     path: 'insurance',
-    canActivateChild: [CanActivateBuyFlowGuard],
+    canActivateChild: [CanActivateCarFlowGuard],
     loadChildren: './submodules/car-buy/car-buy.module#CarBuyModule'
   }
 ];

@@ -8,6 +8,7 @@ import { CarExtrasComponent } from './components/car-extras/car-extras.component
 import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
 import { CarReviewComponent } from './components/car-review/car-review.component';
 import { CarThankYouComponent } from '../car-advice/components/car-thank-you/car-thank-you.component';
+import { CanActivateCarFlowGuard } from '@app/core/services';
 
 export const carAdviceRoutes: Routes = [
   {
@@ -25,11 +26,13 @@ export const carAdviceRoutes: Routes = [
       },
       {
         path: 'extras',
+        canActivate: [CanActivateCarFlowGuard],
         component: InsuranceTopListComponent,
         data: { stepIndex: 1}
       },
       {
         path: 'review',
+        canActivate: [CanActivateCarFlowGuard],
         component: CarReviewComponent,
         data: { stepIndex: 2}
       },

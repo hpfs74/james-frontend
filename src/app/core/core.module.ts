@@ -31,7 +31,7 @@ import { requestOptionsProvider } from './services/default-request-opts.service'
 import { TagsLoader } from '../utils/tagsloader';
 import {
   AssistantService,
-  CanActivateBuyFlowGuard,
+  CanActivateCarFlowGuard,
   CookieService,
   GeolocationService,
   LocalStorageService,
@@ -91,7 +91,7 @@ export class CoreModule {
       providers: [
         KNXLocale,
         AssistantService,
-        CanActivateBuyFlowGuard,
+        CanActivateCarFlowGuard,
         CookieService,
         GeolocationService,
         LocalStorageService,
