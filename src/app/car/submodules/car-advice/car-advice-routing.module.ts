@@ -14,8 +14,7 @@ export const carAdviceRoutes: Routes = [
     path: '',
     component: CarAdviceComponent,
     data: {
-      title: 'Je autoverzekering vergelijken',
-      wizard: true
+      title: 'Je autoverzekering vergelijken'
     },
     children: [
       { path: '', redirectTo: 'detail', pathMatch: 'full' },

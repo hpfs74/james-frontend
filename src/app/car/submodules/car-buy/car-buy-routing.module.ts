@@ -13,8 +13,7 @@ export const carBuyRoutes: Routes = [
     path: '',
     component: CarBuyComponent,
     data: {
-      title: 'Nieuwe autoverzekering aanvragen',
-      wizard: true
+      title: 'Nieuwe autoverzekering aanvragen'
     },
     children: [
       { path: '', redirectTo: 'contact-detail', pathMatch: 'full' },
