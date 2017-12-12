@@ -38,8 +38,8 @@ function getGoogleAnalytics() {
 function outputGtmSnippet(gtmAuth: string, id: string, gtmVersion: number, environment: string) {
   // TODO: Fay asked to put same script for test and production
   //if (isProduction(environment)) {
-    // should be first in head tag
-    return `
+  // should be first in head tag
+  return `
     let gtmScript = document.createElement('script');
     gtmScript.innerHTML =
       \`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -69,7 +69,7 @@ function outputGtmSnippet(gtmAuth: string, id: string, gtmVersion: number, envir
 function outputGtmNoScript(gtmAuth: string, id: string, gtmVersion: number, environment: string) {
   // TODO: Fay asked to put same script for test and production
   //if (isProduction(environment)) {
-    return `
+  return `
     let gtmNoScript = document.createElement('noscript');
     gtmNoScript.innerHTML =
       \`<iframe src="https://www.googletagmanager.com/ns.html?id=${id}"
@@ -114,6 +114,9 @@ function getContent(environment: string) {
   export const environment = {
     production: ${isProd},
     enableAnalytics: ${enableAnalytics},
+    featureToggles: {
+      enableBuyFlowEmail: true
+    },
     external: {
       registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
       login: '${getEnvVar('LOGIN')}'
@@ -129,10 +132,12 @@ function getContent(environment: string) {
       suggestion: '${getEnvVar('JAMES_API_SUGGESTION')}',
       cars: '${getEnvVar('JAMES_API_CARS')}',
       advice: '${getEnvVar('JAMES_API_ADVICE')}',
+      insuranceAdvice: '${getEnvVar('JAMES_API_INSURANCE_ADVICE')}',
       carCompare: '${getEnvVar('JAMES_API_CAR_COMPARE')}',
       carCoverage: '${getEnvVar('JAMES_API_CAR_COVERAGE')}',
       carDamageFree: '${getEnvVar('JAMES_API_CAR_DAMAGEFREE')}',
       carBuy: '${getEnvVar('JAMES_API_CAR_BUY')}',
+      sdBuy: '${getEnvVar('JAMES_API_SD_BUY')}',
       insurer: '${getEnvVar('JAMES_API_INSURER')}',
       payloadEncryption: {
         client: {

@@ -21,6 +21,9 @@ import { CarCheckForm } from '../components/car-check.form';
 import { CarPaymentComponent } from '../components/car-payment.component';
 import { CarBuyComponent } from './car-buy.component';
 
+import { ContentConfig } from '../../content.config';
+import { ContentConfigMock } from '../../content.mock.spec';
+
 import * as fromRoot from '../../car/reducers';
 import * as fromCore from '../../core/reducers';
 import * as fromCar from '../../car/reducers';
@@ -38,7 +41,7 @@ import { SharedModule } from '../../shared.module';
 import { TagsService } from '../../core/services/tags.service';
 import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
 
-import { BuyCompleteAction, BuyFailureAction } from '../../car/actions/car';
+import { BuyComplete, BuyFailure } from '../../car/actions/car';
 import { Profile } from '../../profile/models/profile';
 
 export function getInitialState() {
@@ -148,6 +151,10 @@ describe('Component: CarBuyComponent', () => {
         useValue: TagsServiceMock
       },
       {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      },
+      {
         provide: Router,
         useClass: class {
           navigate = jasmine.createSpy('navigate');
@@ -245,7 +252,8 @@ describe('Component: CarBuyComponent', () => {
   describe('submitInsurace()', () => {
 
     it('should return an error if conditions are not accepted', async(() => {
-      comp.acceptFinalTerms = false;
+      comp.acceptInsuranceTerms = false;
+      comp.acceptKnabTerms = false;
       fixture.detectChanges();
 
       let res = comp
@@ -266,8 +274,9 @@ describe('Component: CarBuyComponent', () => {
       comp.insurance$ = Observable.of(data.insuranceInfo);
       comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
       comp.advice$ = Observable.of(data.adviceInfo);
-      comp.acceptFinalTerms = true;
-      store.dispatch(new BuyFailureAction(new Error()));
+      comp.acceptInsuranceTerms = true;
+      comp.acceptKnabTerms = true;
+      store.dispatch(new BuyFailure(new Error()));
 
       fixture.detectChanges();
 
@@ -290,8 +299,9 @@ describe('Component: CarBuyComponent', () => {
       comp.insurance$ = Observable.of(data.insuranceInfo);
       comp.profile$ = Observable.of(Object.assign(new Profile(), data.profileInfo));
       comp.advice$ = Observable.of(data.adviceInfo);
-      comp.acceptFinalTerms = true;
-      store.dispatch(new BuyCompleteAction({}));
+      comp.acceptInsuranceTerms = true;
+      comp.acceptKnabTerms = true;
+      store.dispatch(new BuyComplete({}));
 
       let expectedAction = new router.Go({path: ['/car/thank-you', data.profileInfo.emailaddress]});
       fixture.detectChanges();

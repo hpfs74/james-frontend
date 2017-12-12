@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { collapseInOutAnimation } from '../../shared/animations';
 import { Nav, NavItemType } from '../../core/models/nav';
+
+import * as auth from '../../auth/actions/auth';
 import * as fromAuth from '../../auth/reducers';
 import * as fromRoot from '../../reducers';
 import * as router from '../../core/actions/router';
@@ -39,6 +41,7 @@ export class NavbarComponent implements OnInit {
 
   public logIn() {
     this.store$.dispatch(new router.Go({ path: ['/login'] }));
+    this.store$.dispatch(new auth.ResetStates());
   }
 
   public register() {

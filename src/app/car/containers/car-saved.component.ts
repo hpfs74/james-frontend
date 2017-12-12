@@ -12,10 +12,10 @@ import * as fromInsurance from '../../insurance/reducers';
 import * as fromProfile from '../../profile/reducers';
 
 @Component({
-  selector: 'knx-car-purchased',
+  selector: 'knx-car-saved',
   template: `
     <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container--status"
-      knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+         knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
       <div class="container">
         <div class="col-md-12">
           <b>Welkom<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>
@@ -28,22 +28,22 @@ import * as fromProfile from '../../profile/reducers';
         <div class="col-sm-4 push-sm-8">
           <div class="knx-wizard__sidebar--sticky">
             <knx-chat-stream #knxChatStream
-              [options]="chatConfig$ | async"
-              [messages]="chatMessages$ | async">
+                             [options]="chatConfig$ | async"
+                             [messages]="chatMessages$ | async">
             </knx-chat-stream>
           </div>
         </div>
         <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
-          <knx-purchased title="Uw autoverzekering" [insurances]="purchasedInsurances$ | async"></knx-purchased>
+          <knx-saved title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
         </div>
       </div>
     </div>
   `
 })
-export class CarPurchasedComponent implements AfterViewInit, OnInit {
+export class CarSavedComponent implements AfterViewInit, OnInit {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
-  purchasedInsurances$: Observable<any>;
+  savedInsurances$: Observable<any>;
   profile$: Observable<any>;
   email: string;
   firstName: string;
@@ -55,7 +55,7 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.purchasedInsurances$ = this.store$.select(fromInsurance.getPurchasedInsurance);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.profile$.subscribe(profile => {
         this.firstName = profile.firstname || '';
         this.email = profile.emailaddress || '';
@@ -64,6 +64,6 @@ export class CarPurchasedComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.purchased', clear: true, value: ' ' + this.firstName }));
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.saved', clear: true, value: ' ' + this.firstName }));
   }
 }

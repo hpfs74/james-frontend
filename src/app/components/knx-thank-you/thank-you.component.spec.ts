@@ -34,29 +34,63 @@ describe('Component: Thank You', () => {
     el = de.nativeElement;
   });
 
-  it('should take input parameters', () => {
-    comp.title = 'Hello World';
-    comp.insuranceType = 'autoverzekering';
-    comp.email = 'test@mail.com';
+  describe('Default template', () => {
+    it('should take input parameters', () => {
+      comp.title = 'Hello World';
+      comp.insuranceType = '';
+      comp.email = 'test@mail.com';
 
-    fixture.detectChanges();
+      fixture.detectChanges();
 
-    let title = de.query(By.css('h2')).nativeElement;
-    expect(title.textContent).toEqual('Hello World');
+      let title = de.query(By.css('h2')).nativeElement;
+      expect(title.textContent).toEqual('Hello World');
 
-    let parElements = de.queryAll(By.css('p'));
-    expect(parElements).toBeDefined();
-    expect(parElements.length).toBeGreaterThan(0);
+      let parElements = de.queryAll(By.css('p'));
+      expect(parElements).toBeDefined();
+      expect(parElements.length).toBeGreaterThan(0);
 
-    const first = parElements[0].nativeElement;
-    expect(first.textContent).toContain('Gefeliciteerd met je nieuwe autoverzekering');
-    expect(first.textContent.replace(/\s+/g, ' '))
-      .toContain('De autoverzekeringpolis is verstuurd en zal binnen 3 dagen goedgekeurd worden');
+      const first = parElements[0].nativeElement;
+      expect(first.textContent).toContain('Gefeliciteerd met je nieuwe verzekering');
+      expect(first.textContent.replace(/\s+/g, ' '))
+        .toContain('We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.');
 
-    const second = parElements[1].nativeElement;
-    const expectedEmailPar = 'Een kopie van de polis is verstuurd naar test@mail.com';
+      const second = parElements[1].nativeElement;
+      const expectedEmailPar = 'Zodra je polis definitief is goedgekeurd, sturen wij deze naar test@mail.com';
 
-    expect(second.textContent).toEqual(expectedEmailPar);
+      expect(second.textContent).toEqual(expectedEmailPar);
+    });
   });
+
+  describe('Car insurance', () => {
+    it('should take input parameters', () => {
+      comp.title = 'Hello World';
+      comp.insuranceType = 'autoverzekering';
+      comp.email = 'test@mail.com';
+
+      fixture.detectChanges();
+
+      let title = de.query(By.css('h2')).nativeElement;
+      expect(title.textContent).toEqual('Hello World');
+
+      let parElements = de.queryAll(By.css('p'));
+      expect(parElements).toBeDefined();
+      expect(parElements.length).toBeGreaterThan(0);
+
+      const first = parElements[0].nativeElement;
+      expect(first.textContent).toContain('Gefeliciteerd, je nieuwe autoverzekering is onderweg.');
+      const firstPar = first.textContent.replace(/\s+/g, ' ');
+      // Check for car specific content
+      expect(firstPar).toContain('We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.');
+      expect(firstPar).toContain('We laten je weten wanneer je tijdelijke dekking hebt, zodat je de weg op kunt.');
+      expect(firstPar).toContain('We laten je weten wanneer je tijdelijke dekking hebt, zodat je de weg op kunt.');
+
+      const second = parElements[1].nativeElement;
+      const expectedEmailPar = 'Zodra je polis definitief is goedgekeurd, sturen wij deze naar test@mail.com';
+
+      expect(second.textContent).toEqual(expectedEmailPar);
+    });
+  });
+
+
 
 });

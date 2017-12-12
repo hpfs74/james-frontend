@@ -7,6 +7,7 @@ import 'rxjs/add/operator/take';
 
 import { Profile } from '../../profile/models/profile';
 import { AssistantConfig } from '../../core/models/assistant';
+import { ContentConfig, Content } from '../../content.config';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 
 import * as fromRoot from '../../reducers';
@@ -32,6 +33,8 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
         <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
           <knx-thank-you title="Autoverzekering aangevraagd!"
             insuranceType="autoverzekering"
+            [phone]="content.phone.label"
+            [phoneLink]="content.phone.link"
             [email]="profileEmail$ | async">
           </knx-thank-you>
         </div>
@@ -40,12 +43,13 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
   `
 })
 export class CarThankYouComponent implements AfterViewInit, OnInit {
+  content: Content;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
-
   profileEmail$: Observable<string>;
 
-  constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute) {
+  constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute, private contentConfig: ContentConfig) {
+    this.content = contentConfig.getContent();
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profileEmail$ = this.store$.select(fromProfile.getProfile)

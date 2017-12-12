@@ -2,9 +2,17 @@ knx-price-table {
   flex: 1 auto 1;
 }
 
+knx-price-item.knx-price-item--highlight + knx-price-item {
+  margin-top: 70px;
+}
+
 @media (min-width: 768px) {
   knx-price-item {
     flex: 1;
+  }
+
+  knx-price-item.knx-price-item--highlight + knx-price-item {
+    margin-top: 0;
   }
 }
 

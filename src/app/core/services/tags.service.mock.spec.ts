@@ -6,6 +6,7 @@ export const TagsServiceMock = {
     ];
   },
   getTranslationText: () => 'myTest',
+  getTranslationDescription: () => 'myDescription',
   getAsLabelValue: () => {
     return [
       { label: 'Security 1', value: 'class1' }

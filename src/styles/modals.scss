@@ -1,6 +1,38 @@
-.knx-modal-body--blobs {
+$modalBlobSize: 300px;
+$logoTextColor: #3e4a59;
+
+.knx-modal-header__logo {
+  width: 100%;
+  margin-top: 20px;
+
+  img {
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+
+h2.knx-modal-header__subline,
+.knx-modal-header__subline {
+  color: $logoTextColor;
+  font-family: $font-family-regular;
+  text-transform: uppercase;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: $font-size-base;
+  font-weight: $font-weight-base;
+  text-align: center;
+}
+
+.knx-modal-header__blobs {
   background-image: url('/assets/images/blob-red@2x.png');
   background-position: top left;
   background-repeat: no-repeat;
-  background-size: 30%;
+  background-size: 40%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $modalBlobSize;
+  height: $modalBlobSize;
 }

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CanActivateBuyFlowGuard } from '../core/services/buy-guard.service';
 import { CarAdviceComponent } from './containers/car-advice.component';
-import { CarPurchasedComponent } from './containers/car-purchased.component';
+import { CarSavedComponent } from './containers/car-saved.component';
 import { CarThankYouComponent } from './containers/car-thank-you.component';
 
 export const carRoutes: Routes = [
@@ -25,7 +25,7 @@ export const carRoutes: Routes = [
   },
   {
     path: 'purchased',
-    component: CarPurchasedComponent
+    component: CarSavedComponent
   }
 ];
 @NgModule({
@@ -36,4 +36,4 @@ export const carRoutes: Routes = [
     RouterModule
   ]
 })
-export class CarRoutingModule { }
+export class CarRoutingModule {}

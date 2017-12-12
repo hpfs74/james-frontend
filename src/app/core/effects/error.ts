@@ -32,8 +32,8 @@ export class ErrorEffects {
     address.GetAddressFailure |
     profile.LoadFailAction |
     profile.SaveFailAction |
-    car.GetInfoFailureAction |
-    car.BuyFailureAction |
+    car.GetInfoFailure |
+    car.BuyFailure |
     compare.LoadCarFailAction |
     coverage.CarCoverageFailureAction |
     insurances.AddInsuranceFail |

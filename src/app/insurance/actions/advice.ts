@@ -8,8 +8,11 @@ export const GET_ADVICE =       '[Advice] Get';
 export const GET_SUCCESS =      '[Advice] Get Success';
 export const GET_FAILURE =      '[Advice] Get Failure';
 
-export const UPDATE_ADVICE =    '[Advice] Update';
 export const REMOVE_ADVICE =    '[Advice] Remove';
+export const REMOVE_SUCCESS =   '[Advice] Remove Success';
+export const REMOVE_FAILURE =   '[Advice] Remove Failure';
+
+export const UPDATE_ADVICE =    '[Advice] Update';
 export const SELECT_ADVICE =    '[Advice] Select';
 export const RESET_ADVICE =     '[Advice] Reset';
 
@@ -52,6 +55,18 @@ export class Update implements Action {
 
 export class Remove implements Action {
   readonly type = REMOVE_ADVICE;
+
+  constructor(public payload: any) {}
+}
+
+export class RemoveSuccess implements Action {
+  readonly type = REMOVE_SUCCESS;
+
+  constructor(public payload: any) {}
+}
+
+export class RemoveFailure implements Action {
+  readonly type = REMOVE_FAILURE;
 
   constructor(public payload: any) {}
 }

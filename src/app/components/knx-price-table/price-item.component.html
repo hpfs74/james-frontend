@@ -1,9 +1,10 @@
+<div [hidden]="!highlight" class="knx-recommended">{{ badge }}</div>
+
 <div class="knx-price-item knx-card" [ngClass]="{'knx-price-item--highlight': highlight, 'knx-price-item--selected': selected }" role="button" tabindex="0">
   <div class="knx-price-item__header" >
     {{ header }}
-    <div *ngIf="highlight" class="knx-price-item__badge">{{ badge }}</div>
   </div>
-  <ul class="knx-list--checks" [ngClass]="{'knx-list--green': !selected, 'knx-list--white': selected}">
+  <ul class="knx-list--checks knx-list--green">
     <li *ngFor="let item of features">{{ item }}</li>
   </ul>
   <div *ngIf="price" class="knx-price-item__price">

@@ -1,12 +1,12 @@
 <div class="container knx-car-advice-loader">
-  <knx-loader [visible]="purchasedInsurancesLoading$ | async">
+  <knx-loader [visible]="savedInsurancesLoading$ | async">
     Laden...
   </knx-loader>
 </div>
 
 <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
   knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded"
-  [hidden]="purchasedInsurancesLoading$ | async">
+  [hidden]="savedInsurancesLoading$ | async">
   <div class="container">
     <knx-step-navigation
       [steps]="formSteps"
@@ -17,13 +17,14 @@
   </div>
 </div>
 
-<div class="container knx-car-advice" [ngClass]="getStepClass()" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" [hidden]="purchasedInsurancesLoading$ | async">
+<div class="container knx-car-advice" [ngClass]="getStepClass()" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" [hidden]="savedInsurancesLoading$ | async">
   <knx-wizard #knxWizard (stepChange)="onStepChange($event)" >
     <div class="knx-wizard__steps">
       <knx-step [options]="formSteps[0]">
         <knx-car-detail-form
           knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="details"
           (coverageSelected)="updateSelectedCoverage($event)"
+          (coverageConfirmed)="knxWizard.goToNextStep()"
           (licensePlateChange)="getCarInfo($event)"
           (activeLoanChange)="updateActiveLoan($event)"
           [form]="carDetailForm"

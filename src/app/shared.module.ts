@@ -17,6 +17,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { environment } from '@env/environment';
 
 // @knx
 import { KNXFormsModule } from '@knx/forms';
@@ -28,6 +29,7 @@ import { KNXCollapsiblePanelModule } from '@knx/collapsible-panel';
 import { KNXTooltipModule } from '@knx/tooltip';
 import { KNXModalDialogModule } from '@knx/modal';
 import { KNXAvatarComponent } from '@knx/avatar';
+import { KNXFeatureToggleModule } from '@knx/feature-toggle';
 
 // TODO: consider moving to shared library
 import { KNXHamburgerComponent } from './components/knx-hamburger/knx-hamburger.component';
@@ -98,7 +100,7 @@ import { TabsComponent } from './components/knx-tabs/tabs.component';
 import { TabComponent } from './components/knx-tabs/tab.component';
 import { ThankYouComponent } from './components/knx-thank-you/thank-you.component';
 import { ServiceGuideComponent } from './components/knx-service-guide/service-guide';
-import { PurchasedComponent } from './components/knx-purchased/purchased.component';
+import { SavedComponent } from './components/knx-saved/saved.component';
 import { RegisterPanelComponent } from './components/knx-register-panel/register-panel.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
@@ -151,7 +153,7 @@ export const sharedComponents = [
   TabComponent,
   ThankYouComponent,
   ServiceGuideComponent,
-  PurchasedComponent,
+  SavedComponent,
   RegisterPanelComponent,
   NavUserComponent,
   UserGreetingComponent,
@@ -179,6 +181,7 @@ export const sharedModules = [
     ReactiveFormsModule,
     TextMaskModule,
     AngularSvgIconModule,
+    KNXFeatureToggleModule.forRoot(environment.featureToggles),
     ...sharedModules
   ],
   declarations: [
@@ -190,6 +193,7 @@ export const sharedModules = [
     ...sharedModules,
     ReactiveFormsModule,
     AngularSvgIconModule,
+    KNXFeatureToggleModule,
     ...sharedComponents,
   ]
 })
