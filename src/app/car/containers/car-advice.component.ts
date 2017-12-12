@@ -168,6 +168,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, AfterViewChecked, 
             this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
           } else if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
             // Proceed to the buy flow for anonymous with advice
+            this.store$.dispatch(new advice.Add({id: cuid()}));
             this.proceedAnonymous(advices, insurances);
           }
       })

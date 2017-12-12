@@ -3,18 +3,19 @@ import { InsuranceAdvice } from '../models/insurance-advice';
 import { CarInsurance } from '../../car/models/car-insurance';
 
 export const ADD_ADVICE =       '[Advice] Add';
+export const UPDATE_ADVICE =    '[Advice] Update';
+export const SELECT_ADVICE =    '[Advice] Select';
+export const RESET_ADVICE =     '[Advice] Reset';
 
 export const GET_ADVICE =       '[Advice] Get';
 export const GET_SUCCESS =      '[Advice] Get Success';
 export const GET_FAILURE =      '[Advice] Get Failure';
 
-export const REMOVE_ADVICE =    '[Advice] Remove';
-export const REMOVE_SUCCESS =   '[Advice] Remove Success';
-export const REMOVE_FAILURE =   '[Advice] Remove Failure';
+export const REMOVE_LATEST_INSURANCE_ADVICE =           '[Advice] Remove Latest Advice';
+export const REMOVE_LATEST_INSURANCE_ADVICE_SUCCESS =   '[Advice] Remove Latest Advice Success';
+export const REMOVE_LATEST_INSURANCE_ADVICE_FAILURE =   '[Advice] Remove Latest Advice Failure';
 
-export const UPDATE_ADVICE =    '[Advice] Update';
-export const SELECT_ADVICE =    '[Advice] Select';
-export const RESET_ADVICE =     '[Advice] Reset';
+export const REMOVE_ADVICE =    '[Advice] Remove';
 
 export const SET_INSURANCE =    '[Advice] Set Insurance';
 export const REMOVE_INSURANCE = '[Advice] Remove Insurance';
@@ -59,18 +60,6 @@ export class Remove implements Action {
   constructor(public payload: any) {}
 }
 
-export class RemoveSuccess implements Action {
-  readonly type = REMOVE_SUCCESS;
-
-  constructor(public payload: any) {}
-}
-
-export class RemoveFailure implements Action {
-  readonly type = REMOVE_FAILURE;
-
-  constructor(public payload: any) {}
-}
-
 export class Select implements Action {
   readonly type = SELECT_ADVICE;
 
@@ -91,6 +80,23 @@ export class RemoveInsurance implements Action {
   readonly type = REMOVE_INSURANCE;
 }
 
+/* Actions for insurance_advice */
+export class RemoveLatestInsuranceAdvice implements Action {
+  readonly type = REMOVE_LATEST_INSURANCE_ADVICE;
+}
+
+export class RemoveLatestInsuranceAdviceSuccess implements Action {
+  readonly type = REMOVE_LATEST_INSURANCE_ADVICE_SUCCESS;
+
+  constructor(public payload: any) {}
+}
+
+export class RemoveLatestInsuranceAdviceFailure implements Action {
+  readonly type = REMOVE_LATEST_INSURANCE_ADVICE_FAILURE;
+
+  constructor(public payload: any) {}
+}
+
 export type All
   = Add
   | Get
@@ -98,6 +104,9 @@ export type All
   | GetFailure
   | Update
   | Remove
+  | RemoveLatestInsuranceAdvice
+  | RemoveLatestInsuranceAdviceSuccess
+  | RemoveLatestInsuranceAdviceFailure
   | Select
   | SetInsurance
   | RemoveInsurance
