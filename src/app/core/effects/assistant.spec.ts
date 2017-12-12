@@ -16,6 +16,19 @@ import * as fromRoot from '../../reducers';
 import * as fromApp from '../reducers';
 import * as fromAssistant from '../reducers';
 
+export function getInitialState() {
+  return {
+    'app': {
+      assistant: {
+        config: new AssistantConfig(),
+        messages: []
+      },
+      layout: null,
+      router: null
+    }
+  };
+}
+
 describe('AssistantEffects', () => {
   let effects: AssistantEffects;
   let actions: Observable<any>;
@@ -33,17 +46,8 @@ describe('AssistantEffects', () => {
         StoreModule.forRoot({
           'app': combineReducers(fromApp.reducers),
         }, {
-            initialState: {
-              'app': {
-                assistant: {
-                  config: config,
-                  messages: []
-                },
-                layout: null,
-                router: null
-              }
-            }
-          })
+          initialState: getInitialState
+        })
       ],
       providers: [
         AssistantEffects,

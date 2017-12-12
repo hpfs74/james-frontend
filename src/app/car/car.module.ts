@@ -3,7 +3,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared.module';
-import { AddressModule } from '../address/address.module';
 import { ChatStreamModule } from './../components/knx-chat-stream/chat-stream.module';
 import { InsuranceReviewModule } from './../components/knx-insurance-review/insurance-review.module';
 import { CarRoutingModule } from './car-routing.module';
@@ -13,35 +12,22 @@ import { BuyService } from '../insurance/services/buy.service';
 import { TagsService } from '../core/services/tags.service';
 import { TagsLoader } from '../utils/tagsloader';
 
-// Smart components / page containers
-import { CarAdviceComponent } from './containers/car-advice.component';
-import { CarSavedComponent } from './containers/car-saved.component';
-import { CarThankYouComponent } from './containers/car-thank-you.component';
-
-// Dumb components
-import { CarDetailComponent } from './components/car-detail.component';
-import { CarExtrasComponent } from './components/car-extras.component';
+// Submodules
+import { CarAdviceModule } from './submodules/car-advice/car-advice.module';
+import { CarBuyModule } from './submodules/car-buy/car-buy.module';
 
 import { CarEffects } from './effects/car';
 import { CompareEffects } from './effects/compare';
 import { CoverageEffects } from './effects/coverage';
 
 import { reducers } from './reducers';
-
-export const COMPONENTS = [
-  CarAdviceComponent,
-  CarSavedComponent,
-  CarDetailComponent,
-  CarExtrasComponent,
-  CarThankYouComponent
-];
-
 @NgModule({
   imports: [
     SharedModule,
-    AddressModule,
     ChatStreamModule,
     InsuranceReviewModule,
+    CarAdviceModule,
+    CarBuyModule,
     CarRoutingModule,
     StoreModule.forFeature('car', reducers),
     EffectsModule.forFeature([
@@ -50,7 +36,6 @@ export const COMPONENTS = [
       CoverageEffects
     ])
   ],
-  declarations: COMPONENTS,
   providers: [
     CarService,
     BuyService

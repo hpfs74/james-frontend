@@ -86,7 +86,6 @@ import { FeatureItemComponent } from './components/knx-features/feature-item.com
 import { LicensePlateComponent } from './components/knx-input-licenseplate/licenseplate.component';
 import { InsuranceResultComponent } from './components/knx-insurance-result/insurance-result.component';
 import { InsuranceResultDetailComponent } from './components/knx-insurance-result-detail/insurance-result-detail.component';
-import { InsuranceTopListComponent } from './components/knx-insurance-toplist/insurance-toplist.component';
 import { OpeningHoursComponent } from './components/knx-opening-hours/opening-hours.component';
 import { OfflineIndicatorComponent, OfflineBarComponent } from './components/knx-offline-indicator/offline-indicator.component';
 import { PriceTableComponent, PriceItemComponent } from './components/knx-price-table';
@@ -104,6 +103,8 @@ import { SavedComponent } from './components/knx-saved/saved.component';
 import { RegisterPanelComponent } from './components/knx-register-panel/register-panel.component';
 import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
+import { KnxWizardRxModule } from './components/knx-wizard-rx/knx-wizard-rx.module';
+import { KNXWizardControlsComponent } from '@app/components/knx-wizard-controls/knx-wizard-controls.component';
 
 export const sharedComponents = [
   // Pipes
@@ -137,7 +138,6 @@ export const sharedComponents = [
   LicensePlateComponent,
   InsuranceResultComponent,
   InsuranceResultDetailComponent,
-  InsuranceTopListComponent,
   OpeningHoursComponent,
   OfflineIndicatorComponent,
   OfflineBarComponent,
@@ -160,13 +160,15 @@ export const sharedComponents = [
   KNXAvatarComponent,
   KNXHamburgerComponent,
   KNXNavbarMenuComponent,
-  KNXFooterComponent
+  KNXFooterComponent,
+  KNXWizardControlsComponent
 ];
 
 export const sharedModules = [
   KNXFormsModule,
   KNXCardModule,
   KNXWizardModule,
+  KnxWizardRxModule,
   KNXStepNavigationModule,
   KNXCollapsiblePanelModule,
   KNXTooltipModule,

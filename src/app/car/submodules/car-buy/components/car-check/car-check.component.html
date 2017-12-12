@@ -1,0 +1,122 @@
+<form [formGroup]="form.formGroup" class="knx-fancy-form" role="form">
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <h2>Check</h2>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.crime"
+              [formControlName]="form.formConfig.crime.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group *ngIf="form.formGroup.get('crime').value"
+              [options]="form.formConfig.crimeComment"
+              [formControlName]="form.formConfig.crimeComment.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.refuse"
+              [formControlName]="form.formConfig.refuse.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group *ngIf="form.formGroup.get('refuse').value"
+              [options]="form.formConfig.refuseComment"
+              [formControlName]="form.formConfig.refuseComment.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.debt"
+              [formControlName]="form.formConfig.debt.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+              <knx-form-group *ngIf="form.formGroup.get('debt').value"
+                [options]="form.formConfig.debtComment"
+                [formControlName]="form.formConfig.debtComment.formControlName">
+              </knx-form-group>
+            </div>
+          </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.driver"
+              [formControlName]="form.formConfig.driver.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+              <knx-form-group *ngIf="form.formGroup.get('driver').value"
+                [options]="form.formConfig.driverComment"
+                [formControlName]="form.formConfig.driverComment.formControlName">
+              </knx-form-group>
+            </div>
+          </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.cause"
+              [formControlName]="form.formConfig.cause.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group *ngIf="form.formGroup.get('cause').value"
+              [options]="form.formConfig.causeComment"
+              [formControlName]="form.formConfig.causeComment.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.register"
+              [formControlName]="form.formConfig.register.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group *ngIf="form.formGroup.get('register').value"
+              [options]="form.formConfig.registerComment"
+              [formControlName]="form.formConfig.registerComment.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+      </knx-card>
+    </div>
+  </div>
+</form>
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+[error]="error$ | async"
+(onNext)="goToNextStep()"
+(onBack)="goToPreviousStep()">
+</knx-wizard-controls>

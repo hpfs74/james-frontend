@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-sm-4 push-sm-8" *ngIf="sidebar">
+      <ng-content select=".knx-wizard__sidebar"></ng-content>
+    </div>
+
+    <div class="knx-wizard-step-content col-sm-{{sidebar ? 8 : 12}} pull-sm-4">
+      <div>
+        <router-outlet (activate)="onActivate($event)" ></router-outlet>
+      </div>
+    </div>
+</div>

@@ -24,7 +24,7 @@ export class CompareEffects {
       return this.carService.getInsurances(payload)
         .map((res) => new compare.LoadCarSuccessAction(res))
         .catch(error => Observable.of(new compare.LoadCarFailAction(error)));
-    });
+    }).catch(error => Observable.of(error));
 
   constructor(private action$: Actions, private carService: CarService) { }
 }
