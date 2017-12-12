@@ -43,47 +43,47 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
   constructor(private tagsService: TagsService,
               private store$: Store<fromRoot.State>) {
 
-      this.securityClasses = this.tagsService.getByKey('buyflow_carsecurity');
-      this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
-      this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
-      const formBuilder = new FormBuilder();
-      this.form = new CarReportingCodeForm(formBuilder, this.tagsService.getAsLabelValue('buyflow_carsecurity'));
-      this.error$ = this.store$.select(fromCore.getWizardError);
-      this.currentStepOptions = {
-        label: 'Autogegevens',
-        nextButtonLabel: 'Volgende',
-        backButtonLabel: 'Terug',
-      };
-    }
+    this.securityClasses = this.tagsService.getByKey('buyflow_carsecurity');
+    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
+    const formBuilder = new FormBuilder();
+    this.form = new CarReportingCodeForm(formBuilder, this.tagsService.getAsLabelValue('buyflow_carsecurity'));
+    this.error$ = this.store$.select(fromCore.getWizardError);
+    this.currentStepOptions = {
+      label: 'Autogegevens',
+      nextButtonLabel: 'Volgende',
+      backButtonLabel: 'Terug',
+    };
+  }
 
-    ngOnInit() {
-      if (this.securityClasses) {
-        this.form.formGroup.get('securityClass').valueChanges.subscribe((value) => {
-          if (this.securityClasses instanceof Array) {
-            this.selectedSecurityClass = this.securityClasses.filter(i => i.tag === value)[0];
-          }
-        });
-      }
-      this.setDefaultValues();
-      this.subscription$.push(
-        this.advice$.subscribe(advice => this.setAdvice(advice))
-      );
-      this.initFormWithProfile();
+  ngOnInit() {
+    if (this.securityClasses) {
+      this.form.formGroup.get('securityClass').valueChanges.subscribe((value) => {
+        if (this.securityClasses instanceof Array) {
+          this.selectedSecurityClass = this.securityClasses.filter(i => i.tag === value)[0];
+        }
+      });
     }
+    this.setDefaultValues();
+    this.subscription$.push(
+      this.advice$.subscribe(advice => this.setAdvice(advice))
+    );
+    this.initFormWithProfile();
+  }
 
-    ngOnDestroy() {
-      this.subscription$.forEach(subscription => subscription.unsubscribe());
+  ngOnDestroy() {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
+  }
+
+  setAdvice(value: any) {
+    if (value) {
+      FormUtils.updateAndValidateControls(this.form.formGroup, value);
     }
+  }
 
-    setAdvice(value: any) {
-      if (value) {
-        FormUtils.updateAndValidateControls(this.form.formGroup, value);
-      }
-    }
-
-    /**
-     * set default values to car-reporting-code.form fields
-   */
+  /**
+   * set default values to car-reporting-code.form fields
+ */
   setDefaultValues() {
     Object.keys(DEFAULT_FORM_VALUES).forEach((key, value) => {
       this.form.formGroup.controls[key].setValue(value);

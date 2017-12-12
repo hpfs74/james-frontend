@@ -67,7 +67,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   isLoggedIn$: Observable<boolean>;
   savedInsurances$: Observable<any>;
   savedInsurancesLoading$: Observable<any>;
-  subscription$: Array<any>;
+  subscription$: Array<any> = [];
   advice$: Observable<any>;
   // Forms
   carExtrasForm: CarExtrasForm;
