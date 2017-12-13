@@ -1,0 +1,228 @@
+<div class="knx-car-summary">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="knx-car-summary__header">
+        Controleer je gegevens
+        <span *ngIf="insurance$ | async">
+          <img class="knx-car-summary__logo" src="{{ (insurance$ | async)._embedded.insurance.insurance_logo }}">
+        </span>
+      </h2>
+      <div class="knx-insurance-review__panels">
+
+        <knx-ir-content title="Je autoverzekering" *ngIf="isValidInsurance((insurance$ | async))">
+
+          <knx-ir-row *ngIf="insurance$ | async">
+            <knx-ir-label>Verzekeringsmaatschappij</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.insurance.insurance_brand }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Ingangsdatum</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.startDate }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Gekozen dekking</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Maximaal eigen risico</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async).own_risk | currency:'EUR':true }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row newSection="true">
+            <knx-ir-label>Rechtsbijstand</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.legal_aid | jamesTag: 'car_flow_legal_aid' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>No-claimbeschermer</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.no_claim_protection | boolean }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Pechhulp</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.road_assistance | jamesTag: 'car_flow_road_assistance' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Inzittendenverzekering</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.cover_occupants | boolean }}</knx-ir-value>
+          </knx-ir-row>
+        </knx-ir-content>
+
+        <knx-ir-content title="Details van je auto" *ngIf="insurance$ | async">
+          <knx-ir-row>
+            <knx-ir-label>Kenteken</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.license }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Merk</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.make }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Model</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.model }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Type</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.edition }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Bouwjaar</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.year }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row newSection="true">
+            <knx-ir-label>Cataloguswaarde</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.price_consumer_incl_vat | currency:'EUR':true}}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Waarde accessoires</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.accessoryValue | currency:'EUR':true}}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Dagwaarde</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.current_value | currency:'EUR':true}}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Gewicht</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)._embedded.car.weight_empty_vehicle + ' kg' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>KM per jaar</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.kilometers_per_year | jamesTag: 'car_flow_km_per_year' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Beveiliging</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async)?.securityClass | jamesTag: 'buyflow_carsecurity' }}</knx-ir-value>
+          </knx-ir-row>
+        </knx-ir-content>
+
+        <knx-ir-content title="Persoonlijke gegevens" *ngIf="insurance$ | async">
+          <knx-ir-row>
+            <knx-ir-label>Geslacht</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).gender === 'M' ? 'Man' : 'Vrouw' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Voorletters</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).initials }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Voornaam</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).firstName }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Tussenvoegsel</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).middleName }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Achternaam</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).lastName }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Geboortedatum</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).date_of_birth | date:'shortDate' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row newSection="true">
+            <knx-ir-label>Street</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).address.street || (advice$ | async).location_info.street  }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Huisnummer</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).address.number  || (advice$ | async).location_info.number }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Postcode</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).address.postcode || (advice$ | async).location_info.postcode }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>City</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).address.city || (advice$ | async).location_info.city }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Mobiel nummer</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).mobileNumber }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Vast nummer</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).phoneNumber || '-' }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>E-mailadres</knx-ir-label>
+            <knx-ir-value>{{ (profile$ | async).emailaddress || (advice$ | async).emailaddress || (advice$ | async).email }}</knx-ir-value>
+          </knx-ir-row>
+        </knx-ir-content>
+
+        <knx-insurance-review-documents *ngIf="(insurance$ | async)?.documents"
+          title="Documenten" [documents]="(insurance$ | async)?.documents"></knx-insurance-review-documents>
+
+        <knx-ir-content title="Betaling" *ngIf="(insurance$ | async)">
+          <knx-ir-row>
+            <knx-ir-label>Je betaalt per maand</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)?.monthly_premium | currency:'EUR':true }}<br><span class="premium-note">Incl. 10% provisie aan Knab</span></knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Eenmalige afsluitkosten</knx-ir-label>
+            <knx-ir-value>{{ (insurance$ | async)?.one_off_premium | currency:'EUR':true }}</knx-ir-value>
+          </knx-ir-row>
+
+          <knx-ir-row>
+            <knx-ir-label>Rekeningnummer</knx-ir-label>
+            <knx-ir-value>{{ (advice$ | async).iban | capitalize }}</knx-ir-value>
+          </knx-ir-row>
+        </knx-ir-content>
+      </div>
+
+      <div class="container">
+        <div class="row knx-car-summary__terms">
+          <div class="col col-sm-12">
+            <knx-checkbox class="knx-car-summary__checkbox"
+              [(ngModel)]="acceptFinalTerms"
+              [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
+            </knx-checkbox>
+          </div>
+        </div>
+
+        <div *ngIf="isAnonymous$ | async" class="row knx-car-summary__terms">
+          <div class="col col-sm-12">
+            <knx-checkbox class="knx-car-summary__checkbox" [(ngModel)]="confirmTerms">
+              Ik ga akkoord met de
+              <a class="knx-registration__document-link" href="{{ content.externalLinks.termsAndConditions }}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
+              en het
+              <a class="knx-registration__document-link" href="{{ content.externalLinks.privacyStatement }}" target="_blank" rel="noopener">privacybeleid</a>
+              van Knab.
+            </knx-checkbox>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+[error]="error$ | async"
+(onNext)="goToNextStep()"
+(onBack)="goToPreviousStep()">
+</knx-wizard-controls>

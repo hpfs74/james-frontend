@@ -1,0 +1,21 @@
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" >
+  <div class="container">
+    <knx-step-navigation
+      [steps]="formSteps"
+      [currentStep]="knxWizardService.currentStepIndex"
+      [clickable]="true"
+      (stepChange)="goToStep($event);">
+    </knx-step-navigation>
+  </div>
+</div>
+
+<div class="container knx-car-buy" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+  <knx-wizard-rx>
+    <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
+      <knx-chat-stream #knxChatStream
+        [options]="chatConfig$ | async"
+        [messages]="chatMessages$ | async">
+      </knx-chat-stream>
+    </div>
+  </knx-wizard-rx>
+</div>
