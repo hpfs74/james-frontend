@@ -15,7 +15,7 @@ interface KnabPageView {
     page?: string;
     title?: string;
     location?: string;
-    'loggedin verzekeren'?: string;
+    loggedIn_Verzekeren?: string;
 }
 
 export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): KnabPageView /* PageView */ {
@@ -25,7 +25,7 @@ export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): K
   return {
     hitType: 'pageview',
     page: action.payload.routerState.url,
-    'loggedin verzekeren': loggedIn ? 'y' : 'n'
+    loggedIn_Verzekeren: loggedIn ? 'y' : 'n'
   };
 }
 
@@ -43,7 +43,8 @@ export const eventsMap = {
 
 // Create Google Tag Manager reducer
 // Console log analytics event in development environment
-const gtmReducer = createMetaReducer(eventsMap, GoogleTagManager(), !environment.production ? { logger } : { logger: null });
+const gtmReducer = createMetaReducer(eventsMap, GoogleTagManager(),
+  !environment.production || environment.featureToggles.enableAnalyticsLogging ? { logger } : { logger: null });
 
 const finalReducer = gtmReducer(fromRouter.routerReducer);
 
