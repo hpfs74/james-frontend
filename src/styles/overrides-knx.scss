@@ -1,3 +1,9 @@
+// BUTTON
+.knx-button.knx-button--secondary.knx-button--ghost span {
+  font-size: $font-size-base - 3;
+  display: block;
+}
+
 // FORM-GROUP
 .knx-form-group {
   font-size: $font-size-base;
