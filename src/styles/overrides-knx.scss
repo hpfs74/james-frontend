@@ -71,3 +71,18 @@
     margin: 15px 0 !important;
   }
 }
+
+.knx-ir-icon {
+  min-height: 50px;
+  line-height: 50px;
+
+  img {
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+  }
+}
+
+knx-ir-value {
+  color: $knab-medium-light-gray;
+}

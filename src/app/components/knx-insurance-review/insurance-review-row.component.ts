@@ -34,22 +34,31 @@ export class InsuranceReviewRowContentComponent {
   template: `
     <hr class="knx-ir-row__divider" *ngIf="newSection">
     <div class="row">
-      <div class="col" [ngClass]="{'col-md-5': showValue, 'col-md-12': !showValue}">
+      <div class="col" [ngClass]="{
+        'col-md-5': showValue && !showIcon,
+        'col-md-12': !showValue && !showIcon,
+        'col-md-8 knx-ir-icon': showIcon
+      }">
+        <ng-content select="knx-ir-icon"></ng-content>
         <ng-content select="knx-ir-label"></ng-content>
         <ng-content *ngIf="showTooltip" select="knx-ir-tooltip"></ng-content>
       </div>
-      <div *ngIf="showValue" class="col col-md-5">
+      <div *ngIf="showValue" [ngClass]="{
+        'col-md-5': showValue && !showIcon,
+        'col-md-4 knx-ir-icon': showIcon
+      }">
         <ng-content select="knx-ir-value"></ng-content>
       </div>
     </div>
   `
 })
 export class InsuranceReviewRowComponent {
-  @Input() showTooltip = false;
-  @Input() showValue = true;
+  @Input() showTooltip;
+  @Input() showValue;
+  @Input() showIcon;
 
   // adds divider between rows
-  @Input() newSection = false;
+  @Input() newSection;
 }
 
 @Component({
@@ -63,6 +72,12 @@ export class InsuranceReviewRowLabelComponent { }
   template: `<ng-content></ng-content>`
 })
 export class InsuranceReviewRowValueComponent { }
+
+@Component({
+  selector: 'knx-ir-icon',
+  template: `<ng-content></ng-content>`
+})
+export class InsuranceReviewRowIconComponent { }
 
 @Component({
   selector: 'knx-ir-tooltip',
