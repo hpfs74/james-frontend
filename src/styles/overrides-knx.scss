@@ -86,3 +86,15 @@
 knx-ir-value {
   color: $knab-medium-light-gray;
 }
+
+.knx-ir-row__divider {
+  &.knx-ir-row-margin {
+    margin-top: -20px;
+  }
+}
+
+@media (max-width: 414px) {
+  .knx-ir-icon {
+    line-height: initial;
+  }
+}
