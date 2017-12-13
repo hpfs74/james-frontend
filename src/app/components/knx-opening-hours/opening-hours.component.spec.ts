@@ -25,6 +25,20 @@ describe('Component: CarContactComponent', () => {
     expect(comp.defaultSchedule).toBeDefined();
   });
 
+  it('[INS-1616] should be open on 20pm', () => {
+    let date = new Date(2017, 6, 7, 20, 20, 0); // 6th june 2017, 20:00
+    comp.updateIsOpen(date);
+    fixture.detectChanges();
+    expect(comp.isOpen).toBeTruthy();
+  });
+
+  it('should be open on 22pm', () => {
+    let date = new Date(2017, 6, 7, 22, 20, 0); // 6th june 2017, 22:20
+    comp.updateIsOpen(date);
+    fixture.detectChanges();
+    expect(comp.isOpen).toBeTruthy();
+  });
+
   it('should be closed on sundays', () => {
     let date = new Date(2017, 6, 11); // 11th june 2017
     comp.updateIsOpen(date);

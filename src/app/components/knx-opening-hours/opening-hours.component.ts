@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/interval';
 
 @Component({
   selector: 'knx-opening-hours',
@@ -11,7 +14,7 @@ import { Component, OnInit, Input } from '@angular/core';
     </div>
   `
 })
-export class OpeningHoursComponent implements OnInit {
+export class OpeningHoursComponent implements OnInit, OnDestroy {
   @Input() schedule: any;
 
   public isOpen: boolean;
@@ -28,6 +31,9 @@ export class OpeningHoursComponent implements OnInit {
   public message: string;
 
   private dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  private pollTime$: Subscription;
+
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     if (!this.schedule) {
@@ -35,6 +41,15 @@ export class OpeningHoursComponent implements OnInit {
     }
     const currentDate = new Date();
     this.updateIsOpen(currentDate);
+
+    this.pollTime$ = Observable.interval(900000 /* every 15 min. */)
+    .subscribe(() => {
+      this.updateIsOpen(new Date());
+    });
+  }
+
+  ngOnDestroy() {
+    this.pollTime$.unsubscribe();
   }
 
   updateIsOpen(date: Date): void {
@@ -48,5 +63,8 @@ export class OpeningHoursComponent implements OnInit {
       this.isOpen = false;
       this.message = 'Nu gesloten';
     }
+
+    // manual mark for changes to support OnPush strategy
+    this.cd.markForCheck();
   }
 }
