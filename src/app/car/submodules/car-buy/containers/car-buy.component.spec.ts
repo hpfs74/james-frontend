@@ -12,12 +12,12 @@ import { StoreModule, Store, State, ActionReducer, combineReducers } from '@ngrx
 import { setUpTestBed } from './../../../../../test.common.spec';
 
 // Components
-import { CarContactComponent } from '../components/car-contact/car-contact.component';
-import { CarSummaryComponent } from '../components/car-summary/car-summary.component';
-import { CarReportingCodeComponent } from '../components/car-reporting/car-reporting-code.component';
-import { CarCheckComponent } from '../components/car-check/car-check.component';
-import { CarCheckForm } from '../components/car-check/car-check.form';
-import { CarPaymentComponent } from '../components/car-payment/car-payment.component';
+import { CarContactComponent } from '../containers/car-contact/car-contact.component';
+import { CarSummaryComponent } from '../containers/car-summary/car-summary.component';
+import { CarReportingCodeComponent } from '../containers/car-reporting/car-reporting-code.component';
+import { CarCheckComponent } from '../containers/car-check/car-check.component';
+import { CarCheckForm } from '../containers/car-check/car-check.form';
+import { CarPaymentComponent } from '../containers/car-payment/car-payment.component';
 import { CarBuyComponent } from './car-buy.component';
 
 import * as fromRoot from '../../../../car/reducers';

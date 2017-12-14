@@ -13,13 +13,11 @@ import { TagsLoader } from '../../../utils/tagsloader';
 
 // Smart components
 import { CarBuyComponent } from './containers/car-buy.component';
-
-// Dumb components
-import { CarContactComponent } from './components/car-contact/car-contact.component';
-import { CarReportingCodeComponent } from './components/car-reporting/car-reporting-code.component';
-import { CarCheckComponent } from './components/car-check/car-check.component';
-import { CarPaymentComponent } from './components/car-payment/car-payment.component';
-import { CarSummaryComponent } from './components/car-summary/car-summary.component';
+import { CarContactComponent } from './containers/car-contact/car-contact.component';
+import { CarReportingCodeComponent } from './containers/car-reporting/car-reporting-code.component';
+import { CarCheckComponent } from './containers/car-check/car-check.component';
+import { CarPaymentComponent } from './containers/car-payment/car-payment.component';
+import { CarSummaryComponent } from './containers/car-summary/car-summary.component';
 import { CarEffects } from '../../../car/effects/car';
 
 import { reducers } from '../../../car/reducers';
