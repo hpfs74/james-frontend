@@ -1,0 +1,258 @@
+<knx-ir-content title="Je autoverzekering" *ngIf="carInsurance">
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Verzekeraar</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance._embedded.insurance.insurance_brand }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Type verzekering</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.product_name }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row newSection="true" showTooltip="true" showValue="true">
+    <knx-ir-label>Dekking</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.main_coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Totaal premie per maand</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Vraag je een verzekering via Knab aan, dan ontvangen wij een percentage van wat jij per maand aan premie
+        betaalt. Dat heet ‘provisie’. We krijgen een doorlopende vaste, lage vergoeding van 10 % van de premie,
+        zolang de verzekering loopt. Knab Verzekeren kan de provisie zo laag houden, omdat de dienst 100% online is.
+        Bij andere aanbieders van verzekeringen kun je tot wel 15% van de premie kwijt zijn aan provisie.<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.monthly_premium | currency:'EUR':true }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true" *ngIf="showOneOffPremium()">
+    <knx-ir-label>Eenmalige afsluitkosten</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Eenmalige afsluitkosten voor nieuwe klanten van deze verzekering.</p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.one_off_premium | currency:'EUR':true }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row newSection="true" showTooltip="true" showValue="true">
+    <knx-ir-label>Prijs-kwaliteit</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.price_quality }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Profiel score</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.fit }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Knab Services</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.supported }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row newSection="true" showTooltip="true" showValue="true">
+    <knx-ir-label>Eigen risico</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.own_risk }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>- bij eigen keuze garage</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.own_risk_freechoice }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>- bij diefstal</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.own_risk_theft }}</knx-ir-value>
+  </knx-ir-row>
+
+  <!-- <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Maximaal eigen risico</knx-ir-label>
+    <knx-ir-tooltip>
+      Dit maximale eigen risico is het bedrag dat voor jouw rekening komt als je de auto laat maken bij een door de verzekeraar
+      gekozen schadehersteller. Wil je jouw auto door iemand anders laten maken? Dan geldt een hoger eigen risico.
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.own_risk | currency:'EUR':true }}</knx-ir-value>
+  </knx-ir-row> -->
+</knx-ir-content>
+
+<knx-ir-content title="Dekking" *ngIf="carInsurance">
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Pechhulp</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.road_assistance | jamesTag: 'car_flow_road_assistance' }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Rechtsbijstand</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.legal_aid | jamesTag: 'car_flow_legal_aid' }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>No-claimbeschermer</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.no_claim_protection | boolean }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Inzittendenverzekering</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{carInsurance.cover_occupants  | boolean }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row newSection="true" showTooltip="true" showValue="true">
+    <knx-ir-label>Vervangend vervoer binnen Nederland</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{carInsurance.additional_details.replacemant_vehicle_nl | boolean }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Vervangend vervoer buiten Nederland</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{carInsurance.additional_details.replacemant_vehicle_bl | boolean }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row newSection="true" showTooltip="true" showValue="true">
+    <knx-ir-label>Nieuwwaarde regeling</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{carInsurance.additional_details.replacementvalue_new }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Occasion regeling</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{carInsurance.additional_details.replacementvalue_occasion }}</knx-ir-value>
+  </knx-ir-row>
+
+  <knx-ir-row showTooltip="true" showValue="true">
+    <knx-ir-label>Dagwaarde regeling</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{carInsurance.car_current_value }}</knx-ir-value>
+  </knx-ir-row>
+</knx-ir-content>
+
+
+<knx-ir-content title="Schade melden - impact op maandelijks bedrag" *ngIf="carInsurance">
+  <knx-ir-row>
+    <knx-ir-label>Wenneer ja schade oploopt en dit wilt melden kan het zijn dat dit invloed heeft opjouw maandelijks bedrag.
+      Bekijk hieronder welke schade meldingen invloed habben op de maandelijkse kosten.</knx-ir-label>
+  </knx-ir-row>
+  <knx-ir-row showValue="true" showIcon="true">
+    <knx-ir-icon>
+      <img src="" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>Soort schade</knx-ir-label>
+    <knx-ir-value>Invloed ja/nee</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row newSection="true" showValue="true" showIcon="true" showTooltip="true">
+    <knx-ir-icon>
+      <img [src]="carInsurance.additional_details.damages.damages_firedamage.icon" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>Brand door vandalisme</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.additional_details.damages.damages_firedamage.value | boolean }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
+    <knx-ir-icon>
+      <img [src]="carInsurance.additional_details.damages.damages_windowdamage.icon" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>Niet-schadsturing ruitschade</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.additional_details.damages.damages_windowdamage.value | boolean }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
+    <knx-ir-icon>
+      <img [src]="carInsurance.additional_details.damages.damages_transportation.icon" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>Transport en hulp voor gewonden</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.additional_details.damages.damages_transportation.value | boolean }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
+    <knx-ir-icon>
+      <img [src]="carInsurance.additional_details.damages.damages_limited_casco.icon" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>Limited casco</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.additional_details.damages.damages_limited_casco.value | boolean }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
+    <knx-ir-icon>
+      <img [src]="carInsurance.additional_details.damages.damages_noblamenoclaim.icon" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>No-blame No-Claim</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.additional_details.damages.damages_noblamenoclaim.value | boolean }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
+    <knx-ir-icon>
+      <img [src]="carInsurance.additional_details.damages.damages_animals_damage.icon" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>Gevolgschade aanrijding dieren</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.additional_details.damages.damages_animals_damage.value | boolean }}</knx-ir-value>
+  </knx-ir-row>
+  <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
+    <knx-ir-icon>
+      <img [src]="carInsurance.additional_details.damages.damages_unmotorised_traffic_participant.icon" alt="">
+    </knx-ir-icon>
+    <knx-ir-label>Ongemotoriseerde verkeersdeelnamer</knx-ir-label>
+    <knx-ir-tooltip>
+      <p>Change me later<p>
+    </knx-ir-tooltip>
+    <knx-ir-value>{{ carInsurance.additional_details.damages.damages_unmotorised_traffic_participant.value | boolean }}</knx-ir-value>
+  </knx-ir-row>
+</knx-ir-content>
