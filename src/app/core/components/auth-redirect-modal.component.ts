@@ -50,7 +50,7 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
         'knx-button knx-button--fullwidth knx-button--3d knx-button--primary';
 
       this.actionButtons.push({
-          text: 'Verder',
+          text: 'Verder <span>zonder account</span>',
           position: 'right',
           buttonClass: 'knx-button knx-button--secondary knx-button--ghost',
           onAction: () => {
