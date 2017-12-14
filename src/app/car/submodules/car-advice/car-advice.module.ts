@@ -12,18 +12,16 @@ import { CarService } from '../../../car/services/car.service';
 import { TagsService } from '../../../core/services/tags.service';
 import { TagsLoader } from '../../../utils/tagsloader';
 
-// Smart components
 import { CarAdviceComponent } from './containers/car-advice/car-advice.component';
 import { CarSavedComponent } from './containers/car-saved/car-saved.component';
-// Dumb components
-import { CarDetailComponent } from './components/car-detail/car-detail.component';
-import { CarExtrasComponent } from './components/car-extras/car-extras.component';
-import { CarReviewComponent } from './components/car-review/car-review.component';
+import { CarDetailComponent } from './containers/car-detail/car-detail.component';
+import { CarExtrasComponent } from './containers/car-extras/car-extras.component';
+import { CarReviewComponent } from './containers/car-review/car-review.component';
+import { CarThankYouComponent } from './containers/car-thank-you/car-thank-you.component';
 
 import { CarEffects } from '../../../car/effects/car';
 import { reducers } from '../../../car/reducers';
-import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
-import { CarThankYouComponent } from '@app/car/submodules/car-advice/components/car-thank-you/car-thank-you.component';
+import { InsuranceTopListComponent } from './containers/insurance-toplist/insurance-toplist.component';
 
 export const COMPONENTS = [
   CarAdviceComponent,

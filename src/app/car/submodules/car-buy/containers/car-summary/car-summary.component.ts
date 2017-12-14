@@ -42,19 +42,24 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   insurance$: Observable<CarInsurance | InsuranceAdvice>;
   advice$: Observable<any>;
   car$: Observable<any>;
-  acceptFinalTerms: boolean;
-  confirmTerms: boolean;
+  acceptInsuranceTerms: boolean;
+  acceptKnabTerms: boolean;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   content: Content;
   isAnonymous$: Observable<any>;
+  isLoggedIn: boolean;
   subscription$: Subscription[] = [];
+
+  formSummaryError = 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.';
+
   constructor(private tagsService: TagsService,
-              private store$: Store<fromRoot.State>,
-              public asyncPipe: AsyncPipe,
-              public contentConfig: ContentConfig) {
+      private store$: Store<fromRoot.State>,
+      public asyncPipe: AsyncPipe,
+      public contentConfig: ContentConfig) {
     this.isAnonymous$ = this.store$.select(fromAuth.getLoggedIn).map(isLoggedIn => !isLoggedIn);
+    this.isAnonymous$.take(1).subscribe(isAnonymous => this.isLoggedIn = !isAnonymous);
     this.content = contentConfig.getContent();
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
@@ -141,8 +146,8 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   goToNextStep() {
-    if (!this.acceptFinalTerms || !this.confirmTerms) {
-      return this.store$.dispatch(new wizardActions.Error({message: 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'}));
+    if (!this.summaryValid()) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.formSummaryError}));
     }
 
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
@@ -183,6 +188,10 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
         this.subscription$.push(subscription);
         // Navigate to thank you page
       });
+  }
+
+  private summaryValid() {
+    return this.isLoggedIn ? this.acceptInsuranceTerms : this.acceptInsuranceTerms && this.acceptKnabTerms;
   }
 
 }
