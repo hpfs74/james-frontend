@@ -199,12 +199,12 @@
 
       <div class="knx-car-summary__terms">
         <knx-checkbox class="knx-car-summary__checkbox"
-          [(ngModel)]="acceptFinalTerms"
+          [(ngModel)]="acceptInsuranceTerms"
           [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
         </knx-checkbox>
 
         <ng-container *ngIf="isAnonymous$ | async">
-          <knx-checkbox class="knx-car-summary__checkbox" [(ngModel)]="confirmTerms">
+          <knx-checkbox class="knx-car-summary__checkbox" [(ngModel)]="acceptKnabTerms">
             Ik ga akkoord met de
             <a class="knx-registration__document-link" href="{{ content.externalLinks.termsAndConditions }}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
             en het
