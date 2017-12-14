@@ -53,14 +53,49 @@ describe('Component: InsuranceReviewComponent', () => {
       no_claim_protection: '100',
       cover_occupants: '100',
       documents: [{name: 'document name', url: 'https://document.com'}],
-      _embedded: {insurance: {insurance_logo: 'logogurl-1'}}
+      _embedded: {insurance: {insurance_logo: 'logogurl-1'}},
+      car_current_value: 975,
+      additional_details: {
+        replacemant_vehicle_bl: true,
+        replacemant_vehicle_nl: false,
+        damages: {
+          damages_firedamage: {
+            icon: '',
+            value: false
+          },
+          damages_windowdamage: {
+            icon: '',
+            value: false
+          },
+          damages_transportation: {
+            icon: '',
+            value: false
+          },
+          damages_limited_casco: {
+            icon: '',
+            value: false
+          },
+          damages_noblamenoclaim: {
+            icon: '',
+            value: false
+          },
+          damages_animals_damage: {
+            icon: '',
+            value: false
+          },
+          damages_unmotorised_traffic_participant: {
+            icon: '',
+            value: false
+          },
+        }
+      }
     };
 
     fixture.detectChanges();
   });
 
   it('should render 3 sections', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-collapsible-panel').length).toBe(3);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-collapsible-panel').length).toBe(4);
   });
 
   // it('should update the form with profile data (ngOnChanges)', () => {
