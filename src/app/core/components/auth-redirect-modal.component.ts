@@ -27,7 +27,6 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
     this.actionButtons = [
       {
         text: 'Inloggen',
-        position: 'left',
         buttonClass: 'knx-button knx-button--fullwidth knx-button--3d knx-button--primary',
         onAction: () => {
           this.store$.dispatch(new router.Go({ path: ['/login']}));
@@ -36,30 +35,37 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
       },
       {
         text: 'Registreren',
-        position: 'left',
-        buttonClass: 'knx-button knx-button--fullwidth knx-button--3d knx-button--primary',
+        buttonClass: 'knx-button knx-button--fullwidth knx-button--3d knx-button--secondary',
         onAction: () => {
           this.store$.dispatch(new router.Go({ path: ['/register']}));
           return true;
         }
       },
-      {
-        text: 'Verder',
-        position: 'right',
-        buttonClass: 'knx-button knx-button--secondary knx-button--ghost',
-        onAction: () => {
-          this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
-            advice => {
-              if (advice && advice.id) {
-                this.store$.dispatch(new router.Go({
-                  path: ['/car/insurance', {adviceId: advice.id}],
-                }));
-              }
-            });
-          return true;
-        }
-      }
     ];
+
+    if (this.featureToggleService.isOn('enableBuyFlowEmail')) {
+      this.actionButtons[0].position =  this.actionButtons[1].position = 'left';
+
+      this.actionButtons[0].buttonClass = this.actionButtons[1].buttonClass =
+        'knx-button knx-button--fullwidth knx-button--3d knx-button--primary';
+
+      this.actionButtons.push({
+          text: 'Verder <span>zonder account</span>',
+          position: 'right',
+          buttonClass: 'knx-button knx-button--secondary knx-button--ghost',
+          onAction: () => {
+            this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
+              advice => {
+                if (advice && advice.id) {
+                  this.store$.dispatch(new router.Go({
+                    path: ['/car/insurance', {adviceId: advice.id}],
+                  }));
+                }
+              });
+            return true;
+          }
+        });
+    }
   }
 
   dialogInit(reference: ComponentRef<KNXModalDialog>, options?: KNXModalDialogOptions) {}

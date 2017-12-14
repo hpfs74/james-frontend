@@ -40,7 +40,7 @@ import { AddressModule } from './address/address.module';
 
     StoreModule.forRoot(reducers, { metaReducers }),
 
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 5 }) : [],
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
 
     StoreRouterConnectingModule,
 

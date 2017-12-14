@@ -10,16 +10,10 @@ import { Proposal } from '../models/proposal';
 
 @Injectable()
 export class BuyService {
-  private headers: Headers;
-
-  constructor(private authHttp: AuthHttp) {
-    this.headers = new Headers();
-    this.headers.append('version', 'v2');
-  }
+  constructor(private authHttp: AuthHttp) {}
 
   public buyInsuranceAnonymous(payload: Proposal): Observable<any> {
-    const headers = this.headers;
-    return this.authHttp.post(environment.james.sdBuy, JSON.stringify(payload), { headers })
+    return this.authHttp.post(environment.james.sdBuy, JSON.stringify(payload))
     .map((res: Response) => res.json());
   }
 }

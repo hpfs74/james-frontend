@@ -7,6 +7,7 @@ import * as fromRoot from '../../reducers';
 import * as fromAnalytics from './analytics';
 import * as fromAssistant from './assistant';
 import * as fromLayout from './layout';
+import * as fromWizard from './wizard';
 
 import { environment } from '@env/environment';
 
@@ -14,6 +15,7 @@ export interface AppState {
   assistant: fromAssistant.State;
   layout: fromLayout.State;
   router: fromRouter.RouterReducerState<RouterStateUrl>;
+  wizard: fromWizard.State;
 }
 
 export interface State extends fromRoot.State {
@@ -23,7 +25,8 @@ export interface State extends fromRoot.State {
 export const reducers = {
   assistant: fromAssistant.reducer,
   layout: fromLayout.reducer,
-  router: environment.enableAnalytics ? fromAnalytics.reducer : fromRouter.routerReducer
+  router: environment.enableAnalytics ? fromAnalytics.reducer : fromRouter.routerReducer,
+  wizard: fromWizard.reducer
 };
 
 
@@ -49,3 +52,8 @@ export const getAsisstantState = createSelector(selectAppState, (state: AppState
 export const getAssistantMessageState = createSelector(getAsisstantState, fromAssistant.getMessages);
 export const getAssistantConfig = createSelector(getAsisstantState, fromAssistant.getConfig);
 
+/**
+ * Wizard Reducers
+ */
+export const getWizardState = createSelector(selectAppState, (state: AppState) => state.wizard);
+export const getWizardError = createSelector(getWizardState, fromWizard.getWizardError);
