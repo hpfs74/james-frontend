@@ -234,6 +234,9 @@ describe('Component: CarBuyComponent', () => {
 
   // describe('resetFlow()', () => {
   //   it('should dispatch reset acitons', () => {
+  //     store.dispatch(new insurance.GetInsurancesSuccess({
+  //       car: {insurance_advice: [{_id: 1231321}]}
+  //     }));
   //     let adviceResetAction = new advice.ResetAction();
   //     let compareResetAction = new compare.CarCompareResetStateAction();
   //     let carResetAction = new car.CarResetStateAction();

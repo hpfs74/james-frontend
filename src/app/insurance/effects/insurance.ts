@@ -15,15 +15,15 @@ import { AuthService } from '../../auth/services/auth.service';
 export class InsuranceEffects {
   @Effect()
   getSavedCarInsurances$: Observable<Action> = this.actions$
-    .ofType(insurance.GET_SAVED_CAR_INSURANCES)
-    .map((action: insurance.GetSavedCarInsurances) => action)
+    .ofType(insurance.GET_INSURANCES)
+    .map((action: insurance.GetInsurances) => action)
     .switchMap(() => {
       if (this.authService.isAnonymous()) {
-        return Observable.of(new insurance.GetSavedCarInsurancesSuccess({}));
+        return Observable.of(new insurance.GetInsurancesSuccess({}));
       }
       return this.insuranceService.getProfileInsurances()
-        .map((res: Response) => new insurance.GetSavedCarInsurancesSuccess(res))
-        .catch(error => Observable.of(new insurance.GetSavedCarInsurancesFailure(error)));
+        .map((res: Response) => new insurance.GetInsurancesSuccess(res))
+        .catch(error => Observable.of(new insurance.GetInsurancesFailure(error)));
     });
 
   constructor(private actions$: Actions, private insuranceService: InsuranceService, private authService: AuthService) {}

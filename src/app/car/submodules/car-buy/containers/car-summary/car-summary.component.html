@@ -142,22 +142,22 @@
 
           <knx-ir-row newSection="true">
             <knx-ir-label>Street</knx-ir-label>
-            <knx-ir-value>{{ (advice$ | async).address.street || (advice$ | async).location_info.street  }}</knx-ir-value>
+            <knx-ir-value>{{ (advice$ | async).address?.street || (advice$ | async).location_info.street  }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Huisnummer</knx-ir-label>
-            <knx-ir-value>{{ (advice$ | async).address.number  || (advice$ | async).location_info.number }}</knx-ir-value>
+            <knx-ir-value>{{ (advice$ | async).address?.number  || (advice$ | async).location_info.number }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>Postcode</knx-ir-label>
-            <knx-ir-value>{{ (advice$ | async).address.postcode || (advice$ | async).location_info.postcode }}</knx-ir-value>
+            <knx-ir-value>{{ (advice$ | async).address?.postcode || (advice$ | async).location_info.postcode }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
             <knx-ir-label>City</knx-ir-label>
-            <knx-ir-value>{{ (advice$ | async).address.city || (advice$ | async).location_info.city }}</knx-ir-value>
+            <knx-ir-value>{{ (advice$ | async).address?.city || (advice$ | async).location_info.city }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row>
