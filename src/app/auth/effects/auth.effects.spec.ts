@@ -99,7 +99,7 @@ describe('AuthEffects', () => {
         new auth.LoginSuccess({ token: tokenResponse }),
         new auth.ScheduleTokenRefresh(tokenResponse),
         new profile.LoadAction(),
-        new insurance.GetSavedCarInsurances()
+        new insurance.GetInsurances()
       ];
       authService.login.and.returnValue(Observable.of(tokenResponse));
 

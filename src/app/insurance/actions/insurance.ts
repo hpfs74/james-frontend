@@ -9,10 +9,10 @@ export const LOAD =                                 '[Insurances] Load';
 export const LOAD_SUCCESS =                         '[Insurances] Load Success';
 export const LOAD_FAILURE =                         '[Insurances] Load Failure';
 
-export const GET_SAVED_CAR_INSURANCES =         '[Insurances] Get Insurances';
-export const GET_SAVED_CAR_INSURANCES_SUCCESS = '[Insurances] Get Insurances Success';
-export const GET_SAVED_CAR_INSURANCES_FAILURE = '[Insurances] Get Insurances Failure';
-export const GET_SAVED_CAR_INSURANCES_ANONYMOUS = '[Insurances] Get Insurances Anonymous';
+export const GET_INSURANCES =             '[Insurances] Get Insurances';
+export const GET_INSURANCES_SUCCESS =     '[Insurances] Get Insurances Success';
+export const GET_INSURANCES_FAILURE =     '[Insurances] Get Insurances Failure';
+export const GET_INSURANCES_ANONYMOUS =   '[Insurances] Get Insurances Anonymous';
 
 
 export class AddInsuranceAction implements Action {
@@ -49,18 +49,18 @@ export class LoadFail implements Action {
   constructor(public payload: any) { }
 }
 
-export class GetSavedCarInsurances implements Action {
-  readonly type = GET_SAVED_CAR_INSURANCES;
+export class GetInsurances implements Action {
+  readonly type = GET_INSURANCES;
 }
 
-export class GetSavedCarInsurancesSuccess implements Action {
-  readonly type = GET_SAVED_CAR_INSURANCES_SUCCESS;
+export class GetInsurancesSuccess implements Action {
+  readonly type = GET_INSURANCES_SUCCESS;
 
   constructor(public payload: any) {}
 }
 
-export class GetSavedCarInsurancesFailure implements Action {
-  readonly type = GET_SAVED_CAR_INSURANCES_FAILURE;
+export class GetInsurancesFailure implements Action {
+  readonly type = GET_INSURANCES_FAILURE;
 
   constructor(public payload: any) {}
 }
@@ -72,7 +72,7 @@ export type All
   | Load
   | LoadSuccess
   | LoadFail
-  | GetSavedCarInsurances
-  | GetSavedCarInsurancesSuccess
-  | GetSavedCarInsurancesFailure;
+  | GetInsurances
+  | GetInsurancesSuccess
+  | GetInsurancesFailure;
 

@@ -244,7 +244,7 @@ describe('Component: CarBuyComponent', () => {
 
   describe('resetFlow()', () => {
     it('should dispatch reset acitons', () => {
-      store.dispatch(new insurance.GetSavedCarInsurancesSuccess({
+      store.dispatch(new insurance.GetInsurancesSuccess({
         car: {insurance_advice: [{_id: 1231321}]}
       }));
 
