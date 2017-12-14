@@ -37,7 +37,7 @@ export function reducer(state = initialState, action: Action): State {
 
     }
 
-    case InsuranceActions.GET_SAVED_CAR_INSURANCES: {
+    case InsuranceActions.GET_INSURANCES: {
       return Object.assign({}, state, {
         ...state,
         loaded: false,
@@ -45,7 +45,7 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case InsuranceActions.GET_SAVED_CAR_INSURANCES_SUCCESS: {
+    case InsuranceActions.GET_INSURANCES_SUCCESS: {
       let insurances = action.payload;
 
       if (insurances && Object.keys(insurances).length === 0) {
@@ -60,7 +60,7 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case InsuranceActions.GET_SAVED_CAR_INSURANCES_FAILURE: {
+    case InsuranceActions.GET_INSURANCES_FAILURE: {
       return Object.assign({}, state, {
         ...state,
         loaded: false,
