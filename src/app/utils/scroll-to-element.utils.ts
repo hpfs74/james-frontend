@@ -87,10 +87,12 @@ function getErrorElementOffsetTop(): number {
         headerHeight = headerElement[0].getBoundingClientRect().height;
     }
     const allErrorElements = document.querySelectorAll('div[data-error]');
-    const errorArray = Object.keys(allErrorElements)
-                        .filter(key => !!allErrorElements[key].dataset['error'])
-                        .map(stringValue => parseInt(stringValue));
-
+    let errorArray = [];
+    if (allErrorElements.length) {
+        errorArray = Object.keys(allErrorElements)
+                            .filter(key => !!allErrorElements[key].dataset['error'])
+                            .map(stringValue => parseInt(stringValue));
+    }
     if (errorArray.length) {
         const minErrorIndex = errorArray.reduce((a, b) => Math.min(a, b));
         return getElementTop(allErrorElements[minErrorIndex]) - headerHeight;
