@@ -1,7 +1,7 @@
 const DEFAULT_SCROLL_TARGET_Y = 0;
 const DEFAULT_SCROLL_SPEED = 3000;
 const DEFAULT_SCROLL_EASING = 'easeOutSine';
-
+let isScrolling = false;
 // first add raf shim
 // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
 declare var window: any;
@@ -35,6 +35,10 @@ export function scrollToY(
     speed: number = DEFAULT_SCROLL_SPEED,
     easing: string = DEFAULT_SCROLL_EASING) {
 
+    if (isScrolling) {
+        return;
+    }
+    isScrolling = true;
     let scrollY = window.scrollY || document.documentElement.scrollTop;
     let currentTime = 0;
 
@@ -66,13 +70,12 @@ export function scrollToY(
 
         if (p < 1) {
             requestAnimFrame(tick);
-
             window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
         } else {
             window.scrollTo(0, scrollTargetY);
+            isScrolling = false;
         }
     }
-
     // call it once to get started
     tick();
 }
