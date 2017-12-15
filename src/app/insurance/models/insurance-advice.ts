@@ -4,6 +4,7 @@ import { InsuranceDocument } from './insurance-document';
 
 export class InsuranceAdvice {
   id: string;
+  advice_expires_at: number;
   insurance_id: string;
   moneyview_id: string;
   type: string;

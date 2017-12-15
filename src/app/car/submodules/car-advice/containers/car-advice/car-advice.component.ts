@@ -127,7 +127,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
           } else if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
             // Proceed to the buy flow for anonymous with advice
-            this.proceedAnonymous(advices, insurances);
+            this.proceedWithAdvice(advices, insurances);
           }
       })
     );
@@ -173,7 +173,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
   }
 
-  private proceedAnonymous(advices, insurances) {
+  private proceedWithAdvice(advices, insurances) {
     this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
     this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
 
@@ -183,11 +183,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       })
       .subscribe(insurance => {
         if (insurance) {
-          this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-            id => {
-              this.store$.dispatch(new router.Go({
-                path: ['/car/insurance/contact-detail'],
-              }));
+          this.subscription$.push(this.store$.select(fromInsurance.getSelectedInsurance)
+            .filter(selectedInsurance => selectedInsurance !== null).subscribe(
+            selectedInsurance => {
+              if (selectedInsurance.advice_expires_at * 1000 > new Date().getTime()) {
+                this.store$.dispatch(new router.Go({
+                  path: ['/car/insurance/contact-detail'],
+                }));
+              } else {
+                this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
+              }
             }));
         }
     });
