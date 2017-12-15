@@ -42,19 +42,24 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   insurance$: Observable<CarInsurance | InsuranceAdvice>;
   advice$: Observable<any>;
   car$: Observable<any>;
-  acceptFinalTerms: boolean;
-  confirmTerms: boolean;
+  acceptInsuranceTerms: boolean;
+  acceptKnabTerms: boolean;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   content: Content;
   isAnonymous$: Observable<any>;
+  isLoggedIn: boolean;
   subscription$: Subscription[] = [];
+
+  formSummaryError = 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.';
+
   constructor(private tagsService: TagsService,
-              private store$: Store<fromRoot.State>,
-              public asyncPipe: AsyncPipe,
-              public contentConfig: ContentConfig) {
+      private store$: Store<fromRoot.State>,
+      public asyncPipe: AsyncPipe,
+      public contentConfig: ContentConfig) {
     this.isAnonymous$ = this.store$.select(fromAuth.getLoggedIn).map(isLoggedIn => !isLoggedIn);
+    this.isAnonymous$.take(1).subscribe(isAnonymous => this.isLoggedIn = !isAnonymous);
     this.content = contentConfig.getContent();
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
@@ -101,6 +106,11 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   getProposalData(value: any) {
+    // convert anonymous flow email property to expected property
+    if (value.adviceInfo.email) {
+      value.adviceInfo.emailaddress = value.adviceInfo.email;
+    }
+
     const flatData = Object.assign({},
       value.profileInfo,
       value.adviceInfo,
@@ -141,8 +151,8 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   goToNextStep() {
-    if (!this.acceptFinalTerms || !this.confirmTerms) {
-      return this.store$.dispatch(new wizardActions.Error({message: 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'}));
+    if (!this.summaryValid()) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.formSummaryError}));
     }
 
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
@@ -155,7 +165,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
         // && value.profileInfo != null)
         .subscribe((value) => {
           const proposalData = this.getProposalData(value);
-          this.store$.dispatch(new car.Buy(proposalData));
+          // this.store$.dispatch(new car.Buy(proposalData));
         });
 
     Observable.combineLatest(
@@ -168,21 +178,30 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
           return this.store$.dispatch(new wizardActions.Error({
             message: 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
           }));
+        } else if (!this.isLoggedIn) {
+          // Anonymous buy flow
+          return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
         }
 
+        // Navigate to thank you page (logged in flow)
         let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
-            this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
-              .subscribe(SavedCarAdvices => {
-                this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
-              });
+            this.deleteAdvice();
             return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
 
         this.subscription$.push(subscription);
-        // Navigate to thank you page
+
       });
+  }
+
+  private deleteAdvice() {
+    this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
+  }
+
+  private summaryValid() {
+    return this.isLoggedIn ? this.acceptInsuranceTerms : this.acceptInsuranceTerms && this.acceptKnabTerms;
   }
 
 }

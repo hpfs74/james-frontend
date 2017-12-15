@@ -1,7 +1,7 @@
 const DEFAULT_SCROLL_TARGET_Y = 0;
 const DEFAULT_SCROLL_SPEED = 3000;
 const DEFAULT_SCROLL_EASING = 'easeOutSine';
-
+let isScrolling = false;
 // first add raf shim
 // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
 declare var window: any;
@@ -34,7 +34,11 @@ export function scrollToY(
     scrollTargetY: number = DEFAULT_SCROLL_TARGET_Y,
     speed: number = DEFAULT_SCROLL_SPEED,
     easing: string = DEFAULT_SCROLL_EASING) {
-
+    if (isScrolling) {
+        return;
+    }
+    isScrolling = true;
+    scrollTargetY = getErrorElementOffsetTop();
     let scrollY = window.scrollY || document.documentElement.scrollTop;
     let currentTime = 0;
 
@@ -66,13 +70,42 @@ export function scrollToY(
 
         if (p < 1) {
             requestAnimFrame(tick);
-
             window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
         } else {
             window.scrollTo(0, scrollTargetY);
+            isScrolling = false;
         }
     }
-
     // call it once to get started
     tick();
+}
+
+function getErrorElementOffsetTop(): number {
+    const headerElement = document.querySelectorAll('knx-navbar');
+    let headerHeight = 0;
+    if (headerElement.length) {
+        headerHeight = headerElement[0].getBoundingClientRect().height;
+    }
+    const allErrorElements = document.querySelectorAll('div[data-error]');
+    let errorArray = [];
+    if (allErrorElements.length) {
+        errorArray = Object.keys(allErrorElements)
+                            .filter(key => !!allErrorElements[key].dataset['error'])
+                            .map(stringValue => parseInt(stringValue));
+    }
+    if (errorArray.length) {
+        const minErrorIndex = errorArray.reduce((a, b) => Math.min(a, b));
+        return getElementTop(allErrorElements[minErrorIndex]) - headerHeight;
+    }
+    return 0;
+}
+
+function getElementTop(elem) { // crossbrowser version
+    const box = elem.getBoundingClientRect();
+    const body = document.body;
+    const docEl = document.documentElement;
+    const scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    const clientTop = docEl.clientTop || body.clientTop || 0;
+    const top  = box.top +  scrollTop - clientTop;
+    return Math.round(top);
 }
