@@ -177,7 +177,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
     this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
 
-    this.store$.select(fromCar.getCompareResult)
+    this.subscription$.push(this.store$.select(fromCar.getCompareResult)
       .map(obs => {
         return obs.map(v => JSON.parse(JSON.stringify(v)));
       })
@@ -187,15 +187,14 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             .filter(selectedInsurance => selectedInsurance !== null).subscribe(
             selectedInsurance => {
               if (selectedInsurance.advice_expires_at * 1000 > new Date().getTime()) {
-                this.store$.dispatch(new router.Go({
-                  path: ['/car/insurance/contact-detail'],
-                }));
+                this.store$.dispatch(new router.Go({ path: ['/car/insurance/contact-detail'] }));
               } else {
                 this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
+                this.store$.dispatch(new router.Go({ path: ['/car/extras'] }));
               }
             }));
         }
-    });
+    }));
   }
 
   goToStep(stepIndex: number) {

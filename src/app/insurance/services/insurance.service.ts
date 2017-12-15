@@ -44,6 +44,15 @@ export class InsuranceService {
   public getProfileInsurances(): Observable<any> {
     const headers = this.headers;
     return this.authHttp.get(environment.james.profileInsurances, { headers })
-      .map(res => res.json());
+      .map(res => {
+        let insurances = res.json();
+        // Convert to number because of inconsistent backend data types
+        // TODO: remove conversion when INS-1690 bug for backend team will be fixed
+        insurances.car.insurance_advice.forEach(carAdvice => {
+          carAdvice.claim_free_years = +carAdvice.claim_free_years;
+          carAdvice.own_risk = +carAdvice.own_risk;
+        });
+        return insurances;
+      });
   }
 }
