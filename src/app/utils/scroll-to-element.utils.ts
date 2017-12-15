@@ -83,7 +83,7 @@ export function scrollToY(
 function getErrorElementOffsetTop(): number {
     const headerElement = document.querySelectorAll('knx-navbar');
     let headerHeight = 0;
-    if (headerElement) {
+    if (headerElement.length) {
         headerHeight = headerElement[0].getBoundingClientRect().height;
     }
     const allErrorElements = document.querySelectorAll('div[data-error]');
