@@ -173,8 +173,12 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
           return this.store$.dispatch(new wizardActions.Error({
             message: 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
           }));
+        } else if (!this.isLoggedIn) {
+          // Anonymous buy flow
+          return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
         }
 
+        // Navigate to thank you page (logged in flow)
         let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
@@ -186,7 +190,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
           });
 
         this.subscription$.push(subscription);
-        // Navigate to thank you page
+
       });
   }
 
