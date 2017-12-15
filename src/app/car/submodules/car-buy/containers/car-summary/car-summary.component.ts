@@ -178,16 +178,17 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
         let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
-            this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
-              .subscribe(SavedCarAdvices => {
-                this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
-              });
+            this.deleteAdvice();
             return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
 
         this.subscription$.push(subscription);
         // Navigate to thank you page
       });
+  }
+
+  private deleteAdvice() {
+    this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
   }
 
   private summaryValid() {
