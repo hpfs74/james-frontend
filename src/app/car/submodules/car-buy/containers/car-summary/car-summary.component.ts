@@ -106,6 +106,11 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   getProposalData(value: any) {
+    // convert anonymous flow email property to expected property
+    if (value.adviceInfo.email) {
+      value.adviceInfo.emailaddress = value.adviceInfo.email;
+    }
+
     const flatData = Object.assign({},
       value.profileInfo,
       value.adviceInfo,
@@ -160,7 +165,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
         // && value.profileInfo != null)
         .subscribe((value) => {
           const proposalData = this.getProposalData(value);
-          this.store$.dispatch(new car.Buy(proposalData));
+          // this.store$.dispatch(new car.Buy(proposalData));
         });
 
     Observable.combineLatest(
