@@ -26,6 +26,12 @@ export class AdviceService {
       .map(res => res.json());
   }
 
+  public saveAdvice(adviceData: string): Observable<any> {
+    const headers = this.headers;
+    return this.authHttp.post(`${this.insuranceAdvice}`, adviceData, { headers })
+      .map(res => res.json());
+  }
+
   public removeAdvice(adviceId: string): Observable<any> {
     const headers = this.headers;
     return this.authHttp.delete(`${this.insuranceAdvice}/${adviceId}`, { headers })

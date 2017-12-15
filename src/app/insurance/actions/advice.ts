@@ -11,6 +11,10 @@ export const GET_ADVICE =       '[Advice] Get';
 export const GET_SUCCESS =      '[Advice] Get Success';
 export const GET_FAILURE =      '[Advice] Get Failure';
 
+export const SAVE_LATEST_ADVICE =       '[Advice] Save Latest';
+export const SAVE_LATEST_SUCCESS =      '[Advice] Save Latest Success';
+export const SAVE_LATEST_FAILURE =      '[Advice] Save Latest Failure';
+
 export const REMOVE_LATEST_INSURANCE_ADVICE =           '[Advice] Remove Latest Advice';
 export const REMOVE_LATEST_INSURANCE_ADVICE_SUCCESS =   '[Advice] Remove Latest Advice Success';
 export const REMOVE_LATEST_INSURANCE_ADVICE_FAILURE =   '[Advice] Remove Latest Advice Failure';
@@ -44,6 +48,22 @@ export class GetSuccess implements Action {
 
 export class GetFailure implements Action {
   readonly type = GET_FAILURE;
+
+  constructor(public payload: any) {}
+}
+
+export class SaveLatest implements Action {
+  readonly type = SAVE_LATEST_ADVICE;
+}
+
+export class SaveLatestSuccess implements Action {
+  readonly type = SAVE_LATEST_SUCCESS;
+
+  constructor(public payload: any) {}
+}
+
+export class SaveLatestFailure implements Action {
+  readonly type = SAVE_LATEST_FAILURE;
 
   constructor(public payload: any) {}
 }
@@ -102,6 +122,9 @@ export type All
   | Get
   | GetSuccess
   | GetFailure
+  | SaveLatest
+  | SaveLatestSuccess
+  | SaveLatestFailure
   | Update
   | Remove
   | RemoveLatestInsuranceAdvice

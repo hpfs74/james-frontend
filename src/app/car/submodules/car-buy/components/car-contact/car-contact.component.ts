@@ -59,6 +59,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     this.subscription$.push(
       this.advice$.subscribe(advice => this.setAdvice(advice))
     );
+    this.store$.dispatch(new advice.SaveLatest());
     this.initFormWithProfile();
   }
 
