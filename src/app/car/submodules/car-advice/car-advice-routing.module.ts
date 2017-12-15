@@ -43,6 +43,7 @@ export const carAdviceRoutes: Routes = [
   },
   {
     path: 'thank-you',
+    canActivate: [CanActivateCarFlowGuard],
     component: CarThankYouComponent
   }
 ];

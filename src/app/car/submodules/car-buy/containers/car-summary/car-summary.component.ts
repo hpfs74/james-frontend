@@ -173,21 +173,26 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
           return this.store$.dispatch(new wizardActions.Error({
             message: 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
           }));
+        } else if (!this.isLoggedIn) {
+          // Anonymous buy flow
+          return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
         }
 
+        // Navigate to thank you page (logged in flow)
         let subscription = this.store$.select(fromProfile.getProfile)
           .filter(profile => !!profile.emailaddress)
           .subscribe((profile) => {
-            this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
-              .subscribe(SavedCarAdvices => {
-                this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
-              });
+            this.deleteAdvice();
             return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
           });
 
         this.subscription$.push(subscription);
-        // Navigate to thank you page
+
       });
+  }
+
+  private deleteAdvice() {
+    this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
   }
 
   private summaryValid() {

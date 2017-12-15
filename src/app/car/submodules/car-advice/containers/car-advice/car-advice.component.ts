@@ -45,7 +45,6 @@ import * as wizardActions from '@app/core/actions/wizard';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
@@ -65,6 +64,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   chatMessages$: Observable<Array<ChatMessage>>;
   // State of the advice forms data
   isLoggedIn$: Observable<boolean>;
+  insurance$: Observable<any>;
   savedInsurances$: Observable<any>;
   savedInsurancesLoading$: Observable<any>;
   subscription$: Array<any> = [];
@@ -103,6 +103,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.savedInsurancesLoading$ = this.store$.select(fromInsurance.getSavedInsuranceLoading);
+    this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     // initialize forms
     const formBuilder = new FormBuilder();
 
@@ -176,21 +177,24 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   private proceedAnonymous(advices, insurances) {
     this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
     this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
-
-    this.store$.select(fromCar.getCompareResult)
-      .map(obs => {
-        return obs.map(v => JSON.parse(JSON.stringify(v)));
-      })
-      .subscribe(insurance => {
+    this.subscription$.push(
+      this.insurance$.subscribe(insurance => {
         if (insurance) {
-          this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-            id => {
-              this.store$.dispatch(new router.Go({
-                path: ['/car/insurance/contact-detail'],
-              }));
-            }));
+          this.proceedToBuy();
         }
-    });
+      })
+    );
+  }
+
+  private proceedToBuy() {
+    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
+      advice => {
+        if (advice && advice.id) {
+          this.store$.dispatch(new router.Go({
+            path: ['/car/insurance/contact-detail', { adviceId: advice.id }],
+          }));
+        }
+      }));
   }
 
   goToStep(stepIndex: number) {
