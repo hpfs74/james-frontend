@@ -3,13 +3,13 @@
     <div class="col-sm-12">
       <knx-card>
         <h2>Je autogegevens</h2>
-
-        <div class="col-sm-8">
-          <div class="knx-message knx-message--hint">
-            <knx-car-info *ngIf="(insurance$ | async)" [data]="(insurance$ | async)?._embedded.car"></knx-car-info>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="knx-message knx-message--hint">
+              <knx-car-info *ngIf="(insurance$ | async)" [data]="(insurance$ | async)?._embedded.car"></knx-car-info>
+            </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-sm-6">
             <knx-form-group
