@@ -4,7 +4,6 @@ import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
 import { Profile } from './../../../../../profile/models';
 import { ContactDetailForm } from './../../../../../shared/forms/contact-detail.form';
 import { FormBuilder } from '@angular/forms';
-import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
@@ -72,10 +71,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
   }
 
   resetFlow() {
-    this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
-      .subscribe(SavedCarAdvices => {
-        this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
-      });
+    this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
     this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new router.Go({path: ['car']}));
   }
