@@ -1,26 +1,29 @@
 import { Component, AfterContentInit, OnDestroy } from '@angular/core';
-import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
-import { Profile } from './../../../../../profile/models';
-import { ContactDetailForm } from './../../../../../shared/forms/contact-detail.form';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/take';
 
-import * as FormUtils from '../../../../../utils/base-form.utils';
-import * as fromRoot from '../../../../reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as assistant from '../../../../../core/actions/assistant';
-import * as router from '../../../../../core/actions/router';
-import * as car from '../../../../../car/actions/car';
-import * as advice from '../../../../../insurance/actions/advice';
-import * as compare from '../../../../../car/actions/compare';
+import * as FormUtils from '@app/utils/base-form.utils';
+import * as fromRoot from '@app/reducers';
+import * as fromAuth from '@app/auth/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as assistant from '@app/core/actions/assistant';
+import * as router from '@app/core/actions/router';
+import * as car from '@app/car/actions/car';
+import * as advice from '@app/insurance/actions/advice';
+import * as compare from '@app/car/actions/compare';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as auth from '@app/auth/actions/auth';
-import * as fromProfile from '../../../../../profile/reducers';
+import * as fromProfile from '@app/profile/reducers';
+
+import { QaIdentifier } from '@app/shared/models/qa-identifier';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { Profile } from '@app/profile/models';
+import { ContactDetailForm } from '@app/shared/forms/contact-detail.form';
+import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
 @Component({
   selector: 'knx-car-contact-form',
@@ -35,11 +38,14 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   profile$: Observable<any>;
+  isLoggedIn: boolean;
 
   constructor(private store$: Store<fromRoot.State>) {
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.store$.select(fromAuth.getLoggedIn).take(1).subscribe(loggedIn => this.isLoggedIn = loggedIn);
     const formBuilder = new FormBuilder();
-    this.form = new ContactDetailForm(formBuilder);
+    const emailRequired = !this.isLoggedIn;
+    this.form = new ContactDetailForm(formBuilder, emailRequired);
     this.error$ = this.store$.select(fromCore.getWizardError);
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.currentStepOptions = {
