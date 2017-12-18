@@ -51,7 +51,7 @@ export class AddressForm {
         label: 'Huisnummer',
         validationErrors: this.validationErrors,
         inputOptions: {
-          type: 'text'
+          type: 'tel'
         }
       },
       houseNumberExtension: {

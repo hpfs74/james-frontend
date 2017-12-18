@@ -69,7 +69,8 @@ export class CarDetailForm extends BaseForm {
         formControl: this.formGroup.get('birthDate'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          decode: true
+          decode: true,
+          type: 'tel'
         }
       },
       claimFreeYears: {
