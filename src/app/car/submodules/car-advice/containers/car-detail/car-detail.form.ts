@@ -80,7 +80,7 @@ export class CarDetailForm extends BaseForm {
         validationErrors: this.validationErrors,
         help: true,
         inputOptions: {
-          type: 'number',
+          type: 'tel',
           events: ['focus']
         }
       },
