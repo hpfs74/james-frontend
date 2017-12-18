@@ -54,6 +54,7 @@ enum carFormSteps {
 }
 @Component({
   templateUrl: 'car-advice.component.html',
+  styleUrls: ['./car-advice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
