@@ -57,7 +57,7 @@ export class LoginForm extends BaseForm {
             'aria-label': 'Vul je wachtwoord in'
           }
         }
-      },
+      }
     };
   }
 }
