@@ -2,21 +2,29 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Verzekeraar</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Een verzekeraar is een financiële onderneming aan wie je het risico op schade overdraagt.
+        Je betaalt een maandelijkse premie en in theorie vergoedt de verzekeraar jouw schade als je dit meldt. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance._embedded.insurance.insurance_brand }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Type verzekering</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Dit is het soort autoverzekering die jij afsluit via de verzekeraar. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.product_name }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row newSection="true" showTooltip="true" showValue="true">
     <knx-ir-label>Dekking</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+        <p>Er bestaan drie soorten dekkingen: <p>
+        <p>WA: Met WA ben je enkel verzekerd voor de schade die je aan anderen toebrengt. </p>
+        <p>
+          WA beperkt casco: Met een Beperkt Cascodekking ben je gedekt voor schade aan je eigen auto bij ruitschade, inbraak, een aanrijding met een dier, brand, storm of diefstal.
+        </p>
+        <p>
+          Allrisk: Met Allrisk of Volledig Cascodekking ben je – naast alle dekkingen die vallen onder een Beperkt Casco dekking – gedekt als je schade hebt na een botsing, als je slipt of omslaat, van de weg afraakt of te water. Ook als het je eigen schuld is.
+        </p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.main_coverage | jamesTag: 'car_flow_coverage' }}</knx-ir-value>
   </knx-ir-row>
@@ -24,10 +32,7 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Totaal premie per maand</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Vraag je een verzekering via Knab aan, dan ontvangen wij een percentage van wat jij per maand aan premie
-        betaalt. Dat heet ‘provisie’. We krijgen een doorlopende vaste, lage vergoeding van 10 % van de premie,
-        zolang de verzekering loopt. Knab Verzekeren kan de provisie zo laag houden, omdat de dienst 100% online is.
-        Bij andere aanbieders van verzekeringen kun je tot wel 15% van de premie kwijt zijn aan provisie.<p>
+      <p>Dit bedrag betaal je maandelijks als premie wanneer je de verzekering via ons afsluit. Dit is inclusief de 10% provisie die Knab ontvangt als vergoeding.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.monthly_premium | currency:'EUR':true }}</knx-ir-value>
   </knx-ir-row>
@@ -35,7 +40,7 @@
   <knx-ir-row showTooltip="true" showValue="true" *ngIf="showOneOffPremium()">
     <knx-ir-label>Eenmalige afsluitkosten</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Eenmalige afsluitkosten voor nieuwe klanten van deze verzekering.</p>
+      <p>Dit zijn de kosten die de verzekeraar rekent voor het afsluiten van de verzekering.</p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.one_off_premium | currency:'EUR':true }}</knx-ir-value>
   </knx-ir-row>
@@ -43,7 +48,7 @@
   <knx-ir-row newSection="true" showTooltip="true" showValue="true">
     <knx-ir-label>Prijs-kwaliteit</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>De prijs-kwaliteitverhouding, is de verhouding tussen het bedrag dat jij betaalt voor je verzekering en de kwaliteit die je er voor terug krijgt van je verzekeraar. Wij baseren de kwaliteit die jij nodig hebt via je profiel score. Aan de hand van de score bepalen welke verzekering met welke kwaliteit goed bij jou past.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.price_quality }}</knx-ir-value>
   </knx-ir-row>
@@ -51,7 +56,7 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Profiel score</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>De profielscore geeft aan hoe goed de verzekering past bij jouw profiel: hoe hoger hoe beter. Een score van 75% betekent dat de verzekering goed aansluit bij jouw wensen en situatie. Wij berekenen de score op basis van het profiel dat jij instelt. Hierbij toetsen we de verzekering op meer dan 100 criteria om te bepalen of wat jij belangrijk vindt ook goed scoort binnen de verzekering. Zo betaal je voor wat jij belangrijk vindt en voorkom je verrassingen. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.fit }}</knx-ir-value>
   </knx-ir-row>
@@ -59,7 +64,7 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Knab Services</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Sluit je je nieuwe verzekering af via Knab, dan regel je alles voor je verzekering heel eenvoudig in de app. Daarnaast profiteer je van extra korting, omdat Knab minder vergoeding rekent en dit graag aan jou teruggeeft. Ook kun je rekenen op de service van Knab. Zo kun je via de app je gegevens aanpassen of je vraag appen aan de Knab Servicedesk. We zijn er voor je wanneer je schade hebt of als je er niet uitkomt met je verzekeraar. Loopt je verzekering bijna af en kun je kijken voor een betere deal? Dan krijg je een seintje van ons. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.supported }}</knx-ir-value>
   </knx-ir-row>
@@ -67,7 +72,8 @@
   <knx-ir-row newSection="true" showTooltip="true" showValue="true">
     <knx-ir-label>Eigen risico</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Sommige verzekeraars rekenen een eigen risico. Dit betekent dat jij bij een schademelding zelf een deel van het bedrag voor de reparatie moet betalen.
+      Let op: het is verleidelijk om je eigen risico heel laag te zetten. Des te meer krijg je in geval van schade terug. Je betaalt dan echter wel veel meer premie. Bedenk voor jezelf of dat je waard is.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.own_risk }}</knx-ir-value>
   </knx-ir-row>
@@ -75,7 +81,9 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>- bij eigen keuze garage</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Een verzekeraar heeft het liefst dat jij je auto laat repareren bij een garage die je verzekeraar heeft gekozen. Wil je zelf je garage kiezen? Dan betaal je vaak een hoger eigen risico.
+      Je kunt op de site van de verzekeraar terugvinden welke garages zijn aangesloten. Uiteraard kun je het ook navragen bij je eigen garage.
+      Is je eigen risico in dit geval € 0? Dan ben je altijd vrij om je eigen garage te kiezen.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.own_risk_freechoice }}</knx-ir-value>
   </knx-ir-row>
@@ -83,7 +91,9 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>- bij diefstal</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>
+        In veel gevallen rekent de verzekeraar een eigen risico wanneer er sprake is van diefstal.
+      <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.own_risk_theft }}</knx-ir-value>
   </knx-ir-row>
@@ -102,7 +112,10 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Pechhulp</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Met deze dekking weet je dat je bij pech onderweg kunt rekenen op hulp en snel weer verder kan. 
+        * Binnen Nederland: Pechhulp in heel Nederland is gedekt.
+        * Binnen Europa: Pechhulp in heel Europa is gedekt.
+        Heb je een reisverzekering? Check dan even of pechhulp in het buitenland daar al in zit. Heb je een nieuwe auto? Dan heb je vaak het eerste jaar gratig pechhulp van de dealer. Door dit te checken voorkom je een dubbele verzekering.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.road_assistance | jamesTag: 'car_flow_road_assistance' }}</knx-ir-value>
   </knx-ir-row>
@@ -110,7 +123,7 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Rechtsbijstand</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Juridische hulp nodig voor verhaal bij schade aan jouw auto? Conflict met je garage? Deze verzekering zorgt dat ervaren juristen je bijstaan. Dit geldt alleen voor verkeer rechtsbijstand voor deze auto.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.legal_aid | jamesTag: 'car_flow_legal_aid' }}</knx-ir-value>
   </knx-ir-row>
@@ -118,7 +131,7 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>No-claimbeschermer</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Met deze dekking kun je elk jaar een keer schade door eigen schuld claimen zonder dat de premie van je lopende verzekering omhoog gaat. nadeel is dat de registratie van je schadevrije jaren wel wordt aangepast. Dat is vervelend als je wilt veranderen van verzekeraar, want dan betaal je plots een hogere premie vanwege je schadevrije jaren.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.no_claim_protection | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -126,7 +139,7 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Inzittendenverzekering</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Je dekt hiermee de materiële schade af die jij als bestuurder, je passagiers en/of de bagage kunnen oplopen bij een aanrijding. Deze dekking is handig als je bijvoorbeeld vaak met het hele gezin in de auto zit.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{carInsurance.cover_occupants  | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -134,7 +147,8 @@
   <knx-ir-row newSection="true" showTooltip="true" showValue="true">
     <knx-ir-label>Vervangend vervoer binnen Nederland</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Heb je pech of schade in Nederland of wordt je auto hier gestolen? Verschillende verzekeraars stellen dan een vergoeding beschikbaar voor vervangend vervoer, zodat je gewoon de weg op kunt.
+      Let op: de vergoeding voor vervangend vervoer verschilt per verzekeraar. Daarnaast hanteren verzekeraars vaak een maximaal aantal dagen voor het vervangend vervoer. Hier kun je meer over lezen in algemene voorwaarden van je verzekeraar.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{carInsurance.additional_details.replacemant_vehicle_nl | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -142,7 +156,8 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Vervangend vervoer buiten Nederland</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Als je een WA beperkt casco of allrisk verzekering hebt, kun je mogelijk gebruik maken van vervangend vervoer in het buitenland. Kan je auto niet binnen een paar uur gerepareerd worden? Dan kun je bij de garage een leenauto meekrijgen.
+      Je verzekeraar geeft je een vergoeding voor de leenauto. In de algemene voorwaarden van je verzekeraar staat hoeveel dagen je een vergoeding krijgt en wat de hoogte van het bedrag is. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{carInsurance.additional_details.replacemant_vehicle_bl | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -150,7 +165,7 @@
   <knx-ir-row newSection="true" showTooltip="true" showValue="true">
     <knx-ir-label>Nieuwwaarde regeling</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Is je nieuwe auto gestolen of onherstelbaar beschadigd? Met de nieuwwaarde-regeling krijg je dan een vergoeding die hoog genoeg is om dezelfde auto nieuw te kopen. De meeste verzekeraars houden een nieuwwaarde-regeling aan waarbij de grens op één jaar ligt. Je krijgt de vergoeding dus als binnen de eerste 12 maanden de auto gestolen wordt of onherstelbaar beschadigd is.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{carInsurance.additional_details.replacementvalue_new }}</knx-ir-value>
   </knx-ir-row>
@@ -158,7 +173,8 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Occasion regeling</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Als je een tweedehands auto hebt gekocht, vergoedt de verzekeraar met deze regeling het bedrag dat jij voor de auto hebt betaald. De aanschafwaarde dus. Deze regeling kun je alleen opnemen in de verzekering als je de auto aanschaft bij een dealer (en niet bij een particulier).
+      Vaak zijn er voorwaarden verbonden aan de occasion-regeling. Bijvoorbeeld de leeftijd van de auto en de papieren die je moet kunnen overleggen. Hier kun je meer over lezen in de voorwaarden van de verzekeraar. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{carInsurance.additional_details.replacementvalue_occasion }}</knx-ir-value>
   </knx-ir-row>
@@ -166,7 +182,8 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Dagwaarde regeling</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Bij de dagwaarde-regelding vergoedt de verzekeraar de waarde van de auto op het moment van de schade of diefstal. Dit is de standaard en van toepassing als je niet de occasion-regeling of nieuwwaarde-regeling in je verzekering hebt opgenomen.
+      De dagwaarde van de auto hangt onder andere af van de leeftijd, hoe goed hij is onderhouden, welke accessoires hij heeft en hoeveel kilometers hij heeft gereden. Wij tonen een gemiddelde dagwaarde van het type auto dat je hebt. Bij schade zal een onafhankelijke schade-expert van de verzekering de exacte dagwaarde van je auto vaststellen.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{carInsurance.car_current_value }}</knx-ir-value>
   </knx-ir-row>
@@ -176,7 +193,7 @@
 <knx-ir-content title="Schade melden - impact op maandelijks bedrag" *ngIf="carInsurance">
   <knx-ir-row>
     <knx-ir-label>Wenneer ja schade oploopt en dit wilt melden kan het zijn dat dit invloed heeft opjouw maandelijks bedrag.
-      Bekijk hieronder welke schade meldingen invloed habben op de maandelijkse kosten.</knx-ir-label>
+    Bekijk hieronder welke schade meldingen invloed habben op de maandelijkse kosten.</knx-ir-label>
   </knx-ir-row>
   <knx-ir-row showValue="true" showIcon="true">
     <knx-ir-icon>
@@ -191,7 +208,7 @@
     </knx-ir-icon>
     <knx-ir-label>Brand door vandalisme</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Als vandalen schade toebrengen aan je auto. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_firedamage.value | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -201,7 +218,7 @@
     </knx-ir-icon>
     <knx-ir-label>Niet-schadsturing ruitschade</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Als je schade laat repareren door een herstelbedrijf dat niet samenwerkt met je verzekeraar. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_windowdamage.value | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -211,7 +228,7 @@
     </knx-ir-icon>
     <knx-ir-label>Transport en hulp voor gewonden</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Schade aan je auto terwijl je bijvoorbeeld een gewond iemand vervoert. <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_transportation.value | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -221,7 +238,7 @@
     </knx-ir-icon>
     <knx-ir-label>Limited casco</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Het claimen van een beperkt casco schade (bijvoorbeeld ruitbreuk, diefstal of stormschade). <p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_limited_casco.value | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -231,7 +248,7 @@
     </knx-ir-icon>
     <knx-ir-label>No-blame No-Claim</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Schade aan de auto die vallen onder de allrisk dekking buiten de schuld om van de bestuurder of passagier (bijvoorbeeld vandalisme).<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_noblamenoclaim.value | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -241,7 +258,7 @@
     </knx-ir-icon>
     <knx-ir-label>Gevolgschade aanrijding dieren</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Schade aan je auto doordat je een dier aanrijdt met schade aan je auto als gevolg.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_animals_damage.value | boolean }}</knx-ir-value>
   </knx-ir-row>
@@ -251,7 +268,7 @@
     </knx-ir-icon>
     <knx-ir-label>Ongemotoriseerde verkeersdeelnamer</knx-ir-label>
     <knx-ir-tooltip>
-      <p>Change me later<p>
+      <p>Schade aan je auto, omdat je een met een ongemotoriseerde verkeersdeelnemer bent gebotst met schade aan je auto als gevolg.<p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_unmotorised_traffic_participant.value | boolean }}</knx-ir-value>
   </knx-ir-row>
