@@ -9,12 +9,14 @@
                 Inloggen
               </h2>
             </div>
+
             <div class="col">
               <div class="knx-login__secure">
                 <span class="knx-icon-lock"></span> Beveiligde verbinding
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="container">
               <form [formGroup]="form.formGroup" (ngSubmit)="loginAndShowErrors($event);" (keyup.enter)="login($event)" autocomplete="off">
@@ -65,6 +67,7 @@
       </knx-card>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-12">
       <div class="knx-login__footer">
