@@ -38,19 +38,21 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   qaRootId = QaIdentifiers.carSummary;
-  profile$: Observable<Profile>;
+
+  subscription$: Subscription[] = [];
   insurance$: Observable<CarInsurance | InsuranceAdvice>;
+  error$: Observable<KNXStepError>;
+  profile$: Observable<Profile>;
+  isAnonymous$: Observable<any>;
   advice$: Observable<any>;
   car$: Observable<any>;
+
   acceptInsuranceTerms: boolean;
   acceptKnabTerms: boolean;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
-  error$: Observable<KNXStepError>;
   content: Content;
-  isAnonymous$: Observable<any>;
   isLoggedIn: boolean;
-  subscription$: Subscription[] = [];
 
   formSummaryError = 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.';
 
@@ -165,7 +167,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
         // && value.profileInfo != null)
         .subscribe((value) => {
           const proposalData = this.getProposalData(value);
-          // this.store$.dispatch(new car.Buy(proposalData));
+          this.store$.dispatch(new car.Buy(proposalData));
         });
 
     Observable.combineLatest(
@@ -192,7 +194,6 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
           });
 
         this.subscription$.push(subscription);
-
       });
   }
 
@@ -203,5 +204,4 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   private summaryValid() {
     return this.isLoggedIn ? this.acceptInsuranceTerms : this.acceptInsuranceTerms && this.acceptKnabTerms;
   }
-
 }
