@@ -10,7 +10,6 @@
       <div class="knx-insurance-review__panels">
 
         <knx-ir-content title="Je autoverzekering" *ngIf="isValidInsurance((insurance$ | async))">
-
           <knx-ir-row showValue="true" *ngIf="insurance$ | async">
             <knx-ir-label>Verzekeringsmaatschappij</knx-ir-label>
             <knx-ir-value>{{ (insurance$ | async)._embedded.insurance.insurance_brand }}</knx-ir-value>
@@ -213,11 +212,11 @@
           </knx-checkbox>
         </ng-container>
       </div>
-
   </div>
 </div>
 
-<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+<knx-wizard-controls
+  [currentStepOptions]="currentStepOptions"
   [error]="error$ | async"
   (onNext)="goToNextStep()"
   (onBack)="goToPreviousStep()">
