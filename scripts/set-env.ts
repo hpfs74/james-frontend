@@ -115,8 +115,8 @@ function getContent(environment: string) {
     production: ${isProd},
     enableAnalytics: ${enableAnalytics},
     featureToggles: {
-      enableBuyFlowEmail: '${getEnvVar('FEATURE_BUY_FLOW_EMAIL')}',
-      enableAnalyticsLogging: '${getEnvVar('FEATURE_ANALYTICS_LOGGING')}'
+      enableBuyFlowEmail: ${getEnvVar('FEATURE_BUY_FLOW_EMAIL')},
+      enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')}
     },
     external: {
       registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
