@@ -38,7 +38,7 @@ export class CarReviewComponent implements OnInit, OnDestroy {
       label: 'Aanvragen',
       backButtonLabel: 'Terug',
       nextButtonLabel: 'Verzekering aanvragen',
-      nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
+      nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d knx-button--float-bottom',
     };
   }
 
@@ -48,13 +48,13 @@ export class CarReviewComponent implements OnInit, OnDestroy {
     this.showStepBlock = selectedInsurance.supported;
     if (selectedInsurance.supported) {
       this.currentStepOptions.nextButtonLabel = 'Verzekering aanvragen';
-      this.currentStepOptions.nextButtonClass = 'knx-button knx-button--cta knx-button--extended knx-button--3d';
+      this.currentStepOptions.nextButtonClass = 'knx-button knx-button--cta knx-button--extended knx-button--3d knx-button--float-bottom';
       // this.currentStepOptions.onBeforeNext = this.startBuyFlow.bind(this);
       this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.title'}));
       this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.steps'}));
     } else {
       this.currentStepOptions.nextButtonLabel = 'Ga naar website';
-      this.currentStepOptions.nextButtonClass = 'knx-button knx-button--secondary';
+      this.currentStepOptions.nextButtonClass = 'knx-button knx-button--secondary knx-button--float-bottom';
       this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.unsupported', clear: true}));
     }
   }

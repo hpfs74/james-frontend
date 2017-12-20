@@ -21,3 +21,19 @@
 .knx-form__error {
   margin-bottom: 15px;
 }
+
+@media (max-width: 414px) {
+  .knx-wizard__buttons {
+    .knx-button--3d:active {
+      top: inherit;
+    }
+
+    .knx-button--float-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 5%;
+      width: 90%;
+      z-index: 2;
+    }
+  }
+}
