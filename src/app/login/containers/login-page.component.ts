@@ -27,7 +27,6 @@ export class LoginPageComponent implements OnInit {
 
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
-  registrationLink = environment.external.registration;
   resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
 
   constructor(@Inject(LOCALE_ID) private locale: string, private store$: Store<fromAuth.State>) {}
