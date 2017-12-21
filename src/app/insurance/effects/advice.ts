@@ -30,10 +30,13 @@ export class AdviceEffects {
   removeAdvice$: Observable<Action> = this.actions$
     .ofType(advice.REMOVE_LATEST_INSURANCE_ADVICE)
     .withLatestFrom(this.store$, (payload, state: any) => {
-      let savedAdvices = state.insurance.insurance.savedInsurances.car.insurance_advice;
 
-      if (savedAdvices.length) {
-        return savedAdvices[0];
+      if (state.insurance.insurance.savedInsurances) {
+        let savedAdvices = state.insurance.insurance.savedInsurances.car.insurance_advice;
+
+        if (savedAdvices.length) {
+          return savedAdvices[0];
+        }
       }
     })
     .switchMap((latestAdvice) => {
