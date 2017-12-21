@@ -31,6 +31,15 @@ export class CarEffects {
         .catch(error => Observable.of(new car.GetInfoFailure(error))));
 
   @Effect()
+  loadCarMeldcode$: Observable<Action> = this.actions$
+    .ofType(car.GET_MELDCODE_REQUEST)
+    .map((action: car.GetMeldcode) => action.payload)
+    .switchMap((license) =>
+      this.carService.getMeldcodeByLicense(license)
+        .map((res: Car) => new car.GetMeldcodeComplete(res))
+        .catch(error => Observable.of(new car.GetMeldcodeFailure(error))));
+
+  @Effect()
   buyCarInsurance$ = this.actions$
     .ofType(car.BUY_REQUEST)
     .map((action: car.Buy) => action.payload)

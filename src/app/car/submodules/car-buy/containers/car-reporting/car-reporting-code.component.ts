@@ -21,6 +21,7 @@ import * as advice from '../../../../../insurance/actions/advice';
 
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
+import 'rxjs/add/operator/take';
 
 const DEFAULT_FORM_VALUES = {
   accessoryValue: 0
@@ -54,6 +55,15 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
       nextButtonLabel: 'Volgende',
       backButtonLabel: 'Terug',
     };
+    this.subscription$.push(
+      this.store$.select(fromRoot.getCarMeldcode)
+        .take(1)
+        .subscribe(meldcode => {
+          if (meldcode) {
+            this.form.formGroup.get('reportingCode').setValue(meldcode);
+          }
+      })
+    );
   }
 
   ngOnInit() {

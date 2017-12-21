@@ -208,6 +208,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     // so we use length here to determine when to proceed
     if (licensePlate && licensePlate.length === validLength) {
       this.store$.dispatch(new car.GetInfo(licensePlate));
+      this.store$.dispatch(new car.GetMeldcode(licensePlate));
     }
   }
 
