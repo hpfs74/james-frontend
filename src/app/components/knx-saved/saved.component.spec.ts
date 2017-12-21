@@ -68,4 +68,11 @@ describe('Component: Saved', () => {
     const first = parElements[0].nativeElement;
     expect(first.textContent).toContain('01XLXL');
   });
+
+  it('should emit on start new button click', () => {
+    spyOn(comp.onNewAdvice, 'emit');
+    comp.startNewAdvice();
+    fixture.detectChanges();
+    expect(comp.onNewAdvice.emit).toHaveBeenCalled();
+  });
 });

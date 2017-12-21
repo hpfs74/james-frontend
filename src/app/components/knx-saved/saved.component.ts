@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'knx-saved',
@@ -10,7 +10,12 @@ import { Component, Input } from '@angular/core';
           <p class="knx-saved__title">{{ title }}</p>
 
           <ul class="knx-list--unstyled">
-            <li *ngFor="let insurance of insurances?.car?.insurance">
+            <li *ngFor="let insurance of insurances?.car?.insurance; let first = first;">
+              <div class="pull-right" *ngIf="first">
+                <button (click)="startNewAdvice()" class="knx-button knx-button--fullwidth knx-button--secondary knx-button--ghost">
+                  Start nieuw advies
+                </button>
+              </div>
               <div *ngIf="!insurance.manually_added">
                 <div class="knx-saved__icon knx-icon-automobile pull-left"></div>
 
@@ -36,4 +41,9 @@ import { Component, Input } from '@angular/core';
 export class SavedComponent {
   @Input() title: string;
   @Input() insurances: any;
+  @Output() onNewAdvice: EventEmitter<any> = new EventEmitter<any>();
+
+  startNewAdvice() {
+    this.onNewAdvice.emit();
+  }
 }
