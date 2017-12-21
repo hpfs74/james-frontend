@@ -41,11 +41,15 @@ export class CarThankYouComponent implements AfterViewInit {
 
     this.email$ = Observable.combineLatest(profileEmail$, isAnonymous$, advice$)
       .map((combined) => {
-        const profileEmail = combined[0];
+        let email = combined[0];
         const loggedIn = combined[1];
         const advice = combined[2];
 
-        return loggedIn ? profileEmail : (advice.email || advice.emailaddress);
+        if (!loggedIn && advice) {
+          email = advice.email || advice.emailaddress;
+        }
+
+        return email;
       });
   }
 
