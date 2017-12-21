@@ -55,6 +55,34 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case CarActions.GET_MELDCODE_REQUEST: {
+      return Object.assign({}, state, {
+        loading: true
+      });
+    }
+
+    case CarActions.GET_MELDCODE_SUCCESS: {
+      const car = state.info;
+      car.meldcode = action.payload.meldcode;
+      return Object.assign({}, state, {
+        loading: false,
+        loaded: true,
+        error: false,
+        license: state.license,
+        info: car
+      });
+    }
+
+    case CarActions.GET_MELDCODE_FAILURE: {
+      return Object.assign({}, state, {
+        loading: false,
+        loaded: false,
+        error: true,
+        license: state.license,
+        info: state.info
+      });
+    }
+
     case CarActions.BUY_SUCCESS: {
       return Object.assign({}, state, {
         loading: false,
@@ -78,6 +106,7 @@ export function reducer(state = initialState, action: Action): State {
 }
 
 export const getInfo = (state: State) => state.info;
+export const getMeldcode = (state: State) => state.info.meldcode;
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getError = (state: State) => state.error;

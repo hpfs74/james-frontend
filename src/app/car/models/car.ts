@@ -32,7 +32,7 @@ export class Car {
   doors: number;
   slug?: Array<string>;
   current_value?: string | number;
-
+  meldcode?: number;
   nicci_cartransmission_manual_transmission?: string;
   nicci_cartransmission_automatic_transmission?: string;
 }
