@@ -11,9 +11,9 @@ import { Component, Input } from '@angular/core';
 
           <!-- car specific copy -->
           <ng-container *ngIf="insuranceType === 'autoverzekering'; else default">
-            <p>Gefeliciteerd, je nieuwe autoverzekering is onderweg.<br>
-            We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.
-            We laten je weten wanneer je tijdelijke dekking hebt, zodat je de weg op kunt.</p>
+            <p>We hebben je aanvraag voor een autoverzekering in goede orde ontvangen.<br>
+              De aanvraag wordt door de verzekeraar binnen 3 dagen goedgekeurd. Dit gaat meestal sneller.
+              Tot die tijd ben je nog even niet gedekt.</p>
           </ng-container>
 
           <ng-template #default>
