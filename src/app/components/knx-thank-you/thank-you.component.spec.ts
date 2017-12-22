@@ -77,11 +77,11 @@ describe('Component: Thank You', () => {
       expect(parElements.length).toBeGreaterThan(0);
 
       const first = parElements[0].nativeElement;
-      expect(first.textContent).toContain('We hebben je aanvraag voor een autoverzekering in goede orde ontvangen..');
+      expect(first.textContent).toContain('We hebben je aanvraag voor een autoverzekering in goede orde ontvangen.');
       const firstPar = first.textContent.replace(/\s+/g, ' ');
       // Check for car specific content
       expect(firstPar).toContain(
-      'De aanvraag wordt door de verzekeraar binnen 3 dagen goedgekeurd. Dit gaat meestal sneller. Tot die tijd ben je nog even niet gedekt'
+    'De aanvraag wordt door de verzekeraar binnen 3 dagen goedgekeurd. Dit gaat meestal sneller. Tot die tijd ben je nog even niet gedekt.'
       );
 
       const second = parElements[1].nativeElement;
