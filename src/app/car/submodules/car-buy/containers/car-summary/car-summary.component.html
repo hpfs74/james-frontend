@@ -17,7 +17,7 @@
 
           <knx-ir-row showValue="true">
             <knx-ir-label>Ingangsdatum</knx-ir-label>
-            <knx-ir-value>{{ (advice$ | async)?.startDate }}</knx-ir-value>
+            <knx-ir-value>{{ (advice$ | async)?.startDate | date:'shortDate' }}</knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row showValue="true">
