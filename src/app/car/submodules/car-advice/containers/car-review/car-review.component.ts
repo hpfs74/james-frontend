@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { AsyncPipe } from '@angular/common';
+import { Subscription } from 'rxjs/Subscription';
+import { AnalyticsEvent } from '@app/core/models/analytics';
+import { Router } from '@angular/router';
 
 import * as fromRoot from '../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
@@ -13,8 +16,7 @@ import * as layout from '../../../../../core/actions/layout';
 import * as fromAuth from '../../../../../auth/reducers';
 import * as router from '../../../../../core/actions/router';
 import * as assistant from '../../../../../core/actions/assistant';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { Subscription } from 'rxjs/Subscription';
+import * as analytics from '@app/core/actions/analytics';
 
 @Component({
   providers: [ AsyncPipe ],
@@ -30,7 +32,8 @@ export class CarReviewComponent implements OnInit, OnDestroy {
   showStepBlock = false;
   loggedIn$: Observable<any>;
   constructor(private store$: Store<fromRoot.State>,
-              private asyncPipe: AsyncPipe) {
+              private asyncPipe: AsyncPipe,
+              private router: Router) {
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.error$ = this.store$.select(fromCore.getWizardError);
@@ -65,7 +68,18 @@ export class CarReviewComponent implements OnInit, OnDestroy {
 
   goToNextStep() {
     if (!this.showStepBlock) {
-      window.open(this.asyncPipe.transform(this.selectedInsurance$)._embedded.insurance.url, '_blank');
+      const selectedInsurance = this.asyncPipe.transform(this.selectedInsurance$);
+      const isLoggedIn = this.asyncPipe.transform(this.loggedIn$);
+      const analyticsEvent: AnalyticsEvent = {
+        event: 'clickout',
+        page: this.router.url,
+        event_label: 'car insurance application',
+        loggedIn_Verzekeren: isLoggedIn ? 'y' : 'n',
+        product_id: selectedInsurance.id,
+        product_name: selectedInsurance.product_name
+      };
+      this.store$.dispatch(new analytics.EventAction(analyticsEvent));
+      window.open(selectedInsurance._embedded.insurance.url, '_blank');
     } else {
       let loggedIn = this.asyncPipe.transform(this.loggedIn$);
       if (loggedIn) {

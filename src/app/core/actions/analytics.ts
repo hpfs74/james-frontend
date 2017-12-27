@@ -1,7 +1,13 @@
 import { Action } from '@ngrx/store';
+import { AnalyticsEvent } from '@app/core/models/analytics';
 
-export class AnalyticsAction implements Action {
-  readonly type = '[Analytics] Event';
+export const ANALITYCS_EVENT = '[Analytics] Event';
 
-  constructor(public payload: any) { }
+export class EventAction implements Action {
+  readonly type = ANALITYCS_EVENT;
+
+  constructor(public payload: AnalyticsEvent) { }
 }
+
+export type All
+  = EventAction;

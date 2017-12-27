@@ -3,8 +3,12 @@ import { RouterStateSerializer } from '@ngrx/router-store';
 import { RouterStateSnapshot, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
+import { selectInsuranceState } from '@app/insurance/reducers';
+
 import * as fromRoot from '../reducers';
 import * as fromAuth from '../auth/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import 'rxjs/add/operator/filter';
 
 /**
  * The RouterStateSerializer takes the current RouterStateSnapshot
@@ -25,14 +29,34 @@ export class CustomRouterStateSerializer
   implements RouterStateSerializer<RouterStateUrl> {
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
     let loggedIn = false;
+    let product_id = null;
+    let product_name = null;
+    let external = null;
+    this.store$.select(fromAuth.getLoggedIn).subscribe((isLoggedIn) => {
+      loggedIn = isLoggedIn;
+    });
+
+    this.store$.select(fromInsurance.getSelectedInsurance)
+    .filter(insurance => !!insurance)
+    .subscribe((selectedInsurance) => {
+      product_id = selectedInsurance.id;
+      product_name = selectedInsurance.insurance_name;
+      external = selectedInsurance.supported ? 'no' : 'yes';
+    });
+
     this.store$.select(fromAuth.getLoggedIn).subscribe((isLoggedIn) => {
       loggedIn = isLoggedIn;
     });
 
     const { url } = routerState;
     const queryParams = routerState.root.queryParams;
-
-    return { url, queryParams, data: { isLoggedIn: loggedIn } };
+    let data = {
+      isLoggedIn: loggedIn,
+      product_id: product_id,
+      product_name: product_name,
+      external: external
+    };
+    return { url, queryParams, data: data };
   }
 
   constructor(@Inject(Store) private store$: Store<fromRoot.State>) {}
