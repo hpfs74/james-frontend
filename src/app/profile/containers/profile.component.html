@@ -12,14 +12,15 @@
     <div class="col-sm-8 pull-sm-4">
       <div class="row">
         <div class="col-sm-12">
-          <h2>Mijn account</h2>
-
-          <knx-profile-edit
-            (formSaved$)="save($event)"
-            (goBack$)="navigateBack()"
-            [profile]="profile$ | async"
-            [form]="profileForm">
-          </knx-profile-edit>
+          <knx-card>
+            <h2>Mijn account</h2>
+            <knx-profile-edit
+              (formSaved$)="save($event)"
+              (goBack$)="navigateBack()"
+              [profile]="profile$ | async"
+              [form]="profileForm">
+            </knx-profile-edit>
+          </knx-card>
         </div>
       </div>
     </div>
