@@ -6,77 +6,7 @@ import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({
   selector: 'knx-profile-edit',
-  template: `
-  <form [formGroup]="form.formGroup" class="knx-fancy-form">
-    <div class="knx-avatar knx-avatar--editable">
-      <img class="knx-avatar__profile-image" src="{{ avatarUrl }}">
-
-      <knx-form-group class="knx-styleguide-icon__icon knx-icon-pencil"
-        [formControlName]="form.formConfig.avatar.formControlName"
-        (events)="loadAvatar($event)"
-        [options]="form.formConfig.avatar">
-      </knx-form-group>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <knx-form-group
-          [options]="form.formConfig.gender"
-          [formControlName]="form.formConfig.gender.formControlName">
-        </knx-form-group>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <knx-form-group
-          [options]="form.formConfig.firstName"
-          [formControlName]="form.formConfig.firstName.formControlName">
-        </knx-form-group>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <knx-form-group
-          [options]="form.formConfig.lastName"
-          [formControlName]="form.formConfig.lastName.formControlName">
-        </knx-form-group>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <knx-form-group
-          [options]="form.formConfig.birthDate"
-          [formControlName]="form.formConfig.birthDate.formControlName">
-        </knx-form-group>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-4">
-        <knx-address-lookup
-          [addressForm]="form.addressForm"
-          (addressFound)="updateAddress($event)">
-        </knx-address-lookup>
-      </div>
-    </div>
-
-    <knx-form-group
-      [options]="form.formConfig.pushNotifications"
-      [formControlName]="form.formConfig.pushNotifications.formControlName">
-    </knx-form-group>
-
-    <knx-form-group
-      [options]="form.formConfig.emailNotifications"
-      [formControlName]="form.formConfig.emailNotifications.formControlName">
-    </knx-form-group>
-  </form>
-
-  <button class="knx-button knx-button--link knx-button--back" (click)="goBack$.emit()">Terug</button>
-  <button class="knx-button knx-button--primary pull-right" (click)="save()">Opslaan</button>
-  `
+  templateUrl: './profile-edit.component.html'
 })
 
 export class ProfileEditComponent {
