@@ -1,16 +1,15 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProfileForm } from './profile.form';
-import { Profile } from '../models';
-import { Address } from '../../address/models';
-import * as FormUtils from '../../utils/base-form.utils';
-import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { Profile } from '../../models';
+import { Address } from '@app/address/models';
+import * as FormUtils from '@app/utils/base-form.utils';
 
 @Component({
-  selector: 'knx-profile-edit',
-  templateUrl: './profile-edit.component.html'
+  selector: 'knx-profile-form',
+  templateUrl: './profile-form.component.html'
 })
 
-export class ProfileEditComponent {
+export class ProfileFormComponent {
   @Input() form: ProfileForm;
 
   @Input() set profile(value: Profile) {

@@ -1,4 +1,3 @@
-
 <div class="container knx-container-main">
   <div class="row">
     <div class="col-sm-4 push-sm-8">
@@ -12,12 +11,12 @@
     <div class="col-sm-8 pull-sm-4">
       <div class="row">
         <div class="col-sm-12">
-          <knx-profile-edit
+          <knx-profile-form
             (formSaved$)="save($event)"
             (goBack$)="navigateBack()"
             [profile]="profile$ | async"
             [form]="profileForm">
-          </knx-profile-edit>
+          </knx-profile-form>
         </div>
       </div>
     </div>

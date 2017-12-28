@@ -1,0 +1,93 @@
+
+<div class="container knx-container-main">
+  <div class="row">
+    <div class="col-sm-4 push-sm-8">
+      <div class="knx-wizard__sidebar--sticky">
+        <knx-chat-stream
+          [options]="chatConfig$ | async"
+          [messages]="chatMessages$ | async">
+        </knx-chat-stream>
+      </div>
+    </div>
+    <div class="col-sm-8 pull-sm-4">
+      <div class="row">
+        <div class="col-sm-12">
+          <knx-card>
+            <div class="row">
+              <div class="col-md-10 col-10">
+                <h2>My details</h2>
+              </div>
+              <div class="col-md-2 col-2">
+                <p class="knx-edit">Edit</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Name</div>
+              <div class="col-md-6">
+                <p class="knx-value">{{ (profile$ | async).name || '-' }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Gender</div>
+              <div class="col-md-6">
+                <p class="knx-value">{{ (profile$ | async).gender || '-' }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Dob</div>
+              <div class="col-md-6">
+                <p class="knx-value">{{ (profile$ | async).birthday || '-' }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Address</div>
+              <div class="col-md-6">
+                <p class="knx-value">{{ (profile$ | async).address || '-' }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Living situation</div>
+              <div class="col-md-6">
+                <p class="knx-value">{{ (profile$ | async).household || '-' }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">Email me the latest news and suggestions</div>
+              <div class="col-md-6">
+                <p class="knx-value">yes</p>
+              </div>
+            </div>
+          </knx-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <knx-card>
+            <div class="row">
+              <div class="col-md-10 col-10">
+                <h2>Email and password</h2>
+              </div>
+              <div class="col-md-2">
+                <p class="knx-edit">Edit</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Email</div>
+              <div class="col-md-6">
+                <p class="knx-value">{{ (profile$ | async).emailaddress || '-' }}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">Password</div>
+              <div class="col-md-6">
+                <p class="knx-value">*******</p>
+              </div>
+            </div>
+          </knx-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

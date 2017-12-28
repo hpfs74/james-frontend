@@ -1,11 +1,11 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { KNXPostalCodeValidator } from '@knx/form-control';
 
-import { BaseForm } from '../../shared/forms/base-form';
-import { AddressForm } from '../../address/components/address.form';
-import { nameInitialMask } from '../../utils/base-form.utils';
-import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
-import { birthDateMask } from '../../utils/base-form.utils';
+import { BaseForm } from '@app/shared/forms/base-form';
+import { AddressForm } from '@app/address/components/address.form';
+import { nameInitialMask } from '@app/utils/base-form.utils';
+import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '@app/utils/base-form.validators';
+import { birthDateMask } from '@app/utils/base-form.utils';
 import { UIPair } from '@app/core/models/ui-pair';
 
 export class ProfileForm extends BaseForm {

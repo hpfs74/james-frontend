@@ -37,7 +37,7 @@ export class NavUserComponent {
   constructor(private router: Router) { }
 
   goToProfile() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/profile-overview']);
   }
 
   getShortEmail(emailaddress: string) {
