@@ -12,7 +12,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
           <ul class="knx-list--unstyled">
             <li *ngFor="let insurance of insurances?.car?.insurance; let first = first;">
               <div class="row">
-                <div *ngIf="!insurance.manually_added" [class.col-md-6]="first">
+                <div *ngIf="!insurance.manually_added" class="col-md-6">
                   <div class="knx-saved__icon knx-icon-automobile pull-left"></div>
 
                   <p>
