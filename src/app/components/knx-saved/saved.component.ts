@@ -11,21 +11,23 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
           <ul class="knx-list--unstyled">
             <li *ngFor="let insurance of insurances?.car?.insurance; let first = first;">
-              <div class="pull-right" *ngIf="first">
-                <button (click)="startNewAdvice()" class="knx-button knx-button--fullwidth knx-button--secondary knx-button--ghost">
-                  Start nieuw advies
-                </button>
-              </div>
-              <div *ngIf="!insurance.manually_added">
-                <div class="knx-saved__icon knx-icon-automobile pull-left"></div>
+              <div class="row">
+                <div *ngIf="!insurance.manually_added" [class.col-md-6]="first">
+                  <div class="knx-saved__icon knx-icon-automobile pull-left"></div>
 
-                <p>
-                  {{insurance.license}} | {{insurance.make}} {{insurance.model}}
+                  <p>
+                    {{insurance.license}} | {{insurance.make}} {{insurance.model}}
 
-                  <br>
+                    <br>
 
-                  <strong>{{insurance.insurance_name}} &bull; {{insurance.price}} &euro; p/m</strong>
-                </p>
+                    <strong>{{insurance.insurance_name}} &bull; {{insurance.price}} &euro; p/m</strong>
+                  </p>
+                </div>
+                <div class="pull-right col-md-6" *ngIf="first">
+                  <button (click)="startNewAdvice()" class="knx-button knx-button--fullwidth knx-button--secondary knx-button--ghost">
+                    Start nieuw advies
+                  </button>
+                </div>
               </div>
             </li>
           </ul>
