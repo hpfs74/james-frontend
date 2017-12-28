@@ -13,6 +13,8 @@ import { AuthService } from '../services/auth.service';
 const anonymousAvailableLinks = [
   '/register',
   '/login',
+  '/account',
+  '/account/profile',
   '/car',
   '/car/insurance',
   '/car/detail',
