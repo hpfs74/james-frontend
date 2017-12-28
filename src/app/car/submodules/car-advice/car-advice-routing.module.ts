@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarAdviceComponent } from './containers/car-advice/car-advice.component';
 import { CarSavedComponent } from './containers/car-saved/car-saved.component';
-
-import { CarDetailComponent } from './components/car-detail/car-detail.component';
-import { CarExtrasComponent } from './components/car-extras/car-extras.component';
-import { InsuranceTopListComponent } from './components/insurance-toplist/insurance-toplist.component';
-import { CarReviewComponent } from './components/car-review/car-review.component';
-import { CarThankYouComponent } from '../car-advice/components/car-thank-you/car-thank-you.component';
+import { CarDetailComponent } from './containers/car-detail/car-detail.component';
+import { CarExtrasComponent } from './containers/car-extras/car-extras.component';
+import { InsuranceTopListComponent } from './containers/insurance-toplist/insurance-toplist.component';
+import { CarReviewComponent } from './containers/car-review/car-review.component';
+import { CarThankYouComponent } from '../car-advice/containers/car-thank-you/car-thank-you.component';
 import { CanActivateCarFlowGuard } from '@app/core/services';
 
 export const carAdviceRoutes: Routes = [
@@ -44,6 +43,7 @@ export const carAdviceRoutes: Routes = [
   },
   {
     path: 'thank-you',
+    canActivate: [CanActivateCarFlowGuard],
     component: CarThankYouComponent
   }
 ];

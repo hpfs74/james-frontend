@@ -46,16 +46,23 @@ export class AdviceEffects {
   removeAdvice$: Observable<Action> = this.actions$
     .ofType(advice.REMOVE_LATEST_INSURANCE_ADVICE)
     .withLatestFrom(this.store$, (payload, state: any) => {
-      let savedAdvices = state.insurance.insurance.savedInsurances.car.insurance_advice;
 
-      if (savedAdvices.length) {
-        return savedAdvices[0];
+      if (state.insurance.insurance.savedInsurances) {
+        let savedAdvices = state.insurance.insurance.savedInsurances.car.insurance_advice;
+
+        if (savedAdvices.length) {
+          return savedAdvices[0];
+        }
       }
     })
     .switchMap((latestAdvice) => {
-      return this.adviceService.removeAdvice(latestAdvice._id)
-        .map((res: Response) => new advice.RemoveLatestInsuranceAdviceSuccess(latestAdvice))
-        .catch(error => Observable.of(new advice.RemoveLatestInsuranceAdviceFailure(error)));
+      if (latestAdvice) {
+        return this.adviceService.removeAdvice(latestAdvice._id)
+          .map((res: Response) => new advice.RemoveLatestInsuranceAdviceSuccess(latestAdvice))
+          .catch(error => Observable.of(new advice.RemoveLatestInsuranceAdviceFailure(error)));
+      } else {
+        return Observable.of({ type: 'NO_ACTION' });
+      }
     });
 
   constructor(private actions$: Actions, private adviceService: AdviceService, private store$: Store<fromInsurance.InsuranceState>) {

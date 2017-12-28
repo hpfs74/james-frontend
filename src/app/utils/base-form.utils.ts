@@ -29,6 +29,10 @@ export const birthDateMask = {
 };
 
 export function dateDecode(value) {
+  if ( value instanceof Date ) {
+    return value;
+  }
+
   let parts = value.replace(/[ _]/gim, '');
 
   if (value.indexOf('/') !== -1) {

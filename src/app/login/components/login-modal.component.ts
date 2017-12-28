@@ -1,7 +1,8 @@
-import { Component, Input, ComponentRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, ComponentRef, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@knx/modal';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
@@ -9,10 +10,10 @@ import 'rxjs/add/operator/filter';
 
 import * as fromAuth from '../../auth/reducers';
 import * as auth from '../../auth/actions/auth';
+import * as FormUtils from '../../utils/base-form.utils';
 
 import { LoginForm } from './login.form';
 import { CustomError } from '../models/login-error';
-import { AuthService } from '../../auth/services/auth.service';
 import { loginError } from '../models/login-error';
 
 @Component({
@@ -21,17 +22,17 @@ import { loginError } from '../models/login-error';
   template: `
     <div class="knx-login-modal" [formGroup]="form.formGroup">
       <div class="login-password-wrapper">
-        <knx-input
+        <knx-form-group
           [formControlName]="form.formConfig.email.formControlName"
           [options]="form.formConfig.email">
-        </knx-input>
+        </knx-form-group>
       </div>
 
       <div class="login-password-wrapper">
-        <knx-input
+        <knx-form-group
           [formControlName]="form.formConfig.password.formControlName"
           [options]="form.formConfig.password">
-        </knx-input>
+        </knx-form-group>
       </div>
 
       <div class="knx-login__error" *ngIf="form.formGroup.valid && errorMessage">
@@ -64,6 +65,7 @@ export class LoginModalComponent implements KNXModalDialog, OnInit {
       .filter(error => error !== null)
       .subscribe((error) => {
         this.errorMessage = { errorText: loginError[error] } || { errorText: loginError.default};
+
         if (error === 'invalid_username') {
           this.errorMessage = { errorText: loginError[error], hasLink: true };
         }
@@ -74,6 +76,8 @@ export class LoginModalComponent implements KNXModalDialog, OnInit {
 
   login(): Observable<boolean> {
     event.preventDefault();
+    FormUtils.showFormErrors(this.form);
+
     if (this.form.formGroup.valid) {
       const email = this.form.formGroup.get('email').value.trim();
       const password = this.form.formGroup.get('password').value.trim();
@@ -82,6 +86,7 @@ export class LoginModalComponent implements KNXModalDialog, OnInit {
         username: email,
         password: password
       }));
+
       return this.store$.select(fromAuth.selectAuthState)
         .flatMap(authenticated => {
           if (authenticated.status.loggedIn && authenticated.status.loginExpired) {
@@ -92,14 +97,5 @@ export class LoginModalComponent implements KNXModalDialog, OnInit {
         });
     }
     return Observable.throw(new Error(this.loginFailError));
-  }
-
-  togglePassword(event) {
-    event.preventDefault();
-    this.showPassword = !this.showPassword;
-
-    this.form.formConfig.password.inputOptions.type =
-      (this.form.formConfig.password.inputOptions.type === 'password')
-        ? 'text' : 'password';
   }
 }

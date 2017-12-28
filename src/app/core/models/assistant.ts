@@ -79,7 +79,7 @@ export class AssistantConfig {
       en wordt binnen 3 dagen goedgekeurd. We houden je op de hoogte!`,
       finalEmail: (email: string) => `Een kopie van de polis is verstuurd naar: ${email}`
     },
-    saved: (firstName: string) => `Via de website krijg je op dit moment enkel advies. Wil je de verzekering beheren?
+    purchased: (firstName: string) => `Via de website krijg je op dit moment enkel advies. Wil je de verzekering beheren?
       Download dan de Knab Verzekeren app.`
   };
 }

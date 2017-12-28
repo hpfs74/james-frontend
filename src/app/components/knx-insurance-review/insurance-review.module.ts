@@ -11,6 +11,7 @@ import {
   InsuranceReviewRowLabelComponent,
   InsuranceReviewRowInfoComponent,
   InsuranceReviewRowValueComponent,
+  InsuranceReviewRowIconComponent,
 } from './insurance-review-row.component';
 import { InsuranceReviewComponent } from './insurance-review.component';
 
@@ -22,6 +23,7 @@ const exportableDeclarations = [
   InsuranceReviewRowContentComponent,
   InsuranceReviewRowLabelComponent,
   InsuranceReviewRowValueComponent,
+  InsuranceReviewRowIconComponent,
   InsuranceReviewRowInfoComponent,
   InsuranceReviewComponent
 ];

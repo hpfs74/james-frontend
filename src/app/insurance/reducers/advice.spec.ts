@@ -184,6 +184,7 @@ describe('Advice reducer', () => {
         moneyview_id: 'ohra-autoverzekering-aanvullend',
         type: 'car',
         car: null,
+        advice_expires_at: 312323123,
         insurance_name: 'Auto',
         fit: 78.09,
         price_quality: 10,
@@ -221,6 +222,7 @@ describe('Advice reducer', () => {
         advice: {},
         selectedInsurance: {
           id: '2516227',
+          advice_expires_at: 312323123,
           insurance_id: 'ohra-autoverzekering-aanvullend',
           moneyview_id: 'ohra-autoverzekering-aanvullend',
           type: 'car',
@@ -267,6 +269,7 @@ describe('Advice reducer', () => {
       },
       selectedInsurance: {
         id: '2516227',
+        advice_expires_at: 312323123,
         insurance_id: 'ohra-autoverzekering-aanvullend',
         moneyview_id: 'ohra-autoverzekering-aanvullend',
         type: 'car',

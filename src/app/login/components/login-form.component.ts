@@ -1,9 +1,8 @@
-import { Inject, Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { LoginForm } from './login.form';
-import { ContentConfig, Content } from '../../content.config';
+import { ContentConfig } from '../../content.config';
 import { CustomError } from '../models/login-error';
 import * as FormUtils from '../../utils/base-form.utils';
 
@@ -21,6 +20,7 @@ export class LoginFormComponent {
   @Input() pending: Store<boolean>;
   @Input() resendSuccess: Store<boolean>;
   @Input() errorMessage: CustomError;
+
   @Output() onResendActivationMail: EventEmitter<string> = new EventEmitter<string>();
   @Output() onPasswordReset: EventEmitter<string> = new EventEmitter<string>();
   @Output() onLogin: EventEmitter<any> = new EventEmitter<any>();

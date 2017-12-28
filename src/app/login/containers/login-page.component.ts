@@ -1,5 +1,5 @@
-import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Inject, Component, OnInit, LOCALE_ID } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/filter';
@@ -12,7 +12,6 @@ import * as router from '../../core/actions/router';
 
 import { LoginForm } from '../components/login.form';
 import { loginError, CustomError } from '../models/login-error';
-import * as profile from '../../profile/actions/profile';
 
 import * as FormUtils from '../../utils/base-form.utils';
 import { scrollToY } from '../../utils/scroll-to-element.utils';
@@ -28,7 +27,6 @@ export class LoginPageComponent implements OnInit {
 
   form: LoginForm = new LoginForm(new FormBuilder());
   passwordResetUrl: string = this.getPasswordResetLink();
-  registrationLink = environment.external.registration;
   resendSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationResendActivationEmailSuccess);
 
   constructor(@Inject(LOCALE_ID) private locale: string, private store$: Store<fromAuth.State>) {}

@@ -77,3 +77,34 @@
     margin: 15px 0 !important;
   }
 }
+
+.knx-ir-icon {
+  min-height: 50px;
+  line-height: 50px;
+
+  img {
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+  }
+}
+
+knx-ir-value {
+  color: $knab-dark-gray;
+}
+
+.knx-ir-row__divider {
+  &.knx-ir-row-margin {
+    margin-top: -20px;
+  }
+}
+
+@media (max-width: 414px) {
+  .knx-ir-icon {
+    line-height: initial;
+  }
+
+  knx-ir-tooltip {
+    float: right;
+  }
+}

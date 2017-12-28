@@ -13,12 +13,15 @@ import { AuthService } from '../services/auth.service';
 const anonymousAvailableLinks = [
   '/register',
   '/login',
+  '/account',
+  '/account/profile',
   '/car',
   '/car/insurance',
   '/car/detail',
   '/car/detail',
   '/car/extras',
-  '/car/review'
+  '/car/review',
+  '/car/thank-you'
 ];
 
 @Injectable()
@@ -27,7 +30,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private store$: Store<fromRoot.State>, private authService: AuthService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const url: string = state.url;
+    let url: string = state.url;
+    // this entire auth guard should be refactored
+    if (Object.keys(route.queryParams).length) {
+      url = url.split('?')[0];
+    }
     return this.checkLogin(url);
   }
 
@@ -43,7 +50,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   checkLogin(url: string): boolean {
     // remove router parameters to match with allowed routes
     const baseUrl = url.split(';')[0];
-
     if (!this.isPublicRoute(baseUrl)) {
       this.store$.select(fromRoot.selectAuthState).take(1).subscribe(authenticated => {
         if (!authenticated.status.loggedIn || !this.authService.isLoggedIn()) {

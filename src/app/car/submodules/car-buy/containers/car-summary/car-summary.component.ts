@@ -38,23 +38,30 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   qaRootId = QaIdentifiers.carSummary;
-  profile$: Observable<Profile>;
+
+  subscription$: Subscription[] = [];
   insurance$: Observable<CarInsurance | InsuranceAdvice>;
+  error$: Observable<KNXStepError>;
+  profile$: Observable<Profile>;
+  isAnonymous$: Observable<any>;
   advice$: Observable<any>;
   car$: Observable<any>;
-  acceptFinalTerms: boolean;
-  confirmTerms: boolean;
+
+  acceptInsuranceTerms: boolean;
+  acceptKnabTerms: boolean;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
-  error$: Observable<KNXStepError>;
   content: Content;
-  isAnonymous$: Observable<any>;
-  subscription$: Subscription[] = [];
+  isLoggedIn: boolean;
+
+  formSummaryError = 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.';
+
   constructor(private tagsService: TagsService,
               private store$: Store<fromRoot.State>,
               public asyncPipe: AsyncPipe,
               public contentConfig: ContentConfig) {
     this.isAnonymous$ = this.store$.select(fromAuth.getLoggedIn).map(isLoggedIn => !isLoggedIn);
+    this.isAnonymous$.take(1).subscribe(isAnonymous => this.isLoggedIn = !isAnonymous);
     this.content = contentConfig.getContent();
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
@@ -70,7 +77,27 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.summary', clear: true}));
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.summary', clear: true }));
+
+    let sub1 = this.store$.select(fromCar.getCarBuyError)
+      .subscribe((error) => {
+        if (error) {
+          return this.store$.dispatch(new wizardActions.Error({
+            message: 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
+          }));
+        }
+      });
+    this.subscription$.push(sub1);
+
+    let sub2 = this.store$.select(fromCar.getCarBuyComplete)
+      .subscribe((complete) => {
+        if (complete) {
+          this.deleteAdvice();
+          this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
+        }
+      });
+
+    this.subscription$.push(sub2);
   }
 
   ngOnDestroy() {
@@ -79,9 +106,9 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   isValidInsurance(obj: any) {
     return (obj &&
-      !this.isEmpty(obj) &&
-      !this.isEmpty(obj._embedded) &&
-      !this.isEmpty(obj._embedded.car));
+    !this.isEmpty(obj) &&
+    !this.isEmpty(obj._embedded) &&
+    !this.isEmpty(obj._embedded.car));
   }
 
   isValidAdvice(obj: any) {
@@ -101,14 +128,19 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   getProposalData(value: any) {
+    // convert anonymous flow email property to expected property
+    if (value.adviceInfo.email) {
+      value.adviceInfo.emailaddress = value.adviceInfo.email;
+    }
+
     const flatData = Object.assign({},
       value.profileInfo,
       value.adviceInfo,
       value.adviceInfo.address,
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
-      {car: value.carInfo},
-      {dekking: this.getDekkingText(value.adviceInfo.coverage)},
+      { car: value.carInfo },
+      { dekking: this.getDekkingText(value.adviceInfo.coverage) },
       this.getUpdatedProfile());
 
     const proposalRequest = new CarProposalHelper();
@@ -141,48 +173,29 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   goToNextStep() {
-    if (!this.acceptFinalTerms || !this.confirmTerms) {
-      return this.store$.dispatch(new wizardActions.Error({message: 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.'}));
+    if (!this.summaryValid()) {
+      return this.store$.dispatch(new wizardActions.Error({ message: this.formSummaryError }));
     }
 
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
-        return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
-      }).filter( value =>
-        value.adviceInfo != null
-        && value.carInfo != null
-        && value.insuranceInfo != null)
-        // && value.profileInfo != null)
-        .subscribe((value) => {
-          const proposalData = this.getProposalData(value);
-          this.store$.dispatch(new car.Buy(proposalData));
-        });
-
-    Observable.combineLatest(
-      this.store$.select(fromCar.getCarBuyComplete),
-      this.store$.select(fromCar.getCarBuyError),
-      (complete, error) => ({complete: complete, error: error}))
-      .take(1)
-      .subscribe(combined => {
-        if (combined.error) {
-          return this.store$.dispatch(new wizardActions.Error({
-            message: 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
-          }));
-        }
-
-        let subscription = this.store$.select(fromProfile.getProfile)
-          .filter(profile => !!profile.emailaddress)
-          .subscribe((profile) => {
-            this.store$.select(fromInsurance.getSavedCarAdvices).take(1)
-              .subscribe(SavedCarAdvices => {
-                this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
-              });
-            return this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
-          });
-
-        this.subscription$.push(subscription);
-        // Navigate to thank you page
+        return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
+      }).filter(value =>
+    value.adviceInfo != null
+    && value.carInfo != null
+    && value.insuranceInfo != null)
+    // && value.profileInfo != null)
+      .subscribe((value) => {
+        const proposalData = this.getProposalData(value);
+        this.store$.dispatch(new car.Buy(proposalData));
       });
   }
 
+  private deleteAdvice() {
+    this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
+  }
+
+  private summaryValid() {
+    return this.isLoggedIn ? this.acceptInsuranceTerms : this.acceptInsuranceTerms && this.acceptKnabTerms;
+  }
 }

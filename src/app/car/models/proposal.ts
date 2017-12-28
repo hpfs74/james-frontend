@@ -7,11 +7,6 @@ import { dateDecode } from '../../utils/base-form.utils';
  * Buy Flow Request Data Transformer
  */
 export class CarProposalHelper {
-
-  constructor() {
-  }
-
-  /* tslint:disable:max-line-length */
   propMapping = [
     {key: 'Verzekeraar', value: 'moneyview_id', transform: (val) => val.split(':')[0]},
     {key: 'Product', value: 'moneyview_id', transform: (val) => val.split(':')[1]},
@@ -48,14 +43,12 @@ export class CarProposalHelper {
     {key: 'Kilometrage', value: 'kilometers_per_year'},
     {key: 'Beveiliging', value: 'securityClass', transform: (value) => 'SCM klasse ' + value.slice(-1)},
     {key: 'Hoofddekking', value: 'dekking'},
-    {key: 'Rechtsbijstand meeverzekeren', value: 'legal', transform: this.getBoolean},
+    {key: 'Rechtsbijstand meeverzekeren', value: 'legal_aid', transform: this.getLegalAid},
     {key: 'Inzittendenverzekering', value: 'cover_occupants', transform: this.getBoolean},
     {key: 'Slotvragen', value: ''},
     // FirstName is a mandatory field to buy an insurance
     {key: 'Voornaam', value: 'name'}
   ];
-
-  /* tslint:enable */
 
   getItems(data: any): Array<Object> {
     if (!data) {
@@ -150,6 +143,10 @@ export class CarProposalHelper {
       }
     });
     return null;
+  }
+
+  private getLegalAid(value: string) {
+    return value === 'LAY' ? 'Ja' : 'Nee';
   }
 
   private getBoolean(value: boolean) {

@@ -4,21 +4,21 @@ import { KNXStepOptions } from '@knx/wizard';
 import { KNXWizardStepRxOptions } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.options';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CarDetailComponent } from './../../components/car-detail/car-detail.component';
+import { CarDetailComponent } from './../../containers/car-detail/car-detail.component';
 import { QaIdentifier } from '../../../../../shared/models/qa-identifier';
 import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
 import { AssistantConfig } from '../../../../../core/models/assistant';
 import { TagsService } from '../../../../../core/services/tags.service';
 import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../../../../models';
 import { Price } from '../../../../../shared/models/price';
-import { CarDetailForm } from '../../components/car-detail/car-detail.form';
-import { CarExtrasForm } from '../../components/car-extras/car-extras.form';
+import { CarDetailForm } from '../../containers/car-detail/car-detail.form';
+import { CarExtrasForm } from '../../containers/car-extras/car-extras.form';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
 import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
 import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
-import { InsuranceTopListComponent } from '../../components/insurance-toplist/insurance-toplist.component';
+import { InsuranceTopListComponent } from '../insurance-toplist/insurance-toplist.component';
 import { KNXWizardRxComponent } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.component';
-import { CarReviewComponent } from '../../components/car-review/car-review.component';
+import { CarReviewComponent } from '../../containers/car-review/car-review.component';
 
 import * as FormUtils from '../../../../../utils/base-form.utils';
 import * as cuid from 'cuid';
@@ -45,7 +45,6 @@ import * as wizardActions from '@app/core/actions/wizard';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
@@ -55,6 +54,7 @@ enum carFormSteps {
 }
 @Component({
   templateUrl: 'car-advice.component.html',
+  styleUrls: ['./car-advice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
@@ -65,6 +65,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   chatMessages$: Observable<Array<ChatMessage>>;
   // State of the advice forms data
   isLoggedIn$: Observable<boolean>;
+  insurance$: Observable<any>;
   savedInsurances$: Observable<any>;
   savedInsurancesLoading$: Observable<any>;
   subscription$: Array<any> = [];
@@ -103,6 +104,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.savedInsurancesLoading$ = this.store$.select(fromInsurance.getSavedInsuranceLoading);
+    this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     // initialize forms
     const formBuilder = new FormBuilder();
 
@@ -127,7 +129,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
           } else if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
             // Proceed to the buy flow for anonymous with advice
-            this.proceedAnonymous(advices, insurances);
+            this.proceedWithAdvice(advices, insurances);
           }
       })
     );
@@ -173,24 +175,36 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
   }
 
-  private proceedAnonymous(advices, insurances) {
+  private proceedWithAdvice(advices, insurances) {
     this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
     this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
-
-    this.store$.select(fromCar.getCompareResult)
-      .map(obs => {
-        return obs.map(v => JSON.parse(JSON.stringify(v)));
-      })
-      .subscribe(insurance => {
+    this.subscription$.push(
+      this.insurance$.subscribe(insurance => {
         if (insurance) {
-          this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
-            id => {
-              this.store$.dispatch(new router.Go({
-                path: ['/car/insurance/contact-detail'],
+          this.subscription$.push(this.store$.select(fromInsurance.getSelectedInsurance)
+            .filter(selectedInsurance => selectedInsurance !== null).subscribe(
+              selectedInsurance => {
+                if (selectedInsurance.advice_expires_at * 1000 > new Date().getTime()) {
+                  this.proceedToBuy();
+                } else {
+                  this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
+                  this.store$.dispatch(new router.Go({ path: ['/car/extras'] }));
+                }
               }));
-            }));
         }
-    });
+      })
+    );
+  }
+
+  private proceedToBuy() {
+    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
+      advice => {
+        if (advice && advice.id) {
+          this.store$.dispatch(new router.Go({
+            path: ['/car/insurance/contact-detail', { adviceId: advice.id }],
+          }));
+        }
+      }));
   }
 
   goToStep(stepIndex: number) {

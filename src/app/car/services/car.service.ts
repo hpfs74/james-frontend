@@ -20,6 +20,13 @@ export class CarService {
       .map(res => <Car>res.json());
   }
 
+  public getMeldcodeByLicense(licensePlate: string): Observable<Car> {
+    const headers = new Headers();
+    headers.append('version', 'v2');
+    return this.authHttp.get(`${environment.james.meldcode}/${licensePlate}`, { headers })
+      .map(res => <Car>res.json());
+  }
+
   public getCoverageRecommendation(licensePlate: string, loan: boolean = false): Observable<CarCoverageRecommendation> {
     const headers = new Headers();
     headers.append('version', 'v2');

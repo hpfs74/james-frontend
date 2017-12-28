@@ -2,7 +2,7 @@
   <knx-offline-indicator></knx-offline-indicator>
   <knx-navbar [menuItems]="topMenu" (onLogOut)="logOut()" (onHamburgerClick)="toggleMenuOpen()">
     <knx-opening-hours></knx-opening-hours>
-    <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="false" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
+    <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="loggedIn$ | async" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
   </knx-navbar>
 </header>
 
@@ -21,6 +21,10 @@
 
     <li class="nav-item" *ngIf="!(loggedIn$ | async)">
       <a class="nav-link" (click)="goToLogin()">Inloggen</a>
+    </li>
+
+    <li class="nav-item" *ngIf="loggedIn$ | async">
+      <a class="nav-link" (click)="goToProfile()">Profile</a>
     </li>
 
     <li class="nav-item">

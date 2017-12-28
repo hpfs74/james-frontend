@@ -115,11 +115,10 @@ function getContent(environment: string) {
     production: ${isProd},
     enableAnalytics: ${enableAnalytics},
     featureToggles: {
-      enableBuyFlowEmail: true,
-      enableAnalyticsLogging: true
+      enableBuyFlowEmail: ${getEnvVar('FEATURE_BUY_FLOW_EMAIL')},
+      enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')}
     },
     external: {
-      registration: '${getEnvVar('WEBSITE_REGISTRATION')}',
       login: '${getEnvVar('LOGIN')}'
     },
     james: {
@@ -140,6 +139,7 @@ function getContent(environment: string) {
       carBuy: '${getEnvVar('JAMES_API_CAR_BUY')}',
       sdBuy: '${getEnvVar('JAMES_API_SD_BUY')}',
       insurer: '${getEnvVar('JAMES_API_INSURER')}',
+      meldcode: '${getEnvVar('JAMES_API_MELDCODE')}',
       payloadEncryption: {
         client: {
           id: '${getEnvVar('PAYLOAD_CLIENT_ID')}',
