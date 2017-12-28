@@ -52,7 +52,8 @@ export class ProfileEditComponent implements OnInit {
         gender: event.gender,
         firstname: event.firstName,
         lastname: event.lastName,
-        birthday: FormUtils.toNicciDate(event.birthDate)
+        birthday: FormUtils.toNicciDate(event.birthDate),
+        household: event.houseHold
       }, event.address)));
 
     this.store$.dispatch(new settings.UpdateSettingsAction({

@@ -1,4 +1,8 @@
-
+<div class="container knx-car-advice-loader">
+  <knx-loader [visible]="profileLoading$ | async">
+    Laden...
+  </knx-loader>
+</div>
 <div class="container knx-container-main">
   <div class="row">
     <div class="col-sm-4 push-sm-8">
@@ -18,7 +22,7 @@
                 <h2>My details</h2>
               </div>
               <div class="col-md-2 col-2">
-                <p class="knx-edit">Edit</p>
+                <p class="knx-edit" (click)="editProfile()">Edit</p>
               </div>
             </div>
             <div class="row">
@@ -48,7 +52,7 @@
             <div class="row">
               <div class="col-md-6">Living situation</div>
               <div class="col-md-6">
-                <p class="knx-value">{{ (profile$ | async).household || '-' }}</p>
+                <p class="knx-value">{{ ((profile$ | async).household | jamesTag: 'insurance_flow_household') || '-' }}</p>
               </div>
             </div>
             <hr>
@@ -69,7 +73,7 @@
                 <h2>Email and password</h2>
               </div>
               <div class="col-md-2">
-                <p class="knx-edit">Edit</p>
+                <p class="knx-edit" (click)="editPassword()">Edit</p>
               </div>
             </div>
             <div class="row">

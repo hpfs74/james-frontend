@@ -28,17 +28,22 @@ export class ProfileOverviewComponent implements OnInit {
   chatMessages$: Observable<Array<ChatMessage>>;
 
   profile$: Observable<Profile>;
-
+  profileLoading$: Observable<boolean>;
   constructor(private store$: Store<fromProfile.State>,
               private tagsService: TagsService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
+    this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
   }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.ClearAction());
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'profile.hello' }));
+  }
+
+  editProfile() {
+    this.store$.dispatch(new router.Go({ path: ['/profile-edit'] }));
   }
 
 }

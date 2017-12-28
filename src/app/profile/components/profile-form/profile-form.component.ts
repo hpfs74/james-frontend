@@ -18,7 +18,8 @@ export class ProfileFormComponent {
         gender: value.gender,
         firstName: value.firstname,
         lastName: value.lastname,
-        birthDate: value.birthday ? FormUtils.toDateFormat(FormUtils.parseNicciDate(value.birthday)) : value.birthday
+        birthDate: value.birthday ? FormUtils.toDateFormat(FormUtils.parseNicciDate(value.birthday)) : value.birthday,
+        houseHold: value.household
       };
 
       this.avatarUrl = value.profile_image;
