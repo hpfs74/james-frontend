@@ -3,6 +3,7 @@ import { ProfileForm } from './profile.form';
 import { Profile } from '../models';
 import { Address } from '../../address/models';
 import * as FormUtils from '../../utils/base-form.utils';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 
 @Component({
   selector: 'knx-profile-edit',

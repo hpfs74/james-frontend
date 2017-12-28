@@ -1,50 +1,61 @@
-<form [formGroup]="form.formGroup" class="knx-fancy-form">
-  <div class="row">
-    <div class="col-md-4">
-      <knx-form-group
-        [options]="form.formConfig.gender"
-        [formControlName]="form.formConfig.gender.formControlName">
-      </knx-form-group>
+<knx-card>
+  <h2>Mijn account</h2>
+  <form [formGroup]="form.formGroup" class="knx-fancy-form">
+    <div class="row">
+      <div class="col-md-6">
+        <knx-form-group
+          [options]="form.formConfig.firstName"
+          [formControlName]="form.formConfig.firstName.formControlName">
+        </knx-form-group>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <knx-form-group
-        [options]="form.formConfig.firstName"
-        [formControlName]="form.formConfig.firstName.formControlName">
-      </knx-form-group>
+    <div class="row">
+      <div class="col-md-6">
+        <knx-form-group
+          [options]="form.formConfig.lastName"
+          [formControlName]="form.formConfig.lastName.formControlName">
+        </knx-form-group>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <knx-form-group
-        [options]="form.formConfig.lastName"
-        [formControlName]="form.formConfig.lastName.formControlName">
-      </knx-form-group>
+    <div class="row">
+      <div class="col-md-4">
+        <knx-form-group
+          [options]="form.formConfig.gender"
+          [formControlName]="form.formConfig.gender.formControlName">
+        </knx-form-group>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <knx-form-group
-        [options]="form.formConfig.birthDate"
-        [formControlName]="form.formConfig.birthDate.formControlName">
-      </knx-form-group>
+    <div class="row">
+      <div class="col-md-6">
+        <knx-form-group
+          [options]="form.formConfig.birthDate"
+          [formControlName]="form.formConfig.birthDate.formControlName">
+        </knx-form-group>
+      </div>
     </div>
-  </div>
 
-  <knx-form-group
-    [options]="form.formConfig.pushNotifications"
-    [formControlName]="form.formConfig.pushNotifications.formControlName">
-  </knx-form-group>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-4">
+        <knx-address-lookup
+          [addressForm]="form.addressForm"
+          (addressFound)="updateAddress($event)">
+        </knx-address-lookup>
+      </div>
+    </div>
 
-  <knx-form-group
-    [options]="form.formConfig.emailNotifications"
-    [formControlName]="form.formConfig.emailNotifications.formControlName">
-  </knx-form-group>
-</form>
+    <knx-form-group
+      [formControlName]="form.formConfig.houseHold.formControlName"
+      [options]="form.formConfig.houseHold">
+    </knx-form-group>
 
+    <knx-form-group
+      [options]="form.formConfig.emailNotifications"
+      [formControlName]="form.formConfig.emailNotifications.formControlName">
+    </knx-form-group>
+  </form>
+</knx-card>
 <button class="knx-button knx-button--link knx-button--back" (click)="goBack$.emit()">Terug</button>
-<button class="knx-button knx-button--primary pull-right" (click)="save()">Opslaan</button>
+<button class="knx-button knx-button--primary pull-right" (click)="save()">Save</button>

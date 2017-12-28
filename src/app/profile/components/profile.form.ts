@@ -6,6 +6,7 @@ import { AddressForm } from '../../address/components/address.form';
 import { nameInitialMask } from '../../utils/base-form.utils';
 import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
 import { birthDateMask } from '../../utils/base-form.utils';
+import { UIPair } from '@app/core/models/ui-pair';
 
 export class ProfileForm extends BaseForm {
   formGroup: FormGroup;
@@ -19,7 +20,7 @@ export class ProfileForm extends BaseForm {
     birthDate: () => 'Vul een geldige geboortedatum in'
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
     super();
 
     this.formGroup = this.fb.group({
@@ -28,8 +29,9 @@ export class ProfileForm extends BaseForm {
       firstName: [null, Validators.compose([Validators.maxLength(50)])],
       lastName: [null, Validators.compose([Validators.maxLength(50)])],
       birthDate: [null, birthDateValidator('birthDate')],
+      houseHold: [null, Validators.required],
       pushNotifications: [null],
-      emailNotifications: [null],
+      emailNotifications: [{}],
     });
 
     this.addressForm = new AddressForm(fb);
@@ -88,6 +90,18 @@ export class ProfileForm extends BaseForm {
           decode: true
         }
       },
+      houseHold: {
+        formControlName: 'houseHold',
+        label: 'Wat is je gezinssituatie?',
+        type: 'select',
+        formControl: this.formGroup.get('houseHold'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          placeholder: 'Maak een keuze',
+          events: ['focus'],
+          items: houseHold
+        }
+      },
       pushNotifications: {
         formControlName: 'pushNotifications',
         formControl: this.formGroup.get('pushNotifications'),
@@ -103,11 +117,20 @@ export class ProfileForm extends BaseForm {
         formControlName: 'emailNotifications',
         formControl: this.formGroup.get('emailNotifications'),
         validationErrors: this.validationErrors,
-        label: '',
-        type: 'checkbox',
+        label: 'emailNotifications',
+        type: 'radio',
         inputOptions: {
-          label: 'Houd mij via e-mail op de hoogte van het laatste nieuws en persoonlijke aanbiedingen',
-          value: 'emailNotifications'
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
+          items: [
+            {
+              label: 'Yes',
+              value: true
+            },
+            {
+              label: 'No',
+              value: false
+            }
+          ]
         }
       },
     };

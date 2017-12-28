@@ -6,11 +6,12 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 import { AssistantConfig } from '../../core/models/assistant';
 import { ChatMessage } from '../../components/knx-chat-stream/chat-message';
 import { BaseForm } from '../../shared/forms/base-form';
-import * as FormUtils from '../../utils/base-form.utils';
 import { Profile } from '../models/profile';
 import { Settings } from '../models/settings';
 import { ProfileForm } from '../components/profile.form';
+import { TagsService } from '@app/core/services';
 
+import * as FormUtils from '../../utils/base-form.utils';
 import * as fromProfile from '../reducers';
 import * as fromCore from '../../core/reducers';
 import * as router from '../../core/actions/router';
@@ -28,7 +29,8 @@ export class ProfileComponent implements OnInit {
 
   profile$: Observable<Profile>;
 
-  constructor(private store$: Store<fromProfile.State>) {
+  constructor(private store$: Store<fromProfile.State>,
+              private tagsService: TagsService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
@@ -37,7 +39,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.store$.dispatch(new assistant.ClearAction());
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'profile.hello' }));
-    this.profileForm = new ProfileForm(new FormBuilder());
+    this.profileForm = new ProfileForm(new FormBuilder(), this.tagsService.getAsLabelValue('insurance_flow_household'));
   }
 
   navigateBack() {
