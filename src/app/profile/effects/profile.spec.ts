@@ -157,7 +157,7 @@ describe('ProfileEffects', () => {
   describe('UPDATE_PROFILE', () => {
     it('should update the profile', () => {
       const expectedResult = {
-        loading: false,
+        loading: true,
         loaded: false,
         profile: this.profileExample
       };
