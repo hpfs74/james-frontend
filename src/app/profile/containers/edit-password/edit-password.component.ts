@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Profile, Settings } from '../../models';
 import { Store } from '@ngrx/store';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-
+import { Address } from '@app/address/models';
+import { Observable } from 'rxjs/Observable';
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
 import { BaseForm } from '@app/shared/forms/base-form';
-import { Profile } from '../../models/profile';
-import { Settings } from '../../models/settings';
 import { ProfileForm } from '../../components/profile-form/profile.form';
 import { TagsService } from '@app/core/services';
+import { PasswordForm } from '@app/profile/containers/edit-password/edit-password.form';
+import { FormBuilder } from '@angular/forms';
 
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as fromProfile from '../../reducers';
@@ -19,16 +19,16 @@ import * as assistant from '@app/core/actions/assistant';
 import * as profile from '../../actions/profile';
 import * as settings from '../../actions/settings';
 import * as fromInsurance from '@app/insurance/reducers';
-
 @Component({
-  templateUrl: 'overview.component.html',
-  styleUrls: ['./overview.component.scss']
+  selector: 'knx-profile-edit-password',
+  templateUrl: './edit-password.component.html'
 })
-export class ProfileOverviewComponent implements OnInit {
-  chatConfig$: Observable<AssistantConfig>;
+
+export class ProfileEditPasswordComponent implements OnInit {
+chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   savedInsurances$: Observable<any>;
-
+  form: PasswordForm;
   profile$: Observable<Profile>;
   settings$: Observable<any>;
   profileLoading$: Observable<boolean>;
@@ -37,21 +37,17 @@ export class ProfileOverviewComponent implements OnInit {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
-    this.settings$ = this.store$.select(fromProfile.getSettings);
-    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
-    this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
   }
 
   ngOnInit() {
-    this.store$.dispatch(new assistant.ClearAction());
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'profile.hello' }));
+    this.form = new PasswordForm(new FormBuilder());
   }
 
-  editProfile() {
-    this.store$.dispatch(new router.Go({ path: ['/profile-edit'] }));
+  goBack() {
+    this.store$.dispatch(new router.Back());
   }
 
-  editPassword() {
-    this.store$.dispatch(new router.Go({ path: ['/profile-edit-password'] }));
+  save() {
+
   }
 }

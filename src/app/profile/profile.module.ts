@@ -10,6 +10,7 @@ import { ProfileService } from './services/profile.service';
 
 import { ProfileEditComponent } from './containers/edit/edit.component';
 import { ProfileOverviewComponent } from './containers/overview/overview.component';
+import { ProfileEditPasswordComponent } from './containers/edit-password/edit-password.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 
 import { ProfileEffects } from './effects/profile';
@@ -32,7 +33,8 @@ import { reducers } from './reducers';
   declarations: [
     ProfileEditComponent,
     ProfileFormComponent,
-    ProfileOverviewComponent
+    ProfileOverviewComponent,
+    ProfileEditPasswordComponent
   ],
   providers: [
     ProfileService

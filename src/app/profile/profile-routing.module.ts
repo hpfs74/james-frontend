@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ProfileEditComponent } from './containers/edit/edit.component';
+import { ProfileEditPasswordComponent } from './containers/edit-password/edit-password.component';
 import { ProfileOverviewComponent } from './containers/overview/overview.component';
 
 export const profileRoutes: Routes = [
@@ -17,8 +18,15 @@ export const profileRoutes: Routes = [
     component: ProfileOverviewComponent,
     data: {
       title: 'Mijn account'
-    },
+    }
   },
+  {
+    path: 'profile-edit-password',
+    component: ProfileEditPasswordComponent,
+    data: {
+      title: 'Mijn account'
+    }
+  }
 ];
 @NgModule({
   imports: [

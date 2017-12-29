@@ -14,6 +14,7 @@ const anonymousAvailableLinks = [
   '/register',
   '/login',
   '/profile-edit',
+  '/profile-edit-password',
   '/profile-overview',
   '/car',
   '/car/insurance',
