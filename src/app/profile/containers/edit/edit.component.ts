@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
@@ -22,24 +23,32 @@ import * as settings from '../../actions/settings';
 @Component({
   templateUrl: 'edit.component.html'
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
   profileForm: ProfileForm;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
+  profileLoading$: Observable<boolean>;
+  settings$: Observable<any>;
 
   profile$: Observable<Profile>;
-
+  subscription$: Subscription[] = [];
   constructor(private store$: Store<fromProfile.State>,
               private tagsService: TagsService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
-    this.profile$ = this.store$.select(fromProfile.getProfile);
+    this.profileLoading$ = store$.select(fromProfile.getProfileLoading);
+    this.profile$ = store$.select(fromProfile.getProfile);
+    this.settings$ = this.store$.select(fromProfile.getSettings);
   }
 
   ngOnInit() {
     this.store$.dispatch(new assistant.ClearAction());
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'profile.hello' }));
     this.profileForm = new ProfileForm(new FormBuilder(), this.tagsService.getAsLabelValue('insurance_flow_household'));
+  }
+
+  ngOnDestroy() {
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
   navigateBack() {
@@ -60,5 +69,12 @@ export class ProfileEditComponent implements OnInit {
       push_notifications: !!event.pushNotifications,
       email_notifications: !!event.emailNotifications
     }));
+    this.subscription$.push(
+      this.profileLoading$.subscribe(loading => {
+        if (!loading) {
+          this.navigateBack();
+        }
+      })
+    );
   }
 }

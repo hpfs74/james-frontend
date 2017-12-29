@@ -15,7 +15,9 @@
             (formSaved$)="save($event)"
             (goBack$)="navigateBack()"
             [profile]="profile$ | async"
-            [form]="profileForm">
+            [settings]="settings$ | async"
+            [form]="profileForm"
+            [pending]="profileLoading$ | async">
           </knx-profile-form>
         </div>
       </div>

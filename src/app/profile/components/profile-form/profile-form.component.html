@@ -58,4 +58,4 @@
   </form>
 </knx-card>
 <button class="knx-button knx-button--link knx-button--back" (click)="goBack$.emit()">Terug</button>
-<button class="knx-button knx-button--primary pull-right" (click)="save()">Save</button>
+<button class="knx-button knx-button--primary pull-right" [class.knx-button--pending]="pending" (click)="save()">Save</button>

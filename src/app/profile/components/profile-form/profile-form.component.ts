@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProfileForm } from './profile.form';
-import { Profile } from '../../models';
+import { Profile, Settings } from '../../models';
 import { Address } from '@app/address/models';
 import * as FormUtils from '@app/utils/base-form.utils';
 
@@ -10,7 +10,10 @@ import * as FormUtils from '@app/utils/base-form.utils';
 })
 
 export class ProfileFormComponent {
+  avatarUrl: string;
+  address: Address;
   @Input() form: ProfileForm;
+  @Input() pending: boolean;
 
   @Input() set profile(value: Profile) {
     if (value) {
@@ -39,11 +42,21 @@ export class ProfileFormComponent {
       }
     }
   }
+
+  @Input() set settings(value: any) {
+    if (value) {
+      const patchObj = {
+        emailNotifications: value.email_notifications,
+      };
+      this.form.formGroup.patchValue(patchObj, { emitEvent: false });
+
+      FormUtils.validateControls(this.form.formGroup, Object.keys(patchObj)
+        .filter(key => patchObj[key] !== null));
+    }
+  }
+
   @Output() formSaved$: EventEmitter<any> = new EventEmitter();
   @Output() goBack$: EventEmitter<any> = new EventEmitter();
-
-  avatarUrl: string;
-  address: Address;
 
   loadAvatar($event) {
     const ctrl = this.form.formGroup.get('avatar');

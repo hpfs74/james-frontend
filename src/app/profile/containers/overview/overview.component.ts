@@ -18,6 +18,7 @@ import * as router from '@app/core/actions/router';
 import * as assistant from '@app/core/actions/assistant';
 import * as profile from '../../actions/profile';
 import * as settings from '../../actions/settings';
+import * as fromInsurance from '@app/insurance/reducers';
 
 @Component({
   templateUrl: 'overview.component.html',
@@ -26,14 +27,18 @@ import * as settings from '../../actions/settings';
 export class ProfileOverviewComponent implements OnInit {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
+  savedInsurances$: Observable<any>;
 
   profile$: Observable<Profile>;
+  settings$: Observable<any>;
   profileLoading$: Observable<boolean>;
   constructor(private store$: Store<fromProfile.State>,
               private tagsService: TagsService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
+    this.settings$ = this.store$.select(fromProfile.getSettings);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
   }
 
