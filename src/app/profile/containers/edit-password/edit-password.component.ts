@@ -25,13 +25,14 @@ import * as fromInsurance from '@app/insurance/reducers';
 })
 
 export class ProfileEditPasswordComponent implements OnInit {
-chatConfig$: Observable<AssistantConfig>;
+  chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   savedInsurances$: Observable<any>;
   form: PasswordForm;
   profile$: Observable<Profile>;
   settings$: Observable<any>;
   profileLoading$: Observable<boolean>;
+  pending = false;
   constructor(private store$: Store<fromProfile.State>,
               private tagsService: TagsService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
