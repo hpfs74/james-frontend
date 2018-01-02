@@ -9,9 +9,9 @@ import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard
 export class KNXWizardControlsComponent {
   @Input() currentStepOptions: KNXWizardStepRxOptions;
   @Input() error: KNXStepError;
+  @Input() isPendingNext: boolean;
   @Output() onNext: EventEmitter<any> = new EventEmitter<any>();
   @Output() onBack: EventEmitter<any> = new EventEmitter<any>();
-  isPendingNext: boolean;
   constructor() {}
 
   next() {
