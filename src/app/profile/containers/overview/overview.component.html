@@ -50,13 +50,6 @@
                 <p class="knx-value">{{ ((profile$ | async).household | jamesTag: 'insurance_flow_household') || '-' }}</p>
               </div>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-6">Email me the latest news and suggestions</div>
-              <div class="col-md-6">
-                <p class="knx-value">{{ (settings$ | async).email_notifications | boolean }}</p>
-              </div>
-            </div>
           </knx-card>
         </div>
       </div>

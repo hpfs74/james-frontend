@@ -30,14 +30,12 @@ export class ProfileOverviewComponent implements OnInit {
   savedInsurances$: Observable<any>;
 
   profile$: Observable<Profile>;
-  settings$: Observable<any>;
   profileLoading$: Observable<boolean>;
   constructor(private store$: Store<fromProfile.State>,
               private tagsService: TagsService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
-    this.settings$ = this.store$.select(fromProfile.getSettings);
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
   }

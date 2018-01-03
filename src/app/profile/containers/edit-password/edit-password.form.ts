@@ -9,14 +9,15 @@ export class PasswordForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     email: () => 'Vul een geldig e-mailadres in alsjeblieft',
-    pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?'
+    pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?',
+    matching: () => 'Passwords do not match'
   };
 
   constructor(private fb: FormBuilder) {
     super();
 
     this.formGroup = this.fb.group({
-      password: [null, Validators.compose(
+      oldPassword: [null, Validators.compose(
         [
           Validators.required,
           Validators.minLength(8),
@@ -40,9 +41,9 @@ export class PasswordForm extends BaseForm {
     });
 
     this.formConfig = {
-      password: {
-        formControlName: 'password',
-        formControl: this.formGroup.get('password'),
+      oldPassword: {
+        formControlName: 'oldPassword',
+        formControl: this.formGroup.get('oldPassword'),
         validationErrors: this.validationErrors,
         label: 'current password',
         type: 'password',

@@ -13,7 +13,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/delay';
 
-import { AuthToken } from '../models/auth';
+import { AuthToken, PasswordChangeResponse } from '../models/auth';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../../core/services/localstorage.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
@@ -69,6 +69,23 @@ export class AuthEffects {
         .catch((error) => {
           let errorText = JSON.parse(error.text()) || error;
           return Observable.of(new auth.LoginFailure(errorText.error || errorText));
+        })
+    );
+
+  passwordChanging: boolean;
+  @Effect()
+  newPassword = this.actions$
+    .ofType(auth.NEW_PASSWORD)
+    .map((action: auth.NewPassword) => action)
+    .exhaustMap(response =>
+      this.authService
+        .changePassword(response.payload)
+        .mergeMap((response: PasswordChangeResponse) => {
+          return [new auth.NewPasswordSuccess(response)];
+        })
+        .catch((error) => {
+          let errorText = JSON.parse(error.text()) || error;
+          return Observable.of(new auth.NewPasswordError(errorText.error_description || errorText));
         })
     );
 

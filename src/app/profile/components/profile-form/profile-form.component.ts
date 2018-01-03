@@ -43,18 +43,6 @@ export class ProfileFormComponent {
     }
   }
 
-  @Input() set settings(value: any) {
-    if (value) {
-      const patchObj = {
-        emailNotifications: value.email_notifications,
-      };
-      this.form.formGroup.patchValue(patchObj, { emitEvent: false });
-
-      FormUtils.validateControls(this.form.formGroup, Object.keys(patchObj)
-        .filter(key => patchObj[key] !== null));
-    }
-  }
-
   @Output() formSaved$: EventEmitter<any> = new EventEmitter();
   @Output() goBack$: EventEmitter<any> = new EventEmitter();
 

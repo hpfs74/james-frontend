@@ -1,20 +1,23 @@
 import { Action } from '@ngrx/store';
-import { AuthToken, Authenticate } from '../models/auth';
+import { AuthToken, Authenticate, PasswordPayload, PasswordChangeResponse, PasswordChangeError } from '../models/auth';
 
-export const LOGIN           =   '[Auth] Login';
-export const LOGIN_ANONYMOUS =   '[Auth] Login Anonymous';
-export const LOGOUT =            '[Auth] Logout';
-export const LOGIN_SUCCESS =     '[Auth] Login Success';
-export const LOGIN_FAILURE =     '[Auth] Login Failure';
-export const LOGIN_REDIRECT =    '[Auth] Login Redirect';
-export const LOGIN_EXPIRED =     '[Auth] Login Expired';
-export const LOGIN_RESET_STATE = '[Auth] Login Reset State';
-export const ANONYMOUS_START =   '[Auth] Anonymous Start';
+export const LOGIN                  = '[Auth] Login';
+export const LOGIN_ANONYMOUS        = '[Auth] Login Anonymous';
+export const LOGOUT                 = '[Auth] Logout';
+export const LOGIN_SUCCESS          = '[Auth] Login Success';
+export const LOGIN_FAILURE          = '[Auth] Login Failure';
+export const LOGIN_REDIRECT         = '[Auth] Login Redirect';
+export const LOGIN_EXPIRED          = '[Auth] Login Expired';
+export const LOGIN_RESET_STATE      = '[Auth] Login Reset State';
+export const ANONYMOUS_START        = '[Auth] Anonymous Start';
+export const NEW_PASSWORD           = '[Auth] New Password';
+export const NEW_PASSWORD_ERROR     = '[Auth] New Password Error';
+export const NEW_PASSWORD_SUCCESS   = '[Auth] New Password Success';
 
-export const REFRESH_TOKEN =     '[Auth] Refresh Token';
-export const REFRESH_SUCCESS =   '[Auth] Refresh Token Success';
-export const REFRESH_FAILURE =   '[Auth] Refresh Token Failure';
-export const RESET_STATES =      '[Auth] Reset States';
+export const REFRESH_TOKEN          = '[Auth] Refresh Token';
+export const REFRESH_SUCCESS        = '[Auth] Refresh Token Success';
+export const REFRESH_FAILURE        = '[Auth] Refresh Token Failure';
+export const RESET_STATES           = '[Auth] Reset States';
 
 export const SCHEDULE_TOKEN_REFRESH = '[Auth] Schedule Token Refresh';
 
@@ -65,6 +68,24 @@ export class RefreshToken implements Action {
   constructor(public payload: string) { }
 }
 
+export class NewPassword implements Action {
+  readonly type = NEW_PASSWORD;
+
+  constructor(public payload: PasswordPayload) { }
+}
+
+export class NewPasswordError implements Action {
+  readonly type = NEW_PASSWORD_ERROR;
+
+  constructor(public payload: string) { }
+}
+
+export class NewPasswordSuccess implements Action {
+  readonly type = NEW_PASSWORD_SUCCESS;
+
+  constructor(public payload: PasswordChangeResponse) { }
+}
+
 export class RefreshTokenFailure implements Action {
   readonly type = REFRESH_FAILURE;
 
@@ -104,6 +125,9 @@ export type Actions =
   | LoginResetState
   | Logout
   | RefreshToken
+  | NewPassword
+  | NewPasswordError
+  | NewPasswordSuccess
   | RefreshTokenFailure
   | RefreshTokenSuccess
   | ScheduleTokenRefresh
