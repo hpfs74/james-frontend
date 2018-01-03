@@ -55,7 +55,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   isLoggedIn: boolean;
 
   formSummaryError = 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.';
-
+  submiting = false;
   constructor(private tagsService: TagsService,
               private store$: Store<fromRoot.State>,
               public asyncPipe: AsyncPipe,
@@ -92,6 +92,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     let sub2 = this.store$.select(fromCar.getCarBuyComplete)
       .subscribe((complete) => {
         if (complete) {
+          this.submiting = false;
           this.deleteAdvice();
           this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
         }
@@ -186,6 +187,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     && value.insuranceInfo != null)
     // && value.profileInfo != null)
       .subscribe((value) => {
+        this.submiting = true;
         const proposalData = this.getProposalData(value);
         this.store$.dispatch(new car.Buy(proposalData));
       });
