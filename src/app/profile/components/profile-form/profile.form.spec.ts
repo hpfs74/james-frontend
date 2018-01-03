@@ -1,11 +1,23 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProfileForm } from './profile.form';
+import { TestBed } from '@angular/core/testing';
+import { TagsService } from '@app/core/services';
+import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
 
 describe('Form: Profile', () => {
   let form: ProfileForm;
 
   beforeEach(() => {
-    form = new ProfileForm(new FormBuilder());
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: TagsService,
+          useValue: TagsServiceMock
+        },
+      ]
+    });
+    const tagsService = TestBed.get(TagsService);
+    form = new ProfileForm(new FormBuilder(), tagsService.getAsLabelValue('insurance_flow_household'));
   });
 
   it('should initialize the form controls', () => {
@@ -24,7 +36,7 @@ describe('Form: Profile', () => {
   it('should init the form options', () => {
     expect(form.formConfig).toBeDefined();
     expect(form.addressForm.formGroup).toBeDefined();
-    expect(Object.keys(form.formConfig).length).toBe(7);
+    expect(Object.keys(form.formConfig).length).toBe(8);
   });
 
   it('should init validation errors', () => {

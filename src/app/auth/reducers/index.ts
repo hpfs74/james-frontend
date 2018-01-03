@@ -52,6 +52,20 @@ export const getLoginPagePending = createSelector(
   fromLoginPage.getPending
 );
 
+export const getChangePasswordLoading = createSelector(
+  selectAuthStatusState,
+  fromAuth.getPasswordChangeLoading
+);
+
+export const getPasswordChangedStatus = createSelector(
+  selectAuthStatusState,
+  fromAuth.getPasswordChangedStatus
+);
+
+export const getPasswordChangedError = createSelector(
+  selectAuthStatusState,
+  fromAuth.getPasswordChangedError
+);
 
 /* Registration */
 

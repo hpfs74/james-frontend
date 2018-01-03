@@ -7,7 +7,7 @@ import * as forge from 'node-forge';
 import * as cuid from 'cuid';
 
 import { environment } from '@env/environment';
-import { AuthToken, RegistrationPayload, RegistrationResult } from '../models/auth';
+import { AuthToken, RegistrationPayload, RegistrationResult, PasswordPayload } from '../models/auth';
 import * as AuthUtils from '../../utils/auth.utils';
 import { Authenticate } from '../models/auth';
 import { LocalStorageService } from '../../core/services/localstorage.service';
@@ -113,6 +113,31 @@ export class AuthService {
 
     return this.play(environment.james.payloadEncryption.profile, registration)
       .map((res: Response) => res.json());
+  }
+
+  /**
+   * Change password
+   * @param {PasswordPayload} changePasswordPayload
+   * @return {Observable}
+   */
+  public changePassword(changePasswordPayload: PasswordPayload): Observable<any> {
+    const headers = new Headers();
+    headers.append('Authorization', this.getHttpAuthorizationHeader(this.clientId, this.clientSecret));
+    const body = {
+      grant_type: 'client_credentials',
+      client_id: this.clientId,
+      scope: 'basic'
+    };
+    return this.http
+      .post(this.tokenUrl, body, { headers: headers })
+      .map((res: Response) => res.json())
+      .map(body => <PayloadAuth>{access_token: body.access_token})
+      .flatMap((payload) => this.getPayloadKey(payload))
+      .flatMap((payload) => this.getEncryptedNicciKey(payload))
+      .flatMap((payload) => this.doPayloadEncryptionForPassword(environment.james.payloadEncryption.me, payload, changePasswordPayload));
+
+    // return this.play(environment.james.payloadEncryption.me, changePasswordPayload)
+    //   .map((res: Response) => res.json());
   }
 
   /**
@@ -224,7 +249,6 @@ export class AuthService {
       client_id: this.clientId,
       scope: 'basic'
     };
-
     return this.http
       .post(this.tokenUrl, body, { headers: headers })
       .map((res: Response) => res.json())
@@ -295,6 +319,24 @@ export class AuthService {
     const arrayBuffer = encryptedPayload.buffer
       .slice(encryptedPayload.byteOffset, encryptedPayload.byteOffset + encryptedPayload.byteLength);
     return this.http.post(url, arrayBuffer, {
+      headers: headers,
+    });
+  }
+
+  // STEP 4 - PAYLOAD ENCRYPTION for password
+  private doPayloadEncryptionForPassword(url: string, payloadAuth: PayloadAuth, payload: any): Observable<any> {
+
+    const headers = new Headers();
+
+    headers.append('Authorization', 'Bearer ' + this.localStorageService.getAccessToken());
+    headers.append('Content-Type', 'application/octet-stream; charset=utf-8');
+    headers.append('NICCI-Key-ID', payloadAuth.id);
+    headers.append('NICCI-Key', payloadAuth.nicci_key);
+
+    const encryptedPayload = this.getAesGcmEncryptedBuffer(payload, payloadAuth.aes_key);
+    const arrayBuffer = encryptedPayload.buffer
+      .slice(encryptedPayload.byteOffset, encryptedPayload.byteOffset + encryptedPayload.byteLength);
+    return this.http.patch(url, arrayBuffer, {
       headers: headers,
     });
   }

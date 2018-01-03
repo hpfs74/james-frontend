@@ -30,7 +30,8 @@ export function reducer(state = initialState, action: Action): State {
       // Patch the store copy with new data
       // WARNING: gets overwritten on a new load action!
       return Object.assign({}, state, {
-        profile: Object.assign({}, state.profile, action.payload)
+        profile: Object.assign({}, state.profile, action.payload),
+        loading: true
       });
     }
 

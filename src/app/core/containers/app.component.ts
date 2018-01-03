@@ -131,6 +131,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   goToProfile() {
     this.toggleMenuOpen();
-    this.store$.dispatch(new router.Go({ path: ['/profile'] }));
+    this.store$.dispatch(new router.Go({ path: ['/profile-overview'] }));
   }
 }
