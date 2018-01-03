@@ -1,5 +1,6 @@
-import { LoginSuccess, Logout, StartAnonymous, RefreshTokenSuccess } from '../actions/auth';
+import { LoginSuccess, Logout, StartAnonymous, RefreshTokenSuccess, NewPassword } from '../actions/auth';
 import * as fromAuth from './auth';
+import { PasswordPayload } from '@app/auth/models/auth';
 
 describe('Auth reducer', () => {
   describe('undefined action', () => {
@@ -24,7 +25,10 @@ describe('Auth reducer', () => {
         loggedIn: true,
         loginExpired: false,
         token: token,
-        anonymous: false
+        anonymous: false,
+        passwordChangeLoading: false,
+        passwordChanged: false,
+        passwordChangeError: null
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, loginAction);
@@ -40,7 +44,10 @@ describe('Auth reducer', () => {
         loggedIn: false,
         loginExpired: false,
         token: null,
-        anonymous: false
+        anonymous: false,
+        passwordChangeLoading: false,
+        passwordChanged: false,
+        passwordChangeError: null
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, logoutAction);
@@ -56,7 +63,10 @@ describe('Auth reducer', () => {
         loggedIn: false,
         loginExpired: false,
         token: null,
-        anonymous: true
+        anonymous: true,
+        passwordChangeLoading: false,
+        passwordChanged: false,
+        passwordChangeError: null
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, startAnonymousAction);
@@ -78,7 +88,10 @@ describe('Auth reducer', () => {
         loggedIn: true,
         loginExpired: false,
         token: token,
-        anonymous: false
+        anonymous: false,
+        passwordChangeLoading: false,
+        passwordChanged: false,
+        passwordChangeError: null
       };
 
       const result = fromAuth.reducer(fromAuth.initialState, refreshAction);
@@ -86,4 +99,23 @@ describe('Auth reducer', () => {
     });
   });
 
+  describe('NEW_PASSWORD', () => {
+    it('should change password', () => {
+      const passwordPayload: PasswordPayload = { old_password: '1234', password: '12345'};
+      const changePasswordAction = new NewPassword(passwordPayload);
+
+      const expectedResult = {
+        loggedIn: false,
+        loginExpired: false,
+        token: null,
+        anonymous: false,
+        passwordChangeLoading: true,
+        passwordChanged: false,
+        passwordChangeError: null
+      };
+
+      const result = fromAuth.reducer(fromAuth.initialState, changePasswordAction);
+      expect(result).toEqual(expectedResult);
+    });
+  });
 });
