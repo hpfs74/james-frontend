@@ -52,4 +52,8 @@ export class ProfileOverviewComponent implements OnInit {
   editPassword() {
     this.store$.dispatch(new router.Go({ path: ['/profile-edit-password'] }));
   }
+
+  goBack() {
+    this.store$.dispatch(new router.Back());
+  }
 }

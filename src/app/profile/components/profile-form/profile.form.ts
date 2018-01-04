@@ -35,7 +35,7 @@ export class ProfileForm extends BaseForm {
     });
 
     this.addressForm = new AddressForm(fb);
-
+    this.addressForm.formConfig.postalCode.inputOptions.twoCols = true;
     this.formConfig = {
       avatar: {
         formControlName: 'avatar',
