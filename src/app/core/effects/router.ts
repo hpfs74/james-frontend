@@ -37,6 +37,13 @@ export class RouterEffects {
     .ofType(RouterActions.GO)
     .switchMap(() => Observable.of(new layout.CloseModal()));
 
+  @Effect({dispatch: false})
+  navigateAll$ = this.actions$
+    .ofType(RouterActions.GO,
+            RouterActions.BACK,
+            RouterActions.FORWARD)
+    .do(() => scrollToY());
+
   constructor(
     private actions$: Actions,
     private router: Router,
