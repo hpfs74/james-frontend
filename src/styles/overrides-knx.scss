@@ -108,3 +108,9 @@ knx-ir-value {
     float: right;
   }
 }
+
+.knx-combined-components {
+  .knx-form-group__label {
+    display: none;
+  }
+}

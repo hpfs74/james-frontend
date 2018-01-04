@@ -9,7 +9,6 @@ export class AddressForm {
   formGroup: FormGroup;
   formConfig: any;
   validationErrors: any;
-
   constructor(private fb: FormBuilder) {
     this.formGroup = fb.group({
       postalCode: [null, Validators.compose(
@@ -41,6 +40,7 @@ export class AddressForm {
         label: 'Postcode',
         validationErrors: this.validationErrors,
         inputOptions: {
+          twoCols: true,
           placeholder: '1234 AB',
           textMask: postalCodeMask,
           transform: postalCodeMask.decode
