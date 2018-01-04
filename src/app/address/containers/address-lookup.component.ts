@@ -44,6 +44,7 @@ export const DEFAULT_OPTIONS: HouseNumberExtensionOptions = {
       [addressPreview]="addressPreview$ | async"
       [loading]="loading$ | async"
       [loaded]="loaded$ | async"
+      [combined]="combined"
       (onAddressChange)="addressChange($event)"
       (onHouseNumberExtensionChange)="getAddress($event)">
     </knx-address>
@@ -53,7 +54,7 @@ export const DEFAULT_OPTIONS: HouseNumberExtensionOptions = {
 export class AddressLookupComponent implements OnInit, AfterViewChecked {
   @Input() addressForm: AddressForm;
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
-
+  @Input() combined: string[];
   addressPreview$: Observable<string>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;

@@ -25,12 +25,12 @@ export class AddressComponent implements OnInit {
   @Input() addressPreview: string;
   @Input() loading: boolean;
   @Input() loaded: boolean;
+  @Input() combined: string[];
 
   @Output() onAddressChange: EventEmitter<AddressLookup> = new EventEmitter();
   @Output() onHouseNumberExtensionChange: EventEmitter<AddressLookup> = new EventEmitter();
 
   mask = postalCodeMask;
-
   ngOnInit(): void {
     const postalCodeChange$ = this.addressFormGroup.get('postalCode').valueChanges;
     const houseNumberChange$ = this.addressFormGroup.get('houseNumber').valueChanges;

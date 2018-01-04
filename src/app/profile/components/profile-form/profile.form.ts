@@ -45,6 +45,7 @@ export class ProfileForm extends BaseForm {
         type: 'file',
         events: ['file-uploaded'],
         inputOptions: {
+          twoCols: true,
           placeholder: ' '
         }
       },
@@ -55,6 +56,7 @@ export class ProfileForm extends BaseForm {
         label: 'Geslacht',
         type: 'radio',
         inputOptions: {
+          twoCols: true,
           formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: [
             {
@@ -72,13 +74,19 @@ export class ProfileForm extends BaseForm {
         formControlName: 'firstName',
         formControl: this.formGroup.get('firstName'),
         validationErrors: this.validationErrors,
-        label: 'Voornaam'
+        label: 'Voornaam',
+        inputOptions: {
+          twoCols: true
+        }
       },
       lastName: {
         formControlName: 'lastName',
         formControl: this.formGroup.get('lastName'),
         validationErrors: this.validationErrors,
-        label: 'Achternaam'
+        label: 'Achternaam',
+        inputOptions: {
+          twoCols: true
+        }
       },
       birthDate: {
         formControlName: 'birthDate',
@@ -87,6 +95,7 @@ export class ProfileForm extends BaseForm {
         label: 'Geboortedatum',
         type: 'date',
         inputOptions: {
+          twoCols: true,
           decode: true
         }
       },
@@ -97,6 +106,7 @@ export class ProfileForm extends BaseForm {
         formControl: this.formGroup.get('houseHold'),
         validationErrors: this.validationErrors,
         inputOptions: {
+          twoCols: true,
           placeholder: 'Maak een keuze',
           events: ['focus'],
           items: houseHold
@@ -109,6 +119,7 @@ export class ProfileForm extends BaseForm {
         label: 'Notificaties',
         type: 'checkbox',
         inputOptions: {
+          twoCols: true,
           label: 'lk wil pushberichten ontvangen van Knab Verzekeren',
           value: 'pushNotifications'
         }
@@ -120,6 +131,7 @@ export class ProfileForm extends BaseForm {
         label: 'emailNotifications',
         type: 'radio',
         inputOptions: {
+          twoCols: true,
           formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: [
             {
