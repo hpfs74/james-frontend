@@ -217,14 +217,14 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       return null;
     }
 
-    return FormUtils.getNumbers(payload.address.number);
+    return payload.address.number_extended.number_only;
   }
 
   private normalizeAddressHouseNumberAddition(payload: any) {
     if (!payload.address) {
       return null;
     }
-    return /\d+(.*)/.exec(payload.address.number)[1] || '';
+    return payload.address.number_extended.number_extension;
   }
 
   updateSelectedCoverage(coverage: Price): void {
