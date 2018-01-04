@@ -40,7 +40,6 @@ export class AddressForm {
         label: 'Postcode',
         validationErrors: this.validationErrors,
         inputOptions: {
-          twoCols: true,
           placeholder: '1234 AB',
           textMask: postalCodeMask,
           transform: postalCodeMask.decode
