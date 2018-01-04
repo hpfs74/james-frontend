@@ -114,3 +114,9 @@ knx-ir-value {
     display: none;
   }
 }
+
+.knx-hide-password-strenght {
+  .knx-form-group__password-strength {
+    display: none;
+  }
+}
