@@ -43,6 +43,7 @@ export class PasswordForm extends BaseForm {
         type: 'password',
         showErrorMessages: true,
         inputOptions: {
+          twoCols: true,
           type: 'password',
           placeholder: 'Wachtwoord',
           hideErrors: ['pattern', 'minlength'],
@@ -62,6 +63,7 @@ export class PasswordForm extends BaseForm {
         type: 'password',
         showErrorMessages: true,
         inputOptions: {
+          twoCols: true,
           type: 'password',
           placeholder: 'Wachtwoord',
           hideErrors: ['pattern', 'minlength'],
@@ -81,6 +83,7 @@ export class PasswordForm extends BaseForm {
         type: 'password',
         showErrorMessages: true,
         inputOptions: {
+          twoCols: true,
           type: 'password',
           placeholder: 'Wachtwoord',
           hideErrors: ['pattern', 'minlength'],
