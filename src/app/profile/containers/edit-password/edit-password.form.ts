@@ -7,10 +7,8 @@ export class PasswordForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
   validationErrors = {
-    required: () => 'Dit is een verplicht veld',
-    email: () => 'Vul een geldig e-mailadres in alsjeblieft',
-    pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?',
-    matching: () => 'Passwords do not match'
+    required: () => 'Vul hier iets in alsjeblieft',
+    matching: () => 'Password do not match'
   };
 
   constructor(private fb: FormBuilder) {
@@ -20,15 +18,11 @@ export class PasswordForm extends BaseForm {
       oldPassword: [null, Validators.compose(
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
         ]
       )],
       confirmPassword: [null, Validators.compose(
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
         ]
       )],
       newPassword: [null, Validators.compose(
@@ -47,12 +41,12 @@ export class PasswordForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'current password',
         type: 'password',
-        showErrorMessages: false,
+        showErrorMessages: true,
         inputOptions: {
           type: 'password',
           placeholder: 'Wachtwoord',
           hideErrors: ['pattern', 'minlength'],
-          showPasswordStrength: true,
+          showPasswordStrength: false,
           prefix: 'knx-icon-lock',
           attributes: {
             'aria-label': 'Vul je wachtwoord in',
@@ -66,12 +60,12 @@ export class PasswordForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'confirm password',
         type: 'password',
-        showErrorMessages: false,
+        showErrorMessages: true,
         inputOptions: {
           type: 'password',
           placeholder: 'Wachtwoord',
           hideErrors: ['pattern', 'minlength'],
-          showPasswordStrength: true,
+          showPasswordStrength: false,
           prefix: 'knx-icon-lock',
           attributes: {
             'aria-label': 'Vul je wachtwoord in',
@@ -85,7 +79,7 @@ export class PasswordForm extends BaseForm {
         validationErrors: this.validationErrors,
         label: 'new  password',
         type: 'password',
-        showErrorMessages: false,
+        showErrorMessages: true,
         inputOptions: {
           type: 'password',
           placeholder: 'Wachtwoord',
