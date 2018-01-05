@@ -104,7 +104,11 @@ export class AuthEffects {
     .ofType(auth.LOGOUT)
     .exhaustMap(auth =>
       this.authService.logout()
-    );
+    )
+    .do(() => {
+      this.store$.dispatch(new auth.StartAnonymous());
+      this.store$.dispatch(new auth.LoginAnonymous());
+    });
 
   @Effect()
   scheduleRefresh$ = this.actions$
