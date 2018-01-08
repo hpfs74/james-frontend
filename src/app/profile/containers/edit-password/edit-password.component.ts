@@ -47,11 +47,11 @@ export class ProfileEditPasswordComponent implements OnInit, OnDestroy {
     this.subscription$.push(
       this.store$.select(fromAuth.getPasswordChangedError).subscribe(error => this.customError = error)
     );
-
   }
 
   ngOnInit() {
     this.form = new PasswordForm(new FormBuilder());
+    this.customError = null;
   }
 
   ngOnDestroy() {
@@ -69,6 +69,7 @@ export class ProfileEditPasswordComponent implements OnInit, OnDestroy {
     this.form.formGroup.updateValueAndValidity();
     const old_password = this.form.formGroup.get('oldPassword');
     const new_password = this.form.formGroup.get('newPassword');
+    this.customError = null;
     if (this.form.formGroup.valid) {
       if (this.passwordMatch()) {
         const action = new auth.NewPassword({old_password: old_password.value, password: new_password.value});
@@ -80,14 +81,13 @@ export class ProfileEditPasswordComponent implements OnInit, OnDestroy {
             }
           });
         }
+      } else {
+        this.form.formGroup.setErrors({matching: true});
       }
-    } else {
-      this.form.formGroup.setErrors({matching: true});
     }
   }
 
   passwordMatch(): boolean {
-    const error = { matching: true };
     const new_password = this.form.formGroup.get('newPassword');
     const confirm_password = this.form.formGroup.get('confirmPassword');
     if ( new_password.value === confirm_password.value ) {

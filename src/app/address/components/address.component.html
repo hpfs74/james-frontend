@@ -19,15 +19,15 @@
     </div>
   </div>
   <div class="row" *ngIf="combined">
-    <div class="col-md-12">
+    <div class="col-md-12 knx-combined">
       <div class="row">
         <div class="col-md-6">
           <div class="knx-combined-label">
             <span *ngFor="let key of combined; let last = last">{{ addressFormConfig[key].label }} <span *ngIf="!last">+ </span></span>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="knx-combined-components row">
+        <div class="col-md-6  knx-combined-components">
+          <div class="row">
             <div class="col-md-6 col-6" *ngFor="let key of combined">
               <knx-form-group formControlName="{{ key }}" [options]="addressFormConfig[key]"></knx-form-group>
             </div>

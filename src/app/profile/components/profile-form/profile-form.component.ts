@@ -58,10 +58,8 @@ export class ProfileFormComponent {
   }
 
   save() {
-    Object.keys(this.form.formGroup.controls).forEach(key => {
-      this.form.formGroup.get(key).markAsTouched();
-    });
-    this.form.formGroup.updateValueAndValidity();
+    FormUtils.validateForm(this.form.formGroup);
+    FormUtils.validateForm(this.form.addressForm.formGroup);
 
     if (this.form.formGroup.valid) {
       this.formSaved$.emit(Object.assign({},

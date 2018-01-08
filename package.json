@@ -48,7 +48,7 @@
     "@knx/dropdown": "0.0.218",
     "@knx/feature-toggle": "0.0.2",
     "@knx/form-control": "1.0.61",
-    "@knx/form-group": "1.0.129",
+    "@knx/form-group": "1.0.133",
     "@knx/forms": "1.0.61",
     "@knx/grid": "0.0.374",
     "@knx/input": "0.0.112",

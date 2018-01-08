@@ -13,39 +13,39 @@
         <div class="col-sm-12">
           <knx-card>
             <div class="row">
-              <div class="col-md-10 col-10">
-                <h2>My details</h2>
+              <div class="col-md-10 col-9">
+                <h2>Mijn Gegevens</h2>
               </div>
               <div class="col-md-2 col-2" *ngIf="!(savedInsurances$ | async)?.car?.insurance.length">
-                <p class="knx-edit" (click)="editProfile()">Edit</p>
+                <p class="knx-edit" (click)="editProfile()">Wijzig</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">Name</div>
+              <div class="col-md-6">Naam</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).name || '-' }}</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">Gender</div>
+              <div class="col-md-6">Geslacht</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).gender || '-' }}</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">Dob</div>
+              <div class="col-md-6">Geboortedatum</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).birthday || '-' }}</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">Address</div>
+              <div class="col-md-6">Postcode</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).address || '-' }}</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">Living situation</div>
+              <div class="col-md-6">Huishouden</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ ((profile$ | async).household | jamesTag: 'insurance_flow_household') || '-' }}</p>
               </div>
@@ -62,22 +62,22 @@
         <div class="col-sm-12">
           <knx-card>
             <div class="row">
-              <div class="col-md-10 col-10">
-                <h2>Email and password</h2>
+              <div class="col-md-10 col-9">
+                <h2>Account Instellingen</h2>
               </div>
               <div class="col-md-2">
-                <p class="knx-edit" (click)="editPassword()">Edit</p>
+                <p class="knx-edit" (click)="editPassword()">Wijzig</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">Email</div>
+              <div class="col-md-6">E-mailadres</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).emailaddress || '-' }}</p>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6">Password</div>
+              <div class="col-md-6">Wachtwoord</div>
               <div class="col-md-6">
                 <p class="knx-value">*******</p>
               </div>
