@@ -39,7 +39,7 @@ export class PasswordForm extends BaseForm {
         formControlName: 'oldPassword',
         formControl: this.formGroup.get('oldPassword'),
         validationErrors: this.validationErrors,
-        label: 'current password',
+        label: 'Huidige Wachtwoord',
         type: 'password',
         showErrorMessages: true,
         inputOptions: {
@@ -59,7 +59,7 @@ export class PasswordForm extends BaseForm {
         formControlName: 'confirmPassword',
         formControl: this.formGroup.get('confirmPassword'),
         validationErrors: this.validationErrors,
-        label: 'confirm password',
+        label: 'Bevestig je nieuwe wachtwoord',
         type: 'password',
         showErrorMessages: true,
         inputOptions: {
@@ -79,7 +79,7 @@ export class PasswordForm extends BaseForm {
         formControlName: 'newPassword',
         formControl: this.formGroup.get('newPassword'),
         validationErrors: this.validationErrors,
-        label: 'new  password',
+        label: 'Nieuw wachtwoord',
         type: 'password',
         showErrorMessages: true,
         inputOptions: {

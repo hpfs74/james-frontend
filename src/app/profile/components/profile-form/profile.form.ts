@@ -25,10 +25,20 @@ export class ProfileForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       avatar: [null],
-      gender: [{}],
-      firstName: [null, Validators.compose([Validators.maxLength(50)])],
-      lastName: [null, Validators.compose([Validators.maxLength(50)])],
-      birthDate: [null, birthDateValidator('birthDate')],
+      gender: [{}, Validators.required],
+      firstName: [null, Validators.compose([
+        Validators.required,
+        Validators.maxLength(50)])],
+      lastName: [null, Validators.compose([
+        Validators.required,
+        Validators.maxLength(50)]
+      )],
+      birthDate: [null,
+        Validators.compose([
+          Validators.required,
+          birthDateValidator('birthDate')
+        ])
+      ],
       houseHold: [null, Validators.required],
       pushNotifications: [null],
       emailNotifications: [{}],

@@ -47,11 +47,11 @@ export class ProfileEditPasswordComponent implements OnInit, OnDestroy {
     this.subscription$.push(
       this.store$.select(fromAuth.getPasswordChangedError).subscribe(error => this.customError = error)
     );
-
   }
 
   ngOnInit() {
     this.form = new PasswordForm(new FormBuilder());
+    this.customError = null;
   }
 
   ngOnDestroy() {
