@@ -184,9 +184,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           this.subscription$.push(this.store$.select(fromInsurance.getSelectedInsurance)
             .filter(selectedInsurance => selectedInsurance !== null).subscribe(
               selectedInsurance => {
-                // if (selectedInsurance.advice_expires_at * 1000 > new Date().getTime()) {
-                // TEMP SOLUTION TO TEST EXPIRATION ON TEST ENV
-                if (selectedInsurance.advice_expires_at * 1000 - 259200000 + 3600000 > new Date().getTime()) {
+                if (selectedInsurance.advice_expires_at * 1000 > new Date().getTime()) {
                   this.proceedToBuy();
                 } else {
                   this.store$.dispatch(new router.Go({ path: ['/car/extras'] }));
