@@ -277,6 +277,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
     FormUtils.validateForm(detailForm);
+    FormUtils.validateForm(addressForm);
 
     if (!detailForm.valid || !addressForm.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));

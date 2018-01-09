@@ -148,6 +148,7 @@ export const validateForm = function (form: FormGroup) {
   Object.keys(form.controls).forEach(key => {
     form.get(key).markAsTouched();
     form.get(key).markAsDirty();
+    form.get(key).updateValueAndValidity();
   });
   form.updateValueAndValidity();
 };
