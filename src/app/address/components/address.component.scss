@@ -24,3 +24,26 @@
     }
   }
 }
+
+.knx-combined-components {
+  padding: 0;
+
+  .row {
+    margin: 0;
+    padding: 0;
+
+    .col-md-6 {
+      padding-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .knx-combined-components {
+    .row {
+      .col-md-6 {
+        padding-left: 15px;
+      }
+    }
+  }
+}

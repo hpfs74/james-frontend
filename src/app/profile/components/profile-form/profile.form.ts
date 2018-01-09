@@ -1,11 +1,12 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { KNXPostalCodeValidator } from '@knx/form-control';
 
-import { BaseForm } from '../../shared/forms/base-form';
-import { AddressForm } from '../../address/components/address.form';
-import { nameInitialMask } from '../../utils/base-form.utils';
-import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../utils/base-form.validators';
-import { birthDateMask } from '../../utils/base-form.utils';
+import { BaseForm } from '@app/shared/forms/base-form';
+import { AddressForm } from '@app/address/components/address.form';
+import { nameInitialMask } from '@app/utils/base-form.utils';
+import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '@app/utils/base-form.validators';
+import { birthDateMask } from '@app/utils/base-form.utils';
+import { UIPair } from '@app/core/models/ui-pair';
 
 export class ProfileForm extends BaseForm {
   formGroup: FormGroup;
@@ -19,21 +20,32 @@ export class ProfileForm extends BaseForm {
     birthDate: () => 'Vul een geldige geboortedatum in'
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
     super();
 
     this.formGroup = this.fb.group({
       avatar: [null],
-      gender: [{}],
-      firstName: [null, Validators.compose([Validators.maxLength(50)])],
-      lastName: [null, Validators.compose([Validators.maxLength(50)])],
-      birthDate: [null, birthDateValidator('birthDate')],
+      gender: [{}, Validators.required],
+      firstName: [null, Validators.compose([
+        Validators.required,
+        Validators.maxLength(50)])],
+      lastName: [null, Validators.compose([
+        Validators.required,
+        Validators.maxLength(50)]
+      )],
+      birthDate: [null,
+        Validators.compose([
+          Validators.required,
+          birthDateValidator('birthDate')
+        ])
+      ],
+      houseHold: [null, Validators.required],
       pushNotifications: [null],
-      emailNotifications: [null],
+      emailNotifications: [{}],
     });
 
     this.addressForm = new AddressForm(fb);
-
+    this.addressForm.formConfig.postalCode.inputOptions.twoCols = true;
     this.formConfig = {
       avatar: {
         formControlName: 'avatar',
@@ -43,6 +55,7 @@ export class ProfileForm extends BaseForm {
         type: 'file',
         events: ['file-uploaded'],
         inputOptions: {
+          twoCols: true,
           placeholder: ' '
         }
       },
@@ -53,6 +66,7 @@ export class ProfileForm extends BaseForm {
         label: 'Geslacht',
         type: 'radio',
         inputOptions: {
+          twoCols: true,
           formGroupModifiers: ['knx-form-group__wrap--spread'],
           items: [
             {
@@ -70,13 +84,19 @@ export class ProfileForm extends BaseForm {
         formControlName: 'firstName',
         formControl: this.formGroup.get('firstName'),
         validationErrors: this.validationErrors,
-        label: 'Voornaam'
+        label: 'Voornaam',
+        inputOptions: {
+          twoCols: true
+        }
       },
       lastName: {
         formControlName: 'lastName',
         formControl: this.formGroup.get('lastName'),
         validationErrors: this.validationErrors,
-        label: 'Achternaam'
+        label: 'Achternaam',
+        inputOptions: {
+          twoCols: true
+        }
       },
       birthDate: {
         formControlName: 'birthDate',
@@ -85,7 +105,21 @@ export class ProfileForm extends BaseForm {
         label: 'Geboortedatum',
         type: 'date',
         inputOptions: {
+          twoCols: true,
           decode: true
+        }
+      },
+      houseHold: {
+        formControlName: 'houseHold',
+        label: 'Wat is je gezinssituatie?',
+        type: 'select',
+        formControl: this.formGroup.get('houseHold'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          twoCols: true,
+          placeholder: 'Maak een keuze',
+          events: ['focus'],
+          items: houseHold
         }
       },
       pushNotifications: {
@@ -95,6 +129,7 @@ export class ProfileForm extends BaseForm {
         label: 'Notificaties',
         type: 'checkbox',
         inputOptions: {
+          twoCols: true,
           label: 'lk wil pushberichten ontvangen van Knab Verzekeren',
           value: 'pushNotifications'
         }
@@ -103,11 +138,21 @@ export class ProfileForm extends BaseForm {
         formControlName: 'emailNotifications',
         formControl: this.formGroup.get('emailNotifications'),
         validationErrors: this.validationErrors,
-        label: '',
-        type: 'checkbox',
+        label: 'emailNotifications',
+        type: 'radio',
         inputOptions: {
-          label: 'Houd mij via e-mail op de hoogte van het laatste nieuws en persoonlijke aanbiedingen',
-          value: 'emailNotifications'
+          twoCols: true,
+          formGroupModifiers: ['knx-form-group__wrap--spread'],
+          items: [
+            {
+              label: 'Yes',
+              value: true
+            },
+            {
+              label: 'No',
+              value: false
+            }
+          ]
         }
       },
     };

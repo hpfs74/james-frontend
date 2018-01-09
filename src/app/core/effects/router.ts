@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import * as RouterActions from '../actions/router';
 
 import * as layout from '../actions/layout';
+import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 @Injectable()
 export class RouterEffects {
@@ -18,8 +19,10 @@ export class RouterEffects {
   navigate$ = this.actions$
     .ofType(RouterActions.GO)
     .map((action: RouterActions.Go) => action.payload)
-    .do(({ path, query: queryParams, extras }) =>
-      this.router.navigate(path, { queryParams, ...extras }));
+    .do(({ path, query: queryParams, extras }) => {
+      scrollToY();
+      return this.router.navigate(path, { queryParams, ...extras });
+    });
 
   @Effect({ dispatch: false })
   navigateBack$ = this.actions$.ofType(RouterActions.BACK)
@@ -33,6 +36,13 @@ export class RouterEffects {
   navigateModal$ = this.actions$
     .ofType(RouterActions.GO)
     .switchMap(() => Observable.of(new layout.CloseModal()));
+
+  @Effect({dispatch: false})
+  navigateAll$ = this.actions$
+    .ofType(RouterActions.GO,
+            RouterActions.BACK,
+            RouterActions.FORWARD)
+    .do(() => scrollToY());
 
   constructor(
     private actions$: Actions,

@@ -8,8 +8,10 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ChatStreamModule } from '../components/knx-chat-stream/chat-stream.module';
 import { ProfileService } from './services/profile.service';
 
-import { ProfileComponent } from './containers/profile.component';
-import { ProfileEditComponent } from './components/profile-edit.component';
+import { ProfileEditComponent } from './containers/edit/edit.component';
+import { ProfileOverviewComponent } from './containers/overview/overview.component';
+import { ProfileEditPasswordComponent } from './containers/edit-password/edit-password.component';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 
 import { ProfileEffects } from './effects/profile';
 import { SettingsEffects } from './effects/settings';
@@ -29,8 +31,10 @@ import { reducers } from './reducers';
     ])
   ],
   declarations: [
-    ProfileComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    ProfileFormComponent,
+    ProfileOverviewComponent,
+    ProfileEditPasswordComponent
   ],
   providers: [
     ProfileService

@@ -3,7 +3,7 @@ import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { TagsService } from '../../../../../core/services/tags.service';
+import { TagsService } from '@app/core/services/tags.service';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/take';
@@ -13,24 +13,24 @@ import 'rxjs/add/operator/map';
 
 import * as cuid from 'cuid';
 import * as car from '../../../../actions/car';
-import * as fromRoot from '../../../../../reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
+import * as fromRoot from '@app/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
 import * as fromCar from '../../../../reducers';
-import * as fromAddress from '../../../../../address/reducers';
-import * as assistant from '../../../../../core/actions/assistant';
-import * as advice from '../../../../../insurance/actions/advice';
+import * as fromAddress from '@app/address/reducers';
+import * as assistant from '@app/core/actions/assistant';
+import * as advice from '@app/insurance/actions/advice';
 import * as coverage from '../../../../actions/coverage';
 import * as compare from '../../../../actions/compare';
-import * as FormUtils from '../../../../../utils/base-form.utils';
+import * as FormUtils from '@app/utils/base-form.utils';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
 
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
 import { CarDetailForm } from './car-detail.form';
-import { AddressForm } from '../../../../../address/components/address.form';
+import { AddressForm } from '@app/address/components/address.form';
 import { Car, CarCoverageRecommendation, CarCompare } from '../../../../models';
-import { Price } from '../../../../../shared/models';
-import { Address } from '../../../../../address/models';
+import { Price } from '@app/shared/models';
+import { Address } from '@app/address/models';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 @Component({
@@ -217,14 +217,14 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       return null;
     }
 
-    return FormUtils.getNumbers(payload.address.number);
+    return payload.address.number_extended.number_only;
   }
 
   private normalizeAddressHouseNumberAddition(payload: any) {
     if (!payload.address) {
       return null;
     }
-    return /\d+(.*)/.exec(payload.address.number)[1] || '';
+    return payload.address.number_extended.number_extension;
   }
 
   updateSelectedCoverage(coverage: Price): void {

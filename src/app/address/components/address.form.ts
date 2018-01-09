@@ -9,7 +9,6 @@ export class AddressForm {
   formGroup: FormGroup;
   formConfig: any;
   validationErrors: any;
-
   constructor(private fb: FormBuilder) {
     this.formGroup = fb.group({
       postalCode: [null, Validators.compose(

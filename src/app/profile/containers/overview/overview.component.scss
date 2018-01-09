@@ -1,0 +1,19 @@
+@import '~styles/base.scss';
+
+.knx-value {
+  color: $knab-dark-gray;
+  overflow: hidden;
+}
+
+.knx-edit {
+  color: $knab-primary-blue;
+
+  &:hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+hr {
+  border-top: 1px solid $knab-primary-gray;
+}

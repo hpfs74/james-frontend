@@ -17,7 +17,7 @@ export const routes: Routes = [
     loadChildren: './car/car.module#CarModule'
   },
   {
-    path: 'account',
+    path: 'profile',
     canActivateChild: [AuthGuard],
     loadChildren: './profile/profile.module#ProfileModule'
   },
