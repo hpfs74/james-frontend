@@ -35,8 +35,8 @@ export class ProfileFormComponent {
       if (value.number && value.postcode) {
         this.form.addressForm.formGroup.patchValue({
           postalCode: value.postcode,
-          houseNumber: value.number,
-          houseNumberExtension: value.number_extended ? value.number_extended.number_letter : ''
+          houseNumber: this.normalizeAddressHouseNumber(value),
+          houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
         }, { emitEvent: false });
         FormUtils.validateForm(this.form.addressForm.formGroup);
       }
@@ -67,5 +67,20 @@ export class ProfileFormComponent {
         this.form.addressForm.formGroup.value,
         { address: this.address }));
     }
+  }
+
+  private normalizeAddressHouseNumber(payload: Profile) {
+    if (!payload.number_extended) {
+      return null;
+    }
+
+    return payload.number_extended.number_only;
+  }
+
+  private normalizeAddressHouseNumberAddition(payload: Profile) {
+    if (!payload.number_extended) {
+      return null;
+    }
+    return payload.number_extended.number_extension;
   }
 }
