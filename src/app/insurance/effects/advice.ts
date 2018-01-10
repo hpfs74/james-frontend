@@ -29,11 +29,15 @@ export class AdviceEffects {
   @Effect()
   saveAdvice$: Observable<Action> = this.actions$
     .ofType(advice.SAVE_LATEST_ADVICE)
+    .map((action: advice.SaveLatest) => action.payload)
     .withLatestFrom(this.store$, (payload, state: any) => {
       const advice = state.insurance.advice;
 
       if (advice.selectedId) {
-        return advice.advice[advice.selectedId];
+        let adviceToSave = advice.advice[advice.selectedId];
+        adviceToSave.insurance = payload._id;
+        adviceToSave.location_info = adviceToSave.address;
+        return adviceToSave;
       }
     })
     .switchMap((adviceData) => {

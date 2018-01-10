@@ -41,6 +41,12 @@ export class InsuranceService {
     .map(res => res.json());
   }
 
+  public saveInsurance(insuranceData: string): Observable<any> {
+    const headers = this.headers;
+    return this.authHttp.post(`${environment.james.profileCarInsurances}`, insuranceData, { headers })
+      .map(res => res.json());
+  }
+
   public getProfileInsurances(): Observable<any> {
     const headers = this.headers;
     return this.authHttp.get(environment.james.profileInsurances, { headers })

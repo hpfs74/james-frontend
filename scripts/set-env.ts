@@ -127,6 +127,7 @@ function getContent(environment: string) {
       token: '${getEnvVar('JAMES_API_TOKEN')}',
       profile: '${getEnvVar('JAMES_API_PROFILE')}',
       profileInsurances: '${getEnvVar('JAMES_API_PROFILE_INSURANCES')}',
+      profileCarInsurances: '${getEnvVar('JAMES_API_PROFILE_CAR_INSURANCES')}',
       auth: '${getEnvVar('JAMES_API_AUTH')}',
       address: '${getEnvVar('JAMES_API_ADDRESS')}',
       suggestion: '${getEnvVar('JAMES_API_SUGGESTION')}',

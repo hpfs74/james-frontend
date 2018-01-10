@@ -144,6 +144,11 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       { dekking: this.getDekkingText(value.adviceInfo.coverage) },
       this.getUpdatedProfile());
 
+    // use the data from saved advice if profile is empty
+    if (!flatData.number_extended) {
+      flatData.number_extended = value.adviceInfo.location_info.number_extended;
+    }
+
     const proposalRequest = new CarProposalHelper();
     const proposalData: Proposal = {
       advice_item_id: value.insuranceInfo.advice_item_id,

@@ -2,14 +2,14 @@ import { Action } from '@ngrx/store';
 import { InsuranceAdvice } from '../models/insurance-advice';
 import { CarInsurance } from '../../car/models/car-insurance';
 
-export const ADD_ADVICE =       '[Advice] Add';
-export const UPDATE_ADVICE =    '[Advice] Update';
-export const SELECT_ADVICE =    '[Advice] Select';
-export const RESET_ADVICE =     '[Advice] Reset';
+export const ADD_ADVICE =               '[Advice] Add';
+export const UPDATE_ADVICE =            '[Advice] Update';
+export const SELECT_ADVICE =            '[Advice] Select';
+export const RESET_ADVICE =             '[Advice] Reset';
 
-export const GET_ADVICE =       '[Advice] Get';
-export const GET_SUCCESS =      '[Advice] Get Success';
-export const GET_FAILURE =      '[Advice] Get Failure';
+export const GET_ADVICE =               '[Advice] Get';
+export const GET_SUCCESS =              '[Advice] Get Success';
+export const GET_FAILURE =              '[Advice] Get Failure';
 
 export const SAVE_LATEST_ADVICE =       '[Advice] Save Latest';
 export const SAVE_LATEST_SUCCESS =      '[Advice] Save Latest Success';
@@ -54,6 +54,8 @@ export class GetFailure implements Action {
 
 export class SaveLatest implements Action {
   readonly type = SAVE_LATEST_ADVICE;
+
+  constructor(public payload: any) {}
 }
 
 export class SaveLatestSuccess implements Action {
