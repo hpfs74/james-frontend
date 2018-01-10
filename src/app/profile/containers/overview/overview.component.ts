@@ -56,4 +56,8 @@ export class ProfileOverviewComponent implements OnInit {
   goBack() {
     this.store$.dispatch(new router.Back());
   }
+
+  deleteProfile() {
+    this.store$.dispatch(new profile.DeleteAction());
+  }
 }

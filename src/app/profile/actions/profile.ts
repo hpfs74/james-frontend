@@ -1,19 +1,22 @@
 import { Action } from '@ngrx/store';
 import { Profile } from '../models/profile';
 
-export const LOAD_PROFILE_REQUEST =   '[Profile] Load Request';
-export const LOAD_PROFILE_SUCCESS =   '[Profile] Load Success';
-export const LOAD_PROFILE_FAILURE =      '[Profile] Load Failure';
+export const LOAD_PROFILE_REQUEST   = '[Profile] Load Request';
+export const LOAD_PROFILE_SUCCESS   = '[Profile] Load Success';
+export const LOAD_PROFILE_FAILURE   = '[Profile] Load Failure';
 
-export const UPDATE_PROFILE =         '[Profile] Update (Local)';
+export const UPDATE_PROFILE         = '[Profile] Update (Local)';
+export const DELETE_PROFILE         = '[Profile] Delete';
+export const DELETE_SUCCESS_PROFILE = '[Profile] Delete Success';
+export const DELETE_FAIL_PROFILE    = '[Profile] Delete Fail';
 
-export const SAVE_PROFILE_REQUEST =   '[Profile] Save Request';
-export const SAVE_PROFILE_SUCCESS =   '[Profile] Save Success';
-export const SAVE_PROFILE_FAILURE =      '[Profile] Save Fail';
+export const SAVE_PROFILE_REQUEST   = '[Profile] Save Request';
+export const SAVE_PROFILE_SUCCESS   = '[Profile] Save Success';
+export const SAVE_PROFILE_FAILURE   = '[Profile] Save Fail';
 
 export const UPDATE_ADDRESS_REQUEST = '[Profile] Update Address Request';
 export const UPDATE_ADDRESS_SUCCESS = '[Profile] Update Address Success';
-export const UPDATE_ADDRESS_FAILURE =    '[Profile] Update Address Failure';
+export const UPDATE_ADDRESS_FAILURE = '[Profile] Update Address Failure';
 
 
 export class LoadAction implements Action {
@@ -36,6 +39,22 @@ export class UpdateAction implements Action {
   readonly type = UPDATE_PROFILE;
 
   constructor(public payload: any) { }
+}
+
+export class DeleteAction implements Action {
+  readonly type = DELETE_PROFILE;
+}
+
+export class DeleteSuccessAction implements Action {
+  readonly type = DELETE_SUCCESS_PROFILE;
+
+  constructor(public payload: Profile) { }
+}
+
+export class DeleteFailAction implements Action {
+  readonly type = DELETE_FAIL_PROFILE;
+
+  constructor(public payload: Profile) { }
 }
 
 export class SaveAction implements Action {
@@ -80,6 +99,9 @@ export type All
   | LoadSuccessAction
   | LoadFailAction
   | UpdateAction
+  | DeleteAction
+  | DeleteSuccessAction
+  | DeleteFailAction
   | SaveAction
   | SaveSuccessAction
   | SaveFailAction
