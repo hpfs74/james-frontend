@@ -27,6 +27,26 @@ export class AdviceEffects {
     });
 
   @Effect()
+  saveAdvice$: Observable<Action> = this.actions$
+    .ofType(advice.SAVE_LATEST_ADVICE)
+    .map((action: advice.SaveLatest) => action.payload)
+    .withLatestFrom(this.store$, (payload, state: any) => {
+      const advice = state.insurance.advice;
+
+      if (advice.selectedId) {
+        let adviceToSave = advice.advice[advice.selectedId];
+        adviceToSave.insurance = payload._id;
+        adviceToSave.location_info = adviceToSave.address;
+        return adviceToSave;
+      }
+    })
+    .switchMap((adviceData) => {
+      return this.adviceService.saveAdvice(adviceData)
+        .map((res: Response) => new advice.SaveLatestSuccess(res))
+        .catch(error => Observable.of(new advice.SaveLatestFailure(error)));
+    });
+
+  @Effect()
   removeAdvice$: Observable<Action> = this.actions$
     .ofType(advice.REMOVE_LATEST_INSURANCE_ADVICE)
     .withLatestFrom(this.store$, (payload, state: any) => {

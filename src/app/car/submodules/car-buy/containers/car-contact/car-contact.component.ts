@@ -13,6 +13,7 @@ import * as assistant from '@app/core/actions/assistant';
 import * as router from '@app/core/actions/router';
 import * as car from '@app/car/actions/car';
 import * as advice from '@app/insurance/actions/advice';
+import * as insurance from '@app/insurance/actions/insurance';
 import * as compare from '@app/car/actions/compare';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
@@ -64,6 +65,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     this.subscription$.push(
       this.advice$.subscribe(advice => this.setAdvice(advice))
     );
+    this.store$.dispatch(new insurance.SaveLatest());
     this.initFormWithProfile();
   }
 
