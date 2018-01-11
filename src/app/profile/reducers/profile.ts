@@ -51,12 +51,6 @@ export function reducer(state = initialState, action: Action): State {
 
     case ProfileActions.DELETE_PROFILE: {
       return Object.assign({}, state, {
-        loading: true
-      });
-    }
-
-    case ProfileActions.DELETE_PROFILE: {
-      return Object.assign({}, state, {
         loading: true,
         loaded: false
       });
