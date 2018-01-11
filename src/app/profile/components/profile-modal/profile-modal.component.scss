@@ -1,0 +1,17 @@
+@import '~styles/base.scss';
+
+.knx-center {
+  h2 {
+    text-align: center;
+    margin-top: 0;
+  }
+
+  p {
+    text-align: center;
+    font-family: $font-family-base;
+  }
+}
+
+button {
+  width: 100%;
+}

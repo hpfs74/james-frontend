@@ -55,7 +55,7 @@
     "@knx/loader": "1.0.58",
     "@knx/locale": "1.0.58",
     "@knx/message": "1.0.127",
-    "@knx/modal": "0.0.327",
+    "@knx/modal": "0.0.345",
     "@knx/password-strength": "0.0.50",
     "@knx/postal-code-input": "3.0.52",
     "@knx/price-table": "0.0.10",

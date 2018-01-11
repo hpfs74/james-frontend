@@ -19,6 +19,7 @@ import * as assistant from '@app/core/actions/assistant';
 import * as profile from '../../actions/profile';
 import * as settings from '../../actions/settings';
 import * as fromInsurance from '@app/insurance/reducers';
+import * as layout from '@app/core/actions/layout';
 
 @Component({
   templateUrl: 'overview.component.html',
@@ -58,6 +59,6 @@ export class ProfileOverviewComponent implements OnInit {
   }
 
   deleteProfile() {
-    this.store$.dispatch(new profile.DeleteAction());
+    this.store$.dispatch(new layout.OpenModal('deleteProfileModal'));
   }
 }
