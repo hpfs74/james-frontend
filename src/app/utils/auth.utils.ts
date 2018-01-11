@@ -33,3 +33,15 @@ export function isTokenExists(tokenName: string): boolean {
   const token: string = localStorage.getItem(tokenName);
   return !!token;
 }
+
+// TODO this should be changed later, all translations should go trough one place
+export function translatePasswordMessages(errorCode: string): string {
+  const errorMapping = {
+    'old_password_invalid': 'Je huidige wachtwoord is niet geldig',
+    'password_already_used': 'De wijziging is niet gelukt, het wachtwoord kan niet hetzelfde \
+    zijn als je vorige 8 wachtwoorden. Verzin alsjeblieft een nieuw wachtwoord',
+    'passwords_are_the_same': 'De wijziging is niet gelukt, het wachtwoord kan niet hetzelfde \
+     zijn als je vorige 8 wachtwoorden. Verzin alsjeblieft een nieuw wachtwoord'
+  };
+  return errorMapping[errorCode] ? errorMapping[errorCode] : '';
+}

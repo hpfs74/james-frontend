@@ -23,6 +23,7 @@ import * as auth from '../actions/auth';
 import * as profile from '../../profile/actions/profile';
 import * as insurance from '../../insurance/actions/insurance';
 import * as layout from '../../core/actions/layout';
+import { translatePasswordMessages } from '@app/utils/auth.utils';
 
 @Injectable()
 export class AuthEffects {
@@ -72,7 +73,6 @@ export class AuthEffects {
         })
     );
 
-  passwordChanging: boolean;
   @Effect()
   newPassword = this.actions$
     .ofType(auth.NEW_PASSWORD)
@@ -85,7 +85,8 @@ export class AuthEffects {
         })
         .catch((error) => {
           let errorText = JSON.parse(error.text()) || error;
-          return Observable.of(new auth.NewPasswordError(errorText.error_description || errorText));
+          return Observable.of(new auth.NewPasswordError( translatePasswordMessages(errorText.error)
+           || translatePasswordMessages(errorText)));
         })
     );
 
