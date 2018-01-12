@@ -1,20 +1,20 @@
 <div class="container knx-container-thank-you">
     <div class="row">
-        <div class="col-sm-4 push-sm-8">
-          <div class="knx-wizard__sidebar--sticky">
-            <knx-chat-stream #knxChatStream
-            [options]="chatConfig$ | async"
-            [messages]="chatMessages$ | async">
-            </knx-chat-stream>
-          </div>
-        </div>
-        <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
-          <knx-thank-you title="Autoverzekering aangevraagd!"
-            insuranceType="autoverzekering"
-            [phone]="content.phone.label"
-            [phoneLink]="content.phone.link"
-            [email]="email$ | async">
-          </knx-thank-you>
-        </div>
+      <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+        <knx-thank-you title="Autoverzekering aangevraagd!"
+        insuranceType="autoverzekering"
+        [phone]="content.phone.label"
+        [phoneLink]="content.phone.link"
+        [email]="email$ | async">
+      </knx-thank-you>
     </div>
+    <div class="col-sm-4 push-sm-8">
+      <div class="knx-wizard__sidebar--sticky">
+        <knx-chat-stream #knxChatStream
+        [options]="chatConfig$ | async"
+        [messages]="chatMessages$ | async">
+        </knx-chat-stream>
+      </div>
+    </div>
+  </div>
 </div>
