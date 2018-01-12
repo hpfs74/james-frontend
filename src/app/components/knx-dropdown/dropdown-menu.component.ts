@@ -10,7 +10,8 @@ import {
   transition,
   animate,
   keyframes,
-  state
+  state,
+  HostListener
 } from '@angular/core';
 
 import { DROPDOWN_ACTIONS, arrowKeysHandler } from './dropdown-actions';
@@ -105,6 +106,11 @@ export class DropdownMenuComponent {
     handleKeypress: undefined
   };
 
+  @HostListener('window:mousedown', [])
+  onWindowMouseDown() {
+    this.hide();
+  }
+
   constructor(public state: DropdownStateService,
     private element: ElementRef,
     private renderer: Renderer) { }
@@ -127,14 +133,14 @@ export class DropdownMenuComponent {
    * @desc hides menu
    */
   public hide(): void {
-    this.state.menuState.isVisible = false;
-
-    // reset selected item state
-    this.state.dropdownState.unselect();
-
-    // call function to unlisten
-    this.listeners.arrowHandler();
-    this.listeners.handleKeypress();
+    if (this.state.menuState.isVisible) {
+      this.state.menuState.isVisible = false;
+      // reset selected item state
+      this.state.dropdownState.unselect();
+      // call function to unlisten
+      this.listeners.arrowHandler();
+      this.listeners.handleKeypress();
+    }
   }
 
   /**
