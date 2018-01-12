@@ -250,7 +250,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
         value.coverage || value.gender || value.active_loan) {
         this.form.formGroup.patchValue(Object.assign({}, {
           licensePlate: value.license || null,
-          claimFreeYears: value.claim_free_years || null,
+          claimFreeYears: value.claim_free_years !== 0 ? value.claim_free_years || null : 0,
           houseHold: value.household_status || null,
           loan: !!value.active_loan,
           gender: value.gender ? value.gender : null,
