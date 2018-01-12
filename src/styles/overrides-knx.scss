@@ -114,3 +114,7 @@ knx-ir-value {
     display: none;
   }
 }
+
+.knx-wizard__sidebar--sticky {
+  z-index: 1;
+}
