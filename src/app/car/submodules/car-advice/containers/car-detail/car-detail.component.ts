@@ -259,9 +259,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
         if (value.date_of_birth) {
           let dob = new Date(value.date_of_birth);
-          this.form.formGroup.get('birthDate').setValue(
-            value.date_of_birth ? `${dob.getDate()} / ${dob.getMonth() + 1} / ${dob.getFullYear()}` : null
-          );
+          this.form.formGroup.get('birthDate').setValue(dob);
         }
 
         // give address-lookup component time to set AsyncValidators before validate it
