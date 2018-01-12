@@ -1,6 +1,6 @@
 <div class="container knx-container-thank-you">
     <div class="row">
-      <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+      <div class="col-sm-8" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
         <knx-thank-you title="Autoverzekering aangevraagd!"
         insuranceType="autoverzekering"
         [phone]="content.phone.label"
@@ -8,7 +8,7 @@
         [email]="email$ | async">
       </knx-thank-you>
     </div>
-    <div class="col-sm-4 push-sm-8">
+    <div class="col-sm-4">
       <div class="knx-wizard__sidebar--sticky">
         <knx-chat-stream #knxChatStream
         [options]="chatConfig$ | async"

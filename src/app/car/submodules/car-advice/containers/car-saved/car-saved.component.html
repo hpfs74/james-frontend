@@ -9,10 +9,10 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-8 pull-sm-4" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+    <div class="col-sm-8" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
       <knx-saved (onNewAdvice)="startNewAdvice()" title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
     </div>
-    <div class="col-sm-4 push-sm-8">
+    <div class="col-sm-4">
       <div class="knx-wizard__sidebar--sticky">
         <knx-chat-stream #knxChatStream
             [options]="chatConfig$ | async"
