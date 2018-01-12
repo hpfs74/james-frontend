@@ -21,6 +21,10 @@ import * as settings from '../../actions/settings';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as layout from '@app/core/actions/layout';
 
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+
 @Component({
   templateUrl: 'overview.component.html',
   styleUrls: ['./overview.component.scss']
@@ -60,5 +64,19 @@ export class ProfileOverviewComponent implements OnInit {
 
   deleteProfile() {
     this.store$.dispatch(new layout.OpenModal('deleteProfileModal'));
+  }
+
+  hasPurchasedInsurances(): Observable<boolean> {
+    return this.savedInsurances$
+        .filter(purchasedInsurances => purchasedInsurances !== null)
+        .take(1)
+        .map(purchasedInsurances => {
+          const insurances = purchasedInsurances.car.insurance;
+          if (insurances.length && insurances.filter(insurance =>
+            (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+            return true;
+          }
+          return false;
+      });
   }
 }
