@@ -8,7 +8,7 @@ export class PasswordForm extends BaseForm {
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
   validationErrors = {
     required: () => 'Vul hier iets in alsjeblieft',
-    matching: () => 'Password do not match'
+    matching: () => 'Wachtwoorden komen niet overeen'
   };
 
   constructor(private fb: FormBuilder) {
