@@ -119,7 +119,8 @@ function getContent(environment: string) {
       enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')}
     },
     external: {
-      login: '${getEnvVar('LOGIN')}'
+      login: '${getEnvVar('LOGIN')}',
+      static: '${getEnvVar('STATIC_PAGE_URL')}'
     },
     james: {
       forgetPassword: '${forgetPasswordLink}',

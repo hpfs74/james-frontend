@@ -58,6 +58,15 @@ export class ProfileEffects {
         .catch(error => Observable.of(new profile.UpdateAddressFailAction(error)));
     });
 
+  @Effect()
+  deleteProfile: Observable<any> = this.action$
+    .ofType(profile.DELETE_PROFILE)
+    .switchMap(() => {
+      return this.profileService.deleteProfile()
+      .map((payload) => new profile.DeleteSuccessAction(payload))
+      .catch(error => Observable.of(new profile.DeleteFailAction(error)));
+    });
+
   constructor(private action$: Actions, private profileService: ProfileService, private authService: AuthService) {
   }
 }

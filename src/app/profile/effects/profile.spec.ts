@@ -114,7 +114,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: true,
         loaded: false,
-        profile: {}
+        profile: {},
+        deleteStatus: false,
+        error: null
       };
 
       const loadAction = new profile.LoadAction();
@@ -129,7 +131,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: false,
         loaded: true,
-        profile: this.profileExample
+        profile: this.profileExample,
+        deleteStatus: false,
+        error: null
       };
 
       const loadSuccessAction = new profile.LoadSuccessAction(this.profileExample);
@@ -144,7 +148,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: false,
         loaded: false,
-        profile: {}
+        profile: {},
+        deleteStatus: false,
+        error: null
       };
 
       const loadFailAction = new profile.LoadFailAction(this.profileExample);
@@ -159,7 +165,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: true,
         loaded: false,
-        profile: this.profileExample
+        profile: this.profileExample,
+        deleteStatus: false,
+        error: null
       };
 
       const updateAction = new profile.UpdateAction(this.profileExample);
@@ -174,7 +182,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: true,
         loaded: false,
-        profile: {}
+        profile: {},
+        deleteStatus: false,
+        error: null
       };
 
       const saveAction = new profile.SaveAction(this.profileExample);
@@ -189,7 +199,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: false,
         loaded: true,
-        profile: this.profileExample
+        profile: this.profileExample,
+        deleteStatus: false,
+        error: null
       };
 
       const saveSuccessAction = new profile.SaveSuccessAction(this.profileExample);
@@ -204,7 +216,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: false,
         loaded: false,
-        profile: {}
+        profile: {},
+        deleteStatus: false,
+        error: null
       };
 
       const saveFailAction = new profile.SaveFailAction(this.profileExample);
@@ -219,7 +233,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: true,
         loaded: false,
-        profile: {}
+        profile: {},
+        deleteStatus: false,
+        error: null
       };
 
       const updateAddressAction = new profile.UpdateAddressAction(this.profileExample);
@@ -234,7 +250,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: false,
         loaded: true,
-        profile: this.profileExample
+        profile: this.profileExample,
+        deleteStatus: false,
+        error: null
       };
 
       const updateAddressSuccessAction = new profile.UpdateAddressSuccessAction(this.profileExample);
@@ -249,7 +267,9 @@ describe('ProfileEffects', () => {
       const expectedResult = {
         loading: false,
         loaded: false,
-        profile: {}
+        profile: {},
+        deleteStatus: false,
+        error: null
       };
 
       const updateAddressFailAction = new profile.UpdateAddressFailAction(this.profileExample);

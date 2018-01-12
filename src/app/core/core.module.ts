@@ -44,6 +44,8 @@ import { GlobalErrorHandler } from './services/error-handler';
 // Feature module reducer
 import { reducers } from './reducers';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
+import { ProfileModalComponent } from '@app/profile/components/profile-modal/profile-modal.component';
+import { LayoutEffects } from '@app/core/effects/layout';
 
 export const COMPONENTS = [
   AppComponent,
@@ -51,6 +53,7 @@ export const COMPONENTS = [
   NavbarComponent,
   AppLoaderComponent,
   AuthRedirectModalComponent,
+  ProfileModalComponent
 ];
 
 @NgModule({
@@ -67,13 +70,15 @@ export const COMPONENTS = [
       RouterEffects,
       ErrorEffects,
       AssistantEffects,
-      WizardEffects
+      WizardEffects,
+      LayoutEffects
     ])
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
   entryComponents: [
-    AuthRedirectModalComponent
+    AuthRedirectModalComponent,
+    ProfileModalComponent
   ]
 })
 export class CoreModule {

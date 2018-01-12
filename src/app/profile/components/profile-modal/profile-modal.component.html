@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12 knx-center">
+    <h2>We're sorry you want to leave us.
+    <br>are you really sure?</h2>
+    <p>If so, your account will be deleted and all your saved data will be removed from all Knab services</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <button class="knx-button knx-button--secondary knx-button--ghost" (click)="cancel()">go back</button>
+  </div>
+  <div class="col-md-6">
+    <button class="knx-button knx-button--primary" [class.knx-button--pending]="pending$ | async" (click)="deleteProfile()">yes. Close account</button>
+  </div>
+</div>

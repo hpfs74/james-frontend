@@ -17,3 +17,22 @@
 hr {
   border-top: 1px solid $knab-primary-gray;
 }
+
+.knx-center--margin {
+  margin: 0 auto;
+}
+
+.knx-button--delete {
+  border-color: $knab-primary-red;
+  color: $knab-primary-red;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 4px;
+
+  &:hover {
+    background: $knab-primary-red;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}

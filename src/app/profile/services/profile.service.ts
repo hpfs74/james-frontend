@@ -8,14 +8,16 @@ import { environment } from '@env/environment';
 import { Profile } from '../models/profile';
 import { Insurance } from '../../insurance/models';
 import { Settings } from '../models/settings';
+import { LocalStorageService } from '@app/core/services';
 
 @Injectable()
 export class ProfileService {
   private baseUrl: string;
   private insurancesUrl: string;
   private headers: Headers;
+  private clientId = environment.james.payloadEncryption.client.id;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: AuthHttp, private localStorageService: LocalStorageService) {
     this.baseUrl = environment.james.profile;
     this.insurancesUrl = this.baseUrl + '/insurances';
     this.headers = new Headers();
@@ -76,5 +78,17 @@ export class ProfileService {
   public updateInsurance(insurance: Insurance): Observable<Insurance> {
     return this.http.post(`this.insurancesUrl/${insurance._id}`, JSON.stringify(insurance))
       .map((res) => res.json());
+  }
+
+  public deleteProfile(): Observable<any> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + this.localStorageService.getAccessToken());
+    headers.append('version', 'v2');
+    const body = {
+      grant_type: 'client_credentials',
+      client_id: this.clientId,
+      scope: 'basic'
+    };
+    return this.http.delete(environment.james.profile, {headers: headers}).map(res => res.json());
   }
 }

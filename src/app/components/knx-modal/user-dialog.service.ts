@@ -26,7 +26,7 @@ export class UserDialogService {
   }
 
   closeModal() {
-    this.store$.dispatch(new layout.CloseModal());
+    this.modalService.closeDialog();
     return true;
   }
 }
