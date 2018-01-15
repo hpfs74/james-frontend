@@ -108,7 +108,10 @@ export class DropdownMenuComponent {
 
   @HostListener('window:mousedown', [])
   onWindowMouseDown() {
-    this.hide();
+    // give other functions time to work before closing the menu
+    setTimeout(() => {
+      this.hide();
+    });
   }
 
   constructor(public state: DropdownStateService,
