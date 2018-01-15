@@ -36,6 +36,7 @@ export class AdviceEffects {
       if (advice.selectedId) {
         let adviceToSave = advice.advice[advice.selectedId];
         adviceToSave.insurance = payload._id;
+        adviceToSave.insurance_id = payload._id;
         adviceToSave.location_info = adviceToSave.address;
         return adviceToSave;
       }

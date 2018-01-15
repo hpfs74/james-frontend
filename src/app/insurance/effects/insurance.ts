@@ -35,21 +35,27 @@ export class InsuranceEffects {
     .ofType(insurance.SAVE_LATEST)
     .withLatestFrom(this.store$, (payload, state: any) => {
       const advice = state.insurance.advice;
+      const existedAdvices = state.insurance.insurance.savedInsurances.car.insurance_advice.filter(savedAdvice =>
+        savedAdvice._id === advice.advice[advice.selectedId]._id);
 
-      if (advice.selectedId) {
+      if (advice.selectedId && !existedAdvices.length) {
         let selectedInsurance = advice.advice[advice.selectedId];
         selectedInsurance.advice_item_id = state.insurance.advice.selectedInsurance.advice_item_id;
         return selectedInsurance;
       }
     })
     .switchMap((adviceData) => {
-      return this.insuranceService.saveInsurance(adviceData)
-        .map((res: Response) => {
-          this.store$.dispatch(new advice.SaveLatest(res));
+      if (adviceData) {
+        return this.insuranceService.saveInsurance(adviceData)
+          .map((res: Response) => {
+            this.store$.dispatch(new advice.SaveLatest(res));
 
-          return new insurance.SaveLatestSuccess(res);
-        })
-        .catch(error => Observable.of(new insurance.SaveLatestFailure(error)));
+            return new insurance.SaveLatestSuccess(res);
+          })
+          .catch(error => Observable.of(new insurance.SaveLatestFailure(error)));
+      } else {
+        return Observable.of({ type: 'NO_ACTION' });
+      }
     });
 
   constructor(private actions$: Actions,
