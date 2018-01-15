@@ -98,6 +98,7 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
   }
 
   suggestionSubscriptions() {
+    const houseExtensionValue = this.addressForm.formGroup.get('houseNumberExtension').value;
     this.store$.select(fromAddress.getSuggestion).subscribe(state => {
       this.addressForm.formConfig.houseNumberExtension.inputOptions.items = [];
       this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = true;
@@ -115,10 +116,10 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
           this.getAddress({
             postalCode: this.addressForm.formGroup.get('postalCode').value,
             houseNumber: this.addressForm.formGroup.get('houseNumber').value,
-            houseNumberExtension: ''
+            houseNumberExtension: houseExtensionValue ? houseExtensionValue : ''
           });
         }
-      } else if (!state.loading && state.error && !state.suggestion) {
+      } else if (!state.loading && !state.suggestion) {
         this.getAddress({
           postalCode: this.addressForm.formGroup.get('postalCode').value,
           houseNumber: this.addressForm.formGroup.get('houseNumber').value
