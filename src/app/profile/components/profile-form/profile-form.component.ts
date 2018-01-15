@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ProfileForm } from './profile.form';
 import { Profile, Settings } from '../../models';
 import { Address } from '@app/address/models';
 import * as FormUtils from '@app/utils/base-form.utils';
+import { AddressLookupComponent } from '@app/address/containers/address-lookup.component';
 
 @Component({
   selector: 'knx-profile-form',
@@ -12,6 +13,7 @@ import * as FormUtils from '@app/utils/base-form.utils';
 export class ProfileFormComponent {
   avatarUrl: string;
   address: Address;
+  @ViewChild('addressLookup') addressLookup: AddressLookupComponent;
   @Input() form: ProfileForm;
   @Input() pending: boolean;
 
@@ -33,12 +35,13 @@ export class ProfileFormComponent {
         .filter(key => patchObj[key] !== null));
 
       if (value.number && value.postcode) {
-        this.form.addressForm.formGroup.patchValue({
+        const addresPatchObj = {
           postalCode: value.postcode,
           houseNumber: this.normalizeAddressHouseNumber(value),
           houseNumberExtension: this.normalizeAddressHouseNumberAddition(value)
-        }, { emitEvent: false });
-        FormUtils.validateForm(this.form.addressForm.formGroup);
+        };
+        this.form.addressForm.formGroup.patchValue(addresPatchObj, { emitEvent: false });
+        this.addressLookup.addressChange(addresPatchObj);
       }
     }
   }
@@ -80,7 +83,7 @@ export class ProfileFormComponent {
       return null;
     }
 
-    return payload.number_extended.number_only;
+    return payload.number_extended.number_only.toString();
   }
 
   private normalizeAddressHouseNumberAddition(payload: Profile) {
