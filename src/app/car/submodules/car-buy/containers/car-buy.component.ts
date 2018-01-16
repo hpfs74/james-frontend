@@ -1,19 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AssistantConfig } from '../../../../core/models/assistant';
-import { ChatMessage } from '../../../../components/knx-chat-stream/chat-message';
-import { TagsService } from '../../../../core/services/tags.service';
-import { QaIdentifier } from './../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../../shared/models/qa-identifiers';
-import { KNXWizardStepRxOptions } from '../../../../components/knx-wizard-rx/knx-wizard-rx.options';
+import { AssistantConfig } from '@app/core/models/assistant';
+import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
+import { TagsService } from '@app/core/services/tags.service';
+import { QaIdentifier } from '@app/shared/models/qa-identifier';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { AsyncPipe } from '@angular/common';
 
-import * as fromRoot from '../../../reducers';
-import * as fromInsurance from '../../../../insurance/reducers';
-import * as fromCore from '../../../../core/reducers';
-import * as assistant from '../../../../core/actions/assistant';
-import * as car from '../../../../car/actions/car';
+import * as fromCar from '@app/car/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as fromCore from '@app/core/reducers';
+import * as assistant from '@app/core/actions/assistant';
+import * as car from '@app/car/actions/car';
 import * as wizardActions from '@app/core/actions/wizard';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 
@@ -31,7 +31,7 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   chatMessages$: Observable<Array<ChatMessage>>;
   advice$: Observable<any>;
 
-  constructor(private store$: Store<fromRoot.State>,
+  constructor(private store$: Store<fromCar.State>,
               private tagsService: TagsService,
               public asyncPipe: AsyncPipe,
               public knxWizardService: KNXWizardRxService) {}
