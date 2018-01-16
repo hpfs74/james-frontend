@@ -1,7 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Profile } from '../../profile/models';
+import * as fromRoot from '../../reducers';
+import * as router from '../../core/actions/router';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'knx-nav-user',
@@ -34,10 +36,10 @@ export class NavUserComponent {
   @Input() isLoggedIn = false;
   @Output() onLogOut = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private store$: Store<fromRoot.State>) { }
 
   goToProfile() {
-    this.router.navigate(['/profile-overview']);
+    this.store$.dispatch(new router.Go({ path: ['/profile-overview'] }));
   }
 
   getShortEmail(emailaddress: string) {
