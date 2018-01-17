@@ -1,7 +1,13 @@
+export class HouseDataRequest {
+  Zipcode: string;
+  HouseNumber: number;
+  HouseNumberAddition?: string;
+}
+
 /**
  * result of getHouseData
  */
-export class HouseData {
+export class HouseDataResponse {
   Zipcode: string;
   HouseNumber: number;
   HouseNumberAddition: string;

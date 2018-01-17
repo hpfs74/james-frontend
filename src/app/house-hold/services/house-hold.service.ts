@@ -4,17 +4,17 @@ import 'rxjs/add/operator/map';
 
 import { environment } from '@env/environment';
 import { HouseHoldAmountRequest, HouseHoldAmountResponse } from '@app/house-hold/models/house-hold-amount';
-import { HouseData } from '@app/house-hold/models/house-data';
+import { HouseDataResponse, HouseDataRequest } from '@app/house-hold/models/house-data';
 import { HouseHoldPremiumRequest } from '@app/house-hold/models/house-hold-premium';
 
 @Injectable()
 export class HouseHoldService {
   constructor(private http: Http) {}
 
-  public getHouseData(postcode: string, houseNumber: number, addition = '') {
+  public getHouseData(req: HouseDataRequest) {
     return this.http.get(`${environment.riskInsurance.getHouseData}?`
-      + `Zipcode=${postcode}&houseNumber=${houseNumber}&houseNumberAddition=${addition}`)
-      .map(res => <HouseData>res.json());
+      + `Zipcode=${req.Zipcode}&houseNumber=${req.HouseNumber}&houseNumberAddition=${req.HouseNumberAddition || ''}`)
+      .map(res => <HouseDataResponse>res.json());
   }
 
   public calculateHouseHoldAmount(req: HouseHoldAmountRequest) {

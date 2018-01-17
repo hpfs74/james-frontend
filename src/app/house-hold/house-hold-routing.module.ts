@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CanActivateCarFlowGuard } from '../core/services/car-guard.service';
 
-export const carRoutes: Routes = [
+export const houseHoldRoutes: Routes = [
   {
     path: '',
     loadChildren: './submodules/car-advice/car-advice.module#CarAdviceModule'
@@ -16,7 +16,7 @@ export const carRoutes: Routes = [
 ];
 @NgModule({
   imports: [
-    RouterModule.forChild(carRoutes)
+    RouterModule.forChild(houseHoldRoutes)
   ],
   exports: [
     RouterModule

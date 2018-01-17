@@ -27,9 +27,8 @@ describe('Service: HouseHold', () => {
   };
 
   const testHouseAddress = {
-    zipCode: '2273DE',
-    houseNumber: 220,
-    houseNumberAddition: ''
+    Zipode: '2273DE',
+    HouseNumber: 220
   };
 
   const mockHouseDataResponse = {
@@ -119,10 +118,7 @@ describe('Service: HouseHold', () => {
       });
 
       inject([HouseHoldService], (houseHoldService) => {
-        houseHoldService.getHouseData(
-          testHouseAddress.zipCode,
-          testHouseAddress.houseNumber,
-          testHouseAddress.houseNumberAddition)
+        houseHoldService.getHouseData(testHouseAddress)
           .subscribe((res) => {
             expect(res).toBeDefined();
             expect(res.Zipcode)
