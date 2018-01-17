@@ -56,6 +56,10 @@ export const getProfileDeleteSuccess = createSelector(
   fromProfile.getDeleteStatus
 );
 
+export const getProfileDeleteError = createSelector(
+  getProfileState,
+  fromProfile.getDeleteError
+);
 
 export const getSettingsState = createSelector(
   selectProfileState,

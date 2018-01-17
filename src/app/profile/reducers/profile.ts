@@ -60,7 +60,7 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
-        error: action.payload
+        error: action.payload.error
       });
     }
 
@@ -82,3 +82,4 @@ export const getProfile = (state: State) => state.profile;
 export const getLoading = (state: State) => state.loading;
 export const getLoaded = (state: State) => state.loaded;
 export const getDeleteStatus = (state: State) => state.deleteStatus;
+export const getDeleteError = (state: State) => state.error;

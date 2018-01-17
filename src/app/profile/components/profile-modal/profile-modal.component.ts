@@ -8,6 +8,7 @@ import { environment } from '@env/environment.prod';
 import * as fromProfile from '../../reducers';
 import * as profile from '../../actions/profile';
 import * as layout from '@app/core/actions/layout';
+import * as auth from '@app/auth/actions/auth';
 
 @Component({
   selector: 'knx-profile-modal',
@@ -18,8 +19,10 @@ import * as layout from '@app/core/actions/layout';
 export class ProfileModalComponent implements KNXModalDialog, OnDestroy {
   pending$: Observable<any>;
   subscription$: Subscription[] = [];
+  error$: Observable<string>;
   constructor(private store$: Store<fromProfile.State>) {
     this.pending$ = this.store$.select(fromProfile.getProfileDeleteLoading);
+    this.error$ = this.store$.select(fromProfile.getProfileDeleteError);
   }
   dialogInit(reference: ComponentRef<KNXModalDialog>, options?: KNXModalDialogOptions) {}
 
@@ -36,6 +39,7 @@ export class ProfileModalComponent implements KNXModalDialog, OnDestroy {
     this.subscription$.push(
       this.store$.select(fromProfile.getProfileDeleteSuccess).subscribe(deleted => {
         if (deleted) {
+          this.store$.dispatch(new auth.Logout);
           window.location.href = environment.external.static;
         }
       })

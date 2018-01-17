@@ -54,7 +54,7 @@ export class DeleteSuccessAction implements Action {
 export class DeleteFailAction implements Action {
   readonly type = DELETE_FAIL_PROFILE;
 
-  constructor(public payload: Profile) { }
+  constructor(public payload: any) { }
 }
 
 export class SaveAction implements Action {

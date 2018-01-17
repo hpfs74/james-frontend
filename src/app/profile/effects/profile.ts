@@ -64,7 +64,10 @@ export class ProfileEffects {
     .switchMap(() => {
       return this.profileService.deleteProfile()
       .map((payload) => new profile.DeleteSuccessAction(payload))
-      .catch(error => Observable.of(new profile.DeleteFailAction(error)));
+      .catch(error => {
+        let errorText = JSON.parse(error.text()) || error;
+        return Observable.of(new profile.DeleteFailAction(errorText));
+      });
     });
 
   constructor(private action$: Actions, private profileService: ProfileService, private authService: AuthService) {
