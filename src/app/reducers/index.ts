@@ -3,6 +3,9 @@ import { environment } from '@env/environment';
 
 import * as logoutActions from '../auth/actions/auth';
 
+import * as fromAddress from '../address/reducers';
+import * as fromInsurance from '../insurance/reducers';
+import * as fromCar from '../car/reducers';
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -63,10 +66,13 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 
 export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
   return function (state, action) {
-    if (action.type === logoutActions.LOGOUT) {
-      // reset to initial state
-      state = null;
-    }
+    // reset to initialstate
+    state = {
+      ...state,
+      ...fromAddress.reducers,
+      ...fromInsurance.reducers,
+      ...fromCar.reducers
+    };
     return reducer(state, action);
   };
 }
