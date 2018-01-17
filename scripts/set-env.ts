@@ -123,6 +123,7 @@ function getContent(environment: string) {
       static: '${getEnvVar('STATIC_PAGE_URL')}'
     },
     james: {
+      featureToggle: '${getEnvVar('JAMES_API_FEATURE_TOGGLE')}',
       forgetPassword: '${forgetPasswordLink}',
       key: '${getEnvVar('JAMES_API_KEY')}',
       token: '${getEnvVar('JAMES_API_TOKEN')}',
