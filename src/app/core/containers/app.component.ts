@@ -127,6 +127,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   logOut() {
     this.toggleMenuOpen();
     this.store$.dispatch(new auth.Logout);
+    this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new assistant.LoadConfigAction(this.assistantService.config));
   }
 

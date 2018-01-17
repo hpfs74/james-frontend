@@ -1,4 +1,11 @@
-import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  createSelector,
+  createFeatureSelector,
+  ActionReducer,
+  MetaReducer
+} from '@ngrx/store';
+import * as fromRouter from '@ngrx/router-store';
 import { environment } from '@env/environment';
 
 import * as logoutActions from '../auth/actions/auth';
@@ -6,6 +13,7 @@ import * as logoutActions from '../auth/actions/auth';
 import * as fromAddress from '../address/reducers';
 import * as fromInsurance from '../insurance/reducers';
 import * as fromCar from '../car/reducers';
+
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -66,13 +74,10 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 
 export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
   return function (state, action) {
-    // reset to initialstate
-    state = {
-      ...state,
-      ...fromAddress.reducers,
-      ...fromInsurance.reducers,
-      ...fromCar.reducers
-    };
+    if (action.type === logoutActions.LOGOUT) {
+      // reset to initialstate
+      state = null;
+    }
     return reducer(state, action);
   };
 }
@@ -80,8 +85,13 @@ export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
 export function resetStates(reducer: ActionReducer<State>): ActionReducer<State> {
   return function (state, action) {
     if (action.type === logoutActions.RESET_STATES) {
-      // reset to initial state
-      state = null;
+      // reset to initialstate
+      state = {
+        ...state,
+        ...fromAddress.reducers,
+        ...fromInsurance.reducers,
+        ...fromCar.reducers
+      };
     }
     return reducer(state, action);
   };
@@ -93,5 +103,5 @@ export function resetStates(reducer: ActionReducer<State>): ActionReducer<State>
  * that will be composed to form the root meta-reducer.
  */
 export const metaReducers: MetaReducer<State>[] = !environment.production
-? [logger, logout] // storeFreeze
+? [logger, logout, resetStates] // storeFreeze
 : [logout, resetStates];
