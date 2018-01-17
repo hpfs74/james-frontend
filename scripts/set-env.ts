@@ -155,6 +155,11 @@ function getContent(environment: string) {
         login: '${getEnvVar('PAYLOAD_LOGIN_URL')}',
         activation: '${getEnvVar('PAYLOAD_ACTIVATION_URL')}'
       },
+    },
+    riskInsurance: {
+      getHouseData: '${getEnvVar('RISK_INSURANCE_HOUSE_DATA')}',
+      HouseHoldAmount: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_AMOUNT')}',
+      HouseHoldPremium: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_PREMIUM')}'
     }
   };
   `;

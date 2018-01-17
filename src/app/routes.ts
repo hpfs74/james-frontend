@@ -17,6 +17,11 @@ export const routes: Routes = [
     loadChildren: './car/car.module#CarModule'
   },
   {
+    path: 'household',
+    // canActivateChild: [AuthGuard],
+    loadChildren: './house-hold/house-hold.module'
+  },
+  {
     path: 'profile',
     canActivateChild: [AuthGuard],
     loadChildren: './profile/profile.module#ProfileModule'
