@@ -44,5 +44,5 @@
       </li>
     </ul>
   </div>
-  <knx-hamburger (onHamburgerClick)="knxToggleMenu()" class="hidden-md-up"></knx-hamburger>
+  <knx-hamburger [animationState]="animationState" (onHamburgerClick)="onHamburgerClick.emit()" class="hidden-md-up"></knx-hamburger>
 </nav>

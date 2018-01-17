@@ -17,6 +17,7 @@ import * as router from '../../core/actions/router';
 })
 export class NavbarComponent implements OnInit {
   @Input() menuItems: Array<Nav>;
+  @Input() animationState: any;
   @Output() onLogOut = new EventEmitter();
   @Output() onHamburgerClick: EventEmitter<any> = new EventEmitter<any>();
   isCollapsed = true;
@@ -46,9 +47,5 @@ export class NavbarComponent implements OnInit {
 
   public register() {
     this.store$.dispatch(new router.Go({ path: ['/register'] }));
-  }
-
-  knxToggleMenu() {
-    this.onHamburgerClick.emit();
   }
 }

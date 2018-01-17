@@ -8,13 +8,14 @@ import { environment } from '@env/environment';
 import { RegistrationForm } from './registration.form';
 import { registrationError } from '../models/registration-error';
 import * as profile from '../../profile/actions/profile';
+import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 @Component({
   selector: 'knx-registration-thankyou',
   templateUrl: './registration-thankyou.component.html',
   styleUrls: ['./registration-thankyou.component.scss']
 })
-export class RegistrationThankyouComponent {
+export class RegistrationThankyouComponent implements OnInit {
   message: string;
   errorMessage: string;
 
@@ -35,5 +36,9 @@ export class RegistrationThankyouComponent {
 
   resendActivationEmail() {
     this.onSendActivation.emit(this.email);
+  }
+
+  ngOnInit() {
+    scrollToY();
   }
 }

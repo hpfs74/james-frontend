@@ -115,7 +115,8 @@ p {
   .knx-thank-you,
   .knx-saved,
   &.knx-container--status,
-  &.knx-container-stepnavigation {
+  &.knx-container-stepnavigation,
+  .knx-wizard-step-content {
     @content;
   }
 }
@@ -125,8 +126,10 @@ p {
   transition: 0.1s filter linear;
 }
 
-.backdrop-blur {
-  @include selectors {
-    filter: blur(3px);
+@media (max-width: 576px) {
+  .backdrop-blur {
+    @include selectors {
+      filter: blur(3px);
+    }
   }
 }
