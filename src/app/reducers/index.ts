@@ -1,18 +1,7 @@
-import {
-  ActionReducerMap,
-  createSelector,
-  createFeatureSelector,
-  ActionReducer,
-  MetaReducer
-} from '@ngrx/store';
-import * as fromRouter from '@ngrx/router-store';
+import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { environment } from '@env/environment';
 
 import * as logoutActions from '../auth/actions/auth';
-
-import * as fromAddress from '../address/reducers';
-import * as fromInsurance from '../insurance/reducers';
-import * as fromCar from '../car/reducers';
 
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
@@ -75,13 +64,8 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
   return function (state, action) {
     if (action.type === logoutActions.LOGOUT) {
-      // reset to initialstate
-      state = {
-        ...state,
-        ...fromAddress.reducers,
-        ...fromInsurance.reducers,
-        ...fromCar.reducers
-      };
+      // reset to initial state
+      state = null;
     }
     return reducer(state, action);
   };
@@ -90,13 +74,8 @@ export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
 export function resetStates(reducer: ActionReducer<State>): ActionReducer<State> {
   return function (state, action) {
     if (action.type === logoutActions.RESET_STATES) {
-      // reset to initialstate
-      state = {
-        ...state,
-        ...fromAddress.reducers,
-        ...fromInsurance.reducers,
-        ...fromCar.reducers
-      };
+      // reset to initial state
+      state = null;
     }
     return reducer(state, action);
   };
@@ -108,5 +87,5 @@ export function resetStates(reducer: ActionReducer<State>): ActionReducer<State>
  * that will be composed to form the root meta-reducer.
  */
 export const metaReducers: MetaReducer<State>[] = !environment.production
-? [logger, logout, resetStates] // storeFreeze
+? [logger, logout] // storeFreeze
 : [logout, resetStates];
