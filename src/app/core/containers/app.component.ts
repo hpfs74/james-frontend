@@ -52,8 +52,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private store$: Store<fromRoot.State>,
     private navigationService: NavigationService,
     private userDialogService: UserDialogService,
-    private contentConfig: ContentConfig
-  ) {
+    private contentConfig: ContentConfig) {
       this.content = contentConfig.getContent();
       this.featureToggleConfig = environment.featureToggles;
     }

@@ -68,6 +68,12 @@ import { AddressModule } from './address/address.module';
       deps: [ContentConfig],
       multi: true
     },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ContentLoader,
+      deps: [ContentConfig],
+      multi: true
+    },
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
      * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
