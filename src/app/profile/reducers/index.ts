@@ -48,7 +48,7 @@ export const getProfileDeleteLoaded = createSelector(
 
 export const getProfileDeleteLoading = createSelector(
   getProfileState,
-  fromProfile.getLoading
+  fromProfile.getDeleteLoading
 );
 
 export const getProfileDeleteSuccess = createSelector(

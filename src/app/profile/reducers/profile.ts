@@ -9,6 +9,8 @@ export interface State {
   profile: any; // TODO: change to Profile if profile is more strictly defined
   error?: any;
   deleteStatus ?: boolean;
+  deleteLoading?: boolean;
+  deleteLoaded?: boolean;
 }
 
 export const initialState: State = {
@@ -16,7 +18,9 @@ export const initialState: State = {
   loaded: false,
   profile: {},
   error: null,
-  deleteStatus: false
+  deleteStatus: false,
+  deleteLoading: false,
+  deleteLoaded: false
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -51,23 +55,23 @@ export function reducer(state = initialState, action: Action): State {
 
     case ProfileActions.DELETE_PROFILE: {
       return Object.assign({}, state, {
-        loading: true,
-        loaded: false
+        deleteLoading: true,
+        deleteLoaded: false
       });
     }
 
     case ProfileActions.DELETE_FAIL_PROFILE: {
       return Object.assign({}, state, {
-        loading: false,
-        loaded: true,
+        deleteLoading: false,
+        deleteLoaded: true,
         error: action.payload.error
       });
     }
 
     case ProfileActions.DELETE_SUCCESS_PROFILE: {
       return Object.assign({}, state, {
-        loading: false,
-        loaded: true,
+        deleteLoading: false,
+        deleteLoaded: true,
         deleteStatus: true
       });
     }
@@ -82,4 +86,5 @@ export const getProfile = (state: State) => state.profile;
 export const getLoading = (state: State) => state.loading;
 export const getLoaded = (state: State) => state.loaded;
 export const getDeleteStatus = (state: State) => state.deleteStatus;
+export const getDeleteLoading = (state: State) => state.deleteLoading;
 export const getDeleteError = (state: State) => state.error;
