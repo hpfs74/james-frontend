@@ -9,4 +9,7 @@ export class QaIdentifiers {
   public static readonly carPayment = 'payment';
   public static readonly carReporting = 'reporting';
   public static readonly carConfirm = 'confirm';
+
+  public static readonly houseHoldAdviceRoot = 'householdadvice';
+  public static readonly houseHoldLocation = 'householdlocation';
 }

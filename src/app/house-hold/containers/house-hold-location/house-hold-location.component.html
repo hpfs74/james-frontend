@@ -1,0 +1,29 @@
+<form [formGroup]="form.formGroup" class="knx-fancy-form house-hold-detail-form">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <h3>Locatie</h3>
+
+        <span>Your living insurance, exaplin why needed, and how it can help you (what are you insured for)</span>
+
+        <knx-form-group
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="houseHold"
+          [formControlName]="form.formConfig.houseHold.formControlName"
+          [options]="form.formConfig.houseHold">
+        </knx-form-group>
+
+        <knx-address-lookup
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="address"
+          [addressForm]="addressForm">
+        </knx-address-lookup>
+
+      </knx-card>
+    </div>
+  </div>
+</form>
+
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep()">
+</knx-wizard-controls>

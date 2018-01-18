@@ -18,8 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'household',
-    // canActivateChild: [AuthGuard],
-    loadChildren: './house-hold/house-hold.module'
+    loadChildren: './house-hold/house-hold.module#HouseHoldModule'
   },
   {
     path: 'profile',
