@@ -1,4 +1,5 @@
 export interface AnalyticsEvent {
+  hitType?: string;
   event: string;
   page: string;
   loggedIn_Verzekeren: string;
