@@ -22,6 +22,10 @@ export class AssistantConfig {
     hello: `Vul hier je persoonlijke gegevens in.`
   };
 
+  public household = {
+    welcome: `Ik ga je vandaag helpen besparen op je inboedelverzekering. Ben je er klaar voor? <b>Let's go!</b>`,
+  };
+
   public car = {
     welcome: `Hallo! Ik ben ${this.avatar.name}.
       Ik ga je helpen met de voordeligste autoverzekering die bij jou past.`,
@@ -82,4 +86,6 @@ export class AssistantConfig {
     purchased: (firstName: string) => `Via de website krijg je op dit moment enkel advies. Wil je de verzekering beheren?
       Download dan de Knab Verzekeren app.`
   };
+
+
 }

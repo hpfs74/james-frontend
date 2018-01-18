@@ -7,7 +7,7 @@ import {
 import * as fromHouseData from './house-data';
 import { HouseDataRequest, HouseDataResponse } from '../models/house-data';
 
-describe('Car reducer', () => {
+describe('House Data reducer', () => {
   describe('undefined action', () => {
     it('should handle initial state', () => {
       const action = {} as any;
