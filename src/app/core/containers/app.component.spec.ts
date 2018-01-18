@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './../../components/knx-navbar/navbar.component';
 import { NavigationService } from '../services/navigation.service';
 import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
+import { AssistantService } from '../services/assistant.service';
 
 import * as fromRoot from '../../reducers';
 import * as fromAuth from '../../auth/reducers';
@@ -57,6 +58,7 @@ describe('Component: AppComponent', () => {
     schemas: [NO_ERRORS_SCHEMA],
     providers: [
       NavigationService,
+      AssistantService,
       {
         provide: UserDialogService,
         useValue: jasmine.createSpyObj('UserDialogService', ['openModal'])
