@@ -76,12 +76,7 @@ export function logout(reducer: ActionReducer<State>): ActionReducer<State> {
   return function (state, action) {
     if (action.type === logoutActions.LOGOUT) {
       // reset to initialstate
-      state = {
-        ...state,
-        ...fromAddress.reducers,
-        ...fromInsurance.reducers,
-        ...fromCar.reducers
-      };
+      state = null;
     }
     return reducer(state, action);
   };
