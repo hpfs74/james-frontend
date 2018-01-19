@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import { InsuranceReviewBenefitsComponent } from './insurance-review-benefits.component';
 import { InsuranceReviewDocumentsComponent } from './insurance-review-documents.component';
+import { InsuranceReviewRegistrationComponent } from './insurance-review-registration.component';
 import { InsuranceReviewCarComponent } from './insurance-review-car.component';
 import {
   InsuranceReviewRowComponent,
@@ -18,6 +19,7 @@ import { InsuranceReviewComponent } from './insurance-review.component';
 const exportableDeclarations = [
   InsuranceReviewBenefitsComponent,
   InsuranceReviewDocumentsComponent,
+  InsuranceReviewRegistrationComponent,
   InsuranceReviewCarComponent,
   InsuranceReviewRowComponent,
   InsuranceReviewRowContentComponent,
