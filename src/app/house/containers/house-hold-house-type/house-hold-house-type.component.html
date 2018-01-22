@@ -1,0 +1,109 @@
+<form [formGroup]="form.formGroup" class="knx-fancy-form house-hold-house-type-form">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-top-address address="address"></knx-top-address>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <h3>Huis type</h3>
+
+        <p>Your living insurance, exaplin why needed, and how it can help you (what are you insured for)</p>
+
+        <div>
+          <span><b>Rooms</b></span>
+          <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+            <knx-tooltip>TOOLTIP</knx-tooltip>
+          </span>
+
+
+          <p>How many rooms does your house have (incl. living, bath, etc)</p>
+        </div>
+
+        <knx-form-group
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="roomsCount"
+          [formControlName]="form.formConfig.roomsCount.formControlName"
+          [options]="form.formConfig.roomsCount">
+        </knx-form-group>
+
+      </knx-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <div>
+
+            <span><b>Surface Area</b></span>
+            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+            <knx-tooltip>TOOLTIP for surface</knx-tooltip>
+          </span>
+
+
+          <p>Please select what's relevant for your specific situation</p>
+        </div>
+
+        <knx-form-group
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="surfaceArea"
+          [formControlName]="form.formConfig.surfaceArea.formControlName"
+          [options]="form.formConfig.surfaceArea">
+        </knx-form-group>
+
+      </knx-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <div>
+          <div>
+            <span><b>Building kind</b></span>
+            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+              <knx-tooltip>TOOLTIP for building type</knx-tooltip>
+            </span>
+          </div>
+          <p>What kind of building do you live in?</p>
+        </div>
+
+        <knx-form-group
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="buildingType"
+          [formControlName]="form.formConfig.buildingType.formControlName"
+          [options]="form.formConfig.buildingType">
+        </knx-form-group>
+      </knx-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <div>
+          <div>
+            <span><b>Select build year</b></span>
+            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+              <knx-tooltip>TOOLTIP select build year</knx-tooltip>
+            </span>
+          </div>
+          <p>In what period is your house been built?</p>
+        </div>
+
+        <knx-form-group
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="buildYear"
+          [formControlName]="form.formConfig.buildYear.formControlName"
+          [options]="form.formConfig.buildYear">
+        </knx-form-group>
+      </knx-card>
+    </div>
+  </div>
+
+</form>
+
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep()">
+</knx-wizard-controls>

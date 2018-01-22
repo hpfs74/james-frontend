@@ -18,7 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'household',
-    loadChildren: './house-hold/house-hold.module#HouseHoldModule'
+    loadChildren: './house/house-hold.module#HouseHoldModule'
   },
   {
     path: 'profile',
