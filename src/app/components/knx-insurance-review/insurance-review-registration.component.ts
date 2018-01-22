@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import { RegistrationForm } from '../../registration/components/registration.form';
+import { InsuranceReviewRegistrationForm } from './insuatance-review-registration.form';
 import * as FormUtils from '../../utils/base-form.utils';
 
 @Component({
@@ -54,20 +54,26 @@ import * as FormUtils from '../../utils/base-form.utils';
 })
 export class InsuranceReviewRegistrationComponent implements OnInit {
   @Input() title: string;
-  form: RegistrationForm;
+  @Output() onRegistrationFormValidation: EventEmitter<InsuranceReviewRegistrationForm> = new EventEmitter();
+
+  form: InsuranceReviewRegistrationForm;
   errorMessage: string;
 
   ngOnInit() {
-    this.form = new RegistrationForm(new FormBuilder());
+    this.form = new InsuranceReviewRegistrationForm(new FormBuilder());
 
     this.form.formGroup.get('email').valueChanges.subscribe((value) => {
       FormUtils.validateForm(this.form.formGroup);
       FormUtils.showFormErrors(this.form);
+
+      this.onRegistrationFormValidation.emit(this.form);
     });
 
     this.form.formGroup.get('password').valueChanges.subscribe((value) => {
       FormUtils.validateForm(this.form.formGroup);
       FormUtils.showFormErrors(this.form);
+
+      this.onRegistrationFormValidation.emit(this.form);
     });
   }
 }

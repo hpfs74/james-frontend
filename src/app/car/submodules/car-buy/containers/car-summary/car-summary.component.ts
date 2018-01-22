@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 import { InsuranceAdvice } from '../../../../../insurance/models/index';
 import { ContactDetailForm } from '../../../../../shared/forms/contact-detail.form';
+import { InsuranceReviewRegistrationForm } from '../../../../../components/knx-insurance-review/insuatance-review-registration.form';
 
 import * as router from '../../../../../core/actions/router';
 import * as fromRoot from '../../../../reducers';
@@ -49,6 +50,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   acceptInsuranceTerms: boolean;
   acceptKnabTerms: boolean;
+  registrationForm: InsuranceReviewRegistrationForm;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
   content: Content;
@@ -183,6 +185,10 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({ message: this.formSummaryError }));
     }
 
+    if (this.isLoggedIn) {
+      this.store$.dispatch(new advice.Update(this.registrationForm.formGroup.value));
+    }
+
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
         return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
@@ -203,6 +209,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   private summaryValid() {
-    return this.isLoggedIn ? this.acceptInsuranceTerms : this.acceptInsuranceTerms && this.acceptKnabTerms;
+    return this.isLoggedIn ? this.acceptInsuranceTerms :
+      this.acceptInsuranceTerms && this.acceptKnabTerms && this.registrationForm.formGroup.valid;
   }
 }
