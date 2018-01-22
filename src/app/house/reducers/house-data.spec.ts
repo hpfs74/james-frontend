@@ -27,7 +27,8 @@ describe('House Data reducer', () => {
         loading: true,
         loaded: false,
         error: false,
-        info: null
+        info: null,
+        address: null
       };
       const result = fromHouseData.reducer(fromHouseData.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -48,6 +49,7 @@ describe('House Data reducer', () => {
         loaded: true,
         error: false,
         info: houseData,
+        address: null
       };
       const result = fromHouseData.reducer(fromHouseData.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -61,7 +63,8 @@ describe('House Data reducer', () => {
         loading: false,
         loaded: false,
         error: true,
-        info: null
+        info: null,
+        address: null
       };
       const result = fromHouseData.reducer(fromHouseData.initialState, action);
       expect(result).toEqual(expectedResult);
