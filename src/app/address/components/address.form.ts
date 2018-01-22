@@ -31,7 +31,7 @@ export class AddressForm {
       required: () => 'Dit is een verplicht veld',
       postalCode: () => `Vul een geldige postcode in`,
       address: () => `Dit adres bestaat niet. Probeer het nog eens`,
-      houseNumber: () => `Vul een huisnummer in`
+      houseNumber: () => `Vul geldig huisnummer in, geen toevoeging`
     };
 
     this.formConfig = {
