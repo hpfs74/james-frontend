@@ -12,4 +12,6 @@ export class QaIdentifiers {
 
   public static readonly houseHoldAdviceRoot = 'householdadvice';
   public static readonly houseHoldLocation = 'householdlocation';
+  public static readonly houseHoldHouseType = 'householdhousetype';
+  public static readonly houseHoldHouseDetail = 'householdhousedetail';
 }

@@ -1,0 +1,76 @@
+@import '~styles/base.scss';
+
+.knx-side-panel__action {
+  font-size: $font-size-base - 1;
+}
+
+.knx-house-hold-advice-motivation {
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    margin-left: 0;
+    padding-left: 40px;
+    padding-bottom: 25px;
+    background: url("/assets/images/list-check.svg") no-repeat;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /deep/ .knx-house-hold-advice.knx-house-hold-advice--step-2 .knx-chat-stream {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    margin: 0;
+    padding: 7px 15px 10px 5px;
+    background: $knab-white;
+    border-radius: 0;
+    box-shadow: 0 -1px 1px -2px rgba(0, 0, 0, 0.2), 0 -1px 2px 0 rgba(0, 0, 0, 0.14), 0 -1px 5px 0 rgba(0, 0, 0, 0.12);
+
+    knx-avatar {
+      float: left;
+
+      .knx-avatar__image {
+        margin-top: -10px;
+        background-color: transparent;
+
+        &:hover {
+          width: 60px;
+        }
+      }
+    }
+
+    .knx-chat-stream__notification.knx-chat-stream__notification--active {
+      left: 55px;
+      top: 10px;
+    }
+
+    .knx-side-panel__action {
+      float: right;
+      width: calc(100% - 67px);
+
+      &:before {
+        margin-right: 10px;
+        margin-left: -10px;
+      }
+    }
+
+    .knx-message--chat {
+      position: absolute;
+      bottom: 65px;
+      left: 15px;
+      right: 15px;
+    }
+
+    .knx-message--arrow-top-center:first-child:before {
+      top: auto;
+      bottom: -10px;
+      left: 12px;
+      border-top: 10px solid #00a4a7;
+      border-bottom: 0;
+    }
+  }
+}
