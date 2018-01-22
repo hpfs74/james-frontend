@@ -2,22 +2,16 @@ import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import { TagsService } from '@app/core/services/tags.service';
 
-
-import * as cuid from 'cuid';
 import * as fromRoot from '@app/reducers';
-import * as fromAddress from '@app/address/reducers';
 import * as assistant from '@app/core/actions/assistant';
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
 
-import { AddressForm } from '@app/address/components/address.form';
 import { Address } from '@app/address/models';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
-import { HouseHoldLocationForm } from '@app/house/containers/house-hold-location/house-hold-location.form';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { HouseHoldHouseTypeForm } from '@app/house/containers/house-hold-house-type/house-hold-house-type.form';
 
@@ -34,9 +28,47 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   error$: Observable<KNXStepError>;
   address: Address;
   alive: boolean;
+  roomValues = [
+    {
+      label: '2 or less',
+      value: '2'
+    },
+    {
+      label: '3',
+      value: '3'
+    },
+    {
+      label: '4',
+      value: '4'
+    },
+    {
+      label: '5',
+      value: '5'
+    },
+    {
+      label: '6',
+      value: '6'
+    },
+    {
+      label: '7',
+      value: '7'
+    },
+    {
+      label: '8',
+      value: '8'
+    },
+    {
+      label: '9 or more',
+      value: '9'
+    },
+  ];
+
+  test = 'ciao';
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
+
+
     this.initializeForms();
     this.selectInitialStates();
 

@@ -13,13 +13,15 @@ import { AddressModule } from '@app/address/address.module';
 import { HouseHoldAdviceComponent } from '@app/house/containers/house-hold-advice/house-hold-advice.component';
 import { HouseHoldHouseTypeComponent } from '@app/house/containers/house-hold-house-type/house-hold-house-type.component';
 import { HouseHoldHouseDetailComponent } from '@app/house/containers/house-hold-house-detail/house-hold-house-detail.component';
+import { RadioNavigatorComponent } from '@app/house/components/knx-radio-navigator/radio-navigator.component';
 
 @NgModule({
   declarations: [
     HouseHoldAdviceComponent,
     HouseHoldLocationComponent,
     HouseHoldHouseTypeComponent,
-    HouseHoldHouseDetailComponent
+    HouseHoldHouseDetailComponent,
+    RadioNavigatorComponent
   ],
   imports: [
     SharedModule,
