@@ -18,6 +18,10 @@
 }
 
 @media screen and (max-width: 576px) {
+  .knx-house-hold-advice-motivation {
+    display: none;
+  }
+
   /deep/ .knx-house-hold-advice.knx-house-hold-advice--step-2 .knx-chat-stream {
     top: auto;
     bottom: 0;
