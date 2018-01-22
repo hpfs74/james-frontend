@@ -12,12 +12,13 @@ import * as FormUtils from '../../utils/base-form.utils';
       <div class="knx-collapsible-panel__content">
         <div class="row">
           <div class="col-sm-12">
-            <b>En ontvang jouw overzocht van alle verzekeringen</b>
 
             <div class="container">
               <div class="row">
                 <div class="col-md-8">
-                    <div class="knx-registration">
+                  <b>En ontvang jouw overzocht van alle verzekeringen</b>
+
+                  <div class="knx-registration">
                       <form [formGroup]="form.formGroup"
                             autocomplete="off">
                         <knx-form-group
@@ -35,7 +36,7 @@ import * as FormUtils from '../../utils/base-form.utils';
                             {{ errorMessage || 'Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
                           </div>
 
-                          <span class="knx-registration__meta-security"><span class="knx-icon-lock"></span> Beveiligde verbinding</span>
+                          <span class="knx-registration__meta-security">Ben je al klant? <a (click)="login($event)">Ga naar login</a></span>
                         </div>
                       </form>
                     </div>
@@ -55,6 +56,7 @@ import * as FormUtils from '../../utils/base-form.utils';
 export class InsuranceReviewRegistrationComponent implements OnInit {
   @Input() title: string;
   @Output() onRegistrationFormValidation: EventEmitter<InsuranceReviewRegistrationForm> = new EventEmitter();
+  @Output() onLogin: EventEmitter<any> = new EventEmitter();
 
   form: InsuranceReviewRegistrationForm;
   errorMessage: string;
@@ -75,5 +77,9 @@ export class InsuranceReviewRegistrationComponent implements OnInit {
 
       this.onRegistrationFormValidation.emit(this.form);
     });
+  }
+
+  public login(event: any) {
+    this.onLogin.emit(event);
   }
 }

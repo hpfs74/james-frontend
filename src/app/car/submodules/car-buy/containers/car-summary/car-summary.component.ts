@@ -212,4 +212,8 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     return this.isLoggedIn ? this.acceptInsuranceTerms :
       this.acceptInsuranceTerms && this.acceptKnabTerms && this.registrationForm.formGroup.valid;
   }
+
+  public login() {
+    this.store$.dispatch(new router.Go({ path: ['/login'] }));
+  }
 }
