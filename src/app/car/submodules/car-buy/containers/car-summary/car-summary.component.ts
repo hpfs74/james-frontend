@@ -185,7 +185,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({ message: this.formSummaryError }));
     }
 
-    if (this.isLoggedIn) {
+    if (!this.isLoggedIn) {
       this.store$.dispatch(new advice.Update(this.registrationForm.formGroup.value));
     }
 

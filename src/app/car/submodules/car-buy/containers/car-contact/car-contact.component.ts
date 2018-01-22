@@ -45,8 +45,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.store$.select(fromAuth.getLoggedIn).take(1).subscribe(loggedIn => this.isLoggedIn = loggedIn);
     const formBuilder = new FormBuilder();
-    const emailRequired = !this.isLoggedIn;
-    this.form = new ContactDetailForm(formBuilder, emailRequired);
+    this.form = new ContactDetailForm(formBuilder);
     this.error$ = this.store$.select(fromCore.getWizardError);
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.currentStepOptions = {

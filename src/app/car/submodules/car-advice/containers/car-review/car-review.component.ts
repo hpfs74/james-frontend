@@ -18,6 +18,8 @@ import * as router from '../../../../../core/actions/router';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as analytics from '@app/core/actions/analytics';
 
+import 'rxjs/add/operator/take';
+
 @Component({
   providers: [ AsyncPipe ],
   selector: 'knx-car-review',
@@ -93,7 +95,15 @@ export class CarReviewComponent implements OnInit, OnDestroy {
         // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
         // Instead of going into the buy flow the user clicks on the modal buttons
         // to be redirected either to /login or /register
-        this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
+        // this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
+        this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
+          advice => {
+            if (advice && advice.id) {
+              this.store$.dispatch(new router.Go({
+                path: ['/car/insurance', {adviceId: advice.id}],
+              }));
+            }
+          });
       }
     }
   }
