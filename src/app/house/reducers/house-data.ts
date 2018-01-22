@@ -11,7 +11,7 @@ export interface State {
   loaded: boolean;
   error: boolean;
   info: HouseDataResponse;
-  address: Address;
+  address?: Address;
 }
 
 export const initialState: State = {
