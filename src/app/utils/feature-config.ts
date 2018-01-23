@@ -4,21 +4,16 @@ import { CookieService } from 'ngx-cookie-service';
 import 'rxjs/add/operator/map';
 
 import { environment } from '@env/environment';
+import { KNXFeatureToggleService } from '@knx/feature-toggle';
 
 const FEATURE_TOOGLE_COOKIE_NAME = 'featureToggleCookie';
 
 @Injectable()
 export class FeatureConfig {
   endpointUrl: string = environment.james.featureToggle;
-  features: any;
   constructor(private http: Http,
-              public cookies: CookieService) {
-    this.features = Object.assign({}, environment.featureToggles);
-  }
-
-  getFeatures() {
-    return this.features;
-  }
+              private cookies: CookieService,
+              private knxFeatureToggleService: KNXFeatureToggleService) {}
 
   /**
    * GUID (or UUID) is an acronym for 'Globally Unique Identifier'
@@ -71,7 +66,7 @@ export class FeatureConfig {
     const response = JSON.parse(data.body);
     if (response.featureGroup) {
       this.cookies.set(FEATURE_TOOGLE_COOKIE_NAME, response.featureGroup);
-      this.features = Object.assign({}, this.features, response.config);
+      this.knxFeatureToggleService.setNewConfig(response.config);
     }
   }
 }

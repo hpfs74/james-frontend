@@ -105,6 +105,7 @@ import { NavUserComponent } from './components/knx-nav-user/nav-user.component';
 import { UserGreetingComponent } from './components/knx-user-greeting/user-greeting.component';
 import { KnxWizardRxModule } from './components/knx-wizard-rx/knx-wizard-rx.module';
 import { KNXWizardControlsComponent } from '@app/components/knx-wizard-controls/knx-wizard-controls.component';
+import { TopAddressComponent } from '@app/components/knx-top-address';
 
 export const sharedComponents = [
   // Pipes
@@ -152,6 +153,7 @@ export const sharedComponents = [
   TabsComponent,
   TabComponent,
   ThankYouComponent,
+  TopAddressComponent,
   ServiceGuideComponent,
   SavedComponent,
   RegisterPanelComponent,

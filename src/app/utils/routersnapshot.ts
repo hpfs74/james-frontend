@@ -9,6 +9,8 @@ import * as fromRoot from '../reducers';
 import * as fromAuth from '../auth/reducers';
 import * as fromInsurance from '@app/insurance/reducers';
 import 'rxjs/add/operator/filter';
+import { KNXFeatureToggleService } from '@knx/feature-toggle';
+import { FeatureConfig } from '@app/utils/feature-config';
 
 /**
  * The RouterStateSerializer takes the current RouterStateSnapshot

@@ -46,7 +46,7 @@
     "@knx/currency-input": "2.0.86",
     "@knx/date-input": "1.0.59",
     "@knx/dropdown": "0.0.218",
-    "@knx/feature-toggle": "0.0.2",
+    "@knx/feature-toggle": "0.0.23",
     "@knx/form-control": "1.0.61",
     "@knx/form-group": "1.0.133",
     "@knx/forms": "1.0.61",

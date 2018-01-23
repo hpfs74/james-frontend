@@ -1,0 +1,19 @@
+@import '~styles/base.scss';
+
+.knx-radio-navigator {
+  width: 400px;
+}
+
+.knx-radio-navigator__previous {
+  display: inline-block;
+}
+
+.knx-radio-navigator__content {
+  display: inline-block;
+  width: 180px;
+  text-align: center;
+}
+
+.knx-radio-navigator__next {
+  display: inline-block;
+}

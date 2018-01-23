@@ -24,7 +24,6 @@ export const REMOVE_ADVICE =    '[Advice] Remove';
 export const SET_INSURANCE =    '[Advice] Set Insurance';
 export const REMOVE_INSURANCE = '[Advice] Remove Insurance';
 
-
 /**
  * Advice Actions
  */
