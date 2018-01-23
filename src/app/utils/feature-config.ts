@@ -65,7 +65,14 @@ export class FeatureConfig {
   handleFeatureResponse(data: any) {
     const response = JSON.parse(data.body);
     if (response.featureGroup) {
-      this.cookies.set(FEATURE_TOOGLE_COOKIE_NAME, response.featureGroup);
+      const cookieName = FEATURE_TOOGLE_COOKIE_NAME;
+      const cookieValue = response.featureGroup;
+      const cookieExpires = 31536000; // one year
+      const cookiePath = '/';
+      const cookieDomain = environment.domain;
+      const cookieSecure = false;
+
+      this.cookies.set(cookieName, cookieValue, cookieExpires, cookiePath, cookieDomain, cookieSecure);
       this.knxFeatureToggleService.setNewConfig(response.config);
     }
   }
