@@ -17,10 +17,10 @@ export class HouseHoldHouseDetailForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      wallsTitle: [null, Validators.required],
-      roofMaterial: [null, Validators.required],
-      secondFloor: [null, Validators.required],
-      security: [null, Validators.required]
+      wallsTitle: ['T', Validators.required],
+      roofMaterial: ['P', Validators.required],
+      secondFloor: ['G', Validators.required],
+      security: ['N', Validators.required]
     });
 
     this.formConfig = {
@@ -34,15 +34,15 @@ export class HouseHoldHouseDetailForm extends BaseForm {
           items: [
             {
               label: 'Stone of concrete',
-              value: '1'
+              value: 'T'
             },
             {
               label: 'Houtenskeletbouw met buitenmuren van hout',
-              value: '2'
+              value: 'K'
             },
             {
               label: 'Houtenskeletbouw met buitenmuren van steen',
-              value: '3'
+              value: 'L'
             }
           ]
         }
@@ -57,27 +57,27 @@ export class HouseHoldHouseDetailForm extends BaseForm {
           items: [
             {
               label: 'Bitumen',
-              value: '90'
+              value: 'N'
             },
             {
-              label: 'Hout schalien',
-              value: '140'
+              label: 'Hout (schaliën)',
+              value: 'C'
             },
             {
               label: 'Kunstriet',
-              value: '190'
+              value: 'K'
             },
             {
               label: 'Pannen',
-              value: '300'
+              value: 'P'
             },
             {
               label: 'Riet',
-              value: '350'
+              value: 'R'
             },
             {
               label: 'Shingles',
-              value: '123'
+              value: 'Q'
             }
           ]
         }
@@ -92,15 +92,15 @@ export class HouseHoldHouseDetailForm extends BaseForm {
           items: [
             {
               label: 'I only have 1 floor',
-              value: '2'
+              value: 'G'
             },
             {
               label: 'Stone/Concrete',
-              value: 'A'
+              value: 'S'
             },
             {
               label: 'Wood',
-              value: 'D'
+              value: 'T'
             }
           ]
         }
@@ -115,15 +115,15 @@ export class HouseHoldHouseDetailForm extends BaseForm {
           items: [
             {
               label: 'No additional security',
-              value: '2'
+              value: 'N'
             },
             {
               label: 'BORG security label',
-              value: 'A'
+              value: 'B'
             },
             {
               label: 'Police OK security label',
-              value: 'D'
+              value: 'V'
             }
           ]
         }
