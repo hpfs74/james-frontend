@@ -24,6 +24,7 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
   actionButtons: KNXModalDialogButton[];
 
   constructor(private store$: Store<fromCore.State>, private featureToggleService: KNXFeatureToggleService) {
+    window['modal'] = this;
     this.actionButtons = [
       {
         text: 'Inloggen',

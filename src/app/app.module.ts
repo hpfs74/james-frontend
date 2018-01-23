@@ -10,6 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
 import { ContentConfig } from './content.config';
@@ -25,6 +27,8 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
+import { FeatureLoader } from '@app/utils/feature-loader';
+import { FeatureConfig } from '@app/utils/feature-config';
 
 @NgModule({
   imports: [
@@ -68,10 +72,12 @@ import { AddressModule } from './address/address.module';
       deps: [ContentConfig],
       multi: true
     },
+    CookieService,
+    FeatureConfig,
     {
       provide: APP_INITIALIZER,
-      useFactory: ContentLoader,
-      deps: [ContentConfig],
+      useFactory: FeatureLoader,
+      deps: [FeatureConfig],
       multi: true
     },
     /**

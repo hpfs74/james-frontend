@@ -1,5 +1,5 @@
+import { FeatureConfig } from '@app/utils/feature-config';
 
-
-export function FeatureLoader(featureService: ContentConfig) {
-  return () => contentService.load();
+export function FeatureLoader(featureService: FeatureConfig) {
+  return () => featureService.load();
 }
