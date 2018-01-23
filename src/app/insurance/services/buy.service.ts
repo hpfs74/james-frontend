@@ -17,14 +17,14 @@ export class BuyService {
     this.headers.append('version', 'v2');
   }
 
-  public buyInsuranceAnonymous(payload: Proposal): Observable<any> {
+  public buyInsuranceAnonymous(payload: Proposal, advice): Observable<any> {
     const headers = this.headers;
     let buyData = {
-      'create_profile': {
-        'password': 'Abcdefg1',
-        'redirect_uri': 'com.mobgen.knab://'
+      create_profile: {
+        password: advice.password,
+        redirect_uri: 'com.mobgen.knab://'
       },
-      'car_buystatic': payload
+      car_buystatic: payload
     };
 
     return this.authHttp.post(environment.james.sdBuy, JSON.stringify(buyData), { headers })
