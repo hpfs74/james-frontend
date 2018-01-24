@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 import 'rxjs/add/operator/map';
 
 import { environment } from '@env/environment';
 import { KNXFeatureToggleService } from '@knx/feature-toggle';
+import { CookieOptionsArgs } from 'angular2-cookie/services/cookie-options-args.model';
 
 const FEATURE_TOOGLE_COOKIE_NAME = 'featureToggleCookie';
 
@@ -38,11 +39,11 @@ export class FeatureConfig {
    * return a feature group Letter from a cookie, A, B or if no cookie set returns 0
    */
   getFeatureGroup() {
-    const cookies = this.cookies.check(FEATURE_TOOGLE_COOKIE_NAME);
+    const cookies = this.cookies.get(FEATURE_TOOGLE_COOKIE_NAME);
     if (cookies) {
       return this.cookies.get(FEATURE_TOOGLE_COOKIE_NAME);
     }
-    this.cookies.set(FEATURE_TOOGLE_COOKIE_NAME, '0');
+    this.setCookie('0');
     return '0';
   }
 
@@ -58,6 +59,18 @@ export class FeatureConfig {
       .catch(error => Promise.resolve());
   }
 
+  setCookie(forValue: any) {
+    const cookieName = FEATURE_TOOGLE_COOKIE_NAME;
+    const cookieValue = forValue;
+    const cookieOptions: CookieOptionsArgs = {
+      domain: environment.domain,
+      expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // one year
+      path: '/',
+      secure: false
+    };
+    this.cookies.put(cookieName, cookieValue, cookieOptions);
+  }
+
   /**
    * sets the cookie for the first time, and also sets the feature toggle variables
    * @param data response from endpoint
@@ -65,14 +78,7 @@ export class FeatureConfig {
   handleFeatureResponse(data: any) {
     const response = JSON.parse(data.body);
     if (response.featureGroup) {
-      const cookieName = FEATURE_TOOGLE_COOKIE_NAME;
-      const cookieValue = response.featureGroup;
-      const cookieExpires = 31536000; // one year
-      const cookiePath = '/';
-      const cookieDomain = environment.domain;
-      const cookieSecure = false;
-
-      this.cookies.set(cookieName, cookieValue, cookieExpires, cookiePath, cookieDomain, cookieSecure);
+      this.setCookie(response.featureGroup);
       this.knxFeatureToggleService.setNewConfig(response.config);
     }
   }

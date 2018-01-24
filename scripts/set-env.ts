@@ -112,7 +112,7 @@ function getContent(environment: string) {
 
   let content = `
   export const environment = {
-    domain: ${getEnvVar('JAMES_DOMAIN')},
+    domain: '${getEnvVar('JAMES_DOMAIN')}',
     production: ${isProd},
     enableAnalytics: ${enableAnalytics},
     featureToggles: {

@@ -10,7 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
