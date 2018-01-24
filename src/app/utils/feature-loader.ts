@@ -1,5 +1,5 @@
-import { FeatureConfig } from '@app/utils/feature-config';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
 
-export function FeatureLoader(featureService: FeatureConfig) {
+export function FeatureLoader(featureService: FeatureConfigService) {
   return () => featureService.load();
 }

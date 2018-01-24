@@ -1,6 +1,6 @@
 import { HttpModule, Http } from '@angular/http';
 import { TestModuleMetadata, TestBed, inject, async, tick } from '@angular/core/testing';
-import { FeatureConfig } from './feature-config';
+import { FeatureConfigService } from './feature-config.service';
 import { CookieService } from '@app/core/services';
 import { CookieServiceMock } from '@app/core/services/cookie.service.mock';
 import { KNXFeatureToggleService, KNXFeatureToggleModule } from '@knx/feature-toggle';
@@ -16,7 +16,7 @@ describe('FeatureConfig', () => {
       KNXFeatureToggleModule.forRoot(environment.featureToggles),
     ],
     providers: [
-      FeatureConfig,
+      FeatureConfigService,
       {
         provide: CookieService,
         useValue: CookieServiceMock
@@ -30,7 +30,7 @@ describe('FeatureConfig', () => {
     featureToggleService = TestBed.get(KNXFeatureToggleService);
   });
 
-  it('should load the content', async(inject([FeatureConfig], (featureConfig: FeatureConfig) => {
+  it('should load the content', async(inject([FeatureConfigService], (featureConfig: FeatureConfigService) => {
     spyOn(featureConfig, 'setCookie');
     spyOn(featureToggleService, 'setNewConfig');
     featureConfig.load().then((hasError) => {

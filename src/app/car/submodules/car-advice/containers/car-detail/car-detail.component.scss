@@ -40,3 +40,9 @@ hr {
     }
   }
 }
+
+.knx-form-group__label {
+  &.knx-pull-up {
+    transform: translateY(-15px);
+  }
+}

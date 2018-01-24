@@ -26,7 +26,7 @@ import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
 import { FeatureLoader } from '@app/utils/feature-loader';
-import { FeatureConfig } from '@app/utils/feature-config';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
 
 @NgModule({
   imports: [
@@ -70,11 +70,11 @@ import { FeatureConfig } from '@app/utils/feature-config';
       deps: [ContentConfig],
       multi: true
     },
-    FeatureConfig,
+    FeatureConfigService,
     {
       provide: APP_INITIALIZER,
       useFactory: FeatureLoader,
-      deps: [FeatureConfig],
+      deps: [FeatureConfigService],
       multi: true
     },
     /**

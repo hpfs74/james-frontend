@@ -9,12 +9,23 @@ import 'rxjs/add/operator/map';
 const FEATURE_TOOGLE_COOKIE_NAME = 'featureToggleCookie';
 
 @Injectable()
-export class FeatureConfig {
+export class FeatureConfigService {
   endpointUrl: string = environment.james.featureToggle;
+  featureConfig: any = environment.featureToggles;
   constructor(private http: Http,
               private cookies: CookieService,
               private knxFeatureToggleService: KNXFeatureToggleService) {}
 
+  /**
+   * return boolean if value exists on feature config object
+   * @param value string value in feature config object
+   */
+  isOn(value: string) {
+    if (this.featureConfig.hasOwnProperty(value)) {
+      return this.featureConfig[value];
+    }
+    return false;
+  }
   /**
    * GUID (or UUID) is an acronym for 'Globally Unique Identifier'
    * (or 'Universally Unique Identifier').
@@ -77,6 +88,7 @@ export class FeatureConfig {
     const response = JSON.parse(data.body);
     if (response.featureGroup) {
       this.setCookie(response.featureGroup);
+      this.featureConfig = response.config;
       this.knxFeatureToggleService.setNewConfig(response.config);
     }
   }

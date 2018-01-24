@@ -17,9 +17,14 @@
 
             <knx-async-preview
             [loading]="isCarLoading$ | async"
-            [loaded]="!(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
-              <knx-car-info [data]="car$ | async"></knx-car-info>
-          </knx-async-preview>
+            [loaded]="!(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')"
+            [hidden]="!(isCarLoading$ | async) && !featureToggleService.isOn('carInfo')">
+              <knx-car-info *ngIf="featureToggleService.isOn('carInfo')" [data]="car$ | async"></knx-car-info>
+            </knx-async-preview>
+            <div class="knx-form-group__label knx-pull-up"
+              *ngIf="!featureToggleService.isOn('carInfo') && !(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
+              {{ (car$ | async)?.make }} {{ (car$ | async)?.model }} {{ (car$ | async)?.year }}
+            </div>
           </div>
         </div>
 
