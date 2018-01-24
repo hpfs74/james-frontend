@@ -6,7 +6,7 @@ import { CookieServiceMock } from '@app/core/services/cookie.service.mock';
 import { KNXFeatureToggleService, KNXFeatureToggleModule } from '@knx/feature-toggle';
 import { environment } from '@env/environment';
 
-fdescribe('FeatureConfig', () => {
+describe('FeatureConfig', () => {
   let cookieService: CookieService;
   let featureToggleService: KNXFeatureToggleService;
 
