@@ -60,13 +60,13 @@ export class FeatureConfig {
 
   setCookie(value: any) {
     const cookieName = FEATURE_TOOGLE_COOKIE_NAME;
-      const cookieValue = value;
-      const cookieExpires = new Date(new Date().setFullYear(new Date().getFullYear() + 1)); // one year
-      const cookiePath = '/';
-      const cookieDomain = environment.domain;
-      const cookieSecure = false;
+    const cookieValue = value;
+    const cookieExpires = new Date(new Date().setFullYear(new Date().getFullYear() + 1)); // one year
+    const cookiePath = '/';
+    const cookieDomain = environment.domain;
+    const cookieSecure = false;
 
-      this.cookies.set(cookieName, cookieValue, cookieExpires, cookiePath, cookieDomain, cookieSecure);
+    this.cookies.set(cookieName, cookieValue, cookieExpires, cookiePath, cookieDomain, cookieSecure);
   }
 
   /**
