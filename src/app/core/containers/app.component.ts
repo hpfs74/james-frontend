@@ -23,6 +23,7 @@ import { LoginModalConfig, AuthRedirectModalAnonymousConfig, AuthRedirectModalCo
 import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';
 import { ContentConfig, Content } from '../../content.config';
+import { KNXFeatureToggleService } from '@knx/feature-toggle';
 
 @Component({
   selector: 'knx-app',
@@ -55,10 +56,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     private navigationService: NavigationService,
     private userDialogService: UserDialogService,
     private contentConfig: ContentConfig,
-    private assistantService: AssistantService
+    private assistantService: AssistantService,
+    public featureToggleService: KNXFeatureToggleService
   ) {
       this.content = contentConfig.getContent();
-      this.featureToggleConfig = environment.featureToggles;
+      this.featureToggleConfig = this.featureToggleService.featureToggleConfig;
     }
 
   ngAfterViewInit() {
