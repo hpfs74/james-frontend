@@ -4,6 +4,9 @@
   <div class="knx-price-item__header" >
     {{ header }}
   </div>
+  <div class="knx-price-item__description" *ngIf="description">
+    {{ description }}
+  </div>
   <ul class="knx-list--checks knx-list--green">
     <li *ngFor="let item of features">{{ item }}</li>
   </ul>

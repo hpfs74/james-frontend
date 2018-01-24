@@ -23,6 +23,7 @@ interface PriceTableLabelOptions {
         [features]="item.features"
         [selectedLabel]="labels.selected"
         [unselectedLabel]="labels.unselected"
+        [description]="item.description"
         (click)="selectItem(i)">
       </knx-price-item>
     </div>`
