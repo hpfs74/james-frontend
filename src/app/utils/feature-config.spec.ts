@@ -33,9 +33,11 @@ describe('FeatureConfig', () => {
   it('should load the content', async(inject([FeatureConfig], (featureConfig: FeatureConfig) => {
     spyOn(featureConfig, 'setCookie');
     spyOn(featureToggleService, 'setNewConfig');
-    featureConfig.load().then(() => {
-      expect(featureConfig.setCookie).toHaveBeenCalled();
-      expect(featureToggleService.setNewConfig).toHaveBeenCalled();
+    featureConfig.load().then((hasError) => {
+      if (!hasError) {
+        expect(featureConfig.setCookie).toHaveBeenCalled();
+        expect(featureToggleService.setNewConfig).toHaveBeenCalled();
+      }
     });
   })));
 });

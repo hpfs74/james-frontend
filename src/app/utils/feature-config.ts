@@ -55,7 +55,7 @@ export class FeatureConfig {
       .map(res => res.json())
       .toPromise()
       .then((data) => this.handleFeatureResponse(data))
-      .catch(error => Promise.resolve());
+      .catch(error => Promise.resolve(error));
   }
 
   setCookie(value: any) {
