@@ -1,0 +1,130 @@
+<form [formGroup]="form.formGroup" class="knx-fancy-form house-hold-dekking">
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h3>Questions about what you want to cover</h3>
+
+      introtext/explanation<br/>
+      introtext<br/>
+      intro<br/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <knx-price-table
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
+        [items]="coverages"
+        [labels]="{ selected: 'Geselecteerd', unselected: 'Kies deze' }"
+        (onSubmit)="goToNextStep()"
+        (onSelected)="updateSelectedCoverage($event)">
+      </knx-price-table>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+
+        <div>
+          <span><b>Outside coverage</b></span>
+          <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+            <knx-tooltip>TOOLTIP</knx-tooltip>
+          </span>
+
+
+          <p>
+            Do you also want to be covered for outside?<br/>
+            This could help when you have often valuables outside of your home.
+          </p>
+        </div>
+
+        <knx-form-group
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="outsideCoverage"
+          [formControlName]="form.formConfig.outsideCoverage.formControlName"
+          [options]="form.formConfig.outsideCoverage">
+        </knx-form-group>
+
+      </knx-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+
+        <h3>Calculate your household value</h3>
+
+        introtext/explanation<br/>
+        introtext<br/>
+        intro<br/>
+
+
+        <div class="knx-form-group--separated">
+          <div>
+            <span><b>Net Income range</b></span>
+            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+            <knx-tooltip>TOOLTIP for roofMaterial</knx-tooltip>
+          </span>
+
+
+            <p>What is your net income per month?</p>
+          </div>
+
+          <knx-form-group
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="netIncomeRange"
+            [formControlName]="form.formConfig.netIncomeRange.formControlName"
+            [options]="form.formConfig.netIncomeRange">
+          </knx-form-group>
+
+        </div>
+
+        <div class="knx-form-group--separated">
+          <div>
+            <div>
+              <span><b>Date of birth</b></span>
+              <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+              <knx-tooltip>TOOLTIP for second floor</knx-tooltip>
+            </span>
+            </div>
+            <p>What is your DOB?</p>
+          </div>
+
+          <knx-form-group
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="dateOfBirth"
+            [formControlName]="form.formConfig.dateOfBirth.formControlName"
+            [options]="form.formConfig.dateOfBirth">
+          </knx-form-group>
+        </div>
+
+
+        <div class="knx-form-group--separated">
+          <div>
+            <div>
+              <span><b>Family situation</b></span>
+              <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+              <knx-tooltip>TOOLTIP </knx-tooltip>
+            </span>
+            </div>
+            <p>Please select what your current situation is</p>
+          </div>
+
+          <knx-form-group
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="familySituation"
+            [formControlName]="form.formConfig.familySituation.formControlName"
+            [options]="form.formConfig.familySituation">
+          </knx-form-group>
+        </div>
+      </knx-card>
+    </div>
+  </div>
+
+</form>
+
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep()">
+</knx-wizard-controls>

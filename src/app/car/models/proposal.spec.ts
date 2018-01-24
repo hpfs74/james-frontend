@@ -34,7 +34,7 @@ describe('CarProposalHelper', () => {
         value: 'Nee'
       },
       {
-        key: `Is jou, de regelmatige bestuurder of kentekenhouder in de laatste 8 jaar de rijbevoegdheid (geheel of voorwaardelijk) ontzegd?`,
+        key: `Is jou, de regelmatige bestuurder en kentekenhouder in de laatste 8 jaar de rijbevoegdheid (geheel of voorwaardelijk) ontzegd?`,
         value: 'Ja, Another comment'
       },
       {

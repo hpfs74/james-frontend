@@ -14,6 +14,7 @@ import { HouseHoldAdviceComponent } from '@app/house/containers/house-hold-advic
 import { HouseHoldHouseTypeComponent } from '@app/house/containers/house-hold-house-type/house-hold-house-type.component';
 import { HouseHoldHouseDetailComponent } from '@app/house/containers/house-hold-house-detail/house-hold-house-detail.component';
 import { RadioNavigatorComponent } from '@app/house/components/knx-radio-navigator/radio-navigator.component';
+import { HouseHoldDekkingComponent } from '@app/house/containers/house-hold-dekking/house-hold-dekking.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RadioNavigatorComponent } from '@app/house/components/knx-radio-navigat
     HouseHoldLocationComponent,
     HouseHoldHouseTypeComponent,
     HouseHoldHouseDetailComponent,
+    HouseHoldDekkingComponent,
     RadioNavigatorComponent
   ],
   imports: [

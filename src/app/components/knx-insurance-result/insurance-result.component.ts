@@ -81,7 +81,7 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
 
         <div class="knx-insurance-result__discount clearfix" *ngIf="insurance.discount">
           <img src="/assets/icon/present_icon.png" alt="present">
-          Incl. {{ insurance.discount | currency:'EUR':true }} Knab korting & Gratis overstapservice
+          Incl. {{ insurance.discount | currency:'EUR':true }} Knab korting & Hulp bij overstappen
         </div>
       </div>
 

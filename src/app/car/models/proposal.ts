@@ -85,7 +85,7 @@ export class CarProposalHelper {
         value: this.getCheckAnswer(data.debt, data.debtComment || null)
       },
       {
-        key: `Is jou, de regelmatige bestuurder of kentekenhouder in de laatste 8 jaar de rijbevoegdheid (geheel of voorwaardelijk) ontzegd?`,
+        key: `Is jou, de regelmatige bestuurder en kentekenhouder in de laatste 8 jaar de rijbevoegdheid (geheel of voorwaardelijk) ontzegd?`,
         value: this.getCheckAnswer(data.driver, data.driverComment || null)
       },
       {

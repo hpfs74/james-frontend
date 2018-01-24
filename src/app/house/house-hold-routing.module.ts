@@ -5,6 +5,7 @@ import { HouseHoldLocationComponent } from '@app/house/containers/house-hold-loc
 import { HouseHoldAdviceComponent } from '@app/house/containers/house-hold-advice/house-hold-advice.component';
 import { HouseHoldHouseTypeComponent } from '@app/house/containers/house-hold-house-type/house-hold-house-type.component';
 import { HouseHoldHouseDetailComponent } from '@app/house/containers/house-hold-house-detail/house-hold-house-detail.component';
+import { HouseHoldDekkingComponent } from '@app/house/containers/house-hold-dekking/house-hold-dekking.component';
 
 export const houseHoldRoutes: Routes = [
   {
@@ -38,6 +39,13 @@ export const houseHoldRoutes: Routes = [
         component: HouseHoldHouseDetailComponent,
         data: {
           stepIndex: 2
+        }
+      },
+      {
+        path: 'dekking',
+        component: HouseHoldDekkingComponent,
+        data: {
+          stepIndex: 3
         }
       }
     ]
