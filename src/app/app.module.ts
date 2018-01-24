@@ -10,8 +10,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
-
 import { routes } from './routes';
 import { CustomRouterStateSerializer } from './utils/routersnapshot';
 import { ContentConfig } from './content.config';
@@ -72,7 +70,6 @@ import { FeatureConfig } from '@app/utils/feature-config';
       deps: [ContentConfig],
       multi: true
     },
-    CookieService,
     FeatureConfig,
     {
       provide: APP_INITIALIZER,

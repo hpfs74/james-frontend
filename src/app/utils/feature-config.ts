@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
-import 'rxjs/add/operator/map';
+import { CookieService } from '@app/core/services/cookie.service';
+import { KNXFeatureToggleService } from '@knx/feature-toggle';
 
 import { environment } from '@env/environment';
-import { KNXFeatureToggleService } from '@knx/feature-toggle';
-import { CookieOptionsArgs } from 'angular2-cookie/services/cookie-options-args.model';
+import 'rxjs/add/operator/map';
 
 const FEATURE_TOOGLE_COOKIE_NAME = 'featureToggleCookie';
 
@@ -59,16 +58,15 @@ export class FeatureConfig {
       .catch(error => Promise.resolve());
   }
 
-  setCookie(forValue: any) {
+  setCookie(value: any) {
     const cookieName = FEATURE_TOOGLE_COOKIE_NAME;
-    const cookieValue = forValue;
-    const cookieOptions: CookieOptionsArgs = {
-      domain: environment.domain,
-      expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // one year
-      path: '/',
-      secure: false
-    };
-    this.cookies.put(cookieName, cookieValue, cookieOptions);
+      const cookieValue = value;
+      const cookieExpires = new Date(new Date().setFullYear(new Date().getFullYear() + 1)); // one year
+      const cookiePath = '/';
+      const cookieDomain = environment.domain;
+      const cookieSecure = false;
+
+      this.cookies.set(cookieName, cookieValue, cookieExpires, cookiePath, cookieDomain, cookieSecure);
   }
 
   /**
