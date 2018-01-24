@@ -16,11 +16,11 @@ import { Component, Input } from '@angular/core';
               Je hebt nu nog geen voorlopige dekking.</p>
           </ng-container>
 
-          <!--<ng-template #default>-->
-            <!--<p>Gefeliciteerd met je nieuwe {{insuranceType}}verzekering.<br>-->
-              <!--We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.-->
-              <!--We houden je hier uiteraard van op de hoogte.</p>-->
-          <!--</ng-template>-->
+          <ng-template #default>
+            <p>Gefeliciteerd met je nieuwe {{insuranceType}}verzekering.<br>
+              We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.
+              We houden je hier uiteraard van op de hoogte.</p>
+          </ng-template>
 
           <p>Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar op <strong>{{email}}</strong></p>
 
