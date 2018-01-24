@@ -116,6 +116,8 @@ describe('ProfileEffects', () => {
         loaded: false,
         profile: {},
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -133,6 +135,8 @@ describe('ProfileEffects', () => {
         loaded: true,
         profile: this.profileExample,
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -150,6 +154,8 @@ describe('ProfileEffects', () => {
         loaded: false,
         profile: {},
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -167,6 +173,8 @@ describe('ProfileEffects', () => {
         loaded: false,
         profile: this.profileExample,
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -184,6 +192,8 @@ describe('ProfileEffects', () => {
         loaded: false,
         profile: {},
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -201,6 +211,8 @@ describe('ProfileEffects', () => {
         loaded: true,
         profile: this.profileExample,
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -218,6 +230,8 @@ describe('ProfileEffects', () => {
         loaded: false,
         profile: {},
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -235,6 +249,8 @@ describe('ProfileEffects', () => {
         loaded: false,
         profile: {},
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -252,6 +268,8 @@ describe('ProfileEffects', () => {
         loaded: true,
         profile: this.profileExample,
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
@@ -269,6 +287,8 @@ describe('ProfileEffects', () => {
         loaded: false,
         profile: {},
         deleteStatus: false,
+        deleteLoading: false,
+        deleteLoaded: false,
         error: null
       };
 
