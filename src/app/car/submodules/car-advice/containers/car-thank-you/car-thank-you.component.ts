@@ -29,11 +29,13 @@ export class CarThankYouComponent implements AfterViewInit {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   email$: Observable<string>;
+  loggedIn$: Observable<any>;
 
   constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute, private contentConfig: ContentConfig) {
     this.content = contentConfig.getContent();
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
+    this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
 
     let profileEmail$ = this.store$.select(fromProfile.getProfile).map((profile: Profile) => profile.emailaddress);
     let isAnonymous$ = this.store$.select(fromAuth.getLoggedIn);
