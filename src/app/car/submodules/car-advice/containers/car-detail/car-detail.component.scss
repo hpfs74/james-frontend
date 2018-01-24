@@ -1,4 +1,3 @@
-
 @import '~styles/base';
 
 .car-detail-form {
@@ -9,6 +8,16 @@
 
   h2 {
     margin-bottom: 10px;
+  }
+
+  h3 {
+    /deep/ span {
+      color: $knab-white;
+    }
+
+    .knx-tooltip {
+      text-transform: none;
+    }
   }
 
   h4.knx-collapse-message__title {
