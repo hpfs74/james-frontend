@@ -37,6 +37,7 @@ describe('Component: Thank You', () => {
   describe('Default template', () => {
     it('should take input parameters', () => {
       comp.title = 'Hello World';
+      comp.loggedIn = true;
       comp.insuranceType = '';
       comp.email = 'test@mail.com';
 
@@ -64,6 +65,7 @@ describe('Component: Thank You', () => {
   describe('Car insurance', () => {
     it('should take input parameters', () => {
       comp.title = 'Hello World';
+      comp.loggedIn = true;
       comp.insuranceType = 'autoverzekering';
       comp.email = 'test@mail.com';
 
