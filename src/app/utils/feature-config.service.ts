@@ -11,6 +11,7 @@ const FEATURE_TOOGLE_COOKIE_NAME = 'featureToggleCookie';
 export class FeatureConfigService {
   endpointUrl: string = environment.james.featureToggle;
   featureConfig: any = environment.featureToggles;
+  uniqueId = '';
   constructor(private http: Http,
               private cookies: CookieService) {}
 
@@ -25,22 +26,22 @@ export class FeatureConfigService {
     return false;
   }
   /**
-   * GUID (or UUID) is an acronym for 'Globally Unique Identifier'
-   * (or 'Universally Unique Identifier').
-   * It is a 128-bit integer number used to identify resources.
-   * The term GUID is generally used by developers working with Microsoft technologies,
-   * while UUID is used everywhere else.
+   * If ID's are generated more than 1 milliseconds apart, they are 100% unique.
+   * If two ID's are generated at shorter intervals, and assuming that the random method is truly random,
+   * this would generate ID's that are 99.99999999999999% likely to be globally unique.
    */
-  guid() {
-    let nav = window.navigator;
-    let guid = nav.mimeTypes.length.toString();
-    let screen = window.screen;
-    guid += nav.userAgent.replace(/\D+/g, '');
-    guid += nav.plugins.length;
-    guid += screen.height || '';
-    guid += screen.width || '';
-    guid += screen.pixelDepth || '';
-    return guid;
+  getUniqueId() {
+    const cookies = this.cookies.get(FEATURE_TOOGLE_COOKIE_NAME);
+    if (cookies) {
+      this.uniqueId = JSON.parse(cookies).uniqueId;
+    } else {
+      this.uniqueId = Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+    }
+    this.setCookie({
+      uniqueId: this.uniqueId,
+      group: '0'
+    });
+    return this.uniqueId;
   }
 
   /**
@@ -49,15 +50,14 @@ export class FeatureConfigService {
   getFeatureGroup() {
     const cookies = this.cookies.get(FEATURE_TOOGLE_COOKIE_NAME);
     if (cookies) {
-      return this.cookies.get(FEATURE_TOOGLE_COOKIE_NAME);
+      return JSON.parse(cookies).group;
     }
-    this.setCookie('0');
     return '0';
   }
 
   load(): Promise<any> {
     const body = {
-      userId: this.guid(),
+      userId: this.getUniqueId(),
       featureGroup: this.getFeatureGroup()
     };
     return this.http.post(this.endpointUrl, body)
@@ -69,7 +69,7 @@ export class FeatureConfigService {
 
   setCookie(value: any) {
     const cookieName = FEATURE_TOOGLE_COOKIE_NAME;
-    const cookieValue = value;
+    const cookieValue = JSON.stringify(value);
     const cookieExpires = new Date(new Date().setFullYear(new Date().getFullYear() + 1)); // one year
     const cookiePath = '/';
     const cookieDomain = environment.domain;
@@ -85,7 +85,10 @@ export class FeatureConfigService {
   handleFeatureResponse(data: any) {
     const response = JSON.parse(data.body);
     if (response.featureGroup) {
-      this.setCookie(response.featureGroup);
+      this.setCookie({
+        uniqueId: this.uniqueId,
+        group: response.featureGroup
+      });
       this.featureConfig = response.config;
       // add data to datalayer for GA
       if (response.ga) {
