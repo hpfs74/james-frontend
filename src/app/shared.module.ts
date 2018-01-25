@@ -50,8 +50,8 @@ import {
   LicensePlatePipe,
   BooleanPipe,
   JamesTagPipe,
-  CapitalizePipe
-
+  CapitalizePipe,
+  UppercasePipe
 } from './shared/pipes/';
 
 /**
@@ -115,6 +115,7 @@ export const sharedComponents = [
   JamesTagPipe,
   LicensePlatePipe,
   CapitalizePipe,
+  UppercasePipe,
   // Directives
   BackdropBlurDirective,
   SidePanelStateDirective,

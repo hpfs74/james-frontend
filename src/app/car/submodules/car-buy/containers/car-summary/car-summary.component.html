@@ -191,7 +191,7 @@
 
           <knx-ir-row showValue="true">
             <knx-ir-label>Rekeningnummer</knx-ir-label>
-            <knx-ir-value>{{ (advice$ | async).iban | capitalize }}</knx-ir-value>
+            <knx-ir-value>{{ (advice$ | async).iban | uppercase }}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
 

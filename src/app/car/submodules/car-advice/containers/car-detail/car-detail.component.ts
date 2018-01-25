@@ -33,6 +33,9 @@ import { Price } from '@app/shared/models';
 import { Address } from '@app/address/models';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+import { KNXFeatureToggleService } from '@knx/feature-toggle';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'knx-car-detail-form',
   styleUrls: ['./car-detail.component.scss'],
@@ -55,7 +58,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   constructor(private store$: Store<fromRoot.State>,
-    private tagsService: TagsService) {
+              private tagsService: TagsService,
+              public featureToggleService: FeatureConfigService,
+              public route: ActivatedRoute) {
     this.initializeForms();
     this.selectInitalStates();
     this.setInitialSubscriptions();
@@ -153,6 +158,13 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
+    if (this.route.snapshot.queryParams) {
+      const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
+      const licencePlateValue = this.route.snapshot.queryParams[QUERY_PARAM_LICENCE];
+      this.form.formGroup.patchValue(Object.assign({}, {
+        licensePlate: licencePlateValue || null
+      }));
+    }
     this.setFormAsyncValidators();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.welcome', clear: true}));
   }

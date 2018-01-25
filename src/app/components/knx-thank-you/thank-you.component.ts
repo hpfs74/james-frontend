@@ -20,7 +20,8 @@ import { Component, Input } from '@angular/core';
 
           <ng-template #default>
             <p>Gefeliciteerd met je nieuwe {{insuranceType}}verzekering.<br>
-            We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed. We houden je hier uiteraard van op de hoogte.</p>
+              We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.
+              We houden je hier uiteraard van op de hoogte.</p>
           </ng-template></div>
 
             <ol *ngIf="!loggedIn">

@@ -10,8 +10,8 @@
     margin-bottom: 10px;
   }
 
-  h3 {
-    /deep/ span {
+  /deep/ h3 {
+    span {
       color: $knab-white;
     }
 
@@ -38,5 +38,11 @@ hr {
     h2 {
       margin-bottom: 45px;
     }
+  }
+}
+
+.knx-form-group__label {
+  &.knx-pull-up {
+    transform: translateY(-15px);
   }
 }
