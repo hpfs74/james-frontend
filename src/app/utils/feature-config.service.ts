@@ -36,11 +36,11 @@ export class FeatureConfigService {
       this.uniqueId = JSON.parse(cookies).uniqueId;
     } else {
       this.uniqueId = Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+      this.setCookie({
+        uniqueId: this.uniqueId,
+        group: '0'
+      });
     }
-    this.setCookie({
-      uniqueId: this.uniqueId,
-      group: '0'
-    });
     return this.uniqueId;
   }
 
