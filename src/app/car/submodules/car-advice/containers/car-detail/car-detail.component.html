@@ -23,7 +23,7 @@
             </knx-async-preview>
             <div class="knx-form-group__label knx-pull-up"
               *ngIf="!featureToggleService.isOn('carInfo') && !(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
-              {{ (car$ | async)?.make }} {{ (car$ | async)?.model }} {{ (car$ | async)?.year }}
+              {{ (car$ | async)?.make | capitalize }} {{ (car$ | async)?.model | capitalize }} {{ (car$ | async)?.year | capitalize }}
             </div>
           </div>
         </div>
