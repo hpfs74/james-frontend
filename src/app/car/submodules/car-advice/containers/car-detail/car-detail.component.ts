@@ -33,6 +33,8 @@ import { Price } from '@app/shared/models';
 import { Address } from '@app/address/models';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+import { KNXFeatureToggleService } from '@knx/feature-toggle';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'knx-car-detail-form',
@@ -57,6 +59,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   error$: Observable<KNXStepError>;
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
+              public featureToggleService: FeatureConfigService,
               public route: ActivatedRoute) {
     this.initializeForms();
     this.selectInitalStates();
