@@ -18,6 +18,7 @@ export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): A
   const product_name = action.payload.event.state['data'].product_name || null;
   const external = action.payload.event.state['data'].external || null;
   const standardValues = {
+    hitType: 'pageview',
     event: 'pageview',
     page: action.payload.routerState.url,
     loggedIn_Verzekeren: loggedIn ? 'y' : 'n'

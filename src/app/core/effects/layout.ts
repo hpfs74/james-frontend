@@ -16,7 +16,7 @@ export class LayoutEffects {
   navigate$ = this.actions$
     .ofType(LayoutActions.CLOSE_MODAL)
     .do(() => {
-      return this.userDialogService.closeModal();
+      return this.userDialogService.modalService.closeDialog();
     });
 
   constructor(

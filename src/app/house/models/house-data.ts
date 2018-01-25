@@ -7,7 +7,7 @@ export class HouseDataRequest {
 /**
  * result of getHouseData
  */
-export class HouseDataResponse {
+export interface HouseDataResponse {
   Zipcode: string;
   HouseNumber: number;
   HouseNumberAddition: string;

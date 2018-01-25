@@ -1,0 +1,21 @@
+<div class="knx-radio-navigator">
+  <div class="knx-radio-navigator__previous">
+      <button type="button" class="knx-button knx-button--3d knx-button--primary"
+              [disabled]="currentIndex === 0"
+              (click)="prev()">
+          <span class="knx-icon-minus"></span>
+      </button>
+  </div>
+  <div class="knx-radio-navigator__content">
+    <strong>{{currentValue}}</strong><br/>
+    {{label}}
+  </div>
+  <div class="knx-radio-navigator__next">
+      <button type="button"
+              class="knx-button knx-button--3d knx-button--primary"
+              [disabled]="currentIndex === values.length-1"
+              (click)="next()">
+          <span class="knx-icon-plus"></span>
+      </button>
+  </div>
+</div>

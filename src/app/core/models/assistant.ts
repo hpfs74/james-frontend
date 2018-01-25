@@ -22,6 +22,10 @@ export class AssistantConfig {
     hello: `Vul hier je persoonlijke gegevens in.`
   };
 
+  public household = {
+    welcome: `Ik ga je vandaag helpen besparen op je inboedelverzekering. Ben je er klaar voor? <b>Let's go!</b>`,
+  };
+
   public car = {
     welcome: `Hallo! Ik ben ${this.avatar.name}.
       Ik ga je helpen met de voordeligste autoverzekering die bij jou past.`,
@@ -75,11 +79,12 @@ export class AssistantConfig {
       payment: 'Nog heel even! Van welk rekeningnummer mag je premie straks worden afgeschreven?',
       summary: 'We zijn er bijna! Kun je nog een keer de ingevulde gegevens controleren? Zo weet je zeker dat' +
         ' de verzekeraar de juiste informatie krijgt.',
-      thankyou: `Goed nieuws! De polis van je autoverzekering is verstuurd
-      en wordt binnen 3 dagen goedgekeurd. We houden je op de hoogte!`,
-      finalEmail: (email: string) => `Een kopie van de polis is verstuurd naar: ${email}`
+      thankyou: `Goed nieuws! We hebben je aanvraag ontvangen en wij gaan deze indienen bij de verzekeraar. We houden je op de hoogte!`,
+      finalEmail: (email: string) => `Een kopie van je aanvraag is verstuurd naar ${email}`
     },
     purchased: (firstName: string) => `Via de website krijg je op dit moment enkel advies. Wil je de verzekering beheren?
       Download dan de Knab Verzekeren app.`
   };
+
+
 }

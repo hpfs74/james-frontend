@@ -5,6 +5,11 @@
     <p>If so, your account will be deleted and all your saved data will be removed from all Knab services</p>
   </div>
 </div>
+<div class="row" *ngIf="error$ | async">
+  <div class="col-md-12">
+    <p class="knx-error">{{ (error$ | async) }}</p>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-6">
     <button class="knx-button knx-button--secondary knx-button--ghost" (click)="cancel()">go back</button>

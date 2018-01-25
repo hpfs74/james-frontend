@@ -1,0 +1,19 @@
+
+@import '~styles/base';
+
+.house-hold-house-type-form {
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  h4.knx-collapse-message__title {
+    letter-spacing: 0.05em;
+  }
+}
+
+hr {
+  margin: -8px 0 16px;
+  border: 0;
+  border-bottom: 2px $knab-primary-gray solid;
+}
+

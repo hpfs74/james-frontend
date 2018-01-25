@@ -25,6 +25,8 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
+import { FeatureLoader } from '@app/utils/feature-loader';
+import { FeatureConfig } from '@app/utils/feature-config';
 
 @NgModule({
   imports: [
@@ -66,6 +68,13 @@ import { AddressModule } from './address/address.module';
       provide: APP_INITIALIZER,
       useFactory: ContentLoader,
       deps: [ContentConfig],
+      multi: true
+    },
+    FeatureConfig,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: FeatureLoader,
+      deps: [FeatureConfig],
       multi: true
     },
     /**

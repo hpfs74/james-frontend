@@ -3,9 +3,10 @@ import { Http, Headers, Response, URLSearchParams, RequestOptions, ResponseOptio
 import 'rxjs/add/operator/map';
 
 import { environment } from '@env/environment';
-import { HouseHoldAmountRequest, HouseHoldAmountResponse } from '@app/house-hold/models/house-hold-amount';
-import { HouseDataResponse, HouseDataRequest } from '@app/house-hold/models/house-data';
-import { HouseHoldPremiumRequest } from '@app/house-hold/models/house-hold-premium';
+import { HouseHoldAmountRequest, HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
+import { HouseDataResponse, HouseDataRequest } from '@app/house/models/house-data';
+import { HouseHoldPremiumRequest, HouseHoldPremiumResponse } from '@app/house/models/house-hold-premium';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HouseHoldService {
@@ -17,13 +18,13 @@ export class HouseHoldService {
       .map(res => <HouseDataResponse>res.json());
   }
 
-  public calculateHouseHoldAmount(req: HouseHoldAmountRequest) {
+  public calculateHouseHoldAmount(req: HouseHoldAmountRequest): Observable<HouseHoldAmountResponse> {
     return this.http.post(environment.riskInsurance.HouseHoldAmount, req)
-      .map(res => res.json());
+      .map(res => <HouseHoldAmountResponse>res.json());
   }
 
-  public calculatePremiums(req: HouseHoldPremiumRequest) {
+  public calculatePremiums(req: HouseHoldPremiumRequest): Observable<HouseHoldPremiumResponse> {
     return this.http.post(environment.riskInsurance.HouseHoldPremium, req)
-      .map(res => res.json());
+      .map(res => <HouseHoldPremiumResponse>res.json());
   }
 }

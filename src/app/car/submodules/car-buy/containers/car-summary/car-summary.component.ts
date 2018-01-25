@@ -12,6 +12,7 @@ import { AsyncPipe } from '@angular/common';
 import { InsuranceAdvice } from '../../../../../insurance/models/index';
 import { ContactDetailForm } from '../../../../../shared/forms/contact-detail.form';
 import { InsuranceReviewRegistrationForm } from '../../../../../components/knx-insurance-review/insuatance-review-registration.form';
+import { registrationError } from '../../../../../registration/models/registration-error';
 
 import * as router from '../../../../../core/actions/router';
 import * as fromRoot from '../../../../reducers';
@@ -82,10 +83,12 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.summary', clear: true }));
 
     let sub1 = this.store$.select(fromCar.getCarBuyError)
-      .subscribe((error) => {
-        if (error) {
+      .subscribe((errorData: any) => {
+        if (errorData[0]) {
+          const errorCode = errorData[0];
+          this.submiting = false;
           return this.store$.dispatch(new wizardActions.Error({
-            message: 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
+            message: registrationError[errorCode] || 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
           }));
         }
       });
@@ -94,9 +97,9 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     let sub2 = this.store$.select(fromCar.getCarBuyComplete)
       .subscribe((complete) => {
         if (complete) {
-          this.submiting = false;
           this.deleteAdvice();
           this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
+          this.submiting = false;
         }
       });
 

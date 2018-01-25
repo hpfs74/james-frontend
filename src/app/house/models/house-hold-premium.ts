@@ -35,20 +35,20 @@ export class HouseHoldPremiumRequest {
   IncludeOutdoorsValuable?: string;
 }
 
-export class ConditionUrl {
+export interface ConditionUrl {
   URL: string;
   Description: string;
   Number: string;
 }
 
-export class Clause {
+export interface Clause {
   ClauseTitle: string;
   ClauseNumber: string;
   ClauseText: string;
 }
 
-export class CalculatedPremium {
-  ComeningDate: number;
+export interface CalculatedPremium {
+  CommencingDate: number;
   NettoPremium: number;
   TotalCosts: number;
   Taxes: number;
@@ -59,8 +59,8 @@ export class CalculatedPremium {
   CompanyName: string;
   CompanyLogoUrl: string;
   Identifier: string;
-  ConditionUrls: ConditionUrl[];
-  Clauses: Clause[];
+  ConditionUrls?: ConditionUrl[];
+  Clauses?: Clause[];
   HouseholdCoverageDescription: string;
   InsuredAmount: number;
   Deductables: number;
@@ -68,4 +68,8 @@ export class CalculatedPremium {
   GlassCoverageDescription: string;
   ValuablesCoverageDescription: string;
   ValuablesInsuredAmount: number;
+}
+
+export interface HouseHoldPremiumResponse {
+  CalculatedPremiums: Array<CalculatedPremium>;
 }

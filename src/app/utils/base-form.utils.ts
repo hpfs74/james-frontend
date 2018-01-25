@@ -29,6 +29,10 @@ export const birthDateMask = {
 };
 
 export function dateDecode(value) {
+  if (!value) {
+    return null;
+  }
+
   if ( value instanceof Date ) {
     return value;
   }

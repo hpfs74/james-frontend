@@ -74,7 +74,14 @@
       </knx-card>
 
       <knx-card>
-        <h3>Over jou</h3>
+        <h3>Over jou <small>(als hoofdbestuurder)</small>
+          <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+            <knx-tooltip>
+              Hoofdbestuurder is de persoon die in de meerderheid van de gevallen in de auto rijdt én eigenaar is van de auto.
+              Als dit niet het geval is, kun je helaas geen autoverzekering afsluiten via Knab.
+            </knx-tooltip>
+          </span>
+        </h3>
 
         <div class="row">
           <div class="col-md-4 col-sm-12">
@@ -129,7 +136,7 @@
         </div>
 
         <knx-loader [visible]="isCoverageLoading$ | async">
-          Een momentje! We vergelijken meer dan 20 verschillende aanbieders voor je om de beste match te vinden.
+          Een momentje! We vergelijken 19 verschillende aanbieders voor je om de beste match te vinden.
         </knx-loader>
       </div>
     </div>

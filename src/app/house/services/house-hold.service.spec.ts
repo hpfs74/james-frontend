@@ -10,8 +10,8 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 import { LocalStorageService } from '../../core/services';
-import { HouseHoldService } from '@app/house-hold/services/house-hold.service';
-import { CalculatedPremium } from '@app/house-hold/models/house-hold-premium';
+import { HouseHoldService } from '@app/house/services/house-hold.service';
+import { CalculatedPremium } from '@app/house/models/house-hold-premium';
 
 describe('Service: HouseHold', () => {
   let backend, service;

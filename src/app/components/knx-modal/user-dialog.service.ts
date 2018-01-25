@@ -10,7 +10,7 @@ import * as layout from '../../core/actions/layout';
 @Injectable()
 export class UserDialogService {
 
-  constructor(private modalService: KNXModalDialogService, private store$: Store<fromRoot.State>) { }
+  constructor(public modalService: KNXModalDialogService, private store$: Store<fromRoot.State>) { }
 
   public openModal(modalName: string, title: string, viewRef: ViewContainerRef, component: any,
     settings?: KNXModalDialogSettings, onClose?: () => Promise<any> | Observable<any> | boolean) {
@@ -26,7 +26,7 @@ export class UserDialogService {
   }
 
   closeModal() {
-    this.modalService.closeDialog();
+    this.store$.dispatch(new layout.CloseModal());
     return true;
   }
 }
