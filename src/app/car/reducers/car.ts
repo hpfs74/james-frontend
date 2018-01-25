@@ -99,7 +99,7 @@ export function reducer(state = initialState, action: Action): State {
         loading: false,
         buyComplete: false,
         buyError: true,
-        buyErrorCode: JSON.parse(action.payload._body).error
+        buyErrorCode: action.payload._body ? JSON.parse(action.payload._body).error : null
       });
     }
 
