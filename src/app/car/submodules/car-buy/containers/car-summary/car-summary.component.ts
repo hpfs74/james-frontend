@@ -11,6 +11,8 @@ import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 import { InsuranceAdvice } from '../../../../../insurance/models/index';
 import { ContactDetailForm } from '../../../../../shared/forms/contact-detail.form';
+import { InsuranceReviewRegistrationForm } from '../../../../../components/knx-insurance-review/insuatance-review-registration.form';
+import { registrationError } from '../../../../../registration/models/registration-error';
 
 import * as router from '../../../../../core/actions/router';
 import * as fromRoot from '../../../../reducers';
@@ -49,6 +51,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   acceptInsuranceTerms: boolean;
   acceptKnabTerms: boolean;
+  registrationForm: InsuranceReviewRegistrationForm;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
   content: Content;
@@ -80,10 +83,12 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.summary', clear: true }));
 
     let sub1 = this.store$.select(fromCar.getCarBuyError)
-      .subscribe((error) => {
-        if (error) {
+      .subscribe((errorData: any) => {
+        if (errorData[0]) {
+          const errorCode = errorData[0];
+          this.submiting = false;
           return this.store$.dispatch(new wizardActions.Error({
-            message: 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
+            message: registrationError[errorCode] || 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
           }));
         }
       });
@@ -92,9 +97,9 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     let sub2 = this.store$.select(fromCar.getCarBuyComplete)
       .subscribe((complete) => {
         if (complete) {
-          this.submiting = false;
           this.deleteAdvice();
           this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
+          this.submiting = false;
         }
       });
 
@@ -183,6 +188,10 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({ message: this.formSummaryError }));
     }
 
+    if (!this.isLoggedIn) {
+      this.store$.dispatch(new advice.Update(this.registrationForm.formGroup.value));
+    }
+
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
         return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
@@ -203,6 +212,11 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   private summaryValid() {
-    return this.isLoggedIn ? this.acceptInsuranceTerms : this.acceptInsuranceTerms && this.acceptKnabTerms;
+    return this.isLoggedIn ? this.acceptInsuranceTerms :
+      this.acceptInsuranceTerms && this.acceptKnabTerms && this.registrationForm.formGroup.valid;
+  }
+
+  public login() {
+    this.store$.dispatch(new router.Go({ path: ['/login'] }));
   }
 }

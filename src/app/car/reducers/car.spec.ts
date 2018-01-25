@@ -28,7 +28,8 @@ describe('Car reducer', () => {
         license: null,
         info: null,
         buyComplete: false,
-        buyError: false
+        buyError: false,
+        buyErrorCode: null,
       };
       const result = fromCar.reducer(fromCar.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -45,7 +46,8 @@ describe('Car reducer', () => {
         license: null,
         info: null,
         buyComplete: false,
-        buyError: false
+        buyError: false,
+        buyErrorCode: null,
       };
       const result = fromCar.reducer(fromCar.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -91,7 +93,8 @@ describe('Car reducer', () => {
         license: 'GK906T',
         info: car,
         buyComplete: false,
-        buyError: false
+        buyError: false,
+        buyErrorCode: null,
       };
       const result = fromCar.reducer(fromCar.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -108,7 +111,8 @@ describe('Car reducer', () => {
         license: null,
         info: null,
         buyComplete: false,
-        buyError: false
+        buyError: false,
+        buyErrorCode: null,
       };
       const result = fromCar.reducer(fromCar.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -125,7 +129,8 @@ describe('Car reducer', () => {
         license: null,
         info: null,
         buyComplete: true,
-        buyError: false
+        buyError: false,
+        buyErrorCode: null
       };
       const result = fromCar.reducer(fromCar.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -142,7 +147,8 @@ describe('Car reducer', () => {
         license: null,
         info: null,
         buyComplete: false,
-        buyError: true
+        buyError: true,
+        buyErrorCode: null
       };
       const result = fromCar.reducer(fromCar.initialState, action);
       expect(result).toEqual(expectedResult);

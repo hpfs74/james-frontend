@@ -12,6 +12,7 @@ export interface State {
   info: Car;
   buyComplete: boolean;
   buyError: boolean;
+  buyErrorCode: string;
 }
 
 export const initialState: State = {
@@ -21,7 +22,8 @@ export const initialState: State = {
   license: null,
   info: null,
   buyComplete: false,
-  buyError: false
+  buyError: false,
+  buyErrorCode: null
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -87,7 +89,8 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, {
         loading: false,
         buyComplete: true,
-        buyError: false
+        buyError: false,
+        buyErrorCode: null
       });
     }
 
@@ -95,7 +98,8 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, {
         loading: false,
         buyComplete: false,
-        buyError: true
+        buyError: true,
+        buyErrorCode: action.payload._body ? JSON.parse(action.payload._body).error : null
       });
     }
 
@@ -113,4 +117,4 @@ export const getError = (state: State) => state.error;
 export const getCarInfo = (state: State) => state.info;
 export const getLicense = (state: State) => state.license;
 export const getBuyComplete = (state: State) => state.buyComplete;
-export const getBuyError = (state: State) => state.buyError;
+export const getBuyError = (state: State) => [state.buyError, state.buyErrorCode];

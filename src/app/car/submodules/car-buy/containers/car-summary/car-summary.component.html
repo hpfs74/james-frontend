@@ -194,6 +194,11 @@
             <knx-ir-value>{{ (advice$ | async).iban | uppercase }}</knx-ir-value>
           </knx-ir-row>
         </knx-ir-content>
+
+        <knx-insurance-review-registration (onLogin)="login()"
+                                           (onRegistrationFormValidation)="registrationForm = $event"
+                                           *ngIf="isAnonymous$ | async" title="Maak jouw Knab Accountant aan">
+        </knx-insurance-review-registration>
       </div>
 
       <div class="knx-car-summary__terms">

@@ -13,6 +13,11 @@ import { BuyService } from '../../insurance/services/buy.service';
 import { Car } from '../models';
 
 import * as fromAuth from '../../auth/reducers';
+import * as fromRoot from '../../reducers';
+import * as fromCore from '../../core/reducers';
+import * as fromCar from '../../reducers';
+import * as fromInsurance from '../../insurance/reducers';
+import * as fromProfile from '../../profile/reducers';
 import * as car from '../actions/car';
 
 describe('CarEffects', () => {
@@ -20,13 +25,17 @@ describe('CarEffects', () => {
   let actions: Observable<any>;
   let carService: any;
   let buyService: any;
-  let store: Store<fromAuth.State>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({
-          'auth': combineReducers(fromAuth.reducers)
+          ...fromRoot.reducers,
+          'auth': combineReducers(fromAuth.reducers),
+          'app': combineReducers(fromCore.reducers),
+          'car': combineReducers(fromCar.reducers),
+          'insurance': combineReducers(fromInsurance.reducers),
+          'profile': combineReducers(fromProfile.reducers)
         })
       ],
       providers: [

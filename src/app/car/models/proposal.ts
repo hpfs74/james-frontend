@@ -174,7 +174,8 @@ export class CarProposalHelper {
   }
 
   private removeWhiteSpace(value: string) {
-    return value.replace(/[ _]/gim, '');
+    if (value) {
+      return value.replace(/[ _]/gim, '');
+    }
   }
-
 }

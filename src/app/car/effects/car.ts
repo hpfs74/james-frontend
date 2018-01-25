@@ -14,6 +14,7 @@ import { BuyService } from '../../insurance/services/buy.service';
 import { Car, CarCoverageRecommendation } from '../models';
 
 import * as fromAuth from '../../auth/reducers';
+import * as fromAdvice from '../../insurance/reducers';
 
 import * as auth from '../../auth/actions/auth';
 import * as car from '../actions/car';
@@ -43,15 +44,15 @@ export class CarEffects {
   buyCarInsurance$ = this.actions$
     .ofType(car.BUY_REQUEST)
     .map((action: car.Buy) => action.payload)
-    .withLatestFrom(this.store$.select(fromAuth.getLoggedIn))
-    .switchMap(([payload, isLoggedIn]) => {
+    .withLatestFrom(this.store$.select(fromAuth.getLoggedIn), this.store$.select(fromAdvice.getSelectedAdvice))
+    .switchMap(([payload, isLoggedIn, advice]) => {
       if (isLoggedIn) {
         return this.carService.buyStatic(payload)
         .map((res: Response) => new car.BuyComplete(res))
         .catch(error => Observable.of(new car.BuyFailure(error)));
       } else {
         // Manual processing of buy request without an account
-        return this.buyService.buyInsuranceAnonymous(payload)
+        return this.buyService.buyInsuranceAnonymous(payload, advice)
         .map((res: Response) => new car.BuyComplete(res))
         .catch(error => Observable.of(new car.BuyFailure(error)));
       }

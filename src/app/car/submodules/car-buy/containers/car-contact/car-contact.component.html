@@ -46,13 +46,6 @@
           </div>
         </div>
 
-        <knx-feature-toggle [featureName]="'enableBuyFlowEmail'">
-          <knx-form-group *ngIf="!(profile$ | async) || !(profile$ | async).emailaddress"
-            [options]="form.formConfig.email"
-            [formControlName]="form.formConfig.email.formControlName">
-          </knx-form-group>
-        </knx-feature-toggle>
-
         <knx-form-group *ngIf="false"
           [options]="form.formConfig.saveToProfile"
           [formControlName]="form.formConfig.saveToProfile.formControlName">

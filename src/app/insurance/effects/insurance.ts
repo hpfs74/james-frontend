@@ -35,10 +35,11 @@ export class InsuranceEffects {
     .ofType(insurance.SAVE_LATEST)
     .withLatestFrom(this.store$, (payload, state: any) => {
       const advice = state.insurance.advice;
-      const existedAdvices = state.insurance.insurance.savedInsurances.car.insurance_advice.filter(savedAdvice =>
-        savedAdvice._id === advice.advice[advice.selectedId]._id);
+      const savedInsurances = state.insurance.insurance.savedInsurances;
+      const existedAdvices = savedInsurances ? savedInsurances.car.insurance_advice.filter(savedAdvice =>
+        savedAdvice._id === advice.advice[advice.selectedId]._id) : null;
 
-      if (advice.selectedId && !existedAdvices.length) {
+      if (advice.selectedId && !(existedAdvices && existedAdvices.length)) {
         let selectedInsurance = advice.advice[advice.selectedId];
         selectedInsurance.advice_item_id = state.insurance.advice.selectedInsurance.advice_item_id;
         return selectedInsurance;

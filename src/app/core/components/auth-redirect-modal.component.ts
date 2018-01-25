@@ -9,7 +9,7 @@ import { KNXFeatureToggleService } from '@knx/feature-toggle';
 import * as fromCore from '../reducers';
 import * as router from '../actions/router';
 import * as fromInsurance from '../../insurance/reducers';
-
+// TODO: popup is not used anymore
 @Component({
   selector: 'knx-auth-redirect',
   styleUrls: ['./auth-redirect.modal.component.scss'],
