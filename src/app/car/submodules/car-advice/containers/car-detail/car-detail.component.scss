@@ -10,8 +10,8 @@
     margin-bottom: 10px;
   }
 
-  h3 {
-    /deep/ span {
+  /deep/ h3 {
+    span {
       color: $knab-white;
     }
 
