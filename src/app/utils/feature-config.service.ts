@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { CookieService } from '@app/core/services/cookie.service';
-import { KNXFeatureToggleService } from '@knx/feature-toggle';
 
 import { environment } from '@env/environment';
 import 'rxjs/add/operator/map';
@@ -13,8 +12,7 @@ export class FeatureConfigService {
   endpointUrl: string = environment.james.featureToggle;
   featureConfig: any = environment.featureToggles;
   constructor(private http: Http,
-              private cookies: CookieService,
-              private knxFeatureToggleService: KNXFeatureToggleService) {}
+              private cookies: CookieService) {}
 
   /**
    * return boolean if value exists on feature config object
@@ -89,7 +87,6 @@ export class FeatureConfigService {
     if (response.featureGroup) {
       this.setCookie(response.featureGroup);
       this.featureConfig = response.config;
-      this.knxFeatureToggleService.setNewConfig(response.config);
     }
   }
 }
