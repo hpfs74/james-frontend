@@ -87,6 +87,10 @@ export class FeatureConfigService {
     if (response.featureGroup) {
       this.setCookie(response.featureGroup);
       this.featureConfig = response.config;
+      // add data to datalayer for GA
+      if (response.ga) {
+        window['dataLayer'].push(response.ga);
+      }
     }
   }
 }
