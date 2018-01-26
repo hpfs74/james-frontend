@@ -223,7 +223,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
 
   private proceedToBuyResults() {
     this.store$.dispatch(new router.Go({
-      path: ['/car/insurance/summary', { adviceId: advice.id }],
+      path: ['/car/insurance/summary'],
     }));
   }
 
