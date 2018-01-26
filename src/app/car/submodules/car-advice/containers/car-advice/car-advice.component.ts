@@ -123,16 +123,29 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           const insurances = purchasedInsurances.car.insurance;
           const advices = purchasedInsurances.car.insurance_advice;
 
-          if (insurances.length && insurances.filter(insurance =>
-            (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
-            // redirect to purchased overview if there are any manually added insurances
-            this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
-          } else if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
+          if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
             // Proceed to the buy flow for anonymous with advice
             this.proceedWithAdvice(advices, insurances);
+          } else if (insurances.length && insurances.filter(insurance =>
+              (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+            // redirect to purchased overview if there are any manually added insurances
+            this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
           }
+        })
+    );
+
+    this.subscription$.push(
+      this.insurance$.take(1).subscribe(selectedInsurance => {
+        this.subscription$.push(
+          this.advice$.take(1).subscribe(selectedAdvice => {
+            if (selectedInsurance && selectedAdvice) {
+              this.proceedToBuyResults();
+            }
+          })
+        );
       })
     );
+
     this.subscription$.push(
       this.carExtrasForm.formGroup.valueChanges
         .debounceTime(200)
@@ -176,8 +189,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   private proceedWithAdvice(advices, insurances) {
-    this.store$.dispatch(new advice.Get(insurances[0].advice_item_id));
-    this.store$.dispatch(new advice.Update(Object.assign({}, advices[0])));
+    this.store$.dispatch(new advice.Get(insurances[insurances.length - 1].advice_item_id));
+    this.store$.dispatch(new advice.Update(Object.assign({}, advices[advices.length - 1])));
+
     this.subscription$.push(
       this.insurance$.subscribe(insurance => {
         if (insurance) {
@@ -202,6 +216,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
         if (advice && advice.id) {
           this.store$.dispatch(new router.Go({
             path: ['/car/insurance/contact-detail', { adviceId: advice.id }],
+          }));
+        }
+      }));
+  }
+
+  private proceedToBuyResults() {
+    this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
+      advice => {
+        if (advice && advice.id) {
+          this.store$.dispatch(new router.Go({
+            path: ['/car/insurance/summary', { adviceId: advice.id }],
           }));
         }
       }));
