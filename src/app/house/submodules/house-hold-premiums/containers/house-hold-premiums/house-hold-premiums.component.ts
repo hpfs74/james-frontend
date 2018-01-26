@@ -20,7 +20,6 @@ import * as fromAuth from '@app/auth/reducers';
 import * as fromCore from '@app/core/reducers';
 
 // Core actions
-import * as router from '@app/core/actions/router';
 import * as layout from '@app/core/actions/layout';
 import * as assistant from '@app/core/actions/assistant';
 
@@ -49,8 +48,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
   // houseHoldExtrasForm: HouseHoldExtrasForm;
 
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService,
-              public router: Router) {
+              private tagsService: TagsService) {
   }
 
   ngOnInit() {

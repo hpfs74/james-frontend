@@ -15,6 +15,7 @@ import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
 import { By } from '@angular/platform-browser';
 import { HouseHoldPremiumsListComponent } from './house-hold-premiums-list.component';
+import * as fromHouse from '@app/house/reducers';
 
 
 describe('Component: HouseHoldPremiumsListComponent', () => {
@@ -31,7 +32,8 @@ describe('Component: HouseHoldPremiumsListComponent', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'app': combineReducers(fromCore.reducers)
+          'app': combineReducers(fromCore.reducers),
+          'household': combineReducers(fromHouse.reducers)
         })
       ],
       declarations: [

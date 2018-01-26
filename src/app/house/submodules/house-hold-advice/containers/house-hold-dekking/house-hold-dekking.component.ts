@@ -16,6 +16,8 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { Price } from '@app/shared/models';
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
+import * as fromHouse from '@app/house/reducers';
+import { HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -30,11 +32,15 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   error$: Observable<KNXStepError>;
   alive: boolean;
   coverages: Price[];
+  isAmountLoaded$: Observable<boolean>;
+  isAmountLoading$: Observable<boolean>;
+  amount$: Observable<HouseHoldAmountResponse>;
 
   constructor(private store$: Store<fromRoot.State>,
-    private tagsService: TagsService) {
+              private tagsService: TagsService) {
     this.initializeForms();
     this.selectInitalStates();
+    this.setIntialSubscription();
 
     this.currentStepOptions = {
       label: 'Dekking',
@@ -75,6 +81,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   }
 
   selectInitalStates(): void {
+
     this.error$ = this.store$.select(fromCore.getWizardError);
   }
 
@@ -82,6 +89,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('insurance_flow_household'));
+  }
+
+  setIntialSubscription() {
+    this.isAmountLoading$ = this.store$.select(fromHouse.getHouseHoldAmountLoading);
+    this.isAmountLoaded$ = this.store$.select(fromHouse.getHouseHoldAmountLoaded);
+    this.amount$ = this.store$.select(fromHouse.getHouseHoldAmountResult);
   }
 
   ngAfterViewInit(): void {

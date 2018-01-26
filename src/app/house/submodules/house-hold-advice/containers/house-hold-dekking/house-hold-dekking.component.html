@@ -135,9 +135,15 @@
 
       </knx-card>
 
-      <div class="knx-house-hold-rect">
+      <knx-async-preview
+        [loading]="isAmountLoading$ | async"
+        [loaded]="isAmountLoaded$ | async"
+        [hidden]="!(isAmountLoading$ | async) && !(isAmountLoaded$ | async)">
 
-      </div>
+        <div class="knx-house-hold-rect">
+          {{(amount$ | async)?.InsuredAmount }}
+        </div>
+      </knx-async-preview>
     </div>
   </div>
 

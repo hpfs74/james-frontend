@@ -30,7 +30,6 @@ export const reducers = {
   houseHoldData: fromHouseHoldData.reducer
 };
 
-
 export const selectHouseHoldState = createFeatureSelector<HouseHoldState>('household');
 
 /**
