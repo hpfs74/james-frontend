@@ -159,9 +159,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
-    if (this.route.snapshot.queryParams) {
-      const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
-      const licencePlateValue = this.route.snapshot.queryParams[QUERY_PARAM_LICENCE];
+    const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
+    const licencePlateValue = this.route.snapshot.queryParams[QUERY_PARAM_LICENCE];
+    if (licencePlateValue) {
       this.form.formGroup.patchValue(Object.assign({}, {
         licensePlate: licencePlateValue || null
       }));
