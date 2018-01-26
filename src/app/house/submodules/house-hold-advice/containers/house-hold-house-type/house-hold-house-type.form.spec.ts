@@ -1,5 +1,5 @@
 import { FormBuilder } from '@angular/forms';
-import { HouseHoldHouseTypeForm } from '@app/house/containers/house-hold-house-type/house-hold-house-type.form';
+import { HouseHoldHouseTypeForm } from './house-hold-house-type.form';
 
 describe('HouseHold Type Form', () => {
   let form: HouseHoldHouseTypeForm;

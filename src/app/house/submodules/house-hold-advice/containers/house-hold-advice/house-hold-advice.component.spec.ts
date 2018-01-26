@@ -10,10 +10,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { setUpTestBed } from '@app/../test.common.spec';
 
-import * as fromRoot from '../../../reducers';
+import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
-import * as fromHouseHold from '../../reducers/house-data';
+import * as fromHouseHold from '@app/house/reducers/house-data';
 
 import * as router from '@app/core/actions/router';
 import * as layout from '@app/core/actions/layout';
@@ -30,7 +30,7 @@ import { Router, RouterModule } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
-import { HouseHoldAdviceComponent } from '@app/house/containers/house-hold-advice/house-hold-advice.component';
+import { HouseHoldAdviceComponent } from './house-hold-advice.component';
 
 describe('Component: HouseHoldAdviceComponent', () => {
   let comp: HouseHoldAdviceComponent;
