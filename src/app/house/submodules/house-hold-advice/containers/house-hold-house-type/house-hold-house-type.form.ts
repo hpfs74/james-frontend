@@ -20,7 +20,7 @@ export class HouseHoldHouseTypeForm extends BaseForm {
       roomsCount: ['2', Validators.required],
       surfaceArea: ['90', Validators.required],
       buildingType: ['2', Validators.required],
-      buildYear: ['1900', Validators.required]
+      buildYear: ['1800', Validators.required]
     });
 
     this.formConfig = {

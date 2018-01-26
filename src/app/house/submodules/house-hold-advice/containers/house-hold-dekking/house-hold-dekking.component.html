@@ -118,7 +118,26 @@
             [options]="form.formConfig.familySituation">
           </knx-form-group>
         </div>
+
+        <div class="knx-form-group--separated">
+          <span class="valuable-contents-ab">
+            Valuable contents above &euro; 34.000
+          </span>
+
+          <div>
+            <div class="rectangle"></div>
+            <div class="currently-we-do-not">
+              Currently we do not insure valuables with values above €34.000.
+              Please contact us if you have any questions regarding insurances for valuables.
+            </div>
+          </div>
+        </div>
+
       </knx-card>
+
+      <div class="knx-house-hold-rect">
+
+      </div>
     </div>
   </div>
 
@@ -126,5 +145,6 @@
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
-                     (onNext)="goToNextStep()">
+                     (onNext)="goToNextStep()"
+                     (onBack)="goToPreviousStep()">
 </knx-wizard-controls>

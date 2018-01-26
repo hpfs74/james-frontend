@@ -15,7 +15,7 @@ import { scrollToY } from '@app/utils/scroll-to-element.utils';
 import { KNXWizardRxComponent } from '@app/components/knx-wizard-rx/knx-wizard-rx.component';
 import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import * as FormUtils from '@app/utils/base-form.utils';
-import * as fromRoot from '../../../reducers';
+import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@app/auth/reducers';
 import * as fromCore from '@app/core/reducers';
 
@@ -23,9 +23,6 @@ import * as fromCore from '@app/core/reducers';
 import * as router from '@app/core/actions/router';
 import * as layout from '@app/core/actions/layout';
 import * as assistant from '@app/core/actions/assistant';
-
-// House hold actions
-import * as housedata from '../../actions/house-data';
 
 // Other actions
 import * as wizardActions from '@app/core/actions/wizard';
@@ -38,7 +35,7 @@ enum houseHoldFormSteps {
   location,
   houseType,
   houseDetails,
-  results
+  dekking
 }
 @Component({
   templateUrl: 'house-hold-advice.component.html',
@@ -58,7 +55,7 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
-              public router: Router,
+              private router: Router,
               public knxWizardService: KNXWizardRxService) {
     this.formSteps = [
       {

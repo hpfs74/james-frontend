@@ -18,6 +18,7 @@ export class HouseHoldDekkingForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
+      outsideCoverage: [null],
       netIncomeRange: [null, Validators.required],
       dateOfBirth: [null, Validators.required, birthDateValidator('dateOfBirth')],
       familySituation: [null, Validators.required]

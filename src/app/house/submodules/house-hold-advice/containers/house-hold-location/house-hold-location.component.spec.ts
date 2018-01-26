@@ -17,11 +17,11 @@ import { ContentConfigMock } from '@app/content.mock.spec';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
 
-import * as fromRoot from '../../../reducers';
+import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
 
-import { HouseHoldLocationComponent } from '@app/house/containers/house-hold-location/house-hold-location.component';
+import { HouseHoldLocationComponent } from './house-hold-location.component';
 
 describe('Component: HouseHoldLocationComponent', () => {
   let comp: HouseHoldLocationComponent;

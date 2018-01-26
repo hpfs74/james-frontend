@@ -1,5 +1,5 @@
 import { FormBuilder } from '@angular/forms';
-import { HouseHoldLocationForm } from '@app/house/containers/house-hold-location/house-hold-location.form';
+import { HouseHoldLocationForm } from './house-hold-location.form';
 
 describe('HouseHold Location Form', () => {
   let form: HouseHoldLocationForm;

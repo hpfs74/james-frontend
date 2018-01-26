@@ -53,6 +53,7 @@ export function reducer(state = initialState, action: Action): State {
 
     case HouseDataActions.UPDATE_ADDRESS: {
       const address = action.payload;
+
       return Object.assign({}, state, {
         address: address
       });

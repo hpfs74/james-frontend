@@ -2,21 +2,19 @@ import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import { TagsService } from '@app/core/services/tags.service';
 
 
-import * as cuid from 'cuid';
 import * as fromRoot from '@app/reducers';
 import * as assistant from '@app/core/actions/assistant';
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
 
-import { AddressForm } from '@app/address/components/address.form';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
-import { HouseHoldHouseDetailForm } from '@app/house/containers/house-hold-house-detail/house-hold-house-detail.form';
+import { HouseHoldHouseDetailForm } from './house-hold-house-detail.form';
+import * as houseHoldData from '@app/house/actions/house-hold-data';
 
 @Component({
   selector: 'knx-house-hold-house-detail-form',
@@ -32,7 +30,7 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   alive: boolean;
 
   constructor(private store$: Store<fromRoot.State>,
-    private tagsService: TagsService) {
+              private tagsService: TagsService) {
     this.initializeForms();
     this.selectInitalStates();
 
@@ -56,6 +54,30 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
       this.tagsService.getAsLabelValue('insurance_flow_household'));
   }
 
+  setInitialSubscription() {
+
+  }
+
+  setFormValue(value) {
+    if (value) {
+      if (value.WallsTitle) {
+        this.form.formGroup.patchValue({'wallsTitle': value.WallsTitle});
+      }
+
+      if (value.RoofMaterial) {
+        this.form.formGroup.patchValue({'roofMaterial': value.RoofMaterial});
+      }
+
+      if (value.SecondFloor) {
+        this.form.formGroup.patchValue({'secondFloor': value.SecondFloor});
+      }
+
+      if (value.Security) {
+        this.form.formGroup.patchValue({'security': value.Security});
+      }
+    }
+  }
+
   ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     this.setFormAsyncValidators();
@@ -72,6 +94,10 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
     this.alive = false;
   }
 
+  goToPreviousStep() {
+    this.store$.dispatch(new wizardActions.Back());
+  }
+
   goToNextStep(event?: any) {
     const detailForm = this.form.formGroup;
 
@@ -80,6 +106,13 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
     if (!detailForm.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
+
+    this.store$.dispatch(new houseHoldData.Update({
+      WallsTitle: detailForm.value.wallsTitle,
+      RoofMaterial: detailForm.value.roofMaterial,
+      SecondFloor: detailForm.value.secondFloor,
+      Security: detailForm.value.security
+    }));
 
     this.store$.dispatch(new wizardActions.Forward());
   }

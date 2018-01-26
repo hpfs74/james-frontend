@@ -9,105 +9,85 @@ import * as assistant from '@app/core/actions/assistant';
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
+import * as router from '@app/core/actions/router';
 
-import { Address } from '@app/address/models';
+
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
-import { HouseHoldHouseTypeForm } from '@app/house/containers/house-hold-house-type/house-hold-house-type.form';
+import { Price } from '@app/shared/models';
+import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 
 @Component({
-  selector: 'knx-house-hold-house-type-form',
-  styleUrls: ['./house-hold-house-type.component.scss'],
-  templateUrl: 'house-hold-house-type.component.html'
+  selector: 'knx-house-hold-dekking-form',
+  styleUrls: ['./house-hold-dekking.component.scss'],
+  templateUrl: 'house-hold-dekking.component.html'
 })
-export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
-  qaRootId = QaIdentifiers.houseHoldHouseType;
-  form: HouseHoldHouseTypeForm;
+export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
+  qaRootId = QaIdentifiers.houseHoldDekking;
+  form: HouseHoldDekkingForm;
   advice$: Observable<any>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
-  address: Address;
   alive: boolean;
-  roomValues = [
-    {
-      label: '2 or less',
-      value: '2'
-    },
-    {
-      label: '3',
-      value: '3'
-    },
-    {
-      label: '4',
-      value: '4'
-    },
-    {
-      label: '5',
-      value: '5'
-    },
-    {
-      label: '6',
-      value: '6'
-    },
-    {
-      label: '7',
-      value: '7'
-    },
-    {
-      label: '8',
-      value: '8'
-    },
-    {
-      label: '9 or more',
-      value: '9'
-    },
-  ];
-
-  test = 'ciao';
+  coverages: Price[];
 
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService) {
-
-
+    private tagsService: TagsService) {
     this.initializeForms();
-    this.selectInitialStates();
+    this.selectInitalStates();
 
     this.currentStepOptions = {
-      label: 'Huis type',
+      label: 'Dekking',
       backButtonLabel: 'Terug',
-      nextButtonLabel: 'Huis details',
+      nextButtonLabel: 'CTA',
       hideBackButton: false,
       hideNextButton: false
     };
-
-    this.address = {
-      street: 'Via le mani dal naso',
-      number: '220',
-      city: 'Plato',
-      province: 'XXXX',
-      county: 'YYYY',
-      postcode: '2123XX'
-    } as Address;
-
     this.alive = true;
+
+    this.coverages = [
+      {
+        id: '1',
+        badge: '',
+        header: 'Default coverage',
+        description: 'When using the default coverage this you are covered for the following topics:',
+
+        features: [
+          'USP1 - line 1 line 2',
+          'USP2',
+          'USP3 - line 1 line 2'
+        ]
+      },
+      {
+        id: '2',
+        badge: '',
+        header: 'Extended coverage',
+        description: 'Select this if you also want the additional coverages to covere to following topics',
+        features: [
+          'USP1 - line 1 line 2',
+          'USP2 ',
+          'USP3 - line 1 line 2',
+          'USP4 - line 1 line 2',
+          'USP5'
+        ]
+      }
+    ];
   }
 
-  selectInitialStates(): void {
+  selectInitalStates(): void {
     this.error$ = this.store$.select(fromCore.getWizardError);
   }
 
   initializeForms(): void {
     const formBuilder = new FormBuilder();
-    this.form = new HouseHoldHouseTypeForm(formBuilder,
+    this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('insurance_flow_household'));
   }
 
   ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     this.setFormAsyncValidators();
-
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));
-
   }
 
   setFormAsyncValidators(): void {
@@ -120,14 +100,23 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
     this.alive = false;
   }
 
+  updateSelectedCoverage(event) {
+
+  }
+
+  goToPreviousStep() {
+    this.store$.dispatch(new wizardActions.Back());
+  }
+
   goToNextStep(event?: any) {
     const detailForm = this.form.formGroup;
+
     FormUtils.validateForm(detailForm);
 
     if (!detailForm.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
-    this.store$.dispatch(new wizardActions.Forward());
+    this.store$.dispatch(new router.Go({path: ['/house']}));
   }
 }

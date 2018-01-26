@@ -99,5 +99,6 @@
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
-                     (onNext)="goToNextStep()">
+                     (onNext)="goToNextStep()"
+                     (onBack)="goToPreviousStep()">
 </knx-wizard-controls>

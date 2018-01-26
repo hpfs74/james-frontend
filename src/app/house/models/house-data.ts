@@ -1,4 +1,4 @@
-export class HouseDataRequest {
+export interface HouseDataRequest {
   Zipcode: string;
   HouseNumber: number;
   HouseNumberAddition?: string;

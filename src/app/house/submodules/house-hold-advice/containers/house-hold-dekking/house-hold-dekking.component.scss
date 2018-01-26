@@ -1,0 +1,72 @@
+@import '~styles/base';
+
+.house-hold-house-type-form {
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  h4.knx-collapse-message__title {
+    letter-spacing: 0.05em;
+  }
+}
+
+hr {
+  margin: -8px 0 16px;
+  border: 0;
+  border-bottom: 2px $knab-primary-gray solid;
+}
+
+.valuable-contents-ab {
+  height: 34px;
+  width: 272px;
+  color: #003b5a;
+  font-family: "PT Sans";
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 34px;
+}
+
+.currently-we-do-not {
+  height: 44px;
+  width: 516px;
+  color: #003b5a;
+  font-family: "PT Sans";
+  font-size: 16px;
+  font-style: italic;
+  line-height: 22px;
+  display: inline-block;
+  padding-left: 18px;
+}
+
+.rectangle {
+  height: 42px;
+  width: 2px;
+  background-color: #efe9e4;
+  display: inline-block;
+}
+
+.est-household-value {
+  height: 20px;
+  min-width: 126px;
+  color: $knab-white;
+  font-family: "PT Sans";
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.knx-house-hold-amount {
+  height: 23px;
+  width: 79px;
+  color: $knab-white;
+  font-family: Intro;
+  font-size: 18px;
+  line-height: 23px;
+  text-align: center;
+}
+
+.knx-house-hold-rect {
+  height: 93px;
+  width: 620px;
+  background-color: #00a4a7;
+}

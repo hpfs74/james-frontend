@@ -16,11 +16,11 @@ import { ContentConfig } from '@app/content.config';
 import { ContentConfigMock } from '@app/content.mock.spec';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
-import * as fromRoot from '../../../reducers';
+import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
 
-import { HouseHoldHouseTypeComponent } from '@app/house/containers/house-hold-house-type/house-hold-house-type.component';
+import { HouseHoldHouseTypeComponent } from './house-hold-house-type.component';
 
 describe('Component: HouseHoldHouseTypeComponent', () => {
   let comp: HouseHoldHouseTypeComponent;

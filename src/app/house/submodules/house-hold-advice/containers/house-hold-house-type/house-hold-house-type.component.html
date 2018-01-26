@@ -1,4 +1,4 @@
-<form [formGroup]="form.formGroup" class="knx-fancy-form house-hold-house-type-form">
+<form [formGroup]="form.formGroup" class="knx-fancy-form house-hold-house-type-form" #detailForm="ngForm">
 
   <div class="row">
     <div class="col-sm-12">
@@ -22,7 +22,12 @@
           <p>How many rooms does your house have (incl. living, bath, etc)</p>
         </div>
 
-        <knx-radio-navigator [values]="roomValues" label="rooms"></knx-radio-navigator>
+        <knx-radio-navigator
+          [values]="roomValues"
+          label="rooms"
+          [selected]="detailForm.value.roomsCount"
+          (onSelectChange)="updateRoomsCount($event)">
+        </knx-radio-navigator>
 
       </knx-card>
     </div>
@@ -33,8 +38,8 @@
       <knx-card>
         <div>
 
-            <span><b>Surface Area</b></span>
-            <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+          <span><b>Surface Area</b></span>
+          <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
             <knx-tooltip>TOOLTIP for surface</knx-tooltip>
           </span>
 
@@ -96,9 +101,12 @@
     </div>
   </div>
 
+
+  
 </form>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
+                     (onBack)="goToPreviousStep()"
                      (onNext)="goToNextStep()">
 </knx-wizard-controls>
