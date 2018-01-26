@@ -15,6 +15,7 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { HouseHoldHouseDetailForm } from './house-hold-house-detail.form';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
+import { getHouseHoldDataInfo } from '@app/house/reducers';
 
 @Component({
   selector: 'knx-house-hold-house-detail-form',
@@ -33,6 +34,7 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
               private tagsService: TagsService) {
     this.initializeForms();
     this.selectInitalStates();
+    this.setInitialSubscription();
 
     this.currentStepOptions = {
       label: 'Huis details',
@@ -55,7 +57,8 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   }
 
   setInitialSubscription() {
-
+    this.store$.select(getHouseHoldDataInfo)
+      .subscribe(data => this.setFormValue(data));
   }
 
   setFormValue(value) {

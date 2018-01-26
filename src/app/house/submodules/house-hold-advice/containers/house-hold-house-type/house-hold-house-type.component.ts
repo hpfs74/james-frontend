@@ -124,9 +124,9 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   }
 
   updateRoomsCount(index) {
-    this.form.formGroup.patchValue(Object.assign({}, {
+    this.form.formGroup.patchValue( {
       roomsCount: this.roomValues[index].value
-    }));
+    });
   }
 
   ngAfterViewInit(): void {

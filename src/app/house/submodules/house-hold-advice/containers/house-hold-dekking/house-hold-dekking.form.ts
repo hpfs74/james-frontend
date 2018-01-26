@@ -11,20 +11,26 @@ export class HouseHoldDekkingForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    dateOfBirth: () => 'Error on date of birth'
+    // dateOfBirth: () => 'Error on date of birth'
   };
 
   constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
     super();
 
     this.formGroup = this.fb.group({
+      coverage: [null],
       outsideCoverage: [null],
       netIncomeRange: [null, Validators.required],
-      dateOfBirth: [null, Validators.required, birthDateValidator('dateOfBirth')],
+      dateOfBirth: [null ], // , Validators.required, birthDateValidator('dateOfBirth')],
       familySituation: [null, Validators.required]
     });
 
     this.formConfig = {
+      coverage: {
+        formControlName: 'coverage',
+        type: 'text',
+        formControl: this.formGroup.get('coverage')
+      },
       outsideCoverage: {
         formControlName: 'outsideCoverage',
         type: 'checkbox',
@@ -66,7 +72,6 @@ export class HouseHoldDekkingForm extends BaseForm {
         label: 'Date of birth',
         type: 'date',
         formControl: this.formGroup.get('dateOfBirth'),
-        validationErrors: this.validationErrors,
         inputOptions: {
           decode: true,
           type: 'tel'

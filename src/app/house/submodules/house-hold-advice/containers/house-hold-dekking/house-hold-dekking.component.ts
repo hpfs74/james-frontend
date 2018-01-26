@@ -2,22 +2,26 @@ import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { takeWhile } from 'rxjs/operator/takeWhile';
 import { TagsService } from '@app/core/services/tags.service';
 
-import * as fromRoot from '@app/reducers';
-import * as assistant from '@app/core/actions/assistant';
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as wizardActions from '@app/core/actions/wizard';
+import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as router from '@app/core/actions/router';
-
+import * as assistant from '@app/core/actions/assistant';
+import * as householdinsuranceamount from '@app/house/actions/house-hold-insurance-amount';
 
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { Price } from '@app/shared/models';
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 import * as fromHouse from '@app/house/reducers';
-import { HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
+import { HouseHoldAmountRequest, HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
+import { HouseHoldData } from '@app/house/models/house-hold-data';
+import * as moment from 'moment';
+import _date = moment.unitOfTime._date;
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -35,6 +39,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   isAmountLoaded$: Observable<boolean>;
   isAmountLoading$: Observable<boolean>;
   amount$: Observable<HouseHoldAmountResponse>;
+  houseHoldData$: Observable<HouseHoldData>;
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -95,6 +100,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.isAmountLoading$ = this.store$.select(fromHouse.getHouseHoldAmountLoading);
     this.isAmountLoaded$ = this.store$.select(fromHouse.getHouseHoldAmountLoaded);
     this.amount$ = this.store$.select(fromHouse.getHouseHoldAmountResult);
+    this.houseHoldData$ = this.store$.select(fromHouse.getHouseHoldDataInfo);
   }
 
   ngAfterViewInit(): void {
@@ -104,6 +110,34 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   }
 
   setFormAsyncValidators(): void {
+    this.form.formGroup.valueChanges
+      .subscribe(() => {
+        if (this.form.formGroup.valid) {
+
+          const detailForm = this.form.formGroup;
+
+          this.houseHoldData$.subscribe(data => {
+
+            const payload = {
+              OwnedBuilding: data.OwnedBuilding ? 'J' : 'N',
+              FamilyComposition: detailForm.value.familySituation,
+              AmountMoreThan12KAudioVisualComp: 0,
+              AmountMoreThan6KJewelry: 0,
+              AmountMoreThan15KSpecialPossesion: 0,
+              BreadWinnerBirthdate: this.toRiskDate(detailForm.value.dateOfBirth),
+              BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
+            } as HouseHoldAmountRequest;
+
+            this.store$.dispatch(new householdinsuranceamount.GetInfo(payload));
+          });
+        }
+      });
+  }
+
+  toRiskDate(date): number {
+    const month = date.getMonth() + 1;
+
+    return +`${date.getFullYear()}${month < 10 ? '0' + month : month}${date.getDate()}`;
   }
 
   /**
@@ -113,8 +147,14 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.alive = false;
   }
 
+  /**
+   * update the form field related to the coverage
+   * @param event
+   */
   updateSelectedCoverage(event) {
-
+    this.form.formGroup.patchValue({
+      coverage: event
+    });
   }
 
   goToPreviousStep() {

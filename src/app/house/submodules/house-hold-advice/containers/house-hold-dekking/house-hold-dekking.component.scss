@@ -20,7 +20,6 @@ hr {
   height: 34px;
   width: 272px;
   color: #003b5a;
-  font-family: "PT Sans";
   font-size: 16px;
   font-weight: bold;
   line-height: 34px;
@@ -30,7 +29,6 @@ hr {
   height: 44px;
   width: 516px;
   color: #003b5a;
-  font-family: "PT Sans";
   font-size: 16px;
   font-style: italic;
   line-height: 22px;
@@ -46,10 +44,9 @@ hr {
 }
 
 .est-household-value {
+  margin-top: 24px;
   height: 20px;
-  min-width: 126px;
   color: $knab-white;
-  font-family: "PT Sans";
   font-size: 14px;
   line-height: 20px;
   text-align: center;
@@ -57,9 +54,8 @@ hr {
 
 .knx-house-hold-amount {
   height: 23px;
-  width: 79px;
+  font-family: $font-family-head;
   color: $knab-white;
-  font-family: Intro;
   font-size: 18px;
   line-height: 23px;
   text-align: center;
@@ -67,6 +63,12 @@ hr {
 
 .knx-house-hold-rect {
   height: 93px;
-  width: 620px;
   background-color: #00a4a7;
+  margin: 0 -1.5em -1.5em -1.5em;
+}
+
+/deep/ .knx-message.knx-house-hold-amount-rect--nomargin {
+  margin-bottom: 0;
+  border: 0;
+  padding: 0;
 }

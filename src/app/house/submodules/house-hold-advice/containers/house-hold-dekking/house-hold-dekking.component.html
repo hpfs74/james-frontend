@@ -13,7 +13,6 @@
 
   <div class="row">
     <div class="col-sm-12">
-
       <knx-price-table
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
         [items]="coverages"
@@ -133,17 +132,19 @@
           </div>
         </div>
 
+        <knx-async-preview
+          [loading]="isAmountLoading$ | async"
+          [loaded]="isAmountLoaded$ | async"
+          [hidden]="!(isAmountLoading$ | async) && !(isAmountLoaded$ | async)"
+          modifier="knx-house-hold-amount-rect--nomargin">
+
+          <div class="knx-house-hold-rect">
+            <p class="est-household-value">Est. household value</p>
+            <p class="knx-house-hold-amount">{{(amount$ | async)?.InsuredAmount | currency:'EUR':true:'2.0-4'}}</p>
+          </div>
+        </knx-async-preview>
       </knx-card>
 
-      <knx-async-preview
-        [loading]="isAmountLoading$ | async"
-        [loaded]="isAmountLoaded$ | async"
-        [hidden]="!(isAmountLoading$ | async) && !(isAmountLoaded$ | async)">
-
-        <div class="knx-house-hold-rect">
-          {{(amount$ | async)?.InsuredAmount }}
-        </div>
-      </knx-async-preview>
     </div>
   </div>
 
