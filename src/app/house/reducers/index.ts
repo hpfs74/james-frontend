@@ -10,26 +10,25 @@ import * as fromRoot from '../../reducers';
 import * as fromHouseData from './house-data';
 import * as fromHouseHoldAmount from './house-hold-insured-amount';
 import * as fromHouseHoldPremium from './house-hold-premium';
-import * as fromCoverage from '@car/reducers/coverage';
-import * as fromCompare from '@car/reducers/compare';
-import * as fromCar from '@car/reducers/car';
-import { CarState } from '@car/reducers';
-import { HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
+import * as fromHouseHoldData from './house-hold-data';
 
 export interface HouseHoldState {
   houseData: fromHouseData.State;
   amount: fromHouseHoldAmount.State;
   premium: fromHouseHoldPremium.State;
+  houseHoldData: fromHouseHoldData.State;
 }
 
 export interface State extends fromRoot.State {
-  'household': HouseHoldState;
+  household: HouseHoldState;
 }
 
 export const reducers = {
-  houseData: fromHouseData.reducer
+  houseData: fromHouseData.reducer,
+  amount: fromHouseHoldAmount.reducer,
+  premium: fromHouseHoldPremium.reducer,
+  houseHoldData: fromHouseHoldData.reducer
 };
-
 
 export const selectHouseHoldState = createFeatureSelector<HouseHoldState>('household');
 
@@ -42,6 +41,7 @@ export const getHouseDataResult = createSelector(getHouseDataState, fromHouseDat
 export const getHouseDataLoading = createSelector(getHouseDataState, fromHouseData.getLoading);
 export const getHouseDataLoaded = createSelector(getHouseDataState, fromHouseData.getLoaded);
 export const getHouseDataError = createSelector(getHouseDataState, fromHouseData.getError);
+export const getHouseDataAddress = createSelector(getHouseDataState, fromHouseData.getAddress);
 
 
 /**
@@ -64,4 +64,9 @@ export const getHouseHoldPremiumLoading = createSelector(getHouseHoldPremiumStat
 export const getHouseHoldPremiumLoaded = createSelector(getHouseHoldPremiumState, fromHouseHoldPremium.getLoaded);
 export const getHouseHoldPremiumError = createSelector(getHouseHoldPremiumState, fromHouseHoldPremium.getError);
 
-
+/**
+ * HouseHold Data Reducers
+ */
+export const getHouseHoldDataState = createSelector(selectHouseHoldState,
+  (state: HouseHoldState) => state.houseHoldData);
+export const getHouseHoldDataInfo = createSelector(getHouseHoldDataState, fromHouseHoldData.getInfo);

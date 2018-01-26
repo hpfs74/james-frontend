@@ -10,7 +10,8 @@ import { Component, Input } from '@angular/core';
       <div class="bounce3"></div>
     </div>
 
-    <div *ngIf="loaded && !loading" class="knx-message knx-message--hint knx-message--arrow-top">
+    <div *ngIf="loaded && !loading" class="knx-message knx-message--hint knx-message--arrow-top"
+      [ngClass]="modifier">
       <ng-content></ng-content>
     </div>
   `
@@ -18,4 +19,5 @@ import { Component, Input } from '@angular/core';
 export class AsyncPreviewComponent {
   @Input() loading: boolean;
   @Input() loaded: boolean;
+  @Input() modifier: string;
 }

@@ -3,7 +3,7 @@ import { CarCoverageRecommendation, CarCoverageDetails } from '../models/coverag
 
 export const CAR_COVERAGE_REQUEST =     '[Car] Coverage';
 export const CAR_COVERAGE_SUCCESS =     '[Car] Coverage Success';
-export const CAR_COVERAGE_FAILURE =      '[Car] Coverage Failure';
+export const CAR_COVERAGE_FAILURE =     '[Car] Coverage Failure';
 
 export const CAR_COVERAGE_SET_ACTIVE_LOAN = '[Car] Set  Active Loan';
 
