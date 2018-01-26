@@ -79,10 +79,8 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.fill'}));
   }
 
-  resetFlow() {
-    this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
-    this.store$.dispatch(new auth.ResetStates());
-    this.store$.dispatch(new router.Go({path: ['car']}));
+  goBack() {
+    this.store$.dispatch(new router.Back());
   }
 
   goToPreviousStep() {
