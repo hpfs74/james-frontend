@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -60,7 +60,8 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
               public featureToggleService: FeatureConfigService,
-              public route: ActivatedRoute) {
+              public route: ActivatedRoute,
+              public cdRef: ChangeDetectorRef) {
     this.initializeForms();
     this.selectInitalStates();
     this.setInitialSubscriptions();
@@ -158,12 +159,14 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
-    if (this.route.snapshot.queryParams) {
-      const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
-      const licencePlateValue = this.route.snapshot.queryParams[QUERY_PARAM_LICENCE];
+    const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
+    const licencePlateValue = this.route.snapshot.queryParams[QUERY_PARAM_LICENCE];
+    if (licencePlateValue) {
       this.form.formGroup.patchValue(Object.assign({}, {
         licensePlate: licencePlateValue || null
       }));
+      this.form.formGroup.controls.licensePlate.markAsTouched();
+      this.cdRef.detectChanges();
     }
     this.setFormAsyncValidators();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.welcome', clear: true}));
