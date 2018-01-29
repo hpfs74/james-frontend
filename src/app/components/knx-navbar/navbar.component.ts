@@ -23,7 +23,9 @@ export class NavbarComponent implements OnInit {
   isCollapsed = true;
   loggedIn$: Observable<boolean>;
   anonymous$: Observable<any>;
-  constructor(private store$: Store<fromRoot.State>) {}
+
+  constructor(private store$: Store<fromRoot.State>) {
+  }
 
   ngOnInit() {
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -42,7 +44,7 @@ export class NavbarComponent implements OnInit {
 
   public logIn() {
     this.store$.dispatch(new router.Go({ path: ['/login'] }));
-    this.store$.dispatch(new auth.ResetStates());
+    // this.store$.dispatch(new auth.ResetStates());
   }
 
   public register() {
