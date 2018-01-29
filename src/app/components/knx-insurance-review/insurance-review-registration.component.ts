@@ -42,7 +42,7 @@ import * as FormUtils from '../../utils/base-form.utils';
                     </div>
                 </div>
 
-                <div class="col-sm-4">
+                <div class="col-sm-4 hidden-xs">
                   <img src="/assets/images/avatars/avatar-fullsize.png" alt="lisa full size" />
                 </div>
               </div>

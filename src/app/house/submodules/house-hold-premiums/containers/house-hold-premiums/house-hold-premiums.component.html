@@ -1,0 +1,47 @@
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
+     knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+
+  <div class="container">
+    back button
+  </div>
+</div>
+
+<div class="container knx-house-hold-premiums" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+  <knx-wizard-rx>
+    <div class="knx-wizard__sidebar" #knxWizardSidebar>
+      <knx-chat-stream #knxChatStream
+                       [options]="chatConfig$ | async"
+                       [messages]="chatMessages$ | async">
+
+                       <!-- TODO: for later advice result to change glass coverage and so on
+
+                       [formGroup]="houseHoldExtrasForm.formGroup"> -->
+
+        <!--<knx-house-hold-extras-->
+          <!--[form]="houseHoldExtrasForm"-->
+          <!--[advice]="advice$ | async"-->
+          <!--[show]="knxWizardService.currentStepIndex === 1">-->
+        <!--</knx-house-hold-extras>-->
+
+        <ng-container >
+          <!--[formGroup]="houseHoldExtrasForm.formGroup">-->
+          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true" (onChangeVisibile)="toggleSideNavState($event)">
+            <div class="container-fluid">
+              <div class="knx-side-panel-content">
+                <!--<knx-house-hold-location-form-->
+                  <!--[form]="houseHoldExtrasForm"-->
+                  <!--[advice]="advice$ | async"-->
+                  <!--[show]="knxWizardService.currentStepIndex === 1">-->
+                <!--</knx-house-hold-location-form>-->
+
+                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow" (click)="knxSidePanel.close()">Verder</button>
+              </div>
+            </div>
+          </knx-side-panel>
+
+          <button class="knx-icon-filter knx-side-panel__action hidden-md hidden-lg hidden-md-up knx-button knx-button--secondary knx-button--3d" (click)="knxSidePanel.open()">Personaliseer resultaten</button>
+        </ng-container>
+      </knx-chat-stream>
+    </div>
+  </knx-wizard-rx>
+</div>
