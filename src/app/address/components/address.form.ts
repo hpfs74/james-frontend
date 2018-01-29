@@ -1,6 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { KNXPostalCodeValidator, FormControlOptions } from '@knx/form-control';
-import { KNXFormGroupOptions } from '@knx/form-group';
+import { KNXPostalCodeValidator } from '@knx/form-control';
 
 import { houseNumberValidator } from '../../utils/base-form.validators';
 import { postalCodeMask } from '../../utils/base-form.utils';
@@ -24,14 +23,19 @@ export class AddressForm {
           houseNumberValidator('houseNumber')
         ]
       )],
-      houseNumberExtension: [null, null]
+      houseNumberExtension: [null, Validators.compose(
+        [
+          Validators.required
+        ]
+      )]
     });
 
     this.validationErrors = {
       required: () => 'Dit is een verplicht veld',
       postalCode: () => `Vul een geldige postcode in`,
       address: () => `Dit adres bestaat niet. Probeer het nog eens`,
-      houseNumber: () => `Vul geldig huisnummer in, geen toevoeging`
+      houseNumber: () => `Vul geldig huisnummer in, geen toevoeging`,
+      houseNumberExtension: () => `bla`
     };
 
     this.formConfig = {

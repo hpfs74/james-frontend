@@ -109,6 +109,11 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
             value: addition
           });
         });
+
+        this.addressForm.formGroup.get('houseNumberExtension').setValue(
+          this.addressForm.formConfig.houseNumberExtension.inputOptions.items[0].value
+        );
+
         if (this.addressForm.formConfig.houseNumberExtension.inputOptions.items.length > 0) {
           this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = false;
         }
