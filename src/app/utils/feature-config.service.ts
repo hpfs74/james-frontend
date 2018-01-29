@@ -17,6 +17,7 @@ export class FeatureConfigService {
 
   /**
    * return boolean if value exists on feature config object
+   * can also be used to hide an feature if we don't have the feature var set to true
    * @param value string value in feature config object
    */
   isOn(value: string) {

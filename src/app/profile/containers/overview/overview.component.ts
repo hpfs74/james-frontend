@@ -10,6 +10,7 @@ import { Profile } from '../../models/profile';
 import { Settings } from '../../models/settings';
 import { ProfileForm } from '../../components/profile-form/profile.form';
 import { TagsService } from '@app/core/services';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
 
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as fromProfile from '../../reducers';
@@ -37,7 +38,8 @@ export class ProfileOverviewComponent implements OnInit {
   profile$: Observable<Profile>;
   profileLoading$: Observable<boolean>;
   constructor(private store$: Store<fromProfile.State>,
-              private tagsService: TagsService) {
+              private tagsService: TagsService,
+              public featureToggleService: FeatureConfigService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
