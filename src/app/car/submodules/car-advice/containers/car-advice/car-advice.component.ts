@@ -63,6 +63,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   formSteps: Array<KNXWizardStepRxOptions>;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
+
   // State of the advice forms data
   isLoggedIn$: Observable<boolean>;
   insurance$: Observable<any>;
@@ -70,6 +71,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   savedInsurancesLoading$: Observable<any>;
   subscription$: Array<any> = [];
   advice$: Observable<any>;
+
   // Forms
   carExtrasForm: CarExtrasForm;
 
@@ -138,7 +140,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       this.insurance$.take(1).subscribe(selectedInsurance => {
         this.subscription$.push(
           this.advice$.take(1).subscribe(selectedAdvice => {
-            if (selectedInsurance && selectedAdvice) {
+            if (selectedInsurance && selectedAdvice.iban) {
               this.proceedToBuyResults();
             }
           })
@@ -185,7 +187,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   private onShowResults() {
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
+    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
   }
 
   private proceedWithAdvice(advices, insurances) {
@@ -233,6 +235,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   goToStep(stepIndex: number) {
-    this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
+    this.store$.dispatch(new wizardActions.Go({ stepIndex: stepIndex }));
   }
 }

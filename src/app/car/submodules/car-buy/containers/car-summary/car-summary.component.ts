@@ -59,6 +59,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   formSummaryError = 'Je hebt de gebruikersvoorwaarden nog niet geaccepteerd.';
   submiting = false;
+
   constructor(private tagsService: TagsService,
               private store$: Store<fromRoot.State>,
               public asyncPipe: AsyncPipe,
@@ -82,7 +83,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   ngOnInit() {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.summary', clear: true }));
 
-    let sub1 = this.store$.select(fromCar.getCarBuyError)
+    this.subscription$.push(this.store$.select(fromCar.getCarBuyError)
       .subscribe((errorData: any) => {
         if (errorData[0]) {
           const errorCode = errorData[0];
@@ -91,19 +92,16 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
             message: registrationError[errorCode] || 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
           }));
         }
-      });
-    this.subscription$.push(sub1);
+      }));
 
-    let sub2 = this.store$.select(fromCar.getCarBuyComplete)
+    this.subscription$.push(this.store$.select(fromCar.getCarBuyComplete)
       .subscribe((complete) => {
         if (complete) {
           this.deleteAdvice();
           this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
           this.submiting = false;
         }
-      });
-
-    this.subscription$.push(sub2);
+      }));
   }
 
   ngOnDestroy() {
@@ -192,7 +190,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       this.store$.dispatch(new advice.Update(this.registrationForm.formGroup.value));
     }
 
-    Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
+    this.subscription$.push(Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
         return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
       }).filter(value =>
@@ -204,7 +202,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
         this.submiting = true;
         const proposalData = this.getProposalData(value);
         this.store$.dispatch(new car.Buy(proposalData));
-      });
+      }));
   }
 
   private deleteAdvice() {
