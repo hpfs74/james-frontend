@@ -32,6 +32,7 @@ p {
 
 knx-card {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .knx-logo {
@@ -39,6 +40,7 @@ knx-card {
 
   img {
     width: 100%;
+    max-height: 50px;
   }
 }
 
@@ -79,6 +81,6 @@ knx-card {
   .knx-card__extension {
     margin-left: 0;
     margin-top: -16px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 }
