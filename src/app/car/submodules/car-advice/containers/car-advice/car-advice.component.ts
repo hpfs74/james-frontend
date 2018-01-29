@@ -140,7 +140,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       this.insurance$.take(1).subscribe(selectedInsurance => {
         this.subscription$.push(
           this.advice$.take(1).subscribe(selectedAdvice => {
-            if (selectedInsurance && selectedAdvice.iban) {
+            if (selectedInsurance && selectedAdvice && selectedAdvice.iban) {
               this.proceedToBuyResults();
             }
           })
