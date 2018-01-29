@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { fadeInAnimation } from '../../shared/animations/fade-in.animation';
 import { InsuranceAdvice, Insurer } from '../../insurance/models';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
 
 @Component({
   selector: 'knx-insurance-result',
@@ -79,7 +80,10 @@ import { InsuranceAdvice, Insurer } from '../../insurance/models';
           </div>
         </div>
 
-        <div class="knx-insurance-result__discount clearfix" *ngIf="insurance.discount">
+        <div class="knx-insurance-result__discount clearfix"
+          [class.knx-animate]="featureToggleService.isOn('provisionPDFLink')"
+          *ngIf="insurance.discount"
+          (click)="openPdf()">
           <img src="/assets/icon/present_icon.png" alt="present">
           Incl. {{ insurance.discount | currency:'EUR':true }} Knab korting & Hulp bij overstappen
         </div>
@@ -101,8 +105,16 @@ export class InsuranceResultComponent {
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
 
+  constructor(public featureToggleService: FeatureConfigService) { }
+
   select(event) {
     event.stopPropagation(); // prevent click event bubbling up and triggering twice
     this.insuranceSelected$.emit(this.insurance);
+  }
+
+  openPdf() {
+    if (this.featureToggleService.isOn('provisionPDFLink')) {
+      window.open(this.featureToggleService.featureConfig.provisionPDFLink, '_blank');
+    }
   }
 }

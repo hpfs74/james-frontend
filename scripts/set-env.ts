@@ -117,7 +117,8 @@ function getContent(environment: string) {
     enableAnalytics: ${enableAnalytics},
     featureToggles: {
       enableBuyFlowEmail: ${getEnvVar('FEATURE_BUY_FLOW_EMAIL')},
-      enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')}
+      enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')},
+      provisionPDFLink: '${getEnvVar('FEATURE_PROVISION_PDF')}'
     },
     external: {
       login: '${getEnvVar('LOGIN')}',
