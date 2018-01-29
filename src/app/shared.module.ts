@@ -106,6 +106,7 @@ import { UserGreetingComponent } from './components/knx-user-greeting/user-greet
 import { KnxWizardRxModule } from './components/knx-wizard-rx/knx-wizard-rx.module';
 import { KNXWizardControlsComponent } from '@app/components/knx-wizard-controls/knx-wizard-controls.component';
 import { TopAddressComponent } from '@app/components/knx-top-address';
+import { KnxCardExtensionComponent } from '@app/components/knx-card-extension/knx-card-extension.component';
 import { RadioNavigatorComponent } from '@app/house/components/knx-radio-navigator/radio-navigator.component';
 
 export const sharedComponents = [
@@ -166,6 +167,7 @@ export const sharedComponents = [
   KNXNavbarMenuComponent,
   KNXFooterComponent,
   KNXWizardControlsComponent,
+  KnxCardExtensionComponent,
   RadioNavigatorComponent
 ];
 

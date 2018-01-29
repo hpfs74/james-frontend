@@ -25,6 +25,7 @@ import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { Profile } from '@app/profile/models';
 import { ContactDetailForm } from '@app/shared/forms/contact-detail.form';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+import { Insurance, InsuranceAdvice } from '@app/insurance/models';
 
 @Component({
   selector: 'knx-car-contact-form',
@@ -40,9 +41,10 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
   error$: Observable<KNXStepError>;
   profile$: Observable<any>;
   isLoggedIn: boolean;
-
+  selectedInsurance$: Observable<Insurance | InsuranceAdvice>;
   constructor(private store$: Store<fromRoot.State>) {
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.store$.select(fromAuth.getLoggedIn).take(1).subscribe(loggedIn => this.isLoggedIn = loggedIn);
     const formBuilder = new FormBuilder();
     this.form = new ContactDetailForm(formBuilder);
