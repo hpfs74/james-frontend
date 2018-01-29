@@ -86,7 +86,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     this.subscription$.push(this.store$.select(fromCar.getCarBuyError)
       .subscribe((errorData: any) => {
         if (errorData[0]) {
-          const errorCode = errorData[0];
+          const errorCode = errorData[1];
           this.submiting = false;
           return this.store$.dispatch(new wizardActions.Error({
             message: registrationError[errorCode] || 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
