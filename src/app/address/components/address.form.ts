@@ -23,19 +23,14 @@ export class AddressForm {
           houseNumberValidator('houseNumber')
         ]
       )],
-      houseNumberExtension: [null, Validators.compose(
-        [
-          Validators.required
-        ]
-      )]
+      houseNumberExtension: [null, null]
     });
 
     this.validationErrors = {
       required: () => 'Dit is een verplicht veld',
       postalCode: () => `Vul een geldige postcode in`,
       address: () => `Dit adres bestaat niet. Probeer het nog eens`,
-      houseNumber: () => `Vul geldig huisnummer in, geen toevoeging`,
-      houseNumberExtension: () => `Dit is een verplicht veld`
+      houseNumber: () => `Vul geldig huisnummer in, geen toevoeging`
     };
 
     this.formConfig = {
