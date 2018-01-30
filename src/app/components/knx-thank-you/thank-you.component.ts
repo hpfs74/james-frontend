@@ -26,7 +26,8 @@ import { Component, Input } from '@angular/core';
 
             <ol *ngIf="!loggedIn">
               <li>Klik op <strong>"bevestig account"</strong> in de e-mail om je account in gebruik te nemen.</li>
-              <li>Stap 1 gedaan? Hartelijk gefeliciteerd!</li>
+              <li>Is stap 1 gelukt? Super! Je aanvraag wordt door ons opgepakt. Wij dienen het in bij de verzekeraar
+                en zij accepteren het vaak binnen 2 werkdagen. We houden je op de hoogte.</li>
             </ol>
 
             <p>Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar op <strong>{{email}}</strong></p>
