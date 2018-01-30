@@ -20,6 +20,7 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
+import * as carActions from '@app/car/actions/car';
 import * as profile from '../../profile/actions/profile';
 import * as insurance from '../../insurance/actions/insurance';
 import * as layout from '../../core/actions/layout';
@@ -27,6 +28,14 @@ import { translatePasswordMessages } from '@app/utils/auth.utils';
 
 @Injectable()
 export class AuthEffects {
+
+  @Effect({dispatch: false})
+  loginActions$ = this.actions$
+    .ofType(auth.LOGIN, auth.LOGIN_ANONYMOUS)
+    .do(() => {
+      // on login actions for now it clears car errors
+      this.store$.dispatch(new carActions.ClearErrors());
+    });
 
   @Effect()
   login$ = this.actions$

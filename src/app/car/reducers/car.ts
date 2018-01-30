@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
 import { Car } from '../models/car';
-import * as CarActions from '../actions/car';
+import * as carActions from '../actions/car';
 
-export type Action = CarActions.All;
+export type Action = carActions.All;
 
 export interface State {
   loading: boolean;
@@ -28,14 +28,14 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
-    case CarActions.BUY_REQUEST:
-    case CarActions.GET_INFO_REQUEST: {
+    case carActions.BUY_REQUEST:
+    case carActions.GET_INFO_REQUEST: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case CarActions.GET_INFO_SUCCESS: {
+    case carActions.GET_INFO_SUCCESS: {
       const car = action.payload;
 
       return Object.assign({}, state, {
@@ -47,7 +47,7 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case CarActions.GET_INFO_FAILURE: {
+    case carActions.GET_INFO_FAILURE: {
       return Object.assign({}, state, {
         loading: false,
         loaded: false,
@@ -57,13 +57,13 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case CarActions.GET_MELDCODE_REQUEST: {
+    case carActions.GET_MELDCODE_REQUEST: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case CarActions.GET_MELDCODE_SUCCESS: {
+    case carActions.GET_MELDCODE_SUCCESS: {
       const car = state.info;
       car.meldcode = action.payload.meldcode;
       return Object.assign({}, state, {
@@ -75,7 +75,7 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case CarActions.GET_MELDCODE_FAILURE: {
+    case carActions.GET_MELDCODE_FAILURE: {
       return Object.assign({}, state, {
         loading: false,
         loaded: false,
@@ -85,7 +85,7 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case CarActions.BUY_SUCCESS: {
+    case carActions.BUY_SUCCESS: {
       return Object.assign({}, state, {
         loading: false,
         buyComplete: true,
@@ -94,12 +94,20 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
-    case CarActions.BUY_FAILURE: {
+    case carActions.BUY_FAILURE: {
       return Object.assign({}, state, {
         loading: false,
         buyComplete: false,
         buyError: true,
         buyErrorCode: action.payload._body ? JSON.parse(action.payload._body).error : null
+      });
+    }
+
+    case carActions.CLEAR_ERROR: {
+      return Object.assign({}, state, {
+        error: false,
+        buyError: false,
+        buyErrorCode: false
       });
     }
 
