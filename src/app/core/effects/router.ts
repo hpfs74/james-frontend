@@ -39,8 +39,8 @@ export class RouterEffects {
     .switchMap(() => Observable.of(new layout.CloseModal()));
 
   constructor(private actions$: Actions,
-              private router: Router,
-              private location: Location,
+              public router: Router,
+              public location: Location,
               private store$: Store<fromRoot.State>) {
     this.router.events.subscribe(event => {
       if ( event instanceof NavigationEnd ) {
