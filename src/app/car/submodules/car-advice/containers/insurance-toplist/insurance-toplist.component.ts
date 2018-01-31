@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -21,7 +21,7 @@ import * as compare from '../../../../actions/compare';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
-import { scrollToY } from '@app/utils/scroll-to-element.utils';
+import { Subscription } from 'rxjs/Subscription';
 
 interface OrderItem {
   id: string;
@@ -36,7 +36,7 @@ interface OrderItem {
   templateUrl: './insurance-toplist.component.html',
   styleUrls: ['./insurance-toplist.component.scss']
 })
-export class InsuranceTopListComponent implements OnInit {
+export class InsuranceTopListComponent implements OnInit, OnDestroy {
   insurances: Array<CarInsurance> = [];
   title: string;
   totalTitle: number;
@@ -47,7 +47,7 @@ export class InsuranceTopListComponent implements OnInit {
   orderBy: Array<OrderItem>;
   qaRootId = QaIdentifiers.carAdviceRoot;
   isLoggedIn$: Observable<boolean>;
-  subscription$: Array<any>;
+  subscription$: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
 
@@ -73,6 +73,10 @@ export class InsuranceTopListComponent implements OnInit {
       { id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true },
       { id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false }
     ];
+  }
+
+  ngOnDestroy() {
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
   changeOrderBy(selected: OrderItem): void {
@@ -134,19 +138,20 @@ export class InsuranceTopListComponent implements OnInit {
   private getCompareResultCopy() {
     // This is needed because the ngrx-datatable modifies the result to add an $$index to each
     // result item and modifies the source array order when sorting
-    this.store$.select(fromCar.getCompareResult)
-      .map(obs => {
-        return obs.map(v => JSON.parse(JSON.stringify(v)));
-      }).subscribe(insurances => {
-        this.insurances = insurances;
-      });
+    this.subscription$.push(
+      this.store$.select(fromCar.getCompareResult)
+        .map(obs => {
+          return obs.map(v => JSON.parse(JSON.stringify(v)));
+        }).subscribe(insurances => {
+          this.insurances = insurances;
+        }),
+        this.store$.select(fromInsurance.getSelectedAdvice)
+        .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
+        .subscribe(advice => {
+          this.store$.dispatch(new compare.LoadCarAction(advice));
+        })
+    );
 
-      this.store$.select(fromInsurance.getSelectedAdvice)
-      .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
-      .subscribe(advice => {
-        scrollToY();
-        this.store$.dispatch(new compare.LoadCarAction(advice));
-      });
   }
 }
 

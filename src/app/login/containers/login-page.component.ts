@@ -14,7 +14,6 @@ import { LoginForm } from '../components/login.form';
 import { loginError, CustomError } from '../models/login-error';
 
 import * as FormUtils from '../../utils/base-form.utils';
-import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 @Component({
   templateUrl: './login-page.component.html',
@@ -32,7 +31,6 @@ export class LoginPageComponent implements OnInit {
   constructor(@Inject(LOCALE_ID) private locale: string, private store$: Store<fromAuth.State>) {}
 
   ngOnInit() {
-    scrollToY();
     this.store$.select(fromAuth.getLoginPageError)
     .filter(error => error !== null)
     .subscribe((error) => {

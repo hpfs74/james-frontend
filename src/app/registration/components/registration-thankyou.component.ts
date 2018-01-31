@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Inject, Component, OnInit, Output, EventEmitter, LOCALE_ID, Input } from '@angular/core';
+import { Inject, Component, Output, EventEmitter, LOCALE_ID, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -8,14 +8,13 @@ import { environment } from '@env/environment';
 import { RegistrationForm } from './registration.form';
 import { registrationError } from '../models/registration-error';
 import * as profile from '../../profile/actions/profile';
-import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 @Component({
   selector: 'knx-registration-thankyou',
   templateUrl: './registration-thankyou.component.html',
   styleUrls: ['./registration-thankyou.component.scss']
 })
-export class RegistrationThankyouComponent implements OnInit {
+export class RegistrationThankyouComponent {
   message: string;
   errorMessage: string;
 
@@ -36,9 +35,5 @@ export class RegistrationThankyouComponent implements OnInit {
 
   resendActivationEmail() {
     this.onSendActivation.emit(this.email);
-  }
-
-  ngOnInit() {
-    scrollToY();
   }
 }
