@@ -15,7 +15,6 @@ import { CarDetailForm } from '../../containers/car-detail/car-detail.form';
 import { CarExtrasForm } from '../../containers/car-extras/car-extras.form';
 import { createCarCoverages } from '../../../../utils/coverage.utils';
 import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
-import { scrollToY } from '../../../../../utils/scroll-to-element.utils';
 import { InsuranceTopListComponent } from '../insurance-toplist/insurance-toplist.component';
 import { KNXWizardRxComponent } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.component';
 import { CarReviewComponent } from '../../containers/car-review/car-review.component';

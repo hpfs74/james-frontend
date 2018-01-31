@@ -1,5 +1,4 @@
 import { Component, ContentChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 @Component({
   selector: 'knx-wizard-rx',
@@ -11,6 +10,5 @@ export class KNXWizardRxComponent {
   constructor(private changeDetector: ChangeDetectorRef) {}
   onActivate(componentRef: any): void {
     this.changeDetector.detectChanges();
-    scrollToY();
   }
 }

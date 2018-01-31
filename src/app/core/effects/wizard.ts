@@ -1,12 +1,15 @@
-import 'rxjs/add/operator/do';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Effect, Actions } from '@ngrx/effects';
 import { KNXWizardRxService } from '../services/wizard.service';
 import { Observable } from 'rxjs/Observable';
-import * as WizardActions from '../actions/wizard';
 import { scrollToY } from '@app/utils/scroll-to-element.utils';
+
+import * as WizardActions from '../actions/wizard';
+
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/debounceTime';
 
 @Injectable()
 export class WizardEffects {
@@ -24,6 +27,10 @@ export class WizardEffects {
 
   @Effect({dispatch: false})
   onError$ = this.actions$.ofType(WizardActions.ERROR)
+     /* use debounce time to allow view to update classes that
+      *  are used to check for errors in scrollToY function
+      */
+    .debounceTime(1)
     .do(() => scrollToY());
 
   constructor(
