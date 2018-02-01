@@ -12,7 +12,7 @@
       </div>
 
       <div class="knx-message knx-message--error" *ngIf="isInsuranceError$ | async">
-        Need a good message here
+        Oops, er gaat iets verkeerd bij het ophalen van het advies. Kun je het nog een keer proberen?
       </div>
 
       <div *ngIf="!(isInsuranceError$ | async) && !(isInsuranceLoading$| async)">
