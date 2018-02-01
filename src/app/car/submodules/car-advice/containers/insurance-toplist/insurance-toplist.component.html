@@ -1,9 +1,7 @@
 <div class="knx-insurance-toplist">
-
   <div class="row">
     <div class="col-sm-12">
-
-      <div *ngIf="(isInsuranceLoading$| async); else insuranceResults">
+      <div *ngIf="(isInsuranceLoading$| async)">
         <knx-loader [visible]="(isInsuranceLoading$| async)">
           Een momentje! We vergelijken 19 verschillende aanbieders voor je om de beste match te vinden.
         </knx-loader>
@@ -13,7 +11,11 @@
         Niets gevonden. Ga terug om je keuze aan te passen. Kom je er niet uit? Neem contact op.
       </div>
 
-      <ng-template #insuranceResults>
+      <div class="knx-message knx-message--error" *ngIf="isInsuranceError$ | async">
+        Oops, er gaat iets verkeerd bij het ophalen van het advies. Kun je het nog een keer proberen?
+      </div>
+
+      <div *ngIf="!(isInsuranceError$ | async) && !(isInsuranceLoading$| async)">
         <h2>We hebben {{ insurances.length }} resultaten gevonden</h2>
 
         <div class="knx-button-group" role="group">
@@ -52,14 +54,16 @@
             </knx-tooltip>
           </span>
         </div>
-      </ng-template>
+      </div>
     </div>
   </div>
 </div>
+
 <knx-service-guide
   knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="service-guide"
-  [visible]="!(isInsuranceLoading$| async)">
+  [visible]="!(isInsuranceLoading$| async) && !(isInsuranceError$| async)">
 </knx-service-guide>
+
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
                      (onNext)="goToNextStep()"

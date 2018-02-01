@@ -43,6 +43,7 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
   initialAmount = 4;
   disableInsuranceBuy: boolean;
   isInsuranceLoading$: Observable<boolean>;
+  isInsuranceError$: Observable<boolean>;
   total: number;
   orderBy: Array<OrderItem>;
   qaRootId = QaIdentifiers.carAdviceRoot;
@@ -57,6 +58,7 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.isInsuranceLoading$ = this.store$.select(fromCar.getCompareLoading);
+    this.isInsuranceError$ = this.store$.select(fromCar.getCompareError);
     this.error$ = this.store$.select(fromCore.getWizardError);
     this.currentStepOptions = {
       label: 'Premies vergelijken',
@@ -124,7 +126,9 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
   }
 
   noResult(): boolean {
-    return this.insurances.length <= 0 && !this.asyncPipe.transform(this.isInsuranceLoading$);
+    return this.insurances.length <= 0 &&
+      !this.asyncPipe.transform(this.isInsuranceLoading$) &&
+      !this.asyncPipe.transform(this.isInsuranceError$);
   }
 
   goToPreviousStep() {
