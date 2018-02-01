@@ -297,11 +297,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     this.store$.select(fromCar.getCoverageError).take(1).subscribe(error => { coverageError = error; });
 
     if (!detailForm.valid || !addressForm.valid) {
-      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
-    }
-
-    if (!detailForm.valid || !addressForm.valid || coverageError) {
-      return;
+      return coverageError ? false : this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
     this.subscriptions$.push(
