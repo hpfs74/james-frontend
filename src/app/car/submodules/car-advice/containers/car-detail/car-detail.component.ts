@@ -76,10 +76,13 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   selectInitalStates(): void {
     this.address$ = this.store$.select(fromAddress.getAddress);
     this.car$ = this.store$.select(fromCar.getCarInfo);
+
     this.isCarLoading$ = this.store$.select(fromCar.getCarInfoLoading);
     this.isCarFailed$ = this.store$.select(fromCar.getCarInfoError);
-    this.isCoverageError$ = this.store$.select(fromCar.getCompareError);
-    this.isCoverageLoading$ = this.store$.select(fromCar.getCompareLoading);
+
+    this.isCoverageLoading$ = this.store$.select(fromCar.getCoverageLoading);
+    this.isCoverageError$ = this.store$.select(fromCar.getCoverageError);
+
     this.coverageRecommendation$ = this.store$.select(fromCar.getCoverage);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.error$ = this.store$.select(fromCore.getWizardError);
@@ -288,11 +291,19 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   goToNextStep(event?: any) {
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
+    let coverageError = null;
     FormUtils.validateForm(detailForm);
+
+    this.store$.select(fromCar.getCoverageError).take(1).subscribe(error => { coverageError = error; });
 
     if (!detailForm.valid || !addressForm.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
+
+    if (!detailForm.valid || !addressForm.valid || coverageError) {
+      return;
+    }
+
     this.subscriptions$.push(
       Observable.combineLatest(this.car$, this.address$, (car, address) => {
         return {

@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import * as CoverageActions from '../actions/coverage';
-import { CarCoverageRecommendation } from '../models/coverage';
+import { CarCoverageRecommendation } from '@app/car/models';
 
 export type Action = CoverageActions.All;
 
@@ -8,6 +8,7 @@ export interface State {
   loading: boolean;
   loaded: boolean;
   activeLoan: boolean;
+  error: boolean;
   coverage: CarCoverageRecommendation;
 }
 
@@ -15,6 +16,7 @@ export const initialState: State = {
   loading: false,
   loaded: false,
   activeLoan: null,
+  error: false,
   coverage: null
 };
 
@@ -30,7 +32,17 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
+        error: false,
         coverage: Object.assign({}, state.coverage, action.payload)
+      });
+    }
+
+    case CoverageActions.CAR_COVERAGE_FAILURE: {
+      return Object.assign({}, state, {
+        loading: false,
+        loaded: false,
+        error: true,
+        coverage: null
       });
     }
 
@@ -50,3 +62,4 @@ export const getCoverage = (state: State) => state.coverage;
 export const getActiveLoan = (state: State) => state.activeLoan;
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
+export const getError = (state: State) => state.error;

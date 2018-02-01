@@ -56,5 +56,6 @@ export const getCarBuyError = createSelector(getCarState, fromCar.getBuyError);
  */
 export const getCoverageState = createSelector(selectCarState, (state: CarState) => state.coverage);
 export const getCoverage = createSelector(getCoverageState, fromCoverage.getCoverage);
-export const getCoverageLoading = createSelector(getCoverageState, fromCoverage.getLoading);
 export const GetCoverageActiveLoan = createSelector(getCoverageState, fromCoverage.getActiveLoan);
+export const getCoverageLoading = createSelector(getCoverageState, fromCoverage.getLoading);
+export const getCoverageError = createSelector(getCoverageState, fromCoverage.getError);
