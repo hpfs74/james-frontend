@@ -10,6 +10,9 @@ export class HouseHoldSelectionRequest {
 
   /** This is what the user selected */
   SelectedPremium: CalculatedPremium;
+
+  /** Contact details of the user */
+  ContactDetails: ContactDetails;
 }
 
 /** Contact details the customer provided when submitting his selection */
