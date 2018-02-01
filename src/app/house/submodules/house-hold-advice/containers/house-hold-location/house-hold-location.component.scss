@@ -31,3 +31,15 @@ hr {
   //  }
   //}
 }
+
+// Mobile
+@media (max-width: 500px) {
+  .house-hold-detail-form span {
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+}
+
+/deep/ .house-hold-detail-form .knx-address-lookup__result {
+  margin-bottom: -20px;
+}
