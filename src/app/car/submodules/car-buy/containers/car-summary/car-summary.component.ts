@@ -144,8 +144,8 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
       { car: value.carInfo },
-      { dekking: this.getDekkingText(value.adviceInfo.coverage) },
-      this.getUpdatedProfile());
+      { dekking: this.getDekkingText(value.adviceInfo.coverage) }
+    );
 
     // use the data from saved advice if profile is empty
     if (!flatData.number_extended) {
@@ -161,20 +161,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       )
     };
     proposalData.proposal.car = proposalRequest.getCarInfo(value.carInfo, value.adviceInfo);
-
     return proposalData;
-  }
-
-  getUpdatedProfile() {
-    let advice: any = this.asyncPipe.transform(this.advice$);
-    return {
-      firstName: advice.firstName,
-      infix: advice.middleName,
-      lastName: advice.lastName,
-      initials: advice.initials,
-      mobileNumber: advice.mobileNumber,
-      phoneNumber: advice.phoneNumber
-    };
   }
 
   goToPreviousStep() {
@@ -190,7 +177,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       this.store$.dispatch(new advice.Update(this.registrationForm.formGroup.value));
     }
 
-    this.subscription$.push(Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
+    Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
         return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
       }).filter(value =>
@@ -198,11 +185,12 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     && value.carInfo != null
     && value.insuranceInfo != null)
     // && value.profileInfo != null)
+      .take(1)
       .subscribe((value) => {
         this.submiting = true;
         const proposalData = this.getProposalData(value);
         this.store$.dispatch(new car.Buy(proposalData));
-      }));
+      });
   }
 
   private deleteAdvice() {
