@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { selectInsuranceState } from '@app/insurance/reducers';
 
+import * as wizardActions from '@app/core/actions/wizard';
 import * as fromRoot from '../reducers';
 import * as fromAuth from '../auth/reducers';
 import * as fromInsurance from '@app/insurance/reducers';
@@ -56,6 +57,7 @@ export class CustomRouterStateSerializer
       product_name: product_name,
       external: external
     };
+    this.store$.dispatch(new wizardActions.ResetError());
     return { url, queryParams, data: data };
   }
 

@@ -46,3 +46,7 @@ hr {
     transform: translateY(-15px);
   }
 }
+
+knx-price-table + .knx-message--error {
+  margin-top: 60px;
+}

@@ -42,6 +42,12 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case wizardActions.RESET_ERROR: {
+      return Object.assign({}, state, {
+        error: null
+      });
+    }
+
     default: {
       return state;
     }

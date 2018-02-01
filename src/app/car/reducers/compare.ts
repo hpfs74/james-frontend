@@ -39,6 +39,7 @@ export function reducer(state = initialState, action: Action): State {
 
     case CompareActions.LOAD_CAR_COMPARE_FAILURE: {
       return Object.assign({}, state, {
+        loading: false,
         error: true
       });
     }

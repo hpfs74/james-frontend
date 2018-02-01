@@ -25,6 +25,7 @@ describe('Car coverage reducer', () => {
         loading: true,
         loaded: false,
         activeLoan: null,
+        error: false,
         coverage: null
       };
       const result = fromCoverage.reducer(fromCoverage.initialState, action);
@@ -42,6 +43,7 @@ describe('Car coverage reducer', () => {
         loading: false,
         loaded: true,
         activeLoan: null,
+        error: false,
         coverage: {
           recommended_value: 'CL',
           slug: []
@@ -59,6 +61,7 @@ describe('Car coverage reducer', () => {
         loading: false,
         loaded: false,
         activeLoan: true,
+        error: false,
         coverage: null
       };
       const result = fromCoverage.reducer(fromCoverage.initialState, action);

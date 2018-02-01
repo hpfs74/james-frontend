@@ -20,6 +20,7 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth';
+import * as carActions from '@app/car/actions/car';
 import * as profile from '../../profile/actions/profile';
 import * as insurance from '../../insurance/actions/insurance';
 import * as layout from '../../core/actions/layout';

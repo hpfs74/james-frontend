@@ -10,7 +10,6 @@ import * as auth from '../../auth/actions/auth';
 import * as registration from '../../auth/actions/registration';
 import { Authenticate } from '../../auth/models/auth';
 import { ContentConfig, Content } from '../../content.config';
-import { scrollToY } from '../../utils/scroll-to-element.utils';
 
 @Component({
   selector: 'knx-password-reset',
@@ -18,7 +17,7 @@ import { scrollToY } from '../../utils/scroll-to-element.utils';
   styleUrls: ['./registration-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistrationPageComponent implements OnInit {
+export class RegistrationPageComponent {
   registrationError$: Observable<string> = this.store$.select(fromAuth.getRegistrationError).filter(error => error !== null);
   registrationPending$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationPending);
   registrationSuccess$: Observable<boolean> = this.store$.select(fromAuth.getRegistrationSuccess);
@@ -34,10 +33,6 @@ export class RegistrationPageComponent implements OnInit {
     this.store$.dispatch(new registration.ResetState());
     this.store$.dispatch(new registration.ResendResetState());
     this.content = this.contentConfig.getContent();
-  }
-
-  ngOnInit() {
-    scrollToY();
   }
 
   register(register: Authenticate) {

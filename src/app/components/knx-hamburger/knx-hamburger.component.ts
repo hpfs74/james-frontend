@@ -13,6 +13,6 @@ export class KNXHamburgerComponent {
 
   toggleMenu() {
     this.onHamburgerClick.emit();
-    scrollToY(0, 1500, 'easeInOutQuint');
+    scrollToY(0, 1500, 'easeInOutQuint', true);
   }
 }

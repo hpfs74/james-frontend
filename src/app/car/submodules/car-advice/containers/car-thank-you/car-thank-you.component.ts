@@ -9,7 +9,6 @@ import 'rxjs/add/operator/take';
 import { Profile } from '@app/profile/models/profile';
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
-import { scrollToY } from '@app/utils/scroll-to-element.utils';
 
 import * as fromAuth from '@app/auth/reducers';
 import * as fromRoot from '@app/reducers';
@@ -56,7 +55,6 @@ export class CarThankYouComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    scrollToY();
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.thankyou', clear: true }));
 
     this.email$.take(1).subscribe((email) => {
