@@ -85,7 +85,12 @@ export class HouseHoldDekkingForm extends BaseForm {
         inputOptions: {
           placeholder: 'Maak een keuze',
           events: ['focus'],
-          items: houseHold
+          items: [
+            { value: 'A', label: 'Alleen ikzelf'},
+            { value: 'H', label: 'Ik en mijn partner'},
+            { value: 'I', label: 'Ik, mijn partner en de kind(eren)'},
+            { value: 'K', label: 'Ik en mijn kind(eren)'},
+          ]
         }
       }
     };
