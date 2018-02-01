@@ -8,8 +8,8 @@ export class HouseHoldSelectionRequest {
   /** These are the premiums that were available and from which the user had to choose. */
   AvailablePremiums: Array<CalculatedPremium>;
 
-  /** This is what the user selected */
-  SelectedPremium: CalculatedPremium;
+  /** This is what the user selected, referencing the premium by its 'Identifier' */
+  SelectedPremiumId: string;
 
   /** Contact details of the user */
   ContactDetails: ContactDetails;
