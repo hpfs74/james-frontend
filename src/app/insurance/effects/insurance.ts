@@ -46,7 +46,7 @@ export class InsuranceEffects {
       }
     })
     .switchMap((adviceData) => {
-      if (adviceData) {
+      if (adviceData && !this.authService.isAnonymous()) {
         return this.insuranceService.saveInsurance(adviceData)
           .map((res: Response) => {
             this.store$.dispatch(new advice.SaveLatest(res));

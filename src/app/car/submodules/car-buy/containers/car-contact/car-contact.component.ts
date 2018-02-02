@@ -95,7 +95,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
-    this.store$.dispatch(new profileActions.UpdateAction(this.form.formGroup.value));
+    this.store$.dispatch(new advice.Update(this.form.formGroup.value));
     this.store$.dispatch(new wizardActions.Forward());
   }
 }
