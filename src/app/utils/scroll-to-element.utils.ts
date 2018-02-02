@@ -1,6 +1,8 @@
 const DEFAULT_SCROLL_TARGET_Y = 0;
 const DEFAULT_SCROLL_SPEED = 3000;
 const DEFAULT_SCROLL_EASING = 'easeOutSine';
+const ERROR_QUERY_LIST = '.knx-form-group--error, .knx-message--error';
+
 let isScrolling = false;
 // first add raf shim
 // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -33,15 +35,15 @@ export function scrollToElement(cssClass: string): void {
 export function scrollToY(
     scrollTargetY: number = DEFAULT_SCROLL_TARGET_Y,
     speed: number = DEFAULT_SCROLL_SPEED,
-    easing: string = DEFAULT_SCROLL_EASING) {
+    easing: string = DEFAULT_SCROLL_EASING,
+    force: boolean = false) {
     if (isScrolling) {
-        return;
+      return;
     }
     isScrolling = true;
-    scrollTargetY = getErrorElementOffsetTop();
+    scrollTargetY = force ? scrollTargetY : getErrorElementOffsetTop();
     let scrollY = window.scrollY || document.documentElement.scrollTop;
     let currentTime = 0;
-
     // min time .1, max time .8 seconds
     let time = Math.max(.1, Math.min(Math.abs(scrollY - scrollTargetY) / speed, .8));
 
@@ -86,11 +88,12 @@ function getErrorElementOffsetTop(): number {
     if (headerElement.length) {
         headerHeight = headerElement[0].getBoundingClientRect().height;
     }
-    const allErrorElements = document.querySelectorAll('div[data-error]');
+    const allErrorElements = document.querySelectorAll(ERROR_QUERY_LIST);
     let errorArray = [];
     if (allErrorElements.length) {
         errorArray = Object.keys(allErrorElements)
-                            .filter(key => !!allErrorElements[key].dataset['error'])
+                            .filter(key => !!allErrorElements[key].dataset['error']
+                                           || allErrorElements[key].classList.contains('knx-message'))
                             .map(stringValue => parseInt(stringValue));
     }
     if (errorArray.length) {

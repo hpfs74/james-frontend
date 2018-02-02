@@ -11,7 +11,6 @@ import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { AssistantConfig } from '@app/core/models/assistant';
 import { TagsService } from '@app/core/services/tags.service';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
-import { scrollToY } from '@app/utils/scroll-to-element.utils';
 import { KNXWizardRxComponent } from '@app/components/knx-wizard-rx/knx-wizard-rx.component';
 import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import * as FormUtils from '@app/utils/base-form.utils';

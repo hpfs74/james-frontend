@@ -16,7 +16,7 @@ import * as FormUtils from '../../utils/base-form.utils';
             <div class="container">
               <div class="row">
                 <div class="col-md-8">
-                  <b>En ontvang jouw overzocht van alle verzekeringen</b>
+                  <b>En ontvang jouw overzicht van alle verzekeringen</b>
 
                   <div class="knx-registration">
                       <form [formGroup]="form.formGroup"

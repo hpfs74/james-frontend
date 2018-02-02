@@ -13,6 +13,7 @@ export const BUY_REQUEST =          '[Car] Buy';
 export const BUY_SUCCESS =          '[Car] Buy Success';
 export const BUY_FAILURE =          '[Car] Buy Failure';
 
+export const CLEAR_ERROR =          '[Car] Clear Errors';
 
 export class GetInfo implements Action {
   readonly type = GET_INFO_REQUEST;
@@ -68,6 +69,10 @@ export class BuyFailure implements Action {
   constructor(public payload: any) { }
 }
 
+export class ClearErrors implements Action {
+  readonly type = CLEAR_ERROR;
+}
+
 export type All
   = GetInfo
   | GetInfoComplete
@@ -77,4 +82,5 @@ export type All
   | GetMeldcodeFailure
   | Buy
   | BuyComplete
+  | ClearErrors
   | BuyFailure;

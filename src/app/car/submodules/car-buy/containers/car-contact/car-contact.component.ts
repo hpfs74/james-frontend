@@ -19,6 +19,7 @@ import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as auth from '@app/auth/actions/auth';
 import * as fromProfile from '@app/profile/reducers';
+import * as profileActions from '@app/profile/actions/profile';
 
 import { QaIdentifier } from '@app/shared/models/qa-identifier';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
@@ -94,7 +95,7 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
-    this.store$.dispatch(new advice.Update(this.form.formGroup.value));
+    this.store$.dispatch(new profileActions.UpdateAction(this.form.formGroup.value));
     this.store$.dispatch(new wizardActions.Forward());
   }
 }

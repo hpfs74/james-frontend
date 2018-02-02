@@ -14,7 +14,6 @@ import * as wizardActions from '@app/core/actions/wizard';
 
 // import 'rxjs/add/operator/map';
 // import 'rxjs/add/operator/filter';
-import { scrollToY } from '@app/utils/scroll-to-element.utils';
 import { CalculatedPremium, HouseHoldPremiumResponse } from '@app/house/models/house-hold-premium';
 import { getHouseHoldPremiumLoading, getHouseHoldPremiumResult } from '@app/house/reducers';
 
@@ -85,7 +84,6 @@ export class HouseHoldPremiumsListComponent implements OnInit {
     // this.store$.select(fromInsurance.getSelectedAdvice)
     //   .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
     //   .subscribe(advice => {
-    //     scrollToY();
     //     this.store$.dispatch(new compare.LoadCarAction(advice));
     //   });
   }
