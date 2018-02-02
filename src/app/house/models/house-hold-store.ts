@@ -22,6 +22,8 @@ export class ContactDetails {
 
   PhoneNumber: string;
 
+  EmailAddress: string;
+
   HasAcceptedTermsAndConditions: boolean;
 
   HasOptInForServiceUpdated: boolean;
