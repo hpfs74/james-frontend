@@ -36,10 +36,8 @@ export function reducer(state = initialState, action: auth.Actions): State {
     case auth.REFRESH_SUCCESS: {
       return {
         ...state,
-        loggedIn: true,
         loginExpired: false,
-        token: action.payload,
-        anonymous: false
+        token: action.payload
       };
     }
 

@@ -85,7 +85,7 @@ describe('Auth reducer', () => {
       const refreshAction = new RefreshTokenSuccess(token);
 
       const expectedResult = {
-        loggedIn: true,
+        loggedIn: false,
         loginExpired: false,
         token: token,
         anonymous: false,
