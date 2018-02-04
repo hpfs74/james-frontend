@@ -33,7 +33,7 @@ hr {
 }
 
 // Mobile
-@media (max-width: 500px) {
+@media (max-width: 414px) {
   .house-hold-detail-form span {
     margin-bottom: 24px;
     display: inline-block;
@@ -41,5 +41,5 @@ hr {
 }
 
 /deep/ .house-hold-detail-form .knx-address-lookup__result {
-  margin-bottom: -20px;
+  margin-bottom: -10px;
 }

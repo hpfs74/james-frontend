@@ -77,4 +77,8 @@
       border-bottom: 0;
     }
   }
+
+  /deep/ .knx-step-navigation {
+    margin-left: 0;
+  }
 }

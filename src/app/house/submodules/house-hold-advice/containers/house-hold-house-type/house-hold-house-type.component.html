@@ -26,7 +26,8 @@
           [values]="roomValues"
           label="rooms"
           [selected]="detailForm.value.roomsCount"
-          (onSelectChange)="updateRoomsCount($event)">
+          (onSelectChange)="updateRoomsCount($event)"
+          class="rooms-buttons">
         </knx-radio-navigator>
 
       </knx-card>
@@ -102,7 +103,7 @@
   </div>
 
 
-  
+
 </form>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
