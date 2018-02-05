@@ -1,16 +1,11 @@
 @import '~styles/base.scss';
 
-.knx-radio-navigator {
-  width: 400px;
-}
-
 .knx-radio-navigator__previous {
   display: inline-block;
 }
 
 .knx-radio-navigator__content {
   display: inline-block;
-  width: 136px;
   text-align: center;
   vertical-align: top;
 }
@@ -19,26 +14,21 @@
   display: inline-block;
 }
 
-/*.icon-plus, .icon-minus {
-  //font-size: 24px;
-  font-family: Serif;
-}*/
-
-/*
 .knx-button {
   width: 64px;
   height: 48px;
 }
 
-@media (max-width: 414px) {
-  .icon-plus, .icon-minus {
-    font-size: 12px;
-    font-family: Serif;
-  }
-
-  .knx-button {
-    width: 32px;
-    height: 24px;
-  }
+.icon-minus,
+.icon-plus {
+  font-family: serif;
+  margin: 0;
 }
-*/
+
+.icon-plus {
+  font-size: 24px;
+}
+
+.icon-minus {
+  font-size: 30px;
+}

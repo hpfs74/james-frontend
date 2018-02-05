@@ -1,20 +1,23 @@
-<div class="knx-radio-navigator">
-  <div class="knx-radio-navigator__previous">
-      <button type="button" class="knx-button knx-button--3d knx-button--primary"
-              [disabled]="currentIndex === 0"
-              (click)="prev()">
-        <span class="icon-minus">-</span>
-      </button>
-  </div>
-  <div class="knx-radio-navigator__content">
-    <strong>{{currentValue}}</strong><br/>
-    {{label}}
-  </div>
-  <div class="knx-radio-navigator__next">
-      <button type="button" class="knx-button knx-button--3d knx-button--primary"
-              [disabled]="currentIndex === values.length-1"
-              (click)="next()">
-        <span class="icon-plus">+</span>
-      </button>
+<div class="row">
+  <div class="knx-radio-navigator text-center col-xl-6 col-md-6 col-xs-12 col-12">
+    <div class="knx-radio-navigator__previous pull-left">
+        <button type="button" class="knx-button knx-button--3d knx-button--primary"
+                [disabled]="currentIndex === 0"
+                (click)="prev()">
+            <span class="icon-minus">–</span>
+        </button>
+    </div>
+    <span class="knx-radio-navigator__content">
+      <strong>{{currentValue}}</strong><br/>
+      {{label}}
+    </span>
+    <div class="knx-radio-navigator__next pull-right">
+        <button type="button"
+                class="knx-button knx-button--3d knx-button--primary"
+                [disabled]="currentIndex === values.length-1"
+                (click)="next()">
+            <span class="icon-plus">+</span>
+        </button>
+    </div>
   </div>
 </div>

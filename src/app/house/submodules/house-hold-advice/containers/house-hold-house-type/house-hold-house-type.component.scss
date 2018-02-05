@@ -14,15 +14,17 @@
 
   /deep/ .knx-card:first-child {
     margin-top: 26px;
+
     h3 {
       margin-bottom: 0;
     }
+
     p {
       margin-bottom: 16px;
     }
   }
 
-  div>p {
+  div > p {
     font-size: 14px;
   }
 }
@@ -34,7 +36,7 @@ hr {
 }
 
 /deep/ p {
-  color: #003B5A;
+  color: $knab-primary-blue;
 }
 
 /deep/ .knx-form-group {
@@ -42,12 +44,6 @@ hr {
 }
 
 /deep/ .knx-radio {
-  margin-top: 1rem;
+  margin-top: 16px;
   margin-bottom: 0;
-}
-
-@media screen and (max-width: 414px) {
-  /deep/ .rooms-buttons .knx-radio-navigator {
-    margin-left: 1rem;
-  }
 }
