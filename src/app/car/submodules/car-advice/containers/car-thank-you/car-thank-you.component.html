@@ -9,11 +9,12 @@
         [loggedIn]="loggedIn$ | async">
       </knx-thank-you>
     </div>
-    <div class="col-sm-4">
+
+      <div class="col-sm-4">
       <div class="knx-wizard__sidebar--sticky">
         <knx-chat-stream #knxChatStream
-        [options]="chatConfig$ | async"
-        [messages]="chatMessages$ | async">
+          [options]="chatConfig$ | async"
+          [messages]="chatMessages$ | async">
         </knx-chat-stream>
       </div>
     </div>

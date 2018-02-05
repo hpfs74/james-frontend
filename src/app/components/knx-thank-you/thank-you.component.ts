@@ -25,12 +25,13 @@ import { Component, Input } from '@angular/core';
           </ng-template></div>
 
             <ol *ngIf="!loggedIn">
-              <li>Klik op <strong>"bevestig account"</strong> in de e-mail om je account in gebruik te nemen.</li>
-              <li>Is stap 1 gelukt? Super! Je aanvraag wordt door ons opgepakt. Wij dienen het in bij de verzekeraar
-                en zij accepteren het vaak binnen 2 werkdagen. We houden je op de hoogte.</li>
+              <li>We hebben je aanvraag voor een autoverzekering in goede orde ontvangen. Wij gaan je aanvraag indienen
+                bij de verzekeraar. Zodra je aanvraag is ingediend, ontvang je van ons bericht. Je hebt nu nog geen voorlopige dekking.</li>
+              <li>Klik op <strong>"bevestig account"</strong> in de e-mail die we je net hebben gestuurd om je account
+                in gebruik te nemen. </li>
             </ol>
 
-            <p>Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar op <strong>{{email}}</strong></p>
+            <p>Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.</p>
 
             <p *ngIf="phone && phoneLink">
               Bij vragen kun je contact met ons opnemen via <a href="{{phoneLink}}" rel="noopener">{{phone}}</a>
