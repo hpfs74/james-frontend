@@ -19,12 +19,13 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
+import * as fromHouse from '@app/house/reducers';
 
 import { HouseHoldHouseTypeComponent } from './house-hold-house-type.component';
 
 describe('Component: HouseHoldHouseTypeComponent', () => {
   let comp: HouseHoldHouseTypeComponent;
-  let fixture:   ComponentFixture<HouseHoldHouseTypeComponent>;
+  let fixture: ComponentFixture<HouseHoldHouseTypeComponent>;
   let store: Store<fromRoot.State>;
   let tagsService: TagsService;
 
@@ -36,7 +37,8 @@ describe('Component: HouseHoldHouseTypeComponent', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'app': combineReducers(fromCore.reducers)
+          'app': combineReducers(fromCore.reducers),
+          'household': combineReducers(fromHouse.reducers)
         })
       ],
       declarations: [
@@ -65,7 +67,40 @@ describe('Component: HouseHoldHouseTypeComponent', () => {
     fixture.detectChanges();
   }));
 
+  function updateForm(room, surface, buildingType, buildYear) {
+    comp.form.formGroup.patchValue(Object.assign({}, {
+      roomsCount: room,
+      surfaceArea: surface,
+      buildingType: buildingType,
+      buildYear: buildYear
+    }));
+  }
+
   beforeEach(() => {
     fixture.detectChanges();
+  });
+
+  describe('form validation', () => {
+
+    it('should be invalid if no room count selected', () => {
+      updateForm(null, '90', 'A', '1800');
+      expect(comp.form.formGroup.valid).toBeFalsy();
+    });
+
+    it('should be invalid if no surface selected', () => {
+      updateForm('2', null, 'A', '1800');
+      expect(comp.form.formGroup.valid).toBeFalsy();
+    });
+
+
+    it('should be invalid if no buildingType selected', () => {
+      updateForm('2', '90', null, '1800');
+      expect(comp.form.formGroup.valid).toBeFalsy();
+    });
+
+    it('should be invalid if no buildingYear selected', () => {
+      updateForm('2', '90', 'A', null);
+      expect(comp.form.formGroup.valid).toBeFalsy();
+    });
   });
 });
