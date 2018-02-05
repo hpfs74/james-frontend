@@ -10,21 +10,31 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HouseHoldService {
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   public getHouseData(req: HouseDataRequest) {
-    return this.http.get(`${environment.riskInsurance.getHouseData}?`
-      + `Zipcode=${req.Zipcode}&houseNumber=${req.HouseNumber}&houseNumberAddition=${req.HouseNumberAddition || ''}`)
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const url = `${environment.riskInsurance.getHouseData}?`
+      + `Zipcode=${req.Zipcode}&houseNumber=${req.HouseNumber}&houseNumberAddition=${req.HouseNumberAddition || ''}`;
+    return this.http.get(url, {headers: headers})
       .map(res => <HouseDataResponse>res.json());
   }
 
   public calculateHouseHoldAmount(req: HouseHoldAmountRequest): Observable<HouseHoldAmountResponse> {
-    return this.http.post(environment.riskInsurance.HouseHoldAmount, req)
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(environment.riskInsurance.HouseHoldAmount, req, {headers: headers})
       .map(res => <HouseHoldAmountResponse>res.json());
   }
 
   public calculatePremiums(req: HouseHoldPremiumRequest): Observable<HouseHoldPremiumResponse> {
-    return this.http.post(environment.riskInsurance.HouseHoldPremium, req)
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(environment.riskInsurance.HouseHoldPremium, req, {headers: headers})
       .map(res => <HouseHoldPremiumResponse>res.json());
   }
 }
