@@ -9,10 +9,41 @@
   h4.knx-collapse-message__title {
     letter-spacing: 0.05em;
   }
+
+  margin-top: 27px;
+
+  /deep/ .knx-card:first-child {
+    margin-top: 26px;
+
+    h3 {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+  }
+
+  div > p {
+    font-size: 14px;
+  }
 }
 
 hr {
   margin: -8px 0 16px;
   border: 0;
   border-bottom: 2px $knab-primary-gray solid;
+}
+
+/deep/ p {
+  color: $knab-primary-blue;
+}
+
+/deep/ .knx-form-group {
+  margin-bottom: 0;
+}
+
+/deep/ .knx-radio {
+  margin-top: 16px;
+  margin-bottom: 0;
 }

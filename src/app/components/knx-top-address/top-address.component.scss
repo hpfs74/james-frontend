@@ -2,8 +2,10 @@
 
 .knx-top-address-hr {
   hr {
-    border-top: 3px solid $knab-dark-gray;
+    border-top: 2px solid $knab-primary-blue;
     text-align: center;
+    width: 79.5%;
+    opacity: 0.2;
   }
 
   span {
@@ -19,4 +21,6 @@
   span:before {
     width: 18px;
   }
+
+  height: 19px;
 }

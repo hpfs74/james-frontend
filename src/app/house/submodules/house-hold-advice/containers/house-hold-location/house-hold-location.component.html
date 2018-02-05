@@ -7,11 +7,15 @@
 
         <span>Your living insurance, exaplin why needed, and how it can help you (what are you insured for)</span>
 
-        <knx-form-group
-          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="houseHold"
-          [formControlName]="form.formConfig.houseHold.formControlName"
-          [options]="form.formConfig.houseHold">
-        </knx-form-group>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-6">
+            <knx-form-group
+              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="houseHold"
+              [formControlName]="form.formConfig.houseHold.formControlName"
+              [options]="form.formConfig.houseHold">
+            </knx-form-group>
+          </div>
+        </div>
 
         <knx-address-lookup
           knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="address"

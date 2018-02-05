@@ -56,7 +56,8 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
       label: 'Locatie',
       nextButtonLabel: 'Huis type',
       hideBackButton: true,
-      hideNextButton: false
+      hideNextButton: false,
+      nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
     };
 
     this.subscriptions$ = new Array<Subscription>();
