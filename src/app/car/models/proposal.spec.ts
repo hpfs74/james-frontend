@@ -98,13 +98,12 @@ describe('CarProposalHelper', () => {
       {'Hoofddekking': 'Aansprakelijkheid + Volledig casco'},
       {'Rechtsbijstand meeverzekeren': 'Nee'},
       {'Inzittendenverzekering': 'Nee'},
-      {'Slotvragen': ''},
-      {'Voornaam': 'Test User Name'}
+      {'Slotvragen': ''}
     ];
 
     let result = helper.getItems(data);
     expect(result).toBeDefined();
-    expect(Object.keys(result).length).toBe(38);
+    expect(Object.keys(result).length).toBe(37);
     expect(result).toEqual(expected);
   });
 
@@ -151,12 +150,11 @@ describe('CarProposalHelper', () => {
       {'Rechtsbijstand meeverzekeren': 'Ja'},
       {'Inzittendenverzekering': 'Nee'},
       {'Slotvragen': ''},
-      {'Voornaam': 'Test User Name'}
     ];
 
     let result = helper.getItems(data);
     expect(result).toBeDefined();
-    expect(Object.keys(result).length).toBe(38);
+    expect(Object.keys(result).length).toBe(37);
     expect(result).toEqual(expected);
   });
 

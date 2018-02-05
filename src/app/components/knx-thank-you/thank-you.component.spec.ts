@@ -56,7 +56,7 @@ describe('Component: Thank You', () => {
         .toContain('We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.');
 
       const second = parElements[1].nativeElement;
-      const expectedEmailPar = 'Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar op test@mail.com';
+      const expectedEmailPar = 'Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.';
 
       expect(second.textContent).toEqual(expectedEmailPar);
     });
@@ -65,7 +65,7 @@ describe('Component: Thank You', () => {
   describe('Car insurance', () => {
     it('should take input parameters', () => {
       comp.title = 'Hello World';
-      comp.loggedIn = true;
+      comp.loggedIn = false;
       comp.insuranceType = 'autoverzekering';
       comp.email = 'test@mail.com';
 
@@ -79,13 +79,10 @@ describe('Component: Thank You', () => {
       expect(parElements.length).toBeGreaterThan(0);
 
       const first = parElements[0].nativeElement;
-      expect(first.textContent).toContain('We hebben je aanvraag voor een autoverzekering in goede orde ontvangen.');
-      const firstPar = first.textContent.replace(/\s+/g, ' ');
-      // Check for car specific content
-      expect(firstPar).toContain('We hebben je aanvraag voor een autoverzekering');
+      expect(first.textContent).toContain('Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.');
 
       const second = parElements[1].nativeElement;
-      const expectedEmailPar = 'Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar op test@mail.com';
+      const expectedEmailPar = 'Al je verzekeringen bij elkaar?';
 
       expect(second.textContent).toEqual(expectedEmailPar);
     });
