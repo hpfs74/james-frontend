@@ -43,7 +43,7 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   advice$: Observable<any>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
-  alive: boolean;
+  subscriptions$: Array<Subscription>;
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -59,12 +59,7 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
       hideNextButton: false
     };
 
-    this.alive = true;
-  }
-
-  selectInitialStates(): void {
-    this.address$ = this.store$.select(fromAddress.getAddress);
-    this.error$ = this.store$.select(fromCore.getWizardError);
+    this.subscriptions$ = new Array<Subscription>();
   }
 
   initializeForms(): void {
@@ -73,7 +68,13 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
     this.form = new HouseHoldLocationForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'));
   }
 
+  selectInitialStates(): void {
+    this.address$ = this.store$.select(fromAddress.getAddress);
+    this.error$ = this.store$.select(fromCore.getWizardError);
+  }
+
   setInitialSubscriptions(): void {
+
     this.store$.select(getHouseDataAddress)
       .subscribe(data => this.setAddress(data));
 
@@ -85,10 +86,15 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
     if (value) {
       this.addressForm.formGroup.patchValue(Object.assign({}, {
         postalCode: value.postcode,
-        houseNumber: value.number_extended.number_only,
-        // houseNumberExtension: value.number_extended.number_extension
+        houseNumber: value.number_extended ? value.number_extended.number_only : null,
+        houseNumberExtension: value.number_extended ? value.number_extended.number_extension : null
       }));
     }
+
+    setTimeout(() => {
+      FormUtils.updateAndValidateControls(this.form.formGroup, value);
+      FormUtils.updateAndValidateControls(this.addressForm.formGroup, value);
+    });
   }
 
   setOwnedBuilding(value) {
@@ -112,7 +118,7 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
    * close all subscriptions
    */
   ngOnDestroy(): void {
-    this.alive = false;
+    this.subscriptions$.forEach((el) => el.unsubscribe());
   }
 
   goToNextStep(event?: any) {
@@ -124,21 +130,27 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
-    Observable.combineLatest(this.address$, (address) => {
-      return {
-        Zipcode: address.postcode,
-        HouseNumber: address.number_extended.number_only,
-        HouseNumberAddition: address.number_extended.number_extension,
-        OwnedBuilding: detailForm.value.houseHold,
-        address: address
-      };
-    })
-      .take(1)
-      .subscribe((step1) => {
-        this.store$.dispatch(new houseDataActions.UpdateAddress(step1.address));
-        this.store$.dispatch(new houseHoldData.Update({OwnedBuilding: step1.OwnedBuilding}));
-      });
+    this.subscriptions$.push(
+      Observable.combineLatest(this.address$, (address) => {
+        if (!address) {
+          return;
+        }
+
+        return {
+          Zipcode: address.postcode,
+          HouseNumber: address.number_extended.number_only,
+          HouseNumberAddition: address.number_extended.number_extension,
+          OwnedBuilding: detailForm.value.houseHold,
+          address: address
+        };
+      })
+        .take(1)
+        .subscribe((step1) => {
+          this.store$.dispatch(new houseDataActions.UpdateAddress(step1.address));
+          this.store$.dispatch(new houseHoldData.Update({OwnedBuilding: step1.OwnedBuilding}));
+        }));
 
     this.store$.dispatch(new wizardActions.Forward());
+
   }
 }

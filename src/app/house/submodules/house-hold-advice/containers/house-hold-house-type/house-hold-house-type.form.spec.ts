@@ -29,4 +29,11 @@ describe('HouseHold Type Form', () => {
     expect(form.formGroup.get('buildingType')).toBeDefined();
     expect(form.formGroup.get('buildYear')).toBeDefined();
   });
+
+  it ('should have proper default value', () => {
+    expect(form.formGroup.get('roomsCount').value).toBe('2');
+    expect(form.formGroup.get('surfaceArea').value).toBe('90');
+    expect(form.formGroup.get('buildingType').value).toBe('2');
+    expect(form.formGroup.get('buildYear').value).toBe('1800');
+  });
 });
