@@ -45,9 +45,7 @@ export class CarProposalHelper {
     {key: 'Hoofddekking', value: 'dekking'},
     {key: 'Rechtsbijstand meeverzekeren', value: 'legal_aid', transform: this.getLegalAid},
     {key: 'Inzittendenverzekering', value: 'cover_occupants', transform: this.getBoolean},
-    {key: 'Slotvragen', value: ''},
-    // FirstName is a mandatory field to buy an insurance
-    {key: 'Voornaam', value: 'name'}
+    {key: 'Slotvragen', value: ''}
   ];
 
   getItems(data: any): Array<Object> {

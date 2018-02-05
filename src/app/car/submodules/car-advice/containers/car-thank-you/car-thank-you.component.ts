@@ -1,5 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -23,17 +22,20 @@ import { Content, ContentConfig } from '@app/content.config';
   selector: 'knx-car-thank-you',
   templateUrl: './car-thank-you.component.html'
 })
-export class CarThankYouComponent implements AfterViewInit {
+export class CarThankYouComponent implements OnInit {
   content: Content;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   email$: Observable<string>;
   loggedIn$: Observable<any>;
 
-  constructor(private store$: Store<fromRoot.State>, private route: ActivatedRoute, private contentConfig: ContentConfig) {
-    this.content = contentConfig.getContent();
-    this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
-    this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
+  constructor(private store$: Store<fromRoot.State>, private contentConfig: ContentConfig) {
+  }
+
+  ngOnInit() {
+    this.content = this.contentConfig.getContent();
+    this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
+    this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.loggedIn$ = this.store$.select(fromAuth.getLoggedIn);
 
     let profileEmail$ = this.store$.select(fromProfile.getProfile).map((profile: Profile) => profile.emailaddress);
@@ -52,9 +54,7 @@ export class CarThankYouComponent implements AfterViewInit {
 
         return email;
       });
-  }
 
-  ngAfterViewInit() {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.thankyou', clear: true }));
 
     this.email$.take(1).subscribe((email) => {
