@@ -15,8 +15,10 @@ import * as fromCore from '@app/core/reducers';
 import * as assistant from '@app/core/actions/assistant';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as fromProfile from '@app/profile/reducers';
+import * as auth from '@app/auth/actions/auth';
 
 import { Content, ContentConfig } from '@app/content.config';
+import { AuthService } from '@app/auth/services';
 
 @Component({
   selector: 'knx-car-thank-you',
@@ -29,10 +31,15 @@ export class CarThankYouComponent implements OnInit {
   email$: Observable<string>;
   loggedIn$: Observable<any>;
 
-  constructor(private store$: Store<fromRoot.State>, private contentConfig: ContentConfig) {
+  constructor(private store$: Store<fromRoot.State>,
+              private contentConfig: ContentConfig,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
+    if (this.authService.isAnonymous()) {
+      this.store$.dispatch(new auth.ResetStates());
+    }
     this.content = this.contentConfig.getContent();
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);

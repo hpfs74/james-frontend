@@ -65,11 +65,11 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
 
   // State of the advice forms data
   isLoggedIn$: Observable<boolean>;
-  insurance$: Observable<any>;
+  selectedInsurance$: Observable<any>;
   savedInsurances$: Observable<any>;
   savedInsurancesLoading$: Observable<any>;
   subscription$: Array<any> = [];
-  advice$: Observable<any>;
+  selectedAdvice$: Observable<any>;
 
   // Forms
   carExtrasForm: CarExtrasForm;
@@ -99,13 +99,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     }));
     // bind observables
     this.subscription$ = [];
-    this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
+    this.selectedAdvice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.savedInsurancesLoading$ = this.store$.select(fromInsurance.getSavedInsuranceLoading);
-    this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
+    this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     // initialize forms
     const formBuilder = new FormBuilder();
 
@@ -123,11 +123,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
         .subscribe(purchasedInsurances => {
           const insurances = purchasedInsurances.car.insurance;
           const advices = purchasedInsurances.car.insurance_advice;
-
-          if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
-            // Proceed to the buy flow for anonymous with advice
-            this.proceedWithAdvice(advices, insurances);
-          } else if (insurances.length && insurances.filter(insurance =>
+          if (insurances.length && insurances.filter(insurance =>
               (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
             // redirect to purchased overview if there are any manually added insurances
             this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
@@ -136,9 +132,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     );
 
     this.subscription$.push(
-      this.insurance$.take(1).subscribe(selectedInsurance => {
+      this.selectedInsurance$.take(1).subscribe(selectedInsurance => {
         this.subscription$.push(
-          this.advice$.take(1).subscribe(selectedAdvice => {
+          this.selectedAdvice$.take(1).subscribe(selectedAdvice => {
             if (selectedInsurance && selectedAdvice && selectedAdvice.iban) {
               this.proceedToBuyResults();
             }
@@ -194,7 +190,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.store$.dispatch(new advice.Update(Object.assign({}, advices[advices.length - 1])));
 
     this.subscription$.push(
-      this.insurance$.subscribe(insurance => {
+      this.selectedInsurance$.subscribe(insurance => {
         if (insurance) {
           this.subscription$.push(this.store$.select(fromInsurance.getSelectedInsurance)
             .filter(selectedInsurance => selectedInsurance !== null).subscribe(

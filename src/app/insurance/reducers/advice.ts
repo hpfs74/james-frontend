@@ -102,6 +102,13 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, initialState);
     }
 
+    case AdviceActions.REMOVE_LATEST_INSURANCE_ADVICE_SUCCESS: {
+      return Object.assign({}, state, {
+        advice: {},
+        selectedInsurance: null
+      });
+    }
+
     default: {
       return state;
     }
