@@ -58,7 +58,10 @@ export class CarService {
   }
 
   public buyStatic(payload: Proposal): Observable<any> {
-    return this.authHttp.post(environment.james.carBuy, JSON.stringify(payload))
+    let buyData = JSON.parse(JSON.stringify(payload));
+
+    delete buyData.proposal._embedded;
+    return this.authHttp.post(environment.james.carBuy, JSON.stringify(buyData))
       .map((res: Response) => res.json());
   }
 }

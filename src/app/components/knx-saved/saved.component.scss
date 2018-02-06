@@ -20,6 +20,10 @@
   font-weight: bold;
 }
 
+.knx-saved__action {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 768px) {
   .knx-saved {
     hr {
@@ -37,7 +41,6 @@
   width: 60px;
   height: 60px;
   margin-right: 10px;
-  margin-top: -5px;
   text-align: center;
   font-size: 30px;
   line-height: 56px;
@@ -46,7 +49,7 @@
   border-radius: 50%;
 
   + p {
-    padding-top: 5px;
+    margin-bottom: 10px;
     line-height: 1.3;
   }
 }

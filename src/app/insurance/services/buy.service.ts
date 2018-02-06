@@ -24,8 +24,10 @@ export class BuyService {
         password: advice.password,
         redirect_uri: 'com.mobgen.knab://'
       },
-      car_buystatic: payload
+      car_buystatic: JSON.parse(JSON.stringify(payload))
     };
+
+    delete buyData.car_buystatic.proposal._embedded;
 
     return this.authHttp.post(environment.james.sdBuy, JSON.stringify(buyData), { headers })
     .map((res: Response) => res.json());
