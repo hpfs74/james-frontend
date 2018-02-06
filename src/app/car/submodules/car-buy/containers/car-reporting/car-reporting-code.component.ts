@@ -2,22 +2,23 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
 import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
 import { CarReportingCodeForm } from './car-reporting-code.form';
-import { Profile } from '../../../../../profile/models';
-import { CarInsurance } from '../../../../../car/models';
-import { TagsService } from '../../../../../core/services/tags.service';
-import { Tag } from '../../../../../core/models/tag';
+import { Profile } from '@app/profile/models';
+import { CarInsurance } from '@app/car/models';
+import { TagsService } from '@app/core/services/tags.service';
+import { Tag } from '@app/core/models/tag';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { InsuranceAdvice } from '../../../../../insurance/models/index';
+import { InsuranceAdvice } from '@app/insurance/models/index';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
-import * as FormUtils from '../../../../../utils/base-form.utils';
-import * as fromRoot from '../../../../reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as assistant from '../../../../../core/actions/assistant';
-import * as advice from '../../../../../insurance/actions/advice';
+import * as FormUtils from '@app/utils/base-form.utils';
+import * as fromCar from '@app/car/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as assistant from '@app/core/actions/assistant';
+import * as advice from '@app/insurance/actions/advice';
+
 
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
@@ -41,12 +42,14 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
   subscription$: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
+  car$: Observable<any>;
+
   constructor(private tagsService: TagsService,
-              private store$: Store<fromRoot.State>) {
+              private store$: Store<fromCar.State>) {
 
     this.securityClasses = this.tagsService.getByKey('buyflow_carsecurity');
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
-    this.insurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
+    this.car$ = this.store$.select(fromCar.getCarInfo);
     const formBuilder = new FormBuilder();
     this.form = new CarReportingCodeForm(formBuilder, this.tagsService.getAsLabelValue('buyflow_carsecurity'));
     this.error$ = this.store$.select(fromCore.getWizardError);
@@ -56,7 +59,7 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
       backButtonLabel: 'Terug',
     };
     this.subscription$.push(
-      this.store$.select(fromRoot.getCarMeldcode)
+      this.store$.select(fromCar.getCarMeldcode)
         .take(1)
         .subscribe(meldcode => {
           if (meldcode) {
