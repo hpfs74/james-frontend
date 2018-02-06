@@ -18,7 +18,7 @@
 </div>
 <div class="container knx-car-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" [hidden]="savedInsurancesLoading$ | async">
   <knx-wizard-rx>
-    
+
     <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="knxWizardService.currentStepIndex !== 1" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
         [options]="chatConfig$ | async"
@@ -27,7 +27,7 @@
 
         <knx-car-extras
           [form]="carExtrasForm"
-          [advice]="advice$ | async"
+          [advice]="selectedAdvice$ | async"
           [show]="knxWizardService.currentStepIndex === 1">
         </knx-car-extras>
 
@@ -37,7 +37,7 @@
               <div class="knx-side-panel-content">
                 <knx-car-extras
                   [form]="carExtrasForm"
-                  [advice]="advice$ | async"
+                  [advice]="selectedAdvice$ | async"
                   [show]="knxWizardService.currentStepIndex === 1">
                 </knx-car-extras>
 

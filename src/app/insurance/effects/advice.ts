@@ -51,7 +51,6 @@ export class AdviceEffects {
   removeAdvice$: Observable<Action> = this.actions$
     .ofType(advice.REMOVE_LATEST_INSURANCE_ADVICE)
     .withLatestFrom(this.store$, (payload, state: any) => {
-
       if (state.insurance.insurance.savedInsurances) {
         let savedAdvices = state.insurance.insurance.savedInsurances.car.insurance_advice;
 

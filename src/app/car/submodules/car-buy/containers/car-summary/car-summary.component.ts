@@ -1,30 +1,32 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
-import { Profile } from '../../../../../profile/models';
+import { QaIdentifier } from '@app/shared/models/qa-identifier';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { Profile } from '@app/profile/models';
 import { CarInsurance, CarProposalHelper } from '@app/car/models';
 import { Proposal } from '@app/insurance/models/proposal';
-import { TagsService } from '../../../../../core/services/tags.service';
+import { TagsService } from '@app/core/services/tags.service';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
-import { InsuranceAdvice } from '../../../../../insurance/models/index';
-import { ContactDetailForm } from '../../../../../shared/forms/contact-detail.form';
-import { InsuranceReviewRegistrationForm } from '../../../../../components/knx-insurance-review/insuatance-review-registration.form';
-import { registrationError } from '../../../../../registration/models/registration-error';
+import { InsuranceAdvice } from '@app/insurance/models/index';
+import { ContactDetailForm } from '@app/shared/forms/contact-detail.form';
+import { InsuranceReviewRegistrationForm } from '@app/components/knx-insurance-review/insuatance-review-registration.form';
+import { registrationError } from '@app/registration/models/registration-error';
 
-import * as router from '../../../../../core/actions/router';
+import * as router from '@app/core/actions/router';
 import * as fromRoot from '../../../../reducers';
-import * as fromProfile from '../../../../../profile/reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as assistant from '../../../../../core/actions/assistant';
-import * as advice from '../../../../../insurance/actions/advice';
-import * as fromCar from '../../../../../car/reducers';
-import * as car from '../../../../../car/actions/car';
+import * as fromProfile from '@app/profile/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as assistant from '@app/core/actions/assistant';
+import * as advice from '@app/insurance/actions/advice';
+import * as fromCar from '@app/car/reducers';
+import * as car from '@app/car/actions/car';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as fromAuth from '@app/auth/reducers';
+import * as insurance from '@app/insurance/actions/insurance';
+import * as carActions from '@app/car/actions/car';
 
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/map';
@@ -82,7 +84,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   ngOnInit() {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.summary', clear: true }));
-
+    this.store$.dispatch(new insurance.GetInsurances());
     this.subscription$.push(this.store$.select(fromCar.getCarBuyError)
       .subscribe((errorData: any) => {
         if (errorData[0]) {
@@ -169,6 +171,8 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   goToNextStep() {
+    this.store$.dispatch(new carActions.ClearErrors());
+    this.store$.dispatch(new wizardActions.ResetError());
     if (!this.summaryValid()) {
       return this.store$.dispatch(new wizardActions.Error({ message: this.formSummaryError }));
     }
