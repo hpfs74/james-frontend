@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-sm-8">
             <div class="knx-message knx-message--hint">
-              <knx-car-info *ngIf="(insurance$ | async)" [data]="(insurance$ | async)?._embedded.car"></knx-car-info>
+              <knx-car-info *ngIf="car$ | async" [data]="car$ | async"></knx-car-info>
             </div>
           </div>
         </div>
