@@ -199,3 +199,7 @@ export const toNicciDate = function (date: Date|string) {
 export const isMaskFormatted = function (date: string | string) {
   return (typeof date === 'string' && moment(date, 'DD / MM / YYYY', true).isValid());
 };
+
+export const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};

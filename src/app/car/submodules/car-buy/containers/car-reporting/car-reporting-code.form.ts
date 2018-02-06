@@ -2,10 +2,11 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { BaseForm, KNXCustomFormGroupOptions } from '../../../../../shared/forms/base-form';
-import { nameInitialMask } from '../../../../../utils/base-form.utils';
+import { nameInitialMask, numberWithCommas } from '../../../../../utils/base-form.utils';
 import { numberValidator } from '../../../../../utils/base-form.validators';
 import { carReportingCodeValidator } from '../../../../../utils/base-form.validators';
 import { UIPair } from '../../../../../core/models/ui-pair';
+
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
@@ -13,6 +14,7 @@ export class CarReportingCodeForm extends BaseForm {
 
   public validationErrors = {
     required: () => 'Dit is een verplicht veld',
+    max: (data) => 'Waarde mag niet hoger zijn dan ' + numberWithCommas(data.max) + '€',
     reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
   };
 
@@ -28,7 +30,8 @@ export class CarReportingCodeForm extends BaseForm {
       ],
       accessoryValue: [null,
         Validators.compose([
-          Validators.required
+          Validators.required,
+          Validators.max(100000)
         ])
       ],
       securityClass: ['unsure', Validators.required],
