@@ -18,12 +18,14 @@ import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiu
 import { HouseHoldPremiumsRoutingModule } from './house-hold-premiums-routing.module';
 import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseHoldPremiumsFilterComponent } from './containers/house-hold-premiums-filter/house-hold-premiums-filter.component';
+import { HouseHoldPremiumsDetailNavComponent } from './containers/house-hold-premiums-detail-nav/house-hold-premiums-detail-nav.component';
 
 export const COMPONENTS = [
   HouseHoldPremiumsComponent,
   HouseHoldPremiumsListComponent,
   HouseHoldPremiumsDetailComponent,
-  HouseHoldPremiumsFilterComponent
+  HouseHoldPremiumsFilterComponent,
+  HouseHoldPremiumsDetailNavComponent
 ];
 
 @NgModule({
