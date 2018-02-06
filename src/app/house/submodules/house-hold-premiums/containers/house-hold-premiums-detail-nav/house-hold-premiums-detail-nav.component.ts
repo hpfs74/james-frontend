@@ -12,6 +12,14 @@ export class HouseHoldPremiumsDetailNavComponent {
   @Input() show: boolean;
   @Input() optionModifierClass: string;
 
-  @Output() select: EventEmitter<string> = new EventEmitter<string>();
-  @Output() buy: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onSelectPill: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onBuy: EventEmitter<any> = new EventEmitter<any>();
+
+  select(name) {
+    this.onSelectPill.emit(name);
+  }
+
+  buy() {
+    this.onBuy.emit();
+  }
 }

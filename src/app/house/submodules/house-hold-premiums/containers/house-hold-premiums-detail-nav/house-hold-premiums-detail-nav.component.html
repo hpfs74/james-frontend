@@ -3,7 +3,7 @@
   <h4>Overzicht</h4>
 
   <knx-collapse-message [ngClass]="optionModifierClass" [isOpen]="true">
-    <div *ngFor="pill in pills">
+    <div *ngFor="let pill of pills; index as pillIndex;">
       <a (click)="select(pill.value)">{{pill.label}}</a>
     </div>
   </knx-collapse-message>
