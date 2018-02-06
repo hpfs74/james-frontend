@@ -7,7 +7,6 @@ import { AsyncPipe } from '@angular/common';
 import * as fromRoot from '@app/reducers';
 import * as router from '@app/core/actions/router';
 import * as assistant from '@app/core/actions/assistant';
-import * as fromAuth from '@app/auth/reducers';
 import * as layout from '@app/core/actions/layout';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';

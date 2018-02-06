@@ -10,7 +10,7 @@ export const houseHoldRoutes: Routes = [
   },
   {
     path: 'premiums',
-    canActivateChild: [CanActivateHouseHoldFlowGuard],
+    // canActivateChild: [CanActivateHouseHoldFlowGuard],
     loadChildren: './submodules/house-hold-premiums/house-hold-premiums.module#HouseHoldPremiumsModule'
   }
 ];
