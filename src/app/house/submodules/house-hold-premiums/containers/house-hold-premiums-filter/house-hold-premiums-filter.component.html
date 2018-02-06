@@ -1,18 +1,19 @@
 <div class="knx-house-hold-premiums-filter hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
-  
-  <knx-collapse-message>
+
+  <knx-collapse-message [ngClass]="optionModifierClass" title="Main coverage" [isOpen]="true">
 
     <div class="knx-form-group--info knx-form-group--info-checkbox">
       <knx-radio #defaultCoverage
                  knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="defaultCoverage"
                  [formControlName]="form.formConfig.mainCoverage.formControlName"
-                 [options]="form.formConfig.mainCoverage.inputOptions"></knx-radio>
+                 [options]="form.formConfig.mainCoverage.inputOptions">
+      </knx-radio>
 
       <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
          Outside coverage tooltip
         </knx-tooltip>
-    </span>
+      </span>
 
       More text for default coverage...
 
