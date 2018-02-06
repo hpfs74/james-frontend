@@ -61,7 +61,7 @@ export class CarService {
     let buyData = JSON.parse(JSON.stringify(payload));
 
     delete buyData.proposal._embedded;
-    return this.authHttp.post(environment.james.carBuy, JSON.stringify(payload))
+    return this.authHttp.post(environment.james.carBuy, JSON.stringify(buyData))
       .map((res: Response) => res.json());
   }
 }
