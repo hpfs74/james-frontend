@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { TagsService } from '@app/core/services/tags.service';
 
-import * as cuid from 'cuid';
 import * as fromRoot from '@app/reducers';
 import * as fromAddress from '@app/address/reducers';
 import * as houseDataActions from '@app/house/actions/house-data';
@@ -27,7 +26,7 @@ import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/take';
 import { HouseHoldAmountRequest } from '@app/house/models/house-hold-amount';
-import { getHouseDataAddress, getHouseHoldDataInfo } from '@app/house/reducers';
+import { getHouseDataAddress, getHouseHoldDataAdvice, getHouseHoldDataInfo } from '@app/house/reducers';
 
 @Component({
   selector: 'knx-house-hold-location-form',
@@ -43,7 +42,7 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   advice$: Observable<any>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
-  subscriptions$: Array<Subscription>;
+  subscriptions$: Subscription[] = [];
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -59,8 +58,6 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
       hideNextButton: false,
       nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
     };
-
-    this.subscriptions$ = new Array<Subscription>();
   }
 
   initializeForms(): void {
@@ -75,12 +72,18 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   }
 
   setInitialSubscriptions(): void {
-
-    this.store$.select(getHouseDataAddress)
-      .subscribe(data => this.setAddress(data));
-
-    this.store$.select(getHouseHoldDataInfo)
-      .subscribe((amount) => this.setOwnedBuilding(amount));
+    this.subscriptions$ = [
+      this.store$.select(getHouseDataAddress)
+        .subscribe(data => this.setAddress(data)),
+      this.store$.select(getHouseHoldDataInfo)
+        .subscribe((amount) => this.setOwnedBuilding(amount)),
+      this.store$.select(getHouseHoldDataAdvice)
+        .subscribe( (advice) => {
+          if (!advice) {
+            this.store$.dispatch(new houseHoldData.Start());
+          }
+        })
+      ];
   }
 
   setAddress(value) {

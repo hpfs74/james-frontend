@@ -30,7 +30,13 @@ import * as wizardActions from '@app/core/actions/wizard';
 
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
+import { Subscription } from 'rxjs/Subscription';
 
+/**
+ * HouseHoldPremiumsComponent
+ *
+ *
+ */
 @Component({
   templateUrl: 'house-hold-premiums.component.html',
   styleUrls: ['./house-hold-premiums.component.scss'],
@@ -42,7 +48,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
   // State of the advice forms data
-  subscription$: Array<any> = [];
+  subscription$: Subscription[] = [];
   // Forms
   // houseHoldExtrasForm: HouseHoldExtrasForm;
 
@@ -56,10 +62,11 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
         title: 'Expert verzekeringen'
       }
     }));
+
     // bind observables
-    this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
+
     // initialize forms
     const formBuilder = new FormBuilder();
   }

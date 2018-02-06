@@ -1,0 +1,13 @@
+<div class="knx-house-hold-premiums-detail-nav hidden-sm" *ngIf="show">
+
+  <h4>Overzicht</h4>
+
+  <knx-collapse-message [ngClass]="optionModifierClass" [isOpen]="true">
+    <div *ngFor="let pill of pills; index as pillIndex;">
+      <a (click)="select(pill.value)">{{pill.label}}</a>
+    </div>
+  </knx-collapse-message>
+
+  <button class="knx-button knx-button--fullwidth" (click)="buy()">Vraag direct aan</button>
+
+</div>

@@ -6,7 +6,7 @@ import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/hou
 
 export const houseHoldPremiumsRoutes: Routes = [
   {
-    path: '',
+    path: 'premiums',
     component: HouseHoldPremiumsComponent,
     data: {
       title: '...'

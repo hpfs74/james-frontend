@@ -1,5 +1,4 @@
 export interface HouseHoldData {
-
   OwnedBuilding?: boolean;
   RoomCount?: string;
   SurfaceArea?: string;

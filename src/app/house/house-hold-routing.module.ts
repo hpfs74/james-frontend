@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CanActivateCarFlowGuard } from '@core/services/car-guard.service';
+import { CanActivateHouseHoldFlowGuard } from '@core/services/house-hold-guard.service';
 
 export const houseHoldRoutes: Routes = [
   {
@@ -8,6 +10,7 @@ export const houseHoldRoutes: Routes = [
   },
   {
     path: 'premiums',
+    // canActivateChild: [CanActivateHouseHoldFlowGuard],
     loadChildren: './submodules/house-hold-premiums/house-hold-premiums.module#HouseHoldPremiumsModule'
   }
 ];

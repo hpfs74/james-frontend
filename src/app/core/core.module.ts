@@ -32,6 +32,7 @@ import { TagsLoader } from '../utils/tagsloader';
 import {
   AssistantService,
   CanActivateCarFlowGuard,
+  CanActivateHouseHoldFlowGuard,
   CookieService,
   GeolocationService,
   LocalStorageService,
@@ -97,6 +98,7 @@ export class CoreModule {
         KNXLocale,
         AssistantService,
         CanActivateCarFlowGuard,
+        CanActivateHouseHoldFlowGuard,
         CookieService,
         GeolocationService,
         LocalStorageService,

@@ -5,6 +5,7 @@ import { HouseHoldLocationComponent } from './containers/house-hold-location/hou
 import { HouseHoldHouseTypeComponent } from './containers/house-hold-house-type/house-hold-house-type.component';
 import { HouseHoldHouseDetailComponent } from './containers/house-hold-house-detail/house-hold-house-detail.component';
 import { HouseHoldDekkingComponent } from './containers/house-hold-dekking/house-hold-dekking.component';
+import { CanActivateCarFlowGuard, CanActivateHouseHoldFlowGuard } from '@core/services';
 
 export const houseHoldAdviceRoutes: Routes = [
   {
@@ -29,6 +30,7 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: 'huis-type',
         component: HouseHoldHouseTypeComponent,
+        canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 1
         }
@@ -36,6 +38,7 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: 'huis-detail',
         component: HouseHoldHouseDetailComponent,
+        canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 2
         }
@@ -43,10 +46,10 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: 'dekking',
         component: HouseHoldDekkingComponent,
+        canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 3
         }
-
       }
     ]
   }
