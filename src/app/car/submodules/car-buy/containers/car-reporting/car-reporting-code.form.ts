@@ -43,7 +43,7 @@ export class CarReportingCodeForm extends BaseForm {
         label: 'Meldcode',
         help: true,
         inputOptions: {
-          type: 'number'
+          type: 'tel'
         }
       },
       accessoryValue: {
