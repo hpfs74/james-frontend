@@ -1,0 +1,76 @@
+<div class="knx-house-hold-premiums-filter hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
+  
+  <knx-collapse-message>
+
+    <div class="knx-form-group--info knx-form-group--info-checkbox">
+      <knx-radio #defaultCoverage
+                 knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="defaultCoverage"
+                 [formControlName]="form.formConfig.mainCoverage.formControlName"
+                 [options]="form.formConfig.mainCoverage.inputOptions"></knx-radio>
+
+      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+        <knx-tooltip [options]="{ position: 'left' }">
+         Outside coverage tooltip
+        </knx-tooltip>
+    </span>
+
+      More text for default coverage...
+
+      <knx-radio #extendedCoverage
+                 knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="extendedCoverage"
+                 [formControlName]="form.formConfig.mainCoverage.formControlName"
+                 [options]="form.formConfig.mainCoverage.inputOptions"></knx-radio>
+
+      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+        <knx-tooltip [options]="{ position: 'left' }">
+         Outside coverage tooltip
+        </knx-tooltip>
+    </span>
+
+      More text about extend coverage...
+
+    </div>
+
+    <div class="knx-form-group--info knx-form-group--info-checkbox">
+      <knx-checkbox #glassCoverage
+                    knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="glassCoverage"
+                    [formControlName]="form.formConfig.glassCoverage.formControlName"
+                    [options]="form.formConfig.glassCoverage.inputOptions"></knx-checkbox>
+
+      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+        <knx-tooltip [options]="{ position: 'left' }">
+         Glass coverage tooltip
+        </knx-tooltip>
+      </span>
+    </div>
+
+  </knx-collapse-message>
+
+  <knx-collapse-message [ngClass]="optionModifierClass" title="Additional coverage" [isOpen]="true">
+    <div class="knx-form-group--info knx-form-group--info-checkbox">
+      <knx-checkbox #outsideCoverage
+                    knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="outsideCoverage"
+                    [formControlName]="form.formConfig.outsideCoverage.formControlName"
+                    [options]="form.formConfig.outsideCoverage.inputOptions"></knx-checkbox>
+
+      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+          <knx-tooltip [options]="{ position: 'left' }">
+           Outside coverage tooltip
+          </knx-tooltip>
+        </span>
+    </div>
+
+    <div class="knx-form-group--info knx-form-group--info-checkbox">
+      <knx-checkbox #glassCoverage
+                    knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="glassCoverage"
+                    [formControlName]="form.formConfig.glassCoverage.formControlName"
+                    [options]="form.formConfig.glassCoverage.inputOptions"></knx-checkbox>
+
+      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+        <knx-tooltip [options]="{ position: 'left' }">
+         Glass coverage tooltip
+        </knx-tooltip>
+      </span>
+    </div>
+  </knx-collapse-message>
+</div>

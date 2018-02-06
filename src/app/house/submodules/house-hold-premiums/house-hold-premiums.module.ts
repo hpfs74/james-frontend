@@ -6,8 +6,8 @@ import { SharedModule } from '@app/shared.module';
 import { ChatStreamModule } from '@app/components/knx-chat-stream/chat-stream.module';
 import { InsuranceReviewModule } from '@app/components/knx-insurance-review/insurance-review.module';
 
-import { TagsService } from '../../../core/services/tags.service';
-import { TagsLoader } from '../../../utils/tagsloader';
+import { TagsService } from '@core/services';
+import { TagsLoader } from '@utils/tagsloader';
 import { HouseHoldEffects } from '@app/house/effects/house-hold';
 
 // Smart components
@@ -17,11 +17,13 @@ import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums
 import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiums-detail/hould-hold-premiums-detail.component';
 import { HouseHoldPremiumsRoutingModule } from './house-hold-premiums-routing.module';
 import { HouseHoldService } from '@app/house/services/house-hold.service';
+import { HouseHoldPremiumsFilterComponent } from './containers/house-hold-premiums-filter/house-hold-premiums-filter.component';
 
 export const COMPONENTS = [
   HouseHoldPremiumsComponent,
   HouseHoldPremiumsListComponent,
-  HouseHoldPremiumsDetailComponent
+  HouseHoldPremiumsDetailComponent,
+  HouseHoldPremiumsFilterComponent
 ];
 
 @NgModule({
