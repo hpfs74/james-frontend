@@ -3,7 +3,6 @@ import * as HouseDataActions from '../actions/house-data';
 import { HouseDataResponse } from '@app/house/models/house-data';
 import { Address } from '@app/address/models';
 
-
 export type Action = HouseDataActions.All;
 
 export interface State {

@@ -70,3 +70,4 @@ export const getHouseHoldPremiumError = createSelector(getHouseHoldPremiumState,
 export const getHouseHoldDataState = createSelector(selectHouseHoldState,
   (state: HouseHoldState) => state.houseHoldData);
 export const getHouseHoldDataInfo = createSelector(getHouseHoldDataState, fromHouseHoldData.getInfo);
+export const getHouseHoldDataAdvice = createSelector(getHouseHoldDataState, fromHouseHoldData.getAdviceId);
