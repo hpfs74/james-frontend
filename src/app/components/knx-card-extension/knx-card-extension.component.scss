@@ -30,17 +30,15 @@ p {
   margin: 0;
 }
 
-knx-card {
-  text-align: center;
-  margin-bottom: 15px;
+.knx-card {
+  margin: 0;
 }
 
 .knx-logo {
   border-right: 1px solid #ced8dd;
 
   img {
-    width: 100%;
-    max-height: 50px;
+    max-width: 60px;
   }
 }
 
@@ -49,9 +47,8 @@ knx-card {
 }
 
 .knx-card__extension {
-  height: 98px;
+  height: 100%;
   padding: 0;
-  margin-top: 8px;
   background: #47a2a6;
   margin-left: -33px;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -70,6 +67,10 @@ knx-card {
   }
 }
 
+.knx-divider {
+  margin-bottom: 15px;
+}
+
 @media (max-width: 991px) {
   .col-12 {
     -webkit-box-flex: 0;
@@ -79,8 +80,15 @@ knx-card {
   }
 
   .knx-card__extension {
+    height: 98px;
     margin-left: 0;
-    margin-top: -16px;
-    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 320px) {
+  .knx-logo {
+    img {
+      max-width: 50px;
+    }
   }
 }
