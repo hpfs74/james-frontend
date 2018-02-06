@@ -45,6 +45,7 @@ export class ProfileOverviewComponent implements OnInit {
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
+    this.store$.dispatch(new profile.LoadAction());
   }
 
   ngOnInit() {
