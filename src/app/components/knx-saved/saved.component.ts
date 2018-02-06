@@ -9,10 +9,18 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         <div class="col">
           <p class="knx-saved__title">{{ title }}</p>
 
+          <div class="row">
+            <div class="col-lg-6 knx-saved__action">
+              <button (click)="startNewAdvice()" class="knx-button knx-button--fullwidth knx-button--secondary knx-button--ghost">
+                Start nieuw advies
+              </button>
+            </div>
+          </div>
+
           <ul class="knx-list--unstyled">
-            <li *ngFor="let insurance of insurances?.car?.insurance; let first = first;">
+            <li *ngFor="let insurance of insurances?.car?.insurance">
               <div class="row">
-                <div *ngIf="!insurance.manually_added" class="col-md-6">
+                <div *ngIf="!insurance.manually_added" class="pull-left col-md-12">
                   <div class="knx-saved__icon knx-icon-automobile pull-left"></div>
 
                   <p>
@@ -21,12 +29,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
                     <br>
 
                     <strong>{{insurance.insurance_name}} &bull; {{insurance.price}} &euro; p/m</strong>
+
+                    <br>
+
+                    {{insurance.request_status === 'pending' ? '(in aanvraag)' : ''}}
                   </p>
-                </div>
-                <div class="pull-right col-md-6" *ngIf="first">
-                  <button (click)="startNewAdvice()" class="knx-button knx-button--fullwidth knx-button--secondary knx-button--ghost">
-                    Start nieuw advies
-                  </button>
                 </div>
               </div>
             </li>

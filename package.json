@@ -3,7 +3,12 @@
   "version": "0.0.3",
   "description": "Knab Verzekeren Web app (Codename James)",
   "author": "cXstudio",
-  "keywords": ["angular", "webapp", "progressive", "knab"],
+  "keywords": [
+    "angular",
+    "webapp",
+    "progressive",
+    "knab"
+  ],
   "scripts": {
     "commitmsg": "commitlint -e && npm run lint:styles && npm run lint",
     "postcheckout": "./hooks/post-checkout $GIT_PARAMS",
