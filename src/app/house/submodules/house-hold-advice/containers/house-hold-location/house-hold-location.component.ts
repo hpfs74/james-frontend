@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { TagsService } from '@app/core/services/tags.service';
 
-import * as cuid from 'cuid';
 import * as fromRoot from '@app/reducers';
 import * as fromAddress from '@app/address/reducers';
 import * as houseDataActions from '@app/house/actions/house-data';
