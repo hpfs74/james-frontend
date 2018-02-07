@@ -11,7 +11,7 @@ export class HouseHoldDekkingForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    // dateOfBirth: () => 'Error on date of birth'
+    dateOfBirth: () => 'Error on date of birth'
   };
 
   constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
@@ -21,7 +21,12 @@ export class HouseHoldDekkingForm extends BaseForm {
       coverage: [null],
       outsideCoverage: [null],
       netIncomeRange: [null, Validators.required],
-      dateOfBirth: [null ], // , Validators.required, birthDateValidator('dateOfBirth')],
+      dateOfBirth: [null,
+        [
+          Validators.required,
+          birthDateValidator('dateOfBirth')
+        ]
+      ],
       familySituation: [null, Validators.required]
     });
 
@@ -69,7 +74,6 @@ export class HouseHoldDekkingForm extends BaseForm {
       },
       dateOfBirth: {
         formControlName: 'dateOfBirth',
-        label: 'Date of birth',
         type: 'date',
         formControl: this.formGroup.get('dateOfBirth'),
         inputOptions: {
@@ -86,10 +90,10 @@ export class HouseHoldDekkingForm extends BaseForm {
           placeholder: 'Maak een keuze',
           events: ['focus'],
           items: [
-            { value: 'A', label: 'Alleen ikzelf'},
-            { value: 'H', label: 'Ik en mijn partner'},
-            { value: 'I', label: 'Ik, mijn partner en de kind(eren)'},
-            { value: 'K', label: 'Ik en mijn kind(eren)'},
+            {value: 'A', label: 'Alleen ikzelf'},
+            {value: 'H', label: 'Ik en mijn partner'},
+            {value: 'I', label: 'Ik, mijn partner en de kind(eren)'},
+            {value: 'K', label: 'Ik en mijn kind(eren)'},
           ]
         }
       }

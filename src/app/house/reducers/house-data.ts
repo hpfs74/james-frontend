@@ -1,4 +1,3 @@
-import { createSelector } from '@ngrx/store';
 import * as HouseDataActions from '../actions/house-data';
 import { HouseDataResponse } from '@app/house/models/house-data';
 import { Address } from '@app/address/models';

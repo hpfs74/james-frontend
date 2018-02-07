@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiums-detail/hould-hold-premiums-detail.component';
+import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiums-detail/house-hold-premiums-detail.component';
 import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums-list/house-hold-premiums-list.component';
 import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/house-hold-premiums.component';
 
