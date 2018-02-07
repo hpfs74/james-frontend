@@ -8,13 +8,13 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
-import * as fromAddress from '../reducers';
-import * as address from '../actions/address';
-import * as suggestion from '../actions/suggestion';
+import * as fromAddress from '@app/address/reducers';
+import * as addressActions from '@app/address/actions/address';
+import * as suggestion from '@app/address/actions/suggestion';
 
-import { AddressComponent } from '../components/address.component';
-import { AddressForm } from '../components/address.form';
-import { AddressLookup, Address, AddressSuggestionParams } from '../models';
+import { AddressComponent } from '@app/address/components/address.component';
+import { AddressForm } from '@app/address/components/address.form';
+import { AddressLookup, Address, AddressSuggestionParams } from '@app/address/models';
 
 export interface HouseExtensionItem {
   label: string;
@@ -59,7 +59,9 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
 
-  constructor(private store$: Store<fromAddress.State>) {}
+  constructor(private store$: Store<fromAddress.State>) {
+    this.store$.dispatch(new addressActions.ClearAddress());
+  }
 
   ngAfterViewChecked() {
     // Validator is bound here instead of inside AddressComponent due to an issue with asyncValidator
@@ -89,7 +91,7 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
 
   getAddress(value: AddressLookup) {
     if (value.postalCode && value.houseNumber) {
-      this.store$.dispatch(new address.GetAddress({
+      this.store$.dispatch(new addressActions.GetAddress({
         postalCode: value.postalCode,
         houseNumber: value.houseNumber,
         houseNumberExtension: value.houseNumberExtension

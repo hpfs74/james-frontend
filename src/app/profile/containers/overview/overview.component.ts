@@ -6,19 +6,19 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
 import { BaseForm } from '@app/shared/forms/base-form';
-import { Profile } from '../../models/profile';
-import { Settings } from '../../models/settings';
-import { ProfileForm } from '../../components/profile-form/profile.form';
+import { Profile } from '@app/profile/models/profile';
+import { Settings } from '@app/profile/models/settings';
+import { ProfileForm } from '@app/profile/components/profile-form/profile.form';
 import { TagsService } from '@app/core/services';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 
 import * as FormUtils from '@app/utils/base-form.utils';
-import * as fromProfile from '../../reducers';
+import * as fromProfile from '@app/profile/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as router from '@app/core/actions/router';
 import * as assistant from '@app/core/actions/assistant';
-import * as profile from '../../actions/profile';
-import * as settings from '../../actions/settings';
+import * as profile from '@app/profile/actions/profile';
+import * as settings from '@app/profile/actions/settings';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as layout from '@app/core/actions/layout';
 
@@ -45,6 +45,7 @@ export class ProfileOverviewComponent implements OnInit {
     this.profile$ = this.store$.select(fromProfile.getProfile);
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
+    this.store$.dispatch(new profile.LoadAction());
   }
 
   ngOnInit() {

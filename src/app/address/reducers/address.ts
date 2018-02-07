@@ -44,6 +44,10 @@ export function reducer(state = initialState, action: Action): State {
       });
     }
 
+    case address.CLEAR_ADDRESS: {
+      return Object.assign({}, initialState);
+    }
+
     default: {
       return state;
     }
