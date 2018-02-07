@@ -21,7 +21,6 @@ import * as profile from '@app/profile/actions/profile';
 import * as settings from '@app/profile/actions/settings';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as layout from '@app/core/actions/layout';
-import * as addressActions from '@app/address/actions/address';
 
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
@@ -47,7 +46,6 @@ export class ProfileOverviewComponent implements OnInit {
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
     this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
     this.store$.dispatch(new profile.LoadAction());
-    this.store$.dispatch(new addressActions.ClearAddress());
   }
 
   ngOnInit() {
