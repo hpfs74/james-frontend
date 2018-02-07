@@ -77,7 +77,6 @@ describe('Service: HouseHold', () => {
   };
 
 
-
   let moduleDef: TestModuleMetadata = {
     imports: [StoreModule.forRoot({})],
     providers: [
@@ -182,8 +181,6 @@ describe('Service: HouseHold', () => {
           });
       });
     });
-
-
   });
 
   describe('HouseHold Calculate Premiums', () => {
