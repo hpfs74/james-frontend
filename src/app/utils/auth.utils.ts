@@ -19,7 +19,7 @@ export class TokenHelper {
 }
 
 export function setTokenExpirationDate(token: AuthToken): AuthToken {
-  let tokenObj = Object.assign({}, token);
+  let tokenObj: AuthToken = Object.assign({}, token);
   tokenObj.expiration_time = new Date().setUTCSeconds(tokenObj.expires_in);
   tokenObj.iat = new Date().getTime();
   return tokenObj;
