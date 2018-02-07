@@ -1,5 +1,5 @@
 import * as AuthUtils from './auth.utils';
-import { TokenHelper, tokenNotExpired } from './auth.utils';
+import { TokenHelper, tokenIsValid } from './auth.utils';
 
 describe('Utils: AuthUtils', () => {
 
@@ -43,7 +43,7 @@ describe('Utils: AuthUtils', () => {
 
   describe('tokenNotExpired', () => {
     it('should return false if token not exist', () => {
-      const res = AuthUtils.tokenNotExpired('not existing token');
+      const res = AuthUtils.tokenIsValid();
       expect(res).toBeFalsy();
     });
 
@@ -51,29 +51,17 @@ describe('Utils: AuthUtils', () => {
       const token = '{ "expires_in": "0" }';
       const resToken = AuthUtils.setTokenExpirationDate(token);
       localStorage.setItem('token', resToken);
-      const res = AuthUtils.tokenNotExpired('token');
+      const res = AuthUtils.tokenIsValid();
       expect(res).toBeFalsy();
     });
 
     it('should return true if token is valid', () => {
       localStorage.setItem('token', ' { "expires_in": "12218018281" }');
-      const res = AuthUtils.tokenNotExpired('token');
+      const res = AuthUtils.tokenIsValid();
       expect(res).toBeTruthy();
     });
   });
 
-  describe('tokenExists', () => {
-    it('should return false if token not exist', () => {
-      const res = AuthUtils.isTokenExists('not existing token');
-      expect(res).toBeFalsy();
-    });
-
-    it('should return false if token exist', () => {
-      localStorage.setItem('token', ' { "expires_in": "12218018281" }');
-      const res = AuthUtils.isTokenExists('token');
-      expect(res).toBeTruthy();
-    });
-  });
 });
 
 

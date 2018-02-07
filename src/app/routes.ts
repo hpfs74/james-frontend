@@ -7,9 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'car',
-    pathMatch: 'full',
-    canActivateChild: [AuthGuard]
-    // loadChildren: './dashboard/dashboard.module#DashboardModule',
+    pathMatch: 'full'
   },
   {
     path: 'car',
@@ -22,7 +20,6 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    canActivateChild: [AuthGuard],
     loadChildren: './profile/profile.module#ProfileModule'
   },
   {

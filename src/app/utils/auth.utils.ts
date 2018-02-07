@@ -1,10 +1,12 @@
+import { AuthToken } from '@app/auth/models/auth';
+
 export class TokenHelper {
 
-  public getTokenExpirationDate(token: string): Number {
-    return token ? JSON.parse(token).expiration_time : null;
+  public getTokenExpirationDate(token: AuthToken): Number {
+    return token ? token.expiration_time : null;
   }
 
-  public isTokenExpired(token: string, offsetSeconds?: number): boolean {
+  public tokenIsExpired(token: AuthToken, offsetSeconds?: number): boolean {
     const date = this.getTokenExpirationDate(token);
 
     if (date == null) {
@@ -23,15 +25,16 @@ export function setTokenExpirationDate(token: string): string {
   return JSON.stringify(tokenObj);
 }
 
-export function tokenNotExpired(tokenName: string): boolean {
-  const token: string = localStorage.getItem(tokenName);
+export function tokenIsValid(): boolean {
+  const token: AuthToken = JSON.parse(localStorage.getItem('token')) || null;
   const tokenHelper = new TokenHelper();
-  return token !== null && !tokenHelper.isTokenExpired(token);
+  return token !== null && !tokenHelper.tokenIsExpired(token);
 }
 
-export function isTokenExists(tokenName: string): boolean {
-  const token: string = localStorage.getItem(tokenName);
-  return !!token;
+export function tokenIsAnonymous(): boolean {
+  const token: AuthToken = JSON.parse(localStorage.getItem('token')) || null;
+  // if token is null for any reason, asume that the user is anonymous
+  return token === null || (token && token['anonymous']);
 }
 
 // TODO this should be changed later, all translations should go trough one place

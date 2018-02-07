@@ -4,18 +4,16 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 
-import * as fromRoot from '../reducers';
-import * as auth from '../actions/auth';
-import * as router from '../../core/actions/router';
-import { AuthService } from '../services/auth.service';
+import * as fromRoot from '@app/auth/reducers';
+import * as auth from '@app/auth/actions/auth';
+import * as router from '@app/core/actions/router';
+import * as AuthUtils from '@app/utils/auth.utils';
+import { AuthService } from '@app/auth/services/auth.service';
 
 // TODO: refactor to more maintainable solution
 const anonymousAvailableLinks = [
   '/register',
   '/login',
-  '/profile-edit',
-  '/profile-edit-password',
-  '/profile-overview',
   '/car',
   '/car/insurance',
   '/car/detail',
@@ -53,7 +51,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     const baseUrl = url.split(';')[0];
     if (!this.isPublicRoute(baseUrl)) {
       this.store$.select(fromRoot.selectAuthState).take(1).subscribe(authenticated => {
-        if (!authenticated.status.loggedIn || !this.authService.isLoggedIn()) {
+        if (!authenticated.status.loggedIn || !AuthUtils.tokenIsValid()) {
           this.store$.dispatch(new auth.LoginRedirect());
         }
       });
