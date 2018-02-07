@@ -19,6 +19,7 @@ import * as auth from '../actions/auth';
 import * as profile from '../../profile/actions/profile';
 import * as insurance from '../../insurance/actions/insurance';
 import { Authenticate } from '../models/auth';
+import { AssistantService } from '@app/core/services';
 
 describe('AuthEffects', () => {
   let effects: AuthEffects;
@@ -65,6 +66,7 @@ describe('AuthEffects', () => {
       ],
       providers: [
         AuthEffects,
+        AssistantService,
         provideMockActions(() => actions),
         {
           provide: AuthService,

@@ -18,11 +18,11 @@ export class TokenHelper {
   }
 }
 
-export function setTokenExpirationDate(token: string): string {
-  let tokenObj = JSON.parse(token);
+export function setTokenExpirationDate(token: AuthToken): AuthToken {
+  let tokenObj = Object.assign({}, token);
   tokenObj.expiration_time = new Date().setUTCSeconds(tokenObj.expires_in);
   tokenObj.iat = new Date().getTime();
-  return JSON.stringify(tokenObj);
+  return tokenObj;
 }
 
 export function tokenIsValid(): boolean {
