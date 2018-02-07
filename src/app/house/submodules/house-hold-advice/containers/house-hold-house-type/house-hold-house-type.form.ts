@@ -107,9 +107,7 @@ export class HouseHoldHouseTypeForm extends BaseForm {
         formControl: this.formGroup.get('buildingType'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          options: {
-            twoCols: true
-          },
+          optTwoCols: true,
           placeholder: '',
           items: [
             {
