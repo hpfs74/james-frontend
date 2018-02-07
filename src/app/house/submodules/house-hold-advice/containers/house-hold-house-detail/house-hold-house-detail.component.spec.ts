@@ -13,14 +13,12 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
-import * as fromHouse from '@app/house/reducers';
-import { HouseHoldDekkingComponent } from './house-hold-dekking.component';
-import { By } from '@angular/platform-browser';
+import { HouseHoldHouseDetailComponent } from './house-hold-house-detail.component';
 
 
 describe('Component: HouseHoldDekkingComponent', () => {
-  let comp: HouseHoldDekkingComponent;
-  let fixture:   ComponentFixture<HouseHoldDekkingComponent>;
+  let comp: HouseHoldHouseDetailComponent;
+  let fixture:   ComponentFixture<HouseHoldHouseDetailComponent>;
   let store: Store<fromRoot.State>;
   let tagsService: TagsService;
 
@@ -32,12 +30,11 @@ describe('Component: HouseHoldDekkingComponent', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'app': combineReducers(fromCore.reducers),
-          'household': combineReducers(fromHouse.reducers)
+          'app': combineReducers(fromCore.reducers)
         })
       ],
       declarations: [
-        HouseHoldDekkingComponent
+        HouseHoldHouseDetailComponent
       ],
       providers: [
         KNXLocale,
@@ -57,21 +54,12 @@ describe('Component: HouseHoldDekkingComponent', () => {
     tagsService = TestBed.get(TagsService);
     spyOn(store, 'dispatch').and.callThrough();
 
-    fixture = TestBed.createComponent(HouseHoldDekkingComponent);
+    fixture = TestBed.createComponent(HouseHoldHouseDetailComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   }));
 
   beforeEach(() => {
     fixture.detectChanges();
-  });
-
-  describe('Initialization', () => {
-
-    it('should init the form template', () => {
-      const element = fixture.debugElement.query(By.css('form'));
-      expect(element).toBeDefined();
-      expect(comp).toBeDefined();
-    });
   });
 });
