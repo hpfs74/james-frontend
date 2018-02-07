@@ -4,7 +4,7 @@ import { Address, AddressLookup } from '../models';
 export const GET_ADDRESS_REQUEST = '[Address] Address Lookup';
 export const GET_ADDRESS_SUCCESS = '[Address] Address Lookup Success';
 export const GET_ADDRESS_FAILURE = '[Address] Address Lookup Failure';
-export const CLEAR_ADDRESS = '[Address] Clear Address';
+export const CLEAR_ADDRESS =       '[Address] Clear Address';
 
 export class GetAddress implements Action {
   readonly type = GET_ADDRESS_REQUEST;
