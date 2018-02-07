@@ -13,7 +13,7 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
-import { HouseHoldPremiumsDetailComponent } from './hould-hold-premiums-detail.component';
+import { HouseHoldPremiumsDetailComponent } from './house-hold-premiums-detail.component';
 import { By } from '@angular/platform-browser';
 
 
