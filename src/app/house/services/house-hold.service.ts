@@ -27,7 +27,8 @@ export class HouseHoldService {
     headers.append('Content-Type', 'application/json');
 
     return this.http.post(environment.riskInsurance.HouseHoldAmount, req, {headers: headers})
-      .map(res => <HouseHoldAmountResponse>res.json());
+      .map(res => <HouseHoldAmountResponse>res.json())
+      .map(res => Object.assign(res, {InsuredAmount: res.InsuredAmount / 100.0}));
   }
 
   public calculatePremiums(req: HouseHoldPremiumRequest): Observable<HouseHoldPremiumResponse> {

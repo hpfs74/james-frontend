@@ -7,7 +7,8 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'car',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivateChild: [AuthGuard]
   },
   {
     path: 'car',

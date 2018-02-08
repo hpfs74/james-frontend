@@ -53,7 +53,7 @@ export class AuthEffects {
           ];
         })
         .catch((error) => {
-          let errorText = JSON.parse(error.text()) || error;
+          const errorText = JSON.parse(error.text() || '{}') || error;
           return Observable.of(new authActions.LoginFailure(errorText.error || errorText));
         })
     );
@@ -74,7 +74,7 @@ export class AuthEffects {
           ];
         })
         .catch((error) => {
-          let errorText = JSON.parse(error.text()) || error;
+          const errorText = JSON.parse(error.text() || '{}') || error;
           return Observable.of(new authActions.LoginFailure(errorText.error || errorText));
         })
     );
@@ -90,7 +90,7 @@ export class AuthEffects {
           return [new authActions.NewPasswordSuccess(response)];
         })
         .catch((error) => {
-          let errorText = JSON.parse(error.text()) || error;
+          const errorText = JSON.parse(error.text() || '{}') || error;
           return Observable.of(new authActions.NewPasswordError( translatePasswordMessages(errorText.error)
            || translatePasswordMessages(errorText)));
         })

@@ -7,7 +7,7 @@ describe('Utils: AuthUtils', () => {
   describe('TokenHelper', () => {
     const tokenHelper = new TokenHelper();
 
-    xit('should get expiration date', () => {
+    it('should get expiration date', () => {
       const token: AuthToken = {
         expires_in: 1200,
         access_token: '',

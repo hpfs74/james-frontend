@@ -1,11 +1,26 @@
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpModule } from '@angular/http';
 import { LoggingService } from './logging.service';
 
 describe('Service: LoggingService', function () {
+  let httpMock: HttpTestingController;
   let service: LoggingService;
 
   beforeEach(() => {
-    service = new LoggingService();
+    TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
+      providers: [
+        LoggingService
+      ]
+    });
   });
+
+  beforeEach(
+    inject([LoggingService, HttpClientTestingModule], (_service, _httpMock) => {
+      service = _service;
+      httpMock = _httpMock;
+  }));
 
   it('all method should be defined', function () {
     expect(service).toBeDefined();

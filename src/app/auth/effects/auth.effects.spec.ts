@@ -10,15 +10,17 @@ import 'rxjs/add/operator/take';
 
 import { AuthEffects } from './auth.effects';
 import { AuthToken } from './../models/auth';
-import { AuthService } from '../services/auth.service';
-import { LocalStorageService } from '../../core/services/localstorage.service';
-import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
+import { AuthService } from '@app/auth/services/auth.service';
+import { LocalStorageService } from '@app/core/services/localstorage.service';
+import { UserDialogService } from '@app/components/knx-modal/user-dialog.service';
 
-import * as fromRoot from '../reducers';
-import * as auth from '../actions/auth';
-import * as profile from '../../profile/actions/profile';
-import * as insurance from '../../insurance/actions/insurance';
-import { Authenticate } from '../models/auth';
+import * as fromRoot from '@app/auth/reducers';
+import * as authActions from '@app/auth/actions/auth';
+import * as assistantActions from '@app/core/actions/assistant';
+import * as profile from '@app/profile/actions/profile';
+import * as insurance from '@app/insurance/actions/insurance';
+import { Authenticate } from '@app/auth/models/auth';
+import { AssistantConfig } from '@app/core/models';
 import { AssistantService } from '@app/core/services';
 
 describe('AuthEffects', () => {
@@ -90,16 +92,16 @@ describe('AuthEffects', () => {
     authService = TestBed.get(AuthService);
     localStorageService = TestBed.get(LocalStorageService);
     userDialogService = TestBed.get(UserDialogService);
-
+    store = TestBed.get(Store);
     effects = TestBed.get(AuthEffects);
   });
 
   describe('login$', () => {
     it('should call authService with the payload', () => {
-      const action = new auth.Login(authPayload);
+      const action = new authActions.Login(authPayload);
       const completion = [
-        new auth.LoginSuccess({ token: tokenResponse }),
-        new auth.ScheduleTokenRefresh(tokenResponse),
+        new authActions.LoginSuccess({ token: tokenResponse }),
+        new authActions.ScheduleTokenRefresh(tokenResponse),
         new profile.LoadAction(),
         new insurance.GetInsurances()
       ];
@@ -122,8 +124,8 @@ describe('AuthEffects', () => {
 
     xit('should fail on a service error', () => {
       const error = 'Error!';
-      const action = new auth.Login(authPayload);
-      const completion = new auth.LoginFailure(error);
+      const action = new authActions.Login(authPayload);
+      const completion = new authActions.LoginFailure(error);
 
       actions = hot('--a-', { a: action });
       const response = cold('-#', {}, error);
@@ -138,8 +140,8 @@ describe('AuthEffects', () => {
 
   describe('loginAnonymous$', () => {
     it('should login anonymous user', () => {
-      const action = new auth.LoginAnonymous();
-      const completion = new auth.ScheduleTokenRefresh(tokenResponse);
+      const action = new authActions.LoginAnonymous();
+      const completion = new authActions.ScheduleTokenRefresh(tokenResponse);
 
       authService.loginAnonymous.and.returnValue(Observable.of(tokenResponse));
 
@@ -151,7 +153,7 @@ describe('AuthEffects', () => {
 
   describe('loginSuccess$', () => {
     it('should redirect to / route', () => {
-      const action = new auth.LoginSuccess({ token: tokenResponse });
+      const action = new authActions.LoginSuccess({ token: tokenResponse });
       actions = hot('--a-', { a: action });
       effects.loginSuccess$.subscribe(() => expect(routerStub.navigate).toHaveBeenCalledWith(['/']));
     });
@@ -159,7 +161,7 @@ describe('AuthEffects', () => {
 
   describe('loginRedirect$', () => {
     xit('should redirect to /login route', () => {
-      const action = new auth.LoginRedirect();
+      const action = new authActions.LoginRedirect();
       actions = hot('--a-', { a: action });
       effects.loginRedirect$.subscribe(() => expect(routerStub.navigate).toHaveBeenCalledWith(['/login']));
     });
@@ -167,9 +169,21 @@ describe('AuthEffects', () => {
 
   describe('logout$', () => {
     it('should call logout on the authService', () => {
-      const action = new auth.Logout();
-      actions = hot('--a-', { a: action });
-      effects.logout$.subscribe(() => expect(authService.logout).toHaveBeenCalled());
+      spyOn(store, 'dispatch');
+      const assistantConfig = new AssistantConfig();
+      const action = new authActions.Logout();
+      const resetAction = new authActions.ResetStates();
+      const startAnonymousAction = new authActions.StartAnonymous();
+      const loginAnonymousAction = new authActions.LoginAnonymous();
+      const loadConfigAction = new assistantActions.LoadConfigAction(assistantConfig);
+      store.dispatch(action);
+      effects.logout$.subscribe(() => {
+        expect(authService.logout).toHaveBeenCalled();
+        expect(store.dispatch).toHaveBeenCalledWith(resetAction);
+        expect(store.dispatch).toHaveBeenCalledWith(startAnonymousAction);
+        expect(store.dispatch).toHaveBeenCalledWith(loginAnonymousAction);
+        expect(store.dispatch).toHaveBeenCalledWith(loadConfigAction);
+      });
     });
   });
 

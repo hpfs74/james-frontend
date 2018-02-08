@@ -56,7 +56,7 @@ describe('Service: HouseHold', () => {
   };
 
   const mockHouseHoldAmount = {
-    InsuredAmount: 16384
+    InsuredAmount: 1638400
   };
 
   const testPremiumsRequest = {
@@ -163,11 +163,27 @@ describe('Service: HouseHold', () => {
         houseHoldService.calculateHouseHoldAmount(testCalculateAmount)
           .subscribe((res) => {
             expect(res).toBeDefined();
-            expect(res.InsuredAmount)
-              .toEqual(mockHouseHoldAmount.InsuredAmount);
           });
       });
     });
+
+    it('should return the amount with decimal', () => {
+      backend.connections.subscribe((connection) => {
+        connection.mockRespond(new Response(new ResponseOptions({
+          body: JSON.stringify(mockHouseHoldAmount)
+        })));
+      });
+
+      inject([HouseHoldService], (houseHoldService) => {
+        houseHoldService.calculateHouseHoldAmount(testCalculateAmount)
+          .subscribe((res) => {
+            expect(res.InsuredAmount)
+              .toEqual(mockHouseHoldAmount.InsuredAmount / 100.00);
+          });
+      });
+    });
+
+
   });
 
   describe('HouseHold Calculate Premiums', () => {
