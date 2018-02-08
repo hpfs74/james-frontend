@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import { defer } from 'rxjs/observable/defer';
+import { AssistantService } from '@app/core/services/assistant.service';
+import { AssistantConfig, CannedMessageType } from '@app/core/models';
+
+import * as fromApp from '@app/core/reducers';
+import * as assistant from '@app/core/actions/assistant';
+
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/withLatestFrom';
-
-import * as fromApp from '../reducers';
-import * as assistant from '../actions/assistant';
-import { AssistantService } from '../services/assistant.service';
-import { AssistantConfig, CannedMessageType } from './../models';
 
 @Injectable()
 export class AssistantEffects {
@@ -53,7 +54,8 @@ export class AssistantEffects {
         : Observable.of({ payload: messagePayload, type: assistant.ADD_MESSAGE });
       }
       return Observable.of({ type: 'NO_ACTION' });
-    });
+    })
+    .catch(error => Observable.of({ type: 'NO_ACTION' }));
 
     @Effect({ dispatch: false })
     init$: Observable<any> = defer(() => {
