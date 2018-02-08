@@ -32,9 +32,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
                     <br>
 
-                    <span class="pending">{{insurance.request_status === 'pending' ? '(in aanvraag)' : ''}}</span>
-                    <span class="approved">{{insurance.request_status === 'approved' ? '(aangenomen)' : ''}}</span>
-                    <span class="rejected">{{insurance.request_status === 'rejected' ? '(verworpen)' : ''}}</span>
+                    <span class="pending" *ngIf="insurance.request_status === 'pending'">(in aanvraag)</span>
+                    <span class="approved" *ngIf="insurance.request_status === 'approved'">(aangenomen)</span>
+                    <span class="rejected" *ngIf="insurance.request_status === 'rejected'">(verworpen)</span>
                   </p>
                 </div>
               </div>
