@@ -33,6 +33,7 @@ export class DashboardItemComponent implements OnInit {
   @Input() isPlaceholder: boolean;
   @Input() index: number;
 
+  /* istanbul ignore next */
   defaultImages = {
     car: '/assets/images/icon-car.svg',
     travel: '/assets/images/icon-travel.svg',

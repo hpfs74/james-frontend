@@ -7,15 +7,15 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
-import * as fromRoot from '../reducers';
-import * as Auth from '../actions/auth';
+import * as fromRoot from '@app/auth/reducers';
+import * as Auth from '@app/auth/actions/auth';
 
-import { tokenNotExpired } from '../../utils/auth.utils';
+import { tokenIsValid } from '@app/utils/auth.utils';
 import { AuthService } from './auth.service';
-import { AuthToken } from '../models/auth';
-import { LocalStorageService } from '../../core/services/localstorage.service';
-import { LoaderService } from '../../components/knx-app-loader/loader.service';
-import * as AuthUtils from '../../utils/auth.utils';
+import { AuthToken } from '@app/auth/models/auth';
+import { LocalStorageService } from '@app/core/services/localstorage.service';
+import { LoaderService } from '@app/components/knx-app-loader/loader.service';
+import * as AuthUtils from '@app/utils/auth.utils';
 
 export class AuthHttpError extends Error {}
 
@@ -63,7 +63,7 @@ export class AuthHttp {
   }
 
   public requestWithToken(req: Request): Observable<Response> {
-    if (AuthUtils.isTokenExists('token') && !AuthUtils.tokenNotExpired('token')) {
+    if (!AuthUtils.tokenIsValid()) {
       return new Observable<Response>((obs: any) => {
         obs.error(new AuthHttpError('Token has expired'));
       });

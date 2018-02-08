@@ -15,6 +15,11 @@ import { LoginPageComponent } from '../containers/login-page.component';
 import { LoginForm } from '../components/login.form';
 import { AuthService } from '../../auth/services/auth.service';
 import { loginError } from '../models/login-error';
+import * as layout from '@core/actions/layout';
+import * as router from '@app/core/actions/router';
+import { UserDialogService } from '@app/components/knx-modal/user-dialog.service';
+import * as registration from '@auth/actions/registration';
+
 
 describe('Component: Login', () => {
   let store: Store<fromAuth.State>;
@@ -52,6 +57,7 @@ describe('Component: Login', () => {
 
   beforeAll(() => {
     store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
   });
 
   beforeEach(() => {
@@ -118,6 +124,72 @@ describe('Component: Login', () => {
 
   it('should redirect to registration', () => {
     expect(comp.goToRegister).toBeDefined();
+    comp.goToRegister();
+    const action = new router.Go({path: ['/register']});
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('should resend activation email', () => {
+    expect(comp.resendActivationMail).toBeDefined();
+
+    const email = 'test@email.com';
+    comp.resendActivationMail(email);
+
+    const action = new registration.ResendActivationEmail(email);
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('should reset login state', () => {
+    expect(comp.resetLoginState).toBeDefined();
+
+    comp.resetLoginState();
+
+    const action = new auth.LoginResetState();
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('should handle error message', () => {
+    comp.handleLoginError('invalid_password');
+    expect(comp.errorMessage.errorText).toBe(loginError.invalid_password);
+  });
+
+  it('should handle error message for inactive profile', () => {
+    comp.handleLoginError('profile inactive');
+    expect(comp.errorMessage.errorText).toBe(loginError.inactive_profile);
+    expect(comp.errorMessage.hasLink).toBeTruthy();
+  });
+
+  it('should login user with valid form', () => {
+    const mock = {
+      email: 'test@email.com',
+      password: 'password'
+    };
+    comp.form.formGroup.patchValue(mock);
+    const event = {
+      preventDefault: () => {
+      }
+    };
+    comp.login(event);
+    const action = new auth.Login({username: mock.email, password: mock.password});
+    // store.dispatch(action);
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('should login user with valid form', () => {
+      const mock = {
+        email: 'test@email.com',
+        password: null
+      };
+      comp.form.formGroup.patchValue(mock);
+      const event = {
+        preventDefault: () => {
+        }
+      };
+      fixture.detectChanges();
+      comp.login(event);
+      const action = new auth.Login({username: mock.email, password: mock.password});
+      // store.dispatch(action);
+      expect(store.dispatch).not.toHaveBeenCalledWith(action);
   });
 
 });

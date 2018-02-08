@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
+import { environment } from '@env/environment';
+import { AuthToken, RegistrationPayload, RegistrationResult, PasswordPayload } from '@app/auth/models/auth';
+import { Authenticate } from '@app/auth/models/auth';
+import { LocalStorageService } from '@app/core/services/localstorage.service';
+import { ResendActivationEmail } from '@app/auth/actions/registration';
 import * as forge from 'node-forge';
 import * as cuid from 'cuid';
-
-import { environment } from '@env/environment';
-import { AuthToken, RegistrationPayload, RegistrationResult, PasswordPayload } from '../models/auth';
-import * as AuthUtils from '../../utils/auth.utils';
-import { Authenticate } from '../models/auth';
-import { LocalStorageService } from '../../core/services/localstorage.service';
-import { ResendActivationEmail } from '../actions/registration';
+import * as AuthUtils from '@app/utils/auth.utils';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 
 export interface PayloadAuth {
   access_token: string;
@@ -32,7 +31,8 @@ export class AuthService {
   private clientId: string;
   private clientSecret: string;
 
-  constructor(private http: Http, private localStorageService: LocalStorageService) {
+  constructor(private http: Http,
+              private localStorageService: LocalStorageService) {
     this.keyUrl = environment.james.payloadEncryption.key;
     this.profileUrl = environment.james.payloadEncryption.profile;
     this.tokenUrl = environment.james.payloadEncryption.token;
@@ -57,11 +57,13 @@ export class AuthService {
     headers.set('Authorization', 'Bearer ' + accessToken);
     headers.set('Cache-Control', 'no-cache');
 
-    return this.http.delete(this.tokenUrl, { headers: headers })
+    return accessToken ?
+      this.http.delete(this.tokenUrl, { headers: headers })
       .map(x => {
         this.localStorageService.clearToken();
         return x.json();
-      });
+      }) :
+      Observable.of({});
   }
 
   /**
@@ -229,15 +231,6 @@ export class AuthService {
   //   //       .map((res: Response) => res.json());
   //   //   });
   // }
-
-  public isLoggedIn() {
-    return AuthUtils.tokenNotExpired('token');
-  }
-
-  public isAnonymous(): boolean {
-    let token: AuthToken = this.localStorageService.getToken();
-    return (token && token.anonymous);
-  }
 
   // PAYLOAD - STEP1
   private getPayloadToken(): Observable<PayloadAuth> {

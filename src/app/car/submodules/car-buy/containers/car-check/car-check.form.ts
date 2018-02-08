@@ -1,7 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { BaseForm, KNXCustomFormGroupOptions } from '../../../../../shared/forms/base-form';
-import { nameInitialMask } from '../../../../../utils/base-form.utils';
+import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
 
 export class CarCheckForm extends BaseForm {
   formGroup: FormGroup;
