@@ -1,18 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
-import { IbanForm } from '../../../../../shared/forms/iban.form';
-import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+
+import { QaIdentifier } from '@app/shared/models/qa-identifier';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { IbanForm } from '@app/shared/forms/iban.form';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
-import * as FormUtils from '../../../../../utils/base-form.utils';
-import * as fromRoot from '../../../../reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as assistant from '../../../../../core/actions/assistant';
-import * as advice from '../../../../../insurance/actions/advice';
+import * as FormUtils from '@app/utils/base-form.utils';
+import * as fromRoot from '@app/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as assistant from '@app/core/actions/assistant';
+import * as advice from '@app/insurance/actions/advice';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 
@@ -28,6 +29,7 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy {
   subscription$: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
+
   constructor(private store$: Store<fromRoot.State>) {
 
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
@@ -56,6 +58,7 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
+  /* istanbul ignore next */
   setAdvice(value: any) {
     if (value && value.startDate || value && value.iban) {
       this.form.formGroup.patchValue({
@@ -66,10 +69,12 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy {
     }
   }
 
+  /* istanbul ignore next */
   goToPreviousStep() {
     this.store$.dispatch(new wizardActions.Back());
   }
 
+  /* istanbul ignore next */
   goToNextStep() {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {
