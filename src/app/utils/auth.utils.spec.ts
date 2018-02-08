@@ -18,11 +18,9 @@ describe('Utils: AuthUtils', () => {
         token_type: ''
       };
       let resToken = AuthUtils.setTokenExpirationDate(token);
-      let res = tokenHelper.getTokenExpirationDate(resToken);
-      const exp = new Date().setUTCSeconds(1200);
+      let result = tokenHelper.getTokenExpirationDate(resToken);
 
-      expect(res).not.toBeNull();
-      expect(res.toString()).toBe(exp.toString());
+      expect(result).toBe(resToken.expiration_time);
     });
 
     it('should say that token is expired if no expires_in present', () => {
