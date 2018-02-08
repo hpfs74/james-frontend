@@ -8,14 +8,12 @@ import * as StackTrace from 'stacktrace-js';
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
 
-  constructor(private injector: Injector) { }
+  constructor(private location: LocationStrategy, private loggingService: LoggingService) {}
 
   handleError(error) {
-    const loggingService = this.injector.get(LoggingService);
-    const location = this.injector.get(LocationStrategy);
     const message = error.message ? error.message : error.toString();
     const url = location instanceof PathLocationStrategy
-      ? location.path() : '';
+      ? this.location.path() : '';
 
     // get the stack trace, lets grab the last 10 stacks only
     if (!(error instanceof AuthHttpError)) {
@@ -27,7 +25,7 @@ export class GlobalErrorHandler implements ErrorHandler {
           }).join('\n');
 
         // log somewhere external
-        loggingService.log({ message, url, stack: stackString });
+        this.loggingService.log({ message, url, stack: stackString });
       });
     }
   }

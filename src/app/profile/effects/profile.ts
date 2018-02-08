@@ -15,7 +15,7 @@ import { ProfileService } from '../services/profile.service';
 import { Profile } from '../models/profile';
 import * as profile from '../actions/profile';
 import * as insurances from '../../insurance/actions/insurance';
-import { AuthService } from '../../auth/services/auth.service';
+import * as AuthUtils from '@app/utils/auth.utils';
 
 @Injectable()
 export class ProfileEffects {
@@ -24,7 +24,7 @@ export class ProfileEffects {
   loadProfile$: Observable<Action> = this.action$
     .ofType(profile.LOAD_PROFILE_REQUEST)
     .switchMap(() => {
-      if (this.authService.isAnonymous()) {
+      if (AuthUtils.tokenIsAnonymous()) {
         return Observable.of(new profile.LoadSuccessAction(new Profile()));
       }
       return this.profileService.getUserProfile()
@@ -70,6 +70,6 @@ export class ProfileEffects {
       });
     });
 
-  constructor(private action$: Actions, private profileService: ProfileService, private authService: AuthService) {
+  constructor(private action$: Actions, private profileService: ProfileService) {
   }
 }

@@ -103,17 +103,6 @@ describe('Component: CarAdviceComponent', () => {
   });
 
   describe('Initialization', () => {
-    // it('should bind a validator for license plate', () => {
-    //   const ctrl = comp.carDetailForm.formGroup.get('licensePlate');
-    //   expect(ctrl).toBeDefined();
-    //   expect(ctrl.asyncValidator).toBeDefined();
-    // });
-
-    // it('should init child component forms', () => {
-    //   expect(comp.carDetailForm).toBeDefined();
-    //   expect(comp.carDetailForm.formGroup).toBeDefined();
-    //   expect(comp.carExtrasForm).toBeDefined();
-    // });
 
     it('should init the form template', () => {
       const element = fixture.debugElement.query(By.css('form'));

@@ -1,4 +1,4 @@
-{
+module.exports = {
   "defaultSeverity": "error",
   "rules": {
     "at-rule-empty-line-before": [ "always", {

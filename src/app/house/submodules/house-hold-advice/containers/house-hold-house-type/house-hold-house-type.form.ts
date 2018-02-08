@@ -95,7 +95,8 @@ export class HouseHoldHouseTypeForm extends BaseForm {
             },
             {
               label: '300 m2 or more',
-              value: '350'
+              value: '350',
+              disabled: true
             }
           ]
         }
@@ -106,7 +107,7 @@ export class HouseHoldHouseTypeForm extends BaseForm {
         formControl: this.formGroup.get('buildingType'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          // formGroupModifiers: ['knx-form-group__wrap--spread'],
+          optTwoCols: true,
           placeholder: '',
           items: [
             {

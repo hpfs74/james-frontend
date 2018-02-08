@@ -9,36 +9,25 @@
     </knx-step-navigation>
   </div>
 </div>
-<div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+
+<div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur
+     [enableBlur]="knxChatStream.chatExpanded">
   <knx-wizard-rx>
 
-    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="knxWizardService.currentStepIndex !== 1" #knxWizardSidebar>
+    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="knxWizardService.currentStepIndex !== 1"
+         #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
                        [messages]="chatMessages$ | async">
 
-                       <!-- TODO: for later advice result to change glass coverage and so on
-
-                       [formGroup]="houseHoldExtrasForm.formGroup"> -->
-
-        <!--<knx-house-hold-extras-->
-          <!--[form]="houseHoldExtrasForm"-->
-          <!--[advice]="advice$ | async"-->
-          <!--[show]="knxWizardService.currentStepIndex === 1">-->
-        <!--</knx-house-hold-extras>-->
-
         <ng-container *ngIf="knxWizardService.currentStepIndex === 1">
-          <!--[formGroup]="houseHoldExtrasForm.formGroup">-->
-          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true" (onChangeVisibile)="toggleSideNavState($event)">
+          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true"
+                          (onChangeVisibile)="toggleSideNavState($event)">
             <div class="container-fluid">
               <div class="knx-side-panel-content">
-                <!--<knx-house-hold-location-form-->
-                  <!--[form]="houseHoldExtrasForm"-->
-                  <!--[advice]="advice$ | async"-->
-                  <!--[show]="knxWizardService.currentStepIndex === 1">-->
-                <!--</knx-house-hold-location-form>-->
-
-                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow" (click)="knxSidePanel.close()">Verder</button>
+                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
+                        (click)="knxSidePanel.close()">Verder
+                </button>
               </div>
             </div>
           </knx-side-panel>

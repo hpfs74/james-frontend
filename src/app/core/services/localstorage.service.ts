@@ -12,7 +12,7 @@ export const NICCI_ID = 'nicci_id';
 export class LocalStorageService {
 
   setToken(token: AuthToken) {
-    let convertToken = JSON.parse(AuthUtils.setTokenExpirationDate(JSON.stringify(token)));
+    let convertToken = AuthUtils.setTokenExpirationDate(token);
     localStorage.setItem(TOKEN_NAME, convertToken.access_token);
     localStorage.setItem(TOKEN_OBJECT_NAME, JSON.stringify(convertToken));
   }

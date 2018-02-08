@@ -13,13 +13,12 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
-import { HouseHoldPremiumsDetailComponent } from './house-hold-premiums-detail.component';
-import { By } from '@angular/platform-browser';
+import { HouseHoldHouseDetailComponent } from './house-hold-house-detail.component';
 
 
-describe('Component: HouseHoldPremiumsDetailComponent', () => {
-  let comp: HouseHoldPremiumsDetailComponent;
-  let fixture:   ComponentFixture<HouseHoldPremiumsDetailComponent>;
+describe('Component: HouseHoldDekkingComponent', () => {
+  let comp: HouseHoldHouseDetailComponent;
+  let fixture:   ComponentFixture<HouseHoldHouseDetailComponent>;
   let store: Store<fromRoot.State>;
   let tagsService: TagsService;
 
@@ -35,7 +34,7 @@ describe('Component: HouseHoldPremiumsDetailComponent', () => {
         })
       ],
       declarations: [
-        HouseHoldPremiumsDetailComponent
+        HouseHoldHouseDetailComponent
       ],
       providers: [
         KNXLocale,
@@ -55,21 +54,12 @@ describe('Component: HouseHoldPremiumsDetailComponent', () => {
     tagsService = TestBed.get(TagsService);
     spyOn(store, 'dispatch').and.callThrough();
 
-    fixture = TestBed.createComponent(HouseHoldPremiumsDetailComponent);
+    fixture = TestBed.createComponent(HouseHoldHouseDetailComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
   }));
 
   beforeEach(() => {
     fixture.detectChanges();
-  });
-
-  describe('Initialization', () => {
-
-    it('should init the form template', () => {
-      const element = fixture.debugElement.query(By.css('div'));
-      expect(element).toBeDefined();
-      expect(comp).toBeDefined();
-    });
   });
 });

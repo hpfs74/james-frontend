@@ -158,6 +158,7 @@ function getContent(environment: string) {
         login: '${getEnvVar('PAYLOAD_LOGIN_URL')}',
         activation: '${getEnvVar('PAYLOAD_ACTIVATION_URL')}'
       },
+      loggingEndpoint: '${getEnvVar('LOGGING_ENDPOINT')}',
     },
     riskInsurance: {
       getHouseData: '${getEnvVar('RISK_INSURANCE_HOUSE_DATA')}',

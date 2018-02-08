@@ -13,7 +13,9 @@ import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
+import * as fromHouse from '@app/house/reducers';
 import { HouseHoldDekkingComponent } from './house-hold-dekking.component';
+import { By } from '@angular/platform-browser';
 
 
 describe('Component: HouseHoldDekkingComponent', () => {
@@ -30,7 +32,8 @@ describe('Component: HouseHoldDekkingComponent', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'app': combineReducers(fromCore.reducers)
+          'app': combineReducers(fromCore.reducers),
+          'household': combineReducers(fromHouse.reducers)
         })
       ],
       declarations: [
@@ -61,5 +64,14 @@ describe('Component: HouseHoldDekkingComponent', () => {
 
   beforeEach(() => {
     fixture.detectChanges();
+  });
+
+  describe('Initialization', () => {
+
+    it('should init the form template', () => {
+      const element = fixture.debugElement.query(By.css('form'));
+      expect(element).toBeDefined();
+      expect(comp).toBeDefined();
+    });
   });
 });
