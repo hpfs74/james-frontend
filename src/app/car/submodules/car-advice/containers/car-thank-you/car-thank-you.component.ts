@@ -36,9 +36,7 @@ export class CarThankYouComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (AuthUtils.tokenIsAnonymous()) {
-      this.store$.dispatch(new auth.ResetStates());
-    }
+
     this.content = this.contentConfig.getContent();
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
@@ -48,25 +46,28 @@ export class CarThankYouComponent implements OnInit {
     let isAnonymous$ = this.store$.select(fromAuth.getLoggedIn);
     let advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
 
-    this.email$ = Observable.combineLatest(profileEmail$, isAnonymous$, advice$)
-      .map((combined) => {
-        let email = combined[0];
-        const loggedIn = combined[1];
-        const advice = combined[2];
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.thankyou', clear: true}));
 
-        if (!loggedIn && advice) {
-          email = advice.email || advice.emailaddress;
-        }
+    Observable.combineLatest(profileEmail$, isAnonymous$, advice$,
+      (profileEmail, isAnonymous, advice) => this.combineEmail(profileEmail, isAnonymous, advice))
+      .take(1)
+      .subscribe(email => this.store$.dispatch(new assistant.AddCannedMessage({
+        key: 'car.buy.finalEmail',
+        value: email
+      })));
 
-        return email;
-      });
+    if (AuthUtils.tokenIsAnonymous()) {
+      this.store$.dispatch(new auth.ResetStates());
+    }
+  }
 
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.thankyou', clear: true }));
+  combineEmail(profileEmail, isAnonymous, advice) {
+    let email = profileEmail;
 
-    this.email$.take(1).subscribe((email) => {
-      if (email) {
-        this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.finalEmail', value: email}));
-      }
-    });
+    if (!isAnonymous && advice) {
+      email = advice.email || advice.emailaddress;
+    }
+
+    return email;
   }
 }
