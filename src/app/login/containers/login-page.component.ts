@@ -37,7 +37,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.subscriptions$ = [
       this.store$.select(fromAuth.getLoginPageError)
         .filter(error => error !== null)
-        .subscribe(this.handleLoginError)
+        .subscribe(value => this.handleLoginError(value))
     ];
     this.resetRegistrationStates();
   }
