@@ -21,4 +21,8 @@ describe('HouseHold Dekking Form', () => {
     expect(form.formGroup.get('dateOfBirth')).toBeDefined();
     expect(form.formGroup.get('familySituation')).toBeDefined();
   });
+
+  it ('should not be valid if date is wrong', () => {
+
+  });
 });

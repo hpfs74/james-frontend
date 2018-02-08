@@ -14,7 +14,7 @@ import { HouseHoldEffects } from '@app/house/effects/house-hold';
 import { reducers } from '@app/house/reducers';
 import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/house-hold-premiums.component';
 import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums-list/house-hold-premiums-list.component';
-import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiums-detail/hould-hold-premiums-detail.component';
+import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiums-detail/house-hold-premiums-detail.component';
 import { HouseHoldPremiumsRoutingModule } from './house-hold-premiums-routing.module';
 import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseHoldPremiumsFilterComponent } from './containers/house-hold-premiums-filter/house-hold-premiums-filter.component';

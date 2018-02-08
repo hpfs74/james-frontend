@@ -2,7 +2,6 @@ import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { takeWhile } from 'rxjs/operator/takeWhile';
 import { TagsService } from '@app/core/services/tags.service';
 
 import * as FormUtils from '@app/utils/base-form.utils';
@@ -21,7 +20,7 @@ import * as fromHouse from '@app/house/reducers';
 import { HouseHoldAmountRequest, HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
 import { HouseHoldData } from '@app/house/models/house-hold-data';
 import * as moment from 'moment';
-import _date = moment.unitOfTime._date;
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -34,12 +33,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   advice$: Observable<any>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
-  alive: boolean;
   coverages: Price[];
   isAmountLoaded$: Observable<boolean>;
   isAmountLoading$: Observable<boolean>;
   amount$: Observable<HouseHoldAmountResponse>;
   houseHoldData$: Observable<HouseHoldData>;
+  subscriptions$: Subscription[] = [];
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -54,7 +53,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       hideBackButton: false,
       hideNextButton: false
     };
-    this.alive = true;
 
     this.coverages = [
       {
@@ -110,30 +108,38 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   }
 
   setFormAsyncValidators(): void {
-    this.form.formGroup.valueChanges
-      .subscribe(() => {
-        if (this.form.formGroup.valid) {
+    this.subscriptions$ = [
+      this.form.formGroup.valueChanges
+        .subscribe(() => {
+          if (this.form.formGroup.valid) {
 
-          const detailForm = this.form.formGroup;
+            const detailForm = this.form.formGroup;
 
-          this.houseHoldData$.subscribe(data => {
+            this.houseHoldData$.subscribe(data => {
 
-            const payload = {
-              OwnedBuilding: data.OwnedBuilding ? 'J' : 'N',
-              FamilyComposition: detailForm.value.familySituation,
-              AmountMoreThan12KAudioVisualComp: 0,
-              AmountMoreThan6KJewelry: 0,
-              AmountMoreThan15KSpecialPossesion: 0,
-              BreadWinnerBirthdate: this.toRiskDate(detailForm.value.dateOfBirth),
-              BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
-            } as HouseHoldAmountRequest;
+              const payload = {
+                OwnedBuilding: data.OwnedBuilding ? 'J' : 'N',
+                FamilyComposition: detailForm.value.familySituation,
+                AmountMoreThan12KAudioVisualComp: 0,
+                AmountMoreThan6KJewelry: 0,
+                AmountMoreThan15KSpecialPossesion: 0,
+                BreadWinnerBirthdate: this.toRiskDate(detailForm.value.dateOfBirth),
+                BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
+              } as HouseHoldAmountRequest;
 
-            this.store$.dispatch(new householdinsuranceamount.GetInfo(payload));
-          });
-        }
-      });
+              this.store$.dispatch(new householdinsuranceamount.GetInfo(payload));
+            });
+          }
+        })
+    ];
   }
 
+  /**
+   * converts the date in the form to the risk insurance format
+   *
+   * @param date - a date field
+   * @returns {number} - in the form of YYYYMMDD
+   */
   toRiskDate(date): number {
     const month = date.getMonth() + 1;
 
@@ -144,7 +150,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
    * close all subscriptions
    */
   ngOnDestroy(): void {
-    this.alive = false;
+    this.subscriptions$.forEach(sub => sub.unsubscribe());
   }
 
   /**
@@ -161,6 +167,10 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.store$.dispatch(new wizardActions.Back());
   }
 
+  /**
+   * check if the form is valid and move to the next step
+   * @param event
+   */
   goToNextStep(event?: any) {
     const detailForm = this.form.formGroup;
 
@@ -170,6 +180,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
-    this.store$.dispatch(new router.Go({path: ['/house']}));
+    this.store$.dispatch(new router.Go({path: ['/household/premiums']}));
   }
 }

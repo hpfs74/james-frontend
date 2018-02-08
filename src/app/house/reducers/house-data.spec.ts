@@ -6,6 +6,9 @@ import {
 } from '../actions/house-data';
 import * as fromHouseData from './house-data';
 import { HouseDataRequest, HouseDataResponse } from '../models/house-data';
+import { Update } from '@app/house/actions/house-hold-data';
+import { Address } from '@app/address/models';
+import { UpdateAddress } from '@app/house/actions/house-data';
 
 describe('House Data reducer', () => {
   describe('undefined action', () => {
@@ -66,6 +69,23 @@ describe('House Data reducer', () => {
         info: null,
         address: null
       };
+      const result = fromHouseData.reducer(fromHouseData.initialState, action);
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  describe('UPDATE_ADDRESS', () => {
+    it('should update the address information object', () => {
+      const address: Address = { street: 'street name', number: '200', city: 'Den Haag'} as Address;
+      const action = new UpdateAddress(address);
+      const expectedResult = {
+        loading: false,
+        loaded: false,
+        error: false,
+        info: null,
+        address: address
+      };
+
       const result = fromHouseData.reducer(fromHouseData.initialState, action);
       expect(result).toEqual(expectedResult);
     });
