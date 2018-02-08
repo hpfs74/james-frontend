@@ -86,8 +86,8 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.summary', clear: true}));
     this.store$.dispatch(new insurance.GetInsurances());
     this.subscription$ = [
-      this.store$.select(fromCar.getCarBuyError).subscribe(this.handleBuyError),
-      this.store$.select(fromCar.getCarBuyComplete).subscribe(this.handleBuyComplete)
+      this.store$.select(fromCar.getCarBuyError).subscribe(value => this.handleBuyError(value)),
+      this.store$.select(fromCar.getCarBuyComplete).subscribe(value => this.handleBuyComplete(value))
     ];
   }
 
@@ -210,7 +210,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       && value.insuranceInfo != null)
     // && value.profileInfo != null)
       .take(1)
-      .subscribe(this.handleBuyFinal);
+      .subscribe(value => this.handleBuyFinal(value));
   }
 
   private deleteAdvice() {
