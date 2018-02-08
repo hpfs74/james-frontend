@@ -193,7 +193,6 @@ export class AuthEffects {
       // anonymous scenario
       this.store$.dispatch(new authActions.StartAnonymous());
       this.store$.dispatch(new authActions.LoginAnonymous());
-      this.store$.dispatch(new routerActions.Go({path: ['/car']}));
     } else {
       // logged in user scenario
       // 3. check if token is valid
