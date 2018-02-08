@@ -83,44 +83,64 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.summary', clear: true }));
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.summary', clear: true}));
     this.store$.dispatch(new insurance.GetInsurances());
-    this.subscription$.push(this.store$.select(fromCar.getCarBuyError)
-      .subscribe((errorData: any) => {
-        if (errorData[0]) {
-          const errorCode = errorData[1];
-          this.submiting = false;
-          return this.store$.dispatch(new wizardActions.Error({
-            message: registrationError[errorCode] || 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
-          }));
-        }
-      }));
-
-    this.subscription$.push(this.store$.select(fromCar.getCarBuyComplete)
-      .subscribe((complete) => {
-        if (complete) {
-          this.deleteAdvice();
-          this.store$.dispatch(new router.Go({ path: ['/car/thank-you'] }));
-          this.submiting = false;
-        }
-      }));
+    this.subscription$ = [
+      this.store$.select(fromCar.getCarBuyError).subscribe(this.handleBuyError),
+      this.store$.select(fromCar.getCarBuyComplete).subscribe(this.handleBuyComplete)
+    ];
   }
 
   ngOnDestroy() {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
+  /**
+   * handle buy complete subscription
+   */
+  handleBuyComplete(complete) {
+    if (complete) {
+      this.deleteAdvice();
+      this.store$.dispatch(new router.Go({path: ['/car/thank-you']}));
+      this.submiting = false;
+    }
+  }
+
+  /**
+   * handle buy error subscription
+   */
+  handleBuyError(errorData: any) {
+    if (errorData[0]) {
+      const errorCode = errorData[1];
+      this.submiting = false;
+      return this.store$.dispatch(new wizardActions.Error({
+        message: registrationError[errorCode] || 'Er is helaas iets mis gegaan. Probeer het later opnieuw.'
+      }));
+    }
+  }
+
+  /**
+   * handle the buy completation subscription
+   *
+   * @param value
+   */
+  handleBuyFinal(value) {
+    this.submiting = true;
+    const proposalData = this.getProposalData(value);
+    this.store$.dispatch(new car.Buy(proposalData));
+  }
+
   isValidInsurance(obj: any) {
     return (obj &&
-    !this.isEmpty(obj) &&
-    !this.isEmpty(obj._embedded) &&
-    !this.isEmpty(obj._embedded.car));
+      !this.isEmpty(obj) &&
+      !this.isEmpty(obj._embedded) &&
+      !this.isEmpty(obj._embedded.car));
   }
 
   isValidAdvice(obj: any) {
     return (obj &&
-    !this.isEmpty(obj) &&
-    !this.isEmpty(obj.address));
+      !this.isEmpty(obj) &&
+      !this.isEmpty(obj.address));
   }
 
   private isEmpty(obj: any) {
@@ -145,8 +165,8 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       value.adviceInfo.address,
       value.insuranceInfo,
       value.insuranceInfo._embedded.insurance,
-      { car: value.carInfo },
-      { dekking: this.getDekkingText(value.adviceInfo.coverage) }
+      {car: value.carInfo},
+      {dekking: this.getDekkingText(value.adviceInfo.coverage)}
     );
 
     // use the data from saved advice if profile is empty
@@ -174,7 +194,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     this.store$.dispatch(new carActions.ClearErrors());
     this.store$.dispatch(new wizardActions.ResetError());
     if (!this.summaryValid()) {
-      return this.store$.dispatch(new wizardActions.Error({ message: this.formSummaryError }));
+      return this.store$.dispatch(new wizardActions.Error({message: this.formSummaryError}));
     }
 
     if (!this.isLoggedIn) {
@@ -183,18 +203,14 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
       (profile, advice, insurance, car) => {
-        return { profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car };
+        return {profileInfo: profile, adviceInfo: advice, insuranceInfo: insurance, carInfo: car};
       }).filter(value =>
-    value.adviceInfo != null
-    && value.carInfo != null
-    && value.insuranceInfo != null)
+      value.adviceInfo != null
+      && value.carInfo != null
+      && value.insuranceInfo != null)
     // && value.profileInfo != null)
       .take(1)
-      .subscribe((value) => {
-        this.submiting = true;
-        const proposalData = this.getProposalData(value);
-        this.store$.dispatch(new car.Buy(proposalData));
-      });
+      .subscribe(this.handleBuyFinal);
   }
 
   private deleteAdvice() {
@@ -207,6 +223,6 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   }
 
   public login() {
-    this.store$.dispatch(new router.Go({ path: ['/login'] }));
+    this.store$.dispatch(new router.Go({path: ['/login']}));
   }
 }

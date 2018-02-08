@@ -1,24 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { CarCheckForm } from './car-check.form';
-import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
-import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/filter';
 
-import * as FormUtils from '../../../../../utils/base-form.utils';
-import * as fromRoot from '../../../../reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as assistant from '../../../../../core/actions/assistant';
-import * as advice from '../../../../../insurance/actions/advice';
+import { CarCheckForm } from './car-check.form';
+import { QaIdentifier } from '@app/shared/models/qa-identifier';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+
+import * as FormUtils from '@app/utils/base-form.utils';
+import * as fromRoot from '@app/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as assistant from '@app/core/actions/assistant';
+import * as advice from '@app/insurance/actions/advice';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 
-import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-car-check',
@@ -62,6 +63,7 @@ export class CarCheckComponent implements OnInit, QaIdentifier, OnDestroy {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
+  /* istanbul ignore next */
   setAdvice(value: any) {
     if (value) {
       FormUtils.updateAndValidateControls(this.form.formGroup, value);
@@ -80,6 +82,7 @@ export class CarCheckComponent implements OnInit, QaIdentifier, OnDestroy {
     textArea.updateValueAndValidity();
   }
 
+  /* istanbul ignore next */
   initCheckForm(messageKey: string) {
     this.store$.select(fromInsurance.getSelectedInsurance)
       .filter(insurance => insurance != null)
@@ -95,10 +98,12 @@ export class CarCheckComponent implements OnInit, QaIdentifier, OnDestroy {
       });
   }
 
+  /* istanbul ignore next */
   goToPreviousStep() {
     this.store$.dispatch(new wizardActions.Back());
   }
 
+  /* istanbul ignore next */
   goToNextStep() {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     if (!this.form.formGroup.valid) {

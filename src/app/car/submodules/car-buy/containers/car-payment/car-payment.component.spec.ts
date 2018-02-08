@@ -3,16 +3,27 @@ import { CommonModule } from '@angular/common';
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { combineReducers, StoreModule } from '@ngrx/store';
+
 import { KNXFormsModule } from '@knx/forms';
 import { KNXLocale } from '@knx/locale';
 
 import { setUpTestBed } from './../../../../../../test.common.spec';
-import { SharedModule } from '../../../../../shared.module';
 import { CarPaymentComponent } from './car-payment.component';
-import { IbanForm } from '../../../../../shared/forms/iban.form';
+import { IbanForm } from '@app/shared/forms/iban.form';
+import * as fromAuth from '@auth/reducers';
+import * as fromCore from '@core/reducers';
+import * as fromInsurance from '@insurance/reducers';
+import * as fromRoot from '@app/reducers';
+import * as fromCar from '@car/reducers';
+
+import * as fromProfile from '@app/profile/reducers';
 
 @Component({
-  template: `<div><knx-car-payment-form [form]="formFromHost"></knx-car-payment-form></div>`
+  template: `
+    <div>
+      <knx-car-payment-form [form]="formFromHost"></knx-car-payment-form>
+    </div>`
 })
 export class TestHostComponent {
   @ViewChild(CarPaymentComponent)
@@ -25,7 +36,18 @@ describe('Component: CarPaymentComponent', () => {
   let comp: TestHostComponent;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [CommonModule, ReactiveFormsModule, KNXFormsModule],
+    imports: [
+      CommonModule,
+      ReactiveFormsModule,
+      KNXFormsModule,
+      StoreModule.forRoot({
+        ...fromRoot.reducers,
+        'auth': combineReducers(fromAuth.reducers),
+        'app': combineReducers(fromCore.reducers),
+        'car': combineReducers(fromCar.reducers),
+        'insurance': combineReducers(fromInsurance.reducers),
+        'profile': combineReducers(fromProfile.reducers)
+      })],
     declarations: [CarPaymentComponent, TestHostComponent],
     providers: [KNXLocale],
     schemas: [NO_ERRORS_SCHEMA]
@@ -38,18 +60,18 @@ describe('Component: CarPaymentComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should init the form', () => {
-  //   const element = fixture.debugElement.query(By.css('form'));
-  //   expect(element).toBeDefined();
-  //   expect(comp.carPaymentComponent).toBeDefined();
-  //   expect(comp.carPaymentComponent.form).toBeDefined();
-  //   expect(comp.carPaymentComponent.form.formGroup.get('startDate')).toBeDefined();
-  //   expect(comp.carPaymentComponent.form.formGroup.get('iban')).toBeDefined();
-  //   expect(comp.carPaymentComponent.form.formGroup.get('acceptConditions')).toBeDefined();
-  // });
+  it('should init the form', () => {
+    const element = fixture.debugElement.query(By.css('form'));
+    expect(element).toBeDefined();
+    expect(comp.carPaymentComponent).toBeDefined();
+    expect(comp.carPaymentComponent.form).toBeDefined();
+    expect(comp.carPaymentComponent.form.formGroup.get('startDate')).toBeDefined();
+    expect(comp.carPaymentComponent.form.formGroup.get('iban')).toBeDefined();
+    expect(comp.carPaymentComponent.form.formGroup.get('acceptConditions')).toBeDefined();
+  });
 
-  // it('should have invalid form controls on init', () => {
-  //   expect(comp.carPaymentComponent.form.formGroup.valid).toBeFalsy();
-  // });
+  it('should have invalid form controls on init', () => {
+    expect(comp.carPaymentComponent.form.formGroup.valid).toBeFalsy();
+  });
 
 });

@@ -18,7 +18,7 @@ import * as fromProfile from '@app/profile/reducers';
 import * as auth from '@app/auth/actions/auth';
 
 import { Content, ContentConfig } from '@app/content.config';
-import { AuthService } from '@app/auth/services';
+import * as AuthUtils from '@app/utils/auth.utils';
 
 @Component({
   selector: 'knx-car-thank-you',
@@ -32,12 +32,11 @@ export class CarThankYouComponent implements OnInit {
   loggedIn$: Observable<any>;
 
   constructor(private store$: Store<fromRoot.State>,
-              private contentConfig: ContentConfig,
-              private authService: AuthService) {
+              private contentConfig: ContentConfig) {
   }
 
   ngOnInit() {
-    if (this.authService.isAnonymous()) {
+    if (AuthUtils.tokenIsAnonymous()) {
       this.store$.dispatch(new auth.ResetStates());
     }
     this.content = this.contentConfig.getContent();
@@ -65,7 +64,9 @@ export class CarThankYouComponent implements OnInit {
     this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.thankyou', clear: true }));
 
     this.email$.take(1).subscribe((email) => {
-      this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.buy.finalEmail', value: email}));
+      if (email) {
+        this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.finalEmail', value: email}));
+      }
     });
   }
 }

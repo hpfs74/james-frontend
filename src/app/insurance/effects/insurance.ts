@@ -9,11 +9,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/withLatestFrom';
 
-import * as advice from '../actions/advice';
-import { InsuranceService } from '../services/insurance.service';
-import * as insurance from '../actions/insurance';
-import { AuthService } from '../../auth/services/auth.service';
-import * as fromInsurance from '../../insurance/reducers';
+import * as advice from '@app/insurance/actions/advice';
+import { InsuranceService } from '@app/insurance/services/insurance.service';
+import * as insurance from '@app/insurance/actions/insurance';
+import * as AuthUtils from '@app/utils/auth.utils';
+import * as fromInsurance from '@app/insurance/reducers';
 
 @Injectable()
 export class InsuranceEffects {
@@ -22,7 +22,7 @@ export class InsuranceEffects {
     .ofType(insurance.GET_INSURANCES)
     .map((action: insurance.GetInsurances) => action)
     .switchMap(() => {
-      if (this.authService.isAnonymous()) {
+      if (AuthUtils.tokenIsAnonymous()) {
         return Observable.of(new insurance.GetInsurancesSuccess({}));
       }
       return this.insuranceService.getProfileInsurances()
@@ -46,7 +46,7 @@ export class InsuranceEffects {
       }
     })
     .switchMap((adviceData) => {
-      if (adviceData && !this.authService.isAnonymous()) {
+      if (adviceData && !AuthUtils.tokenIsAnonymous()) {
         return this.insuranceService.saveInsurance(adviceData)
           .map((res: Response) => {
             this.store$.dispatch(new advice.SaveLatest(res));
@@ -61,6 +61,5 @@ export class InsuranceEffects {
 
   constructor(private actions$: Actions,
               private insuranceService: InsuranceService,
-              private authService: AuthService,
               private store$: Store<fromInsurance.InsuranceState>) {}
 }
