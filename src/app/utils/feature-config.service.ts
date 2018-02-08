@@ -22,7 +22,7 @@ export class FeatureConfigService {
    */
   isOn(value: string) {
     if (this.featureConfig.hasOwnProperty(value)) {
-      return this.featureConfig[value];
+      return this.featureConfig[value] === 'false' ? false : this.featureConfig[value] ;
     }
     return false;
   }
