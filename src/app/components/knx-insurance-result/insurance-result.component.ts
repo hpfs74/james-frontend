@@ -27,7 +27,8 @@ import { FeatureConfigService } from '@app/utils/feature-config.service';
                   <span class="knx-insurance-result__label--no-break">Profielscore
                     <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
                       <knx-tooltip>De profielscore geeft aan hoe goed de verzekering bij jouw past. Hoe hoger de score, hoe beter.
-                      Een profielscore tussen de 60% en 70% is al vrij hoog, omdat we het product wegen op meer dan 100 eigenschappen.</knx-tooltip>
+                      Een profielscore tussen de 60% en 70% is al vrij hoog, omdat we het product wegen op meer dan 100 eigenschappen.
+                      </knx-tooltip>
                     </span>
                   </span>
                 </div>
