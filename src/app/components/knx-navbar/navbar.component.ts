@@ -56,7 +56,10 @@ export class NavbarComponent implements OnInit {
   public register() {
     this.store$.dispatch(new routerActions.Go({ path: ['/register'] }));
   }
-
+  /**
+   * goes on start of advice flow or on purchased page,
+   * depending on weather we are anonymous, and logged in
+  */
   resetFlow() {
     if (AuthUtils.tokenIsAnonymous()) {
       this.goToAdvice();
@@ -74,12 +77,12 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  private goToAdvice() {
+  goToAdvice() {
     this.store$.dispatch(new authActions.ResetStates());
     this.store$.dispatch(new routerActions.Go({ path: [''] }));
   }
 
-  private goToPurchased() {
+  goToPurchased() {
     this.store$.dispatch(new routerActions.Go({ path: ['/car/purchased'] }));
   }
 }
