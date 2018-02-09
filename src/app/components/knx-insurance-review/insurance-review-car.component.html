@@ -56,7 +56,9 @@
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Profiel score</knx-ir-label>
     <knx-ir-tooltip>
-      <p>De profielscore geeft aan hoe goed de verzekering past bij jouw profiel: hoe hoger hoe beter. Een score van 75% betekent dat de verzekering goed aansluit bij jouw wensen en situatie. Wij berekenen de score op basis van het profiel dat jij instelt. Hierbij toetsen we de verzekering op meer dan 100 criteria om te bepalen of wat jij belangrijk vindt ook goed scoort binnen de verzekering. Zo betaal je voor wat jij belangrijk vindt en voorkom je verrassingen. <p>
+      <p>De profielscore geeft aan hoe goed de verzekering bij jouw past. Hoe hoger de score, hoe beter.
+      Een profielscore tussen de 60% en 70% is al vrij hoog, omdat we het product wegen op meer dan 100 eigenschappen.
+      </p>
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.fit }}</knx-ir-value>
   </knx-ir-row>
@@ -185,7 +187,7 @@
       <p>Bij de dagwaarde-regelding vergoedt de verzekeraar de waarde van de auto op het moment van de schade of diefstal. Dit is de standaard en van toepassing als je niet de occasion-regeling of nieuwwaarde-regeling in je verzekering hebt opgenomen.
       De dagwaarde van de auto hangt onder andere af van de leeftijd, hoe goed hij is onderhouden, welke accessoires hij heeft en hoeveel kilometers hij heeft gereden. Wij tonen een gemiddelde dagwaarde van het type auto dat je hebt. Bij schade zal een onafhankelijke schade-expert van de verzekering de exacte dagwaarde van je auto vaststellen.<p>
     </knx-ir-tooltip>
-    <knx-ir-value>{{carInsurance.car_current_value | currency:'EUR':true}}</knx-ir-value>
+    <knx-ir-value>{{carInsurance.car_current_value | currency:'EUR':true:'1.0-2'}}</knx-ir-value>
   </knx-ir-row>
 </knx-ir-content>
 
