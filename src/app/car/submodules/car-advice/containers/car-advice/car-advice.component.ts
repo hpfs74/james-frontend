@@ -158,14 +158,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             insurance_id: ''
           };
           this.store$.dispatch(new advice.Update(compareExtraOptions));
+        }),
+      this.store$.select(fromInsurance.getSelectedAdvice)
+        .filter(advice => advice !== undefined && Object.keys(advice).length > 1)
+        .subscribe(advice => {
+          this.store$.dispatch(new compare.LoadCarAction(advice));
         })
-    );
-
-    this.store$.select(fromInsurance.getSelectedAdvice)
-      .filter(advice => advice !== undefined && Object.keys(advice).length > 1)
-      .subscribe(advice => {
-        this.store$.dispatch(new compare.LoadCarAction(advice));
-      });
+      );
   }
 
   ngOnDestroy() {
