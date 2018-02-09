@@ -1,23 +1,26 @@
 <div class="knx-address-lookup" [formGroup]="addressFormGroup"
      [class.knx-form-group--error]="addressFormGroup.errors && addressFormGroup.touched && !loading"
      [attr.data-error]="getErrors()">
-
   <div class="row" *ngIf="!combined">
     <div class="col-md-4">
       <knx-form-group formControlName="postalCode" [options]="addressFormConfig.postalCode"></knx-form-group>
     </div>
+
     <div class="col-md-4 col-6">
       <knx-form-group formControlName="houseNumber" [options]="addressFormConfig.houseNumber"></knx-form-group>
     </div>
+
     <div class="col-md-4 col-6">
       <knx-form-group #houseNumberExtension formControlName="houseNumberExtension" [options]="addressFormConfig.houseNumberExtension"></knx-form-group>
     </div>
   </div>
+
   <div class="row" *ngIf="combined">
     <div class="col-md-12">
       <knx-form-group formControlName="postalCode" [options]="addressFormConfig.postalCode"></knx-form-group>
     </div>
   </div>
+
   <div class="row" *ngIf="combined">
     <div class="col-md-12 knx-combined">
       <div class="row">
@@ -26,7 +29,8 @@
             <span *ngFor="let key of combined; let last = last">{{ addressFormConfig[key].label }} <span *ngIf="!last">+ </span></span>
           </div>
         </div>
-        <div class="col-md-6  knx-combined-components">
+
+        <div class="col-md-6 knx-combined-components">
           <div class="row">
             <div class="col-md-6 col-6" *ngFor="let key of combined">
               <knx-form-group formControlName="{{ key }}" [options]="addressFormConfig[key]"></knx-form-group>

@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { FormControlOptions } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
@@ -7,14 +7,14 @@ import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
 
 import * as fromAddress from '@app/address/reducers';
 import * as addressActions from '@app/address/actions/address';
 import * as suggestion from '@app/address/actions/suggestion';
 
-import { AddressComponent } from '@app/address/components/address.component';
 import { AddressForm } from '@app/address/components/address.form';
-import { AddressLookup, Address, AddressSuggestionParams } from '@app/address/models';
+import { AddressLookup, Address } from '@app/address/models';
 
 export interface HouseExtensionItem {
   label: string;
@@ -60,7 +60,11 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
   loaded$: Observable<boolean>;
 
   constructor(private store$: Store<fromAddress.State>) {
-    this.store$.dispatch(new addressActions.ClearAddress());
+    this.store$.select(fromAddress.getAddressLoaded).take(1).subscribe(addressIsLoaded => {
+      if (!addressIsLoaded) {
+        this.store$.dispatch(new addressActions.ClearAddress());
+      }
+    });
   }
 
   ngAfterViewChecked() {
@@ -112,9 +116,12 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
           });
         });
 
-        this.addressForm.formGroup.get('houseNumberExtension').setValue(
-          this.addressForm.formConfig.houseNumberExtension.inputOptions.items[0].value
-        );
+        // Setting first value for addition
+        if (!this.addressForm.formGroup.get('houseNumberExtension').value) {
+          this.addressForm.formGroup.get('houseNumberExtension').setValue(
+            this.addressForm.formConfig.houseNumberExtension.inputOptions.items[0].value
+          );
+        }
 
         if (this.addressForm.formConfig.houseNumberExtension.inputOptions.items.length > 0) {
           this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = false;

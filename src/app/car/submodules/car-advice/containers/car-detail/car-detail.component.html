@@ -21,6 +21,7 @@
             [hidden]="!(isCarLoading$ | async) && featureToggleService.isOn('carInfo')">
               <knx-car-info *ngIf="!featureToggleService.isOn('carInfo')" [data]="car$ | async"></knx-car-info>
             </knx-async-preview>
+
             <div class="knx-form-group__label knx-pull-up"
               *ngIf="featureToggleService.isOn('carInfo') && !(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
               {{ (car$ | async)?.make | capitalize }} {{ (car$ | async)?.model | capitalize }} {{ (car$ | async)?.year | capitalize }}
@@ -126,7 +127,7 @@
     <div class="col-sm-12">
       <div class="car-form__coverages">
         <h2>Welke dekking past het beste bij jou</h2>
-
+1
         <knx-price-table
           knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
           [items]="coverages"
@@ -146,7 +147,6 @@
       </div>
     </div>
   </div>
-
 </form>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
