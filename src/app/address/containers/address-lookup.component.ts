@@ -1,20 +1,21 @@
-import { Component, Input, Output, OnInit, AfterViewChecked, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, Input, Output, OnInit, OnDestroy, AfterViewChecked, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { FormControlOptions } from '@knx/form-control';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
 
 import * as fromAddress from '@app/address/reducers';
 import * as addressActions from '@app/address/actions/address';
 import * as suggestion from '@app/address/actions/suggestion';
 
-import { AddressComponent } from '@app/address/components/address.component';
 import { AddressForm } from '@app/address/components/address.form';
-import { AddressLookup, Address, AddressSuggestionParams } from '@app/address/models';
+import { AddressLookup, Address } from '@app/address/models';
 
 export interface HouseExtensionItem {
   label: string;
@@ -51,16 +52,23 @@ export const DEFAULT_OPTIONS: HouseNumberExtensionOptions = {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddressLookupComponent implements OnInit, AfterViewChecked {
+export class AddressLookupComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() addressForm: AddressForm;
   @Output() addressFound: EventEmitter<Address> = new EventEmitter();
   @Input() combined: string[];
+  subscription$: Subscription[] = [];
   addressPreview$: Observable<string>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
 
   constructor(private store$: Store<fromAddress.State>) {
-    this.store$.dispatch(new addressActions.ClearAddress());
+    this.subscription$.push(
+      this.store$.select(fromAddress.getAddressLoaded).take(1).subscribe(addressIsLoaded => {
+        if (!addressIsLoaded) {
+          this.store$.dispatch(new addressActions.ClearAddress());
+        }
+      })
+    );
   }
 
   ngAfterViewChecked() {
@@ -82,6 +90,10 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
       .map((combined) => combined[0] || combined[1]);
   }
 
+  ngOnDestroy() {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
+  }
+
   addressChange(value: AddressLookup) {
     this.store$.dispatch(new suggestion.GetAddressSuggestion({
       zipcode: value.postalCode,
@@ -101,38 +113,43 @@ export class AddressLookupComponent implements OnInit, AfterViewChecked {
 
   suggestionSubscriptions() {
     const houseExtensionValue = this.addressForm.formGroup.get('houseNumberExtension').value;
-    this.store$.select(fromAddress.getSuggestion).subscribe(state => {
-      this.addressForm.formConfig.houseNumberExtension.inputOptions.items = [];
-      this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = true;
-      if (!state.error && state.suggestion) {
-        state.suggestion.additions.forEach(addition => {
-          this.addressForm.formConfig.houseNumberExtension.inputOptions.items.push(<HouseExtensionItem>{
-            label: addition,
-            value: addition
+    this.subscription$.push(
+      this.store$.select(fromAddress.getSuggestion).subscribe(state => {
+        this.addressForm.formConfig.houseNumberExtension.inputOptions.items = [];
+        this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = true;
+        if (!state.error && state.suggestion) {
+          state.suggestion.additions.forEach(addition => {
+            this.addressForm.formConfig.houseNumberExtension.inputOptions.items.push(<HouseExtensionItem>{
+              label: addition,
+              value: addition
+            });
           });
-        });
 
-        this.addressForm.formGroup.get('houseNumberExtension').setValue(
-          this.addressForm.formConfig.houseNumberExtension.inputOptions.items[0].value
-        );
+          // Setting first value for addition
+          if (!this.addressForm.formGroup.get('houseNumberExtension').value) {
+            this.addressForm.formGroup.get('houseNumberExtension').setValue(
+              this.addressForm.formConfig.houseNumberExtension.inputOptions.items[0].value
+            );
+          }
 
-        if (this.addressForm.formConfig.houseNumberExtension.inputOptions.items.length > 0) {
-          this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = false;
-        }
-        if (state.suggestion.additions[0] === '') {
+          if (this.addressForm.formConfig.houseNumberExtension.inputOptions.items.length > 0) {
+            this.addressForm.formConfig.houseNumberExtension.inputOptions.disabled = false;
+          }
+          if (state.suggestion.additions[0] === '') {
+            this.getAddress({
+              postalCode: this.addressForm.formGroup.get('postalCode').value,
+              houseNumber: this.addressForm.formGroup.get('houseNumber').value,
+              houseNumberExtension: houseExtensionValue ? houseExtensionValue : ''
+            });
+          }
+        } else if (!state.loading && !state.suggestion) {
           this.getAddress({
             postalCode: this.addressForm.formGroup.get('postalCode').value,
-            houseNumber: this.addressForm.formGroup.get('houseNumber').value,
-            houseNumberExtension: houseExtensionValue ? houseExtensionValue : ''
+            houseNumber: this.addressForm.formGroup.get('houseNumber').value
           });
         }
-      } else if (!state.loading && !state.suggestion) {
-        this.getAddress({
-          postalCode: this.addressForm.formGroup.get('postalCode').value,
-          houseNumber: this.addressForm.formGroup.get('houseNumber').value
-        });
-      }
-    });
+      })
+    );
   }
 
   validateAddressAsync(formGroup: AbstractControl): Observable<any> {
