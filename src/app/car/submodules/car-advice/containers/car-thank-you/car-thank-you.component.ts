@@ -48,13 +48,16 @@ export class CarThankYouComponent implements OnInit {
 
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.thankyou', clear: true}));
 
-    Observable.combineLatest(profileEmail$, isAnonymous$, advice$,
+    this.email$ = Observable.combineLatest(profileEmail$, isAnonymous$, advice$,
       (profileEmail, isAnonymous, advice) => this.combineEmail(profileEmail, isAnonymous, advice))
       .take(1)
-      .subscribe(email => this.store$.dispatch(new assistant.AddCannedMessage({
-        key: 'car.buy.finalEmail',
-        value: email
-      })));
+      .subscribe(email => {
+        this.store$.dispatch(new assistant.AddCannedMessage({
+          key: 'car.buy.finalEmail',
+          value: email
+        }));
+        return email;
+      });
 
     if (AuthUtils.tokenIsAnonymous()) {
       this.store$.dispatch(new auth.ResetStates());
