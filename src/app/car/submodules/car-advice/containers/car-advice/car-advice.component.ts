@@ -47,10 +47,12 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
+
 enum carFormSteps {
   carDetails,
   compareResults
 }
+
 @Component({
   templateUrl: 'car-advice.component.html',
   styleUrls: ['./car-advice.component.scss'],
@@ -78,17 +80,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
               private tagsService: TagsService,
               public router: Router,
               public knxWizardService: KNXWizardRxService) {
-    this.formSteps = [
-      {
-        label: 'Je gegevens',
-      },
-      {
-        label: 'Premies vergelijken',
-      },
-      {
-        label: 'Aanvragen',
-      }
-    ];
+
+    this.formSteps = ['Je gegevens', 'Premies vergelijken', 'Aanvragen'].map(el => {
+      return {label: el};
+    });
   }
 
   ngOnInit() {
@@ -126,21 +121,24 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           if (insurances.length && insurances.filter(insurance =>
               (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
             // redirect to purchased overview if there are any manually added insurances
-            this.store$.dispatch(new router.Go({ path: ['/car/purchased'] }));
+            this.store$.dispatch(new router.Go({path: ['/car/purchased']}));
           }
         })
     );
 
     this.subscription$.push(
-      this.selectedInsurance$.take(1).subscribe(selectedInsurance => {
-        this.subscription$.push(
-          this.selectedAdvice$.take(1).subscribe(selectedAdvice => {
-            if (selectedInsurance && selectedAdvice && selectedAdvice.iban) {
-              this.proceedToBuyResults();
-            }
-          })
-        );
-      })
+      this.selectedInsurance$
+        .take(1)
+        .filter(selectedInsurance => selectedInsurance)
+        .subscribe(selectedInsurance => {
+          this.subscription$.push(
+            this.selectedAdvice$.take(1).subscribe(selectedAdvice => {
+              if (selectedInsurance && selectedAdvice && selectedAdvice.iban) {
+                this.proceedToBuyResults();
+              }
+            })
+          );
+        })
     );
 
     this.subscription$.push(
@@ -148,6 +146,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
         .debounceTime(200)
         .filter(() => this.knxWizardService.currentStepIndex === carFormSteps.compareResults)
         .subscribe(data => {
+
           let compareExtraOptions = {
             coverage: data.coverage,
             cover_occupants: data.extraOptionsOccupants || false,
@@ -159,8 +158,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             insurance_id: ''
           };
           this.store$.dispatch(new advice.Update(compareExtraOptions));
+        }),
+      this.store$.select(fromInsurance.getSelectedAdvice)
+        .filter(advice => advice !== undefined && Object.keys(advice).length > 1)
+        .subscribe(advice => {
+          this.store$.dispatch(new compare.LoadCarAction(advice));
         })
-    );
+      );
   }
 
   ngOnDestroy() {
@@ -182,7 +186,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   private onShowResults() {
-    this.store$.dispatch(new assistant.AddCannedMessage({ key: 'car.info.advice.option', clear: true }));
+    this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
   }
 
   private proceedWithAdvice(advices, insurances) {
@@ -198,7 +202,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
                 if (selectedInsurance.advice_expires_at * 1000 > new Date().getTime()) {
                   this.proceedToBuy();
                 } else {
-                  this.store$.dispatch(new router.Go({ path: ['/car/extras'] }));
+                  this.store$.dispatch(new router.Go({path: ['/car/extras']}));
                   this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
                 }
               }));
@@ -212,7 +216,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       advice => {
         if (advice && advice.id) {
           this.store$.dispatch(new router.Go({
-            path: ['/car/insurance/contact-detail', { adviceId: advice.id }],
+            path: ['/car/insurance/contact-detail', {adviceId: advice.id}],
           }));
         }
       }));
@@ -223,13 +227,13 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       advice => {
         if (advice && advice.id) {
           this.store$.dispatch(new router.Go({
-            path: ['/car/insurance/summary', { adviceId: advice.id }],
+            path: ['/car/insurance/summary', {adviceId: advice.id}],
           }));
         }
       }));
   }
 
   goToStep(stepIndex: number) {
-    this.store$.dispatch(new wizardActions.Go({ stepIndex: stepIndex }));
+    this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
   }
 }
