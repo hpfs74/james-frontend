@@ -1,16 +1,15 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { KNXFormGroupOptions } from '@knx/forms';
 
-import { birthDateMask } from '../../../../../utils/base-form.utils';
-import { LicensePlateValidator } from '../../../../../components/knx-input-licenseplate/licenseplate.validator';
-import { UIPair } from '../../../../../core/models/ui-pair';
-import { BaseForm, KNXCustomFormGroupOptions } from '../../../../../shared/forms/base-form';
-import { dateValidator, birthDateValidator, minNumberValidator, maxNumberValidator } from '../../../../../utils/base-form.validators';
+import { LicensePlateValidator } from '@app/components/knx-input-licenseplate/licenseplate.validator';
+import { UIPair } from '@core/models/ui-pair';
+import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
+import { birthDateValidator, minNumberValidator, maxNumberValidator } from '@utils/base-form.validators';
 
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
 
+  /* istanbul ignore next */
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,

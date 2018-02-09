@@ -8,8 +8,7 @@ export class RegistrationForm extends BaseForm {
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
-    email: () => 'Vul een geldig e-mailadres in alsjeblieft',
-    pattern: () => 'Ga je akkoord met de gebruiksvoorwaarden en het privacy statement?'
+    email: () => 'Vul een geldig e-mailadres in alsjeblieft'
   };
 
   constructor(private fb: FormBuilder) {

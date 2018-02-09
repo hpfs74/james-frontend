@@ -13,6 +13,18 @@
     margin-left: 0;
     padding-left: 0;
   }
+
+  span.approved {
+    color: $knab-primary-green;
+  }
+
+  span.rejected {
+    color: $knab-primary-red;
+  }
+
+  span.pending {
+    color: $knab-primary-blue;
+  }
 }
 
 .knx-saved__title {

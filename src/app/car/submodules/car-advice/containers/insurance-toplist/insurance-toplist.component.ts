@@ -1,26 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { KNXStepRxComponent } from '../../../../../components/knx-wizard-rx/knx-step-rx.component';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
-import { CarInsurance } from '../../../../models/index';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { CarInsurance } from '@car/models';
 import { AsyncPipe } from '@angular/common';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
 import * as fromRoot from '../../../../reducers';
-import * as router from '../../../../../core/actions/router';
 import * as fromCar from '../../../../reducers';
 import * as assistant from '../../../../../core/actions/assistant';
 import * as advice from '../../../../../insurance/actions/advice';
 import * as fromAuth from '../../../../../auth/reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as layout from '../../../../../core/actions/layout';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
-import * as compare from '../../../../actions/compare';
 
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/filter';
 import { Subscription } from 'rxjs/Subscription';
 
 interface OrderItem {
@@ -31,7 +25,7 @@ interface OrderItem {
 }
 
 @Component({
-  providers: [ AsyncPipe ],
+  providers: [AsyncPipe],
   selector: 'knx-insurance-toplist',
   templateUrl: './insurance-toplist.component.html',
   styleUrls: ['./insurance-toplist.component.scss']
@@ -72,8 +66,8 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.total = this.initialAmount;
     this.orderBy = [
-      { id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true },
-      { id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false }
+      {id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true},
+      {id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false}
     ];
   }
 
@@ -147,15 +141,9 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
         .map(obs => {
           return obs.map(v => JSON.parse(JSON.stringify(v)));
         }).subscribe(insurances => {
-          this.insurances = insurances;
-        }),
-        this.store$.select(fromInsurance.getSelectedAdvice)
-        .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
-        .subscribe(advice => {
-          this.store$.dispatch(new compare.LoadCarAction(advice));
-        })
+        this.insurances = insurances;
+      })
     );
-
   }
 }
 
