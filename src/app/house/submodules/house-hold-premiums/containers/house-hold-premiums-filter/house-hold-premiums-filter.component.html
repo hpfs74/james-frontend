@@ -3,11 +3,19 @@
   <h3>Verfijn uw verzekering</h3>
   <knx-collapse-message [ngClass]="optionModifierClass" title="Main coverage" [isOpen]="true">
     <div class="knx-form-group--info knx-form-group--info-checkbox">
-      <knx-radio #defaultCoverage
-                 knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="defaultCoverage"
-                 [formControlName]="form.formConfig.mainCoverage.formControlName"
-                 [options]="form.formConfig.mainCoverage.inputOptions">
-      </knx-radio>
+      <div class="knx-form-group__wrap">
+
+
+          <label class="knx-radio">
+            <input formControlName="mainCoverage"
+                   type="radio"
+                   value="1" />
+
+            <span class="knx-radio__control"></span>
+            <span class="knx-radio__label">Default</span>
+          </label>
+
+      </div>
 
       <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
@@ -18,10 +26,17 @@
     More text for default coverage...
 
     <div class="knx-form-group--info knx-form-group--info-checkbox">
-      <knx-radio #extendedCoverage
-                 knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="extendedCoverage"
-                 [formControlName]="form.formConfig.mainCoverage.formControlName"
-                 [options]="form.formConfig.mainCoverage.inputOptions"></knx-radio>
+      <div class="knx-form-group__wrap">
+
+        <label class="knx-radio">
+          <input formControlName="mainCoverage"
+                 type="radio"
+
+                 value="2"/>
+          <span class="knx-radio__control"></span>
+          <span class="knx-radio__label">Extended</span>
+        </label>
+      </div>
 
       <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
@@ -31,19 +46,6 @@
 
       More text about extend coverage...
 
-    </div>
-
-    <div class="knx-form-group--info knx-form-group--info-checkbox">
-      <knx-checkbox #glassCoverage
-                    knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="glassCoverage"
-                    [formControlName]="form.formConfig.glassCoverage.formControlName"
-                    [options]="form.formConfig.glassCoverage.inputOptions"></knx-checkbox>
-
-      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
-        <knx-tooltip [options]="{ position: 'left' }">
-         Glass coverage tooltip
-        </knx-tooltip>
-      </span>
     </div>
 
   </knx-collapse-message>

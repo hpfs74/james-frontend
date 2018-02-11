@@ -36,27 +36,15 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
   chatMessages$: Observable<Array<ChatMessage>>;
   // State of the advice forms data
   subscription$: Subscription[] = [];
-  // Forms
-  // houseHoldExtrasForm: HouseHoldExtrasForm;
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
               private router: Router,
               public knxWizardService: KNXWizardRxService) {
-    this.formSteps = [
-      {
-        label: 'Locatie',
-      },
-      {
-        label: 'Huis type',
-      },
-      {
-        label: 'Huis details',
-      },
-      {
-        label: 'Dekking'
-      }
-    ];
+
+    this.formSteps = ['Locatie', 'Huis type', 'Huis details', 'Dekking'].map((el) => {
+      return {label: el};
+    });
   }
 
   ngOnInit() {

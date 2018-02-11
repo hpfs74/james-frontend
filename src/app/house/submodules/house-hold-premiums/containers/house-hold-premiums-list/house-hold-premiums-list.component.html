@@ -1,5 +1,7 @@
 <div class="knx-insurance-toplist">
 
+
+
   <div class="row">
     <div class="col-sm-12">
 
@@ -14,22 +16,22 @@
       </div>
 
       <ng-template #insuranceResults>
-        <h2>We hebben {{ insurances.length }} resultaten gevonden</h2>
+        <h2>De beste verzekeringen voor jouw inboedel</h2>
 
-        <div class="knx-button-group" role="group">
-          <button
-            *ngFor="let item of orderBy"
-            class="knx-button knx-button--toggle"
-            [class.knx-button--toggle-active]="item.active"
-            (click)="changeOrderBy(item)">{{ item.label }}
-          </button>
-        </div>
+        <p>
+          All contents insurances will be based on the following
+        </p>
 
-        <knx-insurance-result
+        <!--</p>-->
+        <!--<h2>We hebben {{ insurances.length }} resultaten gevonden</h2>-->
+
+        <knx-house-hold-insurance-result
           *ngFor="let item of insurances | slice:0:total; let i = index; trackBy: trackInsurance"
-          [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)"
-          [disableButton]="disableInsuranceBuy">
-        </knx-insurance-result>
+          [insurance]="item"
+          [index]="i"
+          (insuranceSelected$)="selectInsurance($event)"
+          [disableButton]="disableInsuranceBuy" >
+        </knx-house-hold-insurance-result>
 
         <button *ngIf="insurances && total < insurances.length"
                 class="knx-button knx-button--secondary knx-button--ghost block-center" (click)="showAll()">

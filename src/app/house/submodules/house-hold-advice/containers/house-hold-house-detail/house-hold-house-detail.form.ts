@@ -119,7 +119,8 @@ export class HouseHoldHouseDetailForm extends BaseForm {
             },
             {
               label: 'BORG security label',
-              value: 'B'
+              value: 'B',
+              disabled: true
             },
             {
               label: 'Police OK security label',

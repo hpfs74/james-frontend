@@ -6,15 +6,13 @@ import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromHouseHold from '@app/house/reducers';
-import { getHouseHoldPremiumResult } from '@app/house/reducers';
-import 'rxjs/add/observable/of';
 
 @Component({
-  selector: 'knx-house-hold-premiums-detail',
-  templateUrl: './house-hold-premiums-detail.component.html',
-  styleUrls: ['./house-hold-premiums-detail.component.scss']
+  selector: 'knx-house-hold-premiums-buy',
+  templateUrl: './house-hold-premiums-buy.component.html',
+  styleUrls: ['./house-hold-premiums-buy.component.scss']
 })
-export class HouseHoldPremiumsDetailComponent implements OnInit {
+export class HouseHoldPremiumsBuyComponent implements OnInit {
 
   selectedInsurance$: Observable<CalculatedPremium>;
   insurance: CalculatedPremium;
@@ -26,7 +24,9 @@ export class HouseHoldPremiumsDetailComponent implements OnInit {
 
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.detail', clear: true}));
 
-    this.selectedInsurance$ = Observable.of(null);
+    // this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldDataAdvice());
+
+    this.insurance = {};
 
   }
 }

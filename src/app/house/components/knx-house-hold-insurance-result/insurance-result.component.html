@@ -1,0 +1,55 @@
+
+<div class="knx-insurance-result" *ngFor="let insurance of [insurance]" [@fadeInAnimation]>
+  <div class="knx-insurance_advice knx-card" [ngClass]="{'knx-insurance_advice__supported': insurance.supported}">
+    <div class="knx-insurance-result__counter">{{ index + 1 }}</div>
+    <div class="row">
+      <div class="knx-insurance-result__bookmark" *ngIf="insurance.supported">knab</div>
+      <div class="knx-insurance-result__bookmark-tip" *ngIf="insurance.supported"></div>
+
+      <div class="col-md-3 knx-insurance-result__insurance">
+        <img class="knx-insurance-result__logo" src="{{ insurance.logo }}" alt="logo">
+      </div>
+
+      <div class="col-md-5 knx-insurance-result__data">
+
+        <div class="row">
+          <div class="col-md-6 col-6 knx-insurance-result__own-risk">
+            <div class="knx-insurance-result__value">{{ insurance.price | currency:'EUR':true }}</div>
+            <div class="knx-insurance-result__label">Verzekerd bedrag</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-6 knx-insurance-result__own-risk">
+            <div class="knx-insurance-result__value">{{ insurance.own_risk | currency:'EUR':true }}</div>
+            <div class="knx-insurance-result__label">Eigen risico</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 knx-insurance-result__buy">
+        <div class="knx-insurance-result__premium knx-insurance-result__price">
+          {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
+        </div>
+
+        <button role="button" class="knx-button knx-button--fullwidth"
+                [ngClass]="{'knx-button--primary knx-button--3d': insurance.supported,
+              'knx-button--secondary knx-button--ghost': !insurance.supported}"
+                [disabled]="disableButton"
+                (click)="select($event)">
+          Bekijk
+        </button>
+      </div>
+    </div>
+
+    <div class="knx-insurance-result__discount clearfix"
+         [class.knx-animate]="featureToggleService.isOn('provisionPDFLink')"
+         *ngIf="insurance.discount"
+         (click)="openPdf()">
+      <img src="/assets/icon/present_icon.png" alt="present">
+      Incl. {{ insurance.discount | currency:'EUR':true }} Knab korting & Hulp bij overstappen
+    </div>
+  </div>
+
+  <!--<knx-insurance-result-detail *ngIf="showDetailPanel && insurance.insurer" [insurer]="insurer"></knx-insurance-result-detail>-->
+</div>

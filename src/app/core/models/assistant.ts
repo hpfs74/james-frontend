@@ -25,7 +25,9 @@ export class AssistantConfig {
   public household = {
     welcome: `Ik ga je vandaag helpen besparen op je inboedelverzekering. Ben je er klaar voor? <b>Let's go!</b>`,
     premiums: 'Based on your detail we\'ve selected the following insurances for you. If you want to add some' +
-              'additional coverage, just change it below.'
+              'additional coverage, just change it below.',
+    detail: `Dit zou jouw nieuwe verzekering kunnen zijn! Bekijk alle gegevens
+             even goed om een goed beeld te krijgen van de verzekering.`
   };
 
   public car = {

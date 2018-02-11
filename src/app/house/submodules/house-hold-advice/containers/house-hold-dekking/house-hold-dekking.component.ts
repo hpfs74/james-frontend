@@ -21,6 +21,8 @@ import { HouseHoldAmountRequest, HouseHoldAmountResponse } from '@app/house/mode
 import { HouseHoldData } from '@app/house/models/house-hold-data';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs/Subscription';
+import { getHouseHoldDataInfo } from '@app/house/reducers';
+import * as houseHoldData from '@app/house/actions/house-hold-data';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -42,17 +44,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
-    this.initializeForms();
-    this.selectInitalStates();
-    this.setIntialSubscription();
-
-    this.currentStepOptions = {
-      label: 'Dekking',
-      backButtonLabel: 'Terug',
-      nextButtonLabel: 'CTA',
-      hideBackButton: false,
-      hideNextButton: false
-    };
 
     this.coverages = [
       {
@@ -81,6 +72,19 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
         ]
       }
     ];
+
+
+    this.currentStepOptions = {
+      label: 'Dekking',
+      backButtonLabel: 'Terug',
+      nextButtonLabel: 'CTA',
+      hideBackButton: false,
+      hideNextButton: false
+    };
+
+    this.initializeForms();
+    this.selectInitalStates();
+    this.setIntialSubscription();
   }
 
   selectInitalStates(): void {
@@ -98,7 +102,35 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.isAmountLoading$ = this.store$.select(fromHouse.getHouseHoldAmountLoading);
     this.isAmountLoaded$ = this.store$.select(fromHouse.getHouseHoldAmountLoaded);
     this.amount$ = this.store$.select(fromHouse.getHouseHoldAmountResult);
-    this.houseHoldData$ = this.store$.select(fromHouse.getHouseHoldDataInfo);
+    this.houseHoldData$ = this.store$.select(getHouseHoldDataInfo);
+    this.houseHoldData$
+      .subscribe(data => this.setFormValue(data));
+  }
+
+  /**
+   * update the form value
+   *
+   * @param value
+   */
+  setFormValue(value: HouseHoldData) {
+    if (value) {
+      if (value.Coverage !== null) {
+        this.coverages.forEach( (el) => { el.selected = el.id === value.Coverage; });
+        this.form.formGroup.patchValue({coverage: value.Coverage});
+      }
+      if (value.OutsideCoverage !== null) {
+        this.form.formGroup.patchValue({outsideCoverage: value.OutsideCoverage});
+      }
+      if (value.NetIncomeRange !== null) {
+        this.form.formGroup.patchValue({netIncomeRange: value.NetIncomeRange});
+      }
+      if (value.DateOfBirth !== null) {
+        this.form.formGroup.patchValue({dateOfBirth: value.DateOfBirth});
+      }
+      if (value.FamilySituation !== null) {
+        this.form.formGroup.patchValue({familySituation: value.FamilySituation});
+      }
+    }
   }
 
   ngAfterViewInit(): void {
@@ -157,9 +189,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
    * update the form field related to the coverage
    * @param event
    */
-  updateSelectedCoverage(event) {
+  updateSelectedCoverage(event: Price) {
     this.form.formGroup.patchValue({
-      coverage: event
+      coverage: event.id
     });
   }
 
@@ -179,6 +211,14 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     if (!detailForm.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
+
+    this.store$.dispatch(new houseHoldData.Update({
+      Coverage: detailForm.value.coverage,
+      OutsideCoverage: detailForm.value.outsideCoverage,
+      NetIncomeRange: detailForm.value.netIncomeRange,
+      DateOfBirth: detailForm.value.dateOfBirth,
+      FamilySituation: detailForm.value.familySituation
+    }));
 
     this.store$.dispatch(new router.Go({path: ['/household/premiums']}));
   }

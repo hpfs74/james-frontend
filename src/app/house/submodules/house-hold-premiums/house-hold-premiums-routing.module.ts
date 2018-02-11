@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiums-detail/house-hold-premiums-detail.component';
 import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums-list/house-hold-premiums-list.component';
 import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/house-hold-premiums.component';
+import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
 
 export const houseHoldPremiumsRoutes: Routes = [
   {
@@ -15,11 +16,24 @@ export const houseHoldPremiumsRoutes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       {
         path: 'list',
-        component: HouseHoldPremiumsListComponent
+        component: HouseHoldPremiumsListComponent,
+        data: {
+          stepIndex: 0
+        }
       },
       {
         path: 'detail',
-        component: HouseHoldPremiumsDetailComponent
+        component: HouseHoldPremiumsDetailComponent,
+        data: {
+          stepIndex: 1
+        }
+      },
+      {
+        path: 'buy',
+        component: HouseHoldPremiumsBuyComponent,
+        data: {
+          stepIndex: 2
+        }
       }
     ]
   }

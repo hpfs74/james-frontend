@@ -8,4 +8,11 @@ export interface HouseHoldData {
   RoofMaterial?: string;
   SecondFloor?: string;
   Security?: string;
+
+  Coverage?: string;
+  OutsideCoverage?: string;
+  NetIncomeRange?: string;
+  DateOfBirth?: string;
+  FamilySituation?: string;
+  GlassCoverage?: string;
 }
