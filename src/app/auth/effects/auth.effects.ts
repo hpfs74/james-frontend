@@ -114,9 +114,9 @@ export class AuthEffects {
     )
     .switchMap(() => [
       new authActions.ResetStates(),
+      new assistantActions.LoadConfigAction(this.assistantService.config),
       new authActions.StartAnonymous(),
       new authActions.LoginAnonymous(),
-      new assistantActions.LoadConfigAction(this.assistantService.config)
     ]);
 
   @Effect()

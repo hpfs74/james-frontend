@@ -32,7 +32,7 @@ export class CarSavedComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurances);
     this.profile$.subscribe(profile => {
         this.firstName = profile.firstname || '';
         this.email = profile.emailaddress || '';

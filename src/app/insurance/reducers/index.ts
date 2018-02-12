@@ -40,7 +40,7 @@ export const getSelectedAdviceId = createSelector(getAdviceState, fromAdvice.get
 export const getSelectedAdvice = createSelector(getAdviceState, fromAdvice.getSelected);
 export const getSelectedInsurance = createSelector(getAdviceState, fromAdvice.getSelectedInsurance);
 
-export const getSavedInsurance = createSelector(getInsurancesState, fromInsurances.getSavedInsurances);
+export const getSavedInsurances = createSelector(getInsurancesState, fromInsurances.getSavedInsurances);
 export const getSavedCarAdvices = createSelector(getInsurancesState, fromInsurances.getSavedCarAdvices);
 export const getSavedInsuranceLoading = createSelector(getInsurancesState, fromInsurances.getSavedInsuranceLoading);
 export const getSavedInsuranceLoaded = createSelector(getInsurancesState, fromInsurances.getSavedInsuranceLoaded);

@@ -98,7 +98,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
-    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurances);
     this.savedInsurancesLoading$ = this.store$.select(fromInsurance.getSavedInsuranceLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     // initialize forms
