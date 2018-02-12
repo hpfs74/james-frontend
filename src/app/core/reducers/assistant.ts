@@ -13,8 +13,11 @@ export interface State {
   messages: Array<ChatMessage>;
 }
 
+/* if for any reason state becomes null or undefined the app will break
+ * so we set it to initial config data
+*/
 export const initialState: State = {
-  config: null,
+  config: new AssistantConfig(),
   messages: []
 };
 
