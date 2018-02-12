@@ -195,8 +195,8 @@
           </knx-ir-row>
         </knx-ir-content>
 
-        <knx-insurance-review-registration (onLogin)="login()"
-                                           (onRegistrationFormValidation)="registrationForm = $event"
+        <knx-insurance-review-registration #reviewRegistration
+                                           (onLogin)="login()"
                                            *ngIf="isAnonymous$ | async" title="Maak jouw Knab Account aan">
         </knx-insurance-review-registration>
       </div>

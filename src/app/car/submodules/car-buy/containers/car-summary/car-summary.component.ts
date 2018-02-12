@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { QaIdentifier } from '@app/shared/models/qa-identifier';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { Profile } from '@app/profile/models';
@@ -11,7 +11,6 @@ import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 import { InsuranceAdvice } from '@app/insurance/models/index';
 import { ContactDetailForm } from '@app/shared/forms/contact-detail.form';
-import { InsuranceReviewRegistrationForm } from '@app/components/knx-insurance-review/insuatance-review-registration.form';
 import { registrationError } from '@app/registration/models/registration-error';
 
 import * as router from '@app/core/actions/router';
@@ -34,6 +33,7 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
 import { ContentConfig, Content } from '@app/content.config';
 import { Subscription } from 'rxjs/Subscription';
+import { InsuranceReviewRegistrationComponent } from '@app/components/knx-insurance-review/insurance-review-registration.component';
 
 @Component({
   selector: 'knx-car-summary-form',
@@ -42,6 +42,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   qaRootId = QaIdentifiers.carSummary;
+  @ViewChild('reviewRegistration') reviewRegistration: InsuranceReviewRegistrationComponent;
 
   subscription$: Subscription[] = [];
   insurance$: Observable<CarInsurance | InsuranceAdvice>;
@@ -53,7 +54,6 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   acceptInsuranceTerms: boolean;
   acceptKnabTerms: boolean;
-  registrationForm: InsuranceReviewRegistrationForm;
   form: ContactDetailForm;
   currentStepOptions: KNXWizardStepRxOptions;
   content: Content;
@@ -193,12 +193,17 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
   goToNextStep() {
     this.store$.dispatch(new carActions.ClearErrors());
     this.store$.dispatch(new wizardActions.ResetError());
+
+    if (this.reviewRegistration) {
+      this.reviewRegistration.validate();
+    }
+
     if (!this.summaryValid()) {
       return this.store$.dispatch(new wizardActions.Error({message: this.formSummaryError}));
     }
 
     if (!this.isLoggedIn) {
-      this.store$.dispatch(new advice.Update(this.registrationForm.formGroup.value));
+      this.store$.dispatch(new advice.Update(this.reviewRegistration.form.formGroup.value));
     }
 
     Observable.combineLatest(this.profile$, this.advice$, this.insurance$, this.car$,
@@ -219,7 +224,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   private summaryValid() {
     return this.isLoggedIn ? this.acceptInsuranceTerms :
-      this.acceptInsuranceTerms && this.acceptKnabTerms && this.registrationForm.formGroup.valid;
+      this.acceptInsuranceTerms && this.acceptKnabTerms && this.reviewRegistration.form.formGroup.valid;
   }
 
   public login() {
