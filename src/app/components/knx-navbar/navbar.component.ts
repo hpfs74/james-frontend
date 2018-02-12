@@ -66,7 +66,9 @@ export class NavbarComponent implements OnInit {
     } else {
       let savedInsurances = this.asyncPipe.transform(this.store$.select(insuranceReducers.getSavedInsurances));
       if ( savedInsurances ) {
-        if (savedInsurances.car.insurance && savedInsurances.car.insurance.length) {
+        let insurances = savedInsurances.car.insurance;
+        if (insurances.length && insurances.filter(insurance =>
+          (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
           this.goToPurchased();
         } else {
           this.goToAdvice();
