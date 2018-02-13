@@ -16,6 +16,7 @@ import * as assistant from '@app/core/actions/assistant';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as fromProfile from '@app/profile/reducers';
 import * as auth from '@app/auth/actions/auth';
+import * as insuranceActions from '@app/insurance/actions/insurance';
 
 import { Content, ContentConfig } from '@app/content.config';
 import * as AuthUtils from '@app/utils/auth.utils';
@@ -36,7 +37,7 @@ export class CarThankYouComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getLatestListOfInsurances();
     this.content = this.contentConfig.getContent();
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
@@ -73,5 +74,13 @@ export class CarThankYouComponent implements OnInit {
     }
 
     return email;
+  }
+
+  /**
+   * update store with latest advices
+   * needed for when loggen in user buys advice, and lands to purchased page
+  */
+  getLatestListOfInsurances() {
+    this.store$.dispatch(new insuranceActions.GetInsurances());
   }
 }

@@ -12,7 +12,6 @@ import * as FormUtils from '../../utils/base-form.utils';
       <div class="knx-collapsible-panel__content">
         <div class="row">
           <div class="col-sm-12">
-
             <div class="container">
               <div class="row">
                 <div class="col-md-8">
@@ -55,7 +54,6 @@ import * as FormUtils from '../../utils/base-form.utils';
 })
 export class InsuranceReviewRegistrationComponent implements OnInit {
   @Input() title: string;
-  @Output() onRegistrationFormValidation: EventEmitter<InsuranceReviewRegistrationForm> = new EventEmitter();
   @Output() onLogin: EventEmitter<any> = new EventEmitter();
 
   form: InsuranceReviewRegistrationForm;
@@ -63,20 +61,11 @@ export class InsuranceReviewRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.form = new InsuranceReviewRegistrationForm(new FormBuilder());
+  }
 
-    this.form.formGroup.get('email').valueChanges.subscribe((value) => {
-      FormUtils.validateForm(this.form.formGroup);
-      FormUtils.showFormErrors(this.form);
-
-      this.onRegistrationFormValidation.emit(this.form);
-    });
-
-    this.form.formGroup.get('password').valueChanges.subscribe((value) => {
-      FormUtils.validateForm(this.form.formGroup);
-      FormUtils.showFormErrors(this.form);
-
-      this.onRegistrationFormValidation.emit(this.form);
-    });
+  public validate() {
+    FormUtils.validateForm(this.form.formGroup);
+    FormUtils.showFormErrors(this.form);
   }
 
   public login(event: any) {

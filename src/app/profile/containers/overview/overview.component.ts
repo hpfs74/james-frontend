@@ -43,7 +43,7 @@ export class ProfileOverviewComponent implements OnInit {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
-    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurances);
     this.profileLoading$ = this.store$.select(fromProfile.getProfileLoading);
     this.store$.dispatch(new profile.LoadAction());
   }

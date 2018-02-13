@@ -98,7 +98,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
-    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurance);
+    this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurances);
     this.savedInsurancesLoading$ = this.store$.select(fromInsurance.getSavedInsuranceLoading);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     // initialize forms
@@ -118,7 +118,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
         .subscribe(purchasedInsurances => {
           const insurances = purchasedInsurances.car.insurance;
           const advices = purchasedInsurances.car.insurance_advice;
-          if (insurances.length && insurances.filter(insurance =>
+          if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
+            // Proceed to the buy flow for anonymous with advice
+            this.proceedWithAdvice(advices, insurances);
+          } else if (insurances.length && insurances.filter(insurance =>
               (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
             // redirect to purchased overview if there are any manually added insurances
             this.store$.dispatch(new router.Go({path: ['/car/purchased']}));

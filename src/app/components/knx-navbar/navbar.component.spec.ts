@@ -4,19 +4,22 @@ import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/tes
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
+import { LocalStorageService } from '@app/core/services';
 
-import { ContentConfig, Content } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock.spec';
+import { ContentConfig, Content } from '@app/content.config';
+import { ContentConfigMock } from '@app/content.mock.spec';
 import { setUpTestBed } from './../../../test.common.spec';
-import { Nav, NavItemType } from '../../core/models';
+import { Nav, NavItemType } from '@app/core/models';
 import { NavbarComponent } from './navbar.component';
-import { NavUserComponent } from './../knx-nav-user/nav-user.component';
-import * as fromAuth from '../../auth/reducers';
-import * as fromRoot from '../../reducers';
-import * as fromCore from '../../core/reducers';
-import * as fromCar from '../../reducers';
-import * as fromInsurance from '../../insurance/reducers';
-import * as fromProfile from '../../profile/reducers';
+import { NavUserComponent } from '@app/components/knx-nav-user/nav-user.component';
+import * as fromAuth from '@app/auth/reducers';
+import * as fromRoot from '@app/reducers';
+import * as fromCore from '@app/core/reducers';
+import * as fromCar from '@app/reducers';
+import * as insuranceReducers from '@app/insurance/reducers';
+import * as insuranceReducer from '@app/insurance/reducers/insurance';
+import * as insuranceActions from '@app/insurance/actions/insurance';
+import * as fromProfile from '@app/profile/reducers';
 
 describe('Component: Navbar', () => {
   let comp: NavbarComponent;
@@ -24,6 +27,7 @@ describe('Component: Navbar', () => {
   let de: DebugElement;
   let el: HTMLElement;
   let store: Store<fromAuth.State>;
+  let localStorageService: LocalStorageService;
 
   let moduleDef: TestModuleMetadata = {
     imports: [
@@ -34,12 +38,13 @@ describe('Component: Navbar', () => {
         'auth': combineReducers(fromAuth.reducers),
         'app': combineReducers(fromCore.reducers),
         'car': combineReducers(fromCar.reducers),
-        'insurance': combineReducers(fromInsurance.reducers),
+        'insurance': combineReducers(insuranceReducers.reducers),
         'profile': combineReducers(fromProfile.reducers)
       })
     ],
     declarations: [NavbarComponent],
     providers: [
+      LocalStorageService,
       {
         provide: ContentConfig,
         useValue: ContentConfigMock
@@ -51,6 +56,8 @@ describe('Component: Navbar', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
+    localStorageService = TestBed.get(LocalStorageService);
+    store = TestBed.get(Store);
     comp = fixture.componentInstance;
     comp.menuItems = [
       { id: 'menu-overview', title: 'Overzicht', routePath: 'overview', menuType: NavItemType.RIGHT },
@@ -66,5 +73,24 @@ describe('Component: Navbar', () => {
     const navElement = fixture.debugElement.query(By.css('ul.navbar-nav'));
     const el = navElement.nativeElement;
     expect(navElement).not.toBeNull();
+  });
+
+  describe('LOGO_CLICK', () => {
+    it('should go to car detail page if user is anonymous', () => {
+      spyOn(comp, 'goToAdvice');
+      localStorageService.setToken({
+        access_token: 'anonymous_token',
+        token_type: 'test_type',
+        expires_in: 0,
+        refresh_token: 'test_refresh',
+        expiration_time: 1,
+        iat: 2,
+        anonymous: true
+      });
+      comp.resetFlow();
+      fixture.detectChanges();
+      expect(comp.goToAdvice).toHaveBeenCalled();
+    });
+
   });
 });

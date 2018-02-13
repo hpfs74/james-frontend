@@ -18,12 +18,9 @@
     <button
       [ngClass]="[
         currentStepOptions.nextButtonClass ?
-        currentStepOptions.nextButtonClass : 'knx-button knx-button--primary knx-button--arrow'
+        currentStepOptions.nextButtonClass : 'knx-button knx-button--primary knx-button--arrow',
+        isPendingNext ? 'knx-button--pending' : ''
       ]"
-      [ngClass]="{
-          'knx-button--pending' : isPendingNext,
-          'knx-button--arrow' : !isPendingNext
-        }"
         [disabled]="isPendingNext || currentStepOptions.disableNextButton"
       *ngIf="!currentStepOptions.hideNextButton"
       (click)="next();">
