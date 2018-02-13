@@ -11,7 +11,6 @@ import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 import { InsuranceAdvice } from '@app/insurance/models';
 import { ContactDetailForm } from '@app/shared/forms/contact-detail.form';
-import { InsuranceReviewRegistrationForm } from '@app/components/knx-insurance-review/insuatance-review-registration.form';
 import { registrationError } from '@app/registration/models/registration-error';
 
 import * as router from '@app/core/actions/router';
@@ -204,7 +203,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
     }
 
     if (!this.registrationValid()) {
-      return this.store$.dispatch(new wizardActions.Error({message: this.registrationForm.validationSummaryError}));
+      return this.store$.dispatch(new wizardActions.Error({message: this.reviewRegistration.form.validationSummaryError}));
     }
 
     if (!this.isLoggedIn) {
