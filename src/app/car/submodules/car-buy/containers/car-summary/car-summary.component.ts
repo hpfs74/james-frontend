@@ -9,7 +9,7 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
-import { InsuranceAdvice } from '@app/insurance/models/index';
+import { InsuranceAdvice } from '@app/insurance/models';
 import { ContactDetailForm } from '@app/shared/forms/contact-detail.form';
 import { registrationError } from '@app/registration/models/registration-error';
 
@@ -202,6 +202,10 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.formSummaryError}));
     }
 
+    if (!this.registrationValid()) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.reviewRegistration.form.validationSummaryError}));
+    }
+
     if (!this.isLoggedIn) {
       this.store$.dispatch(new advice.Update(this.reviewRegistration.form.formGroup.value));
     }
@@ -224,7 +228,11 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
 
   private summaryValid() {
     return this.isLoggedIn ? this.acceptInsuranceTerms :
-      this.acceptInsuranceTerms && this.acceptKnabTerms && this.reviewRegistration.form.formGroup.valid;
+      this.acceptInsuranceTerms && this.acceptKnabTerms;
+  }
+
+  private registrationValid() {
+    return this.reviewRegistration.form.formGroup.valid;
   }
 
   public login() {
