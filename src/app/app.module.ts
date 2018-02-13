@@ -74,12 +74,12 @@ import { FeatureConfigService } from '@app/utils/feature-config.service';
       multi: true
     },
     FeatureConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: FeatureLoader,
-      deps: [FeatureConfigService],
-      multi: true
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: FeatureLoader,
+    //   deps: [FeatureConfigService],
+    //   multi: true
+    // },
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
      * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
