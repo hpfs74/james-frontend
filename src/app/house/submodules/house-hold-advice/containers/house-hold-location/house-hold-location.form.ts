@@ -30,16 +30,7 @@ export class HouseHoldLocationForm extends BaseForm {
         inputOptions: {
           formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: '',
-          items: [
-            {
-              label: 'Bought',
-              value: true
-            },
-            {
-              label: 'Rented',
-              value: false
-            }
-          ]
+          items: houseHold
         }
       }
     };

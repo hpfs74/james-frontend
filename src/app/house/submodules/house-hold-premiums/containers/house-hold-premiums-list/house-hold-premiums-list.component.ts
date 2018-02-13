@@ -11,15 +11,19 @@ import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard
 // reducers
 import * as fromRoot from '@app/reducers';
 import * as router from '@app/core/actions/router';
-import * as assistant from '@app/core/actions/assistant';
-import * as layout from '@app/core/actions/layout';
 import * as fromCore from '@app/core/reducers';
-import * as wizardActions from '@app/core/actions/wizard';
 import * as fromHouse from '@app/house/reducers';
+
+// actions
+import * as wizardActions from '@app/core/actions/wizard';
+import * as layout from '@app/core/actions/layout';
+import * as assistant from '@app/core/actions/assistant';
+import * as householddata from '@app/house/actions/house-hold-data';
 
 // models
 import { CalculatedPremium, HouseHoldPremiumResponse } from '@app/house/models/house-hold-premium';
-import { InsuranceAdvice } from '@insurance/models';
+import { Insurance, InsuranceAdvice } from '@insurance/models';
+import 'rxjs/add/operator/filter';
 
 
 @Component({
@@ -61,10 +65,12 @@ export class HouseHoldPremiumsListComponent implements OnInit {
     this.isPremiumsLoading$ = this.store$.select(fromHouse.getHouseHoldPremiumLoading);
     this.premiums$ = this.store$.select(fromHouse.getHouseHoldPremiumResult);
 
-    this.premiums$.subscribe((data) => {
-      this.houseInsurances = data.CalculatedPremiums;
-      this.insurances = this.houseInsurances.map(this.fromHouseToInsuranceAdvice);
-    });
+    this.premiums$
+      .filter(data => data !== null)
+      .subscribe((data) => {
+        this.houseInsurances = data.CalculatedPremiums;
+        this.insurances = this.houseInsurances.map(this.fromHouseToInsuranceAdvice);
+      });
   }
 
   showAll(): void {
@@ -76,7 +82,10 @@ export class HouseHoldPremiumsListComponent implements OnInit {
     return item && item.insurance_name;
   }
 
-  selectInsurance(insurance): void {
+  selectInsurance(insurance: InsuranceAdvice): void {
+    const houseInsurance = this.houseInsurances.filter((ins) => ins.Identifier === insurance.id)[0];
+
+    this.store$.dispatch(new householddata.UpdateAdvice(houseInsurance));
     this.store$.dispatch(new router.Go({path: ['/household/premiums/detail']}));
   }
 
@@ -102,6 +111,10 @@ export class HouseHoldPremiumsListComponent implements OnInit {
   }
 
   fromHouseToInsuranceAdvice(source: CalculatedPremium): InsuranceAdvice {
+    if (!source) {
+      return null;
+    }
+
     return {
       id: source.Identifier,
       logo: source.CompanyLogoUrl,

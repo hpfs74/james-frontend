@@ -21,13 +21,15 @@ export class LoggingService {
     }
 
     // Fire and forget
-    this.http.post(
-      environment.james.loggingEndpoint,
-      payload
-    ).toPromise();
 
     if (!environment.production) {
       console.warn('LOG: ', payload);
+    } else {
+      this.http.post(
+        environment.james.loggingEndpoint,
+        payload
+      ).toPromise();
+
     }
   }
 }

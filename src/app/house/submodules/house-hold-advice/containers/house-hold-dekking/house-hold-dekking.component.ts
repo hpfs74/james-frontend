@@ -45,39 +45,16 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
 
-    this.coverages = [
-      {
-        id: '1',
-        badge: '',
-        header: 'Default coverage',
-        description: 'When using the default coverage this you are covered for the following topics:',
-
-        features: [
-          'USP1 - line 1 line 2',
-          'USP2',
-          'USP3 - line 1 line 2'
-        ]
-      },
-      {
-        id: '2',
-        badge: '',
-        header: 'Extended coverage',
-        description: 'Select this if you also want the additional coverages to covere to following topics',
-        features: [
-          'USP1 - line 1 line 2',
-          'USP2 ',
-          'USP3 - line 1 line 2',
-          'USP4 - line 1 line 2',
-          'USP5'
-        ]
-      }
-    ];
-
+    this.coverages = tagsService
+      .getByKey('house_hold_flow_coverages')
+      .map((el) => {
+        return JSON.parse(el.tag) as Price;
+      });
 
     this.currentStepOptions = {
       label: 'Dekking',
       backButtonLabel: 'Terug',
-      nextButtonLabel: 'CTA',
+      nextButtonLabel: 'Toon resultaat',
       hideBackButton: false,
       hideNextButton: false
     };
@@ -95,7 +72,8 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   initializeForms(): void {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldDekkingForm(formBuilder,
-      this.tagsService.getAsLabelValue('insurance_flow_household'));
+      this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
+      this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
   }
 
   setIntialSubscription() {
@@ -115,7 +93,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   setFormValue(value: HouseHoldData) {
     if (value) {
       if (value.Coverage !== null) {
-        this.coverages.forEach( (el) => { el.selected = el.id === value.Coverage; });
+        this.coverages.forEach((el) => {
+          el.selected = el.id === value.Coverage;
+        });
         this.form.formGroup.patchValue({coverage: value.Coverage});
       }
       if (value.OutsideCoverage !== null) {
@@ -155,7 +135,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
                 AmountMoreThan12KAudioVisualComp: 0,
                 AmountMoreThan6KJewelry: 0,
                 AmountMoreThan15KSpecialPossesion: 0,
-                BreadWinnerBirthdate: this.toRiskDate(detailForm.value.dateOfBirth),
+                BreadWinnerBirthdate: FormUtils.toRiskDate(detailForm.value.dateOfBirth),
                 BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
               } as HouseHoldAmountRequest;
 
@@ -164,18 +144,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
           }
         })
     ];
-  }
-
-  /**
-   * converts the date in the form to the risk insurance format
-   *
-   * @param date - a date field
-   * @returns {number} - in the form of YYYYMMDD
-   */
-  toRiskDate(date): number {
-    const month = date.getMonth() + 1;
-
-    return +`${date.getFullYear()}${month < 10 ? '0' + month : month}${date.getDate()}`;
   }
 
   /**

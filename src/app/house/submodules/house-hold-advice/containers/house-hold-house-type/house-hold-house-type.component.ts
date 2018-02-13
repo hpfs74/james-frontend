@@ -19,6 +19,7 @@ import * as houseDataActions from '@app/house/actions/house-data';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import { Subscription } from 'rxjs/Subscription';
 import { HouseHoldData } from '@app/house/models/house-hold-data';
+import { UIPair } from '@core/models/ui-pair';
 
 @Component({
   selector: 'knx-house-hold-house-type-form',
@@ -34,16 +35,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   error$: Observable<KNXStepError>;
   address: Address;
   alive: boolean;
-  roomValues = [
-    {label: '2 or less', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9 or more', value: '9'}
-  ];
+  roomValues: UIPair[];
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -81,9 +73,13 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   }
 
   initializeForms(): void {
+    this.roomValues = this.tagsService.getAsLabelValue('house_hold_flow_rooms_count');
+
     const formBuilder = new FormBuilder();
-    this.form = new HouseHoldHouseTypeForm(formBuilder,
-      this.tagsService.getAsLabelValue('insurance_flow_household'));
+    this.form = new HouseHoldHouseTypeForm(formBuilder, this.roomValues,
+      this.tagsService.getAsLabelValue('house_hold_flow_surface_area'),
+      this.tagsService.getAsLabelValue('house_hold_flow_building_type'),
+      this.tagsService.getAsLabelValue('house_hold_flow_build_year'));
   }
 
   /**

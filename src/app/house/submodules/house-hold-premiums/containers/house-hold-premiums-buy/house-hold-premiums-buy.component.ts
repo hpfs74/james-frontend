@@ -26,7 +26,5 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
 
     // this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldDataAdvice());
 
-    this.insurance = {};
-
   }
 }

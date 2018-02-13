@@ -1,24 +1,27 @@
 import * as HouseHoldDataActions from '../actions/house-hold-data';
 import { HouseHoldData } from '@app/house/models/house-hold-data';
 import * as cuid from 'cuid';
+import { CalculatedPremium } from '@app/house/models/house-hold-premium';
 
 export type Action = HouseHoldDataActions.All;
 
 export interface State {
   id: string;
   info: HouseHoldData;
+  advice: CalculatedPremium;
 }
 
 export const initialState: State = {
   id: null,
-  info: null
+  info: null,
+  advice: null
 };
 
 export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
 
     case HouseHoldDataActions.START: {
-      return Object.assign({}, state, { id: cuid() });
+      return Object.assign({}, state, {id: cuid()});
     }
 
     case HouseHoldDataActions.GET_INFO: {
@@ -27,7 +30,14 @@ export function reducer(state = initialState, action: Action): State {
 
     case HouseHoldDataActions.UPDATE_INFO: {
       return Object.assign({}, state, {
-        info: Object.assign( {}, state.info, action.payload )
+        info: Object.assign({}, state.info, action.payload)
+      });
+    }
+
+    case HouseHoldDataActions.UPDATE_ADVICE: {
+
+      return Object.assign({}, state, {
+        advice: action.payload
       });
     }
 
@@ -39,3 +49,4 @@ export function reducer(state = initialState, action: Action): State {
 
 export const getAdviceId = (state: State) => state.id;
 export const getInfo = (state: State) => state.info;
+export const getSelectedAdvice = (state: State) => state.advice;

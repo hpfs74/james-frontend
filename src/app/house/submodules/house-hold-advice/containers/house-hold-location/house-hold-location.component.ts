@@ -63,7 +63,8 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   initializeForms(): void {
     const formBuilder = new FormBuilder();
     this.addressForm = new AddressForm(formBuilder);
-    this.form = new HouseHoldLocationForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'));
+    this.form = new HouseHoldLocationForm(formBuilder,
+      this.tagsService.getAsLabelValue('house_hold_flow_house_hold'));
   }
 
   selectInitialStates(): void {

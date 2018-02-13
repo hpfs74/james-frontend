@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { HouseHoldPremiumsFilterForm } from './house-hold-premiums-filter.form';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { HouseHoldData } from '@app/house/models/house-hold-data';
+import { TagsService } from '@core/services';
+import { Price } from '@app/shared/models';
 
 /**
  * Handle the filters over the premiums, gives the user the ability to change the coverage and
@@ -14,8 +16,17 @@ import { HouseHoldData } from '@app/house/models/house-hold-data';
   templateUrl: './house-hold-premiums-filter.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HouseHoldPremiumsFilterComponent  {
+export class HouseHoldPremiumsFilterComponent {
   qaRootId = QaIdentifiers.houseHoldPremiumsRoot;
+  coverages: Price[];
+
+  constructor(tagsService: TagsService) {
+    this.coverages = tagsService
+      .getByKey('house_hold_flow_coverages')
+      .map((el) => {
+        return JSON.parse(el.tag) as Price;
+      });
+  }
 
   @Input() form: HouseHoldPremiumsFilterForm;
   @Input() show: boolean;
@@ -35,7 +46,7 @@ export class HouseHoldPremiumsFilterComponent  {
         mainCoverage: value.Coverage,
         glassCoverage: value.GlassCoverage,
         outsideCoverage: value.OutsideCoverage
-      }, { emitEvent: false }); // prevent infinite loop; valueChanges subscription
+      }, {emitEvent: false}); // prevent infinite loop; valueChanges subscription
     }
   }
 }

@@ -29,5 +29,4 @@ export class GlobalErrorHandler implements ErrorHandler {
       });
     }
   }
-
 }

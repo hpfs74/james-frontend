@@ -86,7 +86,8 @@ export class TagsService {
     return section.map(tag => {
       return {
         label: this.sanitizeText(tag.translation_text),
-        value: tag.tag
+        value: tag.tag,
+        disabled: tag.disabled
       };
     });
   }

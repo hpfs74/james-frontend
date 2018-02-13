@@ -28,7 +28,7 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   advice$: Observable<any>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
-  alive: boolean;
+
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -43,7 +43,7 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
       hideBackButton: false,
       hideNextButton: false
     };
-    this.alive = true;
+
   }
 
   selectInitalStates(): void {
@@ -53,7 +53,10 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   initializeForms(): void {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldHouseDetailForm(formBuilder,
-      this.tagsService.getAsLabelValue('insurance_flow_household'));
+      this.tagsService.getAsLabelValue('house_hold_flow_walls_title'),
+      this.tagsService.getAsLabelValue('house_hold_flow_roof_material'),
+      this.tagsService.getAsLabelValue('house_hold_flow_second_floor'),
+      this.tagsService.getAsLabelValue('house_hold_flow_security'));
   }
 
   setInitialSubscription() {
@@ -94,7 +97,7 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
    * close all subscriptions
    */
   ngOnDestroy(): void {
-    this.alive = false;
+
   }
 
   goToPreviousStep() {

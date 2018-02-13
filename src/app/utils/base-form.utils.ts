@@ -33,7 +33,7 @@ export function dateDecode(value) {
     return null;
   }
 
-  if ( value instanceof Date ) {
+  if (value instanceof Date) {
     return value;
   }
 
@@ -141,7 +141,7 @@ export const updateAndValidateControls = function (fg: FormGroup, valueObj: any)
 
   if (updateObj && Object.keys(updateObj).length > 0) {
     // update form control values
-    fg.patchValue(updateObj, { emitEvent: false });
+    fg.patchValue(updateObj, {emitEvent: false});
 
     // run validation only on updated controls
     validateControls(fg, Object.keys(updateObj));
@@ -192,7 +192,7 @@ export const parseNicciDate = function (date: string): Date {
   return moment(date, 'YYYY-MM-DD').toDate();
 };
 
-export const toNicciDate = function (date: Date|string) {
+export const toNicciDate = function (date: Date | string) {
   return moment(date).format('YYYY-MM-DD');
 };
 
@@ -203,3 +203,16 @@ export const isMaskFormatted = function (date: string | string) {
 export const numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 };
+
+/**
+ * converts the date in the form to the risk insurance format
+ *
+ * @param date {Date}- a date field
+ * @returns {number} - in the form of YYYYMMDD
+ */
+export function toRiskDate(date: Date): number {
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return +`${date.getFullYear()}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
+}
