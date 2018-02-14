@@ -124,10 +124,9 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
       .subscribe((advice: HouseHoldPremiumRequest) => {
 
         const tomorrow = new Date();
-        const dateOfBirth = new Date(1974, 10, 4);
 
         const payload = {
-          Birthdate: FormUtils.toRiskDate(dateOfBirth),
+          Birthdate: advice.BreadWinnerBirthdate,
           CommencingDate: FormUtils.toRiskDate(tomorrow),
           Zipcode: advice.Zipcode,
           HouseNumber: advice.HouseNumber,
@@ -144,7 +143,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
           CoverageCode: advice.CoverageCode,
           FamilyComposition: advice.FamilyComposition,
           IncludeGlass: advice.IncludeGlass,
-          BreadWinnerBirthdate: FormUtils.toRiskDate(dateOfBirth),
+          BreadWinnerBirthdate: advice.BreadWinnerBirthdate,
           BreadWinnerMonthlyIncome: advice.BreadWinnerMonthlyIncome,
           InsuredAmount: advice.InsuredAmount,
           GuaranteeAgainstUnderinsurance: 'G',
