@@ -4,7 +4,7 @@
 
   <div class="knx-collapse-message knx-message">
     <ul >
-      <li *ngFor="let pill of pills; index as pillIndex;">
+      <li *ngFor="let pill of pills">
         <a (click)="select(pill.value)">{{pill.label}}</a>
       </li>
     </ul>
