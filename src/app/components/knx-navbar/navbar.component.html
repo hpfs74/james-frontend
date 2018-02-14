@@ -7,9 +7,9 @@
     </button> -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="navbar-brand" (click)="resetFlow()">
-          <img class="knx-logo" src="/assets/images/knab-logo.svg" alt="Logo Knab">
-          <span class="knx-logo-text">Verzekeren</span>
+        <a class="navbar-brand">
+          <img class="knx-logo" src="/assets/images/knab-logo.svg" alt="Logo Knab" (click)="goToKnab()">
+          <span class="knx-logo-text" (click)="goToStatic()">Verzekeren</span>
         </a>
       </li>
     </ul>
