@@ -177,7 +177,7 @@ describe('Service: HouseHold', () => {
         houseHoldService.calculateHouseHoldAmount(testCalculateAmount)
           .subscribe((res) => {
             expect(res.InsuredAmount)
-              .toEqual(mockHouseHoldAmount.InsuredAmount / 100.00);
+              .toEqual(mockHouseHoldAmount.InsuredAmount);
           });
       });
     });

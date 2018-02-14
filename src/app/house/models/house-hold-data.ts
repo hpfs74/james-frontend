@@ -1,17 +1,17 @@
 export interface HouseHoldData {
   OwnedBuilding?: boolean;
-  RoomCount?: string;
-  SurfaceArea?: string;
+  RoomCount?: number;
+  SurfaceArea?: number;
   BuildingType?: string;
-  BuildYear?: string;
+  BuildYear?: number;
   WallsTitle?: string;
   RoofMaterial?: string;
   SecondFloor?: string;
   Security?: string;
 
-  Coverage?: string;
+  Coverage?: number;
   OutsideCoverage?: string;
-  NetIncomeRange?: string;
+  NetIncomeRange?: number;
   DateOfBirth?: string;
   FamilySituation?: string;
   GlassCoverage?: string;

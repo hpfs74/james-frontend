@@ -94,7 +94,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     if (value) {
       if (value.Coverage !== null) {
         this.coverages.forEach((el) => {
-          el.selected = el.id === value.Coverage;
+          el.selected = +el.id === value.Coverage;
         });
         this.form.formGroup.patchValue({coverage: value.Coverage});
       }

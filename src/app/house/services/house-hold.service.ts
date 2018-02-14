@@ -47,7 +47,7 @@ export class HouseHoldService {
   public calculateHouseHoldAmount(req: HouseHoldAmountRequest): Observable<HouseHoldAmountResponse> {
 
     return this.http.post<HouseHoldAmountResponse>(environment.riskInsurance.HouseHoldAmount, req, {headers: httpOptions.headers})
-      .map(res => Object.assign(res, {InsuredAmount: res.InsuredAmount / 100.0}));
+      .map(res => Object.assign(res, {InsuredAmount: res.InsuredAmount }));
   }
 
   /**
