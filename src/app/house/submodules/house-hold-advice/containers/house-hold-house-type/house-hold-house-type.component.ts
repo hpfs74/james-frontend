@@ -19,6 +19,7 @@ import * as houseHoldData from '@app/house/actions/house-hold-data';
 import { Subscription } from 'rxjs/Subscription';
 import { UIPair } from '@core/models/ui-pair';
 import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-house-type-form',
@@ -62,11 +63,13 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   setInitialSubscriptions(): void {
     this.subscriptions = [
       this.store$.select(getHouseDataAddress)
+        .filter(data => data !== null)
         .subscribe(data => {
           this.address = Object.assign({}, data);
         }),
 
       this.store$.select(getHouseHoldDataInfo)
+        .filter(data => data !== null)
         .subscribe(data => this.setFormValue(data))
     ];
   }
