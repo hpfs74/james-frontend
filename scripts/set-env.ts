@@ -1,4 +1,4 @@
-import { writeFile, existsSync, readFile } from 'fs';
+import { writeFile, existsSync } from 'fs';
 import { argv } from 'yargs';
 
 require('dotenv').config();
@@ -10,7 +10,6 @@ const enableAnalytics = argv.analytics || false;
 const isWatchMode = argv['no-regenerate'] || false;
 const prodEnvFilePath = './src/environments/environment.prod.ts';
 const devEnvFilePath = './src/environments/environment.ts';
-const mainIndexPath = './src/index.html';
 
 function isProduction(environment: string) {
   return environment === 'production' || environment === 'prod';
