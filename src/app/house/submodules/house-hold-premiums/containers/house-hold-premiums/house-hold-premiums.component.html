@@ -5,7 +5,7 @@
               class="knx-button knx-button--link knx-button--back">wijzig mijn gegevens</button>
     </div>
     <div class="col-6" *ngIf="knxWizardService.currentStepIndex === 1">
-      <button (click)="goListBack()"
+      <button (click)="goToList()"
               class="knx-button knx-button--link knx-button--back">select your insurance</button>
     </div>
   </div>
@@ -34,7 +34,7 @@
 
   <div class="row" *ngIf="knxWizardService.currentStepIndex === 1">
     <div class="col-md-4">
-      <button (click)="goListBack()"
+      <button (click)="goToList()"
               class="knx-button knx-button--link knx-button--back">Terug</button>
     </div>
     <div class="col-md-4 offset8">

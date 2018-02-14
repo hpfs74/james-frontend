@@ -172,11 +172,11 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
     this.store$.dispatch(new router.Go({path: ['/household/dekking']}));
   }
 
-  goListBack() {
+  goToList() {
     this.store$.dispatch(new router.Go({path: ['/household/premiums/list']}));
   }
 
-  goDetail() {
+  goToDetail() {
     this.store$.dispatch(new router.Go({path: ['/household/premius/detail']}));
   }
 }
