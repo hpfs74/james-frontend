@@ -13,6 +13,8 @@ export class Price {
    * List of features
    */
   features: Array<string>;
+  dataActive: string;
+  dataInActive: string;
   highlight?: boolean;
   selected?: boolean;
   description?: string;

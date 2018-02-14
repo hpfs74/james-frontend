@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Price } from '../../shared/models/price';
+import { Price } from '@app/shared/models';
 
 interface PriceTableLabelOptions {
   selected: string;
@@ -21,6 +21,8 @@ interface PriceTableLabelOptions {
         [highlight]="item.highlight"
         [selected]="item.selected"
         [features]="item.features"
+        [dataActive]="item.dataActive"
+        [dataInActive]="item.dataInActive"
         [selectedLabel]="labels.selected"
         [unselectedLabel]="labels.unselected"
         [description]="item.description"

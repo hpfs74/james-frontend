@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-price-item',
@@ -13,6 +13,8 @@ export class PriceItemComponent {
   @Input() highlight = false;
   @Input() selectable = false;
   @Input() selected = false;
+  @Input() dataActive: string;
+  @Input() dataInActive: string;
   @Input() unselectedLabel: string;
   @Input() selectedLabel: string;
   @Input() description: string;

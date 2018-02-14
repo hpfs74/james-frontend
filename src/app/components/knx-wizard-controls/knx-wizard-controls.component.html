@@ -5,25 +5,26 @@
 
   <div class="knx-wizard__buttons" [class.knx-wizard__buttons--first]="currentStepOptions.hideBackButton">
     <button
-        [ngClass]="[
+      [ngClass]="[
           currentStepOptions.backButtonClass ?
           currentStepOptions.backButtonClass : 'knx-button knx-button--link knx-button--back'
         ]"
-        *ngIf="!currentStepOptions.hideBackButton"
-        [disabled]="currentStepOptions.disableBackButton"
-        (click)="back();">
+      *ngIf="!currentStepOptions.hideBackButton"
+      [disabled]="currentStepOptions.disableBackButton"
+      (click)="back()">
       {{ currentStepOptions.backButtonLabel }}
     </button>
 
     <button
+      *ngIf="!currentStepOptions.hideNextButton"
       [ngClass]="[
         currentStepOptions.nextButtonClass ?
         currentStepOptions.nextButtonClass : 'knx-button knx-button--primary knx-button--arrow',
         isPendingNext ? 'knx-button--pending' : ''
       ]"
-        [disabled]="isPendingNext || currentStepOptions.disableNextButton"
-      *ngIf="!currentStepOptions.hideNextButton"
-      (click)="next();">
+      [attr.data-btn]="currentStepOptions.nextButtonData ? currentStepOptions.nextButtonData : ''"
+      [disabled]="isPendingNext || currentStepOptions.disableNextButton"
+      (click)="next()">
       {{ currentStepOptions.nextButtonLabel }}
     </button>
   </div>

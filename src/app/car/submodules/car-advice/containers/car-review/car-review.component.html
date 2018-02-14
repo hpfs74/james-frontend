@@ -2,11 +2,13 @@
   knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="summary"
   [selectedInsurance]="selectedInsurance$ | async">
 </knx-insurance-review>
+
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
                      (onNext)="goToNextStep()"
                      (onBack)="goToPreviousStep()">
 </knx-wizard-controls>
+
 <div class="row knx-car-advice__footer">
   <div class="col-sm-8" *ngIf="showStepBlock">
     <knx-step-blocks title="Hoe gaat het nu verder?">
