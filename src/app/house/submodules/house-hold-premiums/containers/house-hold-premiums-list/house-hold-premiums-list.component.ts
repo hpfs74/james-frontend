@@ -69,7 +69,9 @@ export class HouseHoldPremiumsListComponent implements OnInit {
       .filter(data => data !== null)
       .subscribe((data) => {
         this.houseInsurances = data.CalculatedPremiums;
-        this.insurances = this.houseInsurances.map(this.fromHouseToInsuranceAdvice);
+        if (this.houseInsurances) {
+          this.insurances = this.houseInsurances.map(this.fromHouseToInsuranceAdvice);
+        }
       });
   }
 
