@@ -46,9 +46,8 @@ import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 
 
 /**
- * HouseHoldPremiumsComponent
- *
- *
+ * the container component that holds all the pages
+ * for the premiums flow
  */
 @Component({
   templateUrl: 'house-hold-premiums.component.html',
@@ -64,12 +63,18 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
   chatMessages$: Observable<Array<ChatMessage>>;
   advice$: Observable<HouseHoldPremiumRequest>;
 
-
   // State of the advice forms data
   subscription$: Subscription[] = [];
 
   // Forms
   houseHoldFilterForm: HouseHoldPremiumsFilterForm;
+
+  houseHoldPremiumsSteps = {
+    list: 0,
+    detail: 1,
+    buy: 2,
+    thankyou: 3
+  };
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
@@ -99,14 +104,11 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
       {label: 'Documenten', value: '#documenten'}
     ];
 
-    const coverageTags: UIPair[] = [
-      {label: 'Default', value: '1'},
-      {label: 'Extended', value: '2'}
-    ];
 
     // initialize forms
     const formBuilder = new FormBuilder();
-    this.houseHoldFilterForm = new HouseHoldPremiumsFilterForm(formBuilder, coverageTags);
+    this.houseHoldFilterForm = new HouseHoldPremiumsFilterForm(formBuilder,
+      this.tagsService.getAsLabelValue('house_hold_flow_coverages'));
 
     this.houseHoldFilterForm.formGroup.valueChanges
       .debounceTime(200)
@@ -120,7 +122,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
       });
 
     this.store$.select(fromHouseHold.getHouseHoldDataInfo)
-      .filter( (advice) => advice !== null)
+      .filter((advice) => advice !== null)
       .subscribe((advice: HouseHoldPremiumRequest) => {
 
         const tomorrow = new Date();
@@ -151,7 +153,6 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
           IncludeOutdoorsValuable: advice.IncludeOutdoorsValuable
         } as HouseHoldPremiumRequest;
 
-
         this.store$.dispatch(new householdpremiums.GetInfo(payload));
       });
   }
@@ -165,18 +166,33 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
   }
 
   onShowResults() {
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));
+    this.store$.dispatch(new assistant.AddCannedMessage({
+      key: 'household.welcome',
+      clear: true
+    }));
   }
 
   goBack() {
-    this.store$.dispatch(new router.Go({path: ['/household/dekking']}));
+    this.store$.dispatch(new router.Go({
+      path: ['/household/dekking']
+    }));
   }
 
   goToList() {
-    this.store$.dispatch(new router.Go({path: ['/household/premiums/list']}));
+    this.store$.dispatch(new router.Go({
+      path: ['/household/premiums/list']
+    }));
   }
 
   goToDetail() {
-    this.store$.dispatch(new router.Go({path: ['/household/premius/detail']}));
+    this.store$.dispatch(new router.Go({path: ['/household/premiums/detail']}));
+  }
+
+  goToBuy() {
+    this.store$.dispatch(new router.Go({path: ['/household/premiums/buy']}));
+  }
+
+  goToThankYou() {
+    this.store$.dispatch(new router.Go({path: ['/household/premiums/thankyou']}));
   }
 }

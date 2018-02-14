@@ -24,7 +24,6 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
 
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.detail', clear: true}));
 
-    // this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldDataAdvice());
-
+    this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
   }
 }
