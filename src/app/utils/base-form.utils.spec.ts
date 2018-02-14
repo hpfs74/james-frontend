@@ -62,7 +62,7 @@ describe('Base Form Util', () => {
   describe('toRiskInsurace', () => {
     it('should return a proper date format', () => {
       const date = new Date(1974, 9, 4);
-      expect(toRiskDate(date)).toEqual(19740904);
+      expect(toRiskDate(date)).toEqual(19741004);
     });
   });
 });

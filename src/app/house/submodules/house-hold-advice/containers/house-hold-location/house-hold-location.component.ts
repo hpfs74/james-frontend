@@ -77,14 +77,14 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
       this.store$.select(getHouseDataAddress)
         .subscribe(data => this.setAddress(data)),
       this.store$.select(getHouseHoldDataInfo)
-        .subscribe((amount) => this.setOwnedBuilding(amount)),
+        .subscribe((data) => this.setOwnedBuilding(data)),
       this.store$.select(getHouseHoldDataAdvice)
-        .subscribe( (advice) => {
+        .subscribe((advice) => {
           if (!advice) {
             this.store$.dispatch(new houseHoldData.Start());
           }
         })
-      ];
+    ];
   }
 
   setAddress(value) {
@@ -152,7 +152,9 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
         .take(1)
         .subscribe((step1) => {
           this.store$.dispatch(new houseDataActions.UpdateAddress(step1.address));
-          this.store$.dispatch(new houseHoldData.Update({OwnedBuilding: step1.OwnedBuilding}));
+          this.store$.dispatch(new houseHoldData.Update({
+            OwnedBuilding: step1.OwnedBuilding
+          }));
         }));
 
     this.store$.dispatch(new wizardActions.Forward());

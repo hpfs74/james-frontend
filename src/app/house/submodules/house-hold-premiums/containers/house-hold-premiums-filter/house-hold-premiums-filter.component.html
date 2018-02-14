@@ -9,17 +9,17 @@
           <label class="knx-radio">
             <input formControlName="mainCoverage"
                    type="radio"
-                   [value]="coverages[0].id" />
+                   [value]="coverages[0]?.id" />
 
             <span class="knx-radio__control"></span>
-            <span class="knx-radio__label">{{coverages[0].header}}</span>
+            <span class="knx-radio__label">{{coverages[0]?.header}}</span>
           </label>
 
       </div>
 
       <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
-         {{coverages[0].description}}
+         {{coverages[0]?.description}}
         </knx-tooltip>
       </span>
     </div>
@@ -31,19 +31,19 @@
         <label class="knx-radio">
           <input formControlName="mainCoverage"
                  type="radio"
-                 [value]="coverages[1].id"/>
+                 [value]="coverages[1]?.id"/>
           <span class="knx-radio__control"></span>
-          <span class="knx-radio__label">{{coverages[1].header}}</span>
+          <span class="knx-radio__label">{{coverages[1]?.header}}</span>
         </label>
       </div>
 
       <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
-         {{coverages[1].description}}
-         <span *ngFor="let more of coverages[1].features">{{more}}</span>
+         {{coverages[1]?.description}}
+         <span *ngFor="let more of coverages[1]?.features">{{more}}</span>
         </knx-tooltip>
     </span>
-      {{coverages[1].description}}
+      {{coverages[1]?.description}}
     </div>
 
   </knx-collapse-message>

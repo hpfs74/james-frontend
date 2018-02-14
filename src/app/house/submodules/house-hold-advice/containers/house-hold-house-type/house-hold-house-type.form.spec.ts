@@ -5,10 +5,19 @@ describe('HouseHold Type Form', () => {
   let form: HouseHoldHouseTypeForm;
 
   beforeEach(() => {
-    const mockHouseHold = [
-      { label: 'Alleen ikzelf', value: 'CHM' }
+    const mockRoomsCount = [
+      {label: '2', value: '2'},
+      {label: '3', value: '3'}
     ];
-    form = new HouseHoldHouseTypeForm(new FormBuilder(), mockHouseHold);
+    const mockSurfaceArea = [{label: '90', value: '90'}];
+    const mockBuildingType = [{label: 'A', value: 'A'}];
+    const mockBuildYear = [{label: '1800', value: '1800'}];
+
+    form = new HouseHoldHouseTypeForm(new FormBuilder(),
+      mockRoomsCount,
+      mockSurfaceArea,
+      mockBuildingType,
+      mockBuildYear);
   });
 
   it('should have validation errors defined', () => {
@@ -30,10 +39,10 @@ describe('HouseHold Type Form', () => {
     expect(form.formGroup.get('buildYear')).toBeDefined();
   });
 
-  it ('should have proper default value', () => {
-    expect(form.formGroup.get('roomsCount').value).toBe('2');
-    expect(form.formGroup.get('surfaceArea').value).toBe('90');
-    expect(form.formGroup.get('buildingType').value).toBe('2');
-    expect(form.formGroup.get('buildYear').value).toBe('1800');
+  it('should have proper default value', () => {
+    expect(form.formGroup.get('roomsCount').value).toBe(null);
+    expect(form.formGroup.get('surfaceArea').value).toBe(null);
+    expect(form.formGroup.get('buildingType').value).toBe(null);
+    expect(form.formGroup.get('buildYear').value).toBe(null);
   });
 });

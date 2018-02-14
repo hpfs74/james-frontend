@@ -17,7 +17,7 @@ export class HouseHoldLocationForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      houseHold: [true, Validators.required]
+      houseHold: ['J', Validators.required]
     });
 
     this.formConfig = {
@@ -36,3 +36,4 @@ export class HouseHoldLocationForm extends BaseForm {
     };
   }
 }
+

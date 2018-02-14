@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { HouseHoldPremiumsFilterForm } from './house-hold-premiums-filter.form';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
-import { HouseHoldData } from '@app/house/models/house-hold-data';
 import { TagsService } from '@core/services';
+
+// models
 import { Price } from '@app/shared/models';
+import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 
 /**
  * Handle the filters over the premiums, gives the user the ability to change the coverage and
@@ -39,13 +41,13 @@ export class HouseHoldPremiumsFilterComponent {
    * the the value of the form
    * @param value
    */
-  @Input() set advice(value: HouseHoldData) {
+  @Input() set advice(value: HouseHoldPremiumRequest) {
     if (value) {
       // setting checkbox values
       this.form.formGroup.patchValue({
-        mainCoverage: value.Coverage,
-        glassCoverage: value.GlassCoverage,
-        outsideCoverage: value.OutsideCoverage
+        mainCoverage: value.CoverageCode,
+        glassCoverage: value.IncludeGlass,
+        outsideCoverage: value.IncludeOutdoorsValuable
       }, {emitEvent: false}); // prevent infinite loop; valueChanges subscription
     }
   }

@@ -22,7 +22,7 @@ export class InsuranceAdvice {
   reviews?: number;
   reviews_amount?: number;
   supported: boolean;
-  logo: string;
+  logo?: string;
 
   _embedded?: {
     car: Car;

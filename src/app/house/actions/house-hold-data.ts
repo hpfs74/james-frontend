@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { HouseHoldData } from '@app/house/models/house-hold-data';
 import { CalculatedPremium } from '@app/house/models/house-hold-premium';
 
 export const START = '[HouseHold] Start';
@@ -14,7 +13,7 @@ export class Get implements Action {
 export class Update implements Action {
   readonly type = UPDATE_INFO;
 
-  constructor(public payload: HouseHoldData) {
+  constructor(public payload: any) {
   }
 }
 

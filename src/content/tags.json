@@ -2500,7 +2500,7 @@
   ],
   "house_hold_flow_house_hold": [
     {
-      "tag": true,
+      "tag": "J",
       "blocked": false,
       "alert": false,
       "order": 1,
@@ -2510,7 +2510,7 @@
       "translation_description": ""
     },
     {
-      "tag": false,
+      "tag": "N",
       "blocked": false,
       "alert": false,
       "order": 2,

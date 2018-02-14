@@ -15,11 +15,10 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { HouseHoldHouseTypeForm } from './house-hold-house-type.form';
 import { getHouseDataAddress, getHouseHoldDataInfo } from '@app/house/reducers';
-import * as houseDataActions from '@app/house/actions/house-data';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import { Subscription } from 'rxjs/Subscription';
-import { HouseHoldData } from '@app/house/models/house-hold-data';
 import { UIPair } from '@core/models/ui-pair';
+import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 
 @Component({
   selector: 'knx-house-hold-house-type-form',
@@ -87,7 +86,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
    *
    * @param value
    */
-  setFormValue(value: HouseHoldData) {
+  setFormValue(value: HouseHoldPremiumRequest) {
     if (value) {
       if (value.RoomCount !== null) {
         this.form.formGroup.patchValue({roomsCount: value.RoomCount});
@@ -95,8 +94,8 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
       if (value.SurfaceArea !== null) {
         this.form.formGroup.patchValue({surfaceArea: value.SurfaceArea});
       }
-      if (value.BuildingType !== null) {
-        this.form.formGroup.patchValue({buildingType: value.BuildingType});
+      if (value.HouseType !== null) {
+        this.form.formGroup.patchValue({buildingType: value.HouseType});
       }
       if (value.BuildYear !== null) {
         this.form.formGroup.patchValue({buildYear: value.BuildYear});
@@ -143,7 +142,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
     this.store$.dispatch(new houseHoldData.Update({
       RoomCount: detailForm.value.roomsCount,
       SurfaceArea: detailForm.value.surfaceArea,
-      BuildingType: detailForm.value.buildingType,
+      HouseType: detailForm.value.buildingType,
       BuildYear: detailForm.value.buildYear
     }));
     this.store$.dispatch(new wizardActions.Forward());

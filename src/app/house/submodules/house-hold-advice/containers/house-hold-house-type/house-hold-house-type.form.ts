@@ -20,10 +20,10 @@ export class HouseHoldHouseTypeForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      roomsCount: ['2', Validators.required],
-      surfaceArea: ['90', Validators.required],
-      buildingType: ['2', Validators.required],
-      buildYear: ['1800', Validators.required]
+      roomsCount: [null, Validators.required],
+      surfaceArea: [null, Validators.required],
+      buildingType: [null, Validators.required],
+      buildYear: [null, Validators.required]
     });
 
     this.formConfig = {

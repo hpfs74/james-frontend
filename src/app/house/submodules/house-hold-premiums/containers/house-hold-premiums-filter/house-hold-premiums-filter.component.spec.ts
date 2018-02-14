@@ -8,6 +8,11 @@ import { setUpTestBed } from './../../../../../../test.common.spec';
 import { SharedModule } from '@app/shared.module';
 import { HouseHoldPremiumsFilterComponent } from './house-hold-premiums-filter.component';
 import { HouseHoldPremiumsFilterForm } from './house-hold-premiums-filter.form';
+import { TagsService } from '@core/services';
+import { TagsServiceMock } from '@core/services/tags.service.mock.spec';
+import { ContentConfig } from '@app/content.config';
+import { ContentConfigMock } from '@app/content.mock.spec';
+import { KNXLocale } from '@knx/locale/index';
 
 @Component({
   template: `
@@ -21,8 +26,8 @@ export class TestHostComponent {
   @ViewChild(HouseHoldPremiumsFilterComponent)
   public targetComponent: HouseHoldPremiumsFilterComponent;
   private mockHouseHold = [
-    {label: 'Default coverage', value: 'A'},
-    {label: 'Extended coverage', value: 'B'}
+    {label: 'Default coverage', value: 'A' },
+    {label: 'Extended coverage', value: 'B' }
   ];
   public formFromHost: HouseHoldPremiumsFilterForm = new HouseHoldPremiumsFilterForm(new FormBuilder(),
     this.mockHouseHold);
@@ -34,7 +39,17 @@ describe('Component: HouseHoldPremiumsFilterComponent', () => {
 
   let moduleDef: TestModuleMetadata = {
     imports: [BrowserAnimationsModule, SharedModule],
-    providers: [],
+    providers: [
+      KNXLocale,
+      {
+        provide: TagsService,
+        useValue: TagsServiceMock
+      },
+      {
+        provide: ContentConfig,
+        useValue: ContentConfigMock
+      }
+    ],
     declarations: [HouseHoldPremiumsFilterComponent, TestHostComponent]
   };
   setUpTestBed(moduleDef);

@@ -1,13 +1,12 @@
 import * as HouseHoldDataActions from '../actions/house-hold-data';
-import { HouseHoldData } from '@app/house/models/house-hold-data';
 import * as cuid from 'cuid';
-import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import { CalculatedPremium, HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 
 export type Action = HouseHoldDataActions.All;
 
 export interface State {
   id: string;
-  info: HouseHoldData;
+  info: HouseHoldPremiumRequest;
   advice: CalculatedPremium;
 }
 

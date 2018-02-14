@@ -1,7 +1,6 @@
 import * as fromHouseHoldData from './house-hold-data';
 import { Address } from '@app/address/models';
 import { Update, Start, Get } from '@app/house/actions/house-hold-data';
-import { HouseHoldData } from '@app/house/models/house-hold-data';
 
 describe('House Hold Data reducer', () => {
   describe('undefined action', () => {
@@ -17,7 +16,8 @@ describe('House Hold Data reducer', () => {
       const action = new Get();
       const expectedResult = {
         info: null,
-        id: null
+        id: null,
+        advice: null
       };
       const result = fromHouseHoldData.reducer(fromHouseHoldData.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -27,16 +27,18 @@ describe('House Hold Data reducer', () => {
   describe('UPDATE_INFO', () => {
     it('should set info and loaded', () => {
       const payload = {
-        OwnedBuilding: true,
-        RoomCount: '2'
-      } as HouseHoldData;
+        OwnedBuilding: 'J',
+        RoomCount: 2
+      };
       const action = new Update(payload);
       const expectedResult = {
         info: payload,
-        id: null
+        id: null,
+        advice: null
       };
       const result = fromHouseHoldData.reducer(fromHouseHoldData.initialState, action);
-      expect(result).toEqual(expectedResult);
+      expect(result.info.RoomCount).toEqual(payload.RoomCount);
+      expect(result.info.OwnedBuilding).toEqual(payload.OwnedBuilding);
     });
   });
 

@@ -18,11 +18,10 @@ import { Price } from '@app/shared/models';
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 import * as fromHouse from '@app/house/reducers';
 import { HouseHoldAmountRequest, HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
-import { HouseHoldData } from '@app/house/models/house-hold-data';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs/Subscription';
 import { getHouseHoldDataInfo } from '@app/house/reducers';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
+import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -39,7 +38,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   isAmountLoaded$: Observable<boolean>;
   isAmountLoading$: Observable<boolean>;
   amount$: Observable<HouseHoldAmountResponse>;
-  houseHoldData$: Observable<HouseHoldData>;
+  houseHoldData$: Observable<HouseHoldPremiumRequest>;
   subscriptions$: Subscription[] = [];
 
   constructor(private store$: Store<fromRoot.State>,
@@ -90,25 +89,25 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
    *
    * @param value
    */
-  setFormValue(value: HouseHoldData) {
+  setFormValue(value: HouseHoldPremiumRequest) {
     if (value) {
-      if (value.Coverage !== null) {
+      if (value.CoverageCode !== null) {
         this.coverages.forEach((el) => {
-          el.selected = +el.id === value.Coverage;
+          el.selected = +el.id === value.CoverageCode;
         });
-        this.form.formGroup.patchValue({coverage: value.Coverage});
+        this.form.formGroup.patchValue({coverage: value.CoverageCode});
       }
-      if (value.OutsideCoverage !== null) {
-        this.form.formGroup.patchValue({outsideCoverage: value.OutsideCoverage});
+      if (value.IncludeOutdoorsValuable !== null) {
+        this.form.formGroup.patchValue({outsideCoverage: value.IncludeOutdoorsValuable});
       }
-      if (value.NetIncomeRange !== null) {
-        this.form.formGroup.patchValue({netIncomeRange: value.NetIncomeRange});
+      if (value.BreadWinnerMonthlyIncome !== null) {
+        this.form.formGroup.patchValue({netIncomeRange: value.BreadWinnerMonthlyIncome});
       }
-      if (value.DateOfBirth !== null) {
-        this.form.formGroup.patchValue({dateOfBirth: value.DateOfBirth});
+      if (value.BreadWinnerBirthdate !== null) {
+        this.form.formGroup.patchValue({dateOfBirth: value.BreadWinnerBirthdate});
       }
-      if (value.FamilySituation !== null) {
-        this.form.formGroup.patchValue({familySituation: value.FamilySituation});
+      if (value.FamilyComposition !== null) {
+        this.form.formGroup.patchValue({familySituation: value.FamilyComposition});
       }
     }
   }
@@ -127,10 +126,10 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
             const detailForm = this.form.formGroup;
 
-            this.houseHoldData$.subscribe(data => {
+            this.houseHoldData$.subscribe((data: HouseHoldPremiumRequest) => {
 
               const payload = {
-                OwnedBuilding: data.OwnedBuilding ? 'J' : 'N',
+                OwnedBuilding: data.OwnedBuilding,
                 FamilyComposition: detailForm.value.familySituation,
                 AmountMoreThan12KAudioVisualComp: 0,
                 AmountMoreThan6KJewelry: 0,
@@ -181,11 +180,11 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     }
 
     this.store$.dispatch(new houseHoldData.Update({
-      Coverage: detailForm.value.coverage,
-      OutsideCoverage: detailForm.value.outsideCoverage,
-      NetIncomeRange: detailForm.value.netIncomeRange,
-      DateOfBirth: detailForm.value.dateOfBirth,
-      FamilySituation: detailForm.value.familySituation
+      CoverageCode: detailForm.value.coverage,
+      IncludeOutdoorsValuable: detailForm.value.outsideCoverage,
+      BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange,
+      BreadWinnerBirthdate: detailForm.value.dateOfBirth,
+      FamilyComposition: detailForm.value.familySituation
     }));
 
     this.store$.dispatch(new router.Go({path: ['/household/premiums']}));

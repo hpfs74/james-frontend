@@ -28,9 +28,6 @@ import * as housedata from '@app/house/actions/house-data';
 import * as householdpremiums from '@app/house/actions/house-hold-premium';
 import * as householdinsuranceamount from '@app/house/actions/house-hold-insurance-amount';
 
-// models
-import { HouseHoldData } from '@app/house/models/house-hold-data';
-
 // reducers
 import { getHouseHoldDataInfo } from '@app/house/reducers';
 import * as fromInsurance from '@insurance/reducers';
@@ -65,8 +62,8 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
   formSteps: Array<KNXWizardStepRxOptions>;
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
-  advice$: Observable<HouseHoldData>;
-  houseHoldData$: Observable<HouseHoldData>;
+  advice$: Observable<HouseHoldPremiumRequest>;
+
 
   // State of the advice forms data
   subscription$: Subscription[] = [];
@@ -81,8 +78,6 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
     this.formSteps = ['Premiums list', 'Premium detail', 'Premium buy'].map(el => {
       return {label: el};
     });
-    this.houseHoldData$ = this.store$.select(getHouseHoldDataInfo);
-
   }
 
   ngOnInit() {
@@ -118,14 +113,15 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
       .filter(() => this.knxWizardService.currentStepIndex === 0)
       .subscribe(data => {
         this.store$.dispatch(new houseHoldData.Update({
-          Coverage: data.mainCoverage,
-          OutsideCoverage: data.outsideCoverage,
-          GlassCoverage: data.glassCoverage
+          CoverageCode: data.mainCoverage,
+          IncludeOutdoorsValuable: data.outsideCoverage,
+          IncludeGlass: data.glassCoverage
         }));
       });
 
     this.store$.select(fromHouseHold.getHouseHoldDataInfo)
-      .subscribe((advice: HouseHoldData) => {
+      .filter( (advice) => advice !== null)
+      .subscribe((advice: HouseHoldPremiumRequest) => {
 
         const tomorrow = new Date();
         const dateOfBirth = new Date(1974, 10, 4);
@@ -133,27 +129,27 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
         const payload = {
           Birthdate: FormUtils.toRiskDate(dateOfBirth),
           CommencingDate: FormUtils.toRiskDate(tomorrow),
-          Zipcode: '2273DE',
-          HouseNumber: 200,
-          HouseNumberAddition: '',
-          HouseType: advice.BuildingType,
+          Zipcode: advice.Zipcode,
+          HouseNumber: advice.HouseNumber,
+          HouseNumberAddition: advice.HouseNumberAddition,
+          HouseType: advice.HouseType,
           BuildYear: advice.BuildYear,
           RoomCount: advice.RoomCount,
           SurfaceArea: advice.SurfaceArea,
-          ConstructionNature: advice.WallsTitle,
-          ConstructionNatureRoof: advice.RoofMaterial,
-          ConstructionNatureFloor: advice.SecondFloor,
-          SecurityMeasures: advice.Security,
-          OwnedBuilding: advice.OwnedBuilding ? 'J' : 'N',
-          CoverageCode: advice.Coverage,
-          FamilyComposition: advice.FamilySituation,
-          IncludeGlass: advice.GlassCoverage === 'true' ? 'J' : 'N',
+          ConstructionNature: advice.ConstructionNature,
+          ConstructionNatureRoof: advice.ConstructionNatureRoof,
+          ConstructionNatureFloor: advice.ConstructionNatureFloor,
+          SecurityMeasures: advice.SecurityMeasures,
+          OwnedBuilding: advice.OwnedBuilding,
+          CoverageCode: advice.CoverageCode,
+          FamilyComposition: advice.FamilyComposition,
+          IncludeGlass: advice.IncludeGlass,
           BreadWinnerBirthdate: FormUtils.toRiskDate(dateOfBirth),
-          BreadWinnerMonthlyIncome: advice.NetIncomeRange,
-          InsuredAmount: 10000,
+          BreadWinnerMonthlyIncome: advice.BreadWinnerMonthlyIncome,
+          InsuredAmount: advice.InsuredAmount,
           GuaranteeAgainstUnderinsurance: 'G',
           InsuredAmountValuables: 0,
-          IncludeOutdoorsValuable: advice.OutsideCoverage ? 'J' : 'N'
+          IncludeOutdoorsValuable: advice.IncludeOutdoorsValuable
         } as HouseHoldPremiumRequest;
 
 

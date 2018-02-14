@@ -10,11 +10,18 @@ import { ContentConfig } from '@app/content.config';
 import { ContentConfigMock } from '@app/content.mock.spec';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 
+import { By } from '@angular/platform-browser';
+import { HouseHoldPremiumsComponent } from './house-hold-premiums.component';
+import { KNXWizardRxService } from '@core/services/wizard.service';
+import { KNXWizardServiceMock } from '@core/services/wizard.service.mock';
+
+// reducers
 import * as fromRoot from '@app/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
-import { By } from '@angular/platform-browser';
-import { HouseHoldPremiumsComponent } from './house-hold-premiums.component';
+import * as fromHouse from '@app/house/reducers';
+import { RouterTestingModule } from '@angular/router/testing';
+
 
 
 describe('Component: HouseHoldPremiumsDetailComponent', () => {
@@ -27,11 +34,13 @@ describe('Component: HouseHoldPremiumsDetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        RouterTestingModule,
         SharedModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'app': combineReducers(fromCore.reducers)
+          'app': combineReducers(fromCore.reducers),
+          'household': combineReducers(fromHouse.reducers)
         })
       ],
       declarations: [
@@ -46,6 +55,10 @@ describe('Component: HouseHoldPremiumsDetailComponent', () => {
         {
           provide: ContentConfig,
           useValue: ContentConfigMock
+        },
+        {
+          provide: KNXWizardRxService,
+          useValue: KNXWizardServiceMock
         }
       ],
       schemas: [NO_ERRORS_SCHEMA]

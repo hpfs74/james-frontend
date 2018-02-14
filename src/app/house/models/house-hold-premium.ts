@@ -33,6 +33,9 @@ export class HouseHoldPremiumRequest {
   BreadWinnerMonthlyIncome?: number;
   InsuredAmountValuables: number;
   IncludeOutdoorsValuable?: string;
+
+  // custom field
+  address?: string;
 }
 
 export interface ConditionUrl {

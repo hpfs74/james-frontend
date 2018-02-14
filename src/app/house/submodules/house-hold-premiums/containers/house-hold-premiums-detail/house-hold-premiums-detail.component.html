@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="insurance">
   <div class="col-sm-12">
     <knx-collapsible-panel title="insurance details" [isOpen]="true" [showStep]="false" [collapsible]="false">
       <div class="knx-collapsible-panel__content">
@@ -7,22 +7,22 @@
           <knx-ir-label>Insurance company</knx-ir-label>
           <knx-ir-value>
             <img class="knx-insurance-result__logo"
-                 src="{{ insurance.CompanyLogoUrl }}"
-                 alt="{{ insurance.CompanyName }}"/>
+                 src="{{ insurance?.CompanyLogoUrl }}"
+                 alt="{{ insurance?.CompanyName }}"/>
           </knx-ir-value>
         </knx-ir-row>
 
         <knx-ir-row showTooltip="false" showValue="true">
           <knx-ir-label>Insurance type/name</knx-ir-label>
           <knx-ir-value>
-            {{insurance.ProductDescription}} / {{insurance.PackageDescription}}
+            {{insurance?.ProductDescription}} / {{insurance?.PackageDescription}}
           </knx-ir-value>
         </knx-ir-row>
 
-        <knx-ir-row [newSection]="true"  showTooltip="false" showValue="true">
+        <knx-ir-row [newSection]="true" showTooltip="false" showValue="true">
           <knx-ir-label>Coverage</knx-ir-label>
           <knx-ir-value>
-            {{insurance.HouseholdCoverageDescription}}
+            {{insurance?.HouseholdCoverageDescription}}
           </knx-ir-value>
         </knx-ir-row>
 
@@ -32,14 +32,14 @@
             <small>Incl. BTW and additionals costs</small>
           </knx-ir-label>
           <knx-ir-value>
-            <strong>{{insurance.Premium / 100.0 | currency:'EUR':true }}</strong>
+            <strong>{{insurance?.Premium | currency:'EUR':true }}</strong>
           </knx-ir-value>
         </knx-ir-row>
 
-        <knx-ir-row [newSection]="true"  showTooltip="false" showValue="true">
+        <knx-ir-row [newSection]="true" showTooltip="false" showValue="true">
           <knx-ir-label>Own risk</knx-ir-label>
           <knx-ir-value>
-            {{insurance.Deductables / 100| currency:'EUR':true}}
+            {{insurance?.Deductables | currency:'EUR':true}}
           </knx-ir-value>
         </knx-ir-row>
 
@@ -57,7 +57,7 @@
             Insured amount
           </knx-ir-label>
           <knx-ir-value>
-            {{insurance.ValuablesInsuredAmount /100|currency:'EUR':true}}
+            {{insurance?.ValuablesInsuredAmount |currency:'EUR':true}}
           </knx-ir-value>
         </knx-ir-row>
       </div>
@@ -65,13 +65,13 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="insurance?.Clauses">
   <div class="col-sm-12">
     <knx-collapsible-panel title="Belangrijke voorwaarden" [isOpen]="true" [showStep]="false" [collapsible]="false">
       <div class="knx-collapsible-panel__content">
 
         <knx-ir-row showTooltip="false" showValue="true"
-          *ngFor="let clause of insurance.Clauses">
+                    *ngFor="let clause of insurance?.Clauses">
           <knx-ir-label>
             {{clause.ClauseTitle}}
           </knx-ir-label>
@@ -91,7 +91,7 @@
       <div class="knx-collapsible-panel__content">
         <div class="row">
           <div class="col-sm-12">
-            <span>Hieronder vind je alle documente van {{insurance.CompanyName}}.</span><br>
+            <span>Hieronder vind je alle documente van {{insurance?.CompanyName}}.</span><br>
             <span class="knx-collapse-panel__muted">
               Dit zijn alle documenten, inclusief alle beschikbare extra's en dekkingen. Als jij nient een bepaalde
               dekking hebt geselecteerd kan je deze gewoon negeren.
@@ -103,7 +103,7 @@
         <div class="row">
           <div class="col-sm-12">
             <ul class="knx-insurance-review-documents__list">
-              <li *ngFor="let doc of insurance.ConditionUrls"><span class="knx-icon-file-o"></span>
+              <li *ngFor="let doc of insurance?.ConditionUrls"><span class="knx-icon-file-o"></span>
                 <a href="{{doc.URL}}}" target="_blank" rel="noopener"
                    title="{{doc.Description}}">{{doc.Description}}</a>
               </li>
