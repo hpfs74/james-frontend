@@ -11,7 +11,6 @@ export class FeatureConfigService {
   uniqueId = '';
   constructor(private http: Http,
               private cookies: CookieService) {
-    // console.log('hello from feature config service');
     this.setAbScriptToHead();
   }
 
@@ -71,15 +70,6 @@ export class FeatureConfigService {
 
   load(): Promise<any> {
     return Promise.resolve();
-    // const body = {
-    //   userId: this.getUniqueId(),
-    //   featureGroup: this.getFeatureGroup()
-    // };
-    // return this.http.post(this.endpointUrl, body)
-    //   .map(res => res.json())
-    //   .toPromise()
-    //   .then((data) => this.handleFeatureResponse(data))
-    //   .catch(error => Promise.resolve(error));
   }
 
   setCookie(value: any) {
