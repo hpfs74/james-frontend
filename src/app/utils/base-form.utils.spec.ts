@@ -6,7 +6,8 @@ import {
   toDateFormat,
   parseNicciDate,
   toNicciDate,
-  toDateType, toRiskDate
+  toDateType,
+  toRiskDate
 } from './base-form.utils';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
