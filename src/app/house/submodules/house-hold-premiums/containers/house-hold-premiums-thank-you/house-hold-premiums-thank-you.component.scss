@@ -1,0 +1,29 @@
+@import '~styles/base.scss';
+
+.knx-insurance-review-documents__list > li {
+  padding-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.knx-insurance-review-documents__list {
+  list-style-type: none;
+  padding-top: 10px;
+  padding-left: 0;
+
+  & > li > a {
+    color: $knab-primary-blue;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+      color: $knab-primary-red;
+      text-decoration: none;
+    }
+  }
+}
+
+.knx-collapse-panel__muted {
+  color: $knab-dark-gray;
+}

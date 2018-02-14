@@ -27,7 +27,9 @@ export class AssistantConfig {
     premiums: 'Based on your detail we\'ve selected the following insurances for you. If you want to add some' +
               'additional coverage, just change it below.',
     detail: `Dit zou jouw nieuwe verzekering kunnen zijn! Bekijk alle gegevens
-             even goed om een goed beeld te krijgen van de verzekering.`
+             even goed om een goed beeld te krijgen van de verzekering.`,
+    buy: `Leave your contact details to start requesting your new household insurance [additional copy here]`,
+    thankYou: `Je verzekering is aangevraagd. Nu is het tijd om te relaxen en te genieten!`
   };
 
   public car = {

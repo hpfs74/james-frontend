@@ -6,29 +6,28 @@ import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromHouseHold from '@app/house/reducers';
-import { HouseHoldPremiumsBuyForm } from './house-hold-premiums-buy.form';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'knx-house-hold-premiums-buy',
-  templateUrl: './house-hold-premiums-buy.component.html',
-  styleUrls: ['./house-hold-premiums-buy.component.scss']
+  selector: 'knx-house-hold-premiums-thank-you',
+  templateUrl: './house-hold-premiums-thank-you.component.html',
+  styleUrls: ['./house-hold-premiums-thank-you.component.scss']
 })
-export class HouseHoldPremiumsBuyComponent implements OnInit {
+export class HouseHoldPremiumsThankYouComponent implements OnInit {
 
   selectedInsurance$: Observable<CalculatedPremium>;
   insurance: CalculatedPremium;
-  form: HouseHoldPremiumsBuyForm;
+  customerName: string;
+  customerEmail: string;
 
   constructor(private store$: Store<fromRoot.State>) {
-    const formBuilder = new FormBuilder();
-    this.form = new HouseHoldPremiumsBuyForm(formBuilder);
+    this.customerName = 'sarah';
+    this.customerEmail = 'sarah@gmail.com';
   }
 
   ngOnInit() {
 
     this.store$.dispatch(new assistant.AddCannedMessage({
-      key: 'household.buy',
+      key: 'household.thankYou',
       clear: true
     }));
 

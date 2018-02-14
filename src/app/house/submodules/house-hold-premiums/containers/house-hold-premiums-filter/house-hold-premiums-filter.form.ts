@@ -1,11 +1,12 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UIPair } from '@core/models/ui-pair';
+import { BaseForm } from '@app/shared/forms/base-form';
 
 /**
  * describe the form filters
  */
-export class HouseHoldPremiumsFilterForm {
+export class HouseHoldPremiumsFilterForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: any;
 
@@ -17,6 +18,7 @@ export class HouseHoldPremiumsFilterForm {
    */
   constructor(private fb: FormBuilder,
               coverages?: Array<UIPair>) {
+    super();
 
     this.formGroup = this.fb.group({
       mainCoverage: ['', Validators.required],
