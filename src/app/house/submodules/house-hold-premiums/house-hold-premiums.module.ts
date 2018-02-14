@@ -19,13 +19,19 @@ import { HouseHoldPremiumsRoutingModule } from './house-hold-premiums-routing.mo
 import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseHoldPremiumsFilterComponent } from './containers/house-hold-premiums-filter/house-hold-premiums-filter.component';
 import { HouseHoldPremiumsDetailNavComponent } from './containers/house-hold-premiums-detail-nav/house-hold-premiums-detail-nav.component';
+import { HouseHoldInsuranceResultComponent } from '../../components/knx-house-hold-insurance-result/insurance-result.component';
+import { HouseHoldCardExtensionComponent } from '../../components/knx-house-hold-card-extension/house-hold-card-extension.component';
+import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
 
 export const COMPONENTS = [
   HouseHoldPremiumsComponent,
   HouseHoldPremiumsListComponent,
   HouseHoldPremiumsDetailComponent,
   HouseHoldPremiumsFilterComponent,
-  HouseHoldPremiumsDetailNavComponent
+  HouseHoldPremiumsDetailNavComponent,
+  HouseHoldPremiumsBuyComponent,
+  HouseHoldInsuranceResultComponent,
+  HouseHoldCardExtensionComponent
 ];
 
 @NgModule({

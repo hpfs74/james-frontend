@@ -14,7 +14,9 @@ export class HouseHoldDekkingForm extends BaseForm {
     dateOfBirth: () => 'Error on date of birth'
   };
 
-  constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
+  constructor(private fb: FormBuilder,
+              netIncomeRange: Array<UIPair>,
+              familySituation: Array<UIPair>) {
     super();
 
     this.formGroup = this.fb.group({
@@ -52,24 +54,7 @@ export class HouseHoldDekkingForm extends BaseForm {
         validationErrors: this.validationErrors,
         inputOptions: {
           placeholder: '',
-          items: [
-            {
-              label: 'Tot en met € 1.000',
-              value: '1000'
-            },
-            {
-              label: '€ 1.001 tot en met € 2.000',
-              value: '2000'
-            },
-            {
-              label: '€ 2.001 tot en met € 3.000',
-              value: '3000'
-            },
-            {
-              label: '€ 3.001 tot en met € 4.850',
-              value: '4850'
-            }
-          ]
+          items: netIncomeRange
         }
       },
       dateOfBirth: {
@@ -89,12 +74,7 @@ export class HouseHoldDekkingForm extends BaseForm {
         inputOptions: {
           placeholder: 'Maak een keuze',
           events: ['focus'],
-          items: [
-            {value: 'A', label: 'Alleen ikzelf'},
-            {value: 'H', label: 'Ik en mijn partner'},
-            {value: 'I', label: 'Ik, mijn partner en de kind(eren)'},
-            {value: 'K', label: 'Ik en mijn kind(eren)'},
-          ]
+          items: familySituation
         }
       }
     };

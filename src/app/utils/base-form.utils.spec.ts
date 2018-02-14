@@ -6,7 +6,8 @@ import {
   toDateFormat,
   parseNicciDate,
   toNicciDate,
-  toDateType
+  toDateType,
+  toRiskDate
 } from './base-form.utils';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -57,5 +58,12 @@ describe('Base Form Util', () => {
 
   it('should format a date in NICCI format', () => {
     expect(toNicciDate(new Date(2016, 3, 30))).toEqual('2016-04-30');
+  });
+
+  describe('toRiskInsurace', () => {
+    it('should return a proper date format', () => {
+      const date = new Date(1974, 9, 4);
+      expect(toRiskDate(date)).toEqual(19741004);
+    });
   });
 });

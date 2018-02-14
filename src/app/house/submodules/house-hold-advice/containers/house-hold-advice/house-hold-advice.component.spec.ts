@@ -31,6 +31,7 @@ import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
 import { HouseHoldAdviceComponent } from './house-hold-advice.component';
+import * as fromHouse from '@app/house/reducers';
 
 describe('Component: HouseHoldAdviceComponent', () => {
   let comp: HouseHoldAdviceComponent;
@@ -49,7 +50,8 @@ describe('Component: HouseHoldAdviceComponent', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
-          'app': combineReducers(fromCore.reducers)
+          'app': combineReducers(fromCore.reducers),
+          'household': combineReducers(fromHouse.reducers)
         })
       ],
       declarations: [

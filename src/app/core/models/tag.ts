@@ -8,4 +8,5 @@ export interface Tag {
   translation_text: string;
   translation_label?: string;
   translation_description?: string;
+  disabled?: boolean;
 }

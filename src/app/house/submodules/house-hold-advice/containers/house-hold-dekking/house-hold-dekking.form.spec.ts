@@ -7,7 +7,9 @@ describe('HouseHold Dekking Form', () => {
 
   beforeEach(() => {
     const mockHouseHold = [];
-    form = new HouseHoldDekkingForm(new FormBuilder(), mockHouseHold);
+    form = new HouseHoldDekkingForm(new FormBuilder(),
+      mockHouseHold,
+      mockHouseHold);
   });
 
   it('should have form options defined', () => {
@@ -22,7 +24,7 @@ describe('HouseHold Dekking Form', () => {
     expect(form.formGroup.get('familySituation')).toBeDefined();
   });
 
-  it ('should not be valid if date is wrong', () => {
+  it('should not be valid if date is wrong', () => {
 
   });
 });

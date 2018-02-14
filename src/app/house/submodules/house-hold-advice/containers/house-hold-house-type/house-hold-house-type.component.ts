@@ -15,8 +15,11 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { HouseHoldHouseTypeForm } from './house-hold-house-type.form';
 import { getHouseDataAddress, getHouseHoldDataInfo } from '@app/house/reducers';
-import * as houseDataActions from '@app/house/actions/house-data';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
+import { Subscription } from 'rxjs/Subscription';
+import { UIPair } from '@core/models/ui-pair';
+import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-house-type-form',
@@ -27,44 +30,12 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   qaRootId = QaIdentifiers.houseHoldHouseType;
   form: HouseHoldHouseTypeForm;
   advice$: Observable<any>;
+  subscriptions: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   address: Address;
   alive: boolean;
-  roomValues = [
-    {
-      label: '2 or less',
-      value: '2'
-    },
-    {
-      label: '3',
-      value: '3'
-    },
-    {
-      label: '4',
-      value: '4'
-    },
-    {
-      label: '5',
-      value: '5'
-    },
-    {
-      label: '6',
-      value: '6'
-    },
-    {
-      label: '7',
-      value: '7'
-    },
-    {
-      label: '8',
-      value: '8'
-    },
-    {
-      label: '9 or more',
-      value: '9'
-    },
-  ];
+  roomValues: UIPair[];
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -83,7 +54,6 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
       hideNextButton: false
     };
 
-    this.alive = true;
   }
 
   selectInitialStates(): void {
@@ -91,31 +61,44 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   }
 
   setInitialSubscriptions(): void {
-    this.store$.select(getHouseDataAddress)
-      .subscribe(data => {
-        this.address = Object.assign({}, data);
-      });
+    this.subscriptions = [
+      this.store$.select(getHouseDataAddress)
+        .filter(data => data !== null)
+        .subscribe(data => {
+          this.address = Object.assign({}, data);
+        }),
 
-    this.store$.select(getHouseHoldDataInfo)
-      .subscribe(data => this.setFormValue(data));
+      this.store$.select(getHouseHoldDataInfo)
+        .filter(data => data !== null)
+        .subscribe(data => this.setFormValue(data))
+    ];
   }
 
   initializeForms(): void {
+    this.roomValues = this.tagsService.getAsLabelValue('house_hold_flow_rooms_count');
+
     const formBuilder = new FormBuilder();
-    this.form = new HouseHoldHouseTypeForm(formBuilder,
-      this.tagsService.getAsLabelValue('insurance_flow_household'));
+    this.form = new HouseHoldHouseTypeForm(formBuilder, this.roomValues,
+      this.tagsService.getAsLabelValue('house_hold_flow_surface_area'),
+      this.tagsService.getAsLabelValue('house_hold_flow_building_type'),
+      this.tagsService.getAsLabelValue('house_hold_flow_build_year'));
   }
 
-  setFormValue(value) {
+  /**
+   * update the form value
+   *
+   * @param value
+   */
+  setFormValue(value: HouseHoldPremiumRequest) {
     if (value) {
-      if (value.RoomsCount !== null) {
+      if (value.RoomCount !== null) {
         this.form.formGroup.patchValue({roomsCount: value.RoomCount});
       }
       if (value.SurfaceArea !== null) {
         this.form.formGroup.patchValue({surfaceArea: value.SurfaceArea});
       }
-      if (value.BuildingType !== null) {
-        this.form.formGroup.patchValue({buildingType: value.BuildingType});
+      if (value.HouseType !== null) {
+        this.form.formGroup.patchValue({buildingType: value.HouseType});
       }
       if (value.BuildYear !== null) {
         this.form.formGroup.patchValue({buildYear: value.BuildYear});
@@ -124,7 +107,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   }
 
   updateRoomsCount(index) {
-    this.form.formGroup.patchValue( {
+    this.form.formGroup.patchValue({
       roomsCount: this.roomValues[index].value
     });
   }
@@ -144,7 +127,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
    * close all subscriptions
    */
   ngOnDestroy(): void {
-    this.alive = false;
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   goToPreviousStep() {
@@ -162,7 +145,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
     this.store$.dispatch(new houseHoldData.Update({
       RoomCount: detailForm.value.roomsCount,
       SurfaceArea: detailForm.value.surfaceArea,
-      BuildingType: detailForm.value.buildingType,
+      HouseType: detailForm.value.buildingType,
       BuildYear: detailForm.value.buildYear
     }));
     this.store$.dispatch(new wizardActions.Forward());

@@ -4,54 +4,75 @@ import { Store } from '@ngrx/store';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { AsyncPipe } from '@angular/common';
 
+
+// core
+import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+
+// reducers
 import * as fromRoot from '@app/reducers';
 import * as router from '@app/core/actions/router';
-import * as assistant from '@app/core/actions/assistant';
-import * as layout from '@app/core/actions/layout';
 import * as fromCore from '@app/core/reducers';
+import * as fromHouse from '@app/house/reducers';
+
+// actions
 import * as wizardActions from '@app/core/actions/wizard';
+import * as layout from '@app/core/actions/layout';
+import * as assistant from '@app/core/actions/assistant';
+import * as householddata from '@app/house/actions/house-hold-data';
 
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/filter';
+// models
 import { CalculatedPremium, HouseHoldPremiumResponse } from '@app/house/models/house-hold-premium';
-import { getHouseHoldPremiumLoading, getHouseHoldPremiumResult } from '@app/house/reducers';
+import { Insurance, InsuranceAdvice } from '@insurance/models';
+import 'rxjs/add/operator/filter';
 
-interface OrderItem {
-  id: string;
-  label: string;
-  key: string;
-  active: boolean;
-}
 
 @Component({
-  providers: [ AsyncPipe ],
+  providers: [AsyncPipe],
   selector: 'knx-house-hold-premiums-list',
   templateUrl: './house-hold-premiums-list.component.html',
   styleUrls: ['./house-hold-premiums-list.component.scss']
 })
 export class HouseHoldPremiumsListComponent implements OnInit {
-  insurances: Array<CalculatedPremium> = [];
+  houseInsurances: CalculatedPremium[];
+  insurances: Array<InsuranceAdvice> = [];
   title: string;
   totalTitle: number;
   initialAmount = 4;
   disableInsuranceBuy: boolean;
   isPremiumsLoading$: Observable<boolean>;
+  premiums$: Observable<HouseHoldPremiumResponse>;
   total: number;
-  orderBy: Array<OrderItem>;
+  currentStepOptions: KNXWizardStepRxOptions;
+
   qaRootId = QaIdentifiers.carAdviceRoot;
   subscription$: Array<any>;
 
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe) {
+
     this.getCompareResultCopy();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.premiums', clear: true}));
-    this.isPremiumsLoading$ = this.store$.select(getHouseHoldPremiumLoading);
-    // this.error$ = this.store$.select(fromCore.getWizardError);
+
+    this.currentStepOptions = {
+      label: 'Premiums list'
+    };
+    this.total = this.initialAmount;
+    // this.error$ = this.store$.select(fromHouse.getHouseHoldPremiumError);
   }
 
   ngOnInit(): void {
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.premiums', clear: true}));
-    this.total = this.initialAmount;
+
+    this.isPremiumsLoading$ = this.store$.select(fromHouse.getHouseHoldPremiumLoading);
+    this.premiums$ = this.store$.select(fromHouse.getHouseHoldPremiumResult);
+
+    this.premiums$
+      .filter(data => data !== null)
+      .subscribe((data) => {
+        this.houseInsurances = data.CalculatedPremiums;
+        if (this.houseInsurances) {
+          this.insurances = this.houseInsurances.map(this.fromHouseToInsuranceAdvice);
+        }
+      });
   }
 
   showAll(): void {
@@ -59,11 +80,17 @@ export class HouseHoldPremiumsListComponent implements OnInit {
   }
 
   trackInsurance(index, item): any {
-    return item && item.insurance ? item.insurance.id : undefined;
+    // return item && item.insurance ? item.insurance.id : undefined;
+    return item && item.insurance_name;
   }
 
-  selectInsurance(insurance): void {
-    // this.store$.dispatch(new advice.SetInsurance(insurance));
+  selectInsurance(insurance: InsuranceAdvice): void {
+    if (!this.houseInsurances) {
+      return;
+    }
+    const houseInsurance = this.houseInsurances.filter((ins) => ins.Identifier === insurance.id)[0];
+    this.store$.dispatch(new householddata.UpdateAdvice(houseInsurance));
+    this.store$.dispatch(new router.Go({path: ['/household/premiums/detail']}));
   }
 
   noResult(): boolean {
@@ -86,5 +113,24 @@ export class HouseHoldPremiumsListComponent implements OnInit {
     //     this.store$.dispatch(new compare.LoadCarAction(advice));
     //   });
   }
+
+  fromHouseToInsuranceAdvice(source: CalculatedPremium): InsuranceAdvice {
+    if (!source) {
+      return null;
+    }
+
+    return {
+      id: source.Identifier,
+      logo: source.CompanyLogoUrl,
+      price: source.ValuablesInsuredAmount,
+      own_risk: source.Deductables,
+      monthly_premium: source.Premium,
+      advice_expires_at: Date.now(),
+      insurance_id: source.CompanyName,
+      insurance_name: source.CompanyName,
+      supported: true
+    };
+  }
+
 }
 

@@ -1,25 +1,24 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { fadeInAnimation } from '../../shared/animations/fade-in.animation';
-import { InsuranceAdvice, Insurer } from '../../insurance/models';
+import { fadeInAnimation } from '@app/shared/animations/fade-in.animation';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { CalculatedPremium } from '@app/house/models/house-hold-premium';
 
 @Component({
-  selector: 'knx-insurance-result',
+  selector: 'knx-house-hold-insurance-result',
   styleUrls: ['./insurance-result.component.scss'],
   templateUrl: './insurance-result.component.html',
   animations: [ fadeInAnimation ]
 })
 
-export class InsuranceResultComponent {
+export class HouseHoldInsuranceResultComponent {
   @Input() index: number;
-  @Input() insurance: InsuranceAdvice;
-  @Input() insurer: Insurer;
+  @Input() insurance: CalculatedPremium;
   @Input() showDetailPanel = false;
   @Input() orderChange: boolean;
   @Input() disableButton: boolean;
 
-  @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
+  @Output() insuranceSelected$: EventEmitter<CalculatedPremium> = new EventEmitter<CalculatedPremium>();
 
   constructor(public featureToggleService: FeatureConfigService) { }
 
