@@ -139,6 +139,7 @@ function getContent(environment: string) {
       provisionPDFLink: '${getEnvVar('FEATURE_PROVISION_PDF')}'
     },
     external: {
+      knab: '${getEnvVar('KNAB_NL')}',
       login: '${getEnvVar('LOGIN')}',
       static: '${getEnvVar('STATIC_PAGE_URL')}'
     },

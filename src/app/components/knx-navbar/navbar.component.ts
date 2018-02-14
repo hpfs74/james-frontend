@@ -5,13 +5,13 @@ import { Observable } from 'rxjs/Observable';
 
 import { collapseInOutAnimation } from '@app/shared/animations';
 import { Nav, NavItemType } from '@app/core/models/nav';
-import * as AuthUtils from '@app/utils/auth.utils';
 
 import * as authActions from '@app/auth/actions/auth';
 import * as routerActions from '@app/core/actions/router';
 import * as authReducers from '@app/auth/reducers';
 import * as insuranceReducers from '@app/insurance/reducers';
 import * as rootReducers from '@app/reducers';
+import { environment } from '@env/environment';
 
 @Component({
   providers: [AsyncPipe],
@@ -56,35 +56,13 @@ export class NavbarComponent implements OnInit {
   public register() {
     this.store$.dispatch(new routerActions.Go({ path: ['/register'] }));
   }
-  /**
-   * goes on start of advice flow or on purchased page,
-   * depending on weather we are anonymous, and logged in
-  */
-  resetFlow() {
-    if (AuthUtils.tokenIsAnonymous()) {
-      this.goToAdvice();
-    } else {
-      let savedInsurances = this.asyncPipe.transform(this.store$.select(insuranceReducers.getSavedInsurances));
-      if ( savedInsurances ) {
-        let insurances = savedInsurances.car.insurance;
-        if (insurances.length && insurances.filter(insurance =>
-          (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
-          this.goToPurchased();
-        } else {
-          this.goToAdvice();
-        }
-      } else {
-        this.goToAdvice();
-      }
-    }
+
+  goToStatic() {
+    window.location.href = environment.external.static;
   }
 
-  goToAdvice() {
-    this.store$.dispatch(new authActions.ResetStates());
-    this.store$.dispatch(new routerActions.Go({ path: [''] }));
+  goToKnab() {
+    window.location.href = environment.external.knab;
   }
 
-  goToPurchased() {
-    this.store$.dispatch(new routerActions.Go({ path: ['/car/purchased'] }));
-  }
 }
