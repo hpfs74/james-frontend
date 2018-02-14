@@ -114,10 +114,13 @@ export class CookieService {
    * TODO: consider path and domain usage
    */
   public deleteAll(path?: string, domain?: string): any {
-    const cookies: any = this.getAll();
-
-    for (const cookieName of Object.keys(cookies)) {
-      this.delete(cookieName, path, domain);
-    }
+    document.cookie.split(';').forEach(function(c) {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(
+          /=.*/,
+          '=;expires=' + new Date().toUTCString() + ';path=/'
+        );
+    });
   }
 }

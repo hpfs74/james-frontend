@@ -116,6 +116,7 @@ function getContent(environment: string) {
     domain: '${getEnvVar('JAMES_DOMAIN')}',
     production: ${isProd},
     enableAnalytics: ${enableAnalytics},
+    vwoId: ${getEnvVar('VWO_ID')},
     featureToggles: {
       enableBuyFlowEmail: ${getEnvVar('FEATURE_BUY_FLOW_EMAIL')},
       enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')},
