@@ -85,8 +85,10 @@ export class HouseHoldPremiumsListComponent implements OnInit {
   }
 
   selectInsurance(insurance: InsuranceAdvice): void {
+    if (!this.houseInsurances) {
+      return;
+    }
     const houseInsurance = this.houseInsurances.filter((ins) => ins.Identifier === insurance.id)[0];
-
     this.store$.dispatch(new householddata.UpdateAdvice(houseInsurance));
     this.store$.dispatch(new router.Go({path: ['/household/premiums/detail']}));
   }
