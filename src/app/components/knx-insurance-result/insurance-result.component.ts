@@ -8,7 +8,7 @@ import { FeatureConfigService } from '@app/utils/feature-config.service';
   selector: 'knx-insurance-result',
   styleUrls: ['./insurance-result.component.scss'],
   template: `
-    <div class="knx-insurance-result" *ngFor="let insurance of [insurance]" [@fadeInAnimation]>
+    <div class="knx-insurance-result" *ngFor="let insurance of [insurance] " [@fadeInAnimation]>
       <div class="knx-insurance_advice knx-card" [ngClass]="{'knx-insurance_advice__supported': insurance.supported}">
         <div class="knx-insurance-result__counter">{{ index + 1 }}</div>
         <div class="row">
@@ -75,6 +75,7 @@ import { FeatureConfigService } from '@app/utils/feature-config.service';
               [ngClass]="{'knx-button--primary knx-button--3d': insurance.supported,
               'knx-button--secondary knx-button--ghost': !insurance.supported}"
               [disabled]="disableButton"
+              [attr.data-btn]="'bekijk_' + (index + 1)"
               (click)="select($event)">
               Bekijk
             </button>
