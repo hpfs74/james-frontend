@@ -8,7 +8,7 @@ import * as FormUtils from '../../utils/base-form.utils';
   selector: 'knx-insurance-review-registration',
   styleUrls: ['./insurance-review-registration.component.scss'],
   template: `
-    <knx-collapsible-panel [title]="title">
+    <knx-collapsible-panel [title]="title" [showStep]="showStep">
       <div class="knx-collapsible-panel__content">
         <div class="row">
           <div class="col-sm-12">
@@ -54,6 +54,7 @@ import * as FormUtils from '../../utils/base-form.utils';
 })
 export class InsuranceReviewRegistrationComponent implements OnInit {
   @Input() title: string;
+  @Input() showStep = true;
   @Output() onLogin: EventEmitter<any> = new EventEmitter();
 
   form: InsuranceReviewRegistrationForm;

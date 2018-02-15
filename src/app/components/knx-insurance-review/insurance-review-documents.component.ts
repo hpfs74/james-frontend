@@ -45,5 +45,5 @@ import { InsuranceDocument } from './../../insurance/models';
 export class InsuranceReviewDocumentsComponent {
   @Input() title: string;
   @Input() documents: Array<InsuranceDocument>;
-  @Input() showStep: boolean;
+  @Input() showStep = true;
 }

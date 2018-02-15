@@ -26,7 +26,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InsuranceReviewRowContentComponent {
   @Input() title: string;
-  @Input() showStep: boolean;
+  @Input() showStep = true;
 }
 
 @Component({
