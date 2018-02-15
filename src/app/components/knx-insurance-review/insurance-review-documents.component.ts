@@ -6,7 +6,7 @@ import { InsuranceDocument } from './../../insurance/models';
   selector: 'knx-insurance-review-documents',
   styleUrls: ['./insurance-review-documents.component.scss'],
   template: `
-    <knx-collapsible-panel [title]="title">
+    <knx-collapsible-panel [title]="title" [showStep]="showStep">
       <div class="knx-collapsible-panel__content">
         <div class="row">
           <div class="col-sm-12">
@@ -45,4 +45,5 @@ import { InsuranceDocument } from './../../insurance/models';
 export class InsuranceReviewDocumentsComponent {
   @Input() title: string;
   @Input() documents: Array<InsuranceDocument>;
+  @Input() showStep = true;
 }

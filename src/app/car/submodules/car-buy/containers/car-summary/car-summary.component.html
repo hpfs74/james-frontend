@@ -9,7 +9,7 @@
       </h2>
       <div class="knx-insurance-review__panels">
 
-        <knx-ir-content title="Je autoverzekering" *ngIf="isValidInsurance((insurance$ | async))">
+        <knx-ir-content [showStep]="false" title="Je autoverzekering" *ngIf="isValidInsurance((insurance$ | async))">
           <knx-ir-row showValue="true" *ngIf="insurance$ | async">
             <knx-ir-label>Verzekeringsmaatschappij</knx-ir-label>
             <knx-ir-value>{{ (insurance$ | async)._embedded.insurance.insurance_brand }}</knx-ir-value>
@@ -51,7 +51,7 @@
           </knx-ir-row>
         </knx-ir-content>
 
-        <knx-ir-content title="Details van je auto" *ngIf="insurance$ | async">
+        <knx-ir-content [showStep]="false" title="Details van je auto" *ngIf="insurance$ | async">
           <knx-ir-row showValue="true">
             <knx-ir-label>Kenteken</knx-ir-label>
             <knx-ir-value>{{ (insurance$ | async)._embedded.car.license }}</knx-ir-value>
@@ -108,7 +108,7 @@
           </knx-ir-row>
         </knx-ir-content>
 
-        <knx-ir-content title="Persoonlijke gegevens" *ngIf="insurance$ | async">
+        <knx-ir-content [showStep]="false" title="Persoonlijke gegevens" *ngIf="insurance$ | async">
           <knx-ir-row showValue="true">
             <knx-ir-label>Geslacht</knx-ir-label>
             <knx-ir-value>{{ (advice$ | async).gender === 'M' ? 'Man' : 'Vrouw' }}</knx-ir-value>
@@ -176,9 +176,10 @@
         </knx-ir-content>
 
         <knx-insurance-review-documents *ngIf="(insurance$ | async)?.documents"
-          title="Documenten" [documents]="(insurance$ | async)?.documents"></knx-insurance-review-documents>
+          title="Documenten" [documents]="(insurance$ | async)?.documents"
+          [showStep]="false"></knx-insurance-review-documents>
 
-        <knx-ir-content title="Betaling" *ngIf="(insurance$ | async)">
+        <knx-ir-content [showStep]="false" title="Betaling" *ngIf="(insurance$ | async)">
           <knx-ir-row showValue="true">
             <knx-ir-label>Je betaalt per maand</knx-ir-label>
             <knx-ir-value>{{ (insurance$ | async)?.monthly_premium | currency:'EUR':true }}<br><span class="premium-note">Incl. 10% provisie aan Knab</span></knx-ir-value>
@@ -197,7 +198,8 @@
 
         <knx-insurance-review-registration #reviewRegistration
                                            (onLogin)="login()"
-                                           *ngIf="isAnonymous$ | async" title="Maak jouw Knab Account aan">
+                                           *ngIf="isAnonymous$ | async" title="Maak jouw Knab Account aan"
+                                           [showStep]="false">
         </knx-insurance-review-registration>
       </div>
 

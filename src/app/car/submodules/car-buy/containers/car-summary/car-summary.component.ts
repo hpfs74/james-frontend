@@ -78,7 +78,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       label: 'Overzicht',
       nextButtonLabel: 'Verzekering aanvragen',
       backButtonLabel: 'Terug',
-      nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
+      nextButtonClass: 'knx-button knx-button--primary knx-button--3d',
     };
   }
 
