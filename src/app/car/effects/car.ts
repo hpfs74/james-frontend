@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Store, Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
@@ -11,12 +10,11 @@ import 'rxjs/add/operator/switchMap';
 
 import { CarService } from '../services/car.service';
 import { BuyService } from '../../insurance/services/buy.service';
-import { Car, CarCoverageRecommendation } from '../models';
+import { Car } from '../models';
 
 import * as fromAuth from '../../auth/reducers';
 import * as fromAdvice from '../../insurance/reducers';
 
-import * as auth from '../../auth/actions/auth';
 import * as car from '../actions/car';
 
 @Injectable()
