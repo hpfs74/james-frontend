@@ -4,7 +4,8 @@ import { CarInsurance } from '../../car/models/car-insurance';
 
 @Component({
   selector: 'knx-insurance-review-car',
-  templateUrl: './insurance-review-car.component.html'
+  templateUrl: './insurance-review-car.component.html',
+  styleUrls: ['./insurance-review-car.component.scss']
 })
 export class InsuranceReviewCarComponent {
   @Input() carInsurance: CarInsurance;

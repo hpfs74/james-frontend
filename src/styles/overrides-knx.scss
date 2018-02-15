@@ -83,9 +83,12 @@
   line-height: 50px;
 
   img {
+    position: absolute;
+    display: inline-block;
+    margin: 2px 0;
     height: 50px;
     width: 50px;
-    display: inline-block;
+    clip: rect(2px, 48px, 48px, 2px);
   }
 }
 
@@ -106,6 +109,10 @@ knx-ir-value {
 
   knx-ir-tooltip {
     float: right;
+  }
+
+  .knx-insurance-review__supported-info knx-ir-tooltip {
+    float: none;
   }
 }
 

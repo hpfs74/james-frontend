@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { CarCoverageRecommendation, CarCoverageDetails } from '../models/coverage';
+import { CarCoverageRecommendation, CarCoverageDetails } from '@app/car/models';
 
 export const CAR_COVERAGE_REQUEST =     '[Car] Coverage';
 export const CAR_COVERAGE_SUCCESS =     '[Car] Coverage Success';

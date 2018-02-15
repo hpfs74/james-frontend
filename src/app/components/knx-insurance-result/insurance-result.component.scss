@@ -167,7 +167,7 @@ span.knx-info-icon.knx-icon-info-circle {
   transition: 0.4s all;
 
   &.knx-animate:hover {
-    transform: scale(1.01, 1.1);
+    transform: scale(1.01, 1.01);
     border-radius: 5px;
     cursor: pointer;
   }
