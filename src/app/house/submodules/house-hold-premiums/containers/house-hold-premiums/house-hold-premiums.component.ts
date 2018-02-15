@@ -172,27 +172,29 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
     }));
   }
 
+  /**
+   * go back to the advice last page that is dekking
+   */
   goBack() {
     this.store$.dispatch(new router.Go({
       path: ['/household/dekking']
     }));
   }
 
+  /**
+   * handle the button click on top of the page to go back to result page
+   */
   goToList() {
     this.store$.dispatch(new router.Go({
       path: ['/household/premiums/list']
     }));
   }
 
-  goToDetail() {
-    this.store$.dispatch(new router.Go({path: ['/household/premiums/detail']}));
-  }
-
+  /**
+   * handle the button click for the detail page
+   */
   goToBuy() {
     this.store$.dispatch(new router.Go({path: ['/household/premiums/buy']}));
   }
 
-  goToThankYou() {
-    this.store$.dispatch(new router.Go({path: ['/household/premiums/thankyou']}));
-  }
 }
