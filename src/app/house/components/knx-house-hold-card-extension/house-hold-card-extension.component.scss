@@ -20,6 +20,13 @@
     display: inline-block;
     vertical-align: middle;
   }
+
+  .knx-center-element__truncate {
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 h3 {

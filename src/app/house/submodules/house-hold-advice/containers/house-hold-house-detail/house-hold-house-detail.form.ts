@@ -24,7 +24,7 @@ export class HouseHoldHouseDetailForm extends BaseForm {
       wallsTitle: ['T', Validators.required],
       roofMaterial: ['P', Validators.required],
       secondFloor: ['G', Validators.required],
-      security: ['N', Validators.required]
+      security: ['G', Validators.required]
     });
 
     this.formConfig = {

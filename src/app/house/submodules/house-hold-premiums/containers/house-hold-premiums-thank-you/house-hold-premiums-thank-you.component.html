@@ -1,0 +1,35 @@
+<h2>Insurance requested</h2>
+<div class="row">
+  <div class="col-sm-12">
+    <knx-collapsible-panel [showStep]="false" [collapsible]="false" [isOpen]="true">
+
+      <div class="knx-collapsible-panel__content">
+        <div class="row">
+          <div class="col-sm-12">
+
+            <h4 class="knx-collapse-message__title ">
+              Congrats {{customerName}}<br>
+              Your insurance has been requested
+            </h4>
+            <p>
+              Your request has been sent towards {{(selectedInsurance$ | async).CompanyName}} and will be approved within the next X
+              days.<br>
+              Once everything is approved and accepted we will let you know via email :)
+            </p>
+
+            <p>
+              A confirmation email has been sent to {{customerEmail}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </knx-collapsible-panel>
+
+    <knx-download-panel
+      [iosUrl]="content.appStore.iOS"
+      [androidUrl]="content.appStore.android"
+      [showPhone]="true">
+    </knx-download-panel>
+
+  </div>
+</div>

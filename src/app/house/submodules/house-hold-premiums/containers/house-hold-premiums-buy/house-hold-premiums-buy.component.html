@@ -9,3 +9,57 @@
 
 <knx-house-hold-card-extension [insurance]="selectedInsurance$ | async"></knx-house-hold-card-extension>
 
+<knx-collapsible-panel [collapsible]="false" [showStep]="false" [isOpen]="true">
+  <div class="knx-collapsible-panel__content">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="knx-registration">
+                <form [formGroup]="form.formGroup" autocomplete="off">
+
+                  <knx-form-group
+                    [formControlName]="form.formConfig.name.formControlName"
+                    [options]="form.formConfig.name">
+                  </knx-form-group>
+
+                  <knx-form-group
+                    [formControlName]="form.formConfig.email.formControlName"
+                    [options]="form.formConfig.email">
+                  </knx-form-group>
+
+                  <knx-form-group
+                    [formControlName]="form.formConfig.phone.formControlName"
+                    [options]="form.formConfig.phone">
+                  </knx-form-group>
+
+                  <knx-form-group
+                    [formControlName]="form.formConfig.receiveUpdate.formControlName"
+                    [options]="form.formConfig.receiveUpdate">
+                  </knx-form-group>
+
+                  <div class="knx-house-hold-buy__actions">
+                    <div class="knx-house-hold-buy__error" *ngIf="!form.formGroup.valid">
+                      {{ 'Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+
+            <div class="col-sm-4 hidden-xs">
+              <img src="/assets/images/avatars/avatar-fullsize.png" alt="lisa full size"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</knx-collapsible-panel>
+
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep()">
+</knx-wizard-controls>

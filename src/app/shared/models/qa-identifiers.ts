@@ -18,5 +18,8 @@ export class QaIdentifiers {
 
   public static readonly houseHoldPremiumsRoot  = 'householdpremiums';
   public static readonly houseHoldPremiumsList  = 'householdpremiumslist';
-  public static readonly houseHoldPremiumDetail = 'householdpremiumsdetaial';
+  public static readonly houseHoldPremiumDetail = 'householdpremiumsdetail';
+  public static readonly houseHoldPremiumBuy    = 'householdpremiumsbuy';
+  public static readonly houseHoldPremiumThankYou = 'householdpremiumsthankyou';
+
 }

@@ -6,6 +6,13 @@ import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromHouseHold from '@app/house/reducers';
+import { HouseHoldPremiumsBuyForm } from './house-hold-premiums-buy.form';
+import { FormBuilder } from '@angular/forms';
+import * as FormUtils from '@utils/base-form.utils';
+import * as houseHoldData from '@app/house/actions/house-hold-data';
+import * as wizardActions from '@core/actions/wizard';
+import * as houseDataActions from '@app/house/actions/house-data';
+import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
 @Component({
   selector: 'knx-house-hold-premiums-buy',
@@ -14,17 +21,51 @@ import * as fromHouseHold from '@app/house/reducers';
 })
 export class HouseHoldPremiumsBuyComponent implements OnInit {
 
+  currentStepOptions: KNXWizardStepRxOptions;
+  error$: Observable<KNXStepError>;
+
   selectedInsurance$: Observable<CalculatedPremium>;
   insurance: CalculatedPremium;
+  form: HouseHoldPremiumsBuyForm;
 
   constructor(private store$: Store<fromRoot.State>) {
+    const formBuilder = new FormBuilder();
+    this.form = new HouseHoldPremiumsBuyForm(formBuilder);
+
+    this.currentStepOptions = {
+      nextButtonLabel: 'Request insurance',
+      hideBackButton: false,
+      hideNextButton: false,
+      nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
+    };
   }
 
   ngOnInit() {
 
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.detail', clear: true}));
+    this.store$.dispatch(new assistant.AddCannedMessage({
+      key: 'household.buy',
+      clear: true
+    }));
 
-    // this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldDataAdvice());
+    this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
+  }
 
+  goToNextStep(event?: any) {
+    const detailForm = this.form.formGroup;
+    FormUtils.validateForm(detailForm);
+
+    if (!detailForm.valid) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
+    }
+
+    // add code to save in store with the package
+    this.store$.dispatch(new houseHoldData.Update({
+      customerName: detailForm.value.customerName,
+      customerEmail: detailForm.value.customerEmail,
+      customerPhone: detailForm.value.customerPhone
+    }));
+
+    // go to the next step
+    this.store$.dispatch(new wizardActions.Forward());
   }
 }

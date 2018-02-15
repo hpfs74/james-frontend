@@ -1,5 +1,5 @@
 import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
-import { FormBuilder, AbstractControl } from '@angular/forms';
+import { FormBuilder, AbstractControl, Form } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { TagsService } from '@app/core/services/tags.service';
@@ -22,6 +22,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { getHouseHoldDataInfo } from '@app/house/reducers';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -38,6 +39,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   isAmountLoaded$: Observable<boolean>;
   isAmountLoading$: Observable<boolean>;
   amount$: Observable<HouseHoldAmountResponse>;
+  insuredAmount: number;
   houseHoldData$: Observable<HouseHoldPremiumRequest>;
   subscriptions$: Subscription[] = [];
 
@@ -79,6 +81,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.isAmountLoading$ = this.store$.select(fromHouse.getHouseHoldAmountLoading);
     this.isAmountLoaded$ = this.store$.select(fromHouse.getHouseHoldAmountLoaded);
     this.amount$ = this.store$.select(fromHouse.getHouseHoldAmountResult);
+    this.amount$
+      .filter(data => data !== null)
+      .subscribe(data => {
+        this.insuredAmount = data.InsuredAmount;
+      });
+
     this.houseHoldData$ = this.store$.select(getHouseHoldDataInfo);
     this.houseHoldData$
       .subscribe(data => this.setFormValue(data));
@@ -109,6 +117,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       if (value.FamilyComposition !== null) {
         this.form.formGroup.patchValue({familySituation: value.FamilyComposition});
       }
+      if (value.CommencingDate !== null) {
+        this.form.formGroup.patchValue({commencingDate: value.CommencingDate});
+      }
     }
   }
 
@@ -134,7 +145,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
                 AmountMoreThan12KAudioVisualComp: 0,
                 AmountMoreThan6KJewelry: 0,
                 AmountMoreThan15KSpecialPossesion: 0,
-                BreadWinnerBirthdate: FormUtils.toRiskDate(detailForm.value.dateOfBirth),
+                BreadWinnerBirthdate: detailForm.value.dateOfBirth,
                 BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
               } as HouseHoldAmountRequest;
 
@@ -184,7 +195,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       IncludeOutdoorsValuable: detailForm.value.outsideCoverage,
       BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange,
       BreadWinnerBirthdate: detailForm.value.dateOfBirth,
-      FamilyComposition: detailForm.value.familySituation
+      FamilyComposition: detailForm.value.familySituation,
+      InsuredAmount: this.insuredAmount,
+      CommencingDate: detailForm.value.commencingDate
     }));
 
     this.store$.dispatch(new router.Go({path: ['/household/premiums']}));

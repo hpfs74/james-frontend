@@ -152,8 +152,12 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
         .take(1)
         .subscribe((step1) => {
           this.store$.dispatch(new houseDataActions.UpdateAddress(step1.address));
+
           this.store$.dispatch(new houseHoldData.Update({
-            OwnedBuilding: step1.OwnedBuilding
+            OwnedBuilding: step1.OwnedBuilding,
+            Zipcode: step1.Zipcode,
+            HouseNumber: step1.HouseNumber,
+            HouseNumberAddition: step1.HouseNumberAddition
           }));
         }));
 

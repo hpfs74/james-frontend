@@ -4,6 +4,7 @@ import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiu
 import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums-list/house-hold-premiums-list.component';
 import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/house-hold-premiums.component';
 import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
+import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
 
 export const houseHoldPremiumsRoutes: Routes = [
   {
@@ -13,7 +14,11 @@ export const houseHoldPremiumsRoutes: Routes = [
       title: '...'
     },
     children: [
-      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full'
+      },
       {
         path: 'list',
         component: HouseHoldPremiumsListComponent,
@@ -34,10 +39,18 @@ export const houseHoldPremiumsRoutes: Routes = [
         data: {
           stepIndex: 2
         }
+      },
+      {
+        path: 'thank-you',
+        component: HouseHoldPremiumsThankYouComponent,
+        data: {
+          stepIndex: 3
+        }
       }
     ]
   }
 ];
+
 @NgModule({
   imports: [
     RouterModule.forChild(houseHoldPremiumsRoutes)
@@ -46,4 +59,5 @@ export const houseHoldPremiumsRoutes: Routes = [
     RouterModule
   ]
 })
-export class HouseHoldPremiumsRoutingModule {}
+export class HouseHoldPremiumsRoutingModule {
+}

@@ -216,3 +216,9 @@ export function toRiskDate(date: Date): number {
 
   return +`${date.getFullYear()}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
 }
+
+export function fromRiskDate(date: number): Date {
+  return new Date(+date.toString().substring(0, 4),
+    (+date.toString().substring(4, 6)) - 1,
+    +date.toString().substring(6, 8));
+}
