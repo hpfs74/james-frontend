@@ -80,13 +80,11 @@
 
 .knx-ir-icon {
   min-height: 50px;
-  line-height: 50px;
 
   img {
     height: 50px;
     width: 50px;
     display: inline-block;
-    clip-path: inset(2px);
   }
 }
 
@@ -100,7 +98,7 @@ knx-ir-value {
   }
 }
 
-@media (max-width: 414px) {
+@media (max-width: 575px) {
   .knx-ir-icon {
     line-height: initial;
   }
@@ -120,7 +118,7 @@ knx-ir-value {
   z-index: 1;
 }
 
-.knx-with-icon {
+.knx-ir-content--icon {
   .container {
     height: 100%;
 
@@ -134,7 +132,16 @@ knx-ir-value {
         knx-ir-label {
           display: table-cell;
           vertical-align: middle;
-          line-height: initial;
+        }
+      }
+
+      .col-md-5 {
+        display: table;
+        height: 100%;
+
+        knx-ir-value {
+          display: table-cell;
+          vertical-align: middle;
         }
       }
     }
@@ -142,7 +149,7 @@ knx-ir-value {
 }
 
 @media (max-width: 767px) {
-  .knx-with-icon {
+  .knx-ir-content--icon {
     .container {
       height: initial;
 
@@ -156,7 +163,16 @@ knx-ir-value {
           knx-ir-label {
             display: initial;
             vertical-align: unset;
-            line-height: initial;
+          }
+        }
+
+        .col-md-5 {
+          display: initial;
+          height: initial;
+
+          knx-ir-value {
+            display: initial;
+            vertical-align: unset;
           }
         }
       }
