@@ -26,8 +26,8 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
     this.formGroup = this.fb.group({
       name: [null, Validators.required],
       email: [null, Validators.compose([Validators.required, EmailValidator])],
-      phone: [{}],
-      receiveUpdate: [{}]
+      phone: [null],
+      receiveUpdate: [null]
     });
 
     this.formConfig = {

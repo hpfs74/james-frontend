@@ -2,11 +2,13 @@
   <div class="row">
     <div class="col-6" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
       <button (click)="goBack()"
-              class="knx-button knx-button--link knx-button--back">wijzig mijn gegevens</button>
+              class="knx-button knx-button--link knx-button--back">wijzig mijn gegevens
+      </button>
     </div>
     <div class="col-6" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail">
       <button (click)="goToList()"
-              class="knx-button knx-button--link knx-button--back">select your insurance</button>
+              class="knx-button knx-button--link knx-button--back">select your insurance
+      </button>
     </div>
   </div>
 
@@ -25,7 +27,8 @@
 
       <knx-house-hold-premiums-detail-nav
         [pills]="pills"
-        [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail">
+        [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail"
+        (onBuy)="goToBuy()">
 
       </knx-house-hold-premiums-detail-nav>
 
@@ -49,51 +52,7 @@
         </ul>
       </div>
 
-
     </div>
   </knx-wizard-rx>
 
-  <div class="row" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail">
-    <div class="col-md-4">
-      <button (click)="goToList()"
-              class="knx-button knx-button--link knx-button--back">Terug</button>
-    </div>
-    <div class="col-md-4 offset8">
-      <button (click)="goToBuy()"
-              class="knx-button knx-button--fullwidth knx-button--primary">Vraag direct aan</button>
-    </div>
-  </div>
-
-  <div class="row" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.buy">
-    <div class="col-md-4">
-      <button (click)="goToDetail()"
-              class="knx-button knx-button--link knx-button--back">Terug</button>
-    </div>
-    <div class="col-md-4 offset8">
-      <button (click)="goToThankYou()"
-              class="knx-button knx-button--fullwidth knx-button--primary">Vraag direct aan</button>
-    </div>
-  </div>
-
-
-  <div class="row knx-house-hold-premiums__footer" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail">
-    <div class="col-sm-8" >
-      <knx-step-blocks title="Hoe gaat het nu verder?">
-        <knx-step-block>
-          <h3>1. Vul in</h3>
-          <p>Vul alle gegevens in die nodig zijn voor je nieuwe verzekering.</p>
-        </knx-step-block>
-
-        <knx-step-block>
-          <h3>2. Controleer</h3>
-          <p>Dubbelcheck of alles goed ingevuld is.</p>
-        </knx-step-block>
-
-        <knx-step-block>
-          <h3>3. Bevestig</h3>
-          <p>Gefeliciteerd! Je hebt zojuist flink wat geld bespaard op je autoverzekering!</p>
-        </knx-step-block>
-      </knx-step-blocks>
-    </div>
-  </div>
 </div>

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import { CalculatedPremium, HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 import * as assistant from '@core/actions/assistant';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromHouseHold from '@app/house/reducers';
+import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+import { getHouseHoldDataInfo } from '@app/house/reducers';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-premiums-thank-you',
@@ -14,14 +17,13 @@ import * as fromHouseHold from '@app/house/reducers';
 })
 export class HouseHoldPremiumsThankYouComponent implements OnInit {
 
+  request$: Observable<HouseHoldPremiumRequest>;
   selectedInsurance$: Observable<CalculatedPremium>;
   insurance: CalculatedPremium;
   customerName: string;
   customerEmail: string;
 
   constructor(private store$: Store<fromRoot.State>) {
-    this.customerName = 'sarah';
-    this.customerEmail = 'sarah@gmail.com';
   }
 
   ngOnInit() {
@@ -32,5 +34,23 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit {
     }));
 
     this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
+    this.request$ = this.store$.select(fromHouseHold.getHouseHoldDataInfo);
+    this.setInitialSubscriptions();
   }
+
+  setInitialSubscriptions() {
+    this.request$
+      .filter(data => data !== null)
+      .subscribe((data) => {
+        this.customerEmail = data.customerEmail;
+        this.customerName = data.customerName;
+      });
+
+    this.selectedInsurance$
+      .filter(data => data !== null)
+      .subscribe((data) => {
+        this.insurance = data;
+      });
+  }
+
 }

@@ -91,7 +91,10 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     this.setFormAsyncValidators();
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));
+    this.store$.dispatch(new assistant.AddCannedMessage({
+      key: 'household.welcome',
+      clear: true
+    }));
   }
 
   setFormAsyncValidators(): void {
@@ -114,7 +117,9 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
     FormUtils.validateForm(detailForm);
 
     if (!detailForm.valid) {
-      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
+      return this.store$.dispatch(new wizardActions.Error({
+        message: this.form.validationSummaryError
+      }));
     }
 
     this.store$.dispatch(new houseHoldData.Update({

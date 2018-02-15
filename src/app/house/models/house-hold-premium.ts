@@ -36,6 +36,9 @@ export class HouseHoldPremiumRequest {
 
   // custom field
   address?: string;
+  customerName?: string;
+  customerEmail?: string;
+  customerPhone?: string;
 }
 
 export interface ConditionUrl {
