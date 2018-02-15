@@ -60,9 +60,9 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
 
     // add code to save in store with the package
     this.store$.dispatch(new houseHoldData.Update({
-      customerName: detailForm.value.customerName,
-      customerEmail: detailForm.value.customerEmail,
-      customerPhone: detailForm.value.customerPhone
+      customerName: detailForm.value.name,
+      customerEmail: detailForm.value.email,
+      customerPhone: detailForm.value.phone
     }));
 
     // go to the next step
