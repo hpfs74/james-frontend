@@ -21,7 +21,7 @@
   </div>
 
   <div class="knx-button"
-       [attr.data-btn]="selected ? dataActive : dataInActive"
+       [attr.data-btn]="selected ? dataActive : dataInactive"
        [ngClass]="{ 'knx-button--secondary knx-button--ghost': !selected, 'knx-button--primary': selected }">
     {{ selected ? selectedLabel : unselectedLabel }}
   </div>

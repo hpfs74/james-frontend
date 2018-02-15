@@ -22,7 +22,7 @@ interface PriceTableLabelOptions {
         [selected]="item.selected"
         [features]="item.features"
         [dataActive]="item.dataActive"
-        [dataInActive]="item.dataInActive"
+        [dataInactive]="item.dataInactive"
         [selectedLabel]="labels.selected"
         [unselectedLabel]="labels.unselected"
         [description]="item.description"

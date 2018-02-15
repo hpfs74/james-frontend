@@ -28,9 +28,9 @@ describe('Component: PriceTable', () => {
     };
 
     comp.items = [
-      { id: 'a', header: 'Title1', badge: 'Test1', dataActive: '', dataInActive: '', highlight: false, price: 10.00, features: [] },
-      { id: 'b', header: 'Title2', badge: 'Test2', dataActive: '', dataInActive: '', highlight: false, price: 20.00, features: [] },
-      { id: 'c', header: 'Title3', badge: 'Test3', dataActive: '', dataInActive: '', highlight: false, price: 30.00, features: [] }
+      { id: 'a', header: 'Title1', badge: 'Test1', dataActive: '', dataInactive: '', highlight: false, price: 10.00, features: [] },
+      { id: 'b', header: 'Title2', badge: 'Test2', dataActive: '', dataInactive: '', highlight: false, price: 20.00, features: [] },
+      { id: 'c', header: 'Title3', badge: 'Test3', dataActive: '', dataInactive: '', highlight: false, price: 30.00, features: [] }
     ];
 
     fixture.detectChanges();
@@ -49,7 +49,7 @@ describe('Component: PriceTable', () => {
       price: 30.00,
       features: [],
       dataActive: '',
-      dataInActive: ''
+      dataInactive: ''
     };
     comp.items.push(newItem);
     fixture.detectChanges();

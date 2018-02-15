@@ -38,7 +38,7 @@ export const createCarCoverages = (tags: Array<Tag>): Array<Price> => {
         header: tag.translation_text,
         badge: 'Wij bevelen dit aan:',
         features: coverageFeaturesMap[tag.tag],
-        dataInActive: 'kies_' + dataAttributesMap[tag.tag],
+        dataInactive: 'kies_' + dataAttributesMap[tag.tag],
         dataActive: 'toon_' + dataAttributesMap[tag.tag],
         highlight: false
       };

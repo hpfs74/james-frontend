@@ -14,7 +14,7 @@ export class PriceItemComponent {
   @Input() selectable = false;
   @Input() selected = false;
   @Input() dataActive: string;
-  @Input() dataInActive: string;
+  @Input() dataInactive: string;
   @Input() unselectedLabel: string;
   @Input() selectedLabel: string;
   @Input() description: string;
