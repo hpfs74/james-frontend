@@ -17,7 +17,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'knx-ir-content',
   template: `
-    <knx-collapsible-panel [title]="title">
+    <knx-collapsible-panel [title]="title" [showStep]="showStep">
       <div class="knx-collapsible-panel__content">
         <ng-content select="knx-ir-row"></ng-content>
       </div>
@@ -26,6 +26,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InsuranceReviewRowContentComponent {
   @Input() title: string;
+  @Input() showStep: boolean;
 }
 
 @Component({

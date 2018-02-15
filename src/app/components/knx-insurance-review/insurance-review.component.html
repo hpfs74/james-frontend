@@ -31,7 +31,8 @@
 
   <!-- documents -->
   <knx-insurance-review-documents *ngIf="selectedInsurance"
-    title="Documenten" [documents]="selectedInsurance?.documents"></knx-insurance-review-documents>
+    title="Documenten" [documents]="selectedInsurance?.documents"
+    [showStep]="false"></knx-insurance-review-documents>
 
   <!-- benefits -->
   <knx-insurance-review-benefits

@@ -1,4 +1,4 @@
-<knx-ir-content title="Je autoverzekering" *ngIf="carInsurance">
+<knx-ir-content [showStep]="false" title="Je autoverzekering" *ngIf="carInsurance">
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Verzekeraar</knx-ir-label>
     <knx-ir-tooltip>
@@ -111,7 +111,7 @@
   </knx-ir-row> -->
 </knx-ir-content>
 
-<knx-ir-content title="Jouw Extra's" *ngIf="carInsurance">
+<knx-ir-content [showStep]="false" title="Jouw Extra's" *ngIf="carInsurance">
   <knx-ir-row showTooltip="true" showValue="true">
     <knx-ir-label>Pechhulp</knx-ir-label>
     <knx-ir-tooltip>
@@ -193,7 +193,7 @@
 </knx-ir-content>
 
 
-<knx-ir-content title="Schade melden - impact op maandelijks bedrag" *ngIf="carInsurance" class="knx-ir-content--icon">
+<knx-ir-content [showStep]="false" title="Schade melden - impact op maandelijks bedrag" *ngIf="carInsurance" class="knx-ir-content--icon">
   <knx-ir-row>
     <knx-ir-label>Wanneer je schade oploopt en dit wilt melden, kan het zijn dat dit invloed heeft op jouw maandelijkse bedrag. Bekijk hieronder welke schademeldingen invloed hebben op je maandelijkse kosten.</knx-ir-label>
   </knx-ir-row>
