@@ -86,6 +86,7 @@
     height: 50px;
     width: 50px;
     display: inline-block;
+    clip-path: inset(2px);
   }
 }
 
@@ -117,4 +118,48 @@ knx-ir-value {
 
 .knx-wizard__sidebar--sticky {
   z-index: 1;
+}
+
+.knx-with-icon {
+  .container {
+    height: 100%;
+
+    .row {
+      height: 100%;
+
+      .col-md-7 {
+        display: table;
+        height: 100%;
+
+        knx-ir-label {
+          display: table-cell;
+          vertical-align: middle;
+          line-height: initial;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .knx-with-icon {
+    .container {
+      height: initial;
+
+      .row {
+        height: initial;
+
+        .col-md-7 {
+          display: initial;
+          height: initial;
+
+          knx-ir-label {
+            display: initial;
+            vertical-align: unset;
+            line-height: initial;
+          }
+        }
+      }
+    }
+  }
 }

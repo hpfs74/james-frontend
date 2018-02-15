@@ -190,7 +190,7 @@
 </knx-ir-content>
 
 
-<knx-ir-content title="Schade melden - impact op maandelijks bedrag" *ngIf="carInsurance">
+<knx-ir-content title="Schade melden - impact op maandelijks bedrag" *ngIf="carInsurance" class="knx-with-icon">
   <knx-ir-row>
     <knx-ir-label>Wanneer je schade oploopt en dit wilt melden, kan het zijn dat dit invloed heeft op jouw maandelijkse bedrag. Bekijk hieronder welke schademeldingen invloed hebben op je maandelijkse kosten.</knx-ir-label>
   </knx-ir-row>
@@ -205,70 +205,84 @@
     <knx-ir-icon>
       <img [src]="carInsurance.additional_details.damages.damages_firedamage.icon" alt="">
     </knx-ir-icon>
-    <knx-ir-label>Brand door vandalisme</knx-ir-label>
-    <knx-ir-tooltip>
+    <knx-ir-label>Brand door vandalisme
+      <knx-ir-tooltip>
       <p>Als vandalen schade toebrengen aan je auto. <p>
     </knx-ir-tooltip>
+    </knx-ir-label>
+
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_firedamage.value | boolean }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
     <knx-ir-icon>
       <img [src]="carInsurance.additional_details.damages.damages_windowdamage.icon" alt="">
     </knx-ir-icon>
-    <knx-ir-label>Herstel ruitschade door niet-aangesloten partij</knx-ir-label>
-    <knx-ir-tooltip>
+    <knx-ir-label>Herstel ruitschade door niet-aangesloten partij
+      <knx-ir-tooltip>
       <p>Als je schade laat repareren door een herstelbedrijf dat niet samenwerkt met je verzekeraar. <p>
     </knx-ir-tooltip>
+    </knx-ir-label>
+
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_windowdamage.value | boolean }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
     <knx-ir-icon>
       <img [src]="carInsurance.additional_details.damages.damages_transportation.icon" alt="">
     </knx-ir-icon>
-    <knx-ir-label>Transport en hulp voor gewonden</knx-ir-label>
-    <knx-ir-tooltip>
+    <knx-ir-label>Transport en hulp voor gewonden
+      <knx-ir-tooltip>
       <p>Schade aan je auto terwijl je bijvoorbeeld een gewond iemand vervoert. <p>
     </knx-ir-tooltip>
+    </knx-ir-label>
+
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_transportation.value | boolean }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
     <knx-ir-icon>
       <img [src]="carInsurance.additional_details.damages.damages_limited_casco.icon" alt="">
     </knx-ir-icon>
-    <knx-ir-label>Beperkt casco claim</knx-ir-label>
-    <knx-ir-tooltip>
+    <knx-ir-label>Beperkt casco claim
+      <knx-ir-tooltip>
       <p>Het claimen van een beperkt casco schade (bijvoorbeeld ruitbreuk, diefstal of stormschade). <p>
     </knx-ir-tooltip>
+    </knx-ir-label>
+
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_limited_casco.value | boolean }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
     <knx-ir-icon>
       <img [src]="carInsurance.additional_details.damages.damages_noblamenoclaim.icon" alt="">
     </knx-ir-icon>
-    <knx-ir-label>No-blame No-claim</knx-ir-label>
-    <knx-ir-tooltip>
+    <knx-ir-label>No-blame No-claim
+      <knx-ir-tooltip>
       <p>Schade aan de auto die vallen onder de allrisk dekking buiten de schuld om van de bestuurder of passagier (bijvoorbeeld vandalisme).<p>
     </knx-ir-tooltip>
+    </knx-ir-label>
+
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_noblamenoclaim.value | boolean }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
     <knx-ir-icon>
       <img [src]="carInsurance.additional_details.damages.damages_animals_damage.icon" alt="">
     </knx-ir-icon>
-    <knx-ir-label>Gevolgschade aanrijding dieren</knx-ir-label>
-    <knx-ir-tooltip>
+    <knx-ir-label>Gevolgschade aanrijding dieren
+      <knx-ir-tooltip>
       <p>Schade aan je auto doordat je een dier aanrijdt met schade aan je auto als gevolg.<p>
     </knx-ir-tooltip>
+    </knx-ir-label>
+
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_animals_damage.value | boolean }}</knx-ir-value>
   </knx-ir-row>
   <knx-ir-row showValue="true" showIcon="true" showTooltip="true">
     <knx-ir-icon>
       <img [src]="carInsurance.additional_details.damages.damages_unmotorised_traffic_participant.icon" alt="">
     </knx-ir-icon>
-    <knx-ir-label>Ongemotoriseerde verkeersdeelnemer</knx-ir-label>
-    <knx-ir-tooltip>
+    <knx-ir-label>Ongemotoriseerde verkeersdeelnemer
+      <knx-ir-tooltip>
       <p>Schade aan je auto, omdat je een met een ongemotoriseerde verkeersdeelnemer bent gebotst met schade aan je auto als gevolg.<p>
     </knx-ir-tooltip>
+    </knx-ir-label>
+
     <knx-ir-value>{{ carInsurance.additional_details.damages.damages_unmotorised_traffic_participant.value | boolean }}</knx-ir-value>
   </knx-ir-row>
 </knx-ir-content>
