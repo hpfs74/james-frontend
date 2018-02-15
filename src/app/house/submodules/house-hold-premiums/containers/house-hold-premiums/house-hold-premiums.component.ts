@@ -125,11 +125,9 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
       .filter((advice) => advice !== null)
       .subscribe((advice: HouseHoldPremiumRequest) => {
 
-        const tomorrow = new Date();
-
         const payload = {
           Birthdate: advice.BreadWinnerBirthdate,
-          CommencingDate: FormUtils.toRiskDate(tomorrow),
+          CommencingDate: advice.CommencingDate,
           Zipcode: advice.Zipcode,
           HouseNumber: advice.HouseNumber,
           HouseNumberAddition: advice.HouseNumberAddition,
@@ -151,7 +149,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
           GuaranteeAgainstUnderinsurance: 'G',
           InsuredAmountValuables: 0,
           IncludeOutdoorsValuable: advice.IncludeOutdoorsValuable
-        } as HouseHoldPremiumRequest;
+        };
 
         this.store$.dispatch(new householdpremiums.GetInfo(payload));
       });

@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <img src="/assets/images/avatars/avatar-fullsize.png" alt="lisa full size" />
+      <img *ngIf="!showPhone" src="/assets/images/avatars/avatar-fullsize.png" alt="lisa full size" />
+      <img *ngIf="showPhone" src="/assets/images/devices_iphone.png" alt="lisa full size" />
+
     </div>
 
     <div class="col-sm-8">

@@ -111,11 +111,14 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       if (value.BreadWinnerMonthlyIncome !== null) {
         this.form.formGroup.patchValue({netIncomeRange: value.BreadWinnerMonthlyIncome});
       }
-      if (value.BreadWinnerBirthdate) {
-        this.form.formGroup.patchValue({dateOfBirth: FormUtils.fromRiskDate(value.BreadWinnerBirthdate)});
+      if (value.BreadWinnerBirthdate !== null) {
+        this.form.formGroup.patchValue({dateOfBirth: value.BreadWinnerBirthdate});
       }
       if (value.FamilyComposition !== null) {
         this.form.formGroup.patchValue({familySituation: value.FamilyComposition});
+      }
+      if (value.CommencingDate !== null) {
+        this.form.formGroup.patchValue({commencingDate: value.CommencingDate});
       }
     }
   }
@@ -142,7 +145,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
                 AmountMoreThan12KAudioVisualComp: 0,
                 AmountMoreThan6KJewelry: 0,
                 AmountMoreThan15KSpecialPossesion: 0,
-                BreadWinnerBirthdate: FormUtils.toRiskDate(detailForm.value.dateOfBirth),
+                BreadWinnerBirthdate: detailForm.value.dateOfBirth,
                 BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
               } as HouseHoldAmountRequest;
 
@@ -187,15 +190,14 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
-    const dob: number = FormUtils.toRiskDate(detailForm.value.dateOfBirth);
-
     this.store$.dispatch(new houseHoldData.Update({
       CoverageCode: detailForm.value.coverage,
       IncludeOutdoorsValuable: detailForm.value.outsideCoverage,
       BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange,
-      BreadWinnerBirthdate: dob,
+      BreadWinnerBirthdate: detailForm.value.dateOfBirth,
       FamilyComposition: detailForm.value.familySituation,
-      InsuredAmount: 10000 // TODO: put back as soon risk resolve this.insuredAmount
+      InsuredAmount: this.insuredAmount,
+      CommencingDate: detailForm.value.commencingDate
     }));
 
     this.store$.dispatch(new router.Go({path: ['/household/premiums']}));

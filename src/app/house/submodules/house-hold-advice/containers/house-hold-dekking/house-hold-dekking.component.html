@@ -54,6 +54,29 @@
   <div class="row">
     <div class="col-sm-12">
       <knx-card>
+        <div>
+          <span><b>Commencing date</b></span>
+          <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+            <knx-tooltip>TOOLTIP</knx-tooltip>
+          </span>
+
+          <p>
+            From when will your insurance will cover?
+          </p>
+
+          <knx-form-group
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="commencingDate"
+            [formControlName]="form.formConfig.commencingDate.formControlName"
+            [options]="form.formConfig.commencingDate">
+          </knx-form-group>
+        </div>
+      </knx-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
 
         <h3>Calculate your household value</h3>
 

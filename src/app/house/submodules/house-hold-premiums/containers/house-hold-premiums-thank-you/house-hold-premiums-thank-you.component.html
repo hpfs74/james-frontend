@@ -12,7 +12,8 @@
               Your insurance has been requested
             </h4>
             <p>
-              Your request has been sent towards {{insurance.CompanyName}} and will be approved within the next X days.<br>
+              Your request has been sent towards {{(selectedInsurance$ | async).CompanyName}} and will be approved within the next X
+              days.<br>
               Once everything is approved and accepted we will let you know via email :)
             </p>
 
@@ -24,8 +25,11 @@
       </div>
     </knx-collapsible-panel>
 
-    <knx-download-panel></knx-download-panel>
-
+    <knx-download-panel
+      [iosUrl]="content.appStore.iOS"
+      [androidUrl]="content.appStore.android"
+      [showPhone]="true">
+    </knx-download-panel>
 
   </div>
 </div>

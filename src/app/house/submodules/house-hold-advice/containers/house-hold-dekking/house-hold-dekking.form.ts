@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UIPair } from '@core/models/ui-pair';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
-import { birthDateValidator } from '@utils/base-form.validators';
+import { birthDateValidator, futureDateValidator } from '@utils/base-form.validators';
 
 export class HouseHoldDekkingForm extends BaseForm {
   formGroup: FormGroup;
@@ -11,7 +11,8 @@ export class HouseHoldDekkingForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    dateOfBirth: () => 'Error on date of birth'
+    dateOfBirth: () => 'Error on date of birth',
+    commencingDate: () => 'Date must be in the future'
   };
 
   constructor(private fb: FormBuilder,
@@ -29,7 +30,8 @@ export class HouseHoldDekkingForm extends BaseForm {
           birthDateValidator('dateOfBirth')
         ]
       ],
-      familySituation: [null, Validators.required]
+      familySituation: [null, Validators.required],
+      commencingDate: [new Date(), [Validators.required, futureDateValidator('commencingDate')]]
     });
 
     this.formConfig = {
@@ -75,6 +77,15 @@ export class HouseHoldDekkingForm extends BaseForm {
           placeholder: 'Maak een keuze',
           events: ['focus'],
           items: familySituation
+        }
+      },
+      commencingDate: {
+        formControlName: 'commencingDate',
+        type: 'date',
+        formControl: this.formGroup.get('commencingDate'),
+        inputOptions: {
+          decode: true,
+          type: 'tel'
         }
       }
     };
