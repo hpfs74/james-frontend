@@ -33,7 +33,7 @@ export class HouseHoldDekkingForm extends BaseForm {
         ]
       ],
       familySituation: [null, Validators.required],
-      commencingDate: [null, [Validators.required, futureDateValidator('commencingDate')]]
+      commencingDate: [null, [Validators.required, futureDateValidator('commencingDate', 90)]]
     });
 
     this.formConfig = {

@@ -105,6 +105,14 @@ describe('Custom Validators', () => {
       expect(CustomValidators.futureDateValidator('myCtrl')(new FormControl('22/05/2000')))
         .toEqual({ 'myCtrl': true });
     });
+
+    it('should return null on future greater than 90 using limit', () => {
+      const currentDate = new Date();
+      const testDate = currentDate.setFullYear(currentDate.getFullYear() + 1);
+      const date = moment(testDate).format('DD/MM/YYYY');
+      expect(CustomValidators.futureDateValidator('myCtrl', 90)(new FormControl(date)))
+        .toEqual({ 'myCtrl': true });
+    });
   });
 
   describe('maxDateValidator', () => {
