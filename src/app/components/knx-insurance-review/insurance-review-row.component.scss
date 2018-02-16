@@ -5,3 +5,10 @@ hr {
   border: 0;
   border-bottom: 2px $knab-primary-gray solid;
 }
+
+.row {
+  .knx-no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
