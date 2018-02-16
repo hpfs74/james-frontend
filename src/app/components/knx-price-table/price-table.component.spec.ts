@@ -28,9 +28,9 @@ describe('Component: PriceTable', () => {
     };
 
     comp.items = [
-      { id: 'a', header: 'Title1', badge: 'Test1', highlight: false, price: 10.00, features: [] },
-      { id: 'b', header: 'Title2', badge: 'Test2', highlight: false, price: 20.00, features: [] },
-      { id: 'c', header: 'Title3', badge: 'Test3', highlight: false, price: 30.00, features: [] }
+      { id: 'a', header: 'Title1', badge: 'Test1', dataActive: '', dataInactive: '', highlight: false, price: 10.00, features: [] },
+      { id: 'b', header: 'Title2', badge: 'Test2', dataActive: '', dataInactive: '', highlight: false, price: 20.00, features: [] },
+      { id: 'c', header: 'Title3', badge: 'Test3', dataActive: '', dataInactive: '', highlight: false, price: 30.00, features: [] }
     ];
 
     fixture.detectChanges();
@@ -47,7 +47,9 @@ describe('Component: PriceTable', () => {
       badge: 'Test4',
       highlight: false,
       price: 30.00,
-      features: []
+      features: [],
+      dataActive: '',
+      dataInactive: ''
     };
     comp.items.push(newItem);
     fixture.detectChanges();
