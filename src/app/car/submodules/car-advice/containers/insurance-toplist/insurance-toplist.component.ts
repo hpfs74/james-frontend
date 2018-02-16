@@ -16,6 +16,7 @@ import * as wizardActions from '@app/core/actions/wizard';
 
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
 
 interface OrderItem {
   id: string;
@@ -47,7 +48,8 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
   error$: Observable<KNXStepError>;
 
   constructor(private store$: Store<fromRoot.State>,
-              private asyncPipe: AsyncPipe) {
+              private asyncPipe: AsyncPipe,
+              private featureConfigService: FeatureConfigService) {
     this.getCompareResultCopy();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -65,9 +67,14 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.total = this.initialAmount;
+    /**
+     * this.featureConfigService.isOn('productOrder') will return false by default
+     * for the purpose of this test we need to set productOrder property to true,
+     * than the order will be switched and that will be variation 1
+     */
     this.orderBy = [
-      {id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true},
-      {id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false}
+      {id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: !this.featureConfigService.isOn('productOrder')},
+      {id: 'price', label: 'beste prijs', key: 'monthly_premium', active: this.featureConfigService.isOn('productOrder')}
     ];
   }
 

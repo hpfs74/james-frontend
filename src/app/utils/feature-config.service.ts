@@ -14,6 +14,10 @@ export class FeatureConfigService {
     this.setAbScriptToHead();
   }
 
+  mergeWithWindowConfig() {
+    this.featureConfig = Object.assign({}, this.featureConfig, window['featureConfig']);
+  }
+
   /* tslint:disable */
   private setAbScriptToHead() {
     let abTestScript = document.createElement('script');
@@ -33,6 +37,7 @@ export class FeatureConfigService {
    * @param value string value in feature config object
    */
   isOn(value: string) {
+    this.mergeWithWindowConfig();
     if (this.featureConfig.hasOwnProperty(value)) {
       return this.featureConfig[value] === 'false' ? false : this.featureConfig[value] ;
     }
@@ -69,7 +74,9 @@ export class FeatureConfigService {
   }
 
   load(): Promise<any> {
-    return Promise.resolve();
+    return Promise.resolve()
+      .then(() => this.mergeWithWindowConfig())
+      .catch(error => this.handleError(error));
   }
 
   setCookie(value: any) {
@@ -100,5 +107,9 @@ export class FeatureConfigService {
         window['dataLayer'].push(response.ga);
       }
     }
+  }
+
+  handleError(error: any) {
+    return; // TODO implement correct error handling
   }
 }
