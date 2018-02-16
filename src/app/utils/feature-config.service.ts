@@ -91,6 +91,12 @@ export class FeatureConfigService {
   }
 
   /**
+   * TODO for now this service will be like this,
+   * when CSP is enabled and I can test properly the VWO service,
+   * and it works, that most of the code here will be refactored
+   *
+   *
+   *
    * sets the cookie for the first time, and also sets the feature toggle variables
    * @param data response from endpoint
    */
