@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { AsyncPipe } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
@@ -12,7 +12,6 @@ import * as fromRoot from '../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
-import * as layout from '../../../../../core/actions/layout';
 import * as fromAuth from '../../../../../auth/reducers';
 import * as router from '../../../../../core/actions/router';
 import * as assistant from '../../../../../core/actions/assistant';
@@ -53,6 +52,7 @@ export class CarReviewComponent implements OnInit, OnDestroy {
     this.showStepBlock = selectedInsurance.supported;
     if (selectedInsurance.supported) {
       this.currentStepOptions.nextButtonLabel = 'Verzekering aanvragen';
+      this.currentStepOptions.nextButtonData = 'verzekering_aanvragen_advies';
       this.currentStepOptions.nextButtonClass = 'knx-button knx-button--primary knx-button--3d knx-button--float-bottom';
       // this.currentStepOptions.onBeforeNext = this.startBuyFlow.bind(this);
       this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.title'}));
@@ -80,10 +80,12 @@ export class CarReviewComponent implements OnInit, OnDestroy {
         product_id: selectedInsurance.id,
         product_name: selectedInsurance.product_name
       };
+
       this.store$.dispatch(new analytics.EventAction(analyticsEvent));
       window.open(selectedInsurance._embedded.insurance.url, '_blank');
     } else {
       let loggedIn = this.asyncPipe.transform(this.loggedIn$);
+
       if (loggedIn) {
         this.subscription$.push(this.store$.select(fromInsurance.getSelectedAdviceId).subscribe(
           id => {
@@ -93,8 +95,6 @@ export class CarReviewComponent implements OnInit, OnDestroy {
           }));
       } else {
         // INS-600 Anonymous Flow Stage 1: integrate modal to redirect user
-        // Instead of going into the buy flow the user clicks on the modal buttons
-        // to be redirected either to /login or /register
         // this.store$.dispatch(new layout.OpenModal('authRedirectModal'));
         this.store$.select(fromInsurance.getSelectedAdvice).take(1).subscribe(
           advice => {

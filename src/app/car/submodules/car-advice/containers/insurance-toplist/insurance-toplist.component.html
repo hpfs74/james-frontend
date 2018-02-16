@@ -1,8 +1,8 @@
 <div class="knx-insurance-toplist">
   <div class="row">
     <div class="col-sm-12">
-      <div *ngIf="(isInsuranceLoading$| async)">
-        <knx-loader [visible]="(isInsuranceLoading$| async)">
+      <div *ngIf="(isInsuranceLoading$ | async)">
+        <knx-loader [visible]="(isInsuranceLoading$ | async)">
           Een momentje! We vergelijken 19 verschillende aanbieders voor je om de beste match te vinden.
         </knx-loader>
       </div>
@@ -15,13 +15,14 @@
         Oops, er gaat iets verkeerd bij het ophalen van het advies. Kun je het nog een keer proberen?
       </div>
 
-      <div *ngIf="!(isInsuranceError$ | async) && !(isInsuranceLoading$| async)">
+      <div *ngIf="!(isInsuranceError$ | async) && !(isInsuranceLoading$ | async)">
         <h2>We hebben {{ insurances.length }} resultaten gevonden</h2>
 
         <div class="knx-button-group" role="group">
           <button
             *ngFor="let item of orderBy"
             class="knx-button knx-button--toggle"
+            [attr.data-btn]="item.data"
             [class.knx-button--toggle-active]="item.active"
             (click)="changeOrderBy(item)">{{ item.label }}
           </button>
@@ -32,12 +33,15 @@
           [insurance]="item" [index]="i" (insuranceSelected$)="selectInsurance($event)" [disableButton]="disableInsuranceBuy">
         </knx-insurance-result>
 
-        <button *ngIf="insurances && total < insurances.length" class="knx-button knx-button--secondary knx-button--ghost block-center" (click)="showAll()">
+        <button *ngIf="insurances && total < insurances.length"
+                class="knx-button knx-button--secondary knx-button--ghost block-center"
+                (click)="showAll()"
+                data-btn="toon_alles">
           Toon alle verzekeringen
         </button>
 
         <div class="knx-insurance-toplist__info">
-          <span style="cursor: pointer;">
+          <span>
             Hoe komen we tot deze resultaten?
             <knx-tooltip [options]="{ position: 'bottom' }">
               <p>Onze slimme technologie gaat op basis van de door jou opgegeven informatie aan de slag. We vergelijken
@@ -61,7 +65,7 @@
 
 <knx-service-guide
   knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="service-guide"
-  [visible]="!(isInsuranceLoading$| async) && !(isInsuranceError$| async)">
+  [visible]="!(isInsuranceLoading$ | async) && !(isInsuranceError$ | async)">
 </knx-service-guide>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"

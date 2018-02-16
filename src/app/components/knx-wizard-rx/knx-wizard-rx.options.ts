@@ -11,6 +11,7 @@ export interface KNXWizardStepRxOptions {
   backButtonClass?: string;
   hideNextButton?: boolean;
   hideBackButton?: boolean;
+  nextButtonData?: string;
   disableNextButton?: boolean;
   disableBackButton?: boolean;
   componentOptions?: any;

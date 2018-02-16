@@ -22,6 +22,7 @@ interface OrderItem {
   label: string;
   key: string;
   active: boolean;
+  data: string;
 }
 
 @Component({
@@ -66,8 +67,8 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.total = this.initialAmount;
     this.orderBy = [
-      {id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true},
-      {id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false}
+      {id: 'priceQuality', label: 'prijs / kwaliteit', key: 'price_quality', active: true, data: 'prijs_kwaliteit'},
+      {id: 'price', label: 'beste prijs', key: 'monthly_premium', active: false, data: 'beste_prijs'}
     ];
   }
 

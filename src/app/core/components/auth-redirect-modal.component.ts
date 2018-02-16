@@ -1,7 +1,6 @@
 import { Component, ComponentRef } from '@angular/core';
 import { KNXModalDialog, KNXModalDialogButton, KNXModalDialogOptions } from '@knx/modal';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 
 import { KNXFeatureToggleService } from '@knx/feature-toggle';
