@@ -2,12 +2,15 @@
 
   <h4>Overzicht</h4>
 
-  <knx-collapse-message [ngClass]="optionModifierClass" [isOpen]="true">
-    <div *ngFor="let pill of pills; index as pillIndex;">
-      <a (click)="select(pill.value)">{{pill.label}}</a>
-    </div>
-  </knx-collapse-message>
+  <div class="knx-collapse-message knx-message">
+    <ul >
+      <li *ngFor="let pill of pills">
+        <a (click)="select(pill.value)">{{pill.label}}</a>
+      </li>
+    </ul>
+  </div>
 
-  <button class="knx-button knx-button--fullwidth" (click)="buy()">Vraag direct aan</button>
+
+  <button class="knx-button knx-button--fullwidth knx-button--primary" (click)="buy()">Vraag direct aan</button>
 
 </div>

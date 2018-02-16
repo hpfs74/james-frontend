@@ -74,23 +74,4 @@ describe('Component: Navbar', () => {
     const el = navElement.nativeElement;
     expect(navElement).not.toBeNull();
   });
-
-  describe('LOGO_CLICK', () => {
-    it('should go to car detail page if user is anonymous', () => {
-      spyOn(comp, 'goToAdvice');
-      localStorageService.setToken({
-        access_token: 'anonymous_token',
-        token_type: 'test_type',
-        expires_in: 0,
-        refresh_token: 'test_refresh',
-        expiration_time: 1,
-        iat: 2,
-        anonymous: true
-      });
-      comp.resetFlow();
-      fixture.detectChanges();
-      expect(comp.goToAdvice).toHaveBeenCalled();
-    });
-
-  });
 });

@@ -51,7 +51,7 @@
     "@knx/base": "2.42.159",
     "@knx/card": "1.0.4",
     "@knx/checkbox": "1.0.121",
-    "@knx/collapsible-panel": "0.0.261",
+    "@knx/collapsible-panel": "0.0.333",
     "@knx/currency-input": "2.0.86",
     "@knx/date-input": "1.0.59",
     "@knx/dropdown": "0.0.218",

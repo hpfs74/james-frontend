@@ -17,7 +17,7 @@ export class HouseHoldLocationForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      houseHold: [true, Validators.required]
+      houseHold: ['J', Validators.required]
     });
 
     this.formConfig = {
@@ -30,18 +30,10 @@ export class HouseHoldLocationForm extends BaseForm {
         inputOptions: {
           formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: '',
-          items: [
-            {
-              label: 'Bought',
-              value: true
-            },
-            {
-              label: 'Rented',
-              value: false
-            }
-          ]
+          items: houseHold
         }
       }
     };
   }
 }
+

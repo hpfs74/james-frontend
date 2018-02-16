@@ -1,5 +1,6 @@
 import { Add, Update, Remove, Select, SetInsurance, RemoveInsurance } from '../actions/advice';
 import * as fromAdvice from './advice';
+import { InsuranceAdvice } from '@insurance/models';
 
 describe('Advice reducer', () => {
   describe('undefined action', () => {
@@ -199,7 +200,7 @@ describe('Advice reducer', () => {
         reviews_amount: 4,
         supported: true,
         _embedded: null
-      };
+      } as InsuranceAdvice;
 
       const expectedResult = {
         selectedId: null,
@@ -269,6 +270,7 @@ describe('Advice reducer', () => {
       },
       selectedInsurance: {
         id: '2516227',
+        logo: '',
         advice_expires_at: 312323123,
         insurance_id: 'ohra-autoverzekering-aanvullend',
         moneyview_id: 'ohra-autoverzekering-aanvullend',

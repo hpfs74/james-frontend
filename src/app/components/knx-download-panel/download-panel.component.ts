@@ -14,4 +14,5 @@ import { Component, Input } from '@angular/core';
 export class DownloadPanelComponent {
   @Input() iosUrl: string;
   @Input() androidUrl: string;
+  @Input() showPhone: boolean;
 }

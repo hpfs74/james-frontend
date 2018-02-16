@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UIPair } from '@core/models/ui-pair';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
-import { birthDateValidator } from '@utils/base-form.validators';
+import { birthDateValidator, futureDateValidator } from '@utils/base-form.validators';
 
 export class HouseHoldDekkingForm extends BaseForm {
   formGroup: FormGroup;
@@ -11,14 +11,17 @@ export class HouseHoldDekkingForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    dateOfBirth: () => 'Error on date of birth'
+    dateOfBirth: () => 'Error on date of birth',
+    commencingDate: () => 'Date must be in the future'
   };
 
-  constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
+  constructor(private fb: FormBuilder,
+              netIncomeRange: Array<UIPair>,
+              familySituation: Array<UIPair>) {
     super();
 
     this.formGroup = this.fb.group({
-      coverage: [null],
+      coverage: [null, Validators.required],
       outsideCoverage: [null],
       netIncomeRange: [null, Validators.required],
       dateOfBirth: [null,
@@ -27,7 +30,8 @@ export class HouseHoldDekkingForm extends BaseForm {
           birthDateValidator('dateOfBirth')
         ]
       ],
-      familySituation: [null, Validators.required]
+      familySituation: [null, Validators.required],
+      commencingDate: [null, [Validators.required, futureDateValidator('commencingDate', 90)]]
     });
 
     this.formConfig = {
@@ -36,6 +40,7 @@ export class HouseHoldDekkingForm extends BaseForm {
         type: 'text',
         formControl: this.formGroup.get('coverage')
       },
+
       outsideCoverage: {
         formControlName: 'outsideCoverage',
         type: 'checkbox',
@@ -52,24 +57,7 @@ export class HouseHoldDekkingForm extends BaseForm {
         validationErrors: this.validationErrors,
         inputOptions: {
           placeholder: '',
-          items: [
-            {
-              label: 'Tot en met € 1.000',
-              value: '1000'
-            },
-            {
-              label: '€ 1.001 tot en met € 2.000',
-              value: '2000'
-            },
-            {
-              label: '€ 2.001 tot en met € 3.000',
-              value: '3000'
-            },
-            {
-              label: '€ 3.001 tot en met € 4.850',
-              value: '4850'
-            }
-          ]
+          items: netIncomeRange
         }
       },
       dateOfBirth: {
@@ -89,12 +77,16 @@ export class HouseHoldDekkingForm extends BaseForm {
         inputOptions: {
           placeholder: 'Maak een keuze',
           events: ['focus'],
-          items: [
-            {value: 'A', label: 'Alleen ikzelf'},
-            {value: 'H', label: 'Ik en mijn partner'},
-            {value: 'I', label: 'Ik, mijn partner en de kind(eren)'},
-            {value: 'K', label: 'Ik en mijn kind(eren)'},
-          ]
+          items: familySituation
+        }
+      },
+      commencingDate: {
+        formControlName: 'commencingDate',
+        type: 'date',
+        formControl: this.formGroup.get('commencingDate'),
+        inputOptions: {
+          decode: true,
+          type: 'tel'
         }
       }
     };

@@ -7,7 +7,11 @@ describe('HouseHold Detail Form', () => {
 
   beforeEach(() => {
     const mockHouseHold = [];
-    form = new HouseHoldHouseDetailForm(new FormBuilder(), mockHouseHold);
+    form = new HouseHoldHouseDetailForm(new FormBuilder(),
+      mockHouseHold,
+      mockHouseHold,
+      mockHouseHold,
+      mockHouseHold);
   });
 
   it('should have form options defined', () => {

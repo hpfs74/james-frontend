@@ -80,12 +80,14 @@
 
 .knx-ir-icon {
   min-height: 50px;
-  line-height: 50px;
 
   img {
+    position: absolute;
+    display: inline-block;
+    margin: 2px 0;
     height: 50px;
     width: 50px;
-    display: inline-block;
+    clip: rect(2px, 48px, 48px, 2px);
   }
 }
 
@@ -99,13 +101,17 @@ knx-ir-value {
   }
 }
 
-@media (max-width: 414px) {
+@media (max-width: 575px) {
   .knx-ir-icon {
     line-height: initial;
   }
 
   knx-ir-tooltip {
     float: right;
+  }
+
+  .knx-insurance-review__supported-info knx-ir-tooltip {
+    float: none;
   }
 }
 
@@ -117,4 +123,66 @@ knx-ir-value {
 
 .knx-wizard__sidebar--sticky {
   z-index: 1;
+}
+
+.knx-ir-content--icon {
+  .container {
+    height: 100%;
+
+    .row {
+      height: 100%;
+
+      .col-md-7 {
+        display: table;
+        height: 100%;
+
+        knx-ir-label {
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
+
+      .col-md-5 {
+        display: table;
+        height: 100%;
+
+        knx-ir-value {
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .knx-ir-content--icon {
+    .container {
+      height: initial;
+
+      .row {
+        height: initial;
+
+        .col-md-7 {
+          display: initial;
+          height: initial;
+
+          knx-ir-label {
+            display: initial;
+            vertical-align: unset;
+          }
+        }
+
+        .col-md-5 {
+          display: initial;
+          height: initial;
+
+          knx-ir-value {
+            display: initial;
+            vertical-align: unset;
+          }
+        }
+      }
+    }
+  }
 }

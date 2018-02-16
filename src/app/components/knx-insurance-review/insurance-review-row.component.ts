@@ -17,7 +17,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'knx-ir-content',
   template: `
-    <knx-collapsible-panel [title]="title">
+    <knx-collapsible-panel [title]="title" [showStep]="showStep">
       <div class="knx-collapsible-panel__content">
         <ng-content select="knx-ir-row"></ng-content>
       </div>
@@ -26,6 +26,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InsuranceReviewRowContentComponent {
   @Input() title: string;
+  @Input() showStep = true;
 }
 
 @Component({
@@ -42,11 +43,17 @@ export class InsuranceReviewRowContentComponent {
       <div [ngClass]="{'col-md-12 col-12': !showIcon, 'col-md-11 col-10 knx-ir-icon': showIcon}">
         <div class="container">
           <div class="row">
-            <div [ngClass]="{'col-md-12 col-12': !showValue, 'col-md-7': showValue}">
+            <div [ngClass]="{
+              'col-md-12 col-12': !showValue,
+              'col-md-7': showValue,
+              'knx-no-padding': !showIcon
+            }">
               <ng-content select="knx-ir-label"></ng-content>
               <ng-content *ngIf="showTooltip" select="knx-ir-tooltip"></ng-content>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5" [ngClass]="{
+              'knx-no-padding': !showIcon
+            }">
               <ng-content select="knx-ir-value"></ng-content>
             </div>
           </div>

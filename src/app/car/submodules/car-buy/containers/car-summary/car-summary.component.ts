@@ -78,7 +78,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       label: 'Overzicht',
       nextButtonLabel: 'Verzekering aanvragen',
       backButtonLabel: 'Terug',
-      nextButtonClass: 'knx-button knx-button--cta knx-button--extended knx-button--3d',
+      nextButtonClass: 'knx-button knx-button--primary knx-button--3d',
     };
   }
 
@@ -202,7 +202,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.formSummaryError}));
     }
 
-    if (!this.registrationValid()) {
+    if (!this.isLoggedIn && !this.registrationValid()) {
       return this.store$.dispatch(new wizardActions.Error({message: this.reviewRegistration.form.validationSummaryError}));
     }
 

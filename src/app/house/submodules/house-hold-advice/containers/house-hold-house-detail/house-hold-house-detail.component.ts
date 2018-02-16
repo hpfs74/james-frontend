@@ -16,6 +16,9 @@ import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { HouseHoldHouseDetailForm } from './house-hold-house-detail.form';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import { getHouseHoldDataInfo } from '@app/house/reducers';
+import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-house-detail-form',
@@ -28,7 +31,8 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   advice$: Observable<any>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
-  alive: boolean;
+  subscriptions: Subscription[] = [];
+
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
@@ -43,7 +47,6 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
       hideBackButton: false,
       hideNextButton: false
     };
-    this.alive = true;
   }
 
   selectInitalStates(): void {
@@ -53,30 +56,34 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   initializeForms(): void {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldHouseDetailForm(formBuilder,
-      this.tagsService.getAsLabelValue('insurance_flow_household'));
+      this.tagsService.getAsLabelValue('house_hold_flow_walls_title'),
+      this.tagsService.getAsLabelValue('house_hold_flow_roof_material'),
+      this.tagsService.getAsLabelValue('house_hold_flow_second_floor'),
+      this.tagsService.getAsLabelValue('house_hold_flow_security'));
   }
 
   setInitialSubscription() {
-    this.store$.select(getHouseHoldDataInfo)
-      .subscribe(data => this.setFormValue(data));
+    this.subscriptions.push(this.store$.select(getHouseHoldDataInfo)
+      .filter(data => data !== null)
+      .subscribe(data => this.setFormValue(data)));
   }
 
-  setFormValue(value) {
+  setFormValue(value: HouseHoldPremiumRequest) {
     if (value) {
-      if (value.WallsTitle) {
-        this.form.formGroup.patchValue({'wallsTitle': value.WallsTitle});
+      if (value.ConstructionNature) {
+        this.form.formGroup.patchValue({'wallsTitle': value.ConstructionNature});
       }
 
-      if (value.RoofMaterial) {
-        this.form.formGroup.patchValue({'roofMaterial': value.RoofMaterial});
+      if (value.ConstructionNatureRoof) {
+        this.form.formGroup.patchValue({'roofMaterial': value.ConstructionNatureRoof});
       }
 
-      if (value.SecondFloor) {
-        this.form.formGroup.patchValue({'secondFloor': value.SecondFloor});
+      if (value.ConstructionNatureFloor) {
+        this.form.formGroup.patchValue({'secondFloor': value.ConstructionNatureFloor});
       }
 
-      if (value.Security) {
-        this.form.formGroup.patchValue({'security': value.Security});
+      if (value.SecurityMeasures) {
+        this.form.formGroup.patchValue({'security': value.SecurityMeasures});
       }
     }
   }
@@ -84,7 +91,10 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     this.setFormAsyncValidators();
-    this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));
+    this.store$.dispatch(new assistant.AddCannedMessage({
+      key: 'household.welcome',
+      clear: true
+    }));
   }
 
   setFormAsyncValidators(): void {
@@ -94,7 +104,7 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
    * close all subscriptions
    */
   ngOnDestroy(): void {
-    this.alive = false;
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   goToPreviousStep() {
@@ -107,14 +117,16 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
     FormUtils.validateForm(detailForm);
 
     if (!detailForm.valid) {
-      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
+      return this.store$.dispatch(new wizardActions.Error({
+        message: this.form.validationSummaryError
+      }));
     }
 
     this.store$.dispatch(new houseHoldData.Update({
-      WallsTitle: detailForm.value.wallsTitle,
-      RoofMaterial: detailForm.value.roofMaterial,
-      SecondFloor: detailForm.value.secondFloor,
-      Security: detailForm.value.security
+      ConstructionNature: detailForm.value.wallsTitle,
+      ConstructionNatureRoof: detailForm.value.roofMaterial,
+      ConstructionNatureFloor: detailForm.value.secondFloor,
+      SecurityMeasures: detailForm.value.security
     }));
 
     this.store$.dispatch(new wizardActions.Forward());

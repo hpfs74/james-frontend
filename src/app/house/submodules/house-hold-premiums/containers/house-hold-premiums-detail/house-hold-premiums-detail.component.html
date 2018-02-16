@@ -1,31 +1,142 @@
+<div class="row" *ngIf="insurance">
+  <div class="col-sm-12">
+    <knx-collapsible-panel title="insurance details" [isOpen]="true" [showStep]="false" [collapsible]="false">
+      <div class="knx-collapsible-panel__content">
+
+        <knx-ir-row showTooltip="false" showValue="true">
+          <knx-ir-label>Insurance company</knx-ir-label>
+          <knx-ir-value>
+            <img class="knx-insurance-result__logo"
+                 src="{{ insurance?.CompanyLogoUrl }}"
+                 alt="{{ insurance?.CompanyName }}"/>
+          </knx-ir-value>
+        </knx-ir-row>
+
+        <knx-ir-row showTooltip="false" showValue="true">
+          <knx-ir-label>Insurance type/name</knx-ir-label>
+          <knx-ir-value>
+            {{insurance?.ProductDescription}} / {{insurance?.PackageDescription}}
+          </knx-ir-value>
+        </knx-ir-row>
+
+        <knx-ir-row [newSection]="true" showTooltip="false" showValue="true">
+          <knx-ir-label>Coverage</knx-ir-label>
+          <knx-ir-value>
+            {{insurance?.HouseholdCoverageDescription}}
+          </knx-ir-value>
+        </knx-ir-row>
+
+        <knx-ir-row showTooltip="false" showValue="true">
+          <knx-ir-label>
+            Price per month<br/>
+            <small>Incl. BTW and additionals costs</small>
+          </knx-ir-label>
+          <knx-ir-value>
+            <strong>{{insurance?.Premium | currency:'EUR':true }}</strong>
+          </knx-ir-value>
+        </knx-ir-row>
+
+        <knx-ir-row [newSection]="true" showTooltip="false" showValue="true">
+          <knx-ir-label>Own risk</knx-ir-label>
+          <knx-ir-value>
+            {{insurance?.Deductables | currency:'EUR':true}}
+          </knx-ir-value>
+        </knx-ir-row>
+
+        <knx-ir-row [showTooltip]="false" [showValue]="true">
+          <knx-ir-label>
+            Insured amount description
+          </knx-ir-label>
+          <knx-ir-value>
+            {{insurance.ValuablesCoverageDescription}}
+          </knx-ir-value>
+        </knx-ir-row>
+
+        <knx-ir-row showTooltip="false" showValue="true">
+          <knx-ir-label>
+            Insured amount
+          </knx-ir-label>
+          <knx-ir-value>
+            {{insurance?.ValuablesInsuredAmount |currency:'EUR':true}}
+          </knx-ir-value>
+        </knx-ir-row>
+      </div>
+    </knx-collapsible-panel>
+  </div>
+</div>
+
+<div class="row" *ngIf="insurance?.Clauses">
+  <div class="col-sm-12">
+    <knx-collapsible-panel title="Belangrijke voorwaarden" [isOpen]="true" [showStep]="false" [collapsible]="false">
+      <div class="knx-collapsible-panel__content">
+
+        <knx-ir-row showTooltip="false" showValue="true"
+                    *ngFor="let clause of insurance?.Clauses">
+          <knx-ir-label>
+            {{clause.ClauseTitle}}
+          </knx-ir-label>
+          <knx-ir-value>
+            {{clause.ClauseText}}
+          </knx-ir-value>
+        </knx-ir-row>
+
+      </div>
+    </knx-collapsible-panel>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-sm-12">
-    <knx-collapsible-panel title="insurance details" isOpen="true">
-      <div class="knx-form-group--separated">
-        Insurance company<br/>
-
-        Insurance type/name
-
-      </div>
-
-      <div class="knx-form-group--separated">
-
-        Coverage<br/>
-        <div>
-          Price per month<br/>
-          <small>Incl. BTW and additionals costs</small>
+    <knx-collapsible-panel title="Documenten" [isOpen]="true" [showStep]="false" [collapsible]="false">
+      <div class="knx-collapsible-panel__content">
+        <div class="row">
+          <div class="col-sm-12">
+            <span>Hieronder vind je alle documente van {{insurance?.CompanyName}}.</span><br>
+            <span class="knx-collapse-panel__muted">
+              Dit zijn alle documenten, inclusief alle beschikbare extra's en dekkingen. Als jij nient een bepaalde
+              dekking hebt geselecteerd kan je deze gewoon negeren.
+            </span>
+          </div>
         </div>
 
-      </div>
-
-      <div class="knx-form-group--separated">
-        <div>
-          Own risk
-        </div>
-        <div>
-          Insured amount
+        <!-- documents -->
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="knx-insurance-review-documents__list">
+              <li *ngFor="let doc of insurance?.ConditionUrls"><span class="knx-icon-file-o"></span>
+                <a href="{{doc.URL}}}" target="_blank" rel="noopener"
+                   title="{{doc.Description}}">{{doc.Description}}</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </knx-collapsible-panel>
+  </div>
+</div>
+
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep()">
+</knx-wizard-controls>
+
+<div class="row knx-house-hold-premiums__footer">
+  <div class="col-sm-8" >
+    <knx-step-blocks title="Hoe gaat het nu verder?">
+      <knx-step-block>
+        <h3>1. Vul in</h3>
+        <p>Vul alle gegevens in die nodig zijn voor je nieuwe verzekering.</p>
+      </knx-step-block>
+
+      <knx-step-block>
+        <h3>2. Controleer</h3>
+        <p>Dubbelcheck of alles goed ingevuld is.</p>
+      </knx-step-block>
+
+      <knx-step-block>
+        <h3>3. Bevestig</h3>
+        <p>Gefeliciteerd! Je hebt zojuist flink wat geld bespaard op je autoverzekering!</p>
+      </knx-step-block>
+    </knx-step-blocks>
   </div>
 </div>

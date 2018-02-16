@@ -1,1 +1,58 @@
-<div></div>
+<div class="container knx-house-hold-premiums" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+  <div class="row">
+    <div class="col-6" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
+      <button (click)="goBack()"
+              class="knx-button knx-button--link knx-button--back">wijzig mijn gegevens
+      </button>
+    </div>
+    <div class="col-6" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail">
+      <button (click)="goToList()"
+              class="knx-button knx-button--link knx-button--back">select your insurance
+      </button>
+    </div>
+  </div>
+
+  <knx-wizard-rx>
+    <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
+      <knx-chat-stream #knxChatStream
+                       [options]="chatConfig$ | async"
+                       [messages]="chatMessages$ | async">
+      </knx-chat-stream>
+
+      <knx-house-hold-premiums-filter
+        [form]="houseHoldFilterForm"
+        [advice]="advice$ | async"
+        [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
+      </knx-house-hold-premiums-filter>
+
+      <knx-house-hold-premiums-detail-nav
+        [pills]="pills"
+        [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail"
+        (onBuy)="goToBuy()">
+
+      </knx-house-hold-premiums-detail-nav>
+
+      <div class="knx-house-hold-advice-motivation"
+           *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.buy || knxWizardService.currentStepIndex === houseHoldPremiumsSteps.thankyou">
+        <ul>
+          <li>
+            <b>Objectief</b><br/>
+            We vergelijken meer dan 40
+          </li>
+
+          <li>
+            <b>Bespaar</b><br/>
+            Tot 15% korting op elke verzekering
+          </li>
+
+          <li>
+            <b>Overstaphulp</b><br>
+            Wij regelen overstap
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </knx-wizard-rx>
+
+</div>

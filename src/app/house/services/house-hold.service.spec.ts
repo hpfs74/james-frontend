@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { LocalStorageService } from '../../core/services';
 import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import { HttpClient } from '@angular/common/http';
 
 describe('Service: HouseHold', () => {
   let backend, service;
@@ -89,7 +90,7 @@ describe('Service: HouseHold', () => {
           MockBackend,
           BaseRequestOptions
         ],
-        provide: Http,
+        provide: HttpClient,
         useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
           return new Http(backend, defaultOptions);
         }
@@ -177,7 +178,7 @@ describe('Service: HouseHold', () => {
         houseHoldService.calculateHouseHoldAmount(testCalculateAmount)
           .subscribe((res) => {
             expect(res.InsuredAmount)
-              .toEqual(mockHouseHoldAmount.InsuredAmount / 100.00);
+              .toEqual(mockHouseHoldAmount.InsuredAmount);
           });
       });
     });

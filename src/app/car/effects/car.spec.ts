@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule, combineReducers } from '@ngrx/store';
+import { StoreModule, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import { hot, cold } from 'jasmine-marbles';
 import 'rxjs/add/observable/of';
@@ -9,7 +8,7 @@ import 'rxjs/add/observable/throw';
 
 import { CarEffects } from './car';
 import { CarService } from '../services/car.service';
-import { BuyService } from '../../insurance/services/buy.service';
+import { BuyService } from '@app/insurance/services';
 import { Car } from '../models';
 
 import * as fromAuth from '../../auth/reducers';

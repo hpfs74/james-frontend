@@ -33,6 +33,12 @@ export class HouseHoldPremiumRequest {
   BreadWinnerMonthlyIncome?: number;
   InsuredAmountValuables: number;
   IncludeOutdoorsValuable?: string;
+
+  // custom field
+  address?: string;
+  customerName?: string;
+  customerEmail?: string;
+  customerPhone?: string;
 }
 
 export interface ConditionUrl {
@@ -48,12 +54,12 @@ export interface Clause {
 }
 
 export interface CalculatedPremium {
-  CommencingDate: number;
+  CommencingDate: string;
   NettoPremium: number;
   TotalCosts: number;
   Taxes: number;
   Premium: number;
-  PaymentMethod: number;
+  PaymentPeriod: number;
   PackageDescription: string;
   ProductDescription: string;
   CompanyName: string;

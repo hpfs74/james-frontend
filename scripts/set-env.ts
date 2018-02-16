@@ -116,12 +116,14 @@ function getContent(environment: string) {
     domain: '${getEnvVar('JAMES_DOMAIN')}',
     production: ${isProd},
     enableAnalytics: ${enableAnalytics},
+    vwoId: ${getEnvVar('VWO_ID')},
     featureToggles: {
       enableBuyFlowEmail: ${getEnvVar('FEATURE_BUY_FLOW_EMAIL')},
       enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')},
       provisionPDFLink: '${getEnvVar('FEATURE_PROVISION_PDF')}'
     },
     external: {
+      knab: '${getEnvVar('KNAB_NL')}',
       login: '${getEnvVar('LOGIN')}',
       static: '${getEnvVar('STATIC_PAGE_URL')}'
     },
