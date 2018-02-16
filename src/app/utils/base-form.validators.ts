@@ -58,7 +58,7 @@ export function dateValidator(key: string) {
   };
 }
 
-export function futureDateValidator(key: string) {
+export function futureDateValidator(key: string, dayLimit: number = 86400) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
 
@@ -66,9 +66,18 @@ export function futureDateValidator(key: string) {
       value = dateDecode(value);
     }
 
-    const now = new Date().setHours(0, 0, 0, 0);
-    if (value && (value < now)) {
-      value = false;
+    if (value) {
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+
+      const oneDay = 1000 * 60 * 60 * 24;
+      const nowInMs = now.getTime();
+      const valueInMs = value.getTime();
+      const diffInDays = Math.round((valueInMs - nowInMs) / oneDay);
+
+      if (diffInDays < 0 || diffInDays > dayLimit) {
+        value = false;
+      }
     }
 
     const obj = {};

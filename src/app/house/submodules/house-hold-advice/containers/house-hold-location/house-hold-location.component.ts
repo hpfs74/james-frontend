@@ -157,7 +157,8 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
             OwnedBuilding: step1.OwnedBuilding,
             Zipcode: step1.Zipcode,
             HouseNumber: step1.HouseNumber,
-            HouseNumberAddition: step1.HouseNumberAddition
+            HouseNumberAddition: step1.HouseNumberAddition,
+            CommencingDate: new Date()
           }));
         }));
 

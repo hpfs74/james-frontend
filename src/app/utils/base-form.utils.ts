@@ -203,22 +203,3 @@ export const isMaskFormatted = function (date: string | string) {
 export const numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 };
-
-/**
- * converts the date in the form to the risk insurance format
- *
- * @param date {Date}- a date field
- * @returns {number} - in the form of YYYYMMDD
- */
-export function toRiskDate(date: Date): number {
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  return +`${date.getFullYear()}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
-}
-
-export function fromRiskDate(date: number): Date {
-  return new Date(+date.toString().substring(0, 4),
-    (+date.toString().substring(4, 6)) - 1,
-    +date.toString().substring(6, 8));
-}
