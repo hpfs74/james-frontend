@@ -66,6 +66,7 @@
                 [ngClass]="{'knx-button--primary knx-button--3d': insurance.supported,
               'knx-button--secondary knx-button--ghost': !insurance.supported}"
                 [disabled]="disableButton"
+                [attr.data-btn]="'bekijk_' + (index + 1)"
                 (click)="select($event)">
           Bekijk
         </button>
