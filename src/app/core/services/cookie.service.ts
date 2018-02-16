@@ -44,17 +44,12 @@ export class CookieService {
    * @returns a collection of all the cookies
    */
   public getAll(): any {
-    const cookies: any = {};
-
-    if (document.cookie && document.cookie !== '') {
-      const split = document.cookie.split(';');
-      for (let i = 0; i < split.length; i++) {
-        const currCookie = split[i].split('=');
-        currCookie[0] = currCookie[0].replace(/^ /, '');
-        cookies[decodeURIComponent(currCookie[0])] = decodeURIComponent(currCookie[1]);
-      }
+    let pairs = document.cookie.split(';');
+    let cookies = {};
+    for (let i = 0; i < pairs.length; i++) {
+      let pair = pairs[i].split('=');
+      cookies[(pair[0] + '').trim()] = unescape(pair[1]);
     }
-
     return cookies;
   }
 
@@ -114,9 +109,13 @@ export class CookieService {
    * TODO: consider path and domain usage
    */
   public deleteAll(path?: string, domain?: string): any {
-    const cookies: any = this.getAll();
-    for (const cookieName of Object.keys(cookies)) {
-      this.delete(cookieName, path, domain);
-    }
+    document.cookie.split(';').forEach(function(c) {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(
+          /=.*/,
+          '=;expires=' + new Date().toUTCString() + ';path=/'
+        );
+    });
   }
 }
