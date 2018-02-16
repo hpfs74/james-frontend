@@ -12,8 +12,7 @@ export class HouseHoldDekkingForm extends BaseForm {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
     dateOfBirth: () => 'Error on date of birth',
-    commencingDate: () => 'Date must be in the future',
-    insuredAmount: () => 'Need an insured amount to proceed'
+    commencingDate: () => 'Date must be in the future'
   };
 
   constructor(private fb: FormBuilder,
@@ -23,7 +22,6 @@ export class HouseHoldDekkingForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       coverage: [null, Validators.required],
-      insuredAmount: [null, Validators.required],
       outsideCoverage: [null],
       netIncomeRange: [null, Validators.required],
       dateOfBirth: [null,
@@ -42,11 +40,7 @@ export class HouseHoldDekkingForm extends BaseForm {
         type: 'text',
         formControl: this.formGroup.get('coverage')
       },
-      insuredAmount: {
-        formControlName: 'insuredAmount',
-        type: 'text',
-        formControl: this.formGroup.get('insuredAmount')
-      },
+
       outsideCoverage: {
         formControlName: 'outsideCoverage',
         type: 'checkbox',
