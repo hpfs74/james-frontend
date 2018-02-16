@@ -202,7 +202,7 @@ export class CarSummaryComponent implements QaIdentifier, OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.formSummaryError}));
     }
 
-    if (!this.registrationValid()) {
+    if (!this.isLoggedIn && !this.registrationValid()) {
       return this.store$.dispatch(new wizardActions.Error({message: this.reviewRegistration.form.validationSummaryError}));
     }
 
