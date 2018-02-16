@@ -50,6 +50,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   isAmountLoading$: Observable<boolean>;
   isAmountError$: Observable<boolean>;
   amount$: Observable<HouseHoldAmountResponse>;
+  insuredAmount: number = null;
 
   houseHoldData$: Observable<HouseHoldPremiumRequest>;
   houseHoldData: HouseHoldPremiumRequest;
@@ -59,6 +60,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
+
 
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
@@ -102,6 +104,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
         .filter(error => error)
         .subscribe(() => {
           this.store$.dispatch(new wizardActions.Error({message: 'Sorry cannot retrieve insured amount'}));
+          this.insuredAmount = null;
+        }),
+      this.amount$
+        .filter(data => data !== null)
+        .subscribe((data) => {
+          this.insuredAmount = data.InsuredAmount;
         }),
       this.houseHoldData$
         .filter(data => data !== null)
@@ -137,6 +145,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     }
     if (value.CommencingDate !== null) {
       this.form.formGroup.patchValue({commencingDate: value.CommencingDate});
+    }
+    if (value.InsuredAmount !== null) {
+      this.form.formGroup.patchValue({insuredAmount: value.InsuredAmount});
     }
   }
 
@@ -199,7 +210,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
     FormUtils.validateForm(detailForm);
 
-    if (!detailForm.valid) {
+    if (!detailForm.valid || this.insuredAmount === null) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
@@ -209,7 +220,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange,
       BreadWinnerBirthdate: detailForm.value.dateOfBirth,
       FamilyComposition: detailForm.value.familySituation,
-      InsuredAmount: detailForm.value.insuredAmount,
+      InsuredAmount: this.insuredAmount,
       CommencingDate: detailForm.value.commencingDate
     }));
 
