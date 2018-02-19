@@ -51,6 +51,7 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe,
               private featureConfigService: FeatureConfigService) {
+    this.total = this.initialAmount;
     this.getCompareResultCopy();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
@@ -67,7 +68,6 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.advice.option', clear: true}));
-    this.total = this.initialAmount;
     /**
      * this.featureConfigService.isOn('productOrder') will return false by default
      * for the purpose of this test we need to set productOrder property to true,
@@ -161,7 +161,11 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
         .map(obs => {
           return obs.map(v => JSON.parse(JSON.stringify(v)));
         }).subscribe(insurances => {
-        this.insurances = insurances;
+          // AB test to show all insurances vs only top 4
+          if (this.featureConfigService.isOn('showAllResults')) {
+            this.showAll();
+          }
+          this.insurances = insurances;
       })
     );
   }
