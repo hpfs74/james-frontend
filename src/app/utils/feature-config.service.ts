@@ -125,4 +125,6 @@ export class FeatureConfigService {
  *
  * productOrder
  * profileScore
+ * disscountBasedOnYear
+ * showAllResults
  */
