@@ -5,6 +5,9 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { setUpTestBed } from './../../../../../../test.common.spec';
 import { InsuranceTopListComponent } from './insurance-toplist.component';
 import { StoreModule, combineReducers } from '@ngrx/store';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { HttpModule } from '@angular/http';
+import { CookieService } from '@app/core/services';
 
 import * as car from '../../../../actions/car';
 import * as fromRoot from '../../../../../reducers';
@@ -37,6 +40,7 @@ describe('Component: InsuranceTopList', () => {
   let moduleDef: TestModuleMetadata = {
     declarations: [InsuranceTopListComponent, TestHostComponent],
     imports: [
+      HttpModule,
       BrowserModule,
       StoreModule.forRoot({
         ...fromRoot.reducers,
@@ -46,6 +50,10 @@ describe('Component: InsuranceTopList', () => {
         'insurance': combineReducers(fromInsurance.reducers),
         'profile': combineReducers(fromProfile.reducers)
       })
+    ],
+    providers: [
+      FeatureConfigService,
+      CookieService
     ],
     schemas: [NO_ERRORS_SCHEMA]
   };

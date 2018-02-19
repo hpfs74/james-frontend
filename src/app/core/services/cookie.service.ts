@@ -54,7 +54,6 @@ export class CookieService {
         cookies[decodeURIComponent(currCookie[0])] = decodeURIComponent(currCookie[1]);
       }
     }
-
     return cookies;
   }
 

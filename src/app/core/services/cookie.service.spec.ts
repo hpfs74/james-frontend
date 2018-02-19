@@ -62,11 +62,5 @@ describe('Service: CookieService', () => {
       expect(service.check('cook4')).toBeFalsy();
     });
 
-    it ('should be able delete all cookie', () => {
-      service.deleteAll();
-      const ret = service.getAll();
-
-      expect(Object.keys(ret).length).toBe(0);
-    });
   });
 });
