@@ -21,7 +21,7 @@ export class InsuranceResultComponent {
 
   @Output() insuranceSelected$: EventEmitter<InsuranceAdvice> = new EventEmitter<InsuranceAdvice>();
 
-  constructor(public featureToggleService: FeatureConfigService) { }
+  constructor(public featureConfigService: FeatureConfigService) { }
 
   select(event) {
     event.stopPropagation(); // prevent click event bubbling up and triggering twice
@@ -29,8 +29,8 @@ export class InsuranceResultComponent {
   }
 
   openPdf() {
-    if (this.featureToggleService.isOn('provisionPDFLink')) {
-      window.open(this.featureToggleService.featureConfig.provisionPDFLink, '_blank');
+    if (this.featureConfigService.isOn('provisionPDFLink')) {
+      window.open(this.featureConfigService.featureConfig.provisionPDFLink, '_blank');
     }
   }
 }

@@ -12,7 +12,9 @@
 
       <div class="col-md-5 knx-insurance-result__data">
         <div class="row">
-          <div class="col-md-6 col-6 knx-insurance-result__profilescore">
+          <!-- !featureConfigService.isOn('profileScore') is the default value, so if this value is true this will be
+          item will be hidden as part of the variation on AB test -->
+          <div *ngIf="!featureConfigService.isOn('profileScore')" class="col-md-6 col-6 knx-insurance-result__profilescore">
             <div class="knx-insurance-result__value">{{insurance.fit}}%</div>
             <div class="knx-insurance-result__label">
                   <span class="knx-insurance-result__label--no-break">Profielscore
@@ -74,7 +76,7 @@
     </div>
 
     <div class="knx-insurance-result__discount clearfix"
-         [class.knx-animate]="featureToggleService.isOn('provisionPDFLink')"
+         [class.knx-animate]="featureConfigService.isOn('provisionPDFLink')"
          *ngIf="insurance.discount"
          (click)="openPdf()">
       <img src="/assets/icon/present_icon.png" alt="present">
