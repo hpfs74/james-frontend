@@ -5,11 +5,13 @@ import { CurrencyPipe } from '@angular/common';
 import { KNXCollapsiblePanelComponent } from '@knx/collapsible-panel/index';
 import { KNXFormsModule } from '@knx/forms';
 
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '@app/shared.module';
 import { InsuranceReviewCarComponent } from './insurance-review-car.component';
 import { InsuranceReviewModule } from './insurance-review.module';
-import { TagsService } from '../../core/services/tags.service';
-import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
+import { TagsService } from '@app/core/services/tags.service';
+import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { CookieService } from '@app/core/services';
 
 @Component({
   template: `<knx-insurance-review-car [carInsurance]="carInsuranceFromHost"></knx-insurance-review-car>`
@@ -35,6 +37,8 @@ describe('Component: InsuranceReviewCarComponent', () => {
         TestHostComponent
       ],
       providers: [
+        FeatureConfigService,
+        CookieService,
         CurrencyPipe,
         {
           provide: TagsService,
