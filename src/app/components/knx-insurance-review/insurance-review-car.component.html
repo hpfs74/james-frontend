@@ -55,8 +55,9 @@
     </knx-ir-tooltip>
     <knx-ir-value>{{ carInsurance.price_quality }}/10</knx-ir-value>
   </knx-ir-row>
-
-  <knx-ir-row showTooltip="true" showValue="true">
+  <!-- !featureConfigService.isOn('profileScore') is the default value, so if this value is true this will be
+          item will be hidden as part of the variation on AB test -->
+  <knx-ir-row showTooltip="true" showValue="true" *ngIf="!featureConfigService.isOn('profileScore')">
     <knx-ir-label>Profiel score</knx-ir-label>
     <knx-ir-tooltip>
       <p>De profielscore geeft aan hoe goed de verzekering past bij jouw profiel: hoe hoger hoe beter. Een profielscore tussen de 60% en 70% is al vrij hoog. Wij berekenen de score op basis van het profiel dat jij instelt. Hierbij toetsen we de verzekering op meer dan 100 criteria om te bepalen of wat jij belangrijk vindt ook goed scoort binnen de verzekering. Zo betaal je voor wat jij belangrijk vindt en voorkom je verrassingen. <p>

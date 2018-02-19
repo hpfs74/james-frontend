@@ -2,15 +2,16 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component 
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { InsuranceReviewComponent } from './insurance-review.component';
-import { KNXCollapsiblePanelComponent } from '../../../../node_modules/@knx/collapsible-panel/index';
 import { CurrencyPipe } from '@angular/common';
 
 import { setUpTestBed } from './../../../test.common.spec';
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '@app/shared.module';
 import { InsuranceReviewModule } from './insurance-review.module';
 
-import { TagsService } from '../../core/services/tags.service';
-import { TagsServiceMock } from '../../core/services/tags.service.mock.spec';
+import { TagsService } from '@app/core/services/tags.service';
+import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { CookieService } from '@app/core/services';
 
 @Component({
   template: `<knx-insurance-review [selectedInsurance]="selectedInsuranceFromHost"></knx-insurance-review>`
@@ -31,6 +32,8 @@ describe('Component: InsuranceReviewComponent', () => {
     declarations: [TestHostComponent],
     providers: [
       CurrencyPipe,
+      FeatureConfigService,
+      CookieService,
       {
         provide: TagsService,
         useValue: TagsServiceMock

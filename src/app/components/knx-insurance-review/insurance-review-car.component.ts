@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { CarInsurance } from '../../car/models/car-insurance';
+import { FeatureConfigService } from '@app/utils/feature-config.service';
 
 @Component({
   selector: 'knx-insurance-review-car',
@@ -13,4 +14,5 @@ export class InsuranceReviewCarComponent {
   showOneOffPremium(): boolean {
     return this.carInsurance.one_off_premium > 0;
   }
+  constructor(public featureConfigService: FeatureConfigService) {}
 }
