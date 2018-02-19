@@ -166,8 +166,10 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     if (this.route.snapshot && this.route.snapshot.queryParams) {
       const licencePlateValue = this.route.snapshot.queryParams[QUERY_PARAM_LICENCE];
       if (licencePlateValue) {
+        let decodedLicencePlate = Buffer.from(licencePlateValue, 'base64').toString();
+
         this.form.formGroup.patchValue(Object.assign({}, {
-          licensePlate: licencePlateValue || null
+          licensePlate: decodedLicencePlate || null
         }));
         this.form.formGroup.controls.licensePlate.markAsTouched();
         this.cdRef.detectChanges();
