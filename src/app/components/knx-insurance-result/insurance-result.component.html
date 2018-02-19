@@ -80,7 +80,7 @@
          *ngIf="insurance.discount"
          (click)="openPdf()">
       <img src="/assets/icon/present_icon.png" alt="present">
-      Incl. {{ insurance.discount | currency:'EUR':true }} Knab korting & Hulp bij overstappen
+      Incl. {{ getDiscountAmmount(insurance.discount) | currency:'EUR':true }} Knab korting & Hulp bij overstappen
     </div>
   </div>
 

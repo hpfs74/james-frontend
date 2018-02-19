@@ -33,4 +33,17 @@ export class InsuranceResultComponent {
       window.open(this.featureConfigService.featureConfig.provisionPDFLink, '_blank');
     }
   }
+
+  /**
+   * returns discount per month for control group or default one,
+   * and discount times 12 (for the entire year) for a test group
+   * @param amount insurance.discount
+   */
+  getDiscountAmmount(amount: number) {
+    let newAmount = amount;
+    if (this.featureConfigService.isOn('disscountBasedOnYear')) {
+      newAmount *= 12;
+    }
+    return newAmount;
+  }
 }
