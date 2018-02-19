@@ -48,7 +48,7 @@
     "@angular/router": "^4.4.5",
     "@angular/service-worker": "^1.0.0-beta.16",
     "@knx/avatar": "0.13.1",
-    "@knx/base": "2.42.159",
+    "@knx/base": "2.42.161",
     "@knx/card": "1.0.4",
     "@knx/checkbox": "1.0.121",
     "@knx/collapsible-panel": "0.0.333",

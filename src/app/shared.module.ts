@@ -109,6 +109,7 @@ import { KNXWizardControlsComponent } from '@app/components/knx-wizard-controls/
 import { TopAddressComponent } from '@app/components/knx-top-address';
 import { KnxCardExtensionComponent } from '@app/components/knx-card-extension/knx-card-extension.component';
 import { RadioNavigatorComponent } from '@app/house/components/knx-radio-navigator/radio-navigator.component';
+import { KNXFinalBuyComponent } from '@app/components/knx-final-buy/knx-final-buy.component';
 
 export const sharedComponents = [
   // Pipes
@@ -171,7 +172,8 @@ export const sharedComponents = [
   KNXFooterComponent,
   KNXWizardControlsComponent,
   KnxCardExtensionComponent,
-  RadioNavigatorComponent
+  RadioNavigatorComponent,
+  KNXFinalBuyComponent
 ];
 
 export const sharedModules = [
