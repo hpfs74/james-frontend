@@ -24,7 +24,6 @@ import * as compare from '@app/car/actions/compare';
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
-import * as forge from 'node-forge';
 
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { CarDetailForm } from './car-detail.form';
@@ -167,7 +166,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     if (this.route.snapshot && this.route.snapshot.queryParams) {
       const licencePlateValue = this.route.snapshot.queryParams[QUERY_PARAM_LICENCE];
       if (licencePlateValue) {
-        let decodedLicencePlate = forge.util.decode64(licencePlateValue);
+        let decodedLicencePlate = Buffer.from(licencePlateValue, 'base64').toString();
 
         this.form.formGroup.patchValue(Object.assign({}, {
           licensePlate: decodedLicencePlate || null
