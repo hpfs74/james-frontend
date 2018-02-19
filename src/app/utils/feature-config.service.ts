@@ -119,3 +119,10 @@ export class FeatureConfigService {
     return; // TODO implement correct error handling
   }
 }
+
+/**
+ * current AB test variables:
+ *
+ * productOrder
+ * profileScore
+ */
