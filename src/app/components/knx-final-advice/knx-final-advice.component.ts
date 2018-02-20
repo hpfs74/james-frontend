@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { KNXFinalAdviceOptions, DefaultKNXFinalAdviceOptions } from '@app/components/knx-final-advice/knx-final-advice.options';
 
 @Component({
@@ -9,7 +9,6 @@ import { KNXFinalAdviceOptions, DefaultKNXFinalAdviceOptions } from '@app/compon
 export class KNXFinalAdviceComponent {
   @Input() mobile = false;
   @Input() options: KNXFinalAdviceOptions = DefaultKNXFinalAdviceOptions;
-  @Output() onButtonClicked: EventEmitter<any> = new EventEmitter<any>();
   constructor() {
   }
 }

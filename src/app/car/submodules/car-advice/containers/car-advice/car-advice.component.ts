@@ -51,6 +51,7 @@ import { KNXFinalAdviceOptions } from '@app/components/knx-final-advice/knx-fina
 import { InsuranceAdvice } from '@app/insurance/models';
 import { JamesTagPipe } from '@app/shared/pipes';
 import { CurrencyPipe } from '@angular/common';
+import { CarService } from '@app/car/services/car.service';
 
 enum carFormSteps {
   carDetails,
@@ -86,7 +87,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
               public router: Router,
               public knxWizardService: KNXWizardRxService,
               private jamesTag: JamesTagPipe,
-              private currencyPipe: CurrencyPipe) {
+              private currencyPipe: CurrencyPipe,
+              public carService: CarService) {
 
     this.formSteps = ['Je gegevens', 'Premies vergelijken', 'Aanvragen'].map(el => {
       return {label: el};
@@ -277,7 +279,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             button: {
               text: selectedInsurance.supported ? 'vraag direct aan' : 'Ga naar website',
               pending: false,
-              onClick: () => this.knxWizardService.goToNextStep()
+              onClick: () => this.carService.startBuyFlow()
             }
           };
         })
