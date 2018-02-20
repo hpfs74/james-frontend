@@ -12,7 +12,13 @@ import { TagsService } from '@app/core/services/tags.service';
 import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { CookieService } from '@app/core/services';
-
+import { StoreModule, combineReducers } from '@ngrx/store';
+import * as fromRoot from '@app/car/reducers';
+import * as fromCore from '@app/core/reducers';
+import * as fromAuth from '@app/auth/reducers';
+import * as fromCar from '@app/car/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as fromProfile from '@app/profile/reducers';
 @Component({
   template: `<knx-insurance-review [selectedInsurance]="selectedInsuranceFromHost"></knx-insurance-review>`
 })
@@ -28,7 +34,18 @@ describe('Component: InsuranceReviewComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [SharedModule, InsuranceReviewModule],
+    imports: [
+      SharedModule,
+      InsuranceReviewModule,
+      StoreModule.forRoot({
+        ...fromRoot.reducers,
+        'auth': combineReducers(fromAuth.reducers),
+        'app': combineReducers(fromCore.reducers),
+        'car': combineReducers(fromCar.reducers),
+        'insurance': combineReducers(fromInsurance.reducers),
+        'profile': combineReducers(fromProfile.reducers)
+      })
+    ],
     declarations: [TestHostComponent],
     providers: [
       CurrencyPipe,

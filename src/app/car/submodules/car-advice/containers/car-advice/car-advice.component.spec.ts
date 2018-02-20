@@ -10,39 +10,43 @@ import { Observable } from 'rxjs/Observable';
 
 import { setUpTestBed } from './../../../../../../test.common.spec';
 
-import * as fromRoot from '../../../../reducers';
-import * as fromCore from '../../../../../core/reducers';
-import * as fromAuth from '../../../../../auth/reducers';
-import * as fromCar from '../../../../reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as fromProfile from '../../../../../profile/reducers';
+import * as fromRoot from '@app/car/reducers';
+import * as fromCore from '@app/core/reducers';
+import * as fromAuth from '@app/auth/reducers';
+import * as fromCar from '@app/car/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as fromProfile from '@app/profile/reducers';
 
-import * as router from '../../../../../core/actions/router';
-import * as layout from '../../../../../core/actions/layout';
-import * as assistant from '../../../../../core/actions/assistant';
+import * as router from '@app/core/actions/router';
+import * as layout from '@app/core/actions/layout';
+import * as assistant from '@app/core/actions/assistant';
 
-import * as profile from '../../../../../profile/actions/profile';
-import * as car from '../../../../../car/actions/car';
-import * as insurance from '../../../../../insurance/actions/insurance';
-import * as advice from '../../../../../insurance/actions/advice';
-import * as compare from '../../../../../car/actions/compare';
-import * as coverage from '../../../../../car/actions/coverage';
+import * as profile from '@app/profile/actions/profile';
+import * as car from '@app/car/actions/car';
+import * as insurance from '@app/insurance/actions/insurance';
+import * as advice from '@app/insurance/actions/advice';
+import * as compare from '@app/car/actions/compare';
+import * as coverage from '@app/car/actions/coverage';
 
-import * as FormUtils from '../../../../../utils/base-form.utils';
-import { SharedModule } from '../../../../../shared.module';
-import { AddressModule } from '../../../../../address/address.module';
+import * as FormUtils from '@app/utils/base-form.utils';
+import { SharedModule } from '@app/shared.module';
+import { AddressModule } from '@app/address/address.module';
 import { CarAdviceComponent } from './car-advice.component';
-import { CarExtrasForm } from '../../containers/car-extras/car-extras.form';
-import { CarDetailForm } from '../../containers/car-detail/car-detail.form';
-import { Car } from '../../../../models/car';
-import { ContentConfig } from '../../../../../content.config';
-import { ContentConfigMock } from '../../../../../content.mock.spec';
-import { TagsService } from '../../../../../core/services/tags.service';
-import { TagsServiceMock } from '../../../../../core/services/tags.service.mock.spec';
+import { CarExtrasForm } from '@app/car/submodules/car-advice/containers/car-extras/car-extras.form';
+import { CarDetailForm } from '@app/car/submodules/car-advice/containers/car-detail/car-detail.form';
+import { Car } from '@app/car/models/car';
+import { ContentConfig } from '@app/content.config';
+import { ContentConfigMock } from '@app/content.mock.spec';
+import { TagsService } from '@app/core/services/tags.service';
+import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
 import { Router, RouterModule } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
+import { CarService } from '@app/car/services/car.service';
+import { MockBackend } from '@angular/http/testing';
+import { BaseRequestOptions, XHRBackend, Http } from '@angular/http';
+import { AuthHttp } from '@app/auth/services';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -71,6 +75,9 @@ describe('Component: CarAdviceComponent', () => {
         CarAdviceComponent
       ],
       providers: [
+        CarService,
+        MockBackend,
+        BaseRequestOptions,
         KNXLocale,
         {
           provide: TagsService,
@@ -83,6 +90,16 @@ describe('Component: CarAdviceComponent', () => {
         {
           provide: KNXWizardRxService,
           useValue: KNXWizardServiceMock
+        },
+        {
+          deps: [
+            MockBackend,
+            BaseRequestOptions
+          ],
+          provide: AuthHttp,
+          useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backend, defaultOptions);
+          }
         }
       ],
       schemas: [NO_ERRORS_SCHEMA]
