@@ -19,6 +19,7 @@ import 'rxjs/add/operator/filter';
 })
 export class InsuranceReviewComponent {
   @Input() selectedInsurance: InsuranceAdvice;
+  @Output() onProceedToBuy: EventEmitter<any> = new EventEmitter<any>();
   knxFinalAdviceOptions: KNXFinalAdviceOptions;
   subscription$: Subscription[] = [];
   constructor(private store$: Store<fromRoot.State>,
@@ -54,9 +55,9 @@ export class InsuranceReviewComponent {
               }
             ],
             button: {
-              text: 'vraag direct aan',
+              text: selectedInsurance.supported ? 'vraag direct aan' : 'Ga naar website' ,
               pending: false,
-              onClick: () => {}
+              onClick: () => this.onProceedToBuy.emit()
             }
           };
         })

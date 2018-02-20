@@ -9,7 +9,7 @@ interface KNXFinalBuyOptionSection {
 interface KNXFinalBuyOptionButton {
   text: string;
   pending: boolean;
-  onClick: (event: any) => void;
+  onClick: (event?: any) => void;
   classes?: string[];
 }
 

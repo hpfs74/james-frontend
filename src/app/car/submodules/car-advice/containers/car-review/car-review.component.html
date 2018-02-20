@@ -1,6 +1,7 @@
 <knx-insurance-review
   knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="summary"
-  [selectedInsurance]="selectedInsurance$ | async">
+  [selectedInsurance]="selectedInsurance$ | async"
+  (onProceedToBuy)="goToNextStep()">
 </knx-insurance-review>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
