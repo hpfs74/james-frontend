@@ -8,6 +8,7 @@
         </knx-chat-stream>
       </div>
     </div>
+
     <div class="col-sm-8 pull-sm-4">
       <div class="row">
         <div class="col-sm-12">
@@ -20,30 +21,35 @@
                 <p class="knx-edit" (click)="editProfile()">Wijzig</p>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-6">Naam</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).name || '-' }}</p>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-6">Geslacht</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).gender || '-' }}</p>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-6">Geboortedatum</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).birthday || '-' }}</p>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-6">Adres</div>
               <div class="col-md-6">
                 <p class="knx-value">{{ (profile$ | async).address || '-' }}</p>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-6">Huishouden</div>
               <div class="col-md-6">
@@ -53,12 +59,14 @@
           </knx-card>
         </div>
       </div>
+
       <div class="row" *ngIf="hasPurchasedInsurances() | async">
         <div class="col-md-12">
           <p style="text-align: center;">Heb je een verzekering via Knab,
             dan kun je niet zelf je account verwijderen of wijzigen. Neem contact met ons op.</p>
         </div>
       </div>
+
       <div class="row">
         <div class="col-sm-12">
           <knx-card>
@@ -70,6 +78,7 @@
                 <p class="knx-edit" (click)="editPassword()">Wijzig</p>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-6">E-mailadres</div>
               <div class="col-md-6">
@@ -86,8 +95,9 @@
           </knx-card>
         </div>
       </div>
+
       <!-- hide delete until backend is ready -->
-      <div class="row" *ngIf="featureToggleService.isOn('deleteProfile')">
+      <div class="row">
         <div class="col-md-4 knx-center--margin">
           <div class="knx-button"
               (click)="deleteProfile()"
