@@ -1,0 +1,46 @@
+<div [ngClass]="{'knx-buy--mobile': mobile, 'knx-buy--desktop': !mobile}">
+  <div class="knx-card knx-final-buy">
+    <div class="row">
+      <div class="col-md-12" *ngFor="let section of options.sections; let last = last;">
+        <img *ngIf="section.logoUrl" [src]="section.logoUrl" alt="logoUrl">
+        <p *ngIf="section.heading"><strong>{{ section.heading }}</strong></p>
+        <div class="row">
+          <div class="col-8">
+            <p *ngIf="section.key">{{ section.key }}</p>
+          </div>
+          <div class="col-4 knx-final-value">
+              <p *ngIf="section.value">
+                <span *ngIf="!last">
+                    {{ section.value }}
+                  </span>
+                <strong *ngIf="last">
+                  {{ section.value }}
+                </strong>
+              </p>
+          </div>
+        </div>
+        <hr *ngIf="section.divider" class="knx-divider-line">
+      </div>
+    </div>
+    <div class="row" *ngIf="!mobile">
+      <div class="col-md-12">
+        <button class="knx-button knx-button--fullwidth knx-button--primary {{(options.button.classes || []).join(' ')}}"
+                [class.knx-button--pending]="options.button.pending"
+                (click)="options.button.onClick($event)">
+          {{ options.button.text }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container knx-final--sticky" *ngIf="mobile" [ngClass]="{'knx-buy--mobile': mobile, 'knx-buy--desktop': !mobile}">
+  <div class="row" >
+    <div class="col-md-12">
+      <button class="knx-button knx-button--fullwidth knx-button--primary {{(options.button.classes || []).join(' ')}}"
+              [class.knx-button--pending]="options.button.pending"
+              (click)="options.button.onClick($event)">
+        {{ options.button.text }}
+      </button>
+    </div>
+  </div>
+</div>
