@@ -25,14 +25,20 @@
 </p>
 
 <div class="knx-insurance-review__panels">
-  <!-- car insurance -->
-  <knx-insurance-review-car *ngIf="selectedInsurance"
-    [carInsurance]="selectedInsurance"></knx-insurance-review-car>
+  <div class="knx-scroll--container">
+    <!-- car insurance -->
+    <knx-insurance-review-car *ngIf="selectedInsurance"
+      [carInsurance]="selectedInsurance"></knx-insurance-review-car>
 
-  <!-- documents -->
-  <knx-insurance-review-documents *ngIf="selectedInsurance"
-    title="Documenten" [documents]="selectedInsurance?.documents"
-    [showStep]="false"></knx-insurance-review-documents>
+    <!-- documents -->
+    <knx-insurance-review-documents *ngIf="selectedInsurance"
+      title="Documenten" [documents]="selectedInsurance?.documents"
+      [showStep]="false"></knx-insurance-review-documents>
+    <knx-final-advice
+      [mobile]="true"
+      [options]="knxFinalAdviceOptions">
+    </knx-final-advice>
+  </div>
 
   <!-- benefits -->
   <knx-insurance-review-benefits

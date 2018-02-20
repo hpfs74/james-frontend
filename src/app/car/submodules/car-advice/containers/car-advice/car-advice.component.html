@@ -50,14 +50,9 @@
         </ng-container>
         <knx-final-advice
           *ngIf="knxWizardService.currentStepIndex === knxWizardService.currentStepRoutes.length - 1"
-          [options]="">
+          [options]="knxFinalAdviceOptions">
         </knx-final-advice>
       </knx-chat-stream>
     </div>
   </knx-wizard-rx>
-  <knx-final-advice
-    *ngIf="knxWizardService.currentStepIndex === knxWizardService.currentStepRoutes.length - 1"
-    [mobile]="true"
-    [options]="">
-  </knx-final-advice>
 </div>
