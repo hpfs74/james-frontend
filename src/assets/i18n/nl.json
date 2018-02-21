@@ -14,5 +14,22 @@
   "car.advice.personalizeButton.label": "Personaliseer resultaten",
   "car.advice.steps.step1.title": "Je gegevens",
   "car.advice.steps.step2.title": "Premies vergelijken",
-  "car.advice.steps.step3.title": "Aanvragen"
+  "car.advice.steps.step3.title": "Aanvragen",
+  "car.advice.steps.detail.title": "Je autogegevens",
+  "car.advice.steps.detail.claimFreeYears.tooltip": "<p>De <strong>schadevrije jaren</strong> vind je op je meest recente polis. Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je korting op de premie.</p> <p>Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keerdat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.</p>",
+  "car.advice.steps.detail.loan.tooltip": "We willen graag van je weten of je een lening hebt afgesloten voor je auto. In dat geval raden we je namelijk altijd een Allrisk verzekering aan. Raakt je auto vervolgens onherstelbaar beschadigd? Dan krijg je een vergoeding van je verzekeraar om een nieuwe te kopen. Bij een andere dekking krijg je die vergoeding niet en blijf je met een lening achter, terwijl je geen auto meer hebt.",
+  "car.advice.steps.detail.aboutYou.tooltip": "Hoofdbestuurder is de persoon die in de meerderheid van de gevallen in de auto rijdt én eigenaar is van de auto. Als dit niet het geval is, kun je helaas geen autoverzekering afsluiten via Knab.",
+  "car.advice.steps.detail.aboutYou.title": "Over jou",
+  "car.advice.steps.detail.aboutYou.subtitle": "(als hoofdbestuurder)",
+  "car.advice.steps.detail.carCoverage.title": "Welke dekking past het beste bij jou",
+  "car.advice.steps.detail.carCoverage.selected": "Toon advies",
+  "car.advice.steps.detail.carCoverage.unselected": "Kies deze",
+  "car.advice.steps.detail.carCoverage.errorLoading": "Er is een fout opgetreden bij het ophalen van het dekkingsadvies.",
+  "car.advice.steps.detail.carCoverage.loading": "Een momentje! We vergelijken 19 verschillende aanbieders voor je om de beste match te vinden.",
+  "car.advice.steps.detail.stepOptions.label": "Je gegevens",
+  "car.advice.steps.detail.stepOptions.nextButton.label": "Naar resultaten",
+  "car.advice.steps.detail.form.licensePlate.label": "Wat is je kenteken?",
+  "car.advice.steps.detail.form.licensePlate.placeholder":"AF-19-65"
+
+
 }

@@ -97,11 +97,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   }
 
   ngOnInit() {
-    this.store$.dispatch(new assistant.UpdateConfigAction({
-      avatar: {
-        title: 'Expert autoverzekeringen'
-      }
-    }));
+
+    this.translateService
+      .get('car.advice.avatar.message.start')
+      .subscribe((res: string) => {
+        this.store$.dispatch(new assistant.UpdateConfigAction({
+          avatar: {
+            title: res
+          }
+        }));
+      });
+
+
     // bind observables
     this.subscription$ = [];
     this.selectedAdvice$ = this.store$.select(fromInsurance.getSelectedAdvice);

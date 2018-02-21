@@ -5,6 +5,7 @@ import { UIPair } from '@core/models/ui-pair';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
 import { birthDateValidator, minNumberValidator, maxNumberValidator } from '@utils/base-form.validators';
 
+
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
@@ -20,7 +21,7 @@ export class CarDetailForm extends BaseForm {
     claimFreeYears: () => `De ingevulde waarde ligt niet tussen 0 en 50`
   };
 
-  constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
+  constructor(private fb: FormBuilder, private houseHold: Array<UIPair>, private copies: string[]) {
     super();
 
     this.formGroup = this.fb.group({
@@ -54,11 +55,11 @@ export class CarDetailForm extends BaseForm {
       licensePlate: {
         formControlName: 'licensePlate',
         type: 'custom',
-        label: 'Wat is je kenteken?',
+        label: this.copies['car.advice.steps.detail.form.licensePlate.label'],
         validationErrors: this.validationErrors,
         formControl: this.formGroup.get('licensePlate'),
         inputOptions: {
-          placeholder: 'AF-19-65'
+          placeholder: this.copies['car.advice.steps.detail.form.licensePlate.placeholder']
         }
       },
       birthDate: {
@@ -114,7 +115,7 @@ export class CarDetailForm extends BaseForm {
         inputOptions: {
           placeholder: 'Maak een keuze',
           events: ['focus'],
-          items: houseHold
+          items: this.houseHold
         }
       },
       gender: {
