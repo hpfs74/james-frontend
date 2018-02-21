@@ -10,10 +10,8 @@
     "knab"
   ],
   "scripts": {
-    "commitmsg": "commitlint -e && npm run lint:styles && npm run lint",
     "postcheckout": "./hooks/post-checkout $GIT_PARAMS",
     "postmerge": "./hooks/post-merge $GIT_PARAMS",
-    "prepush": "npm run build && npm run test:ci && npm run security",
     "config": "ts-node ./scripts/set-env.ts",
     "start": "npm run config && ng serve --open --locale",
     "build": "npm run config -- --analytics=true && ng build --locale --aot --build-optimizer --stats-json",
@@ -35,6 +33,10 @@
     "clean": "rimraf -- node_modules dist",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
     "extract:copies": "ngx-translate-extract --input ./src --output ./src/assets/i18n/nl.json --clean --sort --format namespaced-json"
+  },
+  "husky": {
+    "pre-commit": "commitlint -e && npm run lint:styles && npm run lint",
+    "pre-push": "npm run build && npm run test:ci && npm run security"
   },
   "private": true,
   "dependencies": {
@@ -117,7 +119,7 @@
     "codelyzer": "~3.0.1",
     "dotenv": "^4.0.0",
     "faker": "^4.1.0",
-    "husky": "^0.14.3",
+    "husky": "^0.15.0-rc.8",
     "jasmine-core": "~2.6.2",
     "jasmine-marbles": "^0.1.0",
     "jasmine-spec-reporter": "~4.1.0",
