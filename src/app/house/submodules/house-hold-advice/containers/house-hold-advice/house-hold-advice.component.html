@@ -26,7 +26,7 @@
             <div class="container-fluid">
               <div class="knx-side-panel-content">
                 <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
-                        (click)="knxSidePanel.close()">Verder
+                        (click)="knxSidePanel.close()">{{ 'household.advice.moreButton.label' | translate }}
                 </button>
               </div>
             </div>
@@ -38,8 +38,8 @@
       <div class="knx-house-hold-advice-motivation">
         <ul>
           <li>
-            <b>Objectief</b><br/>
-            We vergelijken meer dan 40
+            <b>{{ 'household.advice.usp.objective.title' | translate }}</b><br/>
+            {{ 'household.advice.usp.objective.content' | translate }}
           </li>
 
           <li>

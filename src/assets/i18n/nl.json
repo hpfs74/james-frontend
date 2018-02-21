@@ -1,5 +1,19 @@
 {
-	"general.dekking": "Dekking",
-	"household.locatie.title": "[household.title] YOUR Locatie",
-	"household.locatie.comment": "Your living insurance, exaplin why needed, and how it can help you (what are you insured for)"
+  "general.dekking": "Dekking",
+  "general.insurance.own_risk": "Eigen risico",
+  "general.insurance.monthly_premium": "{{price}} <span>per maand</span>",
+  "general.component.address.postcode": "Postcode",
+  "general.component.address.houseNumber": "Huisnummer",
+  "household.advice.moreButton.label": "Verder",
+  "household.locatie.title": "Locatie",
+  "household.locatie.comment": "Your living insurance, explain why needed, and how it can help you (what are you insured for)"
+  "household.advice.usp.objective.title": "Objectief",
+  "household.advice.usp.objective.content": "We vergelijken meer dan 40",
+
+  "car.advice.loading": "Laden...",
+  "car.advice.moreButton.label": "Verder",
+  "car.advice.personalizeButton.label": "Personaliseer resultaten",
+  "car.advice.steps.step1.title": "Je gegevens",
+  "car.advice.steps.step2.title": "Premies vergelijken",
+  "car.advice.steps.step3.title": "Aanvragen"
 }

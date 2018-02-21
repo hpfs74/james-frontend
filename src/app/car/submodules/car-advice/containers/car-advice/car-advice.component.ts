@@ -47,6 +47,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
+import { TranslateService } from '@ngx-translate/core';
 
 enum carFormSteps {
   carDetails,
@@ -61,7 +62,7 @@ enum carFormSteps {
 export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   qaRootId = QaIdentifiers.carAdviceRoot;
 
-  formSteps: Array<KNXWizardStepRxOptions>;
+  formSteps: Array<KNXWizardStepRxOptions> = [];
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
@@ -78,12 +79,18 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
+              private translateService: TranslateService,
               public router: Router,
               public knxWizardService: KNXWizardRxService) {
 
-    this.formSteps = ['Je gegevens', 'Premies vergelijken', 'Aanvragen'].map(el => {
-      return {label: el};
-    });
+    this.translateService
+      .get([
+        'car.advice.steps.step1.title',
+        'car.advice.steps.step2.title',
+        'car.advice.steps.step3.title'])
+      .subscribe(data => {
+        this.formSteps.push({label: data});
+      });
   }
 
   ngOnInit() {
@@ -167,7 +174,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
         .subscribe(advice => {
           this.store$.dispatch(new compare.LoadCarAction(advice));
         })
-      );
+    );
   }
 
   ngOnDestroy() {
