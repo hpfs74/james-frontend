@@ -48,6 +48,11 @@
   "household.dekking.calcHouseVal.estimatedVal.suffix": "Est. household value",
   "household.advice.usp.objective.title": "Objectief",
   "household.advice.usp.objective.content": "We vergelijken meer dan 40",
+  "household.advice.usp.save.title": "Bespaar",
+  "household.advice.usp.save.content": "Tot 15% korting op elke verzekering",
+  "household.advice.usp.overstaphulp.title": "Overstaphulp",
+  "household.advice.usp.overstaphulp.content": "Wij regelen overstap",
+  
   "car.advice.loading": "Laden...",
   "car.advice.moreButton.label": "Verder",
   "car.advice.personalizeButton.label": "Personaliseer resultaten",
