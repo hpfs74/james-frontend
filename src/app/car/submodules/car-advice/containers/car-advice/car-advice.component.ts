@@ -279,7 +279,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             button: {
               text: selectedInsurance.supported ? 'vraag direct aan' : 'Ga naar website',
               pending: false,
-              onClick: () => this.carService.startBuyFlow()
+              onClick: () => this.carService.startBuyFlow(),
+              classes: ['knx-button', 'knx-button--primary', 'knx-button--3d', 'knx-button--float-bottom']
             }
           };
         })

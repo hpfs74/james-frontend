@@ -115,7 +115,7 @@ describe('Component: InsuranceReviewComponent', () => {
   });
 
   it('should render 3 sections', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-scroll--container').length).toBe(4);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('div.knx-scroll--container').length).toBe(3);
   });
 
   // it('should update the form with profile data (ngOnChanges)', () => {
