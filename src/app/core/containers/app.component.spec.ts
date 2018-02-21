@@ -24,6 +24,7 @@ import * as fromProfile from '../../profile/reducers';
 
 import * as auth from '../../auth/actions/auth';
 import * as layout from '../../core/actions/layout';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   template: `<knx-app></knx-app>`
@@ -47,6 +48,7 @@ describe('Component: AppComponent', () => {
       HttpModule,
       RouterTestingModule,
       SharedModule,
+      TranslateModule.forRoot(),
       StoreModule.forRoot({
       ...fromRoot.reducers,
       'auth': combineReducers(fromAuth.reducers),
@@ -57,6 +59,7 @@ describe('Component: AppComponent', () => {
     declarations: [AppComponent, TestHostComponent, NavbarComponent],
     schemas: [NO_ERRORS_SCHEMA],
     providers: [
+      TranslateService,
       NavigationService,
       AssistantService,
       {

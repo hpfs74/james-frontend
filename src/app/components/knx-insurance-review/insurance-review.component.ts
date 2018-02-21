@@ -1,8 +1,6 @@
 import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-
 import { InsuranceAdvice } from '../../insurance/models';
-import { CarInsurance } from '../../car/models';
+import { KNXFinalAdviceOptions, DefaultKNXFinalAdviceOptions } from '@app/components/knx-final-advice/knx-final-advice.options';
 
 @Component({
   selector: 'knx-insurance-review',
@@ -11,4 +9,7 @@ import { CarInsurance } from '../../car/models';
 })
 export class InsuranceReviewComponent {
   @Input() selectedInsurance: InsuranceAdvice;
+  @Input() knxFinalAdviceOptions: KNXFinalAdviceOptions = DefaultKNXFinalAdviceOptions;
+  @Output() onProceedToBuy: EventEmitter<any> = new EventEmitter<any>();
+  constructor() {}
 }

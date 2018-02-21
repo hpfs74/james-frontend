@@ -13,6 +13,8 @@ import { CarService } from './car.service';
 import { LocalStorageService } from '../../core/services';
 import { AuthHttp } from '../../auth/services';
 import { Car, CarCompare } from '../../car/models';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('Service: Car', () => {
   let backend, service;
@@ -87,7 +89,10 @@ describe('Service: Car', () => {
   };
 
   let moduleDef: TestModuleMetadata = {
-    imports: [StoreModule.forRoot({})],
+    imports: [
+      StoreModule.forRoot({}),
+      RouterTestingModule
+    ],
     providers: [
       BaseRequestOptions,
       MockBackend,

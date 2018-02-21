@@ -1,11 +1,13 @@
 <knx-insurance-review
   knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="summary"
-  [selectedInsurance]="selectedInsurance$ | async">
+  [selectedInsurance]="selectedInsurance$ | async"
+  (onProceedToBuy)="carService.startBuyFlow()"
+  [knxFinalAdviceOptions]="knxFinalAdviceOptions">
 </knx-insurance-review>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
-                     (onNext)="goToNextStep()"
+                     (onNext)="carService.startBuyFlow()"
                      (onBack)="goToPreviousStep()">
 </knx-wizard-controls>
 

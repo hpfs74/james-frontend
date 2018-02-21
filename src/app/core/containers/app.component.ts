@@ -23,6 +23,7 @@ import { NavigationService } from '../services';
 import * as insurance from '../../insurance/actions/insurance';
 import { ContentConfig, Content } from '../../content.config';
 import { KNXFeatureToggleService } from '@knx/feature-toggle';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'knx-app',
@@ -55,10 +56,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     private navigationService: NavigationService,
     private userDialogService: UserDialogService,
     private contentConfig: ContentConfig,
-    public featureToggleService: KNXFeatureToggleService
+    public featureToggleService: KNXFeatureToggleService,
+    translate: TranslateService
   ) {
       this.content = contentConfig.getContent();
       this.featureToggleConfig = this.featureToggleService.featureToggleConfig;
+
+      translate.setDefaultLang('nl');
+      translate.use('nl');
     }
 
   ngAfterViewInit() {

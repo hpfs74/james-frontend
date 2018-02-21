@@ -3,7 +3,6 @@
 $knxChatStreamNotificationRepetition: 2;
 
 .knx-chat-stream {
-  padding: 20px 20px 10px;
   align-items: stretch;
   background: $knab-primary-gray;
   border-radius: $knab-border-radius;
@@ -37,6 +36,7 @@ knx-avatar .knx-avatar__image {
 
 @media (max-width: 576px) {
   .knx-chat-stream {
+    padding: 20px 20px 10px;
     background: none;
     position: fixed;
     top: 50px;
