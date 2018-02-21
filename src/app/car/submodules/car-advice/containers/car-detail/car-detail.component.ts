@@ -36,6 +36,8 @@ import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard
 import { KNXFeatureToggleService } from '@knx/feature-toggle';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'knx-car-detail-form',
   styleUrls: ['./car-detail.component.scss'],
@@ -57,20 +59,32 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   subscriptions$: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
+
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
+              private translateService: TranslateService,
               public featureToggleService: FeatureConfigService,
               public route: ActivatedRoute,
               public cdRef: ChangeDetectorRef) {
     this.initializeForms();
+
     this.selectInitalStates();
+
     this.setInitialSubscriptions();
-    this.currentStepOptions = {
-      label: 'Je gegevens',
-      nextButtonLabel: 'Naar resultaten',
-      hideBackButton: true,
-      hideNextButton: true
-    };
+
+
+    this.translateService.get([
+      'car.advice.steps.detail.stepOptions.label',
+      'car.advice.steps.detail.stepOptions.nextButton.label'
+    ]).subscribe(res => {
+      this.currentStepOptions = {
+        label: res['car.advice.steps.detail.stepOptions.label'],
+        nextButtonLabel: res['car.advice.steps.detail.stepOptions.nextButton.label'],
+        hideBackButton: true,
+        hideNextButton: true
+      };
+    })
+
   }
 
   selectInitalStates(): void {
@@ -91,7 +105,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   initializeForms(): void {
     const formBuilder = new FormBuilder();
     this.addressForm = new AddressForm(formBuilder);
-    this.form = new CarDetailForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'));
+    this.form = new CarDetailForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'), []);
     this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
   }
 
@@ -101,8 +115,8 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   setInitialSubscriptions(): void {
     this.subscriptions$ = [
       this.store$.select(fromInsurance.getSelectedAdvice)
-          .filter(advice => advice)
-          .subscribe(advice => this.setAdvice(advice)),
+        .filter(advice => advice)
+        .subscribe(advice => this.setAdvice(advice)),
       this.advice$.subscribe(currentAdvice => {
         // start new advice only if there is no current one
         if (currentAdvice) {
@@ -119,43 +133,45 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       }),
 
       this.store$.select(fromCar.getCarInfoError)
-      .subscribe((error) => {
-        // Subscribe to car errors
-        if (error) {
-          this.form.formGroup.get('licensePlate').updateValueAndValidity();
-          this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
-        }
-      }),
+        .subscribe((error) => {
+          // Subscribe to car errors
+          if (error) {
+            this.form.formGroup.get('licensePlate').updateValueAndValidity();
+            this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.error.carNotFound', clear: true}));
+          }
+        }),
 
       this.store$.select(fromCar.getCarInfo)
-      .subscribe((car: Car) => {
-        // Subscribe to car info
-        if (car && car.license) {
-          this.form.formGroup.get('licensePlate').updateValueAndValidity();
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.niceCar',
-            value: car,
-            clear: true
-          }));
-        }
-      }),
+        .subscribe((car: Car) => {
+          // Subscribe to car info
+          if (car && car.license) {
+            this.form.formGroup.get('licensePlate').updateValueAndValidity();
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: 'car.info.niceCar',
+              value: car,
+              clear: true
+            }));
+          }
+        }),
 
       this.store$.select(fromCar.getCoverage)
-      .filter(coverage => coverage !== null)
-      .subscribe(coverageAdvice => {
-        // Subscribe to coverage recommendation request
-        this.coverages.forEach( item => { item.selected = false; });
-        let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
-        if (coverageItem) {
-          this.store$.dispatch(new assistant.AddCannedMessage({
-            key: 'car.info.coverage.advice',
-            value: coverageItem,
-            clear: true
-          }));
-          coverageItem.selected = true;
-          this.updateSelectedCoverage(coverageItem);
-        }
-      })
+        .filter(coverage => coverage !== null)
+        .subscribe(coverageAdvice => {
+          // Subscribe to coverage recommendation request
+          this.coverages.forEach(item => {
+            item.selected = false;
+          });
+          let coverageItem = this.coverages.filter(item => item.id === coverageAdvice.recommended_value)[0];
+          if (coverageItem) {
+            this.store$.dispatch(new assistant.AddCannedMessage({
+              key: 'car.info.coverage.advice',
+              value: coverageItem,
+              clear: true
+            }));
+            coverageItem.selected = true;
+            this.updateSelectedCoverage(coverageItem);
+          }
+        })
 
     ];
   }
@@ -226,8 +242,8 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
   onLicensePlateChange(licensePlate: string): void {
     const validLength = 6;
-    // control valid state is changed externally based on RDC request result,
-    // so we use length here to determine when to proceed
+// control valid state is changed externally based on RDC request result,
+// so we use length here to determine when to proceed
     if (licensePlate && licensePlate.length === validLength) {
       this.store$.dispatch(new car.GetInfo(licensePlate));
     }
@@ -292,13 +308,15 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  goToNextStep(event?: any) {
+  goToNextStep(event ?: any) {
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
     let coverageError = null;
     FormUtils.validateForm(detailForm);
 
-    this.store$.select(fromCar.getCoverageError).take(1).subscribe(error => { coverageError = error; });
+    this.store$.select(fromCar.getCoverageError).take(1).subscribe(error => {
+      coverageError = error;
+    });
 
     if (!detailForm.valid || !addressForm.valid) {
       return coverageError ? false : this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
@@ -316,7 +334,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
             gender: detailForm.value.gender.toUpperCase(),
             title: detailForm.value.gender === 'M' ? 'Dhr.' : 'Mw.',
             date_of_birth: FormUtils.toNicciDate(FormUtils.isMaskFormatted(detailForm.value.birthDate) ?
-            FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
+              FormUtils.dateDecode(detailForm.value.birthDate) : detailForm.value.birthDate),
             zipcode: address.postcode,
             house_number: address.number,
             city: address.city,
@@ -332,12 +350,12 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
           address: address
         };
       }).take(1)
-      .subscribe((compare) => {
-        // add address in format for profile
-        // TODO: is this really needed?
-        this.subscriptions$[0].unsubscribe();
-        this.store$.dispatch(new advice.Update(Object.assign({}, compare.request, {
-          address: compare.address
+        .subscribe((compare) => {
+          // add address in format for profile
+          // TODO: is this really needed?
+          this.subscriptions$[0].unsubscribe();
+          this.store$.dispatch(new advice.Update(Object.assign({}, compare.request, {
+            address: compare.address
           })));
         })
     );
