@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 // import { AppShellModule } from '@angular/app-shell';
 import { RouterModule, Router } from '@angular/router';
 import { StoreModule, Action } from '@ngrx/store';
@@ -28,6 +28,12 @@ import { InsuranceModule } from './insurance/insurance.module';
 import { AddressModule } from './address/address.module';
 import { FeatureLoader } from '@app/utils/feature-loader';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   imports: [
@@ -43,9 +49,9 @@ import { FeatureConfigService } from '@app/utils/feature-config.service';
 
     RouterModule.forRoot(routes),
 
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {metaReducers}),
 
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
+    !environment.production ? StoreDevtoolsModule.instrument({maxAge: 25}) : [],
 
     StoreRouterConnectingModule,
 
@@ -58,6 +64,13 @@ import { FeatureConfigService } from '@app/utils/feature-config.service';
     InsuranceModule.forRoot(),
 
     AddressModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
 
     // AppShellModule.runtime(),
   ],

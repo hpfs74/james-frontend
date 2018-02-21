@@ -110,6 +110,7 @@ import { TopAddressComponent } from '@app/components/knx-top-address';
 import { KnxCardExtensionComponent } from '@app/components/knx-card-extension/knx-card-extension.component';
 import { RadioNavigatorComponent } from '@app/house/components/knx-radio-navigator/radio-navigator.component';
 import { KNXFinalAdviceComponent } from '@app/components/knx-final-advice/knx-final-advice.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 export const sharedComponents = [
   // Pipes
@@ -196,7 +197,8 @@ export const sharedModules = [
     TextMaskModule,
     AngularSvgIconModule,
     KNXFeatureToggleModule.forRoot(environment.featureToggles),
-    ...sharedModules
+    ...sharedModules,
+    TranslateModule
   ],
   declarations: [
     ...sharedComponents,
@@ -209,6 +211,7 @@ export const sharedModules = [
     AngularSvgIconModule,
     KNXFeatureToggleModule,
     ...sharedComponents,
+    TranslateModule
   ]
 })
 export class SharedModule { }
