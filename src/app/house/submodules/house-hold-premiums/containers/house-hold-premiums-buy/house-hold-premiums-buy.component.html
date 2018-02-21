@@ -1,7 +1,6 @@
-<h2>Aanvragen inboedelverzekering</h2>
-<p>Ga verder met het aanvragen van jouw nieuwe verzekering.</p>
-<p>Process description, incl. Risk involvement: What heppens now,
-  what can the user expect, does he need to do something?
+<h2>{{ 'household.premiumBuy.header' | translate }}</h2>
+<p>{{ 'household.premiumBuy.header.para1' | translate }}</p>
+<p>{{ 'household.premiumBuy.header.para2' | translate }}
   - <br/>
   - <br/>
   - <br/>
@@ -41,7 +40,7 @@
 
                   <div class="knx-house-hold-buy__actions">
                     <div class="knx-house-hold-buy__error" *ngIf="!form.formGroup.valid">
-                      {{ 'Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.' }}
+                      {{ 'household.premiumBuy.error.msg' | translate }}
                     </div>
                   </div>
 
