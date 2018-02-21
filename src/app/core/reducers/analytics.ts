@@ -1,17 +1,28 @@
 import { RouterStateSnapshot } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { RouterNavigationAction } from '@ngrx/router-store';
-import * as fromRouter from '@ngrx/router-store';
 import { createMetaReducer } from 'redux-beacon';
 import { GoogleAnalytics, PageView, Event, UserTiming, SocialInteraction, Exception } from 'redux-beacon/targets/google-analytics';
 import { GoogleTagManager } from 'redux-beacon/targets/google-tag-manager';
 import { logger } from 'redux-beacon/extensions/logger';
 
 import { environment } from '@env/environment';
-import { EventAction } from '@app/core/actions/analytics';
-import { AnalyticsEvent } from '@app/core/models/analytics';
+import {
+  PageViewEventAction,
+  ClickOutEventAction,
+  CoverageAdviceAvailableAction,
+  CarDataAvailableAction
+} from '@app/core/actions/analytics';
+import {
+  CoverageAdviceAnalyticsEvent,
+  PageViewAnalyticsEvent,
+  ClickoutAnalyticsEvent,
+  CarDataAnaylitcsEvent
+} from '@app/core/models/analytics';
 
-export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): AnalyticsEvent {
+import * as fromRouter from '@ngrx/router-store';
+
+export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): PageViewAnalyticsEvent {
   // Custom value included in routersnapshot
   const loggedIn = action.payload.event.state['data'].isLoggedIn || false;
   const product_id = action.payload.event.state['data'].product_id || null;
@@ -35,7 +46,7 @@ export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): A
   return standardValues;
 }
 
-export function analyticsEvent(action: EventAction): AnalyticsEvent {
+export function clickOutAnalyticsEvent(action: ClickOutEventAction): ClickoutAnalyticsEvent {
   const standardValues = {
     event: 'clickout',
     event_label: action.payload.event_label,
@@ -47,16 +58,21 @@ export function analyticsEvent(action: EventAction): AnalyticsEvent {
   return standardValues;
 }
 
+export function coverageAdviceAvailabeEvent(action: CoverageAdviceAvailableAction): CoverageAdviceAnalyticsEvent {
+  return action.payload;
+}
+
+export function carDataAvailableEvent(action: CarDataAvailableAction): CarDataAnaylitcsEvent {
+  return action.payload;
+}
+
 // Map the event to an ngrx/store action
 export const eventsMap = {
   'ROUTER_NAVIGATION': pageView,
-  '[Analytics] Event': analyticsEvent
+  '[Analytics] Click Out Event': clickOutAnalyticsEvent,
+  '[Analytics] Car Data Available Event': carDataAvailableEvent,
+  '[Analytics] Car Coverage Available Event': coverageAdviceAvailabeEvent
 };
-
-// Optionally rename the datalayer object
-// const options = {
-//   dataLayerName: 'exampleName'
-// };
 
 // const gaReducer = createMetaReducer(eventsMap, GoogleAnalytics);
 

@@ -7,7 +7,7 @@ import { environment } from '@env/environment';
 import { Proposal } from '@insurance/models/proposal';
 import { Car, CarInsurance, CarCoverageRecommendation, CarCompare } from '../models';
 import { Store } from '@ngrx/store';
-import { AnalyticsEvent } from '@app/core/models/analytics';
+import { ClickoutAnalyticsEvent } from '@app/core/models/analytics';
 import { Router } from '@angular/router';
 
 import * as fromRoot from '@app/car/reducers';
@@ -85,7 +85,7 @@ export class CarService {
       .subscribe(selectedInsurance => {
         const isLoggedIn = !AuthUtils.tokenIsAnonymous();
         if (!selectedInsurance.supported) {
-          const analyticsEvent: AnalyticsEvent = {
+          const analyticsEvent: ClickoutAnalyticsEvent = {
             event: 'clickout',
             page: this.router.url,
             event_label: 'car insurance application',
@@ -93,7 +93,7 @@ export class CarService {
             product_id: selectedInsurance.id,
             product_name: selectedInsurance['product_name']
           };
-          this.store$.dispatch(new analytics.EventAction(analyticsEvent));
+          this.store$.dispatch(new analytics.ClickOutEventAction(analyticsEvent));
           window.open(selectedInsurance._embedded.insurance.url, '_blank');
         } else {
           if (isLoggedIn) {
