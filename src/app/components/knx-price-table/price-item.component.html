@@ -4,9 +4,7 @@
      [ngClass]="{'knx-price-item--highlight': highlight, 'knx-price-item--selected': selected }"
      role="button"
      tabindex="0">
-  <div class="knx-price-item__header hidden-xs">
-    {{ header }}
-  </div>
+  <div class="knx-price-item__header hidden-xs">{{ header }}</div>
 
   <div class="knx-price-item__description" *ngIf="description">
     {{ description }}
