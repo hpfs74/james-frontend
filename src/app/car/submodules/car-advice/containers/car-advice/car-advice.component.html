@@ -48,6 +48,10 @@
 
           <button class="knx-icon-filter knx-side-panel__action hidden-md hidden-lg hidden-md-up knx-button knx-button--secondary knx-button--3d" (click)="knxSidePanel.open()">Personaliseer resultaten</button>
         </ng-container>
+        <knx-final-advice
+          *ngIf="knxWizardService.currentStepIndex === knxWizardService.currentStepRoutes.length - 1"
+          [options]="knxFinalAdviceOptions">
+        </knx-final-advice>
       </knx-chat-stream>
     </div>
   </knx-wizard-rx>
