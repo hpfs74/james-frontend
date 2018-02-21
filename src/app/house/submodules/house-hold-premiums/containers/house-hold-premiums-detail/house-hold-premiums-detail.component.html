@@ -4,7 +4,7 @@
       <div class="knx-collapsible-panel__content">
 
         <knx-ir-row showTooltip="false" showValue="true">
-          <knx-ir-label>Insurance company</knx-ir-label>
+          <knx-ir-label>{{ 'household.premiumDetail.insurance.company.label' | translate }}</knx-ir-label>
           <knx-ir-value>
             <img class="knx-insurance-result__logo"
                  src="{{ insurance?.CompanyLogoUrl }}"
@@ -13,14 +13,14 @@
         </knx-ir-row>
 
         <knx-ir-row showTooltip="false" showValue="true">
-          <knx-ir-label>Insurance type/name</knx-ir-label>
+          <knx-ir-label>{{ 'household.premiumDetail.insurance.type.label' | translate }}</knx-ir-label>
           <knx-ir-value>
             {{insurance?.ProductDescription}} / {{insurance?.PackageDescription}}
           </knx-ir-value>
         </knx-ir-row>
 
         <knx-ir-row [newSection]="true" showTooltip="false" showValue="true">
-          <knx-ir-label>Coverage</knx-ir-label>
+          <knx-ir-label>{{ 'household.premiumDetail.insurance.coverage.label' | translate }}</knx-ir-label>
           <knx-ir-value>
             {{insurance?.HouseholdCoverageDescription}}
           </knx-ir-value>
@@ -28,8 +28,8 @@
 
         <knx-ir-row showTooltip="false" showValue="true">
           <knx-ir-label>
-            Price per month<br/>
-            <small>Incl. BTW and additionals costs</small>
+            {{ 'household.premiumDetail.insurance.pricePerMonth.label' | translate }}<br/>
+            <small>{{ 'household.premiumDetail.insurance.addCosts.label' | translate }}</small>
           </knx-ir-label>
           <knx-ir-value>
             <strong>{{insurance?.Premium | currency:'EUR':true }}</strong>
@@ -37,7 +37,7 @@
         </knx-ir-row>
 
         <knx-ir-row [newSection]="true" showTooltip="false" showValue="true">
-          <knx-ir-label>Own risk</knx-ir-label>
+          <knx-ir-label>{{ 'household.premiumDetail.insurance.ownRisk.label' | translate }}</knx-ir-label>
           <knx-ir-value>
             {{insurance?.Deductables | currency:'EUR':true}}
           </knx-ir-value>
@@ -45,7 +45,7 @@
 
         <knx-ir-row [showTooltip]="false" [showValue]="true">
           <knx-ir-label>
-            Insured amount description
+            {{ 'household.premiumDetail.insurance.insAmtDesc.label' | translate }}
           </knx-ir-label>
           <knx-ir-value>
             {{insurance.ValuablesCoverageDescription}}
@@ -54,7 +54,7 @@
 
         <knx-ir-row showTooltip="false" showValue="true">
           <knx-ir-label>
-            Insured amount
+            {{ 'household.premiumDetail.insurance.insAmt.label' | translate }}
           </knx-ir-label>
           <knx-ir-value>
             {{insurance?.ValuablesInsuredAmount |currency:'EUR':true}}
@@ -91,10 +91,9 @@
       <div class="knx-collapsible-panel__content">
         <div class="row">
           <div class="col-sm-12">
-            <span>Hieronder vind je alle documente van {{insurance?.CompanyName}}.</span><br>
+            <span>{{ 'household.premiumDetail.insurance.documente.companyName.prefix' | translate }} {{insurance?.CompanyName}}.</span><br>
             <span class="knx-collapse-panel__muted">
-              Dit zijn alle documenten, inclusief alle beschikbare extra's en dekkingen. Als jij nient een bepaalde
-              dekking hebt geselecteerd kan je deze gewoon negeren.
+              {{ 'household.premiumDetail.insurance.documente.span' | translate }}
             </span>
           </div>
         </div>
@@ -124,18 +123,18 @@
   <div class="col-sm-8" >
     <knx-step-blocks title="Hoe gaat het nu verder?">
       <knx-step-block>
-        <h3>1. Vul in</h3>
-        <p>Vul alle gegevens in die nodig zijn voor je nieuwe verzekering.</p>
+        <h3>{{ 'household.premiumDetail.footer.head1' | translate }}</h3>
+        <p>{{ 'household.premiumDetail.footer.para1' | translate }}</p>
       </knx-step-block>
 
       <knx-step-block>
-        <h3>2. Controleer</h3>
-        <p>Dubbelcheck of alles goed ingevuld is.</p>
+        <h3>{{ 'household.premiumDetail.footer.head2' | translate }}</h3>
+        <p>{{ 'household.premiumDetail.footer.para2' | translate }}</p>
       </knx-step-block>
 
       <knx-step-block>
-        <h3>3. Bevestig</h3>
-        <p>Gefeliciteerd! Je hebt zojuist flink wat geld bespaard op je autoverzekering!</p>
+        <h3>{{ 'household.premiumDetail.footer.head3' | translate }}</h3>
+        <p>{{ 'household.premiumDetail.footer.para3' | translate }}</p>
       </knx-step-block>
     </knx-step-blocks>
   </div>
