@@ -35,8 +35,10 @@
     "extract:copies": "ngx-translate-extract --input ./src --output ./src/assets/i18n/nl.json --clean --sort --format namespaced-json"
   },
   "husky": {
-    "pre-commit": "commitlint -e && npm run lint:styles && npm run lint",
-    "pre-push": "npm run build && npm run test:ci && npm run security"
+    "hooks": {
+      "pre-commit": "commitlint -e && npm run lint:styles && npm run lint",
+      "pre-push": "npm run build && npm run test:ci && npm run security"
+    }
   },
   "private": true,
   "dependencies": {
