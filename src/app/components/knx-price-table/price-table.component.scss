@@ -1,3 +1,5 @@
+@import '~styles/base.scss';
+
 knx-price-table {
   flex: 1 auto 1;
 }
@@ -18,8 +20,53 @@ knx-price-item.knx-price-item--highlight + knx-price-item {
 
 @media (max-width: 768px) {
   knx-price-item {
-    -ms-flex-positive: 9999;
-    flex-grow: 9999;
-    margin-bottom: 15px;
+    width: 100%;
+  }
+}
+
+div.knx-button {
+  // remove focus for button class because outer div has a tabindex
+  // to support focus/outline on the whole price-item
+  line-height: 2em;
+  outline: none;
+}
+
+.knx-recommended {
+  position: relative;
+  margin-bottom: 13px;
+}
+
+.knx-recommended-wrapper {
+  width: 100%;
+}
+
+.knx-button--toggle-pills {
+  flex-grow: 9999;
+}
+
+@media (max-width: 767px) {
+  knx-price-item.knx-price-item--highlight + knx-price-item {
+    margin-top: 0;
+  }
+
+  .knx-recommended__tick {
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid $knab-primary-yellow;
+  }
+
+  .knx-recommended__tick--0 {
+    right: 87%;
+  }
+
+  .knx-recommended__tick--1 {
+    right: 54%;
+  }
+
+  .knx-recommended__tick--2 {
+    right: 14%;
   }
 }
