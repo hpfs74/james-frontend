@@ -2,7 +2,9 @@
   <div class="knx-card knx-final-buy">
     <div class="row">
       <div class="col-md-12" *ngFor="let section of options.sections; let last = last;">
-        <img *ngIf="section.logoUrl" [src]="section.logoUrl" alt="logoUrl">
+        <div *ngIf="section.logoUrl" class="knx-final--logo" [ngStyle]="{
+          'background-image': 'url(' + section.logoUrl + ')'
+        }"></div>
         <p *ngIf="section.heading"><strong>{{ section.heading }}</strong></p>
         <div class="row">
           <div class="col-8">
