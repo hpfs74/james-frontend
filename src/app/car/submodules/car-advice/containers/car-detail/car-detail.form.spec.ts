@@ -8,7 +8,7 @@ describe('Car Detail Form', () => {
     const mockHouseHold = [
       { label: 'Alleen ikzelf', value: 'CHM' }
     ];
-    form = new CarDetailForm(new FormBuilder(), mockHouseHold);
+    form = new CarDetailForm(new FormBuilder(), mockHouseHold. [], []);
   });
 
   it('should have validation errors defined', () => {

@@ -59,6 +59,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   subscriptions$: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
+  copies: any = {};
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
@@ -66,28 +67,33 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
               public featureToggleService: FeatureConfigService,
               public route: ActivatedRoute,
               public cdRef: ChangeDetectorRef) {
-    this.initializeForms();
-
-    this.selectInitalStates();
-
-    this.setInitialSubscriptions();
-
 
     this.translateService.get([
       'car.advice.steps.detail.stepOptions.label',
-      'car.advice.steps.detail.stepOptions.nextButton.label'
-    ]).subscribe(res => {
-      this.currentStepOptions = {
-        label: res['car.advice.steps.detail.stepOptions.label'],
-        nextButtonLabel: res['car.advice.steps.detail.stepOptions.nextButton.label'],
-        hideBackButton: true,
-        hideNextButton: true
-      };
-    });
+      'car.advice.steps.detail.stepOptions.nextButton.label',
+      'car.advice.steps.detail.form.licensePlate.label',
+      'car.advice.steps.detail.form.licensePlate.placeholder',
+      'car.advice.steps.detail.form.birthDate.label',
 
+      'car.advice.steps.detail.form.claimFreeYears',
+      'car.advice.steps.detail.form.loan.label',
+      'car.advice.steps.detail.form.houseHold.label',
+      'car.advice.steps.detail.form.houseHold.placeholder',
+      'car.advice.steps.detail.form.gender.label',
+      'car.advice.steps.detail.form.gender.placeholder'
+
+    ]).subscribe(res => {
+      this.copies = res;
+
+      this.initializeForms();
+
+      this.selectInitialStates();
+
+      this.setInitialSubscriptions();
+    });
   }
 
-  selectInitalStates(): void {
+  selectInitialStates(): void {
     this.address$ = this.store$.select(fromAddress.getAddress);
     this.car$ = this.store$.select(fromCar.getCarInfo);
 
@@ -103,9 +109,21 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   }
 
   initializeForms(): void {
+    this.currentStepOptions = {
+      label: this.copies['car.advice.steps.detail.stepOptions.label'],
+      nextButtonLabel: this.copies['car.advice.steps.detail.stepOptions.nextButton.label'],
+      hideBackButton: true,
+      hideNextButton: true
+    };
+
     const formBuilder = new FormBuilder();
     this.addressForm = new AddressForm(formBuilder);
-    this.form = new CarDetailForm(formBuilder, this.tagsService.getAsLabelValue('insurance_flow_household'), []);
+    this.form = new CarDetailForm(formBuilder,
+      this.tagsService.getAsLabelValue('insurance_flow_household'),
+      this.tagsService.getAsLabelValue('car_flow_gender'),
+      this.tagsService.getAsLabelValue('car_flow_loan'),
+      this.copies);
+
     this.coverages = createCarCoverages(this.tagsService.getByKey('car_flow_coverage'));
   }
 
