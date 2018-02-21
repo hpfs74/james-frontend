@@ -3,11 +3,9 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <h3>Questions about what you want to cover</h3>
+      <h3>{{ 'household.dekking.title' | translate }}</h3>
 
-      introtext/explanation<br/>
-      introtext<br/>
-      intro<br/>
+      {{ 'household.dekking.comment' | translate }}
     </div>
   </div>
 
@@ -29,15 +27,14 @@
       <knx-card>
 
         <div>
-          <span><b>Outside coverage</b></span>
+          <span><b>{{ 'household.dekking.outsideCoverage.title' | translate }}</b></span>
           <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
             <knx-tooltip>TOOLTIP</knx-tooltip>
           </span>
 
 
           <p>
-            Do you also want to be covered for outside?<br/>
-            This could help when you have often valuables outside of your home.
+            {{ 'household.dekking.outsideCoverage.description' | translate }}
           </p>
         </div>
 
@@ -55,13 +52,13 @@
     <div class="col-sm-12">
       <knx-card>
         <div>
-          <span><b>Commencing date</b></span>
+          <span><b>{{ 'household.dekking.commencingDate.title' | translate }}</b></span>
           <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
             <knx-tooltip>TOOLTIP</knx-tooltip>
           </span>
 
           <p>
-            From when will your insurance will cover?
+            {{ 'household.dekking.commencingDate.title' | translate }}
           </p>
 
           <knx-form-group
@@ -78,22 +75,20 @@
     <div class="col-sm-12">
       <knx-card>
 
-        <h3>Calculate your household value</h3>
+        <h3>{{ 'household.dekking.calcHouseVal.title' | translate }}</h3>
 
-        introtext/explanation<br/>
-        introtext<br/>
-        intro<br/>
+        {{ 'household.dekking.calcHouseVal.description' | translate }}
 
 
         <div class="knx-form-group--separated">
           <div>
-            <span><b>Net Income range</b></span>
+            <span><b>{{ 'household.dekking.calcHouseVal.netIncome.title' | translate }}</b></span>
             <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
             <knx-tooltip>TOOLTIP for roofMaterial</knx-tooltip>
           </span>
 
 
-            <p>What is your net income per month?</p>
+            <p>{{ 'household.dekking.calcHouseVal.netIncome.description' | translate }}</p>
           </div>
 
           <knx-form-group
@@ -107,12 +102,12 @@
         <div class="knx-form-group--separated">
           <div>
             <div>
-              <span><b>Date of birth</b></span>
+              <span><b>{{ 'household.dekking.calcHouseVal.dob.title' | translate }}</b></span>
               <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
               <knx-tooltip>TOOLTIP for second floor</knx-tooltip>
             </span>
             </div>
-            <p>What is your DOB?</p>
+            <p>{{ 'household.dekking.calcHouseVal.dob.description' | translate }}</p>
           </div>
 
           <knx-form-group
@@ -126,12 +121,12 @@
         <div class="knx-form-group--separated">
           <div>
             <div>
-              <span><b>Family situation</b></span>
+              <span><b>{{ 'household.dekking.calcHouseVal.familySituation.title' | translate }}</b></span>
               <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
               <knx-tooltip>TOOLTIP </knx-tooltip>
             </span>
             </div>
-            <p>Please select what your current situation is</p>
+            <p>{{ 'household.dekking.calcHouseVal.familySituation.description' | translate }}</p>
           </div>
 
           <knx-form-group
@@ -143,12 +138,11 @@
 
         <div class="knx-form-group--separated">
           <span class="valuable-contents-ab">
-            Valuable contents above &euro; 34.000
+            {{ 'household.dekking.calcHouseVal.disclaimer.title' | translate }}
           </span>
 
           <div class="currently-we-do-not">
-            Currently we do not insure valuables with values above €34.000.
-            Please contact us if you have any questions regarding insurances for valuables.
+            {{ 'household.dekking.calcHouseVal.disclaimer.description' | translate }}
           </div>
         </div>
 
@@ -159,7 +153,7 @@
           modifier="knx-house-hold-amount-rect--nomargin">
 
           <div class="knx-house-hold-rect">
-            <p class="est-household-value">Est. household value</p>
+            <p class="est-household-value">{{ 'household.dekking.calcHouseVal.estimatedVal.suffix' | translate }}</p>
             <p class="knx-house-hold-amount">{{(amount$ | async)?.InsuredAmount | currency:'EUR':true:'2.0-4'}}</p>
           </div>
         </knx-async-preview>

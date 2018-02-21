@@ -83,7 +83,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
         hideBackButton: true,
         hideNextButton: true
       };
-    })
+    });
 
   }
 
