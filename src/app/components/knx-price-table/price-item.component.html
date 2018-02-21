@@ -1,10 +1,10 @@
-<div [hidden]="!highlight" class="knx-recommended">{{ badge }}</div>
+<div [hidden]="!highlight" class="knx-recommended hidden-xs">{{ badge }}</div>
 
 <div class="knx-price-item knx-card"
      [ngClass]="{'knx-price-item--highlight': highlight, 'knx-price-item--selected': selected }"
      role="button"
      tabindex="0">
-  <div class="knx-price-item__header" >
+  <div class="knx-price-item__header hidden-xs">
     {{ header }}
   </div>
 
@@ -22,7 +22,7 @@
 
   <div class="knx-button"
        [attr.data-btn]="selected ? dataActive : dataInactive"
-       [ngClass]="{ 'knx-button--secondary knx-button--ghost': !selected, 'knx-button--primary': selected }">
+       [ngClass]="{ 'knx-button--secondary knx-button--ghost': !selected, 'knx-button--primary knx-button--3d': selected }">
     {{ selected ? selectedLabel : unselectedLabel }}
   </div>
 </div>
