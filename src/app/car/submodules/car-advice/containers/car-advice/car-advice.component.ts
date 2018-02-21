@@ -89,7 +89,10 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
         'car.advice.steps.step2.title',
         'car.advice.steps.step3.title'])
       .subscribe(data => {
-        this.formSteps.push({label: data});
+        this.formSteps = Object
+          .keys(data)
+          .map(key => data[key])
+          .map(v => ({label: v}));
       });
   }
 
