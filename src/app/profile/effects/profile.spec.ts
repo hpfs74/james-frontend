@@ -1,25 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
-import { hot, cold } from 'jasmine-marbles';
 
 import { ProfileEffects } from './profile';
 import { ProfileService } from '../services/profile.service';
-import { Profile } from '../models';
 
 import * as profile from '../actions/profile';
 import * as profileReducer from '../reducers/profile';
 import { AuthService } from '../../auth/services/auth.service';
-import { BaseRequestOptions, Http } from '@angular/http';
 import { LocalStorageService } from '../../core/services/localstorage.service';
-import { MockBackend } from '@angular/http/testing';
-import { AuthHttp } from '../../auth/services/auth-http.service';
 
 describe('ProfileEffects', () => {
   let effects: ProfileEffects;
   let actions: Observable<any>;
   let addressService: any;
-  let profileExample: Profile;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

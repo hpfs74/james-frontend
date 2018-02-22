@@ -13,7 +13,7 @@ export const profileRoutes: Routes = [
     component: ProfileEditComponent,
     data: {
       title: 'Mijn account'
-    },
+    }
   },
   {
     path: 'profile-overview',

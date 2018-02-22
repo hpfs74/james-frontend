@@ -1,20 +1,28 @@
 <div class="row">
-  <div class="col-md-12 knx-center">
-    <h2>We're sorry you want to leave us.
-    <br>are you really sure?</h2>
-    <p>If so, your account will be deleted and all your saved data will be removed from all Knab services</p>
+  <div class="col-md-12 knx-center" *ngIf="!(hasPurchasedInsurances() | async)">
+    <h2>Jammer dat je ons gaat verlaten.
+    <br>Weet je het echt zeker?</h2>
+    <p>Als dat het geval is, deactiveren we je account. Alle opgeslagen data wordt verwijderd.</p>
+  </div>
+
+  <div class="col-md-12 knx-center" *ngIf="hasPurchasedInsurances() | async">
+    <p>Je kunt je account niet verwijderen. Je hebt namelijk een verzekering afgesloten via Knab Verzekeren. Deze is gekoppeld aan jouw account.</p>
+    <p>Je kunt het beste even contact opnemen met onze Servicedesk.</p>
   </div>
 </div>
+
 <div class="row" *ngIf="error$ | async">
   <div class="col-md-12">
-    <p class="knx-error">{{ (error$ | async) }}</p>
+    <p class="knx-error">Door een technische fout kun je op dit moment je account niet verwijderen. Probeer het later nog een keer.</p>
   </div>
 </div>
+
 <div class="row">
-  <div class="col-md-6">
-    <button class="knx-button knx-button--secondary knx-button--ghost" (click)="cancel()">go back</button>
+  <div [ngClass]="{ 'col-md-6': !( hasPurchasedInsurances() | async), 'col-md-12': hasPurchasedInsurances() | async }">
+    <button class="knx-button knx-button--secondary knx-button--ghost" (click)="cancel()">Ga Terug</button>
   </div>
-  <div class="col-md-6">
-    <button class="knx-button knx-button--primary" [class.knx-button--pending]="pending$ | async" (click)="deleteProfile()">yes. Close account</button>
+
+  <div class="col-md-6" *ngIf="!( hasPurchasedInsurances() | async)">
+    <button class="knx-button knx-button--primary" [class.knx-button--pending]="pending$ | async" (click)="deleteProfile()">ja, Verwijder Account</button>
   </div>
 </div>

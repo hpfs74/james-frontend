@@ -1,4 +1,3 @@
-import { createSelector } from '@ngrx/store';
 import { Settings } from '../models/settings';
 import * as SettingsActions from '../actions/settings';
 
