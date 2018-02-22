@@ -13,6 +13,7 @@ import * as houseHoldData from '@app/house/actions/house-hold-data';
 import * as wizardActions from '@core/actions/wizard';
 import * as houseDataActions from '@app/house/actions/house-data';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'knx-house-hold-premiums-buy',
@@ -33,6 +34,7 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
     this.form = new HouseHoldPremiumsBuyForm(formBuilder);
 
     this.currentStepOptions = {
+      backButtonLabel: 'Terug',
       nextButtonLabel: 'Request insurance',
       hideBackButton: false,
       hideNextButton: false,
@@ -48,6 +50,10 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
     }));
 
     this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
+  }
+
+  goToPrevStep() {
+    this.store$.dispatch(new wizardActions.Back());
   }
 
   goToNextStep(event?: any) {
