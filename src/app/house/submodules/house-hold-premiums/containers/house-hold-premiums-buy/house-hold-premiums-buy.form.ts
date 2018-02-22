@@ -35,7 +35,6 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControlName: 'name',
         formControl: this.formGroup.get('name'),
         validationErrors: this.validationErrors,
-        showErrorMessages: false,
         label: 'Your name',
         type: 'text',
         inputOptions: {
@@ -49,7 +48,6 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        showErrorMessages: false,
         label: 'Je e-mailadres',
 
         inputOptions: {
@@ -79,11 +77,11 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControl: this.formGroup.get('receiveUpdate'),
         type: 'checkbox',
         inputOptions: {
-          items: [{
+
             label: 'I want to receive updates regarding Knab services',
             value: 'true'
-          }]
-        }
+
+        } as UIPair
       }
     };
   }

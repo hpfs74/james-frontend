@@ -22,8 +22,16 @@
   padding: 20px 10px 8px;
 }
 
-div.knx-button {
-  // remove focus for button class because outer div has a tabindex
-  // to support focus/outline on the whole price-item
-  outline: none;
+@media (max-width: 767px) {
+  .knx-price-item {
+    display: none;
+
+    &.knx-price-item--selected {
+      display: block;
+    }
+
+    &.knx-price-item--highlight {
+      margin-top: 7px;
+    }
+  }
 }
