@@ -253,6 +253,42 @@
       "translation_text": "Nee"
     }
   ],
+  "car_flow_gender": [
+    {
+      "tag": "M",
+      "blocked": false,
+      "alert": false,
+      "order": 1,
+      "description": "Man",
+      "translation_text": "Man"
+    },
+    {
+      "tag": "F",
+      "blocked": false,
+      "alert": false,
+      "order": 2,
+      "description": "Vrouw",
+      "translation_text": "Vrouw"
+    }
+  ],
+  "car_flow_loan": [
+    {
+      "tag": true,
+      "blocked": false,
+      "alert": false,
+      "order": 1,
+      "description": "Ja",
+      "translation_text": "Ja"
+    },
+    {
+      "tag": false,
+      "blocked": false,
+      "alert": false,
+      "order": 2,
+      "description": "Nee",
+      "translation_text": "Nee"
+    }
+  ],
   "insurance_flow_household": [
     {
       "_id": "42570fc3dca5df7",
