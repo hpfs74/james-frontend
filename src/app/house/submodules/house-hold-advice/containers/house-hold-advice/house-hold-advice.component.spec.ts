@@ -7,6 +7,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 import { setUpTestBed } from '@app/../test.common.spec';
 
@@ -34,12 +35,12 @@ import { HouseHoldAdviceComponent } from './house-hold-advice.component';
 import * as fromHouse from '@app/house/reducers';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
-let translations: any = {"TEST": "This is a test"};
+let translations: any = {'TEST': 'This is a test'};
 class TranslateLoaderMock implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
-};
+}
 
 describe('Component: HouseHoldAdviceComponent', () => {
   let comp: HouseHoldAdviceComponent;
@@ -62,7 +63,6 @@ describe('Component: HouseHoldAdviceComponent', () => {
           'app': combineReducers(fromCore.reducers),
           'household': combineReducers(fromHouse.reducers)
         }),
-        ,
         TranslateModule.forRoot({
           loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
         })

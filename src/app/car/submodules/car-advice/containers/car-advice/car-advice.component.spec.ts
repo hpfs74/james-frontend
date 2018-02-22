@@ -7,6 +7,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 import { setUpTestBed } from './../../../../../../test.common.spec';
 
@@ -45,12 +46,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 
-let translations: any = {"TEST": "This is a test"};
+let translations: any = {'TEST': 'This is a test'};
 class TranslateLoaderMock implements TranslateLoader {
  getTranslation(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
-};
+}
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
