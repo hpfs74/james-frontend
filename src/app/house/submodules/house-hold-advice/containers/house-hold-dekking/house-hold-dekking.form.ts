@@ -22,7 +22,7 @@ export class HouseHoldDekkingForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       coverage: [null, Validators.required],
-      outsideCoverage: [null],
+      outsideCoverage: ['N'],
       netIncomeRange: [null, Validators.required],
       dateOfBirth: [null,
         [
