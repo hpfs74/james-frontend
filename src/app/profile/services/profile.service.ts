@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, URLSearchParams } from '@angular/http';
+import { Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { AuthHttp } from '../../auth/services/auth-http.service';
+import { AuthHttp } from '@app/auth/services';
 import { environment } from '@env/environment';
 import { Profile } from '../models/profile';
-import { Insurance } from '../../insurance/models';
+import { Insurance } from '@app/insurance/models';
 import { Settings } from '../models/settings';
 import { LocalStorageService } from '@app/core/services';
 

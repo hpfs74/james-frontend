@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ProfileForm } from './profile.form';
-import { Profile, Settings } from '../../models';
+import { Profile } from '../../models';
 import { Address } from '@app/address/models';
 import * as FormUtils from '@app/utils/base-form.utils';
 import { AddressLookupComponent } from '@app/address/containers/address-lookup.component';
