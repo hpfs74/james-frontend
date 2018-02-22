@@ -106,7 +106,7 @@ describe('Car reducer', () => {
       const action = new GetInfoFailure('value');
       const expectedResult = {
         loading: false,
-        loaded: false,
+        loaded: true,
         error: true,
         license: null,
         info: null,
