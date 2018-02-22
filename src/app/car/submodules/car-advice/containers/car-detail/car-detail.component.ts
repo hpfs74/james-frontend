@@ -39,7 +39,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { State as CarState } from '@app/car/reducers/car';
 import { CarDataAvailableAction } from '@app/core/actions/analytics';
-import { CarDataAnaylitcsEvent } from '@app/core/models/analytics';
+import { CarDataAnaylitcsEvent, CarAnalytics } from '@app/core/models/analytics';
 
 @Component({
   selector: 'knx-car-detail-form',
