@@ -1,18 +1,18 @@
 <p>Ga verder met het aanvragen van jouw nieuwe verzekering:</p>
 <div class="row">
-  <div class="col-md-7 col-12">
+  <div class="col-md-9 col-12">
     <div class="knx-card">
       <div class="row">
-        <div class="col-md-4 col knx-logo">
+        <div class="col-md-3 col knx-logo">
           <div class="knx-center-container">
             <div class="knx-center-element">
               <img [src]="insurance.CompanyLogoUrl" alt="">
             </div>
           </div>
         </div>
-        <div class="col-md-4 col">
+        <div class="col-md-5 col">
           <div class="knx-center-container">
-            <div class="knx-center-element knx-center-element__truncate">
+            <div class="knx-center-element">
               <h3>
                 {{ insurance.PackageDescription }}
               </h3>
@@ -24,7 +24,7 @@
           <div class="knx-center-container">
             <div class="knx-center-element">
               <h3>
-                {{ insurance.Deductables | currency:'EUR':true:'1.1-2' }}
+                {{ insurance.Deductables | currency:'EUR':true }}
               </h3>
               <p>Eigen risico</p>
             </div>
