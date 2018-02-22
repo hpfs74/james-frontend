@@ -28,8 +28,7 @@
 
       <div class="col-md-4 knx-insurance-result__buy">
         <div class="knx-insurance-result__premium knx-insurance-result__price">
-          <div innerHTML="{{ 'general.insurance.monthly_premium' | translate: {price: insurance.monthly_premium | currency:'EUR':true} }}"></div><br>
-          {{ insurance.monthly_premium | currency:'EUR':true }} <span>per maand</span>
+          {{ insurance.monthly_premium | currency:'EUR':true }} <span>{{ 'general.monthly' | translate }}</span>
         </div>
 
         <button role="button" class="knx-button knx-button--fullwidth"
