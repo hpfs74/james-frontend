@@ -1,6 +1,5 @@
-import { SaveSuccessAction } from './../actions/profile';
 import { Injectable } from '@angular/core';
-import { Action, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/withLatestFrom';
 
 import { ProfileService } from '../services/profile.service';
-import { Profile, Settings } from '../models';
+import { Settings } from '../models';
 
 import * as fromProfile from '../reducers';
 import * as settings from '../actions/settings';

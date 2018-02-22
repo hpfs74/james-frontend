@@ -1,4 +1,3 @@
-import { Profile } from '../models/profile';
 import * as ProfileActions from '../actions/profile';
 
 export type Action = ProfileActions.All;

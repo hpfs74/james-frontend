@@ -1,14 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
-import { BaseForm } from '@app/shared/forms/base-form';
-import { Profile } from '../../models/profile';
-import { Settings } from '../../models/settings';
+import { Profile } from '@app/profile/models';
 import { ProfileForm } from '../../components/profile-form/profile.form';
 import { TagsService } from '@app/core/services';
 
