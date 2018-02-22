@@ -170,6 +170,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
               FamilyComposition: detailForm.value.familySituation,
               AmountMoreThan12KAudioVisualComp: 0,
               AmountMoreThan6KJewelry: 0,
+              AmountMoreThan6KTenantsInterest: 0,
               AmountMoreThan15KSpecialPossesion: 0,
               BreadWinnerBirthdate: detailForm.value.dateOfBirth,
               BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
