@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { UIPair } from '@core/models/ui-pair';
 import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 import 'rxjs/add/operator/filter';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'knx-house-hold-house-type-form',
@@ -36,10 +37,17 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
   address: Address;
   alive: boolean;
   roomValues: UIPair[];
+  copies: any = {};
 
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService) {
-
+              private tagsService: TagsService,
+              private translateService: TranslateService) {
+    this.translateService.get([
+      'household.common.step.options.backButtonLabel',
+      'household.houseType.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
 
     this.initializeForms();
     this.selectInitialStates();
@@ -48,8 +56,8 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
     // set the wizard configuration
     this.currentStepOptions = {
       label: 'Huis type',
-      backButtonLabel: 'Terug',
-      nextButtonLabel: 'Huis details',
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      nextButtonLabel: this.copies['household.houseType.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false
     };

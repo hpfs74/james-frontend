@@ -19,6 +19,7 @@ import { getHouseHoldDataInfo } from '@app/house/reducers';
 import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'knx-house-hold-house-detail-form',
@@ -32,18 +33,27 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   subscriptions: Subscription[] = [];
+  copies: any = {};
 
 
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService) {
+              private tagsService: TagsService,
+              private translateService: TranslateService) {
+    this.translateService.get([
+      'household.common.step.options.backButtonLabel',
+      'household.houseDetails.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
+
     this.initializeForms();
     this.selectInitalStates();
     this.setInitialSubscription();
 
     this.currentStepOptions = {
       label: 'Huis details',
-      backButtonLabel: 'Terug',
-      nextButtonLabel: 'Dekking',
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      nextButtonLabel: this.copies['household.houseDetails.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false
     };
