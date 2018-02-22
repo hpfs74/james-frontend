@@ -17,7 +17,7 @@ export interface ClickoutAnalyticsEvent {
   product_name: string;
 }
 
-interface CarAnalytics {
+export interface CarAnalytics {
   brand: string;
   model: string;
   color: string;
@@ -28,7 +28,7 @@ interface CarAnalytics {
   dayValue: string;
 }
 
-interface UserAnayltics {
+export interface UserAnayltics {
   damageFreeYears: string;
   loan: string;
   gender: string;
@@ -37,22 +37,22 @@ interface UserAnayltics {
   familySituation: string;
 }
 
-interface EcommerceDetailActionFieldAnalytics {
+export interface EcommerceDetailActionFieldAnalytics {
   list?: string;
 }
 
-interface EcommerceDetailProductsAnalytics {
+export interface EcommerceDetailProductsAnalytics {
   name: string;
   category: string;
   variant: string;
 }
 
-interface EcommerceDetailAnalytics {
+export interface EcommerceDetailAnalytics {
   actionField: EcommerceDetailActionFieldAnalytics;
   products: EcommerceDetailProductsAnalytics[];
 }
 
-interface EcommerceAnalytics {
+export interface EcommerceAnalytics {
   detail: EcommerceDetailAnalytics;
 }
 

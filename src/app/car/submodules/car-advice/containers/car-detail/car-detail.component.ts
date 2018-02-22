@@ -37,6 +37,9 @@ import { KNXFeatureToggleService } from '@knx/feature-toggle';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { State as CarState } from '@app/car/reducers/car';
+import { CarDataAvailableAction } from '@app/core/actions/analytics';
+import { CarDataAnaylitcsEvent } from '@app/core/models/analytics';
 
 @Component({
   selector: 'knx-car-detail-form',
@@ -266,7 +269,43 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 // so we use length here to determine when to proceed
     if (licensePlate && licensePlate.length === validLength) {
       this.store$.dispatch(new car.GetInfo(licensePlate));
+      this.dispatchCarDataAvailableAction();
     }
+  }
+
+  dispatchCarDataAvailableAction() {
+    let carState$ = this.store$.select(fromCar.getCarState)
+      .filter(carState => carState.loaded)
+      .subscribe((carState: CarState) => {
+        let carLoadingError = '';
+        let carData = {} as CarAnalytics;
+        if (carState.error && !carState.license) {
+          carLoadingError = this.form.validationErrors['licensePlateRDC']();
+        }
+        if (carState.info) {
+          carData.brand = carState.info.make;
+          carData.model = carState.info.model;
+          carData.color = carState.info.color;
+          carData.fuel = carState.info.fuel;
+          carData.transmission = this.getTransmission(carState.info);
+          carData.constructionYear = carState.info.year.toString();
+          carData.purchaseValue = carState.info.price_consumer_incl_vat.toString();
+          carData.dayValue = carState.info.current_value.toString();
+        }
+        let carDataAvailableAction: CarDataAnaylitcsEvent = {
+          event: 'carDataAvailable',
+          error: carLoadingError,
+          car: carData
+        };
+        this.store$.dispatch(new CarDataAvailableAction(carDataAvailableAction));
+        carState$.unsubscribe();
+      });
+  }
+
+  private getTransmission(data) {
+    return data.nicci_cartransmission_manual_transmission ||
+      data.nicci_cartransmission_automatic_transmission ||
+      data.transmission_nl;
   }
 
   private normalizeAddressHouseNumber(payload: any) {

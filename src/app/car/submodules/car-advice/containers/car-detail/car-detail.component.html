@@ -17,7 +17,7 @@
 
             <knx-async-preview
               [loading]="carInfoLoading$ | async"
-              [loaded]="carInfoLoaded$ | async"
+              [loaded]="(carInfoLoaded$ | async) && !(carInfoError$ | async)"
               [hidden]="!(carInfoLoading$ | async) && featureToggleService.isOn('carInfo')">
               <knx-car-info *ngIf="!featureToggleService.isOn('carInfo')" [data]="car$ | async"></knx-car-info>
             </knx-async-preview>
