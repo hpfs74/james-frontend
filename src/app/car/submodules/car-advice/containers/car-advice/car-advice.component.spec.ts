@@ -43,6 +43,14 @@ import { Router, RouterModule } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
+import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
+
+let translations: any = {"TEST": "This is a test"};
+class TranslateLoaderMock implements TranslateLoader {
+ getTranslation(lang: string): Observable<any> {
+    return Observable.of(translations);
+  }
+};
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -51,6 +59,7 @@ describe('Component: CarAdviceComponent', () => {
   let actions: Observable<any>;
   let store: Store<fromCar.State>;
   let tagsService: TagsService;
+  let translateService: TranslateService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -65,6 +74,9 @@ describe('Component: CarAdviceComponent', () => {
           'car': combineReducers(fromCar.reducers),
           'insurance': combineReducers(fromInsurance.reducers),
           'profile': combineReducers(fromProfile.reducers)
+        }),
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
         })
       ],
       declarations: [
@@ -90,6 +102,8 @@ describe('Component: CarAdviceComponent', () => {
 
     store = TestBed.get(Store);
     tagsService = TestBed.get(TagsService);
+    translateService = TestBed.get(TranslateService);
+
     spyOn(store, 'dispatch').and.callThrough();
 
     fixture = TestBed.createComponent(CarAdviceComponent);
