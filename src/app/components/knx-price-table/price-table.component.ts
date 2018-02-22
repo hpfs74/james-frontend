@@ -11,6 +11,23 @@ interface PriceTableLabelOptions {
   styleUrls: ['./price-table.component.scss'],
   template: `
     <div class="knx-price-table">
+      <div class="knx-recommended-wrapper visible-xs">
+        <div *ngFor="let item of items; let i = index"
+             [hidden]="!item.highlight"
+             class="knx-recommended">
+          {{ item.badge }}
+          <div class="knx-recommended__tick knx-recommended__tick--{{ i }}"></div>
+        </div>
+      </div>
+
+      <div class="knx-button knx-button--toggle-pills visible-xs"
+           *ngFor="let item of items; let i = index"
+           (click)="selectItem(i, true)"
+           [attr.data-btn]="item.selected ? item.dataActive : item.dataInactive"
+           [ngClass]="{ '': !item.selected, 'knx-button--toggle-pills-active': item.selected }">
+        {{ item.header }}
+      </div>
+
       <knx-price-item
         [ngClass]="{ 'knx-price-item--highlight': item.highlight }"
         *ngFor="let item of items; let i = index"
@@ -26,7 +43,7 @@ interface PriceTableLabelOptions {
         [selectedLabel]="labels.selected"
         [unselectedLabel]="labels.unselected"
         [description]="item.description"
-        (click)="selectItem(i)">
+        (click)="selectItem(i, false)">
       </knx-price-item>
     </div>`
 })
@@ -48,10 +65,10 @@ export class PriceTableComponent implements OnDestroy {
     }
   }
 
-  selectItem(index: number) {
+  selectItem(index: number, isMobile: boolean) {
     let selected = this.items[index].selected;
 
-    if (selected) {
+    if (selected && !isMobile) {
       // second click
       this.onSubmit.emit();
     } else {
