@@ -50,8 +50,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   coverages: Price[];
   address$: Observable<Address>;
   car$: Observable<Car>;
-  isCarLoading$: Observable<boolean>;
-  isCarFailed$: Observable<boolean>;
+  carInfoLoading$: Observable<boolean>;
+  carInfoError$: Observable<boolean>;
+  carInfoLoaded$: Observable<boolean>;
   advice$: Observable<any>;
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
@@ -97,8 +98,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     this.address$ = this.store$.select(fromAddress.getAddress);
     this.car$ = this.store$.select(fromCar.getCarInfo);
 
-    this.isCarLoading$ = this.store$.select(fromCar.getCarInfoLoading);
-    this.isCarFailed$ = this.store$.select(fromCar.getCarInfoError);
+    this.carInfoLoading$ = this.store$.select(fromCar.getCarInfoLoading);
+    this.carInfoError$ = this.store$.select(fromCar.getCarInfoError);
+    this.carInfoLoaded$ = this.store$.select(fromCar.getCarInfoLoaded);
 
     this.isCoverageLoading$ = this.store$.select(fromCar.getCoverageLoading);
     this.isCoverageError$ = this.store$.select(fromCar.getCoverageError);
