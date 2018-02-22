@@ -26,7 +26,7 @@
             <div class="container-fluid">
               <div class="knx-side-panel-content">
                 <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
-                        (click)="knxSidePanel.close()">Verder
+                        (click)="knxSidePanel.close()">{{ 'household.advice.moreButton.label' | translate }}
                 </button>
               </div>
             </div>
@@ -38,18 +38,18 @@
       <div class="knx-house-hold-advice-motivation">
         <ul>
           <li>
-            <b>Objectief</b><br/>
-            We vergelijken meer dan 40
+            <b>{{ 'household.advice.usp.objective.title' | translate }}</b><br/>
+            {{ 'household.advice.usp.objective.content' | translate }}
           </li>
 
           <li>
-            <b>Bespaar</b><br/>
-            Tot 15% korting op elke verzekering
+            <b>{{ 'household.advice.usp.save.title' | translate }}</b><br/>
+            {{ 'household.advice.usp.save.content' | translate }}
           </li>
 
           <li>
-            <b>Overstaphulp</b><br>
-            Wij regelen overstap
+            <b>{{ 'household.advice.usp.overstaphulp.title' | translate }}</b><br>
+            {{ 'household.advice.usp.overstaphulp.content' | translate }}
           </li>
         </ul>
       </div>

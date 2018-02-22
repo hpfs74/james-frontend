@@ -253,6 +253,42 @@
       "translation_text": "Nee"
     }
   ],
+  "car_flow_gender": [
+    {
+      "tag": "M",
+      "blocked": false,
+      "alert": false,
+      "order": 1,
+      "description": "Man",
+      "translation_text": "Man"
+    },
+    {
+      "tag": "F",
+      "blocked": false,
+      "alert": false,
+      "order": 2,
+      "description": "Vrouw",
+      "translation_text": "Vrouw"
+    }
+  ],
+  "car_flow_loan": [
+    {
+      "tag": true,
+      "blocked": false,
+      "alert": false,
+      "order": 1,
+      "description": "Ja",
+      "translation_text": "Ja"
+    },
+    {
+      "tag": false,
+      "blocked": false,
+      "alert": false,
+      "order": 2,
+      "description": "Nee",
+      "translation_text": "Nee"
+    }
+  ],
   "insurance_flow_household": [
     {
       "_id": "42570fc3dca5df7",
@@ -2523,42 +2559,42 @@
   "house_hold_flow_rooms_count": [
     {
       "tag": 2,
-      "translation_label": "2 or less rooms",
-      "translation_text": "2 or less rooms"
+      "translation_label": "2 or less",
+      "translation_text": "2 or less"
     },
     {
       "tag": 3,
-      "translation_label": "3 rooms",
-      "translation_text": "3 rooms"
+      "translation_label": "3",
+      "translation_text": "3"
     },
     {
-      "translation_label": "4 rooms",
-      "translation_text": "4 rooms",
+      "translation_label": "4",
+      "translation_text": "4",
       "tag": 4
     },
     {
-      "translation_label": "5 rooms",
-      "translation_text": "5 rooms",
+      "translation_label": "5",
+      "translation_text": "5",
       "tag": 5
     },
     {
-      "translation_label": "6 rooms",
-      "translation_text": "6 rooms",
+      "translation_label": "6",
+      "translation_text": "6",
       "tag": 6
     },
     {
-      "translation_label": "7 rooms",
-      "translation_text": "7 rooms",
+      "translation_label": "7",
+      "translation_text": "7",
       "tag": 7
     },
     {
-      "translation_label": "8 rooms",
-      "translation_text": "8 rooms",
+      "translation_label": "8",
+      "translation_text": "8",
       "tag": 8
     },
     {
-      "translation_label": "9 or more rooms",
-      "translation_text": "9 or more rooms",
+      "translation_label": "9 or more",
+      "translation_text": "9 or more",
       "tag": 9
     }
   ],
@@ -2771,8 +2807,8 @@
       "tag": "1000"
     },
     {
-      "translation_text": "Tot en met € 1.000",
-      "translation_label": "Tot en met € 1.000",
+      "translation_text": "€ 1.001 tot en met € 2.000",
+      "translation_label": "€ 1.001 tot en met € 2.000",
       "tag": "2000"
     },
     {

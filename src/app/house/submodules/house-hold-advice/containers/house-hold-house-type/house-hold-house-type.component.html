@@ -9,17 +9,17 @@
   <div class="row">
     <div class="col-sm-12">
       <knx-card>
-        <h3>Huis type</h3>
+        <h3>{{ 'household.houseType.title' | translate }}</h3>
 
-        <p>Your living insurance, exaplin why needed, and how it can help you (what are you insured for)</p>
+        <p>{{ 'household.houseType.comment' | translate }}</p>
 
         <div>
-          <span><b>Rooms</b></span>
+          <span><b>{{ 'household.houseType.rooms.title' | translate }}</b></span>
           <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
             <knx-tooltip>TOOLTIP</knx-tooltip>
           </span>
 
-          <p>How many rooms does your house have (incl. living, bath, etc)</p>
+          <p>{{ 'household.houseType.rooms.description' | translate }}</p>
         </div>
 
         <knx-radio-navigator
@@ -38,13 +38,13 @@
       <knx-card>
         <div>
 
-          <span><b>Surface Area</b></span>
+          <span><b>{{ 'household.houseType.surfaceArea.title' | translate }}</b></span>
           <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
             <knx-tooltip>TOOLTIP for surface</knx-tooltip>
           </span>
 
 
-          <p>Please select what's relevant for your specific situation</p>
+          <p>{{ 'household.houseType.surfaceArea.description' | translate }}</p>
         </div>
 
         <knx-form-group
@@ -62,12 +62,12 @@
       <knx-card>
         <div>
           <div>
-            <span><b>Building kind</b></span>
+            <span><b>{{ 'household.houseType.buildingKind.title' | translate }}</b></span>
             <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
               <knx-tooltip>TOOLTIP for building type</knx-tooltip>
             </span>
           </div>
-          <p>What kind of building do you live in?</p>
+          <p>{{ 'household.houseType.buildingKind.description' | translate }}</p>
         </div>
 
         <knx-form-group
@@ -84,12 +84,12 @@
       <knx-card>
         <div>
           <div>
-            <span><b>Select build year</b></span>
+            <span><b>{{ 'household.houseType.buildYear.title' | translate }}</b></span>
             <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
               <knx-tooltip>TOOLTIP select build year</knx-tooltip>
             </span>
           </div>
-          <p>In what period is your house been built?</p>
+          <p>{{ 'household.houseType.buildYear.description' | translate }}</p>
         </div>
 
         <knx-form-group

@@ -10,7 +10,6 @@
     "knab"
   ],
   "scripts": {
-    "commitmsg": "commitlint -e && npm run lint:styles && npm run lint",
     "postcheckout": "./hooks/post-checkout $GIT_PARAMS",
     "postmerge": "./hooks/post-merge $GIT_PARAMS",
     "prepush": "npm run test:ci && npm run security",
@@ -35,6 +34,12 @@
     "clean": "rimraf -- node_modules dist",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
     "extract:copies": "ngx-translate-extract --input ./src --output ./src/assets/i18n/nl.json --clean --sort --format namespaced-json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "commitlint -e && npm run lint:styles && npm run lint",
+      "pre-push": "npm run build && npm run test:ci && npm run security"
+    }
   },
   "private": true,
   "dependencies": {
@@ -145,6 +150,7 @@
     "protractor": "~5.1.2",
     "retire": "^1.4.0",
     "rimraf": "^2.6.2",
+    "run-node": "^0.2.0",
     "rxjs-tslint-rules": "^3.1.2",
     "standard-version": "^4.2.0",
     "stylelint": "^8.1.1",

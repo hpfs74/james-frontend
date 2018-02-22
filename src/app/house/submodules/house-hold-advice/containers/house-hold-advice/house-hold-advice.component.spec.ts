@@ -32,6 +32,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
 import { HouseHoldAdviceComponent } from './house-hold-advice.component';
 import * as fromHouse from '@app/house/reducers';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 describe('Component: HouseHoldAdviceComponent', () => {
   let comp: HouseHoldAdviceComponent;
@@ -47,6 +48,7 @@ describe('Component: HouseHoldAdviceComponent', () => {
         BrowserAnimationsModule,
         RouterTestingModule,
         SharedModule,
+        TranslateModule.forRoot(),
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
@@ -70,7 +72,8 @@ describe('Component: HouseHoldAdviceComponent', () => {
         {
           provide: KNXWizardRxService,
           useValue: KNXWizardServiceMock
-        }
+        },
+        TranslateService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });

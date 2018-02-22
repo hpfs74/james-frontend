@@ -1,6 +1,6 @@
 <div class="container knx-car-advice-loader">
   <knx-loader [visible]="savedInsurancesLoading$ | async">
-    Laden...
+    {{ 'car.advice.loading' | translate }}
   </knx-loader>
 </div>
 
@@ -41,12 +41,14 @@
                   [show]="knxWizardService.currentStepIndex === 1">
                 </knx-car-extras>
 
-                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow" (click)="knxSidePanel.close()">Verder</button>
+                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
+                        (click)="knxSidePanel.close()">{{ 'car.advice.moreButton.label' | translate }}</button>
               </div>
             </div>
           </knx-side-panel>
 
-          <button class="knx-icon-filter knx-side-panel__action hidden-md hidden-lg hidden-md-up knx-button knx-button--secondary knx-button--3d" (click)="knxSidePanel.open()">Personaliseer resultaten</button>
+          <button class="knx-icon-filter knx-side-panel__action hidden-md hidden-lg hidden-md-up knx-button knx-button--secondary knx-button--3d"
+                  (click)="knxSidePanel.open()">{{ 'car.advice.personalizeButton.label' | translate }}</button>
         </ng-container>
         <knx-final-advice
           *ngIf="knxWizardService.currentStepIndex === knxWizardService.currentStepRoutes.length - 1"

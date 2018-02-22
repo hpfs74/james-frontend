@@ -5,6 +5,7 @@ import { UIPair } from '@core/models/ui-pair';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
 import { birthDateValidator, minNumberValidator, maxNumberValidator } from '@utils/base-form.validators';
 
+
 export class CarDetailForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
@@ -20,7 +21,11 @@ export class CarDetailForm extends BaseForm {
     claimFreeYears: () => `De ingevulde waarde ligt niet tussen 0 en 50`
   };
 
-  constructor(private fb: FormBuilder, houseHold: Array<UIPair>) {
+  constructor(private fb: FormBuilder,
+              private houseHold: Array<UIPair>,
+              private gender: Array<UIPair>,
+              private loan: Array<UIPair>,
+              private copies: string[] = []) {
     super();
 
     this.formGroup = this.fb.group({
@@ -54,16 +59,16 @@ export class CarDetailForm extends BaseForm {
       licensePlate: {
         formControlName: 'licensePlate',
         type: 'custom',
-        label: 'Wat is je kenteken?',
+        label: this.copies['car.advice.steps.detail.form.licensePlate.label'],
         validationErrors: this.validationErrors,
         formControl: this.formGroup.get('licensePlate'),
         inputOptions: {
-          placeholder: 'AF-19-65'
+          placeholder: this.copies['car.advice.steps.detail.form.licensePlate.placeholder']
         }
       },
       birthDate: {
         formControlName: 'birthDate',
-        label: 'Geboortedatum',
+        label: this.copies['car.advice.steps.detail.form.birthDate.label'],
         type: 'date',
         formControl: this.formGroup.get('birthDate'),
         validationErrors: this.validationErrors,
@@ -74,7 +79,7 @@ export class CarDetailForm extends BaseForm {
       },
       claimFreeYears: {
         formControlName: 'claimFreeYears',
-        label: 'Aantal schadevrije jaren',
+        label: this.copies['car.advice.steps.detail.form.claimFreeYears'],
         formControl: this.formGroup.get('claimFreeYears'),
         validationErrors: this.validationErrors,
         help: true,
@@ -85,7 +90,7 @@ export class CarDetailForm extends BaseForm {
       },
       loan: {
         formControlName: 'loan',
-        label: 'Heb je een lening?',
+        label: this.copies['car.advice.steps.detail.form.loan.label'],
         type: 'radio',
         formControl: this.formGroup.get('loan'),
         validationErrors: this.validationErrors,
@@ -93,49 +98,31 @@ export class CarDetailForm extends BaseForm {
         inputOptions: {
           formGroupModifiers: ['knx-form-group__wrap--spread'],
           placeholder: '',
-          items: [
-            {
-              label: 'Ja',
-              value: true
-            },
-            {
-              label: 'Nee',
-              value: false
-            }
-          ]
+          items: this.loan
         }
       },
       houseHold: {
         formControlName: 'houseHold',
-        label: 'Wat is je gezinssituatie?',
+        label: this.copies['car.advice.steps.detail.form.houseHold.label'],
         type: 'select',
         formControl: this.formGroup.get('houseHold'),
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: 'Maak een keuze',
+          placeholder: this.copies['car.advice.steps.detail.form.houseHold.placeholder'],
           events: ['focus'],
-          items: houseHold
+          items: this.houseHold
         }
       },
       gender: {
         formControlName: 'gender',
-        label: 'Geslacht',
+        label: this.copies['car.advice.steps.detail.form.gender.label'],
         type: 'radio',
         formControl: this.formGroup.get('gender'),
         validationErrors: this.validationErrors,
         inputOptions: {
           formGroupModifiers: ['knx-form-group__wrap--spread'],
-          placeholder: 'Selecteer je geslacht',
-          items: [
-            {
-              label: 'Man',
-              value: 'M'
-            },
-            {
-              label: 'Vrouw',
-              value: 'F'
-            }
-          ]
+          placeholder: this.copies['car.advice.steps.detail.form.gender.placeholder'],
+          items: this.gender
         }
       }
     };

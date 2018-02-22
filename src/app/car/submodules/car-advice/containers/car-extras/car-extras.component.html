@@ -1,5 +1,6 @@
 <div class="knx-car-extras hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
-  <knx-collapse-message [ngClass]="optionModifierClass" title="Dekking" [isOpen]="true">
+  <knx-collapse-message [ngClass]="optionModifierClass" title="{{ 'general.dekking' | translate }}" [isOpen]="true">
+
     <knx-form-group
       knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
       [options]="form.formConfig.coverage"
