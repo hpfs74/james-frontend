@@ -8,15 +8,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { setUpTestBed } from './../../../../../../test.common.spec';
 import { SharedModule } from '../../../../../shared.module';
 import { CarExtrasComponent } from './car-extras.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  template: `<div><knx-car-extras [form]="formFromHost" [show]="true" optionModifierClass="hidden-xs"></knx-car-extras></div>`
+  template: `
+    <div>
+      <knx-car-extras [form]="formFromHost" [show]="true" optionModifierClass="hidden-xs"></knx-car-extras>
+    </div>`
 })
 export class TestHostComponent {
   @ViewChild(CarExtrasComponent)
   public targetComponent: CarExtrasComponent;
   public formFromHost: CarExtrasForm = new CarExtrasForm(new FormBuilder());
-  private mockFormValues = { label: 'test', value: 'VALUE '};
+  private mockFormValues = {label: 'test', value: 'VALUE '};
 }
 
 describe('Component: CarExtrasComponent', () => {
@@ -24,8 +28,8 @@ describe('Component: CarExtrasComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [BrowserAnimationsModule, SharedModule],
-    providers: [],
+    imports: [BrowserAnimationsModule, SharedModule, TranslateModule.forRoot()],
+    providers: [TranslateService],
     declarations: [CarExtrasComponent, TestHostComponent]
   };
   setUpTestBed(moduleDef);

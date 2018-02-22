@@ -47,6 +47,7 @@ import { CarService } from '@app/car/services/car.service';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, XHRBackend, Http } from '@angular/http';
 import { AuthHttp } from '@app/auth/services';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -69,12 +70,14 @@ describe('Component: CarAdviceComponent', () => {
           'car': combineReducers(fromCar.reducers),
           'insurance': combineReducers(fromInsurance.reducers),
           'profile': combineReducers(fromProfile.reducers)
-        })
+        }),
+        TranslateModule.forRoot()
       ],
       declarations: [
         CarAdviceComponent
       ],
       providers: [
+        TranslateService,
         CarService,
         MockBackend,
         BaseRequestOptions,

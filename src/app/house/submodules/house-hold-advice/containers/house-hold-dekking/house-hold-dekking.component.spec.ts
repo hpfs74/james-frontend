@@ -16,11 +16,12 @@ import * as fromAuth from '@app/auth/reducers';
 import * as fromHouse from '@app/house/reducers';
 import { HouseHoldDekkingComponent } from './house-hold-dekking.component';
 import { By } from '@angular/platform-browser';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 describe('Component: HouseHoldDekkingComponent', () => {
   let comp: HouseHoldDekkingComponent;
-  let fixture:   ComponentFixture<HouseHoldDekkingComponent>;
+  let fixture: ComponentFixture<HouseHoldDekkingComponent>;
   let store: Store<fromRoot.State>;
   let tagsService: TagsService;
 
@@ -34,13 +35,15 @@ describe('Component: HouseHoldDekkingComponent', () => {
           'auth': combineReducers(fromAuth.reducers),
           'app': combineReducers(fromCore.reducers),
           'household': combineReducers(fromHouse.reducers)
-        })
+        }),
+        TranslateModule.forRoot()
       ],
       declarations: [
         HouseHoldDekkingComponent
       ],
       providers: [
         KNXLocale,
+        TranslateService,
         {
           provide: TagsService,
           useValue: TagsServiceMock
