@@ -26,7 +26,7 @@ import * as fromAuth from '@app/auth/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as fromCar from '@app/car/reducers';
-
+import { TranslateService } from '@ngx-translate/core';
 // Core actions
 import * as router from '@app/core/actions/router';
 import * as layout from '@app/core/actions/layout';
@@ -47,11 +47,13 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
+
 import { KNXFinalAdviceOptions } from '@app/components/knx-final-advice/knx-final-advice.options';
 import { InsuranceAdvice } from '@app/insurance/models';
 import { JamesTagPipe } from '@app/shared/pipes';
 import { CurrencyPipe } from '@angular/common';
 import { CarService } from '@app/car/services/car.service';
+
 
 enum carFormSteps {
   carDetails,
@@ -67,7 +69,7 @@ enum carFormSteps {
 export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   qaRootId = QaIdentifiers.carAdviceRoot;
 
-  formSteps: Array<KNXWizardStepRxOptions>;
+  formSteps: Array<KNXWizardStepRxOptions> = [];
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
 
@@ -84,24 +86,43 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   knxFinalAdviceOptions: KNXFinalAdviceOptions;
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
+              private translateService: TranslateService,
               public router: Router,
               public knxWizardService: KNXWizardRxService,
               private jamesTag: JamesTagPipe,
               private currencyPipe: CurrencyPipe,
               public carService: CarService) {
 
-    this.formSteps = ['Je gegevens', 'Premies vergelijken', 'Aanvragen'].map(el => {
-      return {label: el};
-    });
+
+    this.translateService
+      .get([
+        'car.advice.steps.step1.title',
+        'car.advice.steps.step2.title',
+        'car.advice.steps.step3.title'])
+      .subscribe(data => {
+        this.formSteps = Object
+          .keys(data)
+          .map(key => data[key])
+          .map(v => ({label: v}));
+      });
+
     this.setFinalAdviceOptions();
+
   }
 
   ngOnInit() {
-    this.store$.dispatch(new assistant.UpdateConfigAction({
-      avatar: {
-        title: 'Expert autoverzekeringen'
-      }
-    }));
+
+    this.translateService
+      .get('car.advice.avatar.message.start')
+      .subscribe((res: string) => {
+        this.store$.dispatch(new assistant.UpdateConfigAction({
+          avatar: {
+            title: res
+          }
+        }));
+      });
+
+
     // bind observables
     this.subscription$ = [];
     this.selectedAdvice$ = this.store$.select(fromInsurance.getSelectedAdvice);
@@ -177,7 +198,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
         .subscribe(advice => {
           this.store$.dispatch(new compare.LoadCarAction(advice));
         })
-      );
+    );
   }
 
   ngOnDestroy() {

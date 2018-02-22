@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12">
       <knx-card>
-        <h3>Je autogegevens</h3>
+        <h3>{{ 'car.advice.steps.detail.title' | translate }}</h3>
 
         <div class="row">
           <div class="col-md-7 col-sm-12">
@@ -16,15 +16,16 @@
             </knx-form-group>
 
             <knx-async-preview
-            [loading]="isCarLoading$ | async"
-            [loaded]="!(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')"
-            [hidden]="!(isCarLoading$ | async) && featureToggleService.isOn('carInfo')">
+              [loading]="isCarLoading$ | async"
+              [loaded]="!(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')"
+              [hidden]="!(isCarLoading$ | async) && featureToggleService.isOn('carInfo')">
               <knx-car-info *ngIf="!featureToggleService.isOn('carInfo')" [data]="car$ | async"></knx-car-info>
             </knx-async-preview>
 
             <div class="knx-form-group__label knx-pull-up"
-              *ngIf="featureToggleService.isOn('carInfo') && !(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
-              {{ (car$ | async)?.make | capitalize }} {{ (car$ | async)?.model | capitalize }} {{ (car$ | async)?.year | capitalize }}
+                 *ngIf="featureToggleService.isOn('carInfo') && !(isCarFailed$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')">
+              {{ (car$ | async)?.make | capitalize }} {{ (car$ | async)?.model | capitalize }} {{ (car$ | async)?.year |
+              capitalize }}
             </div>
           </div>
         </div>
@@ -38,12 +39,7 @@
                 [options]="form.formConfig.claimFreeYears">
 
                 <knx-tooltip>
-                  <p>De <strong>schadevrije jaren</strong> vind je op je meest recente polis.
-                  Je bouwt schadevrije jaren op als een auto op jouw naam is verzekerd. Schadevrije jaren geven je
-                  korting op de premie.</p>
-
-                  <p>Elk jaar dat je geen schade claimt, bouw je 1 schadevrij jaar op. Elke keer
-                  dat je wel een schade claimt die jouw schuld is, verlies je 5 of meer jaren.</p>
+                  <div [innerHTML]="'car.advice.steps.detail.claimFreeYears.tooltip' | translate"></div>
                 </knx-tooltip>
               </knx-form-group>
             </div>
@@ -68,10 +64,7 @@
                 [options]="form.formConfig.loan">
 
                 <knx-tooltip>
-                  We willen graag van je weten of je een lening hebt afgesloten voor je auto.
-                  In dat geval raden we je namelijk altijd een Allrisk verzekering aan.
-                  Raakt je auto vervolgens onherstelbaar beschadigd? Dan krijg je een vergoeding van je verzekeraar om een nieuwe te kopen.
-                  Bij een andere dekking krijg je die vergoeding niet en blijf je met een lening achter, terwijl je geen auto meer hebt.
+                  <div [innerHTML]="'car.advice.steps.detail.loan.tooltip' | translate"></div>
                 </knx-tooltip>
               </knx-form-group>
             </div>
@@ -80,11 +73,13 @@
       </knx-card>
 
       <knx-card>
-        <h3>Over jou <small>(als hoofdbestuurder)</small>
+        <h3>
+          {{ 'car.advice.steps.detail.aboutYou.title' | translate }}
+          <small>{{ 'car.advice.steps.detail.aboutYou.subtitle' | translate }}</small>
+
           <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
             <knx-tooltip>
-              Hoofdbestuurder is de persoon die in de meerderheid van de gevallen in de auto rijdt én eigenaar is van de auto.
-              Als dit niet het geval is, kun je helaas geen autoverzekering afsluiten via Knab.
+              <div [innerHTML]="'car.advice.steps.detail.aboutYou.tooltip' | translate"></div>
             </knx-tooltip>
           </span>
         </h3>
@@ -126,23 +121,25 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="car-form__coverages">
-        <h2>Welke dekking past het beste bij jou</h2>
+        <h2>{{ 'car.advice.steps.detail.carCoverage.title' | translate }}</h2>
 
         <knx-price-table
           knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
           [items]="coverages"
           [highlight]="(coverageRecommendation$ | async)?.recommended_value"
-          [labels]="{ selected: 'Toon advies', unselected: 'Kies deze' }"
+          [labels]="{ selected: 'car.advice.steps.detail.carCoverage.selected' | translate,
+          unselected: 'car.advice.steps.detail.carCoverage.selected' | translate }"
+
           (onSubmit)="goToNextStep()"
           (onSelected)="updateSelectedCoverage($event)">
         </knx-price-table>
 
         <div class="knx-message knx-message--error" *ngIf="isCoverageError$ | async">
-          Er is een fout opgetreden bij het ophalen van het dekkingsadvies.
+          {{ 'car.advice.steps.detail.carCoverage.errorLoading' | translate}}
         </div>
 
         <knx-loader [visible]="isCoverageLoading$ | async">
-          Een momentje! We vergelijken 19 verschillende aanbieders voor je om de beste match te vinden.
+          {{ 'car.advice.steps.detail.carCoverage.loading' | translate }}
         </knx-loader>
       </div>
     </div>
