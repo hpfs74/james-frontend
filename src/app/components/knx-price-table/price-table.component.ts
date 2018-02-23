@@ -10,7 +10,7 @@ interface PriceTableLabelOptions {
   selector: 'knx-price-table',
   styleUrls: ['./price-table.component.scss'],
   template: `
-    <div class="knx-price-table">
+    <div class="knx-price-table" [class.knx-price-table--error]="error">
       <div class="knx-recommended-wrapper visible-xs">
         <div *ngFor="let item of items; let i = index"
              [hidden]="!item.highlight"
@@ -45,12 +45,15 @@ interface PriceTableLabelOptions {
         [description]="item.description"
         (click)="selectItem(i, false)">
       </knx-price-item>
+      
+      <div *ngIf="error" class="knx-price-table--error">{{error}}</div>
     </div>`
 })
 export class PriceTableComponent implements OnDestroy {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
 
+  @Input() error: string;
   @Input() labels: PriceTableLabelOptions;
   @Input() items: Array<Price>;
   @Input() selectable: boolean;

@@ -29,6 +29,7 @@ import * as fromCore from '@app/core/reducers';
 import * as fromHouse from '@app/house/reducers';
 
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
+import { scrollToElement, scrollToY } from '@utils/scroll-to-element.utils';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   coverages: Price[];
+  coverageError: string = 'error grave';
 
   isAmountLoaded$: Observable<boolean>;
   isAmountLoading$: Observable<boolean>;
@@ -130,6 +132,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
         el.selected = +el.id === value.CoverageCode;
       });
       this.form.formGroup.patchValue({coverage: value.CoverageCode});
+      this.coverageError = null;
     }
     if (value.IncludeOutdoorsValuable !== null) {
       this.form.formGroup.patchValue({outsideCoverage: value.IncludeOutdoorsValuable});
@@ -196,6 +199,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.form.formGroup.patchValue({
       coverage: event.id
     });
+    this.coverageError = null;
   }
 
   goToPreviousStep() {
@@ -210,6 +214,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     const detailForm = this.form.formGroup;
 
     FormUtils.validateForm(detailForm);
+
+    if (detailForm.value.coverage === null) {
+      this.coverageError = this.form.validationErrors.coverage();
+      scrollToElement('knx-price-table');
+      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationErrors.coverage()}))
+    }
 
     if (!detailForm.valid || this.insuredAmount === null) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));

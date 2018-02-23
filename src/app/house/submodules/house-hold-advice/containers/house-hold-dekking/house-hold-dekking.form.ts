@@ -12,7 +12,8 @@ export class HouseHoldDekkingForm extends BaseForm {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
     dateOfBirth: () => 'Error on date of birth',
-    commencingDate: () => 'Date must be in the future'
+    commencingDate: () => 'Date must be in the future',
+    coverage: () => 'No coverage selected'
   };
 
   constructor(private fb: FormBuilder,
