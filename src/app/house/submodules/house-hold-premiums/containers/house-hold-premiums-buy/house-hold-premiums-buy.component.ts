@@ -13,6 +13,7 @@ import * as houseHoldData from '@app/house/actions/house-hold-data';
 import * as wizardActions from '@core/actions/wizard';
 import * as houseDataActions from '@app/house/actions/house-data';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'knx-house-hold-premiums-buy',
@@ -27,13 +28,19 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
   selectedInsurance$: Observable<CalculatedPremium>;
   insurance: CalculatedPremium;
   form: HouseHoldPremiumsBuyForm;
+  copies: any = {};
 
-  constructor(private store$: Store<fromRoot.State>) {
+  constructor(private store$: Store<fromRoot.State>, private translateService: TranslateService) {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldPremiumsBuyForm(formBuilder);
+    this.translateService.get([
+      'household.premium.buy.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
 
     this.currentStepOptions = {
-      nextButtonLabel: 'Request insurance',
+      nextButtonLabel: this.copies['household.premium.buy.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false,
       nextButtonClass: 'knx-button knx-button--3d knx-button--primary'

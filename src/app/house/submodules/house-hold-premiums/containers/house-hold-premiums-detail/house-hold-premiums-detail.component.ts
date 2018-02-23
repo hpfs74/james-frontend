@@ -9,6 +9,7 @@ import * as fromHouseHold from '@app/house/reducers';
 import { Subscription } from 'rxjs/Subscription';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import * as router from '@core/actions/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'knx-house-hold-premiums-detail',
@@ -22,11 +23,18 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
   selectedInsurance$: Observable<CalculatedPremium>;
   insurance: CalculatedPremium;
   subscriptions: Subscription[] = [];
+  copies: any = {};
 
-  constructor(private store$: Store<fromRoot.State>) {
+  constructor(private store$: Store<fromRoot.State>, private translateService: TranslateService) {
+    this.translateService.get([
+      'household.common.step.options.backButtonLabel',
+      'household.premium.detail.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
     this.currentStepOptions = {
-      backButtonLabel: 'Terug',
-      nextButtonLabel: 'Vraag direct aan',
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      nextButtonLabel: this.copies['household.premium.detail.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false,
       nextButtonClass: 'knx-button knx-button--3d knx-button--primary'

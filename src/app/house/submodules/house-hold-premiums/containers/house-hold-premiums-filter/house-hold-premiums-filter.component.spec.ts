@@ -13,6 +13,16 @@ import { TagsServiceMock } from '@core/services/tags.service.mock.spec';
 import { ContentConfig } from '@app/content.config';
 import { ContentConfigMock } from '@app/content.mock.spec';
 import { KNXLocale } from '@knx/locale/index';
+import { of } from 'rxjs/observable/of';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs/Observable';
+
+let translations: any = {'TEST': 'This is a test'};
+class TranslateLoaderMock implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return of(translations);
+  }
+}
 
 @Component({
   template: `
@@ -36,9 +46,12 @@ export class TestHostComponent {
 describe('Component: HouseHoldPremiumsFilterComponent', () => {
   let comp: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
+  let translateService: TranslateService;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [BrowserAnimationsModule, SharedModule],
+    imports: [BrowserAnimationsModule, SharedModule, TranslateModule.forRoot({
+      loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+    })],
     providers: [
       KNXLocale,
       {
