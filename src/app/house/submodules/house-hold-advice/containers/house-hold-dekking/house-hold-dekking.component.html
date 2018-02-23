@@ -15,7 +15,6 @@
         knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="coverage"
         [items]="coverages"
         [labels]="{ selected: 'Geselecteerd', unselected: 'Kies deze' }"
-        [error]="coverageError"
         (onSubmit)="goToNextStep()"
         (onSelected)="updateSelectedCoverage($event)">
       </knx-price-table>

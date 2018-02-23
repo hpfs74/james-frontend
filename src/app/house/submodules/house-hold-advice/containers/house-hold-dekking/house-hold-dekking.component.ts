@@ -46,7 +46,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   coverages: Price[];
-  coverageError: string = 'error grave';
 
   isAmountLoaded$: Observable<boolean>;
   isAmountLoading$: Observable<boolean>;
@@ -63,12 +62,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
 
-
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
-      .map((el) => {
-        return JSON.parse(el.tag) as Price;
-      });
+      .map((el) => (JSON.parse(el.tag) as Price));
 
     this.currentStepOptions = {
       label: 'Dekking',
@@ -79,11 +75,11 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     };
 
     this.initializeForms();
-    this.selectInitalStates();
+    this.selectInitialStates();
     this.setIntialSubscription();
   }
 
-  selectInitalStates(): void {
+  selectInitialStates(): void {
     this.error$ = this.store$.select(fromCore.getWizardError);
   }
 
@@ -92,6 +88,8 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
       this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
+
+    this.form.formGroup.patchValue({coverage: '5016'});
   }
 
   setIntialSubscription() {
@@ -132,7 +130,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
         el.selected = +el.id === value.CoverageCode;
       });
       this.form.formGroup.patchValue({coverage: value.CoverageCode});
-      this.coverageError = null;
     }
     if (value.IncludeOutdoorsValuable !== null) {
       this.form.formGroup.patchValue({outsideCoverage: value.IncludeOutdoorsValuable});
@@ -199,7 +196,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.form.formGroup.patchValue({
       coverage: event.id
     });
-    this.coverageError = null;
   }
 
   goToPreviousStep() {
@@ -214,12 +210,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     const detailForm = this.form.formGroup;
 
     FormUtils.validateForm(detailForm);
-
-    if (detailForm.value.coverage === null) {
-      this.coverageError = this.form.validationErrors.coverage();
-      scrollToElement('knx-price-table');
-      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationErrors.coverage()}))
-    }
 
     if (!detailForm.valid || this.insuredAmount === null) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
