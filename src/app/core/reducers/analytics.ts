@@ -58,7 +58,7 @@ export function clickOutAnalyticsEvent(action: ClickOutEventAction): ClickoutAna
   return standardValues;
 }
 
-export function coverageAdviceAvailabeEvent(action: CoverageAdviceAvailableAction): CoverageAdviceAnalyticsEvent {
+export function coverageAdviceAvailableEvent(action: CoverageAdviceAvailableAction): CoverageAdviceAnalyticsEvent {
   return action.payload;
 }
 
@@ -71,7 +71,7 @@ export const eventsMap = {
   'ROUTER_NAVIGATION': pageView,
   '[Analytics] Click Out Event': clickOutAnalyticsEvent,
   '[Analytics] Car Data Available Event': carDataAvailableEvent,
-  '[Analytics] Car Coverage Available Event': coverageAdviceAvailabeEvent
+  '[Analytics] Car Coverage Available Event': coverageAdviceAvailableEvent
 };
 
 // const gaReducer = createMetaReducer(eventsMap, GoogleAnalytics);

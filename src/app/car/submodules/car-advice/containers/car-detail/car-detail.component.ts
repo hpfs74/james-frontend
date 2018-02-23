@@ -424,18 +424,18 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       .take(1)
       .subscribe((advice: Advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
-        this.dispatchCoverageAdviceAvailabe(advice);
+        this.dispatchcoverageAdviceAvailable(advice);
         this.store$.dispatch(new wizardActions.Forward());
       });
   }
 
-  dispatchCoverageAdviceAvailabe(advice: Advice) {
+  dispatchcoverageAdviceAvailable(advice: Advice) {
     this.store$.select(fromCar.getCarState)
       .filter(carState => carState.loaded)
       .take(1)
       .subscribe((carState: CarState) => {
         let coverageAdviceAvailableAction: CoverageAdviceAnalyticsEvent = {
-          event: 'coverageAdviceAvailabe',
+          event: 'coverageAdviceAvailable',
           car: this.getCarData(carState),
           user: this.getUserData(advice),
           ecommerce: this.getEcommerceData(advice)
