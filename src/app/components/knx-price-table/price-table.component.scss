@@ -2,11 +2,6 @@
 
 knx-price-table {
   flex: 1 auto 1;
-
-  .knx-price-table--error {
-    padding-left: 5px;
-    border-left: 3px solid $knab-primary-red;
-  }
 }
 
 knx-price-item.knx-price-item--highlight + knx-price-item {

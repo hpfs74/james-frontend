@@ -10,7 +10,7 @@ interface PriceTableLabelOptions {
   selector: 'knx-price-table',
   styleUrls: ['./price-table.component.scss'],
   template: `
-    <div class="knx-price-table" [class.knx-price-table--error]="error">
+    <div class="knx-price-table">
       <div class="knx-recommended-wrapper visible-xs">
         <div *ngFor="let item of items; let i = index"
              [hidden]="!item.highlight"
@@ -27,36 +27,34 @@ interface PriceTableLabelOptions {
            [ngClass]="{ '': !item.selected, 'knx-button--toggle-pills-active': item.selected }">
         {{ item.header }}
       </div>
-
-      <knx-price-item
-        [ngClass]="{ 'knx-price-item--highlight': item.highlight }"
-        *ngFor="let item of items; let i = index"
-        [id]="item.id"
-        [header]="item.header"
-        [badge]="item.badge"
-        [price]="item.price"
-        [highlight]="item.highlight"
-        [selected]="item.selected"
-        [features]="item.features"
-        [dataActive]="item.dataActive"
-        [dataInactive]="item.dataInactive"
-        [selectedLabel]="labels.selected"
-        [unselectedLabel]="labels.unselected"
-        [description]="item.description"
-        (click)="selectItem(i, false)">
-      </knx-price-item>
       
-      <div *ngIf="error" class="knx-price-table--error">{{error}}</div>
+        <knx-price-item
+          [ngClass]="{ 'knx-price-item--highlight': item.highlight }"
+          *ngFor="let item of items; let i = index"
+          [id]="item.id"
+          [header]="item.header"
+          [badge]="item.badge"
+          [price]="item.price"
+          [highlight]="item.highlight"
+          [selected]="item.selected"
+          [features]="item.features"
+          [dataActive]="item.dataActive"
+          [dataInactive]="item.dataInactive"
+          [selectedLabel]="labels.selected"
+          [unselectedLabel]="labels.unselected"
+          [description]="item.description"
+          (click)="selectItem(i, false)">
+        </knx-price-item>
     </div>`
 })
 export class PriceTableComponent implements OnDestroy {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
 
-  @Input() error: string;
   @Input() labels: PriceTableLabelOptions;
   @Input() items: Array<Price>;
   @Input() selectable: boolean;
+
   @Input() set highlight(value: string) {
     if (this.items) {
       this.items.forEach(i => {
