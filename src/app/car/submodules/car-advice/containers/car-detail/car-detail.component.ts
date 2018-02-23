@@ -100,8 +100,6 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     ]).subscribe(res => {
       this.copies = res;
 
-      this.initializeForms();
-
       this.selectInitialStates();
 
       this.setInitialSubscriptions();
@@ -211,6 +209,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.initializeForms();
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
     if (this.route.snapshot && this.route.snapshot.queryParams) {
@@ -301,27 +300,6 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
         };
         this.store$.dispatch(new CarDataAvailableAction(carDataAvailableAction));
       });
-  }
-
-  private getTransmission(data) {
-    return data.nicci_cartransmission_manual_transmission ||
-      data.nicci_cartransmission_automatic_transmission ||
-      data.transmission_nl;
-  }
-
-  private normalizeAddressHouseNumber(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-
-    return payload.address.number_extended.number_only;
-  }
-
-  private normalizeAddressHouseNumberAddition(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-    return payload.address.number_extended.number_extension;
   }
 
   updateSelectedCoverage(coverage: Price): void {
@@ -488,5 +466,26 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       };
     }
     return ecommerceAnalytics;
+  }
+
+  private getTransmission(data) {
+    return data.nicci_cartransmission_manual_transmission ||
+      data.nicci_cartransmission_automatic_transmission ||
+      data.transmission_nl;
+  }
+
+  private normalizeAddressHouseNumber(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+
+    return payload.address.number_extended.number_only;
+  }
+
+  private normalizeAddressHouseNumberAddition(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+    return payload.address.number_extended.number_extension;
   }
 }
