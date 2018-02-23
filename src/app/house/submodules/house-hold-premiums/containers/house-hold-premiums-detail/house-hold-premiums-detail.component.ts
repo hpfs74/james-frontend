@@ -9,6 +9,7 @@ import * as fromHouseHold from '@app/house/reducers';
 import { Subscription } from 'rxjs/Subscription';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import * as router from '@core/actions/router';
+import * as wizardActions from '@core/actions/wizard';
 
 @Component({
   selector: 'knx-house-hold-premiums-detail',
@@ -51,8 +52,12 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  goToPrevStep() {
+    this.store$.dispatch(new wizardActions.Back());
+  }
+
   goToNextStep() {
-    this.store$.dispatch(new router.Go({path: ['/household/premiums/buy']}));
+    this.store$.dispatch(new wizardActions.Forward());
   }
 }
 
