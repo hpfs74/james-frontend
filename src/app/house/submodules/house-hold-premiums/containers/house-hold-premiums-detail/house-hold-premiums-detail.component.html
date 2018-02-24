@@ -117,6 +117,7 @@
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
+                     (onBack)="goToPrevStep()"
                      (onNext)="goToNextStep()">
 </knx-wizard-controls>
 

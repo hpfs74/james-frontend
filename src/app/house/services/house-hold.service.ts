@@ -93,6 +93,7 @@ export class HouseHoldService {
       Taxes: data.Taxes / 100,
       Premium: data.Premium / 100,
       Deductables: data.Deductables / 100,
+      InsuredAmount: data.InsuredAmount / 100,
       ValuablesInsuredAmount: data.ValuablesInsuredAmount / 100
     });
   }
