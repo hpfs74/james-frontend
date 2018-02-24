@@ -29,8 +29,6 @@ import * as fromCore from '@app/core/reducers';
 import * as fromHouse from '@app/house/reducers';
 
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
-import { scrollToElement, scrollToY } from '@utils/scroll-to-element.utils';
-
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -89,7 +87,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
       this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
 
-    this.form.formGroup.patchValue({coverage: '5016'});
+    this.form.formGroup.patchValue({coverage: 5016});
   }
 
   setIntialSubscription() {

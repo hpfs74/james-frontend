@@ -27,24 +27,24 @@ interface PriceTableLabelOptions {
            [ngClass]="{ '': !item.selected, 'knx-button--toggle-pills-active': item.selected }">
         {{ item.header }}
       </div>
-      
-        <knx-price-item
-          [ngClass]="{ 'knx-price-item--highlight': item.highlight }"
-          *ngFor="let item of items; let i = index"
-          [id]="item.id"
-          [header]="item.header"
-          [badge]="item.badge"
-          [price]="item.price"
-          [highlight]="item.highlight"
-          [selected]="item.selected"
-          [features]="item.features"
-          [dataActive]="item.dataActive"
-          [dataInactive]="item.dataInactive"
-          [selectedLabel]="labels.selected"
-          [unselectedLabel]="labels.unselected"
-          [description]="item.description"
-          (click)="selectItem(i, false)">
-        </knx-price-item>
+
+      <knx-price-item
+        [ngClass]="{ 'knx-price-item--highlight': item.highlight }"
+        *ngFor="let item of items; let i = index"
+        [id]="item.id"
+        [header]="item.header"
+        [badge]="item.badge"
+        [price]="item.price"
+        [highlight]="item.highlight"
+        [selected]="item.selected"
+        [features]="item.features"
+        [dataActive]="item.dataActive"
+        [dataInactive]="item.dataInactive"
+        [selectedLabel]="labels.selected"
+        [unselectedLabel]="labels.unselected"
+        [description]="item.description"
+        (click)="selectItem(i, false)">
+      </knx-price-item>
     </div>`
 })
 export class PriceTableComponent implements OnDestroy {
