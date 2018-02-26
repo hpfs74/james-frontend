@@ -51,7 +51,7 @@ export function reducer(state = initialState, action: Action): State {
     case carActions.GET_INFO_FAILURE: {
       return Object.assign({}, state, {
         loading: false,
-        loaded: true,
+        loaded: false,
         error: true,
         license: null,
         info: null

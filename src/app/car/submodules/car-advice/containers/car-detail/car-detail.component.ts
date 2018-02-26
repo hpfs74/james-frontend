@@ -286,7 +286,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
   dispatchCarDataAvailableAction() {
     this.store$.select(fromCar.getCarState)
-      .filter(carState => carState.loaded)
+      .filter(carState => (carState.loaded || carState.error))
       .take(1)
       .subscribe((carState: CarState) => {
         let carLoadingError = '';
@@ -410,7 +410,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
   dispatchcoverageAdviceAvailable(advice: Advice) {
     this.store$.select(fromCar.getCarState)
-      .filter(carState => carState.loaded)
+      .filter(carState => (carState.loaded || carState.error))
       .take(1)
       .subscribe((carState: CarState) => {
         let coverageAdviceAvailableAction: CoverageAdviceAnalyticsEvent = {
