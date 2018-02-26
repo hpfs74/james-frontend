@@ -51,7 +51,8 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
       backButtonLabel: 'Terug',
       nextButtonLabel: 'Huis details',
       hideBackButton: false,
-      hideNextButton: false
+      hideNextButton: false,
+      nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
     };
 
   }

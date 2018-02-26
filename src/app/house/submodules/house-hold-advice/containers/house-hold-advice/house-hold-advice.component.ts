@@ -42,9 +42,8 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
               private router: Router,
               public knxWizardService: KNXWizardRxService) {
 
-    this.formSteps = ['Locatie', 'Huis type', 'Huis details', 'Dekking'].map((el) => {
-      return {label: el};
-    });
+    this.formSteps = ['Locatie', 'Huis type', 'Huis details', 'Dekking']
+      .map((el) => ({label: el}));
   }
 
   ngOnInit() {
@@ -70,7 +69,7 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
 
   getStepClass(step) {
     return {
-      ['knx-house-hold-advice--step-' + (step + 1)]: true
+      [`knx-house-hold-advice--step-${step + 1}`]: true
     };
   }
 

@@ -54,6 +54,7 @@ export class PriceTableComponent implements OnDestroy {
   @Input() labels: PriceTableLabelOptions;
   @Input() items: Array<Price>;
   @Input() selectable: boolean;
+
   @Input() set highlight(value: string) {
     if (this.items) {
       this.items.forEach(i => {

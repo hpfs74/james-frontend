@@ -30,7 +30,6 @@ import * as fromHouse from '@app/house/reducers';
 
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 
-
 @Component({
   selector: 'knx-house-hold-dekking-form',
   styleUrls: ['./house-hold-dekking.component.scss'],
@@ -61,12 +60,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService) {
 
-
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
-      .map((el) => {
-        return JSON.parse(el.tag) as Price;
-      });
+      .map((el) => (JSON.parse(el.tag) as Price));
 
     this.currentStepOptions = {
       label: 'Dekking',
@@ -77,11 +73,11 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     };
 
     this.initializeForms();
-    this.selectInitalStates();
+    this.selectInitialStates();
     this.setIntialSubscription();
   }
 
-  selectInitalStates(): void {
+  selectInitialStates(): void {
     this.error$ = this.store$.select(fromCore.getWizardError);
   }
 
@@ -90,6 +86,8 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
       this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
+
+    this.form.formGroup.patchValue({coverage: 5016});
   }
 
   setIntialSubscription() {

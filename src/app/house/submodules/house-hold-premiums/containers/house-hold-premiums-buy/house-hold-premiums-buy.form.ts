@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UIPair } from '@core/models/ui-pair';
 import { EmailValidator } from '@utils/email-validator';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
+import { phoneNumberValidator } from '@utils/base-form.validators';
 
 /**
  * describe the form filters
@@ -23,10 +24,11 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
   constructor(private fb: FormBuilder) {
     super();
 
+
     this.formGroup = this.fb.group({
       name: [null, Validators.required],
       email: [null, Validators.compose([Validators.required, EmailValidator])],
-      phone: [null],
+      phone: [null, phoneNumberValidator],
       receiveUpdate: [null]
     });
 
