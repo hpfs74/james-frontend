@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/observable';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 // redux imports
@@ -21,7 +20,8 @@ import {
 // knx imports
 import { KNXLocale } from '@knx/locale';
 import { KNXFormsModule } from '@knx/forms';
-
+// rxjs imports
+import { Observable } from 'rxjs/Observable';
 // app imports
 import { CarDetailComponent } from '@app/car/submodules/car-advice/containers/car-detail/car-detail.component';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
