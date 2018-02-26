@@ -161,3 +161,7 @@ export function carReportingCodeValidator(key: string) {
 export function houseNumberValidator(key: string) {
   return regExValidator(/^\d+(-\d+)*$/, key);
 }
+
+export function emptyOrPhoneNumberValidator(key: string) {
+  return regExValidator(/^(?:[0]\d{9}|)$/, key);
+}
