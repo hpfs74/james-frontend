@@ -37,8 +37,20 @@ import { KNXFeatureToggleService } from '@knx/feature-toggle';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { State as CarState } from '@app/car/reducers/car';
+import { CarDataAvailableAction, CoverageAdviceAvailableAction } from '@app/core/actions/analytics';
+import {
+  CarDataAnaylitcsEvent,
+  CarAnalytics,
+  CoverageAdviceAnalyticsEvent,
+  UserAnayltics,
+  EcommerceAnalytics
+} from '@app/core/models/analytics';
+import { Advice } from '@app/insurance/models';
+import { JamesTagPipe } from '@app/shared/pipes';
 
 @Component({
+  providers: [JamesTagPipe],
   selector: 'knx-car-detail-form',
   styleUrls: ['./car-detail.component.scss'],
   templateUrl: 'car-detail.component.html'
@@ -50,8 +62,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   coverages: Price[];
   address$: Observable<Address>;
   car$: Observable<Car>;
-  isCarLoading$: Observable<boolean>;
-  isCarFailed$: Observable<boolean>;
+  carInfoLoading$: Observable<boolean>;
+  carInfoError$: Observable<boolean>;
+  carInfoLoaded$: Observable<boolean>;
   advice$: Observable<any>;
   isCoverageLoading$: Observable<boolean>;
   isCoverageError$: Observable<boolean>;
@@ -66,7 +79,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
               private translateService: TranslateService,
               public featureToggleService: FeatureConfigService,
               public route: ActivatedRoute,
-              public cdRef: ChangeDetectorRef) {
+              public cdRef: ChangeDetectorRef,
+              private jamesTag: JamesTagPipe
+            ) {
 
     this.translateService.get([
       'car.advice.steps.detail.stepOptions.label',
@@ -97,8 +112,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     this.address$ = this.store$.select(fromAddress.getAddress);
     this.car$ = this.store$.select(fromCar.getCarInfo);
 
-    this.isCarLoading$ = this.store$.select(fromCar.getCarInfoLoading);
-    this.isCarFailed$ = this.store$.select(fromCar.getCarInfoError);
+    this.carInfoLoading$ = this.store$.select(fromCar.getCarInfoLoading);
+    this.carInfoError$ = this.store$.select(fromCar.getCarInfoError);
+    this.carInfoLoaded$ = this.store$.select(fromCar.getCarInfoLoaded);
 
     this.isCoverageLoading$ = this.store$.select(fromCar.getCoverageLoading);
     this.isCoverageError$ = this.store$.select(fromCar.getCoverageError);
@@ -264,22 +280,27 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 // so we use length here to determine when to proceed
     if (licensePlate && licensePlate.length === validLength) {
       this.store$.dispatch(new car.GetInfo(licensePlate));
+      this.dispatchCarDataAvailableAction();
     }
   }
 
-  private normalizeAddressHouseNumber(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-
-    return payload.address.number_extended.number_only;
-  }
-
-  private normalizeAddressHouseNumberAddition(payload: any) {
-    if (!payload.address) {
-      return null;
-    }
-    return payload.address.number_extended.number_extension;
+  dispatchCarDataAvailableAction() {
+    this.store$.select(fromCar.getCarState)
+      .filter(carState => (carState.loaded || carState.error))
+      .take(1)
+      .subscribe((carState: CarState) => {
+        let carLoadingError = '';
+        let carData = {} as CarAnalytics;
+        if (carState.error && !carState.license) {
+          carLoadingError = this.form.validationErrors['licensePlateRDC']();
+        }
+        let carDataAvailableAction: CarDataAnaylitcsEvent = {
+          event: 'carDataAvailable',
+          error: carLoadingError,
+          car: this.getCarData(carState)
+        };
+        this.store$.dispatch(new CarDataAvailableAction(carDataAvailableAction));
+      });
   }
 
   updateSelectedCoverage(coverage: Price): void {
@@ -380,9 +401,92 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     this.store$.select(fromInsurance.getSelectedAdvice)
       .filter(advice => advice !== undefined && Object.keys(advice).length > 1) // bit hackisch way to check for valid compare request
       .take(1)
-      .subscribe(advice => {
+      .subscribe((advice: Advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
+        this.dispatchcoverageAdviceAvailable(advice);
         this.store$.dispatch(new wizardActions.Forward());
       });
+  }
+
+  dispatchcoverageAdviceAvailable(advice: Advice) {
+    this.store$.select(fromCar.getCarState)
+      .filter(carState => (carState.loaded || carState.error))
+      .take(1)
+      .subscribe((carState: CarState) => {
+        let coverageAdviceAvailableAction: CoverageAdviceAnalyticsEvent = {
+          event: 'coverageAdviceAvailable',
+          car: this.getCarData(carState),
+          user: this.getUserData(advice),
+          ecommerce: this.getEcommerceData(advice)
+        };
+        this.store$.dispatch(new CoverageAdviceAvailableAction(coverageAdviceAvailableAction));
+      });
+  }
+
+  private getCarData(carState: CarState): CarAnalytics {
+    let carData = {} as CarAnalytics;
+    if (carState.info) {
+      carData.brand = carState.info.make;
+      carData.model = carState.info.model;
+      carData.color = carState.info.color;
+      carData.fuel = carState.info.fuel;
+      carData.transmission = this.getTransmission(carState.info);
+      carData.constructionYear = carState.info.year.toString();
+      carData.purchaseValue = carState.info.price_consumer_incl_vat.toString();
+      carData.dayValue = carState.info.current_value.toString();
+    }
+    return carData;
+  }
+
+  private getUserData(advice: Advice): UserAnayltics {
+    let userAnalytics = {} as UserAnayltics;
+    if (advice) {
+      userAnalytics.damageFreeYears = advice.claim_free_years.toString();
+      userAnalytics.loan = advice.active_loan ? 'y' : 'n' ;
+      userAnalytics.gender = advice.gender;
+      userAnalytics.birthyear = new Date(advice.date_of_birth).getUTCFullYear().toString();
+      userAnalytics.zipcode = advice.zipcode;
+      userAnalytics.familySituation = this.jamesTag
+        .transform(advice.household_status, 'insurance_flow_household');
+    }
+    return userAnalytics;
+  }
+
+  private getEcommerceData(advice: Advice): EcommerceAnalytics {
+    let ecommerceAnalytics = {} as EcommerceAnalytics;
+    if (advice) {
+      ecommerceAnalytics.detail = {
+        actionField: {
+          list: 'coverageAdvice'
+        },
+        products: [{
+          name: this.jamesTag.transform(advice.coverage, 'car_flow_coverage'),
+          category: 'verzekeren',
+          variant: 'autoverzekering'
+        }]
+      };
+    }
+    return ecommerceAnalytics;
+  }
+
+  private getTransmission(data) {
+    return data.nicci_cartransmission_manual_transmission ||
+      data.nicci_cartransmission_automatic_transmission ||
+      data.transmission_nl;
+  }
+
+  private normalizeAddressHouseNumber(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+
+    return payload.address.number_extended.number_only;
+  }
+
+  private normalizeAddressHouseNumberAddition(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+    return payload.address.number_extended.number_extension;
   }
 }

@@ -5,7 +5,6 @@ import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
-import { AnalyticsEvent } from '@app/core/models/analytics';
 import { Router } from '@angular/router';
 
 import * as fromRoot from '@app/car/reducers';
