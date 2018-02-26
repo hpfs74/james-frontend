@@ -60,7 +60,7 @@ export class CarReviewComponent implements OnInit, OnDestroy {
     this.showStepBlock = selectedInsurance.supported;
     if (selectedInsurance.supported) {
       this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.title'}));
-      this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.steps'}));
+      // this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.steps'}));
     } else {
       this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.info.review.unsupported', clear: true}));
     }
