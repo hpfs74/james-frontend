@@ -1,14 +1,19 @@
 {
   "general.dekking": "Dekking",
+  "general.monthly": "per maand",
   "general.insurance.own_risk": "Eigen risico",
   "general.insurance.monthly_premium": "{{price}} <span>per maand</span>",
   "general.component.address.postcode": "Postcode",
   "general.component.address.houseNumber": "Huisnummer",
-  "household.advice.moreButton.label": "Verder",
-  "household.locatie.title": "Locatie",
-  "household.locatie.comment": "Your living insurance, explain why needed, and how it can help you (what are you insured for)",
   "household.locatie.title": "Waar staat je huis?",
   "household.locatie.comment": "De locatie is van invloed op je inboedelverzekering. In de stad is de kans op schade bijvoorbeeld iets groter dan op het platteland.",
+  "household.advice.moreButton.label": "Verder",
+  "household.advice.usp.objective.title": "Objectief",
+  "household.advice.usp.objective.content": "We vergelijken meer dan 40",
+  "household.advice.usp.save.title": "Bespaar",
+  "household.advice.usp.save.content": "Tot 15% korting op elke verzekering",
+  "household.advice.usp.overstaphulp.title": "Overstaphulp",
+  "household.advice.usp.overstaphulp.content": "Wij regelen overstap",
   "household.houseType.title": "Hoe ziet je huis eruit?",
   "household.houseType.comment": "Beschrijf je huis voor ons, zodat we weten waar de spullen die je wilt verzekeren staan.",
   "household.houseType.rooms.title": "Aantal kamers",
@@ -46,13 +51,6 @@
   "household.dekking.calcHouseVal.disclaimer.title": "Valuable contents above €34.000",
   "household.dekking.calcHouseVal.disclaimer.description": "Currently we do not insure valuables with values above €34.000. Please contact us if you have any questions regarding insurances for valuables.",
   "household.dekking.calcHouseVal.estimatedVal.suffix": "Est. household value",
-  "household.advice.usp.objective.title": "Objectief",
-  "household.advice.usp.objective.content": "We vergelijken meer dan 40",
-  "household.advice.usp.save.title": "Bespaar",
-  "household.advice.usp.save.content": "Tot 15% korting op elke verzekering",
-  "household.advice.usp.overstaphulp.title": "Overstaphulp",
-  "household.advice.usp.overstaphulp.content": "Wij regelen overstap",
-  
   "car.advice.loading": "Laden...",
   "car.advice.moreButton.label": "Verder",
   "car.advice.personalizeButton.label": "Personaliseer resultaten",
@@ -81,5 +79,4 @@
   "car.advice.steps.detail.form.houseHold.placeholder": "Maak een keuze",
   "car.advice.steps.detail.form.gender.label": "Geslacht",
   "car.advice.steps.detail.form.gender.placeholder": "Selecteer je geslacht"
-
 }

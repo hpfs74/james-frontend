@@ -2700,8 +2700,8 @@
       "tag": 1946
     },
     {
-      "translation_text": "1970 - 2000",
-      "translation_label": "1970 - 2000",
+      "translation_text": "1971 - 2000",
+      "translation_label": "1971 - 2000",
       "tag": 1971
     },
     {
@@ -2846,7 +2846,7 @@
   ],
   "house_hold_flow_coverages": [
     {
-      "tag": "{ \"id\": 5016, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
+      "tag": "{ \"id\": 5016, \"selected\":true, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
       "translation_label": "Basis",
       "translation_text": "Basis"
     },

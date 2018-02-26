@@ -1,24 +1,16 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
-import { Profile, Settings } from '../../models';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Profile } from '../../models';
 import { Store } from '@ngrx/store';
-import { Address } from '@app/address/models';
 import { Observable } from 'rxjs/Observable';
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
-import { BaseForm } from '@app/shared/forms/base-form';
-import { ProfileForm } from '../../components/profile-form/profile.form';
-import { TagsService } from '@app/core/services';
 import { PasswordForm } from '@app/profile/containers/edit-password/edit-password.form';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
-import * as FormUtils from '@app/utils/base-form.utils';
 import * as fromProfile from '../../reducers';
 import * as fromCore from '@app/core/reducers';
 import * as router from '@app/core/actions/router';
-import * as assistant from '@app/core/actions/assistant';
-import * as profile from '../../actions/profile';
-import * as settings from '../../actions/settings';
 import * as auth from '@app/auth/actions/auth';
 import * as fromAuth from '@app/auth/reducers';
 @Component({
@@ -29,17 +21,13 @@ import * as fromAuth from '@app/auth/reducers';
 export class ProfileEditPasswordComponent implements OnInit, OnDestroy {
   chatConfig$: Observable<AssistantConfig>;
   chatMessages$: Observable<Array<ChatMessage>>;
-  savedInsurances$: Observable<any>;
   form: PasswordForm;
   profile$: Observable<Profile>;
-  settings$: Observable<any>;
-  profileLoading$: Observable<boolean>;
   pending$: Observable<boolean>;
   subscription$: Subscription[] = [];
   customError: string;
   passwordChange$: Subscription;
-  constructor(private store$: Store<fromProfile.State>,
-              private tagsService: TagsService) {
+  constructor(private store$: Store<fromProfile.State>) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);
     this.profile$ = this.store$.select(fromProfile.getProfile);
@@ -90,10 +78,8 @@ export class ProfileEditPasswordComponent implements OnInit, OnDestroy {
   passwordMatch(): boolean {
     const new_password = this.form.formGroup.get('newPassword');
     const confirm_password = this.form.formGroup.get('confirmPassword');
-    if ( new_password.value === confirm_password.value ) {
-      return true;
-    }
-    return false;
+
+    return new_password.value === confirm_password.value;
   }
 
   getErrors(): Array<string> {
