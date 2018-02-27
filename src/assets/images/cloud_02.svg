@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="21px" viewBox="0 0 65 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>cloud_02</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="XL_Dashboard_empty_123" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-203.000000, -761.000000)" opacity="0.400000006">
+        <g id="Group-6" transform="translate(0.000000, 756.000000)" fill="#FFFFFF">
+            <g id="footer" transform="translate(120.000000, 0.000000)">
+                <path d="M147.868067,26 L83.0823932,26 C83.02795,25.5074992 83,25.0070136 83,24.5 C83,17.0441559 85.5441559,12 93,12 C95.5866083,12 98.4245575,12.6070944 101.028142,13.7113662 C103.462725,7.63766413 109.981667,5 118,5 C127.140825,5 135.133463,8.42785243 136.716135,16.4663543 C137.588326,16.1641622 138.524992,16 139.5,16 C144.19442,16 148,19.8055796 148,24.5 C148,25.0118259 147.954762,25.513086 147.868067,26 Z" id="cloud_02" transform="translate(115.500000, 15.500000) scale(-1, 1) translate(-115.500000, -15.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
