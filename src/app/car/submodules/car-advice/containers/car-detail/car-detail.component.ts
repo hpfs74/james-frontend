@@ -120,7 +120,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
           return Object.keys(combinedValues)
                        .filter(key => combinedValues[key]
                           && optionalFields.indexOf(key) === -1)
-                        .length === Object.keys(combinedValues).length - 1;
+                        .length === Object.keys(combinedValues).length - optionalFields.length;
         })
         .take(1)
         .subscribe((values) => {
