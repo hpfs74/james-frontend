@@ -15,7 +15,8 @@ import * as auth from '@app/auth/actions/auth';
 
 @Component({
   selector: 'knx-car-saved',
-  templateUrl: './car-saved.component.html'
+  templateUrl: './car-saved.component.html',
+  styleUrls: ['./car-saved.component.scss']
 })
 export class CarSavedComponent implements AfterViewInit, OnInit {
   chatConfig$: Observable<AssistantConfig>;
