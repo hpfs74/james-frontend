@@ -108,16 +108,19 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   /**
    * keep track of all forms and when all data is available
    * on the page
+   * filter trough all form fields except optional ones, that can be an empty string
   */
   setStepSupscription(): void {
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
+    const optionalFields: string[] = ['houseNumberExtension'];
     this.subscriptions$.push(
       Observable.combineLatest(detailForm.valueChanges, addressForm.valueChanges, (a, b) => Object.assign({}, a, b))
         .filter(combinedValues => {
           return Object.keys(combinedValues)
-                       .filter(key => combinedValues[key] !== undefined
-                        && combinedValues[key] !== null).length === Object.keys(combinedValues).length;
+                       .filter(key => combinedValues[key]
+                          && optionalFields.indexOf(key) === -1)
+                        .length === Object.keys(combinedValues).length - 1;
         })
         .take(1)
         .subscribe((values) => {
