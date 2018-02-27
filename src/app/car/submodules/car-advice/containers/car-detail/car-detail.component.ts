@@ -99,13 +99,34 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
 
     ]).subscribe(res => {
       this.copies = res;
-
       this.initializeForms();
-
       this.selectInitialStates();
-
       this.setInitialSubscriptions();
+      this.setStepSupscription();
     });
+  }
+  /**
+   * keep track of all forms and when all data is available
+   * on the page
+   * filter trough all form fields except optional ones, that can be an empty string
+  */
+  setStepSupscription(): void {
+    const detailForm = this.form.formGroup;
+    const addressForm = this.addressForm.formGroup;
+    const optionalFields: string[] = ['houseNumberExtension'];
+    this.subscriptions$.push(
+      Observable.combineLatest(detailForm.valueChanges, addressForm.valueChanges, (a, b) => Object.assign({}, a, b))
+        .filter(combinedValues => {
+          return Object.keys(combinedValues)
+                       .filter(key => combinedValues[key]
+                          && optionalFields.indexOf(key) === -1)
+                        .length === Object.keys(combinedValues).length - optionalFields.length;
+        })
+        .take(1)
+        .subscribe((values) => {
+          this.dispatchcoverageAdviceAvailable();
+        })
+    );
   }
 
   selectInitialStates(): void {
@@ -403,12 +424,11 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       .take(1)
       .subscribe((advice: Advice) => {
         this.store$.dispatch(new compare.LoadCarAction(advice));
-        this.dispatchcoverageAdviceAvailable(advice);
         this.store$.dispatch(new wizardActions.Forward());
       });
   }
 
-  dispatchcoverageAdviceAvailable(advice: Advice) {
+  private dispatchcoverageAdviceAvailable() {
     this.store$.select(fromCar.getCarState)
       .filter(carState => (carState.loaded || carState.error))
       .take(1)
@@ -416,8 +436,8 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
         let coverageAdviceAvailableAction: CoverageAdviceAnalyticsEvent = {
           event: 'coverageAdviceAvailable',
           car: this.getCarData(carState),
-          user: this.getUserData(advice),
-          ecommerce: this.getEcommerceData(advice)
+          user: this.getUserData(),
+          ecommerce: this.getEcommerceData()
         };
         this.store$.dispatch(new CoverageAdviceAvailableAction(coverageAdviceAvailableAction));
       });
@@ -438,34 +458,33 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     return carData;
   }
 
-  private getUserData(advice: Advice): UserAnayltics {
+  private getUserData(): UserAnayltics {
+    const detailForm = this.form.formGroup;
+    const addressForm = this.addressForm.formGroup;
     let userAnalytics = {} as UserAnayltics;
-    if (advice) {
-      userAnalytics.damageFreeYears = advice.claim_free_years.toString();
-      userAnalytics.loan = advice.active_loan ? 'y' : 'n' ;
-      userAnalytics.gender = advice.gender;
-      userAnalytics.birthyear = new Date(advice.date_of_birth).getUTCFullYear().toString();
-      userAnalytics.zipcode = advice.zipcode;
-      userAnalytics.familySituation = this.jamesTag
-        .transform(advice.household_status, 'insurance_flow_household');
-    }
+    userAnalytics.damageFreeYears = detailForm.get('claimFreeYears').value;
+    userAnalytics.loan = detailForm.get('loan').value ? 'y' : 'n' ;
+    userAnalytics.gender = detailForm.get('gender').value;
+    userAnalytics.birthyear = new Date(detailForm.get('birthDate').value).getUTCFullYear().toString();
+    userAnalytics.zipcode = addressForm.get('postalCode').value;
+    userAnalytics.familySituation = this.jamesTag
+      .transform(detailForm.get('houseHold').value, 'insurance_flow_household');
     return userAnalytics;
   }
 
-  private getEcommerceData(advice: Advice): EcommerceAnalytics {
+  private getEcommerceData(): EcommerceAnalytics {
+    const detailForm = this.form.formGroup;
     let ecommerceAnalytics = {} as EcommerceAnalytics;
-    if (advice) {
-      ecommerceAnalytics.detail = {
-        actionField: {
-          list: 'coverageAdvice'
-        },
-        products: [{
-          name: this.jamesTag.transform(advice.coverage, 'car_flow_coverage'),
-          category: 'verzekeren',
-          variant: 'autoverzekering'
-        }]
-      };
-    }
+    ecommerceAnalytics.detail = {
+      actionField: {
+        list: 'coverageAdvice'
+      },
+      products: [{
+        name: this.jamesTag.transform(detailForm.get('coverage').value, 'car_flow_coverage'),
+        category: 'verzekeren',
+        variant: 'autoverzekering'
+      }]
+    };
     return ecommerceAnalytics;
   }
 
