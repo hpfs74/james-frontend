@@ -17,7 +17,6 @@ import * as wizardActions from '@core/actions/wizard';
 import * as houseDataActions from '@app/house/actions/house-data';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Router } from '@angular/router';
-import { ObjectUnsubscribedError } from 'rxjs/Rx';
 import { HouseHoldStoredAdviceRequest } from '@app/house/models/house-hold-stored-advice';
 import { HouseDataRequest } from '@app/house/models/house-data';
 import { HouseHoldState } from '@app/house/reducers';
