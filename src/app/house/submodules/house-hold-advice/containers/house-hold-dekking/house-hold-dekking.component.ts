@@ -31,6 +31,7 @@ import * as fromHouse from '@app/house/reducers';
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
