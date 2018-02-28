@@ -55,12 +55,12 @@ export class HouseHoldService {
 
     return this.http.post<HouseHoldAmountResponse>(
       environment.riskInsurance.HouseHoldAmount,
-      this.filterInsuredAmountDate(req),
+      req,
       {
         headers: httpOptions.headers
       })
     // TODO: remove as soon as risk solve the problem
-      .map(res => Object.assign(res, {InsuredAmount: res.InsuredAmount / 100}));
+      .map(res => Object.assign(res, {InsuredAmount: res.InsuredAmount}));
   }
 
   /**
@@ -72,15 +72,9 @@ export class HouseHoldService {
 
     return this.http.post<HouseHoldPremiumResponse>(
       environment.riskInsurance.HouseHoldPremium,
-      this.filterPremiumsDate(req),
+      req,
       {
         headers: httpOptions.headers
-      })
-    // TODO: remove as soon as risk solve the problem with the money
-      .map(res => {
-        return {
-          CalculatedPremiums: res.CalculatedPremiums.map(this.filterAmountError)
-        } as HouseHoldPremiumResponse;
       });
   }
 
@@ -94,49 +88,6 @@ export class HouseHoldService {
   public storeAdvice(req: HouseHoldStoredAdviceRequest): Observable<HouseHoldStoredAdviceResponse> {
 
     return null;
-  }
-
-  /**
-   * convert number by dividing by 100 for an issue with risk insurance
-   *
-   * @param {CalculatedPremium} data
-   * @returns {CalculatedPremium}
-   */
-  private filterAmountError(data: CalculatedPremium): CalculatedPremium {
-    return Object.assign(data, {
-      NettoPremium: data.NettoPremium / 100,
-      TotalCosts: data.TotalCosts / 100,
-      Taxes: data.Taxes / 100,
-      Premium: data.Premium / 100,
-      Deductables: data.Deductables / 100,
-      InsuredAmount: data.InsuredAmount / 100,
-      ValuablesInsuredAmount: data.ValuablesInsuredAmount / 100
-    });
-  }
-
-  /**
-   * convert a date to risk api format
-   */
-  private toRiskDate(date): number {
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    return +`${date.getFullYear()}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
-  }
-
-  private filterInsuredAmountDate(data: HouseHoldAmountRequest): HouseHoldAmountRequest {
-
-    return Object.assign(data, {
-      BreadWinnerBirthdate: this.toRiskDate(data.BreadWinnerBirthdate)
-    });
-  }
-
-  private filterPremiumsDate(data: HouseHoldPremiumRequest): HouseHoldPremiumRequest {
-    return Object.assign(data, {
-      CommencingDate: this.toRiskDate(data.CommencingDate),
-      Birthdate: this.toRiskDate(data.Birthdate),
-      BreadWinnerBirthdate: this.toRiskDate(data.BreadWinnerBirthdate)
-    });
   }
 
 }
