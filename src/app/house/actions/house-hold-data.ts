@@ -1,10 +1,17 @@
 import { Action } from '@ngrx/store';
 import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import {
+  HouseHoldStoredAdviceRequest,
+  HouseHoldStoredAdviceResponse
+} from '@app/house/models/house-hold-stored-advice';
 
 export const START = '[HouseHold] Start';
 export const GET_INFO = '[HouseHold] Info';
 export const UPDATE_INFO = '[HouseHold] Update';
 export const UPDATE_ADVICE = '[HouseHold] Update Advice';
+export const STORE_ADVICE = '[HouseHold] Store Advice';
+export const STORE_ADVICE_COMPLETE = '[HouseHold] Store Advice Complete';
+export const STORE_ADVICE_FAILURE = '[HouseHold] Store Advice Failure';
 
 export class Get implements Action {
   readonly type = GET_INFO;
@@ -28,8 +35,32 @@ export class Start implements Action {
   readonly type = START;
 }
 
+export class StoreAdvice implements Action {
+  readonly type = STORE_ADVICE;
+
+  constructor(public payload: HouseHoldStoredAdviceRequest) {
+  }
+}
+
+export class StoreAdviceComplete implements Action {
+  readonly type = STORE_ADVICE_COMPLETE;
+
+  constructor(public payload: HouseHoldStoredAdviceResponse) {
+  }
+}
+
+export class StoreAdviceFailure implements Action {
+  readonly type = STORE_ADVICE_FAILURE;
+
+  constructor(public payload: any) {
+  }
+}
+
 export type All
   = Get
   | Update
   | UpdateAdvice
-  | Start;
+  | Start
+  | StoreAdvice
+  | StoreAdviceComplete
+  | StoreAdviceFailure;

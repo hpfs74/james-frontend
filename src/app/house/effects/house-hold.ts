@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store, Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -9,9 +9,11 @@ import 'rxjs/add/operator/switchMap';
 
 import * as houseHoldAmount from '../actions/house-hold-insurance-amount';
 import * as houseHoldPremium from '../actions/house-hold-premium';
+import * as houseHoldData from '../actions/house-hold-data';
 import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseHoldAmountResponse } from '@app/house/models/house-hold-amount';
 import { HouseHoldPremiumResponse } from '@app/house/models/house-hold-premium';
+import { HouseHoldStoredAdviceResponse } from '@app/house/models/house-hold-stored-advice';
 
 @Injectable()
 export class HouseHoldEffects {
@@ -33,6 +35,16 @@ export class HouseHoldEffects {
       this.houseHoldService.calculatePremiums(req)
         .map((res: HouseHoldPremiumResponse) => new houseHoldPremium.GetInfoComplete(res))
         .catch(error => Observable.of(new houseHoldPremium.GetInfoFailure(error))));
+
+  @Effect()
+  storeAdvice: Observable<Action> = this.actions$
+    .ofType(houseHoldData.STORE_ADVICE)
+    .map((action: houseHoldData.StoreAdvice) => action.payload)
+    .switchMap((req) =>
+      this.houseHoldService.storeAdvice(req)
+        .map((res: HouseHoldStoredAdviceResponse) => new houseHoldData.StoreAdviceComplete(res))
+        .catch(error => Observable.of(new houseHoldData.StoreAdviceFailure(error))));
+
 
   constructor(private actions$: Actions,
               private houseHoldService: HouseHoldService) {
