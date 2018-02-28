@@ -47,7 +47,7 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
     this.translateService
       .get([
         'household.advice.steps.step1.title',
-        'house  hold.advice.steps.step2.title',
+        'household.advice.steps.step2.title',
         'household.advice.steps.step3.title',
         'household.advice.steps.step4.title'])
       .subscribe(data => {

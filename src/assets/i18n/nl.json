@@ -1,13 +1,10 @@
 {
-
-
   "general.dekking": "Dekking",
   "general.monthly": "per maand",
   "general.insurance.own_risk": "Eigen risico",
   "general.insurance.monthly_premium": "{{price}} <span>per maand</span>",
   "general.component.address.postcode": "Postcode",
   "general.component.address.houseNumber": "Huisnummer",
-
   "household.locatie.title": "Waar staat je huis?",
   "household.locatie.comment": "De locatie is van invloed op je inboedelverzekering. In de stad is de kans op schade bijvoorbeeld iets groter dan op het platteland.",
   "household.advice.moreButton.label": "Verder",
@@ -92,7 +89,7 @@
   "household.premiumDetail.footer.para2": "Dubbelcheck of alles goed ingevuld is.",
   "household.premiumDetail.footer.head3": "3. Bevestig",
   "household.premiumDetail.footer.para3": "Gefeliciteerd! Je hebt zojuist flink wat geld bespaard op je autoverzekering!",
-  "household.premiumBuy.header": "Aanvragen inboedelverzekering",
+  "household.premiumBuy.header.title": "Aanvragen inboedelverzekering",
   "household.premiumBuy.header.para1": "Ga verder met het aanvragen van jouw nieuwe verzekering.",
   "household.premiumBuy.header.para2": "Process description, incl. Risk involvement: What heppens now, what can the user expect, does he need to do something?",
   "household.premiumBuy.error.msg": "Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.",
@@ -106,7 +103,7 @@
   "household.premiums.usp.overstaphulp.content": "Wij regelen overstap",
   "household.premiumDetailNav.header.overzicht": "Overzicht",
   "household.premiumDetailNav.button.label": "Vraag direct aan",
-  "household.premium.thankYou.note.header.congrats": "Congrats",
+  "household.premium.thankYou.note.header.congrats.title": "Congrats",
   "household.premium.thankYou.note.header.congrats.suffixNote": "Your insurance has been requested",
   "household.premium.thankYou.note.para.note1.prefix": "Your request has been sent towards ",
   "household.premium.thankYou.note.para.note1.suffix": " and will be approved within the next X days.",
@@ -114,7 +111,6 @@
   "household.premium.thankYou.confirmation.note": "A confirmation email has been sent to ",
   "household.premium.filter.additionalCover.tooltip": "TOOLTIP for add.Coverage",
   "household.premium.filter.glassCover.tooltip": "TOOLTIP for glass .Coverage",
-
   "household.common.step.options.backButtonLabel": "Terug",
   "household.locatie.step.options.nextButtonLabel": "Naar stap 2",
   "household.houseType.step.options.nextButtonLabel": "Naar stap 3",
@@ -129,7 +125,6 @@
   "household.premium.steps.step1.title": "Premiums list",
   "household.premium.steps.step2.title": "Premium detail",
   "household.premium.steps.step3.title": "Premium buy",
-
   "car.advice.loading": "Laden...",
   "car.advice.moreButton.label": "Verder",
   "car.advice.personalizeButton.label": "Personaliseer resultaten",
@@ -158,5 +153,4 @@
   "car.advice.steps.detail.form.houseHold.placeholder": "Maak een keuze",
   "car.advice.steps.detail.form.gender.label": "Geslacht",
   "car.advice.steps.detail.form.gender.placeholder": "Selecteer je geslacht"
-
 }
