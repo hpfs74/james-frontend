@@ -29,4 +29,8 @@ export class NavUserComponent {
   logOut() {
     this.onLogOut.emit();
   }
+
+  goToPurchased() {
+    this.store$.dispatch(new router.Go({path: ['/car/purchased']}));
+  }
 }

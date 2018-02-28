@@ -15,6 +15,11 @@
   transition: background 0.25s;
 }
 
+.knx-menu-item--slim {
+  height: 62px;
+  padding: 8px 16px;
+}
+
 .knx-menu-item a:hover {
   color: $knab-primary-blue;
   font-weight: normal;

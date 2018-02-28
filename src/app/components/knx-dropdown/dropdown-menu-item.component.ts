@@ -15,6 +15,7 @@ import { DropdownStateService } from './dropdown-state.service';
         role="button"
         tabindex="0"
         [class.knx-menu-item--selected]="isSelected"
+        [class.knx-menu-item--slim]="slim"
         (keydown.enter)="click()"
         (click)="click()"
         (mouseover)="select()">
@@ -23,6 +24,7 @@ import { DropdownStateService } from './dropdown-state.service';
   `
 })
 export class MenuItemComponent {
+  @Input() public slim = false ;
   /**
    * @preventClose
    * @desc if true, clicking on the item won't close the dropdown

@@ -1,11 +1,18 @@
 <div class="knx-nav-user" *ngIf="profile" >
   <knx-dropdown>
     <knx-dropdown-button>
-      <span class="knx-nav-user__icon knx-icon-user-o"></span> {{ profile?.firstname || 'Account' }}
+      <div class="row">
+        <div class="col-12">
+          <div class="knx-dropdown-profile-img knx-dropdown-key"
+            [ngStyle]="{'background-image': profile.profile_image ?
+              'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
+          </div>
+        </div>
+      </div>
     </knx-dropdown-button>
 
-    <knx-dropdown-menu offset="50 -185">
-      <knx-menu-item *ngIf="showAccount" (click)="goToProfile()">
+    <knx-dropdown-menu offset="62 -247">
+      <knx-menu-item *ngIf="showAccount">
         <div class="row">
           <div class="col-2">
             <div class="knx-dropdown-profile-img knx-dropdown-key"
@@ -23,10 +30,10 @@
 
       <div class='knx-menu-divider'></div>
 
-      <knx-menu-item *ngIf="showAccount" (click)="goToProfile()">
+      <knx-menu-item [slim]="true" (click)="goToPurchased()">
         <div class="row">
           <div class="col-2">
-            <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
+            <div class="knx-dropdown-img__house knx-dropdown-key"></div>
           </div>
           <div class="col-10">
             <div class="knx-dropdown-value">
@@ -36,10 +43,10 @@
         </div>
       </knx-menu-item>
 
-      <knx-menu-item *ngIf="showAccount" (click)="goToProfile()">
+      <knx-menu-item [slim]="true" (click)="goToProfile()">
         <div class="row">
           <div class="col-2">
-            <div class="knx-dropdown-img__house knx-dropdown-key"></div>
+            <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
           </div>
           <div class="col-10">
             <div class="knx-dropdown-value">
