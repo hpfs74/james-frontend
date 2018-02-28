@@ -15,9 +15,13 @@ describe('House Hold Data reducer', () => {
     it('should set loading to true', () => {
       const action = new Get();
       const expectedResult = {
-        info: null,
         id: null,
-        advice: null
+        info: null,
+        advice: null,
+        store: null,
+        storeReference: null,
+        storeError: false,
+        storeErrorMessage: null
       };
       const result = fromHouseHoldData.reducer(fromHouseHoldData.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -34,7 +38,11 @@ describe('House Hold Data reducer', () => {
       const expectedResult = {
         info: payload,
         id: null,
-        advice: null
+        advice: null,
+        store: null,
+        storeReference: null,
+        storeError: false,
+        storeErrorMessage: null
       };
       const result = fromHouseHoldData.reducer(fromHouseHoldData.initialState, action);
       expect(result.info.RoomCount).toEqual(payload.RoomCount);

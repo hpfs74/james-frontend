@@ -17,7 +17,7 @@
 
             <knx-async-preview
               [loading]="carInfoLoading$ | async"
-              [loaded]="(carInfoLoaded$ | async) && !(carInfoError$ | async)"
+              [loaded]="(carInfoLoaded$ | async) && !(carInfoError$ | async) && form.formGroup.get('licensePlate').value && !form.formGroup.get('licensePlate').hasError('licensePlate')"
               [hidden]="!(carInfoLoading$ | async) && featureToggleService.isOn('carInfo')">
               <knx-car-info *ngIf="!featureToggleService.isOn('carInfo')" [data]="car$ | async"></knx-car-info>
             </knx-async-preview>
