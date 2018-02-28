@@ -25,9 +25,7 @@ export class HouseHoldPremiumsFilterComponent {
   constructor(tagsService: TagsService) {
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
-      .map((el) => {
-        return JSON.parse(el.tag) as Price;
-      });
+      .map((el) => (JSON.parse(el.tag) as Price));
   }
 
   @Input() form: HouseHoldPremiumsFilterForm;
@@ -46,9 +44,11 @@ export class HouseHoldPremiumsFilterComponent {
       // setting checkbox values
       this.form.formGroup.patchValue({
         mainCoverage: value.CoverageCode,
-        glassCoverage: value.IncludeGlass ? 'J' : 'N',
+        glassCoverage: value.IncludeGlass ? value.IncludeGlass : 'N',
         outsideCoverage: value.IncludeOutdoorsValuable
-      }, {emitEvent: false}); // prevent infinite loop; valueChanges subscription
+      }, {
+        emitEvent: false
+      }); // prevent infinite loop; valueChanges subscription
     }
   }
 }
