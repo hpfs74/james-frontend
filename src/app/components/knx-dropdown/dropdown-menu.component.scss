@@ -38,12 +38,3 @@
   overflow: hidden;
 }
 
-:host /deep/ .knx-menu-divider {
-  height: 1px;
-  min-height: 1px;
-  max-height: 1px;
-  width: 100%;
-  display: block;
-  background: #003b5a;
-  opacity: 0.2;
-}

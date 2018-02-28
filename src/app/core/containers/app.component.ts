@@ -142,4 +142,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.toggleMenuOpen();
     this.store$.dispatch(new router.Go({ path: ['/profile-overview'] }));
   }
+
+  goToPurchased() {
+    this.toggleMenuOpen();
+    this.store$.dispatch(new router.Go({path: ['/car/purchased']}));
+  }
 }

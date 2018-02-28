@@ -186,3 +186,83 @@ knx-ir-value {
     }
   }
 }
+
+.knx-menu-mobile {
+  margin-top: 20px;
+}
+
+.knx-menu-item {
+  &.big {
+    .knx-dropdown-img {
+      height: 56px;
+      width: 56px;
+    }
+
+    .knx-dropdown-value {
+      line-height: 30px;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.knx-dropdown-img {
+  width: 46px;
+  height: 46px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.knx-dropdown-profile-img {
+  @extend .knx-dropdown-img;
+
+  background-color: #f3f3f3;
+  border-radius: 100%;
+
+  &.knx-profile-image {
+    border: 2px solid #f6f6f6;
+    background-size: contain;
+  }
+}
+
+.knx-dropdown-value {
+  padding-left: 15px;
+  height: 100%;
+  line-height: 46px;
+}
+
+.knx-dropdown-img__profile {
+  @extend .knx-dropdown-img;
+
+  background-image: url('/assets/images/profile_icon.svg');
+}
+
+.knx-dropdown-img__house {
+  @extend .knx-dropdown-img;
+
+  background-image: url('/assets/images/house_icon.svg');
+}
+
+.knx-dropdown-img__signout {
+  @extend .knx-dropdown-img;
+
+  background-image: url('/assets/images/signout_icon.svg');
+}
+
+.knx-menu-divider {
+  height: 1px;
+  min-height: 1px;
+  max-height: 1px;
+  width: 100%;
+  display: block;
+  background: #003b5a;
+  opacity: 0.2;
+
+  &.mobile {
+    width: 100vw;
+    margin: 20px 0 20px -15px;
+  }
+}
