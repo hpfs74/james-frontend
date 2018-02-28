@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>signout_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M15.1113,19 C15.6633,19 16.1113,19.447 16.1113,20 C16.1113,20.553 15.6633,21 15.1113,21 L4.0003,21 C3.4473,21 3.0003,20.553 3.0003,20 L3.0003,4 C3.0003,3.447 3.4473,3 4.0003,3 L15.1113,3 C15.6633,3 16.1113,3.447 16.1113,4 C16.1113,4.553 15.6633,5 15.1113,5 L5.0003,5 L5.0003,19 L15.1113,19 Z M20.6997,11.2109 C20.8887,11.3969 20.9967,11.6499 20.9997,11.9149 C21.0027,12.1809 20.8997,12.4369 20.7147,12.6259 L17.1587,16.2559 C16.9627,16.4549 16.7037,16.5559 16.4447,16.5559 C16.1917,16.5559 15.9387,16.4609 15.7447,16.2709 C15.3497,15.8839 15.3437,15.2499 15.7297,14.8559 L17.5477,12.9999 L9.7777,12.9999 C9.2257,12.9999 8.7777,12.5529 8.7777,11.9999 C8.7777,11.4469 9.2257,10.9999 9.7777,10.9999 L17.6247,10.9999 L15.7447,9.1589 C15.3497,8.7729 15.3437,8.1399 15.7297,7.7449 C16.1167,7.3509 16.7497,7.3439 17.1437,7.7299 L20.6997,11.2109 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons/General/Signout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Fill-1" fill="#000000" xlink:href="#path-1"></use>
+        <g id="Colours/Primary/-Blue" mask="url(#mask-2)" fill="#003B5A">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

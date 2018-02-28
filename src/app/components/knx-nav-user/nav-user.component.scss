@@ -36,3 +36,23 @@
 .knx-nav-user .knx-dropdown-container .knx-dropdown-button__caret svg {
   fill: $knab-nav-item-color;
 }
+
+.knx-dropdown-profile-img {
+  width: 46px;
+  height: 46px;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-color: #f3f3f3;
+  border-radius: 100%;
+  background-position: 11px;
+}
+
+.knx-dropdown-value {
+  padding-left: 15px;
+  height: 100%;
+  line-height: 46px;
+}
+
+.knx-dropdown-img__profile {
+  background-image: url('/assets/images/');
+}
