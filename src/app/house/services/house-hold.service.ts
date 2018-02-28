@@ -11,6 +11,10 @@ import {
   CalculatedPremium, HouseHoldPremiumRequest,
   HouseHoldPremiumResponse
 } from '@app/house/models/house-hold-premium';
+import {
+  HouseHoldStoredAdviceRequest,
+  HouseHoldStoredAdviceResponse
+} from '@app/house/models/house-hold-stored-advice';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -78,6 +82,18 @@ export class HouseHoldService {
           CalculatedPremiums: res.CalculatedPremiums.map(this.filterAmountError)
         } as HouseHoldPremiumResponse;
       });
+  }
+
+  /**
+   * store the current advice and search criteria to the backend
+   * for later purpose
+   *
+   * @param {HouseHoldStoredAdviceRequest} req - contians all information about the flow
+   * @returns {Observable<HouseHoldStoredAdviceResponse>} - and id of the stored advice
+   */
+  public storeAdvice(req: HouseHoldStoredAdviceRequest): Observable<HouseHoldStoredAdviceResponse> {
+
+    return null;
   }
 
   /**

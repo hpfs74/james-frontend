@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import {
+  CalculatedPremium, HouseHoldPremiumRequest,
+  HouseHoldPremiumResponse
+} from '@app/house/models/house-hold-premium';
 import * as assistant from '@core/actions/assistant';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
@@ -14,6 +17,10 @@ import * as wizardActions from '@core/actions/wizard';
 import * as houseDataActions from '@app/house/actions/house-data';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Router } from '@angular/router';
+import { ObjectUnsubscribedError } from 'rxjs/Rx';
+import { HouseHoldStoredAdviceRequest } from '@app/house/models/house-hold-stored-advice';
+import { HouseDataRequest } from '@app/house/models/house-data';
+import { HouseHoldState } from '@app/house/reducers';
 
 @Component({
   selector: 'knx-house-hold-premiums-buy',
@@ -49,6 +56,7 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
       clear: true
     }));
 
+
     this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
   }
 
@@ -71,7 +79,10 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
       customerPhone: detailForm.value.phone
     }));
 
+    // TODO: call the store advice here
+
     // go to the next step
     this.store$.dispatch(new wizardActions.Forward());
+
   }
 }
