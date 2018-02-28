@@ -118,7 +118,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       Observable.combineLatest(detailForm.valueChanges, addressForm.valueChanges, (a, b) => Object.assign({}, a, b))
         .filter(combinedValues => {
           return Object.keys(combinedValues)
-                       .filter(key => combinedValues[key]
+                       .filter(key => (combinedValues[key] !== null && combinedValues[key] !== undefined)
                           && optionalFields.indexOf(key) === -1)
                         .length === Object.keys(combinedValues).length - optionalFields.length;
         })
