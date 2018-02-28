@@ -7,6 +7,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 import { setUpTestBed } from './../../../../../../test.common.spec';
 
@@ -43,11 +44,19 @@ import { Router, RouterModule } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
-import { CarService } from '@app/car/services/car.service';
+import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
+import { CarService } from '@car/services/car.service';
 import { MockBackend } from '@angular/http/testing';
-import { BaseRequestOptions, XHRBackend, Http } from '@angular/http';
-import { AuthHttp } from '@app/auth/services';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
+import { AuthHttp } from '@auth/services';
+
+let translations: any = {'TEST': 'This is a test'};
+
+class TranslateLoaderMock implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return of(translations);
+  }
+}
 
 describe('Component: CarAdviceComponent', () => {
   let comp: CarAdviceComponent;
@@ -56,6 +65,7 @@ describe('Component: CarAdviceComponent', () => {
   let actions: Observable<any>;
   let store: Store<fromCar.State>;
   let tagsService: TagsService;
+  let translateService: TranslateService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -71,7 +81,9 @@ describe('Component: CarAdviceComponent', () => {
           'insurance': combineReducers(fromInsurance.reducers),
           'profile': combineReducers(fromProfile.reducers)
         }),
-        TranslateModule.forRoot()
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+        })
       ],
       declarations: [
         CarAdviceComponent
@@ -110,6 +122,8 @@ describe('Component: CarAdviceComponent', () => {
 
     store = TestBed.get(Store);
     tagsService = TestBed.get(TagsService);
+    translateService = TestBed.get(TranslateService);
+
     spyOn(store, 'dispatch').and.callThrough();
 
     fixture = TestBed.createComponent(CarAdviceComponent);

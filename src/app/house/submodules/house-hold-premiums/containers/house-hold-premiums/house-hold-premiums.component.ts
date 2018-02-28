@@ -43,6 +43,7 @@ import { HouseHoldPremiumsFilterForm } from '../house-hold-premiums-filter/house
 import * as router from '@core/actions/router';
 import { UIPair } from '@core/models/ui-pair';
 import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
+import { TranslateService } from '@ngx-translate/core';
 
 
 /**
@@ -78,11 +79,19 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
+              private translateService: TranslateService,
               public knxWizardService: KNXWizardRxService) {
-
-    this.formSteps = ['Premiums list', 'Premium detail', 'Premium buy'].map(el => {
-      return {label: el};
-    });
+    this.translateService
+      .get([
+        'household.premium.steps.step1.title',
+        'household.premium.steps.step2.title',
+        'household.premium.steps.step3.title'])
+      .subscribe(data => {
+        this.formSteps = Object
+          .keys(data)
+          .map(key => data[key])
+          .map(v => ({label: v}));
+      });
   }
 
   ngOnInit() {

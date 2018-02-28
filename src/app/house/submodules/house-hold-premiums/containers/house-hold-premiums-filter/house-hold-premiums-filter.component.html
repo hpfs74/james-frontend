@@ -6,14 +6,14 @@
       <div class="knx-form-group__wrap">
 
 
-          <label class="knx-radio">
-            <input formControlName="mainCoverage"
-                   type="radio"
-                   [value]="coverages[0]?.id" />
+        <label class="knx-radio">
+          <input formControlName="mainCoverage"
+                 type="radio"
+                 [value]="coverages[0]?.id"/>
 
-            <span class="knx-radio__control"></span>
-            <span class="knx-radio__label">{{coverages[0]?.header}}</span>
-          </label>
+          <span class="knx-radio__control"></span>
+          <span class="knx-radio__label">{{coverages[0]?.header}}</span>
+        </label>
 
       </div>
 
@@ -57,7 +57,7 @@
 
       <!--<span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">-->
           <!--<knx-tooltip [options]="{ position: 'left' }">-->
-           <!--Outside coverage tooltip-->
+           <!--<span innerHTML=" 'household.premium.filter.additionalCover.tooltip' | translate "></span>-->
           <!--</knx-tooltip>-->
         <!--</span>-->
     <!--</div>-->
@@ -70,7 +70,7 @@
 
       <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
-         Glass coverage tooltip
+         {{ 'household.premium.filter.glassCover.tooltip' | translate }}
         </knx-tooltip>
       </span>
     </div>

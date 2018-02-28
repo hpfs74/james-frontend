@@ -7,19 +7,19 @@
 
       <div *ngIf="(isPremiumsLoading$| async); else insuranceResults">
         <knx-loader [visible]="(isPremiumsLoading$| async)">
-          Een momentje! We vergelijken meer dan 20 verschillende aanbieders voor je om de beste match te vinden.
+          {{ 'household.premiumList.loading.message' | translate }}
         </knx-loader>
       </div>
 
       <div *ngIf="noResult()" class="knx-message knx-message--hint">
-        Niets gevonden. Ga terug om je keuze aan te passen. Kom je er niet uit? Neem contact op.
+        {{ 'household.premiumList.noResult.message' | translate }}
       </div>
 
       <ng-template #insuranceResults>
-        <h2>De beste verzekeringen voor jouw inboedel</h2>
+        <h2>{{ 'household.premiumList.insuranceResults.title' | translate }}</h2>
 
         <p>
-          All contents insurances will be based on the following
+          {{ 'household.premiumList.insuranceResults.description' | translate }}
         </p>
 
         <!--</p>-->
@@ -35,30 +35,18 @@
 
         <button *ngIf="insurances && total < insurances.length"
                 class="knx-button knx-button--secondary knx-button--ghost block-center" (click)="showAll()">
-          Toon alle verzekeringen
+          {{ 'houshold.premiumList.insuranceResults.button.label.toonAlle' | translate }}
         </button>
 
         <div class="knx-insurance-toplist__info">
           <span style="cursor: pointer;">
-            Hoe komen we tot deze resultaten?
+            {{ 'household.premiumList.insuranceResult.topListInfo.title' | translate }}
             <knx-tooltip [options]="{ position: 'bottom' }">
-              <p>
-                Onze slimme technologie gaat op basis van de door jou opgegeven informatie aan de slag. We vergelijken
-                meer dan 20 aanbieders en stellen hier een overzicht uit samen. Daarbij kijken we niet alleen naar de prijs.
-                Goede polisvoorwaarden en een dekking die past bij jouw persoonlijke situatie, zijn ook belangrijk.
-              </p>
+              <p>{{ 'household.premiumList.insuranceResult.topListInfo.tooltip.para1' | translate }}</p>
 
-              <p>
-                In het overzicht staan de profielscore en de prijs-kwaliteitverhouding. De verzekering met de hoogste
-                score – en dus het best bij je past – staat bovenaan. Verzekeringen die je via Knab afsluit, krijg je
-                voor een vast laag percentage.
-              </p>
+              <p>{{ 'household.premiumList.insuranceResult.topListInfo.tooltip.para2' | translate }}</p>
 
-              <p>
-                Verzekeringen die je niet via ons kunt afsluiten, laten we ook zien. We willen voor jou namelijk de
-                best passende verzekering en daarom is het belangrijk dat jij een zo compleet mogelijk beeld krijgt.
-                We verwijzen je in dat geval door naar de website van de verzekeraar. Wel zo eerlijk.
-              </p>
+              <p>{{ 'household.premiumList.insuranceResult.topListInfo.tooltip.para1' | translate }}</p>
             </knx-tooltip>
           </span>
         </div>
