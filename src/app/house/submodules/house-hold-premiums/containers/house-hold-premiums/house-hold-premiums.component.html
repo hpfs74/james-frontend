@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-6" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
       <button (click)="goBack()"
-              class="knx-button knx-button--link knx-button--back">wijzig mijn gegevens
+              class="knx-button knx-button--link knx-button--back">{{ 'household.premiums.button.label.goBack' | translate }}
       </button>
     </div>
     <div class="col-6" *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail">
       <button (click)="goToList()"
-              class="knx-button knx-button--link knx-button--back">select your insurance
+              class="knx-button knx-button--link knx-button--back">{{ 'household.premiums.button.label.goToList' | translate }}
       </button>
     </div>
   </div>
@@ -37,18 +37,18 @@
            *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.buy || knxWizardService.currentStepIndex === houseHoldPremiumsSteps.thankyou">
         <ul>
           <li>
-            <b>Objectief</b><br/>
-            We vergelijken meer dan 40
+            <b>{{ 'household.premiums.usp.objective.title' | translate }}</b><br/>
+            {{ 'household.premiums.usp.objective.content' | translate }}
           </li>
 
           <li>
-            <b>Bespaar</b><br/>
-            Tot 15% korting op elke verzekering
+            <b>{{ 'household.premiums.usp.save.title' | translate }}</b><br/>
+            {{ 'household.premiums.usp.save.content' | translate }}
           </li>
 
           <li>
-            <b>Overstaphulp</b><br>
-            Wij regelen overstap
+            <b>{{ 'household.premiums.usp.overstaphulp.title' | translate }}</b><br>
+            {{ 'household.premiums.usp.overstaphulp.content' | translate }}
           </li>
         </ul>
       </div>

@@ -27,6 +27,7 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/take';
 import { HouseHoldAmountRequest } from '@app/house/models/house-hold-amount';
 import { getHouseDataAddress, getHouseHoldDataAdvice, getHouseHoldDataInfo } from '@app/house/reducers';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'knx-house-hold-location-form',
@@ -43,9 +44,16 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   subscriptions$: Subscription[] = [];
+  copies: any = {};
 
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService) {
+              private tagsService: TagsService,
+              private translateService: TranslateService) {
+    this.translateService.get([
+      'household.locatie.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
 
     this.initializeForms();
     this.selectInitialStates();
@@ -53,7 +61,7 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
 
     this.currentStepOptions = {
       label: 'Locatie',
-      nextButtonLabel: 'Huis type',
+      nextButtonLabel: this.copies['household.locatie.step.options.nextButtonLabel'],
       hideBackButton: true,
       hideNextButton: false,
       nextButtonClass: 'knx-button knx-button--3d knx-button--primary'

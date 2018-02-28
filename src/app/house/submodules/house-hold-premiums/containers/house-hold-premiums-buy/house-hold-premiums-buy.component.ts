@@ -7,6 +7,8 @@ import * as assistant from '@core/actions/assistant';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
+import { TranslateService } from '@ngx-translate/core';
+
 
 import * as fromHouseHold from '@app/house/reducers';
 import { HouseHoldPremiumsBuyForm } from './house-hold-premiums-buy.form';
@@ -14,12 +16,8 @@ import { FormBuilder } from '@angular/forms';
 import * as FormUtils from '@utils/base-form.utils';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import * as wizardActions from '@core/actions/wizard';
-import * as houseDataActions from '@app/house/actions/house-data';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
-import { Router } from '@angular/router';
-import { HouseHoldStoredAdviceRequest } from '@app/house/models/house-hold-stored-advice';
-import { HouseDataRequest } from '@app/house/models/house-data';
-import { HouseHoldState } from '@app/house/reducers';
+
 
 @Component({
   selector: 'knx-house-hold-premiums-buy',
@@ -34,14 +32,20 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
   selectedInsurance$: Observable<CalculatedPremium>;
   insurance: CalculatedPremium;
   form: HouseHoldPremiumsBuyForm;
+  copies: any = {};
 
-  constructor(private store$: Store<fromRoot.State>) {
+  constructor(private store$: Store<fromRoot.State>, private translateService: TranslateService) {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldPremiumsBuyForm(formBuilder);
+    this.translateService.get([
+      'household.premium.buy.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
 
     this.currentStepOptions = {
-      backButtonLabel: 'Terug',
-      nextButtonLabel: 'Request insurance',
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      nextButtonLabel: this.copies['household.premium.buy.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false,
       nextButtonClass: 'knx-button knx-button--3d knx-button--primary'

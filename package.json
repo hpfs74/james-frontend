@@ -10,9 +10,6 @@
     "knab"
   ],
   "scripts": {
-    "postcheckout": "./hooks/post-checkout $GIT_PARAMS",
-    "postmerge": "./hooks/post-merge $GIT_PARAMS",
-    "prepush": "npm run test:ci && npm run security",
     "config": "ts-node ./scripts/set-env.ts",
     "start": "npm run config -- --analytics=true && ng serve --open --locale",
     "build": "npm run config -- --analytics=true && ng build --locale --aot --build-optimizer --stats-json",
@@ -38,7 +35,9 @@
   "husky": {
     "hooks": {
       "pre-commit": "commitlint -e && npm run lint:styles && npm run lint",
-      "pre-push": "npm run build && npm run test:ci && npm run security"
+      "pre-push": "npm run build && npm run test:ci && npm run security && pkg-ok",
+      "post-checkout": "./hooks/post-checkout $GIT_PARAMS",
+      "post-merge": "./hooks/post-merge $GIT_PARAMS"
     }
   },
   "private": true,
@@ -147,6 +146,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "ng-router-loader": "^2.1.0",
     "ngrx-store-freeze": "^0.2.0",
+    "pkg-ok": "^2.1.0",
     "protractor": "~5.1.2",
     "retire": "^1.4.0",
     "rimraf": "^2.6.2",

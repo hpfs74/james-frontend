@@ -22,6 +22,7 @@ import * as wizardActions from '@app/core/actions/wizard';
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { Subscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'house-hold-advice.component.html',
@@ -39,11 +40,22 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
+              private translateService: TranslateService,
               private router: Router,
               public knxWizardService: KNXWizardRxService) {
 
-    this.formSteps = ['Locatie', 'Huis type', 'Huis details', 'Dekking']
-      .map((el) => ({label: el}));
+    this.translateService
+      .get([
+        'household.advice.steps.step1.title',
+        'house  hold.advice.steps.step2.title',
+        'household.advice.steps.step3.title',
+        'household.advice.steps.step4.title'])
+      .subscribe(data => {
+        this.formSteps = Object
+          .keys(data)
+          .map(key => data[key])
+          .map(v => ({label: v}));
+      });
   }
 
   ngOnInit() {

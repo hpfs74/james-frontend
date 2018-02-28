@@ -29,6 +29,7 @@ import * as fromCore from '@app/core/reducers';
 import * as fromHouse from '@app/house/reducers';
 
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -55,10 +56,18 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   houseHoldData: HouseHoldPremiumRequest;
 
   subscriptions$: Subscription[] = [];
-
+  copies: any = {};
 
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService) {
+              private tagsService: TagsService,
+              private translateService: TranslateService) {
+
+    this.translateService.get([
+      'household.common.step.options.backButtonLabel',
+      'household.dekking.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
 
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
@@ -66,8 +75,8 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
     this.currentStepOptions = {
       label: 'Dekking',
-      backButtonLabel: 'Terug',
-      nextButtonLabel: 'Toon resultaat',
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      nextButtonLabel: this.copies['household.dekking.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false
     };
