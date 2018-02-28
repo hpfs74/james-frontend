@@ -164,29 +164,35 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));
   }
 
+  getInsuredAmount() {
+    const detailForm = this.form.formGroup;
+
+    if (detailForm.value.dateOfBirth && detailForm.value.familySituation && detailForm.value.netIncomeRange) {
+      const payload = {
+        OwnedBuilding: this.houseHoldData.OwnedBuilding,
+        FamilyComposition: detailForm.value.familySituation,
+        AmountMoreThan12KAudioVisualComp: 0,
+        AmountMoreThan6KJewelry: 0,
+        AmountMoreThan6KTenantsInterest: 0,
+        AmountMoreThan15KSpecialPossesion: 0,
+        BreadWinnerBirthdate: detailForm.value.dateOfBirth,
+        BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
+      } as HouseHoldAmountRequest;
+
+      this.store$.dispatch(new householdinsuranceamount.GetInfo(payload));
+    }
+  }
+
   setFormAsyncValidators(): void {
     this.subscriptions$.push(
-      this.form.formGroup.valueChanges
-        .subscribe(() => {
-
-          const detailForm = this.form.formGroup;
-
-          if (detailForm.value.dateOfBirth && detailForm.value.familySituation && detailForm.value.netIncomeRange) {
-            const payload = {
-              OwnedBuilding: this.houseHoldData.OwnedBuilding,
-              FamilyComposition: detailForm.value.familySituation,
-              AmountMoreThan12KAudioVisualComp: 0,
-              AmountMoreThan6KJewelry: 0,
-              AmountMoreThan6KTenantsInterest: 0,
-              AmountMoreThan15KSpecialPossesion: 0,
-              BreadWinnerBirthdate: detailForm.value.dateOfBirth,
-              BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
-            } as HouseHoldAmountRequest;
-
-            this.store$.dispatch(new householdinsuranceamount.GetInfo(payload));
-          }
-        }));
+      this.form.formGroup.get('dateOfBirth').valueChanges
+        .subscribe(() => this.getInsuredAmount()),
+      this.form.formGroup.get('familySituation').valueChanges
+        .subscribe(() => this.getInsuredAmount()),
+      this.form.formGroup.get('netIncomeRange').valueChanges
+        .subscribe(() => this.getInsuredAmount()));
   }
+
 
   /**
    * close all subscriptions
@@ -213,7 +219,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
    * check if the form is valid and move to the next step
    * @param event
    */
-  goToNextStep(event?: any) {
+  goToNextStep(event ?: any) {
     const detailForm = this.form.formGroup;
 
     FormUtils.validateForm(detailForm);
