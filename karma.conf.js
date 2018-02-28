@@ -1,5 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/0.13/config/configuration-file.html
+require('dotenv').config();
 
 module.exports = function(config) {
 
@@ -103,7 +104,6 @@ module.exports = function(config) {
         browsers: process.env.CI ? ['PhantomJS'] : ['ChromeHeadless'],
         singleRun: process.env.CI ? false : true
     };
-
     // CI
     if (!process.env.KARMA_WATCH) {
         configuration.coverageReporter.reporters.push({ type: 'text' });
