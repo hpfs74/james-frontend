@@ -37,14 +37,19 @@
   fill: $knab-nav-item-color;
 }
 
-.knx-dropdown-profile-img {
+.knx-dropdown-img {
   width: 46px;
   height: 46px;
+  background-position: 50%;
   background-repeat: no-repeat;
-  background-size: 24px;
+  background-size: auto;
+}
+
+.knx-dropdown-profile-img {
+  @extend .knx-dropdown-img;
+
   background-color: #f3f3f3;
   border-radius: 100%;
-  background-position: 11px;
 }
 
 .knx-dropdown-value {
@@ -54,5 +59,19 @@
 }
 
 .knx-dropdown-img__profile {
-  background-image: url('/assets/images/');
+  @extend .knx-dropdown-img;
+
+  background-image: url('/assets/images/profile_icon.svg');
+}
+
+.knx-dropdown-img__house {
+  @extend .knx-dropdown-img;
+
+  background-image: url('/assets/images/house_icon.svg');
+}
+
+.knx-dropdown-img__singout {
+  @extend .knx-dropdown-img;
+
+  background-image: url('/assets/images/signout_icon.svg');
 }
