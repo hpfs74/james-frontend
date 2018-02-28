@@ -29,7 +29,7 @@ class TranslateLoaderMock implements TranslateLoader {
 
 describe('Component: HouseHoldDekkingComponent', () => {
   let comp: HouseHoldDekkingComponent;
-  let fixture:   ComponentFixture<HouseHoldDekkingComponent>;
+  let fixture: ComponentFixture<HouseHoldDekkingComponent>;
   let store: Store<fromRoot.State>;
   let tagsService: TagsService;
   let translateService: TranslateService;
@@ -54,6 +54,7 @@ describe('Component: HouseHoldDekkingComponent', () => {
       ],
       providers: [
         KNXLocale,
+        TranslateService,
         {
           provide: TagsService,
           useValue: TagsServiceMock

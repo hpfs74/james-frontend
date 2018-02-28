@@ -1,14 +1,12 @@
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
-import { EmailValidator } from '@app/utils/email-validator';
 
 export class PasswordForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
   validationErrors = {
     required: () => 'Vul hier iets in alsjeblieft',
-    matching: () => 'Wachtwoorden komen niet overeen'
   };
 
   constructor(private fb: FormBuilder) {

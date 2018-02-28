@@ -1,24 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
-import { BaseForm } from '@app/shared/forms/base-form';
 import { Profile } from '@app/profile/models/profile';
-import { Settings } from '@app/profile/models/settings';
-import { ProfileForm } from '@app/profile/components/profile-form/profile.form';
-import { TagsService } from '@app/core/services';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 
-import * as FormUtils from '@app/utils/base-form.utils';
 import * as fromProfile from '@app/profile/reducers';
 import * as fromCore from '@app/core/reducers';
 import * as router from '@app/core/actions/router';
 import * as assistant from '@app/core/actions/assistant';
 import * as profile from '@app/profile/actions/profile';
-import * as settings from '@app/profile/actions/settings';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as layout from '@app/core/actions/layout';
 
@@ -38,7 +31,6 @@ export class ProfileOverviewComponent implements OnInit {
   profile$: Observable<Profile>;
   profileLoading$: Observable<boolean>;
   constructor(private store$: Store<fromProfile.State>,
-              private tagsService: TagsService,
               public featureToggleService: FeatureConfigService) {
     this.chatConfig$ = store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = store$.select(fromCore.getAssistantMessageState);

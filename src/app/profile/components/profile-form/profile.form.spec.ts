@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ProfileForm } from './profile.form';
 import { TestBed } from '@angular/core/testing';
 import { TagsService } from '@app/core/services';

@@ -58,7 +58,7 @@ describe('Component: PriceTable', () => {
   });
 
   it('should show selected state on an element', () => {
-    comp.selectItem(0);
+    comp.selectItem(0, false);
     fixture.detectChanges();
 
     expect(fixture.debugElement.query(By.css('div.knx-price-item--selected'))).not.toBeNull();

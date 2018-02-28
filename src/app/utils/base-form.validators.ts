@@ -161,3 +161,16 @@ export function carReportingCodeValidator(key: string) {
 export function houseNumberValidator(key: string) {
   return regExValidator(/^\d+(-\d+)*$/, key);
 }
+
+/**
+ * some form needs have a optiona phone number
+ * so we need to check if the data is empty is ok
+ * if there's some info then must be a valid phone
+ * number
+ *
+ * @param {string} key
+ * @returns {(fc: FormControl) => {}}
+ */
+export function emptyOrPhoneNumberValidator(key: string) {
+  return regExValidator(/^(?:[0]\d{9}|)$/, key);
+}

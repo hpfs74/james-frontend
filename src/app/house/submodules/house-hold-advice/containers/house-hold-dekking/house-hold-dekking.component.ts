@@ -31,7 +31,6 @@ import * as fromHouse from '@app/house/reducers';
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 import { TranslateService } from '@ngx-translate/core';
 
-
 @Component({
   selector: 'knx-house-hold-dekking-form',
   styleUrls: ['./house-hold-dekking.component.scss'],
@@ -62,6 +61,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
               private translateService: TranslateService) {
+
     this.translateService.get([
       'household.common.step.options.backButtonLabel',
       'household.dekking.step.options.nextButtonLabel'
@@ -71,9 +71,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
-      .map((el) => {
-        return JSON.parse(el.tag) as Price;
-      });
+      .map((el) => (JSON.parse(el.tag) as Price));
 
     this.currentStepOptions = {
       label: 'Dekking',
@@ -84,11 +82,11 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     };
 
     this.initializeForms();
-    this.selectInitalStates();
+    this.selectInitialStates();
     this.setIntialSubscription();
   }
 
-  selectInitalStates(): void {
+  selectInitialStates(): void {
     this.error$ = this.store$.select(fromCore.getWizardError);
   }
 
@@ -97,6 +95,8 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
       this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
+
+    this.form.formGroup.patchValue({coverage: 5016});
   }
 
   setIntialSubscription() {
@@ -177,6 +177,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
               FamilyComposition: detailForm.value.familySituation,
               AmountMoreThan12KAudioVisualComp: 0,
               AmountMoreThan6KJewelry: 0,
+              AmountMoreThan6KTenantsInterest: 0,
               AmountMoreThan15KSpecialPossesion: 0,
               BreadWinnerBirthdate: detailForm.value.dateOfBirth,
               BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange

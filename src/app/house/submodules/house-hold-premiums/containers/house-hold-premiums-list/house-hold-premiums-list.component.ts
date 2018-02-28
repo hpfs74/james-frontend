@@ -122,7 +122,7 @@ export class HouseHoldPremiumsListComponent implements OnInit {
     return {
       id: source.Identifier,
       logo: source.CompanyLogoUrl,
-      price: source.ValuablesInsuredAmount,
+      price: source.InsuredAmount,
       own_risk: source.Deductables,
       monthly_premium: source.Premium,
       advice_expires_at: Date.now(),

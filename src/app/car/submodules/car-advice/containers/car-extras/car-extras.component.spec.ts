@@ -13,6 +13,7 @@ import { of } from 'rxjs/observable/of';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 let translations: any = {'TEST': 'This is a test'};
+
 class TranslateLoaderMock implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
     return of(translations);
@@ -20,13 +21,16 @@ class TranslateLoaderMock implements TranslateLoader {
 }
 
 @Component({
-  template: `<div><knx-car-extras [form]="formFromHost" [show]="true" optionModifierClass="hidden-xs"></knx-car-extras></div>`
+  template: `
+    <div>
+      <knx-car-extras [form]="formFromHost" [show]="true" optionModifierClass="hidden-xs"></knx-car-extras>
+    </div>`
 })
 export class TestHostComponent {
   @ViewChild(CarExtrasComponent)
   public targetComponent: CarExtrasComponent;
   public formFromHost: CarExtrasForm = new CarExtrasForm(new FormBuilder());
-  private mockFormValues = { label: 'test', value: 'VALUE '};
+  private mockFormValues = {label: 'test', value: 'VALUE '};
 }
 
 describe('Component: CarExtrasComponent', () => {
@@ -35,7 +39,7 @@ describe('Component: CarExtrasComponent', () => {
   let translateService: TranslateService;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [BrowserAnimationsModule, SharedModule,  TranslateModule.forRoot({
+    imports: [BrowserAnimationsModule, SharedModule, TranslateModule.forRoot({
       loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
     })],
     providers: [],

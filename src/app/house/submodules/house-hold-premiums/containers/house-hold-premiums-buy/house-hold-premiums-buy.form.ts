@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UIPair } from '@core/models/ui-pair';
 import { EmailValidator } from '@utils/email-validator';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
+import { emptyOrPhoneNumberValidator } from '@utils/base-form.validators';
 
 /**
  * describe the form filters
@@ -23,10 +24,11 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
   constructor(private fb: FormBuilder) {
     super();
 
+
     this.formGroup = this.fb.group({
       name: [null, Validators.required],
       email: [null, Validators.compose([Validators.required, EmailValidator])],
-      phone: [null],
+      phone: [null, emptyOrPhoneNumberValidator],
       receiveUpdate: [null]
     });
 
@@ -35,7 +37,6 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControlName: 'name',
         formControl: this.formGroup.get('name'),
         validationErrors: this.validationErrors,
-        showErrorMessages: false,
         label: 'Your name',
         type: 'text',
         inputOptions: {
@@ -49,7 +50,6 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        showErrorMessages: false,
         label: 'Je e-mailadres',
 
         inputOptions: {
@@ -79,11 +79,11 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControl: this.formGroup.get('receiveUpdate'),
         type: 'checkbox',
         inputOptions: {
-          items: [{
-            label: 'I want to receive updates regarding Knab services',
-            value: 'true'
-          }]
-        }
+
+          label: 'I want to receive updates regarding Knab services',
+          value: 'true'
+
+        } as UIPair
       }
     };
   }

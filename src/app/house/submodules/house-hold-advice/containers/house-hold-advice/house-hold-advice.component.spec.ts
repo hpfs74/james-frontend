@@ -42,6 +42,7 @@ class TranslateLoaderMock implements TranslateLoader {
   }
 }
 
+
 describe('Component: HouseHoldAdviceComponent', () => {
   let comp: HouseHoldAdviceComponent;
   let fixture: ComponentFixture<HouseHoldAdviceComponent>;
@@ -57,6 +58,7 @@ describe('Component: HouseHoldAdviceComponent', () => {
         BrowserAnimationsModule,
         RouterTestingModule,
         SharedModule,
+        TranslateModule.forRoot(),
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers),
@@ -83,7 +85,8 @@ describe('Component: HouseHoldAdviceComponent', () => {
         {
           provide: KNXWizardRxService,
           useValue: KNXWizardServiceMock
-        }
+        },
+        TranslateService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });

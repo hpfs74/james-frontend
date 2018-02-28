@@ -55,7 +55,8 @@ export class HouseHoldHouseDetailComponent implements AfterViewInit, OnDestroy {
       backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
       nextButtonLabel: this.copies['household.houseDetails.step.options.nextButtonLabel'],
       hideBackButton: false,
-      hideNextButton: false
+      hideNextButton: false,
+      nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
     };
   }
 

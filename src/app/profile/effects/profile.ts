@@ -1,9 +1,7 @@
-import { SaveSuccessAction } from './../actions/profile';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
-// import { Database } from '@ngrx/db';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
@@ -14,7 +12,6 @@ import 'rxjs/add/operator/mergeMap';
 import { ProfileService } from '../services/profile.service';
 import { Profile } from '../models/profile';
 import * as profile from '../actions/profile';
-import * as insurances from '../../insurance/actions/insurance';
 import * as AuthUtils from '@app/utils/auth.utils';
 
 @Injectable()

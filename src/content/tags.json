@@ -2559,42 +2559,42 @@
   "house_hold_flow_rooms_count": [
     {
       "tag": 2,
-      "translation_label": "2 or less rooms",
-      "translation_text": "2 or less rooms"
+      "translation_label": "2 or less",
+      "translation_text": "2 or less"
     },
     {
       "tag": 3,
-      "translation_label": "3 rooms",
-      "translation_text": "3 rooms"
+      "translation_label": "3",
+      "translation_text": "3"
     },
     {
-      "translation_label": "4 rooms",
-      "translation_text": "4 rooms",
+      "translation_label": "4",
+      "translation_text": "4",
       "tag": 4
     },
     {
-      "translation_label": "5 rooms",
-      "translation_text": "5 rooms",
+      "translation_label": "5",
+      "translation_text": "5",
       "tag": 5
     },
     {
-      "translation_label": "6 rooms",
-      "translation_text": "6 rooms",
+      "translation_label": "6",
+      "translation_text": "6",
       "tag": 6
     },
     {
-      "translation_label": "7 rooms",
-      "translation_text": "7 rooms",
+      "translation_label": "7",
+      "translation_text": "7",
       "tag": 7
     },
     {
-      "translation_label": "8 rooms",
-      "translation_text": "8 rooms",
+      "translation_label": "8",
+      "translation_text": "8",
       "tag": 8
     },
     {
-      "translation_label": "9 or more rooms",
-      "translation_text": "9 or more rooms",
+      "translation_label": "9 or more",
+      "translation_text": "9 or more",
       "tag": 9
     }
   ],
@@ -2700,8 +2700,8 @@
       "tag": 1946
     },
     {
-      "translation_text": "1970 - 2000",
-      "translation_label": "1970 - 2000",
+      "translation_text": "1971 - 2000",
+      "translation_label": "1971 - 2000",
       "tag": 1971
     },
     {
@@ -2807,8 +2807,8 @@
       "tag": "1000"
     },
     {
-      "translation_text": "Tot en met € 1.000",
-      "translation_label": "Tot en met € 1.000",
+      "translation_text": "€ 1.001 tot en met € 2.000",
+      "translation_label": "€ 1.001 tot en met € 2.000",
       "tag": "2000"
     },
     {
@@ -2846,7 +2846,7 @@
   ],
   "house_hold_flow_coverages": [
     {
-      "tag": "{ \"id\": 5016, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
+      "tag": "{ \"id\": 5016, \"selected\":true, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
       "translation_label": "Basis",
       "translation_text": "Basis"
     },

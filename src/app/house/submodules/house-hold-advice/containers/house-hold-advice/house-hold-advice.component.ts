@@ -43,10 +43,11 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
               private translateService: TranslateService,
               private router: Router,
               public knxWizardService: KNXWizardRxService) {
+
     this.translateService
       .get([
         'household.advice.steps.step1.title',
-        'household.advice.steps.step2.title',
+        'house  hold.advice.steps.step2.title',
         'household.advice.steps.step3.title',
         'household.advice.steps.step4.title'])
       .subscribe(data => {
@@ -80,7 +81,7 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
 
   getStepClass(step) {
     return {
-      ['knx-house-hold-advice--step-' + (step + 1)]: true
+      [`knx-house-hold-advice--step-${step + 1}`]: true
     };
   }
 

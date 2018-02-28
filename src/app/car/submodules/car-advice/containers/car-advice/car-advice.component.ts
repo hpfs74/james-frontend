@@ -1,45 +1,45 @@
 import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { KNXStepOptions } from '@knx/wizard';
-import { KNXWizardStepRxOptions } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.options';
+import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { CarDetailComponent } from './../../containers/car-detail/car-detail.component';
-import { QaIdentifier } from '../../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from '../../../../../shared/models/qa-identifiers';
-import { AssistantConfig } from '../../../../../core/models/assistant';
-import { TagsService } from '../../../../../core/services/tags.service';
-import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '../../../../models';
-import { Price } from '../../../../../shared/models/price';
-import { CarDetailForm } from '../../containers/car-detail/car-detail.form';
-import { CarExtrasForm } from '../../containers/car-extras/car-extras.form';
-import { createCarCoverages } from '../../../../utils/coverage.utils';
-import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
+import { QaIdentifier } from '@app/shared/models/qa-identifier';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
+import { AssistantConfig } from '@app/core/models/assistant';
+import { TagsService } from '@app/core/services/tags.service';
+import { Car, CarCompare, CarCoverageRecommendation, CarInsurance } from '@app/car/models';
+import { Price } from '@app/shared/models/price';
+import { CarDetailForm } from '@app/car/submodules/car-advice/containers/car-detail/car-detail.form';
+import { CarExtrasForm } from '@app/car/submodules/car-advice/containers/car-extras/car-extras.form';
+import { createCarCoverages } from '@app/car/utils/coverage.utils';
+import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
 import { InsuranceTopListComponent } from '../insurance-toplist/insurance-toplist.component';
-import { KNXWizardRxComponent } from '../../../../../components/knx-wizard-rx/knx-wizard-rx.component';
-import { CarReviewComponent } from '../../containers/car-review/car-review.component';
+import { KNXWizardRxComponent } from '@app/components/knx-wizard-rx/knx-wizard-rx.component';
+import { CarReviewComponent } from '@app/car/submodules/car-advice/containers/car-review/car-review.component';
 
-import * as FormUtils from '../../../../../utils/base-form.utils';
+import * as FormUtils from '@app/utils/base-form.utils';
 import * as cuid from 'cuid';
-import * as fromRoot from '../../../../reducers';
-import * as fromAuth from '../../../../../auth/reducers';
-import * as fromCore from '../../../../../core/reducers';
-import * as fromInsurance from '../../../../../insurance/reducers';
-import * as fromCar from '../../../../reducers';
-
+import * as fromRoot from '@app/car/reducers';
+import * as fromAuth from '@app/auth/reducers';
+import * as fromCore from '@app/core/reducers';
+import * as fromInsurance from '@app/insurance/reducers';
+import * as fromCar from '@app/car/reducers';
+import { TranslateService } from '@ngx-translate/core';
 // Core actions
-import * as router from '../../../../../core/actions/router';
-import * as layout from '../../../../../core/actions/layout';
-import * as assistant from '../../../../../core/actions/assistant';
+import * as router from '@app/core/actions/router';
+import * as layout from '@app/core/actions/layout';
+import * as assistant from '@app/core/actions/assistant';
 
 // Car actions
-import * as car from '../../../../actions/car';
-import * as compare from '../../../../actions/compare';
-import * as coverage from '../../../../actions/coverage';
+import * as car from '@app/car/actions/car';
+import * as compare from '@app/car/actions/compare';
+import * as coverage from '@app/car/actions/coverage';
 
 // Other actions
-import * as advice from '../../../../../insurance/actions/advice';
-import * as profile from '../../../../../profile/actions/profile';
+import * as advice from '@app/insurance/actions/advice';
+import * as profile from '@app/profile/actions/profile';
 import * as wizardActions from '@app/core/actions/wizard';
 
 import 'rxjs/add/operator/debounceTime';
@@ -47,7 +47,13 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
-import { TranslateService } from '@ngx-translate/core';
+
+import { KNXFinalAdviceOptions } from '@app/components/knx-final-advice/knx-final-advice.options';
+import { InsuranceAdvice } from '@app/insurance/models';
+import { JamesTagPipe } from '@app/shared/pipes';
+import { CurrencyPipe } from '@angular/common';
+import { CarService } from '@app/car/services/car.service';
+
 
 enum carFormSteps {
   carDetails,
@@ -55,6 +61,7 @@ enum carFormSteps {
 }
 
 @Component({
+  providers: [JamesTagPipe, CurrencyPipe],
   templateUrl: 'car-advice.component.html',
   styleUrls: ['./car-advice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -76,12 +83,16 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
 
   // Forms
   carExtrasForm: CarExtrasForm;
-
+  knxFinalAdviceOptions: KNXFinalAdviceOptions;
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
               private translateService: TranslateService,
               public router: Router,
-              public knxWizardService: KNXWizardRxService) {
+              public knxWizardService: KNXWizardRxService,
+              private jamesTag: JamesTagPipe,
+              private currencyPipe: CurrencyPipe,
+              public carService: CarService) {
+
 
     this.translateService
       .get([
@@ -94,6 +105,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           .map(key => data[key])
           .map(v => ({label: v}));
       });
+
+    this.setFinalAdviceOptions();
+
   }
 
   ngOnInit() {
@@ -255,5 +269,42 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
 
   goToStep(stepIndex: number) {
     this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
+  }
+
+  private setFinalAdviceOptions() {
+    this.subscription$.push(
+      this.store$.select(fromInsurance.getSelectedInsurance)
+        .filter(selectedInsurance => !!selectedInsurance)
+        .subscribe((selectedInsurance: InsuranceAdvice) => {
+          this.knxFinalAdviceOptions = {
+            sections: [
+              {
+                logoUrl: selectedInsurance._embedded.insurance.insurance_logo,
+                divider: true
+              },
+              {
+                heading: selectedInsurance['product_name'],
+                key: this.jamesTag.transform(selectedInsurance['main_coverage'], 'car_flow_coverage'),
+                divider: true
+              },
+              {
+                key: 'Eenmalige afsluitkosten',
+                value: this.currencyPipe.transform(selectedInsurance['one_off_premium'], 'EUR', true)
+              },
+              {
+                key: 'Per maand',
+                value: this.currencyPipe.transform(selectedInsurance.monthly_premium, 'EUR', true),
+                divider: true
+              }
+            ],
+            button: {
+              text: selectedInsurance.supported ? 'vraag direct aan' : 'Ga naar website',
+              pending: false,
+              onClick: () => this.carService.startBuyFlow(),
+              classes: ['knx-button', 'knx-button--primary', 'knx-button--3d', 'knx-button--float-bottom']
+            }
+          };
+        })
+    );
   }
 }

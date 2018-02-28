@@ -40,6 +40,7 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
     });
 
     this.currentStepOptions = {
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
       nextButtonLabel: this.copies['household.premium.buy.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false,
@@ -55,6 +56,10 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
     }));
 
     this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
+  }
+
+  goToPrevStep() {
+    this.store$.dispatch(new wizardActions.Back());
   }
 
   goToNextStep(event?: any) {

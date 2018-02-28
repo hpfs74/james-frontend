@@ -1,4 +1,4 @@
-import { Profile, ProfileMock } from '@app/profile/models';
+import { ProfileMock } from '@app/profile/models';
 import * as profileActions from '@app/profile/actions/profile';
 import * as profileReducer from '@app/profile/reducers/profile';
 
