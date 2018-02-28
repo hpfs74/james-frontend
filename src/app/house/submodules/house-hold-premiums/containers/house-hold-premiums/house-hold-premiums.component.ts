@@ -126,7 +126,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
         this.store$.dispatch(new houseHoldData.Update({
           CoverageCode: data.mainCoverage,
           IncludeOutdoorsValuable: data.outsideCoverage,
-          IncludeGlass: data.glassCoverage
+          IncludeGlass: data.glassCoverage ? 'J' : 'N'
         }));
       });
 
@@ -151,7 +151,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
           OwnedBuilding: advice.OwnedBuilding,
           CoverageCode: advice.CoverageCode,
           FamilyComposition: advice.FamilyComposition,
-          IncludeGlass: advice.IncludeGlass ? advice.IncludeGlass : 'N',
+          IncludeGlass: advice.IncludeGlass ? 'J' : 'N',
           BreadWinnerBirthdate: advice.BreadWinnerBirthdate,
           BreadWinnerMonthlyIncome: advice.BreadWinnerMonthlyIncome,
           InsuredAmount: advice.InsuredAmount,
