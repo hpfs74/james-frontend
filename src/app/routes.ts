@@ -16,7 +16,7 @@ export const routes: Routes = [
     loadChildren: './car/car.module#CarModule'
   },
   {
-    path: 'household',
+    path: 'inboedel',
     loadChildren: './house/house-hold.module#HouseHoldModule'
   },
   {

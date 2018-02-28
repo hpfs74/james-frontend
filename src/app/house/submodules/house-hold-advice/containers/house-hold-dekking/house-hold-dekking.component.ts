@@ -249,6 +249,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       CommencingDate: detailForm.value.commencingDate
     }));
 
-    this.store$.dispatch(new router.Go({path: ['/household/premiums']}));
+    this.store$.dispatch(new router.Go({path: ['/inboedel/advies']}));
   }
 }

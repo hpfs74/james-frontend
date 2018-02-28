@@ -6,6 +6,7 @@ export interface PageViewAnalyticsEvent {
   product_id?: string;
   product_name?: string;
   external?: string;
+  step_nr?: string;
 }
 
 export interface ClickoutAnalyticsEvent {

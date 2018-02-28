@@ -2,7 +2,14 @@ import { RouterStateSnapshot } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { RouterNavigationAction } from '@ngrx/router-store';
 import { createMetaReducer } from 'redux-beacon';
-import { GoogleAnalytics, PageView, Event, UserTiming, SocialInteraction, Exception } from 'redux-beacon/targets/google-analytics';
+import {
+  GoogleAnalytics,
+  PageView,
+  Event,
+  UserTiming,
+  SocialInteraction,
+  Exception
+} from 'redux-beacon/targets/google-analytics';
 import { GoogleTagManager } from 'redux-beacon/targets/google-tag-manager';
 import { logger } from 'redux-beacon/extensions/logger';
 
@@ -22,17 +29,21 @@ import {
 
 import * as fromRouter from '@ngrx/router-store';
 
-export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): PageViewAnalyticsEvent {
+// export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): PageViewAnalyticsEvent {
+export function pageView(action): PageViewAnalyticsEvent {
   // Custom value included in routersnapshot
   const loggedIn = action.payload.event.state['data'].isLoggedIn || false;
   const product_id = action.payload.event.state['data'].product_id || null;
   const product_name = action.payload.event.state['data'].product_name || null;
   const external = action.payload.event.state['data'].external || null;
+  const step_nr = action.payload.event.state['data'].step_nr || null;
+
   const standardValues = {
     hitType: 'pageview',
     event: 'pageview',
     page: action.payload.routerState.url,
-    loggedIn_Verzekeren: loggedIn ? 'y' : 'n'
+    loggedIn_Verzekeren: loggedIn ? 'y' : 'n',
+    step_nr: null
   };
   if (product_id) {
     Object.assign(standardValues, {product_id: product_id});
@@ -42,6 +53,9 @@ export function pageView(action: RouterNavigationAction<RouterStateSnapshot>): P
   }
   if (external) {
     Object.assign(standardValues, {external: external});
+  }
+  if (step_nr) {
+    Object.assign(standardValues, {step_nr: step_nr});
   }
   return standardValues;
 }
@@ -79,10 +93,10 @@ export const eventsMap = {
 // Create Google Tag Manager reducer
 // Console log analytics event in development environment
 const gtmReducer = createMetaReducer(eventsMap, GoogleTagManager(),
-  !environment.production || environment.featureToggles.enableAnalyticsLogging ? { logger } : { logger: null });
+  !environment.production || environment.featureToggles.enableAnalyticsLogging ? {logger} : {logger: null});
 
 const finalReducer = gtmReducer(fromRouter.routerReducer);
 
 export function reducer(state: any, action: any) {
-   return finalReducer(state, action);
+  return finalReducer(state, action);
 }
