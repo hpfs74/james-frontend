@@ -92,7 +92,7 @@
   "household.premiumDetail.footer.para2": "Dubbelcheck of alles goed ingevuld is.",
   "household.premiumDetail.footer.head3": "3. Bevestig",
   "household.premiumDetail.footer.para3": "Gefeliciteerd! Je hebt zojuist flink wat geld bespaard op je autoverzekering!",
-  "household.premiumBuy.header": "Aanvragen inboedelverzekering",
+  "household.premiumBuy.header.title": "Aanvragen inboedelverzekering",
   "household.premiumBuy.header.para1": "Ga verder met het aanvragen van jouw nieuwe verzekering.",
   "household.premiumBuy.header.para2": "Process description, incl. Risk involvement: What heppens now, what can the user expect, does he need to do something?",
   "household.premiumBuy.error.msg": "Het registreren is helaas niet gelukt, probeer het alsjeblieft opnieuw.",
