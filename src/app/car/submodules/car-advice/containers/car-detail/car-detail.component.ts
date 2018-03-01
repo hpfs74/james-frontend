@@ -118,11 +118,10 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       Observable.combineLatest(detailForm.valueChanges, addressForm.valueChanges, (a, b) => Object.assign({}, a, b))
         .filter(combinedValues => {
           return Object.keys(combinedValues)
-                       .filter(key => (combinedValues[key] !== null && combinedValues[key] !== undefined)
+                       .filter(key => this.isAcceptedValue(combinedValues[key])
                           && optionalFields.indexOf(key) === -1)
                         .length === Object.keys(combinedValues).length - optionalFields.length;
         })
-        .take(1)
         .subscribe((values) => {
           this.dispatchcoverageAdviceAvailable();
         })
@@ -507,5 +506,13 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       return null;
     }
     return payload.address.number_extended.number_extension;
+  }
+
+  /**
+   * Accepted values are not empty string, any number and a boolean value
+   * @param value value from addressform and form
+   */
+  private isAcceptedValue(value: any): boolean {
+    return value !== null && value !== undefined && value !== '';
   }
 }
