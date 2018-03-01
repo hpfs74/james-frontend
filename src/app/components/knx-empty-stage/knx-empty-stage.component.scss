@@ -1,0 +1,30 @@
+@import '~styles/base.scss';
+
+.knx-empty-container {
+  position: relative;
+  width: 100%;
+
+  .knx-empty-container__birds {
+    background-image: url(/assets/images/little_birds.png);
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+  }
+}
+
+svg {
+  width: 100%;
+}
+
+rect {
+  fill: none;
+  stroke: $knab-primary-blue;
+  stroke-width: 2;
+  stroke-dasharray: 8, 4;
+  stroke-opacity: 0.2;
+}
