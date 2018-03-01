@@ -126,7 +126,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
         this.store$.dispatch(new houseHoldData.Update({
           CoverageCode: data.mainCoverage,
           IncludeOutdoorsValuable: data.outsideCoverage,
-          IncludeGlass: data.glassCoverage ? data.glassCoverage : 'N'
+          IncludeGlass: data.glassCoverage === true ? 'J' : 'N'
         }));
       });
 
@@ -151,7 +151,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
           OwnedBuilding: advice.OwnedBuilding,
           CoverageCode: advice.CoverageCode,
           FamilyComposition: advice.FamilyComposition,
-          IncludeGlass: advice.IncludeGlass ? advice.IncludeGlass : 'N',
+          IncludeGlass: advice.IncludeGlass,
           BreadWinnerBirthdate: advice.BreadWinnerBirthdate,
           BreadWinnerMonthlyIncome: advice.BreadWinnerMonthlyIncome,
           InsuredAmount: advice.InsuredAmount,
@@ -184,7 +184,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
    */
   goBack() {
     this.store$.dispatch(new router.Go({
-      path: ['/household/dekking']
+      path: ['/inboedel/dekking']
     }));
   }
 
@@ -193,7 +193,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
    */
   goToList() {
     this.store$.dispatch(new router.Go({
-      path: ['/household/premiums/list']
+      path: ['/inboedel/advies']
     }));
   }
 
@@ -201,7 +201,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
    * handle the button click for the detail page
    */
   goToBuy() {
-    this.store$.dispatch(new router.Go({path: ['/household/premiums/buy']}));
+    this.store$.dispatch(new router.Go({path: ['/inboedel/bevestig']}));
   }
 
 }
