@@ -16,9 +16,14 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
             Start nieuw advies
           </button>
         </div>
+        <h2 *ngIf="!(savedInsurances$ | async).length">jouw verzekeringen</h2>
       </div>
 
-      <knx-saved (onNewAdvice)="startNewAdvice()" title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
+      <knx-saved *ngIf="(savedInsurances$ | async).length" (onNewAdvice)="startNewAdvice()" title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
+      <div class="container">
+        <knx-empty-stage *ngIf="!(savedInsurances$ | async).length"></knx-empty-stage>
+        <knx-app-promo-block></knx-app-promo-block>
+      </div>
     </div>
 
     <div class="col-sm-4">
