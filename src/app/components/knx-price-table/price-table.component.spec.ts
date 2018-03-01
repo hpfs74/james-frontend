@@ -6,6 +6,7 @@ import { setUpTestBed } from './../../../test.common.spec';
 import { PriceTableComponent } from './price-table.component';
 import { PriceItemComponent } from './price-item.component';
 import { Price } from '../../shared/models/price';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Component: PriceTable', () => {
   let comp: PriceTableComponent;
@@ -14,6 +15,9 @@ describe('Component: PriceTable', () => {
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
+    imports: [
+      NoopAnimationsModule
+    ],
     declarations: [PriceTableComponent, PriceItemComponent]
   };
   setUpTestBed(moduleDef);

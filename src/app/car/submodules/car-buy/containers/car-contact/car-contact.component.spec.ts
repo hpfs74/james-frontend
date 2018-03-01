@@ -18,6 +18,7 @@ import { CarContactComponent } from './car-contact.component';
 import { ContactDetailForm } from '../../../../../shared/forms/contact-detail.form';
 import { nameInitialMask } from '../../../../../utils/base-form.utils';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   template: `<div><knx-car-contact-form [form]="formFromHost" [profile]="profileFromHost"></knx-car-contact-form></div>`
@@ -35,7 +36,11 @@ describe('Component: CarContactComponent', () => {
   let store: Store<fromRoot.State>;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [CommonModule, ReactiveFormsModule, KNXFormsModule,
+    imports: [
+      NoopAnimationsModule,
+      CommonModule,
+      ReactiveFormsModule,
+      KNXFormsModule,
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),

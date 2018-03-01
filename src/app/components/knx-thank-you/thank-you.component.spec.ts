@@ -7,6 +7,7 @@ import { ContentConfig } from '../../content.config';
 import { ContentConfigMock } from '../../content.mock.spec';
 import { ThankYouComponent } from './thank-you.component';
 import { AppPromoBlockComponent } from '../../components/knx-app-promo/app-promo.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Component: Thank You', () => {
   let comp: ThankYouComponent;
@@ -15,6 +16,9 @@ describe('Component: Thank You', () => {
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
+    imports: [
+      NoopAnimationsModule
+    ],
     declarations: [ThankYouComponent, AppPromoBlockComponent],
     providers: [
       {

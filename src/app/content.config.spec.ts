@@ -3,10 +3,14 @@ import { TestModuleMetadata, TestBed, inject, async, fakeAsync, tick } from '@an
 
 import { setUpTestBed } from './../test.common.spec';
 import { ContentConfig } from './content.config';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ContentConfig', () => {
   let moduleDef: TestModuleMetadata = {
-    imports: [ HttpModule ],
+    imports: [
+      HttpModule,
+      NoopAnimationsModule
+    ],
     providers: [ ContentConfig ]
   };
   setUpTestBed(moduleDef);
