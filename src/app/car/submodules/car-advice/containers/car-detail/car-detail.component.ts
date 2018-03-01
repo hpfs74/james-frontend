@@ -465,7 +465,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     userAnalytics.loan = detailForm.get('loan').value ? 'y' : 'n' ;
     userAnalytics.gender = detailForm.get('gender').value;
     userAnalytics.birthyear = new Date(detailForm.get('birthDate').value).getUTCFullYear().toString();
-    userAnalytics.zipcode = addressForm.get('postalCode').value;
+    userAnalytics.zipcode = addressForm.get('postalCode').value.slice(0, 4);
     userAnalytics.familySituation = this.jamesTag
       .transform(detailForm.get('houseHold').value, 'insurance_flow_household');
     return userAnalytics;
