@@ -252,6 +252,12 @@ knx-ir-value {
   background-image: url('/assets/images/signout_icon.svg');
 }
 
+.knx-dropdown-img__login {
+  @extend .knx-dropdown-img;
+
+  background-image: url('/assets/images/login_icon.svg');
+}
+
 .knx-menu-divider {
   height: 1px;
   min-height: 1px;

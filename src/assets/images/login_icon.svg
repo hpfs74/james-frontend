@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>login_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20,3 C20.553,3 21,3.447 21,4 L21,20 C21,20.553 20.553,21 20,21 L9,21 C8.447,21 8,20.553 8,20 C8,19.447 8.447,19 9,19 L19,19 L19,5 L9,5 C8.447,5 8,4.553 8,4 C8,3.447 8.447,3 9,3 L20,3 Z M10.8809,13.9648 L11.8319,12.9998 L3.9999,12.9998 C3.4469,12.9998 2.9999,12.5528 2.9999,11.9998 C2.9999,11.4468 3.4469,10.9998 3.9999,10.9998 L11.8319,10.9998 L10.8809,10.0348 C10.4929,9.6418 10.4969,9.0088 10.8909,8.6208 C11.2819,8.2338 11.9169,8.2368 12.3049,8.6308 L14.9349,11.2978 C15.3179,11.6878 15.3179,12.3128 14.9349,12.7018 L12.3049,15.3688 C12.1099,15.5678 11.8509,15.6668 11.5929,15.6668 C11.3389,15.6668 11.0859,15.5708 10.8909,15.3788 C10.4969,14.9908 10.4929,14.3588 10.8809,13.9648 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons/General/Login">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Fill-1" fill="#000000" xlink:href="#path-1"></use>
+            <g id="Colours/Primary/-Blue" mask="url(#mask-2)" fill="#003B5A">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
