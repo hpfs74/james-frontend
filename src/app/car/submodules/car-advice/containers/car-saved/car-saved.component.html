@@ -10,14 +10,42 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
 <div class="container">
   <div class="row">
     <div class="col-sm-8" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+      <div class="col">
+        <div class="knx-saved__action">
+          <button (click)="startNewAdvice()" class="knx-button knx-button--primary knx-button--3d">
+            Start nieuw advies
+          </button>
+        </div>
+      </div>
+
       <knx-saved (onNewAdvice)="startNewAdvice()" title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
     </div>
+
     <div class="col-sm-4">
       <div class="knx-wizard__sidebar--sticky">
         <knx-chat-stream #knxChatStream
             [options]="chatConfig$ | async"
             [messages]="chatMessages$ | async">
         </knx-chat-stream>
+
+        <div class="knx-car-advice-motivation">
+          <ul>
+            <li>
+              <b>Objectief</b><br/>
+              We vergelijken meer dan 40
+            </li>
+
+            <li>
+              <b>Bespaar</b><br/>
+              Tot 15% korting op elke verzekering
+            </li>
+
+            <li>
+              <b>Overstaphulp</b><br>
+              Wij regelen overstap
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

@@ -11,10 +11,10 @@ import * as fromAuth from '../../../../../auth/reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromProfile from '../../../../../profile/reducers';
 
-import { SharedModule } from '../../../../../shared.module';
+import { SharedModule } from '@app/shared.module';
 import { CarSavedComponent } from './car-saved.component';
-import { ContentConfig } from '../../../../../content.config';
-import { ContentConfigMock } from '../../../../../content.mock.spec';
+import { ContentConfig } from '@app/content.config';
+import { ContentConfigMock } from '@app/content.mock.spec';
 
 describe('Component: CarSavedComponent', () => {
   let comp: CarSavedComponent;
@@ -59,7 +59,7 @@ describe('Component: CarSavedComponent', () => {
 
   describe('Initialization', () => {
     it('should init the component', () => {
-      const element = fixture.debugElement.query(By.css('.knx-car-purchased'));
+      const element = fixture.debugElement.query(By.css('.knx-car-saved'));
       expect(element).toBeDefined();
       expect(comp).toBeDefined();
     });

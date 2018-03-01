@@ -2,8 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AssistantConfig } from '../../../../../core/models/assistant';
-import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
+import { AssistantConfig } from '@app/core/models';
+import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
 
 import * as fromRoot from '../../../../reducers';
 import * as fromCore from '../../../../../core/reducers';
