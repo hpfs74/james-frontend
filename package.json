@@ -101,7 +101,7 @@
     "rxjs": "^5.4.1",
     "stacktrace-js": "^2.0.0",
     "text-mask-addons": "^3.7.1",
-    "web-animations-js": "2.3.1",
+    "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
