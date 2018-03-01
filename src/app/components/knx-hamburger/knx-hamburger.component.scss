@@ -4,48 +4,52 @@
   cursor: pointer;
   margin: 17px auto;
   padding-left: 1.25em;
-  width: 22px;
-  height: 16px;
+  width: 50px;
+  height: 50px;
   position: absolute;
-  right: 15px;
-  top: 0;
+  right: 20px;
+  top: -15px;
 }
 
-.knx-menu-global {
-  backface-visibility: hidden;
-  position: absolute;
-  left: 0;
-  border-top: 3px solid $knab-primary-blue;
-  width: 100%;
-  transition: 0.2s;
+svg {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
-.knx-menu-top {
-  top: 0;
+path {
+  fill: none;
+  -webkit-transition: stroke-dashoffset 0.5s cubic-bezier(0, 0.25, 0.75, 1), stroke-dasharray 0.5s cubic-bezier(0, 0.25, 0.75, 1);
+  -moz-transition: stroke-dashoffset 0.5s cubic-bezier(0, 0.25, 0.75, 1), stroke-dasharray 0.5s cubic-bezier(0, 0.25, 0.75, 1);
+  -o-transition: stroke-dashoffset 0.5s cubic-bezier(0, 0.25, 0.75, 1), stroke-dasharray 0.5s cubic-bezier(0, 0.25, 0.75, 1);
+  -ms-transition: stroke-dashoffset 0.5s cubic-bezier(0, 0.25, 0.75, 1), stroke-dasharray 0.5s cubic-bezier(0, 0.25, 0.75, 1);
+  transition: stroke-dashoffset 0.5s cubic-bezier(0, 0.25, 0.75, 1), stroke-dasharray 0.5s cubic-bezier(0, 0.25, 0.75, 1);
+  stroke-width: 40px;
+  stroke-linecap: round;
+  stroke: #000;
+  stroke-dashoffset: 0;
 }
 
-.knx-menu-middle {
-  top: 6px;
+path#top,
+path#bottom {
+  stroke-dasharray: 240px 950px;
 }
 
-.knx-menu-bottom {
-  top: 12px;
+path#middle {
+  stroke-dasharray: 240px 240px;
 }
 
-.knx-menu-animate {
-  .knx-menu-top {
-    backface-visibility: hidden;
-    transform: rotate(50deg) translate3d(6px, 1px, 0);
-    transition: 0.2s 0.3s;
-  }
+.cross path#top,
+.cross path#bottom {
+  stroke-dashoffset: -650px;
+}
 
-  .knx-menu-middle {
-    opacity: 0;
-  }
-
-  .knx-menu-bottom {
-    backface-visibility: hidden;
-    transform: rotate(-410deg) translate3d(7px, -2px, 0);
-    transition: 0.2s 0.3s;
-  }
+.cross path#middle {
+  stroke-dashoffset: -115px;
+  stroke-dasharray: 1px 220px;
 }

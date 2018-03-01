@@ -7,13 +7,17 @@
   font-size: 0.9em;
   text-transform: none;
   font-weight: 400;
-  height: 48px;
+  padding: 16px;
   line-height: 38px;
-  padding: 0.3em 1.25rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   transition: background 0.25s;
+}
+
+.knx-menu-item--slim {
+  height: 62px;
+  padding: 8px 16px;
 }
 
 .knx-menu-item a:hover {

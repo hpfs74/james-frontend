@@ -12,6 +12,7 @@ import { TagsService } from '@app/core/services/tags.service';
 import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { CookieService } from '@app/core/services';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   template: `<knx-insurance-review-car [carInsurance]="carInsuranceFromHost"></knx-insurance-review-car>`
@@ -29,10 +30,12 @@ describe('Component: InsuranceReviewCarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        NoopAnimationsModule,
         BrowserModule,
         KNXFormsModule,
         SharedModule,
-        InsuranceReviewModule],
+        InsuranceReviewModule
+      ],
       declarations: [
         TestHostComponent
       ],

@@ -1,0 +1,77 @@
+<div class="knx-nav-user" *ngIf="profile" >
+  <knx-dropdown>
+    <knx-dropdown-button>
+      <div class="row">
+        <div class="col-12">
+          <div class="knx-dropdown-profile-img knx-dropdown-key"
+            [class.knx-profile-image]="profile.profile_image"
+            [ngStyle]="{'background-image': profile.profile_image ?
+              'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
+          </div>
+        </div>
+      </div>
+    </knx-dropdown-button>
+
+    <knx-dropdown-menu offset="62 -247">
+      <knx-menu-item *ngIf="showAccount">
+        <div class="row">
+          <div class="col-2">
+            <div class="knx-dropdown-profile-img knx-dropdown-key"
+            [class.knx-profile-image]="profile.profile_image"
+              [ngStyle]="{'background-image': profile.profile_image ?
+                'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="knx-dropdown-value">
+                {{ profile.emailaddress || '' }}
+            </div>
+          </div>
+        </div>
+      </knx-menu-item>
+
+      <div class='knx-menu-divider'></div>
+
+      <knx-menu-item [slim]="true" (click)="goToPurchased()">
+        <div class="row">
+          <div class="col-2">
+            <div class="knx-dropdown-img__house knx-dropdown-key"></div>
+          </div>
+          <div class="col-10">
+            <div class="knx-dropdown-value">
+                My insurances
+            </div>
+          </div>
+        </div>
+      </knx-menu-item>
+
+      <knx-menu-item [slim]="true" (click)="goToProfile()">
+        <div class="row">
+          <div class="col-2">
+            <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
+          </div>
+          <div class="col-10">
+            <div class="knx-dropdown-value">
+                My Knab profile
+            </div>
+          </div>
+        </div>
+      </knx-menu-item>
+
+      <div class='knx-menu-divider'></div>
+
+      <knx-menu-item (click)="logOut()">
+        <div class="row">
+          <div class="col-2">
+            <div class="knx-dropdown-img__signout knx-dropdown-key"></div>
+          </div>
+          <div class="col-10">
+            <div class="knx-dropdown-value">
+                Uitloggen
+            </div>
+          </div>
+        </div>
+      </knx-menu-item>
+    </knx-dropdown-menu>
+  </knx-dropdown>
+</div>
