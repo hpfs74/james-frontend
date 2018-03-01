@@ -4,7 +4,16 @@
   height: 100%;
 
   .knx-list--checks {
-    padding: 20px 20px 0;
+    padding: 20px 5px 0;
+
+    li {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+  }
+
+  .knx-button {
+    height: auto;
   }
 }
 
@@ -32,6 +41,15 @@
 
     &.knx-price-item--highlight {
       margin-top: 7px;
+    }
+
+    &.knx-card {
+      padding-top: 10px;
+      padding-bottom: 0;
+    }
+
+    .knx-list--checks {
+      padding-top: 10px;
     }
   }
 }

@@ -8,12 +8,14 @@
     </div>
   </div>
 
-  <div class="knx-button knx-button--toggle-pills visible-xs"
-       *ngFor="let item of items; let i = index"
-       (click)="selectItem(i, true)"
-       [attr.data-btn]="item.selected ? item.dataActive : item.dataInactive"
-       [ngClass]="{ '': !item.selected, 'knx-button--toggle-pills-active': item.selected }">
-    {{ item.header }}
+  <div class="knx-price-table__pills">
+    <div class="knx-button knx-button--toggle-pills visible-xs"
+         *ngFor="let item of items; let i = index"
+         (click)="selectItem(i, true)"
+         [attr.data-btn]="item.selected ? item.dataActive : item.dataInactive"
+         [ngClass]="{ '': !item.selected, 'knx-button--toggle-pills-active': item.selected }">
+      {{ item.header }}
+    </div>
   </div>
 
   <knx-price-item
