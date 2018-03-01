@@ -200,6 +200,10 @@ knx-ir-value {
 
     .knx-dropdown-value {
       line-height: 30px;
+
+      .knx-push-down {
+        padding-bottom: 16px;
+      }
     }
 
     p {

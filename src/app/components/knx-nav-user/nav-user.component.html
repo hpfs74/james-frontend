@@ -1,18 +1,14 @@
 <div class="knx-nav-user" *ngIf="profile" >
   <knx-dropdown>
     <knx-dropdown-button>
-      <div class="row">
-        <div class="col-12">
-          <div class="knx-dropdown-profile-img knx-dropdown-key"
-            [class.knx-profile-image]="profile.profile_image"
-            [ngStyle]="{'background-image': profile.profile_image ?
-              'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
-          </div>
-        </div>
+      <div class="knx-header-img knx-dropdown-profile-img knx-dropdown-key"
+        [class.knx-profile-image]="profile.profile_image"
+        [ngStyle]="{'background-image': profile.profile_image ?
+          'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
       </div>
     </knx-dropdown-button>
 
-    <knx-dropdown-menu offset="62 -247">
+    <knx-dropdown-menu offset="62 -195">
       <knx-menu-item *ngIf="showAccount">
         <div class="row">
           <div class="col-2">
