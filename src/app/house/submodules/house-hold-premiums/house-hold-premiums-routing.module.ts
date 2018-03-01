@@ -5,46 +5,60 @@ import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums
 import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/house-hold-premiums.component';
 import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
 import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
+import { CanActivateHouseHoldFlowGuard } from '@core/services/house-hold-guard.service';
 
 export const houseHoldPremiumsRoutes: Routes = [
   {
-    path: 'premiums',
+    path: '',
     component: HouseHoldPremiumsComponent,
+    canActivateChild: [CanActivateHouseHoldFlowGuard],
     data: {
       title: '...'
     },
     children: [
       {
         path: '',
-        redirectTo: 'list',
+        redirectTo: 'advies',
         pathMatch: 'full'
       },
       {
-        path: 'list',
+        path: 'advies',
         component: HouseHoldPremiumsListComponent,
         data: {
-          stepIndex: 0
+          stepIndex: 0,
+          gtm: {
+            step_nr: 40
+          }
         }
       },
       {
-        path: 'detail',
+        path: 'advies-detail',
         component: HouseHoldPremiumsDetailComponent,
         data: {
-          stepIndex: 1
+          stepIndex: 1,
+          gtm: {
+            step_nr: 50
+          }
         }
       },
       {
-        path: 'buy',
+        path: 'bevestig',
         component: HouseHoldPremiumsBuyComponent,
         data: {
-          stepIndex: 2
+          stepIndex: 2,
+          gtm: {
+            step_nr: 60
+          }
         }
       },
       {
-        path: 'thank-you',
+        path: 'bedankt',
         component: HouseHoldPremiumsThankYouComponent,
         data: {
-          stepIndex: 3
+          stepIndex: 3,
+          gtm: {
+            step_nr: 70
+          }
         }
       }
     ]

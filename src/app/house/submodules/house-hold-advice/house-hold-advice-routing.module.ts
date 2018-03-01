@@ -24,7 +24,8 @@ export const houseHoldAdviceRoutes: Routes = [
         path: 'locatie',
         component: HouseHoldLocationComponent,
         data: {
-          stepIndex: 0
+          stepIndex: 0,
+          step_nr: 10
         }
       },
       {
@@ -32,7 +33,8 @@ export const houseHoldAdviceRoutes: Routes = [
         component: HouseHoldHouseTypeComponent,
         canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
-          stepIndex: 1
+          stepIndex: 1,
+          step_nr: 20
         }
       },
       {
@@ -40,7 +42,10 @@ export const houseHoldAdviceRoutes: Routes = [
         component: HouseHoldHouseDetailComponent,
         canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
-          stepIndex: 2
+          stepIndex: 2,
+          gtm: {
+            step_nr: 30
+          }
         }
       },
       {
@@ -48,7 +53,10 @@ export const houseHoldAdviceRoutes: Routes = [
         component: HouseHoldDekkingComponent,
         canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
-          stepIndex: 3
+          stepIndex: 3,
+          gtm: {
+            step_nr: 40
+          }
         }
       }
     ]

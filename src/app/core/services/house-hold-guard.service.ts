@@ -26,7 +26,7 @@ export class CanActivateHouseHoldFlowGuard implements CanActivate, CanActivateCh
 
     // go to previous route if no active advice found
     if (!adviceExists) {
-      this.store$.dispatch(new router.Go({path: ['/household']}));
+      this.store$.dispatch(new router.Go({path: ['/inboedel']}));
     }
     return adviceExists;
   }

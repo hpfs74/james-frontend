@@ -38,18 +38,19 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldPremiumsBuyForm(formBuilder);
     this.translateService.get([
+      'household.common.step.options.backButtonLabel',
       'household.premium.buy.step.options.nextButtonLabel'
     ]).subscribe(res => {
       this.copies = res;
-    });
 
-    this.currentStepOptions = {
-      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
-      nextButtonLabel: this.copies['household.premium.buy.step.options.nextButtonLabel'],
-      hideBackButton: false,
-      hideNextButton: false,
-      nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
-    };
+      this.currentStepOptions = {
+        backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+        nextButtonLabel: this.copies['household.premium.buy.step.options.nextButtonLabel'],
+        hideBackButton: false,
+        hideNextButton: false,
+        nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
+      };
+    });
   }
 
   ngOnInit() {

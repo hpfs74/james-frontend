@@ -30,6 +30,8 @@ import * as fromHouse from '@app/house/reducers';
 
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 import { TranslateService } from '@ngx-translate/core';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -74,7 +76,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       .map((el) => (JSON.parse(el.tag) as Price));
 
     this.currentStepOptions = {
-      label: 'Dekking',
+      label: this.copies['general.dekking'],
       backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
       nextButtonLabel: this.copies['household.dekking.step.options.nextButtonLabel'],
       hideBackButton: false,
@@ -84,6 +86,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.initializeForms();
     this.selectInitialStates();
     this.setIntialSubscription();
+
   }
 
   selectInitialStates(): void {
@@ -95,8 +98,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
       this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
-
-    this.form.formGroup.patchValue({coverage: 5016});
   }
 
   setIntialSubscription() {
@@ -120,7 +121,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
         }),
       this.houseHoldData$
         .filter(data => data !== null)
-        .subscribe(data => this.setFormValue(data)));
+        .subscribe(data => this.setFormValue(data)),
+
+      this.houseHoldData$
+        .filter(data => data !== null && !data.CoverageCode)
+        .subscribe(() => this.store$.dispatch(new houseHoldData.Update({CoverageCode: 5016})))
+    );
   }
 
   /**
@@ -132,7 +138,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
     this.houseHoldData = value;
 
-    if (value.CoverageCode !== null) {
+    if (value.CoverageCode !== null && value.CoverageCode !== undefined) {
       this.coverages.forEach((el) => {
         el.selected = +el.id === value.CoverageCode;
       });
@@ -186,10 +192,16 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   setFormAsyncValidators(): void {
     this.subscriptions$.push(
       this.form.formGroup.get('dateOfBirth').valueChanges
+        .debounceTime(400)
+        .distinctUntilChanged()
         .subscribe(() => this.getInsuredAmount()),
       this.form.formGroup.get('familySituation').valueChanges
+        .debounceTime(400)
+        .distinctUntilChanged()
         .subscribe(() => this.getInsuredAmount()),
       this.form.formGroup.get('netIncomeRange').valueChanges
+        .debounceTime(400)
+        .distinctUntilChanged()
         .subscribe(() => this.getInsuredAmount()));
   }
 
@@ -238,6 +250,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       CommencingDate: detailForm.value.commencingDate
     }));
 
-    this.store$.dispatch(new router.Go({path: ['/household/premiums']}));
+    this.store$.dispatch(new router.Go({path: ['/inboedel/advies']}));
   }
 }

@@ -2846,7 +2846,7 @@
   ],
   "house_hold_flow_coverages": [
     {
-      "tag": "{ \"id\": 5016, \"selected\":true, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
+      "tag": "{ \"id\": 5016, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
       "translation_label": "Basis",
       "translation_text": "Basis"
     },
