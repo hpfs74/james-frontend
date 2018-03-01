@@ -1,5 +1,11 @@
 @import '~styles/base.scss';
 
+.knx-app-promo-block {
+  li {
+    margin-bottom: 0;
+  }
+}
+
 .knx-app-promo-block__subtitle {
   font-size: $font-size-base;
   color: $knab-primary-blue;
@@ -16,10 +22,18 @@
   margin-bottom: 30px;
 }
 
-.knx-app-promo-block__iphone {
-  display: block;
-  max-width: 200px;
-  margin-bottom: 20px;
+.knx-app-promo-block__phone {
+  text-align: center;
+
+  img {
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+}
+
+.knx-app-promo-block__phone--xs {
+  margin-bottom: -72px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -32,7 +46,6 @@
 
 .knx-app-promo-block__buttons {
   margin-top: 15px;
-  margin-left: 30px;
 
   .knx-button {
     &:before {

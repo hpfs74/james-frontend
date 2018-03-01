@@ -3,8 +3,8 @@ import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/tes
 import { By } from '@angular/platform-browser';
 
 import { setUpTestBed } from '../../../test.common.spec';
-import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock.spec';
+import { ContentConfig } from '@app/content.config';
+import { ContentConfigMock } from '@app/content.mock.spec';
 import { SavedComponent } from './saved.component';
 import { AppPromoBlockComponent } from '../knx-app-promo/app-promo.component';
 
@@ -43,14 +43,16 @@ describe('Component: Saved', () => {
             make: 'Honda',
             model: 'Civic',
             insurance_name: 'auto',
-            price: '1234'
+            price: '1234',
+            manually_added: false
           },
           {
             license: '01XLX1',
             make: 'BMW',
             model: '3',
             insurance_name: 'auto',
-            price: '4321'
+            price: '4321',
+            manually_added: false
           }
         ]
       }
@@ -58,8 +60,8 @@ describe('Component: Saved', () => {
 
     fixture.detectChanges();
 
-    let title = de.query(By.css('.knx-saved__title')).nativeElement;
-    expect(title.textContent).toEqual('Hello World');
+    let title = fixture.debugElement.query(By.css('.knx-saved__title')).nativeElement;
+    expect(title.textContent).toContain('Hello World');
 
     let parElements = de.queryAll(By.css('.knx-list--unstyled li'));
     expect(parElements).toBeDefined();

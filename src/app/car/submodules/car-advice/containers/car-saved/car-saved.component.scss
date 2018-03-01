@@ -1,0 +1,20 @@
+@import '~styles/base';
+
+.knx-car-advice-motivation ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .knx-car-advice-motivation ul {
+    padding-left: 20px;
+    padding-top: 40px;
+  }
+}
+
+.knx-car-advice-motivation li {
+  margin-left: 0;
+  padding-left: 40px;
+  padding-bottom: 25px;
+  background: url("/assets/images/list-check.svg") no-repeat;
+}

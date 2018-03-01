@@ -2,8 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AssistantConfig } from '../../../../../core/models/assistant';
-import { ChatMessage } from '../../../../../components/knx-chat-stream/chat-message';
+import { AssistantConfig } from '@app/core/models';
+import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
 
 import * as fromRoot from '../../../../reducers';
 import * as fromCore from '../../../../../core/reducers';
@@ -15,7 +15,8 @@ import * as auth from '@app/auth/actions/auth';
 
 @Component({
   selector: 'knx-car-saved',
-  templateUrl: './car-saved.component.html'
+  templateUrl: './car-saved.component.html',
+  styleUrls: ['./car-saved.component.scss']
 })
 export class CarSavedComponent implements AfterViewInit, OnInit {
   chatConfig$: Observable<AssistantConfig>;

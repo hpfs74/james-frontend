@@ -1,17 +1,14 @@
-import { NO_ERRORS_SCHEMA, DebugElement, LOCALE_ID } from '@angular/core';
-import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { setUpTestBed } from './../../../test.common.spec';
+import { setUpTestBed } from '../../../test.common.spec';
 import { AppPromoBlockComponent } from './app-promo.component';
-import { ContentConfig } from '../../content.config';
-import { ContentConfigMock } from '../../content.mock.spec';
+import { ContentConfig } from '@app/content.config';
+import { ContentConfigMock } from '@app/content.mock.spec';
 
 describe('Component: AppPromoBlockComponent', () => {
   let comp: AppPromoBlockComponent;
   let fixture: ComponentFixture<AppPromoBlockComponent>;
-  let de: DebugElement;
-  let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
     declarations: [AppPromoBlockComponent],
