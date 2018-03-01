@@ -4,6 +4,11 @@ knx-price-table {
   flex: 1 auto 1;
 }
 
+.knx-price-table__pills {
+  display: flex;
+  width: 100%;
+}
+
 knx-price-item.knx-price-item--highlight + knx-price-item {
   margin-top: 70px;
 }
@@ -29,6 +34,7 @@ div.knx-button {
   // to support focus/outline on the whole price-item
   line-height: 2em;
   outline: none;
+  //text-transform: none;
 }
 
 .knx-recommended {
@@ -38,6 +44,14 @@ div.knx-button {
 
 .knx-recommended-wrapper {
   width: 100%;
+
+  .knx-recommended {
+    padding: 5px 10px;
+    height: 32px;
+    text-align: left;
+    border-radius: 4px;
+    font-size: 14px;
+  }
 }
 
 .knx-button--toggle-pills {
@@ -59,7 +73,7 @@ div.knx-button {
   }
 
   .knx-recommended__tick--0 {
-    right: 87%;
+    right: 89%;
   }
 
   .knx-recommended__tick--1 {
