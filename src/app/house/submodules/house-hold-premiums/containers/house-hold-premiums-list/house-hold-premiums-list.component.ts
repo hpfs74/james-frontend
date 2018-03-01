@@ -10,8 +10,6 @@ import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard
 
 // reducers
 import * as fromRoot from '@app/reducers';
-import * as router from '@app/core/actions/router';
-import * as fromCore from '@app/core/reducers';
 import * as fromHouse from '@app/house/reducers';
 
 // actions
@@ -90,7 +88,7 @@ export class HouseHoldPremiumsListComponent implements OnInit {
     }
     const houseInsurance = this.houseInsurances.filter((ins) => ins.Identifier === insurance.id)[0];
     this.store$.dispatch(new householddata.UpdateAdvice(houseInsurance));
-    this.store$.dispatch(new router.Go({path: ['/household/premiums/detail']}));
+    this.store$.dispatch(new wizardActions.Forward());
   }
 
   noResult(): boolean {

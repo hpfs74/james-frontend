@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>profile_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M18.9025193,20 C18.8980645,19.9718717 18.8934286,19.9433339 18.8886061,19.914399 C18.7477016,19.0689722 18.4945759,18.2252197 18.1055728,17.4472136 C17.0193621,15.2747923 15.1071737,14 12,14 C8.89282625,14 6.98063786,15.2747923 5.89442719,17.4472136 C5.50542415,18.2252197 5.25229838,19.0689722 5.11139392,19.914399 C5.10657143,19.9433339 5.10193552,19.9718717 5.09748065,20 L18.9025193,20 Z M3,21 C3,20.6980939 3.03510705,20.2065952 3.13860608,19.585601 C3.31020162,18.5560278 3.61957585,17.5247803 4.10557281,16.5527864 C5.51936214,13.7252077 8.10717375,12 12,12 C15.8928263,12 18.4806379,13.7252077 19.8944272,16.5527864 C20.3804241,17.5247803 20.6897984,18.5560278 20.8613939,19.585601 C20.964893,20.2065952 21,20.6980939 21,21 C21,21.5522847 20.5522847,22 20,22 L4,22 C3.44771525,22 3,21.5522847 3,21 Z M14,6 C14,4.89528475 13.1047153,4 12,4 C10.8952847,4 10,4.89528475 10,6 C10,7.10471525 10.8952847,8 12,8 C13.1047153,8 14,7.10471525 14,6 Z M16,6 C16,8.20928475 14.2092847,10 12,10 C9.79071525,10 8,8.20928475 8,6 C8,3.79071525 9.79071525,2 12,2 C14.2092847,2 16,3.79071525 16,6 Z" id="path-1"></path>
+    </defs>
+    <g id="XL_dashboard_profileDropdown_notFilled" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-909.000000, -191.000000)">
+        <g id="profile_dropdown" transform="translate(890.000000, 46.000000)">
+            <g id="Group-15" transform="translate(0.000000, 103.000000)">
+                <g id="Group-10" transform="translate(16.000000, 40.000000)">
+                    <g id="Icons/General/Profile">
+                        <g id="Page-1" stroke-width="1" fill-rule="evenodd" transform="translate(4.000000, 3.000000)"></g>
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Combined-Shape" fill="#003B5A" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Colours/Primary/-Blue" mask="url(#mask-2)" fill="#003B5A" fill-rule="evenodd">
+                            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

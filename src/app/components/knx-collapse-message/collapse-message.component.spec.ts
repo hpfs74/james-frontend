@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA, Component, DebugElement, ViewChild, LOCALE_ID } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -26,7 +26,7 @@ describe('Component: CollapseMessage', () => {
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [BrowserAnimationsModule],
+    imports: [NoopAnimationsModule],
     declarations: [TestHostComponent, CollapseMessageComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };

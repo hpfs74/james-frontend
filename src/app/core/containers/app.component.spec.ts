@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -44,7 +44,7 @@ describe('Component: AppComponent', () => {
   let moduleDef: TestModuleMetadata = {
     imports: [
       BrowserModule,
-      BrowserAnimationsModule,
+      NoopAnimationsModule,
       HttpModule,
       RouterTestingModule,
       SharedModule,

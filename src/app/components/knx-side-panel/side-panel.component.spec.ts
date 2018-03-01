@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -13,7 +13,7 @@ describe('Component: SidePanel', () => {
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [BrowserAnimationsModule],
+    imports: [NoopAnimationsModule],
     declarations: [SidePanelComponent],
     schemas: [NO_ERRORS_SCHEMA]
   };

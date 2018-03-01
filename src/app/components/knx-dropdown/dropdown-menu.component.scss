@@ -3,13 +3,12 @@
 .knx-dropdown-menu {
   z-index: $z-index-navbar-dropdown;
   overflow-y: auto;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.18);
   position: absolute;
-  padding-top: 0.5em;
   background: #fff;
-  border-radius: 1px;
+  border-radius: 0 0 4px 4px;
   max-height: 400px;
-  width: 160px;
+  width: 300px;
   display: block;
 }
 
@@ -39,11 +38,3 @@
   overflow: hidden;
 }
 
-:host /deep/ .knx-menu-divider {
-  height: 1px;
-  min-height: 1px;
-  max-height: 1px;
-  width: 100%;
-  display: block;
-  background: #f9f9f9;
-}

@@ -29,6 +29,9 @@ import * as fromCore from '@app/core/reducers';
 import * as fromHouse from '@app/house/reducers';
 
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
+import { TranslateService } from '@ngx-translate/core';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'knx-house-hold-dekking-form',
@@ -55,19 +58,27 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   houseHoldData: HouseHoldPremiumRequest;
 
   subscriptions$: Subscription[] = [];
-
+  copies: any = {};
 
   constructor(private store$: Store<fromRoot.State>,
-              private tagsService: TagsService) {
+              private tagsService: TagsService,
+              private translateService: TranslateService) {
+
+    this.translateService.get([
+      'household.common.step.options.backButtonLabel',
+      'household.dekking.step.options.nextButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+    });
 
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
       .map((el) => (JSON.parse(el.tag) as Price));
 
     this.currentStepOptions = {
-      label: 'Dekking',
-      backButtonLabel: 'Terug',
-      nextButtonLabel: 'Toon resultaat',
+      label: this.copies['general.dekking'],
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      nextButtonLabel: this.copies['household.dekking.step.options.nextButtonLabel'],
       hideBackButton: false,
       hideNextButton: false
     };
@@ -75,6 +86,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.initializeForms();
     this.selectInitialStates();
     this.setIntialSubscription();
+
   }
 
   selectInitialStates(): void {
@@ -86,8 +98,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
       this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
-
-    this.form.formGroup.patchValue({coverage: 5016});
   }
 
   setIntialSubscription() {
@@ -111,7 +121,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
         }),
       this.houseHoldData$
         .filter(data => data !== null)
-        .subscribe(data => this.setFormValue(data)));
+        .subscribe(data => this.setFormValue(data)),
+
+      this.houseHoldData$
+        .filter(data => data !== null && !data.CoverageCode)
+        .subscribe(() => this.store$.dispatch(new houseHoldData.Update({CoverageCode: 5016})))
+    );
   }
 
   /**
@@ -123,7 +138,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
     this.houseHoldData = value;
 
-    if (value.CoverageCode !== null) {
+    if (value.CoverageCode !== null && value.CoverageCode !== undefined) {
       this.coverages.forEach((el) => {
         el.selected = +el.id === value.CoverageCode;
       });
@@ -155,29 +170,41 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));
   }
 
+  getInsuredAmount() {
+    const detailForm = this.form.formGroup;
+
+    if (detailForm.value.dateOfBirth && detailForm.value.familySituation && detailForm.value.netIncomeRange) {
+      const payload = {
+        OwnedBuilding: this.houseHoldData.OwnedBuilding,
+        FamilyComposition: detailForm.value.familySituation,
+        AmountMoreThan12KAudioVisualComp: 0,
+        AmountMoreThan6KJewelry: 0,
+        AmountMoreThan6KTenantsInterest: 0,
+        AmountMoreThan15KSpecialPossesion: 0,
+        BreadWinnerBirthdate: detailForm.value.dateOfBirth,
+        BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
+      } as HouseHoldAmountRequest;
+
+      this.store$.dispatch(new householdinsuranceamount.GetInfo(payload));
+    }
+  }
+
   setFormAsyncValidators(): void {
     this.subscriptions$.push(
-      this.form.formGroup.valueChanges
-        .subscribe(() => {
-
-          const detailForm = this.form.formGroup;
-
-          if (detailForm.value.dateOfBirth && detailForm.value.familySituation && detailForm.value.netIncomeRange) {
-            const payload = {
-              OwnedBuilding: this.houseHoldData.OwnedBuilding,
-              FamilyComposition: detailForm.value.familySituation,
-              AmountMoreThan12KAudioVisualComp: 0,
-              AmountMoreThan6KJewelry: 0,
-              AmountMoreThan6KTenantsInterest: 0,
-              AmountMoreThan15KSpecialPossesion: 0,
-              BreadWinnerBirthdate: detailForm.value.dateOfBirth,
-              BreadWinnerMonthlyIncome: detailForm.value.netIncomeRange
-            } as HouseHoldAmountRequest;
-
-            this.store$.dispatch(new householdinsuranceamount.GetInfo(payload));
-          }
-        }));
+      this.form.formGroup.get('dateOfBirth').valueChanges
+        .debounceTime(400)
+        .distinctUntilChanged()
+        .subscribe(() => this.getInsuredAmount()),
+      this.form.formGroup.get('familySituation').valueChanges
+        .debounceTime(400)
+        .distinctUntilChanged()
+        .subscribe(() => this.getInsuredAmount()),
+      this.form.formGroup.get('netIncomeRange').valueChanges
+        .debounceTime(400)
+        .distinctUntilChanged()
+        .subscribe(() => this.getInsuredAmount()));
   }
+
 
   /**
    * close all subscriptions
@@ -204,7 +231,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
    * check if the form is valid and move to the next step
    * @param event
    */
-  goToNextStep(event?: any) {
+  goToNextStep(event ?: any) {
     const detailForm = this.form.formGroup;
 
     FormUtils.validateForm(detailForm);
@@ -223,6 +250,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       CommencingDate: detailForm.value.commencingDate
     }));
 
-    this.store$.dispatch(new router.Go({path: ['/household/premiums']}));
+    this.store$.dispatch(new router.Go({path: ['/inboedel/advies']}));
   }
 }

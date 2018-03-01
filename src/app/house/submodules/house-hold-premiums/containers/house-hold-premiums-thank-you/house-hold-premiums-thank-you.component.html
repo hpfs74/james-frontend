@@ -8,17 +8,17 @@
           <div class="col-sm-12">
 
             <h4 class="knx-collapse-message__title ">
-              Congrats {{customerName}}<br>
-              Your insurance has been requested
+              {{ 'household.premium.thankYou.note.header.congrats.title' | translate }} {{customerName}}<br>
+              {{ 'household.premium.thankYou.note.header.congrats.suffixNote' | translate }}
             </h4>
             <p>
-              Your request has been sent towards {{(selectedInsurance$ | async).CompanyName}} and will be approved within the next X
-              days.<br>
-              Once everything is approved and accepted we will let you know via email :)
+              {{ 'household.premium.thankYou.note.para.note1.prefix' | translate }} {{(selectedInsurance$ | async).CompanyName}}
+              {{ 'household.premium.thankYou.note.para.note1.suffix' | translate }}<br>
+              {{ 'household.premium.thankYou.note.para.note2' | translate }}
             </p>
 
             <p>
-              A confirmation email has been sent to {{customerEmail}}
+              {{ 'household.premium.thankYou.confirmation.note' | translate }}{{customerEmail}}
             </p>
           </div>
         </div>

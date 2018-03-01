@@ -21,14 +21,23 @@ import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
 import * as fromHouse from '@app/house/reducers';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs/observable/of';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs/Observable';
 
+let translations: any = {'TEST': 'This is a test'};
+class TranslateLoaderMock implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return of(translations);
+  }
+}
 
-
-describe('Component: HouseHoldPremiumsDetailComponent', () => {
+describe('Component: HouseHoldPremiumsComponent', () => {
   let comp: HouseHoldPremiumsComponent;
   let fixture: ComponentFixture<HouseHoldPremiumsComponent>;
   let store: Store<fromRoot.State>;
   let tagsService: TagsService;
+  let translateService: TranslateService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,6 +50,9 @@ describe('Component: HouseHoldPremiumsDetailComponent', () => {
           'auth': combineReducers(fromAuth.reducers),
           'app': combineReducers(fromCore.reducers),
           'household': combineReducers(fromHouse.reducers)
+        }),
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
         })
       ],
       declarations: [
@@ -66,6 +78,7 @@ describe('Component: HouseHoldPremiumsDetailComponent', () => {
 
     store = TestBed.get(Store);
     tagsService = TestBed.get(TagsService);
+    translateService = TestBed.get(TranslateService);
     spyOn(store, 'dispatch').and.callThrough();
 
     fixture = TestBed.createComponent(HouseHoldPremiumsComponent);
