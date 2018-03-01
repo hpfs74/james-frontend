@@ -13,12 +13,17 @@
           <div class="row" *ngIf="!insurance.manually_added">
             <div class="pull-left col-md-12">
               <div class="knx-saved__icon pull-left"
-                   [ngClass]="{ 'knx-icon-automobile': !insurance.logo, 'knx-saved__icon--image': insurance.logo }">
+                   [ngClass]="{
+                     'knx-icon-automobile': !insurance.logo,
+                     'knx-saved__icon--image': insurance.logo,
+                     'knx-saved__pending': insurance.request_status === 'pending'
+                    }">
                 <img *ngIf="insurance.logo" src="{{ insurance.logo }}"/>
               </div>
 
               <p>
-                <small>Bought via Knab on {{insurance.next_premium_date}}</small>
+                <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.PENDING">Your insurance is being reviewed by {{insurance.insurance_brand}}</small>
+                <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.APPROVED">Bought via Knab on {{insurance.next_premium_date}}</small>
                 <br>
                 {{insurance.license}} &bull; {{insurance.make}} {{insurance.model}}
 
