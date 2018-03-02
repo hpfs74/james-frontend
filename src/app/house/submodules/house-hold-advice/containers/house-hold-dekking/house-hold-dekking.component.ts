@@ -125,7 +125,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
       this.houseHoldData$
         .filter(data => data !== null && !data.CoverageCode)
-        .subscribe(() => this.store$.dispatch(new houseHoldData.Update({CoverageCode: 5016})))
+        .subscribe(() => this.store$.dispatch(new houseHoldData.Update({CoverageCode: 5018})))
     );
   }
 

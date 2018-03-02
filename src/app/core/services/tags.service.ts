@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 import { Tag } from '../models/tag';
 import { UIPair } from '../models/ui-pair';
+import { environment } from '@env/environment';
 
 // TODO: coupled with middleware spec, should be refactored if using
 // backend tags API directly
@@ -18,7 +19,7 @@ export class TagsService {
 
   load(): Promise<any> {
     const path = '/content/tags.json';
-    return this.http.request(path)
+    return this.http.request(environment.james.tagsEndpoint)
       .map(res => res.json())
       .toPromise()
       .then((data) => this.tags = data)

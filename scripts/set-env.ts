@@ -127,7 +127,7 @@ function getContent(environment: string) {
       login: '${getEnvVar('LOGIN')}',
       static: '${getEnvVar('STATIC_PAGE_URL')}'
     },
-    james: {
+    james: {      
       featureToggle: '${getEnvVar('JAMES_API_FEATURE_TOGGLE')}',
       forgetPassword: '${forgetPasswordLink}',
       key: '${getEnvVar('JAMES_API_KEY')}',
@@ -162,6 +162,8 @@ function getContent(environment: string) {
         activation: '${getEnvVar('PAYLOAD_ACTIVATION_URL')}'
       },
       loggingEndpoint: '${getEnvVar('LOGGING_ENDPOINT')}',
+      tagsEndpoint: '${getEnvVar('TAGS_ENDPOINT')}',
+      langEndpoint: '${getEnvVar('LANG_ENDPOINT')}'
     },
     riskInsurance: {
       getHouseData: '${getEnvVar('RISK_INSURANCE_HOUSE_DATA')}',

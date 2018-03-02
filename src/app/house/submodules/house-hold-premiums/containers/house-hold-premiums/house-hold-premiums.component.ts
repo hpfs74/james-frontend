@@ -81,7 +81,8 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
               private tagsService: TagsService,
               private translateService: TranslateService,
               public knxWizardService: KNXWizardRxService) {
-    this.translateService
+
+    this.subscription$.push(this.translateService
       .get([
         'household.premium.steps.step1.title',
         'household.premium.steps.step2.title',
@@ -91,7 +92,7 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
           .keys(data)
           .map(key => data[key])
           .map(v => ({label: v}));
-      });
+      }));
   }
 
   ngOnInit() {
@@ -119,49 +120,57 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
     this.houseHoldFilterForm = new HouseHoldPremiumsFilterForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_coverages'));
 
-    this.houseHoldFilterForm.formGroup.valueChanges
-      .debounceTime(200)
-      .filter(() => this.knxWizardService.currentStepIndex === 0)
-      .subscribe(data => {
-        this.store$.dispatch(new houseHoldData.Update({
-          CoverageCode: data.mainCoverage,
-          IncludeOutdoorsValuable: data.outsideCoverage,
-          IncludeGlass: data.glassCoverage === true ? 'J' : 'N'
+    this.subscription$.push(this.houseHoldFilterForm.formGroup.valueChanges
+        .debounceTime(200)
+        .filter(() => this.knxWizardService.currentStepIndex === 0)
+        .subscribe(data => {
+          this.store$.dispatch(new houseHoldData.Update({
+            CoverageCode: data.mainCoverage,
+            IncludeOutdoorsValuable: data.outsideCoverage,
+            IncludeGlass: data.glassCoverage === true ? 'J' : 'N'
+          }));
+        }),
+
+      this.store$.select(fromHouseHold.getHouseHoldDataInfo)
+        .filter((advice) => advice !== null)
+        .subscribe((advice: HouseHoldPremiumRequest) => {
+
+          const payload = {
+            Birthdate: advice.BreadWinnerBirthdate,
+            CommencingDate: advice.CommencingDate,
+            Zipcode: advice.Zipcode,
+            HouseNumber: advice.HouseNumber,
+            HouseNumberAddition: advice.HouseNumberAddition,
+            HouseType: advice.HouseType,
+            BuildYear: advice.BuildYear,
+            RoomCount: advice.RoomCount,
+            SurfaceArea: advice.SurfaceArea,
+            ConstructionNature: advice.ConstructionNature,
+            ConstructionNatureRoof: advice.ConstructionNatureRoof,
+            ConstructionNatureFloor: advice.ConstructionNatureFloor,
+            SecurityMeasures: advice.SecurityMeasures,
+            OwnedBuilding: advice.OwnedBuilding,
+            CoverageCode: advice.CoverageCode,
+            FamilyComposition: advice.FamilyComposition,
+            IncludeGlass: advice.IncludeGlass,
+            BreadWinnerBirthdate: advice.BreadWinnerBirthdate,
+            BreadWinnerMonthlyIncome: advice.BreadWinnerMonthlyIncome,
+            InsuredAmount: advice.InsuredAmount,
+            GuaranteeAgainstUnderinsurance: 'G',
+            InsuredAmountValuables: 0,
+            IncludeOutdoorsValuable: advice.IncludeOutdoorsValuable
+          };
+
+          this.store$.dispatch(new householdpremiums.GetInfo(payload));
+        }),
+      // set the default value for include glass in insurance
+      this.store$.select(fromHouseHold.getHouseHoldDataInfo)
+        .filter((advice) => advice !== null && !advice.IncludeGlass)
+        .subscribe((advice) => {
+          this.store$.dispatch(new houseHoldData.Update({
+            IncludeGlass: 'N'
+          }));
         }));
-      });
-
-    this.store$.select(fromHouseHold.getHouseHoldDataInfo)
-      .filter((advice) => advice !== null)
-      .subscribe((advice: HouseHoldPremiumRequest) => {
-
-        const payload = {
-          Birthdate: advice.BreadWinnerBirthdate,
-          CommencingDate: advice.CommencingDate,
-          Zipcode: advice.Zipcode,
-          HouseNumber: advice.HouseNumber,
-          HouseNumberAddition: advice.HouseNumberAddition,
-          HouseType: advice.HouseType,
-          BuildYear: advice.BuildYear,
-          RoomCount: advice.RoomCount,
-          SurfaceArea: advice.SurfaceArea,
-          ConstructionNature: advice.ConstructionNature,
-          ConstructionNatureRoof: advice.ConstructionNatureRoof,
-          ConstructionNatureFloor: advice.ConstructionNatureFloor,
-          SecurityMeasures: advice.SecurityMeasures,
-          OwnedBuilding: advice.OwnedBuilding,
-          CoverageCode: advice.CoverageCode,
-          FamilyComposition: advice.FamilyComposition,
-          IncludeGlass: advice.IncludeGlass,
-          BreadWinnerBirthdate: advice.BreadWinnerBirthdate,
-          BreadWinnerMonthlyIncome: advice.BreadWinnerMonthlyIncome,
-          InsuredAmount: advice.InsuredAmount,
-          GuaranteeAgainstUnderinsurance: 'G',
-          InsuredAmountValuables: 0,
-          IncludeOutdoorsValuable: advice.IncludeOutdoorsValuable
-        };
-
-        this.store$.dispatch(new householdpremiums.GetInfo(payload));
-      });
   }
 
   ngOnDestroy() {
