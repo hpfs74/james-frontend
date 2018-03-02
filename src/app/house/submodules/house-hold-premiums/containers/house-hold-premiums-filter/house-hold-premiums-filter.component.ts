@@ -44,7 +44,7 @@ export class HouseHoldPremiumsFilterComponent {
       // setting checkbox values
       this.form.formGroup.patchValue({
         mainCoverage: value.CoverageCode,
-        glassCoverage: value.IncludeGlass ? value.IncludeGlass : 'N',
+        glassCoverage: value.IncludeGlass === 'J',
         outsideCoverage: value.IncludeOutdoorsValuable
       }, {
         emitEvent: false
