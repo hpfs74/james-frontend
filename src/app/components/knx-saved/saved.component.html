@@ -22,8 +22,8 @@
               </div>
 
               <p>
-                <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.PENDING">Your insurance is being reviewed by {{insurance.insurance_brand}}</small>
-                <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.APPROVED">Bought via Knab on {{insurance.next_premium_date}}</small>
+                <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.PENDING">{{ 'car.purchase.insurances.pending.title' | translate }} {{insurance.insurance_brand}}</small>
+                <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.APPROVED">{{ 'car.purchase.insurances.bought.title' | translate }} {{insurance.next_premium_date}}</small>
                 <br>
                 {{insurance.license}} &bull; {{insurance.make}} {{insurance.model}}
 
@@ -34,9 +34,9 @@
 
                 <br>
 
-                <span class="pending" *ngIf="insurance.request_status === 'pending'">(in aanvraag)</span>
-                <span class="approved" *ngIf="insurance.request_status === 'approved'">(aangenomen)</span>
-                <span class="rejected" *ngIf="insurance.request_status === 'rejected'">(verworpen)</span>
+                <span class="pending" *ngIf="insurance.request_status === 'pending'">{{ 'car.purchase.insurances.status.pending' | translate }}</span>
+                <span class="approved" *ngIf="insurance.request_status === 'approved'">{{ 'car.purchase.insurances.status.approved' | translate }}</span>
+                <span class="rejected" *ngIf="insurance.request_status === 'rejected'">{{ 'car.purchase.insurances.status.rejected' | translate }}</span>
               </p>
             </div>
           </div>

@@ -41,7 +41,7 @@ export class SavedComponent {
         status =  this.insuranceStatus.APPROVED;
         break;
       default:
-        status =  this.insuranceStatus.APPROVED;
+        status =  this.insuranceStatus.PENDING;
         break;
     }
     return status;
