@@ -65,7 +65,8 @@ export class AssistantConfig {
       review: {
         unsupported: `Dit kan jouw nieuwe verzekering zijn! Lees de gegevens zorgvuldig door, zodat je een goed beeld
          krijgt van de verzekering.`,
-        title: `In 3 minuten vraag je een verzekering aan:`,
+        title: `We maken ervan.
+        In 3 minuten vraag je deze autoverzekering aan.`,
         steps: `
         1. Check je persoonsgegevens <br>
         2. Vul je autogegevens in <br>
