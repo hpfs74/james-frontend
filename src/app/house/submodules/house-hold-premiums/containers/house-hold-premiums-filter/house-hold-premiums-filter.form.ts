@@ -21,7 +21,7 @@ export class HouseHoldPremiumsFilterForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      mainCoverage: ['5016', Validators.required],
+      mainCoverage: ['5018', Validators.required],
       outsideCoverage: [{}],
       glassCoverage: [{}]
     });

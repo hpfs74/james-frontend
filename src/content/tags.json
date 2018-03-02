@@ -2846,12 +2846,12 @@
   ],
   "house_hold_flow_coverages": [
     {
-      "tag": "{ \"id\": 5016, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
+      "tag": "{ \"id\": 5018, \"badge\": \"\", \"header\": \"Basis dekking\",\"description\": \"When using the default coverage this you are covered for the following topics:\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\"]}",
       "translation_label": "Basis",
       "translation_text": "Basis"
     },
     {
-      "tag": "{\"id\": 5018,\"badge\": \"\",\"header\": \"Allrisk dekking\",\"description\": \"Select this if you also want the additional coverages to covere to following topics\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\",\"Glas wijn op bank\",\"Water op laptop\"]}",
+      "tag": "{\"id\": 5016,\"badge\": \"\",\"header\": \"Allrisk dekking\",\"description\": \"Select this if you also want the additional coverages to covere to following topics\",\"features\": [\"Storm\",\"Brand\",\"Inbraak\",\"Glas wijn op bank\",\"Water op laptop\"]}",
       "translation_label": "Allrisk",
       "translation_text": "Allrisk"
     }
