@@ -152,5 +152,10 @@
   "car.advice.steps.detail.form.houseHold.label": "Wat is je gezinssituatie?",
   "car.advice.steps.detail.form.houseHold.placeholder": "Maak een keuze",
   "car.advice.steps.detail.form.gender.label": "Geslacht",
-  "car.advice.steps.detail.form.gender.placeholder": "Selecteer je geslacht"
+  "car.advice.steps.detail.form.gender.placeholder": "Selecteer je geslacht",
+  "car.purchase.insurances.pending.title": "Your insurance is being reviewed by",
+  "car.purchase.insurances.bought.title": "Bought via Knab on",
+  "car.purchase.insurances.status.pending": "(in aanvraag)",
+  "car.purchase.insurances.status.approved": "(aangenomen)",
+  "car.purchase.insurances.status.rejected": "(verworpen)"
 }

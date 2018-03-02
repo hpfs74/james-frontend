@@ -100,4 +100,8 @@
     padding: 0 5px;
     line-height: 50px;
   }
+
+  &.knx-saved__pending {
+    border: 3px $knab-primary-green dashed;
+  }
 }
