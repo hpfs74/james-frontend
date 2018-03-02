@@ -7,6 +7,16 @@ import { ContentConfig } from '@app/content.config';
 import { ContentConfigMock } from '@app/content.mock.spec';
 import { SavedComponent } from './saved.component';
 import { AppPromoBlockComponent } from '../knx-app-promo/app-promo.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/Observable';
+
+let translations: any = {'TEST': 'This is a test'};
+class TranslateLoaderMock implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return of(translations);
+  }
+}
 
 describe('Component: Saved', () => {
   let comp: SavedComponent;
@@ -15,6 +25,11 @@ describe('Component: Saved', () => {
   let el: HTMLElement;
 
   let moduleDef: TestModuleMetadata = {
+    imports: [
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      })
+    ],
     declarations: [SavedComponent, AppPromoBlockComponent],
     providers: [
       {
