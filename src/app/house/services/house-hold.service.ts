@@ -75,6 +75,12 @@ export class HouseHoldService {
       req,
       {
         headers: httpOptions.headers
+      })
+      .map(res => {
+        res.CalculatedPremiums.forEach(el => this.filterImageUrl(el));
+        res.CalculatedPremiums.sort((a, b) => a.Premium - b.Premium);
+
+        return res;
       });
   }
 
@@ -90,4 +96,14 @@ export class HouseHoldService {
     return null;
   }
 
+
+  private filterImageUrl(res) {
+
+    // TODO: This has to be moved in the middle layer, it should not be here, but in the meanwhile it is needed
+    res.CompanyLogoUrl = res.CompanyLogoUrl
+      .replace('https://webmodulet.risk-verzekeringen.nl/Webmodule/IMG/Maatschappijen/',
+        'https://knab-dev.apigee.net/v0/content/companylogo/')
+      .replace('https://webmodulea.risk-verzekeringen.nl/Webmodule/IMG/Maatschappijen/',
+        'https://knab-acc.apigee.net/v0/content/companylogo/');
+  }
 }
