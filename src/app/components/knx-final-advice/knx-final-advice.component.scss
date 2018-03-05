@@ -1,6 +1,8 @@
 @import '~styles/base.scss';
 
 .knx-final-buy {
+  padding-bottom: 0;
+
   p {
     word-wrap: break-word;
     margin: 0;
@@ -29,16 +31,23 @@
   }
 }
 
+.knx-no-pad {
+  padding: 0;
+}
+
 .knx-buy--mobile {
   .knx-final-buy {
-    padding-bottom: 90px;
+    padding-bottom: 55px;
   }
 }
 
 .knx-final--sticky {
-  transform: translateY(-80px);
+  transform: translateY(-70px);
+  margin-bottom: -70px;
   position: sticky;
-  bottom: -50px;
+  bottom: -65px;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 @media screen and (max-width: 577px) {

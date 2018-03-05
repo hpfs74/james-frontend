@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="row" *ngIf="!mobile">
-      <div class="col-md-12">
+      <div class="col-md-12 knx-no-pad">
         <button class="knx-button knx-button--fullwidth knx-button--primary {{(options.button.classes || []).join(' ')}}"
                 [class.knx-button--pending]="options.button.pending"
                 (click)="options.button.onClick($event)">
