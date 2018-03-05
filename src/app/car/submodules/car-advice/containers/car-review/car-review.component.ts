@@ -95,8 +95,7 @@ export class CarReviewComponent implements OnInit, OnDestroy {
               },
               {
                 key: 'Per maand',
-                value: this.currencyPipe.transform(selectedInsurance.monthly_premium, 'EUR', true),
-                divider: true
+                value: this.currencyPipe.transform(selectedInsurance.monthly_premium, 'EUR', true)
               }
             ],
             button: {

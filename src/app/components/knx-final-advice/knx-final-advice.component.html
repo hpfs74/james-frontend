@@ -21,7 +21,7 @@
               </p>
           </div>
         </div>
-        <hr *ngIf="section.divider" class="knx-divider-line">
+        <hr class="knx-divider-line" [class.show]="section.divider">
       </div>
     </div>
     <div class="row" *ngIf="!mobile">
