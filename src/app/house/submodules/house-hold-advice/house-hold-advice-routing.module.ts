@@ -38,7 +38,7 @@ export const houseHoldAdviceRoutes: Routes = [
         }
       },
       {
-        path: 'huis-detail',
+        path: 'huis-details',
         component: HouseHoldHouseDetailComponent,
         canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
