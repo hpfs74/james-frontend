@@ -45,10 +45,6 @@ export class CustomRouterStateSerializer
         external = selectedInsurance.supported ? 'no' : 'yes';
       });
 
-    this.store$.select(fromAuth.getLoggedIn).subscribe((isLoggedIn) => {
-      loggedIn = isLoggedIn;
-    });
-
     const {url} = routerState;
     const queryParams = routerState.root.queryParams;
     let data = {
@@ -59,12 +55,17 @@ export class CustomRouterStateSerializer
       step_nr: null
     };
 
-    try {
-      data.step_nr = routerState.root.children[0].children[0].children[0].data.step_nr;
-    } catch (e) {
-
+    let activated = routerState.root.firstChild;
+    if (activated != null) {
+      while (activated != null) {
+        if (activated.routeConfig && activated.routeConfig.data) {
+          if (activated.routeConfig.data.step_nr) {
+            data.step_nr = activated.routeConfig.data.step_nr;
+          }
+        }
+        activated = activated.firstChild;
+      }
     }
-
     this.store$.dispatch(new wizardActions.ResetError());
     return {url, queryParams, data: data};
   }
