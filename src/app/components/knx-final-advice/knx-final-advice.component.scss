@@ -16,7 +16,10 @@
 
   .knx-divider-line {
     border: 0;
-    border-bottom: 1px $knab-tertiary-gray solid;
+
+    &.show {
+      border-bottom: 1px $knab-tertiary-gray solid;
+    }
   }
 
   .knx-final-value {
