@@ -1,0 +1,44 @@
+@import '~styles/base.scss';
+
+.knx-ribbon__container {
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+
+  span {
+    font-size: 12px;
+    color: #fff;
+    position: absolute;
+    background: $knab-primary-red;
+    padding: 2px;
+    bottom: -10px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    white-space: nowrap;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      bottom: 3px;
+      border: 10px solid $knab-primary-red;
+      z-index: -1;
+    }
+
+    &:before {
+      left: -5px;
+      border-right-width: 10px;
+      border-left-width: 5px;
+      border-color: #c2586a $knab-secondary-red #c2586a transparent;
+    }
+
+    &:after {
+      right: -5px;
+      border-right-width: 5px;
+      border-left-width: 10px;
+      border-color: #c2586a $knab-secondary-red #c2586a transparent;
+    }
+  }
+}

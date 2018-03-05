@@ -1,0 +1,8 @@
+<div class="knx-ribbon__container">
+  <div [ngStyle]="{'height': presentHeight}" class="knx-present__container">
+    <ng-content #knxPresent select=".knx-present"></ng-content>
+  </div>
+  <span [ngStyle]="{'width': presentWidth}">
+    <ng-content select=".knx-ribbon-text"></ng-content>
+  </span>
+</div>
