@@ -89,8 +89,16 @@ export class AssistantConfig {
       thankyou: `Goed nieuws! We hebben je aanvraag ontvangen en wij gaan deze indienen bij de verzekeraar. We houden je op de hoogte!`,
       finalEmail: (email: string) => `Een kopie van je aanvraag is verstuurd naar ${email}`
     },
-    purchased: (firstName: string) => `Via de website krijg je op dit moment enkel advies. Wil je de verzekering beheren?
-      Download dan de Knab Verzekeren app.`
+    purchased: {
+      with: {
+        insurances: (firstName: string) => `Hoi ${firstName}! In dit overzicht zie je al jouw aangevraagde verzekeringen.
+        Wil je een nieuwe aanvraag doen? Vul dan de adviestool in!`
+      },
+      without: {
+        insurances: (firstName: string) => `Hoi ${firstName}! Je hebt nog geen verzekering aangevraagd.
+        Vul de adviestool in en check of jij je voordeliger kunt verzekeren.`
+      }
+    }
   };
 
 

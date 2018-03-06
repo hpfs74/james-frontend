@@ -3,7 +3,7 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <b>Welkom<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>
+        <b>{{ getTimeOfDay() | translate }}<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>
       </div>
     </div>
   </div>
@@ -15,10 +15,10 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
       <div>
         <div class="knx-saved__action">
           <button (click)="startNewAdvice()" class="knx-button knx-button--primary knx-button--3d">
-            Start nieuw advies
+            {{ 'car.purchased.button.start.new.advice' | translate }}
           </button>
         </div>
-        <h2 *ngIf="!(savedInsurances$ | async)?.car?.insurance?.length">jouw verzekeringen</h2>
+        <h2 *ngIf="!(savedInsurances$ | async)?.car?.insurance?.length">{{ 'car.purchased.title' | translate }}</h2>
       </div>
       <knx-saved *ngIf="(savedInsurances$ | async)?.car?.insurance?.length" (onNewAdvice)="startNewAdvice()" title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
       <div>

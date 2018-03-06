@@ -153,7 +153,7 @@
   "car.advice.steps.detail.form.houseHold.placeholder": "Maak een keuze",
   "car.advice.steps.detail.form.gender.label": "Geslacht",
   "car.advice.steps.detail.form.gender.placeholder": "Selecteer je geslacht",
-  "car.purchase.insurances.pending.title": "Your insurance is being reviewed by",
+  "car.purchase.insurances.pending.title": "Je aanvraag wordt beoordeeld door",
   "car.purchase.insurances.bought.title": "Bought via Knab on",
   "car.purchase.insurances.status.pending": "(in aanvraag)",
   "car.purchase.insurances.status.approved": "(aangenomen)",
@@ -162,5 +162,15 @@
   "navbar.menu.profile": "Mijn Account",
   "navbar.menu.logout": "Uitloggen",
   "navbar.menu.register": "Registreren",
-  "navbar.menu.login": "Inloggen"
+  "navbar.menu.login": "Inloggen",
+  "car.purchased.greeting.morning": "Goedemorgen",
+  "car.purchased.greeting.afternoon": "Goedemiddag",
+  "car.purchased.greeting.night": "Goedenavond",
+  "car.purchased.button.start.new.advice": "ONTVANG ADVIES OVER JE AUTOVERZEKERING",
+  "car.purchased.title": "JOUW VERZEKERINGEN",
+  "car.purchased.insurance.list.title": "Autoverzekering",
+  "car.purchased.download.section.title": "Download de Knab Verzekeren app",
+  "car.purchased.download.section.list.item1": "Al je verzekeringen altijd bij de hand.",
+  "car.purchased.download.section.list.item2": "Ontvang een seintje als je verzekering verloopt.",
+  "car.purchased.download.section.list.item3": "Direct toegang tot de noodnummers van je verzekeraars."
 }
