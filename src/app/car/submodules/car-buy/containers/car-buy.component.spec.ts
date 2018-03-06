@@ -38,6 +38,7 @@ import { TagsServiceMock } from '../../../../core/services/tags.service.mock.spe
 
 import { BuyComplete, BuyFailure } from '../../../../car/actions/car';
 import { Profile } from '../../../../profile/models/profile';
+import { SharedService } from '@app/shared/services/shared.service';
 
 export function getInitialState() {
   return {
@@ -141,6 +142,7 @@ describe('Component: CarBuyComponent', () => {
     providers: [
       KNXLocale,
       CurrencyPipe,
+      SharedService,
       {
         provide: TagsService,
         useValue: TagsServiceMock

@@ -19,6 +19,7 @@ import { ContactDetailForm } from '../../../../../shared/forms/contact-detail.fo
 import { nameInitialMask } from '../../../../../utils/base-form.utils';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedService } from '@app/shared/services/shared.service';
 
 @Component({
   template: `<div><knx-car-contact-form [form]="formFromHost" [profile]="profileFromHost"></knx-car-contact-form></div>`
@@ -50,7 +51,10 @@ describe('Component: CarContactComponent', () => {
         'profile': combineReducers(fromProfile.reducers)
       })],
     declarations: [CarContactComponent, TestHostComponent],
-    providers: [KNXLocale],
+    providers: [
+      KNXLocale,
+      SharedService
+    ],
     schemas: [NO_ERRORS_SCHEMA]
   };
   setUpTestBed(moduleDef);
