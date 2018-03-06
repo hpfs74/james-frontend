@@ -30,6 +30,7 @@ import { FeatureLoader } from '@app/utils/feature-loader';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedService } from '@app/shared/services/shared.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, environment.james.langEndpoint);
@@ -101,7 +102,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide: RouterStateSerializer,
       useClass: CustomRouterStateSerializer
-    }
+    },
+    SharedService
   ],
   bootstrap: [AppComponent],
 })

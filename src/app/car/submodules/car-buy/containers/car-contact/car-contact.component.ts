@@ -27,6 +27,7 @@ import { Profile } from '@app/profile/models';
 import { ContactDetailForm } from '@app/shared/forms/contact-detail.form';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Insurance, InsuranceAdvice } from '@app/insurance/models';
+import { SharedService } from '@app/shared/services/shared.service';
 
 @Component({
   selector: 'knx-car-contact-form',
@@ -43,7 +44,8 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
   profile$: Observable<any>;
   isLoggedIn: boolean;
   selectedInsurance$: Observable<Insurance | InsuranceAdvice>;
-  constructor(private store$: Store<fromRoot.State>) {
+  constructor(private store$: Store<fromRoot.State>,
+              public sharedService: SharedService) {
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     this.selectedInsurance$ = this.store$.select(fromInsurance.getSelectedInsurance);
     this.store$.select(fromAuth.getLoggedIn).take(1).subscribe(loggedIn => this.isLoggedIn = loggedIn);
@@ -81,8 +83,8 @@ export class CarContactComponent implements QaIdentifier, AfterContentInit, OnDe
   }
 
   resetFlow() {
+    this.sharedService.tempVariables.set('carFlow', true);
     this.store$.dispatch(new advice.RemoveLatestInsuranceAdvice());
-    this.store$.dispatch(new auth.ResetStates());
     this.store$.dispatch(new router.Go({path: ['car']}));
   }
 

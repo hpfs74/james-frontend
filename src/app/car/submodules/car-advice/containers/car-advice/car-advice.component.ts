@@ -53,6 +53,7 @@ import { InsuranceAdvice } from '@app/insurance/models';
 import { JamesTagPipe } from '@app/shared/pipes';
 import { CurrencyPipe } from '@angular/common';
 import { CarService } from '@app/car/services/car.service';
+import { SharedService, TEMP_VARIABLE_KEYS } from '@app/shared/services/shared.service';
 
 
 enum carFormSteps {
@@ -91,7 +92,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
               public knxWizardService: KNXWizardRxService,
               private jamesTag: JamesTagPipe,
               private currencyPipe: CurrencyPipe,
-              public carService: CarService) {
+              public carService: CarService,
+              public sharedService: SharedService) {
 
 
     this.translateService
@@ -107,7 +109,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       });
 
     this.setFinalAdviceOptions();
-
   }
 
   ngOnInit() {
@@ -142,45 +143,17 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       this.tagsService.getAsLabelValue('car_flow_road_assistance'),
       this.tagsService.getAsLabelValue('car_own_risk'));
 
-    this.subscription$.push(
-      this.savedInsurances$
-        .filter(purchasedInsurances => purchasedInsurances !== null)
-        .take(1)
-        .subscribe(purchasedInsurances => {
-          const insurances = purchasedInsurances.car.insurance;
-          const advices = purchasedInsurances.car.insurance_advice;
-          if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
-            // Proceed to the buy flow for anonymous with advice
-            this.proceedWithAdvice(advices, insurances);
-          } else if (insurances.length && insurances.filter(insurance =>
-              (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
-            // redirect to purchased overview if there are any manually added insurances
-            this.store$.dispatch(new router.Go({path: ['/car/purchased']}));
-          }
-        })
-    );
 
     this.subscription$.push(
-      this.selectedInsurance$
-        .take(1)
-        .filter(selectedInsurance => selectedInsurance)
-        .subscribe(selectedInsurance => {
-          this.subscription$.push(
-            this.selectedAdvice$.take(1).subscribe(selectedAdvice => {
-              if (selectedInsurance && selectedAdvice && selectedAdvice.iban) {
-                this.proceedToBuyResults();
-              }
-            })
-          );
-        })
-    );
-
-    this.subscription$.push(
+      this.store$.select(fromInsurance.getSelectedAdvice)
+        .filter(advice => advice !== undefined && Object.keys(advice).length > 1)
+        .subscribe(advice => {
+          this.store$.dispatch(new compare.LoadCarAction(advice));
+        }),
       this.carExtrasForm.formGroup.valueChanges
         .debounceTime(200)
         .filter(() => this.knxWizardService.currentStepIndex === carFormSteps.compareResults)
         .subscribe(data => {
-
           let compareExtraOptions = {
             coverage: data.coverage,
             cover_occupants: data.extraOptionsOccupants || false,
@@ -192,13 +165,9 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
             insurance_id: ''
           };
           this.store$.dispatch(new advice.Update(compareExtraOptions));
-        }),
-      this.store$.select(fromInsurance.getSelectedAdvice)
-        .filter(advice => advice !== undefined && Object.keys(advice).length > 1)
-        .subscribe(advice => {
-          this.store$.dispatch(new compare.LoadCarAction(advice));
         })
     );
+    this.checkFlow();
   }
 
   ngOnDestroy() {
@@ -305,5 +274,39 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
           };
         })
     );
+  }
+
+  checkFlow() {
+    if (!this.sharedService.tempVariables.get(TEMP_VARIABLE_KEYS.carFlow)) {
+      this.subscription$.push(
+        this.savedInsurances$
+          .filter(purchasedInsurances => purchasedInsurances !== null)
+          .take(1)
+          .subscribe(purchasedInsurances => {
+            const insurances = purchasedInsurances.car.insurance;
+            const advices = purchasedInsurances.car.insurance_advice;
+            if (advices.length && insurances.length && insurances.filter(insurance => (insurance.status === 'draft')).length) {
+              // Proceed to the buy flow for anonymous with advice
+              this.proceedWithAdvice(advices, insurances);
+            } else if (insurances.length && insurances.filter(insurance =>
+                (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+              // redirect to purchased overview if there are any manually added insurances
+              this.store$.dispatch(new router.Go({path: ['/car/purchased']}));
+            }
+          }),
+        this.selectedInsurance$
+          .take(1)
+          .filter(selectedInsurance => selectedInsurance)
+          .subscribe(selectedInsurance => {
+            this.subscription$.push(
+              this.selectedAdvice$.take(1).subscribe(selectedAdvice => {
+                if (selectedInsurance && selectedAdvice && selectedAdvice.iban) {
+                  this.proceedToBuyResults();
+                }
+              })
+            );
+          })
+      );
+    }
   }
 }

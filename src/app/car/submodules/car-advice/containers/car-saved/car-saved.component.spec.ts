@@ -15,6 +15,7 @@ import { SharedModule } from '@app/shared.module';
 import { CarSavedComponent } from './car-saved.component';
 import { ContentConfig } from '@app/content.config';
 import { ContentConfigMock } from '@app/content.mock.spec';
+import { SharedService } from '@app/shared/services/shared.service';
 
 describe('Component: CarSavedComponent', () => {
   let comp: CarSavedComponent;
@@ -39,6 +40,7 @@ describe('Component: CarSavedComponent', () => {
         CarSavedComponent
       ],
       providers: [
+        SharedService,
         {
           provide: ContentConfig,
           useValue: ContentConfigMock
