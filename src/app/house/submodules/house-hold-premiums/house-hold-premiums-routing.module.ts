@@ -26,9 +26,7 @@ export const houseHoldPremiumsRoutes: Routes = [
         component: HouseHoldPremiumsListComponent,
         data: {
           stepIndex: 0,
-          gtm: {
-            step_nr: 40
-          }
+          step_nr: '50'
         }
       },
       {
@@ -36,9 +34,7 @@ export const houseHoldPremiumsRoutes: Routes = [
         component: HouseHoldPremiumsDetailComponent,
         data: {
           stepIndex: 1,
-          gtm: {
-            step_nr: 50
-          }
+          step_nr: '60'
         }
       },
       {
@@ -46,9 +42,7 @@ export const houseHoldPremiumsRoutes: Routes = [
         component: HouseHoldPremiumsBuyComponent,
         data: {
           stepIndex: 2,
-          gtm: {
-            step_nr: 60
-          }
+          step_nr: '70'
         }
       },
       {
@@ -56,9 +50,7 @@ export const houseHoldPremiumsRoutes: Routes = [
         component: HouseHoldPremiumsThankYouComponent,
         data: {
           stepIndex: 3,
-          gtm: {
-            step_nr: 70
-          }
+          step_nr: '80-end'
         }
       }
     ]
