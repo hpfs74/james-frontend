@@ -12,7 +12,7 @@ import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromProfile from '../../../../../profile/reducers';
 import * as router from '../../../../../core/actions/router';
 import * as auth from '@app/auth/actions/auth';
-import { SharedService } from '@app/shared/services/shared.service';
+import { SharedService, TEMP_VARIABLE_KEYS } from '@app/shared/services/shared.service';
 
 @Component({
   selector: 'knx-car-saved',
@@ -53,7 +53,7 @@ export class CarSavedComponent implements AfterViewInit, OnInit {
   }
 
   startNewAdvice() {
-    this.store$.dispatch(new auth.ResetStates());
+    this.sharedService.tempVariables.set(TEMP_VARIABLE_KEYS.carFlow, true);
     this.store$.dispatch(new router.Go({path: ['car']}));
   }
 }
