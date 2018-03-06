@@ -50,7 +50,7 @@ export class CarSavedComponent implements OnInit {
       value: ' ' + this.firstName
     };
     this.savedInsurances$
-      .filter(savedInsurances => savedInsurances.car)
+      .filter(savedInsurances => savedInsurances && savedInsurances.car)
       .take(1)
       .subscribe(savedInsurances => {
         if (savedInsurances.car.insurance.length) {
