@@ -157,5 +157,10 @@
   "car.purchase.insurances.bought.title": "Bought via Knab on",
   "car.purchase.insurances.status.pending": "(in aanvraag)",
   "car.purchase.insurances.status.approved": "(aangenomen)",
-  "car.purchase.insurances.status.rejected": "(verworpen)"
+  "car.purchase.insurances.status.rejected": "(verworpen)",
+  "navbar.menu.insurances": "My Insurances",
+  "navbar.menu.profile": "Mijn Account",
+  "navbar.menu.logout": "Uitloggen",
+  "navbar.menu.register": "Registreren",
+  "navbar.menu.login": "Inloggen"
 }
