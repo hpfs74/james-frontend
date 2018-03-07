@@ -15,8 +15,10 @@ import { SharedModule } from '@app/shared.module';
 import { ContentConfig } from '@app/content.config';
 import { ContentConfigMock } from '@app/content.mock.spec';
 import { CarThankYouComponent } from './car-thank-you.component';
+import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoaderMock } from 'test.common.spec';
 
-describe('Component: CarSavedComponent', () => {
+describe('Component: CarThankYouComponent', () => {
   let comp: CarThankYouComponent;
   let fixture: ComponentFixture<CarThankYouComponent>;
   let store: Store<fromCar.State>;
@@ -33,12 +35,16 @@ describe('Component: CarSavedComponent', () => {
           'car': combineReducers(fromCar.reducers),
           'insurance': combineReducers(fromInsurance.reducers),
           'profile': combineReducers(fromProfile.reducers)
-        })
+        }),
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+        }),
       ],
       declarations: [
         CarThankYouComponent
       ],
       providers: [
+        TranslateService,
         {
           provide: ContentConfig,
           useValue: ContentConfigMock

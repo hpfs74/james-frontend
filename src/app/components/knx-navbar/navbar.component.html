@@ -37,10 +37,10 @@
         <ng-content select="knx-nav-user"></ng-content>
       </li>
       <li class="nav-item hidden-sm-down" *ngIf="!(loggedIn$ | async)">
-        <a class="nav-link" (click)="register()">Registreren</a>
+        <a class="nav-link" (click)="register()">{{ 'navbar.menu.register' | translate }}</a>
       </li>
       <li class="nav-item hidden-sm-down" *ngIf="!(loggedIn$ | async)">
-        <a class="nav-link" (click)="logIn()">Inloggen</a>
+        <a class="nav-link" (click)="logIn()">{{ 'navbar.menu.login' | translate }}</a>
       </li>
     </ul>
   </div>

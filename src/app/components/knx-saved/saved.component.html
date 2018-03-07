@@ -8,6 +8,7 @@
 
   <div class="knx-saved">
     <div class="knx-card">
+      <p>{{ 'car.purchased.insurance.list.title' | translate }}</p>
       <ul class="knx-list--unstyled">
         <li *ngFor="let insurance of insurances?.car?.insurance">
           <div class="row" *ngIf="!insurance.manually_added">

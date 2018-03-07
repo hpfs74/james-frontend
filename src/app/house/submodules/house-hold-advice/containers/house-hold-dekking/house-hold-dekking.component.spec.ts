@@ -19,13 +19,7 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-
-let translations: any = {'TEST': 'This is a test'};
-class TranslateLoaderMock implements TranslateLoader {
-  getTranslation(lang: string): Observable<any> {
-    return of(translations);
-  }
-}
+import { TranslateLoaderMock } from 'test.common.spec';
 
 describe('Component: HouseHoldDekkingComponent', () => {
   let comp: HouseHoldDekkingComponent;
