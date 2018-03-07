@@ -3,7 +3,15 @@
   <knx-technical-issue></knx-technical-issue>
   <knx-navbar [animationState]="animationState" [menuItems]="topMenu" (onLogOut)="logOut()" (onHamburgerClick)="toggleMenuOpen()">
     <knx-opening-hours></knx-opening-hours>
-    <knx-nav-user *ngIf="loggedIn$ | async" [showAccount]="loggedIn$ | async" (onLogOut)="logOut()" [profile]="profile$ | async"></knx-nav-user>
+    <knx-navbar-menu
+      [mobile]="false"
+      [animationState]="animationState"
+      [loggedIn]="loggedIn$ | async"
+      [profile]="profile$ | async"
+      (onMenuItemClick)="handleMenuClick($event)"
+      (onAnimationDone)="setMenuAnimationStatus($event)"
+      class="hidden-md-up">
+    </knx-navbar-menu>
   </knx-navbar>
 </header>
 

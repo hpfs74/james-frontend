@@ -165,6 +165,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       case 'profile':
         this.goToProfile();
         break;
+      case 'openMenu':
+        this.toggleMenuOpen();
+        break;
       default:
         this.goToLogin();
         break;
