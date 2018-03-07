@@ -1,28 +1,32 @@
 <div class="row">
-  <div class="col-md-12 knx-center" *ngIf="!(hasPurchasedInsurances() | async)">
-    <h2>Jammer dat je ons gaat verlaten.
-    <br>Weet je het echt zeker?</h2>
+  <div class="ml-auto"></div>
+
+  <div class="col-md-10 knx-center" *ngIf="!(hasPurchasedInsurances() | async)">
+    <h3>Jammer dat je ons gaat verlaten.
+    <br>Weet je het echt zeker?</h3>
     <p>Als dat het geval is, deactiveren we je account. Alle opgeslagen data wordt verwijderd.</p>
   </div>
 
-  <div class="col-md-12 knx-center" *ngIf="hasPurchasedInsurances() | async">
+  <div class="col-md-8 mx-auto knx-center" *ngIf="hasPurchasedInsurances() | async">
     <p>Je kunt je account niet verwijderen. Je hebt namelijk een verzekering afgesloten via Knab Verzekeren. Deze is gekoppeld aan jouw account.</p>
     <p>Je kunt het beste even contact opnemen met onze Servicedesk.</p>
   </div>
+
+  <div class="ml-auto"></div>
 </div>
 
 <div class="row" *ngIf="error$ | async">
-  <div class="col-md-12">
+  <div class="col-md-8 mx-auto">
     <p class="knx-error">Door een technische fout kun je op dit moment je account niet verwijderen. Probeer het later nog een keer.</p>
   </div>
 </div>
 
 <div class="row">
-  <div [ngClass]="{ 'col-md-6': !( hasPurchasedInsurances() | async), 'col-md-12': hasPurchasedInsurances() | async }">
+  <div [ngClass]="{ 'col-md-4': !( hasPurchasedInsurances() | async), 'col-md-12': hasPurchasedInsurances() | async }">
     <button class="knx-button knx-button--secondary knx-button--ghost" (click)="cancel()">Ga Terug</button>
   </div>
 
-  <div class="col-md-6" *ngIf="!( hasPurchasedInsurances() | async)">
+  <div class="col-md-8" *ngIf="!( hasPurchasedInsurances() | async)">
     <button class="knx-button knx-button--primary" [class.knx-button--pending]="pending$ | async" (click)="deleteProfile()">ja, Verwijder Account</button>
   </div>
 </div>
