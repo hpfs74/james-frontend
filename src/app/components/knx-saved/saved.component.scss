@@ -77,8 +77,8 @@
 }
 
 .knx-saved__icon {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   margin-right: 10px;
   text-align: center;
   font-size: 30px;
@@ -105,6 +105,6 @@
   }
 
   &.knx-saved__pending {
-    border: 3px $knab-primary-green dashed;
+    border: 4px $knab-primary-green dashed;
   }
 }
