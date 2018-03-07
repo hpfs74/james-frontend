@@ -20,7 +20,7 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
         </div>
         <h2 *ngIf="!(savedInsurances$ | async)?.car?.insurance?.length">{{ 'car.purchased.title' | translate }}</h2>
       </div>
-      <knx-saved *ngIf="(savedInsurances$ | async)?.car?.insurance?.length" (onNewAdvice)="startNewAdvice()" title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
+      <knx-saved *ngIf="(savedInsurances$ | async)?.car?.insurance?.length" (onNewAdvice)="startNewAdvice()" title="Jouw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
       <div>
         <knx-empty-stage *ngIf="!(savedInsurances$ | async)?.car?.insurance?.length"></knx-empty-stage>
         <knx-app-promo-block></knx-app-promo-block>
