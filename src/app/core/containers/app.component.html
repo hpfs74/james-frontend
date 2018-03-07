@@ -9,109 +9,11 @@
 
 <knx-navbar-menu
   [animationState]="animationState"
+  [loggedIn]="loggedIn$ | async"
+  [profile]="profile$ | async"
+  (onMenuItemClick)="handleMenuClick($event)"
   (onAnimationDone)="setMenuAnimationStatus($event)"
   class="hidden-md-up">
-
-  <div class="knx-menu-mobile">
-    <div class="is-logged-in" *ngIf="loggedIn$ | async">
-      <div class='knx-menu-item container big'>
-        <div class="row">
-          <div class="col-2">
-            <div class="knx-dropdown-profile-img knx-dropdown-key"
-              [class.knx-profile-image]="(profile$ | async).profile_image"
-              [ngStyle]="{'background-image': (profile$ | async).profile_image ?
-                'url('+ (profile$ | async).profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
-            </div>
-          </div>
-          <div class="col-10">
-            <div class="knx-dropdown-value">
-              <div [ngClass]="{'knx-push-down': !(profile$ | async).name}">
-                {{ (profile$ | async).name }}
-              </div>
-              <p>
-                {{ (profile$ | async).emailaddress || '' }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="knx-menu-divider mobile"></div>
-      <div class="knx-menu-item container" (click)="goToPurchased()">
-        <div class="row">
-          <div class="col-2">
-            <div class="knx-dropdown-img__house knx-dropdown-key"></div>
-          </div>
-          <div class="col-10">
-            <div class="knx-dropdown-value">
-                {{ 'navbar.menu.insurances' | translate }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="knx-menu-item container" (click)="goToProfile()">
-        <div class="row">
-          <div class="col-2">
-            <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
-          </div>
-          <div class="col-10">
-            <div class="knx-dropdown-value">
-                {{ 'navbar.menu.profile' | translate }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="knx-menu-divider mobile"></div>
-      <div class="knx-menu-item container" (click)="logOut()">
-        <div class="row">
-          <div class="col-2">
-            <div class="knx-dropdown-img__signout knx-dropdown-key"></div>
-          </div>
-          <div class="col-10">
-            <div class="knx-dropdown-value">
-                {{ 'navbar.menu.logout' | translate }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="is-logged-out" *ngIf="!(loggedIn$ | async)">
-      <div class="knx-menu-item container" (click)="goToRegister()">
-        <div class="row">
-          <div class="col-2">
-            <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
-          </div>
-          <div class="col-10">
-            <div class="knx-dropdown-value">
-                {{ 'navbar.menu.register' | translate }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="knx-menu-item container" (click)="goToLogin()">
-        <div class="row">
-          <div class="col-2">
-            <div class="knx-dropdown-img__login knx-dropdown-key"></div>
-          </div>
-          <div class="col-10">
-            <div class="knx-dropdown-value">
-                {{ 'navbar.menu.login' | translate }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="knx-menu-divider mobile"></div>
-    <div class="container">
-      <div class="knx-opening-hours">
-        <span class="knx-opening-hours__icon knx-icon-phone"></span>
-        <span class="knx-opening-hours__message">
-          <a href="tel:0203031600" id="menu-phone" rel="noopener">020-3031600</a>
-        </span>
-      </div>
-      <knx-opening-hours></knx-opening-hours>
-    </div>
-  </div>
-
 </knx-navbar-menu>
 
 <div class="main-container" knxSidePanelState knxTouchCapable>

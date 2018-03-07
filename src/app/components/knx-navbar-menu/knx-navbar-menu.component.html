@@ -4,6 +4,104 @@
   (@slideUpDownHeightAnimation.start)="onAnimationDone.emit(false)">
 
   <div class="knx-dropdown-menu">
-    <ng-content></ng-content>
+    <div class="knx-menu-mobile">
+      <div class="is-logged-in" *ngIf="loggedIn">
+        <div class='knx-menu-item container big'>
+          <div class="row">
+            <div class="col-2">
+              <div class="knx-dropdown-profile-img knx-dropdown-key"
+                [class.knx-profile-image]="profile.profile_image"
+                [ngStyle]="{'background-image': profile.profile_image ?
+                  'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
+              </div>
+            </div>
+            <div class="col-10">
+              <div class="knx-dropdown-value">
+                <div [ngClass]="{'knx-push-down': !profile.name}">
+                  {{ profile.name }}
+                </div>
+                <p>
+                  {{ profile.emailaddress || '' }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="knx-menu-divider mobile"></div>
+        <div class="knx-menu-item container" (click)="onMenuItemClick.emit('dashboard')">
+          <div class="row">
+            <div class="col-2">
+              <div class="knx-dropdown-img__house knx-dropdown-key"></div>
+            </div>
+            <div class="col-10">
+              <div class="knx-dropdown-value">
+                  {{ 'navbar.menu.insurances' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="knx-menu-item container" (click)="onMenuItemClick.emit('profile')">
+          <div class="row">
+            <div class="col-2">
+              <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
+            </div>
+            <div class="col-10">
+              <div class="knx-dropdown-value">
+                  {{ 'navbar.menu.profile' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="knx-menu-divider mobile"></div>
+        <div class="knx-menu-item container" (click)="onMenuItemClick.emit('logout')">
+          <div class="row">
+            <div class="col-2">
+              <div class="knx-dropdown-img__signout knx-dropdown-key"></div>
+            </div>
+            <div class="col-10">
+              <div class="knx-dropdown-value">
+                  {{ 'navbar.menu.logout' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="is-logged-out" *ngIf="!loggedIn">
+        <div class="knx-menu-item container" (click)="onMenuItemClick.emit('register')">
+          <div class="row">
+            <div class="col-2">
+              <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
+            </div>
+            <div class="col-10">
+              <div class="knx-dropdown-value">
+                  {{ 'navbar.menu.register' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="knx-menu-item container" (click)="onMenuItemClick.emit('login')">
+          <div class="row">
+            <div class="col-2">
+              <div class="knx-dropdown-img__login knx-dropdown-key"></div>
+            </div>
+            <div class="col-10">
+              <div class="knx-dropdown-value">
+                  {{ 'navbar.menu.login' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="knx-menu-divider mobile"></div>
+      <div class="container">
+        <div class="knx-opening-hours">
+          <span class="knx-opening-hours__icon knx-icon-phone"></span>
+          <span class="knx-opening-hours__message">
+            <a href="tel:0203031600" id="menu-phone" rel="noopener">020-3031600</a>
+          </span>
+        </div>
+        <knx-opening-hours></knx-opening-hours>
+      </div>
+    </div>
   </div>
 </div>
