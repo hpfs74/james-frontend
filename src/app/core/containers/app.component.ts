@@ -4,24 +4,24 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from '@env/environment';
 
-import * as fromRoot from '../../reducers';
-import * as fromCore from '../reducers';
-import * as fromAuth from '../../auth/reducers';
-import * as fromProfile from '../../profile/reducers';
+import * as fromRoot from '@app/reducers';
+import * as fromCore from '@app/core/reducers';
+import * as fromAuth from '@app/auth/reducers';
+import * as fromProfile from '@app/profile/reducers';
 
-import * as profile from '../../profile/actions/profile';
-import * as auth from '../../auth/actions/auth';
-import * as assistant from '../actions/assistant';
-import * as router from '../../core/actions/router';
+import * as profile from '@app/profile/actions/profile';
+import * as auth from '@app/auth/actions/auth';
+import * as assistant from '@app/core/actions/assistant';
+import * as router from '@app/core/actions/router';
 
-import { Nav } from '../models/nav';
-import { Profile } from '../../profile/models';
-import { UserDialogService } from '../../components/knx-modal/user-dialog.service';
-import { LoginModalConfig, AuthRedirectModalAnonymousConfig, AuthRedirectModalConfig, DeleteModalConfig } from '../../core/models/modals';
+import { Nav } from '@app/core/models/nav';
+import { Profile } from '@app/profile/models';
+import { UserDialogService } from '@app/components/knx-modal/user-dialog.service';
+import { LoginModalConfig, AuthRedirectModalAnonymousConfig, AuthRedirectModalConfig, DeleteModalConfig } from '@app/core/models/modals';
 
-import { NavigationService } from '../services';
-import * as insurance from '../../insurance/actions/insurance';
-import { ContentConfig, Content } from '../../content.config';
+import { NavigationService } from '@app/core/services';
+import * as insurance from '@app/insurance/actions/insurance';
+import { ContentConfig, Content } from '@app/content.config';
 import { KNXFeatureToggleService } from '@knx/feature-toggle';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -146,5 +146,31 @@ export class AppComponent implements OnInit, AfterViewInit {
   goToPurchased() {
     this.toggleMenuOpen();
     this.store$.dispatch(new router.Go({path: ['/car/purchased']}));
+  }
+
+  handleMenuClick(event: string) {
+    switch (event) {
+      case 'login':
+        this.goToLogin();
+        break;
+      case 'register':
+        this.goToRegister();
+        break;
+      case 'dashboard':
+        this.goToPurchased();
+        break;
+      case 'logout':
+        this.logOut();
+        break;
+      case 'profile':
+        this.goToProfile();
+        break;
+      case 'openMenu':
+        this.toggleMenuOpen();
+        break;
+      default:
+        this.goToLogin();
+        break;
+    }
   }
 }
