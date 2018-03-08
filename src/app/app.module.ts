@@ -31,6 +31,8 @@ import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedService } from '@app/shared/services/shared.service';
+import { LoadScriptsService } from '@app/core/services/load-scripts.service';
+import { LoadScriptLoaderService } from '@app/core/services/load-scripts-loader.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, environment.james.langEndpoint);
@@ -92,6 +94,13 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: APP_INITIALIZER,
       useFactory: FeatureLoader,
       deps: [FeatureConfigService],
+      multi: true
+    },
+    LoadScriptsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: LoadScriptLoaderService,
+      deps: [LoadScriptsService],
       multi: true
     },
     /**
