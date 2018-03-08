@@ -34,7 +34,7 @@
                 <div class="col-8 col-md-10">
                   <p class="knx-saved__par">
                     <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.PENDING">{{ 'car.purchase.insurances.pending.title' | translate }} {{insurance.insurance_brand}}</small>
-                    <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.APPROVED">{{ 'car.purchase.insurances.bought.title' | translate }} {{insurance.next_premium_date}}</small>
+                    <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.APPROVED">{{ 'car.purchase.insurances.bought.title' | translate }}</small>
                     <br>
                     {{insurance.license}} &bull; {{insurance.make}} {{insurance.model}}
 

@@ -15,6 +15,7 @@ import * as router from '@app/core/actions/router';
 import * as auth from '@app/auth/actions/auth';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'knx-car-saved',
@@ -77,5 +78,19 @@ export class CarSavedComponent implements OnInit {
       timeOfDay = 'car.purchased.greeting.night';
     }
     return timeOfDay;
+  }
+
+  hasPurchasedInsurances(): Observable<boolean> {
+    return this.savedInsurances$
+        .filter(purchasedInsurances => purchasedInsurances !== null)
+        .take(1)
+        .map(purchasedInsurances => {
+          const insurances = purchasedInsurances.car.insurance;
+          if (insurances.length && insurances.filter(insurance =>
+            (!insurance.manually_added && insurance.request_status !== 'rejected')).length) {
+            return true;
+          }
+          return false;
+      });
   }
 }
