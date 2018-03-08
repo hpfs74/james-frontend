@@ -19,7 +19,7 @@
 
           <div class="row">
             <div class="container">
-              <form [formGroup]="form.formGroup" (ngSubmit)="loginAndShowErrors($event);" (keyup.enter)="login($event)" autocomplete="off">
+              <form name="carLoginForm" id="carLoginForm" [formGroup]="form.formGroup" (ngSubmit)="loginAndShowErrors($event);" (keyup.enter)="login($event)" autocomplete="off">
                 <div class="row">
                   <div class="col-md-12">
                     <knx-form-group
