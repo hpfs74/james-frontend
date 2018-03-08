@@ -11,7 +11,7 @@
       <p>{{ 'car.purchased.insurance.list.title' | translate }}</p>
       <ul class="knx-list--unstyled">
         <li *ngFor="let insurance of insurances?.car?.insurance">
-          <div class="row" *ngIf="!insurance.manually_added">
+          <div class="row knx-saved__push-top" *ngIf="!insurance.manually_added">
             <div class="col-12">
               <div class="row">
                 <div class="col-4 col-md-2">
@@ -32,7 +32,7 @@
                   </knx-ribbon>
                 </div>
                 <div class="col-8 col-md-10">
-                  <p>
+                  <p class="knx-saved__par">
                     <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.PENDING">{{ 'car.purchase.insurances.pending.title' | translate }} {{insurance.insurance_brand}}</small>
                     <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.APPROVED">{{ 'car.purchase.insurances.bought.title' | translate }} {{insurance.next_premium_date}}</small>
                     <br>
