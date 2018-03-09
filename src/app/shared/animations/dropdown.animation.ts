@@ -2,8 +2,8 @@ import { trigger, state, animate, transition, style, keyframes } from '@angular/
 
 export const dropdDowndAnimation = [
   trigger('dropdDowndAnimation', [
-    state('open', style({ display: 'block', overflow: '*' })),
     state('closed', style({ display: 'none', overflow: 'hidden', width: '0' })),
+    state('open', style({ display: 'block', overflow: '*' })),
     transition('closed => open', [
       animate(150, keyframes([
         style({ opacity: 0, offset: 0, height: '0', width: '0' }),

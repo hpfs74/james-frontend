@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { slideUpDownHeightAnimation } from '@app/shared/animations/slide-up-down.animation';
 import { Profile } from '@app/profile/models';
