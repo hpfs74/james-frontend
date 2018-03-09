@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { slideUpDownHeightAnimation } from '@app/shared/animations/slide-up-down.animation';
 import { Profile } from '@app/profile/models';
-import { bounceAnimation } from '@app/shared/animations/bounce.animation';
+import { dropdDowndAnimation } from '@app/shared/animations/dropdown.animation';
 
 @Component({
   selector: 'knx-navbar-menu',
@@ -10,7 +10,7 @@ import { bounceAnimation } from '@app/shared/animations/bounce.animation';
   templateUrl: './knx-navbar-menu.component.html',
   animations: [
     slideUpDownHeightAnimation,
-    bounceAnimation
+    dropdDowndAnimation
   ]
 })
 export class KNXNavbarMenuComponent {
