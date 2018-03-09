@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Price } from '@app/shared/models';
 
 interface PriceTableLabelOptions {
@@ -11,7 +11,7 @@ interface PriceTableLabelOptions {
   styleUrls: ['./price-table.component.scss'],
   templateUrl: './price-table.component.html'
 })
-export class PriceTableComponent implements OnDestroy {
+export class PriceTableComponent implements OnDestroy, OnInit {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
 
@@ -27,6 +27,13 @@ export class PriceTableComponent implements OnDestroy {
           i.highlight = true;
         }
       });
+    }
+  }
+
+  ngOnInit() {
+    // Select second coverage for mobile as default
+    if (window.innerWidth <= 767) {
+      this.selectItem(1, true);
     }
   }
 
