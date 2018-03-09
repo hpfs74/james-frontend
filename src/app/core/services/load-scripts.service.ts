@@ -46,13 +46,13 @@ export class LoadScriptsService {
   private setFormissimoTrackingScript() {
     let formisimoScrip = document.createElement('script');
     formisimoScrip.src = 'https://cdn-static.formisimo.com/tracking/js/tracking.js';
-    document.head.insertBefore(formisimoScrip, document.head.lastChild);
+    document.body.insertBefore(formisimoScrip, document.body.lastChild);
   }
 
   private setFormissimoConversionScript() {
     let formisimoScrip = document.createElement('script');
     formisimoScrip.src = 'https://cdn-static.formisimo.com/tracking/js/conversion.js';
-    document.head.insertBefore(formisimoScrip, document.head.lastChild);
+    document.body.insertBefore(formisimoScrip, document.body.lastChild);
   }
 
   private setAbScriptToHead() {
