@@ -116,3 +116,9 @@
     border: 4px $knab-primary-green dashed;
   }
 }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .knx-saved-list__item-padd {
+    padding-left: 40px;
+  }
+}
