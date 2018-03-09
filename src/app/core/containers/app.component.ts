@@ -57,13 +57,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     private userDialogService: UserDialogService,
     private contentConfig: ContentConfig,
     public featureToggleService: KNXFeatureToggleService,
-    translate: TranslateService
-  ) {
+    translate: TranslateService) {
       this.content = contentConfig.getContent();
       this.featureToggleConfig = this.featureToggleService.featureToggleConfig;
 
       translate.setDefaultLang('nl');
       translate.use('nl');
+      document.body.onclick = () => this.closeMenu();
+      document.body.onload = () => this.closeMenu();
     }
 
   ngAfterViewInit() {
@@ -117,6 +118,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   toggleMenuOpen() {
     this.animationState = this.animationState === 'closed' ? 'open' : 'closed';
+  }
+
+  closeMenu() {
+    if ( this.animationState === 'open' && this.animationDone ) {
+      this.animationState = 'closed';
+    }
   }
 
   setMenuAnimationStatus(event: boolean) {

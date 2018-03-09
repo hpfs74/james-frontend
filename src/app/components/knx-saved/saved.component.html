@@ -31,7 +31,7 @@
                     </div>
                   </knx-ribbon>
                 </div>
-                <div class="col-8 col-md-10">
+                <div class="col-8 col-md-10 knx-saved-list__item-padd">
                   <p class="knx-saved__par">
                     <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.PENDING">{{ 'car.purchase.insurances.pending.title' | translate }} {{insurance.insurance_brand}}</small>
                     <small *ngIf="getInsuranceStatus(insurance) === insuranceStatus.APPROVED">{{ 'car.purchase.insurances.bought.title' | translate }}</small>

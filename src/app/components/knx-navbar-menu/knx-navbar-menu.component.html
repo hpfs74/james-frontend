@@ -116,65 +116,53 @@
           'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
       </div>
     </div>
-    <div class="knx-nav-user__menu container" [@bounceAnimation]="animationState">
+    <div class="knx-nav-user__menu container"
+      [ngStyle]="{'display': animationState === 'open' ? 'block' : 'none'}"
+      [@dropdDowndAnimation]="animationState"
+      (@dropdDowndAnimation.done)="onAnimationDone.emit(true)"
+      (@dropdDowndAnimation.start)="onAnimationDone.emit(false)">
       <div class="row knx-nav-user__menu-item knx-menu-big big">
-        <div class="col-2">
-          <div class="knx-dropdown-profile-img knx-dropdown-key"
-          [class.knx-profile-image]="profile.profile_image"
-            [ngStyle]="{'background-image': profile.profile_image ?
-              'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
-          </div>
+        <div class="knx-dropdown-profile-img knx-dropdown-key"
+        [class.knx-profile-image]="profile.profile_image"
+          [ngStyle]="{'background-image': profile.profile_image ?
+            'url('+ profile.profile_image +')' : 'url(/assets/images/profile_icon.svg)'}">
         </div>
-        <div class="col-10">
-          <div class="knx-dropdown-value">
-            <div [ngClass]="{'knx-push-down': !profile.name}">
-                {{ profile.name }}
-            </div>
-            <p>
-                {{ profile.emailaddress}}
-            </p>
+        <div class="knx-dropdown-value">
+          <div [ngClass]="{'knx-push-down': !profile.name}">
+              {{ profile.name }}
           </div>
+          <p>
+              {{ profile.emailaddress}}
+          </p>
         </div>
-        <div class="knx-menu-divider mobile"></div>
       </div>
-
-      <div class="row knx-nav-user__menu-item knx-left" (click)="onMenuItemClick.emit('dashboard')">
-        <div class="col-2">
+      <div class="knx-menu-divider mobile"></div>
+      <div class="knx-nav-menu__middle">
+        <div class="row knx-nav-user__menu-item knx-left" (click)="onMenuItemClick.emit('dashboard')">
           <div class="knx-dropdown-img__house knx-dropdown-key"></div>
-        </div>
-        <div class="col-10">
           <div class="knx-dropdown-value">
               <span>
                 {{ 'navbar.menu.insurances' | translate }}
               </span>
           </div>
         </div>
-      </div>
 
-      <div class="row knx-nav-user__menu-item knx-left" (click)="onMenuItemClick.emit('profile')">
-        <div class="col-2">
+        <div class="row knx-nav-user__menu-item knx-left" (click)="onMenuItemClick.emit('profile')">
           <div class="knx-dropdown-img__profile knx-dropdown-key"></div>
-        </div>
-        <div class="col-10">
           <div class="knx-dropdown-value">
             <span>
               {{ 'navbar.menu.profile' | translate }}
             </span>
           </div>
         </div>
-      <div class="knx-menu-divider mobile"></div>
       </div>
-
-      <div class="row knx-nav-user__menu-item knx-left" (click)="onMenuItemClick.emit('logout')">
-        <div class="col-2">
-          <div class="knx-dropdown-img__signout knx-dropdown-key"></div>
-        </div>
-        <div class="col-10">
-          <div class="knx-dropdown-value">
-            <span>
-              {{ 'navbar.menu.logout' | translate }}
-            </span>
-          </div>
+      <div class="knx-menu-divider mobile"></div>
+      <div class="row knx-nav-user__menu-item knx-left knx-nav-menu__last" (click)="onMenuItemClick.emit('logout')">
+        <div class="knx-dropdown-img__signout knx-dropdown-key"></div>
+        <div class="knx-dropdown-value">
+          <span>
+            {{ 'navbar.menu.logout' | translate }}
+          </span>
         </div>
       </div>
 
