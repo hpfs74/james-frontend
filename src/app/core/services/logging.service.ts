@@ -28,7 +28,10 @@ export class LoggingService {
       this.http.post(
         environment.james.loggingEndpoint,
         payload
-      ).toPromise();
+      ).toPromise()
+        .catch(e => {
+          // TODO think of what needs to be done if endpoint fails
+        });
 
     }
   }
