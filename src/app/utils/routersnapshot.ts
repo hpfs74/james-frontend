@@ -38,28 +38,38 @@ export class CustomRouterStateSerializer
     });
 
     this.store$.select(fromInsurance.getSelectedInsurance)
-    .filter(insurance => !!insurance)
-    .subscribe((selectedInsurance) => {
-      product_id = selectedInsurance.id;
-      product_name = selectedInsurance.insurance_name;
-      external = selectedInsurance.supported ? 'no' : 'yes';
-    });
+      .filter(insurance => !!insurance)
+      .subscribe((selectedInsurance) => {
+        product_id = selectedInsurance.id;
+        product_name = selectedInsurance.insurance_name;
+        external = selectedInsurance.supported ? 'no' : 'yes';
+      });
 
-    this.store$.select(fromAuth.getLoggedIn).subscribe((isLoggedIn) => {
-      loggedIn = isLoggedIn;
-    });
-
-    const { url } = routerState;
+    const {url} = routerState;
     const queryParams = routerState.root.queryParams;
     let data = {
       isLoggedIn: loggedIn,
       product_id: product_id,
       product_name: product_name,
-      external: external
+      external: external,
+      step_nr: null
     };
+
+    let activated = routerState.root.firstChild;
+    if (activated != null) {
+      while (activated != null) {
+        if (activated.routeConfig && activated.routeConfig.data) {
+          if (activated.routeConfig.data.step_nr) {
+            data.step_nr = activated.routeConfig.data.step_nr;
+          }
+        }
+        activated = activated.firstChild;
+      }
+    }
     this.store$.dispatch(new wizardActions.ResetError());
-    return { url, queryParams, data: data };
+    return {url, queryParams, data: data};
   }
 
-  constructor(@Inject(Store) private store$: Store<fromRoot.State>) {}
+  constructor(@Inject(Store) private store$: Store<fromRoot.State>) {
+  }
 }

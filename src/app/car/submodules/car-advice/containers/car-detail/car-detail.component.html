@@ -1,9 +1,8 @@
-<form [formGroup]="form.formGroup" class="knx-fancy-form car-detail-form">
+<form name="carDetailForm" id="carDetailForm" [formGroup]="form.formGroup" class="knx-fancy-form car-detail-form">
   <div class="row">
     <div class="col-sm-12">
       <knx-card>
         <h3>{{ 'car.advice.steps.detail.title' | translate }}</h3>
-
         <div class="row">
           <div class="col-md-7 col-sm-12">
             <knx-form-group [options]="form.formConfig.licensePlate">

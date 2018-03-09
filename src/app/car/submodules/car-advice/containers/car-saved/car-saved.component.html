@@ -1,8 +1,10 @@
 <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container--status"
 knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
   <div class="container">
-    <div class="col-md-12">
-      <b>Welkom<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>
+    <div class="row">
+      <div class="col-md-12">
+        <b>{{ getTimeOfDay() | translate }}<span *ngIf="firstName || email"> {{firstName || email}}</span>!</b>
+      </div>
     </div>
   </div>
 </div>
@@ -10,17 +12,17 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
 <div class="container">
   <div class="row">
     <div class="col-sm-8" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
-      <div class="col">
+      <div>
         <div class="knx-saved__action">
           <button (click)="startNewAdvice()" class="knx-button knx-button--primary knx-button--3d">
-            Start nieuw advies
+            {{ 'car.purchased.button.start.new.advice' | translate }}
           </button>
         </div>
-        <h2 *ngIf="!(savedInsurances$ | async)?.car?.insurance?.length">jouw verzekeringen</h2>
+        <h2 *ngIf="!(hasPurchasedInsurances() | async)">{{ 'car.purchased.title' | translate }}</h2>
       </div>
-      <knx-saved *ngIf="(savedInsurances$ | async)?.car?.insurance?.length" (onNewAdvice)="startNewAdvice()" title="Uw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
-      <div class="container">
-        <knx-empty-stage *ngIf="!(savedInsurances$ | async)?.car?.insurance?.length"></knx-empty-stage>
+      <knx-saved *ngIf="hasPurchasedInsurances() | async" (onNewAdvice)="startNewAdvice()" title="Jouw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
+      <div>
+        <knx-empty-stage *ngIf="!(hasPurchasedInsurances() | async)"></knx-empty-stage>
         <knx-app-promo-block></knx-app-promo-block>
       </div>
     </div>

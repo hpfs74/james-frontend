@@ -30,6 +30,9 @@ import { FeatureLoader } from '@app/utils/feature-loader';
 import { FeatureConfigService } from '@app/utils/feature-config.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedService } from '@app/shared/services/shared.service';
+import { LoadScriptsService } from '@app/core/services/load-scripts.service';
+import { LoadScriptLoaderService } from '@app/core/services/load-scripts-loader.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, environment.james.langEndpoint);
@@ -93,6 +96,13 @@ export function HttpLoaderFactory(http: HttpClient) {
       deps: [FeatureConfigService],
       multi: true
     },
+    LoadScriptsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: LoadScriptLoaderService,
+      deps: [LoadScriptsService],
+      multi: true
+    },
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
      * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
@@ -101,7 +111,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide: RouterStateSerializer,
       useClass: CustomRouterStateSerializer
-    }
+    },
+    SharedService
   ],
   bootstrap: [AppComponent],
 })

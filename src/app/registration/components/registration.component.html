@@ -11,7 +11,9 @@
           <form [formGroup]="form.formGroup"
                 (ngSubmit)="registerAndShowErrors($event)"
                 (keyup.enter)="register($event)"
-                autocomplete="off">
+                autocomplete="off"
+                name="carRegistrationForm"
+                id="carRegistrationForm">
             <knx-form-group
               [formControlName]="form.formConfig.email.formControlName"
               [options]="form.formConfig.email">

@@ -9,6 +9,14 @@
     color: $knab-primary-blue;
   }
 
+  .knx-saved__par {
+    margin-bottom: 0;
+  }
+
+  .knx-saved__push-top {
+    margin-top: 25px;
+  }
+
   ul {
     margin-left: 0;
     padding-left: 0;
@@ -77,8 +85,8 @@
 }
 
 .knx-saved__icon {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   margin-right: 10px;
   text-align: center;
   font-size: 30px;
@@ -99,9 +107,12 @@
   &.knx-saved__icon--image {
     padding: 0 5px;
     line-height: 50px;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: 50%;
   }
 
   &.knx-saved__pending {
-    border: 3px $knab-primary-green dashed;
+    border: 4px $knab-primary-green dashed;
   }
 }

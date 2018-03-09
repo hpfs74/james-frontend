@@ -1,4 +1,4 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -37,6 +37,7 @@ describe('Component: Saved', () => {
         useValue: ContentConfigMock
       },
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
   };
   setUpTestBed(moduleDef);
 

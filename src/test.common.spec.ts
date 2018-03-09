@@ -1,5 +1,8 @@
 // angular imports
 import { TestBed, async, TestModuleMetadata  } from '@angular/core/testing';
+import { TranslateLoader } from '@ngx-translate/core';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 const resetTestingModule = TestBed.resetTestingModule,
   preventAngularFromResetting = () => TestBed.resetTestingModule = () => TestBed;
@@ -18,3 +21,10 @@ export const setUpTestBed = (moduleDef: TestModuleMetadata) => {
 
   afterAll(() => allowAngularToReset());
 };
+
+let translations: any = {'TEST': 'This is a test'};
+export class TranslateLoaderMock implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return of(translations);
+  }
+}

@@ -2,12 +2,13 @@ import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, Component } from '@angular/c
 import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { setUpTestBed } from './../../../test.common.spec';
+import { setUpTestBed, TranslateLoaderMock } from './../../../test.common.spec';
 import { ContentConfig } from '../../content.config';
 import { ContentConfigMock } from '../../content.mock.spec';
 import { ThankYouComponent } from './thank-you.component';
 import { AppPromoBlockComponent } from '../../components/knx-app-promo/app-promo.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 
 describe('Component: Thank You', () => {
   let comp: ThankYouComponent;
@@ -17,6 +18,9 @@ describe('Component: Thank You', () => {
 
   let moduleDef: TestModuleMetadata = {
     imports: [
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      }),
       NoopAnimationsModule
     ],
     declarations: [ThankYouComponent, AppPromoBlockComponent],
@@ -81,14 +85,6 @@ describe('Component: Thank You', () => {
       let parElements = de.queryAll(By.css('p'));
       expect(parElements).toBeDefined();
       expect(parElements.length).toBeGreaterThan(0);
-
-      const first = parElements[0].nativeElement;
-      expect(first.textContent).toContain('Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.');
-
-      const second = parElements[1].nativeElement;
-      const expectedEmailPar = 'Al je verzekeringen bij elkaar?';
-
-      expect(second.textContent).toEqual(expectedEmailPar);
     });
   });
 });

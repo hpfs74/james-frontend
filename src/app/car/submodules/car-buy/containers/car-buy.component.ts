@@ -16,6 +16,7 @@ import * as assistant from '@app/core/actions/assistant';
 import * as car from '@app/car/actions/car';
 import * as wizardActions from '@app/core/actions/wizard';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
+import { SharedService, TEMP_VARIABLE_KEYS } from '@app/shared/services/shared.service';
 
 @Component({
   providers: [ AsyncPipe ],
@@ -34,7 +35,8 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
   constructor(private store$: Store<fromCar.State>,
               private tagsService: TagsService,
               public asyncPipe: AsyncPipe,
-              public knxWizardService: KNXWizardRxService) {}
+              public knxWizardService: KNXWizardRxService,
+              public sharedService: SharedService) {}
 
   ngOnInit() {
     this.store$.dispatch(new assistant.UpdateConfigAction({
@@ -67,9 +69,19 @@ export class CarBuyComponent implements OnInit, QaIdentifier {
         label: 'Overzicht',
       }
     ];
+    this.checkFlow();
   }
 
   goToStep(stepIndex: number) {
     this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
+  }
+
+  /**
+   * if car flow is set for any reason,
+   * for now only used for reset flow,
+   * on this point set it back to false, so you can continue as usual
+  */
+  private checkFlow() {
+    this.sharedService.tempVariables.set(TEMP_VARIABLE_KEYS.carFlow, false);
   }
 }

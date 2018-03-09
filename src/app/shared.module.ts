@@ -112,6 +112,7 @@ import { RadioNavigatorComponent } from '@app/house/components/knx-radio-navigat
 import { KNXFinalAdviceComponent } from '@app/components/knx-final-advice/knx-final-advice.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { KnxEmptyStageComponent } from '@app/components/knx-empty-stage/knx-empty-stage.component';
+import { KnxRibbonComponent } from '@app/components/knx-ribbon/knx-ribbon.component';
 
 export const sharedComponents = [
   // Pipes
@@ -176,7 +177,8 @@ export const sharedComponents = [
   KnxCardExtensionComponent,
   RadioNavigatorComponent,
   KNXFinalAdviceComponent,
-  KnxEmptyStageComponent
+  KnxEmptyStageComponent,
+  KnxRibbonComponent
 ];
 
 export const sharedModules = [

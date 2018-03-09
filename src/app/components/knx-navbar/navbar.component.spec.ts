@@ -8,7 +8,7 @@ import { LocalStorageService } from '@app/core/services';
 
 import { ContentConfig, Content } from '@app/content.config';
 import { ContentConfigMock } from '@app/content.mock.spec';
-import { setUpTestBed } from './../../../test.common.spec';
+import { setUpTestBed, TranslateLoaderMock } from './../../../test.common.spec';
 import { Nav, NavItemType } from '@app/core/models';
 import { NavbarComponent } from './navbar.component';
 import { NavUserComponent } from '@app/components/knx-nav-user/nav-user.component';
@@ -20,6 +20,7 @@ import * as insuranceReducers from '@app/insurance/reducers';
 import * as insuranceReducer from '@app/insurance/reducers/insurance';
 import * as insuranceActions from '@app/insurance/actions/insurance';
 import * as fromProfile from '@app/profile/reducers';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 describe('Component: Navbar', () => {
   let comp: NavbarComponent;
@@ -40,7 +41,10 @@ describe('Component: Navbar', () => {
         'car': combineReducers(fromCar.reducers),
         'insurance': combineReducers(insuranceReducers.reducers),
         'profile': combineReducers(fromProfile.reducers)
-      })
+      }),
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      }),
     ],
     declarations: [NavbarComponent],
     providers: [

@@ -49,6 +49,7 @@ import { CarService } from '@car/services/car.service';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { AuthHttp } from '@auth/services';
+import { SharedService } from '@app/shared/services/shared.service';
 
 let translations: any = {'TEST': 'This is a test'};
 
@@ -94,6 +95,7 @@ describe('Component: CarAdviceComponent', () => {
         MockBackend,
         BaseRequestOptions,
         KNXLocale,
+        SharedService,
         {
           provide: TagsService,
           useValue: TagsServiceMock
