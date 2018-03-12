@@ -38,16 +38,18 @@ export class PriceTableComponent implements OnDestroy, OnInit {
   }
 
   selectItem(index: number, isMobile: boolean) {
-    let selected = this.items[index].selected;
+    if (this.items && this.items[index]) {
+      let selected = this.items[index].selected;
 
-    if (selected && !isMobile) {
-      // second click
-      this.onSubmit.emit();
-    } else {
-      this.items.map((item, i) => {
-        item.selected = index === i ? true : false;
-      });
-      this.onSelected.emit(this.items[index]);
+      if (selected && !isMobile) {
+        // second click
+        this.onSubmit.emit();
+      } else {
+        this.items.map((item, i) => {
+          item.selected = index === i ? true : false;
+        });
+        this.onSelected.emit(this.items[index]);
+      }
     }
   }
 
