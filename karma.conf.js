@@ -31,6 +31,15 @@ module.exports = function(config) {
               // Without a remote debugging port, Google Chrome exits immediately.
               '--remote-debugging-port=9222',
             ],
+          },
+          PhantomJS_custom: {
+            base: 'PhantomJS',
+            options: {
+              viewportSize: {
+                width: 1228,
+                height: 1000
+              }
+            }
           }
         },
         client: {
@@ -101,7 +110,7 @@ module.exports = function(config) {
         browserNoActivityTimeout: 60000,
         transports: process.env.CI ? ['polling'] : ['polling', 'websocket'],
         autoWatch: process.env.CI ? false : true,
-        browsers: process.env.CI ? ['PhantomJS'] : ['ChromeHeadless'],
+        browsers: process.env.CI ? ['PhantomJS_custom'] : ['ChromeHeadless'],
         singleRun: process.env.CI ? false : true
     };
     // CI
