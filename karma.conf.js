@@ -110,7 +110,7 @@ module.exports = function(config) {
         browserNoActivityTimeout: 60000,
         transports: process.env.CI ? ['polling'] : ['polling', 'websocket'],
         autoWatch: process.env.CI ? false : true,
-        browsers: process.env.CI ? ['PhantomJS_custom'] : ['ChromeHeadless'],
+        browsers: process.env.CI ? ['PhantomJS', 'PhantomJS_custom'] : ['ChromeHeadless'],
         singleRun: process.env.CI ? false : true
     };
     // CI
