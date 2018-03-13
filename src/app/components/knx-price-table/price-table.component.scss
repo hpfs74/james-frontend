@@ -6,6 +6,14 @@ knx-price-table {
 
 .knx-price-table__pills {
   display: none;
+
+  .knx-button--toggle-pills {
+    font-family: $font-family-base;
+    flex-grow: 9999;
+    font-size: 16px;
+    text-transform: none;
+    line-height: 1.8em;
+  }
 }
 
 knx-price-item.knx-price-item--highlight + knx-price-item {
@@ -56,11 +64,6 @@ div.knx-button {
     border-radius: 4px;
     font-size: 14px;
   }
-}
-
-.knx-button--toggle-pills {
-  flex-grow: 9999;
-  font-size: 14px;
 }
 
 @media (max-width: 767px) {

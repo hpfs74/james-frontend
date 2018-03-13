@@ -142,6 +142,9 @@ describe('Component: CarDetailComponent', () => {
     it('should throw an error if nothing is selected', () => {
       const wizardAction = new wizardActions.Error({message: comp.form.validationSummaryError});
       comp.goToNextStep();
+      let window = {
+        innerWidth: 1000
+      };
       expect(store.dispatch).toHaveBeenCalledWith(wizardAction);
     });
     it('should dispatch analyitcs event when licenceplate is entered', () => {

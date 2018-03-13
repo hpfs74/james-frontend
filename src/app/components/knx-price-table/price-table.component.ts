@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Price } from '@app/shared/models';
 
 interface PriceTableLabelOptions {
@@ -11,7 +11,7 @@ interface PriceTableLabelOptions {
   styleUrls: ['./price-table.component.scss'],
   templateUrl: './price-table.component.html'
 })
-export class PriceTableComponent implements OnDestroy {
+export class PriceTableComponent implements OnDestroy, OnInit {
   @Output() onSelected: EventEmitter<Price> = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
 
@@ -30,17 +30,26 @@ export class PriceTableComponent implements OnDestroy {
     }
   }
 
-  selectItem(index: number, isMobile: boolean) {
-    let selected = this.items[index].selected;
+  ngOnInit() {
+    // Select second coverage for mobile as default
+    if (window.innerWidth <= 767) {
+      this.selectItem(1, true);
+    }
+  }
 
-    if (selected && !isMobile) {
-      // second click
-      this.onSubmit.emit();
-    } else {
-      this.items.map((item, i) => {
-        item.selected = index === i ? true : false;
-      });
-      this.onSelected.emit(this.items[index]);
+  selectItem(index: number, isMobile: boolean) {
+    if (this.items && this.items[index]) {
+      let selected = this.items[index].selected;
+
+      if (selected && !isMobile) {
+        // second click
+        this.onSubmit.emit();
+      } else {
+        this.items.map((item, i) => {
+          item.selected = index === i ? true : false;
+        });
+        this.onSelected.emit(this.items[index]);
+      }
     }
   }
 

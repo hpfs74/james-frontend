@@ -10,6 +10,10 @@
       padding-top: 2px;
       padding-bottom: 2px;
     }
+
+    + .knx-button {
+      margin-bottom: -10px;
+    }
   }
 
   .knx-button {
@@ -49,7 +53,7 @@
     }
 
     .knx-list--checks {
-      padding-top: 10px;
+      padding-top: 3px;
     }
   }
 }
