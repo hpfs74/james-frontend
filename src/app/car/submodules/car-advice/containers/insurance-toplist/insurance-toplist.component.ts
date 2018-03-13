@@ -16,7 +16,7 @@ import * as wizardActions from '@app/core/actions/wizard';
 
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 
 interface OrderItem {
   id: string;

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AssistantConfig } from '@app/core/models/assistant';
 import { ChatMessage } from '@app/components/knx-chat-stream/chat-message';
 import { Profile } from '@app/profile/models/profile';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 
 import * as fromProfile from '@app/profile/reducers';
 import * as fromCore from '@app/core/reducers';

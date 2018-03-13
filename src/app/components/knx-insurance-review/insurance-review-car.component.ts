@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { CarInsurance } from '../../car/models/car-insurance';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 
 @Component({
   selector: 'knx-insurance-review-car',

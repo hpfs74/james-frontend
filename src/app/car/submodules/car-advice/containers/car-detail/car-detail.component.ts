@@ -33,7 +33,7 @@ import { Price } from '@app/shared/models';
 import { Address } from '@app/address/models';
 import { createCarCoverages } from '@app/car/utils/coverage.utils';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { State as CarState } from '@app/car/reducers/car';

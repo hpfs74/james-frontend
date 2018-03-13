@@ -10,7 +10,7 @@ import { InsuranceReviewCarComponent } from './insurance-review-car.component';
 import { InsuranceReviewModule } from './insurance-review.module';
 import { TagsService } from '@app/core/services/tags.service';
 import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { CookieService } from '@app/core/services';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 

@@ -29,6 +29,10 @@ export class FeatureConfigService {
     return; // TODO implement correct error handling
   }
 
+  /**
+   * on app load this method will merge featureToggle object from environment variable
+   * with the one set in VWO ab testing suite
+   */
   private mergeWithWindowConfig() {
     this.featureConfig = Object.assign({}, this.featureConfig, window['featureConfig']);
   }
