@@ -19,6 +19,8 @@ import { licensePlateMask } from './licenseplate.mask';
       <input class="knx-input__input"
         (blur)="onTouchedCallback()"
         [(ngModel)]="value"
+        [name]="formControlName"
+        [id]="formControlName"
         [placeholder]="options.placeholder"
         [class.knx-input__input--disabled]="options.disabled"
         [disabled]="options.disabled"
@@ -29,7 +31,7 @@ import { licensePlateMask } from './licenseplate.mask';
 })
 export class LicensePlateComponent extends KNXFormComponent implements OnInit {
   @Input() options: KNXInputOptions;
-
+  @Input() formControlName: string;
   textMask: any = licensePlateMask;
 
   constructor(public elementRef: ElementRef) {
