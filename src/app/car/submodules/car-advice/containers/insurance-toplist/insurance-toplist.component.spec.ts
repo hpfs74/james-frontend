@@ -5,7 +5,7 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { setUpTestBed } from './../../../../../../test.common.spec';
 import { InsuranceTopListComponent } from './insurance-toplist.component';
 import { StoreModule, combineReducers } from '@ngrx/store';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { HttpModule } from '@angular/http';
 import { CookieService } from '@app/core/services';
 

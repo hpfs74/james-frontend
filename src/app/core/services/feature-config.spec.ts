@@ -30,12 +30,4 @@ describe('FeatureConfig', () => {
     featureToggleService = TestBed.get(KNXFeatureToggleService);
   });
 
-  xit('should load the content', async(inject([FeatureConfigService], (featureConfig: FeatureConfigService) => {
-    spyOn(featureConfig, 'setCookie');
-    featureConfig.load().then((hasError) => {
-      if (!hasError) {
-        expect(featureConfig.setCookie).toHaveBeenCalled();
-      }
-    });
-  })));
 });

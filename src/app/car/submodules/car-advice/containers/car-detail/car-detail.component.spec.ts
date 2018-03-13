@@ -24,7 +24,7 @@ import { KNXFormsModule } from '@knx/forms';
 import { Observable } from 'rxjs/Observable';
 // app imports
 import { CarDetailComponent } from '@app/car/submodules/car-advice/containers/car-detail/car-detail.component';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { TagsService, CookieService } from '@app/core/services';
 import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
 import { ContentConfig } from '@app/content.config';

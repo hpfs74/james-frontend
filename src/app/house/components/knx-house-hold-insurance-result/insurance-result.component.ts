@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { fadeInAnimation } from '@app/shared/animations/fade-in.animation';
-import { FeatureConfigService } from '@app/utils/feature-config.service';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { CalculatedPremium } from '@app/house/models/house-hold-premium';
 
 @Component({
