@@ -102,8 +102,8 @@ export class HouseHoldService {
     // TODO: This has to be moved in the middle layer, it should not be here, but in the meanwhile it is needed
     res.CompanyLogoUrl = res.CompanyLogoUrl
       .replace('https://webmodulet.risk-verzekeringen.nl/Webmodule/IMG/Maatschappijen/',
-        'https://knab-dev.apigee.net/v0/content/companylogo/')
+        'https://knab-dev.apigee.net/insurance/risk/v1/content/images/Maatschappijen/')
       .replace('https://webmodulea.risk-verzekeringen.nl/Webmodule/IMG/Maatschappijen/',
-        'https://knab-acc.apigee.net/v0/content/companylogo/');
+        'https://knab-acc.apigee.net/insurance/risk/v1/content/images/Maatschappijen/');
   }
 }
