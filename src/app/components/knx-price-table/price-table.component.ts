@@ -32,7 +32,7 @@ export class PriceTableComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     // Select second coverage for mobile as default
-    if (window.innerWidth <= 767) {
+    if (window.innerWidth < 768) {
       this.selectItem(1, true);
     }
   }

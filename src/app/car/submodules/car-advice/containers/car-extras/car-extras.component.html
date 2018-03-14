@@ -1,5 +1,5 @@
 <form name="carExtrasForm" id="carExtrasForm">
-  <div class="knx-car-extras hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
+  <div class="knx-car-extras" [formGroup]="form.formGroup" *ngIf="show">
     <knx-collapse-message [ngClass]="optionModifierClass" title="{{ 'general.dekking' | translate }}" [isOpen]="true">
 
       <knx-form-group

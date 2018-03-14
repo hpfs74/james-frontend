@@ -1,4 +1,6 @@
-<knx-card-extension [selectedInsurance]="selectedInsurance$ | async"></knx-card-extension>
+<knx-card-extension
+  knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="cardExtension"
+  [selectedInsurance]="selectedInsurance$ | async"></knx-card-extension>
 <form [formGroup]="form.formGroup" class="knx-fancy-form knx-car-contact-form" role="form">
   <div class="row">
     <div class="col-sm-12">

@@ -35,6 +35,7 @@
       title="Documenten" [documents]="selectedInsurance?.documents"
       [showStep]="false"></knx-insurance-review-documents>
     <knx-final-advice
+      knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="adviceMobile"
       [mobile]="true"
       [options]="knxFinalAdviceOptions">
     </knx-final-advice>

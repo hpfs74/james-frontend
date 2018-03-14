@@ -16,3 +16,8 @@ h4.knx-collapse-message__title {
   float: right;
   position: relative;
 }
+
+/deep/ .knx-checkbox__label {
+  word-wrap: break-word;
+  word-break: break-word;
+}

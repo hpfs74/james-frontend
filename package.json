@@ -75,7 +75,7 @@
     "@knx/price-table": "0.0.10",
     "@knx/radio": "1.0.151",
     "@knx/select": "1.0.151",
-    "@knx/step-navigation": "0.0.180",
+    "@knx/step-navigation": "0.0.258",
     "@knx/textarea": "1.0.151",
     "@knx/tooltip": "1.0.173",
     "@knx/utils": "1.0.27",
