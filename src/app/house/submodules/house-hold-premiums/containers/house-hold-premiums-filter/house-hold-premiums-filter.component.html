@@ -1,78 +1,79 @@
-<div class="knx-house-hold-premiums-filter hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
+<form name="houseHoldPremiumsFilterForm" id="houseHoldPremiumsFilterForm">
+  <div class="knx-house-hold-premiums-filter hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
 
-  <h3>Verfijn uw verzekering</h3>
-  <knx-collapse-message [ngClass]="optionModifierClass" title="Main coverage" [isOpen]="true">
-    <div class="knx-form-group--info knx-form-group--info-checkbox">
-      <div class="knx-form-group__wrap">
+    <h3>Verfijn uw verzekering</h3>
+    <knx-collapse-message [ngClass]="optionModifierClass" title="Main coverage" [isOpen]="true">
+      <div class="knx-form-group--info knx-form-group--info-checkbox">
+        <div class="knx-form-group__wrap">
 
+          <label class="knx-radio">
+            <input formControlName="mainCoverage"
+                   type="radio"
+                   [value]="coverages[0]?.id"/>
 
-        <label class="knx-radio">
-          <input formControlName="mainCoverage"
-                 type="radio"
-                 [value]="coverages[0]?.id"/>
+            <span class="knx-radio__control"></span>
+            <span class="knx-radio__label">{{coverages[0]?.header}}</span>
+          </label>
 
-          <span class="knx-radio__control"></span>
-          <span class="knx-radio__label">{{coverages[0]?.header}}</span>
-        </label>
+        </div>
 
-      </div>
-
-      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+        <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
          {{coverages[0]?.description}}
         </knx-tooltip>
       </span>
-    </div>
-    {{coverages[0].description}}
-
-    <div class="knx-form-group--info knx-form-group--info-checkbox">
-      <div class="knx-form-group__wrap">
-
-        <label class="knx-radio">
-          <input formControlName="mainCoverage"
-                 type="radio"
-                 [value]="coverages[1]?.id"/>
-          <span class="knx-radio__control"></span>
-          <span class="knx-radio__label">{{coverages[1]?.header}}</span>
-        </label>
       </div>
+      {{coverages[0].description}}
 
-      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+      <div class="knx-form-group--info knx-form-group--info-checkbox">
+        <div class="knx-form-group__wrap">
+
+          <label class="knx-radio">
+            <input formControlName="mainCoverage"
+                   type="radio"
+                   [value]="coverages[1]?.id"/>
+            <span class="knx-radio__control"></span>
+            <span class="knx-radio__label">{{coverages[1]?.header}}</span>
+          </label>
+        </div>
+
+        <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
          {{coverages[1]?.description}}
          <span *ngFor="let more of coverages[1]?.features">{{more}}</span>
         </knx-tooltip>
     </span>
-      {{coverages[1]?.description}}
-    </div>
+        {{coverages[1]?.description}}
+      </div>
 
-  </knx-collapse-message>
+    </knx-collapse-message>
 
-  <knx-collapse-message [ngClass]="optionModifierClass" title="Additional coverage" [isOpen]="true">
-    <!--<div class="knx-form-group&#45;&#45;info knx-form-group&#45;&#45;info-checkbox">-->
+    <knx-collapse-message [ngClass]="optionModifierClass" title="Additional coverage" [isOpen]="true">
+      <!--<div class="knx-form-group&#45;&#45;info knx-form-group&#45;&#45;info-checkbox">-->
       <!--<knx-checkbox #outsideCoverage-->
-                    <!--knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="outsideCoverage"-->
-                    <!--[formControlName]="form.formConfig.outsideCoverage.formControlName"-->
-                    <!--[options]="form.formConfig.outsideCoverage.inputOptions"></knx-checkbox>-->
+      <!--knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="outsideCoverage"-->
+      <!--[formControlName]="form.formConfig.outsideCoverage.formControlName"-->
+      <!--[options]="form.formConfig.outsideCoverage.inputOptions"></knx-checkbox>-->
 
       <!--<span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">-->
-          <!--<knx-tooltip [options]="{ position: 'left' }">-->
-           <!--<span innerHTML=" 'household.premium.filter.additionalCover.tooltip' | translate "></span>-->
-          <!--</knx-tooltip>-->
-        <!--</span>-->
-    <!--</div>-->
+      <!--<knx-tooltip [options]="{ position: 'left' }">-->
+      <!--<span innerHTML=" 'household.premium.filter.additionalCover.tooltip' | translate "></span>-->
+      <!--</knx-tooltip>-->
+      <!--</span>-->
+      <!--</div>-->
 
-    <div class="knx-form-group--info knx-form-group--info-checkbox">
-      <knx-checkbox #glassCoverage
-                    knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="glassCoverage"
-                    [formControlName]="form.formConfig.glassCoverage.formControlName"
-                    [options]="form.formConfig.glassCoverage.inputOptions"></knx-checkbox>
+      <div class="knx-form-group--info knx-form-group--info-checkbox">
+        <knx-checkbox #glassCoverage
+                      knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="glassCoverage"
+                      [formControlName]="form.formConfig.glassCoverage.formControlName"
+                      [options]="form.formConfig.glassCoverage.inputOptions"></knx-checkbox>
 
-      <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
+        <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
         <knx-tooltip [options]="{ position: 'left' }">
          {{ 'household.premium.filter.glassCover.tooltip' | translate }}
         </knx-tooltip>
       </span>
-    </div>
-  </knx-collapse-message>
-</div>
+      </div>
+    </knx-collapse-message>
+  </div>
+</form>

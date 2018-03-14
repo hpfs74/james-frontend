@@ -177,15 +177,15 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
     this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
-  toggleSideNavState(event) {
-    event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
-  }
-
   onShowResults() {
     this.store$.dispatch(new assistant.AddCannedMessage({
       key: 'household.welcome',
       clear: true
     }));
+  }
+
+  toggleSideNavState(event) {
+    event ? this.store$.dispatch(new layout.OpenLeftSideNav) : this.store$.dispatch(new layout.CloseLeftSideNav);
   }
 
   /**

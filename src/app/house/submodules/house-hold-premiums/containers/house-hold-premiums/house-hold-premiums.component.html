@@ -17,21 +17,43 @@
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
                        [messages]="chatMessages$ | async">
+
+          <knx-house-hold-premiums-filter
+            id="houseHoldFilterNoMobile"
+            [form]="houseHoldFilterForm"
+            [advice]="advice$ | async"
+            [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
+          </knx-house-hold-premiums-filter>
+
+          <!-- TODO: temp. disable the component waiting for risk api to get more detail -->
+          <knx-house-hold-premiums-detail-nav
+            [pills]="pills"
+            [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail && false"
+            (onBuy)="goToBuy()">
+          </knx-house-hold-premiums-detail-nav>
+
+        <ng-container *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list" [formGroup]="houseHoldFilterForm.formGroup">
+          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true" (onChangeVisibile)="toggleSideNavState($event)">
+            <div class="container-fluid">
+              <div class="knx-side-panel-content">
+                <knx-house-hold-premiums-filter
+                  [form]="houseHoldFilterForm"
+                  [advice]="advice$ | async"
+                  [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
+                </knx-house-hold-premiums-filter>
+
+                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
+                        (click)="knxSidePanel.close()">{{ 'car.advice.moreButton.label' | translate }}</button>
+              </div>
+            </div>
+          </knx-side-panel>
+
+          <button class="knx-icon-filter knx-side-panel__action hidden-md hidden-lg hidden-md-up knx-button knx-button--secondary knx-button--3d"
+                  (click)="knxSidePanel.open()">{{ 'car.advice.personalizeButton.label' | translate }}</button>
+
+        </ng-container>
+
       </knx-chat-stream>
-
-      <knx-house-hold-premiums-filter
-        [form]="houseHoldFilterForm"
-        [advice]="advice$ | async"
-        [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
-      </knx-house-hold-premiums-filter>
-
-      <!-- TODO: temp. disable the component waiting for risk api to get more detail -->
-      <knx-house-hold-premiums-detail-nav
-        [pills]="pills"
-        [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail && false"
-        (onBuy)="goToBuy()">
-
-      </knx-house-hold-premiums-detail-nav>
 
       <div class="knx-house-hold-advice-motivation"
            *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.buy || knxWizardService.currentStepIndex === houseHoldPremiumsSteps.thankyou">
