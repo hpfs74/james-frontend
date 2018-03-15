@@ -19,20 +19,7 @@
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
                        [messages]="chatMessages$ | async">
-
-        <ng-container *ngIf="knxWizardService.currentStepIndex === 1">
-          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true"
-                          (onChangeVisibile)="toggleSideNavState($event)">
-            <div class="container-fluid">
-              <div class="knx-side-panel-content">
-                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
-                        (click)="knxSidePanel.close()">{{ 'household.advice.moreButton.label' | translate }}
-                </button>
-              </div>
-            </div>
-          </knx-side-panel>
-
-        </ng-container>
+        
       </knx-chat-stream>
 
       <div class="knx-house-hold-advice-motivation">
