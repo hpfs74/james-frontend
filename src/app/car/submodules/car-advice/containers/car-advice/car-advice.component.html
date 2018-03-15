@@ -51,6 +51,7 @@
                   (click)="knxSidePanel.open()">{{ 'car.advice.personalizeButton.label' | translate }}</button>
         </ng-container>
         <knx-final-advice
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="adviceWeb"
           *ngIf="knxWizardService.currentStepIndex === knxWizardService.currentStepRoutes.length - 1"
           [options]="knxFinalAdviceOptions">
         </knx-final-advice>

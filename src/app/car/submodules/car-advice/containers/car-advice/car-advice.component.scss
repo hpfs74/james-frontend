@@ -2,6 +2,7 @@
 
 .knx-side-panel__action {
   font-size: $font-size-base - 1;
+  height: auto;
 }
 
 @media screen and (max-width: 576px) {
@@ -59,5 +60,11 @@
       border-top: 10px solid #00a4a7;
       border-bottom: 0;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .knx-side-panel__action {
+    display: none;
   }
 }

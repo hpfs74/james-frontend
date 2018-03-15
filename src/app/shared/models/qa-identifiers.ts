@@ -1,5 +1,8 @@
 export class QaIdentifiers {
   public static readonly carAdviceRoot          = 'caradvice';
+  public static readonly carAdviceMobile        = 'adviceMobile';
+  public static readonly carAdviceWeb           = 'adviceWeb';
+  public static readonly carCardExtension       = 'cardExtension';
   public static readonly carDetails             = 'details';
   public static readonly carInsurances          = 'insurances';
   public static readonly carSummary             = 'summary';
