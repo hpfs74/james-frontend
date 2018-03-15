@@ -13,7 +13,7 @@ export class LoadScriptsService {
 
   initScripts() {
     this.setAbScriptToHead();
-    this.setFormisimoScripts();
+    // this.setFormisimoScripts();
     this.setGoogleScripts();
     this.setUsabillaScripts();
   }
@@ -110,7 +110,6 @@ export class LoadScriptsService {
 
   private generateCSP(): string {
     const contentSecurityPolicy = {
-      "report-uri": "https://report-uri.knab.nl/r/t/csp/enforce",
       "default-src": [
         "'unsafe-inline'",
         "'self'",
