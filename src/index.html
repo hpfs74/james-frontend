@@ -111,6 +111,20 @@
     }
 
   </style>
+  <script>
+    // temp service worker removal.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        registrations.forEach((registration) => {
+          registration.unregister().then(function (register) {
+            // if boolean = true, unregister is successful
+          }).catch(function (error) {
+            // registration failed
+          });
+        });
+      });
+    }
+  </script>
 </head>
 
 <body class="knx-base">
