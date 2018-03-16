@@ -35,6 +35,8 @@ export class HouseHoldPremiumsFilterComponent {
    */
   @Input() optionModifierClass: string;
 
+  @Input() glassDisabled = false;
+
   /**
    * the the value of the form
    * @param value

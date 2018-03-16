@@ -20,6 +20,7 @@
 
           <knx-house-hold-premiums-filter
             id="houseHoldFilterNoMobile"
+            [glassDisabled]="(advice$ | async).OwnedBuilding === 'J'"
             [form]="houseHoldFilterForm"
             [advice]="advice$ | async"
             [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
