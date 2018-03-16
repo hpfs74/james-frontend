@@ -17,8 +17,7 @@ export class HouseHoldPremiumsFilterForm extends BaseForm {
    * @param {Array<UIPair>} coverages - the list of avilable coverage
    */
   constructor(private fb: FormBuilder,
-              coverages?: Array<UIPair>,
-              glassDisabled = false) {
+              coverages?: Array<UIPair>) {
     super();
 
     this.formGroup = this.fb.group({
@@ -51,8 +50,7 @@ export class HouseHoldPremiumsFilterForm extends BaseForm {
         formControl: this.formGroup.get('glassCoverage'),
         inputOptions: {
           label: 'Glass coverage',
-          value: 'J',
-          disabled: glassDisabled
+          value: 'J'
         } as UIPair
       }
     };
