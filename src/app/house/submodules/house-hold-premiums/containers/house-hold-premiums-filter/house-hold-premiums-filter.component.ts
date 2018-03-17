@@ -35,6 +35,10 @@ export class HouseHoldPremiumsFilterComponent {
    */
   @Input() optionModifierClass: string;
 
+  @Input() set glassDisabled(value: boolean) {
+    this.form.formConfig.glassCoverage.inputOptions.disabled = value;
+  }
+
   /**
    * the the value of the form
    * @param value
