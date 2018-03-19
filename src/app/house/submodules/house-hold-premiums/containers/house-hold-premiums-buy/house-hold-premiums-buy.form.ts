@@ -22,7 +22,7 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
    * @param {FormBuilder} fb - the form object to bind
    * @param {Array<UIPair>} coverages - the list of avilable coverage
    */
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public copies: any) {
     super();
 
     this.formGroup = this.fb.group({
@@ -43,10 +43,10 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControlName: 'name',
         formControl: this.formGroup.get('name'),
         validationErrors: this.validationErrors,
-        label: 'Your name',
+        label: this.copies['household.premium.buy.your_name.label'],
         type: 'text',
         inputOptions: {
-          placeholder: 'Sarah',
+          placeholder: this.copies['household.premium.buy.your_name.placeholder'],
           attributes: {
             'aria-label': 'Your name'
           }
@@ -56,11 +56,11 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControlName: 'email',
         formControl: this.formGroup.get('email'),
         validationErrors: this.validationErrors,
-        label: 'Je e-mailadres',
+        label: this.copies['household.premium.buy.your_email.label'],
 
         inputOptions: {
           type: 'email',
-          placeholder: 'E-mailadres',
+          placeholder: this.copies['household.premium.buy.your_email.placeholder'],
           prefix: 'knx-icon-envelope',
           attributes: {
             'aria-label': 'Vul je e-mailadres in'
@@ -70,12 +70,12 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
       phone: {
         formControlName: 'phone',
         formControl: this.formGroup.get('phone'),
-        label: 'Phone number',
+        label: this.copies['household.premium.buy.your_phone.label'],
         type: 'text',
         validationErrors: this.validationErrors,
         inputOptions: {
           prefix: 'knx-icon-phone',
-          placeholder: '0612345678',
+          placeholder: this.copies['household.premium.buy.your_phone.placeholder'],
           attributes: {
             'aria-label': 'Your phone number'
           }
@@ -86,7 +86,7 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControl: this.formGroup.get('receiveUpdate'),
         type: 'checkbox',
         inputOptions: {
-          label: 'I want to receive updates regarding Knab services',
+          label: this.copies['household.premium.buy.checkbox.label'],
           value: 'true'
 
         } as UIPair
