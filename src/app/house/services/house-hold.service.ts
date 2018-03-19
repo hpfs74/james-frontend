@@ -83,7 +83,7 @@ export class HouseHoldService {
         res.CalculatedPremiums.forEach(el => this.filterImageUrl(el));
         res.CalculatedPremiums.sort((a, b) => a.Premium - b.Premium);
 
-        return res;k
+        return res;
       });
   }
 
