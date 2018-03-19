@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { HouseDataRequest, HouseDataResponse } from '@app/house/models/house-data';
 import { Address } from '@app/address/models';
 
-export const GET_INFO_REQUEST =     '[HouseData] Info';
+export const GET_INFO_REQUEST =     '[HouseData] Info Request';
 export const GET_INFO_SUCCESS =     '[HouseData] Info Success';
 export const GET_INFO_FAILURE =     '[HouseData] Info Failure';
 export const UPDATE_ADDRESS   =     '[HouseData] Update address';

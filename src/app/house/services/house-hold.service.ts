@@ -36,11 +36,14 @@ export class HouseHoldService {
    * @returns {Observable<HouseDataResponse>}
    */
   public getHouseData(req: HouseDataRequest): Observable<HouseDataResponse> {
-    const params = new HttpParams();
+    let params = new HttpParams();
 
-    params.append('Zipcode', req.Zipcode);
-    params.append('houseNumber', req.HouseNumber.toString());
-    params.append('houseNumberAddition', req.HouseNumberAddition || '');
+    params = params.append('Zipcode', req.Zipcode);
+    params = params.append('houseNumber', req.HouseNumber.toString());
+
+    if (!req.HouseNumberAddition && req.HouseNumberAddition.length > 0) {
+      params = params.append('houseNumberAddition', req.HouseNumberAddition);
+    }
 
     return this.http.get<HouseDataResponse>(environment.riskInsurance.getHouseData,
       Object.assign(httpOptions, {params: params}));

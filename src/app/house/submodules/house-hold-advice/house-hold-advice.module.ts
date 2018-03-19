@@ -20,6 +20,7 @@ import { HouseHoldHouseDetailComponent } from './containers/house-hold-house-det
 import { HouseHoldDekkingComponent } from './containers/house-hold-dekking/house-hold-dekking.component';
 import { HouseHoldAdviceComponent } from './containers/house-hold-advice/house-hold-advice.component';
 import { AddressModule } from '@app/address/address.module';
+import { HouseDataEffects } from '@app/house/effects/house-data';
 
 export const COMPONENTS = [
   HouseHoldAdviceComponent,
@@ -38,6 +39,7 @@ export const COMPONENTS = [
     HouseHoldAdviceRoutingModule,
     StoreModule.forFeature('household', reducers),
     EffectsModule.forFeature([
+      HouseDataEffects,
       HouseHoldEffects
     ])
   ],

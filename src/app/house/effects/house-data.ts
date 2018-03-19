@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
 
-
 import * as houseData from '../actions/house-data';
 import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseDataResponse } from '@app/house/models/house-data';
