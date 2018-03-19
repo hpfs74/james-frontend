@@ -117,18 +117,16 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   }
 
   addressFound() {
-    this.address$
+    this.subscriptions$.push(this.address$
+      .filter(value => value !== null)
       .subscribe(value => {
-        if (value === null) {
-          return;
-        }
 
         this.store$.dispatch(new houseDataActions.GetInfo({
           Zipcode: value.postcode,
           HouseNumber: value.number_extended ? value.number_extended.number_only : null,
           HouseNumberAddition: value.number_extended ? value.number_extended.number_extension : null
         } as HouseDataRequest));
-      });
+      }));
   }
 
   setAddress(value) {
