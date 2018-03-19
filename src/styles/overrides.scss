@@ -100,3 +100,7 @@ button.knx-button--toggle,
   position: sticky;
   top: 90px;
 }
+
+.knx-checkbox--disabled {
+  color: $knab-primary-gray;
+}
