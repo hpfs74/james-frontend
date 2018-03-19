@@ -31,6 +31,7 @@ import {
 } from '@app/house/reducers';
 import { TranslateService } from '@ngx-translate/core';
 import { HouseDataRequest } from '@app/house/models/house-data';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-location-form',
@@ -106,26 +107,29 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   }
 
   setHouseTypePrefill(data) {
-    console.log('Pass here !!!!', data);
+
+    this.store$.dispatch(new houseHoldData.Update({
+      RoomCount: data.RoomCount,
+      SurfaceArea: data.SurfaceArea,
+      Volume: data.Volume,
+      HouseType: data.HouseType
+    }));
   }
 
   addressFound() {
     this.address$
       .subscribe(value => {
-
-        if (value === null)
+        if (value === null) {
           return;
+        }
 
         this.store$.dispatch(new houseDataActions.GetInfo({
           Zipcode: value.postcode,
           HouseNumber: value.number_extended ? value.number_extended.number_only : null,
           HouseNumberAddition: value.number_extended ? value.number_extended.number_extension : null
         } as HouseDataRequest));
-
       });
-
   }
-
 
   setAddress(value) {
     if (value) {
