@@ -9,7 +9,6 @@ import * as fromRoot from '@app/reducers';
 import * as fromAddress from '@app/address/reducers';
 import * as houseDataActions from '@app/house/actions/house-data';
 import * as fromHouseData from '@app/house/reducers/house-data';
-import * as fromHouseHoldData from '@app/house/reducers/house-hold-data';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import * as assistant from '@app/core/actions/assistant';
 import * as FormUtils from '@app/utils/base-form.utils';
@@ -26,8 +25,12 @@ import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/take';
 import { HouseHoldAmountRequest } from '@app/house/models/house-hold-amount';
-import { getHouseDataAddress, getHouseHoldDataAdvice, getHouseHoldDataInfo } from '@app/house/reducers';
+import {
+  getHouseDataAddress, getHouseDataResult, getHouseHoldDataAdvice,
+  getHouseHoldDataInfo
+} from '@app/house/reducers';
 import { TranslateService } from '@ngx-translate/core';
+import { HouseDataRequest } from '@app/house/models/house-data';
 
 @Component({
   selector: 'knx-house-hold-location-form',
@@ -82,10 +85,17 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
 
   setInitialSubscriptions(): void {
     this.subscriptions$ = [
+      this.store$.select(fromAddress.getAddressLoaded)
+        .filter(data => data === true)
+        .subscribe(data => this.addressFound()),
+
       this.store$.select(getHouseDataAddress)
         .subscribe(data => this.setAddress(data)),
       this.store$.select(getHouseHoldDataInfo)
         .subscribe((data) => this.setOwnedBuilding(data)),
+      this.store$.select(getHouseDataResult)
+        .filter(data => data !== null)
+        .subscribe(data => this.setHouseTypePrefill(data)),
       this.store$.select(getHouseHoldDataAdvice)
         .subscribe((advice) => {
           if (!advice) {
@@ -94,6 +104,28 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
         })
     ];
   }
+
+  setHouseTypePrefill(data) {
+    console.log('Pass here !!!!', data);
+  }
+
+  addressFound() {
+    this.address$
+      .subscribe(value => {
+
+        if (value === null)
+          return;
+
+        this.store$.dispatch(new houseDataActions.GetInfo({
+          Zipcode: value.postcode,
+          HouseNumber: value.number_extended ? value.number_extended.number_only : null,
+          HouseNumberAddition: value.number_extended ? value.number_extended.number_extension : null
+        } as HouseDataRequest));
+
+      });
+
+  }
+
 
   setAddress(value) {
     if (value) {
