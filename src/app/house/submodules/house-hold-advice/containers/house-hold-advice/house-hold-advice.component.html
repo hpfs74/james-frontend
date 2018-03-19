@@ -19,27 +19,9 @@
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
                        [messages]="chatMessages$ | async">
-        
+
       </knx-chat-stream>
 
-      <div class="knx-house-hold-advice-motivation">
-        <ul>
-          <li>
-            <b>{{ 'household.advice.usp.objective.title' | translate }}</b><br/>
-            {{ 'household.advice.usp.objective.content' | translate }}
-          </li>
-
-          <li>
-            <b>{{ 'household.advice.usp.save.title' | translate }}</b><br/>
-            {{ 'household.advice.usp.save.content' | translate }}
-          </li>
-
-          <li>
-            <b>{{ 'household.advice.usp.overstaphulp.title' | translate }}</b><br>
-            {{ 'household.advice.usp.overstaphulp.content' | translate }}
-          </li>
-        </ul>
-      </div>
     </div>
   </knx-wizard-rx>
 </div>

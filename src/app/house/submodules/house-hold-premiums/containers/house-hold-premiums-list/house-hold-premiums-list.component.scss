@@ -1,1 +1,16 @@
 @import '~styles/base.scss';
+
+.knx-insurance-toplist__info {
+  margin-top: 15px;
+  text-align: center;
+
+  > span {
+    cursor: pointer;
+  }
+
+  span {
+    font-size: $font-size-base - 2;
+    color: $knab-primary-blue;
+    border-bottom: 1px dotted $knab-primary-blue;
+  }
+}

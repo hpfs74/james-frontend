@@ -56,26 +56,6 @@
 
       </knx-chat-stream>
 
-      <div class="knx-house-hold-advice-motivation"
-           *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.buy || knxWizardService.currentStepIndex === houseHoldPremiumsSteps.thankyou">
-        <ul>
-          <li>
-            <b>{{ 'household.premiums.usp.objective.title' | translate }}</b><br/>
-            {{ 'household.premiums.usp.objective.content' | translate }}
-          </li>
-
-          <li>
-            <b>{{ 'household.premiums.usp.save.title' | translate }}</b><br/>
-            {{ 'household.premiums.usp.save.content' | translate }}
-          </li>
-
-          <li>
-            <b>{{ 'household.premiums.usp.overstaphulp.title' | translate }}</b><br>
-            {{ 'household.premiums.usp.overstaphulp.content' | translate }}
-          </li>
-        </ul>
-      </div>
-
     </div>
   </knx-wizard-rx>
 

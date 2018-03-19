@@ -36,12 +36,18 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
 
   constructor(private store$: Store<fromRoot.State>, private translateService: TranslateService) {
     const formBuilder = new FormBuilder();
-    this.form = new HouseHoldPremiumsBuyForm(formBuilder);
     this.translateService.get([
       'household.common.step.options.backButtonLabel',
-      'household.premium.buy.step.options.nextButtonLabel'
+      'household.premium.buy.step.options.nextButtonLabel',
+      'household.premium.buy.your_name.label',
+      'household.premium.buy.your_name.placeholder',
+      'household.premium.buy.your_email.label',
+      'household.premium.buy.your_email.placeholder',
+      'household.premium.buy.your_phone.label',
+      'household.premium.buy.your_phone.placeholder',
     ]).subscribe(res => {
       this.copies = res;
+      this.form = new HouseHoldPremiumsBuyForm(formBuilder, this.copies);
 
       this.currentStepOptions = {
         backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],

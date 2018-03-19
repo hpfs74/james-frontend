@@ -156,7 +156,8 @@ export class LoadScriptsService {
         "https://d3cuj82m9z5zxb.cloudfront.net",
         "http://*.visualwebsiteoptimizer.com",
         "https://*.cloudfront.net",
-        "http://w.usabilla.com"
+        "http://w.usabilla.com",
+        "https://knab-dev.apigee.net"
       ],
       "script-src": [
         "'unsafe-inline'",
