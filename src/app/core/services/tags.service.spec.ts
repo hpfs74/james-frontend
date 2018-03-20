@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { setUpTestBed } from './../../../test.common.spec';
 import { TagsService } from './tags.service';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoaderMock } from '../../../test.common.spec';
 
 describe('Service: Tags', () => {
   let backend, service: TagsService;
@@ -24,11 +26,16 @@ describe('Service: Tags', () => {
   };
 
   let moduleDef: TestModuleMetadata = {
-    imports: [HttpModule],
+    imports: [HttpModule,
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      })
+    ],
     providers: [
       BaseRequestOptions,
       MockBackend,
-      TagsService
+      TagsService,
+      TranslateService
     ]
   };
   setUpTestBed(moduleDef);

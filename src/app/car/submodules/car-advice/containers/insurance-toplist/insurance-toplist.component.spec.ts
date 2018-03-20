@@ -2,7 +2,7 @@ import { Component, DebugElement, ViewChild, NO_ERRORS_SCHEMA } from '@angular/c
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 
-import { setUpTestBed } from './../../../../../../test.common.spec';
+import { setUpTestBed, TranslateLoaderMock } from './../../../../../../test.common.spec';
 import { InsuranceTopListComponent } from './insurance-toplist.component';
 import { StoreModule, combineReducers } from '@ngrx/store';
 import { FeatureConfigService } from '@app/core/services/feature-config.service';
@@ -23,6 +23,9 @@ import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
 import * as fromProfile from '@app/profile/reducers';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
+
 @Component({
   template: `<div><knx-insurance-toplist [initialAmount]="initialAmount" [insurances]="insurances"></knx-insurance-toplist></div>`
 })
@@ -42,6 +45,9 @@ describe('Component: InsuranceTopList', () => {
     imports: [
       HttpModule,
       BrowserModule,
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      }),
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),
