@@ -47,6 +47,15 @@ import { reducers } from './reducers';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { ProfileModalComponent } from '@app/profile/components/profile-modal/profile-modal.component';
 import { LayoutEffects } from '@app/core/effects/layout';
+import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@env/environment';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, environment.james.langEndpoint);
+}
 
 export const COMPONENTS = [
   AppComponent,
@@ -73,7 +82,14 @@ export const COMPONENTS = [
       AssistantEffects,
       WizardEffects,
       LayoutEffects
-    ])
+    ]),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
@@ -83,7 +99,7 @@ export const COMPONENTS = [
   ]
 })
 export class CoreModule {
-  constructor (@Optional() @SkipSelf() parentModule: CoreModule) {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
       const error = 'CoreModule is already loaded. Import it in the AppModule only';
       console.warn(error);

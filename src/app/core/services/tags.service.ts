@@ -7,15 +7,19 @@ import 'rxjs/add/operator/map';
 import { Tag } from '../models/tag';
 import { UIPair } from '../models/ui-pair';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 // TODO: coupled with middleware spec, should be refactored if using
 // backend tags API directly
 @Injectable()
 export class TagsService {
   tags: { [key: string]: Array<Tag> };
+  copies: { [key: string]: string };
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private translateService: TranslateService) {
+    this.translateService.use('nl');
   }
+
 
   load(): Promise<any> {
     const path = '/content/tags.json';
@@ -23,6 +27,18 @@ export class TagsService {
       .map(res => res.json())
       .toPromise()
       .then((data) => this.tags = data)
+      .then(() => {
+        const translateKey = [];
+        Object.keys(this.tags).forEach(key => {
+          const section = this.tags[key];
+          section.forEach(tag => translateKey.push(`${key}.${tag.tag}`));
+        });
+
+        this.translateService.get(translateKey)
+          .subscribe(res => {
+            this.copies = Object.assign({}, this.copies, res);
+          });
+      })
       .catch(error => Promise.resolve());
   }
 
@@ -83,10 +99,17 @@ export class TagsService {
       return null;
     }
 
+
     const section = this.tags[key];
     return section.map(tag => {
+      const copyKey = `${key}.${tag.tag}`;
+      let label = this.copies[copyKey];
+      if ((!label && label.length === 0) || label === copyKey) {
+        label = this.sanitizeText(tag.translation_text);
+      }
+
       return {
-        label: this.sanitizeText(tag.translation_text),
+        label: label,
         value: tag.tag,
         disabled: tag.disabled
       };
