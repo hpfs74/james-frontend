@@ -32,7 +32,7 @@
 
     <!-- documents -->
     <knx-insurance-review-documents *ngIf="selectedInsurance"
-      title="Documenten" [documents]="selectedInsurance?.documents"
+      title="{{'general.documents' | translate}}" [documents]="selectedInsurance?.documents"
       [showStep]="false"></knx-insurance-review-documents>
     <knx-final-advice
       knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="adviceMobile"

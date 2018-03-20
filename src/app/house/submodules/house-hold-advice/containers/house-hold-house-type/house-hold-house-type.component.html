@@ -24,7 +24,7 @@
 
         <knx-radio-navigator
           [values]="roomValues"
-          label="rooms"
+          label="{{'household.houseType.rooms.room.label' | translate}}"
           [selected]="detailForm.value.roomsCount"
           (onSelectChange)="updateRoomsCount($event)">
         </knx-radio-navigator>

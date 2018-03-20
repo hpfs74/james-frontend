@@ -176,7 +176,7 @@
         </knx-ir-content>
 
         <knx-insurance-review-documents *ngIf="(insurance$ | async)?.documents"
-          title="Documenten" [documents]="(insurance$ | async)?.documents"
+          title="{{'general.documents' | translate}}" [documents]="(insurance$ | async)?.documents"
           [showStep]="false"></knx-insurance-review-documents>
 
         <knx-ir-content [showStep]="false" title="Betaling" *ngIf="(insurance$ | async)">
