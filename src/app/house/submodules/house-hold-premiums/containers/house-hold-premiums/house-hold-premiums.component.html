@@ -39,6 +39,7 @@
               <div class="knx-side-panel-content">
                 <knx-house-hold-premiums-filter
                   [form]="houseHoldFilterForm"
+                  [glassDisabled]="(advice$ | async)?.OwnedBuilding === 'J'"
                   [advice]="advice$ | async"
                   [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
                 </knx-house-hold-premiums-filter>

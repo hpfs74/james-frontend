@@ -2820,6 +2820,12 @@
       "translation_text": "€ 3.001 tot en met € 4.850",
       "translation_label": "€ 3.001 tot en met € 4.850",
       "tag": "4850"
+    },
+    {
+      "translation_text": "> 4.850",
+      "translation_label": "> 4.850",
+      "tag": "4851",
+      "disabled": true
     }
   ],
   "house_hold_flow_family_situation": [
