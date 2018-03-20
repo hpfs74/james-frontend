@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { InsuranceReviewComponent } from './insurance-review.component';
 import { CurrencyPipe } from '@angular/common';
 
-import { setUpTestBed } from './../../../test.common.spec';
+import { setUpTestBed, TranslateLoaderMock } from './../../../test.common.spec';
 import { SharedModule } from '@app/shared.module';
 import { InsuranceReviewModule } from './insurance-review.module';
 
@@ -19,6 +19,7 @@ import * as fromAuth from '@app/auth/reducers';
 import * as fromCar from '@app/car/reducers';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as fromProfile from '@app/profile/reducers';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 @Component({
   template: `<knx-insurance-review [selectedInsurance]="selectedInsuranceFromHost"></knx-insurance-review>`
 })
@@ -37,6 +38,9 @@ describe('Component: InsuranceReviewComponent', () => {
     imports: [
       SharedModule,
       InsuranceReviewModule,
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      }),
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),

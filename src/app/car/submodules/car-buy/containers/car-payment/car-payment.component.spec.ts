@@ -8,7 +8,7 @@ import { combineReducers, StoreModule } from '@ngrx/store';
 import { KNXFormsModule } from '@knx/forms';
 import { KNXLocale } from '@knx/locale';
 
-import { setUpTestBed } from './../../../../../../test.common.spec';
+import { setUpTestBed, TranslateLoaderMock } from './../../../../../../test.common.spec';
 import { CarPaymentComponent } from './car-payment.component';
 import { IbanForm } from '@app/shared/forms/iban.form';
 import * as fromAuth from '@auth/reducers';
@@ -18,6 +18,7 @@ import * as fromRoot from '@app/reducers';
 import * as fromCar from '@car/reducers';
 
 import * as fromProfile from '@app/profile/reducers';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 @Component({
   template: `
@@ -40,6 +41,9 @@ describe('Component: CarPaymentComponent', () => {
       CommonModule,
       ReactiveFormsModule,
       KNXFormsModule,
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      }),
       StoreModule.forRoot({
         ...fromRoot.reducers,
         'auth': combineReducers(fromAuth.reducers),
