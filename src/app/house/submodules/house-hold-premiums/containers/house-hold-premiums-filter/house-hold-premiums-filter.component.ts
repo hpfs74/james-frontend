@@ -21,8 +21,9 @@ import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 export class HouseHoldPremiumsFilterComponent {
   qaRootId = QaIdentifiers.houseHoldPremiumsRoot;
   coverages: Price[];
-
+  showCard = true;
   constructor(tagsService: TagsService) {
+    window['tss'] = this;
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
       .map((el) => (JSON.parse(el.tag) as Price));
@@ -37,6 +38,7 @@ export class HouseHoldPremiumsFilterComponent {
 
   @Input() set glassDisabled(value: boolean) {
     this.form.formConfig.glassCoverage.inputOptions.disabled = value;
+    this.showCard = value;
   }
 
   /**

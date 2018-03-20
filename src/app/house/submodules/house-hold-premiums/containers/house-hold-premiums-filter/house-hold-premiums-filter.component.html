@@ -47,8 +47,7 @@
       </div>
 
     </knx-collapse-message>
-
-    <knx-collapse-message [ngClass]="optionModifierClass" title="Additional coverage" [isOpen]="true">
+    <knx-collapse-message [ngClass]="optionModifierClass" title="Additional coverage" [isOpen]="true" *ngIf="!showCard">
       <!--<div class="knx-form-group&#45;&#45;info knx-form-group&#45;&#45;info-checkbox">-->
       <!--<knx-checkbox #outsideCoverage-->
       <!--knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="outsideCoverage"-->
