@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class LoadScriptsService {
-  constructor() {
+  constructor(private http: Http) {
     this.initScripts();
     if (!environment.production) {
       this.addCSP();
@@ -101,15 +102,18 @@ export class LoadScriptsService {
 
 
   private addCSP() {
-    let meta = document.createElement('meta');
-    meta.httpEquiv = "Content-Security-Policy";
-    meta.content = this.generateCSP();
-    document.head.insertBefore(meta, document.head.firstChild);
+    this.generateCSP().then((csp) => {
+      const meta = document.createElement('meta');
+      meta.httpEquiv = "Content-Security-Policy";
+      meta.content = csp;
+      document.head.insertBefore(meta, document.head.firstChild);
+    });
   }
 
 
-  private generateCSP(): string {
-    const contentSecurityPolicy = {
+  private generateCSP():Promise<string> {
+    /** Fallback object */
+    const defaultContentSecurityPolicy = {
       "default-src": [
         "'unsafe-inline'",
         "'self'",
@@ -226,11 +230,30 @@ export class LoadScriptsService {
         "'none'"
       ]
     };
-    if (typeof(contentSecurityPolicy) === "object") {
 
-      return Object.keys(contentSecurityPolicy).reduce( (acc, el) => `${acc} ${this.buildTag(el, contentSecurityPolicy[el])}`, "");
-    }
-    return "";
+    const fallbackReturn = () => Object.keys(defaultContentSecurityPolicy).reduce( (acc, el) => `${acc} ${this.buildTag(el, defaultContentSecurityPolicy[el])}`, "");
+
+    /**
+     * We request the root URL's page to get its headers so that we can extract the
+     * 'Content-Security-Policy' header.
+     * If we fail to access the page or the page doesn't have the header, we return
+     * the fallback.
+     */
+    return this.http.request('/')
+      .toPromise()
+      .then((res) => {
+        const headerName = 'Content-Security-Policy';
+        if (res.headers.has(headerName)) {
+          return res.headers.get(headerName);
+        }
+
+        return fallbackReturn();
+      })
+
+      /** On error returns default CSP */
+      .catch(() => {
+        return fallbackReturn();
+      });
   }
 
   private buildTag(tag, val) {
