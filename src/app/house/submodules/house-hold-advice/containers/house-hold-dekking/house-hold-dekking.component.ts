@@ -85,7 +85,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
             id: el.tag,
             header: this.copies[`house_hold_flow_coverages.${el.tag}.header`],
             description: this.copies[`house_hold_flow_coverages.${el.tag}.description`],
-            features: this.copies[`house_hold_flow_coverages.${el.tag}.features`].split('|')
+            features: (this.copies[`house_hold_flow_coverages.${el.tag}.features`] || '').split('|')
         } as Price;
       });
 
