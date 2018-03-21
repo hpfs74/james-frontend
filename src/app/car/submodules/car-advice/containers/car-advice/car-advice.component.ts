@@ -54,6 +54,7 @@ import { JamesTagPipe } from '@app/shared/pipes';
 import { CurrencyPipe } from '@angular/common';
 import { CarService } from '@app/car/services/car.service';
 import { SharedService, TEMP_VARIABLE_KEYS } from '@app/shared/services/shared.service';
+import { AssistantService } from '@app/core/services';
 
 
 enum carFormSteps {
@@ -71,7 +72,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
   qaRootId = QaIdentifiers.carAdviceRoot;
 
   formSteps: Array<KNXWizardStepRxOptions> = [];
-  chatConfig$: Observable<AssistantConfig>;
+  chatConfig$: AssistantConfig;
   chatMessages$: Observable<Array<ChatMessage>>;
 
   // State of the advice forms data
@@ -93,7 +94,8 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
               private jamesTag: JamesTagPipe,
               private currencyPipe: CurrencyPipe,
               public carService: CarService,
-              public sharedService: SharedService) {
+              public sharedService: SharedService,
+              public assistantService: AssistantService) {
 
 
     this.translateService
@@ -127,7 +129,7 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
     // bind observables
     this.subscription$ = [];
     this.selectedAdvice$ = this.store$.select(fromInsurance.getSelectedAdvice);
-    this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
+    this.chatConfig$ = this.assistantService.config;
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.isLoggedIn$ = this.store$.select(fromAuth.getLoggedIn);
     this.savedInsurances$ = this.store$.select(fromInsurance.getSavedInsurances);

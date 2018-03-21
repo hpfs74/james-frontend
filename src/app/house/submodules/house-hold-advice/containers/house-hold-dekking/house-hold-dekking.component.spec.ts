@@ -28,7 +28,7 @@ describe('Component: HouseHoldDekkingComponent', () => {
   let tagsService: TagsService;
   let translateService: TranslateService;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -69,7 +69,7 @@ describe('Component: HouseHoldDekkingComponent', () => {
     fixture = TestBed.createComponent(HouseHoldDekkingComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   beforeEach(() => {
     fixture.detectChanges();

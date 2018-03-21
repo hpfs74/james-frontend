@@ -27,14 +27,13 @@ export class AssistantEffects {
 
       return {
         payload: action,
-        config: state.app.assistant.config,
+        config: this.assistantService.config,
         prev: previousMessage
       };
     })
     .switchMap((combined: any) => {
       let key = combined.payload.key;
       let value = combined.payload.value;
-
       let message: any;
       let prop = key.split('.').reduce((o, i) => o[i], combined.config);
       if (typeof prop === 'function') {

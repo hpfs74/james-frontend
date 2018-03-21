@@ -33,7 +33,7 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
   insurance: CalculatedPremium;
   form: HouseHoldPremiumsBuyForm;
   copies: any = {};
-
+  insurer = '';
   constructor(private store$: Store<fromRoot.State>, private translateService: TranslateService) {
     const formBuilder = new FormBuilder();
     this.translateService.get([
@@ -45,6 +45,7 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
       'household.premium.buy.your_email.placeholder',
       'household.premium.buy.your_phone.label',
       'household.premium.buy.your_phone.placeholder',
+      'household.premium.buy.checkbox.label'
     ]).subscribe(res => {
       this.copies = res;
       this.form = new HouseHoldPremiumsBuyForm(formBuilder, this.copies);

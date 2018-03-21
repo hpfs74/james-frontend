@@ -15,6 +15,8 @@ import * as assistant from '../actions/assistant';
 import * as fromRoot from '../../reducers';
 import * as fromApp from '../reducers';
 import * as fromAssistant from '../reducers';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoaderMock } from 'test.common.spec';
 
 export function getInitialState() {
   return {
@@ -47,6 +49,9 @@ describe('AssistantEffects', () => {
           'app': combineReducers(fromApp.reducers),
         }, {
           initialState: getInitialState
+        }),
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
         })
       ],
       providers: [
