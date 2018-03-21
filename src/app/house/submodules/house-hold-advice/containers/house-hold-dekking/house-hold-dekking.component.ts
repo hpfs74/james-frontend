@@ -66,14 +66,28 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
 
     this.translateService.get([
       'household.common.step.options.backButtonLabel',
-      'household.dekking.step.options.nextButtonLabel'
+      'household.dekking.step.options.nextButtonLabel',
+      'house_hold_flow_coverages.5018.header',
+      'house_hold_flow_coverages.5018.description',
+      'house_hold_flow_coverages.5018.features',
+      'house_hold_flow_coverages.5016.header',
+      'house_hold_flow_coverages.5016.description',
+      'house_hold_flow_coverages.5016.features'
     ]).subscribe(res => {
       this.copies = res;
     });
 
     this.coverages = tagsService
       .getByKey('house_hold_flow_coverages')
-      .map((el) => (JSON.parse(el.tag) as Price));
+      .map((el) => {
+        // (JSON.parse(el.tag) as Price)
+        return {
+            id: el.tag,
+            header: this.copies[`house_hold_flow_coverages.${el.tag}.header`],
+            description: this.copies[`house_hold_flow_coverages.${el.tag}.description`],
+            features: (this.copies[`house_hold_flow_coverages.${el.tag}.features`] || '').split('|')
+        } as Price;
+      });
 
     this.currentStepOptions = {
       label: this.copies['general.dekking'],
