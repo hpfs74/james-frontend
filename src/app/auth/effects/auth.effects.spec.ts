@@ -22,6 +22,8 @@ import * as insurance from '@app/insurance/actions/insurance';
 import { Authenticate } from '@app/auth/models/auth';
 import { AssistantConfig } from '@app/core/models';
 import { AssistantService } from '@app/core/services';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoaderMock } from 'test.common.spec';
 
 describe('AuthEffects', () => {
   let effects: AuthEffects;
@@ -65,6 +67,9 @@ describe('AuthEffects', () => {
         StoreModule.forRoot({
           ...fromRoot.reducers
         }),
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+        })
       ],
       providers: [
         AuthEffects,

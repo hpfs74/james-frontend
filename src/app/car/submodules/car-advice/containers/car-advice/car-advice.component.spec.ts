@@ -50,6 +50,7 @@ import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
 import { AuthHttp } from '@auth/services';
 import { SharedService } from '@app/shared/services/shared.service';
+import { AssistantService } from '@app/core/services';
 
 let translations: any = {'TEST': 'This is a test'};
 
@@ -90,6 +91,7 @@ describe('Component: CarAdviceComponent', () => {
         CarAdviceComponent
       ],
       providers: [
+        AssistantService,
         TranslateService,
         CarService,
         MockBackend,
