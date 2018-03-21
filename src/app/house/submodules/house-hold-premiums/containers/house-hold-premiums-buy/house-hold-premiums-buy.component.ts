@@ -33,7 +33,7 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
   insurance: CalculatedPremium;
   form: HouseHoldPremiumsBuyForm;
   copies: any = {};
-
+  insurer = '';
   constructor(private store$: Store<fromRoot.State>, private translateService: TranslateService) {
     const formBuilder = new FormBuilder();
     this.translateService.get([

@@ -41,7 +41,7 @@ export class AssistantService {
       household: {
         welcome: this.translateService.instant('lisa.household_welcome'),
         premiums: this.translateService.instant('lisa.household_premiums'),
-        detail: this.translateService.instant('lisa.household_detail'),
+        detail: this.translateService.instant('lisa.household_details'),
         buy: this.translateService.instant('lisa.household_buy'),
         thankYou: this.translateService.instant('lisa.household_thankYou')
       },
