@@ -45,6 +45,7 @@ export class HouseHoldPremiumsBuyComponent implements OnInit {
       'household.premium.buy.your_email.placeholder',
       'household.premium.buy.your_phone.label',
       'household.premium.buy.your_phone.placeholder',
+      'household.premium.buy.checkbox.label'
     ]).subscribe(res => {
       this.copies = res;
       this.form = new HouseHoldPremiumsBuyForm(formBuilder, this.copies);

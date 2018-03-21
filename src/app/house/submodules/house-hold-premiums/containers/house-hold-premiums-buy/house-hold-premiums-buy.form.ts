@@ -35,7 +35,7 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
           phoneNumberValidator('phone')
         ]
       )],
-      receiveUpdate: [null]
+      receiveUpdate: [{}]
     });
 
     this.formConfig = {
@@ -86,10 +86,13 @@ export class HouseHoldPremiumsBuyForm extends BaseForm {
         formControl: this.formGroup.get('receiveUpdate'),
         type: 'checkbox',
         inputOptions: {
-          label: this.copies['household.premium.buy.checkbox.label'],
-          value: 'true'
-
-        } as UIPair
+          items: [
+            {
+              label: this.copies['household.premium.buy.checkbox.label'],
+              value: 'true'
+            } as UIPair
+          ]
+        }
       }
     };
   }
