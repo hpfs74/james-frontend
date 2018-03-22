@@ -2861,5 +2861,19 @@
       "translation_label": "Allrisk",
       "translation_text": "Allrisk"
     }
+  ],
+  "house_hold_flow_glass_coverage": [
+    {
+      "tag": "J",
+      "translation_label": "Glass coverage",
+      "translation_text": "Glass coverage"
+    }
+  ],
+  "house_hold_flow_outside_coverage": [
+    {
+      "tag": "J",
+      "translation_label": "Outside coverage",
+      "translation_text": "Outside coverage"
+    }
   ]
 }

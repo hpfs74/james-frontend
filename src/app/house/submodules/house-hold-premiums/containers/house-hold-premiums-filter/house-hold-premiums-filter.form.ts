@@ -17,7 +17,9 @@ export class HouseHoldPremiumsFilterForm extends BaseForm {
    * @param {Array<UIPair>} coverages - the list of avilable coverage
    */
   constructor(private fb: FormBuilder,
-              coverages?: Array<UIPair>) {
+              private coverages?: Array<UIPair>,
+              private outsideCoverage?: UIPair,
+              private glassCoverage?: UIPair) {
     super();
 
     this.formGroup = this.fb.group({
@@ -39,19 +41,19 @@ export class HouseHoldPremiumsFilterForm extends BaseForm {
         formControlName: 'outsideCoverage',
         type: 'checkbox',
         formControl: this.formGroup.get('outsideCoverage'),
-        inputOptions: {
+        inputOptions: this.outsideCoverage /*{
           label: 'Outside coverage',
           value: 'J'
-        } as UIPair
+        } as UIPair*/
       },
       glassCoverage: {
         formControlName: 'glassCoverage',
         type: 'checkbox',
         formControl: this.formGroup.get('glassCoverage'),
-        inputOptions: {
+        inputOptions: this.glassCoverage /*{
           label: 'Glass coverage',
           value: 'J'
-        } as UIPair
+        } as UIPair*/
       }
     };
   }

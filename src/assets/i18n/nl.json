@@ -302,5 +302,7 @@
   "lisa.car_purchased_with_hello_before": "Hoi",
   "lisa.car_purchased_with_message_after": "! In dit overzicht zie je al jouw aangevraagde verzekeringen. Wil je een nieuwe aanvraag doen? Vul dan de adviestool in!",
   "lisa.car_purchased_without_hello_before": "Hoi",
-  "lisa.car_purchased_without_message_after": "Je hebt nog geen verzekering aangevraagd. Vul de adviestool in en check of jij je voordeliger kunt verzekeren."
+  "lisa.car_purchased_without_message_after": "Je hebt nog geen verzekering aangevraagd. Vul de adviestool in en check of jij je voordeliger kunt verzekeren.",
+  "house_hold_flow_outside_coverage.J": "Outside coverage",
+  "house_hold_flow_glass_coverage.J": "Glass coverage"
 }
