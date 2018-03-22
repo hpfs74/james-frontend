@@ -22,7 +22,10 @@ knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
       </div>
       <knx-saved *ngIf="hasPurchasedInsurances() | async" (onNewAdvice)="startNewAdvice()" title="Jouw autoverzekering" [insurances]="savedInsurances$ | async"></knx-saved>
       <div>
-        <knx-empty-stage *ngIf="!(hasPurchasedInsurances() | async)"></knx-empty-stage>
+        <knx-empty-stage
+          *ngIf="!(hasPurchasedInsurances() | async)"
+          [emptyText]="'car.purchased.empty_stage_text' | translate">
+        </knx-empty-stage>
         <knx-app-promo-block></knx-app-promo-block>
       </div>
     </div>
