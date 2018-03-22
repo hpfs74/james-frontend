@@ -118,7 +118,9 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
     // initialize forms
     const formBuilder = new FormBuilder();
     this.houseHoldFilterForm = new HouseHoldPremiumsFilterForm(formBuilder,
-      this.tagsService.getAsLabelValue('house_hold_flow_coverages'));
+      this.tagsService.getAsLabelValue('house_hold_flow_coverages'),
+      this.tagsService.getAsLabelValue('house_hold_flow_outside_coverage')[0],
+      this.tagsService.getAsLabelValue('house_hold_flow_glass_coverage')[0]);
 
     this.subscription$.push(this.houseHoldFilterForm.formGroup.valueChanges
         .debounceTime(200)

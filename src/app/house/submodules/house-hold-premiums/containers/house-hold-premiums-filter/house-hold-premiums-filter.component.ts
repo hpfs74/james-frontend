@@ -38,7 +38,6 @@ export class HouseHoldPremiumsFilterComponent {
     ]).subscribe(res => {
       this.copies = res;
 
-
       this.coverages = tagsService
         .getByKey('house_hold_flow_coverages')
         .map((el) => {
