@@ -11,9 +11,9 @@
   ],
   "scripts": {
     "config": "ts-node ./scripts/set-env.ts",
-    "start": "npm run config -- --analytics=true && ng serve --open --locale",
-    "build": "npm run config -- --analytics=true && ng build --locale --aot --build-optimizer --stats-json",
-    "build:prod": "npm run config --  --analytics=true && ng build --prod --environment=prod --locale --build-optimizer --stats-json --output-hashing all --aot",
+    "start": "npm run config -- --analytics=true --environment=dev && ng serve --open --locale",
+    "build": "npm run config -- --analytics=true --environment=dev && ng build --locale --aot --build-optimizer --stats-json",
+    "build:prod": "npm run config --  --analytics=true --environment=prod && ng build --prod --locale --build-optimizer --stats-json --output-hashing all --aot",
     "serve:prod": "ng serve --open --locale --prod",
     "serve:gtm": "npm run config -- --analytics=true && ng serve --open --locale --aot",
     "test:watch": "ng test --code-coverage --watch --sourcemaps=true",
