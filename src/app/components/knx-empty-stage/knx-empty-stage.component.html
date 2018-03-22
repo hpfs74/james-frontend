@@ -2,5 +2,7 @@
   <svg preserveAspectRatio="none">
     <rect id="svg_1" rx="4" width="100%" stroke-width="1.5" [attr.height]="height"></rect>
   </svg>
-  <div class="knx-empty-container__birds"></div>
+  <div class="knx-empty-container__center-text" [ngStyle]="{'line-height': height + 'px'}">
+    {{emptyText}}
+  </div>
 </div>
