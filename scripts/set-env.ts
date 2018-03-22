@@ -114,7 +114,7 @@ function getContent(environment: string) {
 
 function createEnvironmentFiles() {
   // Production
-  createEnvFile(prodEnvFilePath, getContent('production'));
+  createEnvFile(prodEnvFilePath, getContent(environment));
 
   // Development
   createEnvFile(devEnvFilePath, getContent(environment));
