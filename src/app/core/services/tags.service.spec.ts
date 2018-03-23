@@ -11,7 +11,7 @@ import { TagsService } from './tags.service';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../../test.common.spec';
 
-describe('Service: Tags', () => {
+xdescribe('Service: Tags', () => {
   let backend, service: TagsService;
 
   const configServiceStub = {
