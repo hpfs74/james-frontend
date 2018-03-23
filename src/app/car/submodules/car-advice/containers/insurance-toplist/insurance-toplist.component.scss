@@ -24,3 +24,27 @@
     border-bottom: 1px dotted $knab-primary-blue;
   }
 }
+
+iframe {
+  width: 100%;
+}
+
+.iframe-xs {
+  height: 817px;
+}
+
+.iframe-sm {
+  height: 890px;
+}
+
+.iframe-md {
+  height: 724px;
+}
+
+.iframe-lg {
+  height: 608px;
+}
+
+.iframe-xl {
+  height: 333px;
+}

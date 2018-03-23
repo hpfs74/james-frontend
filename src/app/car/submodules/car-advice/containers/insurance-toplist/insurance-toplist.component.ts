@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
@@ -32,10 +33,12 @@ interface OrderItem {
   templateUrl: './insurance-toplist.component.html',
   styleUrls: ['./insurance-toplist.component.scss']
 })
-export class InsuranceTopListComponent implements OnInit, OnDestroy {
+export class InsuranceTopListComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('iframe') iframe: ElementRef;
   insurances: Array<CarInsurance> = [];
   title: string;
-  totalTitle: number;
+  iframeClass: string;
+  iframeUrl: any;
   initialAmount = 4;
   disableInsuranceBuy: boolean;
   isInsuranceLoading$: Observable<boolean>;
@@ -50,6 +53,7 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
 
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe,
+              private sanitizer: DomSanitizer,
               private featureConfigService: FeatureConfigService) {
     this.total = this.initialAmount;
     this.getCompareResultCopy();
@@ -89,6 +93,33 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
         data: 'beste_prijs'
       }
     ];
+
+    // Tune up the iframe settings
+    let iframeIdUrl = 'dStdt194J8vCpRC5hXzy5fsGf0dlS6e_rihApiR7Xj51qWFK67%2BKYBA4obE5jioLgZCjc_ypUb6ddH';
+    if (window.innerWidth < 1200) {
+      iframeIdUrl = 'vHKtxx4CMz0J36bmsrkB0%2BbPPMBcj%2BeWHt899Uv8jwWbpveuosWR8KprfWzWN9%2BNHZmFmVERhhKvvS';
+    }
+    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://email.knab.nl/optiext/optiextension.dll?ID=' + iframeIdUrl);
+  }
+
+  ngAfterViewInit() {
+    // Because it is insecure to set up the iframe height with going inside the iframe with js we have to change it based on breakpoints
+    switch (true) {
+      case (window.innerWidth < 575):
+        this.iframeClass = 'iframe-xs';
+        break;
+      case (window.innerWidth < 768):
+        this.iframeClass = 'iframe-sm';
+        break;
+      case (window.innerWidth < 991):
+        this.iframeClass = 'iframe-md';
+        break;
+      case (window.innerWidth < 1200):
+        this.iframeClass = 'iframe-lg';
+        break;
+      default:
+        this.iframeClass = 'iframe-xl';
+    }
   }
 
   ngOnDestroy() {
