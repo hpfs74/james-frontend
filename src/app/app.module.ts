@@ -35,7 +35,7 @@ import { LoadScriptsService } from '@app/core/services/load-scripts.service';
 import { LoadScriptLoaderService } from '@app/core/services/load-scripts-loader.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, environment.james.langEndpoint);
+  return new TranslateHttpLoader(http, '/assets/i18n/');
 }
 
 @NgModule({
