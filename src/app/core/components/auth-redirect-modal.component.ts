@@ -57,7 +57,8 @@ export class AuthRedirectModalComponent implements KNXModalDialog {
               advice => {
                 if (advice && advice.id) {
                   this.store$.dispatch(new router.Go({
-                    path: ['/car/insurance', {adviceId: advice.id}],
+                    // path: ['/car/insurance', {adviceId: advice.id}],
+                    path: ['/car/insurance']
                   }));
                 }
               });

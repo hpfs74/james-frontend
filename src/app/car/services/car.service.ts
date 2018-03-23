@@ -116,7 +116,8 @@ export class CarService {
                 advice => {
                   if (advice && advice.id) {
                     this.store$.dispatch(new router.Go({
-                      path: ['/car/insurance', {adviceId: advice.id}],
+                      // path: ['/car/insurance', {adviceId: advice.id}],
+                      path: ['/car/insurance']
                     }));
                   }
               });
