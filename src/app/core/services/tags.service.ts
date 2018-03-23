@@ -18,28 +18,61 @@ export class TagsService {
 
   constructor(private http: Http, private translateService: TranslateService) {
     this.translateService.use('nl');
-  }
-
-
-  load(): Promise<any> {
-    const path = '/content/tags.json';
-    return this.http.request(environment.james.tagsEndpoint)
+    const path = environment.james.langEndpoint + 'nl.json';
+    this.http.request(path)
       .map(res => res.json())
       .toPromise()
-      .then((data) => this.tags = data)
-      .then(() => {
-        const translateKey = [];
-        Object.keys(this.tags).forEach(key => {
-          const section = this.tags[key];
-          section.forEach(tag => translateKey.push(`${key}.${tag.tag}`));
-        });
-
-        this.translateService.get(translateKey)
-          .subscribe(res => {
-            this.copies = Object.assign({}, this.copies, res);
-          });
+      .then(data => {
+        // TODO 'nl' should be extracted to a variable once we have multiple languages
+        this.translateService.setTranslation('nl', data);
       })
-      .catch(error => Promise.resolve());
+      .catch(error => {
+        // console.log('error', error);
+      });
+  }
+
+  /**
+   * always load the file from the app itself, prevent slow pending requests,
+   * and failing requests
+   */
+  load(): Promise<any> {
+    return this.getDefaultTags()
+      .then(() => this.getTagsFromEndpoint())
+      .catch(() => Promise.resolve());
+  }
+
+  getDefaultTags() {
+    const path = '/content/tags.json';
+    return this.tagsRequest(path);
+  }
+
+  getTagsFromEndpoint() {
+    const path = environment.james.tagsEndpoint;
+    return this.tagsRequest(path);
+  }
+
+  tagsRequest(path: string) {
+    return this.http.request(path)
+      .map(res => res.json())
+      .toPromise()
+      .then((data) => this.setTagsAndCopies(data))
+      .catch(error => {
+        return Promise.resolve();
+      });
+  }
+
+  setTagsAndCopies(data: any) {
+    this.tags = data;
+    const translateKey = [];
+    Object.keys(this.tags).forEach(key => {
+      const section = this.tags[key];
+      section.forEach(tag => translateKey.push(`${key}.${tag.tag}`));
+    });
+
+    this.translateService.get(translateKey)
+      .subscribe(res => {
+        this.copies = Object.assign({}, this.copies, res);
+      });
   }
 
   getByKey(key: string): Array<Tag> {
