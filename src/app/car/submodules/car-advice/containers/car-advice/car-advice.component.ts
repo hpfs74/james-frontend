@@ -222,7 +222,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       advice => {
         if (advice && advice.id) {
           this.store$.dispatch(new router.Go({
-            // path: ['/car/insurance/contact-detail', {adviceId: advice.id}],
             path: ['/car/insurance/contact-detail'],
           }));
         }
@@ -234,7 +233,6 @@ export class CarAdviceComponent implements OnInit, OnDestroy, QaIdentifier {
       advice => {
         if (advice && advice.id) {
           this.store$.dispatch(new router.Go({
-            //path: ['/car/insurance/summary', {adviceId: advice.id}],
             path: ['/car/insurance/summary'],
           }));
         }
