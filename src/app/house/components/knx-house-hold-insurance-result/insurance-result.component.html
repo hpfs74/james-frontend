@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="insurance.own_risk">
+        <div class="row">
           <div class="col-md-6 col-6 knx-insurance-result__own-risk">
             <div class="knx-insurance-result__value">{{ insurance.own_risk | currency:'EUR':true }}</div>
             <div class="knx-insurance-result__label">{{ 'general.insurance.own_risk' | translate }}</div>
