@@ -1,6 +1,7 @@
 {
   "general.dekking": "Dekking",
   "general.insurance.own_risk": "Eigen risico",
+  "general.insurace.details": "Details",
   "general.insurance.monthly_premium": "{{price}} <span>per maand</span>",
   "general.component.address.postcode": "Postcode",
   "general.component.address.houseNumber": "Huisnummer",
