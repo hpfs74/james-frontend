@@ -33,7 +33,7 @@ interface OrderItem {
   templateUrl: './insurance-toplist.component.html',
   styleUrls: ['./insurance-toplist.component.scss']
 })
-export class InsuranceTopListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class InsuranceTopListComponent implements OnInit, OnDestroy {
   @ViewChild('iframe') iframe: ElementRef;
   insurances: Array<CarInsurance> = [];
   title: string;
@@ -100,9 +100,6 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy, AfterViewIn
       iframeIdUrl = 'vHKtxx4CMz0J36bmsrkB0%2BbPPMBcj%2BeWHt899Uv8jwWbpveuosWR8KprfWzWN9%2BNHZmFmVERhhKvvS';
     }
     this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://email.knab.nl/optiext/optiextension.dll?ID=' + iframeIdUrl);
-  }
-
-  ngAfterViewInit() {
     // Because it is insecure to set up the iframe height with going inside the iframe with js we have to change it based on breakpoints
     switch (true) {
       case (window.innerWidth < 575):
