@@ -17,7 +17,7 @@ export class HouseHoldLocationForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      houseHold: ['J', Validators.required]
+      houseHold: [null, Validators.required]
     });
 
     this.formConfig = {
