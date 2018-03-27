@@ -125,7 +125,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       this.isAmountError$
         .filter(error => error)
         .subscribe(() => {
-          this.store$.dispatch(new wizardActions.Error({message: 'Sorry cannot retrieve insured amount'}));
+          this.store$.dispatch(new wizardActions.Error({message: this.translateService.instant('household.error_message_insured_amount')}));
           this.insuredAmount = null;
         }),
       this.amount$
