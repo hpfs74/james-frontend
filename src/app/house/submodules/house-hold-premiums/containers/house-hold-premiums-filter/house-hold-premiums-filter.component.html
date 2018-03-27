@@ -17,13 +17,9 @@
 
         </div>
 
-        <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
-        <knx-tooltip [options]="{ position: 'left' }">
          {{coverages[0]?.description}}
-        </knx-tooltip>
-      </span>
+         <span *ngFor="let more of coverages[0]?.features">{{more}} </span>
       </div>
-      {{coverages[0].description}}
 
       <div class="knx-form-group--info knx-form-group--info-checkbox">
         <div class="knx-form-group__wrap">
@@ -37,13 +33,8 @@
           </label>
         </div>
 
-        <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
-        <knx-tooltip [options]="{ position: 'left' }">
          {{coverages[1]?.description}}
-         <span *ngFor="let more of coverages[1]?.features">{{more}}</span>
-        </knx-tooltip>
-    </span>
-        {{coverages[1]?.description}}
+         <span *ngFor="let more of coverages[1]?.features">{{more}} </span>
       </div>
 
     </knx-collapse-message>

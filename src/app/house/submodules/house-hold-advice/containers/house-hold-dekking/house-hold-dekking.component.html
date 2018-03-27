@@ -142,9 +142,7 @@
             {{ 'household.dekking.calcHouseVal.disclaimer.title' | translate }}
           </span>
 
-          <div class="currently-we-do-not">
-            {{ 'household.dekking.calcHouseVal.disclaimer.description' | translate }}
-          </div>
+          <div class="currently-we-do-not" [innerHTML]="'household.dekking.calcHouseVal.disclaimer.description' | translate"></div>
         </div>
 
         <knx-async-preview
