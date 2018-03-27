@@ -86,11 +86,11 @@ export function futureDateValidator(key: string, dayLimit: number = 86400) {
   };
 }
 
-export function maxDateValidator(key: string, maxYearFromNow: number) {
+export function maxDateValidator(key: string, maxMonthsFromNow: number) {
   return (c: FormControl): { [key: string]: any } => {
     let value = c.value;
     const today = new Date();
-    const limit = today.setFullYear(today.getFullYear() + maxYearFromNow);
+    const limit = today.setMonth(today.getMonth() + maxMonthsFromNow);
 
     if (value && !(value instanceof Date)) {
       value = dateDecode(value);
