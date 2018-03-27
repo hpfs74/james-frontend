@@ -18,7 +18,7 @@
         </div>
 
          {{coverages[0]?.description}}
-         <span *ngFor="let more of coverages[0]?.features">{{more}} </span>
+         <span style="text-transform: lowercase;" *ngFor="let more of coverages[0]?.features">{{more}} </span>
       </div>
 
       <div class="knx-form-group--info knx-form-group--info-checkbox">
@@ -34,7 +34,7 @@
         </div>
 
          {{coverages[1]?.description}}
-         <span *ngFor="let more of coverages[1]?.features">{{more}} </span>
+         <span style="text-transform: lowercase;" *ngFor="let more of coverages[1]?.features">{{more}} </span>
       </div>
 
     </knx-collapse-message>
