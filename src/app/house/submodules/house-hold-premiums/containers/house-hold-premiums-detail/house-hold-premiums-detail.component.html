@@ -67,7 +67,7 @@
 
 <div class="row" *ngIf="insurance?.Clauses">
   <div class="col-sm-12">
-    <knx-collapsible-panel title="Belangrijke voorwaarden" [isOpen]="true" [showStep]="false" [collapsible]="false">
+    <knx-collapsible-panel title="{{ 'household.premiumDetail.insurance_details' | translate }}" [isOpen]="true" [showStep]="false" [collapsible]="false">
       <div class="knx-collapsible-panel__content">
 
         <knx-ir-row showTooltip="false" showValue="true"
