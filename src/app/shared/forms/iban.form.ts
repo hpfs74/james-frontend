@@ -13,6 +13,7 @@ export class IbanForm extends BaseForm {
   public validationErrors = {
     required: () => 'Dit is een verplicht veld',
     startDate: () => 'De ingevulde startdatum is niet geldig',
+    startDateMax: () => 'Je kunt tot maximaal 60 dagen vooruit een datum kiezen',
     iban: () => 'Het ingevulde bankrekeningnummer (IBAN) is niet geldig'
   };
 
@@ -20,14 +21,14 @@ export class IbanForm extends BaseForm {
     super();
 
     // Startdate can be a maximum of 1 year in the future
-    const maxYear = 1;
+    const maxMonths = 2;
 
     this.formGroup = this.fb.group({
       startDate: [null,
         Validators.compose([
           Validators.required,
           futureDateValidator('startDate'),
-          maxDateValidator('startDate', maxYear)
+          maxDateValidator('startDateMax', maxMonths)
         ])
       ],
       iban: [null,
