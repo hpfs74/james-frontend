@@ -1,7 +1,7 @@
 <form name="houseHoldPremiumsFilterForm" id="houseHoldPremiumsFilterForm">
   <div class="knx-house-hold-premiums-filter hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
 
-    <h3>Verfijn uw verzekering</h3>
+    <h3>{{'household.premium.filter.main_coverage_title' | translate}}</h3>
     <knx-collapse-message [ngClass]="optionModifierClass" title="{{'household.premiums.main_coverage' | translate}}" [isOpen]="true">
       <div class="knx-form-group--info knx-form-group--info-checkbox">
         <div class="knx-form-group__wrap">
