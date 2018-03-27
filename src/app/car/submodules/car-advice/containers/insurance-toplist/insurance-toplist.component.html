@@ -68,6 +68,8 @@
   [visible]="!(isInsuranceLoading$ | async) && !(isInsuranceError$ | async)">
 </knx-service-guide>
 
+<hr [hidden]="(isInsuranceLoading$ | async) || (isInsuranceError$ | async)">
+
 <div [hidden]="(isInsuranceLoading$ | async) || (isInsuranceError$ | async)">
   <iframe [src]="iframeUrl"
           [ngClass]="iframeClass"
