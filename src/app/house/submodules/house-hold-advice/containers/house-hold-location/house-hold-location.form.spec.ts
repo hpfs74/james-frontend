@@ -27,8 +27,8 @@ describe('HouseHold Location Form', () => {
     expect(form.formGroup.get('houseHold')).toBeDefined();
   });
 
-  it('should have bought option checked by default', () => {
+  it('should have nothing selected as default', () => {
     expect(form.formGroup).toBeDefined();
-    expect(form.formGroup.get('houseHold').value).toBeTruthy();
+    expect(form.formGroup.get('houseHold').value).toBeFalsy();
   });
 });
