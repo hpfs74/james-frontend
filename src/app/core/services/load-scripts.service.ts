@@ -188,7 +188,6 @@ export class LoadScriptsService {
       "connect-src": [
         "'self'",
         "https://knab.blueconic.net",
-        "https://login.test.knabverzekeren.nl:8002/token",
         "https://www.googletagmanager.com",
         "https://www.google-analytics.com",
         "https://middleware.test.knabverzekeren.nl",
