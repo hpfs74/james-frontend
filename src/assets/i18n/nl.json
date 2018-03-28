@@ -309,5 +309,7 @@
   "lisa.car_purchased_without_hello_before": "Hoi",
   "lisa.car_purchased_without_message_after": "Je hebt nog geen verzekering aangevraagd. Vul de adviestool in en check of jij je voordeliger kunt verzekeren.",
   "house_hold_flow_outside_coverage.J": "Buitenhuisdekking",
-  "house_hold_flow_glass_coverage.J": "Glasdekking"
+  "house_hold_flow_glass_coverage.J": "Glasdekking",
+  "household.end_of_line_feedback": "Geef je feedback",
+  "household.end_of_line_text": "Bedankt voor het testen van de nieuwe omgeving voor Inboedelverzekering. Je kunt deze verzekering helaas nog niet aanvragen, binnenkort kan dit wel! Geef je feedback en wij gaan ermee aan de slag."
 }
