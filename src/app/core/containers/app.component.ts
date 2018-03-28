@@ -17,7 +17,13 @@ import * as router from '@app/core/actions/router';
 import { Nav } from '@app/core/models/nav';
 import { Profile } from '@app/profile/models';
 import { UserDialogService } from '@app/components/knx-modal/user-dialog.service';
-import { LoginModalConfig, AuthRedirectModalAnonymousConfig, AuthRedirectModalConfig, DeleteModalConfig } from '@app/core/models/modals';
+import {
+  LoginModalConfig,
+  AuthRedirectModalAnonymousConfig,
+  AuthRedirectModalConfig,
+  DeleteModalConfig,
+  EndOfTheLineHouseholdModal
+} from '@app/core/models/modals';
 
 import { NavigationService } from '@app/core/services';
 import * as insurance from '@app/insurance/actions/insurance';
@@ -34,7 +40,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   modalNames = {
     loginModal: 'loginModal',
     authRedirect: 'authRedirectModal',
-    deleteProfile: 'deleteProfileModal'
+    deleteProfile: 'deleteProfileModal',
+    householdEndOfTheLine: 'houseHoldEndOftheLineModal'
   };
 
   topMenu: Array<Nav>;
@@ -107,6 +114,8 @@ export class AppComponent implements OnInit, AfterViewInit {
         modal = new AuthRedirectModalConfig(modalName, this.userDialogService, this.viewContainerRef);
       } else if (modalName === this.modalNames.deleteProfile) {
         modal = new DeleteModalConfig(modalName, this.userDialogService, this.viewContainerRef);
+      } else if (modalName === this.modalNames.householdEndOfTheLine) {
+        modal = new EndOfTheLineHouseholdModal(modalName, this.userDialogService, this.viewContainerRef);
       }
 
       // internally use userDialogService to show the modal

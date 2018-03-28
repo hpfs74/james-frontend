@@ -5,6 +5,7 @@ import { UserDialogService } from '../../components/knx-modal/user-dialog.servic
 import { LoginModalComponent } from '../../login/components/login-modal.component';
 import { AuthRedirectModalComponent } from '../components/auth-redirect-modal.component';
 import { ProfileModalComponent } from '@app/profile/components/profile-modal/profile-modal.component';
+import { KNXEndOfLineComponent } from '@app/house/components/knx-end-of-line/knx-end-of-line.component';
 
 export interface ModalConfig {
   title: string;
@@ -54,6 +55,32 @@ export class DeleteModalConfig implements ModalConfig {
       this.title,
       this.viewContainerRef,
       ProfileModalComponent,
+      this.settings
+    );
+  }
+}
+
+export class EndOfTheLineHouseholdModal implements ModalConfig {
+  title = '';
+  settings = {
+    bodyClass: 'knx-modal-body',
+    fullwidthButtons: true,
+    header: true,
+    headerLogo: '/assets/images/knab-logo.svg',
+    headerSubline: 'Verzekeren',
+    closeButton: false,
+    twoColFooter: true,
+    backgroundBlob: false
+  } as KNXModalDialogSettings;
+
+  constructor(private modalName: string, private userDialogService: UserDialogService, private viewContainerRef: ViewContainerRef) {}
+
+  open() {
+    this.userDialogService.openModal(
+      this.modalName,
+      this.title,
+      this.viewContainerRef,
+      KNXEndOfLineComponent,
       this.settings
     );
   }

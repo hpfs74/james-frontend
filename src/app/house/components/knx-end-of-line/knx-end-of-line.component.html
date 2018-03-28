@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="ml-auto"></div>
+
+  <div class="col-md-12 knx-center">
+    <p>{{'household.end_of_line_text' | translate}}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <button class="knx-button knx-button--secondary knx-button--ghost" (click)="cancel()">Ga Terug</button>
+  </div>
+
+  <div class="col-md-6">
+    <button class="knx-button knx-button--primary" (click)="giveFeedback()">{{'household.end_of_line_feedback' | translate}}</button>
+  </div>
+</div>
