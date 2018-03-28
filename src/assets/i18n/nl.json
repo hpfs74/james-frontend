@@ -74,7 +74,7 @@
   "household.dekking.calcHouseVal.familySituation.description": "En je gezinssituatie?",
   "household.dekking.calcHouseVal.familySituation.tooltip": "We willen graag weten hoe je gezin is samengesteld. De hoogte van de premie is hier onder andere van afhankelijk.",
   "household.dekking.calcHouseVal.disclaimer.title": "Waardevolle spullen",
-  "household.dekking.calcHouseVal.disclaimer.description": "Op dit moment verzekeren we een aantal waardevolle spullen niet boven een bepaalde waarde: <br>Audio & computer boven €12.000 <br>Sieraden boven €6.000<br>Kostbaarheden boven €15.000<br>Neem contact met ons op als je vragen hebt over het verzekeren van deze waardevolle spullen.",
+  "household.dekking.calcHouseVal.disclaimer.description": "Op dit moment verzekeren we de volgende waardevolle spullen niet: audio & computer boven €12.000, sieraden boven €6.000 en kostbaarheden boven €15.000. Neem contact met ons op als je vragen hebt over het verzekeren van deze waardevolle spullen.",
   "household.dekking.calcHouseVal.estimatedVal.suffix": "Geschatte inboedelwaarde",
   "household.dekking.step.options.nextButtonLabel": "Naar het overzicht",
   "household.premiumList.loading.message": "Een momentje! We vergelijken verschillende aanbieders voor je om de beste match te vinden.",
