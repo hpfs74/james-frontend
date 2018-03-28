@@ -23,6 +23,8 @@ import { Router } from '@angular/router';
 import { KNXWizardRxService } from '@app/core/services/wizard.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
+import { environment } from '@env/environment';
 
 @Component({
   templateUrl: 'house-hold-advice.component.html',
@@ -42,7 +44,8 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
               private tagsService: TagsService,
               private translateService: TranslateService,
               private router: Router,
-              public knxWizardService: KNXWizardRxService) {
+              public knxWizardService: KNXWizardRxService,
+              private featureConfigService: FeatureConfigService) {
 
     this.translateService
       .get([
@@ -56,6 +59,7 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
           .map(key => data[key])
           .map(v => ({label: v}));
       });
+    this.setKnabLabButton();
   }
 
   ngOnInit() {
@@ -87,5 +91,15 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
 
   goToStep(stepIndex: number) {
     this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
+  }
+
+  private setKnabLabButton() {
+    if (this.featureConfigService.isOn('knabLab') && !document.querySelector('.knx-knab-lab__button')) {
+      let newNode = document.createElement('a');
+      newNode.className = 'knx-knab-lab__button';
+      newNode.innerHTML = 'Knab Lab';
+      newNode.href = environment.featureToggles.knabLab;
+      document.body.insertBefore(newNode, document.body.lastChild);
+    }
   }
 }

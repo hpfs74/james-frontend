@@ -53,7 +53,8 @@ function getContent(environment: string) {
     featureToggles: {
       enableBuyFlowEmail: ${getEnvVar('FEATURE_BUY_FLOW_EMAIL')},
       enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')},
-      provisionPDFLink: '${getEnvVar('FEATURE_PROVISION_PDF')}'
+      provisionPDFLink: '${getEnvVar('FEATURE_PROVISION_PDF')}',
+      knabLab: '${getEnvVar('KNAB_LAB')}'
     },
     external: {
       knab: '${getEnvVar('KNAB_NL')}',
