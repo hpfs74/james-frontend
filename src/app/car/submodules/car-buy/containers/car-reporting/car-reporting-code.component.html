@@ -4,12 +4,27 @@
       <knx-card>
         <h2>Je autogegevens</h2>
         <div class="row">
+          <div class="col-sm-6">
+            <knx-form-group
+              [options]="form.formConfig.startDate"
+              [formControlName]="form.formConfig.startDate.formControlName">
+
+              <knx-tooltip>
+                Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
+                Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.
+              </knx-tooltip>
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col-sm-8">
             <div class="knx-message knx-message--hint">
               <knx-car-info *ngIf="car$ | async" [data]="car$ | async"></knx-car-info>
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-sm-6">
             <knx-form-group
@@ -62,8 +77,8 @@
       </knx-card>
     </div>
   </div>
-
 </form>
+
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
 [error]="error$ | async"
 (onNext)="goToNextStep()"
