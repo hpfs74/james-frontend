@@ -1,25 +1,17 @@
-import { Component, DebugElement, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
-import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, BrowserModule } from '@angular/platform-browser';
+import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
+import { TestModuleMetadata, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { setUpTestBed, TranslateLoaderMock } from './../../../../../../test.common.spec';
+import { setUpTestBed, TranslateLoaderMock } from '../../../../../../test.common.spec';
 import { InsuranceTopListComponent } from './insurance-toplist.component';
 import { StoreModule, combineReducers } from '@ngrx/store';
 import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { HttpModule } from '@angular/http';
 import { CookieService } from '@app/core/services';
 
-import * as car from '../../../../actions/car';
 import * as fromRoot from '../../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
 import * as fromCar from '../../../../reducers';
-import * as fromAddress from '../../../../../address/reducers';
-import * as assistant from '../../../../../core/actions/assistant';
-import * as advice from '../../../../../insurance/actions/advice';
-import * as coverage from '../../../../actions/coverage';
-import * as compare from '../../../../actions/compare';
-import * as FormUtils from '../../../../../utils/base-form.utils';
-import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
 import * as fromAuth from '@app/auth/reducers';
 import * as fromProfile from '@app/profile/reducers';

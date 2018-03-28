@@ -1,7 +1,7 @@
-import { NO_ERRORS_SCHEMA, DebugElement, ViewChild, OnChanges, Input, Component } from '@angular/core';
+import { NO_ERRORS_SCHEMA, ViewChild, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { combineReducers, StoreModule } from '@ngrx/store';
 
@@ -69,7 +69,6 @@ describe('Component: CarPaymentComponent', () => {
     expect(element).toBeDefined();
     expect(comp.carPaymentComponent).toBeDefined();
     expect(comp.carPaymentComponent.form).toBeDefined();
-    expect(comp.carPaymentComponent.form.formGroup.get('startDate')).toBeDefined();
     expect(comp.carPaymentComponent.form.formGroup.get('iban')).toBeDefined();
     expect(comp.carPaymentComponent.form.formGroup.get('acceptConditions')).toBeDefined();
   });
@@ -77,5 +76,4 @@ describe('Component: CarPaymentComponent', () => {
   it('should have invalid form controls on init', () => {
     expect(comp.carPaymentComponent.form.formGroup.valid).toBeFalsy();
   });
-
 });
