@@ -6,7 +6,7 @@ export class HouseHoldAmountRequest {
   AmountMoreThan6KJewelry: number;
   AmountMoreThan15KSpecialPossesion: number;
   AmountMoreThan6KTenantsInterest?: number;
-  BreadWinnerBirthdate: number;
+  BreadWinnerBirthdate: string;
   BreadWinnerMonthlyIncome: number;
 }
 

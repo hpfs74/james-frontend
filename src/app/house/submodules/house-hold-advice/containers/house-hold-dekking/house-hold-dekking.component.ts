@@ -82,10 +82,10 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       .map((el) => {
         // (JSON.parse(el.tag) as Price)
         return {
-            id: el.tag,
-            header: this.copies[`house_hold_flow_coverages.${el.tag}.header`],
-            description: this.copies[`house_hold_flow_coverages.${el.tag}.description`],
-            features: (this.copies[`house_hold_flow_coverages.${el.tag}.features`] || '').split('|')
+          id: el.tag,
+          header: this.copies[`house_hold_flow_coverages.${el.tag}.header`],
+          description: this.copies[`house_hold_flow_coverages.${el.tag}.description`],
+          features: (this.copies[`house_hold_flow_coverages.${el.tag}.features`] || '').split('|')
         } as Price;
       });
 
@@ -188,6 +188,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     const detailForm = this.form.formGroup;
 
     if (detailForm.value.dateOfBirth && detailForm.value.familySituation && detailForm.value.netIncomeRange) {
+      // shift the hour to convert in the correct format for RISK
+      detailForm.value.dateOfBirth.setHours(12);
+
       const payload = {
         OwnedBuilding: this.houseHoldData.OwnedBuilding,
         FamilyComposition: detailForm.value.familySituation,
@@ -253,6 +256,10 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     if (!detailForm.valid || this.insuredAmount === null) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
+
+    // shift the hour to convert in the correct format for RISK
+    detailForm.value.dateOfBirth.setHours(12);
+    detailForm.value.commencingDate.setHours(12);
 
     this.store$.dispatch(new houseHoldData.Update({
       CoverageCode: detailForm.value.coverage,
