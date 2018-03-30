@@ -9,6 +9,7 @@
 }
 
 @mixin knx-data-items() {
+  .knx-insurance-result__product-name,
   .knx-insurance-result__own-risk,
   .knx-insurance-result__profilescore,
   .knx-insurance-result__dekking,
@@ -46,14 +47,6 @@ span.knx-info-icon.knx-icon-info-circle {
       font-family: $font-family-head;
       font-size: $font-size-base + 2;
       border: 0;
-
-      &:first-child {
-        padding-right: 12px;
-      }
-
-      &:last-child {
-        padding-left: 12px;
-      }
 
       span {
         font-family: $font-family-base;
@@ -94,6 +87,10 @@ span.knx-info-icon.knx-icon-info-circle {
 
 .knx-insurance-result__price {
   display: inline-block;
+}
+
+.knx-insurance-result__product-name {
+  margin-bottom: 20px;
 }
 
 .knx-insurance-result__price-quality {
@@ -257,13 +254,7 @@ span.knx-info-icon.knx-icon-info-circle {
 
     .knx-insurance-result__data {
       .row {
-        &:first-child {
-          padding: 10px 0;
-        }
-
-        &:last-child {
-          padding-bottom: 10px;
-        }
+        padding: 5px 0;
       }
 
       @include knx-data-items {
@@ -280,6 +271,11 @@ span.knx-info-icon.knx-icon-info-circle {
 
   .knx-insurance-result__premium span {
     display: inline;
+  }
+
+  .knx-insurance-result__product-name {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   .knx-insurance-result__own-risk {
