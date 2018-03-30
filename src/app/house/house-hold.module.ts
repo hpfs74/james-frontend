@@ -9,11 +9,13 @@ import { reducers } from './reducers';
 import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseHoldPremiumsModule } from '@app/house/submodules/house-hold-premiums/house-hold-premiums.module';
 import { HouseHoldAdviceModule } from '@app/house/submodules/house-hold-advice/house-hold-advice.module';
+import { HouseHoldRoutingModule } from '@app/house/house-hold-routing.module';
 
 @NgModule({
   imports: [
     SharedModule,
     ChatStreamModule,
+    HouseHoldRoutingModule,
     HouseHoldAdviceModule,
     HouseHoldPremiumsModule,
     StoreModule.forFeature('household', reducers),

@@ -11,6 +11,7 @@ import * as wizardActions from '@core/actions/wizard';
 import * as fromRoot from '@app/reducers';
 import * as fromHouseHold from '@app/house/reducers';
 import * as layout from '@app/core/actions/layout';
+import * as router from '@app/core/actions/router';
 
 @Component({
   selector: 'knx-house-hold-premiums-detail',
@@ -65,8 +66,10 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
   }
 
   goToNextStep() {
-    // this.store$.dispatch(new wizardActions.Forward());
-    this.store$.dispatch(new layout.OpenModal('houseHoldEndOftheLineModal'));
+    if (window['testing']) {
+      this.store$.dispatch(new router.Go({path: ['/inboedel/buy']}));
+    } else {
+      this.store$.dispatch(new layout.OpenModal('houseHoldEndOftheLineModal'));
+    }
   }
 }
-
