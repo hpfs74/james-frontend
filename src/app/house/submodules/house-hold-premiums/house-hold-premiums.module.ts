@@ -23,6 +23,9 @@ import { HouseHoldInsuranceResultComponent } from '../../components/knx-house-ho
 import { HouseHoldCardExtensionComponent } from '../../components/knx-house-hold-card-extension/house-hold-card-extension.component';
 import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
 import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
+import {
+  HouseHoldPremiumsLegalComponent
+} from '@app/house/submodules/house-hold-premiums/containers/house-hold-premiums-legal/houe-hold-premiums-legal.component';
 
 export const COMPONENTS = [
   HouseHoldPremiumsComponent,
@@ -33,7 +36,8 @@ export const COMPONENTS = [
   HouseHoldPremiumsBuyComponent,
   HouseHoldInsuranceResultComponent,
   HouseHoldCardExtensionComponent,
-  HouseHoldPremiumsThankYouComponent
+  HouseHoldPremiumsThankYouComponent,
+  HouseHoldPremiumsLegalComponent
 ];
 
 @NgModule({
