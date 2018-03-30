@@ -7,6 +7,7 @@ import { KNXFinalAdviceOptions, DefaultKNXFinalAdviceOptions } from '@app/compon
   templateUrl: './knx-final-advice.component.html'
 })
 export class KNXFinalAdviceComponent implements AfterViewInit {
+  @Input() buttonVisible = true;
   @Input() mobile = false;
   @Input() options: KNXFinalAdviceOptions = DefaultKNXFinalAdviceOptions;
   @ViewChild('mobileButton') mobileButton: ElementRef;

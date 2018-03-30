@@ -1,4 +1,5 @@
-<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded" >
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation" knxBackdropBlur
+     [enableBlur]="knxChatStream.chatExpanded">
   <div class="container">
     <knx-step-navigation
       [steps]="formSteps"
@@ -13,9 +14,16 @@
   <knx-wizard-rx>
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
-        [options]="chatConfig$ | async"
-        [messages]="chatMessages$ | async">
+                       [options]="chatConfig$ | async"
+                       [messages]="chatMessages$ | async">
       </knx-chat-stream>
+
+      <knx-final-advice
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="adviceWeb"
+        class="hidden-xs"
+        [buttonVisible]="false"
+        [options]="knxFinalAdviceOptions">
+      </knx-final-advice>
     </div>
   </knx-wizard-rx>
 </div>
