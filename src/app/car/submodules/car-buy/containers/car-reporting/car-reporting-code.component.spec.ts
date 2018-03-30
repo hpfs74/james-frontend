@@ -4,11 +4,19 @@ import { TestModuleMetadata, async, ComponentFixture, TestBed } from '@angular/c
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { KNXLocale } from '@knx/locale';
+import { StoreModule, combineReducers } from '@ngrx/store';
 
-import { setUpTestBed } from './../../../../../../test.common.spec';
-import { SharedModule } from '../../../../../shared.module';
-import { TagsService } from '../../../../../core/services/tags.service';
-import { TagsServiceMock } from '../../../../../core/services/tags.service.mock.spec';
+import * as fromRoot from '../../../../../reducers';
+import * as fromInsurance from '../../../../../insurance/reducers';
+import * as fromCar from '../../../../reducers';
+import * as fromCore from '@app/core/reducers';
+import * as fromAuth from '@app/auth/reducers';
+import * as fromProfile from '@app/profile/reducers';
+
+import { setUpTestBed } from '../../../../../../test.common.spec';
+import { SharedModule } from '@app/shared.module';
+import { TagsService } from '@app/core/services';
+import { TagsServiceMock } from '@app/core/services/tags.service.mock.spec';
 import { CarReportingCodeComponent } from './car-reporting-code.component';
 
 const securityClassMock = [
@@ -31,7 +39,16 @@ describe('Component: CarReportingCodeComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   let moduleDef: TestModuleMetadata = {
-    imports: [SharedModule],
+    imports: [
+      SharedModule,
+      StoreModule.forRoot({
+        ...fromRoot.reducers,
+        'auth': combineReducers(fromAuth.reducers),
+        'app': combineReducers(fromCore.reducers),
+        'car': combineReducers(fromCar.reducers),
+        'insurance': combineReducers(fromInsurance.reducers),
+        'profile': combineReducers(fromProfile.reducers)
+      })],
     declarations: [CarReportingCodeComponent, TestHostComponent],
     providers: [
       KNXLocale,
@@ -55,6 +72,7 @@ describe('Component: CarReportingCodeComponent', () => {
   //   expect(element).toBeDefined();
   //   expect(comp.targetComponent).toBeDefined();
   //   expect(comp.targetComponent.form).toBeDefined();
+  //   expect(comp.targetComponent.form.formGroup.get('startDate')).toBeDefined();
   // });
 
   // it('should have invalid form controls on init', () => {

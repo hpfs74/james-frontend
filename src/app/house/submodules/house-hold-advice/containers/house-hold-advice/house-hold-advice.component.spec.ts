@@ -34,6 +34,7 @@ import { KNXWizardServiceMock } from '@app/core/services/wizard.service.mock';
 import { HouseHoldAdviceComponent } from './house-hold-advice.component';
 import * as fromHouse from '@app/house/reducers';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 
 let translations: any = {'TEST': 'This is a test'};
 class TranslateLoaderMock implements TranslateLoader {
@@ -86,7 +87,8 @@ describe('Component: HouseHoldAdviceComponent', () => {
           provide: KNXWizardRxService,
           useValue: KNXWizardServiceMock
         },
-        TranslateService
+        TranslateService,
+        FeatureConfigService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });

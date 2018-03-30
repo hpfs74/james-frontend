@@ -179,7 +179,13 @@ export class AuthEffects {
           return new authActions.RefreshTokenFailure(token);
         });
     })
-    .catch(error => Observable.of(new authActions.RefreshTokenFailure(error)));
+    .catch(error => {
+      this.localStorageService.clearToken();
+      this.store$.dispatch(new authActions.StartAnonymous());
+      this.store$.dispatch(new authActions.LoginAnonymous());
+
+      return Observable.of(new authActions.RefreshTokenFailure(error));
+    });
 
   // NOTE: the order of the init effect needs to be preserved as last
   // see: https://github.com/ngrx/platform/issues/246

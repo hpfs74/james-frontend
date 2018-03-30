@@ -1,7 +1,7 @@
 <form name="houseHoldPremiumsFilterForm" id="houseHoldPremiumsFilterForm">
   <div class="knx-house-hold-premiums-filter hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
 
-    <h3>Verfijn uw verzekering</h3>
+    <h3>{{'household.premium.filter.main_coverage_title' | translate}}</h3>
     <knx-collapse-message [ngClass]="optionModifierClass" title="{{'household.premiums.main_coverage' | translate}}" [isOpen]="true">
       <div class="knx-form-group--info knx-form-group--info-checkbox">
         <div class="knx-form-group__wrap">
@@ -17,13 +17,9 @@
 
         </div>
 
-        <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
-        <knx-tooltip [options]="{ position: 'left' }">
          {{coverages[0]?.description}}
-        </knx-tooltip>
-      </span>
+         <span style="text-transform: lowercase;" *ngFor="let more of coverages[0]?.features">{{more}} </span>
       </div>
-      {{coverages[0].description}}
 
       <div class="knx-form-group--info knx-form-group--info-checkbox">
         <div class="knx-form-group__wrap">
@@ -37,13 +33,8 @@
           </label>
         </div>
 
-        <span class="knx-info-icon knx-icon-info-circle" style="cursor: pointer;">
-        <knx-tooltip [options]="{ position: 'left' }">
          {{coverages[1]?.description}}
-         <span *ngFor="let more of coverages[1]?.features">{{more}}</span>
-        </knx-tooltip>
-    </span>
-        {{coverages[1]?.description}}
+         <span style="text-transform: lowercase;" *ngFor="let more of coverages[1]?.features">{{more}} </span>
       </div>
 
     </knx-collapse-message>

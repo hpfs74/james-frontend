@@ -107,28 +107,30 @@ p {
 }
 
 // Mobile view background blur on focus
-@mixin selectors {
-  .knx-wizard__steps,
-  .knx-wizard--controls,
-  .knx-car-advice__footer,
-  .knx-buy__footer,
-  .knx-thank-you,
-  .knx-saved,
-  &.knx-container--status,
-  &.knx-container-stepnavigation,
-  .knx-wizard-step-content {
-    @content;
-  }
-}
-
-@include selectors {
+.knx-wizard__steps,
+.knx-wizard--controls,
+.knx-car-advice__footer,
+.knx-buy__footer,
+.knx-thank-you,
+.knx-saved,
+.knx-container--status,
+.knx-container-stepnavigation,
+.knx-wizard-step-content {
   filter: none;
   transition: 0.1s filter linear;
 }
 
 @media (max-width: 576px) {
   .backdrop-blur {
-    @include selectors {
+    .knx-wizard__steps,
+    .knx-wizard--controls,
+    .knx-car-advice__footer,
+    .knx-buy__footer,
+    .knx-thank-you,
+    .knx-saved,
+    &.knx-container--status,
+    &.knx-container-stepnavigation,
+    .knx-wizard-step-content {
       filter: blur(3px);
     }
   }

@@ -131,7 +131,7 @@ describe('Custom Validators', () => {
       const currentDate = new Date();
       const testDate = currentDate.setFullYear(currentDate.getFullYear() + 1);
       const date = moment(testDate).format('DD/MM/YYYY');
-      expect(CustomValidators.maxDateValidator('myCtrl', 2)(new FormControl(date)))
+      expect(CustomValidators.maxDateValidator('myCtrl', 24)(new FormControl(date)))
         .toBeNull();
     });
 
@@ -140,7 +140,7 @@ describe('Custom Validators', () => {
       const currentDate = new Date();
       const testDate = currentDate.setFullYear(currentDate.getFullYear() + 3);
       const date = moment(testDate).format('DD/MM/YYYY');
-      expect(CustomValidators.maxDateValidator('myCtrl', 2)(new FormControl(date)))
+      expect(CustomValidators.maxDateValidator('myCtrl', 24)(new FormControl(date)))
         .toEqual({'myCtrl': true});
     });
   });

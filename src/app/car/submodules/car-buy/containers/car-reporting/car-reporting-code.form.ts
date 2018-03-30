@@ -1,12 +1,11 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
+import { numberWithCommas } from '@app/utils/base-form.utils';
+import { carReportingCodeValidator } from '@app/utils/base-form.validators';
+import { UIPair } from '@app/core/models/ui-pair';
 
-import { BaseForm, KNXCustomFormGroupOptions } from '../../../../../shared/forms/base-form';
-import { nameInitialMask, numberWithCommas } from '../../../../../utils/base-form.utils';
-import { numberValidator } from '../../../../../utils/base-form.validators';
-import { carReportingCodeValidator } from '../../../../../utils/base-form.validators';
-import { UIPair } from '../../../../../core/models/ui-pair';
-
+import { futureDateValidator, maxDateValidator } from '@app/utils/base-form.validators';
 
 export class CarReportingCodeForm extends BaseForm {
   formGroup: FormGroup;
@@ -15,13 +14,25 @@ export class CarReportingCodeForm extends BaseForm {
   public validationErrors = {
     required: () => 'Dit is een verplicht veld',
     max: (data) => 'Waarde mag niet hoger zijn dan ' + numberWithCommas(data.max) + '€',
-    reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)'
+    reportingCode: () => 'Vul een geldige meldcode in (4 cijfers)',
+    startDate: () => 'De ingevulde startdatum is niet geldig',
+    startDateMax: () => 'Je kunt tot maximaal 60 dagen vooruit een datum kiezen',
   };
 
   constructor(private fb: FormBuilder, private securityClasses: Array<UIPair>) {
     super();
 
+    // Startdate can be a maximum of 1 year in the future
+    const maxMonths = 2;
+
     this.formGroup = this.fb.group({
+      startDate: [null,
+        Validators.compose([
+          Validators.required,
+          futureDateValidator('startDate'),
+          maxDateValidator('startDateMax', maxMonths)
+        ])
+      ],
       reportingCode: [null,
         Validators.compose([
           Validators.required,
@@ -39,6 +50,17 @@ export class CarReportingCodeForm extends BaseForm {
     });
 
     this.formConfig = {
+      startDate: {
+        formControlName: 'startDate',
+        label: 'Ingangsdatum',
+        type: 'date',
+        help: true,
+        formControl: this.formGroup.get('startDate'),
+        validationErrors: this.validationErrors,
+        inputOptions: {
+          decode: true
+        }
+      },
       reportingCode: {
         formControlName: 'reportingCode',
         formControl: this.formGroup.get('reportingCode'),

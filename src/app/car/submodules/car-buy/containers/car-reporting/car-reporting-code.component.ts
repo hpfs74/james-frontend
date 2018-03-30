@@ -1,16 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { QaIdentifier } from './../../../../../shared/models/qa-identifier';
-import { QaIdentifiers } from './../../../../../shared/models/qa-identifiers';
+import { QaIdentifier } from '@app/shared/models/qa-identifier';
+import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { CarReportingCodeForm } from './car-reporting-code.form';
-import { Profile } from '@app/profile/models';
-import { CarInsurance } from '@app/car/models';
 import { TagsService } from '@app/core/services/tags.service';
 import { Tag } from '@app/core/models/tag';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { InsuranceAdvice } from '@app/insurance/models/index';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
 import * as FormUtils from '@app/utils/base-form.utils';
@@ -18,7 +15,6 @@ import * as fromCar from '@app/car/reducers';
 import * as fromInsurance from '@app/insurance/reducers';
 import * as assistant from '@app/core/actions/assistant';
 import * as advice from '@app/insurance/actions/advice';
-
 
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
@@ -35,7 +31,6 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
   qaRootId = QaIdentifiers.carReporting;
 
   form: CarReportingCodeForm;
-  insurance$: Observable<CarInsurance | InsuranceAdvice>;
   advice$: Observable<any>;
   selectedSecurityClass: Tag;
   securityClasses: Array<Tag>;
@@ -77,7 +72,14 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
         }
       });
     }
+
     this.setDefaultValues();
+
+    const startDate = this.form.formGroup.get('startDate');
+    const currentDate = new Date();
+    startDate.setValue(currentDate);
+    FormUtils.validateControls(this.form.formGroup, ['startDate']);
+
     this.subscription$.push(
       this.advice$.subscribe(advice => this.setAdvice(advice))
     );

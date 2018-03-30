@@ -126,6 +126,8 @@ export class HouseHoldPremiumsListComponent implements OnInit {
       advice_expires_at: Date.now(),
       insurance_id: source.CompanyName,
       insurance_name: source.CompanyName,
+      details: source.PackageDescription,
+
       supported: true
     };
   }

@@ -65,6 +65,7 @@ export class HouseHoldDekkingForm extends BaseForm {
         formControlName: 'dateOfBirth',
         type: 'date',
         formControl: this.formGroup.get('dateOfBirth'),
+        validationErrors: this.validationErrors,
         inputOptions: {
           decode: true,
           type: 'tel'
@@ -84,6 +85,7 @@ export class HouseHoldDekkingForm extends BaseForm {
       commencingDate: {
         formControlName: 'commencingDate',
         type: 'date',
+        validationErrors: this.validationErrors,
         formControl: this.formGroup.get('commencingDate'),
         inputOptions: {
           decode: true,
