@@ -59,7 +59,10 @@ function getContent(environment: string) {
     external: {
       knab: '${getEnvVar('KNAB_NL')}',
       login: '${getEnvVar('LOGIN')}',
-      static: '${getEnvVar('STATIC_PAGE_URL')}'
+      static: '${getEnvVar('STATIC_PAGE_URL')}',
+      iframeUrl: '${getEnvVar('IFRAME_URL')}',
+      iframeDesktopParam: '${getEnvVar('IFRAME_DESKTOP_PARAM')}',
+      iframeMobileParam: '${getEnvVar('IFRAME_MOBILE_PARAM')}',
     },
     james: {
       featureToggle: '${getEnvVar('JAMES_API_FEATURE_TOGGLE')}',

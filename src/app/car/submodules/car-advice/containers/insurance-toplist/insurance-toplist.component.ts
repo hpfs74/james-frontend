@@ -18,6 +18,7 @@ import * as wizardActions from '@app/core/actions/wizard';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
 import { FeatureConfigService } from '@app/core/services/feature-config.service';
+import { environment } from '@env/environment';
 
 interface OrderItem {
   id: string;
@@ -95,11 +96,11 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     ];
 
     // Tune up the iframe settings
-    let iframeIdUrl = 'dStdt194J8vCpRC5hXzy5fsGf0dlS6e_rihApiR7Xj51qWFK67%2BKYBA4obE5jioLgZCjc_ypUb6ddH';
+    let iframeIdUrl = environment.external.iframeDesktopParam;
     if (window.innerWidth < 1200) {
-      iframeIdUrl = 'vHKtxx4CMz0J36bmsrkB0%2BbPPMBcj%2BeWHt899Uv8jwWbpveuosWR8KprfWzWN9%2BNHZmFmVERhhKvvS';
+      iframeIdUrl = environment.external.iframeMobileParam;
     }
-    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://email.knab.nl/optiext/optiextension.dll?ID=' + iframeIdUrl);
+    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.external.iframeUrl + iframeIdUrl);
     // Because it is insecure to set up the iframe height with going inside the iframe with js we have to change it based on breakpoints
     switch (true) {
       case (window.innerWidth < 575):
