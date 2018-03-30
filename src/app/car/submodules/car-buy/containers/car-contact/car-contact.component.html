@@ -1,6 +1,8 @@
 <knx-card-extension
+  id="pippo123"
   knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="cardExtension"
-  [selectedInsurance]="selectedInsurance$ | async"></knx-card-extension>
+  [selectedInsurance]="selectedInsurance$ | async">
+</knx-card-extension>
 <form [formGroup]="form.formGroup" class="knx-fancy-form knx-car-contact-form" role="form">
   <div class="row">
     <div class="col-sm-12">
@@ -50,8 +52,8 @@
         </div>
 
         <knx-form-group *ngIf="false"
-          [options]="form.formConfig.saveToProfile"
-          [formControlName]="form.formConfig.saveToProfile.formControlName">
+                        [options]="form.formConfig.saveToProfile"
+                        [formControlName]="form.formConfig.saveToProfile.formControlName">
         </knx-form-group>
       </knx-card>
     </div>
@@ -59,7 +61,8 @@
 
   <div class="row">
     <div class="col-sm-12">
-      <button class="knx-car-contact-form__reset knx-button knx-button--link" (click)="resetFlow()">Opnieuw beginnen</button>
+      <button class="knx-car-contact-form__reset knx-button knx-button--link" (click)="resetFlow()">Opnieuw beginnen
+      </button>
     </div>
   </div>
 

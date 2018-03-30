@@ -16,6 +16,12 @@
         [options]="chatConfig$ | async"
         [messages]="chatMessages$ | async">
       </knx-chat-stream>
+
+      <knx-final-advice
+        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="adviceWeb"
+        [buttonVisible]="false"
+        [options]="knxFinalAdviceOptions">
+      </knx-final-advice>
     </div>
   </knx-wizard-rx>
 </div>
