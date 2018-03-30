@@ -1,0 +1,27 @@
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
+     knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+  <div class="container">
+    <knx-step-navigation
+      [steps]="formSteps"
+      [currentStep]="knxWizardService.currentStepIndex"
+      [clickable]="true"
+      (stepChange)="goToStep($event);">
+    </knx-step-navigation>
+  </div>
+</div>
+
+<div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur
+     [enableBlur]="knxChatStream.chatExpanded">
+  <knx-wizard-rx>
+
+    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="knxWizardService.currentStepIndex !== 1"
+         #knxWizardSidebar>
+      <knx-chat-stream #knxChatStream
+                       [options]="chatConfig$ | async"
+                       [messages]="chatMessages$ | async">
+
+      </knx-chat-stream>
+
+    </div>
+  </knx-wizard-rx>
+</div>

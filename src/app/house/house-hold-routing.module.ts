@@ -12,7 +12,11 @@ export const houseHoldRoutes: Routes = [
     path: 'premiums',
     canActivateChild: [CanActivateHouseHoldFlowGuard],
     loadChildren: './submodules/house-hold-premiums/house-hold-premiums.module#HouseHoldPremiumsModule'
-  }
+  },
+  {
+    path: 'buy',
+    loadChildren: './submodules/house-hold-buy/house-hold-buy.module#HouseHoldBuyModule'
+  },
 ];
 
 @NgModule({

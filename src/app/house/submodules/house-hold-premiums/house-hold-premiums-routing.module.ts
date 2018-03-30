@@ -11,7 +11,7 @@ export const houseHoldPremiumsRoutes: Routes = [
   {
     path: '',
     component: HouseHoldPremiumsComponent,
-    canActivateChild: [CanActivateHouseHoldFlowGuard],
+    // canActivateChild: [CanActivateHouseHoldFlowGuard],
     data: {
       title: '...'
     },
