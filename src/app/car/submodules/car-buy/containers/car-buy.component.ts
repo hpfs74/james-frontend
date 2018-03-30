@@ -20,6 +20,7 @@ import { SharedService, TEMP_VARIABLE_KEYS } from '@app/shared/services/shared.s
 import { InsuranceAdvice } from '@insurance/models';
 import { JamesTagPipe } from '@app/shared/pipes';
 import { KNXFinalAdviceOptions } from '@app/components/knx-final-advice/knx-final-advice.options';
+import 'rxjs/add/operator/filter';
 
 @Component({
   providers: [AsyncPipe, JamesTagPipe, CurrencyPipe],
