@@ -16,14 +16,14 @@ import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseHoldBuyRoutingModule } from './house-hold-buy-routing.module';
 import { AddressModule } from '@app/address/address.module';
 import { HouseDataEffects } from '@app/house/effects/house-data';
-import { HouseHoldBuyComponent } from '@app/house/submodules/house-hold-buy/containers/house-hold-buy.component/house-hold-buy.component';
-import {
-  HouseHoldBuyDetailsComponent
-} from '@app/house/submodules/house-hold-buy/containers/house-hold-buy-details/house-hold-buy-details.component';
+import { HouseHoldBuyComponent } from './containers/house-hold-buy.component/house-hold-buy.component';
+import { HouseHoldBuyDetailsComponent  } from './containers/house-hold-buy-details/house-hold-buy-details.component';
+import { HouseHoldPaymentDetailsComponent } from './containers/house-hold-payment-details/house-hold-payment-details.component';
 
 export const COMPONENTS = [
   HouseHoldBuyComponent,
-  HouseHoldBuyDetailsComponent
+  HouseHoldBuyDetailsComponent,
+  HouseHoldPaymentDetailsComponent
 ];
 
 @NgModule({

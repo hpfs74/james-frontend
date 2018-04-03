@@ -5,13 +5,11 @@ import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums
 import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/house-hold-premiums.component';
 import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
 import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
-import { CanActivateHouseHoldFlowGuard } from '@core/services/house-hold-guard.service';
 
 export const houseHoldPremiumsRoutes: Routes = [
   {
     path: '',
     component: HouseHoldPremiumsComponent,
-    // canActivateChild: [CanActivateHouseHoldFlowGuard],
     data: {
       title: '...'
     },
