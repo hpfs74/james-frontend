@@ -22,12 +22,19 @@ import * as householddata from '@app/house/actions/house-hold-data';
 import { CalculatedPremium, HouseHoldPremiumResponse } from '@app/house/models/house-hold-premium';
 import { Insurance, InsuranceAdvice } from '@insurance/models';
 import 'rxjs/add/operator/filter';
-
+import { HouseHoldDetailForm } from '@app/house/submodules/house-hold-buy/containers/house-hold-buy-details/house-hold-buy-details.form';
+import { FormBuilder } from '@angular/forms';
+import { TagsService } from '@app/core/services';
+import { TranslateService } from '@ngx-translate/core';
+import { AddressForm } from '@app/address/components/address.form';
+import * as FormUtils from '@app/utils/base-form.utils';
+import * as fromCore from '@app/core/reducers';
 
 @Component({
   providers: [AsyncPipe],
   selector: 'knx-house-hold-buy-details',
   templateUrl: './house-hold-buy-details.component.html',
+  styleUrls: ['./house-hold-buy-details.component.scss'],
 })
 export class HouseHoldBuyDetailsComponent implements OnInit {
   houseInsurances: CalculatedPremium[];
@@ -38,23 +45,54 @@ export class HouseHoldBuyDetailsComponent implements OnInit {
   disableInsuranceBuy: boolean;
   isPremiumsLoading$: Observable<boolean>;
   premiums$: Observable<HouseHoldPremiumResponse>;
-  total: number;
   currentStepOptions: KNXWizardStepRxOptions;
 
   qaRootId = QaIdentifiers.carAdviceRoot;
   subscription$: Array<any>;
-
+  form: HouseHoldDetailForm;
+  addressForm: AddressForm;
+  copies: any;
+  error$: any;
   constructor(private store$: Store<fromRoot.State>,
-              private asyncPipe: AsyncPipe) {
+              private asyncPipe: AsyncPipe,
+              private translateService: TranslateService,
+              private tagsService: TagsService) {
 
     this.getCompareResultCopy();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.premiums', clear: true}));
-
+    this.translateService.get([
+      'household.detail.form_initials_label',
+      'household.detail.form_initials_placeholder',
+      'household.detail.form_firstName_label',
+      'household.detail.form_firstName_placeholder',
+      'household.detail.form_prefix_label',
+      'household.detail.form_prefix_placeholder',
+      'household.detail.form_lastName_label',
+      'household.detail.form_lastName_placeholder',
+      'car.advice.steps.detail.form.gender.label',
+      'car.advice.steps.detail.form.gender.placeholder',
+      'household.details.form_sameAddress_label',
+      'household.details.form_sameAddress_yes_value',
+      'household.details.form_sameAddress_no_value',
+      'household.detail.next_step',
+      'household.common.step.options.backButtonLabel'
+    ]).subscribe(res => {
+      this.copies = res;
+      const formBuilder = new FormBuilder();
+      this.form = new HouseHoldDetailForm(formBuilder,
+        this.tagsService.getAsLabelValue('car_flow_gender'),
+        this.copies);
+      this.addressForm = new AddressForm(formBuilder);
+    });
     this.currentStepOptions = {
       label: 'Premiums list'
     };
-    this.total = this.initialAmount;
-    // this.error$ = this.store$.select(fromHouse.getHouseHoldPremiumError);
+    this.error$ = this.store$.select(fromCore.getWizardError);
+    const formBuilder = new FormBuilder();
+    this.currentStepOptions = {
+      nextButtonLabel: this.copies['household.detail.next_step'],
+      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+    };
   }
 
   ngOnInit(): void {
@@ -70,10 +108,6 @@ export class HouseHoldBuyDetailsComponent implements OnInit {
           this.insurances = this.houseInsurances.map(this.fromHouseToInsuranceAdvice);
         }
       });
-  }
-
-  showAll(): void {
-    this.total = this.insurances.length;
   }
 
   trackInsurance(index, item): any {
@@ -129,6 +163,18 @@ export class HouseHoldBuyDetailsComponent implements OnInit {
 
       supported: true
     };
+  }
+
+  goToPreviousStep() {
+    this.store$.dispatch(new wizardActions.Back());
+  }
+
+  goToNextStep() {
+    FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
+    if (!this.form.formGroup.valid) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
+    }
+    this.store$.dispatch(new wizardActions.Forward());
   }
 
 }

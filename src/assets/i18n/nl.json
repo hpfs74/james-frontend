@@ -327,5 +327,17 @@
   "household.legal.q6.error": "Error 6",
   "household.legal.q7.error": "Error 7",
   "household.legal.form_label": "Legal",
-  "household.legal.next_step": "Next step"
+  "household.legal.next_step": "Next step",
+  "household.detail.form_initials_label": "Initials",
+  "household.detail.form_initials_placeholder": "",
+  "household.detail.form_firstName_label": "Firstname",
+  "household.detail.form_firstName_placeholder": "",
+  "household.detail.form_prefix_label": "Prefix",
+  "household.detail.form_prefix_placeholder": "",
+  "household.detail.form_lastName_label": "Lastname",
+  "household.detail.form_lastName_placeholder": "",
+  "household.details.form_sameAddress_label": "My comunication address is the same as my insured address",
+  "household.details.form_sameAddress_yes_value": "Yes",
+  "household.details.form_sameAddress_no_value": "No",
+  "household.detail.next_step": "Next step"
 }
