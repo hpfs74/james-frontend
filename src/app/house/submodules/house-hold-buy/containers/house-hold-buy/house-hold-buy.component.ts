@@ -26,6 +26,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { environment } from '@env/environment';
 
+enum Steps {
+  DETAILS,
+  LEGAL,
+  PAYMENT
+}
+
 @Component({
   templateUrl: 'house-hold-buy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -38,6 +44,7 @@ export class HouseHoldBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   chatMessages$: Observable<Array<ChatMessage>>;
   // State of the advice forms data
   subscription$: Subscription[] = [];
+  wizardSteps = Steps;
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
@@ -50,8 +57,8 @@ export class HouseHoldBuyComponent implements OnInit, OnDestroy, QaIdentifier {
       .get([
         'household.advice.steps.step1.title',
         'household.advice.steps.step2.title',
-        'household.advice.steps.step3.title',
-        'household.advice.steps.step4.title'])
+        'household.advice.steps.step3.title'
+      ])
       .subscribe(data => {
         this.formSteps = Object
           .keys(data)

@@ -10,8 +10,6 @@ import { HouseHoldService } from '@app/house/services/house-hold.service';
 import { HouseHoldPremiumsModule } from '@app/house/submodules/house-hold-premiums/house-hold-premiums.module';
 import { HouseHoldAdviceModule } from '@app/house/submodules/house-hold-advice/house-hold-advice.module';
 import { HouseHoldRoutingModule } from '@app/house/house-hold-routing.module';
-import { HouseHoldBuyRoutingModule } from '@app/house/submodules/house-hold-buy/house-hold-buy-routing.module';
-import { HouseHoldBuyComponent } from '@app/house/submodules/house-hold-buy/containers/house-hold-buy.component/house-hold-buy.component';
 import { HouseHoldBuyModule } from '@app/house/submodules/house-hold-buy/house-hold-buy.module';
 
 @NgModule({

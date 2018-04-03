@@ -1,0 +1,78 @@
+<form name="carCheckForm" id="carCheckForm" [formGroup]="form.formGroup" class="knx-fancy-form" role="form">
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-card>
+        <h2>{{'household.legal.form_label' | translate}}</h2>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.refuse"
+              [formControlName]="form.formConfig.refuse.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.crime"
+              [formControlName]="form.formConfig.crime.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.harmed"
+              [formControlName]="form.formConfig.harmed.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.bankrupt"
+              [formControlName]="form.formConfig.bankrupt.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.fraud"
+              [formControlName]="form.formConfig.fraud.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.seizedIncome"
+              [formControlName]="form.formConfig.seizedIncome.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <knx-form-group
+              [options]="form.formConfig.driver"
+              [formControlName]="form.formConfig.driver.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+
+      </knx-card>
+    </div>
+  </div>
+</form>
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+[error]="error$ | async"
+(onNext)="goToNextStep()"
+(onBack)="goToPreviousStep()">
+</knx-wizard-controls>

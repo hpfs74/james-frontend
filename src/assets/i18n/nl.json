@@ -311,5 +311,21 @@
   "house_hold_flow_outside_coverage.J": "Buitenhuisdekking",
   "house_hold_flow_glass_coverage.J": "Glasdekking",
   "household.end_of_line_feedback": "Geef je feedback",
-  "household.end_of_line_text": "Bedankt voor het testen van de nieuwe omgeving voor Inboedelverzekering. Je kunt deze verzekering helaas nog niet aanvragen, binnenkort kan dit wel! Geef je feedback en wij gaan ermee aan de slag."
+  "household.end_of_line_text": "Bedankt voor het testen van de nieuwe omgeving voor Inboedelverzekering. Je kunt deze verzekering helaas nog niet aanvragen, binnenkort kan dit wel! Geef je feedback en wij gaan ermee aan de slag.",
+  "household.legal.q1": "Werd u, of een andere belanghebbende bij deze verzekering(en), in de laatste acht jaar een verzekering van welke aard dan ook opgezegd, geweigerd of aangeboden op beperkte en/of verzwarende voorwaarden?",
+  "household.legal.q2": "Bent u, of een andere belanghebbende bij deze verzekering(en), in de laatste acht jaar in aanraking geweest met politie of justitie?",
+  "household.legal.q3": "Heeft u, of een andere belanghebbende bij deze verzekering(en), in de afgelopen acht jaar eerder een schade geleden door gebeurtenissen als door de aangevraagde verzekering worden gedekt?",
+  "household.legal.q4": "Bent u, of een andere belanghebbende bij deze verzekering, in de afgelopen acht jaar failliet verklaard, in een schuldsanering betrokken of is de rechter akkoord gegaan met een surseance (uitstel) van betaling?",
+  "household.legal.q5": "Bent u, of een andere belanghebbende bij deze verzekering, in de afgelopen acht jaar, betrokken (geweest) bij verzekeringsfraude of opzettelijke misleiding van een financiële instelling?",
+  "household.legal.q6": "Heeft de deurwaarder op dit moment beslag gelegd op inkomsten of bezittingen van u of een andere belanghebbende bij deze verzekering?",
+  "household.legal.q7": "Werd u, of de regelmatige bestuurder, in de afgelopen acht jaar, al dan niet voorwaardelijk, de rijbevoegdheid ontzegd?",
+  "household.legal.q1.error": "Error 1",
+  "household.legal.q2.error": "Error 2",
+  "household.legal.q3.error": "Error 3",
+  "household.legal.q4.error": "Error 4",
+  "household.legal.q5.error": "Error 5",
+  "household.legal.q6.error": "Error 6",
+  "household.legal.q7.error": "Error 7",
+  "household.legal.form_label": "Legal",
+  "household.legal.next_step": "Next step"
 }
