@@ -174,3 +174,15 @@ export function houseNumberValidator(key: string) {
 export function emptyOrPhoneNumberValidator(key: string) {
   return regExValidator(/^(?:[0]\d{9}|)$/, key);
 }
+
+export function trueValidator(error: string) {
+  return (control: FormControl) => {
+    let value = control.value;
+    return !value ? null : {
+      trueError: {
+        valid: false,
+        errorMsg: error
+      }
+    };
+  };
+}
