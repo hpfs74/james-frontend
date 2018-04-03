@@ -96,7 +96,9 @@ function getContent(environment: string) {
       },
       loggingEndpoint: '${getEnvVar('LOGGING_ENDPOINT')}',
       tagsEndpoint: '${getEnvVar('TAGS_ENDPOINT')}',
-      langEndpoint: '${getEnvVar('LANG_ENDPOINT')}'
+      langEndpoint: '${getEnvVar('LANG_ENDPOINT')}',
+      iframeWebappDesktop: '${getEnvVar('IFRAME_WEBAPP_DESKTOP')}',
+      iframeWebappMobile: '${getEnvVar('IFRAME_WEBAPP_MOBILE')}'
     },
     riskInsurance: {
       getHouseData: '${getEnvVar('RISK_INSURANCE_HOUSE_DATA')}',

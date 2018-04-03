@@ -6,6 +6,7 @@ import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { CarInsurance } from '@car/models';
 import { AsyncPipe } from '@angular/common';
 import { KNXWizardStepRxOptions, KNXStepError } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+import { environment } from '@env/environment';
 
 import * as fromRoot from '../../../../reducers';
 import * as fromCar from '../../../../reducers';
@@ -95,11 +96,12 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     ];
 
     // Tune up the iframe settings
-    let iframeIdUrl = 'Mf2i66A0rl1%2BGK_8wAFdoE15zN5DgcbamL4eKWbGPXCcA1hMxLfJ7011OdNATaOhlTnkxApyPzHMMK';
+    let iframeIdUrl = environment.james.iframeWebappDesktop;
     if (window.innerWidth < 1200) {
-      iframeIdUrl = 'iJBi1XMb3WtBHAisHnyIcx1BmRChM%2B16atzw03jXSCkyxSoiB%2B6dgfhhp41Fi5hUsRHsoxX4FFBii0';
+      iframeIdUrl = environment.james.iframeWebappMobile;
     }
-    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://email.knab.nl/optiext/optiextension.dll?ID=' + iframeIdUrl);
+    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(iframeIdUrl);
+
     // Because it is insecure to set up the iframe height with going inside the iframe with js we have to change it based on breakpoints
     switch (true) {
       case (window.innerWidth < 575):
