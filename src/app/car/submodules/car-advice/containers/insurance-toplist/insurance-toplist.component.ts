@@ -95,9 +95,9 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     ];
 
     // Tune up the iframe settings
-    let iframeIdUrl = 'dStdt194J8vCpRC5hXzy5fsGf0dlS6e_rihApiR7Xj51qWFK67%2BKYBA4obE5jioLgZCjc_ypUb6ddH';
+    let iframeIdUrl = 'Mf2i66A0rl1%2BGK_8wAFdoE15zN5DgcbamL4eKWbGPXCcA1hMxLfJ7011OdNATaOhlTnkxApyPzHMMK';
     if (window.innerWidth < 1200) {
-      iframeIdUrl = 'vHKtxx4CMz0J36bmsrkB0%2BbPPMBcj%2BeWHt899Uv8jwWbpveuosWR8KprfWzWN9%2BNHZmFmVERhhKvvS';
+      iframeIdUrl = 'iJBi1XMb3WtBHAisHnyIcx1BmRChM%2B16atzw03jXSCkyxSoiB%2B6dgfhhp41Fi5hUsRHsoxX4FFBii0';
     }
     this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://email.knab.nl/optiext/optiextension.dll?ID=' + iframeIdUrl);
     // Because it is insecure to set up the iframe height with going inside the iframe with js we have to change it based on breakpoints
