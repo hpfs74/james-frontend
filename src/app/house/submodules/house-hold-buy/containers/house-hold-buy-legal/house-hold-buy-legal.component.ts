@@ -14,6 +14,8 @@ import { TranslateService } from '@ngx-translate/core';
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as fromRoot from '@app/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
+import * as fromCore from '@app/core/reducers';
+
 @Component({
   selector: 'knx-house-hold-buy-legal',
   templateUrl: 'house-hold-buy-legal.component.html'
