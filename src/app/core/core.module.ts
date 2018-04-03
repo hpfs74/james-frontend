@@ -52,6 +52,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { KNXEndOfLineComponent } from '@app/house/components/knx-end-of-line/knx-end-of-line.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, environment.james.langEndpoint);
@@ -63,7 +64,8 @@ export const COMPONENTS = [
   NavbarComponent,
   AppLoaderComponent,
   AuthRedirectModalComponent,
-  ProfileModalComponent
+  ProfileModalComponent,
+  KNXEndOfLineComponent
 ];
 
 @NgModule({
@@ -95,7 +97,8 @@ export const COMPONENTS = [
   exports: COMPONENTS,
   entryComponents: [
     AuthRedirectModalComponent,
-    ProfileModalComponent
+    ProfileModalComponent,
+    KNXEndOfLineComponent
   ]
 })
 export class CoreModule {

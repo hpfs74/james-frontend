@@ -1,4 +1,7 @@
-export class HouseHoldPremiumRequest {
+/**
+ * Criteria by which we've found this selection
+ */
+export class HouseHoldSearchCriteria {
   Birthdate: number;
   CommencingDate: number;
   Zipcode: string;
@@ -39,6 +42,9 @@ export class HouseHoldPremiumRequest {
   customerName?: string;
   customerEmail?: string;
   customerPhone?: string;
+}
+
+export class HouseHoldPremiumRequest extends HouseHoldSearchCriteria {
 }
 
 export interface ConditionUrl {

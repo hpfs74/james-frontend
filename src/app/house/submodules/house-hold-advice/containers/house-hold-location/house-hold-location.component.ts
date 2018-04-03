@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -53,23 +53,25 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
               private translateService: TranslateService) {
+
     this.translateService.get([
+      'household.advice.steps.step1.title',
       'household.locatie.step.options.nextButtonLabel'
     ]).subscribe(res => {
       this.copies = res;
+
+      this.currentStepOptions = {
+        label: this.copies['household.advice.steps.step1.title'],
+        nextButtonLabel: this.copies['household.locatie.step.options.nextButtonLabel'],
+        hideBackButton: true,
+        hideNextButton: false,
+        nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
+      };
     });
 
     this.initializeForms();
     this.selectInitialStates();
     this.setInitialSubscriptions();
-
-    this.currentStepOptions = {
-      label: 'Locatie',
-      nextButtonLabel: this.copies['household.locatie.step.options.nextButtonLabel'],
-      hideBackButton: true,
-      hideNextButton: false,
-      nextButtonClass: 'knx-button knx-button--3d knx-button--primary'
-    };
   }
 
   initializeForms(): void {
@@ -86,17 +88,27 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
 
   setInitialSubscriptions(): void {
     this.subscriptions$ = [
-      this.store$.select(fromAddress.getAddressLoaded)
-        .filter(data => data === true)
-        .subscribe(data => this.addressFound()),
+      this.address$
+        .filter(data => data !== null)
+        .subscribe(value => {
+          this.store$.dispatch(new houseDataActions.GetInfo({
+            Zipcode: value.postcode,
+            HouseNumber: value.number_extended ? value.number_extended.number_only : null,
+            HouseNumberAddition: value.number_extended ? value.number_extended.number_extension : null
+          } as HouseDataRequest));
+        }),
 
-      this.store$.select(getHouseDataAddress)
-        .subscribe(data => this.setAddress(data)),
+      // get the current house hold request info
       this.store$.select(getHouseHoldDataInfo)
+        .take(1)
         .subscribe((data) => this.setOwnedBuilding(data)),
+
+      // get the result of the api call to risk for house data info
       this.store$.select(getHouseDataResult)
         .filter(data => data !== null)
         .subscribe(data => this.setHouseTypePrefill(data)),
+
+      // check if the advice is active otherwise will start one
       this.store$.select(getHouseHoldDataAdvice)
         .subscribe((advice) => {
           if (!advice) {
@@ -106,50 +118,45 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
     ];
   }
 
+  /**
+   * set the data about house type in the store
+   *
+   * @param data - payload object from the risk api
+   */
   setHouseTypePrefill(data) {
 
     this.store$.dispatch(new houseHoldData.Update({
       RoomCount: data.RoomCount,
       SurfaceArea: data.SurfaceArea,
       Volume: data.Volume,
-      HouseType: data.HouseType
+      HouseType: data.HouseType,
+      BuildYear: data.BuildYear
     }));
   }
 
-  addressFound() {
-    this.subscriptions$.push(this.address$
-      .filter(value => value !== null)
-      .subscribe(value => {
-
-        this.store$.dispatch(new houseDataActions.GetInfo({
-          Zipcode: value.postcode,
-          HouseNumber: value.number_extended ? value.number_extended.number_only : null,
-          HouseNumberAddition: value.number_extended ? value.number_extended.number_extension : null
-        } as HouseDataRequest));
-      }));
-  }
-
-  setAddress(value) {
-    if (value) {
-      this.addressForm.formGroup.patchValue(Object.assign({}, {
-        postalCode: value.postcode,
-        houseNumber: value.number_extended ? value.number_extended.number_only : null,
-        houseNumberExtension: value.number_extended ? value.number_extended.number_extension : null
-      }));
+  /**
+   * update form values
+   *
+   * @param value
+   */
+  setOwnedBuilding(value) {
+    if (!value) {
+      return;
     }
+    this.addressForm.formGroup.patchValue(Object.assign({}, {
+      postalCode: value.Zipcode,
+      houseNumber: value.HouseNumber,
+      houseNumberExtension: value.HouseNumberAddition
+    }));
+
+    this.form.formGroup.patchValue(Object.assign({}, {
+      houseHold: value.OwnedBuilding
+    }));
 
     setTimeout(() => {
       FormUtils.updateAndValidateControls(this.form.formGroup, value);
       FormUtils.updateAndValidateControls(this.addressForm.formGroup, value);
     });
-  }
-
-  setOwnedBuilding(value) {
-    if (value) {
-      this.form.formGroup.patchValue(Object.assign({}, {
-        houseHold: value.OwnedBuilding
-      }));
-    }
   }
 
   ngAfterViewInit(): void {

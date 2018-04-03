@@ -45,10 +45,7 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy {
 
   ngOnInit() {
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'car.buy.payment', clear: true}));
-    const startDate = this.form.formGroup.get('startDate');
-    const currentDate = new Date();
-    startDate.setValue(currentDate);
-    FormUtils.validateControls(this.form.formGroup, ['startDate']);
+
     this.subscription$.push(
       this.advice$.subscribe(advice => this.setAdvice(advice))
     );
@@ -60,9 +57,8 @@ export class CarPaymentComponent implements OnInit, QaIdentifier, OnDestroy {
 
   /* istanbul ignore next */
   setAdvice(value: any) {
-    if (value && value.startDate || value && value.iban) {
+    if (value && value.iban) {
       this.form.formGroup.patchValue({
-        startDate: FormUtils.dateDecode(value.startDate),
         iban: value.iban
       });
       FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));

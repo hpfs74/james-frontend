@@ -12,13 +12,20 @@
       <div class="col-md-5 knx-insurance-result__data">
 
         <div class="row">
-          <div class="col-md-6 col-6 knx-insurance-result__price-quality">
-            <div class="knx-insurance-result__value">{{ insurance.price | currency:'EUR':true }}</div>
-            <div class="knx-insurance-result__label">Verzekerd bedrag</div>
+          <div class="col-md-12 col-12 knx-insurance-result__details">
+            <div class="knx-insurance-result__value">{{ insurance.details }}</div>
+            <div class="knx-insurance-result__label">{{ 'general.insurace.details' | translate }}</div>
           </div>
         </div>
 
-        <div class="row" *ngIf="insurance.own_risk">
+        <div class="row">
+          <div class="col-md-6 col-6 knx-insurance-result__price-quality">
+            <div class="knx-insurance-result__value">{{ insurance.price | currency:'EUR':true }}</div>
+            <div class="knx-insurance-result__label">{{ 'household.premiumDetail.insurance.insAmt.label' | translate }}</div>
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col-md-6 col-6 knx-insurance-result__own-risk">
             <div class="knx-insurance-result__value">{{ insurance.own_risk | currency:'EUR':true }}</div>
             <div class="knx-insurance-result__label">{{ 'general.insurance.own_risk' | translate }}</div>

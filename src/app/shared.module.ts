@@ -64,7 +64,8 @@ import {
   ClickOutsideDirective,
   QaIdentifierDirective,
   StickyDirective,
-  TouchCapableDirective
+  TouchCapableDirective,
+  FirstElementFocusDirective
 } from './shared/directives';
 
 /**
@@ -131,6 +132,7 @@ export const sharedComponents = [
   QaIdentifierDirective,
   StickyDirective,
   TouchCapableDirective,
+  FirstElementFocusDirective,
   // Components
   AppPromoBlockComponent,
   AsyncPreviewComponent,

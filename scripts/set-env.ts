@@ -53,12 +53,16 @@ function getContent(environment: string) {
     featureToggles: {
       enableBuyFlowEmail: ${getEnvVar('FEATURE_BUY_FLOW_EMAIL')},
       enableAnalyticsLogging: ${getEnvVar('FEATURE_ANALYTICS_LOGGING')},
-      provisionPDFLink: '${getEnvVar('FEATURE_PROVISION_PDF')}'
+      provisionPDFLink: '${getEnvVar('FEATURE_PROVISION_PDF')}',
+      knabLab: '${getEnvVar('KNAB_LAB')}'
     },
     external: {
       knab: '${getEnvVar('KNAB_NL')}',
       login: '${getEnvVar('LOGIN')}',
-      static: '${getEnvVar('STATIC_PAGE_URL')}'
+      static: '${getEnvVar('STATIC_PAGE_URL')}',
+      iframeUrl: '${getEnvVar('IFRAME_URL')}',
+      iframeDesktopParam: '${getEnvVar('IFRAME_DESKTOP_PARAM')}',
+      iframeMobileParam: '${getEnvVar('IFRAME_MOBILE_PARAM')}',
     },
     james: {
       featureToggle: '${getEnvVar('JAMES_API_FEATURE_TOGGLE')}',

@@ -1,15 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CalculatedPremium } from '@app/house/models/house-hold-premium';
-import * as assistant from '@core/actions/assistant';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
 import { TranslateService } from '@ngx-translate/core';
-import * as wizardActions from '@core/actions/wizard';
-
-import * as fromHouseHold from '@app/house/reducers';
 import { Subscription } from 'rxjs/Subscription';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
+
+import * as assistant from '@core/actions/assistant';
+import * as wizardActions from '@core/actions/wizard';
+import * as fromRoot from '@app/reducers';
+import * as fromHouseHold from '@app/house/reducers';
+import * as layout from '@app/core/actions/layout';
 
 @Component({
   selector: 'knx-house-hold-premiums-detail',
@@ -64,7 +65,8 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
   }
 
   goToNextStep() {
-    this.store$.dispatch(new wizardActions.Forward());
+    // this.store$.dispatch(new wizardActions.Forward());
+    this.store$.dispatch(new layout.OpenModal('houseHoldEndOftheLineModal'));
   }
 }
 
