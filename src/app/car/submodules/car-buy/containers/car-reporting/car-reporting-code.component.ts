@@ -16,6 +16,8 @@ import * as fromInsurance from '@app/insurance/reducers';
 import * as assistant from '@app/core/actions/assistant';
 import * as advice from '@app/insurance/actions/advice';
 
+import * as moment from 'moment';
+
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 import 'rxjs/add/operator/take';
@@ -94,6 +96,12 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
     if (value) {
       FormUtils.updateAndValidateControls(this.form.formGroup, value);
     }
+  }
+
+  startDateIsToday() {
+    const startDate = moment(this.form.formGroup.get('startDate').value, 'DD/MM/YYYY');
+    const today = moment(new Date(), 'DD/MM/YYYY');
+    return startDate === today;
   }
 
   /**

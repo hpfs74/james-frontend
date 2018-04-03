@@ -10,10 +10,17 @@
               [formControlName]="form.formConfig.startDate.formControlName">
 
               <knx-tooltip>
-                Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
-                Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.
+                <p>Wil je de verzekering vandaag in laten gaan? Tijdens werkdagen tot 20u en zaterdagen tot 15u proberen
+                  we je aanvraag op dezelfde dag te verwerken. Let op: Je bent na je aanvraag niet automatisch direct verzekerd.</p>
+                <p>Zorg ervoor dat de auto tenminste WA verzekerd is zodra deze op jouw naam staat. Je loopt anders kans op een boete.</p>
               </knx-tooltip>
             </knx-form-group>
+
+            <div *ngIf="startDateIsToday()" class="knx-note">
+              Wil je de verzekering vandaag in laten gaan?
+              Let op: Je bent na je aanvraag niet direct verzekerd.
+              Tijdens werkdagen tot 20u en zaterdagen tot 17u proberen we je aanvraag op dezelfde dag te verwerken.
+            </div>
           </div>
         </div>
 
