@@ -1,0 +1,79 @@
+<knx-collapsible-panel
+  [collapsible]="collapsible"
+  title="{{ 'general.contacts.title' | translate }}"
+  [showStep]="false">
+
+  <div class="knx-collapsible-panel__content">
+    <div class="row">
+      <div class="col-6 col-md-6">
+        {{ 'general.contacts.lastname.label' | translate }}
+      </div>
+      <div class="col-6 col-md-6">
+        {{ contact.infix }} {{ contact.lastName }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        {{ 'general.contacts.firstname.label' | translate }}
+      </div>
+      <div class="col-6">
+        {{ contact.firstName }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        {{ 'general.contacts.dob.label' | translate }}
+      </div>
+      <div class="col-6">
+        {{ contact.dateOfBirth | date }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        {{ 'general.contacts.familySituation.label' | translate }}
+      </div>
+      <div class="col-6">
+        {{ contact.familySituation }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <hr/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        {{ 'general.contacts.address.label' | translate }}
+      </div>
+      <div class="col-6">
+        {{contact.address.street}} {{contact.address.number_extended ? contact.address.number_extended.number_only : ''}}{{contact.address.number_extended ? contact.address.number_extended.number_extension : ''}},<br/>
+        {{contact.address.postcode}} {{contact.address.city}}
+      </div>
+    </div>
+
+    <div class="row" *ngIf="contact.addressForComminications">
+      <div class="col-6">
+        {{ 'general.contacts.addressForCommunications.label' | translate }}
+      </div>
+      <div class="col-6">
+        {{contact.addressForComminications.street}} {{contact.addressForComminications.number_extended ? contact.addressForComminications.number_extended.number_only : ''}}{{contact.addressForComminications.number_extended ? contact.addressForComminications.number_extended.number_extension : ''}},<br/>
+        {{contact.addressForComminications.postcode}} {{contact.addressForComminications.city}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        {{ 'general.contacts.email.label' | translate }}
+      </div>
+      <div class="col-6">
+        {{ contact.email }}
+      </div>
+    </div>
+  </div>
+
+</knx-collapsible-panel>

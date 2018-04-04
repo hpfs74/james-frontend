@@ -5,6 +5,7 @@ import {
   HouseHoldStoredAdviceRequest,
   HouseHoldStoredAdviceResponse
 } from '@app/house/models/house-hold-stored-advice';
+import { InsuranceStore } from '@app/house/models/house-hold-store';
 
 export type Action = HouseHoldDataActions.All;
 
@@ -16,6 +17,7 @@ export interface State {
   storeReference: HouseHoldStoredAdviceResponse;
   storeError: boolean;
   storeErrorMessage: string;
+  newFlowAdvice: InsuranceStore;
 }
 
 export const initialState: State = {
@@ -25,11 +27,20 @@ export const initialState: State = {
   store: null,
   storeReference: null,
   storeError: false,
-  storeErrorMessage: null
+  storeErrorMessage: null,
+  newFlowAdvice: null
 };
 
 export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
+
+    case HouseHoldDataActions.NEW_FLOW_STORE_ADVICE: {
+      const payload = action.payload;
+
+      return Object.assign({}, state, {
+        newFlowAdvice: payload
+      });
+    }
 
     case HouseHoldDataActions.STORE_ADVICE: {
       const payload = action.payload;
