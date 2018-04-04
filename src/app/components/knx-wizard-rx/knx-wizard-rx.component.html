@@ -3,7 +3,7 @@
       <ng-content select=".knx-wizard__sidebar"></ng-content>
     </div>
 
-    <div class="knx-wizard-step-content col-sm-{{sidebar ? 8 : 12}} pull-sm-4">
+    <div class="knx-wizard-step-content" [ngClass]="{'col-sm-8 pull-sm-4' : sidebar, 'col-md-8': !sidebar}">
       <div>
         <router-outlet (activate)="onActivate($event)" ></router-outlet>
       </div>
