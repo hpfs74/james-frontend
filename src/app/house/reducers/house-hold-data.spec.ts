@@ -21,7 +21,8 @@ describe('House Hold Data reducer', () => {
         store: null,
         storeReference: null,
         storeError: false,
-        storeErrorMessage: null
+        storeErrorMessage: null,
+        newFlowAdvice: null
       };
       const result = fromHouseHoldData.reducer(fromHouseHoldData.initialState, action);
       expect(result).toEqual(expectedResult);
@@ -42,7 +43,8 @@ describe('House Hold Data reducer', () => {
         store: null,
         storeReference: null,
         storeError: false,
-        storeErrorMessage: null
+        storeErrorMessage: null,
+        newFlowAdvice: null
       };
       const result = fromHouseHoldData.reducer(fromHouseHoldData.initialState, action);
       expect(result.info.RoomCount).toEqual(payload.RoomCount);

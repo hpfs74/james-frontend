@@ -1,49 +1,87 @@
 import { HouseHoldSearchCriteria, CalculatedPremium } from './house-hold-premium';
+import { Address } from '@app/address/models';
 
-/** Used to transmit which selection has been made. */
-export class HouseHoldSelectionRequest {
+export interface InsuranceStore {
+
+  /** insurance for house hold */
+  houseHoldInsurance: InsuranceChoice;
+
+  /** insurance for house */
+  houseInsurance: InsuranceChoice;
+
+  /** customer information */
+  contacts: ContactDetails;
+
+  /** legal questions */
+  questions: LegalQuestions;
+
+  /** customer payment details */
+  paymentDetails: PaymentDetails;
+}
+
+/** this interface will contain the payment method from customer */
+export interface PaymentDetails {
+  /** contains the customer iban number */
+  iban: string;
+}
+
+export interface InsuranceChoice {
   /** Criteria used to find the available premiums */
-  SearchCriteria: HouseHoldSearchCriteria;
+  searchCriteria: HouseHoldSearchCriteria;
 
   /** These are the premiums that were available and from which the user had to choose. */
-  AvailablePremiums: Array<CalculatedPremium>;
+  availablePremiums: Array<CalculatedPremium>;
 
   /** This is what the user selected, referencing the premium by its 'Identifier' */
-  SelectedPremiumId: string;
-
-  /** Contact details of the user */
-  ContactDetails: ContactDetails;
+  selectedPremium: CalculatedPremium;
 }
 
 /** Contact details the customer provided when submitting his selection */
-export class ContactDetails {
-  /** User-provided name */
-  FullName: string;
+export interface ContactDetails {
+  /** customer first name */
+  firstName: string;
 
-  PhoneNumber: string;
+  /** infix typical dutch */
+  infix: string;
 
-  EmailAddress: string;
+  /** prefix like Mr, Mrs, Dr, Ms, Hr, Vr, etc. */
+  prefix: string;
 
-  HasAcceptedTermsAndConditions: boolean;
+  /** customer last name */
+  lastName: string;
 
-  HasOptInForServiceUpdated: boolean;
+  /** customer email address */
+  email: string;
+
+  /** M: male, F: female */
+  gender?: string;
+
+  /** date of birth */
+  dateOfBirth: Date;
+
+  /** family situation with values */
+  familySituation: string;
+
+  /** Location address */
+  address: Address;
+
+  /** Address for sending paper mail, this would be null in case is the same from the normal address */
+  addressForComminications?: Address;
+
+  /** true if the user accepted knab terms and conditions */
+  hasAcceptedTermsAndConditionsFromKnab?: boolean;
+
+  /** true if the user accepted risk terms and conditions */
+  hasAcceptedTermsAndConditionsFromRisk?: boolean;
 }
 
-/** Generic model for errors. Based on http://jsonapi.org/examples/#error-objects
- * and http://jsonapi.org/format/#errors
- */
-export class InsuranceApiErrors {
-  Errors: Array<InsuranceApiError>;
-}
 
-/** Single error description */
-export class InsuranceApiError {
-  /** HTTP status code, expressed as string */
-  Status: string;
-  /** Short, human-readable summary that should not change from occurrence to occurrence */
-  Title: string;
-  /** Human-readable explanation */
-  Details: string;
-  /** Unique ID to this particular occurrence */
-  Id: string;
+export interface LegalQuestions {
+  question1: boolean;
+  question2: boolean;
+  question3: boolean;
+  question4: boolean;
+  question5: boolean;
+  question6: boolean;
+  question7: boolean;
 }
