@@ -89,7 +89,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldHouseTypeForm(formBuilder, this.roomValues,
       this.tagsService.getAsLabelValue('house_hold_flow_surface_area'),
-      this.tagsService.getAsLabelValue('house_hold_flow_building_type'),
+      this.tagsService.getAsLabelValue('house_hold_flow_building_type', true),
       this.tagsService.getAsLabelValue('house_hold_flow_build_year'));
   }
 
