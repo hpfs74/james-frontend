@@ -59,14 +59,9 @@ describe('Component: Thank You', () => {
       expect(parElements.length).toBeGreaterThan(0);
 
       const first = parElements[0].nativeElement;
-      expect(first.textContent).toContain('Gefeliciteerd met je nieuwe verzekering');
+      expect(first.textContent).toContain('Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.');
       expect(first.textContent.replace(/\s+/g, ' '))
-        .toContain('We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.');
-
-      const second = parElements[1].nativeElement;
-      const expectedEmailPar = 'Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.';
-
-      expect(second.textContent).toEqual(expectedEmailPar);
+        .toContain('Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.');
     });
   });
 
