@@ -339,5 +339,8 @@
   "household.details.form_sameAddress_label": "My comunication address is the same as my insured address",
   "household.details.form_sameAddress_yes_value": "Yes",
   "household.details.form_sameAddress_no_value": "No",
-  "household.detail.next_step": "Next step"
+  "household.detail.next_step": "Next step",
+  "household.buy.steps.step1.title": "Personal details",
+  "household.buy.steps.step2.title": "Legal",
+  "household.buy.steps.step3.title": "Payment"
 }

@@ -55,9 +55,9 @@ export class HouseHoldBuyComponent implements OnInit, OnDestroy, QaIdentifier {
 
     this.translateService
       .get([
-        'household.advice.steps.step1.title',
-        'household.advice.steps.step2.title',
-        'household.advice.steps.step3.title'
+        'household.buy.steps.step1.title',
+        'household.buy.steps.step2.title',
+        'household.buy.steps.step3.title'
       ])
       .subscribe(data => {
         this.formSteps = Object
