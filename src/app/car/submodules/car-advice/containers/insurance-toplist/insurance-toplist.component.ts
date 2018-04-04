@@ -96,9 +96,9 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     ];
 
     // Tune up the iframe settings
-    let iframeIdUrl = environment.james.iframeWebappDesktop;
+    let iframeIdUrl = environment.external.iframeWebappDesktop;
     if (window.innerWidth < 1200) {
-      iframeIdUrl = environment.james.iframeWebappMobile;
+      iframeIdUrl = environment.external.iframeWebappMobile;
     }
     this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(iframeIdUrl);
 

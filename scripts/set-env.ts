@@ -60,9 +60,8 @@ function getContent(environment: string) {
       knab: '${getEnvVar('KNAB_NL')}',
       login: '${getEnvVar('LOGIN')}',
       static: '${getEnvVar('STATIC_PAGE_URL')}',
-      iframeUrl: '${getEnvVar('IFRAME_URL')}',
-      iframeDesktopParam: '${getEnvVar('IFRAME_DESKTOP_PARAM')}',
-      iframeMobileParam: '${getEnvVar('IFRAME_MOBILE_PARAM')}',
+      iframeWebappDesktop: '${getEnvVar('IFRAME_WEBAPP_DESKTOP')}',
+      iframeWebappMobile: '${getEnvVar('IFRAME_WEBAPP_MOBILE')}'
     },
     james: {
       featureToggle: '${getEnvVar('JAMES_API_FEATURE_TOGGLE')}',
@@ -100,9 +99,7 @@ function getContent(environment: string) {
       },
       loggingEndpoint: '${getEnvVar('LOGGING_ENDPOINT')}',
       tagsEndpoint: '${getEnvVar('TAGS_ENDPOINT')}',
-      langEndpoint: '${getEnvVar('LANG_ENDPOINT')}',
-      iframeWebappDesktop: '${getEnvVar('IFRAME_WEBAPP_DESKTOP')}',
-      iframeWebappMobile: '${getEnvVar('IFRAME_WEBAPP_MOBILE')}'
+      langEndpoint: '${getEnvVar('LANG_ENDPOINT')}'
     },
     riskInsurance: {
       getHouseData: '${getEnvVar('RISK_INSURANCE_HOUSE_DATA')}',
