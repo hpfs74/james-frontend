@@ -10,23 +10,25 @@ import { Component, Input } from '@angular/core';
           <div class="knx-card">
             <h2 class="knx-thank-you__title">{{title}}</h2>
 
-          <!-- car specific copy -->
-          <div *ngIf="loggedIn">
+            <!-- car specific copy -->
+            <div *ngIf="loggedIn">
               <ng-container *ngIf="insuranceType === 'autoverzekering'; else default">
-            <p>We hebben je aanvraag voor een autoverzekering in goede orde ontvangen.<br>
-              Wij gaan je aanvraag indienen bij de verzekeraar . Zodra je aanvraag is ingediend, ontvang je van ons bericht.
-              Je hebt nunog geen voorlopige dekking.</p>
-          </ng-container>
+                <p>We hebben je aanvraag in goede orde ontvangen en gaan hem zo snel mogelijk verwerken bij de verzekeraar.</p>
+                <p>Let op: Je hebt nog niet automatisch een voorlopige dekking als je de ingangsdatum op vandaag hebt gezet.
+                  We doen ons uiterste best om je dezelfde dag nog te activeren.</p>
+              </ng-container>
 
-          <ng-template #default>
-            <p>Gefeliciteerd met je nieuwe {{insuranceType}}verzekering.<br>
-              We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.
-              We houden je hier uiteraard van op de hoogte.</p>
-          </ng-template></div>
+              <!--<ng-template #default>-->
+              <!--<p>Gefeliciteerd met je nieuwe {{insuranceType}}verzekering.<br>-->
+              <!--We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.-->
+              <!--We houden je hier uiteraard van op de hoogte.</p>-->
+              <!--</ng-template>-->
+            </div>
 
             <ol *ngIf="!loggedIn">
-              <li>We hebben je aanvraag voor een autoverzekering in goede orde ontvangen. Wij gaan je aanvraag indienen
-                bij de verzekeraar. Zodra je aanvraag is ingediend, ontvang je van ons bericht. Je hebt nu nog geen voorlopige dekking.</li>
+              <li>We hebben je aanvraag in goede orde ontvangen en gaan hem zo snel mogelijk verwerken bij de verzekeraar.
+                Let op: Je hebt nog niet automatisch een voorlopige dekking als je de ingangsdatum op vandaag hebt gezet.
+                We doen ons uiterste best om je dezelfde dag nog te activeren.</li>
               <li>Klik op <strong>"bevestig account"</strong> in de e-mail die we je net hebben gestuurd om je account
                 in gebruik te nemen. </li>
             </ol>
@@ -34,7 +36,7 @@ import { Component, Input } from '@angular/core';
             <p>Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.</p>
 
             <p *ngIf="phone && phoneLink">
-              Bij vragen kun je contact met ons opnemen via <a href="{{phoneLink}}" rel="noopener">{{phone}}</a>
+              Bij vragen kun je ons direct bereiken via <a href="{{phoneLink}}" rel="noopener">{{phone}}</a>
             </p>
           </div>
         </div>

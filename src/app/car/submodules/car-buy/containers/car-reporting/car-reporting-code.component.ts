@@ -27,7 +27,8 @@ const DEFAULT_FORM_VALUES = {
 };
 @Component({
   selector: 'knx-car-reporting-code-form',
-  templateUrl: 'car-reporting-code.component.html'
+  templateUrl: 'car-reporting-code.component.html',
+  styleUrls: ['./car-reporting-code.component.scss']
 })
 export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestroy {
   qaRootId = QaIdentifiers.carReporting;
@@ -99,8 +100,8 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
   }
 
   startDateIsToday() {
-    const startDate = moment(this.form.formGroup.get('startDate').value, 'DD/MM/YYYY');
-    const today = moment(new Date(), 'DD/MM/YYYY');
+    const startDate = moment(this.form.formGroup.get('startDate').value).format('DD/MM/YYYY');
+    const today = moment(new Date()).format('DD/MM/YYYY');
     return startDate === today;
   }
 
