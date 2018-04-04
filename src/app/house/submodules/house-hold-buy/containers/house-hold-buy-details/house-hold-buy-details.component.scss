@@ -3,3 +3,20 @@
 .knx-icon-map-marker {
   font-size: 30px;
 }
+
+.knx-logo-risk {
+  width: 59px;
+  height: 41px;
+  background: url('/assets/images/risk_logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+
+  + h3 {
+    display: inline-block;
+  }
+}
+
+.knx-inline-b {
+  display: inline-block;
+}

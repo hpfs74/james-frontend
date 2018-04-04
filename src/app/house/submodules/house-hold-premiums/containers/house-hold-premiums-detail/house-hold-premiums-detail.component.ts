@@ -66,7 +66,7 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
   }
 
   goToNextStep() {
-    if (window['testing']) {
+    if (localStorage.getItem('testing')) {
       this.store$.dispatch(new router.Go({path: ['/inboedel/buy']}));
     } else {
       this.store$.dispatch(new layout.OpenModal('houseHoldEndOftheLineModal'));

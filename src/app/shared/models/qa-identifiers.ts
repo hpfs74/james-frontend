@@ -24,6 +24,6 @@ export class QaIdentifiers {
   public static readonly houseHoldPremiumDetail   = 'householdpremiumsdetail';
   public static readonly houseHoldPremiumBuy      = 'householdpremiumsbuy';
   public static readonly houseHoldPremiumThankYou = 'householdpremiumsthankyou';
-  public static readonly houseHoldPremiumLegal    = 'householdpremiumslegal';
-
+  public static readonly houseHoldBuyLegal        = 'householdbuylegal';
+  public static readonly houseHoldBuyDetail       = 'householdbuydetail';
 }
