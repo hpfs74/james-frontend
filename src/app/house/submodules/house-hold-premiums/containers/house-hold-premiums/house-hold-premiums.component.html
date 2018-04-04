@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <knx-wizard-rx>
+  <knx-wizard-rx [sidebar]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
