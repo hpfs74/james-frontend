@@ -68,6 +68,15 @@
   [visible]="!(isInsuranceLoading$ | async) && !(isInsuranceError$ | async)">
 </knx-service-guide>
 
+<hr [hidden]="(isInsuranceLoading$ | async) || (isInsuranceError$ | async)">
+
+<div [hidden]="(isInsuranceLoading$ | async) || (isInsuranceError$ | async)">
+  <iframe [src]="iframeUrl"
+          [ngClass]="iframeClass"
+          #iframe
+          frameborder="0"></iframe>
+</div>
+
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [error]="error$ | async"
                      (onNext)="goToNextStep()"

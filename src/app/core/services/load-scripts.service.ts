@@ -176,6 +176,7 @@ export class LoadScriptsService {
       ],
       "frame-src": [
         "'self'",
+        "https://email.knab.nl",
         "https://www.google.com/recaptcha/",
         "https://*.cobrowse.liveperson.net",
         "https://lpcdn.lpsnmedia.net",
