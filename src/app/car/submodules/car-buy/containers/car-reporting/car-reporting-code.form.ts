@@ -52,7 +52,7 @@ export class CarReportingCodeForm extends BaseForm {
     this.formConfig = {
       startDate: {
         formControlName: 'startDate',
-        label: 'Ingangsdatum',
+        label: 'Ingangsdatum verzekering',
         type: 'date',
         help: true,
         formControl: this.formGroup.get('startDate'),

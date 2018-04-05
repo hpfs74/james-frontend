@@ -16,6 +16,8 @@ import * as fromInsurance from '@app/insurance/reducers';
 import * as assistant from '@app/core/actions/assistant';
 import * as advice from '@app/insurance/actions/advice';
 
+import * as moment from 'moment';
+
 import * as fromCore from '@app/core/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 import 'rxjs/add/operator/take';
@@ -25,7 +27,8 @@ const DEFAULT_FORM_VALUES = {
 };
 @Component({
   selector: 'knx-car-reporting-code-form',
-  templateUrl: 'car-reporting-code.component.html'
+  templateUrl: 'car-reporting-code.component.html',
+  styleUrls: ['./car-reporting-code.component.scss']
 })
 export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestroy {
   qaRootId = QaIdentifiers.carReporting;
@@ -94,6 +97,12 @@ export class CarReportingCodeComponent implements OnInit, QaIdentifier, OnDestro
     if (value) {
       FormUtils.updateAndValidateControls(this.form.formGroup, value);
     }
+  }
+
+  startDateIsToday() {
+    const startDate = moment(this.form.formGroup.get('startDate').value).format('DD/MM/YYYY');
+    const today = moment(new Date()).format('DD/MM/YYYY');
+    return startDate === today;
   }
 
   /**
