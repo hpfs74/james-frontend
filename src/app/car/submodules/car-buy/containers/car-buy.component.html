@@ -16,14 +16,16 @@
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
                        [messages]="chatMessages$ | async">
-      </knx-chat-stream>
 
-      <knx-final-advice
-        knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="adviceWeb"
-        class="hidden-xs"
-        [buttonVisible]="false"
-        [options]="knxFinalAdviceOptions">
-      </knx-final-advice>
+        <ng-container>
+          <knx-final-advice
+            knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="adviceWeb"
+            class="hidden-xs"
+            [buttonVisible]="false"
+            [options]="knxFinalAdviceOptions">
+          </knx-final-advice>
+        </ng-container>
+      </knx-chat-stream>
     </div>
   </knx-wizard-rx>
 </div>
