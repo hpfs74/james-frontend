@@ -99,8 +99,7 @@ export class TagsService {
       return null;
     }
 
-
-    const section = this.tags[key];
+    const section: any = this.tags[key];
     return section.map(tag => {
       const copyKey = `${key}.${tag.tag}`;
       let label = this.copies[copyKey];
