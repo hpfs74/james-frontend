@@ -27,12 +27,7 @@ export class HouseHoldDekkingForm extends BaseForm {
       coverage: ['5018', Validators.required],
       outsideCoverage: ['N'],
       netIncomeRange: [null, Validators.required],
-      dateOfBirth: [null,
-        [
-          Validators.required,
-          birthDateValidator('dateOfBirth')
-        ]
-      ],
+      dateOfBirth: [null, [Validators.required, birthDateValidator('dateOfBirth')]],
       familySituation: [null, Validators.required],
       commencingDate: [null, [Validators.required, futureDateValidator('commencingDate', 90)]]
     });

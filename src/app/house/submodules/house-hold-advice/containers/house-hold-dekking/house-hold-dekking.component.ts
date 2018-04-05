@@ -38,7 +38,7 @@ import 'rxjs/add/operator/debounceTime';
   styleUrls: ['./house-hold-dekking.component.scss'],
   templateUrl: 'house-hold-dekking.component.html'
 })
-export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
+export class HouseHoldDekkingComponent implements OnInit, AfterViewInit, OnDestroy {
   qaRootId = QaIdentifiers.houseHoldDekking;
 
   form: HouseHoldDekkingForm;
@@ -177,10 +177,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit() {
     this.selectInitialStates();
     this.setIntialSubscription();
+  }
 
+  ngAfterViewInit(): void {
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     this.setFormAsyncValidators();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));

@@ -1,15 +1,16 @@
 import { FormBuilder } from '@angular/forms';
 import { HouseHoldDekkingForm } from './house-hold-dekking.form';
 
-
 describe('HouseHold Dekking Form', () => {
   let form: HouseHoldDekkingForm;
 
   beforeEach(() => {
     const mockHouseHold = [];
+    let copies = [];
     form = new HouseHoldDekkingForm(new FormBuilder(),
       mockHouseHold,
-      mockHouseHold);
+      mockHouseHold,
+      copies);
   });
 
   it('should have form options defined', () => {
