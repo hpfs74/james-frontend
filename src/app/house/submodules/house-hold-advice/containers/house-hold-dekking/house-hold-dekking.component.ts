@@ -111,7 +111,8 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
-      this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
+      this.tagsService.getAsLabelValue('house_hold_flow_family_situation'),
+      this.copies);
   }
 
   setIntialSubscription() {

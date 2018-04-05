@@ -77,6 +77,7 @@
   "household.dekking.calcHouseVal.disclaimer.description": "Op dit moment verzekeren we de volgende waardevolle spullen niet: audio & computer boven €12.000, sieraden boven €6.000 en kostbaarheden boven €15.000. Neem contact met ons op als je vragen hebt over het verzekeren van deze waardevolle spullen.",
   "household.dekking.calcHouseVal.estimatedVal.suffix": "Geschatte inboedelwaarde",
   "household.dekking.step.options.nextButtonLabel": "Naar het overzicht",
+  "household.dekking.error.dateofbirth": "Geboortedatum is ongeldig",
   "household.premiumList.loading.message": "Een momentje! We vergelijken verschillende aanbieders voor je om de beste match te vinden.",
   "household.premiumList.noResult.message": "Niets gevonden. Ga terug om je keuze aan te passen. Kom je er niet uit? Neem contact op.",
   "household.premiumList.insuranceResults.title": "De verzekeringen voor jouw inboedel",
