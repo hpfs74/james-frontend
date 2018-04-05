@@ -6,6 +6,8 @@ import { FeatureConfigService } from '@app/core/services/feature-config.service'
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { FeatureConfigServiceMock } from '@app/core/services/feature-config.service.mock';
 import { By } from '@angular/platform-browser';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoaderMock } from 'test.common.spec';
 
 describe('Component: HouseHoldDetailComponent', () => {
   let comp: KnabLabButtonComponent;
@@ -13,6 +15,11 @@ describe('Component: HouseHoldDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+        })
+      ],
       declarations: [
         KnabLabButtonComponent
       ],
