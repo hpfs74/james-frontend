@@ -57,11 +57,6 @@ describe('Component: Thank You', () => {
       let parElements = de.queryAll(By.css('p'));
       expect(parElements).toBeDefined();
       expect(parElements.length).toBeGreaterThan(0);
-
-      const first = parElements[0].nativeElement;
-      expect(first.textContent).toContain('Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.');
-      expect(first.textContent.replace(/\s+/g, ' '))
-        .toContain('Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.');
     });
   });
 
