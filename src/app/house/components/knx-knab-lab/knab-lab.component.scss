@@ -6,7 +6,7 @@
 
 .knx-button {
   line-height: 35px;
-  height: unset;
+  height: inherit;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -26,7 +26,7 @@
 @media (max-width: 767px) {
   .knx-button {
     width: 100%;
-    position: unset;
-    transform: unset;
+    position: initial;
+    transform: inherit;
   }
 }
