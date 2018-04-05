@@ -1,24 +1,31 @@
-import { Component, Input, Output, EventEmitter, OnInit, AfterViewChecked, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/filter';
+import { Subscription } from 'rxjs/Subscription';
 
-import * as fromAddress from '../reducers';
-import * as address from '../actions/address';
 
 import { postalCodeMask } from '../../utils/base-form.utils';
 import { AddressLookup, Address, AddressSuggestionParams } from '../models';
 
-import { KNXFormGroupComponent } from '@knx/form-group';
 
 @Component({
   selector: 'knx-address',
   styleUrls: ['./address.component.scss'],
   templateUrl: './address.component.html'
 })
-export class AddressComponent implements OnInit {
+export class AddressComponent implements OnInit, OnDestroy {
+
+  private subscriptions$: Subscription[] = [];
+
   @Input() addressFormGroup: FormGroup;
   @Input() addressFormConfig: any;
   @Input() validationErrors: any;
@@ -31,27 +38,34 @@ export class AddressComponent implements OnInit {
   @Output() onHouseNumberExtensionChange: EventEmitter<AddressLookup> = new EventEmitter();
 
   mask = postalCodeMask;
+
   ngOnInit(): void {
     const postalCodeChange$ = this.addressFormGroup.get('postalCode').valueChanges;
     const houseNumberChange$ = this.addressFormGroup.get('houseNumber').valueChanges;
     const houseNumberExtensionChange$ = this.addressFormGroup.get('houseNumberExtension').valueChanges;
 
-    Observable.combineLatest(postalCodeChange$, houseNumberChange$)
-      .filter(combined => combined[0] && combined[1])
-      .subscribe((combined) => {
-        this.onAddressChange.emit({
-          postalCode: combined[0],
-          houseNumber: combined[1]
-        });
-    });
+    this.subscriptions$.push(
+      Observable.combineLatest(postalCodeChange$, houseNumberChange$)
+        .filter(combined => combined[0] && combined[1])
+        .subscribe((combined) => {
+          this.onAddressChange.emit({
+            postalCode: combined[0],
+            houseNumber: combined[1]
+          });
+        }),
 
-    houseNumberExtensionChange$
-      .subscribe(value =>
-        this.onHouseNumberExtensionChange.emit({
-          postalCode: this.addressFormGroup.value.postalCode,
-          houseNumber: this.addressFormGroup.value.houseNumber,
-          houseNumberExtension: value
-        }));
+      houseNumberExtensionChange$
+        .subscribe(value =>
+          this.onHouseNumberExtensionChange.emit({
+            postalCode: this.addressFormGroup.value.postalCode,
+            houseNumber: this.addressFormGroup.value.houseNumber,
+            houseNumberExtension: value
+          })));
+  }
+
+  /** remove all subscriptions */
+  ngOnDestroy() {
+    this.subscriptions$.forEach(sub => sub.unsubscribe());
   }
 
   getErrors(): Array<string> {

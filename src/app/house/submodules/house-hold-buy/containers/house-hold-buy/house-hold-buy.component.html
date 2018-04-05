@@ -12,7 +12,7 @@
 
 <div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur
      [enableBlur]="knxChatStream.chatExpanded">
-  <knx-wizard-rx>
+  <knx-wizard-rx [sidebar]="false">
 
     <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="knxWizardService.currentStepIndex !== 1"
          #knxWizardSidebar>

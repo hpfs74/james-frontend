@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, Input } from '@angular/core';
 
 @Component({
   selector: 'knx-wizard-rx',
@@ -6,7 +6,7 @@ import { Component, ContentChild, ElementRef, ChangeDetectorRef } from '@angular
   templateUrl: './knx-wizard-rx.component.html',
 })
 export class KNXWizardRxComponent {
-  @ContentChild('knxWizardSidebar') sidebar: ElementRef;
+  @Input() sidebar = true;
   constructor(private changeDetector: ChangeDetectorRef) {}
   onActivate(componentRef: any): void {
     this.changeDetector.detectChanges();

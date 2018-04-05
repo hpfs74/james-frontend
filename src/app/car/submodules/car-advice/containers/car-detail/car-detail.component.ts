@@ -99,9 +99,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     ]).subscribe(res => {
       this.copies = res;
       this.initializeForms();
-      this.selectInitialStates();
-      this.setInitialSubscriptions();
-      this.setStepSupscription();
+
     });
   }
   /**
@@ -230,6 +228,11 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+
+    this.selectInitialStates();
+    this.setInitialSubscriptions();
+    this.setStepSupscription();
+
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
     if (this.route.snapshot && this.route.snapshot.queryParams) {
