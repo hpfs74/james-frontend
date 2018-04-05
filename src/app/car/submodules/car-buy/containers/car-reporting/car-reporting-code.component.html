@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12">
       <knx-card>
-        <h2>Je autogegevens</h2>
+        <h2>{{'car.buy.steps.reporting.title' | translate}}</h2>
         <div class="row">
           <div class="col-sm-6">
             <knx-form-group
@@ -10,10 +10,17 @@
               [formControlName]="form.formConfig.startDate.formControlName">
 
               <knx-tooltip>
-                Je verzekering kan ingaan vanaf vandaag. Je kunt niet met terugwerkende kracht een verzekering afsluiten.
-                Zorg ervoor dat de auto tenminste WA verzekerd is zodra die op jouw naam staat. Je loopt anders kans op een boete.
+                <p>{{'car.buy.steps.reporting.start_date.tooltip' | translate}}</p>
               </knx-tooltip>
             </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <div *ngIf="startDateIsToday()" class="knx-note">
+              {{'car.buy.steps.reporting.start_date.today' | translate}}
+            </div>
           </div>
         </div>
 
@@ -33,10 +40,7 @@
 
               <knx-tooltip>
                 <img class='image-reportingcode' src='/assets/images/reportingcode.png'>
-                Elke auto heeft een eigen meldcode. Vraag je een verzekering aan, dan geef je altijd de meldcode op.
-                De verzekeraar geeft dit door aan de RDW (Rijksdienst voor het Wegverkeer). De RDW houdt zo bij of alle
-                auto's (tenminste WA) verzekerd zijn. Je vindt de meldcode van je auto op deel 1B van je kentekenbewijs.
-                Het zijn de laatste 4 cijfers van het chassisnummer.
+                {{'car.buy.steps.reporting.reporting_code' | translate}}
               </knx-tooltip>
             </knx-form-group>
           </div>
@@ -49,8 +53,7 @@
               [formControlName]="form.formConfig.accessoryValue.formControlName">
 
               <knx-tooltip>
-                Accessoires zijn bijvoorbeeld een losse alarminstallatie, de trekhaak, lichtmetalen velgen of een ingebouwde autoradio.<br>
-                Bij diefstal krijg je de dagwaarde van de accessoires terug van je verzekering.
+                {{'car.buy.steps.reporting.accessory_value' | translate}}
               </knx-tooltip>
             </knx-form-group>
           </div>

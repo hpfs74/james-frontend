@@ -10,31 +10,23 @@ import { Component, Input } from '@angular/core';
           <div class="knx-card">
             <h2 class="knx-thank-you__title">{{title}}</h2>
 
-          <!-- car specific copy -->
-          <div *ngIf="loggedIn">
+            <!-- car specific copy -->
+            <div *ngIf="loggedIn">
               <ng-container *ngIf="insuranceType === 'autoverzekering'; else default">
-            <p>We hebben je aanvraag voor een autoverzekering in goede orde ontvangen.<br>
-              Wij gaan je aanvraag indienen bij de verzekeraar . Zodra je aanvraag is ingediend, ontvang je van ons bericht.
-              Je hebt nunog geen voorlopige dekking.</p>
-          </ng-container>
-
-          <ng-template #default>
-            <p>Gefeliciteerd met je nieuwe {{insuranceType}}verzekering.<br>
-              We versturen je aanvraag en de verzekeraar keurt deze binnen 3 dagen goed.
-              We houden je hier uiteraard van op de hoogte.</p>
-          </ng-template></div>
+                <p>{{'car.purchased.logged_in.text1' | translate}}</p>
+                <p>{{'car.purchased.logged_in.text2' | translate}}</p>
+              </ng-container>
+            </div>
 
             <ol *ngIf="!loggedIn">
-              <li>We hebben je aanvraag voor een autoverzekering in goede orde ontvangen. Wij gaan je aanvraag indienen
-                bij de verzekeraar. Zodra je aanvraag is ingediend, ontvang je van ons bericht. Je hebt nu nog geen voorlopige dekking.</li>
-              <li>Klik op <strong>"bevestig account"</strong> in de e-mail die we je net hebben gestuurd om je account
-                in gebruik te nemen. </li>
+              <li>{{'car.purchased.anonymous.text1' | translate}}</li>
+              <li>{{'car.purchased.anonymous.text2' | translate}}</li>
             </ol>
 
-            <p>Zodra je polis definitief is goedgekeurd, krijg je deze van de verzekeraar.</p>
+            <p>{{'car.purchased.note' | translate}}</p>
 
             <p *ngIf="phone && phoneLink">
-              Bij vragen kun je contact met ons opnemen via <a href="{{phoneLink}}" rel="noopener">{{phone}}</a>
+              {{'car.purchased.phone' | translate}} <a href="{{phoneLink}}" rel="noopener">{{phone}}</a>
             </p>
           </div>
         </div>
