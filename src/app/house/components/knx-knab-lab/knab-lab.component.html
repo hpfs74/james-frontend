@@ -1,0 +1,13 @@
+<knx-card *ngIf="featureConfig.isOn('knabLab')">
+  <div class="row">
+    <div class="col-md-6 knx-relative">
+      <div>Knab lab test</div>
+      <p class="knx-dark-blue">Inboedelverzekering</p>
+      <div>heb je opmerkingen of feedback?</div>
+      <div class="knx-pad-bottom">Laat het ons weten!</div>
+    </div>
+    <div class="col-md-6">
+      <div class="knx-button knx-button--secondary knx-button--ghost" (click)="goToKnabLab()">naar de vragenlijst</div>
+    </div>
+  </div>
+</knx-card>
