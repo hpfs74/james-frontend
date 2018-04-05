@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-sm-12">
       <knx-card>
-        <h2>Betaling</h2>
+        <h2>{{'car.buy.steps.payment.title' | translate}}</h2>
 
         <div class="row">
           <div class="col-sm-8">
-            <p>Voer hier je bankrekening in. Je betaalt dan automatisch maandelijks je premie.</p>
+            <p>{{'car.buy.steps.payment.hint' | translate}}</p>
           </div>
         </div>
 
@@ -16,7 +16,7 @@
               [options]="form.formConfig.iban"
               [formControlName]="form.formConfig.iban.formControlName">
 
-              <knx-tooltip>Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankafschrift of in de app van je bank.</knx-tooltip>
+              <knx-tooltip>{{'car.buy.steps.payment.tooltip' | translate}}</knx-tooltip>
             </knx-form-group>
           </div>
         </div>
@@ -36,18 +36,18 @@
     <div class="col-sm-12">
       <knx-step-blocks title="{{'general.step_blocks.title' | translate}}">
         <knx-step-block>
-          <h3>1. Bevestiging</h3>
-          <p>Je krijgt een ontvangstbevestiging per e-mail.</p>
+          <h3>{{'general.step_block1.title' | translate}}</h3>
+          <p>{{'general.step_block1.text' | translate}}</p>
         </knx-step-block>
 
         <knx-step-block>
-          <h3>2. In behandeling</h3>
-          <p>Uiterlijk de eerstvolgende werkdag hoor je of je bent geaccepteerd.</p>
+          <h3>{{'general.step_block2.title' | translate}}</h3>
+          <p>{{'general.step_block2.text' | translate}}</p>
         </knx-step-block>
 
         <knx-step-block>
-          <h3>3. Overgestapt</h3>
-          <p>Gefeliciteerd! Je hebt een hoop geld bespaard op je autoverzekering!</p>
+          <h3>{{'general.step_block3.title' | translate}}</h3>
+          <p>{{'general.step_block3.text' | translate}}</p>
         </knx-step-block>
       </knx-step-blocks>
     </div>
