@@ -94,13 +94,13 @@ export class TagsService {
    * with form controls like a checkbox or select
    * @param key The section key, e.g. 'car_flow_km_per_year'
    */
-  getAsLabelValue(key: string, sortAlphabeticaly?: boolean): Array<UIPair> {
+  getAsLabelValue(key: string): Array<UIPair> {
     if (!this.tags) {
       return null;
     }
 
     const section: any = this.tags[key];
-    let mappedSection = section.map(tag => {
+    return section.map(tag => {
       const copyKey = `${key}.${tag.tag}`;
       let label = this.copies[copyKey];
       if ((!label && label.length === 0) || label === copyKey) {
@@ -113,16 +113,6 @@ export class TagsService {
         disabled: tag.disabled
       };
     });
-    return sortAlphabeticaly ? mappedSection.sort((a, b) => {
-      let letterA = a.label.toLowerCase(), letterB = b.label.toLowerCase();
-      if ( letterA < letterB ) {
-        return -1;
-      }
-      if ( letterA > letterB ) {
-        return 1;
-      }
-      return 0;
-     }) : mappedSection;
   }
 
   sanitizeText(value: string) {

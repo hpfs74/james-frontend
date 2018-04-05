@@ -21,6 +21,7 @@ import { UIPair } from '@core/models/ui-pair';
 import { HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 import 'rxjs/add/operator/filter';
 import { TranslateService } from '@ngx-translate/core';
+import { sortUiPair } from '@app/utils/helpers';
 
 @Component({
   selector: 'knx-house-hold-house-type-form',
@@ -89,7 +90,7 @@ export class HouseHoldHouseTypeComponent implements AfterViewInit, OnDestroy {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldHouseTypeForm(formBuilder, this.roomValues,
       this.tagsService.getAsLabelValue('house_hold_flow_surface_area'),
-      this.tagsService.getAsLabelValue('house_hold_flow_building_type', true),
+      this.tagsService.getAsLabelValue('house_hold_flow_building_type').sort(sortUiPair),
       this.tagsService.getAsLabelValue('house_hold_flow_build_year'));
   }
 
