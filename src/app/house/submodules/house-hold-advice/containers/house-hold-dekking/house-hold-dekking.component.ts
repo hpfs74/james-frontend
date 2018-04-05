@@ -192,6 +192,7 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       detailForm.value.dateOfBirth.setHours(12);
 
       const payload = {
+        SurfaceArea: this.houseHoldData.SurfaceArea,
         OwnedBuilding: this.houseHoldData.OwnedBuilding,
         FamilyComposition: detailForm.value.familySituation,
         AmountMoreThan12KAudioVisualComp: 0,

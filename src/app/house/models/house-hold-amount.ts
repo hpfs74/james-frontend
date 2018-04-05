@@ -1,5 +1,6 @@
 export class HouseHoldAmountRequest {
 
+  SurfaceArea: number;
   OwnedBuilding: string;
   FamilyComposition: string;
   AmountMoreThan12KAudioVisualComp: number;
