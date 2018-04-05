@@ -72,9 +72,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       'house_hold_flow_coverages.5018.features',
       'house_hold_flow_coverages.5016.header',
       'house_hold_flow_coverages.5016.description',
-      'house_hold_flow_coverages.5016.features'
+      'house_hold_flow_coverages.5016.features',
+      'household.dekking.error.dateofbirth'
     ]).subscribe(res => {
       this.copies = res;
+
+      this.initializeForms();
     });
 
     this.coverages = tagsService
@@ -96,11 +99,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       hideBackButton: false,
       hideNextButton: false
     };
-
-    this.initializeForms();
-    this.selectInitialStates();
-    this.setIntialSubscription();
-
   }
 
   selectInitialStates(): void {
@@ -180,6 +178,9 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.selectInitialStates();
+    this.setIntialSubscription();
+
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     this.setFormAsyncValidators();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));

@@ -12,7 +12,7 @@ export class HouseHoldDekkingForm extends BaseForm {
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    dateOfBirth: () => 'STO CAZZO',
+    dateOfBirth: () => this.copies['household.dekking.error.dateofbirth'],
     commencingDate: () => 'Date must be in the future',
     coverage: () => 'No coverage selected'
   };
@@ -22,10 +22,6 @@ export class HouseHoldDekkingForm extends BaseForm {
               private familySituation: Array<UIPair>,
               private copies: any) {
     super();
-
-    console.log('ERROR1', this.copies['household.dekking.error.dateofbirth']);
-
-    // this.validationErrors.dateOfBirth = () => this.copies['household.dekking.error.dateofbirth'];
 
     this.formGroup = this.fb.group({
       coverage: ['5018', Validators.required],
