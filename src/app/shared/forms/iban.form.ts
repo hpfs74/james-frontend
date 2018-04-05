@@ -30,7 +30,6 @@ export class IbanForm extends BaseForm {
         formControlName: 'iban',
         label: 'Bankrekening (IBAN)',
         help: true,
-        description: 'De premie wordt maandelijks automatisch afgeschreven',
         formControl: this.formGroup.get('iban'),
         validationErrors: this.validationErrors,
         inputOptions: {
