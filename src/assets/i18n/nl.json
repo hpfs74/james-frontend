@@ -347,5 +347,10 @@
   "household.legal.q6.error": "Error 6",
   "household.legal.q7.error": "Error 7",
   "household.legal.form_label": "Legal",
-  "household.legal.next_step": "Next step"
+  "household.legal.next_step": "Next step",
+  "knablab.title": "Knab lab test",
+  "knablab.blue_para": "Inboedelverzekering",
+  "knablab.para1": "heb je opmerkingen of feedback",
+  "knablab.para2": "Laat het ons weten",
+  "knablab.button_text": "naar de vragenlijst"
 }
