@@ -10,7 +10,8 @@
               [formControlName]="form.formConfig.startDate.formControlName">
 
               <knx-tooltip>
-                <p>{{'car.buy.steps.reporting.start_date.tooltip' | translate}}</p>
+                <p>{{'car.buy.steps.reporting.start_date.tooltip_text1' | translate}}</p>
+                <p>{{'car.buy.steps.reporting.start_date.tooltip_text2' | translate}}</p>
               </knx-tooltip>
             </knx-form-group>
           </div>
@@ -19,7 +20,8 @@
         <div class="row">
           <div class="col-sm-8">
             <div *ngIf="startDateIsToday()" class="knx-note">
-              {{'car.buy.steps.reporting.start_date.today' | translate}}
+              {{'car.buy.steps.reporting.start_date.today_text1' | translate}}<br>
+              {{'car.buy.steps.reporting.start_date.today_text2' | translate}}
             </div>
           </div>
         </div>
