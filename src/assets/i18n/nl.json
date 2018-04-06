@@ -389,5 +389,14 @@
   "knablab.blue_para": "Inboedelverzekering",
   "knablab.para1": "heb je opmerkingen of feedback",
   "knablab.para2": "Laat het ons weten",
-  "knablab.button_text": "naar de vragenlijst"
+  "knablab.button_text": "naar de vragenlijst",
+  "household.details_header_first_card_h3_p1": "Risk Insurances: ",
+  "household.details_header_first_card_h3_p2": " our insurance partner in crime",
+  "household.details_first_card_desc": "We choose our partners carefull, to help you get the best for your situation and personal fit. etc.",
+  "household.details_first_card_desc_p1": "- Role of risk",
+  "household.details_first_card_desc_p2": "- Who do you call when",
+  "household.details_first_card_desc_p3": "- Ablut risk",
+  "household.details_second_card_title": "Personal details",
+  "household.details_third_card_title": "Your location",
+  "household.details_third_card_address": "Your address"
 }

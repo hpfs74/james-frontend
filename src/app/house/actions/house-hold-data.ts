@@ -17,8 +17,6 @@ export const NEW_FLOW_STORE_ADVICE       = '[HouseHold] New Flow Advice';
 
 export class Get implements Action {
   readonly type = GET_INFO;
-  constructor(public payload: any) {
-  }
 }
 
 export class Update implements Action {
