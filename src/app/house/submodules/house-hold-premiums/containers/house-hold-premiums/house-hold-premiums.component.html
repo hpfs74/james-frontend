@@ -12,11 +12,12 @@
     </div>
   </div>
 
-  <knx-wizard-rx [sidebar]="false">
+  <knx-wizard-rx [sidebar]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
-                       [messages]="chatMessages$ | async">
+                       [messages]="chatMessages$ | async"
+                       [showLisa]="false">
 
           <knx-house-hold-premiums-filter
             id="houseHoldFilterNoMobile"
@@ -32,28 +33,31 @@
             [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.detail && false"
             (onBuy)="goToBuy()">
           </knx-house-hold-premiums-detail-nav>
-      </knx-chat-stream>
-      <ng-container *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list" [formGroup]="houseHoldFilterForm.formGroup">
-        <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true" (onChangeVisibile)="toggleSideNavState($event)">
-          <div class="container-fluid">
-            <div class="knx-side-panel-content">
-              <knx-house-hold-premiums-filter
-                [form]="houseHoldFilterForm"
-                [glassDisabled]="(advice$ | async)?.OwnedBuilding === 'J'"
-                [advice]="advice$ | async"
-                [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
-              </knx-house-hold-premiums-filter>
 
-              <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
-                      (click)="knxSidePanel.close()">{{ 'car.advice.moreButton.label' | translate }}</button>
+        <ng-container *ngIf="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list" [formGroup]="houseHoldFilterForm.formGroup">
+          <knx-side-panel #knxSidePanel title="Wijzig" [fullwidth]="true" (onChangeVisibile)="toggleSideNavState($event)">
+            <div class="container-fluid">
+              <div class="knx-side-panel-content">
+                <knx-house-hold-premiums-filter
+                  [form]="houseHoldFilterForm"
+                  [glassDisabled]="(advice$ | async)?.OwnedBuilding === 'J'"
+                  [advice]="advice$ | async"
+                  [show]="knxWizardService.currentStepIndex === houseHoldPremiumsSteps.list">
+                </knx-house-hold-premiums-filter>
+
+                <button class="knx-button knx-button--secondary knx-button--fullwidth knx-button--arrow"
+                        (click)="knxSidePanel.close()">{{ 'car.advice.moreButton.label' | translate }}</button>
+              </div>
             </div>
-          </div>
-        </knx-side-panel>
+          </knx-side-panel>
 
-        <button class="knx-icon-filter knx-side-panel__action hidden-md hidden-lg hidden-md-up knx-button knx-button--secondary knx-button--3d"
-                (click)="knxSidePanel.open()">{{ 'car.advice.personalizeButton.label' | translate }}</button>
+          <button class="knx-icon-filter knx-side-panel__action hidden-md hidden-lg hidden-md-up knx-button knx-button--secondary knx-button--3d"
+                  (click)="knxSidePanel.open()">{{ 'car.advice.personalizeButton.label' | translate }}</button>
 
-      </ng-container>
+        </ng-container>
+
+      </knx-chat-stream>
+
     </div>
   </knx-wizard-rx>
 
