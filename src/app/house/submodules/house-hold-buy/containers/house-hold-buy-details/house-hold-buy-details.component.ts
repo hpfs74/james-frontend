@@ -4,32 +4,32 @@ import { Store } from '@ngrx/store';
 import { QaIdentifiers } from '@app/shared/models/qa-identifiers';
 import { AsyncPipe } from '@angular/common';
 
-// core
 import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
-// reducers
-import * as fromRoot from '@app/reducers';
-import * as fromHouse from '@app/house/reducers';
-
-// actions
-import * as wizardActions from '@app/core/actions/wizard';
-import * as layout from '@app/core/actions/layout';
-import * as assistant from '@app/core/actions/assistant';
-import * as householddata from '@app/house/actions/house-hold-data';
-
-// models
-import { CalculatedPremium, HouseHoldPremiumResponse } from '@app/house/models/house-hold-premium';
+import { CalculatedPremium, HouseHoldPremiumResponse, HouseHoldSearchCriteria } from '@app/house/models/house-hold-premium';
 import { Insurance, InsuranceAdvice } from '@insurance/models';
-import 'rxjs/add/operator/filter';
 import { HouseHoldDetailForm } from '@app/house/submodules/house-hold-buy/containers/house-hold-buy-details/house-hold-buy-details.form';
 import { FormBuilder } from '@angular/forms';
 import { TagsService } from '@app/core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AddressForm } from '@app/address/components/address.form';
+import { Subscription } from 'rxjs/Subscription';
+import { ContactDetails } from '@app/house/models/house-hold-store';
+import { Address } from '@app/address/models';
+
 import * as FormUtils from '@app/utils/base-form.utils';
 import * as fromCore from '@app/core/reducers';
-import { Subscription } from 'rxjs/Subscription';
 import * as fromHouseHold from '@app/house/reducers';
+import * as fromRoot from '@app/reducers';
+import * as fromHouse from '@app/house/reducers';
+import * as wizardActions from '@app/core/actions/wizard';
+import * as layout from '@app/core/actions/layout';
+import * as assistant from '@app/core/actions/assistant';
+import * as householddataActions from '@app/house/actions/house-hold-data';
+import * as fromAddress from '@app/address/reducers';
+
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/take';
 
 @Component({
   providers: [AsyncPipe],
@@ -44,7 +44,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   addressForm: AddressForm;
   copies: any;
   error$: any;
-  address: any;
+  address: Address;
   subscriptions: Subscription[] = [];
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe,
@@ -75,14 +75,24 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       nextButtonLabel: this.copies['household.detail.next_step'],
       backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
     };
+    this.initSubscriptions();
   }
 
   ngOnInit() {
-
+    this.subscriptions.push(
+      this.store$.select(fromHouseHold.getHouseHoldContactDetails)
+        .filter(data => !!data)
+        .subscribe(houseHoldContactDetails => this.handleHouseholdContactDetails(houseHoldContactDetails)),
+      this.store$.select(fromHouseHold.getHouseDataAddress)
+        .filter(data => data !== null)
+        .subscribe(data => {
+          this.address = Object.assign({}, data);
+        }),
+    );
   }
 
   ngOnDestroy() {
-
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   initForms() {
@@ -93,13 +103,46 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
     this.addressForm = new AddressForm(formBuilder);
   }
 
+  handleHouseholdContactDetails(houseHoldContactDetails: ContactDetails) {
+    const formValues = {
+        sameAddress: houseHoldContactDetails.sameAddress,
+        gender: houseHoldContactDetails.gender,
+        firstName: houseHoldContactDetails.firstName,
+        prefix: houseHoldContactDetails.prefix,
+        lastName: houseHoldContactDetails.lastName,
+        initials: houseHoldContactDetails.initials
+    };
+    this.form.formGroup.patchValue(Object.assign({}, formValues));
+    if (!this.form.formGroup.get('sameAddress').value) {
+      const postalCode = houseHoldContactDetails.address.postcode;
+      const houseNumber = this.normalizeAddressHouseNumber(houseHoldContactDetails);
+      const houseNumberExtension = this.normalizeAddressHouseNumberAddition(houseHoldContactDetails);
+      const addressFormValues = {
+        postalCode: postalCode,
+        houseNumber: houseNumber,
+        houseNumberExtension: houseNumberExtension
+      };
+      this.addressForm.formGroup.patchValue(Object.assign({}, addressFormValues));
+    }
+  }
+
   initSubscriptions() {
     this.error$ = this.store$.select(fromCore.getWizardError);
     this.subscriptions.push(
-      this.store$.select(fromHouseHold.getHouseDataAddress)
-        .filter(data => data !== null)
+      this.store$.select(fromAddress.getAddress)
+        .filter(data => data !== null && !this.form.formGroup.get('sameAddress').value)
         .subscribe(data => {
-          this.address = JSON.stringify(Object.assign({}, data));
+          this.address = Object.assign({}, data);
+        }),
+      this.form.formGroup.get('sameAddress').valueChanges
+        .filter(value => !!value)
+        .subscribe(value => {
+          this.store$.select(fromHouseHold.getHouseDataAddress)
+            .filter(data => data !== null)
+            .take(1)
+            .subscribe(data => {
+              this.address = Object.assign({}, data);
+            });
         })
     );
   }
@@ -110,9 +153,50 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
 
   goToNextStep() {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
+    FormUtils.validateControls(this.addressForm.formGroup, Object.keys(this.addressForm.formGroup.controls));
+    if (!this.form.formGroup.get('sameAddress').value) {
+      const postalCode = this.addressForm.formGroup.get('postalCode').value;
+      const houseNumber = this.addressForm.formGroup.get('houseNumber').value;
+      const houseNumberExtension = this.addressForm.formGroup.get('houseNumberExtension').value;
+      if (!postalCode || !houseNumber) {
+        return this.store$.dispatch(new wizardActions.Error({
+          message: this.translateService.instant('household.buy_details_address_error')
+        }));
+      }
+    }
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
+    const firstName = this.form.formGroup.get('firstName').value;
+    const prefix = this.form.formGroup.get('prefix').value;
+    const lastName = this.form.formGroup.get('lastName').value;
+    const initials = this.form.formGroup.get('initials').value;
+    const gender = this.form.formGroup.get('gender').value;
+    const contactDetails = {
+      sameAddress: this.form.formGroup.get('sameAddress').value,
+      gender: gender,
+      firstName: firstName,
+      prefix: prefix,
+      lastName: lastName,
+      initials: initials,
+      address: this.address
+    };
+    this.store$.dispatch(new householddataActions.UpdateContactDetails(contactDetails));
     this.store$.dispatch(new wizardActions.Forward());
+  }
+
+  private normalizeAddressHouseNumber(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+
+    return payload.address.number_extended.number_only;
+  }
+
+  private normalizeAddressHouseNumberAddition(payload: any) {
+    if (!payload.address) {
+      return null;
+    }
+    return payload.address.number_extended.number_extension;
   }
 }

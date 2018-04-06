@@ -21,7 +21,7 @@ export class HouseHoldDetailForm extends BaseForm {
       gender: [null, Validators.required],
       initials: [null, Validators.required],
       firstName: [null, Validators.required],
-      prefix: [null, Validators.required],
+      prefix: [null, null],
       lastName: [null, Validators.required],
       sameAddress: [true, Validators.required],
     });

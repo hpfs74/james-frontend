@@ -28,19 +28,19 @@ export const houseHoldAdviceRoutes: Routes = [
         },
       },
       {
-        path: 'payment-details',
-        component: HouseHoldPaymentDetailsComponent,
-        data: {
-          stepIndex: 2,
-          step_nr: '30-details'
-        }
-      },
-      {
         path: 'legal',
         component: HouseHoldBuyLegalComponent,
         data: {
           stepIndex: 1,
           step_nr: '20'
+        }
+      },
+      {
+        path: 'payment-details',
+        component: HouseHoldPaymentDetailsComponent,
+        data: {
+          stepIndex: 2,
+          step_nr: '30-details'
         }
       }
     ]

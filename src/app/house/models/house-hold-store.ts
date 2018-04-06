@@ -38,6 +38,12 @@ export interface InsuranceChoice {
 
 /** Contact details the customer provided when submitting his selection */
 export interface ContactDetails {
+  /** customer has same address */
+  sameAddress: boolean;
+
+  /** customer initials */
+  initials: string;
+
   /** customer first name */
   firstName: string;
 
@@ -53,8 +59,8 @@ export interface ContactDetails {
   /** customer email address */
   email: string;
 
-  /** M: male, F: female */
-  gender?: string;
+  /** Location address */
+  address: Address;
 
   /** date of birth */
   dateOfBirth: Date;
@@ -62,8 +68,8 @@ export interface ContactDetails {
   /** family situation with values */
   familySituation: string;
 
-  /** Location address */
-  address: Address;
+  /** M: male, F: female */
+  gender?: string;
 
   /** Address for sending paper mail, this would be null in case is the same from the normal address */
   addressForComminications?: Address;
@@ -74,7 +80,6 @@ export interface ContactDetails {
   /** true if the user accepted risk terms and conditions */
   hasAcceptedTermsAndConditionsFromRisk?: boolean;
 }
-
 
 export interface LegalQuestions {
   question1: boolean;

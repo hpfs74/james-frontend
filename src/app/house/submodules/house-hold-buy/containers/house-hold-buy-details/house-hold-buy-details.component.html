@@ -87,7 +87,7 @@
         <div class="knx-inline-b knx-icon-map-marker"></div>
         <div class="knx-inline-b">
           <div><b>Your address</b></div>
-          <div>{{address}}</div>
+          <div>{{address.fullname}}</div>
         </div>
       </div>
     </div>
@@ -107,14 +107,11 @@
         </knx-form-group>
       </div>
     </div>
-    <div class="row" *ngIf="!form.formGroup.get('sameAddress').value">
-      <div class="col-md-12">
-        <knx-address-lookup
-          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="address"
-          [addressForm]="addressForm">
-        </knx-address-lookup>
-      </div>
-    </div>
+    <knx-address-lookup
+      *ngIf="!form.formGroup.get('sameAddress').value"
+      knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="address"
+      [addressForm]="addressForm">
+    </knx-address-lookup>
   </knx-card>
 </form>
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
