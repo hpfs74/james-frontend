@@ -1,0 +1,32 @@
+@import '~styles/base.scss';
+
+.knx-relative {
+  position: relative;
+}
+
+.knx-button {
+  line-height: 35px;
+  height: inherit;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.knx-dark-blue {
+  color: $knab-primary-green;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0;
+}
+
+.knx-pad-bottom {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 767px) {
+  .knx-button {
+    width: 100%;
+    position: initial;
+    transform: inherit;
+  }
+}

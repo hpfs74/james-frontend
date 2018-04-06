@@ -115,6 +115,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { KnxEmptyStageComponent } from '@app/components/knx-empty-stage/knx-empty-stage.component';
 import { KnxRibbonComponent } from '@app/components/knx-ribbon/knx-ribbon.component';
 import { ContactDetailsComponent } from '@app/house/components/knx-contact-details/contact-details.component';
+import { KnabLabButtonComponent } from '@app/house/components/knx-knab-lab/knab-lab.component';
 
 export const sharedComponents = [
   // Pipes
@@ -182,7 +183,8 @@ export const sharedComponents = [
   KNXFinalAdviceComponent,
   KnxEmptyStageComponent,
   KnxRibbonComponent,
-  ContactDetailsComponent
+  ContactDetailsComponent,
+  KnabLabButtonComponent
 ];
 
 export const sharedModules = [

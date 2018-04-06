@@ -70,8 +70,7 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
     });
 
     this.initializeForms();
-    this.selectInitialStates();
-    this.setInitialSubscriptions();
+
   }
 
   initializeForms(): void {
@@ -160,6 +159,10 @@ export class HouseHoldLocationComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+
+    this.selectInitialStates();
+    this.setInitialSubscriptions();
+
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     this.setFormAsyncValidators();
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.welcome', clear: true}));
