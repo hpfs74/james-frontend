@@ -14,10 +14,11 @@ export const STORE_ADVICE                = '[HouseHold] Store Advice';
 export const STORE_ADVICE_COMPLETE       = '[HouseHold] Store Advice Complete';
 export const STORE_ADVICE_FAILURE        = '[HouseHold] Store Advice Failure';
 export const NEW_FLOW_STORE_ADVICE       = '[HouseHold] New Flow Advice';
-export const UPDATE_CONTACT_DETAILS      = '[HouseHold] Update Contact Details';
 
 export class Get implements Action {
   readonly type = GET_INFO;
+  constructor(public payload: any) {
+  }
 }
 
 export class Update implements Action {
@@ -66,13 +67,6 @@ export class NewFlowAdviceStore implements Action {
   }
 }
 
-export class UpdateContactDetails implements Action {
-  readonly type = UPDATE_CONTACT_DETAILS;
-
-  constructor(public payload: any) {
-  }
-}
-
 export type All
   = Get
   | Update
@@ -81,5 +75,4 @@ export type All
   | StoreAdvice
   | StoreAdviceComplete
   | StoreAdviceFailure
-  | NewFlowAdviceStore
-  | UpdateContactDetails;
+  | NewFlowAdviceStore;

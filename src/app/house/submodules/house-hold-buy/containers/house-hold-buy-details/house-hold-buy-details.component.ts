@@ -14,7 +14,7 @@ import { TagsService } from '@app/core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AddressForm } from '@app/address/components/address.form';
 import { Subscription } from 'rxjs/Subscription';
-import { ContactDetails } from '@app/house/models/house-hold-store';
+import { ContactDetails, InsuranceStore } from '@app/house/models/house-hold-store';
 import { Address } from '@app/address/models';
 
 import * as FormUtils from '@app/utils/base-form.utils';
@@ -80,9 +80,9 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptions.push(
-      this.store$.select(fromHouseHold.getHouseHoldContactDetails)
+      this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
         .filter(data => !!data)
-        .subscribe(houseHoldContactDetails => this.handleHouseholdContactDetails(houseHoldContactDetails)),
+        .subscribe((insuranceStore: InsuranceStore) => this.handleHouseholdContactDetails(insuranceStore.contacts)),
       this.store$.select(fromHouseHold.getHouseDataAddress)
         .filter(data => data !== null)
         .subscribe(data => {
@@ -181,8 +181,18 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       initials: initials,
       address: this.address
     };
-    this.store$.dispatch(new householddataActions.UpdateContactDetails(contactDetails));
-    this.store$.dispatch(new wizardActions.Forward());
+    this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
+      .take(1)
+      .subscribe((newFlowAdvice: InsuranceStore) => {
+        const insuranceStore = Object.assign(
+          {},
+          newFlowAdvice,
+          {
+            contacts: Object.assign({}, contactDetails)
+          });
+        this.store$.dispatch(new householddataActions.NewFlowAdviceStore(insuranceStore));
+        this.store$.dispatch(new wizardActions.Forward());
+      });
   }
 
   private normalizeAddressHouseNumber(payload: any) {
