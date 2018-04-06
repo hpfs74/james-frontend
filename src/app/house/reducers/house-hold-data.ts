@@ -100,3 +100,4 @@ export function reducer(state = initialState, action: Action): State {
 export const getAdviceId = (state: State) => state.id;
 export const getInfo = (state: State) => state.info;
 export const getSelectedAdvice = (state: State) => state.advice;
+export const getNewFlowAdvice = (state: State) => state.newFlowAdvice;

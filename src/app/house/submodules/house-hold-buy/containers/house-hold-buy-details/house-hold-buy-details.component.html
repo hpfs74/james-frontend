@@ -1,1 +1,121 @@
-<h1>details</h1>
+<form name="householdDetailForm" id="householdDetailForm" [formGroup]="form.formGroup" class="knx-fancy-form household-detail-form">
+
+  <knx-card>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="knx-inline-b knx-logo-risk"></div>
+        <div class="knx-inline-b">
+          <h3>{{'household.details_header_first_card_h3_p1' | translate}}<br>{{'household.details_header_first_card_h3_p2' | translate}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p>{{'household.details_first_card_desc' | translate}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p class="knx-no-pad">{{'household.details_first_card_desc_p1' | translate}}</p>
+        <p class="knx-no-pad">{{'household.details_first_card_desc_p2' | translate}}</p>
+        <p class="knx-no-pad">{{'household.details_first_card_desc_p3' | translate}}</p>
+      </div>
+    </div>
+  </knx-card>
+
+  <knx-card>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{'household.details_second_card' | translate}}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-6">
+            <knx-form-group
+              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="gender"
+              [formControlName]="form.formConfig.gender.formControlName"
+              [options]="form.formConfig.gender">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <knx-form-group
+              knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="initials"
+              [formControlName]="form.formConfig.initials.formControlName"
+              [options]="form.formConfig.initials">
+            </knx-form-group>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <knx-form-group
+              [options]="form.formConfig.firstName"
+              [formControlName]="form.formConfig.firstName.formControlName">
+            </knx-form-group>
+          </div>
+          <div class="col-sm-3">
+            <knx-form-group
+              [options]="form.formConfig.prefix"
+              [formControlName]="form.formConfig.prefix.formControlName">
+            </knx-form-group>
+          </div>
+          <div class="col-sm-5">
+            <knx-form-group
+              [options]="form.formConfig.lastName"
+              [formControlName]="form.formConfig.lastName.formControlName">
+            </knx-form-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </knx-card>
+
+  <knx-card>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{'household.details_third_card_title' | translate}}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="knx-inline-b knx-icon-map-marker"></div>
+        <div class="knx-inline-b">
+          <div><b>{{'household.details_third_card_address' | translate}}</b></div>
+          <div>{{address.fullname}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="knx-divider"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <div>{{ 'household.details.form_sameAddress_label' | translate }}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-6">
+        <knx-form-group
+          knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="sameAddress"
+          [formControlName]="form.formConfig.sameAddress.formControlName"
+          [options]="form.formConfig.sameAddress">
+        </knx-form-group>
+      </div>
+    </div>
+    <knx-address-lookup
+      *ngIf="!form.formGroup.get('sameAddress').value"
+      knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="address"
+      [addressForm]="addressForm">
+    </knx-address-lookup>
+  </knx-card>
+</form>
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+[error]="error$ | async"
+(onNext)="goToNextStep()"
+(onBack)="goToPreviousStep()">
+</knx-wizard-controls>

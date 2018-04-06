@@ -4,16 +4,16 @@ import {
   HouseHoldStoredAdviceRequest,
   HouseHoldStoredAdviceResponse
 } from '@app/house/models/house-hold-stored-advice';
-import { InsuranceStore } from '@app/house/models/house-hold-store';
+import { InsuranceStore, ContactDetails } from '@app/house/models/house-hold-store';
 
-export const START = '[HouseHold] Start';
-export const GET_INFO = '[HouseHold] Info';
-export const UPDATE_INFO = '[HouseHold] Update';
-export const UPDATE_ADVICE = '[HouseHold] Update Advice';
-export const STORE_ADVICE = '[HouseHold] Store Advice';
-export const STORE_ADVICE_COMPLETE = '[HouseHold] Store Advice Complete';
-export const STORE_ADVICE_FAILURE = '[HouseHold] Store Advice Failure';
-export const NEW_FLOW_STORE_ADVICE = '[HouseHold] New Flow Advice';
+export const START                       = '[HouseHold] Start';
+export const GET_INFO                    = '[HouseHold] Info';
+export const UPDATE_INFO                 = '[HouseHold] Update';
+export const UPDATE_ADVICE               = '[HouseHold] Update Advice';
+export const STORE_ADVICE                = '[HouseHold] Store Advice';
+export const STORE_ADVICE_COMPLETE       = '[HouseHold] Store Advice Complete';
+export const STORE_ADVICE_FAILURE        = '[HouseHold] Store Advice Failure';
+export const NEW_FLOW_STORE_ADVICE       = '[HouseHold] New Flow Advice';
 
 export class Get implements Action {
   readonly type = GET_INFO;
@@ -64,7 +64,6 @@ export class NewFlowAdviceStore implements Action {
   constructor(public payload: InsuranceStore) {
   }
 }
-
 
 export type All
   = Get

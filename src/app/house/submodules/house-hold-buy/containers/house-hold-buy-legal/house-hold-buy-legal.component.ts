@@ -21,7 +21,7 @@ import * as fromCore from '@app/core/reducers';
   templateUrl: 'house-hold-buy-legal.component.html'
 })
 export class HouseHoldBuyLegalComponent implements QaIdentifier {
-  qaRootId = QaIdentifiers.carCheck;
+  qaRootId = QaIdentifiers.houseHoldBuyLegal;
   form: HouseHoldBuyLegalForm;
   advice$: Observable<any>;
   subscription$: Subscription[] = [];

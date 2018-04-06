@@ -1,0 +1,22 @@
+@import '~styles/base.scss';
+
+.knx-icon-map-marker {
+  font-size: 30px;
+}
+
+.knx-logo-risk {
+  width: 59px;
+  height: 41px;
+  background: url('/assets/images/risk_logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
+
+.knx-inline-b {
+  display: inline-block;
+}
+
+/deep/ .knx-form-group {
+  margin-bottom: 1.4em;
+}
