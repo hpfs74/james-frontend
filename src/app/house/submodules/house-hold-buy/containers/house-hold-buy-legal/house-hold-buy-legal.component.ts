@@ -15,6 +15,10 @@ import * as FormUtils from '@app/utils/base-form.utils';
 import * as fromRoot from '@app/reducers';
 import * as wizardActions from '@app/core/actions/wizard';
 import * as fromCore from '@app/core/reducers';
+import * as fromHouseHold from '@app/house/reducers';
+import * as householddataActions from '@app/house/actions/house-hold-data';
+import { InsuranceStore, LegalQuestions } from '@app/house/models/house-hold-store';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'knx-house-hold-buy-legal',
@@ -68,6 +72,26 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier {
     if (!this.form.formGroup.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
-    this.store$.dispatch(new wizardActions.Forward());
+    const legalQuestions: LegalQuestions = {
+      question1: true,
+      question2: true,
+      question3: true,
+      question4: true,
+      question5: true,
+      question6: true,
+      question7: true,
+    };
+    this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
+      .take(1)
+      .subscribe((newFlowAdvice: InsuranceStore) => {
+        const insuranceStore = Object.assign(
+          {},
+          newFlowAdvice,
+          {
+            questions: Object.assign({}, legalQuestions)
+          });
+        this.store$.dispatch(new householddataActions.NewFlowAdviceStore(insuranceStore));
+        this.store$.dispatch(new wizardActions.Forward());
+      });
   }
 }
