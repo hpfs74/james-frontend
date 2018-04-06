@@ -6,10 +6,7 @@ import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromHouseHold from '@app/house/reducers';
-import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
-import { getHouseHoldDataInfo } from '@app/house/reducers';
 import 'rxjs/add/operator/filter';
-import { environment } from '@env/environment';
 import { Subscription } from 'rxjs/Subscription';
 import { Content, ContentConfig } from '@app/content.config';
 import { AsyncPipe } from '@angular/common';
@@ -17,7 +14,8 @@ import { AsyncPipe } from '@angular/common';
 @Component({
   providers: [ AsyncPipe ],
   selector: 'knx-house-hold-premiums-thank-you',
-  templateUrl: './house-hold-premiums-thank-you.component.html'
+  templateUrl: './house-hold-premiums-thank-you.component.html',
+  styleUrls: ['./house-hold-premiums-thank-you.component.scss']
 })
 export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
 
