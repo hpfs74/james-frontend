@@ -4,19 +4,19 @@ import { Address } from '@app/address/models';
 export interface InsuranceStore {
 
   /** insurance for house hold */
-  houseHoldInsurance: InsuranceChoice;
+  houseHoldInsurance?: InsuranceChoice;
 
   /** insurance for house */
-  houseInsurance: InsuranceChoice;
+  houseInsurance?: InsuranceChoice;
 
   /** customer information */
-  contacts: ContactDetails;
+  contacts?: ContactDetails;
 
   /** legal questions */
-  questions: LegalQuestions;
+  questions?: LegalQuestions;
 
   /** customer payment details */
-  paymentDetails: PaymentDetails;
+  paymentDetails?: PaymentDetails;
 }
 
 /** this interface will contain the payment method from customer */

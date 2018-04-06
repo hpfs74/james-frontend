@@ -1,0 +1,71 @@
+<knx-collapsible-panel [collapsible]="false" [isOpen]="true" [showStep]="false">
+  <div class="knx-collapsible-panel__title">
+    <span *ngFor="let insurance of Insurance; index as i; first as isFirst">
+      <span *ngIf="!first"> + </span>
+      <img src="{{insurance.CompanyLogoUrl}}" alt="insurance.CompanyName" />
+    </span>
+  </div>
+
+  <div class="knx-collapsible-panel__content">
+    <div class="row" *ngFor="let insurance of Insurance; index as i; first as isFirst">
+
+      <div class="col-6 col-sm-6">
+        {{insurance.CompanyName}} - {{insurance.ProductDescription}}
+      </div>
+      <div class="col-6 col-sm-6 text-right">
+        {{insurance.Premium | currency }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 col-sm-6">
+        {{ 'general.knab.package.discount.label' | translate }}
+      </div>
+      <div class="col-6 col-sm-6 text-right">
+        ???
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-12">
+        <hr />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 col-sm-6">
+        {{ 'general.total.price.monthly' | translate }}
+      </div>
+      <div class="col-6 col-sm-6 text-right">
+        {{ getTotalMonthlyPrice() | currency }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 col-sm-6">
+        {{ 'general.risk.administration.cost' | translate }}
+        <knx-tooltip>
+        </knx-tooltip>
+      </div>
+      <div class="col-6 col-sm-6 text-right">
+        {{ getRiskAdministrationCost() | currency }}
+      </div>
+    </div>
+
+
+    <div class="row" *ngIf="IncludeBTW">
+      <div class="col-12 col-md-12">
+        <hr/>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="IncludeBTW">
+      <div class="col-12 col-md-12">
+        {{ 'general.price.including.btw' | translate }}
+      </div>
+    </div>
+
+
+  </div>
+
+</knx-collapsible-panel>

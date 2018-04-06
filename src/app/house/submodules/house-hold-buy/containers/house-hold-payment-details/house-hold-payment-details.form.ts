@@ -11,7 +11,8 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
   validationErrors = {
-    required: () => 'Dit is een verplicht veld'
+    required: () => this.copies['general.errors.field_is_required'], // 'Dit is een verplicht veld',
+    iban: () => this.copies['general.errors.iban_is_invalid']
   };
 
   /**
@@ -20,8 +21,9 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
    * @param {FormBuilder} fb - the form object to bind
    * @param {Array<UIPair>} coverages - the list of avilable coverage
    */
-  constructor(private fb: FormBuilder, public copies: any) {
+  constructor(private fb: FormBuilder, private copies: any) {
     super();
+
 
     this.formGroup = this.fb.group({
       iban: [null, Validators.compose([Validators.required, ibanValidator('iban', 'nl')])],
@@ -35,12 +37,12 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
         formControlName: 'iban',
         formControl: this.formGroup.get('iban'),
         validationErrors: this.validationErrors,
-        label: this.copies['household.buy.payment.details.iban.label'],
+        label: this.copies['household.payment_details.iban.label'],
         inputOptions: {
           type: 'text',
-          placeholder: this.copies['household.buy.payment.details.iban.placeholder'],
+          placeholder: this.copies['household.payment_details.iban.placeholder'],
           attributes: {
-            'aria-label': this.copies['household.buy.payment.details.iban']
+            'aria-label': this.copies['household.payment_details.iban.label']
           }
         }
       },
@@ -51,7 +53,7 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
         inputOptions: {
           items: [
             {
-              label: this.copies['household.buy.payment.details.knabtac.label'],
+              label: this.copies['household.payment_details.knabtac.label'],
               value: 'true'
             } as UIPair
           ]
@@ -64,7 +66,7 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
         inputOptions: {
           items: [
             {
-              label: this.copies['household.buy.payment.details.risktac.label'],
+              label: this.copies['household.payment_details.risktac.label'],
               value: 'true'
             } as UIPair
           ]
