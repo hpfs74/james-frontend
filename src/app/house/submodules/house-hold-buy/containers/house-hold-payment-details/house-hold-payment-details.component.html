@@ -4,10 +4,80 @@
 <p>{{ 'household.premiumBuy.header.para2' | translate }}</p>
 <p>{{ 'household.premiumBuy.header.para3' | translate }}</p>
 
-
-<knx-contact-detail [contact]="contact">
+<knx-contact-detail
+  [contact]="contact$ | async">
 </knx-contact-detail>
 
-<form>
 
-</form>
+<knx-insurance-combined-price
+  [IncludeBTW]="true"
+  [Insurance]="selectedInsurances$ | async">
+
+</knx-insurance-combined-price>
+
+<knx-collapsible-panel title="{{ 'household.payment_details.payment_details.title' | translate }}" [collapsible]="false" [showStep]="false" [isOpen]="true">
+  <div class="knx-collapsible-panel__content">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="knx-house-hold-payment-details">
+                <form [formGroup]="form.formGroup" autocomplete="off">
+
+
+                  <div class="row">
+                    <div class="col-md-12 col-12 col-sm-12">
+                      Description text.
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-12">
+                      <label>Startdate</label><br/>
+                      {{(selectedInsurances$ | async).CommencingDate}}
+                    </div>
+                  </div>
+
+                  <knx-form-group
+                    [formControlName]="form.formConfig.iban.formControlName"
+                    [options]="form.formConfig.iban">
+                  </knx-form-group>
+
+                  <knx-form-group
+                    [formControlName]="form.formConfig.agreeKnabTAC.formControlName"
+                    [options]="form.formConfig.agreeKnabTAC">
+                  </knx-form-group>
+
+
+                  <knx-form-group
+                    [formControlName]="form.formConfig.agreeRiskTAC.formControlName"
+                    [options]="form.formConfig.agreeRiskTAC">
+                  </knx-form-group>
+
+                  <div class="knx-house-hold-buy__actions">
+                    <div class="knx-house-hold-buy__error"
+                         *ngIf="!form.formGroup.valid && form.formGroup.touched && form.formGroup.dirty">
+                      {{ 'household.premiumBuy.error.msg' | translate }}
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+
+            <div class="col-sm-4 hidden-xs">
+              <img src="/assets/images/avatars/avatar-fullsize.png" alt="lisa full size"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</knx-collapsible-panel>
+
+<knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [error]="error$ | async"
+                     (onBack)="goToPrevStep()"
+                     (onNext)="goToNextStep()">
+</knx-wizard-controls>

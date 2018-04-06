@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { InsuranceChoice } from '@app/house/models/house-hold-store';
+import { CalculatedPremium } from '@app/house/models/house-hold-premium';
 
 @Component({
   selector: 'knx-insurance-combined-price',
-  templateUrl: 'insurance-combined-price.html'
+  templateUrl: 'insurance-combined-price.component.html'
 })
 export class InsuranceCombinedPriceComponent {
 
   @Input() IncludeBTW = false;
-  @Input() Insurance: Array<InsuranceChoice>;
+  @Input() Insurance: Array<CalculatedPremium>;
 
   getTotalMonthlyPrice(): number {
     return 0;

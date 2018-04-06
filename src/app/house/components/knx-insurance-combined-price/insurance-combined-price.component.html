@@ -1,8 +1,8 @@
-<knx-collapsible-panel [collapsible]="false" [isOpen]="true" [showStep]="falsee">
+<knx-collapsible-panel [collapsible]="false" [isOpen]="true" [showStep]="false">
   <div class="knx-collapsible-panel__title">
     <span *ngFor="let insurance of Insurance; index as i; first as isFirst">
       <span *ngIf="!first"> + </span>
-      <img src="{{insurance.selectedPremium.CompanyLogoUrl}}" alt="insurance.selectedPremium.CompanyName" />
+      <img src="{{insurance.CompanyLogoUrl}}" alt="insurance.CompanyName" />
     </span>
   </div>
 
@@ -53,13 +53,13 @@
     </div>
 
 
-    <div class="row" *ngif="IncludeBTW">
+    <div class="row" *ngIf="IncludeBTW">
       <div class="col-12 col-md-12">
         <hr/>
       </div>
     </div>
 
-    <div class="row" *ngif="IncludeBTW">
+    <div class="row" *ngIf="IncludeBTW">
       <div class="col-12 col-md-12">
         {{ 'general.price.including.btw' | translate }}
       </div>
