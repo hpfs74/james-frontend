@@ -367,7 +367,7 @@
   "household.payment_details.iban.placeholder": "Iban goes here",
   "household.payment_details.iban.label": "Whay is your IBAN?",
   "household.payment_details.knabtac.label": "Agree with Knab terms etc. etc.",
-  "household.payment_details.risktac.label": "Agree with Risk terms etc. etc."
+  "household.payment_details.risktac.label": "Agree with Risk terms etc. etc.",
   "knablab.title": "Knab lab test",
   "knablab.blue_para": "Inboedelverzekering",
   "knablab.para1": "heb je opmerkingen of feedback",

@@ -7,7 +7,7 @@ import * as fromRoot from '@app/reducers';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/observable/of';
-import { HouseHoldPaymentDetailsForm } from '@app/house/submodules/house-hold-buy/containers/house-hold-payment-details/house-hold-payment-details.form';
+import { HouseHoldPaymentDetailsForm } from './house-hold-payment-details.form';
 import { FormBuilder } from '@angular/forms';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Subscription } from 'rxjs/Subscription';
@@ -31,12 +31,12 @@ const fakedata = {
       Identifier: '84985H043P0560007',
       ConditionUrls: [
         {
-          URL: 'https://webservicea.risk-verzekeringen.nl/voorwaardenservice/voorwaarden.aspx?file=2b830bb7-f0e7-478c-a119-ba6723e5a90d',
+          URL: 'xxxx',
           Description: 'Voorwaarden Woonpakket',
           Number: 'WP 16-01'
         },
         {
-          URL: 'https://webservicea.risk-verzekeringen.nl/voorwaardenservice/voorwaarden.aspx?file=4e7b6bea-94e1-4ba7-8319-edf7e3ca7e0e',
+          URL: 'xxx',
           Description: 'Bijzondere Voorwaarden Buitenshuisdekking',
           Number: 'Bui 0807'
         }
@@ -126,11 +126,23 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     this.contact$ = Observable.of(fakedata.contacts);
 
     this.selectedInsurances$ = Observable.of([fakedata.houseHoldInsurance.selectedPremium]);
+
+    this.setInitialSubscriptions();
   }
 
   /** ondestroy unsubscribe all */
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  /** set component initial subscription */
+  setInitialSubscriptions() {
+
+    // this.subscriptions.push(
+    //  this.store$.insuranceBuy.subscribe( res=> {
+    //     // go to the next step
+    //     this.store$.dispatch(new wizardActions.Forward());});
+    // );
   }
 
   /** handle the going to previous step */
@@ -148,15 +160,10 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     }
 
     // add code to save in store with the package
-    this.store$.dispatch(new houseHoldData.Update({
-      customerName: detailForm.value.name,
-      customerEmail: detailForm.value.email,
-      customerPhone: detailForm.value.phone
+    this.store$.dispatch(new houseHoldData.NewFlowAdviceStore({
+      paymentDetails: {
+        iban: detailForm.value.iban
+      }
     }));
-
-    // TODO: call the store advice here
-
-    // go to the next step
-    this.store$.dispatch(new wizardActions.Forward());
   }
 }
