@@ -59,7 +59,6 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
           .map(key => data[key])
           .map(v => ({label: v}));
       });
-    this.setKnabLabButton();
   }
 
   ngOnInit() {
@@ -91,15 +90,5 @@ export class HouseHoldAdviceComponent implements OnInit, OnDestroy, QaIdentifier
 
   goToStep(stepIndex: number) {
     this.store$.dispatch(new wizardActions.Go({stepIndex: stepIndex}));
-  }
-
-  private setKnabLabButton() {
-    if (this.featureConfigService.isOn('knabLab') && !document.querySelector('.knx-knab-lab__button')) {
-      let newNode = document.createElement('a');
-      newNode.className = 'knx-knab-lab__button';
-      newNode.innerHTML = 'Knab Lab';
-      newNode.href = environment.featureToggles.knabLab;
-      document.body.insertBefore(newNode, document.body.lastChild);
-    }
   }
 }

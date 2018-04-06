@@ -20,6 +20,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateLoaderMock } from 'test.common.spec';
+import { FeatureConfigService } from '@app/core/services/feature-config.service';
 
 describe('Component: HouseHoldDekkingComponent', () => {
   let comp: HouseHoldDekkingComponent;
@@ -48,6 +49,7 @@ describe('Component: HouseHoldDekkingComponent', () => {
       ],
       providers: [
         KNXLocale,
+        FeatureConfigService,
         TranslateService,
         {
           provide: TagsService,

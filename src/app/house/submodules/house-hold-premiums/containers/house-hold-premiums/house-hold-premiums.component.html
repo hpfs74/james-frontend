@@ -16,7 +16,8 @@
     <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
-                       [messages]="chatMessages$ | async">
+                       [messages]="chatMessages$ | async"
+                       [showLisa]="false">
 
           <knx-house-hold-premiums-filter
             id="houseHoldFilterNoMobile"
