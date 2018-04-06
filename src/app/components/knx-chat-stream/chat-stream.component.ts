@@ -8,15 +8,21 @@ import { ChatMessage } from './chat-message';
   template: `
     <div class="knx-chat-stream" [ngClass]="{'knx-chat-stream--expanded': chatExpanded}">
       <knx-avatar
+        *ngIf="showLisa"
         (click)="toggleChat()"
         (knxClickOutside)="closeChat()"
         [title]="options.avatar.title"
         image="/assets/images/avatars/avatar.png">
       </knx-avatar>
 
-      <div class="knx-chat-stream__notification" [ngClass]="{'knx-chat-stream__notification--active': hasNewMessage}"></div>
-
-      <knx-chat-message *ngFor="let message of messages" [data]="message?.data"></knx-chat-message>
+      <div
+        *ngIf="showLisa"
+        class="knx-chat-stream__notification"
+        [ngClass]="{'knx-chat-stream__notification--active': hasNewMessage}">
+      </div>
+      <div *ngIf="showLisa">
+        <knx-chat-message *ngFor="let message of messages" [data]="message?.data"></knx-chat-message>
+      </div>
 
       <!-- slot for filter options -->
       <ng-content select="knx-car-extras"></ng-content>
@@ -27,6 +33,7 @@ import { ChatMessage } from './chat-message';
 `
 })
 export class ChatStreamComponent implements OnChanges {
+  @Input() showLisa = true;
   @Input() options: ChatStreamOptions;
   @Input() messages: Array<ChatMessage>;
   @Output() public onChatExpand: EventEmitter<boolean> = new EventEmitter<boolean>();

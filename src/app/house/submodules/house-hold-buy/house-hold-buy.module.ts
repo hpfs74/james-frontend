@@ -20,13 +20,17 @@ import { HouseHoldBuyDetailsComponent  } from './containers/house-hold-buy-detai
 import { HouseHoldPaymentDetailsComponent } from './containers/house-hold-payment-details/house-hold-payment-details.component';
 import { HouseHoldBuyLegalComponent } from './containers/house-hold-buy-legal/house-hold-buy-legal.component';
 import { HouseHoldBuyComponent } from './containers/house-hold-buy/house-hold-buy.component';
+import { ContactDetailsComponent } from '@app/house/components/knx-contact-details/contact-details.component';
+import { InsuranceCombinedPriceComponent } from '@app/house/components/knx-insurance-combined-price/insurance-combined-price.component';
 
 
 export const COMPONENTS = [
   HouseHoldBuyComponent,
   HouseHoldBuyDetailsComponent,
   HouseHoldPaymentDetailsComponent,
-  HouseHoldBuyLegalComponent
+  HouseHoldBuyLegalComponent,
+  ContactDetailsComponent,
+  InsuranceCombinedPriceComponent
 ];
 
 @NgModule({

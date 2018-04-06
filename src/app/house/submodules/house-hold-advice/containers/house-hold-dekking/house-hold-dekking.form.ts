@@ -8,29 +8,26 @@ export class HouseHoldDekkingForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
 
+
   validationErrors = {
     required: () => 'Dit is een verplicht veld',
     maxlength: (err) => `Value is too long! Use max ${err.requiredLength} characters`,
-    dateOfBirth: () => 'Error on date of birth',
+    dateOfBirth: () => this.copies['household.dekking.error.dateofbirth'],
     commencingDate: () => 'Date must be in the future',
     coverage: () => 'No coverage selected'
   };
 
   constructor(private fb: FormBuilder,
-              netIncomeRange: Array<UIPair>,
-              familySituation: Array<UIPair>) {
+              private netIncomeRange: Array<UIPair>,
+              private familySituation: Array<UIPair>,
+              private copies: any) {
     super();
 
     this.formGroup = this.fb.group({
       coverage: ['5018', Validators.required],
       outsideCoverage: ['N'],
       netIncomeRange: [null, Validators.required],
-      dateOfBirth: [null,
-        [
-          Validators.required,
-          birthDateValidator('dateOfBirth')
-        ]
-      ],
+      dateOfBirth: [null, [Validators.required, birthDateValidator('dateOfBirth')]],
       familySituation: [null, Validators.required],
       commencingDate: [null, [Validators.required, futureDateValidator('commencingDate', 90)]]
     });

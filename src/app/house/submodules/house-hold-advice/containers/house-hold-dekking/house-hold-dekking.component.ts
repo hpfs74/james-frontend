@@ -38,7 +38,7 @@ import 'rxjs/add/operator/debounceTime';
   styleUrls: ['./house-hold-dekking.component.scss'],
   templateUrl: 'house-hold-dekking.component.html'
 })
-export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
+export class HouseHoldDekkingComponent implements OnInit, AfterViewInit, OnDestroy {
   qaRootId = QaIdentifiers.houseHoldDekking;
 
   form: HouseHoldDekkingForm;
@@ -72,9 +72,12 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       'house_hold_flow_coverages.5018.features',
       'house_hold_flow_coverages.5016.header',
       'house_hold_flow_coverages.5016.description',
-      'house_hold_flow_coverages.5016.features'
+      'house_hold_flow_coverages.5016.features',
+      'household.dekking.error.dateofbirth'
     ]).subscribe(res => {
       this.copies = res;
+
+      this.initializeForms();
     });
 
     this.coverages = tagsService
@@ -96,11 +99,6 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
       hideBackButton: false,
       hideNextButton: false
     };
-
-    this.initializeForms();
-    this.selectInitialStates();
-    this.setIntialSubscription();
-
   }
 
   selectInitialStates(): void {
@@ -111,7 +109,8 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldDekkingForm(formBuilder,
       this.tagsService.getAsLabelValue('house_hold_flow_net_income_range'),
-      this.tagsService.getAsLabelValue('house_hold_flow_family_situation'));
+      this.tagsService.getAsLabelValue('house_hold_flow_family_situation'),
+      this.copies);
   }
 
   setIntialSubscription() {
@@ -176,6 +175,11 @@ export class HouseHoldDekkingComponent implements AfterViewInit, OnDestroy {
     if (value.InsuredAmount !== null) {
       this.form.formGroup.patchValue({insuredAmount: value.InsuredAmount});
     }
+  }
+
+  ngOnInit() {
+    this.selectInitialStates();
+    this.setIntialSubscription();
   }
 
   ngAfterViewInit(): void {
