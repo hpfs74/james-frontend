@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -19,12 +19,13 @@ import * as fromHouseHold from '@app/house/reducers';
 import * as householddataActions from '@app/house/actions/house-hold-data';
 import { InsuranceStore, LegalQuestions } from '@app/house/models/house-hold-store';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-buy-legal',
   templateUrl: 'house-hold-buy-legal.component.html'
 })
-export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy {
+export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnInit {
   qaRootId = QaIdentifiers.houseHoldBuyLegal;
   form: HouseHoldBuyLegalForm;
   advice$: Observable<any>;
@@ -63,6 +64,25 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy {
     };
   }
 
+  ngOnInit() {
+    this.subscription$.push(
+      this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
+        .filter(householdNewFlowData => !!householdNewFlowData.questions)
+        .subscribe(householdNewFlowData => {
+          const formData = {
+            refuse: householdNewFlowData.questions.question1,
+            crime: householdNewFlowData.questions.question2,
+            harmed: householdNewFlowData.questions.question3,
+            bankrupt: householdNewFlowData.questions.question4,
+            fraud: householdNewFlowData.questions.question5,
+            seizedIncome: householdNewFlowData.questions.question6,
+            driver: householdNewFlowData.questions.question7,
+          };
+          this.form.formGroup.patchValue(Object.assign({}, formData));
+        })
+    );
+  }
+
   goToPreviousStep() {
     this.store$.dispatch(new wizardActions.Back());
   }
@@ -73,13 +93,13 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
     const legalQuestions: LegalQuestions = {
-      question1: true,
-      question2: true,
-      question3: true,
-      question4: true,
-      question5: true,
-      question6: true,
-      question7: true,
+      question1: false,
+      question2: false,
+      question3: false,
+      question4: false,
+      question5: false,
+      question6: false,
+      question7: false,
     };
     this.subscription$.push(
       this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
