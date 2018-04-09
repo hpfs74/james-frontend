@@ -80,7 +80,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
               public route: ActivatedRoute,
               public cdRef: ChangeDetectorRef,
               private jamesTag: JamesTagPipe
-            ) {
+  ) {
 
     this.translateService.get([
       'car.advice.steps.detail.stepOptions.label',
@@ -99,14 +99,17 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     ]).subscribe(res => {
       this.copies = res;
       this.initializeForms();
-
+      this.selectInitialStates();
+      this.setInitialSubscriptions();
+      this.setStepSupscription();
     });
   }
+
   /**
    * keep track of all forms and when all data is available
    * on the page
    * filter trough all form fields except optional ones, that can be an empty string
-  */
+   */
   setStepSupscription(): void {
     const detailForm = this.form.formGroup;
     const addressForm = this.addressForm.formGroup;
@@ -115,9 +118,9 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
       Observable.combineLatest(detailForm.valueChanges, addressForm.valueChanges, (a, b) => Object.assign({}, a, b))
         .filter(combinedValues => {
           return Object.keys(combinedValues)
-                       .filter(key => this.isAcceptedValue(combinedValues[key])
-                          && optionalFields.indexOf(key) === -1)
-                        .length === Object.keys(combinedValues).length - optionalFields.length;
+            .filter(key => this.isAcceptedValue(combinedValues[key])
+              && optionalFields.indexOf(key) === -1)
+            .length === Object.keys(combinedValues).length - optionalFields.length;
         })
         .subscribe((values) => {
           this.dispatchcoverageAdviceAvailable();
@@ -164,7 +167,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
    * put all subscriptions in an array, so we can unsubscribe to them later on
    */
   setInitialSubscriptions(): void {
-    this.subscriptions$ = [
+    this.subscriptions$.push(
       this.store$.select(fromInsurance.getSelectedAdvice)
         .filter(advice => advice)
         .subscribe(advice => this.setAdvice(advice)),
@@ -222,16 +225,12 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
             coverageItem.selected = true;
             this.updateSelectedCoverage(coverageItem);
           }
-        })
-
-    ];
+        }));
   }
 
   ngAfterViewInit(): void {
 
-    this.selectInitialStates();
-    this.setInitialSubscriptions();
-    this.setStepSupscription();
+
 
     // set form validators after the view has been fully loaded, otherwise it is getting an error
     const QUERY_PARAM_LICENCE = 'licencePlate'; // change this to correct get variable after talking with marketing
@@ -258,6 +257,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     this.subscriptions$.push(
       loan.valueChanges.subscribe((value) => {
         if (value !== null && loan.valid) {
+          console.log('LOAN HERE', value);
           this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(value));
         }
       })
@@ -464,7 +464,7 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     const addressForm = this.addressForm.formGroup;
     let userAnalytics = {} as UserAnayltics;
     userAnalytics.damageFreeYears = detailForm.get('claimFreeYears').value;
-    userAnalytics.loan = detailForm.get('loan').value ? 'y' : 'n' ;
+    userAnalytics.loan = detailForm.get('loan').value ? 'y' : 'n';
     userAnalytics.gender = detailForm.get('gender').value;
     userAnalytics.birthyear = new Date(detailForm.get('birthDate').value).getUTCFullYear().toString();
     userAnalytics.zipcode = addressForm.get('postalCode').value.slice(0, 4);
