@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -24,7 +24,7 @@ import 'rxjs/add/operator/take';
   selector: 'knx-house-hold-buy-legal',
   templateUrl: 'house-hold-buy-legal.component.html'
 })
-export class HouseHoldBuyLegalComponent implements QaIdentifier {
+export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy {
   qaRootId = QaIdentifiers.houseHoldBuyLegal;
   form: HouseHoldBuyLegalForm;
   advice$: Observable<any>;
@@ -81,17 +81,23 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier {
       question6: true,
       question7: true,
     };
-    this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
-      .take(1)
-      .subscribe((newFlowAdvice: InsuranceStore) => {
-        const insuranceStore = Object.assign(
-          {},
-          newFlowAdvice,
-          {
-            questions: Object.assign({}, legalQuestions)
-          });
-        this.store$.dispatch(new householddataActions.NewFlowAdviceStore(insuranceStore));
-        this.store$.dispatch(new wizardActions.Forward());
-      });
+    this.subscription$.push(
+      this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
+        .take(1)
+        .subscribe((newFlowAdvice: InsuranceStore) => {
+          const insuranceStore = Object.assign(
+            {},
+            newFlowAdvice,
+            {
+              questions: Object.assign({}, legalQuestions)
+            });
+          this.store$.dispatch(new householddataActions.NewFlowAdviceStore(insuranceStore));
+          this.store$.dispatch(new wizardActions.Forward());
+        })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 }
