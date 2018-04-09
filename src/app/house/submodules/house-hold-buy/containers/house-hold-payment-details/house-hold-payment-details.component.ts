@@ -165,5 +165,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
         iban: detailForm.value.iban
       }
     }));
+
+    this.store$.dispatch(new wizardActions.Forward());
   }
 }

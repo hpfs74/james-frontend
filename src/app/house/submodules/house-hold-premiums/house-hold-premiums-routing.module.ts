@@ -4,7 +4,6 @@ import { HouseHoldPremiumsDetailComponent } from './containers/house-hold-premiu
 import { HouseHoldPremiumsListComponent } from './containers/house-hold-premiums-list/house-hold-premiums-list.component';
 import { HouseHoldPremiumsComponent } from './containers/house-hold-premiums/house-hold-premiums.component';
 import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
-import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
 
 export const houseHoldPremiumsRoutes: Routes = [
   {
@@ -41,14 +40,6 @@ export const houseHoldPremiumsRoutes: Routes = [
         data: {
           stepIndex: 2,
           step_nr: '70'
-        }
-      },
-      {
-        path: 'bedankt',
-        component: HouseHoldPremiumsThankYouComponent,
-        data: {
-          stepIndex: 3,
-          step_nr: '80-end'
         }
       }
     ]

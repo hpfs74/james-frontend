@@ -22,7 +22,6 @@ import { HouseHoldPremiumsDetailNavComponent } from './containers/house-hold-pre
 import { HouseHoldInsuranceResultComponent } from '../../components/knx-house-hold-insurance-result/insurance-result.component';
 import { HouseHoldCardExtensionComponent } from '../../components/knx-house-hold-card-extension/house-hold-card-extension.component';
 import { HouseHoldPremiumsBuyComponent } from './containers/house-hold-premiums-buy/house-hold-premiums-buy.component';
-import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
 
 export const COMPONENTS = [
   HouseHoldPremiumsComponent,
@@ -32,8 +31,7 @@ export const COMPONENTS = [
   HouseHoldPremiumsDetailNavComponent,
   HouseHoldPremiumsBuyComponent,
   HouseHoldInsuranceResultComponent,
-  HouseHoldCardExtensionComponent,
-  HouseHoldPremiumsThankYouComponent
+  HouseHoldCardExtensionComponent
 ];
 
 @NgModule({
