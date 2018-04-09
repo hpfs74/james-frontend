@@ -35,7 +35,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint:styles && npm run lint",
-      "commitmsg": "commitlint -e", 
+      "commit-msg": "commitlint -e", 
       "pre-push": "npm run build && npm run test:ci && npm run security && pkg-ok",
       "post-checkout": "./hooks/post-checkout $GIT_PARAMS",
       "post-merge": "./hooks/post-merge $GIT_PARAMS"
