@@ -257,7 +257,6 @@ export class CarDetailComponent implements AfterViewInit, OnDestroy {
     this.subscriptions$.push(
       loan.valueChanges.subscribe((value) => {
         if (value !== null && loan.valid) {
-          console.log('LOAN HERE', value);
           this.store$.dispatch(new coverage.CarCoverageSetActiveLoan(value));
         }
       })
