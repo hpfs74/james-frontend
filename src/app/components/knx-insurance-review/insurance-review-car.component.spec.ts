@@ -5,6 +5,9 @@ import { CurrencyPipe } from '@angular/common';
 import { KNXCollapsiblePanelComponent } from '@knx/collapsible-panel/index';
 import { KNXFormsModule } from '@knx/forms';
 
+import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoaderMock } from 'test.common.spec';
+
 import { SharedModule } from '@app/shared.module';
 import { InsuranceReviewCarComponent } from './insurance-review-car.component';
 import { InsuranceReviewModule } from './insurance-review.module';
@@ -34,7 +37,10 @@ describe('Component: InsuranceReviewCarComponent', () => {
         BrowserModule,
         KNXFormsModule,
         SharedModule,
-        InsuranceReviewModule
+        InsuranceReviewModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+        }),
       ],
       declarations: [
         TestHostComponent
@@ -43,6 +49,7 @@ describe('Component: InsuranceReviewCarComponent', () => {
         FeatureConfigService,
         CookieService,
         CurrencyPipe,
+        TranslateService,
         {
           provide: TagsService,
           useValue: TagsServiceMock

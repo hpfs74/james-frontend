@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import * as faker from 'faker';
 
+import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoaderMock } from 'test.common.spec';
 
 
 import { setUpTestBed } from './../../../../../../test.common.spec';
@@ -62,12 +64,16 @@ describe('Component: CarSummaryComponent', () => {
         'insurance': combineReducers(fromInsurance.reducers),
         'profile': combineReducers(fromProfile.reducers)
       }),
-      SharedModule
+      SharedModule,
+      TranslateModule.forRoot({
+        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+      }),
     ],
     declarations: [CarSummaryComponent, TestHostComponent],
     providers: [
       AsyncPipe,
       ChangeDetectorRef,
+      TranslateService,
       {
         provide: ContentConfig,
         useValue: ContentConfigMock

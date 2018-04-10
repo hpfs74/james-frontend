@@ -162,6 +162,7 @@ span.knx-info-icon.knx-icon-info-circle {
   background: $knab-primary-red;
   border-radius: 0 0 3px 3px;
   transition: 0.4s all;
+  text-decoration: underline;
 
   &.knx-animate:hover {
     transform: scale(1.01, 1.01);
