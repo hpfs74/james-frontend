@@ -1,6 +1,6 @@
 {
   "name": "knab-james-frontend",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Knab Verzekeren Web app (Codename James)",
   "author": "cXstudio",
   "keywords": [
@@ -35,7 +35,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint:styles && npm run lint",
-      "commit-msg": "commitlint -e", 
+      "commit-msg": "commitlint -e",
       "pre-push": "npm run build && npm run test:ci && npm run security && pkg-ok",
       "post-checkout": "./hooks/post-checkout $GIT_PARAMS",
       "post-merge": "./hooks/post-merge $GIT_PARAMS"
