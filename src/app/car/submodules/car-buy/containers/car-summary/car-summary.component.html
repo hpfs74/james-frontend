@@ -182,7 +182,9 @@
         <knx-ir-content [showStep]="false" title="Betaling" *ngIf="(insurance$ | async)">
           <knx-ir-row showValue="true">
             <knx-ir-label>Je betaalt per maand</knx-ir-label>
-            <knx-ir-value>{{ (insurance$ | async)?.monthly_premium | currency:'EUR':true }}<br><span class="premium-note">Incl. 10% provisie aan Knab</span></knx-ir-value>
+            <knx-ir-value>{{ (insurance$ | async)?.monthly_premium | currency:'EUR':true }}<br><span class="premium-note">
+              {{ 'car.buy.steps.summary.provision' | translate }}
+            </span></knx-ir-value>
           </knx-ir-row>
 
           <knx-ir-row showValue="true">

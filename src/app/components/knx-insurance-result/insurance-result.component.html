@@ -88,7 +88,8 @@
          *ngIf="insurance.discount"
          (click)="openPdf()">
       <img src="/assets/icon/present_icon.png" alt="present">
-      Incl. {{ getDiscountAmmount(insurance.discount) | currency:'EUR':true }} Knab korting & Hulp bij overstappen
+       {{'car.advice.steps.extras.discount.text1' | translate}}
+      {{ getDiscountAmmount(insurance.discount) | currency:'EUR':true }}{{'car.advice.steps.extras.discount.text2' | translate}}
     </div>
   </div>
 
