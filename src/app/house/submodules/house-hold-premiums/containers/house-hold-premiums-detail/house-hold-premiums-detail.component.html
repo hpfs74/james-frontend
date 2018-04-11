@@ -70,13 +70,12 @@
     <knx-collapsible-panel title="{{ 'household.premiumDetail.insurance_details' | translate }}" [isOpen]="true" [showStep]="false" [collapsible]="false">
       <div class="knx-collapsible-panel__content">
 
-        <knx-ir-row showTooltip="false" showValue="true"
-                    *ngFor="let clause of insurance?.Clauses">
+        <knx-ir-row showTooltip="false" showValue="true" *ngFor="let clause of insurance?.Clauses">
           <knx-ir-label>
             {{clause.ClauseTitle}}
           </knx-ir-label>
           <knx-ir-value>
-            {{clause.ClauseText}}
+            {{cutOffHtmlTags(clause.ClauseText)}}
           </knx-ir-value>
         </knx-ir-row>
 
