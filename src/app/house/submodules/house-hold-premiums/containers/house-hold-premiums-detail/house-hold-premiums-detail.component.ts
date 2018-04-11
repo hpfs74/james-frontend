@@ -61,6 +61,13 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  /**
+   * remove html tags from RISK responce
+   */
+  cutOffHtmlTags(strInputCode) {
+    return strInputCode.replace(/<\/?[^>]+(>|$)/g, '');
+  }
+
   goToPrevStep() {
     this.store$.dispatch(new wizardActions.Back());
   }
