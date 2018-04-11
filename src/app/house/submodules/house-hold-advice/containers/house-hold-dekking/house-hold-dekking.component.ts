@@ -151,12 +151,6 @@ export class HouseHoldDekkingComponent implements OnInit, AfterViewInit, OnDestr
 
     this.houseHoldData = value;
 
-    if (value.CoverageCode !== null && value.CoverageCode !== undefined) {
-      this.coverages.forEach((el) => {
-        el.selected = +el.id === value.CoverageCode;
-      });
-      this.form.formGroup.patchValue({coverage: value.CoverageCode});
-    }
     if (value.IncludeOutdoorsValuable !== null) {
       this.form.formGroup.patchValue({outsideCoverage: value.IncludeOutdoorsValuable});
     }
