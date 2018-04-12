@@ -9,7 +9,7 @@ import { Pipe, PipeTransform } from '@angular/core';
  *   {{ '<html><body>Test</body></html> | stripHtml }}
  *   will output: Test
 */
-@Pipe({name: 'exponentialStrength'})
+@Pipe({name: 'stripHtml'})
 export class StripHtmlPipe implements PipeTransform {
   transform(value: string): string {
 
