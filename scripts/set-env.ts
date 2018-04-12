@@ -104,7 +104,10 @@ function getContent(environment: string) {
     riskInsurance: {
       getHouseData: '${getEnvVar('RISK_INSURANCE_HOUSE_DATA')}',
       HouseHoldAmount: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_AMOUNT')}',
-      HouseHoldPremium: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_PREMIUM')}'
+      HouseHoldPremium: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_PREMIUM')}',
+      HouseHoldCalculatePrivatePremium: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_CALCULATE_PREMIUM')}',
+      HouseHoldOfferPrivatePremium: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_OFFER_PREMIUM')}',
+      HouseHoldRequestPrivatePremium: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_REQUEST_PREMIUM')}'
     }
   };
   `;

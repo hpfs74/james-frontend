@@ -15,6 +15,9 @@ import {
   HouseHoldStoredAdviceRequest,
   HouseHoldStoredAdviceResponse
 } from '@app/house/models/house-hold-stored-advice';
+import { PackagePremium } from '@app/house/models/house-hold-data';
+import { NgCliWebpackConfig } from '@angular/cli/models/webpack-config';
+import 'rxjs/add/operator/switchMap';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,6 +35,7 @@ export class HouseHoldService {
 
   /**
    * get information about the house
+   *
    * @param {HouseDataRequest} req - address of the house
    * @returns {Observable<HouseDataResponse>}
    */
@@ -51,6 +55,7 @@ export class HouseHoldService {
 
   /**
    * get the amount of supported insurance
+   *
    * @param {HouseHoldAmountRequest} req
    * @returns {Observable<HouseHoldAmountResponse>}
    */
@@ -80,11 +85,75 @@ export class HouseHoldService {
         headers: httpOptions.headers
       })
       .map(res => {
+        // Payload post processing
         res.CalculatedPremiums.forEach(el => this.filterImageUrl(el));
         res.CalculatedPremiums.sort((a, b) => a.Premium - b.Premium);
 
         return res;
       });
+  }
+
+  /**
+   * call risk api to request a package premium
+   *
+   * @param {CalculatedPremium} req
+   * @returns {Observable<PackagePremium>}
+   */
+  public calculatePrivatePremiums(req: CalculatedPremium): Observable<PackagePremium> {
+    const payload = {
+      HouseHoldInsurance: [
+        req
+      ],
+      HomeInsurance: null
+    };
+
+    return this.http.post<PackagePremium>(
+      environment.riskInsurance.HouseHoldCalculatePrivatePremium,
+      payload, {
+        headers: httpOptions.headers
+      });
+  }
+
+  /**
+   * call risk api to request an offer for the specific package premium
+   *
+   * @param {PackagePremium} req
+   * @returns {Observable<PackagePremium>}
+   */
+  public offerPrivatePremiums(req: PackagePremium): Observable<PackagePremium> {
+    return this.http.post<PackagePremium>(
+      environment.riskInsurance.HouseHoldOfferPrivatePremium,
+      req, {
+        headers: httpOptions.headers
+      });
+  }
+
+  /**
+   * call risk api to complete the request of the insurance and the buy flow
+   *
+   * @param {PackagePremium} req
+   * @returns {Observable<PackagePremium>}
+   */
+  public requestPrivatePremiums(req: PackagePremium): Observable<PackagePremium> {
+    return this.http.post<PackagePremium>(
+      environment.riskInsurance.HouseHoldRequestPrivatePremium,
+      req, {
+        headers: httpOptions.headers
+      });
+  }
+
+  /**
+   * make the buy of household premium buy calling the whole
+   * risk api flow
+   *
+   * @param {CalculatedPremium} req
+   * @returns {Observable<PackagePremium>}
+   */
+  public buyPremium(req: CalculatedPremium): Observable<PackagePremium> {
+
+    return this.calculatePrivatePremiums(req)
+      .switchMap(offer => this.offerPrivatePremiums(offer))
+      .switchMap(request => this.requestPrivatePremiums(request));
   }
 
   /**
@@ -99,11 +168,11 @@ export class HouseHoldService {
     return null;
   }
 
-
   private filterImageUrl(res) {
 
     // TODO: This has to be moved in the middle layer, it should not be here, but in the meanwhile it is needed
-    res.CompanyLogoUrl = res.CompanyLogoUrl
+    res
+      .CompanyLogoUrl = res.CompanyLogoUrl
       .replace('https://webmodulet.risk-verzekeringen.nl/Webmodule/IMG/Maatschappijen/',
         'https://knab-dev.apigee.net/insurance/risk/v1/content/images/Maatschappijen/')
       .replace('https://webmodulea.risk-verzekeringen.nl/Webmodule/IMG/Maatschappijen/',

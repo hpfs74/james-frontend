@@ -16,3 +16,24 @@ export interface HouseHoldData {
   FamilySituation?: string;
   GlassCoverage?: string;
 }
+
+
+export interface PackagePremium {
+  AcceptanceResult?: string;
+  PackageDescription?: string;
+  OfferNumber?: string;
+  PackageNumber?: string;
+  PolicyCount?: number;
+  CommencingDate?: Date;
+  NettoPremium?: number;
+  TotalCosts?: number;
+  Taxes?: number;
+  PackageDiscount?: number;
+  Premium: number;
+
+  CarInsurances?: any;
+  HomeInsurances?: any;
+  HouseHoldInsurances?: HouseHoldData[];
+}
+
+
