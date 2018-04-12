@@ -28,6 +28,8 @@ module.exports = function(config) {
             flags: [
               '--headless',
               '--disable-gpu',
+              '--disable-translate',
+              '--disable-extensions',
               // Without a remote debugging port, Google Chrome exits immediately.
               '--remote-debugging-port=9222',
             ],
@@ -110,7 +112,8 @@ module.exports = function(config) {
         browserNoActivityTimeout: 60000,
         transports: process.env.CI ? ['polling'] : ['polling', 'websocket'],
         autoWatch: process.env.CI ? false : true,
-        browsers: process.env.CI ? ['PhantomJS', 'PhantomJS_custom'] : ['ChromeHeadless'],
+        // browsers: process.env.CI ? ['PhantomJS', 'PhantomJS_custom'] : ['ChromeHeadless'],
+        browsers: process.env.CI ? ['PhantomJS_custom'] : ['ChromeHeadless'],
         singleRun: process.env.CI ? false : true
     };
     // CI
