@@ -102,6 +102,7 @@ function getContent(environment: string) {
       langEndpoint: '${getEnvVar('LANG_ENDPOINT')}'
     },
     riskInsurance: {
+      brokerId: '${getEnvVar('RISK_BROKER_ID')}',
       getHouseData: '${getEnvVar('RISK_INSURANCE_HOUSE_DATA')}',
       HouseHoldAmount: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_AMOUNT')}',
       HouseHoldPremium: '${getEnvVar('RISK_INSURANCE_HOUSEHOLD_PREMIUM')}'

@@ -2,6 +2,7 @@
  * Criteria by which we've found this selection
  */
 export class HouseHoldSearchCriteria {
+  BrokerID?: string;
   Birthdate: number;
   CommencingDate: number;
   Zipcode: string;

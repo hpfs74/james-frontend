@@ -1,5 +1,5 @@
 export class HouseHoldAmountRequest {
-
+  BrokerID?: string;
   SurfaceArea: number;
   OwnedBuilding: string;
   FamilyComposition: string;

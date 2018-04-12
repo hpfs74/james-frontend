@@ -58,7 +58,7 @@ export class HouseHoldService {
 
     return this.http.post<HouseHoldAmountResponse>(
       environment.riskInsurance.HouseHoldAmount,
-      req,
+      Object.assign(req, { BrokerID: environment.riskInsurance.brokerId}),
       {
         headers: httpOptions.headers
       })
@@ -75,7 +75,7 @@ export class HouseHoldService {
 
     return this.http.post<HouseHoldPremiumResponse>(
       environment.riskInsurance.HouseHoldPremium,
-      req,
+      Object.assign(req, { BrokerID: environment.riskInsurance.brokerId}),
       {
         headers: httpOptions.headers
       })
