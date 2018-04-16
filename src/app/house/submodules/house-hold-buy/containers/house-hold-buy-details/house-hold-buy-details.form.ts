@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
 import { UIPair } from '@app/core/models/ui-pair';
+import { EmailValidator } from '@utils/email-validator';
 
 export class HouseHoldDetailForm extends BaseForm {
   formGroup: FormGroup;
@@ -24,9 +25,24 @@ export class HouseHoldDetailForm extends BaseForm {
       prefix: [null, null],
       lastName: [null, Validators.required],
       sameAddress: [true, Validators.required],
+      email: [null, Validators.compose([Validators.required, EmailValidator])],
     });
 
     this.formConfig = {
+      email: {
+        formControlName: 'email',
+        formControl: this.formGroup.get('email'),
+        validationErrors: this.validationErrors,
+        label: this.copies['household.premium.buy.your_email.label'],
+        inputOptions: {
+          type: 'email',
+          placeholder: this.copies['household.premium.buy.your_email.placeholder'],
+          prefix: 'knx-icon-envelope',
+          attributes: {
+            'aria-label': 'household.premium.buy.your_email.placeholder'
+          }
+        }
+      },
       gender: {
         formControlName: 'gender',
         label: this.copies['car.advice.steps.detail.form.gender.label'],
