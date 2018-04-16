@@ -5,13 +5,13 @@
 <p>{{ 'household.payment_details.header.para3' | translate }}</p>
 
 <knx-contact-detail
-  [contact]="contact$ | async">
+  [contact]="(insuranceStore$ | async).contacts">
 </knx-contact-detail>
 
 
 <knx-insurance-combined-price
   [IncludeBTW]="true"
-  [Insurance]="selectedInsurances$ | async">
+  [Insurance]="[(selectedInsurances$ | async)]">
 
 </knx-insurance-combined-price>
 
@@ -37,7 +37,7 @@
                       <label>
                         {{ 'household.payment_details.payment_details.start_date.label' | translate }}.
                       </label><br/>
-                      {{(selectedInsurances$ | async).CommencingDate}}
+                      {{(selectedInsurances$ | async).CommencingDate | date:'shortDate'}}
                     </div>
                   </div>
 

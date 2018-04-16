@@ -17,7 +17,6 @@ export interface HouseHoldData {
   GlassCoverage?: string;
 }
 
-
 export interface PackagePremium {
   AcceptanceResult?: string;
   PackageDescription?: string;
@@ -35,5 +34,3 @@ export interface PackagePremium {
   HomeInsurances?: any;
   HouseHoldInsurances?: HouseHoldData[];
 }
-
-

@@ -99,7 +99,7 @@ export class HouseHoldService {
    * @param {CalculatedPremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public calculatePrivatePremiums(req: CalculatedPremium): Observable<PackagePremium> {
+  public calculatePrivatePackage(req: CalculatedPremium): Observable<PackagePremium> {
     const payload = {
       HouseHoldInsurance: [
         req
@@ -120,7 +120,7 @@ export class HouseHoldService {
    * @param {PackagePremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public offerPrivatePremiums(req: PackagePremium): Observable<PackagePremium> {
+  public offerPrivatePackage(req: PackagePremium): Observable<PackagePremium> {
     return this.http.post<PackagePremium>(
       environment.riskInsurance.HouseHoldOfferPrivatePremium,
       req, {
@@ -134,7 +134,7 @@ export class HouseHoldService {
    * @param {PackagePremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public requestPrivatePremiums(req: PackagePremium): Observable<PackagePremium> {
+  public requestPrivatePackage(req: PackagePremium): Observable<PackagePremium> {
     return this.http.post<PackagePremium>(
       environment.riskInsurance.HouseHoldRequestPrivatePremium,
       req, {
@@ -149,11 +149,11 @@ export class HouseHoldService {
    * @param {CalculatedPremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public buyPremium(req: CalculatedPremium): Observable<PackagePremium> {
+  public buyPackage(req: CalculatedPremium): Observable<PackagePremium> {
 
-    return this.calculatePrivatePremiums(req)
-      .switchMap(offer => this.offerPrivatePremiums(offer))
-      .switchMap(request => this.requestPrivatePremiums(request));
+    return this.calculatePrivatePackage(req)
+      .switchMap(offer => this.offerPrivatePackage(offer))
+      .switchMap(request => this.requestPrivatePackage(request));
   }
 
   /**

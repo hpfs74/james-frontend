@@ -8,7 +8,7 @@ import { KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard
 
 import { CalculatedPremium, HouseHoldPremiumResponse, HouseHoldSearchCriteria } from '@app/house/models/house-hold-premium';
 import { Insurance, InsuranceAdvice } from '@insurance/models';
-import { HouseHoldDetailForm } from '@app/house/submodules/house-hold-buy/containers/house-hold-buy-details/house-hold-buy-details.form';
+import { HouseHoldDetailForm } from './house-hold-buy-details.form';
 import { FormBuilder } from '@angular/forms';
 import { TagsService } from '@app/core/services';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,6 +30,7 @@ import * as fromAddress from '@app/address/reducers';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
+import * as router from '@core/actions/router';
 
 @Component({
   providers: [AsyncPipe],
@@ -46,6 +47,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   error$: any;
   address: Address;
   subscriptions: Subscription[] = [];
+
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe,
               private translateService: TranslateService,
@@ -105,12 +107,12 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
 
   handleHouseholdContactDetails(houseHoldContactDetails: ContactDetails) {
     const formValues = {
-        sameAddress: houseHoldContactDetails.sameAddress,
-        gender: houseHoldContactDetails.gender,
-        firstName: houseHoldContactDetails.firstName,
-        prefix: houseHoldContactDetails.prefix,
-        lastName: houseHoldContactDetails.lastName,
-        initials: houseHoldContactDetails.initials
+      sameAddress: houseHoldContactDetails.sameAddress,
+      gender: houseHoldContactDetails.gender,
+      firstName: houseHoldContactDetails.firstName,
+      prefix: houseHoldContactDetails.prefix,
+      lastName: houseHoldContactDetails.lastName,
+      initials: houseHoldContactDetails.initials
     };
     this.form.formGroup.patchValue(Object.assign({}, formValues));
     if (!this.form.formGroup.get('sameAddress').value) {
@@ -148,7 +150,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   }
 
   goToPreviousStep() {
-    this.store$.dispatch(new wizardActions.Back());
+    this.store$.dispatch(new router.Go({path: ['/inboedel/advies-detail']}));
   }
 
   goToNextStep() {
@@ -188,7 +190,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
           {},
           newFlowAdvice,
           {
-            contacts: Object.assign({}, contactDetails)
+            contacts: Object.assign({}, newFlowAdvice.contacts, contactDetails)
           });
         this.store$.dispatch(new householddataActions.NewFlowAdviceStore(insuranceStore));
         this.store$.dispatch(new wizardActions.Forward());

@@ -2,8 +2,8 @@
  * Criteria by which we've found this selection
  */
 export class HouseHoldSearchCriteria {
-  Birthdate: number;
-  CommencingDate: number;
+  Birthdate: string;
+  CommencingDate: string;
   Zipcode: string;
   HouseNumber: number;
   HouseNumberAddition?: string;
@@ -32,7 +32,7 @@ export class HouseHoldSearchCriteria {
   AmountMoreThan6KJewelry?: number;
   AmountMoreThan15KSpecialPossesion?: number;
   AmountMoreThan6KTenantsInterest?: number;
-  BreadWinnerBirthdate?: number;
+  BreadWinnerBirthdate?: string;
   BreadWinnerMonthlyIncome?: number;
   InsuredAmountValuables: number;
   IncludeOutdoorsValuable?: string;

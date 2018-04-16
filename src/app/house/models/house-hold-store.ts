@@ -27,46 +27,46 @@ export interface PaymentDetails {
 
 export interface InsuranceChoice {
   /** Criteria used to find the available premiums */
-  searchCriteria: HouseHoldSearchCriteria;
+  searchCriteria?: HouseHoldSearchCriteria;
 
   /** These are the premiums that were available and from which the user had to choose. */
-  availablePremiums: Array<CalculatedPremium>;
+  availablePremiums?: Array<CalculatedPremium>;
 
   /** This is what the user selected, referencing the premium by its 'Identifier' */
-  selectedPremium: CalculatedPremium;
+  selectedPremium?: CalculatedPremium;
 }
 
 /** Contact details the customer provided when submitting his selection */
 export interface ContactDetails {
   /** customer has same address */
-  sameAddress: boolean;
+  sameAddress?: boolean;
 
   /** customer initials */
-  initials: string;
+  initials?: string;
 
   /** customer first name */
-  firstName: string;
+  firstName?: string;
 
   /** infix typical dutch */
-  infix: string;
+  infix?: string;
 
   /** prefix like Mr, Mrs, Dr, Ms, Hr, Vr, etc. */
-  prefix: string;
+  prefix?: string;
 
   /** customer last name */
-  lastName: string;
+  lastName?: string;
 
   /** customer email address */
-  email: string;
+  email?: string;
 
   /** Location address */
-  address: Address;
+  address?: Address;
 
   /** date of birth */
-  dateOfBirth: Date;
+  dateOfBirth?: string;
 
   /** family situation with values */
-  familySituation: string;
+  familySituation?: string;
 
   /** M: male, F: female */
   gender?: string;
