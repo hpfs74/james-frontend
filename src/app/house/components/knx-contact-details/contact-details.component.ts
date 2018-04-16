@@ -13,5 +13,9 @@ export class ContactDetailsComponent {
   constructor(private translateService: TranslateService) {
 
   }
+
+  getFamilySituation() {
+    return 'house_hold_flow_family_situation.' + this.contact.familySituation;
+  }
 }
 

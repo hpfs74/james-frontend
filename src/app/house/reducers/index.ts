@@ -73,3 +73,6 @@ export const getHouseHoldDataInfo = createSelector(getHouseHoldDataState, fromHo
 export const getHouseHoldDataAdvice = createSelector(getHouseHoldDataState, fromHouseHoldData.getAdviceId);
 export const getHouseHoldSelectedAdvice = createSelector(getHouseHoldDataState, fromHouseHoldData.getSelectedAdvice);
 export const getHouseHoldNewFlowAdvice = createSelector(getHouseHoldDataState, fromHouseHoldData.getNewFlowAdvice);
+export const getHouseHoldNewFlowAdviceContact = createSelector(getHouseHoldDataState, fromHouseHoldData.getNewFlowAdviceContact);
+export const getNewFlowAdviceSelectedHouseHoldPremium =
+  createSelector(getHouseHoldDataState, fromHouseHoldData.getNewFlowAdviceSelectedHouseHoldPremium);

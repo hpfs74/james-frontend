@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import { CalculatedPremium, HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 
+import * as houseHoldAction from '@app/house/actions/house-hold-data';
 import * as assistant from '@core/actions/assistant';
 import * as wizardActions from '@core/actions/wizard';
 import * as fromRoot from '@app/reducers';
@@ -23,7 +24,9 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
   error$: Observable<KNXStepError>;
 
   selectedInsurance$: Observable<CalculatedPremium>;
+  houseDataInfo$: Observable<HouseHoldPremiumRequest>;
   insurance: CalculatedPremium;
+  houseDataInfo: HouseHoldPremiumRequest;
   subscriptions: Subscription[] = [];
   copies: any = {};
 
@@ -47,11 +50,16 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
 
     this.store$.dispatch(new assistant.AddCannedMessage({key: 'household.detail', clear: true}));
 
+    this.houseDataInfo$ = this.store$.select(fromHouseHold.getHouseHoldDataInfo);
     this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
 
-    this.subscriptions.push(this.selectedInsurance$.subscribe(ins => {
-      this.insurance = ins;
-    }));
+    this.subscriptions.push(
+      this.selectedInsurance$.subscribe(ins => {
+        this.insurance = ins;
+      }),
+      this.houseDataInfo$.subscribe(info => {
+        this.houseDataInfo = info;
+      }));
   }
 
   /**
@@ -74,6 +82,18 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
 
   goToNextStep() {
     if (localStorage.getItem('testing')) {
+
+
+      this.store$.dispatch(new houseHoldAction.NewFlowAdviceStore({
+        contacts: {
+          sameAddress: true,
+          dateOfBirth: this.houseDataInfo.BreadWinnerBirthdate,
+          familySituation: this.houseDataInfo.FamilyComposition
+        },
+        houseHoldInsurance: {
+          selectedPremium: this.insurance
+        }
+      }));
       this.store$.dispatch(new router.Go({path: ['/inboedel/buy-details']}));
     } else {
       this.store$.dispatch(new layout.OpenModal('houseHoldEndOftheLineModal'));

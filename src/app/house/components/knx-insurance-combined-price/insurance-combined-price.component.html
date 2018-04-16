@@ -1,23 +1,26 @@
 <knx-collapsible-panel [collapsible]="false" [isOpen]="true" [showStep]="false">
-  <div class="knx-collapsible-panel__title">
-    <span *ngFor="let insurance of Insurance; index as i; first as isFirst">
-      <span *ngIf="!first"> + </span>
-      <img src="{{insurance.CompanyLogoUrl}}" alt="insurance.CompanyName" />
-    </span>
-  </div>
 
   <div class="knx-collapsible-panel__content">
-    <div class="row" *ngFor="let insurance of Insurance; index as i; first as isFirst">
+    <div class="row">
+      <div class="col-12 col-md-12 col-sm-12">
+        <span *ngFor="let insurance of Insurance; index as i; first as isFirst">
+          <!--<span *ngIf="!first"> + </span> {{first}}-->
+          <img src="{{insurance.CompanyLogoUrl}}" alt="insurance.CompanyName"/>
+        </span>
+        <hr />
+      </div>
+    </div>
 
+    <div class="row" *ngFor="let insurance of Insurance; index as i; first as isFirst">
       <div class="col-6 col-sm-6">
         {{insurance.CompanyName}} - {{insurance.ProductDescription}}
       </div>
       <div class="col-6 col-sm-6 text-right">
-        {{insurance.Premium | currency }}
+        {{insurance.Premium | currency:'EUR':true:'2.0' }}
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="false">
       <div class="col-6 col-sm-6">
         {{ 'general.knab.package.discount.label' | translate }}
       </div>
@@ -28,7 +31,7 @@
 
     <div class="row">
       <div class="col-12 col-sm-12">
-        <hr />
+        <hr/>
       </div>
     </div>
 
@@ -37,7 +40,16 @@
         {{ 'general.total.price.monthly' | translate }}
       </div>
       <div class="col-6 col-sm-6 text-right">
-        {{ getTotalMonthlyPrice() | currency }}
+        {{ getTotalMonthlyPrice() | currency:'EUR':true:'2.0-2' }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 col-sm-6">
+        {{ 'general.total.taxes.monthly' | translate }}
+      </div>
+      <div class="col-6 col-sm-6 text-right">
+        {{ getTotalTaxPrice() | currency:'EUR':true:'2.0-2' }}
       </div>
     </div>
 
@@ -48,7 +60,7 @@
         </knx-tooltip>
       </div>
       <div class="col-6 col-sm-6 text-right">
-        {{ getRiskAdministrationCost() | currency }}
+        {{ getRiskAdministrationCost() | currency:'EUR':true:'2.0-2' }}
       </div>
     </div>
 
@@ -61,7 +73,7 @@
 
     <div class="row" *ngIf="IncludeBTW">
       <div class="col-12 col-md-12">
-        {{ 'general.price.including.btw' | translate }}
+        <small>{{ 'general.price.including.btw' | translate }}</small>
       </div>
     </div>
 

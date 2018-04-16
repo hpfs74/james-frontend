@@ -10,11 +10,19 @@ export class InsuranceCombinedPriceComponent {
   @Input() IncludeBTW = false;
   @Input() Insurance: Array<CalculatedPremium>;
 
+  private sum(a, b): number {
+    return a + b;
+  }
+
   getTotalMonthlyPrice(): number {
-    return 0;
+    return this.Insurance.map(x => x.NettoPremium).reduce(this.sum);
+  }
+
+  getTotalTaxPrice(): number {
+    return this.Insurance.map(x => x.Taxes).reduce(this.sum);
   }
 
   getRiskAdministrationCost(): number {
-    return 0;
+    return this.Insurance.map(x => x.TotalCosts).reduce(this.sum);
   }
 }

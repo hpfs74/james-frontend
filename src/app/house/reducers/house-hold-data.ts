@@ -36,7 +36,7 @@ export function reducer(state = initialState, action: Action): State {
 
     case HouseHoldDataActions.NEW_FLOW_STORE_ADVICE: {
       const payload = action.payload;
-
+      // TODO: BUG!!!!!
       return Object.assign({}, state, {
         newFlowAdvice: payload
       });
@@ -101,3 +101,5 @@ export const getAdviceId = (state: State) => state.id;
 export const getInfo = (state: State) => state.info;
 export const getSelectedAdvice = (state: State) => state.advice;
 export const getNewFlowAdvice = (state: State) => state.newFlowAdvice;
+export const getNewFlowAdviceContact = (state: State) => state.newFlowAdvice.contacts;
+export const getNewFlowAdviceSelectedHouseHoldPremium = (state: State) => state.newFlowAdvice.houseHoldInsurance.selectedPremium;

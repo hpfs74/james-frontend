@@ -2,11 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ContactDetails, InsuranceStore } from '@app/house/models/house-hold-store';
 import { Observable } from 'rxjs/Observable';
 import { CalculatedPremium } from '@app/house/models/house-hold-premium';
-import * as fromHouseHold from '@app/house/reducers';
 import * as fromRoot from '@app/reducers';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import 'rxjs/add/observable/of';
 import { HouseHoldPaymentDetailsForm } from './house-hold-payment-details.form';
 import { FormBuilder } from '@angular/forms';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
@@ -14,68 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
 import * as wizardActions from '@core/actions/wizard';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import * as FormUtils from '@utils/base-form.utils';
-
-const fakedata = {
-  houseHoldInsurance: {
-    selectedPremium: {
-      CommencingDate: '2018-01-11T00:00:00',
-      NettoPremium: 17.93,
-      TotalCosts: 1.25,
-      Taxes: 4.03,
-      Premium: 23.21,
-      PaymentPeriod: 1,
-      PackageDescription: 'Totaal Plan',
-      ProductDescription: 'Inboedel',
-      CompanyName: 'Reaal',
-      CompanyLogoUrl: 'https://webmodulea.risk-verzekeringen.nl/Webmodule/IMG/Maatschappijen/H043_Small.png',
-      Identifier: '84985H043P0560007',
-      ConditionUrls: [
-        {
-          URL: 'xxxx',
-          Description: 'Voorwaarden Woonpakket',
-          Number: 'WP 16-01'
-        },
-        {
-          URL: 'xxx',
-          Description: 'Bijzondere Voorwaarden Buitenshuisdekking',
-          Number: 'Bui 0807'
-        }
-      ],
-      Clauses: [
-        {
-          ClauseTitle: 'Geen beroep op onderverzekering (inboedel)',
-          ClauseNumber: '3413',
-          ClauseText: 'REAAL zal geen beroep doen op onderverzekering indien de waarde...'
-        }
-      ],
-      HouseholdCoverageDescription: 'Alle gevaren',
-      InsuredAmount: 4215600,
-      Deductables: 50,
-      TenantsInterestCoverageDescription: null,
-      GlassCoverageDescription: 'Glas',
-      ValuablesCoverageDescription: 'Buitenshuis Particulier inclusief laptop',
-      ValuablesInsuredAmount: 5000
-    }
-  },
-  houseInsurance: null,
-  contacts: {
-    lastName: 'Skywalker',
-    infix: 'van',
-    prefix: 'S.A.',
-    firstName: 'Sarah',
-    dateOfBirth: new Date('1/1/1990'),
-    familySituation: 'A',
-    address: {
-      street: 'street name',
-      number: '123',
-      postcode: '2717AX',
-      city: 'sophia'
-    },
-    addressForComminications: null,
-    email: 's.skywalker@empire.com'
-  }
-
-} as InsuranceStore;
+import * as fromHouseHold from '@app/house/reducers';
 
 @Component({
   selector: 'knx-house-hold-payment-details',
@@ -83,19 +20,20 @@ const fakedata = {
 })
 export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   contact$: Observable<ContactDetails>;
-  selectedInsurances$: Observable<CalculatedPremium[]>;
+  selectedInsurances$: Observable<CalculatedPremium>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   form: HouseHoldPaymentDetailsForm;
   copies: any;
-  subscriptions: Subscription[] = [];
+  subscriptions$: Subscription[] = [];
+  insuranceStore$: Observable<InsuranceStore>;
 
   constructor(private store$: Store<fromRoot.State>,
               private translateService: TranslateService) {
 
     const formBuilder = new FormBuilder();
 
-    this.subscriptions.push(this.translateService.get([
+    this.subscriptions$.push(this.translateService.get([
       'general.errors.field_is_required',
       'general.errors.iban_is_invalid',
       'household.payment_details.payment_details.title',
@@ -122,17 +60,16 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
 
   /** oninit subscribe everything */
   ngOnInit() {
-
-    this.contact$ = Observable.of(fakedata.contacts);
-
-    this.selectedInsurances$ = Observable.of([fakedata.houseHoldInsurance.selectedPremium]);
+    this.insuranceStore$ = this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice);
+    this.contact$ = this.store$.select(fromHouseHold.getHouseHoldNewFlowAdviceContact);
+    this.selectedInsurances$ = this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium);
 
     this.setInitialSubscriptions();
   }
 
   /** ondestroy unsubscribe all */
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions$.forEach(sub => sub.unsubscribe());
   }
 
   /** set component initial subscription */
