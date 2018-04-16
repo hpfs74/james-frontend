@@ -68,7 +68,8 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       'household.details.form_sameAddress_yes_value',
       'household.details.form_sameAddress_no_value',
       'household.detail.next_step',
-      'household.common.step.options.backButtonLabel'
+      'household.common.step.options.backButtonLabel',
+      'household.premium.buy.your_email.label'
     ]).subscribe(res => {
       this.copies = res;
       this.initForms();
@@ -112,7 +113,8 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       firstName: houseHoldContactDetails.firstName,
       prefix: houseHoldContactDetails.prefix,
       lastName: houseHoldContactDetails.lastName,
-      initials: houseHoldContactDetails.initials
+      initials: houseHoldContactDetails.initials,
+      email: houseHoldContactDetails.email
     };
     this.form.formGroup.patchValue(Object.assign({}, formValues));
     if (!this.form.formGroup.get('sameAddress').value) {
@@ -174,6 +176,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
     const lastName = this.form.formGroup.get('lastName').value;
     const initials = this.form.formGroup.get('initials').value;
     const gender = this.form.formGroup.get('gender').value;
+    const email = this.form.formGroup.get('email').value;
     const contactDetails = {
       sameAddress: this.form.formGroup.get('sameAddress').value,
       gender: gender,
@@ -181,7 +184,8 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       prefix: prefix,
       lastName: lastName,
       initials: initials,
-      address: this.address
+      address: this.address,
+      email: email
     };
     this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
       .take(1)
