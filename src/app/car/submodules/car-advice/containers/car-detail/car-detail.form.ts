@@ -51,7 +51,7 @@ export class CarDetailForm extends BaseForm {
       )],
       houseHold: [null, Validators.required],
       loan: [null, Validators.required],
-      gender: [null, Validators.required],
+      gender: ['M', Validators.required],
       coverage: [null, Validators.required]
     });
 

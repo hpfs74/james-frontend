@@ -4,6 +4,7 @@
 export class HouseHoldSearchCriteria {
   Birthdate: string;
   CommencingDate: string;
+  BrokerID?: string;
   Zipcode: string;
   HouseNumber: number;
   HouseNumberAddition?: string;
