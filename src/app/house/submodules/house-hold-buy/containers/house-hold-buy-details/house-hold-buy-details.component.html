@@ -1,11 +1,23 @@
-<form name="householdDetailForm" id="householdDetailForm" [formGroup]="form.formGroup" class="knx-fancy-form household-detail-form">
+<form name="householdDetailForm" id="householdDetailForm" [formGroup]="form.formGroup"
+      class="knx-fancy-form household-detail-form">
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <button (click)="goToPreviousStep()"
+              class="knx-button knx-button--link knx-button--back">
+        {{'household.details_go_back_to_insurance' | translate }}
+      </button>
+    </div>
+  </div>
 
   <knx-card>
     <div class="row">
       <div class="col-md-12">
         <div class="knx-inline-b knx-logo-risk"></div>
         <div class="knx-inline-b">
-          <h3>{{'household.details_header_first_card_h3_p1' | translate}}<br>{{'household.details_header_first_card_h3_p2' | translate}}</h3>
+          <h3>{{'household.details_header_first_card_h3_p1' | translate}}<br>{{'household.details_header_first_card_h3_p2'
+            | translate}}</h3>
         </div>
       </div>
     </div>
@@ -24,9 +36,18 @@
   </knx-card>
 
   <knx-card>
+    <knx-insurance-combined-price
+      [short]="true"
+      [IncludeBTW]="true"
+      [Insurance]="[(selectedInsurances$ | async)]">
+
+    </knx-insurance-combined-price>
+  </knx-card>
+
+  <knx-card>
     <div class="row">
       <div class="col-md-12">
-        <h2>{{'household.details_second_card' | translate}}</h2>
+        <h2>{{'household.details_second_card_title' | translate}}</h2>
       </div>
     </div>
     <div class="row">
@@ -123,8 +144,26 @@
     </knx-address-lookup>
   </knx-card>
 </form>
+
+
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
-[error]="error$ | async"
-(onNext)="goToNextStep()"
-(onBack)="goToPreviousStep()">
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep()"
+                     (onBack)="goToPreviousStep()">
 </knx-wizard-controls>
+
+<div class="row">
+  <div class="col-md-12 col-12">
+    <div [innerHTML]="'household.details_privacy_policy_statement' | translate "></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <button (click)="goToPreviousStep()"
+            class="knx-button knx-button--link knx-button--back">
+      {{'household.details_go_back_to_insurance' | translate}}
+    </button>
+  </div>
+</div>

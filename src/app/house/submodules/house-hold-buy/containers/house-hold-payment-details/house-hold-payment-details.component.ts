@@ -75,6 +75,10 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   /** set component initial subscription */
   setInitialSubscriptions() {
 
+    this.subscriptions$.push(
+
+    );
+
     // this.subscriptions.push(
     //  this.store$.insuranceBuy.subscribe( res=> {
     //     // go to the next step
@@ -103,6 +107,10 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       }
     }));
 
+    this.store$.dispatch(new houseHoldData.NewBuy(null));
+  }
+
+  requestSuccess() {
     this.store$.dispatch(new wizardActions.Forward());
   }
 }

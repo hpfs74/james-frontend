@@ -1,7 +1,7 @@
 <div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
      knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
   <div class="container">
-    <knx-step-navigation
+    <knx-step-navigation *ngIf="knxWizardService.currentStepIndex !== 3"
       [steps]="formSteps"
       [currentStep]="knxWizardService.currentStepIndex"
       [clickable]="true"

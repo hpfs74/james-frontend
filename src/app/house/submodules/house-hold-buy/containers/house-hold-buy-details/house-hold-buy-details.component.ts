@@ -47,6 +47,8 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   error$: any;
   address: Address;
   subscriptions: Subscription[] = [];
+  selectedInsurances$: Observable<CalculatedPremium>;
+
 
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe,
@@ -82,6 +84,8 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.selectedInsurances$ = this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium);
+
     this.subscriptions.push(
       this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
         .filter(data => !!data)
