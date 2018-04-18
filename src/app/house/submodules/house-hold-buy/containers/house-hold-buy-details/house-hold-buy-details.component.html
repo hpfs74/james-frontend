@@ -1,6 +1,16 @@
 <form name="householdDetailForm" id="householdDetailForm" [formGroup]="form.formGroup"
       class="knx-fancy-form household-detail-form">
 
+  <div class="row">
+    <div class="col-md-6">
+
+      <button (click)="goToPreviousStep()"
+              class="knx-button knx-button--link knx-button--back">
+        {{'household.details_go_back_to_insurance' | translate }}
+      </button>
+    </div>
+  </div>
+
   <knx-card>
     <div class="row">
       <div class="col-md-12">
@@ -142,6 +152,18 @@
                      (onBack)="goToPreviousStep()">
 </knx-wizard-controls>
 
-<div>
-  <div [innerHTML]="'household.details_privacy_policy_statement' | translate "></div>
+<div class="row">
+  <div class="col-md-12 col-12">
+    <div [innerHTML]="'household.details_privacy_policy_statement' | translate "></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <button (click)="goToPreviousStep()"
+            class="knx-button knx-button--link knx-button--back">
+      {{'household.details_go_back_to_insurance' | translate}}
+    </button>
+  </div>
 </div>

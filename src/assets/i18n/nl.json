@@ -200,13 +200,11 @@
   "car.advice.steps.detail.form.gender.placeholder": "Selecteer je geslacht",
   "car.advice.steps.extras.discount.text1": "Nu extra korting van",
   "car.advice.steps.extras.discount.text2": "! Bekijk hier de voorwaarden",
-
   "car.advice.steps.review.label": "Slim verzekerd via Knab",
   "car.advice.steps.review.tooltip.title": "Verzekeren via Knab is een goed idee, want:",
   "car.advice.steps.review.tooltip.text1": "Scherpe prijs: Knab rekent tijdelijk slechts 2% provisie, en daardoor is je maandbedrag lager. Bij andere aanbieders kan de provisie oplopen tot wel 25%.",
   "car.advice.steps.review.tooltip.text2": "Gemak: je regelt alles voor je verzekeringen heel eenvoudig in de app. Je gegevens aanpassen of een vraag stellen aan de Knab Servicedesk bijvoorbeeld. Wij staan altijd voor je klaar: of je nou hulp nodig hebt bij het melden van schade of als je er niet uitkomt met je verzekeraar.",
   "car.advice.steps.review.tooltip.text3": "Slim: loopt je verzekering bijna af en kun je ergens een betere deal krijgen? Dan krijg je van ons een seintje. Zo ben je via ons altijd slim en voordelig verzekerd.",
-
   "car.buy.steps.payment.title": "Betaling",
   "car.buy.steps.payment.hint": "Voer hier je bankrekening in. Je betaalt dan automatisch maandelijks je premie.",
   "car.buy.steps.payment.tooltip": "Je vindt je IBAN meestal op je bankpas. Of kijk op een recent bankafschrift of in de app van je bank.",
@@ -411,5 +409,6 @@
   "household.details_second_card_title": "Personal details",
   "household.details_third_card_title": "Your location",
   "household.details_third_card_address": "Your address",
-  "household.details_privacy_policy_statement": "By continuing you accept the <a href='#'>Privacy policy</a> of Knab Verzekeren, etc, etc"
+  "household.details_privacy_policy_statement": "By continuing you accept the <a href='#'>Privacy policy</a> of Knab Verzekeren, etc, etc",
+  "household.details_go_back_to_insurance": "Select your insurace"
 }
