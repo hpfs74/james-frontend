@@ -17,31 +17,31 @@ export class HouseHoldBuyLegalForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       refuse: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.q1.error']),
+        trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
       crime: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.q2.error']),
+        trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
       harmed: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.q3.error']),
+        trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
       bankrupt: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.q4.error']),
+        trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
       fraud: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.q5.error']),
+        trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
       seizedIncome: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.q6.error']),
+        trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
       driver: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.q7.error']),
+        trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
     });
