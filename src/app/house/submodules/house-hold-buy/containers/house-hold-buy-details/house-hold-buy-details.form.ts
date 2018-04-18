@@ -3,10 +3,13 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
 import { UIPair } from '@app/core/models/ui-pair';
 import { EmailValidator } from '@utils/email-validator';
+import { nameInitialMask } from '@utils/base-form.utils';
 
 export class HouseHoldDetailForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
+
+  initialMask = nameInitialMask;
 
   /* istanbul ignore next */
   validationErrors = {
@@ -61,7 +64,9 @@ export class HouseHoldDetailForm extends BaseForm {
         label: this.copies['household.detail.form_initials_label'],
         validationErrors: this.validationErrors,
         inputOptions: {
-          placeholder: this.copies['household.detail.form_initials_placeholder']
+          placeholder: this.copies['household.detail.form_initials_placeholder'],
+          decode: this.initialMask.decode,
+          textMask: this.initialMask
         }
       },
       firstName: {
