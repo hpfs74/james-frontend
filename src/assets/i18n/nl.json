@@ -410,5 +410,6 @@
   "household.details_first_card_desc_p3": "- Ablut risk",
   "household.details_second_card_title": "Personal details",
   "household.details_third_card_title": "Your location",
-  "household.details_third_card_address": "Your address"
+  "household.details_third_card_address": "Your address",
+  "household.details_privacy_policy_statement": "By continuing you accept the <a href='#'>Privacy policy</a> of Knab Verzekeren, etc, etc"
 }
