@@ -26,6 +26,15 @@
   </knx-card>
 
   <knx-card>
+    <knx-insurance-combined-price
+      [short]="true"
+      [IncludeBTW]="true"
+      [Insurance]="[(selectedInsurances$ | async)]">
+
+    </knx-insurance-combined-price>
+  </knx-card>
+
+  <knx-card>
     <div class="row">
       <div class="col-md-12">
         <h2>{{'household.details_second_card_title' | translate}}</h2>

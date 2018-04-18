@@ -8,14 +8,16 @@
   [contact]="(insuranceStore$ | async).contacts">
 </knx-contact-detail>
 
+<knx-card>
+  <knx-insurance-combined-price
+    [IncludeBTW]="true"
+    [Insurance]="[(selectedInsurances$ | async)]">
+  </knx-insurance-combined-price>
+</knx-card>
 
-<knx-insurance-combined-price
-  [IncludeBTW]="true"
-  [Insurance]="[(selectedInsurances$ | async)]">
 
-</knx-insurance-combined-price>
-
-<knx-collapsible-panel title="{{ 'household.payment_details.payment_details.title' | translate }}" [collapsible]="false" [showStep]="false" [isOpen]="true">
+<knx-collapsible-panel title="{{ 'household.payment_details.payment_details.title' | translate }}" [collapsible]="false"
+                       [showStep]="false" [isOpen]="true">
   <div class="knx-collapsible-panel__content">
     <div class="row">
       <div class="col-sm-12">

@@ -3,10 +3,11 @@ import { CalculatedPremium } from '@app/house/models/house-hold-premium';
 
 @Component({
   selector: 'knx-insurance-combined-price',
-  templateUrl: 'insurance-combined-price.component.html'
+  styleUrls: ['./insurance-combined-price.component.scss'],
+  templateUrl: './insurance-combined-price.component.html'
 })
 export class InsuranceCombinedPriceComponent {
-
+  @Input() short = false;
   @Input() IncludeBTW = false;
   @Input() Insurance: Array<CalculatedPremium>;
 
