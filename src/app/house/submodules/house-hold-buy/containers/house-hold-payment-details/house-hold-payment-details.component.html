@@ -1,8 +1,14 @@
 <h2>{{ 'household.payment_details.header.title' | translate }}</h2>
 
-<p>{{ 'household.payment_details.header.para1' | translate }}</p>
-<p>{{ 'household.payment_details.header.para2' | translate }}</p>
-<p>{{ 'household.payment_details.header.para3' | translate }}</p>
+<div class="row">
+  <div class="col-6">
+    <p class="knx-no-pad">{{ 'household.payment_details.header.para1' | translate }}</p>
+    <p class="knx-no-pad">{{ 'household.payment_details.header.para2' | translate }}</p>
+    <p class="knx-no-pad">{{ 'household.payment_details.header.para3' | translate }}</p>
+  </div>
+</div>
+
+<br/>
 
 <knx-contact-detail
   [contact]="(insuranceStore$ | async).contacts">
