@@ -45,15 +45,6 @@ export class HouseHoldEffects {
         .map((res: HouseHoldStoredAdviceResponse) => new houseHoldData.StoreAdviceComplete(res))
         .catch(error => Observable.of(new houseHoldData.StoreAdviceFailure(error))));
 
-  @Effect()
-  newBuy: Observable<Action> = this.actions$
-    .ofType(houseHoldData.NEW_BUY)
-    .map((action: houseHoldData.NewBuy) => action.payload)
-    .switchMap((req) =>
-      this.houseHoldService.requestPrivatePackage(req)
-        .map(() => new houseHoldData.NewBuyComplete())
-        .catch(error => Observable.of(new houseHoldData.NewBuyFailure(error))));
-
 
   constructor(private actions$: Actions,
               private houseHoldService: HouseHoldService) {
