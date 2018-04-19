@@ -25,18 +25,20 @@ export interface PackagePremiumResponse {
 
 /** this is the object that is needed for the buy of a package insurance */
 export interface PackagePremiumRequest {
-  Name: string;
-  NameInfix: string;
-  Initials: string;
-  Gender: string;
-  Birthday: string;
-  Email: string;
-  ZipCode: string;
-  HouseNumber: string;
-  HouseNumberAddition: string;
-  IBAN: string;
-  AgreeToFinalQuestions: string;
+  Name?: string;
+  NameInfix?: string;
+  Initials?: string;
+  Gender?: string;
+  Birthday?: string;
+  Email?: string;
+  ZipCode?: string;
+  HouseNumber?: string;
+  HouseNumberAddition?: string;
+  IBAN?: string;
+  AgreeToFinalQuestions?: string;
   HouseholdInsurances?: CalculatedPremium[];
   HomeInsurances?: any;
   CarInsurances?: any;
 }
+
+
