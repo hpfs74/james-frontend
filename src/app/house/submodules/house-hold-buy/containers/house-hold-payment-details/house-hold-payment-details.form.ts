@@ -24,11 +24,10 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
   constructor(private fb: FormBuilder, private copies: any) {
     super();
 
-
     this.formGroup = this.fb.group({
       iban: [null, Validators.compose([Validators.required, ibanValidator('iban', 'nl')])],
-      agreeKnabTAC: [{}],
-      agreeRiskTAC: [{}]
+      agreeKnabTAC: [{}, Validators.required],
+      agreeRiskTAC: [{}, Validators.required]
     });
 
     this.formConfig = {
@@ -47,6 +46,7 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
         }
       },
       agreeKnabTAC: {
+        validationErrors: this.validationErrors,
         formControlName: 'agreeKnabTAC',
         formControl: this.formGroup.get('agreeKnabTAC'),
         type: 'checkbox',
@@ -63,6 +63,7 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
         formControlName: 'agreeRiskTAC',
         formControl: this.formGroup.get('agreeRiskTAC'),
         type: 'checkbox',
+        validationErrors: this.validationErrors,
         inputOptions: {
           items: [
             {
