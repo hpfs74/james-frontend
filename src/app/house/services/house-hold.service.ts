@@ -15,7 +15,7 @@ import {
   HouseHoldStoredAdviceRequest,
   HouseHoldStoredAdviceResponse
 } from '@app/house/models/house-hold-stored-advice';
-import { PackagePremium } from '@app/house/models/house-hold-data';
+import { PackagePremiumRequest, PackagePremiumResponse } from '@app/house/models/package-premium';
 import { NgCliWebpackConfig } from '@angular/cli/models/webpack-config';
 import 'rxjs/add/operator/switchMap';
 
@@ -63,7 +63,7 @@ export class HouseHoldService {
 
     return this.http.post<HouseHoldAmountResponse>(
       environment.riskInsurance.HouseHoldAmount,
-      Object.assign(req, { BrokerID: environment.riskInsurance.brokerId}),
+      Object.assign(req, {BrokerID: environment.riskInsurance.brokerId}),
       {
         headers: httpOptions.headers
       })
@@ -80,7 +80,7 @@ export class HouseHoldService {
 
     return this.http.post<HouseHoldPremiumResponse>(
       environment.riskInsurance.HouseHoldPremium,
-      Object.assign(req, { BrokerID: environment.riskInsurance.brokerId}),
+      Object.assign(req, {BrokerID: environment.riskInsurance.brokerId}),
       {
         headers: httpOptions.headers
       })
@@ -99,7 +99,7 @@ export class HouseHoldService {
    * @param {CalculatedPremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public calculatePrivatePackage(req: CalculatedPremium): Observable<PackagePremium> {
+  public calculatePrivatePackage(req: CalculatedPremium): Observable<PackagePremiumResponse> {
     const payload = {
       HouseHoldInsurance: [
         req
@@ -107,7 +107,7 @@ export class HouseHoldService {
       HomeInsurance: null
     };
 
-    return this.http.post<PackagePremium>(
+    return this.http.post<PackagePremiumResponse>(
       environment.riskInsurance.HouseHoldCalculatePrivatePremium,
       payload, {
         headers: httpOptions.headers
@@ -120,8 +120,8 @@ export class HouseHoldService {
    * @param {PackagePremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public offerPrivatePackage(req: PackagePremium): Observable<PackagePremium> {
-    return this.http.post<PackagePremium>(
+  public offerPrivatePackage(req: any): Observable<PackagePremiumResponse> {
+    return this.http.post<PackagePremiumResponse>(
       environment.riskInsurance.HouseHoldOfferPrivatePremium,
       req, {
         headers: httpOptions.headers
@@ -134,8 +134,8 @@ export class HouseHoldService {
    * @param {PackagePremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public requestPrivatePackage(req: PackagePremium): Observable<PackagePremium> {
-    return this.http.post<PackagePremium>(
+  public requestPrivatePackage(req: any): Observable<PackagePremiumResponse> {
+    return this.http.post<PackagePremiumResponse>(
       environment.riskInsurance.HouseHoldRequestPrivatePremium,
       req, {
         headers: httpOptions.headers
@@ -149,7 +149,7 @@ export class HouseHoldService {
    * @param {CalculatedPremium} req
    * @returns {Observable<PackagePremium>}
    */
-  public buyPackage(req: CalculatedPremium): Observable<PackagePremium> {
+  public buyPackage(req: CalculatedPremium): Observable<PackagePremiumResponse> {
 
     return this.calculatePrivatePackage(req)
       .switchMap(offer => this.offerPrivatePackage(offer))

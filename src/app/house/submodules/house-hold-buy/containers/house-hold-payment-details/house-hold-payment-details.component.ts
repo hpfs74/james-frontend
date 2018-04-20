@@ -9,10 +9,12 @@ import { HouseHoldPaymentDetailsForm } from './house-hold-payment-details.form';
 import { FormBuilder } from '@angular/forms';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Subscription } from 'rxjs/Subscription';
+
 import * as wizardActions from '@core/actions/wizard';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
 import * as FormUtils from '@utils/base-form.utils';
 import * as fromHouseHold from '@app/house/reducers';
+import * as packagePremiumActions from '@app/house/actions/package-premium';
 
 @Component({
   selector: 'knx-house-hold-payment-details',
@@ -27,6 +29,9 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   copies: any;
   subscriptions$: Subscription[] = [];
   insuranceStore$: Observable<InsuranceStore>;
+  insuranceStore: InsuranceStore;
+
+  newBuyLoading$: Observable<boolean>;
 
   constructor(private store$: Store<fromRoot.State>,
               private translateService: TranslateService) {
@@ -64,6 +69,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     this.contact$ = this.store$.select(fromHouseHold.getHouseHoldNewFlowAdviceContact);
     this.selectedInsurances$ = this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium);
 
+
     this.setInitialSubscriptions();
   }
 
@@ -76,7 +82,9 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   setInitialSubscriptions() {
 
     this.subscriptions$.push(
-
+      this.insuranceStore$.subscribe(ins => {
+        this.insuranceStore = ins;
+      })
     );
 
     // this.subscriptions.push(
@@ -102,12 +110,12 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
 
     // add code to save in store with the package
     this.store$.dispatch(new houseHoldData.NewFlowAdviceStore({
-      paymentDetails: {
+      paymentDetails: Object.assign({}, this.insuranceStore.paymentDetails, {
         iban: detailForm.value.iban
-      }
+      })
     }));
 
-    this.store$.dispatch(new houseHoldData.NewBuy(null));
+    this.store$.dispatch(new packagePremiumActions.NewBuy(null));
   }
 
   requestSuccess() {
