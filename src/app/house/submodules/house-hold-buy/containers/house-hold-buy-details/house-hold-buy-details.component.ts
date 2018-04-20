@@ -78,7 +78,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       this.initForms();
     });
     this.currentStepOptions = {
-      nextButtonLabel: this.copies['household.detail.next_step'],
+      nextButtonLabel: this.copies['household.details_go_back_to_insurance'],
       backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
     };
     this.initSubscriptions();

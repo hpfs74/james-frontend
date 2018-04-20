@@ -101,12 +101,6 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
           this.store$.dispatch(new wizardActions.Forward());
         })
     );
-
-    // this.subscriptions.push(
-    //  this.store$.insuranceBuy.subscribe( res=> {
-    //     // go to the next step
-    //     this.store$.dispatch(new wizardActions.Forward());});
-    // );
   }
 
   /** handle the going to previous step */

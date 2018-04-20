@@ -3,7 +3,6 @@
 
   <div class="row">
     <div class="col-md-6">
-
       <button (click)="goToPreviousStep()"
               class="knx-button knx-button--link knx-button--back">
         {{'household.details_go_back_to_insurance' | translate }}
@@ -24,6 +23,16 @@
   </div>
 
   <br/>
+
+
+  <knx-card>
+    <knx-insurance-combined-price
+      [short]="true"
+      [IncludeBTW]="true"
+      [Insurance]="[(selectedInsurances$ | async)]">
+
+    </knx-insurance-combined-price>
+  </knx-card>
 
   <knx-card>
     <div class="row">
@@ -49,14 +58,7 @@
     </div>
   </knx-card>
 
-  <knx-card>
-    <knx-insurance-combined-price
-      [short]="true"
-      [IncludeBTW]="true"
-      [Insurance]="[(selectedInsurances$ | async)]">
 
-    </knx-insurance-combined-price>
-  </knx-card>
 
   <knx-card>
     <div class="row">
@@ -172,7 +174,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row hidden-lg hidden-md">
   <div class="col-md-6">
 
     <button (click)="goToPreviousStep()"

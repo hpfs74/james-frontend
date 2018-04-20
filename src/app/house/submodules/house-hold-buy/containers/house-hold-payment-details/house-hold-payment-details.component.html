@@ -98,6 +98,7 @@
 </knx-collapsible-panel>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
+                     [isPendingNext]="newBuyLoading$ | async"
                      [error]="error$ | async"
                      (onBack)="goToPrevStep()"
                      (onNext)="goToNextStep()">
