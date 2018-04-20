@@ -1,44 +1,34 @@
-<h2>{{'household.thankyou.title' | translate}}</h2>
-
 <div class="row">
   <div class="col-sm-12">
     <div class="knx-card">
       <h3 class="knx-collapse-message__title ">
-        {{ 'household.premium.thankYou.note.header.congrats.title' | translate }} {{customerName}}<br>
-        {{ 'household.premium.thankYou.note.header.congrats.suffixNote' | translate }}
+        {{ 'household.premium.thankYou.note.header.congrats' | translate:params }}
       </h3>
 
       <p>
-        {{ 'household.premium.thankYou.note.para.note1.prefix' | translate }} {{(selectedInsurance$ | async).CompanyName}}
-        {{ 'household.premium.thankYou.note.para.note1.suffix' | translate }}<br>
+        {{ 'household.premium.thankYou.note.para.note1' | translate:params }}<br/>
         {{ 'household.premium.thankYou.note.para.note2' | translate }}
       </p>
 
       <p>
-        {{ 'household.premium.thankYou.confirmation.note' | translate }}{{customerEmail}}
+        {{ 'household.premium.thankYou.confirmation.note' | translate }}
       </p>
     </div>
 
-    <!--<knx-download-panel-->
-      <!--[iosUrl]="content.appStore.iOS"-->
-      <!--[androidUrl]="content.appStore.android"-->
-      <!--[showPhone]="true">-->
-    <!--</knx-download-panel>-->
-
     <knx-ir-content [showStep]="false">
-      <knx-ir-row showValue="true" *ngIf="selectedInsurance$ | async">
+      <knx-ir-row showValue="true">
         <knx-ir-label>{{ 'household.thankyou.id' | translate }}</knx-ir-label>
-        <knx-ir-value>{{(selectedInsurance$ | async).Identifier}}</knx-ir-value>
+        <knx-ir-value>{{params.packageNumber }}</knx-ir-value>
       </knx-ir-row>
 
-      <knx-ir-row showValue="true" *ngIf="selectedInsurance$ | async">
+      <knx-ir-row showValue="true">
         <knx-ir-label>{{ 'household.dekking.commencingDate.title' | translate }}</knx-ir-label>
-        <knx-ir-value>{{(selectedInsurance$ | async).CommencingDate | date:'shortDate'}}</knx-ir-value>
+        <knx-ir-value>{{params.commencingDate | date:'shortDate'}}</knx-ir-value>
       </knx-ir-row>
 
-      <knx-ir-row showValue="true" *ngIf="request$ | async">
+      <knx-ir-row showValue="true">
         <knx-ir-label>{{ 'household.premium.buy.your_email.label' | translate }}</knx-ir-label>
-        <knx-ir-value>{{(request$ | async).customerEmail}}</knx-ir-value>
+        <knx-ir-value>{{params.customerEmail}}</knx-ir-value>
       </knx-ir-row>
     </knx-ir-content>
   </div>

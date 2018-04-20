@@ -108,14 +108,17 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
-    // add code to save in store with the package
-    this.store$.dispatch(new houseHoldData.NewFlowAdviceStore({
-      paymentDetails: Object.assign({}, this.insuranceStore.paymentDetails, {
-        iban: detailForm.value.iban
-      })
-    }));
+    // // add code to save in store with the package
+    // this.store$.dispatch(new houseHoldData.NewFlowAdviceStore({
+    //   paymentDetails: Object.assign({}, this.insuranceStore.paymentDetails, {
+    //     iban: detailForm.value.iban
+    //   })
+    // }));
+    //
+    // this.store$.dispatch(new packagePremiumActions.NewBuy(null));
 
-    this.store$.dispatch(new packagePremiumActions.NewBuy(null));
+    this.store$.dispatch(new wizardActions.Forward());
+
   }
 
   requestSuccess() {

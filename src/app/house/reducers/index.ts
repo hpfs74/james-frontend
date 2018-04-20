@@ -11,12 +11,15 @@ import * as fromHouseData from './house-data';
 import * as fromHouseHoldAmount from './house-hold-insured-amount';
 import * as fromHouseHoldPremium from './house-hold-premium';
 import * as fromHouseHoldData from './house-hold-data';
+import * as fromPackagePremium from './package-premium';
+import { create } from 'domain';
 
 export interface HouseHoldState {
   houseData: fromHouseData.State;
   amount: fromHouseHoldAmount.State;
   premium: fromHouseHoldPremium.State;
   houseHoldData: fromHouseHoldData.State;
+  packagePremium: fromPackagePremium.State;
 }
 
 export interface State extends fromRoot.State {
@@ -27,7 +30,8 @@ export const reducers = {
   houseData: fromHouseData.reducer,
   amount: fromHouseHoldAmount.reducer,
   premium: fromHouseHoldPremium.reducer,
-  houseHoldData: fromHouseHoldData.reducer
+  houseHoldData: fromHouseHoldData.reducer,
+  packagePremium: fromPackagePremium.reducer
 };
 
 export const selectHouseHoldState = createFeatureSelector<HouseHoldState>('household');
@@ -76,3 +80,13 @@ export const getHouseHoldNewFlowAdvice = createSelector(getHouseHoldDataState, f
 export const getHouseHoldNewFlowAdviceContact = createSelector(getHouseHoldDataState, fromHouseHoldData.getNewFlowAdviceContact);
 export const getNewFlowAdviceSelectedHouseHoldPremium =
   createSelector(getHouseHoldDataState, fromHouseHoldData.getNewFlowAdviceSelectedHouseHoldPremium);
+
+/** Package premium */
+export const getPackagePremiumState = createSelector(selectHouseHoldState,
+  (state: HouseHoldState) => state.packagePremium);
+export const getPackagePremiumLoading = createSelector(getPackagePremiumState, fromPackagePremium.getLoading);
+export const getPackagePremiumLoaded = createSelector(getPackagePremiumState, fromPackagePremium.getLoaded);
+export const getPackagePremiumError = createSelector(getPackagePremiumState, fromPackagePremium.getError);
+export const getPackagePremiumRequest = createSelector(getPackagePremiumState, fromPackagePremium.getRequest);
+export const getPackagePremiumResponse = createSelector(getPackagePremiumState, fromPackagePremium.getResponse);
+

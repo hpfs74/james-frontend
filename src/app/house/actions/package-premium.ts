@@ -8,7 +8,6 @@ export const CALCULATE = '[PackagePremium] Calculate Premium';
 export const CALCULATE_COMPLETE = '[PackagePremium] Calculate Premium Complete';
 export const CALCULATE_FAILURE = '[PackagePremium] Calculate Premium Failure';
 
-
 export class NewBuy implements Action {
   readonly type = NEW_BUY;
 
@@ -52,7 +51,6 @@ export class CalculatePremiumFailure implements Action {
   constructor(public payload: any) {
   }
 }
-
 
 export type All
   = NewBuy

@@ -2,11 +2,13 @@
      knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
   <div class="container">
     <knx-step-navigation *ngIf="knxWizardService.currentStepIndex !== 3"
-      [steps]="formSteps"
-      [currentStep]="knxWizardService.currentStepIndex"
-      [clickable]="true"
-      (stepChange)="goToStep($event);">
+                         [steps]="formSteps"
+                         [currentStep]="knxWizardService.currentStepIndex"
+                         [clickable]="true"
+                         (stepChange)="goToStep($event);">
     </knx-step-navigation>
+
+    <h1>PAGE: {{knxWizardService.currentStepIndex}}</h1>
   </div>
 </div>
 

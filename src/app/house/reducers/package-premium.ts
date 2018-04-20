@@ -10,13 +10,15 @@ export interface State {
   loaded: boolean;
   error: boolean;
   request?: PackagePremiumRequest;
+  response?: PackagePremiumResponse;
 }
 
 export const initialState: State = {
   loading: false,
   loaded: false,
   error: false,
-  request: null
+  request: null,
+  response: null
 };
 
 export function reducer(state = initialState, action: Action): State {
@@ -35,7 +37,8 @@ export function reducer(state = initialState, action: Action): State {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
-        error: false
+        error: false,
+        response: action.payload
       });
     }
 
@@ -56,3 +59,5 @@ export function reducer(state = initialState, action: Action): State {
 export const getLoading = (state: State) => state.loading;
 export const getLoaded = (state: State) => state.loaded;
 export const getError = (state: State) => state.error;
+export const getRequest = (state: State) => state.request;
+export const getResponse = (state: State) => state.response;

@@ -1,35 +1,31 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CalculatedPremium, HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
+import { AsyncPipe } from '@angular/common';
 import * as assistant from '@core/actions/assistant';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '@app/reducers';
 import { Observable } from 'rxjs/Observable';
-
-import * as fromHouseHold from '@app/house/reducers';
-import 'rxjs/add/operator/filter';
 import { Subscription } from 'rxjs/Subscription';
+
 import { Content, ContentConfig } from '@app/content.config';
-import { AsyncPipe } from '@angular/common';
+
+import * as fromRoot from '@app/reducers';
+import * as fromHouseHold from '@app/house/reducers';
+import { PackagePremiumResponse, PackagePremiumRequest } from '@app/house/models/package-premium';
 
 @Component({
-  providers: [ AsyncPipe ],
+  providers: [AsyncPipe],
   selector: 'knx-house-hold-premiums-thank-you',
   templateUrl: './house-hold-premiums-thank-you.component.html',
   styleUrls: ['./house-hold-premiums-thank-you.component.scss']
 })
 export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
-
-  request$: Observable<HouseHoldPremiumRequest>;
-  selectedInsurance$: Observable<CalculatedPremium>;
-  insurance: CalculatedPremium;
-
-  subscriptions: Subscription[] = [];
-  customerName: string;
-  customerEmail: string;
+  packagePremiumRequest$: Observable<PackagePremiumRequest>;
+  packagePremiumResponse$: Observable<PackagePremiumResponse>;
+  subscriptions$: Subscription[] = [];
   content: Content;
+  params: any;
 
   constructor(private store$: Store<fromRoot.State>,
-              public asyncPipe: AsyncPipe,
+              private async: AsyncPipe,
               private contentConfig: ContentConfig) {
     this.content = this.contentConfig.getContent();
   }
@@ -42,9 +38,9 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
       key: 'household.thankYou',
       clear: true
     }));
+    this.packagePremiumRequest$ = this.store$.select(fromHouseHold.getPackagePremiumRequest);
+    this.packagePremiumResponse$ = this.store$.select(fromHouseHold.getPackagePremiumResponse);
 
-    this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
-    this.request$ = this.store$.select(fromHouseHold.getHouseHoldDataInfo);
     this.setInitialSubscriptions();
   }
 
@@ -52,7 +48,7 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
    * run unsubscripton
    */
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions$.forEach(sub => sub.unsubscribe());
   }
 
   /**
@@ -60,18 +56,17 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
    * get stored in subscription array for later unsubscribtion
    */
   setInitialSubscriptions() {
-    this.subscriptions.push(this.request$
-        .filter(data => data !== null)
-        .subscribe((data) => {
-          this.customerEmail = data.customerEmail;
-          this.customerName = data.customerName;
-        }),
-
-      this.selectedInsurance$
-        .filter(data => data !== null)
-        .subscribe((data) => {
-          this.insurance = data;
-        }));
+    this.subscriptions$.push(
+      this.packagePremiumRequest$.subscribe(x => {
+        this.params.customerName = x.Name;
+        this.params.customerEmail = x.Email;
+      }),
+      this.packagePremiumResponse$.subscribe(x => {
+        this.params.id = x.this.params.packageNumber = x.PackageNumber;
+        this.params.commencingDate = x.CommencingDate;
+        this.params.companyName = x.HouseHoldInsurances[0].CompanyName;
+      })
+    );
   }
 
 }
