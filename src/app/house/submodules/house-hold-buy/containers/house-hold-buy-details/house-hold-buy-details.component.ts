@@ -48,6 +48,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   address: Address;
   subscriptions: Subscription[] = [];
   selectedInsurances$: Observable<CalculatedPremium>;
+  contactDetails: ContactDetails;
 
 
   constructor(private store$: Store<fromRoot.State>,
@@ -111,6 +112,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   }
 
   handleHouseholdContactDetails(houseHoldContactDetails: ContactDetails) {
+    this.contactDetails = houseHoldContactDetails;
     const formValues = {
       sameAddress: houseHoldContactDetails.sameAddress,
       gender: houseHoldContactDetails.gender,
@@ -189,7 +191,8 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       lastName: lastName,
       initials: initials,
       address: this.address,
-      email: email
+      email: email,
+      addressForComminications: this.contactDetails.address
     };
     this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
       .take(1)
@@ -199,7 +202,8 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
           newFlowAdvice,
           {
             contacts: Object.assign({}, newFlowAdvice.contacts, contactDetails)
-          });
+          }
+        );
         this.store$.dispatch(new householddataActions.NewFlowAdviceStore(insuranceStore));
         this.store$.dispatch(new wizardActions.Forward());
       });

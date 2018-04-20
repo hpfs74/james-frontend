@@ -1,5 +1,5 @@
 import { HouseHoldData } from '@app/house/models/house-hold-data';
-import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import { CalculatedPremium, HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 
 /**
  * this is the object that returns from risk when we call
@@ -36,7 +36,7 @@ export interface PackagePremiumRequest {
   HouseNumberAddition?: string;
   IBAN?: string;
   AgreeToFinalQuestions?: string;
-  HouseholdInsurances?: CalculatedPremium[];
+  HouseholdInsurances?: any;
   HomeInsurances?: any;
   CarInsurances?: any;
 }

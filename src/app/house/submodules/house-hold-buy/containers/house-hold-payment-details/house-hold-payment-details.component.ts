@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ContactDetails, InsuranceStore } from '@app/house/models/house-hold-store';
 import { Observable } from 'rxjs/Observable';
-import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import { CalculatedPremium, HouseHoldPremiumRequest } from '@app/house/models/house-hold-premium';
 import * as fromRoot from '@app/reducers';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +15,8 @@ import * as houseHoldData from '@app/house/actions/house-hold-data';
 import * as FormUtils from '@utils/base-form.utils';
 import * as fromHouseHold from '@app/house/reducers';
 import * as packagePremiumActions from '@app/house/actions/package-premium';
+import { PackagePremiumRequest } from '@app/house/models/package-premium';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'knx-house-hold-payment-details',
@@ -23,6 +25,7 @@ import * as packagePremiumActions from '@app/house/actions/package-premium';
 export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   contact$: Observable<ContactDetails>;
   selectedInsurances$: Observable<CalculatedPremium>;
+  packagePremiumLoaded$: Observable<boolean>;
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   form: HouseHoldPaymentDetailsForm;
@@ -30,6 +33,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[] = [];
   insuranceStore$: Observable<InsuranceStore>;
   insuranceStore: InsuranceStore;
+  houseHoldRequest$: Observable<HouseHoldPremiumRequest>;
+  houseHoldRequest: HouseHoldPremiumRequest;
 
   newBuyLoading$: Observable<boolean>;
 
@@ -68,7 +73,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     this.insuranceStore$ = this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice);
     this.contact$ = this.store$.select(fromHouseHold.getHouseHoldNewFlowAdviceContact);
     this.selectedInsurances$ = this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium);
-
+    this.packagePremiumLoaded$ = this.store$.select(fromHouseHold.getPackagePremiumLoaded);
+    this.houseHoldRequest$ = this.store$.select(fromHouseHold.getHouseHoldDataInfo);
 
     this.setInitialSubscriptions();
   }
@@ -82,9 +88,18 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   setInitialSubscriptions() {
 
     this.subscriptions$.push(
+      this.houseHoldRequest$.subscribe(req => {
+        this.houseHoldRequest = req;
+      }),
+
       this.insuranceStore$.subscribe(ins => {
         this.insuranceStore = ins;
-      })
+      }),
+      this.packagePremiumLoaded$
+        .filter(x => (x === true))
+        .subscribe(x => {
+          this.store$.dispatch(new wizardActions.Forward());
+        })
     );
 
     // this.subscriptions.push(
@@ -108,20 +123,34 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
 
-    // // add code to save in store with the package
-    // this.store$.dispatch(new houseHoldData.NewFlowAdviceStore({
-    //   paymentDetails: Object.assign({}, this.insuranceStore.paymentDetails, {
-    //     iban: detailForm.value.iban
-    //   })
-    // }));
-    //
-    // this.store$.dispatch(new packagePremiumActions.NewBuy(null));
+    const insurancePayload = Object.assign(
+      this.insuranceStore.houseHoldInsurance.selectedPremium,
+      this.houseHoldRequest, {
+        Identifier: this.insuranceStore.houseHoldInsurance.selectedPremium.Identifier,
+        GuaranteeAgainstUnderinsurance: 'G',
+        InsuredAmountValuables: 0,
+        Birthdate: this.insuranceStore.contacts.dateOfBirth
+      });
 
-    this.store$.dispatch(new wizardActions.Forward());
 
-  }
+    const payload = {
+      Name: this.insuranceStore.contacts.lastName,
+      NameInfix: this.insuranceStore.contacts.initials,
+      Initials: '-',
+      Gender: this.insuranceStore.contacts.gender,
+      Birthday: this.insuranceStore.contacts.dateOfBirth,
+      Email: this.insuranceStore.contacts.email,
+      ZipCode: this.insuranceStore.contacts.address.postcode,
+      HouseNumber: this.insuranceStore.contacts.address.number,
+      HouseNumberAddition: this.insuranceStore.contacts.address.number_extended.number_addition,
+      IBAN: detailForm.value.iban,
+      AgreeToFinalQuestions: 'J',
+      HouseholdInsurances: [insurancePayload],
+      HomeInsurances: null,
+      CarInsurances: null
 
-  requestSuccess() {
-    this.store$.dispatch(new wizardActions.Forward());
+    } as PackagePremiumRequest;
+
+    this.store$.dispatch(new packagePremiumActions.NewBuy(payload));
   }
 }
