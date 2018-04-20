@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
 
 import * as fromAuth from '../../auth/reducers';
 import * as auth from '../../auth/actions/auth';

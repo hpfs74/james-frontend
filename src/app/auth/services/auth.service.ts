@@ -11,6 +11,7 @@ import * as cuid from 'cuid';
 import * as AuthUtils from '@app/utils/auth.utils';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
 export interface PayloadAuth {
   access_token: string;
@@ -58,11 +59,11 @@ export class AuthService {
     headers.set('Cache-Control', 'no-cache');
 
     return accessToken ?
-      this.http.delete(this.tokenUrl, { headers: headers })
-      .map(x => {
-        this.localStorageService.clearToken();
-        return x.json();
-      }) :
+      this.http.delete(this.tokenUrl, {headers: headers})
+        .map(x => {
+          this.localStorageService.clearToken();
+          return x.json();
+        }) :
       Observable.of({});
   }
 
@@ -131,7 +132,7 @@ export class AuthService {
       scope: 'basic'
     };
     return this.http
-      .post(this.tokenUrl, body, { headers: headers })
+      .post(this.tokenUrl, body, {headers: headers})
       .map((res: Response) => res.json())
       .map(body => <PayloadAuth>{access_token: body.access_token})
       .flatMap((payload) => this.getPayloadKey(payload))
@@ -243,7 +244,7 @@ export class AuthService {
       scope: 'basic'
     };
     return this.http
-      .post(this.tokenUrl, body, { headers: headers })
+      .post(this.tokenUrl, body, {headers: headers})
       .map((res: Response) => res.json())
       .map(body => <PayloadAuth>{access_token: body.access_token});
   }
@@ -259,7 +260,7 @@ export class AuthService {
     };
 
     return this.http
-      .post(this.tokenUrl, body, { headers: headers })
+      .post(this.tokenUrl, body, {headers: headers})
       .map((res: Response) => res.json());
   }
 
@@ -272,7 +273,7 @@ export class AuthService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return this.http
-      .post(environment.james.payloadEncryption.key, `uuid=${session}`, { headers: headers })
+      .post(environment.james.payloadEncryption.key, `uuid=${session}`, {headers: headers})
       .map((res: Response) => res.json())
       .map(body => <PayloadAuth>Object.assign(payloadauth, {
         id: body.id,
@@ -409,7 +410,7 @@ export class AuthService {
 
     // encrypt some bytes using GCM mode
     let cipher = forge.cipher.createCipher('AES-GCM', key);
-    cipher.start({ iv: iv });
+    cipher.start({iv: iv});
     cipher.update(forge.util.createBuffer(textToEncrypt));
     cipher.finish();
 

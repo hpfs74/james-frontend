@@ -103,3 +103,8 @@ For state management we partially implemented the Redux pattern using [@ngrx/pla
 There is some technical debt left for certain application state that we haven't refactored yet to use the ngrx/store, such as async validators for address and car info lookup and the Reactive Forms are not automatically kept in sync with the store. So these are set individually for each form component.
 
 Follow this discussion on Github on a solution for integrating forms with @ngrx/store: https://github.com/ngrx/core/issues/12
+
+
+# The new NPM repo is been moved
+
+# Test commit

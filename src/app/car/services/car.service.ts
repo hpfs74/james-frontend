@@ -21,6 +21,8 @@ import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
+
 
 @Injectable()
 export class CarService {

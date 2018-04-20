@@ -10,7 +10,9 @@ pipeline {
         }
         stage('SETUP') {
             steps {
-                sh 'npm set registry https://knab-npm.ddns.net'
+                sh 'npm set registry https://registry.npmjs.org'
+                sh 'npm config set @knx:registry=https://npm.mgmt.a-random-domain.com/'
+                sh 'npm config set @cx:registry=https://npm.mgmt.a-random-domain.com/'
                 sh 'npm set strict-ssl false'
                 sh 'npm install'
             }
