@@ -8,27 +8,32 @@
   </div>
 </div>
 
-<div class="row" *ngFor="let insurance of Insurance; index as i; first as isFirst" >
-  <div class="col-8 col-sm-8">
-    {{insurance.ProductDescription}} - <strong>{{insurance.CompanyName}}</strong>
-  </div>
-  <div class="col-4 col-sm-4 text-right">
-    {{insurance.Premium | currency:'EUR':true:'2.0' }}
+<div *ngIf="!short">
+  <div class="row" *ngFor="let insurance of Insurance; index as i; first as isFirst">
+    <div class="col-8 col-sm-8">
+      {{insurance.ProductDescription}} - <strong>{{insurance.CompanyName}}</strong>
+    </div>
+    <div class="col-4 col-sm-4 text-right">
+      {{insurance.Premium | currency:'EUR':true:'2.0' }}
+    </div>
   </div>
 </div>
 
-<!--<div class="row" *ngFor="let insurance of Insurance; index as i; first as isFirst" *ngIf="short">-->
-  <!--<div class="col-12 col-sm-12">-->
-    <!--{{insurance.ProductDescription}} - <strong>{{insurance.CompanyName}}</strong>-->
-  <!--</div>-->
-<!--</div>-->
 
-<!--<div class="row" *ngIf="short">-->
-  <!--<div class="col-12 col-sm-12">-->
-    <!--<hr/>-->
-    <!--Total: <strong>{{getTotalMonthlyPrice() | currency:'EUR':true:'2.0' }}</strong>-->
-  <!--</div>-->
-<!--</div>-->
+<div *ngIf="short">
+  <div class="row" *ngFor="let insurance of Insurance; index as i; first as isFirst">
+    <div class="col-12 col-sm-12">
+      {{insurance.ProductDescription}} - <strong>{{insurance.CompanyName}}</strong>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-12">
+      <hr/>
+      Total: <strong>{{getTotalMonthlyPrice() | currency:'EUR':true:'2.0' }}</strong>
+    </div>
+  </div>
+</div>
 
 <div class="row" *ngIf="false">
   <div class="col-6 col-sm-6">
