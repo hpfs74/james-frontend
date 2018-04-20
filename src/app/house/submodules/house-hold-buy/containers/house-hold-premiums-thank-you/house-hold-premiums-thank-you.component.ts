@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import * as assistant from '@core/actions/assistant';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Content, ContentConfig } from '@app/content.config';
 
+import * as assistant from '@core/actions/assistant';
 import * as fromRoot from '@app/reducers';
 import * as fromHouseHold from '@app/house/reducers';
 import { PackagePremiumResponse, PackagePremiumRequest } from '@app/house/models/package-premium';
