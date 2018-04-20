@@ -62,7 +62,7 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
         this.params.customerEmail = x.Email;
       }),
       this.packagePremiumResponse$.subscribe(x => {
-        this.params.id = x.this.params.packageNumber = x.PackageNumber;
+        this.params.packageNumber = x.PackageNumber;
         this.params.commencingDate = x.CommencingDate;
         this.params.companyName = x.HouseHoldInsurances[0].CompanyName;
       })
