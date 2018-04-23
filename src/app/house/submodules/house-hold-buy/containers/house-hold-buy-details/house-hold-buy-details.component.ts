@@ -74,14 +74,15 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       'household.common.step.options.backButtonLabel',
       'household.premium.buy.your_email.label',
       'household.buy_details_address_error',
-      'household.details_go_back_to_insurance'
+      'household.details_go_back_to_insurance',
+      'household.details_go_forward_to_security'
     ]).subscribe(res => {
       this.copies = res;
       this.initForms();
     });
     this.currentStepOptions = {
-      nextButtonLabel: this.copies['household.details_go_back_to_insurance'],
-      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      nextButtonLabel: this.copies['household.details_go_forward_to_security'],
+      backButtonLabel: this.copies['household.details_go_back_to_insurance'],
     };
     this.initSubscriptions();
   }
