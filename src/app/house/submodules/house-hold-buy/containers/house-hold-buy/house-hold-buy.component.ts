@@ -25,6 +25,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { environment } from '@env/environment';
+import { CalculatedPremium } from '@app/house/models/house-hold-premium';
+import * as fromHouseHold from '@app/house/reducers';
 
 enum Steps {
   DETAILS,
@@ -45,6 +47,8 @@ export class HouseHoldBuyComponent implements OnInit, OnDestroy, QaIdentifier {
   // State of the advice forms data
   subscription$: Subscription[] = [];
   wizardSteps = Steps;
+  selectedInsurances$: Observable<CalculatedPremium>;
+
 
   constructor(private store$: Store<fromRoot.State>,
               private tagsService: TagsService,
@@ -78,6 +82,7 @@ export class HouseHoldBuyComponent implements OnInit, OnDestroy, QaIdentifier {
     this.subscription$ = [];
     this.chatConfig$ = this.store$.select(fromCore.getAssistantConfig);
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
+    this.selectedInsurances$ = this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium);
   }
 
   ngOnDestroy() {

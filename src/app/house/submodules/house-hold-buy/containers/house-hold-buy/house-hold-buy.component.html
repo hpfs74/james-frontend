@@ -12,13 +12,21 @@
 
 <div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur
      [enableBlur]="knxChatStream.chatExpanded">
-  <knx-wizard-rx [sidebar]="false">
+  <knx-wizard-rx>
 
-    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="knxWizardService.currentStepIndex !== 1"
+    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="false"
          #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
                        [messages]="chatMessages$ | async">
+        <ng-container>
+          <knx-card *ngIf="knxWizardService.currentStepIndex === 1">
+            <knx-insurance-combined-price
+              [IncludeBTW]="true"
+              [Insurance]="[(selectedInsurances$ | async)]">
+            </knx-insurance-combined-price>
+          </knx-card>
+        </ng-container>
 
       </knx-chat-stream>
 
