@@ -1,0 +1,42 @@
+
+<div class="row">
+  <div class="col-12">
+    <strong>{{ 'general.contact-card.question.label' | transalte }}</strong><br/>
+    {{'general.contact-card.question.text' | translate }}
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col-12">
+    <p class="knx-no-pad">
+      <span class="knx-icon-phone"></span>
+      {{ 'general.contact-card.phone.label' | translate }}: {{ 'general.contact-card.phone.value' | translate }}
+    </p>
+
+    <p class="knx-no-pad">
+      <span class="knx-icon-whatsapp"></span>
+      {{ 'general.contact-card.whatsapp.label' | translate }}: {{ 'general.contact-card.whatsapp.value' | translate }}
+    </p>
+
+    <p class="knx-no-pad">
+      <span class="knx-icon-email"></span>
+      {{ 'general.contact-card.email.label' | translate }}: {{ 'general.contact-card.email.value' | translate }}
+    </p>
+
+    <p class="knx-no-pad">
+      <span class="knx-icon-website"></span>
+      {{ 'general.contact-card.website.value' | translate }}
+    </p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr />
+    <a [href]="facebook"><img src="assets/images/facebook_ico.png">{{'general.contact-card.facebook.label'}}</a>
+    <a [href]="twitter"><img src="assets/images/twitter_ico.png">{{'general.contact-card.twitter.label'}}</a>
+  </div>
+</div>

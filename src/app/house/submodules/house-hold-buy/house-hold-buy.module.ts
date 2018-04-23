@@ -22,6 +22,7 @@ import { ContactDetailsComponent } from '@app/house/components/knx-contact-detai
 import { InsuranceCombinedPriceComponent } from '@app/house/components/knx-insurance-combined-price/insurance-combined-price.component';
 import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
 import { PackagePremiumEffects } from '@app/house/effects/package-premium';
+import { ContactCardComponent } from '@app/house/components/knx-contact-card/contact-card.component';
 
 
 export const COMPONENTS = [
@@ -31,6 +32,7 @@ export const COMPONENTS = [
   HouseHoldBuyLegalComponent,
   HouseHoldPremiumsThankYouComponent,
   ContactDetailsComponent,
+  ContactCardComponent,
   InsuranceCombinedPriceComponent
 ];
 
