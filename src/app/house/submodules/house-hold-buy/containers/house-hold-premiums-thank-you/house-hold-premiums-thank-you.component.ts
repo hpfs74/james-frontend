@@ -22,7 +22,7 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
   packagePremiumResponse$: Observable<PackagePremiumResponse>;
   subscriptions$: Subscription[] = [];
   content: Content;
-  params: any;
+  params: any = {};
 
   constructor(private store$: Store<fromRoot.State>,
               private async: AsyncPipe,
@@ -64,7 +64,7 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
       this.packagePremiumResponse$.subscribe(x => {
         this.params.packageNumber = x.PackageNumber;
         this.params.commencingDate = x.CommencingDate;
-        this.params.companyName = x.HouseHoldInsurances[0].CompanyName;
+        // this.params.companyName = x.HouseHoldInsurances[0].CompanyName;
       })
     );
   }

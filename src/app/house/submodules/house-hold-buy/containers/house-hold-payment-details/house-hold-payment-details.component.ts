@@ -118,7 +118,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     }
 
     const insurancePayload = Object.assign(
-      this.insuranceStore.houseHoldInsurance.selectedPremium,
+      // this.insuranceStore.houseHoldInsurance.selectedPremium,
       this.houseHoldRequest, {
         Identifier: this.insuranceStore.houseHoldInsurance.selectedPremium.Identifier,
         GuaranteeAgainstUnderinsurance: 'G',

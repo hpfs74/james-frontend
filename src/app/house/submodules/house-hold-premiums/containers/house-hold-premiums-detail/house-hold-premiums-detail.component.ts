@@ -13,6 +13,7 @@ import * as fromRoot from '@app/reducers';
 import * as fromHouseHold from '@app/house/reducers';
 import * as layout from '@app/core/actions/layout';
 import * as router from '@app/core/actions/router';
+import { Address } from '@app/address/models';
 
 @Component({
   selector: 'knx-house-hold-premiums-detail',
@@ -83,9 +84,16 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
   goToNextStep() {
     if (localStorage.getItem('testing')) {
 
-
       this.store$.dispatch(new houseHoldAction.NewFlowAdviceStore({
         contacts: {
+          address: {
+            postcode: this.houseDataInfo.Zipcode,
+            number: this.houseDataInfo.HouseNumber.toString(),
+            number_extended: {
+              number_only: this.houseDataInfo.HouseNumber,
+              number_addition: this.houseDataInfo.HouseNumberAddition
+            }
+          } as Address,
           sameAddress: true,
           dateOfBirth: this.houseDataInfo.BreadWinnerBirthdate,
           familySituation: this.houseDataInfo.FamilyComposition

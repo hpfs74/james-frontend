@@ -5,6 +5,7 @@ import {
   HouseHoldStoredAdviceResponse
 } from '@app/house/models/house-hold-stored-advice';
 import { InsuranceStore, ContactDetails } from '@app/house/models/house-hold-store';
+import { Address } from '@app/address/models';
 
 export const START = '[HouseHold] Start';
 export const GET_INFO = '[HouseHold] Info';
@@ -14,6 +15,7 @@ export const STORE_ADVICE = '[HouseHold] Store Advice';
 export const STORE_ADVICE_COMPLETE = '[HouseHold] Store Advice Complete';
 export const STORE_ADVICE_FAILURE = '[HouseHold] Store Advice Failure';
 export const NEW_FLOW_STORE_ADVICE = '[HouseHold] New Flow Advice';
+export const NEW_FLOW_STORE_ADVICE_ADDRESS = '[HouseHold] New Flow Advice Address';
 
 export class Get implements Action {
   readonly type = GET_INFO;
@@ -65,6 +67,12 @@ export class NewFlowAdviceStore implements Action {
   }
 }
 
+export class NewFlowAdviceStoreAddress implements Action {
+  readonly type = NEW_FLOW_STORE_ADVICE_ADDRESS;
+
+  constructor(public payload: Address) {
+  }
+}
 
 
 export type All
@@ -75,4 +83,5 @@ export type All
   | StoreAdvice
   | StoreAdviceComplete
   | StoreAdviceFailure
-  | NewFlowAdviceStore;
+  | NewFlowAdviceStore
+  | NewFlowAdviceStoreAddress;

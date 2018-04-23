@@ -72,7 +72,9 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       'household.details.form_sameAddress_no_value',
       'household.detail.next_step',
       'household.common.step.options.backButtonLabel',
-      'household.premium.buy.your_email.label'
+      'household.premium.buy.your_email.label',
+      'household.buy_details_address_error',
+      'household.details_go_back_to_insurance'
     ]).subscribe(res => {
       this.copies = res;
       this.initForms();
@@ -112,6 +114,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   }
 
   handleHouseholdContactDetails(houseHoldContactDetails: ContactDetails) {
+
     this.contactDetails = houseHoldContactDetails;
     const formValues = {
       sameAddress: houseHoldContactDetails.sameAddress,
@@ -162,15 +165,25 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   }
 
   goToNextStep() {
+    const detailForm = this.form.formGroup;
+
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     FormUtils.validateControls(this.addressForm.formGroup, Object.keys(this.addressForm.formGroup.controls));
-    if (!this.form.formGroup.get('sameAddress').value) {
+    if (!detailForm.get('sameAddress').value) {
       const postalCode = this.addressForm.formGroup.get('postalCode').value;
       const houseNumber = this.addressForm.formGroup.get('houseNumber').value;
       const houseNumberExtension = this.addressForm.formGroup.get('houseNumberExtension').value;
       if (!postalCode || !houseNumber) {
         return this.store$.dispatch(new wizardActions.Error({
-          message: this.translateService.instant('household.buy_details_address_error')
+          message: this.copies['household.buy_details_address_error']
+        }));
+      }
+
+      if (postalCode === this.contactDetails.address.postcode
+        && houseNumber === this.contactDetails.address.number_extended.number_only
+        && houseNumberExtension === this.contactDetails.address.number_extended.number_extension) {
+        return this.store$.dispatch(new wizardActions.Error({
+          message: this.copies['household.buy_details_address_error']
         }));
       }
     }

@@ -6,6 +6,7 @@ import {
   HouseHoldStoredAdviceResponse
 } from '@app/house/models/house-hold-stored-advice';
 import { InsuranceStore } from '@app/house/models/house-hold-store';
+import { NEW_FLOW_STORE_ADVICE_ADDRESS } from '@app/house/actions/house-hold-data';
 
 export type Action = HouseHoldDataActions.All;
 

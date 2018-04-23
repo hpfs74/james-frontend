@@ -1,4 +1,29 @@
 <form name="carCheckForm" id="carCheckForm" [formGroup]="form.formGroup" class="knx-fancy-form" role="form">
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <button (click)="goToPreviousStep()"
+              class="knx-button knx-button--link knx-button--back">
+        {{'household.legal.go_back' | translate }}
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+
+      <h2>{{ 'household.legal.header.title' | translate }}</h2>
+
+      <p class="knx-no-pad">{{ 'household.legal.header.para1' | translate }}</p>
+      <p class="knx-no-pad">{{ 'household.legal.header.para2' | translate }}</p>
+      <p class="knx-no-pad">{{ 'household.legal.header.para3' | translate }}</p>
+    </div>
+  </div>
+
+  <br/>
+
   <div class="row">
     <div class="col-sm-12">
       <knx-card>
@@ -71,8 +96,18 @@
     </div>
   </div>
 </form>
+
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
-[error]="error$ | async"
-(onNext)="goToNextStep()"
-(onBack)="goToPreviousStep()">
+                     [error]="error$ | async"
+                     (onNext)="goToNextStep()"
+                     (onBack)="goToPreviousStep()">
 </knx-wizard-controls>
+
+<div class="row hidden-lg hidden-md">
+  <div class="col-md-6">
+    <button (click)="goToPreviousStep()"
+            class="knx-button knx-button--link knx-button--back">
+      {{'household.legal.go_back' | translate}}
+    </button>
+  </div>
+</div>
