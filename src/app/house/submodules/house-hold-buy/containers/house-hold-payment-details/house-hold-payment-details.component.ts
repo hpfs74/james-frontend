@@ -36,7 +36,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   houseHoldRequest$: Observable<HouseHoldPremiumRequest>;
   houseHoldRequest: HouseHoldPremiumRequest;
 
-  newBuyLoading$: Observable<boolean>;
+  packagePremiumLoading$: Observable<boolean>;
+  packagePremiumError$: Observable<boolean>;
 
   constructor(private store$: Store<fromRoot.State>,
               private translateService: TranslateService) {
@@ -75,6 +76,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     this.selectedInsurances$ = this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium);
     this.packagePremiumLoaded$ = this.store$.select(fromHouseHold.getPackagePremiumLoaded);
     this.houseHoldRequest$ = this.store$.select(fromHouseHold.getHouseHoldDataInfo);
+    this.packagePremiumLoading$ = this.store$.select(fromHouseHold.getPackagePremiumLoading);
+    this.packagePremiumError$ = this.store$.select(fromHouseHold.getPackagePremiumError);
 
     this.setInitialSubscriptions();
   }
@@ -99,7 +102,10 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
         .filter(x => (x === true))
         .subscribe(x => {
           this.store$.dispatch(new wizardActions.Forward());
-        })
+        }),
+      this.packagePremiumError$.subscribe(err => {
+        this.store$.dispatch(new wizardActions.Error({message: 'Unable to process your request at this time'}));
+      })
     );
   }
 

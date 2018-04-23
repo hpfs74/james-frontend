@@ -52,7 +52,7 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
       'household.legal.q6.error',
       'household.legal.q7.error',
       'household.legal.next_step',
-      'household.common.step.options.backButtonLabel'
+      'household.legal.go_back'
     ])
     .subscribe(values => this.copies = values);
     this.error$ = this.store$.select(fromCore.getWizardError);
@@ -60,7 +60,7 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
     this.form = new HouseHoldBuyLegalForm(formBuilder, this.copies);
     this.currentStepOptions = {
       nextButtonLabel: this.copies['household.legal.next_step'],
-      backButtonLabel: this.copies['household.common.step.options.backButtonLabel'],
+      backButtonLabel: this.copies['household.legal.go_back'],
     };
   }
 

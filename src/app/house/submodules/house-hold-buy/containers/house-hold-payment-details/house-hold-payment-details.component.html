@@ -98,13 +98,13 @@
 </knx-collapsible-panel>
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
-                     [isPendingNext]="newBuyLoading$ | async"
+                     [isPendingNext]="(packagePremiumLoading$ | async)"
                      [error]="error$ | async"
                      (onBack)="goToPrevStep()"
                      (onNext)="goToNextStep()">
 </knx-wizard-controls>
 
-<div class="row hidden-lg hidden-md">
+<div class="row hidden-lg hidden-md hidden-sm">
   <div class="col-md-6">
     <button (click)="goToPreviousStep()"
             class="knx-button knx-button--link knx-button--back">
