@@ -1,5 +1,4 @@
-<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation"
-     knxBackdropBlur [enableBlur]="knxChatStream.chatExpanded">
+<div class="container-fluid knx-container--fullwidth knx-container--gray knx-container-stepnavigation">
   <div class="container">
     <knx-step-navigation *ngIf="knxWizardService.currentStepIndex !== 3"
                          [steps]="formSteps"
@@ -10,20 +9,15 @@
   </div>
 </div>
 
-<div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur
-     [enableBlur]="knxChatStream.chatExpanded">
+<div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)">
   <knx-wizard-rx [sidebar]="knxWizardService.currentStepIndex === 1">
-
-    <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky"
-         #knxWizardSidebar>
-
+    <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky" #knxWizardSidebar>
         <knx-card class="hidden-xs" *ngIf="knxWizardService.currentStepIndex === 1">
           <knx-insurance-combined-price
             [IncludeBTW]="true"
             [Insurance]="[(selectedInsurances$ | async)]">
           </knx-insurance-combined-price>
         </knx-card>
-
     </div>
   </knx-wizard-rx>
 </div>
