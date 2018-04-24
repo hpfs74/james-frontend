@@ -12,20 +12,33 @@
 
 <div class="container knx-house-hold-advice" [ngClass]="getStepClass(knxWizardService.currentStepIndex)" knxBackdropBlur
      [enableBlur]="knxChatStream.chatExpanded">
-  <knx-wizard-rx>
+  <knx-wizard-rx [sidebar]="knxWizardService.currentStepIndex === 1">
 
-    <div class="knx-wizard__sidebar" [class.knx-wizard__sidebar--sticky]="false"
+    <div class="knx-wizard__sidebar knx-wizard__sidebar--sticky"
          #knxWizardSidebar>
       <knx-chat-stream #knxChatStream
                        [options]="chatConfig$ | async"
                        [messages]="chatMessages$ | async">
-        <ng-container>
-          <knx-card *ngIf="knxWizardService.currentStepIndex === 1">
-            <knx-insurance-combined-price
-              [IncludeBTW]="true"
-              [Insurance]="[(selectedInsurances$ | async)]">
-            </knx-insurance-combined-price>
-          </knx-card>
+
+        <knx-card>
+          <knx-insurance-combined-price
+            [IncludeBTW]="true"
+            [Insurance]="[(selectedInsurances$ | async)]">
+          </knx-insurance-combined-price>
+        </knx-card>
+
+        <ng-container *ngIf="knxWizardService.currentStepIndex === 1" [formGroup]="carExtrasForm.formGroup">
+          <knx-side-panel #knxSidePanel title="" [fullwidth]="true"
+                          (onChangeVisibile)="toggleSideNavState($event)">
+            <div class="container-fluid">
+              <div class="knx-side-panel-content">
+                <knx-insurance-combined-price
+                  [IncludeBTW]="true"
+                  [Insurance]="[(selectedInsurances$ | async)]">
+                </knx-insurance-combined-price>
+              </div>
+            </div>
+          </knx-side-panel>
         </ng-container>
 
       </knx-chat-stream>
