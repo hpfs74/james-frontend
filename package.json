@@ -26,7 +26,7 @@
     "security": "retire -npv --exitwith 0 --proxy http://edc-proxy.ds.global:9090",
     "lint": "ng lint --type-check",
     "lint:styles": "stylelint 'src/**/*.scss' --syntax scss --config stylelint.conf.js",
-    "release": "standard-version && git push --follow-tags origin master",
+    "release": "standard-version && git push --follow-tags origin $(git rev-parse --abbrev-ref HEAD)",
     "e2e": "ng e2e",
     "clean": "rimraf -- node_modules dist",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
