@@ -109,7 +109,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   initForms() {
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldDetailForm(formBuilder,
-      this.tagsService.getAsLabelValue('car_flow_gender'),
+      this.tagsService.getAsLabelValue('house_hold_flow_gender'),
       this.copies);
     this.addressForm = new AddressForm(formBuilder);
   }

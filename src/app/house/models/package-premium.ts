@@ -20,7 +20,7 @@ export interface PackagePremiumResponse {
 
   CarInsurances?: any;
   HomeInsurances?: any;
-  HouseHoldInsurances?: CalculatedPremium[];
+  HouseholdInsurances?: CalculatedPremium[];
 }
 
 /** this is the object that is needed for the buy of a package insurance */

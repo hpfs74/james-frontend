@@ -2,7 +2,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UIPair } from '@core/models/ui-pair';
 import { EmailValidator } from '@utils/email-validator';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
-import { emptyOrPhoneNumberValidator, ibanValidator, phoneNumberValidator } from '@utils/base-form.validators';
+import {
+  emptyOrPhoneNumberValidator,
+  expectedValueValidator,
+  ibanValidator,
+  phoneNumberValidator,
+  trueValidator
+} from '@utils/base-form.validators';
 
 /**
  * describe the form filters
@@ -26,8 +32,14 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
 
     this.formGroup = this.fb.group({
       iban: [null, Validators.compose([Validators.required, ibanValidator('iban', 'nl')])],
-      agreeKnabTAC: [{}, Validators.required],
-      agreeRiskTAC: [{}, Validators.required]
+      agreeKnabTAC: [{}, Validators.compose([
+        expectedValueValidator((value) => value.knabtac === true, this.copies['household.payment_details.knabtac.error']),
+        Validators.required
+      ])],
+      agreeRiskTAC: [{}, Validators.compose([
+        expectedValueValidator((value) => value.risktac === true, this.copies['household.payment_details.risktac.error']),
+        Validators.required
+      ])]
     });
 
     this.formConfig = {
@@ -46,15 +58,15 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
         }
       },
       agreeKnabTAC: {
-        validationErrors: this.validationErrors,
         formControlName: 'agreeKnabTAC',
         formControl: this.formGroup.get('agreeKnabTAC'),
         type: 'checkbox',
+        validationErrors: this.validationErrors,
         inputOptions: {
           items: [
             {
               label: this.copies['household.payment_details.knabtac.label'],
-              value: 'true'
+              value: 'knabtac'
             } as UIPair
           ]
         }
@@ -68,7 +80,7 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
           items: [
             {
               label: this.copies['household.payment_details.risktac.label'],
-              value: 'true'
+              value: 'risktac'
             } as UIPair
           ]
         }

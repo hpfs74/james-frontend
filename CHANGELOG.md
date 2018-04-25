@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://bitbucket.org/knabab/knab-james-frontend/compare/v0.3.0...v0.4.0) (2018-04-24)
+
+
+### Bug Fixes
+
+* **car-detail-form:** preselect male ([9df0e95](https://bitbucket.org/knabab/knab-james-frontend/commits/9df0e95))
+* **car-details-html:** hide loan field ([0a41310](https://bitbucket.org/knabab/knab-james-frontend/commits/0a41310))
+* **house-hold-buy:** address format ([91209ad](https://bitbucket.org/knabab/knab-james-frontend/commits/91209ad))
+* **house-hold-buy:** agree tac required ([3bc0adb](https://bitbucket.org/knabab/knab-james-frontend/commits/3bc0adb))
+* **house-hold-buy:** contact details title missing ([3736ccc](https://bitbucket.org/knabab/knab-james-frontend/commits/3736ccc))
+* **house-hold-buy:** fix title in second card and missing policy ([a6afece](https://bitbucket.org/knabab/knab-james-frontend/commits/a6afece)), closes [#p1-135](https://bitbucket.org/knabab/knab-james-frontend/issue/p1-135) [#p1-122](https://bitbucket.org/knabab/knab-james-frontend/issue/p1-122)
+* **house-hold-buy:** missing back button on top ([cad05b7](https://bitbucket.org/knabab/knab-james-frontend/commits/cad05b7))
+* **house-hold-buy:** missing header content #p1-131 ([eeded13](https://bitbucket.org/knabab/knab-james-frontend/commits/eeded13)), closes [#p1-131](https://bitbucket.org/knabab/knab-james-frontend/issue/p1-131)
+* **house-hold-buy:** missing header content #p1-131 ([b9eb06d](https://bitbucket.org/knabab/knab-james-frontend/commits/b9eb06d)), closes [#p1-131](https://bitbucket.org/knabab/knab-james-frontend/issue/p1-131)
+* **house-hold-buy:** missing select insurance buttonb ([6d42e18](https://bitbucket.org/knabab/knab-james-frontend/commits/6d42e18))
+* **house-hold-buy:** more fix ([af1c432](https://bitbucket.org/knabab/knab-james-frontend/commits/af1c432))
+* **house-hold-buy:** more fix ([f7fec81](https://bitbucket.org/knabab/knab-james-frontend/commits/f7fec81))
+* **house-hold-buy:** more fix ([dcbc71d](https://bitbucket.org/knabab/knab-james-frontend/commits/dcbc71d))
+* **house-hold-buy:** more fix ([3c9cd81](https://bitbucket.org/knabab/knab-james-frontend/commits/3c9cd81))
+* **house-hold-buy:** more fix ([c3f642a](https://bitbucket.org/knabab/knab-james-frontend/commits/c3f642a))
+* **house-hold-buy:** more fix ([f25d844](https://bitbucket.org/knabab/knab-james-frontend/commits/f25d844))
+* **house-hold-buy:** more fix ([258cac2](https://bitbucket.org/knabab/knab-james-frontend/commits/258cac2))
+* **house-hold-buy:** more fix ([bbc564e](https://bitbucket.org/knabab/knab-james-frontend/commits/bbc564e))
+* **house-hold-buy:** more fix ([e57831d](https://bitbucket.org/knabab/knab-james-frontend/commits/e57831d))
+* **house-hold-buy:** remove step counter on thank you page ([07467be](https://bitbucket.org/knabab/knab-james-frontend/commits/07467be))
+* **house-hold-buy:** remove step counter on thank you page ([2bddc77](https://bitbucket.org/knabab/knab-james-frontend/commits/2bddc77))
+* **house-hold-buy:** remove step counter on thank you page ([b159175](https://bitbucket.org/knabab/knab-james-frontend/commits/b159175))
+* **house-hold-dekking:** remove preselecting of coverage ([7dd2f3a](https://bitbucket.org/knabab/knab-james-frontend/commits/7dd2f3a))
+* **house-hold-form:** remove default value from form config ([2cd4d22](https://bitbucket.org/knabab/knab-james-frontend/commits/2cd4d22))
+* **husehold:** fast fix to remove html tags for release ([0eaf935](https://bitbucket.org/knabab/knab-james-frontend/commits/0eaf935))
+* **strip-html:** correct pipe name description ([905d98f](https://bitbucket.org/knabab/knab-james-frontend/commits/905d98f))
+
+
+### Features
+
+* **copies:** update 2% UI ([f3617fb](https://bitbucket.org/knabab/knab-james-frontend/commits/f3617fb))
+* **copies:** update 2% UI ([0031b90](https://bitbucket.org/knabab/knab-james-frontend/commits/0031b90))
+* **copies:** update 2% UI ([70d3a4c](https://bitbucket.org/knabab/knab-james-frontend/commits/70d3a4c))
+* **copies:** update copies for 2% provision ([36bb13e](https://bitbucket.org/knabab/knab-james-frontend/commits/36bb13e))
+* **house-hold:** add borkerid field to request ([64b5db7](https://bitbucket.org/knabab/knab-james-frontend/commits/64b5db7))
+* **house-hold:** add borkerid field to request amount ([1ab4536](https://bitbucket.org/knabab/knab-james-frontend/commits/1ab4536))
+* **house-hold-buy:** add api calls ([d4b4948](https://bitbucket.org/knabab/knab-james-frontend/commits/d4b4948))
+* **house-hold-buy:** add api calls ([473898d](https://bitbucket.org/knabab/knab-james-frontend/commits/473898d))
+* **house-hold-buy:** added customer email address ([e3e67ad](https://bitbucket.org/knabab/knab-james-frontend/commits/e3e67ad))
+* **house-hold-buy:** added effects for buy ([bc52f47](https://bitbucket.org/knabab/knab-james-frontend/commits/bc52f47))
+* **house-hold-buy:** cosmetic fix ([4a2ad90](https://bitbucket.org/knabab/knab-james-frontend/commits/4a2ad90))
+* **shared:** add strip html from alexey code ([6514af4](https://bitbucket.org/knabab/knab-james-frontend/commits/6514af4))
+
+
+
 <a name="0.3.0"></a>
 # 0.3.0 (2018-04-10)
 

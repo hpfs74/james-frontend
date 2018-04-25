@@ -2875,5 +2875,23 @@
       "translation_label": "Outside coverage",
       "translation_text": "Outside coverage"
     }
+  ],
+  "house_hold_flow_gender": [
+    {
+      "tag": "M",
+      "blocked": false,
+      "alert": false,
+      "order": 1,
+      "description": "Man",
+      "translation_text": "Man"
+    },
+    {
+      "tag": "V",
+      "blocked": false,
+      "alert": false,
+      "order": 2,
+      "description": "Vrouw",
+      "translation_text": "Vrouw"
+    }
   ]
 }
