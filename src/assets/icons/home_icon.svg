@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>home_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11,20 C11,20.5522847 10.5522847,21 10,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,11 C4,10.7080751 4.12756273,10.4307256 4.34920863,10.2407434 L11.3492086,4.2407434 C11.7236984,3.9197522 12.2763016,3.9197522 12.6507914,4.2407434 L19.6507914,10.2407434 C19.8724373,10.4307256 20,10.7080751 20,11 L20,20 C20,20.5522847 19.5522847,21 19,21 L14,21 C13.4477153,21 13,20.5522847 13,20 L13,16 L11,16 L11,20 Z M9,19 L9,15 C9,14.4477153 9.44771525,14 10,14 L14,14 C14.5522847,14 15,14.4477153 15,15 L15,19 L18,19 L18,11.4599349 L12,6.31707778 L6,11.4599349 L6,19 L9,19 Z" id="path-1"></path>
+    </defs>
+    <g id="Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="XS_buy_household_package_thankYou" transform="translate(-30.000000, -812.000000)">
+            <g id="content_list-[16v]" transform="translate(8.000000, 66.000000)">
+                <g id="result_item_mobile-copy-2" transform="translate(2.000000, 504.000000)">
+                    <g id="Group-6" transform="translate(16.000000, 142.000000)">
+                        <g id="content-list-[8v]">
+                            <g id="phone-copy-2" transform="translate(0.000000, 96.000000)">
+                                <g id="Icons/General/House">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <use id="Page-1" fill="#003B5A" fill-rule="nonzero" xlink:href="#path-1"></use>
+                                    <g id="Colours/Primary/-Blue" mask="url(#mask-2)" fill="#003B5A" fill-rule="evenodd">
+                                        <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="19px" viewBox="0 0 18 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>facebook_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="8.99639663 18 17.9927865 18 17.9927865 0.00707865169 8.99639663 0.00707865169 6.74157303e-06 0.00707865169 6.74157303e-06 18 8.99639663 18"></polygon>
+    </defs>
+    <g id="Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="XS_buy_household_package_thankYou" transform="translate(-26.000000, -866.000000)">
+            <g id="content_list-[16v]" transform="translate(8.000000, 66.000000)">
+                <g id="result_item_mobile-copy-2" transform="translate(2.000000, 504.000000)">
+                    <g id="Group-11" transform="translate(16.000000, 295.000000)">
+                        <g id="Group-14-Copy">
+                            <g id="facebook_icon" transform="translate(0.000000, 1.000000)">
+                                <g id="Group-3" transform="translate(0.000000, 0.060337)">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <g id="Clip-2"></g>
+                                    <path d="M16.9997596,18 C17.5481191,18 17.9927933,17.5553258 17.9927933,17.0069663 L17.9927933,1.00017978 C17.9927933,0.451617978 17.5481191,0.00707865169 16.9997596,0.00707865169 L0.993040449,0.00707865169 C0.444478652,0.00707865169 6.74157303e-06,0.451617978 6.74157303e-06,1.00017978 L6.74157303e-06,17.0069663 C6.74157303e-06,17.5553258 0.444478652,18 0.993040449,18 L16.9997596,18 Z" id="Fill-1" fill="#3C5A99" mask="url(#mask-2)"></path>
+                                </g>
+                                <path d="M12.4147011,18.0603371 L12.4147011,11.0925843 L14.7535551,11.0925843 L15.1037124,8.37707865 L12.4147011,8.37707865 L12.4147011,6.64334831 C12.4147011,5.85714607 12.6329933,5.32139326 13.7604539,5.32139326 L15.1984315,5.3207191 L15.1984315,2.892 C14.9496674,2.85896629 14.0961169,2.78501124 13.1030831,2.78501124 C11.0298472,2.78501124 9.61054382,4.05047191 9.61054382,6.37449438 L9.61054382,8.37707865 L7.2657573,8.37707865 L7.2657573,11.0925843 L9.61054382,11.0925843 L9.61054382,18.0603371 L12.4147011,18.0603371 Z" id="Fill-4" fill="#FEFEFE"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

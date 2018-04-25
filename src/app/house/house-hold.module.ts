@@ -12,6 +12,7 @@ import { HouseHoldAdviceModule } from '@app/house/submodules/house-hold-advice/h
 import { HouseHoldRoutingModule } from '@app/house/house-hold-routing.module';
 import { HouseHoldBuyModule } from '@app/house/submodules/house-hold-buy/house-hold-buy.module';
 
+
 @NgModule({
   imports: [
     SharedModule,

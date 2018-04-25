@@ -1,42 +1,73 @@
-
 <div class="row">
   <div class="col-12">
-    <strong>{{ 'general.contact-card.question.label' | transalte }}</strong><br/>
+    <strong>{{ 'general.contact-card.question.label' | translate }}</strong><br/>
     {{'general.contact-card.question.text' | translate }}
   </div>
 </div>
 
-<hr />
-
 <div class="row">
   <div class="col-12">
-    <p class="knx-no-pad">
-      <span class="knx-icon-phone"></span>
-      {{ 'general.contact-card.phone.label' | translate }}: {{ 'general.contact-card.phone.value' | translate }}
-    </p>
 
-    <p class="knx-no-pad">
-      <span class="knx-icon-whatsapp"></span>
-      {{ 'general.contact-card.whatsapp.label' | translate }}: {{ 'general.contact-card.whatsapp.value' | translate }}
-    </p>
+    <ul class="knx-contact-card__contacts">
+      <li>
+        <a href="tel:{{ 'general.contact-card.phone.value' | translate }}">
+          <img src="/assets/icons/phone_icon.svg" alt="phone number"/>
+          <span class="knx-contact-card__contacts-text">
+            <span class="knx-contact-card__contacts-label">{{ 'general.contact-card.phone.label' | translate }}</span>
+            {{ 'general.contact-card.phone.text' | translate }}
+          </span>
+        </a>
+      </li>
 
-    <p class="knx-no-pad">
-      <span class="knx-icon-email"></span>
-      {{ 'general.contact-card.email.label' | translate }}: {{ 'general.contact-card.email.value' | translate }}
-    </p>
+      <li>
+        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ 'general.contact-card.whatsapp.value' | translate }}">
+          <img src="/assets/icons/whatsapp_icon.svg" alt="whatsApp number"/>
+          <span class="knx-contact-card__contacts-text">
+            <span class="knx-contact-card__contacts-label">{{ 'general.contact-card.whatsapp.label' | translate }}</span>
+            {{ 'general.contact-card.whatsapp.text' | translate }}
+          </span>
+        </a>
+      </li>
 
-    <p class="knx-no-pad">
-      <span class="knx-icon-website"></span>
-      {{ 'general.contact-card.website.value' | translate }}
-    </p>
+      <li>
+        <a href="mailto:{{ 'general.contact-card.email.value' | translate }}">
+          <img src="/assets/icons/email_icon.svg" alt="Email address"/>
+          <span class="knx-contact-card__contacts-text">
+            <span class="knx-contact-card__contacts-label">{{ 'general.contact-card.email.label' | translate }}</span>
+            {{ 'general.contact-card.email.text' | translate }}
+          </span>
+        </a>
+      </li>
 
+      <li>
+        <a target="_blank" href="mailto:{{ 'general.contact-card.website.value' | translate }}">
+          <img src="/assets/icons/home_icon.svg" alt="website address"/>
+          <span class="knx-contact-card__contacts-text">
+            <span class="knx-contact-card__contacts-label">{{ 'general.contact-card.website.label' | translate }}</span>
+            {{ 'general.contact-card.website.text' | translate }}
+          </span>
+        </a>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="row">
   <div class="col-12">
-    <hr />
-    <a [href]="facebook"><img src="assets/images/facebook_ico.png">{{'general.contact-card.facebook.label'}}</a>
-    <a [href]="twitter"><img src="assets/images/twitter_ico.png">{{'general.contact-card.twitter.label'}}</a>
+    <ul class="knx-contact-card__social-links">
+      <li>
+        <a target="_blank" href="{{ 'general.contact-card.facebook.value' | translate }}"><img
+          src="/assets/icons/facebook_icon.svg">
+          <span
+            class="knx-contact-card__social-links_text">{{'general.contact-card.facebook.label' | translate }}</span>
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="{{ 'general.contact-card.twitter.value' | translate }}">
+          <img src="/assets/icons/twitter_icon.svg">
+          <span class="knx-contact-card__social-links_text">{{'general.contact-card.twitter.label' | translate }}</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </div>

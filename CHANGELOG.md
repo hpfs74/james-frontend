@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://bitbucket.org/knabab/knab-james-frontend/compare/v0.4.0...v0.5.0) (2018-04-25)
+
+
+### Bug Fixes
+
+* **content.json:** remove blog link ([c423c87](https://bitbucket.org/knabab/knab-james-frontend/commits/c423c87))
+* **house-hold-buy:** more fixes ([c2480d0](https://bitbucket.org/knabab/knab-james-frontend/commits/c2480d0))
+* **house-hold-buy:** payments detail checkboxx mandatory ([f0ee57c](https://bitbucket.org/knabab/knab-james-frontend/commits/f0ee57c))
+* **house-hold-buy:** remove lisa ([85a1b33](https://bitbucket.org/knabab/knab-james-frontend/commits/85a1b33))
+* **house-hold-buy:** remove lisa ([88327e3](https://bitbucket.org/knabab/knab-james-frontend/commits/88327e3))
+
+
+### Features
+
+* **house-hold-buy:** contacts card ([c9f4b8e](https://bitbucket.org/knabab/knab-james-frontend/commits/c9f4b8e))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://bitbucket.org/knabab/knab-james-frontend/compare/v0.3.0...v0.4.0) (2018-04-24)
 

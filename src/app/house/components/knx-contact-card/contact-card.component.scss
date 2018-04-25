@@ -1,0 +1,69 @@
+@import '~styles/base';
+
+.knx-contact-card__contacts {
+  border: {
+    bottom: 1px solid $knab-primary-blue;
+    top: 1px solid $knab-primary-blue;
+  }
+
+  margin: 16px 0;
+  padding: 16px 0;
+
+  li {
+    background: no-repeat left top;
+    margin-bottom: 12px;
+    list-style-type: none;
+
+    .knx-contact-card__contact-label {
+      margin-right: 5px;
+    }
+  }
+
+  a {
+    color: $knab-primary-blue;
+    display: block;
+    line-height: 20px;
+    width: 100%;
+  }
+
+  img,
+  .knx-contact-card__contacts-text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  img {
+    height: 16px;
+    margin-right: 24px;
+    width: 16px;
+  }
+}
+
+.knx-contact-card__social-links {
+  display: flex;
+
+  ul {
+    margin-left: -8px;
+  }
+
+  li {
+    list-style-type: none;
+    margin-right: 16px;
+  }
+
+  a {
+    color: $knab-primary-blue;
+    display: block;
+    font-size: 0.875em;
+  }
+
+  img {
+    margin-right: 8px;
+  }
+
+  .knx-contact-card__social-links_text,
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
