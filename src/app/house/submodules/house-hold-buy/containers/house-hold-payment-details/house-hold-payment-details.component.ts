@@ -38,6 +38,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
 
   packagePremiumLoading$: Observable<boolean>;
   packagePremiumError$: Observable<boolean>;
+  params: any = {};
 
   constructor(private store$: Store<fromRoot.State>,
               private translateService: TranslateService) {

@@ -28,11 +28,12 @@ import 'rxjs/add/operator/filter';
 export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnInit {
   qaRootId = QaIdentifiers.houseHoldBuyLegal;
   form: HouseHoldBuyLegalForm;
-  advice$: Observable<any>;
   subscription$: Subscription[] = [];
   currentStepOptions: KNXWizardStepRxOptions;
   error$: Observable<KNXStepError>;
   copies: any = {};
+  params: any = {};
+
   constructor(private store$: Store<fromRoot.State>,
               private translateService: TranslateService) {
 
@@ -54,7 +55,7 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
       'household.legal.next_step',
       'household.legal.go_back'
     ])
-    .subscribe(values => this.copies = values);
+      .subscribe(values => this.copies = values);
     this.error$ = this.store$.select(fromCore.getWizardError);
     const formBuilder = new FormBuilder();
     this.form = new HouseHoldBuyLegalForm(formBuilder, this.copies);
@@ -66,6 +67,10 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
 
   ngOnInit() {
     this.subscription$.push(
+      this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium)
+        .subscribe(x => {
+          this.params.companyName = x.CompanyName;
+        }),
       this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
         .filter(householdNewFlowData => !!householdNewFlowData.questions)
         .subscribe(householdNewFlowData => {
