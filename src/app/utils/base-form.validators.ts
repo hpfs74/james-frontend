@@ -186,3 +186,16 @@ export function trueValidator(error: string) {
     };
   };
 }
+
+
+export function expectedValueValidator(expected, error: string) {
+  return (control: FormControl) => {
+    let value = control.value;
+    return expected(value) ? null : {
+      trueError: {
+        valid: false,
+        errorMsg: error
+      }
+    };
+  };
+}

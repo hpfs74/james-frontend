@@ -53,7 +53,9 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       'household.payment_details.iban.placeholder',
       'household.payment_details.iban.label',
       'household.payment_details.knabtac.label',
-      'household.payment_details.risktac.label'
+      'household.payment_details.knabtac.error',
+      'household.payment_details.risktac.label',
+      'household.payment_details.risktac.error'
     ]).subscribe(res => {
       this.copies = res;
 
