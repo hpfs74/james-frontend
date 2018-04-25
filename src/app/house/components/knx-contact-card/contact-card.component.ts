@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: './contact-card.component.html'
+  selector: 'knx-contact-card',
+  styleUrls: ['./contact-card.component.scss'],
+  templateUrl: './contact-card.component.html'
 })
 export class ContactCardComponent {
 

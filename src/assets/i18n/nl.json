@@ -1,4 +1,33 @@
 {
+  "general.contact-card.question.label": "Questions?",
+  "general.contact-card.question.text": "Just contact us if you have any questions regarding your insurances or any other financial related topics.",
+  "general.contact-card.phone.label": "Phone",
+  "general.contact-card.phone.text": "020 303 16 00",
+  "general.contact-card.phone.value": "+310203031600",
+
+  "general.contact-card.whatsapp.label": "WhatsApp",
+  "general.contact-card.whatsapp.text": "06 138 226 60",
+  "general.contact-card.whatsapp.value": "+31613822660",
+
+  "general.contact-card.email.label": "Email us",
+  "general.contact-card.email.text": "info@knab.nl",
+  "general.contact-card.email.value": "info@knab.nl",
+
+  "general.contact-card.website.label": "",
+  "general.contact-card.website.text": "knab.nl/contact",
+  "general.contact-card.website.value": "https://www.knab.nl/contact/",
+
+
+  "general.contact-card.facebook.label": "facebook",
+  "general.contact-card.facebook.text": "",
+  "general.contact-card.facebook.value": "https://www.facebook.com/knab.nl/",
+
+
+  "general.contact-card.twitter.label": "twitter",
+  "general.contact-card.twitter.text": "",
+  "general.contact-card.twitter.value": "https://twitter.com/@knab_nl/",
+
+
   "general.total.taxes.monthly": "Taxes",
   "general.contacts.addressForCommunications": "Address for communications",
   "general.dekking": "Dekking",
