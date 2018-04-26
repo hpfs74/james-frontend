@@ -53,7 +53,8 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
       'household.legal.q6.error',
       'household.legal.q7.error',
       'household.legal.next_step',
-      'household.legal.go_back'
+      'household.legal.go_back',
+      'household.legal.error'
     ])
       .subscribe(values => this.copies = values);
     this.error$ = this.store$.select(fromCore.getWizardError);
