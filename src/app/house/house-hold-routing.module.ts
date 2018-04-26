@@ -15,7 +15,7 @@ export const houseHoldRoutes: Routes = [
   },
   {
     path: 'buy',
-    // canActivateChild: [CanActivateHouseHoldFlowGuard],
+    canActivateChild: [CanActivateHouseHoldFlowGuard],
     loadChildren: './submodules/house-hold-buy/house-hold-buy.module#HouseHoldBuyModule'
   },
 ];
