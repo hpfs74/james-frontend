@@ -116,7 +116,6 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   }
 
   handleHouseholdContactDetails(houseHoldContactDetails: ContactDetails) {
-console.log('DEBUG3', houseHoldContactDetails);
     this.contactDetails = Object.assign({}, houseHoldContactDetails);
     this.sameAddressDetails = Object.assign({}, houseHoldContactDetails.address);
     const formValues = {
@@ -213,8 +212,6 @@ console.log('DEBUG3', houseHoldContactDetails);
     this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
       .take(1)
       .subscribe((newFlowAdvice: InsuranceStore) => {
-        console.log('DEBUG2', contactDetails);
-
         const insuranceStore = Object.assign(
           {},
           newFlowAdvice,
@@ -222,7 +219,6 @@ console.log('DEBUG3', houseHoldContactDetails);
             contacts: Object.assign({}, newFlowAdvice.contacts, contactDetails)
           }
         );
-        console.log('DEBUG', insuranceStore);
 
         this.store$.dispatch(new householddataActions.NewFlowAdviceStore(insuranceStore));
         this.store$.dispatch(new wizardActions.Forward());
