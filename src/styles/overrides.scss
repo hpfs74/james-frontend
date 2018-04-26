@@ -57,6 +57,22 @@ button.knx-button--toggle,
   }
 }
 
+@media screen and (max-width: 769px) {
+  .knx-step-navigation {
+    margin-bottom: 20px;
+    padding: 0;
+    margin-top: -10px;
+  }
+
+  .knx-button--link {
+    padding-left: 25px;
+
+    &:before {
+      padding-left: 0;
+    }
+  }
+}
+
 .knx-dropdown-menu-container {
   .navbar-nav {
     &.knx-list--unstyled {
