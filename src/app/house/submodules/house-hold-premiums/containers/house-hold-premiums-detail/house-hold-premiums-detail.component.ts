@@ -82,7 +82,7 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
   }
 
   goToNextStep() {
-    if (localStorage.getItem('testing')) {
+    // if (localStorage.getItem('testing')) {
 
       this.store$.dispatch(new houseHoldAction.NewFlowAdviceStore({
         contacts: {
@@ -102,9 +102,9 @@ export class HouseHoldPremiumsDetailComponent implements OnInit, OnDestroy {
           selectedPremium: this.insurance
         }
       }));
-      this.store$.dispatch(new router.Go({path: ['/inboedel/buy-details']}));
-    } else {
-      this.store$.dispatch(new layout.OpenModal('houseHoldEndOftheLineModal'));
-    }
+      this.store$.dispatch(new router.Go({path: ['/inboedel/persoonlijke-gegevens']}));
+    // } else {
+    //   this.store$.dispatch(new layout.OpenModal('houseHoldEndOftheLineModal'));
+    // }
   }
 }

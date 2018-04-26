@@ -17,31 +17,31 @@ export const houseHoldAdviceRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'buy-details',
+        redirectTo: 'persoonlijke-gegevens',
         pathMatch: 'full'
       },
       {
-        path: 'buy-details',
+        path: 'persoonlijke-gegevens',
         component: HouseHoldBuyDetailsComponent,
         data: {
           stepIndex: 0,
-          step_nr: '10-start'
+          step_nr: '70'
         },
       },
       {
-        path: 'legal',
+        path: 'check',
         component: HouseHoldBuyLegalComponent,
         data: {
           stepIndex: 1,
-          step_nr: '20'
+          step_nr: '80'
         }
       },
       {
-        path: 'payment-details',
+        path: 'betaling',
         component: HouseHoldPaymentDetailsComponent,
         data: {
           stepIndex: 2,
-          step_nr: '30-details'
+          step_nr: '90'
         }
       },
       {
@@ -49,7 +49,7 @@ export const houseHoldAdviceRoutes: Routes = [
         component: HouseHoldPremiumsThankYouComponent,
         data: {
           stepIndex: 3,
-          step_nr: '80-end'
+          step_nr: '100'
         }
       }
     ]
