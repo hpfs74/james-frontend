@@ -435,6 +435,7 @@
   "household.payment_details.payment_details.title": "Payment details",
   "household.payment_details.payment_details.description.text": "description_text",
   "household.payment_details.payment_details.start_date.label": "Startdate",
+  "household.payment_details.form.error": "some fields error",
   "knablab.title": "Knab lab test",
   "knablab.blue_para": "Inboedelverzekering",
   "knablab.para1": "heb je opmerkingen of feedback",
