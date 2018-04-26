@@ -33,14 +33,6 @@ export const houseHoldPremiumsRoutes: Routes = [
           stepIndex: 1,
           step_nr: '60'
         }
-      },
-      {
-        path: 'bevestig',
-        component: HouseHoldPremiumsBuyComponent,
-        data: {
-          stepIndex: 2,
-          step_nr: '70'
-        }
       }
     ]
   }
