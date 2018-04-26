@@ -1,4 +1,6 @@
 {
+  "general.contacts.addressForCommunications.label": "Address for communications",
+
   "general.contact-card.question.label": "Questions?",
   "general.contact-card.question.text": "Just contact us if you have any questions regarding your insurances or any other financial related topics.",
   "general.contact-card.phone.label": "Phone",
