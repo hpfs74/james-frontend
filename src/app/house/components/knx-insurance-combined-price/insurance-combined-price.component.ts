@@ -15,6 +15,10 @@ export class InsuranceCombinedPriceComponent {
     return a + b;
   }
 
+  getTotalMonthlyGrossPrice(): number {
+    return this.Insurance.map(x => x.Premium).reduce(this.sum);
+  }
+
   getTotalMonthlyPrice(): number {
     return this.Insurance.map(x => x.NettoPremium).reduce(this.sum);
   }
