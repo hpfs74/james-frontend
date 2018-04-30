@@ -9,6 +9,7 @@ import { HouseHoldPaymentDetailsForm } from './house-hold-payment-details.form';
 import { FormBuilder } from '@angular/forms';
 import { KNXStepError, KNXWizardStepRxOptions } from '@app/components/knx-wizard-rx/knx-wizard-rx.options';
 import { Subscription } from 'rxjs/Subscription';
+import * as fromCore from '@app/core/reducers';
 
 import * as wizardActions from '@core/actions/wizard';
 import * as houseHoldData from '@app/house/actions/house-hold-data';
@@ -56,7 +57,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       'household.payment_details.knabtac.label',
       'household.payment_details.knabtac.error',
       'household.payment_details.risktac.label',
-      'household.payment_details.risktac.error'
+      'household.payment_details.risktac.error',
+      'general.errors.network-failure'
     ]).subscribe(res => {
       this.copies = res;
 
@@ -81,6 +83,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     this.houseHoldRequest$ = this.store$.select(fromHouseHold.getHouseHoldDataInfo);
     this.packagePremiumLoading$ = this.store$.select(fromHouseHold.getPackagePremiumLoading);
     this.packagePremiumError$ = this.store$.select(fromHouseHold.getPackagePremiumError);
+    this.error$ = this.store$.select(fromCore.getWizardError);
 
     this.setInitialSubscriptions();
   }
@@ -106,9 +109,9 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
         .subscribe(x => {
           this.store$.dispatch(new wizardActions.Forward());
         }),
-      this.packagePremiumError$.subscribe(err => {
-        this.store$.dispatch(new wizardActions.Error({message: 'Unable to process your request at this time'}));
-      })
+      this.packagePremiumError$
+        .filter(x => (x === true))
+        .subscribe(err => this.store$.dispatch(new wizardActions.Error({message: this.copies['general.errors.network-failure'] })))
     );
   }
 

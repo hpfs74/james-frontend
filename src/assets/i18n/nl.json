@@ -1,4 +1,5 @@
 {
+  "general.errors.network-failure": "Unable to process your request at this time",
   "general.errors.field_is_required": "This field is required",
   "general.contacts.addressForCommunications.label": "Address for communications",
   "general.contact-card.question.label": "Questions?",
