@@ -7,12 +7,12 @@ export class HouseHoldBuyLegalForm extends BaseForm {
   formGroup: FormGroup;
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
 
-  public validationErrors = {
+  validationErrors = {
     required: () => 'Dit is een verplicht veld',
     trueError: (obj) => obj.errorMsg
   };
 
-  constructor( private fb: FormBuilder, public copies: any ) {
+  constructor( private fb: FormBuilder, private copies: any ) {
     super();
 
     this.formGroup = this.fb.group({

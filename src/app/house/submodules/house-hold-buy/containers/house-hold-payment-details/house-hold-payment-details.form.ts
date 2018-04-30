@@ -18,7 +18,8 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
   validationErrors = {
     required: () => this.copies['general.errors.field_is_required'], // 'Dit is een verplicht veld',
-    iban: () => this.copies['general.errors.iban_is_invalid']
+    iban: () => this.copies['general.errors.iban_is_invalid'],
+    expectedValueError: (obj) => obj.errorMsg
   };
 
   /**
@@ -33,8 +34,8 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
     this.formGroup = this.fb.group({
       iban: [null, Validators.compose([Validators.required, ibanValidator('iban', 'nl')])],
       agreeKnabTAC: [{}, Validators.compose([
-        expectedValueValidator((value) => value.knabtac === true, this.copies['household.payment_details.knabtac.error']),
-        Validators.required
+        Validators.required,
+        expectedValueValidator((value) => value.knabtac === true, this.copies['household.payment_details.knabtac.error'])
       ])],
       agreeRiskTAC: [{}, Validators.compose([
         expectedValueValidator((value) => value.risktac === true, this.copies['household.payment_details.risktac.error']),

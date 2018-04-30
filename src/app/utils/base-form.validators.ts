@@ -191,11 +191,14 @@ export function trueValidator(error: string) {
 export function expectedValueValidator(expected, error: string) {
   return (control: FormControl) => {
     let value = control.value;
-    return expected(value) ? null : {
-      trueError: {
+
+    const ret = expected(value) ? null : {
+      expectedValueError: {
         valid: false,
         errorMsg: error
       }
     };
+
+    return ret;
   };
 }

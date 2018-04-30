@@ -6,6 +6,7 @@ import { HouseHoldPaymentDetailsComponent } from './containers/house-hold-paymen
 import { HouseHoldBuyComponent } from './containers/house-hold-buy/house-hold-buy.component';
 import { HouseHoldBuyLegalComponent } from './containers/house-hold-buy-legal/house-hold-buy-legal.component';
 import { HouseHoldPremiumsThankYouComponent } from './containers/house-hold-premiums-thank-you/house-hold-premiums-thank-you.component';
+import { CanActivateHouseHoldFlowGuard } from '@core/services';
 
 export const houseHoldAdviceRoutes: Routes = [
   {
@@ -18,11 +19,13 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: '',
         redirectTo: 'persoonlijke-gegevens',
+        canActivate: [CanActivateHouseHoldFlowGuard],
         pathMatch: 'full'
       },
       {
         path: 'persoonlijke-gegevens',
         component: HouseHoldBuyDetailsComponent,
+        canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 0,
           step_nr: '70'
@@ -31,6 +34,7 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: 'check',
         component: HouseHoldBuyLegalComponent,
+        canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 1,
           step_nr: '80'
@@ -39,6 +43,7 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: 'betaling',
         component: HouseHoldPaymentDetailsComponent,
+        canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 2,
           step_nr: '90'
@@ -46,6 +51,7 @@ export const houseHoldAdviceRoutes: Routes = [
       },
       {
         path: 'bedankt',
+        canActivate: [CanActivateHouseHoldFlowGuard],
         component: HouseHoldPremiumsThankYouComponent,
         data: {
           stepIndex: 3,
