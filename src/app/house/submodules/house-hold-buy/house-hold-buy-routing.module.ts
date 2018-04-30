@@ -55,7 +55,7 @@ export const houseHoldAdviceRoutes: Routes = [
         component: HouseHoldPremiumsThankYouComponent,
         data: {
           stepIndex: 3,
-          step_nr: '100'
+          step_nr: '100-end'
         }
       }
     ]
