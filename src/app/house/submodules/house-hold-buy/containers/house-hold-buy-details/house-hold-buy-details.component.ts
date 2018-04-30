@@ -147,7 +147,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       this.store$.select(fromAddress.getAddress)
         .filter(data => data !== null && !this.form.formGroup.get('sameAddress').value)
         .subscribe(data => {
-          this.address = Object.assign({}, data);
+          this.sameAddressDetails = Object.assign({}, data);
         }),
       this.form.formGroup.get('sameAddress').valueChanges
         .filter(value => !!value)
@@ -156,7 +156,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
             .filter(data => data !== null)
             .take(1)
             .subscribe(data => {
-              this.address = Object.assign({}, data);
+              this.sameAddressDetails = Object.assign({}, data);
             });
         })
     );
@@ -172,6 +172,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
     FormUtils.validateControls(this.form.formGroup, Object.keys(this.form.formGroup.controls));
     FormUtils.validateControls(this.addressForm.formGroup, Object.keys(this.addressForm.formGroup.controls));
     if (!detailForm.get('sameAddress').value) {
+
       const postalCode = this.addressForm.formGroup.get('postalCode').value;
       const houseNumber = this.addressForm.formGroup.get('houseNumber').value;
       const houseNumberExtension = this.addressForm.formGroup.get('houseNumberExtension').value;
@@ -181,11 +182,11 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
         }));
       }
 
-      if (postalCode === this.contactDetails.address.postcode
-        && houseNumber === this.contactDetails.address.number_extended.number_only
-        && houseNumberExtension === this.contactDetails.address.number_extended.number_extension) {
+      if (postalCode === this.address.postcode
+        && +houseNumber === this.address.number_extended.number_only
+        && houseNumberExtension === this.address.number_extended.number_extension) {
         return this.store$.dispatch(new wizardActions.Error({
-          message: this.copies['household.buy_details_address_error']
+          message: this.copies['household.buy_details_same_address_error']
         }));
       }
     }
@@ -198,8 +199,10 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
     const initials = this.form.formGroup.get('initials').value;
     const gender = this.form.formGroup.get('gender').value;
     const email = this.form.formGroup.get('email').value;
+    const sameAddress = this.form.formGroup.get('sameAddress').value;
+
     const contactDetails = {
-      sameAddress: this.form.formGroup.get('sameAddress').value,
+      sameAddress: sameAddress,
       gender: gender,
       firstName: firstName,
       prefix: prefix,
@@ -207,7 +210,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       initials: initials,
       address: this.address,
       email: email,
-      addressForComminications: Object.assign({}, this.address)
+      addressForComminications: Object.assign({}, (sameAddress ? this.address : this.sameAddressDetails))
     };
     this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
       .take(1)

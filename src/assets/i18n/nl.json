@@ -417,6 +417,7 @@
   "household.details.form_sameAddress_yes_value": "Yes",
   "household.details.form_sameAddress_no_value": "No",
   "household.buy_details_address_error": "Please fill in another address",
+  "household.buy_details_same_address_error": "Please provide a different address",
   "household.detail.next_step": "Next step",
   "household.buy.steps.step1.title": "Personal details",
   "household.buy.steps.step2.title": "Legal",
