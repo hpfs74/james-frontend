@@ -31,6 +31,8 @@ import * as fromAddress from '@app/address/reducers';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/take';
 import * as router from '@core/actions/router';
+import * as addressActions from '@app/address/actions/address';
+import * as suggestionActions from '@app/address/actions/suggestion';
 
 @Component({
   providers: [AsyncPipe],
@@ -89,6 +91,9 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.store$.dispatch(new addressActions.ClearAddress());
+    this.store$.dispatch(new suggestionActions.ClearAddressSuggestion());
+
     this.selectedInsurances$ = this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium);
 
     this.subscriptions.push(

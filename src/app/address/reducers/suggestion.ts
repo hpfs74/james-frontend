@@ -1,5 +1,6 @@
 import * as suggestion from '../actions/suggestion';
 import { AddressSuggestion } from '../models';
+import { init } from 'protractor/built/launcher';
 
 export type Action = suggestion.All;
 
@@ -42,6 +43,10 @@ export function reducer(state = initialState, action: Action): State {
         suggestion: null
       });
     }
+    case suggestion.CLEAR_ADDRESS_SUGGESTION: {
+      return Object.assign({}, initialState);
+    }
+
 
     default: {
       return state;
