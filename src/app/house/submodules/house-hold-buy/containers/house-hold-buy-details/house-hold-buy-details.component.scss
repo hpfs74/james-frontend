@@ -20,3 +20,11 @@
 /deep/ .knx-form-group {
   margin-bottom: 1.4em;
 }
+
+/deep/ .knx-privacy-policy-statement {
+  a {
+    text-align: center;
+    color: $knab-muted;
+    text-decoration: underline;
+  }
+}
