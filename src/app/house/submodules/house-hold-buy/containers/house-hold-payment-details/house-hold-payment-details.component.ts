@@ -47,7 +47,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
 
   acceptKnabTerms = false;
   acceptInsuranceTerms = false;
-  private content: Content;
+  content: Content;
 
 
   constructor(private store$: Store<fromRoot.State>,
