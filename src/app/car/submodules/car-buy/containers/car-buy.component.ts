@@ -61,9 +61,6 @@ export class CarBuyComponent implements OnInit, OnDestroy, QaIdentifier {
     this.chatMessages$ = this.store$.select(fromCore.getAssistantMessageState);
     this.advice$ = this.store$.select(fromInsurance.getSelectedAdvice);
     let advice = this.asyncPipe.transform(this.advice$);
-    if (advice.license) {
-      this.store$.dispatch(new car.GetMeldcode(advice.license));
-    }
     this.formSteps = [
       {
         label: 'Contactgegevens',
