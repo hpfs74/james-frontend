@@ -18,9 +18,11 @@ import * as fromHouseHold from '@app/house/reducers';
 import * as packagePremiumActions from '@app/house/actions/package-premium';
 import { PackagePremiumRequest } from '@app/house/models/package-premium';
 import 'rxjs/add/operator/filter';
+import { Content, ContentConfig } from '@app/content.config';
 
 @Component({
   selector: 'knx-house-hold-payment-details',
+  styleUrls: ['./house-hold-payment-details.component.scss'],
   templateUrl: './house-hold-payment-details.component.html'
 })
 export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
@@ -36,13 +38,23 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
   insuranceStore: InsuranceStore;
   houseHoldRequest$: Observable<HouseHoldPremiumRequest>;
   houseHoldRequest: HouseHoldPremiumRequest;
+  selectedInsurance$: Observable<CalculatedPremium>;
+  insurance: CalculatedPremium;
 
   packagePremiumLoading$: Observable<boolean>;
   packagePremiumError$: Observable<boolean>;
   params: any = {};
 
+  acceptKnabTerms = false;
+  acceptInsuranceTerms = false;
+  private content: Content;
+
+
   constructor(private store$: Store<fromRoot.State>,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              public contentConfig: ContentConfig) {
+
+    this.content = contentConfig.getContent();
 
     const formBuilder = new FormBuilder();
 
@@ -84,6 +96,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     this.packagePremiumLoading$ = this.store$.select(fromHouseHold.getPackagePremiumLoading);
     this.packagePremiumError$ = this.store$.select(fromHouseHold.getPackagePremiumError);
     this.error$ = this.store$.select(fromCore.getWizardError);
+    this.selectedInsurance$ = this.store$.select(fromHouseHold.getHouseHoldSelectedAdvice);
 
     this.setInitialSubscriptions();
   }
@@ -100,7 +113,9 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       this.houseHoldRequest$.subscribe(req => {
         this.houseHoldRequest = req;
       }),
-
+      this.selectedInsurance$.subscribe(ins => {
+        this.insurance = ins;
+      }),
       this.insuranceStore$.subscribe(ins => {
         this.insuranceStore = ins;
       }),
@@ -111,7 +126,7 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
         }),
       this.packagePremiumError$
         .filter(x => (x === true))
-        .subscribe(err => this.store$.dispatch(new wizardActions.Error({message: this.copies['general.errors.network-failure'] })))
+        .subscribe(err => this.store$.dispatch(new wizardActions.Error({message: this.copies['general.errors.network-failure']})))
     );
   }
 
@@ -125,8 +140,17 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     const detailForm = this.form.formGroup;
     FormUtils.validateForm(detailForm);
 
+    this.store$.dispatch(new wizardActions.ResetError());
+
     if (!detailForm.valid) {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
+    }
+
+    if (!this.acceptInsuranceTerms) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.copies['household.payment_details.risktac.error']}));
+    }
+    if (!this.acceptKnabTerms) {
+      return this.store$.dispatch(new wizardActions.Error({message: this.copies['household.payment_details.knabtac.error']}));
     }
 
     const insurancePayload = Object.assign(
@@ -142,6 +166,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
     const payload = {
       Name: this.insuranceStore.contacts.lastName,
       NameInfix: this.insuranceStore.contacts.initials,
+      // TODO: waiting RISK to fix the bug
+      // Initials: this.insuranceStore.contacts.infix,
       Initials: '-',
       Gender: this.insuranceStore.contacts.gender,
       Birthday: this.insuranceStore.contacts.dateOfBirth,

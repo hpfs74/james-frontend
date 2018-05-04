@@ -18,8 +18,7 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
   formConfig: { [key: string]: KNXCustomFormGroupOptions<any> };
   validationErrors = {
     required: () => this.copies['general.errors.field_is_required'], // 'Dit is een verplicht veld',
-    iban: () => this.copies['general.errors.iban_is_invalid'],
-    expectedValueError: (obj) => obj.errorMsg
+    iban: () => this.copies['general.errors.iban_is_invalid']
   };
 
   /**
@@ -32,15 +31,7 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
     super();
 
     this.formGroup = this.fb.group({
-      iban: [null, Validators.compose([Validators.required, ibanValidator('iban', 'nl')])],
-      agreeKnabTAC: [{}, Validators.compose([
-        Validators.required,
-        expectedValueValidator((value) => value.knabtac === true, this.copies['household.payment_details.knabtac.error'])
-      ])],
-      agreeRiskTAC: [{}, Validators.compose([
-        expectedValueValidator((value) => value.risktac === true, this.copies['household.payment_details.risktac.error']),
-        Validators.required
-      ])]
+      iban: [null, Validators.compose([Validators.required, ibanValidator('iban', 'nl')])]
     });
 
     this.formConfig = {
@@ -56,34 +47,6 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
           attributes: {
             'aria-label': this.copies['household.payment_details.iban.label']
           }
-        }
-      },
-      agreeKnabTAC: {
-        formControlName: 'agreeKnabTAC',
-        formControl: this.formGroup.get('agreeKnabTAC'),
-        type: 'checkbox',
-        validationErrors: this.validationErrors,
-        inputOptions: {
-          items: [
-            {
-              label: this.copies['household.payment_details.knabtac.label'],
-              value: 'knabtac'
-            } as UIPair
-          ]
-        }
-      },
-      agreeRiskTAC: {
-        formControlName: 'agreeRiskTAC',
-        formControl: this.formGroup.get('agreeRiskTAC'),
-        type: 'checkbox',
-        validationErrors: this.validationErrors,
-        inputOptions: {
-          items: [
-            {
-              label: this.copies['household.payment_details.risktac.label'],
-              value: 'risktac'
-            } as UIPair
-          ]
         }
       }
     };

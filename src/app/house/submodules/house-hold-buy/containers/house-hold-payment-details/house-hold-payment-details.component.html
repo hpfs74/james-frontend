@@ -1,48 +1,85 @@
-<div class="row">
-  <div class="col-md-6">
+<form [formGroup]="form.formGroup" autocomplete="off">
 
-    <button (click)="goToPrevStep()"
-            class="knx-button knx-button--link knx-button--back">
-      {{ currentStepOptions.backButtonLabel }}
-    </button>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <button (click)="goToPrevStep()"
+              class="knx-button knx-button--link knx-button--back">
+        {{ currentStepOptions.backButtonLabel }}
+      </button>
+    </div>
   </div>
-</div>
 
 
-<h2>{{ 'household.payment_details.header.title' | translate }}</h2>
+  <h2>{{ 'household.payment_details.header.title' | translate }}</h2>
 
-<div class="row">
-  <div class="col-6">
-    <p class="knx-no-pad">{{ 'household.payment_details.header.para1' | translate }}</p>
-    <p class="knx-no-pad">{{ 'household.payment_details.header.para2' | translate }}</p>
-    <p class="knx-no-pad">{{ 'household.payment_details.header.para3' | translate }}</p>
+  <div class="row">
+    <div class="col-6">
+      <p class="knx-no-pad">{{ 'household.payment_details.header.para1' | translate }}</p>
+      <p class="knx-no-pad">{{ 'household.payment_details.header.para2' | translate }}</p>
+      <p class="knx-no-pad">{{ 'household.payment_details.header.para3' | translate }}</p>
+    </div>
   </div>
-</div>
 
-<br/>
+  <br/>
 
-<knx-contact-detail
-  [contact]="(insuranceStore$ | async).contacts">
-</knx-contact-detail>
+  <knx-contact-detail
+    [contact]="(insuranceStore$ | async).contacts">
+  </knx-contact-detail>
 
-<knx-card>
-  <knx-insurance-combined-price
-    [IncludeBTW]="true"
-    [Insurance]="[(selectedInsurances$ | async)]">
-  </knx-insurance-combined-price>
-</knx-card>
+  <knx-card>
+    <knx-insurance-combined-price
+      [IncludeBTW]="true"
+      [Insurance]="[(selectedInsurances$ | async)]">
+    </knx-insurance-combined-price>
+  </knx-card>
 
-
-<knx-collapsible-panel title="{{ 'household.payment_details.payment_details.title' | translate }}" [collapsible]="false"
-                       [showStep]="false" [isOpen]="true">
-  <div class="knx-collapsible-panel__content">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <knx-collapsible-panel title="{{'general.documents' | translate}}" [isOpen]="true" [showStep]="false"
+                             [collapsible]="true">
+        <div class="knx-collapsible-panel__content">
           <div class="row">
-            <div class="col-md-8">
-              <div class="knx-house-hold-payment-details">
-                <form [formGroup]="form.formGroup" autocomplete="off">
+            <div class="col-sm-12">
+              <span>{{ 'household.premiumDetail.insurance.documente.companyName.prefix' | translate }} {{insurance?.CompanyName}}.</span><br>
+              <span class="knx-collapse-panel__muted">
+              {{ 'household.premiumDetail.insurance.documente.span' | translate }}
+            </span>
+            </div>
+          </div>
+
+          <!-- documents -->
+          <div class="row">
+            <div class="col-sm-12">
+              <ul class="knx-insurance-review-documents__list">
+                <li *ngFor="let doc of insurance?.ConditionUrls"><span class="knx-icon-file-o"></span>
+                  <a href="{{doc.URL}}" target="_blank" rel="noopener"
+                     title="{{doc.Description}}">{{doc.Description}}</a>
+                </li>
+              </ul>
+
+
+            </div>
+          </div>
+        </div>
+      </knx-collapsible-panel>
+
+
+    </div>
+  </div>
+
+
+  <knx-collapsible-panel title="{{ 'household.payment_details.payment_details.title' | translate }}"
+                         [collapsible]="false"
+                         [showStep]="false" [isOpen]="true">
+    <div class="knx-collapsible-panel__content">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="knx-house-hold-payment-details">
 
 
                   <div class="row">
@@ -65,16 +102,6 @@
                     [options]="form.formConfig.iban">
                   </knx-form-group>
 
-                  <knx-form-group
-                    [formControlName]="form.formConfig.agreeKnabTAC.formControlName"
-                    [options]="form.formConfig.agreeKnabTAC">
-                  </knx-form-group>
-
-
-                  <knx-form-group
-                    [formControlName]="form.formConfig.agreeRiskTAC.formControlName"
-                    [options]="form.formConfig.agreeRiskTAC">
-                  </knx-form-group>
 
                   <div class="knx-house-hold-buy__actions">
                     <div class="knx-house-hold-buy__error"
@@ -83,15 +110,42 @@
                     </div>
                   </div>
 
-                </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </knx-collapsible-panel>
+</form>
+  <div class="knx-insurance-summary__terms">
+    <knx-checkbox class="knx-insurance-summary__checkbox"
+                  [(ngModel)]="acceptInsuranceTerms"
+                  [options]="{ label: 'Ik ga akkoord met de voorwaarden die hierboven getoond worden' }">
+    </knx-checkbox>
+
+    <knx-checkbox class="knx-car-summary__checkbox" [(ngModel)]="acceptKnabTerms">
+      Ik ga akkoord met de
+      <a class="knx-registration__document-link" href="{{ content.externalLinks.termsAndConditions }}" target="_blank" rel="noopener">gebruiksvoorwaarden</a>
+      en het
+      <a class="knx-registration__document-link" href="{{ content.externalLinks.privacyStatement }}" target="_blank" rel="noopener">privacybeleid</a>
+      van Knab.
+    </knx-checkbox>
   </div>
-</knx-collapsible-panel>
+
+  <!--<knx-form-group-->
+    <!--[formControlName]="form.formConfig.agreeRiskTAC.formControlName"-->
+    <!--[options]="form.formConfig.agreeRiskTAC">-->
+  <!--</knx-form-group>-->
+
+  <!--<knx-form-group-->
+    <!--[formControlName]="form.formConfig.agreeKnabTAC.formControlName"-->
+    <!--[options]="form.formConfig.agreeKnabTAC">-->
+  <!--</knx-form-group>-->
+
+
+
 
 <knx-wizard-controls [currentStepOptions]="currentStepOptions"
                      [isPendingNext]="(packagePremiumLoading$ | async)"
