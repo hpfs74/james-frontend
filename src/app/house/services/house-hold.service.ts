@@ -16,7 +16,6 @@ import {
   HouseHoldStoredAdviceResponse
 } from '@app/house/models/house-hold-stored-advice';
 import { PackagePremiumRequest, PackagePremiumResponse } from '@app/house/models/package-premium';
-import { NgCliWebpackConfig } from '@angular/cli/models/webpack-config';
 import 'rxjs/add/operator/switchMap';
 
 const httpOptions = {
@@ -135,6 +134,9 @@ export class HouseHoldService {
    * @returns {Observable<PackagePremium>}
    */
   public requestPrivatePackage(req: any): Observable<PackagePremiumResponse> {
+
+    req.IBAN = req.IBAN.replace(/\s/g, '').toUpperCase();
+
     return this.http.post<PackagePremiumResponse>(
       environment.riskInsurance.HouseHoldRequestPrivatePremium,
       req, {

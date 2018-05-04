@@ -409,7 +409,7 @@ countrySpecs['VG'] = {chars: 24, bban_regexp: '^[A-Z0-9]{4}[0-9]{16}$', name: 'B
 export const IBANMask = {
   mask: (rawValue: string) => getIBANMask(),
   pipe: function (conformedValue) {
-    return conformedValue.replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase();
+    return conformedValue.replace(/[^a-zA-Z0-9 ]/g, '').replace(/\s/g, '').toUpperCase();
   }
 };
 

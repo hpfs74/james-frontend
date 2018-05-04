@@ -1,14 +1,8 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UIPair } from '@core/models/ui-pair';
-import { EmailValidator } from '@utils/email-validator';
 import { BaseForm, KNXCustomFormGroupOptions } from '@app/shared/forms/base-form';
-import {
-  emptyOrPhoneNumberValidator,
-  expectedValueValidator,
-  ibanValidator,
-  phoneNumberValidator,
-  trueValidator
-} from '@utils/base-form.validators';
+import { ibanValidator } from '@utils/base-form.validators';
+import { IBANMask } from '@utils/iban-tools';
 
 /**
  * describe the form filters
@@ -41,8 +35,10 @@ export class HouseHoldPaymentDetailsForm extends BaseForm {
         formControl: this.formGroup.get('iban'),
         validationErrors: this.validationErrors,
         label: this.copies['household.payment_details.iban.label'],
+        help: true,
         inputOptions: {
           type: 'text',
+          textMask: IBANMask,
           placeholder: this.copies['household.payment_details.iban.placeholder'],
           attributes: {
             'aria-label': this.copies['household.payment_details.iban.label']
