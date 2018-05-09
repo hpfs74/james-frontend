@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <div *ngIf="(isInsuranceLoading$ | async)">
         <knx-loader [visible]="(isInsuranceLoading$ | async)">
-          Een momentje! We vergelijken 19 verschillende aanbieders voor je om de beste match te vinden.
+          {{ 'car.advice.steps.detail.carCoverage.loading' | translate }}
         </knx-loader>
       </div>
 
