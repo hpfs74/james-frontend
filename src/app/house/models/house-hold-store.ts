@@ -72,7 +72,7 @@ export interface ContactDetails {
   gender?: string;
 
   /** Address for sending paper mail, this would be null in case is the same from the normal address */
-  addressForComminications?: Address;
+  addressForCommunications?: Address;
 
   /** true if the user accepted knab terms and conditions */
   hasAcceptedTermsAndConditionsFromKnab?: boolean;

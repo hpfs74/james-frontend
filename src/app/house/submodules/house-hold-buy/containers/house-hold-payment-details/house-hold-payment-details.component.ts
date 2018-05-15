@@ -115,6 +115,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       }),
       this.selectedInsurance$.subscribe(ins => {
         this.insurance = ins;
+        this.params.InsuranceCompanyName = ins.CompanyName;
+
       }),
       this.insuranceStore$.subscribe(ins => {
         this.insuranceStore = ins;
