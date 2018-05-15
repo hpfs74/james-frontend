@@ -342,7 +342,7 @@
   "lisa.dashboard_start": "Waar wil je mee beginnen?",
   "lisa.dashboard_welcome_helo_before_name": "Hoi ",
   "lisa.dashboard_welcome_after_name": " ik ben je persoonlijke verzekeringsassistent. Verzekeringen die je via Knab afsluit, staan automatisch in je overzicht. Maar ook je bestaande verzekeringen voeg je gemakkelijk toe.",
-  "lisa.profile_hello": "Controleer hier of je gegevens kloppen en pas ze zo nodig aan.",
+  "lisa.profile_hello": "Op deze pagina vind je een overzicht van de gegevens die wij van jou hebben. Ga voor meer informatie naar onze <a href='{{link}}' target='_blank' rel='noopener'>Privacypagina</a>. Via die pagina kun je ook een volledig overzicht aanvragen van alle data die we van jou verzamelen",
   "lisa.household_welcome": "Ik ga je vandaag helpen met besparen op je inboedelverzekering. Ben je er klaar voor? <b>Let's go!</b>",
   "lisa.household_premiums": "We hebben de volgende verzekeringen voor je geselecteerd. Als je nog iets wilt aanpassen, kan dat hieronder.",
   "lisa.household_details": "Dit kan je nieuwe verzekering zijn! Check alle gegevens om een duidelijk beeld te krijgen van de verzekering.",
