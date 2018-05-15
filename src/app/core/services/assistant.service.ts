@@ -35,7 +35,7 @@ export class AssistantService {
       },
 
       profile: {
-        hello: this.translateService.instant('lisa.profile_hello')
+        hello: this.translateService.instant('lisa.profile_hello', {link: 'https://www.knab.nl/privacy'})
       },
 
       household: {
