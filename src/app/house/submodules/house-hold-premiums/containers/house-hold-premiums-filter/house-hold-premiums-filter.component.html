@@ -2,7 +2,8 @@
   <div class="knx-house-hold-premiums-filter hidden-sm" [formGroup]="form.formGroup" *ngIf="show">
 
     <h3>{{'household.premium.filter.main_coverage_title' | translate}}</h3>
-    <knx-collapse-message [ngClass]="optionModifierClass" title="{{'household.premiums.main_coverage' | translate}}" [isOpen]="true">
+    <knx-collapse-message [ngClass]="optionModifierClass" title="{{'household.premiums.main_coverage' | translate}}"
+                          [isOpen]="true">
       <div class="knx-form-group--info knx-form-group--info-checkbox">
         <div class="knx-form-group__wrap">
 
@@ -16,9 +17,9 @@
           </label>
 
         </div>
-
-         {{coverages[0]?.description}}
-         <span style="text-transform: lowercase;" *ngFor="let more of coverages[0]?.features">{{more}} </span>
+        <br/>
+        {{coverages[0]?.description}}
+        <span style="text-transform: lowercase;" *ngFor="let more of coverages[0]?.features">{{more}} </span>
       </div>
 
       <div class="knx-form-group--info knx-form-group--info-checkbox">
@@ -32,13 +33,15 @@
             <span class="knx-radio__label">{{coverages[1]?.header}}</span>
           </label>
         </div>
-
-         {{coverages[1]?.description}}
-         <span style="text-transform: lowercase;" *ngFor="let more of coverages[1]?.features">{{more}} </span>
+        <br/>
+        {{coverages[1]?.description}}
+        <span style="text-transform: lowercase;" *ngFor="let more of coverages[1]?.features">{{more}} </span>
       </div>
 
     </knx-collapse-message>
-    <knx-collapse-message [ngClass]="optionModifierClass" title="{{ 'household.premium.filter.additionalCover.title' | translate }}" [isOpen]="true" *ngIf="!showCard">
+    <knx-collapse-message [ngClass]="optionModifierClass"
+                          title="{{ 'household.premium.filter.additionalCover.title' | translate }}" [isOpen]="true"
+                          *ngIf="!showCard">
       <!--<div class="knx-form-group&#45;&#45;info knx-form-group&#45;&#45;info-checkbox">-->
       <!--<knx-checkbox #outsideCoverage-->
       <!--knxQaIdentifier [qaRoot]="qaRootId" qaIdentifier="outsideCoverage"-->
