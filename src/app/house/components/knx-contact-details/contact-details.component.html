@@ -56,13 +56,13 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="contact.addressForComminications">
+    <div class="row" *ngIf="contact.addressForCommunications">
       <div class="col-6">
         {{ 'general.contacts.addressForCommunications.label' | translate }}
       </div>
       <div class="col-6">
-        {{contact.addressForComminications.street}} {{contact.addressForComminications.number_extended ? contact.addressForComminications.number_extended.number_only : ''}}{{contact.addressForComminications.number_extended ? contact.addressForComminications.number_extended.number_extension : ''}},<br/>
-        {{contact.addressForComminications.postcode}} {{contact.addressForComminications.city}}
+        {{contact.addressForCommunications.street}} {{contact.addressForCommunications.number_extended ? contact.addressForCommunications.number_extended.number_only : ''}}{{contact.addressForCommunications.number_extended ? contact.addressForCommunications.number_extended.number_extension : ''}},<br/>
+        {{contact.addressForCommunications.postcode}} {{contact.addressForCommunications.city}}
       </div>
     </div>
 
