@@ -4,7 +4,7 @@
     "android": "https://play.google.com/store/apps/details?id=com.knab.verzekeren"
   },
   "externalLinks": {
-    "privacyStatement": "https://www.knab.nl/privacybeleid/verzekeren",
+    "privacyStatement": "https://www.knab.nl/privacy",
     "termsAndConditions": "https://www.knab.nl/~/media/files/overeenkomsten-en-voorwaarden/gebruiksvoorwaarden_knab_verzekeren.pdf",
     "serviceGuide": "https://www.knab.nl/~/media/files/overeenkomsten-en-voorwaarden/dienstenwijzer.pdf"
   },
@@ -157,8 +157,8 @@
     "policies": {
       "links": [
         {
-          "title": "Privacybeleid",
-          "url": "https://www.knab.nl/privacybeleid",
+          "title": "Privacy",
+          "url": "https://www.knab.nl/privacy",
           "delimiter": "-"
         },
         {

@@ -78,7 +78,7 @@ export class RegistrationForm extends BaseForm {
         showErrorMessages: false,
         inputOptions: {
           attributes: {
-            'aria-label': 'Ik ga akkoord met de gebruiksvoorwaarden en het privacybeleid van Knab.'
+            'aria-label': 'Ik ga akkoord met de gebruiksvoorwaarden en het Privacy van Knab.'
           }
         }
       }
