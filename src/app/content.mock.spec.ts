@@ -93,7 +93,7 @@ const mockContent = {
     },
     policies: {
       links: [
-        { title: 'Privacybeleid', url: 'https://www.knab.nl/privacybeleid', delimiter: '-' },
+        { title: 'Privacy', url: 'https://www.knab.nl/privacy', delimiter: '-' },
         {
           title: 'Belangenbeleid',
           url: 'https://www.knab.nl/belangenbeleid',
