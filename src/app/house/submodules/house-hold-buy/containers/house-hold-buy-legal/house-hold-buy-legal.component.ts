@@ -70,7 +70,7 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
     this.subscription$.push(
       this.store$.select(fromHouseHold.getNewFlowAdviceSelectedHouseHoldPremium)
         .subscribe(x => {
-          this.params.companyName = x.CompanyName;
+          this.params.InsuranceCompanyName = x.CompanyName;
         }),
       this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
         .filter(householdNewFlowData => !!householdNewFlowData.questions)

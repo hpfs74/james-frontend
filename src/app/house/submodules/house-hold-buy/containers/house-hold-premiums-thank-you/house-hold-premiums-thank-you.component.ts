@@ -10,6 +10,7 @@ import * as assistant from '@core/actions/assistant';
 import * as fromRoot from '@app/reducers';
 import * as fromHouseHold from '@app/house/reducers';
 import { PackagePremiumResponse, PackagePremiumRequest } from '@app/house/models/package-premium';
+import { ContactDetails } from '@app/house/models/house-hold-store';
 
 @Component({
   providers: [AsyncPipe],
@@ -23,6 +24,7 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
   subscriptions$: Subscription[] = [];
   content: Content;
   params: any = {};
+  newHouseHoldFlowAdvice$: Observable<ContactDetails>;
 
   constructor(private store$: Store<fromRoot.State>,
               private async: AsyncPipe,
@@ -38,6 +40,7 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
       key: 'household.thankYou',
       clear: true
     }));
+    this.newHouseHoldFlowAdvice$ = this.store$.select(fromHouseHold.getHouseHoldNewFlowAdviceContact);
     this.packagePremiumRequest$ = this.store$.select(fromHouseHold.getPackagePremiumRequest);
     this.packagePremiumResponse$ = this.store$.select(fromHouseHold.getPackagePremiumResponse);
 
@@ -57,14 +60,15 @@ export class HouseHoldPremiumsThankYouComponent implements OnInit, OnDestroy {
    */
   setInitialSubscriptions() {
     this.subscriptions$.push(
-      this.packagePremiumRequest$.subscribe(x => {
-        this.params.customerName = x.Name;
-        this.params.customerEmail = x.Email;
+      this.newHouseHoldFlowAdvice$.subscribe(x => {
+        this.params.CustomerName = x.firstName;
+        this.params.customerEmail = x.email;
       }),
       this.packagePremiumResponse$.subscribe(x => {
         this.params.packageNumber = x.PackageNumber;
         this.params.commencingDate = x.CommencingDate;
         this.params.companyName = x.HouseholdInsurances[0].CompanyName;
+        this.params.InsuranceCompanyName = x.HouseholdInsurances[0].CompanyName;
       })
     );
   }

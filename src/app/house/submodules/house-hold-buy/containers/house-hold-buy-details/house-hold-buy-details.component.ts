@@ -215,7 +215,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       initials: initials,
       address: this.address,
       email: email,
-      addressForComminications: Object.assign({}, (sameAddress ? this.address : this.sameAddressDetails))
+      addressForCommunications: Object.assign({}, (sameAddress ? this.address : this.sameAddressDetails))
     };
     this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
       .take(1)
