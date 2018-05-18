@@ -40,10 +40,6 @@ export class HouseHoldBuyLegalForm extends BaseForm {
         trueValidator(this.copies['household.legal.error']),
         Validators.required
       ])],
-      driver: [null, Validators.compose([
-        trueValidator(this.copies['household.legal.error']),
-        Validators.required
-      ])],
     });
 
     this.formConfig = {
@@ -106,17 +102,6 @@ export class HouseHoldBuyLegalForm extends BaseForm {
         formControlName: 'seizedIncome',
         label: this.copies['household.legal.q6'],
         formControl: this.formGroup.get('seizedIncome'),
-        validationErrors: this.validationErrors,
-        type: 'radio',
-        inputOptions: {
-          formGroupModifiers: ['knx-form-group__wrap--spread'],
-          items: this.getBooleanItems()
-        }
-      },
-      driver: {
-        formControlName: 'driver',
-        label: this.copies['household.legal.q7'],
-        formControl: this.formGroup.get('driver'),
         validationErrors: this.validationErrors,
         type: 'radio',
         inputOptions: {

@@ -88,5 +88,4 @@ export interface LegalQuestions {
   question4: boolean;
   question5: boolean;
   question6: boolean;
-  question7: boolean;
 }
