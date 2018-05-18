@@ -44,14 +44,12 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
       'household.legal.q4',
       'household.legal.q5',
       'household.legal.q6',
-      'household.legal.q7',
       'household.legal.q1.error',
       'household.legal.q2.error',
       'household.legal.q3.error',
       'household.legal.q4.error',
       'household.legal.q5.error',
       'household.legal.q6.error',
-      'household.legal.q7.error',
       'household.legal.next_step',
       'household.legal.go_back',
       'household.legal.error'
@@ -82,7 +80,6 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
             bankrupt: householdNewFlowData.questions.question4,
             fraud: householdNewFlowData.questions.question5,
             seizedIncome: householdNewFlowData.questions.question6,
-            driver: householdNewFlowData.questions.question7,
           };
           this.form.formGroup.patchValue(Object.assign({}, formData));
         })
@@ -104,8 +101,7 @@ export class HouseHoldBuyLegalComponent implements QaIdentifier, OnDestroy, OnIn
       question3: false,
       question4: false,
       question5: false,
-      question6: false,
-      question7: false,
+      question6: false
     };
     this.subscription$.push(
       this.store$.select(fromHouseHold.getHouseHoldNewFlowAdvice)
