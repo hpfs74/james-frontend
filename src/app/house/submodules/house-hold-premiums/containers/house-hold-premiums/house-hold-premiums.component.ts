@@ -158,7 +158,15 @@ export class HouseHoldPremiumsComponent implements OnInit, OnDestroy, QaIdentifi
             BreadWinnerBirthdate: advice.BreadWinnerBirthdate,
             BreadWinnerMonthlyIncome: advice.BreadWinnerMonthlyIncome,
             InsuredAmount: advice.InsuredAmount,
-            GuaranteeAgainstUnderinsurance: 'G',
+            // Setting GuaranteeAgainstUnderInsurance to I makes
+            // all the AmountMoreThan fields required. Since we do not
+            // ask to the customer, we set that to zero.
+            GuaranteeAgainstUnderinsurance: 'I',
+            AmountMoreThan12KAudioVisualComp: 0,
+            AmountMoreThan6KJewelry: 0,
+            AmountMoreThan15KSpecialPossesion: 0,
+            AmountMoreThan6KTenantsInterest: 0,
+            // End for GuaranteeAgainstUnderInsurance
             InsuredAmountValuables: 0,
             IncludeOutdoorsValuable: advice.IncludeOutdoorsValuable
           };
