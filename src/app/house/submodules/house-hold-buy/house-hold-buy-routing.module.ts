@@ -19,7 +19,7 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: '',
         redirectTo: 'persoonlijke-gegevens',
-        canActivate: [CanActivateHouseHoldFlowGuard],
+       //  canActivate: [CanActivateHouseHoldFlowGuard],
         pathMatch: 'full'
       },
       {
