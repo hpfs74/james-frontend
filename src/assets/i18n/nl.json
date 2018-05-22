@@ -1,4 +1,6 @@
 {
+  "generic.button.show-more": "Show more",
+  "generic.button.show-less": "Show less",
   "general.errors.field_is_required": "Dit veld is verplicht",
   "general.contacts.addressForCommunications.label": "Correspondentieadres",
   "general.contact-card.question.label": "Heb je nog vragen? ",

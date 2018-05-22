@@ -52,6 +52,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
   selectedInsurances$: Observable<CalculatedPremium>;
   contactDetails: ContactDetails;
   sameAddressDetails: Address;
+  showMoreButton = false;
 
 
   constructor(private store$: Store<fromRoot.State>,
@@ -246,5 +247,13 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       return null;
     }
     return payload.address.number_extended.number_extension;
+  }
+
+  showMore() {
+    this.showMoreButton = true;
+  }
+
+  showLess() {
+    this.showMoreButton = false;
   }
 }

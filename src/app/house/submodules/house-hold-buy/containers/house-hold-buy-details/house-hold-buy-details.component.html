@@ -39,14 +39,23 @@
       <div class="col-md-12">
         <div class="knx-inline-b knx-logo-risk"></div>
         <div class="knx-inline-b">
-          <h3>{{'household.details_header_first_card_h3_p1' | translate}}<br>{{'household.details_header_first_card_h3_p2'
-            | translate}}</h3>
+          <h3>{{'household.details_header_first_card_h3_p1' | translate}}</h3>
+        </div>
+        <div class="knx-panel-wrapper">
+          <a (click)="showMore()" class="btn showMore" id="showMore" [class.hide]="showMoreButton">{{ 'generic.button.show-more' | translate }}</a>
+          <a (click)="showLess()" class="btn showLess hide" id="showLess" [class.hide]="!showMoreButton">{{ 'generic.button.show-less' | translate }}</a>
+          <div class="knx-panel" [class.knx-panel-visible]="showMoreButton">
+            <p>{{'household.details_header_first_card_h3_p2' | translate}}</p>
+            <p>{{'household.details_first_card_desc' | translate}}</p>
+          </div>
+          <div class="knx-fade" [class.knx-fade-no-more]="showMoreButton"></div>
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
-        <p>{{'household.details_first_card_desc' | translate}}</p>
+        <!--<p>{{'household.details_first_card_desc' | translate}}</p>-->
       </div>
     </div>
     <div class="row">
