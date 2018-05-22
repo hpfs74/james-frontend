@@ -25,7 +25,7 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: 'persoonlijke-gegevens',
         component: HouseHoldBuyDetailsComponent,
-        canActivate: [CanActivateHouseHoldFlowGuard],
+        //  canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 0,
           step_nr: '70'
