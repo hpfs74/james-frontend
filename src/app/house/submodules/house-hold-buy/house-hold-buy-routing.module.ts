@@ -19,13 +19,13 @@ export const houseHoldAdviceRoutes: Routes = [
       {
         path: '',
         redirectTo: 'persoonlijke-gegevens',
-       //  canActivate: [CanActivateHouseHoldFlowGuard],
+        canActivate: [CanActivateHouseHoldFlowGuard],
         pathMatch: 'full'
       },
       {
         path: 'persoonlijke-gegevens',
         component: HouseHoldBuyDetailsComponent,
-        //  canActivate: [CanActivateHouseHoldFlowGuard],
+        canActivate: [CanActivateHouseHoldFlowGuard],
         data: {
           stepIndex: 0,
           step_nr: '70'
