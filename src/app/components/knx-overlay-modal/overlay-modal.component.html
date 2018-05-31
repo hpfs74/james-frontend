@@ -1,0 +1,8 @@
+<div class="knx-overlay" [ngClass]="{'openModal': (openModal$ | async)}">
+  <div class="knx-modal">
+    <div class="knx-iframe" [ngClass]="{'fadeIn': (openModal$ | async)}">
+      <span class="knx-icon-close" (click)="closeModal()"></span>
+      <iframe [ngClass]="iframeClass" [src]="iframeUrl | safe" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>

@@ -194,6 +194,7 @@
   "household.premium.steps.step3.title": "Premie aanvragen",
   "household.common.step.options.backButtonLabel": "Terug",
   "household.error_message_insured_amount": "Het berekenen van de geschatte inboedelwaarde is helaas niet gelukt. Probeer het alsjeblieft opnieuw.",
+  "car.results.email.button": "Email deze top 5",
   "car.advice.loading": "Laden...",
   "car.advice.moreButton.label": "Verder",
   "car.advice.personalizeButton.label": "Personaliseer resultaten",

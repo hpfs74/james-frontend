@@ -19,6 +19,8 @@ import * as wizardActions from '@app/core/actions/wizard';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
 import { FeatureConfigService } from '@app/core/services/feature-config.service';
+import * as overlayActions from '@core/actions/overlay-modal';
+import { JamesTagPipe } from '@app/shared/pipes';
 
 interface OrderItem {
   id: string;
@@ -29,7 +31,7 @@ interface OrderItem {
 }
 
 @Component({
-  providers: [AsyncPipe],
+  providers: [AsyncPipe, JamesTagPipe],
   selector: 'knx-insurance-toplist',
   templateUrl: './insurance-toplist.component.html',
   styleUrls: ['./insurance-toplist.component.scss']
@@ -54,6 +56,7 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
 
   constructor(private store$: Store<fromRoot.State>,
               private asyncPipe: AsyncPipe,
+              private jamesTag: JamesTagPipe,
               private sanitizer: DomSanitizer,
               private featureConfigService: FeatureConfigService) {
     this.total = this.initialAmount;
@@ -183,6 +186,10 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
     this.store$.dispatch(new wizardActions.Forward());
   }
 
+  mailMeAdvice() {
+    this.store$.dispatch(new overlayActions.Open());
+  }
+
   private getCompareResultCopy() {
     // This is needed because the ngrx-datatable modifies the result to add an $$index to each
     // result item and modifies the source array order when sorting
@@ -196,8 +203,45 @@ export class InsuranceTopListComponent implements OnInit, OnDestroy {
             this.showAll();
           }
           this.insurances = insurances;
+          const topFiveResults = this.getTopFiveResults();
+          const data = btoa(JSON.stringify(topFiveResults));
+          this.store$.dispatch(new overlayActions.SetData(data));
       })
     );
   }
+
+  private getTopFiveResults(): AdviceResults[] {
+    const result = this.insurances.map((insurance, index) => {
+      return {
+        ID: `${index + 1}`,
+        PARAM: `ADVICE${index + 1}`,
+        CONTENT: {
+          insurance_image: insurance._embedded.insurance.insurance_logo,
+          score: `${insurance.fit}`,
+          own_risk: `${insurance.own_risk}`,
+          price_quality: `${insurance.price_quality}`,
+          coverage: `${this.jamesTag.transform(insurance.main_coverage, 'car_flow_coverage')}`,
+          price: `${insurance.price}`,
+          knab_discount: `${insurance['discount']}`,
+        }
+      };
+    }).slice(0, 5);
+    return result;
+  }
 }
 
+export interface Content {
+  insurance_image: string;
+  score: string;
+  own_risk: string;
+  price_quality: string;
+  coverage: string;
+  price: string;
+  knab_discount: string;
+}
+
+export interface AdviceResults {
+  ID: string;
+  PARAM: string;
+  CONTENT: Content;
+}

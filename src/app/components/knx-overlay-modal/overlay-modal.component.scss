@@ -1,0 +1,63 @@
+@import '~styles/base.scss';
+
+.knx-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-navbar-dropdown;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+
+  &.openModal {
+    display: block;
+  }
+
+  .knx-modal {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    .knx-iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      opacity: 0;
+      transition: opacity 0.5s;
+
+      &.fadeIn {
+        opacity: 1;
+      }
+
+      .knx-icon-close {
+        position: absolute;
+        right: 0;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+
+        &:before {
+          margin-left: 50%;
+          margin-top: 50%;
+          transform: translate3d(-50%, -50%, 0);
+        }
+      }
+
+      iframe {
+        border-radius: 4px;
+
+        &.iframe-xl {
+          width: 576px;
+          height: 370px;
+        }
+
+        &.iframe-xs {
+          width: 300px;
+          height: 520px;
+        }
+      }
+    }
+  }
+}

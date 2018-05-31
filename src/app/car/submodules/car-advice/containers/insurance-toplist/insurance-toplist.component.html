@@ -16,7 +16,19 @@
       </div>
 
       <div *ngIf="!(isInsuranceError$ | async) && !(isInsuranceLoading$ | async)">
-        <h2>We hebben {{ insurances.length }} resultaten gevonden</h2>
+        <div class="row">
+          <div class="col-md-8">
+            <h2>{{ insurances.length }} beschikbare verzekeringen</h2>
+          </div>
+          <div class="col-md-4">
+            <button
+              (click)="mailMeAdvice()"
+              class="knx-button knx-button--primary knx-icon-envelope"
+              data-btn="email_deze_top_5">
+              {{'car.results.email.button' | translate}}
+            </button>
+          </div>
+        </div>
 
         <div class="knx-button-group" role="group">
           <button

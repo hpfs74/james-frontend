@@ -61,7 +61,9 @@ function getContent(environment: string) {
       login: '${getEnvVar('LOGIN')}',
       static: '${getEnvVar('STATIC_PAGE_URL')}',
       iframeWebappDesktop: '${getEnvVar('IFRAME_WEBAPP_DESKTOP')}',
-      iframeWebappMobile: '${getEnvVar('IFRAME_WEBAPP_MOBILE')}'
+      iframeWebappMobile: '${getEnvVar('IFRAME_WEBAPP_MOBILE')}',
+      iframeWebappMailAdviceDesktop: '${getEnvVar('IFRAME_WEBAPP_MAIL_ADVICE_DESKTOP')}',
+      iframeWebappMailAdviceMobile: '${getEnvVar('IFRAME_WEBAPP_MAIL_ADVICE_MOBILE')}'
     },
     james: {
       featureToggle: '${getEnvVar('JAMES_API_FEATURE_TOGGLE')}',

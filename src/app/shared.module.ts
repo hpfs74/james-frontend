@@ -116,6 +116,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { KnxEmptyStageComponent } from '@app/components/knx-empty-stage/knx-empty-stage.component';
 import { KnxRibbonComponent } from '@app/components/knx-ribbon/knx-ribbon.component';
 import { KnabLabButtonComponent } from '@app/house/components/knx-knab-lab/knab-lab.component';
+import { SafePipe } from '@app/shared/pipes/safe.pipe';
 
 
 export const sharedComponents = [
@@ -128,6 +129,7 @@ export const sharedComponents = [
   CapitalizePipe,
   UppercasePipe,
   StripHtmlPipe,
+  SafePipe,
   // Directives
   BackdropBlurDirective,
   SidePanelStateDirective,

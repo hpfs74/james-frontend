@@ -8,6 +8,7 @@ import * as fromAnalytics from './analytics';
 import * as fromAssistant from './assistant';
 import * as fromLayout from './layout';
 import * as fromWizard from './wizard';
+import * as fromOverlay from './overlay-modal';
 
 import { environment } from '@env/environment';
 
@@ -16,6 +17,7 @@ export interface AppState {
   layout: fromLayout.State;
   router: fromRouter.RouterReducerState<RouterStateUrl>;
   wizard: fromWizard.State;
+  overlay: fromOverlay.State;
 }
 
 export interface State extends fromRoot.State {
@@ -26,7 +28,8 @@ export const reducers = {
   assistant: fromAssistant.reducer,
   layout: fromLayout.reducer,
   router: environment.enableAnalytics ? fromAnalytics.reducer : fromRouter.routerReducer,
-  wizard: fromWizard.reducer
+  wizard: fromWizard.reducer,
+  overlay: fromOverlay.reducer
 };
 
 
@@ -57,3 +60,11 @@ export const getAssistantConfig = createSelector(getAsisstantState, fromAssistan
  */
 export const getWizardState = createSelector(selectAppState, (state: AppState) => state.wizard);
 export const getWizardError = createSelector(getWizardState, fromWizard.getWizardError);
+
+
+/**
+ * Overlay Reducers
+ */
+export const getOverlayState = createSelector(selectAppState, (state: AppState) => state.overlay);
+export const getOpenModal = createSelector(getOverlayState, fromOverlay.openModal);
+export const getData = createSelector(getOverlayState, fromOverlay.data);

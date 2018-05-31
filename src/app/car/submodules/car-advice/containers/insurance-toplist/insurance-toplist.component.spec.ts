@@ -7,7 +7,7 @@ import { InsuranceTopListComponent } from './insurance-toplist.component';
 import { StoreModule, combineReducers } from '@ngrx/store';
 import { FeatureConfigService } from '@app/core/services/feature-config.service';
 import { HttpModule } from '@angular/http';
-import { CookieService } from '@app/core/services';
+import { CookieService, TagsService } from '@app/core/services';
 
 import * as fromRoot from '../../../../../reducers';
 import * as fromInsurance from '../../../../../insurance/reducers';
@@ -51,7 +51,8 @@ describe('Component: InsuranceTopList', () => {
     ],
     providers: [
       FeatureConfigService,
-      CookieService
+      CookieService,
+      TagsService
     ],
     schemas: [NO_ERRORS_SCHEMA]
   };
