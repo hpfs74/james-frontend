@@ -29,7 +29,7 @@ export class KnxOverlayModalComponent {
       .filter(data => !!data)
       .subscribe(data => {
         this.setIframeUrl();
-        this.iframeUrl = this.iframeUrl + `&data=${data}`;
+        this.iframeUrl = this.iframeUrl + `&content=${data}`;
       });
   }
 
