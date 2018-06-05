@@ -159,7 +159,11 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
       // this.insuranceStore.houseHoldInsurance.selectedPremium,
       this.houseHoldRequest, {
         Identifier: this.insuranceStore.houseHoldInsurance.selectedPremium.Identifier,
-        GuaranteeAgainstUnderinsurance: 'G',
+        GuaranteeAgainstUnderinsurance: 'I',
+        AmountMoreThan12KAudioVisualComp: 0,
+        AmountMoreThan6KJewelry: 0,
+        AmountMoreThan15KSpecialPossesion: 0,
+        AmountMoreThan6KTenantsInterest: 0,
         InsuredAmountValuables: 0,
         Birthdate: this.insuranceStore.contacts.dateOfBirth
       });
