@@ -17,10 +17,10 @@
 
       <div *ngIf="!(isInsuranceError$ | async) && !(isInsuranceLoading$ | async)">
         <div class="row">
-          <div class="col-md-8">
+          <div [ngClass]="{'col-md-12' : !featureConfigService.isOn('mailMeAdvice'), 'col-md-8' : featureConfigService.isOn('mailMeAdvice')}">
             <h2>{{ insurances.length }} beschikbare verzekeringen</h2>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" *ngIf="featureConfigService.isOn('mailMeAdvice')">
             <button
               (click)="mailMeAdvice()"
               class="knx-button knx-button--primary knx-icon-envelope"
