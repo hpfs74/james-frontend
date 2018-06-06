@@ -25,7 +25,7 @@ export class HouseHoldDetailForm extends BaseForm {
       gender: [null, Validators.required],
       initials: [null, Validators.required],
       firstName: [null, Validators.required],
-      prefix: [null, null],
+      infix: [null, null],
       lastName: [null, Validators.required],
       sameAddress: [true, Validators.required],
       email: [null, Validators.compose([Validators.required, EmailValidator])],
@@ -78,8 +78,8 @@ export class HouseHoldDetailForm extends BaseForm {
           placeholder: this.copies['household.detail.form_firstName_placeholder']
         }
       },
-      prefix: {
-        formControlName: 'prefix',
+      infix: {
+        formControlName: 'infix',
         formControl: this.formGroup.get('input'),
         label: this.copies['household.detail.form_prefix_label'],
         validationErrors: this.validationErrors,
