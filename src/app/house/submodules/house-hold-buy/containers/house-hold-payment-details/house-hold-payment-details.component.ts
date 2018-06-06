@@ -171,10 +171,8 @@ export class HouseHoldPaymentDetailsComponent implements OnInit, OnDestroy {
 
     const payload = {
       Name: this.insuranceStore.contacts.lastName,
-      NameInfix: this.insuranceStore.contacts.initials,
-      // TODO: waiting RISK to fix the bug
-      // Initials: this.insuranceStore.contacts.infix,
-      Initials: '-',
+      NameInfix: this.insuranceStore.contacts.infix,
+      Initials: this.insuranceStore.contacts.initials,
       Gender: this.insuranceStore.contacts.gender,
       Birthday: this.insuranceStore.contacts.dateOfBirth,
       Email: this.insuranceStore.contacts.email,
