@@ -200,7 +200,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       return this.store$.dispatch(new wizardActions.Error({message: this.form.validationSummaryError}));
     }
     const firstName = this.form.formGroup.get('firstName').value;
-    const prefix = this.form.formGroup.get('prefix').value;
+    const infix = this.form.formGroup.get('infix').value;
     const lastName = this.form.formGroup.get('lastName').value;
     const initials = this.form.formGroup.get('initials').value;
     const gender = this.form.formGroup.get('gender').value;
@@ -211,7 +211,7 @@ export class HouseHoldBuyDetailsComponent implements OnInit, OnDestroy {
       sameAddress: sameAddress,
       gender: gender,
       firstName: firstName,
-      prefix: prefix,
+      infix: infix,
       lastName: lastName,
       initials: initials,
       address: this.address,
