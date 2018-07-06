@@ -26,10 +26,22 @@ import 'rxjs/add/operator/mergeMap';
 
 @Injectable()
 export class CarService {
+  public affiliateUrls: Map<string, string> = new Map();
   constructor(private authHttp: AuthHttp,
               private store$: Store<fromRoot.State>,
-              private router: Router) {}
-
+              private router: Router) {
+    this.setAffiliateUrls();
+    window['carService'] = this;
+  }
+  /* tslint:disable */
+  setAffiliateUrls(): void {
+    this.affiliateUrls.set('www.anwb.nl/verzekeringen', 'https://ad.doubleclick.net/ddm/clk/422794744;224596201;j?http://www.awin1.com/awclick.php?gid=316560&mid=9795&awinaffid=508143&linkid=1015040&clickref_autoverzekering');
+    this.affiliateUrls.set('autoweekautoverzekering.intramediair.nl', 'https://ad.doubleclick.net/ddm/clk/422695632;224596228;o?http://www.awin1.com/awclick.php?gid=320841&mid=8581&awinaffid=508143&linkid=2027328&clickref_autoverzekering');
+    this.affiliateUrls.set('www.ditzo.nl', 'https://ad.doubleclick.net/ddm/clk/422695647;224596024;o?http://www.awin1.com/awclick.php?gid=316404&mid=8279&awinaffid=508143&linkid=1013292&clickref_autoverzekering');
+    this.affiliateUrls.set('www.unive.nl', 'https://ad.doubleclick.net/ddm/clk/422694828;224534957;v?http://www.awin1.com/awclick.php?gid=316650&mid=8519&awinaffid=508143&linkid=1015638&clickref_autoverzekering');
+    this.affiliateUrls.set('www.verzekeruzelf.nl', 'https://ad.doubleclick.net/ddm/clk/422693256;224534951;j?http://www.awin1.com/awclick.php?gid=319006&mid=8542&awinaffid=508143&linkid=2015088&clickref_autoverzekering');
+  }
+  /* tslint:enable */
   public getByLicense(licensePlate: string): Observable<Car> {
     return this.authHttp.get(`${environment.james.cars}/${licensePlate}`)
       .map(res => <Car>res.json());
@@ -96,7 +108,7 @@ export class CarService {
             product_name: selectedInsurance['product_name']
           };
           this.store$.dispatch(new analytics.ClickOutEventAction(analyticsEvent));
-          window.open(selectedInsurance._embedded.insurance.url, '_blank');
+          window.open(this.getAffiliateUrl(selectedInsurance._embedded.insurance.url), '_blank');
         } else {
           if (isLoggedIn) {
             this.store$.select(fromInsurance.getSelectedAdviceId)
@@ -126,5 +138,11 @@ export class CarService {
           }
         }
       });
+  }
+
+  private getAffiliateUrl(url: string): string {
+    // remove https or http from beginning and remove / from the end, just in case the exact urls are coming differently from backend
+    const safeUrl = url.replace(/(^\w+:|^)\/\//, '').replace(/\/$/, '');
+    return this.affiliateUrls.get(safeUrl) || url;
   }
 }
