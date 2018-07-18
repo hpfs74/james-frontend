@@ -46,10 +46,9 @@ export class RouterEffects {
       if ( event instanceof NavigationEnd ) {
         scrollToY(0, 1500, 'easeInOutQuint', true);
         this.store$.dispatch(new carActions.ClearErrors());
-
-        // if (window['usabilla_live']) {
-        //   window['usabilla_live']('virtualPageView');
-        // }
+        if (window['usabilla_live']) {
+          window['usabilla_live']('virtualPageView');
+        }
       }
     });
   }
