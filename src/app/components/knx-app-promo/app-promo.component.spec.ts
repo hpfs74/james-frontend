@@ -37,8 +37,7 @@ describe('Component: AppPromoBlockComponent', () => {
   it('should initialize template links', () => {
     comp.ngOnInit();
     fixture.detectChanges();
-    expect(comp.iOSLink).toContain('itunes.apple.com');
-    expect(comp.androidLink).toContain('play.google.com');
+    expect(comp.iOSLink).not.toContain('itunes.apple.com');
+    expect(comp.androidLink).not.toContain('play.google.com');
   });
 });
-
