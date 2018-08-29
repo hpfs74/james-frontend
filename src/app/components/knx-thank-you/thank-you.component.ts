@@ -31,8 +31,6 @@ import { Component, Input } from '@angular/core';
           </div>
         </div>
       </div>
-      <!-- row -->
-      <knx-app-promo-block></knx-app-promo-block>
     </div>
   `
 })
