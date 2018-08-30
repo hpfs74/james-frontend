@@ -41,4 +41,3 @@ describe('Component: AppPromoBlockComponent', () => {
     expect(comp.androidLink).toContain('play.google.com');
   });
 });
-
